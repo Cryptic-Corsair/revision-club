@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Newsreader, IBM_Plex_Mono } from "next/font/google";
+import { Caveat, Fraunces, Newsreader, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -22,10 +22,16 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
 });
 
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "Axiom — Edexcel IAL notes, properly taught",
+  title: "Axiom — IAL Chemistry, marked by hand",
   description:
-    "A free, exam-obsessed revision-notes library for Pearson Edexcel International A Levels — mapped unit-by-unit to the spec and annotated the way a great tutor marks your paper.",
+    "A free, exam-obsessed revision-notes library built for one subject: Pearson Edexcel International A Level Chemistry (WCH11–WCH16). Mapped line-by-line to the spec and annotated the way a great tutor marks your paper.",
   icons: { icon: "/favicon.svg" },
 };
 
@@ -37,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fraunces.variable} ${newsreader.variable} ${plexMono.variable} antialiased`}
+        className={`${fraunces.variable} ${newsreader.variable} ${plexMono.variable} ${caveat.variable} antialiased`}
       >
         <div className="margin-line" aria-hidden="true" />
         {children}

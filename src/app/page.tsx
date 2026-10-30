@@ -5,14 +5,12 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { TopBar, Footer } from "@/components/margins/chrome";
 import { Home } from "@/components/margins/home";
 import { Library } from "@/components/margins/library";
-import { SubjectView } from "@/components/margins/subject";
 import { Reader } from "@/components/margins/reader";
 
 type View =
   | { name: "home" }
-  | { name: "library" }
-  | { name: "subject"; slug: string }
-  | { name: "notes"; subject: string; unit: string; topic: string };
+  | { name: "library"; focus?: string }
+  | { name: "notes"; unit: string; topic: string };
 
 export default function Page() {
   const [view, setView] = useState<View>({ name: "home" });
@@ -24,12 +22,10 @@ export default function Page() {
 
   const goHome = () => setView({ name: "home" });
   const goLibrary = () => setView({ name: "library" });
-  const openSubject = (slug: string) => setView({ name: "subject", slug });
-  const openTopic = (subject: string, unit: string, topic: string) =>
-    setView({ name: "notes", subject, unit, topic });
+  const openUnit = (slug: string) => setView({ name: "library", focus: slug });
+  const openTopic = (unit: string, topic: string) => setView({ name: "notes", unit, topic });
 
-  const viewKey =
-    view.name === "notes" ? `notes-${view.topic}` : view.name === "subject" ? `subject-${view.slug}` : view.name;
+  const viewKey = view.name === "notes" ? `notes-${view.topic}` : view.name === "library" ? `library-${view.focus ?? "all"}` : view.name;
 
   return (
     <div className="min-h-screen flex flex-col relative">
@@ -45,18 +41,20 @@ export default function Page() {
             transition={{ duration: 0.28, ease: [0.2, 0.7, 0.3, 1] }}
           >
             {view.name === "home" && (
-              <Home goLibrary={goLibrary} openSubject={openSubject} openSampleNote={() => openTopic("physics", "unit-1", "motion-suvat")} />
+              <Home
+                goLibrary={goLibrary}
+                openUnit={openUnit}
+                openSampleNote={() => openTopic("unit-1", "the-mole-titrations")}
+              />
             )}
-            {view.name === "library" && <Library openSubject={openSubject} />}
-            {view.name === "subject" && (
-              <SubjectView slug={view.slug} back={goLibrary} openTopic={(unit, topic) => openTopic(view.slug, unit, topic)} />
+            {view.name === "library" && (
+              <Library key={view.focus ?? "all"} focus={view.focus} openTopic={openTopic} />
             )}
             {view.name === "notes" && (
               <Reader
-                subjectSlug={view.subject}
                 unitSlug={view.unit}
                 topicSlug={view.topic}
-                backToUnit={() => setView({ name: "subject", slug: view.subject })}
+                backToUnit={() => setView({ name: "library", focus: view.unit })}
               />
             )}
           </motion.div>

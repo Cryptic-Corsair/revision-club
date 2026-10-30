@@ -1,51 +1,46 @@
 /* ————————————————————————————————————————————————
-   AXIOM · content data
+   AXIOM · IAL CHEMISTRY · content data
    Single source of truth. The UI renders from this —
    adding notes later requires zero UI changes.
-   ———————————————————————————————————————————————— */
 
-export type SubjectGroup =
-  | "Mathematics"
-  | "Sciences"
-  | "Business & Economics"
-  | "Humanities & English";
+   Formula markup: use _{...} for subscripts and ^{...}
+   for superscripts, e.g. "H_{2}O", "6.02 × 10^{23}".
+   The <Formula> component renders them properly.
+   ———————————————————————————————————————————————— */
 
 export type Status = "live" | "partial" | "coming-soon";
 
 export interface Topic {
   slug: string;
   title: string;
+  ref?: string; // spec reference range, e.g. "1.3–1.9"
   status: "live" | "coming-soon";
   minutes?: number;
 }
 
 export interface Unit {
   slug: string;
-  code: string;
+  code: string; // WCH11 …
   name: string;
-  weight?: string;
+  period: "AS" | "A2";
+  weight: string;
+  points?: string; // spec points summary
+  status: Status;
+  practical?: string[]; // for Units 3 & 6: what the paper actually tests
   topics: Topic[];
 }
 
-export interface Subject {
-  slug: string;
-  name: string;
-  code: string;
-  group: SubjectGroup;
-  blurb: string;
-  status: Status;
-  examStructure?: { label: string; value: string }[];
-  units: Unit[];
-}
-
 export type NoteSection =
-  | { type: "p"; text: string }
+  | { type: "p"; text: string; margin?: string }
   | { type: "h2"; text: string; margin?: string }
   | { type: "definition"; term: string; text: string; margin?: string }
-  | { type: "formula"; lines: string[]; highlight?: number; margin?: string }
-  | { type: "examTip"; text: string }
+  | { type: "formula"; caption?: string; lines: string[]; highlight?: number; margin?: string }
+  | { type: "table"; caption?: string; head: string[]; rows: string[][]; margin?: string }
+  | { type: "practical"; title: string; steps: string[]; margin?: string }
+  | { type: "examTip"; text: string; margin?: string }
   | { type: "mistake"; text: string }
-  | { type: "worked"; title: string; body: string[]; answer: string }
+  | { type: "worked"; title: string; body: string[]; marks?: { chip: string; text: string }[]; answer: string }
+  | { type: "quiz"; question: string; options: string[]; answer: number; explain: string }
   | { type: "keyPoints"; items: { chip: string; text: string }[] };
 
 export interface Note {
@@ -53,342 +48,339 @@ export interface Note {
   sections: NoteSection[];
 }
 
-export const SUBJECTS: Subject[] = [
-  {
-    slug: "mathematics",
-    name: "Mathematics",
-    code: "WMA",
-    group: "Mathematics",
-    blurb:
-      "Pure, Mechanics and Statistics — every module broken into the exact methods the mark scheme rewards.",
-    status: "partial",
-    examStructure: [
-      { label: "AS", value: "P1 + P2 + one applied (M1 / S1 / D1)" },
-      { label: "A level", value: "P1–P4 + two applied" },
-      { label: "Papers", value: "1h 30m · 75 marks each" },
-    ],
-    units: [
-      {
-        slug: "p1",
-        code: "WMA11",
-        name: "Pure Mathematics 1",
-        weight: "16⅔%",
-        topics: [
-          { slug: "algebraic-expressions", title: "Algebraic expressions", status: "coming-soon" },
-          { slug: "quadratics", title: "Quadratics and the discriminant", status: "coming-soon" },
-          { slug: "equations-inequalities", title: "Equations and inequalities", status: "coming-soon" },
-          { slug: "graphs-transformations", title: "Graphs and transformations", status: "coming-soon" },
-          { slug: "straight-lines", title: "Straight line graphs", status: "coming-soon" },
-          { slug: "calculus-intro", title: "Introduction to differentiation", status: "coming-soon" },
-        ],
-      },
-      { slug: "p2", code: "WMA12", name: "Pure Mathematics 2", weight: "16⅔%", topics: [] },
-      { slug: "p3", code: "WMA13", name: "Pure Mathematics 3", weight: "16⅔%", topics: [] },
-      { slug: "p4", code: "WMA14", name: "Pure Mathematics 4", weight: "16⅔%", topics: [] },
-      { slug: "m1", code: "WME01", name: "Mechanics 1", weight: "16⅔%", topics: [] },
-      { slug: "s1", code: "WST01", name: "Statistics 1", weight: "16⅔%", topics: [] },
-      { slug: "d1", code: "WDM11", name: "Decision 1", weight: "16⅔%", topics: [] },
-    ],
-  },
-  {
-    slug: "further-mathematics",
-    name: "Further Mathematics",
-    code: "WFM",
-    group: "Mathematics",
-    blurb:
-      "For the ones who finish the paper early. Further Pure and the deeper applied options.",
-    status: "coming-soon",
-    units: [
-      { slug: "fp1", code: "WFM11", name: "Further Pure Mathematics 1", topics: [] },
-      { slug: "fp2", code: "WFM12", name: "Further Pure Mathematics 2", topics: [] },
-      { slug: "fp3", code: "WFM13", name: "Further Pure Mathematics 3", topics: [] },
-    ],
-  },
-  {
-    slug: "physics",
-    name: "Physics",
-    code: "WPH",
-    group: "Sciences",
-    blurb:
-      "From SUVAT to capacitors — mechanics-first notes with the examiner's voice in the margin.",
-    status: "partial",
-    examStructure: [
-      { label: "AS", value: "U1 40% · U2 40% · U3 20%" },
-      { label: "A level", value: "U1–U3 20% each · U4 20% · U5 20% · U6 10%" },
-      { label: "Practical", value: "U3 & U6 — 50 marks · 1h 20m" },
-    ],
-    units: [
-      {
-        slug: "unit-1",
-        code: "WPH11",
-        name: "Mechanics and Materials",
-        weight: "40% of AS",
-        topics: [
-          { slug: "motion-suvat", title: "Motion: SUVAT and graphs", status: "live", minutes: 14 },
-          { slug: "forces-newtons-laws", title: "Forces and Newton's laws", status: "coming-soon" },
-          { slug: "work-energy-power", title: "Work, energy and power", status: "coming-soon" },
-          { slug: "momentum", title: "Momentum", status: "coming-soon" },
-          { slug: "materials-hooke", title: "Materials: Hooke's law, stress and strain", status: "coming-soon" },
-          { slug: "fluids-stokes", title: "Fluids and Stokes' law", status: "coming-soon" },
-        ],
-      },
-      {
-        slug: "unit-2",
-        code: "WPH12",
-        name: "Waves and Electricity",
-        weight: "40% of AS",
-        topics: [
-          { slug: "wave-basics", title: "Wave basics and the EM spectrum", status: "coming-soon" },
-          { slug: "refraction-diffraction", title: "Refraction, diffraction and interference", status: "coming-soon" },
-          { slug: "dc-electricity", title: "DC electricity", status: "coming-soon" },
-          { slug: "nature-of-light", title: "The nature of light", status: "coming-soon" },
-        ],
-      },
-      { slug: "unit-3", code: "WPH13", name: "Practical Skills in Physics I", weight: "20% of AS", topics: [] },
-      { slug: "unit-4", code: "WPH14", name: "Further Mechanics, Fields and Particles", weight: "20% of A level", topics: [] },
-      { slug: "unit-5", code: "WPH15", name: "Thermodynamics, Radiation and Oscillations", weight: "20% of A level", topics: [] },
-      { slug: "unit-6", code: "WPH16", name: "Practical Skills in Physics II", weight: "10% of A level", topics: [] },
-    ],
-  },
-  {
-    slug: "chemistry",
-    name: "Chemistry",
-    code: "WCH",
-    group: "Sciences",
-    blurb:
-      "Moles to transition metals — mechanisms drawn out, definitions marked word-perfect.",
-    status: "coming-soon",
-    examStructure: [
-      { label: "AS", value: "U1 40% · U2 40% · U3 20%" },
-      { label: "A level", value: "U4 40% · U5 40% · U6 20% of A2" },
-    ],
-    units: [
-      { slug: "unit-1", code: "WCH11", name: "Structure, Bonding and Introduction to Organic Chemistry", topics: [] },
-      { slug: "unit-2", code: "WCH12", name: "Energetics, Group Chemistry, Halogenoalkanes and Alcohols", topics: [] },
-      { slug: "unit-3", code: "WCH13", name: "Practical Skills in Chemistry I", topics: [] },
-      { slug: "unit-4", code: "WCH14", name: "Rates, Equilibria and Further Organic Chemistry", topics: [] },
-      { slug: "unit-5", code: "WCH15", name: "Transition Metals and Organic Nitrogen Chemistry", topics: [] },
-      { slug: "unit-6", code: "WCH16", name: "Practical Skills in Chemistry II", topics: [] },
-    ],
-  },
-  {
-    slug: "biology",
-    name: "Biology",
-    code: "WBI",
-    group: "Sciences",
-    blurb:
-      "The mark scheme is a language — these notes teach you to speak it fluently.",
-    status: "coming-soon",
-    units: [
-      { slug: "unit-1", code: "WBI11", name: "Molecules, Diet, Transport and Health", topics: [] },
-      { slug: "unit-2", code: "WBI12", name: "Membranes, Proteins, DNA and Gene Expression", topics: [] },
-      { slug: "unit-3", code: "WBI13", name: "Practical Skills in Biology I", topics: [] },
-      { slug: "unit-4", code: "WBI14", name: "Energy, Environment, Microbiology and Immunity", topics: [] },
-      { slug: "unit-5", code: "WBI15", name: "Respiration, Coordination and Homeostasis", topics: [] },
-      { slug: "unit-6", code: "WBI16", name: "Practical Skills in Biology II", topics: [] },
-    ],
-  },
-  {
-    slug: "economics",
-    name: "Economics",
-    code: "WEC",
-    group: "Business & Economics",
-    blurb:
-      "Diagrams, chains of reasoning and evaluation — the three things every econ essay is marked on.",
-    status: "partial",
-    examStructure: [
-      { label: "AS", value: "U1 + U2" },
-      { label: "A level", value: "U1–U4 · 2h papers, 80 marks" },
-    ],
-    units: [
-      {
-        slug: "unit-1",
-        code: "WEC11",
-        name: "Markets in Action",
-        weight: "50% of AS",
-        topics: [
-          { slug: "demand-curve", title: "Demand and the demand curve", status: "live", minutes: 11 },
-          { slug: "supply", title: "Supply", status: "coming-soon" },
-          { slug: "ped", title: "Price elasticity of demand", status: "coming-soon" },
-          { slug: "equilibrium", title: "Market equilibrium", status: "coming-soon" },
-          { slug: "market-failure", title: "Market failure", status: "coming-soon" },
-          { slug: "intervention", title: "Government intervention", status: "coming-soon" },
-        ],
-      },
-      { slug: "unit-2", code: "WEC12", name: "Macroeconomic Performance and Policy", weight: "50% of AS", topics: [] },
-      { slug: "unit-3", code: "WEC13", name: "Business Behaviour", topics: [] },
-      { slug: "unit-4", code: "WEC14", name: "Developments in the Global Economy", topics: [] },
-    ],
-  },
-  {
-    slug: "business",
-    name: "Business",
-    code: "WBS",
-    group: "Business & Economics",
-    blurb: "Case-study technique, formulas you can't fake, and the 4-unit map done properly.",
-    status: "coming-soon",
-    units: [
-      { slug: "unit-1", code: "WBS11", name: "Marketing and People", topics: [] },
-      { slug: "unit-2", code: "WBS12", name: "Managing Business Activities", topics: [] },
-      { slug: "unit-3", code: "WBS13", name: "Business Decisions and Strategy", topics: [] },
-      { slug: "unit-4", code: "WBS14", name: "Global Business", topics: [] },
-    ],
-  },
-  {
-    slug: "accounting",
-    name: "Accounting",
-    code: "WAC",
-    group: "Business & Economics",
-    blurb: "Ledgers that balance, statements that make sense, and the formats examiners expect.",
-    status: "coming-soon",
-    units: [
-      { slug: "unit-1", code: "WAC11", name: "The Accounting System and Costing", topics: [] },
-      { slug: "unit-2", code: "WAC12", name: "Corporate and Management Accounting", topics: [] },
-    ],
-  },
-  {
-    slug: "psychology",
-    name: "Psychology",
-    code: "WPS",
-    group: "Humanities & English",
-    blurb: "Studies, evaluations and the issues-and-debates toolkit — organised unit by unit.",
-    status: "coming-soon",
-    units: [],
-  },
-  {
-    slug: "information-technology",
-    name: "Information Technology",
-    code: "WIT",
-    group: "Humanities & English",
-    blurb: "From hardware to global information systems — theory notes that survive the exam.",
-    status: "coming-soon",
-    units: [],
-  },
-  {
-    slug: "english-literature",
-    name: "English Literature",
-    code: "WET",
-    group: "Humanities & English",
-    blurb: "Close-reading frameworks and essay architecture for post-2000 poetry, prose and drama.",
-    status: "coming-soon",
-    units: [],
-  },
-  {
-    slug: "history",
-    name: "History",
-    code: "WHI",
-    group: "Humanities & English",
-    blurb: "Cause, consequence and the source skills that separate a B from an A*.",
-    status: "coming-soon",
-    units: [],
-  },
-];
+/* ————— the subject: Pearson Edexcel IAL Chemistry (2018 spec, WCH11–WCH16) ————— */
 
-export const GROUPS: SubjectGroup[] = [
-  "Mathematics",
-  "Sciences",
-  "Business & Economics",
-  "Humanities & English",
-];
+export const CHEMISTRY = {
+  name: "Chemistry",
+  code: "WCH",
+  blurb:
+    "One subject, done properly: every unit from the mole to transition metals, mapped line-by-line to the Pearson specification and annotated the way a great tutor marks your paper.",
+  examStructure: [
+    { label: "AS", value: "U1 40% · U2 40% · U3 20%" },
+    { label: "A level", value: "U4 40% · U5 40% · U6 20%" },
+    { label: "Practicals", value: "U3 & U6 — written papers, no coursework" },
+  ],
+  units: [
+    {
+      slug: "unit-1",
+      code: "WCH11",
+      name: "Structure, Bonding and Introduction to Organic Chemistry",
+      period: "AS",
+      weight: "40% of AS",
+      points: "42 spec points",
+      status: "partial",
+      topics: [
+        { slug: "the-mole-titrations", title: "The mole and titration calculations", ref: "1.3–1.9", status: "live", minutes: 16 },
+        { slug: "ionisation-energy", title: "First ionisation energy and periodicity", ref: "2.5–2.6", status: "live", minutes: 12 },
+        { slug: "amount-of-substance", title: "Formulae, equations and ideal gases", ref: "1.1–1.2, 1.5", status: "coming-soon" },
+        { slug: "bonding-structure", title: "Bonding, shapes and polarity", ref: "3.1–3.9", status: "coming-soon" },
+        { slug: "organic-intro-alkanes", title: "Introductory organic chemistry and alkanes", ref: "4.1–4.7", status: "coming-soon" },
+        { slug: "alkenes", title: "Alkenes and electrophilic addition", ref: "5.1–5.7", status: "coming-soon" },
+      ],
+    },
+    {
+      slug: "unit-2",
+      code: "WCH12",
+      name: "Energetics, Group Chemistry, Halogenoalkanes and Alcohols",
+      period: "AS",
+      weight: "40% of AS",
+      points: "43 spec points",
+      status: "coming-soon",
+      topics: [
+        { slug: "energetics", title: "Enthalpy changes and Hess's law", ref: "6", status: "coming-soon" },
+        { slug: "intermolecular-forces", title: "Intermolecular forces", ref: "7", status: "coming-soon" },
+        { slug: "redox-groups", title: "Redox, Groups 1 & 2 and Group 7", ref: "8A–8C", status: "coming-soon" },
+        { slug: "kinetics-equilibria-intro", title: "Introduction to kinetics and equilibria", ref: "9", status: "coming-soon" },
+        { slug: "halogenoalkanes-alcohols", title: "Halogenoalkanes and alcohols", ref: "10A–10B", status: "coming-soon" },
+        { slug: "ms-ir", title: "Mass spectrometry and infrared", ref: "10C–10D", status: "coming-soon" },
+      ],
+    },
+    {
+      slug: "unit-3",
+      code: "WCH13",
+      name: "Practical Skills in Chemistry I",
+      period: "AS",
+      weight: "20% of AS",
+      status: "coming-soon",
+      practical: [
+        "Titrations and volumetric analysis",
+        "Calorimetry and enthalpy changes",
+        "Rates and qualitative tests",
+        "Organic preparation techniques",
+      ],
+      topics: [],
+    },
+    {
+      slug: "unit-4",
+      code: "WCH14",
+      name: "Rates, Equilibria and Further Organic Chemistry",
+      period: "A2",
+      weight: "40% of A level",
+      points: "29 spec points",
+      status: "coming-soon",
+      topics: [
+        { slug: "kinetics", title: "Kinetics: rate equations and orders", ref: "11", status: "coming-soon" },
+        { slug: "entropy", title: "Entropy and energetics", ref: "12", status: "coming-soon" },
+        { slug: "equilibria", title: "Chemical equilibria", ref: "13", status: "coming-soon" },
+        { slug: "acid-base", title: "Acid–base equilibria and buffers", ref: "14", status: "coming-soon" },
+        { slug: "carbonyls-chirality", title: "Carbonyls, carboxylic acids and chirality", ref: "15", status: "coming-soon" },
+      ],
+    },
+    {
+      slug: "unit-5",
+      code: "WCH15",
+      name: "Transition Metals and Organic Nitrogen Chemistry",
+      period: "A2",
+      weight: "40% of A level",
+      points: "25 spec points",
+      status: "coming-soon",
+      topics: [
+        { slug: "redox-equilibria", title: "Redox equilibria and electrode potentials", ref: "16", status: "coming-soon" },
+        { slug: "transition-metals", title: "Transition metals and complexes", ref: "17", status: "coming-soon" },
+        { slug: "arenes", title: "Arenes: benzene and electrophilic substitution", ref: "18", status: "coming-soon" },
+        { slug: "organic-nitrogen", title: "Organic nitrogen compounds", ref: "19", status: "coming-soon" },
+        { slug: "synthesis-analysis", title: "Organic synthesis and analysis", ref: "20", status: "coming-soon" },
+      ],
+    },
+    {
+      slug: "unit-6",
+      code: "WCH16",
+      name: "Practical Skills in Chemistry II",
+      period: "A2",
+      weight: "20% of A level",
+      status: "coming-soon",
+      practical: [
+        "Rates, quenching and clock reactions",
+        "Electrode potentials and redox titrations",
+        "Transition metal tests",
+        "Multi-step organic preparation",
+      ],
+      topics: [],
+    },
+  ] as Unit[],
+};
+
+export const UNIT_COUNT = CHEMISTRY.units.length;
+export const TOPIC_COUNT = CHEMISTRY.units.reduce((n, u) => n + u.topics.length, 0);
 
 /* ————— sample notes (real teaching content) ————— */
 
 export const NOTES: Record<string, Note> = {
-  "physics/unit-1/motion-suvat": {
+  "unit-1/the-mole-titrations": {
     updated: "Oct 2026",
     sections: [
       {
         type: "p",
-        text: "Kinematics is the geometry of motion: it describes how things move without asking why. Every SUVAT question is the same game — you are given some of the five quantities (s, u, v, a, t) and asked for the rest. The skill is choosing the one equation that connects what you know to what you want, with nothing spare.",
+        text: "Chemistry is a counting game played with particles far too small to see. A single grain of salt holds more ions than there are people on Earth, so chemists count by mass and by volume instead — and the bridge between those two worlds is the mole. Get this topic fluent and every calculation in Units 1, 2, 4 and 5 gets easier at once.",
+        margin: "fluency here pays for the whole A level",
       },
       {
         type: "definition",
-        term: "Displacement vs distance",
-        text: "Displacement (s) is the straight-line change in position from start to finish, with direction. Distance is the total path travelled, and it can never be smaller than the magnitude of displacement.",
-        margin: "vectors are exam gold — always state direction ↘",
+        term: "The mole (mol)",
+        text: "One mole is the amount of substance that contains as many elementary particles — atoms, molecules, ions or electrons — as there are atoms in exactly 12 g of carbon-12. That number is the Avogadro constant, N_{A} = 6.02 × 10^{23} mol^{-1}.",
+        margin: "always name the particle: atoms? molecules? ions?",
       },
       {
         type: "definition",
-        term: "Velocity vs speed",
-        text: "Velocity is the rate of change of displacement (a vector, m s⁻¹); speed is the rate of change of distance (a scalar). Acceleration is the rate of change of velocity, in m s⁻².",
+        term: "Molar mass, M",
+        text: "The mass of one mole of a substance, in g mol^{-1}. It is numerically equal to the relative atomic or molecular mass — water is 18.0 on the relative scale and 18.0 g mol^{-1} per mole.",
       },
       {
         type: "h2",
-        text: "The five SUVAT equations",
-        margin: "the money box — memorise all five ✏",
+        text: "The three bridges",
+        margin: "the units in the question tell you which one",
       },
       {
         type: "p",
-        text: "These hold only for constant acceleration. If acceleration varies, SUVAT is illegal — go back to graphs or calculus.",
+        text: "Each formula connects n to something you can measure: mass on a balance, volume of solution in a pipette, or gas conditions. Choose by the units you are handed — grams means n = m/M, cm³ of solution means n = cV/1000, and a gas with pressure data means pV = nRT.",
       },
       {
         type: "formula",
-        lines: ["v = u + at", "s = ut + ½at²", "v² = u² + 2as", "s = vt − ½at²", "s = ½(u + v)t"],
-        highlight: 2,
-        margin: "no t? this is your equation",
+        caption: "Learn these",
+        lines: [
+          "n = m / M   — mass in g",
+          "n = cV / 1000   — V in cm³",
+          "pV = nRT   — R = 8.31 J K^{-1} mol^{-1}",
+        ],
+        highlight: 1,
+        margin: "R only works with p in Pa, V in m³, T in K",
       },
-      {
-        type: "p",
-        text: "Each equation leaves out exactly one variable — that is how you choose. Missing t? Use v² = u² + 2as. Missing v? Use s = ut + ½at². Missing s? Use v = u + at. Missing a? Use s = ½(u + v)t.",
-      },
-      { type: "examTip", text: "Write down which SUVAT equation you are using before substituting. Method marks (M1) are awarded for the correct selection, not just the final answer." },
       {
         type: "h2",
-        text: "Reading motion graphs",
+        text: "Titration technique — Unit 3 will ask",
       },
       {
         type: "p",
-        text: "On a displacement–time graph, the gradient is velocity. On a velocity–time graph, the gradient is acceleration and the area under the graph is displacement. Examiners love asking for 'the acceleration between t = 2 and t = 5' — that is a gradient, so draw the rise and run on the graph itself.",
+        text: "The maths of a titration belongs to Topic 1, but the technique is examined too, and it is worth easy marks. Do these in order, every time.",
       },
-      { type: "mistake", text: "Mixing units is the single most common lost mark: a speed given in km h⁻¹ must be divided by 3.6 before it touches a SUVAT equation." },
+      {
+        type: "practical",
+        title: "Rinse · fill · read",
+        steps: [
+          "Rinse the burette with the solution it will hold, then fill it below the tap — no air bubble left in the jet.",
+          "Take the initial reading at eye level, to the nearest 0.05 cm³, at the bottom of the meniscus.",
+          "Run a rough titration first to find the end-point colour, then repeat accurately.",
+          "Stop when two titres agree within 0.10 cm³ — these are concordant, and only concordant titres get averaged.",
+        ],
+        margin: "rinse with what goes IN it — water would dilute your solution",
+      },
+      {
+        type: "table",
+        caption: "Results from a real-style run",
+        head: ["", "Rough", "1", "2", "3"],
+        rows: [
+          ["Final reading / cm³", "22.60", "22.45", "22.30", "22.30"],
+          ["Initial reading / cm³", "0.00", "0.10", "0.00", "0.05"],
+          ["Titre / cm³", "22.60", "22.35", "22.30", "22.25"],
+        ],
+        margin: "concordant: 22.35 · 22.30 · 22.25 → mean 22.30",
+      },
       {
         type: "worked",
-        title: "Worked example — WPH11 style",
+        title: "Worked example — WCH11 style",
         body: [
-          "A cyclist accelerates uniformly from rest to 12 m s⁻¹ in 8.0 s. Calculate the acceleration and the distance travelled.",
-          "Known: u = 0, v = 12, t = 8.0. Unknown a → no s needed: v = u + at → 12 = 0 + a(8.0) → a = 1.5 m s⁻².",
-          "Distance: s = ½(u + v)t = ½(0 + 12)(8.0) = 48 m.",
+          "25.00 cm³ portions of sodium hydroxide are titrated with 0.100 mol dm^{-3} hydrochloric acid. The mean concordant titre is 22.30 cm³. Calculate the concentration of the sodium hydroxide.",
+          "Equation: HCl + NaOH → NaCl + H_{2}O",
         ],
-        answer: "a = 1.5 m s⁻², s = 48 m",
+        marks: [
+          { chip: "M1", text: "n(HCl) = c × V/1000 = 0.100 × 22.30/1000 = 2.23 × 10^{-3} mol" },
+          { chip: "M1", text: "The equation is 1 : 1, so n(NaOH) = 2.23 × 10^{-3} mol in each 25.00 cm³ portion" },
+          { chip: "A1", text: "c(NaOH) = n ÷ V = (2.23 × 10^{-3}) / 0.02500 = 0.0892 mol dm^{-3}" },
+        ],
+        answer: "c(NaOH) = 0.0892 mol dm^{-3} (3 s.f.)",
+      },
+      {
+        type: "examTip",
+        text: "Quote answers to 3 significant figures and attach the unit — a bare \u201c0.0892\u201d drops the A1. And if a question says \u201cstate\u201d, no working is needed; if it says \u201ccalculate\u201d, every step can earn.",
+        margin: "unit + s.f. = free marks, every paper",
+      },
+      {
+        type: "mistake",
+        text: "Forgetting ÷1000 when the volume is in cm³. It inflates the answer by a factor of 1000 and it happens in every exam series. Write the ÷1000 before you key anything into the calculator.",
+      },
+      {
+        type: "mistake",
+        text: "Averaging all the titres — including the rough run, or readings that are not concordant. The rough titration exists only to locate the end-point colour; it never enters the mean.",
+      },
+      {
+        type: "quiz",
+        question: "A student records titres of 22.35, 22.30, 22.90 and 22.25 cm³. Which mean should be used?",
+        options: [
+          "22.45 cm³ — average all four",
+          "22.30 cm³ — use 22.35, 22.30 and 22.25",
+          "22.48 cm³ — use the last three",
+          "22.90 cm³ — the largest titre",
+        ],
+        answer: 1,
+        explain:
+          "22.35, 22.30 and 22.25 lie within 0.10 cm³ of one another — concordant. The 22.90 is off the set (the end-point was overshot), so it is discarded: (22.35 + 22.30 + 22.25) ÷ 3 = 22.30 cm³.",
       },
       {
         type: "keyPoints",
         items: [
-          { chip: "B1", text: "Recall: displacement, velocity and acceleration are vectors; distance and speed are scalars." },
-          { chip: "M1", text: "Select the SUVAT equation that omits exactly the variable you don't need." },
-          { chip: "A1", text: "Convert km h⁻¹ → m s⁻¹ by dividing by 3.6 before any substitution." },
+          { chip: "B1", text: "Define the mole in terms of the Avogadro constant, 6.02 × 10^{23} mol^{-1}, and name the particle." },
+          { chip: "M1", text: "Convert cm³ → dm³ before using n = cV — the ÷1000 is itself a method mark." },
+          { chip: "A1", text: "Concentration to 3 s.f. with units: 0.0892 mol dm^{-3}." },
+          { chip: "B1", text: "Concordant titres agree within 0.10 cm³; average only those." },
         ],
       },
     ],
   },
-  "economics/unit-1/demand-curve": {
+  "unit-1/ionisation-energy": {
     updated: "Oct 2026",
     sections: [
       {
         type: "p",
-        text: "Demand is not the same as want. You may want a yacht; you demand one only if you are willing and able to pay for it. That distinction is worth a mark on its own in almost every Unit 1 paper.",
+        text: "First ionisation energy is the periodic table's X-ray. Because it depends only on the attraction between the nucleus and the outermost electron, its trends across and down the table are pure evidence for how electrons are actually arranged — shells, sub-shells and all. Examiners ask \u201cwhy\u201d far more often than \u201cwhat\u201d, so this note is built around the explanations.",
+        margin: "the definition is 3 marks — learn it word-perfect",
       },
       {
         type: "definition",
-        term: "Effective demand",
-        text: "The quantity of a good consumers are willing and able to buy at a given price over a given period of time.",
-        margin: "willing AND able — quote both words",
+        term: "First ionisation energy",
+        text: "The energy required to remove one mole of electrons from one mole of gaseous atoms to form one mole of gaseous singly-charged positive ions.",
+        margin: "gaseous … gaseous — both states or the mark is gone",
       },
-      { type: "examTip", text: "When drawing the demand curve, label both axes (Price, Quantity) and give the curve a label like D₁. Unlabelled diagrams lose the easiest marks in the paper." },
+      {
+        type: "formula",
+        caption: "The equations that score",
+        lines: ["M(g) → M^{+}(g) + e^{-}", "Na(g) → Na^{+}(g) + e^{-}"],
+        margin: "state symbols are part of the answer",
+      },
       {
         type: "h2",
-        text: "The law of demand",
+        text: "What the value depends on",
+        margin: "three levers — quote them all in \u201cexplain\u201d answers",
       },
       {
         type: "p",
-        text: "As price rises, quantity demanded falls — ceteris paribus. The demand curve slopes downward for two reasons: the substitution effect (the good becomes relatively dearer than alternatives) and the income effect (a higher price reduces real purchasing power).",
+        text: "Three levers, no more: nuclear charge (more protons pull harder), distance (an outer shell further from the nucleus is held more weakly) and shielding (inner shells screen the outer electron from the nucleus). Every trend in this topic is one or two of those levers moving — so every explanation you write should name them.",
+      },
+      {
+        type: "h2",
+        text: "Across Period 3: up, with two dips",
+      },
+      {
+        type: "p",
+        text: "From sodium to argon the outer electron stays in shell n = 3 while nuclear charge climbs from +11 to +18, so first ionisation energy rises overall. The two dips are the examiners' favourite question. At aluminium the outer electron opens the 3p sub-shell, which is higher in energy than 3s. At sulfur the fourth 3p electron must pair up, and the repulsion between the paired electrons makes it easier to remove.",
+        margin: "dip 1: Al, 3p^{1} · dip 2: S, 3p^{4}",
+      },
+      {
+        type: "formula",
+        caption: "Evidence for sub-shells",
+        lines: [
+          "Na: 1s^{2} 2s^{2} 2p^{6} 3s^{1}",
+          "Al: 1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{1}  ← dip",
+          "S: 1s^{2} 2s^{2} 2p^{6} 3s^{2} 3p^{4}  ← dip",
+        ],
+        margin: "the dips ARE the evidence for sub-shells",
+      },
+      {
+        type: "p",
+        text: "Down a group, first ionisation energy falls: each element adds a whole new shell, so distance and shielding both increase — and together they beat the rise in nuclear charge. Magnesium holds its outer electron far more tightly than barium does.",
+      },
+      {
+        type: "examTip",
+        text: "\u201cExplain why\u201d means full sentences that name the lever. \u201cThe outer electron in sulfur is paired in a 3p orbital, so electron–electron repulsion raises its energy\u201d scores two; the single word \u201cshielding\u201d usually scores one.",
+        margin: "one word = one mark. sentences = full marks",
+      },
+      {
+        type: "mistake",
+        text: "Writing that ionisation energy \u201cincreases across a period\u201d and stopping there. The statement alone is B1 at best — the marks live in the reason: same shell, rising nuclear charge, shielding unchanged.",
+      },
+      {
+        type: "worked",
+        title: "Worked example — WCH11 style",
+        body: [
+          "Explain why the first ionisation energy of sulfur is lower than that of phosphorus.",
+          "Phosphorus is 3p^{3}: every 3p electron occupies its own orbital. Sulfur is 3p^{4}: the fourth electron must share an orbital with a partner.",
+          "The paired electrons repel each other, so that electron is already higher in energy and is removed more easily — despite sulfur's greater nuclear charge.",
+        ],
+        marks: [
+          { chip: "M1", text: "Identifies pairing in the 3p orbital of sulfur (3p^{4} vs 3p^{3})" },
+          { chip: "A1", text: "States that electron–electron repulsion makes the paired electron easier to remove" },
+        ],
+        answer: "Pairing repulsion in 3p^{4} outweighs the extra nuclear charge.",
+      },
+      {
+        type: "quiz",
+        question: "Why is sodium's second ionisation energy so much larger than its first?",
+        options: [
+          "The ion has lost mass, so electrons are harder to remove",
+          "The second electron is pulled from the full 2p shell — much closer to the nucleus",
+          "The nuclear charge increases once the first electron leaves",
+          "Sodium becomes a noble gas",
+        ],
+        answer: 1,
+        explain:
+          "Na^{+} is 1s^{2}2s^{2}2p^{6} — the next electron comes from a full inner shell, far closer to the nucleus with far less shielding than 3s^{1}. The nuclear charge does not change when an electron leaves; distance and shielding do.",
       },
       {
         type: "keyPoints",
         items: [
-          { chip: "B1", text: "Define demand as willingness and ability to pay, at a price, over time." },
-          { chip: "M1", text: "Distinguish movements along the curve (price changes) from shifts of the curve (non-price factors)." },
-          { chip: "A1", text: "Non-price shifter: income, tastes, substitutes' prices, complements' prices, population, expectations." },
+          { chip: "B1", text: "Definition: one mole of gaseous atoms → one mole of gaseous 1+ ions." },
+          { chip: "B1", text: "Trends: across a period ↑ (dips at Groups 3 and 6); down a group ↓." },
+          { chip: "M1", text: "Link every trend to nuclear charge, distance or shielding — name the lever." },
+          { chip: "A1", text: "A sharp jump in successive ionisation energies marks a new shell — evidence for quantum shells." },
         ],
       },
     ],

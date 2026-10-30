@@ -1,16 +1,14 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll } from "framer-motion";
-import { NOTES, SUBJECTS } from "@/lib/data";
-import { NoteBlock, Reveal, Stamp } from "./primitives";
+import { CHEMISTRY, NOTES } from "@/lib/data";
+import { MarkChip, NoteBlock, Reveal, Stamp } from "./primitives";
 
 export function Reader({
-  subjectSlug,
   unitSlug,
   topicSlug,
   backToUnit,
 }: {
-  subjectSlug: string;
   unitSlug: string;
   topicSlug: string;
   backToUnit: () => void;
@@ -18,14 +16,14 @@ export function Reader({
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll();
 
-  const subject = SUBJECTS.find((s) => s.slug === subjectSlug);
-  const unit = subject?.units.find((u) => u.slug === unitSlug);
+  const unit = CHEMISTRY.units.find((u) => u.slug === unitSlug);
   const topicIdx = unit?.topics.findIndex((t) => t.slug === topicSlug) ?? -1;
   const topic = topicIdx >= 0 ? unit!.topics[topicIdx] : undefined;
-  const note = NOTES[`${subjectSlug}/${unitSlug}/${topicSlug}`];
+  const note = NOTES[`${unitSlug}/${topicSlug}`];
+  const prevTopic = topicIdx > 0 ? unit!.topics[topicIdx - 1] : undefined;
   const nextTopic = topicIdx >= 0 ? unit!.topics[topicIdx + 1] : undefined;
 
-  if (!subject || !unit || !topic) {
+  if (!unit || !topic) {
     return (
       <div className="mx-auto max-w-[1160px] px-5 md:px-10 pt-20 pb-24">
         <p className="font-display text-3xl">Note not found.</p>
@@ -53,13 +51,14 @@ export function Reader({
           onClick={backToUnit}
           className="font-marks text-[11.5px] uppercase tracking-[0.16em] text-ink-faint hover:text-pen-deep transition-colors mb-10"
         >
-          ◂ {subject.name} · {unit.code}
+          ◂ Unit map · {unit.code}
         </button>
 
         <Reveal>
-          <header className="mb-12">
+          <header className="mb-10">
             <p className="font-marks text-[11px] uppercase tracking-[0.2em] text-pen-deep mb-4">
-              {subject.name} · Unit: {unit.name} · {unit.code}
+              Pearson Edexcel IAL Chemistry · Unit {unit.code.slice(-1)} · {unit.code}
+              {topic.ref ? ` · Spec ${topic.ref}` : ""}
             </p>
             <h1 className="font-display font-semibold text-[2.4rem] md:text-[3.2rem] leading-[1.05] tracking-[-0.015em] mb-5">
               {topic.title}
@@ -73,6 +72,27 @@ export function Reader({
             </div>
             <div className="double-rule mt-8" aria-hidden="true" />
           </header>
+        </Reveal>
+
+        {/* mark scheme legend — how the chips work */}
+        <Reveal>
+          <div className="paper-card px-5 py-3.5 mb-10 flex flex-wrap items-center gap-x-6 gap-y-2 max-w-[64ch]">
+            <span className="font-marks text-[10.5px] uppercase tracking-[0.18em] text-ink-faint">
+              Mark code
+            </span>
+            <span className="flex items-center gap-2">
+              <MarkChip>M1</MarkChip>
+              <span className="font-body text-[14px] text-ink-soft">method</span>
+            </span>
+            <span className="flex items-center gap-2">
+              <MarkChip>A1</MarkChip>
+              <span className="font-body text-[14px] text-ink-soft">accuracy</span>
+            </span>
+            <span className="flex items-center gap-2">
+              <MarkChip>B1</MarkChip>
+              <span className="font-body text-[14px] text-ink-soft">independent recall</span>
+            </span>
+          </div>
         </Reveal>
 
         {note ? (
@@ -97,12 +117,21 @@ export function Reader({
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="paper-card px-5 py-4 opacity-55">
+            <div className={`paper-card px-5 py-4 ${prevTopic && prevTopic.status === "live" ? "" : "opacity-55"}`}>
               <p className="font-marks text-[10.5px] uppercase tracking-[0.18em] text-ink-faint mb-1">◂ Turn back</p>
-              <p className="font-body italic text-ink-soft">This is the first topic in the unit.</p>
+              {prevTopic ? (
+                <p className="font-body text-ink-soft">
+                  Previous: {prevTopic.title}
+                  {prevTopic.status === "coming-soon" && (
+                    <span className="font-marks text-[10.5px] uppercase tracking-[0.14em] text-ink-faint"> — being written</span>
+                  )}
+                </p>
+              ) : (
+                <p className="font-body italic text-ink-soft">This is the first topic in the unit.</p>
+              )}
             </div>
             {nextTopic ? (
-              <div className="paper-card px-5 py-4">
+              <div className={`paper-card px-5 py-4 ${nextTopic.status === "live" ? "" : "opacity-55"}`}>
                 <p className="font-marks text-[10.5px] uppercase tracking-[0.18em] text-pen-deep mb-1">Turn over ▸</p>
                 <p className="font-body text-ink-soft">
                   Next: {nextTopic.title}
