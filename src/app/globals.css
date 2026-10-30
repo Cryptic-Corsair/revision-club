@@ -1,0 +1,359 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ————————————————————————————————————————————————
+   AXIOM · "THE MARGINS" DESIGN SYSTEM
+   An annotated exam paper, set by a designer.
+   Paper. Ink. Red pen. Highlighter. Nothing else.
+   ———————————————————————————————————————————————— */
+
+:root {
+  /* paper + ink */
+  --paper: #f5f1e6;
+  --paper-deep: #ede7d6;
+  --paper-card: #faf7ee;
+  --ink: #211c14;
+  --ink-soft: #5c5546;
+  --ink-faint: #8b8271;
+  --rule: #d9d0bb;
+
+  /* the two pens */
+  --red: #bf3b2b;      /* red marking pen — accents, stamps, ticks */
+  --red-ink: #9c2e21;
+  --blue: #2f5382;     /* ballpoint — links & interactive hints only */
+
+  /* highlighter */
+  --hl: #f0e14e;
+
+  /* shadcn compatibility mapping */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-card);
+  --card-foreground: var(--ink);
+  --popover: var(--paper-card);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-deep);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-deep);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--paper-deep);
+  --accent-foreground: var(--ink);
+  --destructive: var(--red);
+  --destructive-foreground: var(--paper);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--red);
+  --radius: 2px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-radius: var(--radius);
+
+  /* the margins palette */
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-paper-card: var(--paper-card);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-pen: var(--red);
+  --color-pen-deep: var(--red-ink);
+  --color-ballpoint: var(--blue);
+  --color-hl: var(--hl);
+
+  /* typography */
+  --font-display: var(--font-fraunces), "Georgia", serif;
+  --font-body: var(--font-newsreader), "Georgia", serif;
+  --font-marks: var(--font-plex-mono), "Courier New", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-newsreader), "Georgia", serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* paper grain + faint print grid, always-on texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+}
+
+/* the exercise-book margin: double red rule down the left (desktop) */
+.margin-line {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: clamp(28px, 5vw, 84px);
+  width: 5px;
+  border-left: 1px solid rgba(191, 59, 43, 0.38);
+  border-right: 1px solid rgba(191, 59, 43, 0.38);
+  z-index: 0;
+  pointer-events: none;
+}
+@media (max-width: 1023px) {
+  .margin-line { display: none; }
+}
+
+::selection {
+  background: rgba(240, 225, 78, 0.75);
+  color: var(--ink);
+}
+
+/* ————— components ————— */
+
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red-ink);
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+  padding: 0.35em 0.7em;
+  transform: rotate(-1.6deg);
+  position: relative;
+  box-shadow: inset 0 0 0 1.5px rgba(191, 59, 43, 0.14);
+}
+.stamp--graphite { color: var(--ink-faint); box-shadow: inset 0 0 0 1.5px rgba(139, 130, 113, 0.16); }
+.stamp--pressed { animation: stampIn 0.45s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+
+.paper-card {
+  background: var(--paper-card);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  box-shadow: 3px 3px 0 rgba(33, 28, 20, 0.07);
+}
+.paper-card--stacked {
+  box-shadow:
+    4px 4px 0 var(--paper-card),
+    5px 5px 0 var(--rule),
+    8px 8px 0 rgba(33, 28, 20, 0.05);
+}
+
+/* exam answer box */
+.exam-box {
+  border: 1.5px dashed rgba(33, 28, 20, 0.4);
+  border-radius: 2px;
+  background: rgba(250, 247, 238, 0.7);
+}
+
+.btn-ink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.85em 1.5em;
+  border-radius: 2px;
+  border: 1px solid var(--ink);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 3px 3px 0 rgba(191, 59, 43, 0.85);
+}
+.btn-ink:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 rgba(191, 59, 43, 0.9); }
+.btn-ink:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 rgba(191, 59, 43, 0.9); }
+
+/* hand-drawn red underline that draws itself */
+.hand-underline {
+  position: relative;
+  white-space: nowrap;
+}
+.hand-underline > svg {
+  position: absolute;
+  left: -2%;
+  bottom: -0.28em;
+  width: 104%;
+  height: 0.32em;
+  overflow: visible;
+}
+.hand-underline > svg > path {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 5.5;
+  stroke-linecap: round;
+  stroke-dasharray: 620;
+  stroke-dashoffset: 620;
+  animation: drawIn 0.9s 0.45s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+
+/* highlighter swipe */
+.hl-swipe {
+  position: relative;
+  background: linear-gradient(100deg, rgba(240, 225, 78, 0) 1%, rgba(240, 225, 78, 0.72) 4%, rgba(240, 225, 78, 0.72) 96%, rgba(240, 225, 78, 0) 99%);
+  background-repeat: no-repeat;
+  background-size: 0% 62%;
+  background-position: 0 68%;
+  animation: swipe 0.7s 0.9s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+  padding: 0 0.12em;
+}
+
+/* margin note — the red pen voice */
+.margin-note {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-size: 15.5px;
+  line-height: 1.45;
+  color: var(--red-ink);
+  transform: rotate(-1.4deg);
+}
+
+/* MCQ option bubble (filters, choices) */
+.mcq {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.mcq .bubble {
+  width: 15px;
+  height: 15px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  transition: all 0.15s ease;
+}
+.mcq .bubble::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--red);
+  transform: scale(0);
+  transition: transform 0.18s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+.mcq[data-active="true"] { color: var(--ink); }
+.mcq[data-active="true"] .bubble { border-color: var(--red); }
+.mcq[data-active="true"] .bubble::after { transform: scale(1); }
+.mcq:hover { color: var(--ink); }
+
+/* mark-scheme chip: M1 / A1 / B1 */
+.mark-chip {
+  display: inline-grid;
+  place-items: center;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--red-ink);
+  border: 1px solid rgba(191, 59, 43, 0.55);
+  border-radius: 2px;
+  padding: 1px 5px;
+  min-width: 26px;
+}
+
+/* red tick (hand-drawn check) */
+.tick path {
+  stroke: var(--red);
+  stroke-width: 7;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+}
+.tick path:not(.animated) { stroke-dashoffset: 0; }
+.tick path.animated { animation: drawIn 0.5s cubic-bezier(0.6, 0, 0.3, 1) forwards; }
+
+/* mono eyebrow / instruction line */
+.instruction {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* links behave like ballpoint */
+.balllink {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-color: rgba(47, 83, 130, 0.4);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s ease, color 0.15s ease;
+}
+.balllink:hover { color: var(--ink); text-decoration-color: var(--red); }
+
+/* double rule (exam paper top/bottom rules) */
+.double-rule {
+  border-top: 1px solid var(--ink);
+  box-shadow: 0 3px 0 -2px var(--ink);
+  height: 3px;
+}
+
+/* reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.3, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.reveal.is-in { opacity: 1; transform: translateY(0); }
+
+@keyframes drawIn { to { stroke-dashoffset: 0; } }
+@keyframes swipe { to { background-size: 100% 62%; } }
+@keyframes stampIn {
+  0% { opacity: 0; transform: rotate(-6deg) scale(1.25); }
+  60% { opacity: 1; transform: rotate(-1.6deg) scale(0.96); }
+  100% { opacity: 1; transform: rotate(-1.6deg) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hand-underline > svg > path { animation: none; stroke-dashoffset: 0; }
+  .hl-swipe { animation: none; background-size: 100% 62%; }
+  .stamp--pressed { animation: none; }
+  .tick path.animated { animation: none; stroke-dashoffset: 0; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { transition-duration: 0.01ms !important; }
+}

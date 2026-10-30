@@ -173,3 +173,47 @@ Upgrade the /notes/* reading experience while keeping the paper theme tokens unc
 - **If it drifts generic**, re-paste the FORBIDDEN list and the QUALITY BAR from Prompt 1.
 - **Retheme later** is one message because everything references CSS variables: *"Change accent #7B8CFF to #22D3EE and regenerate the gradient."*
 - **Verify before publishing:** unit codes and names in the seed data are spec-aligned, but confirm them against Pearson Edexcel's current specification pages, and update the footer disclaimer if needed.
+
+---
+
+## PROMPT 5 — V2 ART DIRECTION: "THE MARGINS" (use instead of the design section of Prompt 1)
+
+*The v1 design ("midnight library", dark SaaS, bento) is deliberately conventional. A working prototype of the concept below exists — ask me for screenshots if you want a visual target. To make AI Studio build this, replace PROMPT 1's DESIGN SYSTEM, Texture, Motion and Component standards sections with the following, keeping everything else (stack, data model, pages, quality bar):*
+
+```text
+DESIGN SYSTEM — "THE MARGINS"
+Concept: the entire site is a beautifully typeset, teacher-annotated exam paper. Warm paper, ink serif typography, red marking pen, highlighter. Every component comes from the exam experience: stamps, tick marks, MCQ bubbles, mark-scheme chips, answer boxes. Sharp corners (2px max radius) — paper is square. No gradients, no glassmorphism, no dark mode, no bento grids, no drop shadows (use offset print shadows: 3px 3px 0 rgba(33,28,20,0.07)).
+
+Palette (CSS variables, light only):
+- paper #F5F1E6, paper-deep #EDE7D6, paper-card #FAF7EE
+- ink #211C14, ink-soft #5C5546, ink-faint #8B8271, rule #D9D0BB
+- pen red #BF3B2B (accent: stamps, ticks, annotations, active states, the CTA shadow)
+- ballpoint blue #2F5382 (links and Definition callouts ONLY)
+- highlighter #F0E14E (key phrases, selected formulas)
+
+Typography:
+- Display/headings: Fraunces (Google Font), 500–600 weight, -0.015em tracking; hero 40–64px.
+- Body: Newsreader (Google Font); UI 15–16px/1.65; note body 17.5px/1.8, max 64ch.
+- Codes/labels/stamps: IBM Plex Mono, 11–13px, uppercase, tracking +0.14em.
+- The "hand voice": margin annotations in Fraunces ITALIC, red, rotated -1.5deg, 15px.
+
+Signature elements:
+- A fixed double red margin rule down the left edge of the viewport (1px lines, 5px apart, 38% opacity), desktop only — the exercise-book margin. Margin annotations live in a 186px left gutter column of the notes reader, right-aligned toward the text.
+- Stamps: 1.5px bordered mono uppercase labels, rotated -1.6deg, double-border inset. Status = stamps: "NOTES LIVE" (red), "IN PROGRESS" / "COMING SOON" (graphite).
+- Hand-drawn red tick (SVG polyline with draw-in stroke animation) marks anything live/correct.
+- Hand-drawn underline: squiggly SVG path under one key hero phrase, draws itself on load (stroke-dashoffset 0.9s).
+- Highlighter swipe: key phrases get #F0E14E at 60% height, animating background-size 0→100% on load.
+- Filters are MCQ bubbles: ○ circle that fills with a red dot when active — like multiple-choice options.
+- Mark-scheme chips: B1/M1/A1 in tiny red-bordered mono squares beside revision points.
+- Exam box: 1.5px dashed border with a small mono label punched into the top border ("LEARN THESE", "WORKED EXAMPLE").
+- Buttons: solid ink with a 3px solid red offset shadow that shifts on hover/active (translate -1px/+1px).
+- Paper grain: SVG feTurbulence noise data-URI overlay at ~5% opacity, plus subtle section double-rules (1px line with 3px shadow line under it) like exam paper headers.
+
+Motion: understated "ink on paper" — 200ms hovers (lift 2px, red shadow grows), 600ms fade-up scroll reveals with 2.2s failsafe so content is never stuck invisible, draw-in underlines/ticks on first view, stamps "press in" (scale 1.25→1 with rotate settle). prefers-reduced-motion disables everything. No parallax, no bounces.
+
+Notes reader (the showpiece): paper-white article at 64ch in a grid with a 186px margin gutter; margin notes render in the gutter on desktop and inline below paragraphs on mobile; Definition callouts have a 3px ballpoint-blue left border; ExamTip cards have a 3px red left border; formula boxes are dashed exam boxes with mono equations and one highlighted line; end with a "Mark scheme recap" card (B1/M1/A1 chips) and "Turn back ◂ / Turn over ▸" pagination cards.
+
+Homepage sections are named like exam paper parts: "Section A — The library", "Section B — How it works" (instruction line: "Answer ALL questions. Show your reasoning."), "Section C — The examiner's voice" (three specimen callout cards, each slightly rotated). Top bar is an exam board header: centered mono "PEARSON EDEXCEL · INTERNATIONAL A LEVEL · SPEC-ALIGNED". Footer reads "END OF SECTION" between rules, with the Pearson non-affiliation disclaimer and a "Turn over ▸" link.
+
+FORBIDDEN additionally: dark backgrounds; purple/indigo anything; rounded-xl cards; glass/blur; gradient text; Inter as the identity font; emoji as icons (the only "hand" marks are the SVG tick, arrow, underline and stamps).
+```

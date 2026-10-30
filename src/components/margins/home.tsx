@@ -1,0 +1,281 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+import { SUBJECTS } from "@/lib/data";
+import { HandUnderline, MarginNote, Reveal, SectionHead, Stamp, Tick } from "./primitives";
+import { SubjectCard } from "./library";
+
+const fadeUp = (delay: number) => ({
+  initial: { opacity: 0, y: 22 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.65, delay, ease: [0.2, 0.7, 0.3, 1] as const },
+});
+
+export function Home({
+  goLibrary,
+  openSubject,
+  openSampleNote,
+}: {
+  goLibrary: () => void;
+  openSubject: (slug: string) => void;
+  openSampleNote: () => void;
+}) {
+  const reduced = useReducedMotion();
+  const anim = <T extends object>(cfg: T) => (reduced ? {} : cfg);
+  const popular = ["physics", "mathematics", "chemistry", "biology", "economics", "business"]
+    .map((slug) => SUBJECTS.find((s) => s.slug === slug)!)
+    .filter(Boolean);
+
+  return (
+    <div className="mx-auto max-w-[1160px] px-5 md:px-10">
+      {/* ————— hero ————— */}
+      <section className="pt-14 md:pt-20 pb-16 md:pb-24 grid gap-12 xl:grid-cols-[1.08fr_0.92fr] xl:gap-10 items-center">
+        <div>
+          <motion.div {...(reduced ? {} : fadeUp(0))} className="flex flex-wrap items-center gap-4 mb-7">
+            <Stamp pressed>Spec-aligned · IAL 2018</Stamp>
+            <Stamp graphite pressed>Free · no ads</Stamp>
+          </motion.div>
+
+          <motion.h1
+            {...(reduced ? {} : fadeUp(0.08))}
+            className="font-display font-semibold text-[2.6rem] md:text-[3.6rem] xl:text-[4.1rem] leading-[1.04] tracking-[-0.015em] mb-4"
+          >
+            The notes your teacher <span className="whitespace-nowrap">would write</span>{" "}
+            <HandUnderline>if they had the time.</HandUnderline>
+            <span className="hidden md:inline-block align-middle">
+              <MarginNote arrow className="ml-6 text-[16px]">
+                better, honestly
+              </MarginNote>
+            </span>
+          </motion.h1>
+
+          <motion.p
+            {...(reduced ? {} : fadeUp(0.18))}
+            className="font-body text-[19px] leading-[1.7] text-ink-soft max-w-[56ch] mb-9"
+          >
+            Axiom is a free, exam-obsessed notes library for Pearson Edexcel International A Levels —
+            mapped unit-by-unit to the specification and annotated the way a great tutor marks your
+            paper: <span className="hl-swipe font-medium text-ink">in the margins, where it counts.</span>
+          </motion.p>
+
+          <motion.div {...(reduced ? {} : fadeUp(0.28))} className="flex flex-wrap items-center gap-6">
+            <button type="button" onClick={goLibrary} className="btn-ink">
+              Open the library
+            </button>
+            <button
+              type="button"
+              onClick={openSampleNote}
+              className="font-marks text-[12.5px] uppercase tracking-[0.14em] text-pen-deep underline decoration-pen/50 underline-offset-[5px] hover:text-ink hover:decoration-ink transition-colors"
+            >
+              Read a sample note →
+            </button>
+          </motion.div>
+
+          <motion.p
+            {...(reduced ? {} : fadeUp(0.4))}
+            className="font-marks text-[11.5px] uppercase tracking-[0.16em] text-ink-faint mt-12 flex flex-wrap items-center gap-x-3 gap-y-2"
+          >
+            <span>12 subjects</span>
+            <span className="text-pen" aria-hidden="true">·</span>
+            <span>40+ units mapped</span>
+            <span className="text-pen" aria-hidden="true">·</span>
+            <span>Mark-scheme fluent</span>
+            <span className="text-pen" aria-hidden="true">·</span>
+            <span>Zero paywalls</span>
+          </motion.p>
+        </div>
+
+        {/* the annotated paper artifact */}
+        <motion.div
+          {...(reduced ? {} : fadeUp(0.3))}
+          className="relative max-w-[470px] w-full mx-auto xl:mx-0 xl:justify-self-end"
+        >
+          <div className="paper-card paper-card--stacked rotate-[0.8deg] p-6 md:p-7">
+            <div className="flex items-center justify-between gap-3 mb-1">
+              <p className="font-marks text-[11px] uppercase tracking-[0.18em] text-pen-deep">Physics — Unit 1</p>
+              <span className="font-marks text-[11px] tracking-[0.14em] text-ink-faint border border-rule rounded-[2px] px-2 py-0.5">
+                WPH11
+              </span>
+            </div>
+            <div className="double-rule my-4" aria-hidden="true" />
+            <p className="font-display font-semibold text-[21px] leading-snug mb-4">Motion: SUVAT and graphs</p>
+
+            <div className="exam-box relative px-5 py-4">
+              <span className="absolute -top-[8px] left-3 bg-paper-card px-2 font-marks text-[10px] uppercase tracking-[0.18em] text-ink-faint">
+                Learn these
+              </span>
+              <ol className="font-marks text-[14.5px] leading-[2]">
+                <li><span className="text-ink-faint mr-4 text-[11px]">01</span>v = u + at</li>
+                <li className="inline-block bg-hl/60 px-2 -mx-2 rounded-[2px]">
+                  <span className="text-ink-faint mr-4 text-[11px]">03</span>v² = u² + 2as
+                </li>
+                <li><span className="text-ink-faint mr-4 text-[11px]">05</span>s = ½(u + v)t</li>
+              </ol>
+            </div>
+
+            <div className="flex items-center justify-between mt-5">
+              <MarginNote className="text-[15px]">
+                the money equation — no t needed
+              </MarginNote>
+              <Tick size={26} className="shrink-0 -rotate-6" />
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-dashed border-rule">
+              <button
+                type="button"
+                onClick={openSampleNote}
+                className="balllink font-body text-[15.5px] bg-transparent border-0 p-0 cursor-pointer"
+              >
+                From the full note — read it in the reader →
+              </button>
+            </div>
+          </div>
+
+          <div className="absolute -top-5 -right-2 md:-right-5 rotate-[2.4deg]" aria-hidden="true">
+            <MarginNote className="text-[15px] bg-paper px-2 py-0.5">start here</MarginNote>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* ————— Section A: the library preview ————— */}
+      <section className="pb-20">
+        <Reveal>
+          <SectionHead
+            section="Section A"
+            title="The library"
+            instruction="Answer all questions. Every subject, filed by group."
+          />
+        </Reveal>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {popular.map((s, i) => (
+            <SubjectCard key={s.slug} subject={s} onOpen={() => openSubject(s.slug)} delay={(i % 3) * 70} />
+          ))}
+        </div>
+        <Reveal delay={120}>
+          <div className="mt-8">
+            <button
+              type="button"
+              onClick={goLibrary}
+              className="font-marks text-[12.5px] uppercase tracking-[0.14em] text-pen-deep underline decoration-pen/50 underline-offset-[5px] hover:text-ink transition-colors"
+            >
+              View the full index — 12 subjects →
+            </button>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ————— Section B: how it works ————— */}
+      <section className="pb-20">
+        <Reveal>
+          <SectionHead section="Section B" title="How it works" instruction="Answer ALL questions. Show your reasoning." />
+        </Reveal>
+        <div className="grid gap-8 md:grid-cols-3">
+          {[
+            {
+              n: "01",
+              t: "Pick your subject",
+              b: "Every IAL subject has its own file, organised by the exact unit codes Pearson prints on the paper.",
+              m: "even the obscure ones",
+            },
+            {
+              n: "02",
+              t: "Follow the unit map",
+              b: "Units break into topics in spec order — so revision always lines up with what the exam will actually ask.",
+              m: "no textbook detours",
+            },
+            {
+              n: "03",
+              t: "Revise with the margins",
+              b: "Notes are annotated like a marked script: exam tips in the margin, mark-scheme chips beside the points that earn them.",
+              m: "the fun part",
+            },
+          ].map((step, i) => (
+            <Reveal key={step.n} delay={i * 90}>
+              <div className="relative">
+                <p className="font-marks text-[13px] text-pen-deep tracking-[0.2em] mb-3">{step.n}</p>
+                <h3 className="font-display text-[1.5rem] font-semibold mb-3">{step.t}</h3>
+                <p className="font-body text-[16px] leading-[1.7] text-ink-soft">{step.b}</p>
+                <p className="margin-note text-[14.5px] mt-3">{step.m}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ————— Section C: the examiner's voice ————— */}
+      <section className="pb-20">
+        <Reveal>
+          <SectionHead
+            section="Section C"
+            title="The examiner's voice"
+            instruction="Fig. 1 — what every note looks like on the inside."
+          />
+        </Reveal>
+        <div className="grid gap-6 md:grid-cols-3 items-start">
+          <Reveal delay={0}>
+            <div className="paper-card border-l-[3px] border-pen px-5 py-4 -rotate-[0.6deg]">
+              <p className="font-marks text-[11px] uppercase tracking-[0.16em] text-pen-deep mb-1">Exam tip</p>
+              <p className="font-body text-[15.5px] leading-[1.65] text-ink/90">
+                Write down which SUVAT equation you are using before substituting — the M1 mark is for selection.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={90}>
+            <div className="exam-box px-5 py-4 rotate-[0.5deg]">
+              <p className="font-marks text-[11px] uppercase tracking-[0.18em] text-ink-faint mb-2">Learn these</p>
+              <p className="font-marks text-[14.5px] leading-[2]">
+                <span className="bg-hl/60 px-1.5 -mx-1.5 rounded-[2px]">v² = u² + 2as</span>
+                <br />
+                s = ut + ½at²
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={180}>
+            <div className="paper-card border-l-[3px] border-ink-faint px-5 py-4 rotate-[0.9deg]">
+              <p className="font-marks text-[11px] uppercase tracking-[0.16em] text-ink-faint mb-1">Common mistake</p>
+              <p className="font-body text-[15.5px] leading-[1.65] text-ink/90">
+                A speed in km h⁻¹ must be divided by 3.6 before it touches a SUVAT equation.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+        <Reveal delay={120}>
+          <div className="mt-8">
+            <button
+              type="button"
+              onClick={openSampleNote}
+              className="font-marks text-[12.5px] uppercase tracking-[0.14em] text-pen-deep underline decoration-pen/50 underline-offset-[5px] hover:text-ink transition-colors"
+            >
+              Read a full note in the reader →
+            </button>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ————— quote band ————— */}
+      <section className="py-16 border-t border-rule">
+        <Reveal>
+          <blockquote className="font-display italic font-medium text-[1.55rem] md:text-[1.9rem] leading-[1.35] text-center max-w-[30ch] md:max-w-[44ch] mx-auto">
+            “Notes that read like a <span className="hl-swipe not-italic font-semibold">great teacher</span> explained
+            it — not like a textbook dumped it.”
+          </blockquote>
+        </Reveal>
+      </section>
+
+      {/* ————— CTA band ————— */}
+      <section className="pb-20">
+        <Reveal>
+          <div className="double-rule mb-14" aria-hidden="true" />
+          <div className="text-center">
+            <h2 className="font-display font-semibold text-[2.1rem] md:text-[2.7rem] leading-[1.1] tracking-[-0.01em] mb-8">
+              Start with your weakest unit.
+            </h2>
+            <button type="button" onClick={goLibrary} className="btn-ink">
+              Open the library
+            </button>
+          </div>
+        </Reveal>
+      </section>
+    </div>
+  );
+}
