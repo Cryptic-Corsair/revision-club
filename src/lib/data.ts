@@ -41,7 +41,9 @@ export type NoteSection =
   | { type: "mistake"; text: string }
   | { type: "worked"; title: string; body: string[]; marks?: { chip: string; text: string }[]; answer: string }
   | { type: "quiz"; question: string; options: string[]; answer: number; explain: string }
-  | { type: "keyPoints"; items: { chip: string; text: string }[] };
+  | { type: "keyPoints"; items: { chip: string; text: string }[] }
+  | { type: "mechanism"; figure: "ethene-hbr" | "propene-hbr"; caption?: string; margin?: string }
+  | { type: "ref"; text: string; to: "wallchart" };
 
 export interface Note {
   updated: string;
@@ -75,7 +77,7 @@ export const CHEMISTRY = {
         { slug: "amount-of-substance", title: "Formulae, equations and ideal gases", ref: "1.1–1.2, 1.5", status: "coming-soon" },
         { slug: "bonding-structure", title: "Bonding, shapes and polarity", ref: "3.1–3.9", status: "coming-soon" },
         { slug: "organic-intro-alkanes", title: "Introductory organic chemistry and alkanes", ref: "4.1–4.7", status: "coming-soon" },
-        { slug: "alkenes", title: "Alkenes and electrophilic addition", ref: "5.1–5.7", status: "coming-soon" },
+        { slug: "alkenes", title: "Alkenes and electrophilic addition", ref: "5.1–5.7", status: "live", minutes: 18 },
       ],
     },
     {
@@ -381,6 +383,109 @@ export const NOTES: Record<string, Note> = {
           { chip: "B1", text: "Trends: across a period ↑ (dips at Groups 3 and 6); down a group ↓." },
           { chip: "M1", text: "Link every trend to nuclear charge, distance or shielding — name the lever." },
           { chip: "A1", text: "A sharp jump in successive ionisation energies marks a new shell — evidence for quantum shells." },
+        ],
+      },
+      {
+        type: "ref",
+        text: "See the two dips painted across Period 3 for yourself — open the wallchart.",
+        to: "wallchart",
+      },
+    ],
+  },
+  "unit-1/alkenes": {
+    updated: "Oct 2026",
+    sections: [
+      {
+        type: "p",
+        text: "A carbon–carbon double bond is not twice a single bond. It is one strong σ bond plus one weak π bond, and the π bond is what makes alkenes the most examinable family in Unit 1: its exposed electron cloud is a standing invitation to electrophiles. Learn one mechanism well — electrophilic addition — and Topic 5 answers itself.",
+        margin: "one π bond + one σ bond — never 'two σ'",
+      },
+      {
+        type: "definition",
+        term: "σ and π bonds",
+        text: "The σ bond forms by direct overlap of orbitals along the axis joining the nuclei. The π bond forms by sideways overlap above and below that axis, so its electron density is exposed — easier to attack, easier to break, and the reason C=C is reactive at all.",
+        margin: "π electrons live above and below the plane — exposed",
+      },
+      {
+        type: "definition",
+        term: "Electrophilic addition",
+        text: "An unsymmetrical reagent HX adds across a C=C bond: the π cloud attacks the δ⁺ end of the reagent, forming a carbocation intermediate, which is then attacked by the negative ion. Both new bonds form on the two carbons of the original double bond.",
+        margin: "say all three words: electrophilic · addition",
+      },
+      {
+        type: "h2",
+        text: "The mechanism itself — step through it",
+        margin: "curly arrows start where electrons ARE, end where they GO",
+      },
+      {
+        type: "p",
+        text: "The examiner wants three things from every curly arrow: where the electrons start (on the π bond or a lone pair), where they finish (on a δ⁺ atom), and a balanced intermediate. Work the theatre below with the (a)(b)(c) buttons — then draw it from memory on paper.",
+      },
+      {
+        type: "mechanism",
+        figure: "ethene-hbr",
+        caption: "HBr adding to ethene — the canonical WCH11 mechanism",
+        margin: "both curly arrows are drawn in the same step — synchronous",
+      },
+      {
+        type: "h2",
+        text: "Unsymmetrical alkenes — Markovnikov's rule",
+      },
+      {
+        type: "p",
+        text: "Add HBr to propene and the hydrogen has a choice of two carbons. It takes the one that already carries more hydrogens, because that route leaves the more stable carbocation — a secondary ion rather than a primary one. Alkyl groups stabilise the positive charge by pushing electron density towards it, so the 'rich get richer'.",
+        margin: "H to the H-rich carbon — the rich get richer",
+      },
+      {
+        type: "mechanism",
+        figure: "propene-hbr",
+        caption: "Propene — why the major product is 2-bromopropane",
+        margin: "secondary beats primary: 2 alkyl groups donating",
+      },
+      {
+        type: "examTip",
+        text: "When drawing the mechanism: full curly arrows from a lone pair or the centre of the π bond, δ charges on the HBr, and the intermediate's charge on the correct carbon. A half-arrow (fishhook) is radical chemistry — wrong paper. In WCH11 the double-barbed arrow is the only one you need.",
+        margin: "double-headed arrows only — this is not radical chemistry",
+      },
+      {
+        type: "practical",
+        title: "The unsaturation test",
+        steps: [
+          "Add a few drops of bromine water (orange) to the hydrocarbon and shake.",
+          "An alkene decolourises it almost instantly — the Br₂ adds across the double bond exactly like HBr would.",
+          "An alkane does not react in the dark: no π bond to attack, so the orange stays.",
+          "In the exam, write 'decolourises' — 'goes clear' is not the mark-scheme word.",
+        ],
+        margin: "orange → colourless = unsaturated",
+      },
+      {
+        type: "mistake",
+        text: "Drawing the curly arrow from the H of H–Br instead of from the π bond. The π electrons attack the electrophile, never the reverse — the arrow starts at the electrons, always.",
+      },
+      {
+        type: "mistake",
+        text: "Forgetting that HBr is polar. Without δ⁺ and δ⁻ written on the H–Br, the first mark of the mechanism is usually lost — the whole story of the attack depends on that polarity.",
+      },
+      {
+        type: "quiz",
+        question: "Propene reacts with HBr. What is the major product, and why?",
+        options: [
+          "1-bromopropane — Br⁻ attacks the primary carbocation, which is more stable",
+          "2-bromopropane — the secondary carbocation is more stable, so it forms preferentially",
+          "Equal amounts of both — the two carbocations have the same stability",
+          "No reaction — HBr cannot add across a non-polar double bond",
+        ],
+        answer: 1,
+        explain:
+          "Adding H to the middle carbon leaves a secondary carbocation (two alkyl groups donating electron density towards the charge). It forms far more readily than the primary alternative, so Br⁻ attacks it and 2-bromopropane dominates — Markovnikov.",
+      },
+      {
+        type: "keyPoints",
+        items: [
+          { chip: "B1", text: "C=C = one σ + one π bond; the π cloud sits above and below the axis and is the reactive part." },
+          { chip: "M1", text: "Curly arrow from the π bond to the δ⁺ hydrogen; second arrow from the H–X bond to X." },
+          { chip: "A1", text: "Markovnikov: H adds to the carbon with more H's — via the more stable carbocation." },
+          { chip: "B1", text: "Bromine water decolourises rapidly with an alkene — the standard unsaturation test." },
         ],
       },
     ],

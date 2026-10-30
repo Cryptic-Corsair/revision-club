@@ -425,3 +425,257 @@ sub { bottom: -0.22em; }
   .reveal { opacity: 1; transform: none; transition: none; }
   * { transition-duration: 0.01ms !important; }
 }
+
+/* ————————————————————————————————————————————————
+   THE WALLCHART — pinned periodic table
+   ———————————————————————————————————————————————— */
+
+.element-cell-pt {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  background: var(--paper-card);
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.element-cell-pt:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 2px 2px 0 rgba(33, 28, 20, 0.18);
+}
+.element-cell-pt .znum {
+  position: absolute;
+  top: 2.5px;
+  left: 4px;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 6.5px;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+}
+.element-cell-pt .sym {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-size: 13.5px;
+  transform: translateY(2.5px);
+}
+.element-cell-pt .ieval {
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 6px;
+  color: var(--red-ink);
+}
+
+/* the two strips of tape holding the poster up */
+.tape {
+  position: absolute;
+  width: 44px;
+  height: 13px;
+  background: rgba(240, 225, 78, 0.62);
+  box-shadow: 0 1px 2px rgba(33, 28, 20, 0.12);
+  transform: rotate(-4deg);
+  z-index: 35;
+}
+
+/* IE legend gradient */
+.ie-scale {
+  height: 10px;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(191, 59, 43, 0.08), rgba(191, 59, 43, 0.74));
+}
+
+/* the pen drawn across the print: trend arrows + examiner's rings */
+.trend-arrow path {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: drawIn 1.2s 0.25s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+.trend-arrow path.head { stroke-dasharray: 60; stroke-dashoffset: 60; animation: drawIn 0.3s 1.3s forwards; }
+.trend-arrow.slow path { animation-delay: 0.6s; }
+.trend-arrow.slow path.head { animation-delay: 1.65s; }
+.trend-ring path {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  animation: drawIn 0.8s 0.8s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+.trend-ring.slow path { animation-delay: 1.25s; }
+
+/* ————————————————————————————————————————————————
+   MECHANISM THEATRE — molecules + curly arrows
+   ———————————————————————————————————————————————— */
+
+.mol-text { font-family: var(--font-newsreader), Georgia, serif; user-select: none; }
+.mol-mono { font-family: var(--font-plex-mono), monospace; letter-spacing: 0.05em; }
+.svg-bond line { stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+.pi-arc {
+  fill: none;
+  stroke: var(--ink-faint);
+  stroke-width: 1.6;
+  stroke-dasharray: 4 5;
+  opacity: 0.75;
+}
+.lone-pair circle { fill: var(--ink); }
+
+.curly path {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: drawIn 0.8s calc(0.15s + var(--d, 0s)) cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+.curly path.head {
+  stroke-width: 2.4;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: drawIn 0.3s calc(0.85s + var(--d, 0s)) forwards;
+}
+
+.svg-tick {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  animation: drawIn 0.5s 0.55s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+.svg-cross path {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: drawIn 0.35s 0.5s forwards;
+}
+.svg-cross path:nth-child(2) { animation-delay: 0.75s; }
+.svg-ring ellipse {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 2.6;
+  stroke-dasharray: 160;
+  stroke-dashoffset: 160;
+  animation: drawIn 0.7s 0.35s forwards;
+}
+.svg-ring text { opacity: 0; animation: fadeIn 0.3s 0.85s forwards; }
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* home preview: the curly arrow that draws itself on the annex card */
+.preview-curly {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawIn 1s 1.2s ease-out forwards;
+}
+
+/* ————————————————————————————————————————————————
+   THE MARK SHEET — candidate cover
+   ———————————————————————————————————————————————— */
+
+.candidate-input {
+  font-family: var(--font-caveat), cursive;
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--blue);
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px dashed var(--rule);
+  border-radius: 0;
+  padding: 0 2px 2px;
+  outline: none;
+}
+.candidate-input:focus { border-bottom-color: var(--blue); }
+.candidate-input::placeholder { color: var(--ink-faint); opacity: 0.55; }
+
+/* examiner's tally marks */
+.tally-group { position: relative; display: inline-flex; gap: 3px; height: 16px; padding: 0 1px; }
+.tally-group i, .tally-bar {
+  display: inline-block;
+  width: 2.6px;
+  height: 16px;
+  background: var(--red-ink);
+  border-radius: 2px;
+  transform: rotate(4deg);
+}
+.tally-group b {
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 50%;
+  height: 2.6px;
+  background: var(--red-ink);
+  border-radius: 2px;
+  transform: rotate(-28deg);
+}
+
+/* bubbles rising in the test-tube meters */
+.bubble { opacity: 0; animation: bubbleRise 2.8s ease-in infinite; }
+.bubble.b2 { animation-delay: 1.4s; }
+@keyframes bubbleRise {
+  0% { transform: translateY(0); opacity: 0; }
+  25% { opacity: 0.9; }
+  100% { transform: translateY(-15px); opacity: 0; }
+}
+
+/* ————————————————————————————————————————————————
+   LIBRARY — the revision tick
+   ———————————————————————————————————————————————— */
+
+.tick-toggle {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--rule);
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.tick-toggle:hover { border-color: var(--red); background: rgba(240, 225, 78, 0.25); }
+.tick-toggle--on { border-color: rgba(191, 59, 43, 0.55); background: rgba(240, 225, 78, 0.35); }
+.tick-toggle svg { transform: rotate(-8deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .trend-arrow path, .trend-ring path, .curly path, .svg-tick, .svg-cross path,
+  .svg-ring ellipse, .preview-curly {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .svg-ring text { animation: none !important; opacity: 1 !important; }
+  .bubble { animation: none !important; }
+}
+
+/* ————————————————————————————————————————————————
+   PRINT — the note becomes a handout
+   ———————————————————————————————————————————————— */
+
+.print-only { display: none; }
+
+@media print {
+  .no-print, .margin-line { display: none !important; }
+  body::before { display: none !important; }
+  body { background: #fff !important; }
+  .paper-card, .paper-card--stacked { box-shadow: none !important; }
+  .paper-card, .exam-box { background: #fff !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  article { max-width: 100% !important; padding-left: 0 !important; padding-right: 0 !important; }
+  .print-only { display: block; }
+  @page { margin: 15mm; }
+}

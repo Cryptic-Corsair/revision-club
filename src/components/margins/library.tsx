@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CHEMISTRY, type Unit } from "@/lib/data";
+import { useProgress } from "@/lib/progress";
 import { Reveal, SectionHead, Stamp, Tick } from "./primitives";
 
 export function StatusBadge({ status }: { status: "live" | "partial" | "coming-soon" }) {
@@ -50,6 +51,9 @@ export function Library({ focus, openTopic }: { focus?: string; openTopic: (unit
   const [open, setOpen] = useState<Set<string>>(
     () => new Set(focus ? [focus] : [CHEMISTRY.units[0].slug])
   );
+  const { progress, toggleRevised } = useProgress();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const toggle = (u: string) =>
     setOpen((prev) => {
@@ -111,6 +115,12 @@ export function Library({ focus, openTopic }: { focus?: string; openTopic: (unit
                     <span className="font-marks text-[11px] tracking-[0.12em] text-ink-faint">
                       {unit.code} · {unit.weight}
                       {!isPractical && unit.topics.length > 0 ? ` · ${unit.topics.length} topics` : ""}
+                      {(() => {
+                        const live = unit.topics.filter((t) => t.status === "live");
+                        if (!live.length || !mounted) return "";
+                        const n = live.filter((t) => progress.revised.includes(`${unit.slug}/${t.slug}`)).length;
+                        return ` · ${n}/${live.length} ticked`;
+                      })()}
                     </span>
                   </span>
                   <span className="hidden sm:block shrink-0">
@@ -149,28 +159,44 @@ export function Library({ focus, openTopic }: { focus?: string; openTopic: (unit
                       )}
                       {unit.topics.map((topic, ti) =>
                         topic.status === "live" ? (
-                          <button
-                            key={topic.slug}
-                            type="button"
-                            onClick={() => openTopic(unit.slug, topic.slug)}
-                            className="w-full flex items-center gap-4 px-2 py-2.5 rounded-[2px] text-left hover:bg-paper-deep/60 transition-colors group"
-                          >
-                            <span className="font-marks text-[11px] text-ink-faint w-6 shrink-0">
-                              {String(ti + 1).padStart(2, "0")}
-                            </span>
-                            <Tick size={16} animated={false} className="shrink-0" />
-                            <span className="font-body text-[16.5px] text-ink group-hover:text-pen-deep transition-colors flex-1">
-                              {topic.title}
-                            </span>
-                            {topic.minutes && (
-                              <span className="font-marks text-[11px] tracking-[0.1em] text-ink-faint hidden sm:block">
-                                {topic.minutes} min
-                              </span>
-                            )}
-                            <span className="font-marks text-[11px] uppercase tracking-[0.12em] text-pen-deep group-hover:translate-x-0.5 transition-transform">
-                              Read →
-                            </span>
-                          </button>
+                          (() => {
+                            const key = `${unit.slug}/${topic.slug}`;
+                            const ticked = mounted && progress.revised.includes(key);
+                            return (
+                              <div
+                                key={topic.slug}
+                                className="w-full flex items-center gap-4 px-2 py-2.5 rounded-[2px] hover:bg-paper-deep/60 transition-colors group"
+                              >
+                                <span className="font-marks text-[11px] text-ink-faint w-6 shrink-0">
+                                  {String(ti + 1).padStart(2, "0")}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => toggleRevised(key)}
+                                  aria-pressed={ticked}
+                                  aria-label={ticked ? `Untick ${topic.title} as revised` : `Mark ${topic.title} as revised`}
+                                  className={`tick-toggle shrink-0 ${ticked ? "tick-toggle--on" : ""}`}
+                                >
+                                  {ticked && <Tick size={17} animated={false} />}
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => openTopic(unit.slug, topic.slug)}
+                                  className="font-body text-[16.5px] text-ink group-hover:text-pen-deep transition-colors flex-1 text-left min-w-0"
+                                >
+                                  {topic.title}
+                                </button>
+                                {topic.minutes && (
+                                  <span className="font-marks text-[11px] tracking-[0.1em] text-ink-faint hidden sm:block">
+                                    {topic.minutes} min
+                                  </span>
+                                )}
+                                <span className="font-marks text-[11px] uppercase tracking-[0.12em] text-pen-deep group-hover:translate-x-0.5 transition-transform">
+                                  Read →
+                                </span>
+                              </div>
+                            );
+                          })()
                         ) : (
                           <div key={topic.slug} className="flex items-center gap-4 px-2 py-2.5 opacity-60">
                             <span className="font-marks text-[11px] text-ink-faint w-6 shrink-0">

@@ -1,20 +1,27 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion, useScroll } from "framer-motion";
 import { CHEMISTRY, NOTES } from "@/lib/data";
-import { MarkChip, NoteBlock, Reveal, Stamp } from "./primitives";
+import { useProgress } from "@/lib/progress";
+import { MarkChip, NoteBlock, Reveal, Stamp, Tick } from "./primitives";
 
 export function Reader({
   unitSlug,
   topicSlug,
   backToUnit,
+  goWallchart,
 }: {
   unitSlug: string;
   topicSlug: string;
   backToUnit: () => void;
+  goWallchart: () => void;
 }) {
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll();
+  const { progress, toggleRevised } = useProgress();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const unit = CHEMISTRY.units.find((u) => u.slug === unitSlug);
   const topicIdx = unit?.topics.findIndex((t) => t.slug === topicSlug) ?? -1;
@@ -22,6 +29,8 @@ export function Reader({
   const note = NOTES[`${unitSlug}/${topicSlug}`];
   const prevTopic = topicIdx > 0 ? unit!.topics[topicIdx - 1] : undefined;
   const nextTopic = topicIdx >= 0 ? unit!.topics[topicIdx + 1] : undefined;
+  const topicKey = `${unitSlug}/${topicSlug}`;
+  const isRevised = mounted && progress.revised.includes(topicKey);
 
   if (!unit || !topic) {
     return (
@@ -49,7 +58,7 @@ export function Reader({
         <button
           type="button"
           onClick={backToUnit}
-          className="font-marks text-[11.5px] uppercase tracking-[0.16em] text-ink-faint hover:text-pen-deep transition-colors mb-10"
+          className="no-print font-marks text-[11.5px] uppercase tracking-[0.16em] text-ink-faint hover:text-pen-deep transition-colors mb-10"
         >
           ◂ Unit map · {unit.code}
         </button>
@@ -69,10 +78,28 @@ export function Reader({
                 Last updated {note?.updated ?? "recently"}
                 {topic.minutes ? ` · ${topic.minutes} min read` : ""}
               </p>
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="no-print font-marks text-[11.5px] uppercase tracking-[0.14em] text-pen-deep underline decoration-pen/50 underline-offset-[5px] hover:text-ink transition-colors ml-auto"
+              >
+                Print this note
+              </button>
             </div>
             <div className="double-rule mt-8" aria-hidden="true" />
           </header>
         </Reveal>
+
+        {/* print-only handout header */}
+        <div className="print-only" aria-hidden="true">
+          <div className="flex items-center justify-between gap-4 mb-1">
+            <p className="font-marks text-[10px] uppercase tracking-[0.16em]">
+              Axiom · IAL Chemistry · {unit.code} · Spec {topic.ref ?? "—"}
+            </p>
+            <p className="font-marks text-[10px] uppercase tracking-[0.16em]">Name ______________  Class ______</p>
+          </div>
+          <div className="border-t border-dashed border-ink/60 mb-6" />
+        </div>
 
         {/* mark scheme legend — how the chips work */}
         <Reveal>
@@ -98,7 +125,12 @@ export function Reader({
         {note ? (
           <div className="space-y-5">
             {note.sections.map((section, i) => (
-              <NoteBlock key={i} section={section} />
+              <NoteBlock
+                key={i}
+                section={section}
+                quizId={section.type === "quiz" ? `${topicKey}#q${i}` : undefined}
+                goWallchart={goWallchart}
+              />
             ))}
           </div>
         ) : (
@@ -109,7 +141,36 @@ export function Reader({
         )}
 
         {/* end of note */}
-        <div className="max-w-[64ch] mt-16">
+        <div className="max-w-[64ch] mt-16 no-print">
+          {/* mark as revised — the tick that fills the mark sheet */}
+          <div className="paper-card px-6 py-5 mb-8 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <span className={isRevised ? "shrink-0" : "shrink-0 opacity-35"} aria-hidden="true">
+                <Tick size={28} animated={false} className={isRevised ? "-rotate-6" : ""} />
+              </span>
+              <div>
+                <p className="font-display font-semibold text-[17px]">
+                  {isRevised ? "Ticked — on the mark sheet" : "Revised this one?"}
+                </p>
+                <p className="font-body text-[14.5px] text-ink-soft">
+                  {isRevised ? "The examiner has been informed. It counts on the mark sheet." : "One tick here and it appears on your candidate mark sheet."}
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => toggleRevised(topicKey)}
+              className={`font-marks text-[12px] uppercase tracking-[0.14em] px-4 py-2.5 border rounded-[2px] transition-colors ${
+                isRevised
+                  ? "border-rule text-ink-faint hover:text-ink"
+                  : "border-pen/60 text-pen-deep hover:bg-hl/30"
+              }`}
+              aria-pressed={isRevised}
+            >
+              {isRevised ? "Untick ↺" : "Tick as revised ✓"}
+            </button>
+          </div>
+
           <div className="flex items-center gap-5 mb-8" aria-hidden="true">
             <span className="h-px flex-1 bg-rule" />
             <span className="font-marks text-[10.5px] uppercase tracking-[0.3em] text-ink-faint">End of note</span>

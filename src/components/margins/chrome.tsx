@@ -1,18 +1,22 @@
 "use client";
 
-import { Stamp, Tick } from "./primitives";
+import { Stamp } from "./primitives";
 
 export function TopBar({
   goHome,
   goLibrary,
+  goWallchart,
+  goMarks,
   current,
 }: {
   goHome: () => void;
   goLibrary: () => void;
+  goWallchart: () => void;
+  goMarks: () => void;
   current: string;
 }) {
   return (
-    <header className="sticky top-0 z-40 bg-paper/92 backdrop-blur-[3px] border-b border-rule">
+    <header className="no-print sticky top-0 z-40 bg-paper/92 backdrop-blur-[3px] border-b border-rule">
       <div className="mx-auto max-w-[1160px] px-5 md:px-10 h-[62px] flex items-center justify-between gap-4">
         <button type="button" onClick={goHome} className="flex items-center gap-3 group" aria-label="Axiom — IAL Chemistry home">
           <span className="element-cell group-hover:border-pen transition-colors" aria-hidden="true">
@@ -35,18 +39,22 @@ export function TopBar({
         </p>
 
         <nav className="flex items-center gap-5" aria-label="Main">
-          <button
-            type="button"
-            onClick={goLibrary}
-            className={`font-marks text-[12px] uppercase tracking-[0.14em] transition-colors hover:text-pen-deep ${
-              current === "library" ? "text-pen-deep" : "text-ink-soft"
-            }`}
-          >
-            Unit map
-          </button>
-          <span className="hidden sm:block" aria-hidden="true">
-            <Tick size={17} animated={false} />
-          </span>
+          {[
+            { label: "Unit map", action: goLibrary, key: "library" },
+            { label: "Wallchart", action: goWallchart, key: "wallchart" },
+            { label: "Mark sheet", action: goMarks, key: "marks" },
+          ].map((item) => (
+            <button
+              key={item.key}
+              type="button"
+              onClick={item.action}
+              className={`font-marks text-[12px] uppercase tracking-[0.14em] transition-colors hover:text-pen-deep ${
+                current === item.key ? "text-pen-deep" : "text-ink-soft"
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
         </nav>
       </div>
     </header>
@@ -55,7 +63,7 @@ export function TopBar({
 
 export function Footer({ goLibrary }: { goLibrary: () => void }) {
   return (
-    <footer className="mt-auto">
+    <footer className="no-print mt-auto">
       <div className="mx-auto max-w-[1160px] px-5 md:px-10 pb-10 pt-4">
         <div className="flex items-center gap-5 my-12" aria-hidden="true">
           <span className="h-px flex-1 bg-rule" />

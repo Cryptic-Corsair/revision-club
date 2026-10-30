@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { NoteSection } from "@/lib/data";
+import { useProgress } from "@/lib/progress";
+import { MechanismStage } from "./mechanism";
 
 /* ————— hand-drawn primitives ————— */
 
@@ -137,9 +139,26 @@ export function MarkChip({ children }: { children: ReactNode }) {
 
 /* ————— interactive: exam-question quiz with marking ————— */
 
-export function QuizBlock({ question, options, answer, explain }: { question: string; options: string[]; answer: number; explain: string }) {
+export function QuizBlock({
+  question,
+  options,
+  answer,
+  explain,
+  quizId,
+}: {
+  question: string;
+  options: string[];
+  answer: number;
+  explain: string;
+  quizId?: string;
+}) {
   const [picked, setPicked] = useState<number | null>(null);
   const solved = picked === answer;
+  const { recordQuiz } = useProgress();
+
+  useEffect(() => {
+    if (quizId && picked !== null) recordQuiz(quizId, picked === answer);
+  }, [picked, quizId, answer, recordQuiz]);
 
   return (
     <div className="exam-box relative px-6 py-5 my-5 max-w-[64ch]">
@@ -274,7 +293,7 @@ function Row({ margin, children }: { margin?: string; children: ReactNode }) {
   );
 }
 
-export function NoteBlock({ section }: { section: NoteSection }) {
+export function NoteBlock({ section, quizId, goWallchart }: { section: NoteSection; quizId?: string; goWallchart?: () => void }) {
   switch (section.type) {
     case "p":
       return (
@@ -424,7 +443,31 @@ export function NoteBlock({ section }: { section: NoteSection }) {
         </div>
       );
     case "quiz":
-      return <QuizBlock {...section} />;
+      return <QuizBlock {...section} quizId={quizId} />;
+    case "mechanism":
+      return (
+        <Row margin={section.margin}>
+          <div>
+            {section.caption && (
+              <p className="font-marks text-[11px] uppercase tracking-[0.16em] text-ink-faint mb-2">{section.caption}</p>
+            )}
+            <MechanismStage figure={section.figure} />
+          </div>
+        </Row>
+      );
+    case "ref":
+      return (
+        <div className="my-4 max-w-[64ch]">
+          <div className="paper-card border-l-[3px] border-ballpoint px-5 py-4 flex items-center justify-between gap-4 flex-wrap">
+            <p className="font-body text-[16px] text-ink/90">{section.text}</p>
+            {section.to === "wallchart" && (
+              <button type="button" onClick={goWallchart} className="balllink font-body text-[15.5px] shrink-0">
+                Open the wallchart →
+              </button>
+            )}
+          </div>
+        </div>
+      );
     case "keyPoints":
       return (
         <div className="paper-card px-6 py-5 my-6 max-w-[64ch]">

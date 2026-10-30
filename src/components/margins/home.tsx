@@ -1,8 +1,9 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 import { CHEMISTRY } from "@/lib/data";
-import { Formula, GradeCircle, HandUnderline, MarginNote, MarkChip, Reveal, SectionHead, Stamp, Tick } from "./primitives";
+import { Formula, GradeCircle, HandUnderline, MarginNote, MarkChip, Mcq, Reveal, SectionHead, Stamp, Tick } from "./primitives";
 import { UnitCard } from "./library";
 
 const fadeUp = (delay: number) => ({
@@ -11,14 +12,58 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.65, delay, ease: [0.2, 0.7, 0.3, 1] as const },
 });
 
+/* ————— the examiner's dictionary: command words decoded ————— */
+const COMMANDS = [
+  {
+    w: "State",
+    demands: "The fact, nothing else. No reasons, no working — one line, and move on.",
+    example: "State the colour of chlorine gas.",
+    hint: "usually 1 mark — never explain",
+  },
+  {
+    w: "Describe",
+    demands: "What you would observe, in the order it happens. Sights, sounds, changes — but not why.",
+    example: "Describe what happens when sodium is added to water.",
+    hint: "observations only — no reasons",
+  },
+  {
+    w: "Explain",
+    demands: "The why, in full sentences. One cause per point, named precisely.",
+    example: "Explain why the first ionisation energy decreases down Group 2.",
+    hint: "the word 'because' must appear",
+  },
+  {
+    w: "Deduce",
+    demands: "Work it out from the data in front of you. The answer is hiding in the question.",
+    example: "Deduce the formula of the hydrocarbon from these results.",
+    hint: "use their numbers, not memory",
+  },
+  {
+    w: "Calculate",
+    demands: "Every line of working, because each line can earn a mark. Unit and 3 s.f. at the end.",
+    example: "Calculate the concentration of the sodium hydroxide.",
+    hint: "working = method marks",
+  },
+  {
+    w: "Compare",
+    demands: "Both sides, the same property, joined with 'whereas'. One-sided answers score half.",
+    example: "Compare the thermal stabilities of MgCO₃ and BaCO₃.",
+    hint: "two columns, one sentence",
+  },
+];
+
 export function Home({
   goLibrary,
   openUnit,
   openSampleNote,
+  openWallchart,
+  openTopic,
 }: {
   goLibrary: () => void;
   openUnit: (slug: string) => void;
   openSampleNote: () => void;
+  openWallchart: () => void;
+  openTopic: (unit: string, topic: string) => void;
 }) {
   const reduced = useReducedMotion();
   const anim = <T extends object>(cfg: T) => (reduced ? {} : cfg);
@@ -79,7 +124,7 @@ export function Home({
             <span className="text-pen" aria-hidden="true">·</span>
             <span>150+ spec points</span>
             <span className="text-pen" aria-hidden="true">·</span>
-            <span>Mark-scheme fluent</span>
+            <span>wallchart + mechanism theatre</span>
           </motion.p>
         </div>
 
@@ -276,6 +321,145 @@ export function Home({
         </Reveal>
       </section>
 
+      {/* ————— Section D: the lab annex — two new instruments ————— */}
+      <section className="pb-20">
+        <Reveal>
+          <SectionHead
+            section="Section D"
+            title="The lab annex"
+            instruction="Two new instruments, marked and ready to use."
+          />
+        </Reveal>
+        <div className="grid gap-6 md:grid-cols-2">
+          {/* the wallchart */}
+          <Reveal delay={0}>
+            <button
+              type="button"
+              onClick={openWallchart}
+              className="paper-card group text-left w-full p-6 transition-all duration-200 hover:-translate-y-[3px] hover:shadow-[4px_4px_0_rgba(191,59,43,0.25)]"
+            >
+              <div className="border border-rule rounded-[2px] bg-paper px-4 pt-4 pb-3 mb-5 relative overflow-hidden">
+                <svg viewBox="0 0 148 86" className="w-full h-auto" aria-hidden="true">
+                  {/* a silhouette of the chart */}
+                  {Array.from({ length: 4 }, (_, r) =>
+                    Array.from({ length: 12 }, (_, c) => {
+                      const inGap = c >= 2 && c <= 7 && r < 3;
+                      if (inGap) return null;
+                      const tint =
+                        (r === 1 && c === 1) || (r === 2 && c === 1)
+                          ? "rgba(240,225,78,0.55)"
+                          : c >= 8
+                            ? "rgba(47,83,130,0.14)"
+                            : "rgba(191,59,43,0.12)";
+                      return (
+                        <rect
+                          key={`${r}-${c}`}
+                          x={c * 12 + (c >= 8 ? 32 : 0)}
+                          y={r * 13 + 2}
+                          width="10"
+                          height="11"
+                          fill={tint}
+                          stroke="var(--rule)"
+                          strokeWidth="0.8"
+                        />
+                      );
+                    })
+                  )}
+                  {Array.from({ length: 6 }, (_, c) => (
+                    <rect
+                      key={`f-${c}`}
+                      x={c * 12 + 26}
+                      y={55}
+                      width="10"
+                      height="11"
+                      fill="rgba(33,28,20,0.10)"
+                      stroke="var(--rule)"
+                      strokeWidth="0.8"
+                    />
+                  ))}
+                  {/* the teacher's pen: trend arrow + rings */}
+                  <path d="M 6 44 C 40 38, 90 32, 148 30" fill="none" stroke="var(--red)" strokeWidth="1.8" strokeLinecap="round" />
+                  <path d="M 148 30 l -8 -2 M 148 30 l -6 5" fill="none" stroke="var(--red)" strokeWidth="1.8" strokeLinecap="round" />
+                  <ellipse cx="104" cy="42" rx="8" ry="7" fill="none" stroke="var(--red)" strokeWidth="1.4" />
+                  <ellipse cx="128" cy="42" rx="8" ry="7" fill="none" stroke="var(--red)" strokeWidth="1.4" />
+                </svg>
+              </div>
+              <div className="flex items-center justify-between gap-3 mb-2.5">
+                <h3 className="font-display text-[1.4rem] font-semibold group-hover:underline decoration-pen decoration-2 underline-offset-4">
+                  The Wallchart
+                </h3>
+                <Stamp pressed>118 elements</Stamp>
+              </div>
+              <p className="font-body text-[15.5px] leading-[1.65] text-ink-soft">
+                The periodic table, hung and annotated. Shade it by block, state or first ionisation
+                energy — and watch the two Period 3 dips appear under the examiner's red ring.
+              </p>
+              <p className="font-marks text-[11.5px] uppercase tracking-[0.14em] text-pen-deep mt-4 group-hover:translate-x-1 transition-transform inline-block">
+                Open the wallchart →
+              </p>
+            </button>
+          </Reveal>
+
+          {/* the mechanism theatre */}
+          <Reveal delay={90}>
+            <button
+              type="button"
+              onClick={() => openTopic("unit-1", "alkenes")}
+              className="paper-card group text-left w-full p-6 transition-all duration-200 hover:-translate-y-[3px] hover:shadow-[4px_4px_0_rgba(191,59,43,0.25)]"
+            >
+              <div className="border border-rule rounded-[2px] bg-paper px-4 pt-4 pb-3 mb-5">
+                <svg viewBox="0 0 148 86" className="w-full h-auto" aria-hidden="true">
+                  {/* ethene, compressed */}
+                  <text x="30" y="50" textAnchor="middle" fontSize="15" fill="var(--ink)" fontFamily="Georgia, serif">
+                    C=C
+                  </text>
+                  <text x="108" y="50" textAnchor="middle" fontSize="15" fill="var(--ink)" fontFamily="Georgia, serif">
+                    H—Br
+                  </text>
+                  <text x="100" y="30" textAnchor="middle" fontSize="10" fill="var(--red-ink)" fontFamily="Georgia, serif" fontStyle="italic">
+                    δ+
+                  </text>
+                  <text x="124" y="66" textAnchor="middle" fontSize="10" fill="var(--red-ink)" fontFamily="Georgia, serif" fontStyle="italic">
+                    δ−
+                  </text>
+                  {/* the curly arrow — the signature */}
+                  <path d="M 38 36 C 56 10, 86 12, 102 32" fill="none" stroke="var(--red)" strokeWidth="2" strokeLinecap="round" className="preview-curly" />
+                  <path d="M 104 34 l -8 -1 M 104 34 l -4 7" fill="none" stroke="var(--red)" strokeWidth="2" strokeLinecap="round" className="preview-curly" />
+                  <path d="M 46 70 L 54 78 L 68 58" fill="none" stroke="var(--red)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <div className="flex items-center justify-between gap-3 mb-2.5">
+                <h3 className="font-display text-[1.4rem] font-semibold group-hover:underline decoration-pen decoration-2 underline-offset-4">
+                  The Mechanism Theatre
+                </h3>
+                <Stamp pressed>Curly arrows</Stamp>
+              </div>
+              <p className="font-body text-[15.5px] leading-[1.65] text-ink-soft">
+                Mechanisms that draw their own curly arrows. Step through electrophilic addition and
+                Markovnikov with exam-style part buttons — the way a marker reads it.
+              </p>
+              <p className="font-marks text-[11.5px] uppercase tracking-[0.14em] text-pen-deep mt-4 group-hover:translate-x-1 transition-transform inline-block">
+                Watch a mechanism →
+              </p>
+            </button>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ————— Section E: the examiner's dictionary ————— */}
+      <section className="pb-20">
+        <Reveal>
+          <SectionHead
+            section="Section E"
+            title="The examiner's dictionary"
+            instruction="Six command words. Learn what each one is asking for."
+          />
+        </Reveal>
+        <Reveal>
+          <CommandDecoder />
+        </Reveal>
+      </section>
+
       {/* ————— quote band ————— */}
       <section className="py-16 border-t border-rule">
         <Reveal>
@@ -301,5 +485,52 @@ export function Home({
         </Reveal>
       </section>
     </div>
+  );
+}
+
+/* ————— the decoder: pick a command word, read what it demands ————— */
+function CommandDecoder() {
+  const [sel, setSel] = useState(2); // "Explain" — the one everyone loses marks on
+  const cur = COMMANDS[sel];
+  return (
+    <div>
+      <div className="flex flex-wrap gap-x-7 gap-y-3 mb-6" role="group" aria-label="Command words">
+        {COMMANDS.map((c, i) => (
+          <Mcq key={c.w} label={c.w} active={sel === i} onClick={() => setSel(i)} />
+        ))}
+      </div>
+
+      <div className="exam-box relative px-6 py-6 md:px-8 max-w-[64ch]">
+        <span className="absolute -top-[9px] left-4 bg-paper px-2 font-marks text-[10.5px] uppercase tracking-[0.18em] text-ink-faint">
+          Decoded
+        </span>
+        <AnimateKeyed k={sel}>
+          <div>
+            <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-3">
+              <h3 className="font-display font-semibold text-[1.7rem]">{cur.w}</h3>
+              <span className="mark-chip">{cur.hint}</span>
+            </div>
+            <p className="font-body text-[17px] leading-[1.75] text-ink/90 mb-4">{cur.demands}</p>
+            <p className="font-body italic text-[15.5px] leading-[1.65] text-ink-soft border-l-[3px] border-rule pl-4">
+              “{cur.example}”
+            </p>
+          </div>
+        </AnimateKeyed>
+      </div>
+    </div>
+  );
+}
+
+/* tiny helper: re-mount children on key change for a soft fade */
+function AnimateKeyed({ k, children }: { k: number; children: React.ReactNode }) {
+  return (
+    <motion.div
+      key={k}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, ease: [0.2, 0.7, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
   );
 }

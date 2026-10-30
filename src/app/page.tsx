@@ -6,10 +6,14 @@ import { TopBar, Footer } from "@/components/margins/chrome";
 import { Home } from "@/components/margins/home";
 import { Library } from "@/components/margins/library";
 import { Reader } from "@/components/margins/reader";
+import { Wallchart } from "@/components/margins/wallchart";
+import { MarkSheet } from "@/components/marks";
 
 type View =
   | { name: "home" }
   | { name: "library"; focus?: string }
+  | { name: "wallchart" }
+  | { name: "marks" }
   | { name: "notes"; unit: string; topic: string };
 
 export default function Page() {
@@ -22,14 +26,27 @@ export default function Page() {
 
   const goHome = () => setView({ name: "home" });
   const goLibrary = () => setView({ name: "library" });
+  const goWallchart = () => setView({ name: "wallchart" });
+  const goMarks = () => setView({ name: "marks" });
   const openUnit = (slug: string) => setView({ name: "library", focus: slug });
   const openTopic = (unit: string, topic: string) => setView({ name: "notes", unit, topic });
 
-  const viewKey = view.name === "notes" ? `notes-${view.topic}` : view.name === "library" ? `library-${view.focus ?? "all"}` : view.name;
+  const viewKey =
+    view.name === "notes"
+      ? `notes-${view.topic}`
+      : view.name === "library"
+        ? `library-${view.focus ?? "all"}`
+        : view.name;
 
   return (
     <div className="min-h-screen flex flex-col relative">
-      <TopBar goHome={goHome} goLibrary={goLibrary} current={view.name} />
+      <TopBar
+        goHome={goHome}
+        goLibrary={goLibrary}
+        goWallchart={goWallchart}
+        goMarks={goMarks}
+        current={view.name}
+      />
 
       <main className="flex-1">
         <AnimatePresence mode="wait">
@@ -45,16 +62,21 @@ export default function Page() {
                 goLibrary={goLibrary}
                 openUnit={openUnit}
                 openSampleNote={() => openTopic("unit-1", "the-mole-titrations")}
+                openWallchart={goWallchart}
+                openTopic={openTopic}
               />
             )}
             {view.name === "library" && (
               <Library key={view.focus ?? "all"} focus={view.focus} openTopic={openTopic} />
             )}
+            {view.name === "wallchart" && <Wallchart openTopic={openTopic} />}
+            {view.name === "marks" && <MarkSheet openTopic={openTopic} />}
             {view.name === "notes" && (
               <Reader
                 unitSlug={view.unit}
                 topicSlug={view.topic}
                 backToUnit={() => setView({ name: "library", focus: view.unit })}
+                goWallchart={goWallchart}
               />
             )}
           </motion.div>
