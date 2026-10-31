@@ -76,7 +76,7 @@ const MARQUEE_B = [
   "RECRYSTALLISATION",
 ];
 
-export function Home({ units, onOpenUnit }: { units: Unit[]; onOpenUnit: (code: string) => void }) {
+export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units: Unit[]; onOpenUnit: (code: string) => void; onOpenBlend: () => void; onOpenSticker: () => void }) {
   const hours = Math.round(TOTALS.minutes / 60);
   const revised = useRevised();
 
@@ -358,6 +358,102 @@ export function Home({ units, onOpenUnit }: { units: Unit[]; onOpenUnit: (code: 
               )}
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ————— the arcade strip ————— */}
+      <section id="arcade" className="mx-auto max-w-6xl scroll-mt-24 px-5 pb-20 sm:px-8">
+        <Reveal className="text-center">
+          <SectionTag main="#F06595" tilt={1.5}>
+            the arcade
+          </SectionTag>
+          <h2 className="mt-5 font-display text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-ink">
+            Not feeling like reading?
+          </h2>
+        </Reveal>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <Reveal delay={0.05}>
+            <motion.button
+              type="button"
+              onClick={onOpenBlend}
+              whileHover={{ y: -8, rotate: 0, scale: 1.015 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 300, damping: 18 }}
+              className="group relative block w-full cursor-pointer overflow-hidden rounded-[36px] p-7 text-left puff sm:p-8"
+              style={{ background: tint("#9775FA", 10), transform: "rotate(-1deg)" }}
+            >
+              <Blob color={tint("#9775FA", 22)} className="top-[-30%] right-[-15%] h-[75%] w-[55%]" />
+              <div className="relative z-10">
+                <span
+                  className="grid h-14 w-14 place-items-center rounded-[22px] text-white"
+                  style={{ background: "#9775FA", boxShadow: `0 5px 0 ${shade("#9775FA")}` }}
+                >
+                  <Gamepad2 className="h-7 w-7" strokeWidth={2.2} />
+                </span>
+                <h3 className="mt-5 font-display text-[26px] font-semibold text-ink">
+                  Blend Mode
+                </h3>
+                <p className="mt-2 max-w-[46ch] text-[14.5px] leading-[1.75] text-ink-soft">
+                  Every checkpoint question on the site, shuffled into a flashcard blender.
+                  Flip, judge yourself, chase streaks — the mascot reacts to your combos and
+                  he is not subtle about it.
+                </p>
+                <div className="mt-5 flex flex-wrap items-center gap-2">
+                  <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
+                    quick-fire flips
+                  </span>
+                  <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
+                    streak combos
+                  </span>
+                  <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[14px] font-bold text-grape">
+                    play <MoveRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
+                  </span>
+                </div>
+              </div>
+            </motion.button>
+          </Reveal>
+
+          <Reveal delay={0.12}>
+            <motion.button
+              type="button"
+              onClick={onOpenSticker}
+              whileHover={{ y: -8, rotate: 0, scale: 1.015 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 300, damping: 18 }}
+              className="group relative block w-full cursor-pointer overflow-hidden rounded-[36px] p-7 text-left puff sm:p-8"
+              style={{ background: tint("#12B886", 10), transform: "rotate(1deg)" }}
+            >
+              <Blob color={tint("#12B886", 22)} className="bottom-[-30%] left-[-15%] h-[75%] w-[55%]" />
+              <div className="relative z-10">
+                <span
+                  className="grid h-14 w-14 place-items-center rounded-[22px] text-white"
+                  style={{ background: "#12B886", boxShadow: `0 5px 0 ${shade("#12B886")}` }}
+                >
+                  <Sticker className="h-7 w-7" strokeWidth={2.2} />
+                </span>
+                <h3 className="mt-5 font-display text-[26px] font-semibold text-ink">
+                  The Sticker Book
+                </h3>
+                <p className="mt-2 max-w-[46ch] text-[14.5px] leading-[1.75] text-ink-soft">
+                  Your jar, your sheets, your badges. Every revised topic becomes a sticker;
+                  fill all six sheets and the beaker tops out. Currently{" "}
+                  {revised.length}/{TOTALS.topics} collected.
+                </p>
+                <div className="mt-5 flex flex-wrap items-center gap-2">
+                  <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
+                    6 badge achievements
+                  </span>
+                  <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
+                    saved in your browser
+                  </span>
+                  <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[14px] font-bold text-mint">
+                    open <MoveRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
+                  </span>
+                </div>
+              </div>
+            </motion.button>
+          </Reveal>
         </div>
       </section>
 

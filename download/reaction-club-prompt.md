@@ -1,6 +1,6 @@
 # Reaction Club — Edexcel IAL Chemistry Notes Site
 
-## AI Studio / design-engineering prompt (v6 — replaces all "Spectra" versions)
+## AI Studio / design-engineering prompt (v7 — replaces all "Spectra" versions)
 
 Build a single-page React/Next.js study site for **Pearson Edexcel International A Level
 Chemistry, 2018 specification (WCH11–WCH16)**. It must feel like a **playground, not a
@@ -73,8 +73,17 @@ delivers "Bubbles says" tip bubbles, and its silhouette fills like a gauge
 
 ## 2. Information architecture (single route, client view state)
 
-Only `/` exists. Three client views with spring `AnimatePresence` transitions and
-scroll-to-top on change:
+Only `/` exists. Five client views with spring `AnimatePresence` transitions and
+scroll-to-top on change. A fixed floating **pill nav** (rounded-full, blurred paper,
+cloud shadow) carries: logo | search · blend · sticker-book icon pucks | home | six
+unit pucks (active puck pops to 1.12× in its flavour colour).
+
+0. **⌘K search bubble** — global; ⌘K / Ctrl+K / `/` summons, Esc flees. A
+   rounded-32px paper dialog on a blurred cocoa overlay (spring in with a −1°→+1°
+   wobble): magnifier puck, big Fredoka input, rainbow divider strip, suggestion
+   chips ("moles", "enthalpy", "chirality"…), and result rows (unit-colour number
+   tile, marker-highlighted title, label chip, minutes, animated arrow). ↑↓ wander,
+   ↵ opens, empty state is polite and cheeky.
 
 1. **Home (the clubhouse)**
    - Hero: eyebrow tag pill → display headline "Chemistry that *actually* **sticks.**"
@@ -91,6 +100,9 @@ scroll-to-top on change:
    - "Revision that plays like a game": three numbered candy-dot steps
      (read sticky-sweet notes → play the checkpoints → fill your sticker book) with
      bouncing arrow pucks between.
+   - **The arcade strip**: two big tilted cards — **Blend Mode** (grape, gamepad
+     puck) and **The Sticker Book** (mint, sticker puck, live "x/y collected"
+     count) — each with tinted blob, feature chips and a hover-chasing arrow.
    - CTA band: cocoa rounded-44px stage, blobs, cheer mascot, candy buttons.
 
 2. **Unit view (the trail)**
@@ -115,6 +127,48 @@ scroll-to-top on change:
      (`reaction-club-v1: { revised: string[] }`, cross-tab sync).
    - "Turn back / Turn over" pills; end-of-trail pill says "Back to WCHxx" with a
      party icon.
+
+4. **Blend Mode (the flashcard arcade)**
+   - Grape header: tag "the arcade · blend mode", H1 "Flashcards that *fight
+     back.*", scoreboard chips fed by localStorage
+     (`reaction-club-blend-v1: { best, blends, hits, tries }`): best streak,
+     blends played, all-time hit rate.
+   - **Pile picker:** "the whole shelf · N" + one pill per flavour with live card
+     counts (derived from every checkpoint block on the site — one source of
+     truth, zero drift).
+   - Idle stage: cheer mascot on a grape tint, "N cards ready to blend", candy
+     start button (10 cards) + "go big · 15 / 25" ghosts.
+   - **Play:** progress dots (mint = hit, coral = miss, ink = current, spring-pop),
+     streak pill that ignites coral at 3+ ("· on fire!"), hit/miss counter. The
+     card is a fat **3D flip** (`perspective 1400px`, `preserve-3d`, spring
+     rotateY): front = question + "Reveal the answer" candy; back = answer +
+     **Got it** (mint) / **Not yet** (coral) + "reread topic" dotted link. Whole
+     front is a click target. Keyboard: **Space** flips, **← →** judge.
+   - Combo milestones (3/5/8/12/16/20): confetti burst + mascot speech-bubble
+     quips that escalate in cheek ("Three in a row! The blend is warming up." →
+     "TWENTY. Bubbles has fainted. Passionately.").
+   - **Results:** tinted stage, mascot mood scales with accuracy, headline from a
+     tier list ("A perfect blend!" → "That one needed sieving."), spring-filled
+     accuracy bar, **new record** badge, "Blend again" + "Change the pile", and a
+     **"cards that escaped"** list — every missed question as a tilted card that
+     deep-links to its topic.
+
+5. **The Sticker Book (your jar)**
+   - Mint header "Your jar, *so far.*" Jar panel: giant BeakerMeter + % + gradient
+     fill bar + per-unit count chips (filled units glow in their flavour).
+   - **Bubbles reacts** with a tiered quip (empty → first sips → halfway →
+     three-quarters → FULL JAR).
+   - **Badge shelf:** six tilted achievement badges (First dip, Flavour fan,
+     Half pint, Blend rookie, On a streak, Full jar) — locked ones sit ghosted
+     with a padlock, earned ones pop in colour on pedestals.
+   - **The six sheets:** one tinted panel per unit (header row = number pedestal,
+     nickname, count, mini beaker, deep-links to the unit) over a grid of sticker
+     slots — **collected** stickers are solid flavour tiles with a check seal and
+     tilt; **empty slots** are dashed-outline ghosts reading "empty slot — go
+     collect it". Tapping toggles the sticker (peel-off works both ways).
+   - **The pour ritual:** two-step reset pill ("pour out the jar (start fresh)" →
+     coral "really pour it all out?") that empties the jar — with confetti, because
+     Bubbles insists.
 
 ---
 
@@ -152,7 +206,9 @@ jokes live in labels and transitions ("Turn over", "sticker!", "Go be smug.").
 4. Accessibility: semantic landmarks, aria-labels on icon buttons, `aria-pressed` on
    toggles, visible dashed-coral focus rings, 44px+ touch targets, reduced-motion off.
 5. Footer sticks to the viewport bottom (`min-h-screen flex flex-col` + `mt-auto`);
-   cocoa with a wave top, six flavour links, and the not-affiliated-with-Pearson line.
+   cocoa with a wave top, three columns (brand + boopable mascot / **the arcade**
+   links: Blend Mode, Sticker book, Search · press ⌘K / six flavour links) and the
+   not-affiliated-with-Pearson line.
 6. Selection colour lemon; scrollbar a coral→tangerine candy cane.
 7. Single route, client-side views; no data fetching required; progress in localStorage.
 

@@ -1,12 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FlaskConical, Home as HomeIcon } from "lucide-react";
+import { FlaskConical, Home as HomeIcon, Search, Sticker, Zap } from "lucide-react";
+import type { UnitCode } from "@/lib/spectra/types";
 import { UNITS, getUnit, getTopic } from "@/lib/spectra/units";
 import { Home } from "./home";
 import { UnitView } from "./unit-view";
 import { TopicView } from "./topic-view";
+import { Blend } from "./blend";
+import { StickerBook } from "./sticker-book";
+import { SearchPalette } from "./search";
 import { Mascot, SpeechBubble, tint, shade } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -16,7 +20,9 @@ import { Mascot, SpeechBubble, tint, shade } from "./bits";
 type View =
   | { kind: "home" }
   | { kind: "unit"; code: string }
-  | { kind: "topic"; code: string; topicId: string };
+  | { kind: "topic"; code: string; topicId: string }
+  | { kind: "sticker" }
+  | { kind: "blend" };
 
 function LogoMark({ size = 38 }: { size?: number }) {
   return (
@@ -38,12 +44,18 @@ function TopBar({
   view,
   onHome,
   onOpenUnit,
+  onOpenSticker,
+  onOpenBlend,
+  onSearch,
 }: {
   view: View;
   onHome: () => void;
   onOpenUnit: (code: string) => void;
+  onOpenSticker: () => void;
+  onOpenBlend: () => void;
+  onSearch: () => void;
 }) {
-  const activeCode = view.kind === "home" ? null : view.code;
+  const activeCode = view.kind === "unit" || view.kind === "topic" ? view.code : null;
 
   return (
     <header className="fixed inset-x-0 top-3 z-50 flex justify-center px-3">
@@ -63,6 +75,54 @@ function TopBar({
             Reaction Club
           </span>
         </button>
+
+        <span aria-hidden className="mx-1 hidden h-6 w-[3px] rounded-full bg-ink/10 sm:block" />
+
+        {/* ————— the arcade trio ————— */}
+        <motion.button
+          type="button"
+          onClick={onSearch}
+          whileTap={{ scale: 0.88 }}
+          className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full bg-ink/5 text-ink-soft hover:bg-ink/10"
+          title="Search topics · ⌘K"
+          aria-label="Search topics"
+        >
+          <Search className="h-4 w-4" strokeWidth={2.5} />
+        </motion.button>
+        <motion.button
+          type="button"
+          onClick={onOpenBlend}
+          aria-current={view.kind === "blend" ? "page" : undefined}
+          whileTap={{ scale: 0.88 }}
+          animate={{ scale: view.kind === "blend" ? 1.12 : 1 }}
+          transition={{ type: "spring", stiffness: 380, damping: 16 }}
+          className={`grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full ${
+            view.kind === "blend"
+              ? "bg-grape text-white"
+              : "bg-ink/5 text-ink-soft hover:bg-ink/10"
+          }`}
+          title="Blend Mode — flashcard arcade"
+          aria-label="Open Blend Mode"
+        >
+          <Zap className="h-4 w-4" strokeWidth={2.5} />
+        </motion.button>
+        <motion.button
+          type="button"
+          onClick={onOpenSticker}
+          aria-current={view.kind === "sticker" ? "page" : undefined}
+          whileTap={{ scale: 0.88 }}
+          animate={{ scale: view.kind === "sticker" ? 1.12 : 1 }}
+          transition={{ type: "spring", stiffness: 380, damping: 16 }}
+          className={`grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full ${
+            view.kind === "sticker"
+              ? "bg-mint text-white"
+              : "bg-ink/5 text-ink-soft hover:bg-ink/10"
+          }`}
+          title="Your sticker book"
+          aria-label="Open the sticker book"
+        >
+          <Sticker className="h-4 w-4" strokeWidth={2.5} />
+        </motion.button>
 
         <span aria-hidden className="mx-1 hidden h-6 w-[3px] rounded-full bg-ink/10 sm:block" />
 
@@ -109,7 +169,17 @@ function TopBar({
   );
 }
 
-function Footer({ onOpenUnit }: { onOpenUnit: (code: string) => void }) {
+function Footer({
+  onOpenUnit,
+  onOpenSticker,
+  onOpenBlend,
+  onSearch,
+}: {
+  onOpenUnit: (code: string) => void;
+  onOpenSticker: () => void;
+  onOpenBlend: () => void;
+  onSearch: () => void;
+}) {
   const [booped, setBooped] = useState(false);
 
   const boop = () => {
@@ -164,6 +234,50 @@ function Footer({ onOpenUnit }: { onOpenUnit: (code: string) => void }) {
 
           <div>
             <div className="font-display text-[12px] font-bold tracking-[0.2em] text-cream/50 uppercase">
+              The arcade
+            </div>
+            <div className="mt-4 flex flex-col gap-3">
+              <button
+                type="button"
+                onClick={onOpenBlend}
+                className="group flex cursor-pointer items-center gap-2.5 text-left"
+              >
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-grape/25 text-grape transition-transform group-hover:scale-110">
+                  <Zap className="h-4 w-4" strokeWidth={2.5} />
+                </span>
+                <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream">
+                  Blend Mode · flashcard arcade
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={onOpenSticker}
+                className="group flex cursor-pointer items-center gap-2.5 text-left"
+              >
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-mint/25 text-mint transition-transform group-hover:scale-110">
+                  <Sticker className="h-4 w-4" strokeWidth={2.5} />
+                </span>
+                <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream">
+                  Sticker book · your jar
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={onSearch}
+                className="group flex cursor-pointer items-center gap-2.5 text-left"
+              >
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10 text-cream/70 transition-transform group-hover:scale-110">
+                  <Search className="h-4 w-4" strokeWidth={2.5} />
+                </span>
+                <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream">
+                  Search · press ⌘K
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div className="font-display text-[12px] font-bold tracking-[0.2em] text-cream/50 uppercase">
               The six flavours
             </div>
             <div className="mt-4 grid grid-cols-2 gap-x-10 gap-y-3">
@@ -201,29 +315,67 @@ function Footer({ onOpenUnit }: { onOpenUnit: (code: string) => void }) {
 
 export default function ClubApp() {
   const [view, setView] = useState<View>({ kind: "home" });
+  const [searchOpen, setSearchOpen] = useState(false);
   const viewKey =
     view.kind === "topic"
       ? `topic-${view.code}-${view.topicId}`
       : view.kind === "unit"
         ? `unit-${view.code}`
-        : "home";
+        : view.kind === "sticker"
+          ? "sticker"
+          : view.kind === "blend"
+            ? "blend"
+            : "home";
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
   }, [viewKey]);
 
   const openUnit = (code: string) => setView({ kind: "unit", code });
-  const openTopic = (code: string, topicId: string) =>
+  const openTopicRaw = useCallback((code: string, topicId: string) => {
     setView({ kind: "topic", code, topicId });
+  }, []);
+  const openTopic = useCallback(
+    (code: UnitCode, topicId: string) => openTopicRaw(code, topicId),
+    [openTopicRaw]
+  );
   const goHome = () => setView({ kind: "home" });
+  const openSticker = useCallback(() => setView({ kind: "sticker" }), []);
+  const openBlend = useCallback(() => setView({ kind: "blend" }), []);
+  const openSearch = useCallback(() => setSearchOpen(true), []);
 
-  const unit = view.kind === "home" ? undefined : getUnit(view.code);
+  /* ⌘K / Ctrl+K (and "/") summon the search bubble */
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      const typing = tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT";
+      if ((e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setSearchOpen((o) => !o);
+      } else if (e.key === "/" && !typing && !searchOpen) {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [searchOpen]);
+
+  const unit = view.kind === "home" || view.kind === "sticker" || view.kind === "blend" ? undefined : getUnit(view.code);
   const topic =
     view.kind === "topic" && unit ? getTopic(view.code, view.topicId) : undefined;
 
   return (
     <div className="flex min-h-screen flex-col">
-      <TopBar view={view} onHome={goHome} onOpenUnit={openUnit} />
+      <TopBar
+        view={view}
+        onHome={goHome}
+        onOpenUnit={openUnit}
+        onOpenSticker={openSticker}
+        onOpenBlend={openBlend}
+        onSearch={openSearch}
+      />
+      <SearchPalette open={searchOpen} onClose={() => setSearchOpen(false)} onOpenTopic={openTopic} />
 
       <main className="relative flex-1">
         <AnimatePresence mode="wait">
@@ -234,7 +386,14 @@ export default function ClubApp() {
             exit={{ opacity: 0, y: -14, scale: 0.995 }}
             transition={{ type: "spring", stiffness: 260, damping: 26 }}
           >
-            {view.kind === "home" && <Home units={UNITS} onOpenUnit={openUnit} />}
+            {view.kind === "home" && (
+              <Home
+                units={UNITS}
+                onOpenUnit={openUnit}
+                onOpenBlend={openBlend}
+                onOpenSticker={openSticker}
+              />
+            )}
 
             {view.kind === "unit" && unit && (
               <UnitView
@@ -253,10 +412,23 @@ export default function ClubApp() {
                 onOpenTopic={(id) => openTopic(unit.code, id)}
               />
             )}
+
+            {view.kind === "sticker" && (
+              <StickerBook units={UNITS} onBack={goHome} onOpenUnit={openUnit} />
+            )}
+
+            {view.kind === "blend" && (
+              <Blend onBack={goHome} onOpenTopic={openTopic} />
+            )}
           </motion.div>
         </AnimatePresence>
 
-        <Footer onOpenUnit={openUnit} />
+        <Footer
+          onOpenUnit={openUnit}
+          onOpenSticker={openSticker}
+          onOpenBlend={openBlend}
+          onSearch={openSearch}
+        />
       </main>
     </div>
   );
