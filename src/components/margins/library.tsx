@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CHEMISTRY, type Unit } from "@/lib/data";
-import { useProgress } from "@/lib/progress";
+import { useHydrated, useProgress } from "@/lib/progress";
 import { Reveal, SectionHead, Stamp, Tick } from "./primitives";
 
 export function StatusBadge({ status }: { status: "live" | "partial" | "coming-soon" }) {
@@ -52,8 +52,7 @@ export function Library({ focus, openTopic }: { focus?: string; openTopic: (unit
     () => new Set(focus ? [focus] : [CHEMISTRY.units[0].slug])
   );
   const { progress, toggleRevised } = useProgress();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useHydrated();
 
   const toggle = (u: string) =>
     setOpen((prev) => {

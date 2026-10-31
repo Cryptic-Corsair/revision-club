@@ -370,7 +370,7 @@ export function NoteBlock({ section, quizId, goWallchart }: { section: NoteSecti
     case "practical":
       return (
         <Row margin={section.margin}>
-          <div className="paper-card border-l-[3px] border-ink px-5 py-4.5 py-5 my-3">
+          <div className="paper-card border-l-[3px] border-ink px-5 py-5 my-3">
             <p className="font-marks text-[11px] uppercase tracking-[0.16em] text-ink mb-3 flex items-center gap-2">
               <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <path d="M9 3h6M10 3v6.3L5.6 17A2.5 2.5 0 0 0 7.9 20.5h8.2A2.5 2.5 0 0 0 18.4 17L14 9.3V3" strokeLinecap="round" strokeLinejoin="round" />

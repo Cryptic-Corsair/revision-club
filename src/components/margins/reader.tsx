@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion, useReducedMotion, useScroll } from "framer-motion";
 import { CHEMISTRY, NOTES } from "@/lib/data";
-import { useProgress } from "@/lib/progress";
+import { useHydrated, useProgress } from "@/lib/progress";
 import { MarkChip, NoteBlock, Reveal, Stamp, Tick } from "./primitives";
 
 export function Reader({
@@ -11,17 +10,18 @@ export function Reader({
   topicSlug,
   backToUnit,
   goWallchart,
+  openTopic,
 }: {
   unitSlug: string;
   topicSlug: string;
   backToUnit: () => void;
   goWallchart: () => void;
+  openTopic: (unit: string, topic: string) => void;
 }) {
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const { progress, toggleRevised } = useProgress();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useHydrated();
 
   const unit = CHEMISTRY.units.find((u) => u.slug === unitSlug);
   const topicIdx = unit?.topics.findIndex((t) => t.slug === topicSlug) ?? -1;
@@ -178,29 +178,40 @@ export function Reader({
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className={`paper-card px-5 py-4 ${prevTopic && prevTopic.status === "live" ? "" : "opacity-55"}`}>
-              <p className="font-marks text-[10.5px] uppercase tracking-[0.18em] text-ink-faint mb-1">◂ Turn back</p>
-              {prevTopic ? (
-                <p className="font-body text-ink-soft">
-                  Previous: {prevTopic.title}
+            {prevTopic ? (
+              <button
+                type="button"
+                onClick={() => openTopic(unitSlug, prevTopic.slug)}
+                className={`paper-card px-5 py-4 text-left transition-all duration-200 hover:-translate-y-[2px] hover:shadow-[4px_4px_0_rgba(191,59,43,0.2)] ${prevTopic.status === "live" ? "" : "opacity-55"}`}
+              >
+                <p className="font-marks text-[10.5px] uppercase tracking-[0.18em] text-ink-faint mb-1">◂ Turn back</p>
+                <p className="font-body text-ink-soft group-hover:text-ink">
+                  {prevTopic.title}
                   {prevTopic.status === "coming-soon" && (
                     <span className="font-marks text-[10.5px] uppercase tracking-[0.14em] text-ink-faint"> — being written</span>
                   )}
                 </p>
-              ) : (
+              </button>
+            ) : (
+              <div className="paper-card px-5 py-4">
+                <p className="font-marks text-[10.5px] uppercase tracking-[0.18em] text-ink-faint mb-1">◂ Turn back</p>
                 <p className="font-body italic text-ink-soft">This is the first topic in the unit.</p>
-              )}
-            </div>
+              </div>
+            )}
             {nextTopic ? (
-              <div className={`paper-card px-5 py-4 ${nextTopic.status === "live" ? "" : "opacity-55"}`}>
+              <button
+                type="button"
+                onClick={() => openTopic(unitSlug, nextTopic.slug)}
+                className={`paper-card px-5 py-4 text-left transition-all duration-200 hover:-translate-y-[2px] hover:shadow-[4px_4px_0_rgba(191,59,43,0.2)] ${nextTopic.status === "live" ? "" : "opacity-55"}`}
+              >
                 <p className="font-marks text-[10.5px] uppercase tracking-[0.18em] text-pen-deep mb-1">Turn over ▸</p>
                 <p className="font-body text-ink-soft">
-                  Next: {nextTopic.title}
+                  {nextTopic.title}
                   {nextTopic.status === "coming-soon" && (
                     <span className="font-marks text-[10.5px] uppercase tracking-[0.14em] text-ink-faint"> — being written</span>
                   )}
                 </p>
-              </div>
+              </button>
             ) : (
               <div className="paper-card px-5 py-4">
                 <p className="font-marks text-[10.5px] uppercase tracking-[0.18em] text-pen-deep mb-1">Turn over ▸</p>

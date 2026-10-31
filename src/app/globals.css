@@ -391,6 +391,26 @@ sub { bottom: -0.22em; }
 }
 .balllink:hover { color: var(--ink); text-decoration-color: var(--red); }
 
+/* the red pen underline beneath the active nav item */
+.nav-underline {
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: 0;
+  width: calc(100% + 4px);
+  height: 8px;
+  overflow: visible;
+}
+.nav-underline path {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: drawIn 0.5s 0.1s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+
 /* double rule (exam paper top/bottom rules) */
 .double-rule {
   border-top: 1px solid var(--ink);
@@ -422,6 +442,7 @@ sub { bottom: -0.22em; }
   .tick path.animated { animation: none; stroke-dashoffset: 0; }
   .grade-circle > svg > path { animation: none; stroke-dashoffset: 0; }
   .hand-x path { animation: none; stroke-dashoffset: 0; }
+  .nav-underline path { animation: none; stroke-dashoffset: 0; }
   .reveal { opacity: 1; transform: none; transition: none; }
   * { transition-duration: 0.01ms !important; }
 }
@@ -585,6 +606,66 @@ sub { bottom: -0.22em; }
 }
 
 /* ————————————————————————————————————————————————
+   THE BENCH — titration instrument
+   ———————————————————————————————————————————————— */
+
+/* examiner's rings on the pH graph */
+.bench-ring {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  animation: drawIn 0.7s 0.15s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+.bench-ring.slow { animation-delay: 0.55s; }
+
+/* the falling droplet — re-mounted on every addition */
+.drop { animation: dropFall 0.55s ease-in forwards; }
+@keyframes dropFall {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translateY(34px); opacity: 0; }
+}
+
+/* scrub slider styled as a ruler */
+.bench-slider {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 22px;
+  background: transparent;
+  cursor: pointer;
+}
+.bench-slider::-webkit-slider-runnable-track {
+  height: 3px;
+  background: var(--rule);
+  border-radius: 2px;
+}
+.bench-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 2px solid var(--paper-card);
+  box-shadow: 1px 1px 0 rgba(33, 28, 20, 0.3);
+}
+.bench-slider::-moz-range-track {
+  height: 3px;
+  background: var(--rule);
+  border-radius: 2px;
+}
+.bench-slider::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 2px solid var(--paper-card);
+}
+
+/* ————————————————————————————————————————————————
    THE MARK SHEET — candidate cover
    ———————————————————————————————————————————————— */
 
@@ -654,12 +735,12 @@ sub { bottom: -0.22em; }
 
 @media (prefers-reduced-motion: reduce) {
   .trend-arrow path, .trend-ring path, .curly path, .svg-tick, .svg-cross path,
-  .svg-ring ellipse, .preview-curly {
+  .svg-ring ellipse, .preview-curly, .bench-ring {
     animation: none !important;
     stroke-dashoffset: 0 !important;
   }
   .svg-ring text { animation: none !important; opacity: 1 !important; }
-  .bubble { animation: none !important; }
+  .bubble, .drop { animation: none !important; opacity: 1 !important; }
 }
 
 /* ————————————————————————————————————————————————

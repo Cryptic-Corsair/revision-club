@@ -57,12 +57,16 @@ export function Home({
   openUnit,
   openSampleNote,
   openWallchart,
+  openBench,
+  openMap,
   openTopic,
 }: {
   goLibrary: () => void;
   openUnit: (slug: string) => void;
   openSampleNote: () => void;
   openWallchart: () => void;
+  openBench: () => void;
+  openMap: () => void;
   openTopic: (unit: string, topic: string) => void;
 }) {
   const reduced = useReducedMotion();
@@ -124,7 +128,7 @@ export function Home({
             <span className="text-pen" aria-hidden="true">·</span>
             <span>150+ spec points</span>
             <span className="text-pen" aria-hidden="true">·</span>
-            <span>wallchart + mechanism theatre</span>
+            <span>four lab instruments</span>
           </motion.p>
         </div>
 
@@ -321,13 +325,13 @@ export function Home({
         </Reveal>
       </section>
 
-      {/* ————— Section D: the lab annex — two new instruments ————— */}
+      {/* ————— Section D: the lab annex — four instruments ————— */}
       <section className="pb-20">
         <Reveal>
           <SectionHead
             section="Section D"
             title="The lab annex"
-            instruction="Two new instruments, marked and ready to use."
+            instruction="Four instruments, marked and ready to use."
           />
         </Reveal>
         <div className="grid gap-6 md:grid-cols-2">
@@ -440,6 +444,106 @@ export function Home({
               </p>
               <p className="font-marks text-[11.5px] uppercase tracking-[0.14em] text-pen-deep mt-4 group-hover:translate-x-1 transition-transform inline-block">
                 Watch a mechanism →
+              </p>
+            </button>
+          </Reveal>
+
+          {/* the titration bench */}
+          <Reveal delay={0}>
+            <button
+              type="button"
+              onClick={openBench}
+              className="paper-card group text-left w-full p-6 transition-all duration-200 hover:-translate-y-[3px] hover:shadow-[4px_4px_0_rgba(191,59,43,0.25)]"
+            >
+              <div className="border border-rule rounded-[2px] bg-paper px-4 pt-4 pb-3 mb-5">
+                <svg viewBox="0 0 148 86" className="w-full h-auto" aria-hidden="true">
+                  {/* graph-paper ghosting */}
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <line key={`h${i}`} x1="10" y1={20 + i * 16} x2="138" y2={20 + i * 16} stroke="var(--rule)" strokeWidth="0.7" />
+                  ))}
+                  {Array.from({ length: 6 }, (_, i) => (
+                    <line key={`v${i}`} x1={10 + i * 25} y1="14" x2={10 + i * 25} y2="72" stroke="var(--rule)" strokeWidth="0.7" />
+                  ))}
+                  {/* the weak-acid curve, drawn in red */}
+                  <path
+                    d="M 10 68 C 45 63, 60 62, 78 61 C 92 60, 92 22, 106 21 C 122 20, 132 19, 138 18"
+                    fill="none"
+                    stroke="var(--red)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    className="preview-curly"
+                  />
+                  {/* the examiner's ring at equivalence */}
+                  <ellipse cx="99" cy="24" rx="8" ry="9" fill="none" stroke="var(--red)" strokeWidth="1.6" />
+                  {/* axis stubs */}
+                  <line x1="10" y1="14" x2="10" y2="72" stroke="var(--ink)" strokeWidth="1.2" />
+                  <line x1="10" y1="72" x2="138" y2="72" stroke="var(--ink)" strokeWidth="1.2" />
+                </svg>
+              </div>
+              <div className="flex items-center justify-between gap-3 mb-2.5">
+                <h3 className="font-display text-[1.4rem] font-semibold group-hover:underline decoration-pen decoration-2 underline-offset-4">
+                  The Bench
+                </h3>
+                <Stamp pressed>Live pH curve</Stamp>
+              </div>
+              <p className="font-body text-[15.5px] leading-[1.65] text-ink-soft">
+                Run a titration with your own hands: add the base, watch the pH curve draw itself on
+                graph paper, and see the equivalence point ringed in red while the flask changes colour.
+              </p>
+              <p className="font-marks text-[11.5px] uppercase tracking-[0.14em] text-pen-deep mt-4 group-hover:translate-x-1 transition-transform inline-block">
+                Run a titration →
+              </p>
+            </button>
+          </Reveal>
+
+          {/* the reaction map */}
+          <Reveal delay={90}>
+            <button
+              type="button"
+              onClick={openMap}
+              className="paper-card group text-left w-full p-6 transition-all duration-200 hover:-translate-y-[3px] hover:shadow-[4px_4px_0_rgba(191,59,43,0.25)]"
+            >
+              <div className="border border-rule rounded-[2px] bg-paper px-4 pt-4 pb-3 mb-5">
+                <svg viewBox="0 0 148 86" className="w-full h-auto" aria-hidden="true">
+                  {/* families as tiny cells */}
+                  <g className="font-marks">
+                    <rect x="8" y="34" width="30" height="18" fill="var(--paper-card)" stroke="var(--rule)" />
+                    <text x="23" y="46" textAnchor="middle" fontSize="7" fill="var(--ink)">alkene</text>
+                    <rect x="56" y="12" width="34" height="18" fill="var(--paper-card)" stroke="var(--rule)" />
+                    <text x="73" y="24" textAnchor="middle" fontSize="7" fill="var(--ink)">haloalk.</text>
+                    <rect x="56" y="56" width="30" height="18" fill="var(--paper-card)" stroke="var(--rule)" />
+                    <text x="71" y="68" textAnchor="middle" fontSize="7" fill="var(--ink)">alcohol</text>
+                    <rect x="106" y="34" width="34" height="18" fill="var(--paper-card)" stroke="var(--rule)" />
+                    <text x="123" y="46" textAnchor="middle" fontSize="7" fill="var(--ink)">ketone</text>
+                  </g>
+                  {/* routes */}
+                  <path d="M 30 38 C 40 30, 46 26, 54 24" fill="none" stroke="var(--ink-soft)" strokeWidth="1.4" markerEnd="url(#ann-arr)" />
+                  <path d="M 54 60 C 46 56, 40 50, 34 46" fill="none" stroke="var(--ink-soft)" strokeWidth="1.4" markerEnd="url(#ann-arr)" />
+                  <path d="M 88 62 C 100 58, 106 52, 116 48" fill="none" stroke="var(--red)" strokeWidth="1.8" className="preview-curly" markerEnd="url(#ann-arr-red)" />
+                  <defs>
+                    <marker id="ann-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--ink-soft)" />
+                    </marker>
+                    <marker id="ann-arr-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--red)" />
+                    </marker>
+                  </defs>
+                  {/* the teacher's pen */}
+                  <text x="102" y="14" fontSize="9" fill="var(--red-ink)" fontFamily="Caveat, cursive" transform="rotate(-4 102 14)">reflux!</text>
+                </svg>
+              </div>
+              <div className="flex items-center justify-between gap-3 mb-2.5">
+                <h3 className="font-display text-[1.4rem] font-semibold group-hover:underline decoration-pen decoration-2 underline-offset-4">
+                  The Reaction Map
+                </h3>
+                <Stamp pressed>13 routes</Stamp>
+              </div>
+              <p className="font-body text-[15.5px] leading-[1.65] text-ink-soft">
+                Organic chemistry as a wall map: nine families pinned up and thirteen exam routes
+                between them. Click any arrow for the reagents, the conditions and the mark.
+              </p>
+              <p className="font-marks text-[11.5px] uppercase tracking-[0.14em] text-pen-deep mt-4 group-hover:translate-x-1 transition-transform inline-block">
+                Open the map →
               </p>
             </button>
           </Reveal>

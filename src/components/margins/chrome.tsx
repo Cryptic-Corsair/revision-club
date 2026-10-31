@@ -2,29 +2,55 @@
 
 import { Stamp } from "./primitives";
 
+/* the hand-drawn underline that draws itself under the active nav item */
+function NavUnderline() {
+  return (
+    <svg
+      viewBox="0 0 100 10"
+      preserveAspectRatio="none"
+      className="nav-underline"
+      aria-hidden="true"
+    >
+      <path d="M3 7 C 26 3, 58 9, 97 4" />
+    </svg>
+  );
+}
+
 export function TopBar({
   goHome,
   goLibrary,
   goWallchart,
+  goBench,
+  goMap,
   goMarks,
   current,
 }: {
   goHome: () => void;
   goLibrary: () => void;
   goWallchart: () => void;
+  goBench: () => void;
+  goMap: () => void;
   goMarks: () => void;
   current: string;
 }) {
+  const items = [
+    { label: "Unit map", action: goLibrary, key: "library" },
+    { label: "Wallchart", action: goWallchart, key: "wallchart" },
+    { label: "The bench", action: goBench, key: "bench" },
+    { label: "Reaction map", action: goMap, key: "map" },
+    { label: "Mark sheet", action: goMarks, key: "marks" },
+  ];
+
   return (
     <header className="no-print sticky top-0 z-40 bg-paper/92 backdrop-blur-[3px] border-b border-rule">
-      <div className="mx-auto max-w-[1160px] px-5 md:px-10 h-[62px] flex items-center justify-between gap-4">
-        <button type="button" onClick={goHome} className="flex items-center gap-3 group" aria-label="Axiom — IAL Chemistry home">
+      <div className="mx-auto max-w-[1160px] px-4 md:px-10 h-[62px] flex items-center justify-between gap-3">
+        <button type="button" onClick={goHome} className="flex items-center gap-3 group shrink-0" aria-label="Axiom — IAL Chemistry home">
           <span className="element-cell group-hover:border-pen transition-colors" aria-hidden="true">
             <span className="num">01</span>
             <span className="sym">Ax</span>
             <span className="name">axiom</span>
           </span>
-          <span className="hidden sm:flex flex-col items-start leading-tight">
+          <span className="hidden md:flex flex-col items-start leading-tight">
             <span className="font-display font-semibold text-[19px] tracking-[-0.01em] group-hover:text-pen-deep transition-colors">
               Axiom
             </span>
@@ -34,27 +60,27 @@ export function TopBar({
           </span>
         </button>
 
-        <p className="hidden lg:block font-marks text-[10.5px] uppercase tracking-[0.22em] text-ink-faint">
+        <p className="hidden xl:block font-marks text-[10.5px] uppercase tracking-[0.22em] text-ink-faint">
           Pearson Edexcel IAL · WCH11–WCH16 · spec-aligned
         </p>
 
-        <nav className="flex items-center gap-5" aria-label="Main">
-          {[
-            { label: "Unit map", action: goLibrary, key: "library" },
-            { label: "Wallchart", action: goWallchart, key: "wallchart" },
-            { label: "Mark sheet", action: goMarks, key: "marks" },
-          ].map((item) => (
-            <button
-              key={item.key}
-              type="button"
-              onClick={item.action}
-              className={`font-marks text-[12px] uppercase tracking-[0.14em] transition-colors hover:text-pen-deep ${
-                current === item.key ? "text-pen-deep" : "text-ink-soft"
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
+        <nav className="flex items-center gap-3.5 sm:gap-5 md:gap-6" aria-label="Main">
+          {items.map((item) => {
+            const active = current === item.key;
+            return (
+              <button
+                key={item.key}
+                type="button"
+                onClick={item.action}
+                className={`relative font-marks text-[10px] sm:text-[11.5px] md:text-[12px] uppercase tracking-[0.1em] sm:tracking-[0.14em] transition-colors hover:text-pen-deep py-2 ${
+                  active ? "text-pen-deep" : "text-ink-soft"
+                }`}
+              >
+                {item.label}
+                {active && <NavUnderline />}
+              </button>
+            );
+          })}
         </nav>
       </div>
     </header>

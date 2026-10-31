@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useId, useState } from "react";
 import { CHEMISTRY, NOTES } from "@/lib/data";
-import { useProgress } from "@/lib/progress";
+import { useHydrated, useProgress } from "@/lib/progress";
 import { GradeCircle, Reveal, Stamp } from "./margins/primitives";
 
 /* ————— test-tube progress meter ————— */
@@ -77,8 +77,7 @@ function quizStats(unitSlug: string) {
 
 export function MarkSheet({ openTopic }: { openTopic: (unit: string, topic: string) => void }) {
   const { progress, setName, reset } = useProgress();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useHydrated();
 
   const liveTopics = CHEMISTRY.units.flatMap((u) =>
     u.topics.filter((t) => t.status === "live").map((t) => ({ unit: u.slug, ...t }))

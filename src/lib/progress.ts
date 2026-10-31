@@ -69,6 +69,17 @@ if (typeof window !== "undefined") {
 
 const serverSnapshot = () => DEFAULT;
 
+const noopSubscribe = () => () => {};
+
+/** false during SSR + hydration, true after — safe guard for localStorage reads */
+export function useHydrated() {
+  return useSyncExternalStore(
+    noopSubscribe,
+    () => true,
+    () => false
+  );
+}
+
 export function useProgress() {
   const progress = useSyncExternalStore(subscribe, read, serverSnapshot);
 

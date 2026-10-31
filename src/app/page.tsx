@@ -7,12 +7,16 @@ import { Home } from "@/components/margins/home";
 import { Library } from "@/components/margins/library";
 import { Reader } from "@/components/margins/reader";
 import { Wallchart } from "@/components/margins/wallchart";
+import { Bench } from "@/components/margins/titration";
+import { ReactionMap } from "@/components/margins/reactionmap";
 import { MarkSheet } from "@/components/marks";
 
 type View =
   | { name: "home" }
   | { name: "library"; focus?: string }
   | { name: "wallchart" }
+  | { name: "bench" }
+  | { name: "map" }
   | { name: "marks" }
   | { name: "notes"; unit: string; topic: string };
 
@@ -27,6 +31,8 @@ export default function Page() {
   const goHome = () => setView({ name: "home" });
   const goLibrary = () => setView({ name: "library" });
   const goWallchart = () => setView({ name: "wallchart" });
+  const goBench = () => setView({ name: "bench" });
+  const goMap = () => setView({ name: "map" });
   const goMarks = () => setView({ name: "marks" });
   const openUnit = (slug: string) => setView({ name: "library", focus: slug });
   const openTopic = (unit: string, topic: string) => setView({ name: "notes", unit, topic });
@@ -44,6 +50,8 @@ export default function Page() {
         goHome={goHome}
         goLibrary={goLibrary}
         goWallchart={goWallchart}
+        goBench={goBench}
+        goMap={goMap}
         goMarks={goMarks}
         current={view.name}
       />
@@ -63,6 +71,8 @@ export default function Page() {
                 openUnit={openUnit}
                 openSampleNote={() => openTopic("unit-1", "the-mole-titrations")}
                 openWallchart={goWallchart}
+                openBench={goBench}
+                openMap={goMap}
                 openTopic={openTopic}
               />
             )}
@@ -70,6 +80,8 @@ export default function Page() {
               <Library key={view.focus ?? "all"} focus={view.focus} openTopic={openTopic} />
             )}
             {view.name === "wallchart" && <Wallchart openTopic={openTopic} />}
+            {view.name === "bench" && <Bench />}
+            {view.name === "map" && <ReactionMap />}
             {view.name === "marks" && <MarkSheet openTopic={openTopic} />}
             {view.name === "notes" && (
               <Reader
@@ -77,6 +89,7 @@ export default function Page() {
                 topicSlug={view.topic}
                 backToUnit={() => setView({ name: "library", focus: view.unit })}
                 goWallchart={goWallchart}
+                openTopic={openTopic}
               />
             )}
           </motion.div>
