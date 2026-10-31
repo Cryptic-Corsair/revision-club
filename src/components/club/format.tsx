@@ -1,12 +1,11 @@
 import type { ReactNode } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
-   SPECTRA · <Fmt/> — inline markup → typography
+   Reaction Club · <Fmt/> — inline markup → typography
    **bold** · *em* · ==highlight== · ~subscript~ · ^superscript^
    ═══════════════════════════════════════════════════════════════ */
 
-const TOKEN =
-  /(\*\*(.+?)\*\*|\*(.+?)\*|==(.+?)==|~(.+?)~|\^(.+?)\^)/;
+const TOKEN = /(\*\*(.+?)\*\*|\*(.+?)\*|==(.+?)==|~(.+?)~|\^(.+?)\^)/;
 
 export function Fmt({ text }: { text: string }) {
   return <>{parse(text)}</>;
@@ -30,13 +29,13 @@ function parse(text: string, keyPrefix = "f"): ReactNode[] {
 
     if (m[2] !== undefined) {
       out.push(
-        <strong key={key} className="font-semibold text-ink">
+        <strong key={key} className="font-extrabold text-ink">
           {parse(inner, key)}
         </strong>
       );
     } else if (m[3] !== undefined) {
       out.push(
-        <em key={key} className="font-serif italic text-ink">
+        <em key={key} className="font-bold italic">
           {parse(inner, key)}
         </em>
       );

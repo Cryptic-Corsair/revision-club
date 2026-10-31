@@ -3,11 +3,11 @@
 import { useSyncExternalStore } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
-   SPECTRA · revision progress — localStorage, cross-tab
-   key "spectra-progress-v1" · { revised: string[] }
+   Reaction Club · sticker book — revision progress
+   localStorage, cross-tab · key "reaction-club-v1" · { revised: string[] }
    ═══════════════════════════════════════════════════════════════ */
 
-const KEY = "spectra-progress-v1";
+const KEY = "reaction-club-v1";
 const EMPTY: string[] = [];
 
 let state: string[] = EMPTY;

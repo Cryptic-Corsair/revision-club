@@ -1,5 +1,5 @@
-import SpectraApp from "@/components/spectra/spectra-app";
+import ClubApp from "@/components/club/club-app";
 
 export default function Page() {
-  return <SpectraApp />;
+  return <ClubApp />;
 }

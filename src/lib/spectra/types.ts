@@ -8,6 +8,16 @@ export type Stage = "IAS" | "IA2";
 
 export type UnitCode = "WCH11" | "WCH12" | "WCH13" | "WCH14" | "WCH15" | "WCH16";
 
+/** Reaction Club flavour — the candy colour a unit wears */
+export interface Candy {
+  /** main candy colour (hex) */
+  main: string;
+  /** flavour name, e.g. "strawberry" */
+  name: string;
+  /** playful nickname for the unit */
+  nick: string;
+}
+
 /** rel: relative intensity of an emission line — 3 is the dominant line */
 export interface SpectralLine {
   nm: number;
@@ -61,6 +71,7 @@ export interface Unit {
   element: ElementId;
   color: string;
   cssVar: string;
+  candy: Candy;
   lines: SpectralLine[];
   /** annotation shown under the unit's spectrum strip */
   spectrumNote?: string;

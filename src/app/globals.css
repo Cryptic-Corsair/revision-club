@@ -1,100 +1,98 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 /* ═════════════════════════════════════════════════════════════════════
-   SPECTRA · design system
-   A dark observatory for Edexcel IAL Chemistry.
+   REACTION CLUB · design system
+   A candy-bright chemistry playground for Edexcel IAL (WCH11–WCH16).
 
-   Material: instrument black, hairline rules, emission light.
-   Colour is data — six flame-test elements, six wavelengths:
-   Li 670.8 · Na 589.0 · Ba 553.5 · Cu 510.5 · Cs 455.5 · K 404.4 nm
+   Material: cream paper, polka dots, chunky rounded type, sticker cards.
+   No hairline borders, no edged boxes — everything squishy and round.
+   Six units, six flavours:
+   WCH11 strawberry · WCH12 orange fizz · WCH13 mint chip
+   WCH14 grape soda · WCH15 bubblegum · WCH16 lemon sherbet
    ═════════════════════════════════════════════════════════════════════ */
 
-:root {
-  --bg: #0a0d13;
-  --bg-raise: #0d121a;
-  --panel: #101624;
-  --panel-2: #141b2b;
-  --line: #212a3b;
-  --line-soft: #182031;
-  --ink: #e9ecf4;
-  --ink-2: #a9b1c2;
-  --ink-3: #6d7688;
+@theme inline {
+  --color-cream: #fff6ea;
+  --color-paper: #fffdf7;
+  --color-ink: #3d2b1f;
+  --color-ink-soft: #8a7261;
+  --color-ink-faint: #c9b6a6;
+  --color-cocoa: #2e2016;
 
-  /* the six flames — real visible emission lines */
-  --flame-11: #ff4d5e; /* Li  · 670.8 nm · crimson    */
-  --flame-12: #ffb224; /* Na  · 589.0 nm · gold       */
-  --flame-13: #43e08c; /* Ba  · 553.5 nm · green      */
-  --flame-14: #2cd9c7; /* Cu  · 510.5 nm · blue-green */
-  --flame-15: #5e8bff; /* Cs  · 455.5 nm · deep blue  */
-  --flame-16: #a06bff; /* K   · 404.4 nm · lilac      */
-  --flame: var(--flame-11);
+  --color-coral: #ff6b6b;
+  --color-tangerine: #ff922b;
+  --color-mint: #12b886;
+  --color-grape: #9775fa;
+  --color-bubble: #f06595;
+  --color-lemon: #f59f00;
 
-  /* shadcn mapping (dark instrument) */
-  --background: var(--bg);
-  --foreground: var(--ink);
-  --card: var(--panel);
-  --card-foreground: var(--ink);
-  --popover: var(--panel);
-  --popover-foreground: var(--ink);
-  --primary: var(--ink);
-  --primary-foreground: var(--bg);
-  --secondary: var(--panel-2);
-  --secondary-foreground: var(--ink);
-  --muted: var(--panel-2);
-  --muted-foreground: var(--ink-2);
-  --accent: var(--panel-2);
-  --accent-foreground: var(--ink);
-  --destructive: #ff4d5e;
-  --destructive-foreground: var(--bg);
-  --border: var(--line);
-  --input: var(--line);
-  --ring: var(--flame);
-  --radius: 4px;
+  --font-display: var(--font-fredoka), "Trebuchet MS", sans-serif;
+  --font-body: var(--font-nunito), "Trebuchet MS", sans-serif;
+  --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, monospace;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-blob: blob 12s ease-in-out infinite;
+  --animate-bubble: bubble-up 4.5s ease-in infinite;
+  --animate-wiggle: wiggle 2.6s ease-in-out infinite;
+  --animate-spin-slow: spin 16s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-radius: var(--radius);
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
 
-  --color-bg: var(--bg);
-  --color-bg-raise: var(--bg-raise);
-  --color-panel: var(--panel);
-  --color-panel-2: var(--panel-2);
-  --color-line: var(--line);
-  --color-line-soft: var(--line-soft);
-  --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
-  --color-ink-3: var(--ink-3);
-  --color-flame: var(--flame);
-  --color-flame-11: var(--flame-11);
-  --color-flame-12: var(--flame-12);
-  --color-flame-13: var(--flame-13);
-  --color-flame-14: var(--flame-14);
-  --color-flame-15: var(--flame-15);
-  --color-flame-16: var(--flame-16);
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
 
-  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument), Georgia, "Times New Roman", serif;
-  --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, monospace;
+@keyframes blob {
+  0%,
+  100% {
+    border-radius: 58% 42% 55% 45% / 52% 56% 44% 48%;
+  }
+  33% {
+    border-radius: 45% 55% 48% 52% / 58% 44% 56% 42%;
+  }
+  66% {
+    border-radius: 52% 48% 60% 40% / 45% 58% 42% 55%;
+  }
+}
+
+@keyframes bubble-up {
+  0% {
+    transform: translateY(6px) scale(0.7);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-96px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-2.5deg);
+  }
+  50% {
+    transform: rotate(2.5deg);
+  }
 }
 
 /* ————— base ————— */
@@ -104,130 +102,111 @@ html {
 }
 
 body {
-  background: var(--bg);
-  color: var(--ink);
-  font-feature-settings: "ss01" on, "ss03" on;
+  background-color: var(--color-cream);
+  background-image: radial-gradient(rgb(61 43 31 / 0.05) 1.6px, transparent 1.7px);
+  background-size: 26px 26px;
+  color: var(--color-ink);
+  font-size: 16px;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--flame) 32%, transparent);
-  color: var(--ink);
+  background: #ffe08a;
+  color: var(--color-ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--flame);
+  outline: 3px dashed var(--color-coral);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 12px;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg);
+  background: var(--color-cream);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--line);
-  border-radius: 5px;
-  border: 2px solid var(--bg);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--ink-3);
+  background: linear-gradient(180deg, var(--color-coral), var(--color-tangerine));
+  border-radius: 999px;
+  border: 3px solid var(--color-cream);
 }
 
-/* ————— instrument details ————— */
+/* ————— candy primitives ————— */
 
-/* highlight for terms of art, tinted by the active unit flame */
-mark {
-  background: color-mix(in oklab, var(--flame) 20%, transparent);
-  color: var(--ink);
-  padding: 0 3px;
-  border-radius: 2px;
-}
-
-/* emission lines flicker like an excited flame */
-@keyframes flame-flicker {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-.flame-line {
-  animation: flame-flicker 7s ease-in-out infinite;
-  animation-delay: var(--fd, 0s);
-}
-
-/* soft emission glow behind key numerals and symbols */
-.flame-glow {
-  text-shadow:
-    0 0 18px color-mix(in oklab, var(--flame) 60%, transparent),
-    0 0 42px color-mix(in oklab, var(--flame) 28%, transparent);
-}
-
-/* the full visible spectrum as a hairline gradient (violet → red) */
-.spectrum-rule {
-  background: linear-gradient(
-    90deg,
-    #a06bff,
-    #5e8bff 21%,
-    #2cd9c7 38%,
-    #43e08c 51%,
-    #ffb224 62%,
-    #ff4d5e 86%
-  );
-}
-
-/* measurement ruler — repeating tick marks */
-.tick-rule {
-  background-image: repeating-linear-gradient(
-    90deg,
-    var(--line) 0 1px,
-    transparent 1px 10px
-  );
-}
-
-/* subtle grain-free vignette to focus the reading column */
-.reading-vignette {
-  background: radial-gradient(
-    120% 90% at 50% 0%,
-    transparent 40%,
-    color-mix(in oklab, var(--bg) 88%, black) 100%
-  );
-}
-
-/* line links inside the spectrum diagrams */
-.spec-link {
-  cursor: pointer;
-}
-.spec-link .spec-line {
+/* Duolingo-style candy button: rounded pill on a squishy pedestal */
+.candy {
+  --candy-bg: var(--color-coral);
+  --candy-side: #e8590c;
+  background: var(--candy-bg);
+  color: #fff;
+  box-shadow: 0 5px 0 var(--candy-side);
   transition:
-    stroke-width 0.25s ease,
-    opacity 0.25s ease;
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    filter 0.2s ease;
 }
-.spec-link:hover .spec-line,
-.spec-link:focus-visible .spec-line {
-  stroke-width: 5px;
+.candy:hover {
+  filter: brightness(1.06);
 }
-.spec-link .spec-code {
-  transition: opacity 0.25s ease;
-  opacity: 0.75;
+.candy:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 var(--candy-side);
 }
-.spec-link:hover .spec-code,
-.spec-link:focus-visible .spec-code {
-  opacity: 1;
+
+/* fluffy cloud shadow for sticker cards */
+.puff {
+  box-shadow:
+    0 2px 0 0 rgb(61 43 31 / 0.04),
+    0 18px 42px -20px rgb(61 43 31 / 0.22);
+}
+
+.puff-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
+}
+.puff-lift:hover {
+  transform: translateY(-6px) rotate(0deg) !important;
+  box-shadow:
+    0 4px 0 0 rgb(61 43 31 / 0.04),
+    0 30px 60px -24px rgb(61 43 31 / 0.3);
+}
+
+/* marker-pen highlight for ==terms== */
+mark {
+  background: linear-gradient(104deg, transparent 2%, #ffe08a 9%, #ffd43b 88%, transparent 96%);
+  color: inherit;
+  padding: 0.06em 0.22em;
+  margin: 0 -0.06em;
+  border-radius: 0.5em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ————— helpers ————— */
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* dashed hand-drawn connector (vertical) */
+.dot-line {
+  background-image: linear-gradient(to bottom, var(--color-ink-faint) 45%, transparent 45%);
+  background-size: 3px 14px;
+  background-repeat: repeat-y;
+  width: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .flame-line {
-    animation: none;
   }
   *,
   *::before,
@@ -238,67 +217,7 @@ mark {
   }
 }
 
-/* ————— composition ————— */
-
-/* scroll-reveal: content must never stay hidden */
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
-}
-.reveal.in {
-  opacity: 1;
-  transform: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
-/* unit cards — tinted by the unit's own flame (—u set inline) */
-.unit-card {
-  border: 1px solid var(--line);
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
-}
-.unit-card:hover {
-  border-color: color-mix(in oklab, var(--u) 55%, var(--line));
-  box-shadow:
-    0 0 0 1px color-mix(in oklab, var(--u) 22%, transparent),
-    0 14px 44px -18px color-mix(in oklab, var(--u) 42%, transparent);
-  transform: translateY(-2px);
-}
-
-.topic-row:hover {
-  background: var(--panel-2);
-}
-
-.turn-card {
-  transition:
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
-}
-.turn-card:hover {
-  border-color: color-mix(in oklab, var(--flame) 55%, var(--line));
-  transform: translateY(-1px);
-}
-
-.no-scrollbar {
-  scrollbar-width: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* ————— print: every topic is a handout ————— */
+/* ————— print ————— */
 
 @media print {
   header,
@@ -306,19 +225,9 @@ mark {
   .no-print {
     display: none !important;
   }
-  .reveal {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-  html {
-    scroll-behavior: auto;
-  }
   body {
     background: #fff;
     color: #111;
-  }
-  main {
-    padding-top: 0 !important;
   }
   @page {
     margin: 15mm;

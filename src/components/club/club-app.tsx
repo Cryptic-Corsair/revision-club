@@ -1,0 +1,263 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { FlaskConical, Home as HomeIcon } from "lucide-react";
+import { UNITS, getUnit, getTopic } from "@/lib/spectra/units";
+import { Home } from "./home";
+import { UnitView } from "./unit-view";
+import { TopicView } from "./topic-view";
+import { Mascot, SpeechBubble, tint, shade } from "./bits";
+
+/* ═══════════════════════════════════════════════════════════════
+   Reaction Club · app shell — pill nav, views, footer
+   ═══════════════════════════════════════════════════════════════ */
+
+type View =
+  | { kind: "home" }
+  | { kind: "unit"; code: string }
+  | { kind: "topic"; code: string; topicId: string };
+
+function LogoMark({ size = 38 }: { size?: number }) {
+  return (
+    <span
+      className="grid shrink-0 place-items-center rounded-[14px]"
+      style={{
+        width: size,
+        height: size,
+        background: "#FF6B6B",
+        boxShadow: "0 4px 0 #E8590C",
+      }}
+    >
+      <FlaskConical className="h-5 w-5 text-white" strokeWidth={2.5} />
+    </span>
+  );
+}
+
+function TopBar({
+  view,
+  onHome,
+  onOpenUnit,
+}: {
+  view: View;
+  onHome: () => void;
+  onOpenUnit: (code: string) => void;
+}) {
+  const activeCode = view.kind === "home" ? null : view.code;
+
+  return (
+    <header className="fixed inset-x-0 top-3 z-50 flex justify-center px-3">
+      <nav
+        aria-label="Units"
+        className="no-scrollbar flex max-w-[96vw] items-center gap-1.5 overflow-x-auto rounded-full bg-paper/90 py-2 pr-3 pl-2.5 backdrop-blur-md"
+        style={{ boxShadow: "0 3px 0 rgba(61,43,31,0.06), 0 14px 34px -18px rgba(61,43,31,0.35)" }}
+      >
+        <button
+          type="button"
+          onClick={onHome}
+          className="flex shrink-0 cursor-pointer items-center gap-2.5 pr-2"
+          aria-label="Reaction Club — home"
+        >
+          <LogoMark />
+          <span className="hidden font-display text-[16px] font-semibold tracking-tight text-ink sm:block">
+            Reaction Club
+          </span>
+        </button>
+
+        <span aria-hidden className="mx-1 hidden h-6 w-[3px] rounded-full bg-ink/10 sm:block" />
+
+        <motion.button
+          type="button"
+          onClick={onHome}
+          aria-current={view.kind === "home" ? "page" : undefined}
+          whileTap={{ scale: 0.88 }}
+          className={`grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full ${
+            view.kind === "home"
+              ? "bg-ink text-cream"
+              : "bg-ink/5 text-ink-soft hover:bg-ink/10"
+          }`}
+          title="Clubhouse"
+        >
+          <HomeIcon className="h-4 w-4" strokeWidth={2.5} />
+        </motion.button>
+
+        {UNITS.map((u) => {
+          const active = activeCode === u.code;
+          return (
+            <motion.button
+              key={u.code}
+              type="button"
+              onClick={() => onOpenUnit(u.code)}
+              aria-current={active ? "page" : undefined}
+              whileTap={{ scale: 0.88 }}
+              animate={{ scale: active ? 1.12 : 1 }}
+              transition={{ type: "spring", stiffness: 380, damping: 16 }}
+              className="h-9 shrink-0 cursor-pointer rounded-full px-2.5 font-display text-[11px] font-bold tracking-wide"
+              style={
+                active
+                  ? { background: u.candy.main, color: "#fff", boxShadow: `0 3px 0 ${shade(u.candy.main)}` }
+                  : { background: tint(u.candy.main, 14), color: shade(u.candy.main, 62) }
+              }
+              title={`${u.code} — ${u.candy.nick}`}
+            >
+              {u.code.replace("WCH", "")}
+            </motion.button>
+          );
+        })}
+      </nav>
+    </header>
+  );
+}
+
+function Footer({ onOpenUnit }: { onOpenUnit: (code: string) => void }) {
+  const [booped, setBooped] = useState(false);
+
+  const boop = () => {
+    setBooped(true);
+    setTimeout(() => setBooped(false), 2200);
+  };
+
+  return (
+    <footer className="mt-auto">
+      <div aria-hidden className="h-[54px] bg-cream sm:h-[74px]">
+        <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-full w-full">
+          <path
+            d="M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z"
+            fill="#2E2016"
+          />
+        </svg>
+      </div>
+
+      <div className="bg-cocoa pt-4 pb-12 text-cream">
+        <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 sm:px-8 md:flex-row md:items-start md:justify-between">
+          <div className="max-w-sm">
+            <div className="flex items-center gap-3">
+              <LogoMark size={34} />
+              <span className="font-display text-[17px] font-semibold tracking-tight">
+                Reaction Club
+              </span>
+            </div>
+            <p className="mt-3 text-[14px] leading-relaxed text-cream/65">
+              Chemistry, but make it fun. Six units, six flavours, one beaker that fills up as
+              you revise.
+            </p>
+            <div className="mt-5 flex items-end gap-1">
+              <Mascot main="#FFD43B" size={72} boop onBoop={boop} bubbles={false} />
+              <AnimatePresence>
+                {booped && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.85 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.85 }}
+                    className="mb-4"
+                  >
+                    <SpeechBubble bg="#FFFDF7" className="px-4 py-2.5">
+                      <span className="font-display text-[13px] font-semibold text-ink">
+                        Boop received. Now revise something.
+                      </span>
+                    </SpeechBubble>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          <div>
+            <div className="font-display text-[12px] font-bold tracking-[0.2em] text-cream/50 uppercase">
+              The six flavours
+            </div>
+            <div className="mt-4 grid grid-cols-2 gap-x-10 gap-y-3">
+              {UNITS.map((u) => (
+                <button
+                  key={u.code}
+                  type="button"
+                  onClick={() => onOpenUnit(u.code)}
+                  className="group flex cursor-pointer items-center gap-2.5 text-left"
+                >
+                  <span
+                    className="h-3 w-3 shrink-0 rounded-full transition-transform group-hover:scale-125"
+                    style={{ background: u.candy.main }}
+                  />
+                  <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream">
+                    {u.code.replace("WCH", "Unit ")} · {u.candy.nick}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mx-auto mt-10 max-w-6xl px-5 sm:px-8">
+          <p className="text-[11.5px] leading-relaxed font-semibold text-cream/40">
+            Written to the Pearson Edexcel International A Level Chemistry (2018) specification
+            · WCH11–WCH16 · not affiliated with or endorsed by Pearson Education Ltd. Brewed
+            with curiosity — no boring tables were used in the making of this site.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+export default function ClubApp() {
+  const [view, setView] = useState<View>({ kind: "home" });
+  const viewKey =
+    view.kind === "topic"
+      ? `topic-${view.code}-${view.topicId}`
+      : view.kind === "unit"
+        ? `unit-${view.code}`
+        : "home";
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+  }, [viewKey]);
+
+  const openUnit = (code: string) => setView({ kind: "unit", code });
+  const openTopic = (code: string, topicId: string) =>
+    setView({ kind: "topic", code, topicId });
+  const goHome = () => setView({ kind: "home" });
+
+  const unit = view.kind === "home" ? undefined : getUnit(view.code);
+  const topic =
+    view.kind === "topic" && unit ? getTopic(view.code, view.topicId) : undefined;
+
+  return (
+    <div className="flex min-h-screen flex-col">
+      <TopBar view={view} onHome={goHome} onOpenUnit={openUnit} />
+
+      <main className="relative flex-1">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={viewKey}
+            initial={{ opacity: 0, y: 22, scale: 0.995 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -14, scale: 0.995 }}
+            transition={{ type: "spring", stiffness: 260, damping: 26 }}
+          >
+            {view.kind === "home" && <Home units={UNITS} onOpenUnit={openUnit} />}
+
+            {view.kind === "unit" && unit && (
+              <UnitView
+                unit={unit}
+                onOpenTopic={(id) => openTopic(unit.code, id)}
+                onBack={goHome}
+                onOpenUnit={openUnit}
+              />
+            )}
+
+            {view.kind === "topic" && unit && topic && (
+              <TopicView
+                unit={unit}
+                topic={topic}
+                onBack={() => openUnit(unit.code)}
+                onOpenTopic={(id) => openTopic(unit.code, id)}
+              />
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        <Footer onOpenUnit={openUnit} />
+      </main>
+    </div>
+  );
+}

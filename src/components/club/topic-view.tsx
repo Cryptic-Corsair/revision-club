@@ -1,0 +1,224 @@
+"use client";
+
+import { useState } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { ArrowLeft, ArrowRight, Check, PartyPopper, Sticker } from "lucide-react";
+import type { Topic, Unit } from "@/lib/spectra/types";
+import { toggleRevised, useRevised } from "@/lib/spectra/progress";
+import { TopicBlocks } from "./blocks";
+import { Fmt } from "./format";
+import {
+  Chip,
+  Confetti,
+  PopIn,
+  Reveal,
+  SoftButton,
+  Squiggle,
+  shade,
+} from "./bits";
+
+/* ═══════════════════════════════════════════════════════════════
+   Reaction Club · topic reader — one stop on the trail
+   ═══════════════════════════════════════════════════════════════ */
+
+export function TopicView({
+  unit,
+  topic,
+  onBack,
+  onOpenTopic,
+}: {
+  unit: Unit;
+  topic: Topic;
+  onBack: () => void;
+  onOpenTopic: (topicId: string) => void;
+}) {
+  const revised = useRevised();
+  const key = `${unit.code}/${topic.id}`;
+  const isRevised = revised.includes(key);
+  const [fire, setFire] = useState(0);
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 26, mass: 0.4 });
+
+  const idx = unit.topics.findIndex((t) => t.id === topic.id);
+  const prev = idx > 0 ? unit.topics[idx - 1] : undefined;
+  const next = idx < unit.topics.length - 1 ? unit.topics[idx + 1] : undefined;
+  const main = unit.candy.main;
+
+  const collect = () => {
+    if (!isRevised) setFire((f) => f + 1);
+    toggleRevised(key);
+  };
+
+  return (
+    <div className="mx-auto max-w-3xl px-5 pt-24 pb-20 sm:px-8">
+      {/* reading progress — a candy strip filling up top */}
+      <motion.div
+        aria-hidden
+        className="fixed top-0 left-0 z-[70] h-[7px] w-full origin-left rounded-r-full"
+        style={{
+          scaleX,
+          background: `linear-gradient(90deg, ${main}, #FFD43B)`,
+        }}
+      />
+
+      <PopIn>
+        <SoftButton
+          onClick={onBack}
+          className="min-h-[42px] px-4 py-2 text-[13.5px]"
+          ariaLabel={`Back to ${unit.code}`}
+        >
+          <ArrowLeft className="h-4 w-4" /> {unit.code} trail
+        </SoftButton>
+      </PopIn>
+
+      {/* ————— header ————— */}
+      <header className="mt-8">
+        <PopIn delay={0.05} className="flex flex-wrap items-center gap-2">
+          <Chip main={main}>{topic.label}</Chip>
+          <Chip>{topic.minutes} min read</Chip>
+          <Chip>{topic.ao.join(" · ")}</Chip>
+        </PopIn>
+
+        <PopIn delay={0.1}>
+          <h1 className="mt-5 font-display text-[clamp(2rem,4.6vw,3rem)] leading-[1.08] font-semibold tracking-tight text-ink">
+            {topic.title}
+          </h1>
+          <p className="mt-3.5 max-w-[60ch] text-[16.5px] leading-[1.8] text-ink-soft">
+            {topic.summary}
+          </p>
+        </PopIn>
+
+        <Squiggle color={main} className="mt-8 h-3.5 w-full opacity-60" />
+      </header>
+
+      {/* ————— content ————— */}
+      <div className="mt-10">
+        <TopicBlocks blocks={topic.blocks} main={main} />
+      </div>
+
+      {/* ————— sticker collection ————— */}
+      <Reveal className="relative mt-14 flex justify-center">
+        <div className="relative">
+          <Confetti fire={fire} />
+          <motion.button
+            type="button"
+            onClick={collect}
+            aria-pressed={isRevised}
+            whileHover={{ y: -3, scale: 1.02 }}
+            whileTap={{ scale: 0.94 }}
+            transition={{ type: "spring", stiffness: 320, damping: 15 }}
+            className="inline-flex min-h-[56px] cursor-pointer items-center gap-3 rounded-full px-7 py-4 font-display text-[16px] font-semibold"
+            style={
+              isRevised
+                ? {
+                    background: main,
+                    color: "#fff",
+                    boxShadow: `0 5px 0 ${shade(main)}`,
+                    transform: "rotate(-1.5deg)",
+                  }
+                : {
+                    background: "#FFFDF7",
+                    color: "#3D2B1F",
+                    boxShadow: "0 5px 0 rgba(61,43,31,0.10)",
+                  }
+            }
+          >
+            {isRevised ? (
+              <>
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-white/25">
+                  <Check className="h-4.5 w-4.5" strokeWidth={3} />
+                </span>
+                In your sticker book!
+              </>
+            ) : (
+              <>
+                <Sticker className="h-5.5 w-5.5" style={{ color: main }} />
+                Collect this sticker
+              </>
+            )}
+          </motion.button>
+        </div>
+      </Reveal>
+      <p className="mt-3 text-center text-[12.5px] font-bold text-ink-faint">
+        {isRevised
+          ? "Bubbles has noted it down. Show-off."
+          : "One tap and the beaker rises — your club remembers."}
+      </p>
+
+      {/* ————— prev / next ————— */}
+      <nav className="mt-10 grid gap-4 sm:grid-cols-2" aria-label="Topic navigation">
+        {prev ? (
+          <motion.button
+            type="button"
+            onClick={() => onOpenTopic(prev.id)}
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex cursor-pointer items-center gap-3 rounded-full bg-paper px-5 py-4 text-left puff"
+          >
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink/5 text-ink-soft">
+              <ArrowLeft className="h-4.5 w-4.5" strokeWidth={2.5} />
+            </span>
+            <span className="min-w-0">
+              <span className="block text-[11px] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+                turn back · {prev.label}
+              </span>
+              <span className="block truncate font-display text-[15px] font-semibold text-ink">
+                {prev.title}
+              </span>
+            </span>
+          </motion.button>
+        ) : (
+          <span aria-hidden className="hidden sm:block" />
+        )}
+        {next ? (
+          <motion.button
+            type="button"
+            onClick={() => onOpenTopic(next.id)}
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex cursor-pointer items-center justify-end gap-3 rounded-full px-5 py-4 text-right text-white sm:col-start-2"
+            style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
+          >
+            <span className="min-w-0">
+              <span className="block text-[11px] font-extrabold tracking-[0.14em] text-white/70 uppercase">
+                turn over · {next.label}
+              </span>
+              <span className="block truncate font-display text-[15px] font-semibold">
+                {next.title}
+              </span>
+            </span>
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/20">
+              <ArrowRight className="h-4.5 w-4.5" strokeWidth={2.5} />
+            </span>
+          </motion.button>
+        ) : (
+          <motion.button
+            type="button"
+            onClick={onBack}
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex cursor-pointer items-center justify-end gap-3 rounded-full px-5 py-4 text-right text-white sm:col-start-2"
+            style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
+          >
+            <span className="min-w-0">
+              <span className="block text-[11px] font-extrabold tracking-[0.14em] text-white/70 uppercase">
+                trail finished
+              </span>
+              <span className="block truncate font-display text-[15px] font-semibold">
+                Back to {unit.code}
+              </span>
+            </span>
+            <PartyPopper className="h-5 w-5 shrink-0" />
+          </motion.button>
+        )}
+      </nav>
+
+      <p className="mt-10 text-center text-[12px] leading-relaxed font-bold text-ink-faint">
+        <Fmt
+          text={`==${unit.code}== · ${unit.title} · written to the 2018 specification`}
+        />
+      </p>
+    </div>
+  );
+}

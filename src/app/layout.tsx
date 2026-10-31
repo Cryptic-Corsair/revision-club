@@ -1,31 +1,34 @@
-import type { Metadata } from "next";
-import { Space_Grotesk, Instrument_Serif, IBM_Plex_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Fredoka, Nunito, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const grotesk = Space_Grotesk({
-  variable: "--font-grotesk",
+const fredoka = Fredoka({
+  variable: "--font-fredoka",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-const instrument = Instrument_Serif({
-  variable: "--font-instrument",
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
+  weight: ["400", "600", "700", "800", "900"],
 });
 
 const plex = IBM_Plex_Mono({
   variable: "--font-plex",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Spectra — Edexcel IAL Chemistry notes",
+  title: "Reaction Club — IAL Chemistry, but make it fun",
   description:
-    "A complete set of revision notes for Pearson Edexcel International A Level Chemistry (WCH11–WCH16), written to the 2018 specification. Six units, six flames, one subject observed closely.",
+    "Edexcel IAL Chemistry notes (WCH11–WCH16) rebuilt as a playground: candy-coloured units, sticker progress, quizzes that high-five back, and zero boring tables. Written to the 2018 specification.",
   icons: { icon: "/favicon.svg" },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#FFF6EA",
 };
 
 export default function RootLayout({
@@ -34,10 +37,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${grotesk.variable} ${instrument.variable} ${plex.variable} font-sans antialiased`}
-      >
+    <html lang="en" className={`${fredoka.variable} ${nunito.variable} ${plex.variable}`}>
+      <body className="min-h-screen bg-cream font-body text-ink antialiased">
         {children}
       </body>
     </html>
