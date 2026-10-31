@@ -1,37 +1,30 @@
 import type { Metadata } from "next";
-import { Caveat, Fraunces, Newsreader, IBM_Plex_Mono } from "next/font/google";
+import { Space_Grotesk, Instrument_Serif, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const grotesk = Space_Grotesk({
+  variable: "--font-grotesk",
   subsets: ["latin"],
-  style: ["normal", "italic"],
   weight: ["400", "500", "600", "700"],
 });
 
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
+const instrument = Instrument_Serif({
+  variable: "--font-instrument",
   subsets: ["latin"],
+  weight: "400",
   style: ["normal", "italic"],
-  weight: ["400", "500", "600"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
+const plex = IBM_Plex_Mono({
+  variable: "--font-plex",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-});
-
-const caveat = Caveat({
-  variable: "--font-caveat",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Axiom — IAL Chemistry, marked by hand",
+  title: "Spectra — Edexcel IAL Chemistry notes",
   description:
-    "A free, exam-obsessed revision-notes library built for one subject: Pearson Edexcel International A Level Chemistry (WCH11–WCH16). Mapped line-by-line to the spec and annotated the way a great tutor marks your paper.",
+    "A complete set of revision notes for Pearson Edexcel International A Level Chemistry (WCH11–WCH16), written to the 2018 specification. Six units, six flames, one subject observed closely.",
   icons: { icon: "/favicon.svg" },
 };
 
@@ -43,9 +36,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fraunces.variable} ${newsreader.variable} ${plexMono.variable} ${caveat.variable} antialiased`}
+        className={`${grotesk.variable} ${instrument.variable} ${plex.variable} font-sans antialiased`}
       >
-        <div className="margin-line" aria-hidden="true" />
         {children}
       </body>
     </html>
