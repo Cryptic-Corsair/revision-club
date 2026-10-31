@@ -1,0 +1,480 @@
+     1→import type { Topic } from "../types";
+     2→
+     3→/* ═══════════════════════════════════════════════════════════════
+     4→   WCH12 · Energetics, Group Chemistry, Halogenoalkanes and Alcohols
+     5→   Topics 6–10 of the Pearson IAL 2018 specification.
+     6→   ═══════════════════════════════════════════════════════════════ */
+     7→
+     8→export const WCH12_TOPICS: Topic[] = [
+     9→  {
+    10→    id: "t06",
+    11→    no: "06",
+    12→    label: "Topic 6",
+    13→    title: "Energetics",
+    14→    summary:
+    15→      "Enthalpy changes, Hess's law, bond enthalpies and calorimetry — energy bookkeeping for reactions you can and cannot measure directly.",
+    16→    minutes: 24,
+    17→    ao: ["AO1", "AO2", "AO3"],
+    18→    blocks: [
+    19→      {
+    20→        k: "p",
+    21→        text: "Enthalpy change is heat energy exchanged at constant pressure: ==ΔH = H(products) − H(reactants)==, negative for exothermic (heat leaves the system) and positive for endothermic (heat enters). Definitions are worth whole marks on their own, and every one of them is fixed to ==standard conditions==: 100 kPa and 298 K, every substance in its standard state.",
+    22→      },
+    23→      {
+    24→        k: "table",
+    25→        caption: "The enthalpy definitions that get asked",
+    26→        head: ["Quantity", "Defined as", "Defining equation"],
+    27→        rows: [
+    28→          ["ΔHf — formation", "enthalpy change forming 1 mol of compound from its elements in standard states", "C(s) + O~2~(g) → CO~2~(g)"],
+    29→          ["ΔHc — combustion", "enthalpy change burning 1 mol completely in excess oxygen", "CH~4~(g) + 2O~2~(g) → CO~2~(g) + 2H~2~O(l)"],
+    30→          ["ΔHneut — neutralisation", "enthalpy change forming 1 mol of water from acid + base", "HCl(aq) + NaOH(aq) → NaCl(aq) + H~2~O(l)"],
+    31→          ["Bond enthalpy", "energy to break 1 mol of a bond, gaseous state, averaged over compounds", "Cl–Cl(g) → 2Cl•(g)"],
+    32→        ],
+    33→      },
+    34→      {
+    35→        k: "def",
+    36→        term: "Hess's law",
+    37→        text: "The enthalpy change of a reaction is independent of the route taken. If you cannot measure a reaction directly, build a cycle through reactions you *can* measure — energy is conserved either way.",
+    38→      },
+    39→      {
+    40→        k: "eq",
+    41→        title: "The two Hess routes",
+    42→        eq: "ΔH = ΣΔHf(products) − ΣΔHf(reactants)        ΔH = ΣΔHc(reactants) − ΣΔHc(products)",
+    43→        note: "Formation goes products-minus-reactants; combustion runs the other way round. One sign error here is the most common mark lost in Unit 2.",
+    44→        ok: ["routes close", "signs consistent"],
+    45→      },
+    46→      {
+    47→        k: "p",
+    48→        text: "Bond enthalpies give a third route and an important insight. Breaking bonds always ==costs== energy; making bonds always ==releases== it. If the bonds made are stronger than the bonds broken, the reaction is exothermic.",
+    49→      },
+    50→      {
+    51→        k: "eq",
+    52→        title: "Bond enthalpy route",
+    53→        eq: "ΔH = Σ(bond enthalpies broken) − Σ(bond enthalpies formed)",
+    54→        note: "Values are averages over many compounds, and everything must be gaseous — that is why this method only ever *estimates* ΔH.",
+    55→        ok: ["gaseous species only", "breaking − making"],
+    56→      },
+    57→      {
+    58→        k: "ex",
+    59→        title: "Bond enthalpy calculation",
+    60→        steps: [
+    61→          "H~2~(g) + Cl~2~(g) → 2HCl(g), with H–H 436, Cl–Cl 243, H–Cl 432 kJ mol^−1^.",
+    62→          "Broken: 436 + 243 = 679 kJ mol^−1^.",
+    63→          "Formed: 2 × 432 = 864 kJ mol^−1^.",
+    64→          "ΔH = 679 − 864",
+    65→        ],
+    66→        answer: "ΔH = −185 kJ mol^−1^ — exothermic, because H–Cl bonds are stronger than what was broken.",
+    67→      },
+    68→      {
+    69→        k: "p",
+    70→        text: "==Calorimetry== puts a number on all of this: burn or dissolve the reaction in a known mass of water and watch the temperature move. The Unit 3 practical expects the method *and* its errors.",
+    71→      },
+    72→      {
+    73→        k: "eq",
+    74→        title: "Calorimetry",
+    75→        eq: "q = mcΔT        ΔH = −q/n",
+    76→        note: "m = mass of water (g), c = 4.18 J g^−1^ K^−1^, q in joules. Convert to kJ before dividing by n — and ΔT in K equals ΔT in °C.",
+    77→        ok: ["J → kJ", "per mole"],
+    78→      },
+    79→      {
+    80→        k: "tips",
+    81→        items: [
+    82→          "Heat loss to the surroundings makes measured ΔH *less* exothermic than the true value — say which direction, not just “heat loss”.",
+    83→          "State symbols are part of every defining equation; (g), (l), (aq), (s) each earn.",
+    84→          "Bond enthalpy calculations ignore intermolecular forces — only gases qualify.",
+    85→          "Units: kJ mol^−1^. Write them even when the number is right.",
+    86→        ],
+    87→      },
+    88→      {
+    89→        k: "check",
+    90→        qs: [
+    91→          {
+    92→            q: "50.0 g of water rises 25.0 °C in a calorimeter. How much heat went in?",
+    93→            a: "q = mcΔT = 50.0 × 4.18 × 25.0 = 5 225 J ≈ 5.23 kJ.",
+    94→          },
+    95→          {
+    96→            q: "Why is ΔH from bond enthalpies called an estimate?",
+    97→            a: "The values are averages taken from many different compounds, and the method ignores everything but the gas-phase bonds — condensation and solution energies are left out entirely.",
+    98→          },
+    99→        ],
+   100→      },
+   101→      {
+   102→        k: "recap",
+   103→        items: [
+   104→          "ΔH < 0 exothermic; > 0 endothermic; standard state, 100 kPa, 298 K.",
+   105→          "Hess: formation products − reactants; combustion reactants − products.",
+   106→          "Bond route: broken − formed; gases only; averages → estimate.",
+   107→          "q = mcΔT, then ΔH = −q/n; watch J vs kJ.",
+   108→          "Errors: heat loss, evaporation, incomplete combustion — name the direction of the error.",
+   109→        ],
+   110→      },
+   111→    ],
+   112→  },
+   113→  {
+   114→    id: "t07",
+   115→    no: "07",
+   116→    label: "Topic 7",
+   117→    title: "Intermolecular forces",
+   118→    summary:
+   119→      "Van der Waals, permanent dipoles and hydrogen bonds — why boiling points trend the way they do, and water's strange behaviour.",
+   120→    minutes: 20,
+   121→    ao: ["AO1", "AO2"],
+   122→    blocks: [
+   123→      {
+   124→        k: "p",
+   125→        text: "Covalent bonds hold molecules together; ==intermolecular forces== hold molecules to each other — and it is the second kind that decides melting point, boiling point, viscosity and solubility. They come in three strengths, and every explanation question is a two-step: identify the strongest force present, then compare it.",
+   126→      },
+   127→      {
+   128→        k: "def",
+   129→        term: "Van der Waals (induced dipole–dipole)",
+   130→        text: "Electrons fluctuate, creating an instantaneous dipole in one molecule, which induces a dipole in its neighbour — a momentary attraction. Present between ==all== molecules; the only force in non-polar ones.",
+   131→      },
+   132→      {
+   133→        k: "def",
+   134→        term: "Hydrogen bonding",
+   135→        text: "The strongest intermolecular force: a hydrogen covalently bonded to N, O or F (small and very electronegative) is attracted to a lone pair on the N, O or F of a neighbouring molecule. Both halves of that requirement must be present.",
+   136→      },
+   137→      {
+   138→        k: "table",
+   139→        caption: "The three forces, weakest to strongest",
+   140→        head: ["Force", "Origin", "Where it operates"],
+   141→        rows: [
+   142→          ["Van der Waals", "instantaneous → induced dipoles", "everything, non-polar molecules' only force"],
+   143→          ["Permanent dipole–dipole", "δ^+^ and δ^−^ ends of polar molecules", "HCl, propanone, HBr"],
+   144→          ["Hydrogen bond", "H on N/O/F + lone pair on N/O/F", "H~2~O, NH~3~, HF, alcohols, DNA bases"],
+   145→        ],
+   146→      },
+   147→      {
+   148→        k: "p",
+   149→        text: "Van der Waals strength grows with ==electron count and molecular surface==: more electrons, bigger instantaneous dipoles. That is why boiling points climb down the halogens (Cl~2~ gas → Br~2~ liquid → I~2~ solid) and along any homologous series — each CH~2~ adds electrons and contact area.",
+   150→      },
+   151→      {
+   152→        k: "ex",
+   153→        title: "Explain the boiling points: HF +20 °C, HCl −85 °C, HBr −67 °C, HI −35 °C",
+   154→        steps: [
+   155→          "HF is far above the others: it is the only one with hydrogen bonding (H bonded to F, F lone pairs available).",
+   156→          "HCl < HBr < HI looks backwards for polarity — but polarity is not the strongest force here.",
+   157→          "From HCl to HI the electron count rises, so van der Waals forces strengthen, and they dominate the trend.",
+   158→        ],
+   159→        answer: "HF high by hydrogen bonding; the rest climb with electron count via van der Waals. Identify the force, then compare.",
+   160→      },
+   161→      {
+   162→        k: "p",
+   163→        text: "Hydrogen bonding explains water's catalogue of oddities: a ==boiling point far above its group's trend==, high surface tension, and ==ice less dense than water== — freezing locks molecules into an open hydrogen-bonded lattice that collapses on melting. Alcohols dissolve in water because their –OH can hydrogen-bond with it; hydrocarbons cannot, and float or separate.",
+   164→      },
+   165→      {
+   166→        k: "tips",
+   167→        items: [
+   168→          "Never say “it has strong bonds” when you mean intermolecular forces — the distinction is the mark.",
+   169→          "Draw the hydrogen bond as a dashed line from H to the lone pair, and label it — diagram questions want the lone pair shown.",
+   170→          "Boiling point questions: state the strongest force in *each* substance, then compare strengths.",
+   171→        ],
+   172→      },
+   173→      {
+   174→        k: "check",
+   175→        qs: [
+   176→          {
+   177→            q: "Why does propan-1-ol (b.p. 97 °C) boil far higher than propane (−42 °C) despite similar size?",
+   178→            a: "Propan-1-ol has an –OH group: hydrogen bonding between molecules. Propane manages only van der Waals. Much more energy is needed to separate alcohol molecules.",
+   179→          },
+   180→          {
+   181→            q: "Which force must be broken to boil water — and which must *not* be?",
+   182→            a: "Hydrogen bonds between molecules break; the O–H covalent bonds within molecules do not. Boiling separates molecules, never atoms.",
+   183→          },
+   184→        ],
+   185→      },
+   186→      {
+   187→        k: "recap",
+   188→        items: [
+   189→          "Three forces: vdW (universal) < permanent dipole < hydrogen bond.",
+   190→          "vdW scales with electron count and surface contact.",
+   191→          "Hydrogen bond needs H–N/O/F *and* a lone pair on N/O/F.",
+   192→          "Ice floats: open hydrogen-bonded lattice.",
+   193→          "–OH groups make small alcohols water-soluble.",
+   194→        ],
+   195→      },
+   196→    ],
+   197→  },
+   198→  {
+   199→    id: "t08",
+   200→    no: "08",
+   201→    label: "Topic 8",
+   202→    title: "Redox chemistry and Groups 1, 2 and 7",
+   203→    summary:
+   204→      "Oxidation numbers, half-equations, and the s-block and halogen chemistry that starts — and ends — most Unit 2 papers.",
+   205→    minutes: 26,
+   206→    ao: ["AO1", "AO2", "AO3"],
+   207→    blocks: [
+   208→      {
+   209→        k: "p",
+   210→        text: "Redox runs on one bookkeeping device: the ==oxidation number==. Elements are 0; the sum equals the overall charge; O is usually −2, H usually +1, F always −1. The species whose oxidation number rises is ==oxidised== and loses electrons; the one that falls is ==reduced==. An oxidising agent takes electrons and is itself reduced.",
+   211→      },
+   212→      {
+   213→        k: "def",
+   214→        term: "Disproportionation",
+   215→        text: "A reaction in which the same element is simultaneously oxidised and reduced — chlorine in cold alkali is the classic: Cl~2~ + 2NaOH → NaCl + NaClO + H~2~O, chlorine going to −1 in Cl^−^ and +1 in ClO^−^.",
+   216→      },
+   217→      {
+   218→        k: "p",
+   219→        text: "Half-equations keep large redox reactions honest: write the electron transfer for each species, balance O with H~2~O and H with H^+^, then multiply so the electrons cancel. Names carry oxidation numbers in Roman numerals — ==manganate(VII)==, ==chlorate(I)== — and every number in those names is examinable.",
+   220→      },
+   221→      {
+   222→        k: "p",
+   223→        text: "==Group 1== metals are soft, low-melting and violently reactive: one outer electron, lost easily. They fizz water into hydroxides and hydrogen — 2Na + 2H~2~O → 2NaOH + H~2~ — and they give the exam its most beautiful identification technique, the ==flame test==. Heat a clean nichrome wire in concentrated HCl, dip it in the compound, and read the colour.",
+   224→      },
+   225→      {
+   226→        k: "table",
+   227→        caption: "Flame tests — the six colours this site is named after",
+   228→        head: ["Ion", "Flame", "Note"],
+   229→        rows: [
+   230→          ["Li^+^", "crimson", "WCH11's colour, 670.8 nm"],
+   231→          ["Na^+^", "golden yellow", "so bright it masks others — 589.0 nm"],
+   232→          ["K^+^", "lilac", "view through cobalt-blue glass to hide Na's glare"],
+   233→          ["Ca^2+^", "brick red", "Group 2"],
+   234→          ["Ba^2+^", "apple green", "WCH13's colour, 553.5 nm"],
+   235→          ["Cu^2+^", "blue-green", "WCH14's colour, 510.5 nm"],
+   236→        ],
+   237→      },
+   238→      {
+   239→        k: "p",
+   240→        text: "==Group 2== trends all trace to one fact: the ions get larger down the group. Reactivity with water climbs (Mg shrugs → Ba fizzes hard); hydroxides get ==more== soluble (Mg(OH)~2~ barely dissolves, Ba(OH)~2~ freely); sulfates get ==less== soluble (BaSO~4~ is insoluble — the basis of the sulfate test); and nitrates and carbonates get ==more== thermally stable down the group.",
+   241→      },
+   242→      {
+   243→        k: "ex",
+   244→        title: "Why BaCO₃ decomposes at a higher temperature than MgCO₃",
+   245→        steps: [
+   246→          "Thermal decomposition needs the cation to polarise and weaken the carbonate ion's C–O bonds.",
+   247→          "Mg^2+^ is small: high charge density, strongly polarising — the carbonate breaks apart at ~350 °C.",
+   248→          "Ba^2+^ is large: low charge density, weakly polarising — the ion survives to ~1300 °C.",
+   249→        ],
+   250→        answer: "Polarising power falls down the group as the cation grows, so thermal stability rises. Charge density is the phrase to write.",
+   251→      },
+   252→      {
+   253→        k: "p",
+   254→        text: "==Group 7==, the halogens: boiling points climb down the group (more electrons, stronger van der Waals — Topic 7 again), and oxidising power ==falls==. A halogen will oxidise any halide below it: chlorine water displaces bromine from KBr (orange solution) and iodine from KI (brown). That displacement order — and its reverse refusal — is a favourite multiple-choice stem.",
+   255→      },
+   256→      {
+   257→        k: "p",
+   258→        text: "Halide identification closes the topic: acidify with dilute HNO~3~ (to clear carbonate and sulfite interference), add AgNO~3~, and read the precipitate — ==white AgCl== (dissolves in dilute NH~3~), ==cream AgBr== (dissolves in concentrated NH~3~), ==yellow AgI== (insoluble in either). Colour words must be exact.",
+   259→      },
+   260→      {
+   261→        k: "tips",
+   262→        items: [
+   263→          "Oxidation numbers in names: manganate(VII) is MnO~4~^−^, chlorate(I) is ClO^−^. Decode before you balance.",
+   264→          "In the sulfate test, acidify with HCl *then* add BaCl~2~ — a white precipitate of BaSO~4~ confirms SO~4~^2−^.",
+   265→          "“Displacement” answers must name both half-reactions: Cl~2~ oxidises 2Br^−^ → Br~2~ while Cl~2~ itself is reduced to 2Cl^−^.",
+   266→        ],
+   267→      },
+   268→      {
+   269→        k: "check",
+   270→        qs: [
+   271→          {
+   272→            q: "Balance and interpret: Cl~2~ + KI → ?",
+   273→            a: "Cl~2~ + 2KI → 2KCl + I~2~. Chlorine (0 → −1) is reduced; iodide (−1 → 0) is oxidised. The solution turns brown.",
+   274→          },
+   275→          {
+   276→            q: "Why is silver nitrate added *after* dilute nitric acid in halide tests?",
+   277→            a: "Nitric acid removes carbonate and sulfite ions, which would otherwise give precipitates of their own (Ag~2~CO~3~, Ag~2~SO~3~) and mask the halide result.",
+   278→          },
+   279→        ],
+   280→      },
+   281→      {
+   282→        k: "recap",
+   283→        items: [
+   284→          "Oxidation number bookkeeping: O −2, H +1, sum = charge; names carry Roman numerals.",
+   285→          "Disproportionation: one element both oxidised and reduced (Cl~2~ + cold NaOH).",
+   286→          "Group 1: violent water reaction + flame tests — Li crimson, Na gold, K lilac.",
+   287→          "Group 2: solubility splits (hydroxides up, sulfates down) and thermal stability up — polarising power explains all.",
+   288→          "Group 7: oxidising power falls; AgNO~3~ gives white / cream / yellow.",
+   289→        ],
+   290→      },
+   291→    ],
+   292→  },
+   293→  {
+   294→    id: "t09",
+   295→    no: "09",
+   296→    label: "Topic 9",
+   297→    title: "Introduction to kinetics and equilibria",
+   298→    summary:
+   299→      "Collision theory, the four rate factors, dynamic equilibrium and Le Chatelier — the qualitative toolkit that Topic 11 and 13 deepen.",
+   300→    minutes: 18,
+   301→    ao: ["AO1", "AO2"],
+   302→    blocks: [
+   303→      {
+   304→        k: "p",
+   305→        text: "Reactions only happen when colliding particles carry at least the ==activation energy==, E~a~, and hit with the right orientation. Raise the fraction of successful collisions and the rate rises. Every rate factor in the course is one of two moves: more frequent collisions, or more energetic ones.",
+   306→      },
+   307→      {
+   308→        k: "table",
+   309→        caption: "The four rate factors — and which move each makes",
+   310→        head: ["Factor", "Effect on collisions", "Why"],
+   311→        rows: [
+   312→          ["Temperature ↑", "more frequent *and* more energetic", "faster particles, and a much larger fraction exceeds E~a~"],
+   313→          ["Concentration / pressure ↑", "more frequent", "more particles in the same volume"],
+   314→          ["Surface area ↑", "more frequent", "more solid particles exposed to attack"],
+   315→          ["Catalyst", "neither — new route", "lower E~a~, so the existing collisions succeed more often"],
+   316→        ],
+   317→      },
+   318→      {
+   319→        k: "def",
+   320→        term: "Catalyst",
+   321→        text: "A substance that increases the rate of a reaction by providing an alternative route with a lower activation energy, and is left unchanged at the end. Heterogeneous catalysts are in a different phase from the reactants (iron in the Haber process); homogeneous ones are in the same phase.",
+   322→      },
+   323→      {
+   324→        k: "p",
+   325→        text: "Now the second half of the toolkit. Many reactions are reversible; in a closed system they settle into ==dynamic equilibrium== — both directions still reacting, at equal rates, so concentrations stop changing. Not static: dynamic. The composition at equilibrium is the ==position==, and it moves predictably when you disturb it.",
+   326→      },
+   327→      {
+   328→        k: "def",
+   329→        term: "Le Chatelier's principle",
+   330→        text: "When a system at equilibrium is disturbed, the position shifts to oppose the change. Raise the concentration of a reactant → the forward reaction uses it; raise the pressure → the side with fewer gas molecules grows; raise the temperature → the endothermic direction is favoured.",
+   331→      },
+   332→      {
+   333→        k: "ex",
+   334→        title: "Predicting shifts — N₂ + 3H₂ ⇌ 2NH₃, ΔH negative",
+   335→        steps: [
+   336→          "Increase the pressure: 4 mol of gas on the left, 2 on the right — the equilibrium shifts right, towards fewer molecules.",
+   337→          "Increase the temperature: the forward reaction is exothermic, so the equilibrium shifts left, the endothermic way.",
+   338→          "Add an iron catalyst: equilibrium is reached *faster*, but the position does not move — the same composition, sooner.",
+   339→        ],
+   340→        answer: "Pressure → right; temperature → left; catalyst → no change in position. Count gas molecules first; then check the sign of ΔH.",
+   341→      },
+   342→      {
+   343→        k: "tips",
+   344→        items: [
+   345→          "“Dynamic” must appear in the definition — both reactions continue at equal rate.",
+   346→          "A catalyst changes rate, never the position — the single most-tested sentence in this topic.",
+   347→          "Pressure only matters when the two sides have different numbers of ==gas== molecules.",
+   348→        ],
+   349→      },
+   350→      {
+   351→        k: "check",
+   352→        qs: [
+   353→          {
+   354→            q: "Why does a mixture of flour dust ignite faster than a pile of flour?",
+   355→            a: "Dust has enormous surface area — far more particles exposed to oxygen at once, so far more frequent successful collisions.",
+   356→          },
+   357→          {
+   358→            q: "For 2SO~2~ + O~2~ ⇌ 2SO~3~ (exothermic), what happens to the position if temperature is raised?",
+   359→            a: "It shifts left, favouring the endothermic reverse reaction — less SO~3~ at equilibrium. Rate rises, yield falls: the industrial compromise begins here.",
+   360→          },
+   361→        ],
+   362→      },
+   363→      {
+   364→        k: "recap",
+   365→        items: [
+   366→          "Collisions need E~a~ and orientation; factors work by frequency or energy.",
+   367→          "Catalyst: alternative route, lower E~a~, unchanged at the end.",
+   368→          "Dynamic equilibrium: closed system, equal rates, constant macroscopic properties.",
+   369→          "Le Chatelier: the position opposes the disturbance — concentration, pressure, temperature.",
+   370→          "Catalysts speed arrival, never move the destination.",
+   371→        ],
+   372→      },
+   373→    ],
+   374→  },
+   375→  {
+   376→    id: "t10",
+   377→    no: "10",
+   378→    label: "Topic 10",
+   379→    title: "Halogenoalkanes, alcohols and spectra",
+   380→    summary:
+   381→      "Nucleophilic substitution and elimination, the ozone story, alcohol chemistry — and the first two analytical machines: mass spectrometer and IR.",
+   382→    minutes: 30,
+   383→    ao: ["AO1", "AO2", "AO3"],
+   384→    blocks: [
+   385→      {
+   386→        k: "p",
+   387→        text: "The C–X bond in a halogenoalkane is polar — carbon δ^+^, halogen δ^−^ — which invites attack by electron-pair donors. A ==nucleophile== is exactly that: a lone-pair donor such as OH^−^, CN^−^ or NH~3~ that attacks the positive carbon. Whether the halogenoalkane then ==substitutes== or ==eliminates== is decided by the reagent and solvent you choose.",
+   388→      },
+   389→      {
+   390→        k: "ex",
+   391→        title: "SN2 — primary halogenoalkane + aqueous OH⁻",
+   392→        steps: [
+   393→          "OH^−^ attacks the δ^+^ carbon from the side *opposite* the halogen (backside attack) — arrow from the OH lone pair to the carbon.",
+   394→          "A transition state forms with the carbon half-bonded to both O and Br; draw it in square brackets with a δ^−^ on each end.",
+   395→          "The C–Br pair leaves with the bromine: arrow from the C–Br bond to Br.",
+   396→        ],
+   397→        answer: "CH~3~CH~2~Br + OH^−^ → CH~3~CH~2~OH + Br^−^ — substitution, one step, inversion of configuration. Tertiary halogenoalkanes go SN1 instead: Br^−^ leaves first to form a carbocation, then the nucleophile attacks the planar intermediate.",
+   398→      },
+   399→      {
+   400→        k: "eq",
+   401→        title: "Substitution vs elimination — the solvent decides",
+   402→        eq: "C~4~H~9~Br + OH^−^ → C~4~H~9~OH + Br^−^  (aq, warm)        C~4~H~9~Br + OH^−^ → C~4~H~8~ + H~2~O + Br^−^  (ethanolic, hot)",
+   403→        note: "Aqueous hydroxide substitutes; ethanolic hydroxide eliminates an H and the halogen to form an alkene.",
+   404→        ok: ["atoms balance", "charge balance"],
+   405→      },
+   406→      {
+   407→        k: "p",
+   408→        text: "Hydrolysis rate depends on ==bond strength, not polarity==: C–I is the most polarised but also the weakest bond, so iodoalkanes hydrolyse fastest (C–I < C–Br < C–Cl in bond enthalpy → rates run the opposite way). Set this up with aqueous ethanol and silver nitrate and watch the precipitate timings — a Core Practical in spirit and a classic data question.",
+   409→      },
+   410→      {
+   411→        k: "p",
+   412→        text: "The ozone layer made halogenoalkanes famous. CFCs are so unreactive that they survive the journey to the stratosphere, where UV finally breaks the C–Cl bond homolytically. The chlorine radical then destroys ozone ==catalytically== — Cl• + O~3~ → ClO• + O~2~, then ClO• + O → Cl• + O~2~ — one chlorine atom cycling through thousands of ozone molecules. That chain is why CFCs were replaced.",
+   413→      },
+   414→      {
+   415→        k: "table",
+   416→        caption: "Alcohols — oxidation rules with acidified K₂Cr₂O₇ (orange → green)",
+   417→        head: ["Class", "Distil (limit contact)", "Reflux (prolonged)"],
+   418→        rows: [
+   419→          ["Primary R–CH~2~OH", "aldehyde R–CHO", "carboxylic acid R–COOH"],
+   420→          ["Secondary R~2~CH–OH", "ketone R~2~C=O", "ketone — no further"],
+   421→          ["Tertiary R~3~C–OH", "no reaction", "no reaction — no H on the carbinol carbon"],
+   422→        ],
+   423→      },
+   424→      {
+   425→        k: "p",
+   426→        text: "Alcohols also ==dehydrate== to alkenes (pass the vapour over heated Al~2~O~3~ or use concentrated H~2~SO~4~), ==combust== cleanly, and form ==esters== with carboxylic acids over a strong acid catalyst — CH~3~COOH + C~2~H~5~OH ⇌ CH~3~COOC~2~H~5~ + H~2~O, the equilibrium arrow doing real work here (Topic 13 explains it).",
+   427→      },
+   428→      {
+   429→        k: "p",
+   430→        text: "Two machines end the topic. The ==mass spectrometer== (Topic 2's friend) now reads *molecules*: the rightmost major peak is the ==molecular ion M^+^==, whose m/z gives the relative molecular mass, and the fragment peaks below it are a fingerprint of structure — chlorine's M and M+2 peaks in a 3 : 1 ratio is the giveaway that keeps reappearing. ==Infrared== spectroscopy identifies bonds by vibration: each bond absorbs a characteristic frequency, plotted as dips in % transmission.",
+   431→      },
+   432→      {
+   433→        k: "table",
+   434→        caption: "IR absorptions worth memorising (wavenumber / cm⁻¹)",
+   435→        head: ["Bond", "Range", "Signature"],
+   436→        rows: [
+   437→          ["O–H (alcohol)", "3200–3600", "broad, rounded dip"],
+   438→          ["O–H (acid)", "2500–3300", "very broad, spills wide"],
+   439→          ["N–H", "3300–3500", "sharp-ish, one dip per H"],
+   440→          ["C=O", "1680–1750", "strong, sharp — the easiest dip to spot"],
+   441→          ["C–H", "2850–3300", "always present, rarely diagnostic"],
+   442→        ],
+   443→      },
+   444→      {
+   445→        k: "tips",
+   446→        items: [
+   447→          "Curly arrows in SN2 start on a *lone pair or negative charge* — never on the bare atom symbol.",
+   448→          "“Aqueous” and “ethanolic” are one-word command signals for substitution vs elimination: circle them in the question.",
+   449→          "M and M+2 of equal height = one bromine; 3 : 1 = one chlorine — isotopes doing analytical work.",
+   450→          "The region below 1500 cm^−1^ is the fingerprint region: never assigned, only matched.",
+   451→        ],
+   452→      },
+   453→      {
+   454→        k: "check",
+   455→        qs: [
+   456→          {
+   457→            q: "Why does 1-iodobutane hydrolyse faster than 1-chlorobutane?",
+   458→            a: "The C–I bond has a lower bond enthalpy than C–Cl, so it breaks more readily in the rate-determining step. Polarity runs the other way — it is bond strength that governs the rate.",
+   459→          },
+   460→          {
+   461→            q: "Propan-2-ol is refluxed with acidified potassium dichromate. Product?",
+   462→            a: "Propanone. A secondary alcohol oxidises once to a ketone and stops — no amount of reflux pushes it further.",
+   463→          },
+   464→        ],
+   465→      },
+   466→      {
+   467→        k: "recap",
+   468→        items: [
+   469→          "Nucleophile = lone-pair donor attacking δ^+^ carbon.",
+   470→          "SN2 (primary, one step, backside) vs SN1 (tertiary, carbocation).",
+   471→          "aq OH^−^ substitutes; ethanolic OH^−^ eliminates. Rate order: C–I fastest.",
+   472→          "CFC radicals catalytically destroy O~3~ — two propagation equations.",
+   473→          "Oxidation table: 1° distil→aldehyde / reflux→acid; 2°→ketone; 3° resists.",
+   474→          "M^+^ gives M~r~; IR dips give bonds — C=O at ~1700 is the giveaway.",
+   475→        ],
+   476→      },
+   477→    ],
+   478→  },
+   479→];
+   480→

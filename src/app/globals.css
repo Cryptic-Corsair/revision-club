@@ -237,3 +237,90 @@ mark {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ————— composition ————— */
+
+/* scroll-reveal: content must never stay hidden */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* unit cards — tinted by the unit's own flame (—u set inline) */
+.unit-card {
+  border: 1px solid var(--line);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+.unit-card:hover {
+  border-color: color-mix(in oklab, var(--u) 55%, var(--line));
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--u) 22%, transparent),
+    0 14px 44px -18px color-mix(in oklab, var(--u) 42%, transparent);
+  transform: translateY(-2px);
+}
+
+.topic-row:hover {
+  background: var(--panel-2);
+}
+
+.turn-card {
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+.turn-card:hover {
+  border-color: color-mix(in oklab, var(--flame) 55%, var(--line));
+  transform: translateY(-1px);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ————— print: every topic is a handout ————— */
+
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  body {
+    background: #fff;
+    color: #111;
+  }
+  main {
+    padding-top: 0 !important;
+  }
+  @page {
+    margin: 15mm;
+  }
+}
