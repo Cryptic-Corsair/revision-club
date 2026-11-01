@@ -6,19 +6,8 @@ import type { UnitCode } from "./types";
    into one section per specification point, with the official
    spec statement stated above each section.
    Inline markup: **bold** · *em* · ==highlight== · ~sub~ · ^sup^
-   — rendered by <Fmt/>. In `cloze` blocks the ==parts== become
-   tap-to-reveal chips (active recall).
+   — rendered by <Fmt/>.
    ═══════════════════════════════════════════════════════════════ */
-
-export type ExerciseBody =
-  | {
-      kind: "particles";
-      head: string[];
-      rows: { row: string; given: (string | null)[]; answers: string[] }[];
-    }
-  | { kind: "questions"; qs: { q: string; data?: string[]; answer: string }[] }
-  | { kind: "ions"; items: { ion: string; answer: string }[] }
-  | { kind: "configs" };
 
 export type FigureKind =
   | "atom"
@@ -49,10 +38,6 @@ export type NotesBlock =
   | { k: "table"; head: string[]; rows: string[][]; caption?: string }
   | { k: "worked"; title: string; question: string; steps: string[]; answer: string }
   | { k: "steps"; caption?: string; items: { title: string; text: string; icon?: string }[] }
-  | { k: "flip"; title?: string; hint?: string; cards: { front: string; back: string }[] }
-  | { k: "cloze"; title?: string; hint?: string; items: string[] }
-  | { k: "quiz"; title?: string; qs: { q: string; a: string }[] }
-  | { k: "exercise"; label: string; title: string; note?: string; body: ExerciseBody }
   | { k: "checkpoint"; page: number }
   | { k: "figure"; kind: FigureKind; caption?: string }
   | { k: "wow"; text: string };
@@ -62,7 +47,7 @@ export interface SpecSection {
   spec: string;
   /** the official statement, verbatim — stated above the section */
   statement: string;
-  /** short candy title for the section */
+  /** short direct title for the section */
   title: string;
   blocks: NotesBlock[];
 }

@@ -23,7 +23,7 @@ const plex = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "Reaction Club — IAL Chemistry, but make it fun",
   description:
-    "Edexcel IAL Chemistry notes (WCH11–WCH16) rebuilt as a playground: candy-coloured units, sticker progress, quizzes that high-five back, and zero boring tables. Written to the 2018 specification.",
+    "Edexcel IAL Chemistry notes (WCH11–WCH16), rebuilt spec by spec: candy-coloured units, sticker progress, worked examples and checkpoint questions. Written to the 2018 specification.",
   icons: { icon: "/favicon.svg" },
 };
 

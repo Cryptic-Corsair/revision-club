@@ -115,9 +115,9 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
             <PopIn delay={0.16}>
               <p className="mt-6 max-w-[54ch] text-[16.5px] leading-[1.8] text-ink-soft">
                 Welcome to <strong className="font-extrabold text-ink">Reaction Club</strong> —
-                Edexcel IAL Chemistry (WCH11–WCH16) rebuilt as a playground. Candy-coloured
-                units, quizzes that high-five back, worked examples you climb like stairs, and
-                progress you can literally sip. Zero boring tables. Zero yawns.
+                Edexcel IAL Chemistry (WCH11–WCH16), rebuilt spec by spec. Candy-coloured units,
+                worked examples you climb one step at a time, checkpoint questions with instant
+                answers, and progress you can literally sip.
               </p>
             </PopIn>
 
@@ -135,7 +135,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                 { icon: Atom, label: `${units.length} units` },
                 { icon: ListChecks, label: `${TOTALS.topics} topics` },
                 { icon: Clock, label: `≈${hours} h of reading` },
-                { icon: PencilRuler, label: `${TOTALS.examples} worked stairs` },
+                { icon: PencilRuler, label: `${TOTALS.examples} worked examples` },
                 { icon: Gamepad2, label: `${TOTALS.checks} checkpoint Qs` },
               ].map((s) => (
                 <span
@@ -172,7 +172,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                 className="inline-block rotate-[6deg] rounded-full px-4 py-2 font-display text-[13px] font-bold text-white puff"
                 style={{ background: "#9775FA" }}
               >
-                0% boring
+                beaker approved
               </span>
             </Float>
 
@@ -315,7 +315,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
               color: "#FF922B",
               icon: Gamepad2,
               title: "Play the checkpoints",
-              body: "Every topic ends with quick-fire checks. Reveal answers with a tap, feel the wiggle when you were right, and lock the idea in before moving on.",
+              body: "Every topic ends with checkpoint questions. Reveal the answer with a tap, and move on once it clicks.",
             },
             {
               n: "3",

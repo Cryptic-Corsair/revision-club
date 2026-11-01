@@ -4,19 +4,19 @@ import type { SpecSection } from "../notes-types";
    Topic 2 revision note · sections 2.1 – 2.9
    Text kept verbatim from the CHSE Grade 11 / Unit 1 / Topic 2
    revision note (2021, semester 1); page furniture omitted.
+   Exercises from the note are presented as fully worked examples.
    ═══════════════════════════════════════════════════════════════ */
 
 export const SECTIONS_A: SpecSection[] = [
   {
     spec: "2.1",
     statement: "know the structure of an atom in terms of electrons, protons and neutrons",
-    title: "Inside the atom",
+    title: "Structure of the atom",
     blocks: [
       {
         k: "p",
         text: "Our current understanding of the structure of atoms is influenced by the theories put forward by scientists such as **J.J Thomson** (discovered electrons in 1897), **Ernest Rutherford** (discovered proton in 1917) and **James Chadwick** (discovered the neutron in 1932).",
       },
-      { k: "h", text: "Structure of an atom" },
       {
         k: "bullets",
         items: [
@@ -28,22 +28,12 @@ export const SECTIONS_A: SpecSection[] = [
         ],
       },
       { k: "figure", kind: "atom", caption: "The nucleus (protons + neutrons) sits at the center; electrons occupy the quantum shells around it." },
-      {
-        k: "flip",
-        title: "Say it, then flip",
-        hint: "Answer out loud first — the flip is only for checking.",
-        cards: [
-          { front: "Who discovered the electron — and when?", back: "**J.J Thomson**, in **1897**." },
-          { front: "Protons and neutrons are together known as…", back: "**Nucleons** — found in the nucleus, the center of the atom." },
-          { front: "Where does an atom get its chemical properties from?", back: "From the **number of electrons** and **arrangement of electrons** in the atom." },
-        ],
-      },
     ],
   },
   {
     spec: "2.2",
     statement: "know the relative mass and charge of protons, neutrons and electrons",
-    title: "The particle line-up",
+    title: "Relative masses and charges",
     blocks: [
       {
         k: "table",
@@ -59,38 +49,14 @@ export const SECTIONS_A: SpecSection[] = [
         k: "p",
         text: "The mass of electrons are ==negligible==, hence the mass of the atoms are determined by the mass of **nucleons**.",
       },
-      {
-        k: "cloze",
-        title: "Recall jolt",
-        hint: "Tap the dashed chips only after you have said the missing bit out loud.",
-        items: [
-          "A proton carries a charge of ==+1.60 × 10^−19^ C== and a relative charge of ==+1==.",
-          "The neutron is the only one of the three with ==no charge at all==.",
-          "The electron's relative mass is ==1/1840== — effectively ==negligible== next to a nucleon.",
-        ],
-      },
-      {
-        k: "quiz",
-        title: "Quick-fire",
-        qs: [
-          {
-            q: "Which two particles make up almost all of an atom's mass?",
-            a: "The **nucleons** — protons and neutrons, 1.67 × 10^−24^ g each. The electron's 9.11 × 10^−28^ g barely registers.",
-          },
-          {
-            q: "Protons and electrons carry equal but opposite relative charges (+1 and −1). So why is an atom neutral?",
-            a: "Because a neutral atom contains ==equal numbers== of protons and electrons — the charges cancel exactly.",
-          },
-        ],
-      },
     ],
   },
   {
     spec: "2.3",
     statement: "know what is meant by the terms ‘atomic (proton) number’ and ‘mass number’",
-    title: "The atom's ID numbers",
+    title: "Atomic number and mass number",
     blocks: [
-      { k: "p", text: "Every atom carries two ID numbers, written beside its symbol:" },
+      { k: "p", text: "Every atom is described by two numbers, written beside its symbol:" },
       { k: "figure", kind: "notation", caption: "Mass number on top, atomic number underneath — here for carbon-12." },
       {
         k: "def",
@@ -102,22 +68,14 @@ export const SECTIONS_A: SpecSection[] = [
         term: "Mass number, A",
         text: "The total number of ==protons and neutrons== (the nucleons) in the nucleus.",
       },
-      { k: "eq", eq: "number of neutrons = A − Z        protons = Z        electrons = Z − charge", note: "The two ID numbers unlock every particle count — that is exactly what Exercise 1 makes you practise." },
-      {
-        k: "cloze",
-        title: "Recall jolt",
-        items: [
-          "The ==atomic (proton) number== counts the ==protons==; the ==mass number== counts the ==protons and neutrons==.",
-          "Subtract the two ID numbers and you are left with the ==neutrons==.",
-        ],
-      },
+      { k: "eq", eq: "number of neutrons = A − Z        protons = Z        electrons = Z − charge", note: "These two numbers give every particle count — the method is applied in 2.4." },
     ],
   },
   {
     spec: "2.4",
     statement:
       "be able to use the atomic number and the mass number to determine the number of each type of subatomic particle in an atom or ion",
-    title: "Particle arithmetic",
+    title: "Counting subatomic particles",
     blocks: [
       {
         k: "bullets",
@@ -129,24 +87,34 @@ export const SECTIONS_A: SpecSection[] = [
         ],
       },
       {
-        k: "exercise",
-        label: "Exercise 1",
-        title: "Complete the following table",
-        note: "Tap a dashed chip only when you have worked the cell out. Every answer is two lines of arithmetic: n = A − Z and e = protons − charge.",
-        body: {
-          kind: "particles",
-          head: ["", "Protons", "Neutrons", "Electrons", "Charge", "Atomic No.", "Mass No.", "Symbol"],
-          rows: [
-            { row: "A", given: ["19", "21", "19", null, null, null, null], answers: ["Neutral", "19", "40", "^40^^19^K"] },
-            { row: "B", given: ["20", null, null, "Neutral", null, "40", null], answers: ["20", "20", "20", "^40^^20^Ca"] },
-            { row: "C", given: [null, null, null, "+", "11", "23", null], answers: ["11", "12", "10", "^23^^11^Na^+^"] },
-            { row: "D", given: ["6", "6", null, "Neutral", null, null, null], answers: ["6", "6", "12", "^12^^6^C"] },
-            { row: "E", given: ["92", null, null, "Neutral", null, "235", null], answers: ["143", "92", "92", "^235^^92^U"] },
-            { row: "F", given: ["6", null, "6", null, null, "13", null], answers: ["7", "Neutral", "6", "^13^^6^C"] },
-            { row: "G", given: [null, "16", null, "2−", "16", null, null], answers: ["16", "18", "32", "^32^^16^S^2−^"] },
-            { row: "H", given: [null, null, null, null, null, null, "^27^^13^Al^3+^"], answers: ["13", "14", "10", "3+"] },
-          ],
-        },
+        k: "worked",
+        title: "Worked example · the aluminium ion",
+        question: "Determine the number of protons, neutrons and electrons in ^27^~13~Al^3+^.",
+        steps: [
+          "Protons = atomic number = **13**.",
+          "Neutrons = mass number − atomic number = 27 − 13 = **14**.",
+          "Electrons = protons − charge = 13 − 3 = **10** — a 3+ ion has lost three electrons.",
+        ],
+        answer: "^27^~13~Al^3+^: **13 protons, 14 neutrons, 10 electrons**.",
+      },
+      {
+        k: "p",
+        text: "The same three lines of arithmetic complete every row of the note's table:",
+      },
+      {
+        k: "table",
+        caption: "The completed table",
+        head: ["", "Protons", "Neutrons", "Electrons", "Charge", "Atomic No.", "Mass No.", "Symbol"],
+        rows: [
+          ["A", "19", "21", "19", "Neutral", "19", "40", "^40^~19~K"],
+          ["B", "20", "20", "20", "Neutral", "20", "40", "^40^~20~Ca"],
+          ["C", "11", "12", "10", "+", "11", "23", "^23^~11~Na^+^"],
+          ["D", "6", "6", "6", "Neutral", "6", "12", "^12^~6~C"],
+          ["E", "92", "143", "92", "Neutral", "92", "235", "^235^~92~U"],
+          ["F", "6", "7", "6", "Neutral", "6", "13", "^13^~6~C"],
+          ["G", "16", "16", "18", "2−", "16", "32", "^32^~16~S^2−^"],
+          ["H", "13", "14", "10", "3+", "13", "27", "^27^~13~Al^3+^"],
+        ],
       },
       { k: "checkpoint", page: 43 },
     ],
@@ -154,7 +122,7 @@ export const SECTIONS_A: SpecSection[] = [
   {
     spec: "2.5",
     statement: "understand the term ‘isotope’",
-    title: "Same element, different weight",
+    title: "Isotopes",
     blocks: [
       {
         k: "def",
@@ -182,35 +150,13 @@ export const SECTIONS_A: SpecSection[] = [
           "Relative atomic masses measured by chemical methods rarely produce whole numbers. This is because isotopes of the same element exist in different proportions in nature.",
         ],
       },
-      {
-        k: "cloze",
-        title: "Recall jolt",
-        items: [
-          "Isotopes always have the ==same chemical properties== because the ==number of electrons is the same==.",
-          "Isotopes with fewer neutrons have ==lower masses, lower densities, faster rate of diffusion, lower melting and boiling points==.",
-        ],
-      },
-      {
-        k: "quiz",
-        title: "Quick-fire",
-        qs: [
-          {
-            q: "^14^C has 8 neutrons. How many protons and electrons does a neutral atom have?",
-            a: "**6 protons** — every carbon isotope has Z = 6 — and **6 electrons**. Only the neutron count (8) separates it from carbon-12.",
-          },
-          {
-            q: "Why do chemically-measured relative atomic masses rarely come out as whole numbers?",
-            a: "Because isotopes of the same element exist in ==different proportions in nature== — you are weighing a mixture, not one isotope.",
-          },
-        ],
-      },
     ],
   },
   {
     spec: "2.6",
     statement:
       "understand the basic principles of a mass spectrometer and be able to analyse and interpret mass spectra to: i deduce the isotopic composition of a sample of an element ii calculate the relative atomic mass of an element from relative abundances of isotopes and vice versa iii determine the relative molecular mass of a molecule, and hence identify molecules in a sample iv understand that ions in a mass spectrometer may have a 2+ charge",
-    title: "Weighing the invisible",
+    title: "The mass spectrometer",
     blocks: [
       { k: "h", text: "Relative masses of elements or compounds" },
       {
@@ -241,7 +187,7 @@ export const SECTIONS_A: SpecSection[] = [
         term: "Relative isotopic mass",
         text: "The mass of ==an atom of that isotope== divided by 1/12^th^ the mass of a carbon-12 atom.",
       },
-      { k: "h", text: "Using data obtained from a mass spectrometer — what is a mass spectrometer?" },
+      { k: "h", text: "What is a mass spectrometer?" },
       {
         k: "bullets",
         items: [
@@ -264,7 +210,7 @@ export const SECTIONS_A: SpecSection[] = [
       { k: "p", text: "There are five main processes occurring in a mass spectrometer. They are:" },
       {
         k: "steps",
-        caption: "The ride every sample takes — tap each stage to walk the machine.",
+        caption: "The five stages, in order",
         items: [
           { title: "1 · Vapourisation", icon: "flame", text: "The sample is turned into gas or vapourised using an electrical heater.  X(s) → X(g)   ·   X(l) → X(g)" },
           { title: "2 · Ionization", icon: "zap", text: "Gas particles are bombarded with a stream of high energy electrons from an **electron gun**, to ionize them. Electrons are knocked off the particles, producing uni-positively charged ions.  X(g) → X^+^(g) + e^−^" },
@@ -275,7 +221,7 @@ export const SECTIONS_A: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "Spec point iv says ions may carry a **2+** charge. Knock *two* electrons off and the m/z ratio halves — X²⁺ behaves like a particle of half the mass, so watch for peaks sitting at ==half the expected mass==.",
+        text: "Ions in a mass spectrometer may carry a **2+** charge. Knock *two* electrons off and the m/z ratio halves — X²⁺ behaves like a particle of half the mass, so watch for peaks sitting at ==half the expected mass==.",
       },
       { k: "figure", kind: "spectrum-neon", caption: "Mass spectrum of neon — an early application was the demonstration by Aston, (Nobel Prize, 1922), that naturally occurring neon consisted of three isotopes; ²⁰Ne, ²¹Ne and ²²Ne." },
       {
@@ -313,46 +259,62 @@ export const SECTIONS_A: SpecSection[] = [
         answer: "Relative atomic mass of chlorine = **35.5**",
       },
       {
-        k: "exercise",
-        label: "Exercise 2",
-        title: "Your turn — reveal only after committing to an answer",
-        note: "Same recipe every time: multiply each isotopic mass by its abundance, add them up, divide by 100.",
-        body: {
-          kind: "questions",
-          qs: [
-            {
-              q: "Question 1: Calculate the relative atomic mass of sulfur from the following isotopic percentages.",
-              data: ["³²S 95%", "³³S 1%", "³⁴S 4%"],
-              answer: "RAM = (32 × 95 + 33 × 1 + 34 × 4) ÷ 100 = (3040 + 33 + 136) ÷ 100 = 3209 ÷ 100 = **32.09**",
-            },
-            {
-              q: "Question 2: The neon element has three isotopes. They are 90.92% of ²⁰Ne, 0.26% of ²¹Ne and 8.82% of ²²Ne. Calculate relative atomic mass.",
-              answer: "RAM = (20 × 90.92 + 21 × 0.26 + 22 × 8.82) ÷ 100 = 2017.9 ÷ 100 = **20.18** — the same data as Worked Example 1.",
-            },
-            {
-              q: "Question 3: Calculate the relative atomic mass of boron using the mass spectrum.",
-              data: ["m/z 10 → abundance 18.7", "m/z 11 → abundance 81.3"],
-              answer: "RAM = (10 × 18.7 + 11 × 81.3) ÷ 100 = (187 + 894.3) ÷ 100 = 1081.3 ÷ 100 = **10.81**",
-            },
-            {
-              q: "Question 4: Calculate the relative atomic mass of Zirconium using the mass spectrum.",
-              data: ["zirconium-90: 51.5", "zirconium-91: 11.2", "zirconium-92: 17.1", "zirconium-94: 17.4", "zirconium-96: 2.8"],
-              answer:
-                "RAM = (90 × 51.5 + 91 × 11.2 + 92 × 17.1 + 94 × 17.4 + 96 × 2.8) ÷ 100 = (4635 + 1019.2 + 1573.2 + 1635.6 + 268.8) ÷ 100 = 9131.8 ÷ 100 = **91.32**",
-            },
-            {
-              q: "Question 5: Naturally occurring potassium consists of potassium-39 and potassium-41. Calculate the percentage of each isotope present if the average is 39.1.",
-              answer:
-                "Let x be the fraction of ³⁹K: 39x + 41(1 − x) = 39.1 → 41 − 2x = 39.1 → 2x = 1.9 → x = 0.95 → **95% potassium-39 and 5% potassium-41**.",
-            },
-            {
-              q: "Question 6: The mass spectrum of bromine vapour is shown below (peaks at 79 and 81 of equal height; molecular peaks at 158, 160, 162 with heights ≈ 1 : 2 : 1). (a) What are the relative isotopic masses of the two isotopes present in bromine? (b) Identify the particles responsible for the peaks at m/z 158, 160 and 162. (c) Deduce the relative abundance of the two isotopes and explain the relative heights of the three peaks.",
-              data: ["atomic-ion peaks: m/z 79 and m/z 81, equal heights", "molecular-ion peaks: m/z 158, 160, 162 ≈ 1 : 2 : 1"],
-              answer:
-                "(a) **79 and 81**. (b) The **molecular ions**: m/z 158 = ⁷⁹Br₂⁺, m/z 160 = ⁷⁹Br⁸¹Br⁺, m/z 162 = ⁸¹Br₂⁺. (c) The two atomic-ion peaks are equal, so the isotopes are present **1 : 1**. Heights come from pair chances: ⁷⁹Br + ⁷⁹Br = ½ × ½ = ¼, mixed = 2 × (½ × ½) = ½, ⁸¹Br + ⁸¹Br = ¼ → **1 : 2 : 1**.",
-            },
-          ],
-        },
+        k: "worked",
+        title: "Worked example 3",
+        question: "Calculate the relative atomic mass of sulfur from the following isotopic percentages: ³²S 95%, ³³S 1%, ³⁴S 4%.",
+        steps: [
+          "RAM = (32 × 95 + 33 × 1 + 34 × 4) ÷ 100",
+          "= (3040 + 33 + 136) ÷ 100",
+          "= 3209 ÷ 100",
+        ],
+        answer: "Relative atomic mass of sulfur = **32.09**",
+      },
+      {
+        k: "worked",
+        title: "Worked example 4",
+        question: "Calculate the relative atomic mass of boron using the mass spectrum: m/z 10 → abundance 18.7; m/z 11 → abundance 81.3.",
+        steps: [
+          "RAM = (10 × 18.7 + 11 × 81.3) ÷ 100",
+          "= (187 + 894.3) ÷ 100",
+          "= 1081.3 ÷ 100",
+        ],
+        answer: "Relative atomic mass of boron = **10.81**",
+      },
+      {
+        k: "worked",
+        title: "Worked example 5",
+        question:
+          "Calculate the relative atomic mass of zirconium using the mass spectrum: zirconium-90: 51.5, zirconium-91: 11.2, zirconium-92: 17.1, zirconium-94: 17.4, zirconium-96: 2.8.",
+        steps: [
+          "RAM = (90 × 51.5 + 91 × 11.2 + 92 × 17.1 + 94 × 17.4 + 96 × 2.8) ÷ 100",
+          "= (4635 + 1019.2 + 1573.2 + 1635.6 + 268.8) ÷ 100",
+          "= 9131.8 ÷ 100",
+        ],
+        answer: "Relative atomic mass of zirconium = **91.32**",
+      },
+      {
+        k: "worked",
+        title: "Worked example 6",
+        question: "Naturally occurring potassium consists of potassium-39 and potassium-41. Calculate the percentage of each isotope present if the average is 39.1.",
+        steps: [
+          "Let x be the fraction of ³⁹K: 39x + 41(1 − x) = 39.1",
+          "41 − 2x = 39.1",
+          "2x = 1.9, so x = 0.95",
+        ],
+        answer: "**95% potassium-39 and 5% potassium-41**.",
+      },
+      {
+        k: "worked",
+        title: "Worked example 7 · the bromine spectrum",
+        question:
+          "The mass spectrum of bromine vapour shows peaks at m/z 79 and 81 of equal height, and molecular peaks at m/z 158, 160 and 162 with heights ≈ 1 : 2 : 1. (a) What are the relative isotopic masses of the two isotopes present in bromine? (b) Identify the particles responsible for the peaks at m/z 158, 160 and 162. (c) Deduce the relative abundance of the two isotopes and explain the relative heights of the three peaks.",
+        steps: [
+          "(a) The atomic-ion peaks sit at m/z **79 and 81**, so the relative isotopic masses are 79 and 81.",
+          "(b) The molecular-ion peaks are the **molecular ions**: m/z 158 = ⁷⁹Br₂⁺, m/z 160 = ⁷⁹Br⁸¹Br⁺, m/z 162 = ⁸¹Br₂⁺.",
+          "(c) The two atomic-ion peaks are equal in height, so the isotopes are present **1 : 1**. The peak heights follow the pairing chances: ⁷⁹Br + ⁷⁹Br = ½ × ½ = ¼; the mixed pair in either order = 2 × (½ × ½) = ½; ⁸¹Br + ⁸¹Br = ¼ — giving **1 : 2 : 1**.",
+        ],
+        answer:
+          "(a) **79 and 81** · (b) the molecular ions ⁷⁹Br₂⁺, ⁷⁹Br⁸¹Br⁺ and ⁸¹Br₂⁺ · (c) abundances **1 : 1**, peak heights **1 : 2 : 1**.",
       },
       { k: "checkpoint", page: 47 },
     ],
@@ -361,7 +323,7 @@ export const SECTIONS_A: SpecSection[] = [
     spec: "2.7",
     statement:
       "be able to predict mass spectra, including relative peak heights, for diatomic molecules, including chlorine, given the isotopic abundances",
-    title: "Predicting diatomic peaks",
+    title: "Mass spectra of diatomic molecules",
     blocks: [
       {
         k: "p",
@@ -387,7 +349,7 @@ export const SECTIONS_A: SpecSection[] = [
       { k: "h", text: "Explanation of peak height ratio" },
       {
         k: "steps",
-        caption: "The probability cascade — tap through it.",
+        caption: "Where the 9 : 6 : 1 ratio comes from",
         items: [
           { title: "The starting chances", icon: "spark", text: "There are two isotopes of chlorine, ³⁵Cl which is 75% abundant and ³⁷Cl which is 25% abundant. The chance of picking each isotope: 75/100 = **3/4** and 25/100 = **1/4**." },
           { title: "Two ³⁵Cl together", icon: "spark", text: "There is 3 in 4 chance of selecting a ³⁵Cl from a sample of chlorine atom. This means total chance of two ³⁵Cl atoms combining together is 3/4 × 3/4 = **9/16**." },
@@ -399,7 +361,7 @@ export const SECTIONS_A: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "The peak-ratio is a fingerprint: chlorine (75 : 25) always marches **9 : 6 : 1**; a 50 : 50 element like bromine gives **1 : 2 : 1**; a single-isotope element shows just one molecular peak.",
+        text: "The peak ratio is a pattern worth memorising: chlorine (75 : 25) always gives **9 : 6 : 1**; a 50 : 50 element like bromine gives **1 : 2 : 1**; a single-isotope element shows just one molecular peak.",
       },
       { k: "h", text: "Determining relative molecular mass of a polyatomic molecule" },
       { k: "figure", kind: "spectrum-ethanol", caption: "Mass spectrum of ethanol (C₂H₅OH)." },
@@ -413,20 +375,14 @@ export const SECTIONS_A: SpecSection[] = [
     spec: "2.8",
     statement:
       "be able to define first, second and third ionisation energies and understand that all ionisation energies are endothermic",
-    title: "The energy toll of losing electrons",
+    title: "Ionisation energies",
     blocks: [
-      { k: "h", text: "Ionization energy" },
       {
         k: "bullets",
         items: [
           "It is a measure of the energy required to **remove electrons** from an atom.",
           "There are as many ionization energies as there are electrons in the atom.",
           "The value of ionization energy depends on:",
-        ],
-      },
-      {
-        k: "bullets",
-        items: [
           "the **distance of the electron from the nucleus**, and",
           "the **effective nuclear charge** (not the nuclear charge) of the atom.",
         ],
@@ -472,16 +428,6 @@ export const SECTIONS_A: SpecSection[] = [
         k: "wow",
         text: "All ionisation energies are **endothermic** — energy must go *in* to pull an electron away from the nucleus's attraction. That is why every definition says “energy required”, never “energy released”.",
       },
-      {
-        k: "flip",
-        title: "Definitions you must produce on demand",
-        hint: "Exam gold: the four pillars are *energy · one mole · gaseous · ions*.",
-        cards: [
-          { front: "Define the **first** ionisation energy.", back: "The energy required to remove **one mole of electrons** from **one mole of gaseous atoms** to form **one mole of gaseous uni-positive ions**." },
-          { front: "Define the **second** ionisation energy.", back: "The energy required to remove 1 mole of electrons from 1 mole of the **gaseous uni-positive ions** to form one mole of **gaseous di-positive ions**." },
-          { front: "Define the **third** ionisation energy.", back: "The energy required to remove 1 mole of electrons from 1 mole of the **gaseous di-positive ions** to form one mole of **gaseous tri-positive ions**." },
-        ],
-      },
     ],
   },
   {
@@ -526,22 +472,6 @@ export const SECTIONS_A: SpecSection[] = [
           "Each sub-shell is made up of **orbitals**.",
           "**Orbital** is the region where the electrons are most likely to be found — 3-dimensional statistical maps showing the likeliest places to find electrons; they come in different shapes and sizes.",
           "The orbitals in different sub-levels have different shapes.",
-        ],
-      },
-      {
-        k: "cloze",
-        title: "Recall jolt",
-        items: [
-          "An orbital can hold ==up to two electrons==, and they must have ==opposite spins== — one spins ==clockwise==, the other ==anti-clockwise==.",
-          "The energy of sub-shells climbs in the order ==s → p → d → f==.",
-        ],
-      },
-      {
-        k: "flip",
-        title: "The spec wording",
-        cards: [
-          { front: "Describe an orbital.", back: "A region within an atom that can hold **up to two electrons** with **opposite spins**." },
-          { front: "What does the principle quantum number (n) tell you?", back: "Which shell the electron occupies — **the larger n is, the further the electron is from the nucleus**." },
         ],
       },
     ],

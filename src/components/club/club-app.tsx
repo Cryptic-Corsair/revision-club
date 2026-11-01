@@ -308,8 +308,7 @@ function Footer({
         <div className="mx-auto mt-10 max-w-6xl px-5 sm:px-8">
           <p className="text-[11.5px] leading-relaxed font-semibold text-cream/40">
             Written to the Pearson Edexcel International A Level Chemistry (2018) specification
-            · WCH11–WCH16 · not affiliated with or endorsed by Pearson Education Ltd. Brewed
-            with curiosity — no boring tables were used in the making of this site.
+            · WCH11–WCH16 · not affiliated with or endorsed by Pearson Education Ltd.
           </p>
         </div>
       </div>
@@ -431,7 +430,7 @@ export default function ClubApp() {
             )}
 
             {view.kind === "notes" && unit && notesDoc && (
-              <NotesReader doc={notesDoc} unit={unit} onBack={() => openTopic(unit.code, notesDoc.topicId)} />
+              <NotesReader key={notesDoc.id} doc={notesDoc} unit={unit} onBack={() => openTopic(unit.code, notesDoc.topicId)} />
             )}
 
             {view.kind === "sticker" && (

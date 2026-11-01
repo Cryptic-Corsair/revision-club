@@ -114,8 +114,7 @@ export function TopicView({
               </span>
               <span className="mt-1 block text-[13.5px] leading-[1.6] font-bold text-white/80">
                 The complete class note, word for word, cut into one section per specification point
-                (2.1 → 2.18) with the official wording above each — plus interactive exercises and
-                recall decks.
+                (2.1 → 2.18) with the official wording above each, and every calculation worked in full.
               </span>
             </span>
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/20 transition-transform group-hover:translate-x-1">
