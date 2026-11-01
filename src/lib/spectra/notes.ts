@@ -1,0 +1,34 @@
+import type { NotesDoc } from "./notes-types";
+import { SECTIONS_A } from "./content/notes-t02-a";
+import { SECTIONS_B, OUTRO } from "./content/notes-t02-b";
+
+/* ═══════════════════════════════════════════════════════════════
+   Reaction Club · the revision-note library
+   ═══════════════════════════════════════════════════════════════ */
+
+export const NOTES_DOCS: NotesDoc[] = [
+  {
+    id: "wch11-t02",
+    unitCode: "WCH11",
+    topicId: "t02",
+    kicker: "The real revision note, rebuilt spec by spec",
+    title: "Atomic structure & the periodic table",
+    source: "CHSE revision notes · Grade 11 · Unit 1 · Topic 2 · Semester 1, 2021",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual revision note for Topic 2, kept **word for word** — but re-cut so that ==every specification point owns its section==, with the official statement sitting right above it. Underlined phrases hide behind tap-to-reveal chips, definitions flip, every exercise is interactive. ==Don't scroll passively== — say it, tap it, remember it.",
+      },
+    ],
+    sections: [...SECTIONS_A, ...SECTIONS_B],
+    outro: OUTRO,
+  },
+];
+
+export function getNotes(docId: string): NotesDoc | undefined {
+  return NOTES_DOCS.find((d) => d.id === docId);
+}
+
+export function getNotesForTopic(unitCode: string, topicId: string): NotesDoc | undefined {
+  return NOTES_DOCS.find((d) => d.unitCode === unitCode && d.topicId === topicId);
+}

@@ -5,9 +5,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FlaskConical, Home as HomeIcon, Search, Sticker, Zap } from "lucide-react";
 import type { UnitCode } from "@/lib/spectra/types";
 import { UNITS, getUnit, getTopic } from "@/lib/spectra/units";
+import { getNotes, getNotesForTopic } from "@/lib/spectra/notes";
 import { Home } from "./home";
 import { UnitView } from "./unit-view";
 import { TopicView } from "./topic-view";
+import { NotesReader } from "./notes-reader";
 import { Blend } from "./blend";
 import { StickerBook } from "./sticker-book";
 import { SearchPalette } from "./search";
@@ -21,6 +23,7 @@ type View =
   | { kind: "home" }
   | { kind: "unit"; code: string }
   | { kind: "topic"; code: string; topicId: string }
+  | { kind: "notes"; code: string; docId: string }
   | { kind: "sticker" }
   | { kind: "blend" };
 
@@ -55,7 +58,8 @@ function TopBar({
   onOpenBlend: () => void;
   onSearch: () => void;
 }) {
-  const activeCode = view.kind === "unit" || view.kind === "topic" ? view.code : null;
+  const activeCode =
+    view.kind === "unit" || view.kind === "topic" || view.kind === "notes" ? view.code : null;
 
   return (
     <header className="fixed inset-x-0 top-3 z-50 flex justify-center px-3">
@@ -321,11 +325,13 @@ export default function ClubApp() {
       ? `topic-${view.code}-${view.topicId}`
       : view.kind === "unit"
         ? `unit-${view.code}`
-        : view.kind === "sticker"
-          ? "sticker"
-          : view.kind === "blend"
-            ? "blend"
-            : "home";
+        : view.kind === "notes"
+          ? `notes-${view.docId}`
+          : view.kind === "sticker"
+            ? "sticker"
+            : view.kind === "blend"
+              ? "blend"
+              : "home";
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
@@ -361,9 +367,15 @@ export default function ClubApp() {
     return () => window.removeEventListener("keydown", onKey);
   }, [searchOpen]);
 
-  const unit = view.kind === "home" || view.kind === "sticker" || view.kind === "blend" ? undefined : getUnit(view.code);
-  const topic =
-    view.kind === "topic" && unit ? getTopic(view.code, view.topicId) : undefined;
+  const unit =
+    view.kind === "home" || view.kind === "sticker" || view.kind === "blend" ? undefined : getUnit(view.code);
+  const topic = view.kind === "topic" && unit ? getTopic(view.code, view.topicId) : undefined;
+  const notesDoc =
+    view.kind === "notes"
+      ? getNotes(view.docId)
+      : unit && topic
+        ? getNotesForTopic(unit.code, topic.id)
+        : undefined;
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -410,7 +422,16 @@ export default function ClubApp() {
                 topic={topic}
                 onBack={() => openUnit(unit.code)}
                 onOpenTopic={(id) => openTopic(unit.code, id)}
+                onOpenNotes={
+                  notesDoc
+                    ? () => setView({ kind: "notes", code: unit.code, docId: notesDoc.id })
+                    : undefined
+                }
               />
+            )}
+
+            {view.kind === "notes" && unit && notesDoc && (
+              <NotesReader doc={notesDoc} unit={unit} onBack={() => openTopic(unit.code, notesDoc.topicId)} />
             )}
 
             {view.kind === "sticker" && (

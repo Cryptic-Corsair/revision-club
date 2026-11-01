@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check, PartyPopper, Sticker } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Check, PartyPopper, Sticker } from "lucide-react";
 import type { Topic, Unit } from "@/lib/spectra/types";
 import { toggleRevised, useRevised } from "@/lib/spectra/progress";
 import { TopicBlocks } from "./blocks";
@@ -26,11 +26,13 @@ export function TopicView({
   topic,
   onBack,
   onOpenTopic,
+  onOpenNotes,
 }: {
   unit: Unit;
   topic: Topic;
   onBack: () => void;
   onOpenTopic: (topicId: string) => void;
+  onOpenNotes?: () => void;
 }) {
   const revised = useRevised();
   const key = `${unit.code}/${topic.id}`;
@@ -91,6 +93,37 @@ export function TopicView({
 
         <Squiggle color={main} className="mt-8 h-3.5 w-full opacity-60" />
       </header>
+
+      {/* ————— full revision note CTA ————— */}
+      {onOpenNotes && (
+        <Reveal className="mt-8">
+          <motion.button
+            type="button"
+            onClick={onOpenNotes}
+            whileHover={{ y: -4, rotate: -0.4 }}
+            whileTap={{ scale: 0.97 }}
+            className="group flex w-full cursor-pointer items-center gap-4 rounded-[28px] p-5 text-left sm:p-6"
+            style={{ background: main, boxShadow: `0 6px 0 ${shade(main)}` }}
+          >
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-[20px] bg-white/20">
+              <BookOpen className="h-7 w-7 text-white" strokeWidth={2.2} />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-display text-[18px] font-semibold text-white">
+                The full revision note — spec by spec
+              </span>
+              <span className="mt-1 block text-[13.5px] leading-[1.6] font-bold text-white/80">
+                The complete class note, word for word, cut into one section per specification point
+                (2.1 → 2.18) with the official wording above each — plus interactive exercises and
+                recall decks.
+              </span>
+            </span>
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/20 transition-transform group-hover:translate-x-1">
+              <ArrowRight className="h-5 w-5 text-white" strokeWidth={2.5} />
+            </span>
+          </motion.button>
+        </Reveal>
+      )}
 
       {/* ————— content ————— */}
       <div className="mt-10">
