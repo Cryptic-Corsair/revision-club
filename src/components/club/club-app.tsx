@@ -52,7 +52,11 @@ function useTheme() {
   }, []);
   const toggle = useCallback(() => {
     const next = !document.documentElement.classList.contains("dark");
-    document.documentElement.classList.toggle("dark", next);
+    const root = document.documentElement;
+    /* hold the colours while they ease over — one smooth dim-the-lights move */
+    root.classList.add("theme-anim");
+    window.setTimeout(() => root.classList.remove("theme-anim"), 480);
+    root.classList.toggle("dark", next);
     try {
       localStorage.setItem("rc-theme", next ? "dark" : "light");
     } catch {
@@ -92,7 +96,7 @@ function TopBar({
       <nav
         aria-label="Units"
         className="no-scrollbar flex max-w-[97vw] items-center gap-1.5 overflow-x-auto rounded-full bg-paper/90 py-2 pr-2.5 pl-2.5 backdrop-blur-xl"
-        style={{ boxShadow: "0 3px 0 color-mix(in oklab, var(--color-ink) 6%, transparent), 0 16px 38px -18px rgb(0 0 0 / 0.4)" }}
+        style={{ boxShadow: "0 3px 0 var(--edge), 0 16px 38px -18px rgb(0 0 0 / 0.4)" }}
       >
         <button
           type="button"
@@ -238,7 +242,7 @@ function Footer({
         </svg>
       </div>
 
-      <div className="bg-cocoa pt-4 pb-12 text-cream">
+      <div className="bg-cocoa pt-4 pb-12 text-milk">
         <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 sm:px-8 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
             <div className="flex items-center gap-3">
@@ -247,7 +251,7 @@ function Footer({
                 Reaction Club
               </span>
             </div>
-            <p className="mt-3 text-[14px] leading-relaxed text-cream/65 dark:text-cream/80">
+            <p className="mt-3 text-[14px] leading-relaxed text-milk/80">
               Revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16), written to the
               2018 specification.
             </p>
@@ -273,7 +277,7 @@ function Footer({
           </div>
 
           <div>
-            <div className="font-display text-[12px] font-bold tracking-[0.2em] text-cream/50 uppercase dark:text-cream/70">
+            <div className="font-display text-[12px] font-bold tracking-[0.2em] text-milk/60 uppercase">
               Practice
             </div>
             <div className="mt-4 flex flex-col gap-3">
@@ -285,7 +289,7 @@ function Footer({
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-grape/25 text-grape transition-transform group-hover:scale-110">
                   <Zap className="h-4 w-4" strokeWidth={2.2} />
                 </span>
-                <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream dark:text-cream/85">
+                <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
                   Flashcards · shuffled checkpoint questions
                 </span>
               </button>
@@ -297,7 +301,7 @@ function Footer({
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-mint/25 text-mint transition-transform group-hover:scale-110">
                   <Sticker className="h-4 w-4" strokeWidth={2.2} />
                 </span>
-                <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream dark:text-cream/85">
+                <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
                   Progress · topics revised
                 </span>
               </button>
@@ -306,10 +310,10 @@ function Footer({
                 onClick={onSearch}
                 className="group flex cursor-pointer items-center gap-2.5 text-left"
               >
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10 text-cream/70 transition-transform group-hover:scale-110">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10 text-milk/80 transition-transform group-hover:scale-110">
                   <Search className="h-4 w-4" strokeWidth={2.2} />
                 </span>
-                <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream dark:text-cream/85">
+                <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
                   Search · press ⌘K
                 </span>
               </button>
@@ -317,7 +321,7 @@ function Footer({
           </div>
 
           <div>
-            <div className="font-display text-[12px] font-bold tracking-[0.2em] text-cream/50 uppercase dark:text-cream/70">
+            <div className="font-display text-[12px] font-bold tracking-[0.2em] text-milk/60 uppercase">
               Units
             </div>
             <div className="mt-4 grid grid-cols-2 gap-x-10 gap-y-3">
@@ -332,7 +336,7 @@ function Footer({
                     className="h-3 w-3 shrink-0 rounded-full transition-transform group-hover:scale-125"
                     style={{ background: u.candy.main }}
                   />
-                  <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream dark:text-cream/85">
+                  <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
                     {u.code.replace("WCH", "Unit ")} · {u.shortTitle}
                   </span>
                 </button>
@@ -342,7 +346,7 @@ function Footer({
         </div>
 
         <div className="mx-auto mt-10 max-w-6xl px-5 sm:px-8">
-          <p className="text-[11.5px] leading-relaxed font-semibold text-cream/40 dark:text-cream/60">
+          <p className="text-[11.5px] leading-relaxed font-semibold text-milk/60">
             Written to the Pearson Edexcel International A Level Chemistry (2018) specification
             · WCH11–WCH16 · not affiliated with or endorsed by Pearson Education Ltd.
           </p>

@@ -492,17 +492,17 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
               className="right-[-12%] bottom-[-35%] h-[75%] w-[45%]"
               style={{ animationDuration: "15s" }}
             />
-            <DoodlePlus className="absolute top-8 left-[12%] h-6 w-6 text-cream/25" />
+            <DoodlePlus className="absolute top-8 left-[12%] h-6 w-6 text-milk/25" />
             <DoodleSparkle className="absolute right-[16%] bottom-10 h-7 w-7 text-lemon/50" />
 
             <div className="relative z-10 mx-auto max-w-xl">
               <Float slow className="mx-auto w-fit">
                 <Mascot main="#FFD43B" mood="cheer" size={150} bubbles={false} className="mx-auto" />
               </Float>
-              <h2 className="mt-2 font-display text-[clamp(1.8rem,3.6vw,2.6rem)] font-semibold text-cream">
+              <h2 className="mt-2 font-display text-[clamp(1.8rem,3.6vw,2.6rem)] font-semibold text-milk">
                 Pick a unit and start.
               </h2>
-              <p className="mt-3 text-[15.5px] leading-relaxed text-cream/70">
+              <p className="mt-3 text-[15.5px] leading-relaxed text-milk/75">
                 Start with Unit 1, or jump straight to the topic you are revising.
               </p>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3.5">

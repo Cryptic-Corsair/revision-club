@@ -158,12 +158,12 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
 
     case "recap":
       return (
-        <div className="rotate-[-0.5deg] rounded-[30px] bg-cocoa p-6 text-cream sm:p-7">
+        <div className="rotate-[-0.5deg] rounded-[30px] bg-cocoa p-6 text-milk sm:p-7">
           <div className="mb-4 flex items-center gap-3">
             <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white/10">
               <Timer className="h-5 w-5 text-lemon" />
             </span>
-            <h4 className="font-display text-[19px] font-semibold text-cream">
+            <h4 className="font-display text-[19px] font-semibold text-milk">
               Quick recap
             </h4>
           </div>
@@ -178,7 +178,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
                   >
                     {i + 1}
                   </span>
-                  <p className="text-[15px] leading-[1.7] text-cream/90">
+                  <p className="text-[15px] leading-[1.7] text-milk/90">
                     <Fmt text={t} />
                   </p>
                 </li>
