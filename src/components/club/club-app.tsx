@@ -6,6 +6,7 @@ import { FlaskConical, Home as HomeIcon, Moon, Search, Sticker, Sun, Zap } from 
 import type { UnitCode } from "@/lib/spectra/types";
 import { UNITS, getUnit, getTopic } from "@/lib/spectra/units";
 import { getNotes, getNotesForTopic } from "@/lib/spectra/notes";
+import { pickDarkMood } from "@/lib/spectra/dark-mood";
 import { Home } from "./home";
 import { UnitView } from "./unit-view";
 import { TopicView } from "./topic-view";
@@ -57,6 +58,9 @@ function useTheme() {
     root.classList.add("theme-anim");
     window.setTimeout(() => root.classList.remove("theme-anim"), 480);
     root.classList.toggle("dark", next);
+    /* the dark lab wears today's roast; the daylight lab needs none */
+    if (next) root.dataset.mood = String(pickDarkMood());
+    else delete root.dataset.mood;
     try {
       localStorage.setItem("rc-theme", next ? "dark" : "light");
     } catch {

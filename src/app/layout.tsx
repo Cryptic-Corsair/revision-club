@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Fredoka, Nunito, IBM_Plex_Mono } from "next/font/google";
+import { DARK_MOOD_COUNT } from "@/lib/spectra/dark-mood";
 import "./globals.css";
 
 const fredoka = Fredoka({
@@ -29,13 +30,15 @@ export const metadata: Metadata = {
 };
 
 /* Sets the saved mood (or none) before first paint — no flash of the wrong lab.
-   beforeInteractive keeps it out of React's hydration tree. */
-const themeInit = `(function(){try{if(localStorage.getItem("rc-theme")==="dark"){document.documentElement.classList.add("dark")}}catch(e){}})();`;
+   The dark lab also picks today's roast (html.dark[data-mood]) so the darker
+   shade set is on before the first pixel. beforeInteractive keeps it out of
+   React's hydration tree. */
+const themeInit = `(function(){try{if(localStorage.getItem("rc-theme")==="dark"){var r=document.documentElement;r.classList.add("dark");r.dataset.mood=String(Math.floor(Date.now()/864e5)%${DARK_MOOD_COUNT})}}catch(e){}})();`;
 
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#FFF6EA" },
-    { media: "(prefers-color-scheme: dark)", color: "#251A11" },
+    { media: "(prefers-color-scheme: dark)", color: "#201810" },
   ],
 };
 

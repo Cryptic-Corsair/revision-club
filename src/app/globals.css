@@ -15,6 +15,8 @@
    Two moods, one set of tokens: every surface reads its colour from
    the custom properties below, so the whole site flips between the
    daylight cream lab and the after-hours cocoa lab (html.dark).
+   The dark lab also rotates through a few darker roasts — mood 0
+   below is the reference look, data-mood="1..3" are the alternates.
 
    `milk` is the one colour that never flips — it is "light text on a
    dark band" in both moods (footer, recap cards, the closing CTA),
@@ -64,16 +66,44 @@
 }
 
 html.dark {
-  --color-cream: #251a11;
-  --color-paper: #382818;
+  /* roast 0 — "espresso", the reference look from the design shot */
+  --color-cream: #201810; /* page background */
+  --color-paper: #342818; /* cards, sheets, bubbles */
   --color-milk: #f8efdf;
   --color-ink: #f6ebdc;
   --color-ink-soft: #c6ab92;
   --color-ink-faint: #a5886b; /* lifted — small labels stay legible */
-  --color-cocoa: #170e08;
-  --tint-base: #4a3521;
+  --color-cocoa: #130c07; /* footer, dark bands */
+  --tint-base: #443220;
   --edge: rgb(0 0 0 / 0.5);
   color-scheme: dark;
+}
+
+/* ————— rotating roasts —————
+   The dark lab cycles through a few darker shade sets so it doesn't
+   wear the same brown every day (see lib/spectra/dark-mood.ts — one
+   roast per day, baked in before first paint). Only the four surface
+   tones change; text inks stay put, so contrast holds in every roast. */
+html.dark[data-mood="1"] {
+  /* roast 1 — "dark roast", a flatter, less saturated brown */
+  --color-cream: #1d1712;
+  --color-paper: #2f261c;
+  --color-cocoa: #0e0a07;
+  --tint-base: #3e3225;
+}
+html.dark[data-mood="2"] {
+  /* roast 2 — "mahogany", a red-leaning chestnut */
+  --color-cream: #221410;
+  --color-paper: #372419;
+  --color-cocoa: #130905;
+  --tint-base: #442e1e;
+}
+html.dark[data-mood="3"] {
+  /* roast 3 — "midnight cocoa", the deepest of the set */
+  --color-cream: #181310;
+  --color-paper: #2a211a;
+  --color-cocoa: #0c0807;
+  --tint-base: #372b21;
 }
 
 @keyframes float {
