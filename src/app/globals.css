@@ -99,9 +99,6 @@
 
 html {
   scroll-behavior: smooth;
-  /* framer-motion useScroll(target) measures offsets against the
-     scrolling element — it must not be position: static */
-  position: relative;
 }
 
 body {
