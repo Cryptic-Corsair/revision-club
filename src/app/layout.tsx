@@ -29,11 +29,11 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
 };
 
-/* Sets the saved mood (or none) before first paint — no flash of the wrong lab.
-   The dark lab also picks today's roast (html.dark[data-mood]) so the darker
-   shade set is on before the first pixel. beforeInteractive keeps it out of
-   React's hydration tree. */
-const themeInit = `(function(){try{if(localStorage.getItem("rc-theme")==="dark"){var r=document.documentElement;r.classList.add("dark");r.dataset.mood=String(Math.floor(Date.now()/864e5)%${DARK_MOOD_COUNT})}}catch(e){}})();`;
+/* Sets the saved lab (or none) before first paint — no flash of the wrong
+   one. dark and hybrid also pick today's roast (html[data-mood]) so the
+   day's shade set is on before the first pixel. beforeInteractive keeps
+   it out of React's hydration tree. */
+const themeInit = `(function(){try{var t=localStorage.getItem("rc-theme");if(t==="dark"||t==="hybrid"){var r=document.documentElement;r.classList.add(t);r.dataset.mood=String(Math.floor(Date.now()/864e5)%${DARK_MOOD_COUNT})}}catch(e){}})();`;
 
 export const viewport: Viewport = {
   themeColor: [

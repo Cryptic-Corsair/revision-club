@@ -1,9 +1,11 @@
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · dark-lab roasts
+   Reaction Club · daily roasts
 
    The after-dark lab keeps a small wardrobe of darker shade sets
    (see html.dark in globals.css) and rotates them "every now and
-   then" so the site doesn't wear the same brown every day.
+   then" so the site doesn't wear the same brown every day. The
+   hybrid lab's cocoa rooms follow the same rotation, keyed off
+   the same html[data-mood] attribute (html.hybrid[data-mood]).
 
    The pick is deterministic — same roast for the whole day, on
    every tab and reload — so there is no flash of a different

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FlaskConical, Home as HomeIcon, Moon, Search, Sticker, Sun, Zap } from "./icons";
+import { FlaskConical, Home as HomeIcon, Moon, Search, Sticker, Sun, SunMoon, Zap } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { UNITS, getUnit, getTopic } from "@/lib/spectra/units";
 import { getNotes, getNotesForTopic } from "@/lib/spectra/notes";
@@ -44,31 +44,45 @@ function LogoMark({ size = 38 }: { size?: number }) {
   );
 }
 
-/* ————— mood switch ————— */
+/* ————— lab switch —————
+   Three labs, one button: daylight → after-dark → hybrid → daylight.
+   The hybrid lab keeps the daylight page but lets the notes reader
+   punch in deep cocoa rooms — the best of both moods. */
+
+export type Lab = "light" | "dark" | "hybrid";
+
+function readLab(): Lab {
+  const r = document.documentElement;
+  if (r.classList.contains("dark")) return "dark";
+  if (r.classList.contains("hybrid")) return "hybrid";
+  return "light";
+}
 
 function useTheme() {
-  const [dark, setDark] = useState(false);
+  const [lab, setLab] = useState<Lab>("light");
   useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
+    setLab(readLab());
   }, []);
-  const toggle = useCallback(() => {
-    const next = !document.documentElement.classList.contains("dark");
+  const cycle = useCallback(() => {
+    const order: Lab[] = ["light", "dark", "hybrid"];
+    const next = order[(order.indexOf(readLab()) + 1) % order.length];
     const root = document.documentElement;
-    /* hold the colours while they ease over — one smooth dim-the-lights move */
+    /* hold the colours while they ease over — one smooth move */
     root.classList.add("theme-anim");
     window.setTimeout(() => root.classList.remove("theme-anim"), 480);
-    root.classList.toggle("dark", next);
-    /* the dark lab wears today's roast; the daylight lab needs none */
-    if (next) root.dataset.mood = String(pickDarkMood());
+    root.classList.toggle("dark", next === "dark");
+    root.classList.toggle("hybrid", next === "hybrid");
+    /* dark + hybrid wear today's roast; the daylight lab needs none */
+    if (next !== "light") root.dataset.mood = String(pickDarkMood());
     else delete root.dataset.mood;
     try {
-      localStorage.setItem("rc-theme", next ? "dark" : "light");
+      localStorage.setItem("rc-theme", next);
     } catch {
       /* private mode — mood just won't persist */
     }
-    setDark(next);
+    setLab(next);
   }, []);
-  return { dark, toggle };
+  return { lab, cycle };
 }
 
 function TopBar({
@@ -86,7 +100,7 @@ function TopBar({
   onOpenBlend: () => void;
   onSearch: () => void;
 }) {
-  const { dark, toggle } = useTheme();
+  const { lab, cycle } = useTheme();
   const activeCode =
     view.kind === "unit" || view.kind === "topic" || view.kind === "notes" ? view.code : null;
 
@@ -204,13 +218,19 @@ function TopBar({
         </motion.button>
         <motion.button
           type="button"
-          onClick={toggle}
+          onClick={cycle}
           whileTap={{ scale: 0.88 }}
           className={tool(false)}
-          title={dark ? "Switch to the daylight lab" : "Switch to the after-dark lab"}
-          aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+          title={lab === "light" ? "Switch to the after-dark lab" : lab === "dark" ? "Switch to the hybrid lab" : "Switch to the daylight lab"}
+          aria-label={lab === "light" ? "Switch to dark theme" : lab === "dark" ? "Switch to hybrid theme" : "Switch to light theme"}
         >
-          {dark ? <Sun className="h-[18px] w-[18px]" strokeWidth={2.2} /> : <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />}
+          {lab === "light" ? (
+            <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+          ) : lab === "dark" ? (
+            <SunMoon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+          ) : (
+            <Sun className="h-[18px] w-[18px]" strokeWidth={2.2} />
+          )}
         </motion.button>
       </nav>
     </header>

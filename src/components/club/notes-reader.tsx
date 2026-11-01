@@ -45,14 +45,18 @@ import {
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · notes reader — one enclosed room per spec point.
-   Each section is a full-width tonal band: most borrow a candy
-   colour, every third sits on the deep roast (a dark room), and
-   the footer's wave rides between the bands, so the note reads as
+   Each section is a full-width tonal band borrowing one candy
+   colour, walking the hue wheel so neighbours always contrast.
+   In the hybrid lab every third band is a deep cocoa room with
+   milk-toned fonts (see html.hybrid .room in globals.css); in the
+   other two labs the same bands stay candy — the class is inert.
+   The footer's wave rides between the bands, so the note reads as
    a string of connected rooms rather than one long scroll.
    ═══════════════════════════════════════════════════════════════ */
 
-/* the rotating palette — every band borrows one candy colour */
-const BANDS = ["#FF6B6B", "#FFD43B", "#12B886", "#FF922B", "#9775FA", "#F06595"];
+/* the rotating palette — hue-wheel order: red → orange → yellow →
+   green → purple → pink, so adjacent bands always differ */
+const BANDS = ["#FF6B6B", "#FF922B", "#FFD43B", "#12B886", "#9775FA", "#F06595"];
 
 const WAVE_D = "M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z";
 
@@ -60,7 +64,8 @@ function BandWave({ from, to }: { from: string; to: string }) {
   return (
     <div aria-hidden style={{ background: from }}>
       <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-[46px] w-full sm:h-[68px]">
-        <path d={WAVE_D} fill={to} />
+        {/* fill rides on style so var() strings with fallbacks resolve */}
+        <path d={WAVE_D} style={{ fill: to }} />
       </svg>
     </div>
   );
@@ -69,6 +74,12 @@ function BandWave({ from, to }: { from: string; to: string }) {
 function scrollToSpec(spec: string) {
   document.getElementById(`spec-${spec.replace(".", "-")}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+/* A candy accent pulled toward the current ink: deep brick by day,
+   warm salmon after dark, pale gold inside a cocoa room — one
+   helper, readable in every lab, no dark: variants needed. */
+const inkMix = (main: string, pct = 45) =>
+  `color-mix(in oklab, ${main} ${pct}%, var(--color-ink))`;
 
 /* ————— main reader ————— */
 
@@ -113,11 +124,15 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
   ];
 
   const accentOf = (i: number) => BANDS[i % BANDS.length];
-  const bandOf = (i: number) => tint(accentOf(i), 10);
-  /* every third room sits on the deep roast — a dark interlude
-     between the candy bands (2.2, 2.5, 2.8 …), fonts flipped to milk */
-  const isDarkBand = (i: number) => i % 3 === 1;
-  const bgOf = (i: number) => (isDarkBand(i) ? "var(--color-cocoa)" : bandOf(i));
+  /* bands mix their candy over --tint-base at --band-mix — 10% by
+     day, 14% after dark, so roast-tone neighbours stay distinct */
+  const bandOf = (i: number) =>
+    `color-mix(in oklab, ${accentOf(i)} var(--band-mix, 10%), var(--tint-base))`;
+  /* every third room goes cocoa in the hybrid lab (2.2, 2.5, 2.8 …).
+     Elsewhere --room-surface is undefined and the fallback keeps the
+     plain candy band — one expression, correct in all three labs. */
+  const isRoom = (i: number) => i % 3 === 1;
+  const bgOf = (i: number) => (isRoom(i) ? `var(--room-surface, ${bandOf(i)})` : bandOf(i));
   const activeIndex = Math.max(0, doc.sections.findIndex((s) => s.spec === active));
   const activeSection = doc.sections[activeIndex];
 
@@ -150,7 +165,7 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
           </span>
         </PopIn>
         <PopIn delay={0.1}>
-          <p className="mt-6 font-display text-[15px] font-semibold tracking-[0.06em] uppercase" style={{ color: shade(main, 62) }}>
+          <p className="mt-6 font-display text-[15px] font-semibold tracking-[0.06em] uppercase" style={{ color: inkMix(main, 52) }}>
             {doc.kicker}
           </p>
           <h1 className="mt-2 font-display text-[clamp(2.1rem,5vw,3.2rem)] leading-[1.05] font-semibold tracking-tight text-ink">
@@ -193,7 +208,7 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
         <div className="rounded-[30px] bg-paper p-5 puff sm:p-6">
           <div className="flex items-center gap-3">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl" style={{ background: tint(main, 16) }}>
-              <Target className="h-5 w-5" style={{ color: shade(main, 62) }} />
+              <Target className="h-5 w-5" style={{ color: inkMix(main, 60) }} />
             </span>
             <div>
               <h2 className="font-display text-[18px] font-semibold text-ink">Contents</h2>
@@ -209,9 +224,9 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
                   type="button"
                   onClick={() => scrollToSpec(s.spec)}
                   className={`group flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left transition-transform hover:-translate-y-0.5${
-                    isDarkBand(i) ? " band-dark" : ""
+                    isRoom(i) ? " room" : ""
                   }`}
-                  style={isDarkBand(i) ? undefined : { background: bandOf(i) }}
+                  style={{ background: bgOf(i) }}
                 >
                   <span
                     className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[10.5px] font-bold"
@@ -238,7 +253,7 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
             <div className="flex items-center gap-3">
               {activeSection ? (
                 <span className="min-w-0 flex-1 truncate font-display text-[13.5px] font-semibold text-ink">
-                  <span style={{ color: shade(accentOf(activeIndex), 45) }}>{activeSection.spec}</span> · {activeSection.title}
+                  <span style={{ color: inkMix(accentOf(activeIndex), 45) }}>{activeSection.spec}</span> · {activeSection.title}
                 </span>
               ) : (
                 <span className="min-w-0 flex-1 truncate font-display text-[13.5px] font-semibold text-ink">{doc.title}</span>
@@ -258,7 +273,7 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
                     style={
                       isActive
                         ? { background: accent, color: readableInk(accent), boxShadow: `0 3px 0 ${shade(accent)}` }
-                        : { background: tint(accent, 22), color: shade(accent, 62) }
+                        : { background: tint(accent, 22), color: inkMix(accent, 62) }
                     }
                     title={`${s.spec} — ${s.title}`}
                     aria-label={`Jump to spec ${s.spec}`}
@@ -276,14 +291,14 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
           <BandWave from="var(--color-cream)" to={bgOf(0)} />
           {doc.sections.map((s, i) => {
             const accent = accentOf(i);
-            const dark = isDarkBand(i);
+            const room = isRoom(i);
             const last = i === doc.sections.length - 1;
             return (
               <Fragment key={s.spec}>
                 <section
                   id={`spec-${s.spec.replace(".", "-")}`}
-                  className={`relative scroll-mt-[190px]${dark ? " band-dark" : ""}`}
-                  style={dark ? undefined : { background: bandOf(i) }}
+                  className={`relative scroll-mt-[190px]${room ? " room" : ""}`}
+                  style={{ background: bgOf(i) }}
                 >
                   <div className="mx-auto max-w-3xl px-4 py-14 sm:px-8 sm:py-16">
                     <SpecSectionView section={s} accent={accent} />
@@ -335,7 +350,7 @@ function SpecSectionView({ section, accent }: { section: SpecSection; accent: st
           {section.title}
         </h2>
         <div className="mt-4 rounded-[22px] bg-paper/85 px-5 py-4" style={{ borderLeft: `5px solid ${tint(accent, 45)}` }}>
-          <div className="font-display text-[10.5px] font-extrabold tracking-[0.2em] uppercase" style={{ color: shade(accent, 62) }}>
+          <div className="font-display text-[10.5px] font-extrabold tracking-[0.2em] uppercase" style={{ color: inkMix(accent, 62) }}>
             From the specification
           </div>
           <p className="mt-1.5 text-[14.5px] leading-[1.75] text-ink italic">
@@ -391,9 +406,9 @@ function BlockView({ block: b, accent }: { block: NotesBlock; accent: string }) 
       return (
         <div className="max-w-[72ch] rounded-[20px] px-4 py-3.5" style={{ background: tint("#FFD43B", 18) }}>
           <div className="flex items-start gap-3">
-            <StickyNote className="mt-0.5 h-4.5 w-4.5 shrink-0 text-[#B08D00]" />
+            <StickyNote className="mt-0.5 h-4.5 w-4.5 shrink-0" style={{ color: inkMix("#B08D00", 62) }} />
             <p className="text-[14.5px] leading-[1.7] text-ink">
-              <span className="mr-1.5 font-display text-[11.5px] font-extrabold tracking-[0.12em] text-[#B08D00] uppercase">{b.label}:</span>
+              <span className="mr-1.5 font-display text-[11.5px] font-extrabold tracking-[0.12em] uppercase" style={{ color: inkMix("#B08D00", 58) }}>{b.label}:</span>
               <Fmt text={b.text} />
             </p>
           </div>
@@ -451,10 +466,10 @@ function BlockView({ block: b, accent }: { block: NotesBlock; accent: string }) 
         <div className="max-w-[72ch] rounded-[22px] p-5 sm:p-6" style={{ background: tint("#9775FA", 12) }}>
           <div className="flex items-start gap-3">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-paper">
-              <Lightbulb className="h-5 w-5 text-grape" />
+              <Lightbulb className="h-5 w-5" style={{ color: inkMix("#9775FA", 72) }} />
             </span>
             <div>
-              <div className="font-display text-[11px] font-extrabold tracking-[0.18em] text-grape uppercase">Key idea</div>
+              <div className="font-display text-[11px] font-extrabold tracking-[0.18em] uppercase" style={{ color: inkMix("#9775FA", 62) }}>Key idea</div>
               <p className="mt-1 text-[15px] leading-[1.75] text-ink">
                 <Fmt text={b.text} />
               </p>
@@ -610,7 +625,7 @@ function Journey({
                 className="flex w-full cursor-pointer items-center gap-3 px-4 py-3.5 text-left sm:px-5"
               >
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full" style={{ background: isOpen ? accent : tint(accent, 14) }}>
-                  <Icon className="h-4.5 w-4.5" style={{ color: isOpen ? readableInk(accent) : shade(accent, 62) }} strokeWidth={2.5} />
+                  <Icon className="h-4.5 w-4.5" style={{ color: isOpen ? readableInk(accent) : inkMix(accent, 62) }} strokeWidth={2.5} />
                 </span>
                 <span className="min-w-0 flex-1 font-display text-[15.5px] font-semibold text-ink">{it.title}</span>
                 <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
