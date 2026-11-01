@@ -208,6 +208,7 @@ export const SECTIONS_A: SpecSection[] = [
       },
       { k: "h", text: "How does a mass spectrometer work?" },
       { k: "p", text: "There are five main processes occurring in a mass spectrometer. They are:" },
+      { k: "figure", kind: "mass-spec", caption: "The mass spectrometer end to end — the sample is vapourised, bombarded by the electron gun, accelerated by an electric field, deflected by the magnetic field, and only then detected." },
       {
         k: "steps",
         caption: "The five stages, in order",

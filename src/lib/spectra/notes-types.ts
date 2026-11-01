@@ -12,6 +12,8 @@ import type { UnitCode } from "./types";
 export type FigureKind =
   | "atom"
   | "notation"
+  | "mass-spec"
+  | "shielding"
   | "spectrum-neon"
   | "spectrum-boron"
   | "spectrum-bromine"

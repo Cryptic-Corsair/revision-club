@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import {
   ArrowLeft,
@@ -11,19 +11,16 @@ import {
   Flame,
   Lightbulb,
   Magnet,
-  PartyPopper,
   PenLine,
   Sparkles,
-  Sticker,
   StickyNote,
   Target,
   Zap,
 } from "./icons";
 import type { NotesBlock, NotesDoc, SpecSection } from "@/lib/spectra/notes-types";
 import type { Unit } from "@/lib/spectra/types";
-import { toggleRevised, useRevised } from "@/lib/spectra/progress";
 import { Fmt } from "./format";
-import { BeakerMeter, Confetti, PopIn, Reveal, SoftButton, SpeechBubble, Squiggle, Mascot, shade, tint } from "./bits";
+import { PopIn, Reveal, SoftButton, SpeechBubble, Squiggle, Mascot, readableInk, shade, tint } from "./bits";
 import {
   FigAtom,
   FigBoxesC,
@@ -31,11 +28,13 @@ import {
   FigFillDemo,
   FigFillOrder,
   FigIeGraph,
+  FigMassSpec,
   FigMelting,
   FigNotation,
   FigOrbitals,
   FigPtBlocks,
   FigRadius,
+  FigShielding,
   FigSpectrumBoron,
   FigSpectrumBromine,
   FigSpectrumCl2,
@@ -45,33 +44,25 @@ import {
 } from "./notes-figures";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · notes reader — a real revision note, one section
-   per specification point, spec wording stated above each section.
+   Reaction Club · notes reader — one enclosed room per spec point.
+   Each section is a full-width tonal band in its own colour, and
+   the footer's wave rides between the bands, so the note reads as
+   a string of connected rooms rather than one long scroll.
    ═══════════════════════════════════════════════════════════════ */
 
-/* ————— progress (localStorage) ————— */
+/* the rotating palette — every band borrows one candy colour */
+const BANDS = ["#FF6B6B", "#FFD43B", "#12B886", "#FF922B", "#9775FA", "#F06595"];
 
-function useRevisedSpecs(docId: string) {
-  const [specs, setSpecs] = useState<string[]>(() => {
-    if (typeof window === "undefined") return [];
-    try {
-      return JSON.parse(window.localStorage.getItem(`rc-notes-${docId}`) ?? "[]");
-    } catch {
-      /* first visit */
-      return [];
-    }
-  });
-  const toggle = (spec: string) =>
-    setSpecs((prev) => {
-      const next = prev.includes(spec) ? prev.filter((s) => s !== spec) : [...prev, spec];
-      try {
-        window.localStorage.setItem(`rc-notes-${docId}`, JSON.stringify(next));
-      } catch {
-        /* private mode */
-      }
-      return next;
-    });
-  return { specs, toggle };
+const WAVE_D = "M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z";
+
+function BandWave({ from, to }: { from: string; to: string }) {
+  return (
+    <div aria-hidden style={{ background: from }}>
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-[46px] w-full sm:h-[68px]">
+        <path d={WAVE_D} fill={to} />
+      </svg>
+    </div>
+  );
 }
 
 function scrollToSpec(spec: string) {
@@ -82,12 +73,7 @@ function scrollToSpec(spec: string) {
 
 export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; onBack: () => void }) {
   const main = unit.candy.main;
-  const { specs: revisedSpecs, toggle } = useRevisedSpecs(doc.id);
-  const [active, setActive] = useState<string>("2.1");
-  const [fire, setFire] = useState(0);
-  const revised = useRevised();
-  const revKey = `${unit.code}/${doc.topicId}`;
-  const isRevised = revised.includes(revKey);
+  const [active, setActive] = useState<string>(doc.sections[0]?.spec ?? "");
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 26, mass: 0.4 });
@@ -125,11 +111,13 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
     `${count("checkpoint")} textbook checkpoints`,
   ];
 
-  const activeSection = doc.sections.find((s) => s.spec === active);
-  const pct = revisedSpecs.length / doc.sections.length;
+  const accentOf = (i: number) => BANDS[i % BANDS.length];
+  const bandOf = (i: number) => tint(accentOf(i), 10);
+  const activeIndex = Math.max(0, doc.sections.findIndex((s) => s.spec === active));
+  const activeSection = doc.sections[activeIndex];
 
   return (
-    <div className="mx-auto max-w-3xl px-4 pt-24 pb-20 sm:px-8">
+    <div className="relative">
       {/* reading progress */}
       <motion.div
         aria-hidden
@@ -137,15 +125,15 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
         style={{ scaleX, background: `linear-gradient(90deg, ${main}, #FFD43B)` }}
       />
 
-      <PopIn>
-        <SoftButton onClick={onBack} className="min-h-[42px] px-4 py-2 text-[13.5px]" ariaLabel="Back to the topic page">
-          <ArrowLeft className="h-4 w-4" /> Back to the topic page
-        </SoftButton>
-      </PopIn>
-
       {/* ————— header ————— */}
-      <header className="mt-7">
-        <PopIn delay={0.05} className="flex flex-wrap items-center gap-2">
+      <header className="mx-auto max-w-3xl px-4 pt-24 sm:px-8">
+        <PopIn>
+          <SoftButton onClick={onBack} className="min-h-[42px] px-4 py-2 text-[13.5px]" ariaLabel="Back to the topic page">
+            <ArrowLeft className="h-4 w-4" /> Back to the topic page
+          </SoftButton>
+        </PopIn>
+
+        <PopIn delay={0.05} className="mt-7 flex flex-wrap items-center gap-2">
           <span
             className="inline-flex -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[11.5px] font-bold tracking-[0.14em] text-white uppercase"
             style={{ background: main }}
@@ -196,7 +184,7 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
       </header>
 
       {/* ————— contents ————— */}
-      <Reveal className="mt-9">
+      <Reveal className="mx-auto max-w-3xl px-4 pt-4 sm:px-8">
         <div className="rounded-[30px] bg-paper p-5 puff sm:p-6">
           <div className="flex items-center gap-3">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl" style={{ background: tint(main, 16) }}>
@@ -204,30 +192,25 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
             </span>
             <div>
               <h2 className="font-display text-[18px] font-semibold text-ink">Contents</h2>
-              <p className="text-[12.5px] font-bold text-ink-faint">
-                {revisedSpecs.length}/{doc.sections.length} revised · tap to jump
-              </p>
-            </div>
-            <div className="ml-auto hidden shrink-0 sm:block">
-              <BeakerMeter pct={pct} main={main} size={44} />
+              <p className="text-[12.5px] font-bold text-ink-faint">{doc.sections.length} sections · tap one to jump</p>
             </div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {doc.sections.map((s) => {
-              const done = revisedSpecs.includes(s.spec);
+            {doc.sections.map((s, i) => {
+              const accent = accentOf(i);
               return (
                 <button
                   key={s.spec}
                   type="button"
                   onClick={() => scrollToSpec(s.spec)}
                   className="group flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left transition-transform hover:-translate-y-0.5"
-                  style={{ background: done ? tint("#12B886", 14) : tint(main, 8) }}
+                  style={{ background: bandOf(i) }}
                 >
                   <span
                     className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[10.5px] font-bold"
-                    style={done ? { background: "#12B886", color: "#fff" } : { background: "#fff", color: shade(main, 62) }}
+                    style={{ background: accent, color: readableInk(accent) }}
                   >
-                    {done ? <Check className="h-3.5 w-3.5" strokeWidth={3.5} /> : s.spec}
+                    {s.spec}
                   </span>
                   <span className="truncate text-[12px] font-bold text-ink">{s.title}</span>
                 </button>
@@ -237,197 +220,132 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
         </div>
       </Reveal>
 
-      {/* ————— sticky spec rail ————— */}
-      <div className="sticky top-[76px] z-40 mt-8">
-        <div
-          className="rounded-[24px] bg-paper/95 px-3.5 py-2.5 backdrop-blur-md"
-          style={{ boxShadow: "0 3px 0 rgba(61,43,31,0.05), 0 16px 34px -20px rgba(61,43,31,0.4)" }}
-        >
-          <div className="flex items-center gap-3">
-            {activeSection ? (
-              <span className="min-w-0 flex-1 truncate font-display text-[13.5px] font-semibold text-ink">
-                <span style={{ color: shade(main, 45) }}>{activeSection.spec}</span> · {activeSection.title}
-              </span>
-            ) : (
-              <span className="min-w-0 flex-1 truncate font-display text-[13.5px] font-semibold text-ink">{doc.title}</span>
-            )}
-            <span className="shrink-0 rounded-full bg-ink/5 px-2.5 py-1 text-[11px] font-extrabold text-ink-soft">
-              {revisedSpecs.length}/{doc.sections.length}
-            </span>
-          </div>
-          <div className="no-scrollbar mt-2 flex items-center gap-1.5 overflow-x-auto">
-            {doc.sections.map((s) => {
-              const done = revisedSpecs.includes(s.spec);
-              const isActive = active === s.spec;
-              return (
-                <motion.button
-                  key={s.spec}
-                  type="button"
-                  whileTap={{ scale: 0.88 }}
-                  onClick={() => scrollToSpec(s.spec)}
-                  className="grid h-8 min-w-8 shrink-0 cursor-pointer place-items-center rounded-full px-2 font-display text-[11px] font-bold"
-                  style={
-                    done
-                      ? { background: "#12B886", color: "#fff" }
-                      : isActive
-                        ? { background: main, color: "#fff", boxShadow: `0 3px 0 ${shade(main)}` }
-                        : { background: "rgba(61,43,31,0.06)", color: "#8A7261" }
-                  }
-                  title={`${s.spec} — ${s.title}`}
-                  aria-label={`Jump to spec ${s.spec}`}
-                  aria-current={isActive ? "true" : undefined}
-                >
-                  {done ? <Check className="h-3.5 w-3.5" strokeWidth={3.5} /> : s.spec}
-                </motion.button>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* ————— sections ————— */}
-      <div className="mt-6 flex flex-col gap-14">
-        {doc.sections.map((s, idx) => (
-          <SpecSectionView
-            key={s.spec}
-            section={s}
-            main={main}
-            done={revisedSpecs.includes(s.spec)}
-            onToggle={() => toggle(s.spec)}
-            delay={Math.min(idx * 0.02, 0.1)}
-          />
-        ))}
-      </div>
-
-      {/* ————— collect the sticker ————— */}
-      <Reveal className="relative mt-16 flex justify-center">
-        <div className="relative">
-          <Confetti fire={fire} />
-          <motion.button
-            type="button"
-            onClick={() => {
-              if (!isRevised) setFire((f) => f + 1);
-              toggleRevised(revKey);
-            }}
-            aria-pressed={isRevised}
-            whileHover={{ y: -3, scale: 1.02 }}
-            whileTap={{ scale: 0.94 }}
-            transition={{ type: "spring", stiffness: 320, damping: 15 }}
-            className="inline-flex min-h-[56px] cursor-pointer items-center gap-3 rounded-full px-7 py-4 font-display text-[16px] font-semibold"
-            style={
-              isRevised
-                ? { background: main, color: "#fff", boxShadow: `0 5px 0 ${shade(main)}`, transform: "rotate(-1.5deg)" }
-                : { background: "var(--color-paper)", color: "var(--color-ink)", boxShadow: "0 5px 0 color-mix(in oklab, var(--color-ink) 10%, transparent)" }
-            }
+      {/* ————— the string of rooms ————— */}
+      <div className="mt-10">
+        {/* sticky rail rides above every band */}
+        <div className="sticky top-[76px] z-40 mx-auto max-w-3xl px-4 sm:px-8">
+          <div
+            className="rounded-[24px] bg-paper/95 px-3.5 py-2.5 backdrop-blur-md"
+            style={{ boxShadow: "0 3px 0 var(--edge), 0 16px 34px -20px rgb(0 0 0 / 0.4)" }}
           >
-            {isRevised ? (
-              <>
-                <span className="grid h-7 w-7 place-items-center rounded-full bg-white/25">
-                  <Check className="h-4.5 w-4.5" strokeWidth={3} />
+            <div className="flex items-center gap-3">
+              {activeSection ? (
+                <span className="min-w-0 flex-1 truncate font-display text-[13.5px] font-semibold text-ink">
+                  <span style={{ color: shade(accentOf(activeIndex), 45) }}>{activeSection.spec}</span> · {activeSection.title}
                 </span>
-                Marked as revised
-              </>
-            ) : (
-              <>
-                <Sticker className="h-5.5 w-5.5" style={{ color: main }} />
-                Mark the whole note as revised
-              </>
-            )}
-          </motion.button>
+              ) : (
+                <span className="min-w-0 flex-1 truncate font-display text-[13.5px] font-semibold text-ink">{doc.title}</span>
+              )}
+            </div>
+            <div className="no-scrollbar mt-2 flex items-center gap-1.5 overflow-x-auto">
+              {doc.sections.map((s, i) => {
+                const isActive = active === s.spec;
+                const accent = accentOf(i);
+                return (
+                  <motion.button
+                    key={s.spec}
+                    type="button"
+                    whileTap={{ scale: 0.88 }}
+                    onClick={() => scrollToSpec(s.spec)}
+                    className="grid h-8 min-w-8 shrink-0 cursor-pointer place-items-center rounded-full px-2 font-display text-[11px] font-bold"
+                    style={
+                      isActive
+                        ? { background: accent, color: readableInk(accent), boxShadow: `0 3px 0 ${shade(accent)}` }
+                        : { background: tint(accent, 22), color: shade(accent, 62) }
+                    }
+                    title={`${s.spec} — ${s.title}`}
+                    aria-label={`Jump to spec ${s.spec}`}
+                    aria-current={isActive ? "true" : undefined}
+                  >
+                    {s.spec}
+                  </motion.button>
+                );
+              })}
+            </div>
+          </div>
         </div>
-      </Reveal>
-      <p className="mt-3 text-center text-[12.5px] font-bold text-ink-faint">
-        {isRevised ? `All ${doc.sections.length} sections revised.` : `Revise all ${doc.sections.length} sections, then mark the note as done.`}
-      </p>
 
-      <p className="mt-10 text-center text-[12px] leading-relaxed font-bold text-ink-faint">
-        <Fmt text={`==${unit.code}== · ${unit.title} · text kept verbatim from the ${doc.source}`} />
-      </p>
+        <div className="mt-8">
+          <BandWave from="var(--color-cream)" to={bandOf(0)} />
+          {doc.sections.map((s, i) => {
+            const accent = accentOf(i);
+            const last = i === doc.sections.length - 1;
+            return (
+              <Fragment key={s.spec}>
+                <section id={`spec-${s.spec.replace(".", "-")}`} className="relative scroll-mt-[190px]" style={{ background: bandOf(i) }}>
+                  <div className="mx-auto max-w-3xl px-4 py-14 sm:px-8 sm:py-16">
+                    <SpecSectionView section={s} accent={accent} />
+                  </div>
+                </section>
+                <BandWave from={bandOf(i)} to={last ? "var(--color-cream)" : bandOf(i + 1)} />
+              </Fragment>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ————— end of the note ————— */}
+      <div className="mx-auto max-w-3xl px-4 pt-10 pb-24 text-center sm:px-8">
+        <Reveal className="flex flex-col items-center gap-5">
+          <Squiggle color={main} className="h-3 w-40 opacity-70" />
+          <p className="font-display text-[19px] font-semibold text-ink">
+            That&apos;s the whole note — every spec point, word for word.
+          </p>
+          <SoftButton onClick={onBack} ariaLabel="Back to the topic page">
+            <ArrowLeft className="h-4.5 w-4.5" /> Back to the topic page
+          </SoftButton>
+          <p className="mt-2 text-[12px] leading-relaxed font-bold text-ink-faint">
+            <Fmt text={`==${unit.code}== · ${unit.title} · text kept verbatim from the ${doc.source}`} />
+          </p>
+        </Reveal>
+      </div>
     </div>
   );
 }
 
-/* ————— one specification section ————— */
+/* ————— one specification section — a room with its own colour ————— */
 
-function SpecSectionView({
-  section,
-  main,
-  done,
-  onToggle,
-  delay,
-}: {
-  section: SpecSection;
-  main: string;
-  done: boolean;
-  onToggle: () => void;
-  delay: number;
-}) {
-  const [fire, setFire] = useState(0);
+function SpecSectionView({ section, accent }: { section: SpecSection; accent: string }) {
   return (
-    <section id={`spec-${section.spec.replace(".", "-")}`} className="scroll-mt-[176px]">
-      <Reveal delay={delay}>
-        {/* spec banner — the official wording, stated above the section */}
+    <div className="flex flex-col gap-7">
+      {/* spec banner — the official wording, stated above the section */}
+      <div>
         <div className="flex items-center gap-3">
           <span
-            className="inline-flex shrink-0 rotate-[-1.5deg] items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.08em] text-white uppercase"
-            style={{ background: main, boxShadow: `0 3px 0 ${shade(main)}` }}
+            className="inline-flex shrink-0 rotate-[-1.5deg] items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.08em] uppercase"
+            style={{ background: accent, color: readableInk(accent), boxShadow: `0 3px 0 ${shade(accent)}` }}
           >
             <Target className="h-3.5 w-3.5" /> Spec {section.spec}
           </span>
-          <span aria-hidden className="h-[3px] flex-1 rounded-full" style={{ background: tint(main, 18) }} />
+          <span aria-hidden className="h-[3px] flex-1 rounded-full" style={{ background: tint(accent, 32) }} />
         </div>
         <h2 className="mt-3.5 font-display text-[clamp(1.55rem,3.4vw,1.95rem)] font-semibold tracking-tight text-ink">
           {section.title}
         </h2>
-        <div className="mt-4 rounded-[22px] px-5 py-4" style={{ background: tint(main, 7), borderLeft: `5px solid ${tint(main, 45)}` }}>
-          <div className="font-display text-[10.5px] font-extrabold tracking-[0.2em] uppercase" style={{ color: shade(main, 62) }}>
+        <div className="mt-4 rounded-[22px] bg-paper/85 px-5 py-4" style={{ borderLeft: `5px solid ${tint(accent, 45)}` }}>
+          <div className="font-display text-[10.5px] font-extrabold tracking-[0.2em] uppercase" style={{ color: shade(accent, 62) }}>
             From the specification
           </div>
           <p className="mt-1.5 text-[14.5px] leading-[1.75] text-ink italic">
             <Fmt text={section.statement} />
           </p>
         </div>
-      </Reveal>
+      </div>
 
-      <div className="mt-7 flex flex-col gap-6">
+      <div className="flex flex-col gap-6">
         {section.blocks.map((b, i) => (
           <Reveal key={i} delay={Math.min(i * 0.03, 0.12)} y={18}>
-            <BlockView block={b} main={main} />
+            <BlockView block={b} accent={accent} />
           </Reveal>
         ))}
       </div>
-
-      {/* mark as revised */}
-      <div className="relative mt-8 flex items-center gap-4">
-        <Confetti fire={fire} />
-        <motion.button
-          type="button"
-          onClick={() => {
-            if (!done) setFire((f) => f + 1);
-            onToggle();
-          }}
-          aria-pressed={done}
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.94 }}
-          className="inline-flex min-h-[44px] shrink-0 cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[13.5px] font-semibold"
-          style={
-            done
-              ? { background: "#12B886", color: "#fff", boxShadow: "0 4px 0 #0B7A57" }
-              : { background: "var(--color-paper)", color: "var(--color-ink)", boxShadow: "0 4px 0 color-mix(in oklab, var(--color-ink) 10%, transparent)" }
-          }
-        >
-          {done ? <Check className="h-4.5 w-4.5" strokeWidth={3} /> : <PartyPopper className="h-4.5 w-4.5" style={{ color: main }} />}
-          {done ? "Revised" : "Mark as revised"}
-        </motion.button>
-        <span aria-hidden className="h-[3px] flex-1 rounded-full bg-ink/5" />
-      </div>
-    </section>
+    </div>
   );
 }
 
 /* ————— block dispatcher ————— */
 
-function BlockView({ block: b, main }: { block: NotesBlock; main: string }) {
+function BlockView({ block: b, accent }: { block: NotesBlock; accent: string }) {
   switch (b.k) {
     case "p":
       return (
@@ -438,7 +356,7 @@ function BlockView({ block: b, main }: { block: NotesBlock; main: string }) {
     case "h":
       return (
         <div className="flex items-center gap-2.5 pt-2">
-          <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: main }} />
+          <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: accent }} />
           <h3 className="font-display text-[21px] font-semibold tracking-tight text-ink">
             <Fmt text={b.text} />
           </h3>
@@ -449,7 +367,7 @@ function BlockView({ block: b, main }: { block: NotesBlock; main: string }) {
         <ul className="flex max-w-[70ch] flex-col gap-2.5">
           {b.items.map((t, i) => (
             <li key={i} className="flex items-start gap-3 text-[16px] leading-[1.8] text-ink/90">
-              <span className="mt-[11px] h-2 w-2 shrink-0 rounded-full" style={{ background: tint(main, 55) }} />
+              <span className="mt-[11px] h-2 w-2 shrink-0 rounded-full" style={{ background: tint(accent, 55) }} />
               <span>
                 <Fmt text={t} />
               </span>
@@ -471,7 +389,7 @@ function BlockView({ block: b, main }: { block: NotesBlock; main: string }) {
       );
     case "def":
       return (
-        <div className="max-w-[72ch] rounded-[20px] bg-paper px-5 py-4 puff" style={{ borderLeft: `5px solid ${tint(main, 40)}` }}>
+        <div className="max-w-[72ch] rounded-[20px] bg-paper px-5 py-4 puff" style={{ borderLeft: `5px solid ${tint(accent, 40)}` }}>
           <h4 className="font-display text-[16.5px] font-semibold text-ink">
             <Fmt text={b.term} />
           </h4>
@@ -482,10 +400,10 @@ function BlockView({ block: b, main }: { block: NotesBlock; main: string }) {
       );
     case "eq":
       return (
-        <div className="max-w-[72ch] rounded-[22px] p-5" style={{ background: tint(main, 9) }}>
+        <div className="max-w-[72ch] rounded-[22px] p-5" style={{ background: tint(accent, 9) }}>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5">
             {b.eq.split(/\s{2,}/).map((part, i) => (
-              <span key={i} className="rounded-2xl bg-paper px-4 py-2.5 font-mono text-[14.5px] font-semibold text-ink shadow-[0_3px_0_rgb(61_43_31/0.06)]">
+              <span key={i} className="rounded-2xl bg-paper px-4 py-2.5 font-mono text-[14.5px] font-semibold text-ink shadow-[0_3px_0_color-mix(in_oklab,var(--color-ink)_7%,transparent)]">
                 <Fmt text={part.trim()} />
               </span>
             ))}
@@ -498,11 +416,11 @@ function BlockView({ block: b, main }: { block: NotesBlock; main: string }) {
         </div>
       );
     case "table":
-      return <CandyTable head={b.head} rows={b.rows} caption={b.caption} main={main} />;
+      return <CandyTable head={b.head} rows={b.rows} caption={b.caption} accent={accent} />;
     case "worked":
-      return <Worked title={b.title} question={b.question} steps={b.steps} answer={b.answer} main={main} />;
+      return <Worked title={b.title} question={b.question} steps={b.steps} answer={b.answer} accent={accent} />;
     case "steps":
-      return <Journey caption={b.caption} items={b.items} main={main} />;
+      return <Journey caption={b.caption} items={b.items} accent={accent} />;
     case "checkpoint":
       return (
         <div className="flex items-center gap-3 rounded-full bg-paper px-5 py-4 puff">
@@ -515,7 +433,7 @@ function BlockView({ block: b, main }: { block: NotesBlock; main: string }) {
         </div>
       );
     case "figure":
-      return <Figure kind={b.kind} caption={b.caption} main={main} />;
+      return <Figure kind={b.kind} caption={b.caption} accent={accent} />;
     case "wow":
       return (
         <div className="max-w-[72ch] rounded-[22px] p-5 sm:p-6" style={{ background: tint("#9775FA", 12) }}>
@@ -543,12 +461,12 @@ function CandyTable({
   head,
   rows,
   caption,
-  main,
+  accent,
 }: {
   head: string[];
   rows: string[][];
   caption?: string;
-  main: string;
+  accent: string;
 }) {
   return (
     <div className="max-w-full">
@@ -561,7 +479,7 @@ function CandyTable({
         <div className="overflow-x-auto">
           <table className="w-full min-w-[480px] border-collapse text-left">
             <thead>
-              <tr style={{ background: tint(main, 15) }}>
+              <tr style={{ background: tint(accent, 15) }}>
                 {head.map((h, i) => (
                   <th key={i} className="px-4 py-3.5 font-display text-[12px] font-semibold tracking-[0.06em] whitespace-nowrap text-ink uppercase sm:px-5">
                     <Fmt text={h} />
@@ -571,7 +489,7 @@ function CandyTable({
             </thead>
             <tbody>
               {rows.map((r, i) => (
-                <tr key={i} className="border-t-[2.5px] border-dashed border-ink/10" style={{ background: i % 2 === 1 ? tint(main, 4) : undefined }}>
+                <tr key={i} className="border-t-[2.5px] border-dashed border-ink/10" style={{ background: i % 2 === 1 ? tint(accent, 4) : undefined }}>
                   {r.map((c, j) => (
                     <td key={j} className={`px-4 py-3.5 align-top text-[14px] leading-[1.65] sm:px-5 ${j === 0 ? "font-extrabold text-ink" : "text-ink-soft"}`}>
                       <Fmt text={c} />
@@ -594,20 +512,20 @@ function Worked({
   question,
   steps,
   answer,
-  main,
+  accent,
 }: {
   title: string;
   question: string;
   steps: string[];
   answer: string;
-  main: string;
+  accent: string;
 }) {
   return (
     <div className="rounded-[28px] bg-paper p-5 puff sm:p-6">
       <div className="flex flex-wrap items-center gap-3">
         <span
-          className="inline-flex shrink-0 rotate-[-1.5deg] items-center rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.1em] text-white uppercase"
-          style={{ background: main }}
+          className="inline-flex shrink-0 rotate-[-1.5deg] items-center rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.1em] uppercase"
+          style={{ background: accent, color: readableInk(accent) }}
         >
           <PenLine className="mr-1.5 h-3.5 w-3.5" /> {title}
         </span>
@@ -619,8 +537,8 @@ function Worked({
         {steps.map((s, i) => (
           <div key={i} style={{ marginLeft: `min(${i * 14}px, 56px)` }}>
             {i > 0 && <div className="dot-line mb-1 ml-6 h-4" aria-hidden />}
-            <div className="inline-flex max-w-full items-start gap-2.5 rounded-[18px] px-4 py-2.5 text-[15px] leading-[1.7] text-ink" style={{ background: tint(main, 9) }}>
-              <span className="mt-0.5 grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full font-display text-[11px] font-bold text-white" style={{ background: main }}>
+            <div className="inline-flex max-w-full items-start gap-2.5 rounded-[18px] px-4 py-2.5 text-[15px] leading-[1.7] text-ink" style={{ background: tint(accent, 9) }}>
+              <span className="mt-0.5 grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full font-display text-[11px] font-bold" style={{ background: accent, color: readableInk(accent) }}>
                 {i + 1}
               </span>
               <span>
@@ -631,10 +549,10 @@ function Worked({
         ))}
       </div>
       <div
-        className="mt-4 flex items-start gap-2.5 rounded-[20px] bg-paper px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_rgb(61_43_31/0.07)]"
-        style={{ borderLeft: `6px solid ${main}` }}
+        className="mt-4 flex items-start gap-2.5 rounded-[20px] bg-paper px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_color-mix(in_oklab,var(--color-ink)_7%,transparent)]"
+        style={{ borderLeft: `6px solid ${accent}` }}
       >
-        <Check className="mt-0.5 h-5 w-5 shrink-0" style={{ color: main }} strokeWidth={3} />
+        <Check className="mt-0.5 h-5 w-5 shrink-0" style={{ color: accent }} strokeWidth={3} />
         <span>
           <Fmt text={answer} />
         </span>
@@ -657,11 +575,11 @@ const STEP_ICONS: Record<string, typeof Flame> = {
 function Journey({
   caption,
   items,
-  main,
+  accent,
 }: {
   caption?: string;
   items: { title: string; text: string; icon?: string }[];
-  main: string;
+  accent: string;
 }) {
   const [open, setOpen] = useState(0);
   return (
@@ -679,8 +597,8 @@ function Journey({
                 aria-expanded={isOpen}
                 className="flex w-full cursor-pointer items-center gap-3 px-4 py-3.5 text-left sm:px-5"
               >
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full" style={{ background: isOpen ? main : tint(main, 14) }}>
-                  <Icon className="h-4.5 w-4.5" style={{ color: isOpen ? "#fff" : shade(main, 62) }} strokeWidth={2.5} />
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full" style={{ background: isOpen ? accent : tint(accent, 14) }}>
+                  <Icon className="h-4.5 w-4.5" style={{ color: isOpen ? readableInk(accent) : shade(accent, 62) }} strokeWidth={2.5} />
                 </span>
                 <span className="min-w-0 flex-1 font-display text-[15.5px] font-semibold text-ink">{it.title}</span>
                 <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
@@ -712,33 +630,41 @@ function Journey({
 
 /* ————— figures ————— */
 
-function Figure({ kind, caption, main }: { kind: string; caption?: string; main: string }) {
+/* wide plots scroll sideways on phones instead of shrinking to mush */
+const WIDE_FIGS = new Set(["mass-spec", "ie-graph", "succ-ie", "pt-blocks", "spectrum-bromine", "radius", "fill-order", "melting"]);
+
+function Figure({ kind, caption, accent }: { kind: string; caption?: string; accent: string }) {
   let node: ReactNode = null;
   switch (kind) {
-    case "atom": node = <FigAtom main={main} />; break;
-    case "notation": node = <FigNotation main={main} />; break;
+    case "atom": node = <FigAtom accent={accent} />; break;
+    case "notation": node = <FigNotation accent={accent} />; break;
+    case "mass-spec": node = <FigMassSpec />; break;
+    case "shielding": node = <FigShielding accent={accent} />; break;
     case "spectrum-neon": node = <FigSpectrumNeon />; break;
     case "spectrum-boron": node = <FigSpectrumBoron />; break;
     case "spectrum-bromine": node = <FigSpectrumBromine />; break;
     case "spectrum-cl2": node = <FigSpectrumCl2 />; break;
     case "spectrum-ethanol": node = <FigSpectrumEthanol />; break;
-    case "orbitals": node = <FigOrbitals main={main} />; break;
-    case "fill-demo": node = <FigFillDemo main={main} />; break;
-    case "fill-order": node = <FigFillOrder main={main} />; break;
-    case "boxes-c": node = <FigBoxesC main={main} />; break;
-    case "boxes-s": node = <FigBoxesS main={main} />; break;
+    case "orbitals": node = <FigOrbitals accent={accent} />; break;
+    case "fill-demo": node = <FigFillDemo accent={accent} />; break;
+    case "fill-order": node = <FigFillOrder accent={accent} />; break;
+    case "boxes-c": node = <FigBoxesC accent={accent} />; break;
+    case "boxes-s": node = <FigBoxesS accent={accent} />; break;
     case "ie-graph": node = <FigIeGraph />; break;
     case "succ-ie": node = <FigSuccIe />; break;
     case "melting": node = <FigMelting />; break;
     case "pt-blocks": node = <FigPtBlocks />; break;
-    case "radius": node = <FigRadius main={main} />; break;
+    case "radius": node = <FigRadius accent={accent} />; break;
   }
   if (!node) return null;
+  const wide = WIDE_FIGS.has(kind);
   return (
-    <div className="rounded-[28px] bg-[#FFFDF7] p-4 puff sm:p-6">
-      <div className="flex justify-center">{node}</div>
+    <div className="rounded-[28px] bg-paper p-4 puff sm:p-6">
+      <div className={wide ? "no-scrollbar overflow-x-auto" : "flex justify-center"}>
+        <div className={wide ? "min-w-[620px]" : "flex w-full justify-center"}>{node}</div>
+      </div>
       {caption && (
-        <p className="mx-auto mt-3 max-w-[58ch] text-center text-[12.5px] leading-[1.65] font-semibold text-[#B7A18E]">
+        <p className="mx-auto mt-3 max-w-[58ch] text-center text-[12.5px] leading-[1.65] font-semibold text-ink-faint">
           <Fmt text={caption} />
         </p>
       )}

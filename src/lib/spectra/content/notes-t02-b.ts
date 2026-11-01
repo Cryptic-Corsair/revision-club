@@ -31,6 +31,7 @@ export const SECTIONS_B: SpecSection[] = [
         term: "Shielding effect",
         text: "The electron in the outermost energy level experiences more inter-electron repulsion known as ==shielding==. The greater the number of the inner shell electrons the greater is the shielding effect (screening effect). The force of attraction becomes weaker. Less energy is required to remove the electron (==lower ionization energy==).",
       },
+      { k: "figure", kind: "shielding", caption: "Shielding in sodium — the ten inner-shell electrons sit between the +11 nucleus and the outer 3s electron, so that electron feels far less than the full nuclear pull." },
       {
         k: "p",
         text: "These three factors explain every trend: across a period the growing **nuclear charge** wins; down a group it is **distance and shielding**. Both trends are explained in full at **2.18**.",

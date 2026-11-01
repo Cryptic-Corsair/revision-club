@@ -10,8 +10,12 @@ import { tint, shade } from "./bits";
    Every chart plots real values taken from the revision note.
    ═══════════════════════════════════════════════════════════════ */
 
-const INK = "#3D2B1F";
-const FAINT = "rgba(61,43,31,0.35)";
+/* ————— theme-aware ink — colours ride the mood tokens ————— */
+
+const INK = "var(--color-ink)";
+const SOFT = "var(--color-ink-soft)";
+const PAPER = "var(--color-paper)";
+const FAINT = "color-mix(in oklab, var(--color-ink) 30%, transparent)";
 
 /* ————— shared chart scaffold ————— */
 
@@ -59,7 +63,7 @@ function ChartFrame({
 
 /* ————— 2.1 · the atom ————— */
 
-export function FigAtom({ main = "#FF6B6B" }: { main?: string }) {
+export function FigAtom({ accent = "#FF6B6B" }: { accent?: string }) {
   const shells = [
     { r: 52, electrons: [0] },
     { r: 86, electrons: [0, 72, 144, 216, 288] },
@@ -75,7 +79,7 @@ export function FigAtom({ main = "#FF6B6B" }: { main?: string }) {
           rx={s.r + 22}
           ry={s.r * 0.62 + 6}
           fill="none"
-          stroke={tint(main, 45)}
+          stroke={tint(accent, 45)}
           strokeWidth="3.5"
           strokeDasharray="7 8"
           strokeLinecap="round"
@@ -91,7 +95,7 @@ export function FigAtom({ main = "#FF6B6B" }: { main?: string }) {
           return (
             <g key={`${i}-${j}`}>
               <circle cx={cx} cy={cy} r="7.5" fill={INK} />
-              <circle cx={cx - 2} cy={cy - 2.4} r="2.2" fill="#FFFDF7" />
+              <circle cx={cx - 2} cy={cy - 2.4} r="2.2" fill={PAPER} />
             </g>
           );
         })
@@ -100,10 +104,10 @@ export function FigAtom({ main = "#FF6B6B" }: { main?: string }) {
       {(
         [
           [-10, -6, "#FF6B6B"],
-          [6, -10, "#B9AA9C"],
+          [6, -10, "var(--color-ink-faint)"],
           [-2, 8, "#FF6B6B"],
-          [12, 6, "#B9AA9C"],
-          [-14, 8, "#B9AA9C"],
+          [12, 6, "var(--color-ink-faint)"],
+          [-14, 8, "var(--color-ink-faint)"],
           [4, -1, "#FF6B6B"],
         ] as const
       ).map(([dx, dy, c], i) => (
@@ -117,7 +121,7 @@ export function FigAtom({ main = "#FF6B6B" }: { main?: string }) {
       <text x="24" y="52" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
         quantum shell
       </text>
-      <text x="24" y="68" fontSize="11" fontWeight="700" fill="#8A7261" fontFamily="var(--font-body)">
+      <text x="24" y="68" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
         (energy level)
       </text>
       <text x="182" y="228" textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
@@ -130,7 +134,7 @@ export function FigAtom({ main = "#FF6B6B" }: { main?: string }) {
 
 /* ————— 2.3 · A/Z notation ————— */
 
-export function FigNotation({ main = "#FF6B6B" }: { main?: string }) {
+export function FigNotation({ accent = "#FF6B6B" }: { accent?: string }) {
   return (
     <svg viewBox="0 0 560 240" className="w-full" role="img" aria-label="Mass number and atomic number notation">
       <text x="205" y="98" textAnchor="middle" fontSize="40" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
@@ -142,18 +146,18 @@ export function FigNotation({ main = "#FF6B6B" }: { main?: string }) {
       <text x="252" y="152" textAnchor="middle" fontSize="96" fontWeight="800" fill={INK} fontFamily="var(--font-display)">
         C
       </text>
-      <path d="M240 84 Q 290 34 356 46" fill="none" stroke={main} strokeWidth="3" strokeLinecap="round" strokeDasharray="1 8" />
+      <path d="M240 84 Q 290 34 356 46" fill="none" stroke={accent} strokeWidth="3" strokeLinecap="round" strokeDasharray="1 8" />
       <text x="366" y="40" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
         mass number = 12
       </text>
-      <text x="366" y="58" fontSize="12" fontWeight="700" fill="#8A7261" fontFamily="var(--font-body)">
+      <text x="366" y="58" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
         protons + neutrons
       </text>
       <path d="M236 172 Q 300 196 356 188" fill="none" stroke="#12B886" strokeWidth="3" strokeLinecap="round" strokeDasharray="1 8" />
       <text x="366" y="182" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
         atomic (proton) number = 6
       </text>
-      <text x="366" y="200" fontSize="12" fontWeight="700" fill="#8A7261" fontFamily="var(--font-body)">
+      <text x="366" y="200" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
         the protons
       </text>
     </svg>
@@ -291,10 +295,10 @@ export function FigSpectrumEthanol() {
       xMax={50}
       xTicks={[10, 20, 30, 40, 46]}
       peaks={[
-        { x: 15, h: 26, label: "", color: "rgba(61,43,31,0.25)" },
-        { x: 29, h: 62, label: "", color: "rgba(61,43,31,0.25)" },
-        { x: 31, h: 88, label: "", color: "rgba(61,43,31,0.25)" },
-        { x: 45, h: 40, label: "", color: "rgba(61,43,31,0.25)" },
+        { x: 15, h: 26, label: "", color: "color-mix(in oklab, var(--color-ink) 25%, transparent)" },
+        { x: 29, h: 62, label: "", color: "color-mix(in oklab, var(--color-ink) 25%, transparent)" },
+        { x: 31, h: 88, label: "", color: "color-mix(in oklab, var(--color-ink) 25%, transparent)" },
+        { x: 45, h: 40, label: "", color: "color-mix(in oklab, var(--color-ink) 25%, transparent)" },
         { x: 46, h: 74, label: "M⁺ 46", color: "#FF6B6B" },
       ]}
     />
@@ -303,12 +307,12 @@ export function FigSpectrumEthanol() {
 
 /* ————— 2.12 · orbital shapes ————— */
 
-export function FigOrbitals({ main = "#FF6B6B" }: { main?: string }) {
+export function FigOrbitals({ accent = "#FF6B6B" }: { accent?: string }) {
   return (
     <svg viewBox="0 0 660 240" className="w-full" role="img" aria-label="Orbital shapes">
       {/* s orbital */}
       <g transform="translate(110,120)">
-        <circle r="72" fill={tint(main, 14)} stroke={INK} strokeWidth="3.5" />
+        <circle r="72" fill={tint(accent, 14)} stroke={INK} strokeWidth="3.5" />
         <circle r="9" fill={INK} />
         <text y="108" textAnchor="middle" fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
           s — sphere
@@ -338,7 +342,7 @@ export function FigOrbitals({ main = "#FF6B6B" }: { main?: string }) {
 
 /* ————— 2.13 · fill-demo (interactive) ————— */
 
-export function FigFillDemo({ main = "#FF6B6B" }: { main?: string }) {
+export function FigFillDemo({ accent = "#FF6B6B" }: { accent?: string }) {
   const [count, setCount] = useState(0);
   const full = count >= 6;
   const status = full
@@ -350,7 +354,7 @@ export function FigFillDemo({ main = "#FF6B6B" }: { main?: string }) {
       : "Boxes are full, so electrons start pairing — opposite spins, Pauli Exclusion Principle.";
 
   return (
-    <div className="rounded-[26px] bg-[#FFFDF7] p-5 puff sm:p-6">
+    <div className="rounded-[26px] bg-paper p-5 puff sm:p-6">
       <div className="flex flex-wrap items-end justify-center gap-3 sm:gap-4">
         {[0, 1, 2].map((box) => {
           const up = count > box;
@@ -359,21 +363,21 @@ export function FigFillDemo({ main = "#FF6B6B" }: { main?: string }) {
             <div key={box} className="flex flex-col items-center gap-2">
               <motion.div
                 layout
-                className="grid h-16 w-16 place-items-center rounded-[18px] bg-white font-display text-[30px] font-bold"
-                style={{ boxShadow: "inset 0 0 0 3px rgba(61,43,31,0.10), 0 4px 0 rgba(61,43,31,0.07)" }}
+                className="grid h-16 w-16 place-items-center rounded-[18px] bg-paper font-display text-[30px] font-bold"
+                style={{ boxShadow: "inset 0 0 0 3px color-mix(in oklab, var(--color-ink) 10%, transparent), 0 4px 0 color-mix(in oklab, var(--color-ink) 7%, transparent)" }}
                 animate={up && down ? { rotate: [0, -3, 3, 0] } : {}}
               >
-                {up && <span className="text-[26px]" style={{ color: shade(main) }}>↑</span>}
+                {up && <span className="text-[26px]" style={{ color: shade(accent) }}>↑</span>}
                 {up && down && <span className="ml-0.5 text-[26px]" style={{ color: "#12B886" }}>↓</span>}
               </motion.div>
-              {box === 0 && <span className="font-display text-[12px] font-bold tracking-wide text-[#B7A18E]">2p</span>}
+              {box === 0 && <span className="font-display text-[12px] font-bold tracking-wide text-ink-faint">2p</span>}
             </div>
           );
         })}
       </div>
       <div className="mt-5 flex flex-col items-center gap-3">
-        <p className="text-center text-[14.5px] font-bold text-[#3D2B1F]">{status}</p>
-        <p className="text-center text-[12.5px] font-bold text-[#B7A18E]">{count}/6 electrons placed</p>
+        <p className="text-center text-[14.5px] font-bold text-ink">{status}</p>
+        <p className="text-center text-[12.5px] font-bold text-ink-faint">{count}/6 electrons placed</p>
         <div className="flex gap-2.5">
           {!full ? (
             <motion.button
@@ -382,7 +386,7 @@ export function FigFillDemo({ main = "#FF6B6B" }: { main?: string }) {
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
               className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[14px] font-semibold text-white"
-              style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
+              style={{ background: accent, boxShadow: `0 4px 0 ${shade(accent)}` }}
             >
               +1 electron
             </motion.button>
@@ -392,7 +396,7 @@ export function FigFillDemo({ main = "#FF6B6B" }: { main?: string }) {
               onClick={() => setCount(0)}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full bg-[rgb(61_43_31/0.05)] px-5 py-2.5 font-display text-[14px] font-semibold text-[#8A7261]"
+              className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full bg-ink/5 px-5 py-2.5 font-display text-[14px] font-semibold text-ink-soft"
             >
               <RotateCcw className="h-4 w-4" /> Empty the sub-shell
             </motion.button>
@@ -441,11 +445,11 @@ export function spdfString(parts: { sub: string; e: number }[]): string {
 
 export function BoxNotation({
   parts,
-  main = "#FF6B6B",
+  accent = "#FF6B6B",
   compact = false,
 }: {
   parts: { sub: string; e: number }[];
-  main?: string;
+  accent?: string;
   compact?: boolean;
 }) {
   const boxSize = compact ? 20 : 30;
@@ -464,23 +468,23 @@ export function BoxNotation({
               {boxes.map((b, i) => (
                 <div
                   key={i}
-                  className="grid place-items-center rounded-[8px] bg-white font-bold"
+                  className="grid place-items-center rounded-[8px] bg-paper font-bold"
                   style={{
                     width: boxSize,
                     height: boxSize,
-                    boxShadow: "inset 0 0 0 2.5px rgba(61,43,31,0.10), 0 2.5px 0 rgba(61,43,31,0.06)",
+                    boxShadow: "inset 0 0 0 2.5px color-mix(in oklab, var(--color-ink) 10%, transparent), 0 2.5px 0 color-mix(in oklab, var(--color-ink) 6%, transparent)",
                     fontSize: compact ? 12 : 15,
                   }}
                 >
                   {b.up && (
-                    <span style={{ color: shade(main) }}>
+                    <span style={{ color: shade(accent) }}>
                       ↑{b.down ? <span style={{ color: "#12B886" }}>↓</span> : null}
                     </span>
                   )}
                 </div>
               ))}
             </div>
-            <span className="font-mono text-[11.5px] font-bold text-[#8A7261]">
+            <span className="font-mono text-[11.5px] font-bold text-ink-soft">
               {p.sub}
               {p.e}
             </span>
@@ -491,31 +495,31 @@ export function BoxNotation({
   );
 }
 
-export function FigBoxesC({ main = "#FF6B6B" }: { main?: string }) {
+export function FigBoxesC({ accent = "#FF6B6B" }: { accent?: string }) {
   const parts = buildConfig(6);
   return (
-    <div className="rounded-[26px] bg-[#FFFDF7] p-5 puff sm:p-6">
-      <div className="mb-3 font-display text-[15px] font-semibold text-[#3D2B1F]">
+    <div className="rounded-[26px] bg-paper p-5 puff sm:p-6">
+      <div className="mb-3 font-display text-[15px] font-semibold text-ink">
         Carbon (Z = 6): <span className="font-mono">1s² 2s² 2p²</span>
       </div>
-      <BoxNotation parts={parts} main={main} />
+      <BoxNotation parts={parts} accent={accent} />
     </div>
   );
 }
 
-export function FigBoxesS({ main = "#FF6B6B" }: { main?: string }) {
+export function FigBoxesS({ accent = "#FF6B6B" }: { accent?: string }) {
   const parts = buildConfig(16);
   return (
-    <div className="rounded-[26px] bg-[#FFFDF7] p-5 puff sm:p-6">
-      <div className="mb-3 font-display text-[15px] font-semibold text-[#3D2B1F]">
+    <div className="rounded-[26px] bg-paper p-5 puff sm:p-6">
+      <div className="mb-3 font-display text-[15px] font-semibold text-ink">
         Sulfur (Z = 16): <span className="font-mono">1s² 2s² 2p⁶ 3s² 3p⁴</span>
       </div>
-      <BoxNotation parts={parts} main={main} />
+      <BoxNotation parts={parts} accent={accent} />
     </div>
   );
 }
 
-export function FigFillOrder({ main = "#FF6B6B" }: { main?: string }) {
+export function FigFillOrder({ accent = "#FF6B6B" }: { accent?: string }) {
   const steps: { label: string; note?: string }[] = [
     { label: "1s" },
     { label: "2s" },
@@ -550,12 +554,12 @@ export function FigFillOrder({ main = "#FF6B6B" }: { main?: string }) {
                 strokeLinecap="round"
               />
             )}
-            <rect x={indent} y={y} width="130" height="32" rx="16" fill={isD ? tint("#9775FA", 20) : tint(main, 14)} stroke={INK} strokeWidth="2.5" />
+            <rect x={indent} y={y} width="130" height="32" rx="16" fill={isD ? tint("#9775FA", 20) : tint(accent, 14)} stroke={INK} strokeWidth="2.5" />
             <text x={indent + 65} y={y + 21} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
               {s.label}
             </text>
             {s.note && (
-              <text x={indent + 146} y={y + 21} fontSize="12" fontWeight="700" fill="#8A7261" fontFamily="var(--font-body)">
+              <text x={indent + 146} y={y + 21} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
                 ← {s.note}
               </text>
             )}
@@ -606,7 +610,7 @@ export function FigIeGraph() {
           <text x={X(i)} y={h - pad.b + 20} textAnchor="middle" fontSize="10" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
             {sym}
           </text>
-          <text x={X(i)} y={h - pad.b + 33} textAnchor="middle" fontSize="8.5" fontWeight="700" fill="#8A7261" fontFamily="var(--font-body)">
+          <text x={X(i)} y={h - pad.b + 33} textAnchor="middle" fontSize="8.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
             {i + 1}
           </text>
         </g>
@@ -621,7 +625,7 @@ export function FigIeGraph() {
   );
 }
 
-export function FigRadius({ main = "#FF6B6B" }: { main?: string }) {
+export function FigRadius({ accent = "#FF6B6B" }: { accent?: string }) {
   return (
     <svg viewBox="0 0 640 260" className="w-full" role="img" aria-label="Atomic vs ionic radius">
       {/* Na → Na+ */}
@@ -676,10 +680,10 @@ export function FigRadius({ main = "#FF6B6B" }: { main?: string }) {
           18 electrons
         </text>
       </g>
-      <text x="210" y="228" textAnchor="middle" fontSize="13" fontWeight="800" fill="#8A7261" fontFamily="var(--font-body)">
+      <text x="210" y="228" textAnchor="middle" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">
         cation = smaller
       </text>
-      <text x="482" y="228" textAnchor="middle" fontSize="13" fontWeight="800" fill="#8A7261" fontFamily="var(--font-body)">
+      <text x="482" y="228" textAnchor="middle" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">
         anion = larger
       </text>
     </svg>
@@ -836,8 +840,170 @@ export function FigPtBlocks() {
       <text x={ox + 18.5 * (cw + gap)} y={oy + 3 * (ch + gap) + 10} textAnchor="middle" fontSize="14" fontWeight="800" fill="#12B886" fontFamily="var(--font-body)">
         p
       </text>
-      <text x={ox + 10 * (cw + gap)} y={oy + 7.4 * (ch + gap)} textAnchor="middle" fontSize="12.5" fontWeight="800" fill="#B08D00" fontFamily="var(--font-body)">
+      <text x={ox + 10 * (cw + gap)} y={oy + 7.4 * (ch + gap)} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
         f — lanthanides &amp; actinides
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 2.6 · the mass spectrometer, drawn as a machine ————— */
+
+function StageBadge({ x, y, n, label, below = true }: { x: number; y: number; n: number; label: string; below?: boolean }) {
+  return (
+    <g>
+      <circle cx={x} cy={y} r="12" fill="#FF6B6B" stroke="var(--color-ink)" strokeWidth="2" />
+      <text x={x} y={y + 4.5} textAnchor="middle" fontSize="12.5" fontWeight="800" fill="#fff" fontFamily="var(--font-body)">
+        {n}
+      </text>
+      <text
+        x={x}
+        y={below ? y + 32 : y - 20}
+        textAnchor="middle"
+        fontSize="12"
+        fontWeight="800"
+        fill={INK}
+        fontFamily="var(--font-body)"
+      >
+        {label}
+      </text>
+    </g>
+  );
+}
+
+export function FigMassSpec() {
+  return (
+    <svg viewBox="0 0 780 400" className="w-full" role="img" aria-label="How a mass spectrometer works">
+      {/* vacuum chamber */}
+      <rect x="18" y="58" width="744" height="252" rx="26" fill="none" stroke={FAINT} strokeWidth="2.5" strokeDasharray="7 8" />
+      <text x="44" y="86" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)" fontStyle="italic">
+        the whole tube sits inside a high vacuum
+      </text>
+
+      {/* ion paths — drawn first so the chambers sit on top */}
+      <path d="M67 180 H 380 C 462 180 520 202 590 258" fill="none" stroke="#FF6B6B" strokeWidth="4" strokeLinecap="round" strokeDasharray="9 8" />
+      <path d="M380 180 C 470 180 540 194 618 240" fill="none" stroke={FAINT} strokeWidth="3" strokeLinecap="round" strokeDasharray="4 8" />
+
+      {/* sample vial + inlet */}
+      <circle cx="52" cy="180" r="15" fill={PAPER} stroke={INK} strokeWidth="3" />
+      <path d="M52 165 v-10 M46 155 h12" stroke={INK} strokeWidth="3" strokeLinecap="round" />
+      <path d="M67 180 h48" stroke={INK} strokeWidth="4" strokeLinecap="round" />
+      {/* heater coil */}
+      <path d="M76 212 q6 -8 12 0 q6 8 12 0 q6 -8 12 0" fill="none" stroke="#FF922B" strokeWidth="3.5" strokeLinecap="round" />
+      <StageBadge x={95} y={252} n={1} label="vapourisation" />
+
+      {/* ionisation chamber */}
+      <rect x="172" y="140" width="92" height="80" rx="16" fill={tint("#9775FA", 12)} stroke={INK} strokeWidth="3" />
+      <circle cx="188" cy="180" r="6.5" fill={INK} />
+      {[0, 1, 2].map((i) => (
+        <path key={i} d={`M${198 + i * 16} 175 l9 5 l-9 5`} fill="none" stroke={INK} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      ))}
+      <text x="218" y="128" textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        electron gun knocks off e⁻
+      </text>
+      <StageBadge x={218} y={252} n={2} label="ionisation" />
+
+      {/* acceleration plates */}
+      <rect x="298" y="128" width="16" height="42" rx="7" fill={tint("#12B886", 30)} stroke={INK} strokeWidth="2.5" />
+      <rect x="298" y="190" width="16" height="42" rx="7" fill={tint("#FF6B6B", 30)} stroke={INK} strokeWidth="2.5" />
+      <text x="327" y="155" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">+</text>
+      <text x="327" y="226" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">−</text>
+      {[168, 186, 204].map((y) => (
+        <path key={y} d={`M282 ${y} l9 5 l-9 5`} fill="none" stroke={SOFT} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      ))}
+      <StageBadge x={306} y={252} n={3} label="acceleration" />
+
+      {/* magnet poles */}
+      <rect x="398" y="88" width="150" height="38" rx="11" fill={tint("#FF6B6B", 22)} stroke={INK} strokeWidth="3" />
+      <text x="473" y="113" textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">N</text>
+      <rect x="398" y="234" width="150" height="38" rx="11" fill={tint("#FF6B6B", 22)} stroke={INK} strokeWidth="3" />
+      <text x="473" y="259" textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">S</text>
+      {[146, 180, 214].map((y) => (
+        <line key={y} x1="412" y1={y} x2="534" y2={y} stroke={FAINT} strokeWidth="2" strokeDasharray="3 7" />
+      ))}
+      <StageBadge x={473} y={306} n={4} label="deflection" />
+
+      <text x="560" y="176" fontSize="11" fontWeight="800" fill="#FF6B6B" fontFamily="var(--font-body)">
+        lighter ions deflect more
+      </text>
+
+      {/* detector + amplifier */}
+      <rect x="600" y="248" width="14" height="52" rx="7" fill={PAPER} stroke={INK} strokeWidth="3" />
+      <path d="M607 300 v14" stroke={FAINT} strokeWidth="2.5" strokeDasharray="3 5" />
+      <rect x="556" y="318" width="112" height="42" rx="13" fill={tint("#12B886", 16)} stroke={INK} strokeWidth="3" />
+      <text x="612" y="344" textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        amplifier → recorder
+      </text>
+      <StageBadge x={712} y={272} n={5} label="detection" />
+      <text x="712" y="322" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        → mass
+      </text>
+      <text x="712" y="337" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        spectrum
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 2.10 · shielding — why outer electrons pull less ————— */
+
+export function FigShielding({ accent = "#FF6B6B" }: { accent?: string }) {
+  const cx = 180;
+  const cy = 160;
+  const shell2: [number, number][] = [0, 45, 90, 135, 180, 225, 270, 315].map((a) => {
+    const rad = (a * Math.PI) / 180;
+    return [cx + 100 * Math.cos(rad), cy + 100 * Math.sin(rad)];
+  });
+  return (
+    <svg viewBox="0 0 640 320" className="w-full" role="img" aria-label="Shielding of the outer electron">
+      {/* shells */}
+      <circle cx={cx} cy={cy} r="55" fill="none" stroke={FAINT} strokeWidth="2.5" strokeDasharray="6 8" />
+      <circle cx={cx} cy={cy} r="100" fill="none" stroke={FAINT} strokeWidth="2.5" strokeDasharray="6 8" />
+      <path d={`M ${cx + 142} ${cy} A 145 145 0 0 0 ${cx + 103} ${cy - 104}`} fill="none" stroke={FAINT} strokeWidth="2.5" strokeDasharray="6 8" />
+
+      {/* inner electrons */}
+      <circle cx={cx} cy={cy - 55} r="7" fill={INK} />
+      <circle cx={cx} cy={cy + 55} r="7" fill={INK} />
+      {shell2.map(([x, y], i) => (
+        <circle key={i} cx={x} cy={y} r="7" fill={INK} />
+      ))}
+
+      {/* nucleus */}
+      <circle cx={cx} cy={cy} r="21" fill="#FF6B6B" stroke={INK} strokeWidth="3" />
+      <text x={cx} y={cy + 5.5} textAnchor="middle" fontSize="15" fontWeight="800" fill="#fff" fontFamily="var(--font-body)">
+        +11
+      </text>
+
+      {/* outer electron */}
+      <circle cx={cx + 150} cy={cy} r="10" fill="#9775FA" stroke={INK} strokeWidth="3" />
+
+      {/* full pull vs effective pull */}
+      <path d={`M ${cx + 26} ${cy - 12} L ${cx + 122} ${cy - 26}`} fill="none" stroke="#FF6B6B" strokeWidth="3" strokeLinecap="round" strokeDasharray="7 6" />
+      <text x={cx + 84} y={cy - 40} textAnchor="middle" fontSize="11.5" fontWeight="800" fill="#FF6B6B" fontFamily="var(--font-body)">
+        the full pull of +11 …
+      </text>
+      <path d={`M ${cx + 122} ${cy + 34} L ${cx + 26} ${cy + 22}`} fill="none" stroke="#12B886" strokeWidth="3.5" strokeLinecap="round" />
+      <text x={cx + 78} y={cy + 62} textAnchor="middle" fontSize="11.5" fontWeight="800" fill="#12B886" fontFamily="var(--font-body)">
+        … what the outer electron actually feels
+      </text>
+
+      {/* annotations */}
+      <path d="M416 92 Q 340 96 288 134" fill="none" stroke={FAINT} strokeWidth="2.5" strokeLinecap="round" />
+      <text x="424" y="84" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        inner-shell electrons sit
+      </text>
+      <text x="424" y="101" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        between: they shield the charge
+      </text>
+      <path d="M416 236 Q 372 228 348 184" fill="none" stroke={FAINT} strokeWidth="2.5" strokeLinecap="round" />
+      <text x="424" y="240" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        so the outer electron is held
+      </text>
+      <text x="424" y="257" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        less tightly — easier to remove
+      </text>
+      <text x={cx + 176} y={cy + 4} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        ← the electron being removed
       </text>
     </svg>
   );
