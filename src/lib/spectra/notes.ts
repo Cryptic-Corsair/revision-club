@@ -17,7 +17,7 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 2, kept **word for word** and re-cut so that ==every specification point owns its section==. The official statement sits above each section, and every calculation is worked in full — no skipped lines.",
+        text: "This is the actual revision note for Topic 2, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every calculation is worked in full — no skipped lines.",
       },
     ],
     sections: [...SECTIONS_A, ...SECTIONS_B],

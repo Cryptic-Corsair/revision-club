@@ -265,7 +265,7 @@ export const WCH14_TOPICS: Topic[] = [
         items: [
           "In Kp problems, convert moles to mole fractions ==first==, multiply by total pressure second — skipping steps is where marks die.",
           "State the units of Kc/Kp by substituting powers of mol dm^−3^ or Pa — and say “no units” when the powers cancel.",
-          "“Explain the shift” answers: name Q vs K for equilibrium constants, or Le Chatelier for position — don't blend the two vocabularies.",
+          "“Explain the shift” answers: name Q vs K for equilibrium constants, or Le Chatelier for position — don't mix the two terms.",
         ],
       },
       {

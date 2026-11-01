@@ -4,8 +4,8 @@ import { fmtPlain } from "@/components/club/format";
 
 /* ═══════════════════════════════════════════════════════════════
    REACTION CLUB · deck + search index
-   Every checkpoint question on the site becomes a Blend Mode
-   flashcard; every topic becomes a search row. Both are derived
+   Every checkpoint question becomes a flashcard; every topic
+   becomes a search row. Both are derived
    from the same UNITS data — one source of truth, zero drift.
    ═══════════════════════════════════════════════════════════════ */
 
@@ -47,7 +47,7 @@ export const DECK_BY_UNIT: Record<UnitCode, number> = UNITS.reduce(
   {} as Record<UnitCode, number>
 );
 
-/** Fisher–Yates, seeded by Math.random — a fresh shuffle every blend */
+/** Fisher–Yates, seeded by Math.random — a fresh shuffle every round */
 export function shuffle<T>(arr: readonly T[]): T[] {
   const out = [...arr];
   for (let i = out.length - 1; i > 0; i--) {
@@ -62,7 +62,6 @@ export function shuffle<T>(arr: readonly T[]): T[] {
 export interface SearchRow {
   unit: UnitCode;
   unitMain: string;
-  unitNick: string;
   topicId: string;
   label: string;
   title: string;
@@ -78,13 +77,12 @@ export const SEARCH_INDEX: SearchRow[] = UNITS.flatMap((u) =>
     return {
       unit: u.code,
       unitMain: u.candy.main,
-      unitNick: u.candy.nick,
       topicId: t.id,
       label: t.label,
       title,
       summary,
       minutes: t.minutes,
-      hay: `${u.code} ${u.candy.nick} ${u.title} ${t.label} ${title} ${summary}`.toLowerCase(),
+      hay: `${u.code} ${u.title} ${u.shortTitle} ${t.label} ${title} ${summary}`.toLowerCase(),
     };
   })
 );

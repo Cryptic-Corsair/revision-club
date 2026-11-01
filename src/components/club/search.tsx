@@ -114,7 +114,7 @@ function PaletteBody({
                   setSel(0);
                 }}
                 onKeyDown={onKey}
-                placeholder="Search the club… try “buffer” or “WCH14”"
+                placeholder="Search topics… try “buffer” or “WCH14”"
                 aria-label="Search topics"
                 className="min-w-0 flex-1 bg-transparent font-display text-[17px] font-semibold text-ink placeholder:text-ink-faint/70 focus:outline-none"
               />
@@ -130,7 +130,7 @@ function PaletteBody({
               {!q.trim() ? (
                 <div className="px-3 py-5">
                   <div className="flex items-center gap-2 font-display text-[12px] font-bold tracking-[0.16em] text-ink-faint uppercase">
-                    <Sparkles className="h-3.5 w-3.5 text-lemon" /> try asking for
+                    <Sparkles className="h-3.5 w-3.5 text-lemon" /> try these
                   </div>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {SUGGESTIONS.map((s) => (
@@ -152,10 +152,10 @@ function PaletteBody({
               ) : results.length === 0 ? (
                 <div className="px-3 py-8 text-center">
                   <p className="font-display text-[16px] font-semibold text-ink">
-                    Nothing in the jar matches “{q}”.
+                    No topics match “{q}”.
                   </p>
                   <p className="mt-1 text-[13.5px] font-bold text-ink-faint">
-                    Try a topic name, a unit code, or a flavour.
+                    Try a topic name or a unit code.
                   </p>
                 </div>
               ) : (
@@ -217,12 +217,12 @@ function PaletteBody({
             <div className="flex items-center justify-between border-t-[2.5px] border-dashed border-ink/10 px-5 py-3">
               <span className="flex items-center gap-1.5 text-[11px] font-extrabold text-ink-faint">
                 <span className="rounded-md bg-ink/5 px-1.5 py-0.5 font-mono">↑↓</span>
-                wander
+                move
                 <span className="ml-2 rounded-md bg-ink/5 px-1.5 py-0.5 font-mono">↵</span>
                 open
               </span>
               <span className="text-[11px] font-extrabold text-ink-faint">
-                {q.trim() ? `${results.length} found` : "⌘K anywhere, anytime"}
+                {q.trim() ? `${results.length} found` : "press ⌘K to search"}
               </span>
             </div>
           </motion.div>

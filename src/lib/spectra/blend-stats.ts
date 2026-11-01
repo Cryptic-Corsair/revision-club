@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
-   REACTION CLUB · blend stats — the arcade scoreboard
+   REACTION CLUB · flashcard round stats
    localStorage · key "reaction-club-blend-v1"
    { best: streak record, blends: games played, hits, tries }
    ═══════════════════════════════════════════════════════════════ */

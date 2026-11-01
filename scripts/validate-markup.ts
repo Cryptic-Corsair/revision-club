@@ -40,7 +40,6 @@ function check(s: string): string[] {
 
 const texts: { where: string; s: string }[] = [];
 for (const u of UNITS) {
-  texts.push({ where: `${u.code} story`, s: u.story });
   texts.push({ where: `${u.code} blurb`, s: u.blurb });
   texts.push({ where: `${u.code} spectrumNote`, s: u.spectrumNote ?? "" });
   u.topics.forEach((t, ti) => {

@@ -46,12 +46,12 @@ type Phase = "idle" | "playing" | "done";
 const MILESTONES = [3, 5, 8, 12, 16, 20];
 
 const COMBO_QUIPS: Record<number, string> = {
-  3: "Three in a row! The blend is warming up.",
-  5: "FIVE! Somewhere, an enthalpy diagram just smiled.",
-  8: "Eight?! Are you a catalyst? Because things are happening faster now.",
-  12: "Twelve. This is a runaway reaction and we are here for it.",
-  16: "Sixteen! Honestly, revise me harder.",
-  20: "TWENTY. Bubbles has fainted. Passionately.",
+  3: "Three in a row.",
+  5: "Five in a row — keep going.",
+  8: "Eight in a row.",
+  12: "Twelve in a row.",
+  16: "Sixteen in a row.",
+  20: "Twenty in a row. Excellent.",
 };
 
 export function Blend({
@@ -159,7 +159,7 @@ export function Blend({
       {/* back */}
       <PopIn>
         <SoftButton onClick={onBack} className="min-h-[42px] px-4 py-2 text-[13.5px]">
-          <ArrowLeft className="h-4 w-4" /> back to the clubhouse
+          <ArrowLeft className="h-4 w-4" /> back to all units
         </SoftButton>
       </PopIn>
 
@@ -167,21 +167,21 @@ export function Blend({
       <header className="mt-8">
         <PopIn delay={0.05}>
           <SectionTag main="#9775FA" tilt={-2}>
-            the arcade · blend mode
+            flashcards
           </SectionTag>
         </PopIn>
         <PopIn delay={0.1}>
           <h1 className="mt-5 font-display text-[clamp(2.3rem,5vw,3.4rem)] leading-[1.05] font-semibold tracking-tight text-ink">
-            Flashcards that{" "}
+            Checkpoint questions,{" "}
             <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-grape/15 px-[0.18em]">
-              fight back.
+              shuffled.
             </span>
           </h1>
           <p className="mt-3.5 max-w-[58ch] text-[16.5px] leading-[1.8] text-ink-soft">
-            Every checkpoint question on the site, blended into one deck. Flip a card, judge
-            yourself honestly (Bubbles will know), and chase your streak.{" "}
+            Every checkpoint question on the site, shuffled into one deck. Flip a card, answer
+            it, then reveal and compare. {" "}
             <strong className="font-extrabold text-ink">Space</strong> flips,{" "}
-            <strong className="font-extrabold text-ink">← →</strong> judges.
+            <strong className="font-extrabold text-ink">← →</strong> mark it.
           </p>
         </PopIn>
       </header>
@@ -192,12 +192,12 @@ export function Blend({
           <Trophy className="h-4 w-4 text-grape" /> best streak: {stats.best}
         </span>
         <span className="inline-flex items-center gap-2 rounded-full bg-mint/15 px-4 py-2.5 text-[13.5px] font-extrabold text-ink">
-          <Zap className="h-4 w-4 text-mint" /> {stats.blends} blends played
+          <Zap className="h-4 w-4 text-mint" /> {stats.blends} rounds played
         </span>
         {stats.tries > 0 && (
           <span className="inline-flex items-center gap-2 rounded-full bg-lemon/20 px-4 py-2.5 text-[13.5px] font-extrabold text-ink">
             <Sparkles className="h-4 w-4 text-lemon" />
-            {Math.round((stats.hits / stats.tries) * 100)}% all-time hit rate
+            {Math.round((stats.hits / stats.tries) * 100)}% all-time correct
           </span>
         )}
       </PopIn>
@@ -207,7 +207,7 @@ export function Blend({
         <section className="mt-10">
           <Reveal>
             <div className="mb-3 flex items-center gap-2 font-display text-[13px] font-bold tracking-[0.16em] text-ink-faint uppercase">
-              pick your pile <DoodleSparkle className="h-4 w-4 text-lemon" />
+              choose a deck <DoodleSparkle className="h-4 w-4 text-lemon" />
             </div>
             <div className="flex flex-wrap gap-2.5">
               <motion.button
@@ -222,7 +222,7 @@ export function Blend({
                     : { background: "rgb(61 43 31 / 0.07)", color: "#8a7261" }
                 }
               >
-                the whole shelf · {DECK.length}
+                the whole course · {DECK.length}
               </motion.button>
               {UNITS.map((u) => (
                 <motion.button
@@ -239,7 +239,7 @@ export function Blend({
                       : { background: tint(u.candy.main, 14), color: shade(u.candy.main, 62) }
                   }
                 >
-                  {u.code.replace("WCH", "")} · {u.candy.name} · {DECK_BY_UNIT[u.code]}
+                  {u.code.replace("WCH", "")} · {DECK_BY_UNIT[u.code]} cards
                 </motion.button>
               ))}
             </div>
@@ -256,11 +256,11 @@ export function Blend({
               </Float>
               <div className="relative z-10">
                 <h2 className="font-display text-[clamp(1.5rem,3.4vw,2.1rem)] font-semibold text-ink">
-                  {pile.length} cards ready to blend
+                  {pile.length} cards in this deck
                 </h2>
                 <p className="mx-auto mt-2 max-w-[46ch] text-[14.5px] leading-relaxed text-ink-soft">
-                  Ten cards per blend — quick enough for the bus stop, mean enough to matter.
-                  Judged by you, remembered by the jar.
+                  Ten cards per round, shuffled each time. Answer first, then check the
+                  solution.
                 </p>
                 <motion.button
                   type="button"
@@ -270,7 +270,7 @@ export function Blend({
                   className="candy mt-6 inline-flex min-h-[56px] cursor-pointer items-center gap-2.5 rounded-full px-8 py-4 font-display text-[17px] font-semibold text-white select-none"
                   style={{ "--candy-bg": "#9775FA", "--candy-side": shade("#9775FA") } as React.CSSProperties}
                 >
-                  <Zap className="h-5 w-5" /> Blend {Math.min(10, pile.length)} cards
+                  <Zap className="h-5 w-5" /> Shuffle {Math.min(10, pile.length)} cards
                 </motion.button>
                 {pile.length > 10 && (
                   <div className="mt-4 flex flex-wrap justify-center gap-2">
@@ -283,7 +283,7 @@ export function Blend({
                         whileTap={{ scale: 0.95 }}
                         className="cursor-pointer rounded-full bg-white/80 px-4 py-2 text-[12.5px] font-extrabold text-ink-soft"
                       >
-                        go big · {n}
+                        {n} cards
                       </motion.button>
                     ))}
                   </div>
@@ -334,11 +334,11 @@ export function Blend({
               <Flame className="h-4 w-4" strokeWidth={2.5} />
               streak {streak}
               {bestStreak >= 3 && streak === bestStreak && streak > 0 && (
-                <span className="ml-0.5 text-[11px] opacity-80">· on fire!</span>
+                <span className="ml-0.5 text-[11px] opacity-80">· best so far</span>
               )}
             </motion.span>
             <span className="rounded-full bg-ink/5 px-4 py-2 font-display text-[14px] font-bold text-ink-soft">
-              {hits} hit · {run.picks.length - hits} missed
+              {hits} correct · {run.picks.length - hits} missed
             </span>
           </div>
 
@@ -396,15 +396,15 @@ export function Blend({
                 </Float>
                 <h2 className="mt-4 font-display text-[clamp(1.7rem,3.8vw,2.4rem)] font-semibold text-ink">
                   {hits === run.cards.length
-                    ? "A perfect blend!"
+                    ? "All correct."
                     : hits / run.cards.length >= 0.7
-                      ? "Smooth operator."
+                      ? "Good work."
                       : hits / run.cards.length >= 0.4
-                        ? "Chunky, but drinkable."
-                        : "That one needed sieving."}
+                        ? "Keep practising."
+                        : "Worth another look."}
                 </h2>
                 <p className="mt-2 text-[15px] text-ink-soft">
-                  {hits} of {run.cards.length} cards hit · best streak {bestStreak}
+                  {hits} of {run.cards.length} correct · best streak {bestStreak}
                   {bestStreak >= stats.best && bestStreak > 0 && (
                     <span className="ml-1.5 inline-flex items-center gap-1 rounded-full bg-lemon/25 px-2.5 py-0.5 text-[11.5px] font-extrabold text-lemon">
                       <Trophy className="h-3 w-3" /> new record
@@ -440,7 +440,7 @@ export function Blend({
                     className="candy inline-flex min-h-[52px] cursor-pointer items-center gap-2 rounded-full px-7 py-3.5 font-display text-[16px] font-semibold text-white select-none"
                     style={{ "--candy-bg": "#12B886", "--candy-side": shade("#12B886") } as React.CSSProperties}
                   >
-                    <RotateCcw className="h-4.5 w-4.5" /> Blend again
+                    <RotateCcw className="h-4.5 w-4.5" /> Shuffle again
                   </motion.button>
                   <SoftButton
                     onClick={() => {
@@ -448,7 +448,7 @@ export function Blend({
                       setRun(null);
                     }}
                   >
-                    Change the pile
+                    Change the deck
                   </SoftButton>
                 </div>
               </div>
@@ -459,7 +459,7 @@ export function Blend({
           {run.picks.some((p) => p === "miss") && (
             <Reveal delay={0.1} className="mt-8">
               <div className="mb-3 font-display text-[13px] font-bold tracking-[0.16em] text-ink-faint uppercase">
-                cards that escaped · chase them down
+                cards to review
               </div>
               <div className="flex flex-col gap-3">
                 {run.cards.map((c, i) =>
@@ -500,8 +500,8 @@ export function Blend({
           {/* revised topics hint */}
           <p className="mt-8 text-center text-[12.5px] font-bold text-ink-faint">
             {revised.length === 0
-              ? "Tip: topics you mark revised get their own stickers — the jar is watching."
-              : `${revised.length} sticker${revised.length === 1 ? "" : "s"} in the jar so far.`}
+              ? "Tip: mark topics as revised from their topic pages."
+              : `${revised.length} topic${revised.length === 1 ? "" : "s"} marked as revised so far.`}
           </p>
         </section>
       )}
@@ -622,7 +622,7 @@ function Flashcard({
               onClick={() => onOpenTopic(card.unit, card.topicId)}
               className="cursor-pointer text-[12.5px] font-extrabold text-ink-faint underline decoration-dotted underline-offset-4 hover:text-ink-soft"
             >
-              reread {card.topicLabel.toLowerCase()} · {card.topicTitle}
+              reopen {card.topicLabel.toLowerCase()} · {card.topicTitle}
             </button>
           </div>
         </CardFace>

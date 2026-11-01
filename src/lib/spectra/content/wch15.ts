@@ -104,7 +104,7 @@ export const WCH15_TOPICS: Topic[] = [
     blocks: [
       {
         k: "p",
-        text: "One definition powers the whole topic: a ==transition metal== forms at least one stable ion with a ==partially filled d sub-shell==. That half-filled d set is why iron swings between +2 and +3, why aqueous Cu^2+^ is blue, why the same ion can catalyse two reactions — and why scandium (only Sc^3+^, empty d) and zinc (only Zn^2+^, full d) are excluded from the club.",
+        text: "One definition powers the whole topic: a ==transition metal== forms at least one stable ion with a ==partially filled d sub-shell==. That half-filled d set is why iron swings between +2 and +3, why aqueous Cu^2+^ is blue, why the same ion can catalyse two reactions — and why scandium (only Sc^3+^, empty d) and zinc (only Zn^2+^, full d) are excluded from the definition.",
       },
       {
         k: "def",

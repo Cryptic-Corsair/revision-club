@@ -70,7 +70,7 @@ export function TopicView({
           className="min-h-[42px] px-4 py-2 text-[13.5px]"
           ariaLabel={`Back to ${unit.code}`}
         >
-          <ArrowLeft className="h-4 w-4" /> {unit.code} trail
+          <ArrowLeft className="h-4 w-4" /> Back to {unit.code}
         </SoftButton>
       </PopIn>
 
@@ -129,7 +129,7 @@ export function TopicView({
         <TopicBlocks blocks={topic.blocks} main={main} />
       </div>
 
-      {/* ————— sticker collection ————— */}
+      {/* ————— mark as revised ————— */}
       <Reveal className="relative mt-14 flex justify-center">
         <div className="relative">
           <Confetti fire={fire} />
@@ -161,12 +161,12 @@ export function TopicView({
                 <span className="grid h-7 w-7 place-items-center rounded-full bg-white/25">
                   <Check className="h-4.5 w-4.5" strokeWidth={3} />
                 </span>
-                In your sticker book!
+                Marked as revised
               </>
             ) : (
               <>
                 <Sticker className="h-5.5 w-5.5" style={{ color: main }} />
-                Collect this sticker
+                Mark as revised
               </>
             )}
           </motion.button>
@@ -174,8 +174,8 @@ export function TopicView({
       </Reveal>
       <p className="mt-3 text-center text-[12.5px] font-bold text-ink-faint">
         {isRevised
-          ? "Bubbles has noted it down. Show-off."
-          : "One tap and the beaker rises — your club remembers."}
+          ? "Saved in this browser. Tap again to unmark it."
+          : "One tap marks it done — progress is saved in this browser."}
       </p>
 
       {/* ————— prev / next ————— */}
@@ -193,7 +193,7 @@ export function TopicView({
             </span>
             <span className="min-w-0">
               <span className="block text-[11px] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
-                turn back · {prev.label}
+                previous · {prev.label}
               </span>
               <span className="block truncate font-display text-[15px] font-semibold text-ink">
                 {prev.title}
@@ -214,7 +214,7 @@ export function TopicView({
           >
             <span className="min-w-0">
               <span className="block text-[11px] font-extrabold tracking-[0.14em] text-white/70 uppercase">
-                turn over · {next.label}
+                next · {next.label}
               </span>
               <span className="block truncate font-display text-[15px] font-semibold">
                 {next.title}
@@ -235,7 +235,7 @@ export function TopicView({
           >
             <span className="min-w-0">
               <span className="block text-[11px] font-extrabold tracking-[0.14em] text-white/70 uppercase">
-                trail finished
+                end of unit
               </span>
               <span className="block truncate font-display text-[15px] font-semibold">
                 Back to {unit.code}

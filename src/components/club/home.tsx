@@ -42,7 +42,7 @@ import {
 } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · home — welcome to the playground
+   Reaction Club · home
    ═══════════════════════════════════════════════════════════════ */
 
 const UNIT_ICONS = {
@@ -98,16 +98,16 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
 
             <PopIn delay={0.08}>
               <h1 className="mt-6 font-display text-[clamp(2.7rem,6.4vw,4.6rem)] leading-[1.04] font-semibold tracking-tight text-ink">
-                Chemistry that{" "}
+                Edexcel IAL Chemistry{" "}
                 <span className="relative inline-block">
-                  actually
+                  spec point
                   <Squiggle
                     color="#FF6B6B"
                     className="absolute -bottom-2 left-0 h-[12px] w-full"
                   />
                 </span>{" "}
                 <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-lemon/60 px-[0.18em]">
-                  sticks.
+                  by spec point.
                 </span>
               </h1>
             </PopIn>
@@ -115,18 +115,19 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
             <PopIn delay={0.16}>
               <p className="mt-6 max-w-[54ch] text-[16.5px] leading-[1.8] text-ink-soft">
                 Welcome to <strong className="font-extrabold text-ink">Reaction Club</strong> —
-                Edexcel IAL Chemistry (WCH11–WCH16), rebuilt spec by spec. Candy-coloured units,
-                worked examples you climb one step at a time, checkpoint questions with instant
-                answers, and progress you can literally sip.
+                revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16). Each unit
+                follows the 2018 specification in order, with definitions, equations, fully
+                worked examples and checkpoint questions with answers. Your progress is saved
+                in your browser.
               </p>
             </PopIn>
 
             <PopIn delay={0.24} className="mt-8 flex flex-wrap items-center gap-3.5">
               <CandyButton main="#FF6B6B" onClick={() => scrollTo("units")}>
-                Join the club <MoveRight className="h-5 w-5" />
+                Browse the units <MoveRight className="h-5 w-5" />
               </CandyButton>
               <SoftButton onClick={() => onOpenUnit("WCH12")}>
-                <Play className="h-4 w-4 text-coral" /> Peek inside WCH12
+                <Play className="h-4 w-4 text-coral" /> Open WCH12
               </SoftButton>
             </PopIn>
 
@@ -164,7 +165,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
 
             <Float delay={0.8} className="absolute top-[8%] left-[4%] z-20">
               <span className="inline-block rotate-[-7deg] rounded-full bg-paper px-4 py-2 font-display text-[13px] font-bold text-ink puff">
-                spec-mapped 2018
+                spec point by spec point
               </span>
             </Float>
             <Float delay={1.6} slow className="absolute right-[2%] bottom-[14%] z-20">
@@ -172,7 +173,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                 className="inline-block rotate-[6deg] rounded-full px-4 py-2 font-display text-[13px] font-bold text-white puff"
                 style={{ background: "#9775FA" }}
               >
-                beaker approved
+                WCH11–WCH16
               </span>
             </Float>
 
@@ -189,18 +190,18 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
         <Ribbon words={MARQUEE_B} bg="#2E2016" rotate={1.2} reverse className="-mt-7" />
       </section>
 
-      {/* ————— pick your flavour ————— */}
+      {/* ————— units ————— */}
       <section id="units" className="mx-auto max-w-6xl scroll-mt-24 px-5 pt-20 pb-6 sm:px-8">
         <Reveal className="text-center">
           <SectionTag main="#FF922B" tilt={2}>
-            pick your flavour
+            the units
           </SectionTag>
           <h2 className="mt-5 font-display text-[clamp(1.9rem,4vw,2.8rem)] leading-tight font-semibold text-ink">
-            Six units. Six flavours.
+            The six units
           </h2>
           <p className="mx-auto mt-3 max-w-[52ch] text-[15.5px] leading-relaxed text-ink-soft">
-            Every unit gets its own colour, nickname and beaker to fill. Tap one to hit the
-            trail — the sticker book remembers what you have revised.
+            Tap a unit to see its topics in specification order. Topics you mark as revised
+            are saved in your browser.
           </p>
         </Reveal>
 
@@ -254,20 +255,20 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                     </div>
                   </div>
 
-                  <h3 className="mt-4 font-display text-[23px] leading-tight font-semibold text-ink">
-                    {u.candy.nick}
+                  <h3 className="mt-4 font-display text-[21px] leading-tight font-semibold text-ink">
+                    {u.title}
                   </h3>
                   <p className="mt-1 text-[13.5px] leading-snug font-extrabold text-ink-soft">
-                    {u.title}
+                    {u.topicRange}
                   </p>
-                  <p className="mt-2.5 line-clamp-2 text-[14px] leading-relaxed text-ink-soft">
+                  <p className="mt-2.5 line-clamp-3 text-[14px] leading-relaxed text-ink-soft">
                     {u.blurb}
                   </p>
 
                   <div className="mt-5 flex items-end justify-between gap-3">
                     <div className="flex flex-wrap items-center gap-1.5">
                       <Chip main={u.candy.main}>
-                        {u.topics.length} stops
+                        {u.topics.length} topics
                       </Chip>
                       <Chip>
                         <Clock className="h-3 w-3" /> {minutes} min
@@ -290,14 +291,14 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
         </div>
       </section>
 
-      {/* ————— how the club works ————— */}
+      {/* ————— how it works ————— */}
       <section id="how" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20 sm:px-8">
         <Reveal className="text-center">
           <SectionTag main="#9775FA" tilt={-1.5}>
-            how the club works
+            how it works
           </SectionTag>
           <h2 className="mt-5 font-display text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-ink">
-            Revision that plays like a game
+            Read, practise, then mark it as revised
           </h2>
         </Reveal>
 
@@ -307,22 +308,22 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
               n: "1",
               color: "#FF6B6B",
               icon: NotebookPen,
-              title: "Read sticky-sweet notes",
-              body: "Definitions as word-wall stickers, equations as candy pills, calculations as staircases you climb one step at a time — chunked and coloured, never a wall of text.",
+              title: "Read the notes",
+              body: "Each topic is written in full — definitions, equations, tables and worked examples — following the specification point by point.",
             },
             {
               n: "2",
               color: "#FF922B",
               icon: Gamepad2,
-              title: "Play the checkpoints",
-              body: "Every topic ends with checkpoint questions. Reveal the answer with a tap, and move on once it clicks.",
+              title: "Check your answers",
+              body: "Every topic ends with checkpoint questions. Try each one first, then reveal the answer and compare your working.",
             },
             {
               n: "3",
               color: "#9775FA",
               icon: Sticker,
-              title: "Fill your sticker book",
-              body: "Mark a topic done and watch that unit's beaker fill up. Collect all six flavours and the whole A level is in your jar. Effort still required — sorry.",
+              title: "Track your progress",
+              body: "Mark a topic as revised when you finish it. The unit page and the progress page keep count of what is done and what is left.",
             },
           ].map((s, i) => (
             <div key={s.n} className="contents">
@@ -361,14 +362,14 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
         </div>
       </section>
 
-      {/* ————— the arcade strip ————— */}
+      {/* ————— practice tools ————— */}
       <section id="arcade" className="mx-auto max-w-6xl scroll-mt-24 px-5 pb-20 sm:px-8">
         <Reveal className="text-center">
           <SectionTag main="#F06595" tilt={1.5}>
-            the arcade
+            practice
           </SectionTag>
           <h2 className="mt-5 font-display text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-ink">
-            Not feeling like reading?
+            Two more ways to revise
           </h2>
         </Reveal>
 
@@ -392,22 +393,21 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                   <Gamepad2 className="h-7 w-7" strokeWidth={2.2} />
                 </span>
                 <h3 className="mt-5 font-display text-[26px] font-semibold text-ink">
-                  Blend Mode
+                  Flashcards
                 </h3>
                 <p className="mt-2 max-w-[46ch] text-[14.5px] leading-[1.75] text-ink-soft">
-                  Every checkpoint question on the site, shuffled into a flashcard blender.
-                  Flip, judge yourself, chase streaks — the mascot reacts to your combos and
-                  he is not subtle about it.
+                  Every checkpoint question on the site, shuffled into one deck. Flip a card,
+                  answer it, then reveal the answer and check yourself. Space flips, ← → marks.
                 </p>
                 <div className="mt-5 flex flex-wrap items-center gap-2">
                   <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
-                    quick-fire flips
+                    tap to flip
                   </span>
                   <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
-                    streak combos
+                    shuffled every round
                   </span>
                   <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[14px] font-bold text-grape">
-                    play <MoveRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
+                    open <MoveRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
                   </span>
                 </div>
               </div>
@@ -433,16 +433,15 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                   <Sticker className="h-7 w-7" strokeWidth={2.2} />
                 </span>
                 <h3 className="mt-5 font-display text-[26px] font-semibold text-ink">
-                  The Sticker Book
+                  Progress tracker
                 </h3>
                 <p className="mt-2 max-w-[46ch] text-[14.5px] leading-[1.75] text-ink-soft">
-                  Your jar, your sheets, your badges. Every revised topic becomes a sticker;
-                  fill all six sheets and the beaker tops out. Currently{" "}
-                  {revised.length}/{TOTALS.topics} collected.
+                  Mark topics as revised as you finish them, and this page keeps count across
+                  all six units. Currently {revised.length}/{TOTALS.topics} topics marked.
                 </p>
                 <div className="mt-5 flex flex-wrap items-center gap-2">
                   <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
-                    6 badge achievements
+                    6 badges
                   </span>
                   <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
                     saved in your browser
@@ -475,18 +474,17 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                 <Mascot main="#FFD43B" mood="cheer" size={150} bubbles={false} className="mx-auto" />
               </Float>
               <h2 className="mt-2 font-display text-[clamp(1.8rem,3.6vw,2.6rem)] font-semibold text-cream">
-                Ready when you are.
+                Pick a unit and start.
               </h2>
               <p className="mt-3 text-[15.5px] leading-relaxed text-cream/70">
-                Pick a flavour, hit the trail, and let the beaker fill itself — one revised
-                topic at a time.
+                Start with Unit 1, or jump straight to the topic you are revising.
               </p>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3.5">
                 <CandyButton main="#FFD43B" onClick={() => scrollTo("units")}>
-                  Back to the flavours <MoveRight className="h-5 w-5" />
+                  Back to the units <MoveRight className="h-5 w-5" />
                 </CandyButton>
                 <SoftButton onClick={() => onOpenUnit("WCH11")}>
-                  Start from the top <DoodleSparkle className="h-4 w-4 text-lemon" />
+                  Open Unit 1 <DoodleSparkle className="h-4 w-4 text-lemon" />
                 </SoftButton>
               </div>
             </div>

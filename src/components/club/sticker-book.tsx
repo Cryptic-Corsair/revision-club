@@ -33,8 +33,8 @@ import {
 } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · the sticker book — where the jar lives
-   Every revised topic is a sticker; every sticker raises the beaker.
+   Reaction Club · progress page
+   Topics marked as revised are counted here.
    ═══════════════════════════════════════════════════════════════ */
 
 interface Achievement {
@@ -45,14 +45,15 @@ interface Achievement {
   earned: boolean;
 }
 
-function jarQuip(pct: number, count: number): string {
+function progressLine(pct: number, count: number): string {
   if (count === 0)
-    return "An empty jar! Hurray — that means every sticker is still out there waiting.";
-  if (pct >= 1) return "FULL JAR. Every topic collected. Frame it. Tweet it. Tell your teacher.";
-  if (pct >= 0.75) return "Three quarters full! The A level is starting to worry about you.";
-  if (pct >= 0.5) return "Halfway! The liquid level says you are officially dangerous.";
-  if (pct >= 0.25) return "A proper splash! Keep pulling topics off the shelf.";
-  return "First sips! Every beaker starts with one drop. Or in your case, stickers.";
+    return "Nothing marked yet. Open any unit, finish a topic, then mark it as revised.";
+  if (pct >= 1)
+    return "Every topic revised — well done. Use the flashcards to keep it fresh.";
+  if (pct >= 0.75) return "Three quarters of the course revised.";
+  if (pct >= 0.5) return "Halfway through the course.";
+  if (pct >= 0.25) return "A quarter of the course revised.";
+  return "Good start — keep going.";
 }
 
 export function StickerBook({
@@ -77,44 +78,44 @@ export function StickerBook({
 
   const achievements: Achievement[] = [
     {
-      id: "first-dip",
-      label: "First dip",
-      hint: "Collect 1 sticker",
+      id: "first-topic",
+      label: "First topic",
+      hint: "Mark 1 topic as revised",
       color: "#FF6B6B",
       earned: count >= 1,
     },
     {
-      id: "flavour-fan",
-      label: "Flavour fan",
-      hint: "Finish any one unit",
+      id: "unit-complete",
+      label: "Unit complete",
+      hint: "Finish every topic in one unit",
       color: "#FF922B",
       earned: units.some((u) => unitDone(u) === u.topics.length && u.topics.length > 0),
     },
     {
-      id: "half-pint",
-      label: "Half pint",
-      hint: "Fill the jar to 50%",
+      id: "halfway",
+      label: "Halfway",
+      hint: "Revise half of the topics",
       color: "#FFD43B",
       earned: pct >= 0.5,
     },
     {
-      id: "blend-rookie",
-      label: "Blend rookie",
-      hint: "Play one blend",
+      id: "first-round",
+      label: "First round",
+      hint: "Play one round of flashcards",
       color: "#9775FA",
       earned: stats.blends >= 1,
     },
     {
       id: "streak-5",
       label: "On a streak",
-      hint: "Streak of 5 in Blend Mode",
+      hint: "Get a streak of 5 in Flashcards",
       color: "#F06595",
       earned: stats.best >= 5,
     },
     {
-      id: "full-jar",
-      label: "Full jar",
-      hint: "Collect every sticker",
+      id: "course-complete",
+      label: "Course complete",
+      hint: "Revise every topic",
       color: "#12B886",
       earned: pct >= 1,
     },
@@ -128,7 +129,7 @@ export function StickerBook({
     }
     for (const k of revised) toggleRevised(k);
     setConfirmPour(false);
-    setConfetti((c) => c + 1); // yes, emptying the jar also gets confetti. Bubbles insists.
+    setConfetti((c) => c + 1);
   };
 
   return (
@@ -136,7 +137,7 @@ export function StickerBook({
       {/* back */}
       <PopIn>
         <SoftButton onClick={onBack} className="min-h-[42px] px-4 py-2 text-[13.5px]">
-          <ArrowLeft className="h-4 w-4" /> back to the clubhouse
+          <ArrowLeft className="h-4 w-4" /> back to all units
         </SoftButton>
       </PopIn>
 
@@ -144,12 +145,12 @@ export function StickerBook({
       <header className="mt-8">
         <PopIn delay={0.05}>
           <SectionTag main="#12B886" tilt={-2}>
-            the sticker book
+            progress
           </SectionTag>
         </PopIn>
         <PopIn delay={0.1}>
           <h1 className="mt-5 font-display text-[clamp(2.3rem,5vw,3.4rem)] leading-[1.05] font-semibold tracking-tight text-ink">
-            Your jar,{" "}
+            Your revision,{" "}
             <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-mint/15 px-[0.18em]">
               so far.
             </span>
@@ -157,7 +158,7 @@ export function StickerBook({
         </PopIn>
       </header>
 
-      {/* ————— the jar panel ————— */}
+      {/* ————— progress panel ————— */}
       <Reveal className="relative mt-8">
         <div className="flex flex-wrap items-center gap-7 rounded-[40px] bg-paper p-7 puff sm:p-9">
           <Confetti fire={confetti} />
@@ -166,14 +167,14 @@ export function StickerBook({
           </Float>
           <div className="min-w-0 flex-1">
             <div className="font-display text-[12px] font-bold tracking-[0.18em] text-ink-faint uppercase">
-              jar fill level
+              topics revised
             </div>
             <div className="mt-1 flex items-baseline gap-2">
               <span className="font-display text-[clamp(2.4rem,6vw,3.6rem)] leading-none font-semibold text-ink">
                 {Math.round(pct * 100)}%
               </span>
               <span className="text-[14px] font-extrabold text-ink-soft">
-                {count} of {TOTALS.topics} stickers
+                {count} of {TOTALS.topics} topics
               </span>
             </div>
             <div className="mt-4 h-5 w-full max-w-sm overflow-hidden rounded-full bg-ink/5">
@@ -207,13 +208,13 @@ export function StickerBook({
         </div>
       </Reveal>
 
-      {/* ————— Bubbles reacts ————— */}
+      {/* ————— progress line ————— */}
       <PopIn delay={0.15} className="mt-6 flex items-end gap-2 sm:gap-3">
         <div className="shrink-0 pb-1">
           <Mascot main="#12B886" mood={pct >= 0.5 ? "cheer" : "idle"} size={88} bubbles={false} />
         </div>
         <SpeechBubble bg={tint("#12B886", 10)} className="min-w-0 flex-1" tailClass="left-[-9px] rotate-[135deg]">
-          <p className="text-[15px] leading-[1.75] text-ink">{jarQuip(pct, count)}</p>
+          <p className="text-[15px] leading-[1.75] text-ink">{progressLine(pct, count)}</p>
         </SpeechBubble>
       </PopIn>
 
@@ -221,7 +222,7 @@ export function StickerBook({
       <section className="mt-12">
         <Reveal>
           <div className="mb-4 flex items-center gap-2 font-display text-[13px] font-bold tracking-[0.16em] text-ink-faint uppercase">
-            <Award className="h-4 w-4 text-lemon" /> badge shelf · {achievements.filter((a) => a.earned).length}/{achievements.length}
+            <Award className="h-4 w-4 text-lemon" /> badges · {achievements.filter((a) => a.earned).length}/{achievements.length}
           </div>
         </Reveal>
         <div className="grid grid-cols-3 gap-4 sm:grid-cols-6 sm:gap-3">
@@ -248,10 +249,10 @@ export function StickerBook({
                 >
                   {a.earned ? (
                     a.id === "streak-5" ? <Zap className="h-5.5 w-5.5" strokeWidth={2.5} /> :
-                    a.id === "blend-rookie" ? <Sparkles className="h-5.5 w-5.5" strokeWidth={2.5} /> :
-                    a.id === "full-jar" ? <Droplets className="h-5.5 w-5.5" strokeWidth={2.5} /> :
-                    a.id === "flavour-fan" ? <BookOpenCheck className="h-5.5 w-5.5" strokeWidth={2.5} /> :
-                    a.id === "half-pint" ? <Droplets className="h-5.5 w-5.5" strokeWidth={2.5} /> :
+                    a.id === "first-round" ? <Sparkles className="h-5.5 w-5.5" strokeWidth={2.5} /> :
+                    a.id === "course-complete" ? <Droplets className="h-5.5 w-5.5" strokeWidth={2.5} /> :
+                    a.id === "unit-complete" ? <BookOpenCheck className="h-5.5 w-5.5" strokeWidth={2.5} /> :
+                    a.id === "halfway" ? <Droplets className="h-5.5 w-5.5" strokeWidth={2.5} /> :
                     <Sticker className="h-5.5 w-5.5" strokeWidth={2.5} />
                   ) : (
                     <Lock className="h-5 w-5" strokeWidth={2.5} />
@@ -277,7 +278,7 @@ export function StickerBook({
       <section className="mt-14 flex flex-col gap-8">
         <Reveal>
           <div className="flex items-center gap-2 font-display text-[13px] font-bold tracking-[0.16em] text-ink-faint uppercase">
-            <Trophy className="h-4 w-4 text-tangerine" /> the six sheets · tap a sticker to peel it off
+            <Trophy className="h-4 w-4 text-tangerine" /> all topics · tap one to mark or unmark it
           </div>
         </Reveal>
 
@@ -304,10 +305,10 @@ export function StickerBook({
                   </span>
                   <span className="min-w-0">
                     <span className="block font-display text-[17px] font-semibold text-ink group-hover:underline">
-                      {u.candy.nick}
+                      {u.code} · {u.shortTitle}
                     </span>
                     <span className="block text-[12px] font-extrabold text-ink-soft">
-                      {done}/{u.topics.length} collected · {u.candy.name}
+                      {done}/{u.topics.length} revised
                     </span>
                   </span>
                   <span className="ml-auto flex items-center gap-3">
@@ -329,8 +330,8 @@ export function StickerBook({
                         aria-pressed={has}
                         aria-label={
                           has
-                            ? `Remove sticker: ${t.title}`
-                            : `Mark revised (add sticker): ${t.title}`
+                            ? `Unmark as revised: ${t.title}`
+                            : `Mark as revised: ${t.title}`
                         }
                         className="relative cursor-pointer rounded-[22px] p-3.5 text-left"
                         style={
@@ -370,7 +371,7 @@ export function StickerBook({
                         </span>
                         {!has && (
                           <span className="mt-1.5 block text-[10.5px] font-bold text-ink-faint">
-                            empty slot — go collect it
+                            not marked yet
                           </span>
                         )}
                       </motion.button>
@@ -383,14 +384,14 @@ export function StickerBook({
         })}
       </section>
 
-      {/* ————— the pour ritual ————— */}
+      {/* ————— reset ————— */}
       <Reveal className="mt-14 flex justify-center">
         <motion.button
           type="button"
           onClick={pour}
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.95, y: 2 }}
-          aria-label="Reset all sticker progress"
+          aria-label="Reset all progress"
           className="inline-flex min-h-[48px] cursor-pointer items-center gap-2 rounded-full px-6 py-3 font-display text-[14.5px] font-semibold"
           style={
             confirmPour
@@ -399,13 +400,13 @@ export function StickerBook({
           }
         >
           <Droplets className="h-4.5 w-4.5" />
-          {confirmPour ? "really pour it all out?" : "pour out the jar (start fresh)"}
+          {confirmPour ? "tap again to confirm" : "Reset all progress"}
         </motion.button>
       </Reveal>
       <p className="mt-3 text-center text-[12px] font-bold text-ink-faint">
         {confirmPour
-          ? "tap again to confirm — there is no undo, only regret"
-          : "your jar lives in this browser only. no accounts, no clouds, no judgement."}
+          ? "this clears the revised status of every topic — there is no undo"
+          : "progress is saved in this browser only"}
       </p>
     </div>
   );

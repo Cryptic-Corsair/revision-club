@@ -21,10 +21,9 @@ import { Fmt } from "./format";
 import { Mascot, SpeechBubble, tint, shade, Reveal } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · blocks — notes rendered like a sticker book
-   p · def (word-wall stickers) · eq (equation pills) ·
-   ex (worked staircases) · tips (Bubbles says) ·
-   table (candy tables) · check (checkpoint quiz) · recap (choco card)
+   Reaction Club · blocks — topic content blocks
+   p · def (term cards) · eq (equation pills) ·
+   ex (worked examples) · tips · table · check (checkpoint) · recap
    ═══════════════════════════════════════════════════════════════ */
 
 export function TopicBlocks({ blocks, main }: { blocks: Block[]; main: string }) {
@@ -135,7 +134,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
             tailClass="left-[-9px] rotate-[135deg]"
           >
             <div className="mb-1.5 font-display text-[12px] font-bold tracking-[0.18em] text-tangerine uppercase">
-              Bubbles says
+              Tips
             </div>
             <ul className="flex flex-col gap-1.5">
               {b.items.map((t, i) => (
@@ -165,7 +164,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
               <Timer className="h-5 w-5 text-lemon" />
             </span>
             <h4 className="font-display text-[19px] font-semibold text-cream">
-              The 90-second recap
+              Quick recap
             </h4>
           </div>
           <ol className="flex flex-col gap-3">
@@ -279,7 +278,7 @@ function WorkedExample({
             className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[14px] font-semibold text-white"
             style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
           >
-            {shown === 0 ? "Show me how" : `Next step (${shown}/${steps.length})`}
+            {shown === 0 ? "Show the first step" : `Next step (${shown}/${steps.length})`}
           </motion.button>
         ) : (
           <motion.button
@@ -289,7 +288,7 @@ function WorkedExample({
             whileTap={{ scale: 0.96 }}
             className="inline-flex min-h-[40px] cursor-pointer items-center gap-2 rounded-full bg-ink/5 px-4 py-2 text-[13px] font-bold text-ink-soft"
           >
-            <EyeOff className="h-4 w-4" /> Climb again
+            <EyeOff className="h-4 w-4" /> Hide steps
           </motion.button>
         )}
       </div>

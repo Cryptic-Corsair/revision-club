@@ -325,19 +325,19 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
                 <span className="grid h-7 w-7 place-items-center rounded-full bg-white/25">
                   <Check className="h-4.5 w-4.5" strokeWidth={3} />
                 </span>
-                In your sticker book!
+                Marked as revised
               </>
             ) : (
               <>
                 <Sticker className="h-5.5 w-5.5" style={{ color: main }} />
-                Revised the whole note — stamp it
+                Mark the whole note as revised
               </>
             )}
           </motion.button>
         </div>
       </Reveal>
       <p className="mt-3 text-center text-[12.5px] font-bold text-ink-faint">
-        {isRevised ? `All ${doc.sections.length} sections revised — the note is stamped.` : `Revise all ${doc.sections.length} sections, then stamp the note.`}
+        {isRevised ? `All ${doc.sections.length} sections revised.` : `Revise all ${doc.sections.length} sections, then mark the note as done.`}
       </p>
 
       <p className="mt-10 text-center text-[12px] leading-relaxed font-bold text-ink-faint">

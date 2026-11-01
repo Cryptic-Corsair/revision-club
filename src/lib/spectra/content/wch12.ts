@@ -427,7 +427,7 @@ export const WCH12_TOPICS: Topic[] = [
       },
       {
         k: "p",
-        text: "Two machines end the topic. The ==mass spectrometer== (Topic 2's friend) now reads *molecules*: the rightmost major peak is the ==molecular ion M^+^==, whose m/z gives the relative molecular mass, and the fragment peaks below it are a fingerprint of structure — chlorine's M and M+2 peaks in a 3 : 1 ratio is the giveaway that keeps reappearing. ==Infrared== spectroscopy identifies bonds by vibration: each bond absorbs a characteristic frequency, plotted as dips in % transmission.",
+        text: "Two machines end the topic. The ==mass spectrometer== (first seen in Topic 2) now reads *molecules*: the rightmost major peak is the ==molecular ion M^+^==, whose m/z gives the relative molecular mass, and the fragment peaks below it are a fingerprint of structure — chlorine's M and M+2 peaks in a 3 : 1 ratio is the giveaway that keeps reappearing. ==Infrared== spectroscopy identifies bonds by vibration: each bond absorbs a characteristic frequency, plotted as dips in % transmission.",
       },
       {
         k: "table",

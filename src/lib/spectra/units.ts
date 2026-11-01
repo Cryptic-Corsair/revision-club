@@ -28,7 +28,7 @@ export const UNITS: Unit[] = [
     element: { symbol: "Li", name: "lithium", flameName: "crimson", nm: 670.8 },
     color: "#ff4d5e",
     cssVar: "--flame-11",
-    candy: { main: "#FF6B6B", name: "strawberry", nick: "The Toolkit" },
+    candy: { main: "#FF6B6B", name: "red" },
     lines: [
       { nm: 670.8, rel: 3 },
       { nm: 610.4, rel: 1 },
@@ -36,9 +36,8 @@ export const UNITS: Unit[] = [
     ],
     spectrumNote:
       "Lithium's crimson line at 670.8 nm is among the strongest colours any flame makes — the rest of its visible spectrum is sparse.",
-    story:
-      "Every measurement passes through the mole, every structure through electrostatics, every mechanism through the π bond. Unit 1 is the instrument you calibrate once and use for two years — fluency here is why later units feel like observation instead of memorisation.",
-    blurb: "The calibrating unit: moles, atoms, bonds and the first mechanisms.",
+    blurb:
+      "Covers Topics 1–5: formulae, equations and the mole, atomic structure, bonding, and an introduction to organic chemistry.",
     topics: WCH11_TOPICS,
   },
   {
@@ -57,7 +56,7 @@ export const UNITS: Unit[] = [
     element: { symbol: "Na", name: "sodium", flameName: "gold", nm: 589.0 },
     color: "#ffb224",
     cssVar: "--flame-12",
-    candy: { main: "#FF922B", name: "orange fizz", nick: "Feel the Heat" },
+    candy: { main: "#FF922B", name: "orange" },
     lines: [
       { nm: 589.0, rel: 3 },
       { nm: 589.6, rel: 2 },
@@ -65,9 +64,8 @@ export const UNITS: Unit[] = [
     ],
     spectrumNote:
       "Sodium's golden doublet at 589.0 / 589.6 nm is so intense that a trace of contamination yellows every flame — and every street lamp.",
-    story:
-      "Energy in, energy out; groups that behave as families; and the first mechanisms where the solvent decides the product. Unit 2 turns Unit 1's vocabulary into explanations — the trend, the displacement, the curly arrow.",
-    blurb: "Unit 1's vocabulary becomes explanations: heat, families, and the first choices.",
+    blurb:
+      "Covers Topics 6–10: energetics, intermolecular forces, redox and group chemistry, halogenoalkanes and alcohols.",
     topics: WCH12_TOPICS,
   },
   {
@@ -86,7 +84,7 @@ export const UNITS: Unit[] = [
     element: { symbol: "Ba", name: "barium", flameName: "apple-green", nm: 553.5 },
     color: "#43e08c",
     cssVar: "--flame-13",
-    candy: { main: "#12B886", name: "mint chip", nick: "Lab Coat On" },
+    candy: { main: "#12B886", name: "green" },
     lines: [
       { nm: 553.5, rel: 3 },
       { nm: 614.2, rel: 2 },
@@ -94,9 +92,8 @@ export const UNITS: Unit[] = [
     ],
     spectrumNote:
       "Barium burns apple-green, its lines clustered across the green-yellow of the spectrum with the strongest at 553.5 nm.",
-    story:
-      "The first practical paper rewards honesty: uncertainties quoted, titres concordant, graphs drawn to the rules. Unit 3 is marked on how you look — not on what you know.",
-    blurb: "Marked on how you look: uncertainty, titration ritual, honest graphs.",
+    blurb:
+      "The AS practical skills: measurement and uncertainty, titration technique, and presenting results in tables and graphs.",
     topics: WCH13_TOPICS,
   },
   {
@@ -115,7 +112,7 @@ export const UNITS: Unit[] = [
     element: { symbol: "Cu", name: "copper", flameName: "blue-green", nm: 510.5 },
     color: "#2cd9c7",
     cssVar: "--flame-14",
-    candy: { main: "#9775FA", name: "grape soda", nick: "Push & Pull" },
+    candy: { main: "#9775FA", name: "violet" },
     lines: [
       { nm: 510.5, rel: 3 },
       { nm: 515.3, rel: 2 },
@@ -124,9 +121,8 @@ export const UNITS: Unit[] = [
     ],
     spectrumNote:
       "Copper(II) colours the flame blue-green — the 510.5 / 515.3 / 521.8 nm triplet is its unmistakable signature.",
-    story:
-      "Rates, equilibrium and organic chemistry all go quantitative: rate equations and Arrhenius, Kc and Kp, ΔG, and the carbonyl family with its chiral centres. Unit 4 is where the AS toolkit starts paying interest.",
-    blurb: "Everything goes quantitative: orders, constants, free energy, chirality.",
+    blurb:
+      "Covers Topics 11–16: reaction rates, chemical equilibrium, acid–base equilibria, and further organic chemistry including carbonyls and chirality.",
     topics: WCH14_TOPICS,
   },
   {
@@ -145,16 +141,15 @@ export const UNITS: Unit[] = [
     element: { symbol: "Cs", name: "caesium", flameName: "deep blue", nm: 455.5 },
     color: "#5e8bff",
     cssVar: "--flame-15",
-    candy: { main: "#F06595", name: "bubblegum", nick: "Colour Me Complex" },
+    candy: { main: "#F06595", name: "pink" },
     lines: [
       { nm: 455.5, rel: 3 },
       { nm: 459.3, rel: 2 },
     ],
     spectrumNote:
       "Caesium's blue lines at 455.5 / 459.3 nm sit deep in the violet-blue — the element whose microwave transition now defines the second itself.",
-    story:
-      "Electrode potentials predict the future of redox reactions; transition metals paint the d-block with their complexes; benzene and nitrogen chemistry close the organic story. Unit 5 is the summit the whole course has been climbing.",
-    blurb: "The summit: cells, colour, the ring, and nitrogen's lone pair.",
+    blurb:
+      "Covers Topics 17–21: redox and electrode potentials, transition metals, benzene and aromatic compounds, and nitrogen chemistry.",
     topics: WCH15_TOPICS,
   },
   {
@@ -173,16 +168,15 @@ export const UNITS: Unit[] = [
     element: { symbol: "K", name: "potassium", flameName: "lilac", nm: 404.4 },
     color: "#a06bff",
     cssVar: "--flame-16",
-    candy: { main: "#F59F00", name: "lemon sherbet", nick: "The Final Check" },
+    candy: { main: "#F59F00", name: "amber" },
     lines: [
       { nm: 404.4, rel: 3 },
       { nm: 404.7, rel: 2 },
     ],
     spectrumNote:
       "Potassium's lilac is faint: the violet doublet at 404.4 / 404.7 nm is easily masked by sodium's yellow, so cobalt glass filters it out. (Its strongest lines, 766.5 and 769.9 nm, sit just outside the visible band.)",
-    story:
-      "The final practical paper audits everything from Units 4 and 5 — rates, organic work-ups, electrochemistry and the observation bank — marked on method as much as on result. Close it and the course closes with it.",
-    blurb: "The audit: methods, observations and honest evaluation, one last time.",
+    blurb:
+      "The A2 practical skills: kinetics experiments, organic techniques and tests, and how to write practical exam answers.",
     topics: WCH16_TOPICS,
   },
 ];

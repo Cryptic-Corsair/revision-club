@@ -479,7 +479,7 @@ export function Mascot({
       whileTap={{ scale: 0.88, rotate: 3 }}
       transition={{ type: "spring", stiffness: 320, damping: 12 }}
       className={`cursor-pointer ${className ?? ""}`}
-      aria-label="Boop the beaker"
+      aria-label="Mascot"
     >
       <svg viewBox="0 0 220 230" width={size} height={size} aria-hidden>
         {inner}
@@ -488,7 +488,7 @@ export function Mascot({
   );
 }
 
-/* ————— progress beaker (sticker book meter) ————— */
+/* ————— progress meter ————— */
 
 export function BeakerMeter({
   pct,

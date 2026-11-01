@@ -60,7 +60,7 @@ export function UnitView({
       {/* back */}
       <PopIn>
         <SoftButton onClick={onBack} className="min-h-[42px] px-4 py-2 text-[13.5px]">
-          <ArrowLeft className="h-4 w-4" /> back to the clubhouse
+          <ArrowLeft className="h-4 w-4" /> back to all units
         </SoftButton>
       </PopIn>
 
@@ -75,7 +75,7 @@ export function UnitView({
           </span>
           <Chip main={main}>
             <span className="h-2 w-2 rounded-full" style={{ background: main }} />
-            flavour: {unit.candy.name}
+            {unit.candy.name}
           </Chip>
           <Chip>
             {unit.stage} · {unit.topicRange}
@@ -83,11 +83,11 @@ export function UnitView({
         </PopIn>
 
         <PopIn delay={0.1}>
-          <h1 className="mt-6 font-display text-[clamp(2.4rem,5.5vw,3.8rem)] leading-[1.05] font-semibold tracking-tight text-ink">
-            {unit.candy.nick}
+          <h1 className="mt-6 font-display text-[clamp(2rem,4.6vw,3.1rem)] leading-[1.06] font-semibold tracking-tight text-ink">
+            {unit.title}
           </h1>
           <p className="mt-2 max-w-3xl text-[16.5px] leading-snug font-extrabold text-ink-soft">
-            {unit.title}
+            {unit.code} · {unit.topicRange} · {unit.paper.duration} · {unit.paper.marks} marks
           </p>
         </PopIn>
 
@@ -121,7 +121,7 @@ export function UnitView({
         ))}
       </PopIn>
 
-      {/* ————— sticker book progress ————— */}
+      {/* ————— progress ————— */}
       <Reveal className="mt-10">
         <div
           className="flex items-center gap-6 rounded-[32px] p-6 sm:p-7"
@@ -132,14 +132,14 @@ export function UnitView({
           </div>
           <div className="min-w-0">
             <h3 className="font-display text-[21px] font-semibold text-ink">
-              Your sticker book
+              Progress
             </h3>
             <p className="mt-1 text-[14.5px] leading-relaxed text-ink-soft">
               {done === 0
-                ? "Still empty — every sticker starts with one topic."
+                ? "Nothing marked yet — mark a topic as revised when you finish it."
                 : done === unit.topics.length
-                  ? "Full jar! Every topic collected. Go be smug."
-                  : `${done} of ${unit.topics.length} topics collected.`}
+                  ? "All topics revised — well done."
+                  : `${done} of ${unit.topics.length} topics revised.`}
             </p>
             <div className="mt-3 h-4 w-full max-w-xs overflow-hidden rounded-full bg-white/80">
               <motion.div
@@ -154,16 +154,16 @@ export function UnitView({
         </div>
       </Reveal>
 
-      {/* ————— the trail ————— */}
+      {/* ————— topics ————— */}
       <section className="mt-14">
         <Reveal>
           <SectionTag main={main} tilt={-2}>
-            the trail
+            topics
           </SectionTag>
           <h2 className="mt-4 mb-8 font-display text-[clamp(1.7rem,3.4vw,2.4rem)] font-semibold text-ink">
             {unit.code === "WCH13" || unit.code === "WCH16"
-              ? "Lab stops, in order"
-              : "Follow the dots"}
+              ? "Practical skills, in order"
+              : "Topics in this unit"}
           </h2>
         </Reveal>
 
@@ -209,7 +209,7 @@ export function UnitView({
                         </span>
                         {isDone && (
                           <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-mint/15 px-2.5 py-1 text-[11.5px] font-extrabold text-mint">
-                            <Check className="h-3.5 w-3.5" strokeWidth={3} /> sticker!
+                            <Check className="h-3.5 w-3.5" strokeWidth={3} /> revised
                           </span>
                         )}
                       </div>
@@ -228,7 +228,7 @@ export function UnitView({
         </div>
       </section>
 
-      {/* ————— flame trivia ————— */}
+      {/* ————— the flame behind the colour ————— */}
       <Reveal className="mt-14">
         <div
           className="relative overflow-hidden rounded-[32px] p-6 sm:p-8"
@@ -246,15 +246,15 @@ export function UnitView({
             </Float>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 font-display text-[12px] font-bold tracking-[0.18em] uppercase" style={{ color: shade(main, 62) }}>
-                <Flame className="h-4 w-4" /> the flame behind the flavour
+                <Flame className="h-4 w-4" /> why this colour
               </div>
               <p className="mt-2 text-[15px] leading-[1.75] text-ink-soft">
                 <strong className="font-extrabold text-ink capitalize">
                   {unit.element.name}
                 </strong>{" "}
                 burns {unit.element.flameName} at{" "}
-                <strong className="font-extrabold text-ink">{unit.element.nm} nm</strong> —
-                that is the real colour your unit flavour is based on.{" "}
+                <strong className="font-extrabold text-ink">{unit.element.nm} nm</strong> — the
+                colour this unit uses comes from that flame.{" "}
                 {unit.spectrumNote && <Fmt text={unit.spectrumNote} />}
               </p>
             </div>
@@ -277,10 +277,10 @@ export function UnitView({
             </span>
             <span className="min-w-0">
               <span className="block text-[11px] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
-                previous flavour
+                previous unit
               </span>
               <span className="block truncate font-display text-[15px] font-semibold text-ink">
-                {prev.code} · {prev.candy.nick}
+                {prev.code} · {prev.shortTitle}
               </span>
             </span>
           </motion.button>
@@ -298,10 +298,10 @@ export function UnitView({
           >
             <span className="min-w-0">
               <span className="block text-[11px] font-extrabold tracking-[0.14em] text-white/70 uppercase">
-                next flavour
+                next unit
               </span>
               <span className="block truncate font-display text-[15px] font-semibold">
-                {next.code} · {next.candy.nick}
+                {next.code} · {next.shortTitle}
               </span>
             </span>
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/20">

@@ -82,7 +82,7 @@ function TopBar({
 
         <span aria-hidden className="mx-1 hidden h-6 w-[3px] rounded-full bg-ink/10 sm:block" />
 
-        {/* ————— the arcade trio ————— */}
+        {/* ————— tools ————— */}
         <motion.button
           type="button"
           onClick={onSearch}
@@ -105,8 +105,8 @@ function TopBar({
               ? "bg-grape text-white"
               : "bg-ink/5 text-ink-soft hover:bg-ink/10"
           }`}
-          title="Blend Mode — flashcard arcade"
-          aria-label="Open Blend Mode"
+          title="Flashcards"
+          aria-label="Open flashcards"
         >
           <Zap className="h-4 w-4" strokeWidth={2.5} />
         </motion.button>
@@ -122,8 +122,8 @@ function TopBar({
               ? "bg-mint text-white"
               : "bg-ink/5 text-ink-soft hover:bg-ink/10"
           }`}
-          title="Your sticker book"
-          aria-label="Open the sticker book"
+          title="Your progress"
+          aria-label="Open your progress"
         >
           <Sticker className="h-4 w-4" strokeWidth={2.5} />
         </motion.button>
@@ -140,7 +140,7 @@ function TopBar({
               ? "bg-ink text-cream"
               : "bg-ink/5 text-ink-soft hover:bg-ink/10"
           }`}
-          title="Clubhouse"
+          title="Home"
         >
           <HomeIcon className="h-4 w-4" strokeWidth={2.5} />
         </motion.button>
@@ -162,7 +162,7 @@ function TopBar({
                   ? { background: u.candy.main, color: "#fff", boxShadow: `0 3px 0 ${shade(u.candy.main)}` }
                   : { background: tint(u.candy.main, 14), color: shade(u.candy.main, 62) }
               }
-              title={`${u.code} — ${u.candy.nick}`}
+              title={`${u.code} — ${u.shortTitle}`}
             >
               {u.code.replace("WCH", "")}
             </motion.button>
@@ -212,8 +212,8 @@ function Footer({
               </span>
             </div>
             <p className="mt-3 text-[14px] leading-relaxed text-cream/65">
-              Chemistry, but make it fun. Six units, six flavours, one beaker that fills up as
-              you revise.
+              Revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16), written to the
+              2018 specification.
             </p>
             <div className="mt-5 flex items-end gap-1">
               <Mascot main="#FFD43B" size={72} boop onBoop={boop} bubbles={false} />
@@ -227,7 +227,7 @@ function Footer({
                   >
                     <SpeechBubble bg="#FFFDF7" className="px-4 py-2.5">
                       <span className="font-display text-[13px] font-semibold text-ink">
-                        Boop received. Now revise something.
+                        Tap a unit to start revising.
                       </span>
                     </SpeechBubble>
                   </motion.div>
@@ -238,7 +238,7 @@ function Footer({
 
           <div>
             <div className="font-display text-[12px] font-bold tracking-[0.2em] text-cream/50 uppercase">
-              The arcade
+              Practice
             </div>
             <div className="mt-4 flex flex-col gap-3">
               <button
@@ -250,7 +250,7 @@ function Footer({
                   <Zap className="h-4 w-4" strokeWidth={2.5} />
                 </span>
                 <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream">
-                  Blend Mode · flashcard arcade
+                  Flashcards · shuffled checkpoint questions
                 </span>
               </button>
               <button
@@ -262,7 +262,7 @@ function Footer({
                   <Sticker className="h-4 w-4" strokeWidth={2.5} />
                 </span>
                 <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream">
-                  Sticker book · your jar
+                  Progress · topics revised
                 </span>
               </button>
               <button
@@ -282,7 +282,7 @@ function Footer({
 
           <div>
             <div className="font-display text-[12px] font-bold tracking-[0.2em] text-cream/50 uppercase">
-              The six flavours
+              Units
             </div>
             <div className="mt-4 grid grid-cols-2 gap-x-10 gap-y-3">
               {UNITS.map((u) => (
@@ -297,7 +297,7 @@ function Footer({
                     style={{ background: u.candy.main }}
                   />
                   <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream">
-                    {u.code.replace("WCH", "Unit ")} · {u.candy.nick}
+                    {u.code.replace("WCH", "Unit ")} · {u.shortTitle}
                   </span>
                 </button>
               ))}
