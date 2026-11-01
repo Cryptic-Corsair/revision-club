@@ -45,7 +45,8 @@ import {
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · notes reader — one enclosed room per spec point.
-   Each section is a full-width tonal band in its own colour, and
+   Each section is a full-width tonal band: most borrow a candy
+   colour, every third sits on the deep roast (a dark room), and
    the footer's wave rides between the bands, so the note reads as
    a string of connected rooms rather than one long scroll.
    ═══════════════════════════════════════════════════════════════ */
@@ -113,6 +114,10 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
 
   const accentOf = (i: number) => BANDS[i % BANDS.length];
   const bandOf = (i: number) => tint(accentOf(i), 10);
+  /* every third room sits on the deep roast — a dark interlude
+     between the candy bands (2.2, 2.5, 2.8 …), fonts flipped to milk */
+  const isDarkBand = (i: number) => i % 3 === 1;
+  const bgOf = (i: number) => (isDarkBand(i) ? "var(--color-cocoa)" : bandOf(i));
   const activeIndex = Math.max(0, doc.sections.findIndex((s) => s.spec === active));
   const activeSection = doc.sections[activeIndex];
 
@@ -203,8 +208,10 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
                   key={s.spec}
                   type="button"
                   onClick={() => scrollToSpec(s.spec)}
-                  className="group flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left transition-transform hover:-translate-y-0.5"
-                  style={{ background: bandOf(i) }}
+                  className={`group flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left transition-transform hover:-translate-y-0.5${
+                    isDarkBand(i) ? " band-dark" : ""
+                  }`}
+                  style={isDarkBand(i) ? undefined : { background: bandOf(i) }}
                 >
                   <span
                     className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[10.5px] font-bold"
@@ -266,18 +273,23 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
         </div>
 
         <div className="mt-8">
-          <BandWave from="var(--color-cream)" to={bandOf(0)} />
+          <BandWave from="var(--color-cream)" to={bgOf(0)} />
           {doc.sections.map((s, i) => {
             const accent = accentOf(i);
+            const dark = isDarkBand(i);
             const last = i === doc.sections.length - 1;
             return (
               <Fragment key={s.spec}>
-                <section id={`spec-${s.spec.replace(".", "-")}`} className="relative scroll-mt-[190px]" style={{ background: bandOf(i) }}>
+                <section
+                  id={`spec-${s.spec.replace(".", "-")}`}
+                  className={`relative scroll-mt-[190px]${dark ? " band-dark" : ""}`}
+                  style={dark ? undefined : { background: bandOf(i) }}
+                >
                   <div className="mx-auto max-w-3xl px-4 py-14 sm:px-8 sm:py-16">
                     <SpecSectionView section={s} accent={accent} />
                   </div>
                 </section>
-                <BandWave from={bandOf(i)} to={last ? "var(--color-cream)" : bandOf(i + 1)} />
+                <BandWave from={bgOf(i)} to={last ? "var(--color-cream)" : bgOf(i + 1)} />
               </Fragment>
             );
           })}
