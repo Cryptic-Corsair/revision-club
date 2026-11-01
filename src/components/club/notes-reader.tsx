@@ -18,7 +18,7 @@ import {
   StickyNote,
   Target,
   Zap,
-} from "lucide-react";
+} from "./icons";
 import type { NotesBlock, NotesDoc, SpecSection } from "@/lib/spectra/notes-types";
 import type { Unit } from "@/lib/spectra/types";
 import { toggleRevised, useRevised } from "@/lib/spectra/progress";
@@ -170,7 +170,7 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
             <Mascot main={main} size={104} bubbles={false} />
           </div>
           <Reveal delay={0.15} className="min-w-0">
-            <SpeechBubble bg="#FFFDF7" tailClass="left-8 -top-[7px] rotate-[225deg]">
+            <SpeechBubble tailClass="left-8 -top-[7px] rotate-[225deg]">
               <p className="text-[14.5px] leading-[1.75] text-ink">
                 {doc.intro.map((b, i) =>
                   b.k === "p" ? (
@@ -317,7 +317,7 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
             style={
               isRevised
                 ? { background: main, color: "#fff", boxShadow: `0 5px 0 ${shade(main)}`, transform: "rotate(-1.5deg)" }
-                : { background: "#FFFDF7", color: "#3D2B1F", boxShadow: "0 5px 0 rgba(61,43,31,0.10)" }
+                : { background: "var(--color-paper)", color: "var(--color-ink)", boxShadow: "0 5px 0 color-mix(in oklab, var(--color-ink) 10%, transparent)" }
             }
           >
             {isRevised ? (
@@ -413,7 +413,7 @@ function SpecSectionView({
           style={
             done
               ? { background: "#12B886", color: "#fff", boxShadow: "0 4px 0 #0B7A57" }
-              : { background: "#FFFDF7", color: "#3D2B1F", boxShadow: "0 4px 0 rgba(61,43,31,0.10)" }
+              : { background: "var(--color-paper)", color: "var(--color-ink)", boxShadow: "0 4px 0 color-mix(in oklab, var(--color-ink) 10%, transparent)" }
           }
         >
           {done ? <Check className="h-4.5 w-4.5" strokeWidth={3} /> : <PartyPopper className="h-4.5 w-4.5" style={{ color: main }} />}
@@ -485,7 +485,7 @@ function BlockView({ block: b, main }: { block: NotesBlock; main: string }) {
         <div className="max-w-[72ch] rounded-[22px] p-5" style={{ background: tint(main, 9) }}>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5">
             {b.eq.split(/\s{2,}/).map((part, i) => (
-              <span key={i} className="rounded-2xl bg-white px-4 py-2.5 font-mono text-[14.5px] font-semibold text-ink shadow-[0_3px_0_rgb(61_43_31/0.06)]">
+              <span key={i} className="rounded-2xl bg-paper px-4 py-2.5 font-mono text-[14.5px] font-semibold text-ink shadow-[0_3px_0_rgb(61_43_31/0.06)]">
                 <Fmt text={part.trim()} />
               </span>
             ))}
@@ -520,7 +520,7 @@ function BlockView({ block: b, main }: { block: NotesBlock; main: string }) {
       return (
         <div className="max-w-[72ch] rounded-[22px] p-5 sm:p-6" style={{ background: tint("#9775FA", 12) }}>
           <div className="flex items-start gap-3">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-white">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-paper">
               <Lightbulb className="h-5 w-5 text-grape" />
             </span>
             <div>
@@ -631,7 +631,7 @@ function Worked({
         ))}
       </div>
       <div
-        className="mt-4 flex items-start gap-2.5 rounded-[20px] bg-white px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_rgb(61_43_31/0.07)]"
+        className="mt-4 flex items-start gap-2.5 rounded-[20px] bg-paper px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_rgb(61_43_31/0.07)]"
         style={{ borderLeft: `6px solid ${main}` }}
       >
         <Check className="mt-0.5 h-5 w-5 shrink-0" style={{ color: main }} strokeWidth={3} />
@@ -735,10 +735,10 @@ function Figure({ kind, caption, main }: { kind: string; caption?: string; main:
   }
   if (!node) return null;
   return (
-    <div className="rounded-[28px] bg-paper p-4 puff sm:p-6">
+    <div className="rounded-[28px] bg-[#FFFDF7] p-4 puff sm:p-6">
       <div className="flex justify-center">{node}</div>
       {caption && (
-        <p className="mx-auto mt-3 max-w-[58ch] text-center text-[12.5px] leading-[1.65] font-semibold text-ink-faint">
+        <p className="mx-auto mt-3 max-w-[58ch] text-center text-[12.5px] leading-[1.65] font-semibold text-[#B7A18E]">
           <Fmt text={caption} />
         </p>
       )}

@@ -15,7 +15,7 @@ import {
   PartyPopper,
   Sparkles,
   Timer,
-} from "lucide-react";
+} from "./icons";
 import type { Block } from "@/lib/spectra/types";
 import { Fmt } from "./format";
 import { Mascot, SpeechBubble, tint, shade, Reveal } from "./bits";
@@ -89,7 +89,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
             {b.eq.split(/\s{2,}/).map((part, i) => (
               <span
                 key={i}
-                className="rounded-2xl bg-white px-4 py-2.5 font-mono text-[15px] font-semibold text-ink shadow-[0_3px_0_rgb(61_43_31/0.06)]"
+                className="rounded-2xl bg-paper px-4 py-2.5 font-mono text-[15px] font-semibold text-ink shadow-[0_3px_0_rgb(61_43_31/0.06)]"
               >
                 <Fmt text={part.trim()} />
               </span>
@@ -100,7 +100,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
               {b.ok.map((o, i) => (
                 <span
                   key={i}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1 text-[12.5px] font-bold text-ink"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-paper/70 px-3 py-1 text-[12.5px] font-bold text-ink"
                 >
                   <BadgeCheck className="h-4 w-4" style={{ color: main }} />
                   <Fmt text={o} />
@@ -257,7 +257,7 @@ function WorkedExample({
             initial={{ opacity: 0, scale: 0.8, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 320, damping: 15 }}
-            className="mt-4 flex items-start gap-2.5 rounded-full bg-white px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_rgb(61_43_31/0.07)] sm:items-center"
+            className="mt-4 flex items-start gap-2.5 rounded-full bg-paper px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_rgb(61_43_31/0.07)] sm:items-center"
             style={{ borderLeft: `6px solid ${main}` }}
           >
             <PartyPopper className="h-5 w-5 shrink-0" style={{ color: main }} />
@@ -370,11 +370,11 @@ function Checkpoint({ qs, main }: { qs: { q: string; a: string }[]; main: string
   return (
     <div className="rounded-[30px] p-5 sm:p-6" style={{ background: tint(main, 9) }}>
       <div className="mb-4 flex items-center gap-3">
-        <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white">
+        <span className="grid h-10 w-10 place-items-center rounded-2xl bg-paper">
           <Gamepad2 className="h-5 w-5" style={{ color: main }} />
         </span>
         <h4 className="font-display text-[19px] font-semibold text-ink">Checkpoint</h4>
-        <span className="ml-auto hidden rounded-full bg-white/70 px-3 py-1 text-[12px] font-bold text-ink-soft sm:block">
+        <span className="ml-auto hidden rounded-full bg-paper/70 px-3 py-1 text-[12px] font-bold text-ink-soft sm:block">
           {open.length}/{qs.length} revealed
         </span>
       </div>

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FlaskConical, Home as HomeIcon, Search, Sticker, Zap } from "lucide-react";
+import { FlaskConical, Home as HomeIcon, Moon, Search, Sticker, Sun, Zap } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { UNITS, getUnit, getTopic } from "@/lib/spectra/units";
 import { getNotes, getNotesForTopic } from "@/lib/spectra/notes";
@@ -38,9 +38,29 @@ function LogoMark({ size = 38 }: { size?: number }) {
         boxShadow: "0 4px 0 #E8590C",
       }}
     >
-      <FlaskConical className="h-5 w-5 text-white" strokeWidth={2.5} />
+      <FlaskConical className="h-5 w-5 text-white" strokeWidth={2.2} />
     </span>
   );
+}
+
+/* ————— mood switch ————— */
+
+function useTheme() {
+  const [dark, setDark] = useState(false);
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
+  }, []);
+  const toggle = useCallback(() => {
+    const next = !document.documentElement.classList.contains("dark");
+    document.documentElement.classList.toggle("dark", next);
+    try {
+      localStorage.setItem("rc-theme", next ? "dark" : "light");
+    } catch {
+      /* private mode — mood just won't persist */
+    }
+    setDark(next);
+  }, []);
+  return { dark, toggle };
 }
 
 function TopBar({
@@ -58,91 +78,47 @@ function TopBar({
   onOpenBlend: () => void;
   onSearch: () => void;
 }) {
+  const { dark, toggle } = useTheme();
   const activeCode =
     view.kind === "unit" || view.kind === "topic" || view.kind === "notes" ? view.code : null;
 
+  const tool = (active: boolean) =>
+    `grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors ${
+      active ? "bg-ink text-cream" : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
+    }`;
+
   return (
-    <header className="fixed inset-x-0 top-3 z-50 flex justify-center px-3">
+    <header className="fixed inset-x-0 top-2.5 z-50 flex justify-center px-2.5 sm:top-3 sm:px-3">
       <nav
         aria-label="Units"
-        className="no-scrollbar flex max-w-[96vw] items-center gap-1.5 overflow-x-auto rounded-full bg-paper/90 py-2 pr-3 pl-2.5 backdrop-blur-md"
-        style={{ boxShadow: "0 3px 0 rgba(61,43,31,0.06), 0 14px 34px -18px rgba(61,43,31,0.35)" }}
+        className="no-scrollbar flex max-w-[97vw] items-center gap-1.5 overflow-x-auto rounded-full bg-paper/90 py-2 pr-2.5 pl-2.5 backdrop-blur-xl"
+        style={{ boxShadow: "0 3px 0 color-mix(in oklab, var(--color-ink) 6%, transparent), 0 16px 38px -18px rgb(0 0 0 / 0.4)" }}
       >
         <button
           type="button"
           onClick={onHome}
-          className="flex shrink-0 cursor-pointer items-center gap-2.5 pr-2"
+          className="flex shrink-0 cursor-pointer items-center gap-2.5 pr-1.5"
           aria-label="Reaction Club — home"
         >
           <LogoMark />
-          <span className="hidden font-display text-[16px] font-semibold tracking-tight text-ink sm:block">
+          <span className="hidden font-display text-[16px] font-semibold tracking-tight text-ink md:block">
             Reaction Club
           </span>
         </button>
 
-        <span aria-hidden className="mx-1 hidden h-6 w-[3px] rounded-full bg-ink/10 sm:block" />
+        <span aria-hidden className="mx-1 hidden h-6 w-[3px] shrink-0 rounded-full bg-ink/10 sm:block" />
 
-        {/* ————— tools ————— */}
-        <motion.button
-          type="button"
-          onClick={onSearch}
-          whileTap={{ scale: 0.88 }}
-          className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full bg-ink/5 text-ink-soft hover:bg-ink/10"
-          title="Search topics · ⌘K"
-          aria-label="Search topics"
-        >
-          <Search className="h-4 w-4" strokeWidth={2.5} />
-        </motion.button>
-        <motion.button
-          type="button"
-          onClick={onOpenBlend}
-          aria-current={view.kind === "blend" ? "page" : undefined}
-          whileTap={{ scale: 0.88 }}
-          animate={{ scale: view.kind === "blend" ? 1.12 : 1 }}
-          transition={{ type: "spring", stiffness: 380, damping: 16 }}
-          className={`grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full ${
-            view.kind === "blend"
-              ? "bg-grape text-white"
-              : "bg-ink/5 text-ink-soft hover:bg-ink/10"
-          }`}
-          title="Flashcards"
-          aria-label="Open flashcards"
-        >
-          <Zap className="h-4 w-4" strokeWidth={2.5} />
-        </motion.button>
-        <motion.button
-          type="button"
-          onClick={onOpenSticker}
-          aria-current={view.kind === "sticker" ? "page" : undefined}
-          whileTap={{ scale: 0.88 }}
-          animate={{ scale: view.kind === "sticker" ? 1.12 : 1 }}
-          transition={{ type: "spring", stiffness: 380, damping: 16 }}
-          className={`grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full ${
-            view.kind === "sticker"
-              ? "bg-mint text-white"
-              : "bg-ink/5 text-ink-soft hover:bg-ink/10"
-          }`}
-          title="Your progress"
-          aria-label="Open your progress"
-        >
-          <Sticker className="h-4 w-4" strokeWidth={2.5} />
-        </motion.button>
-
-        <span aria-hidden className="mx-1 hidden h-6 w-[3px] rounded-full bg-ink/10 sm:block" />
-
+        {/* ————— home + units ————— */}
         <motion.button
           type="button"
           onClick={onHome}
           aria-current={view.kind === "home" ? "page" : undefined}
-          whileTap={{ scale: 0.88 }}
-          className={`grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full ${
-            view.kind === "home"
-              ? "bg-ink text-cream"
-              : "bg-ink/5 text-ink-soft hover:bg-ink/10"
-          }`}
+          aria-label="Home"
           title="Home"
+          whileTap={{ scale: 0.88 }}
+          className={`h-10 w-10 shrink-0 ${tool(view.kind === "home")}`}
         >
-          <HomeIcon className="h-4 w-4" strokeWidth={2.5} />
+          <HomeIcon className="h-[18px] w-[18px]" strokeWidth={2.2} />
         </motion.button>
 
         {UNITS.map((u) => {
@@ -154,13 +130,13 @@ function TopBar({
               onClick={() => onOpenUnit(u.code)}
               aria-current={active ? "page" : undefined}
               whileTap={{ scale: 0.88 }}
-              animate={{ scale: active ? 1.12 : 1 }}
+              animate={{ scale: active ? 1.1 : 1 }}
               transition={{ type: "spring", stiffness: 380, damping: 16 }}
-              className="h-9 shrink-0 cursor-pointer rounded-full px-2.5 font-display text-[11px] font-bold tracking-wide"
+              className="h-10 shrink-0 cursor-pointer rounded-full px-3 font-display text-[12px] font-bold tracking-wide"
               style={
                 active
                   ? { background: u.candy.main, color: "#fff", boxShadow: `0 3px 0 ${shade(u.candy.main)}` }
-                  : { background: tint(u.candy.main, 14), color: shade(u.candy.main, 62) }
+                  : { background: tint(u.candy.main, 16), color: u.candy.main }
               }
               title={`${u.code} — ${u.shortTitle}`}
             >
@@ -168,6 +144,66 @@ function TopBar({
             </motion.button>
           );
         })}
+
+        <span aria-hidden className="mx-1 hidden h-6 w-[3px] shrink-0 rounded-full bg-ink/10 sm:block" />
+
+        {/* ————— tools ————— */}
+        <motion.button
+          type="button"
+          onClick={onSearch}
+          whileTap={{ scale: 0.88 }}
+          className={tool(false)}
+          title="Search topics · ⌘K"
+          aria-label="Search topics"
+        >
+          <Search className="h-[18px] w-[18px]" strokeWidth={2.2} />
+        </motion.button>
+        <motion.button
+          type="button"
+          onClick={onOpenBlend}
+          aria-current={view.kind === "blend" ? "page" : undefined}
+          whileTap={{ scale: 0.88 }}
+          animate={{ scale: view.kind === "blend" ? 1.1 : 1 }}
+          transition={{ type: "spring", stiffness: 380, damping: 16 }}
+          className={tool(view.kind === "blend")}
+          title="Flashcards"
+          aria-label="Open flashcards"
+          style={
+            view.kind === "blend"
+              ? { background: "#9775FA", color: "#fff", boxShadow: "0 3px 0 #6d4fd4" }
+              : undefined
+          }
+        >
+          <Zap className="h-[18px] w-[18px]" strokeWidth={2.2} />
+        </motion.button>
+        <motion.button
+          type="button"
+          onClick={onOpenSticker}
+          aria-current={view.kind === "sticker" ? "page" : undefined}
+          whileTap={{ scale: 0.88 }}
+          animate={{ scale: view.kind === "sticker" ? 1.1 : 1 }}
+          transition={{ type: "spring", stiffness: 380, damping: 16 }}
+          className={tool(view.kind === "sticker")}
+          title="Your progress"
+          aria-label="Open your progress"
+          style={
+            view.kind === "sticker"
+              ? { background: "#12B886", color: "#fff", boxShadow: "0 3px 0 #0B7A57" }
+              : undefined
+          }
+        >
+          <Sticker className="h-[18px] w-[18px]" strokeWidth={2.2} />
+        </motion.button>
+        <motion.button
+          type="button"
+          onClick={toggle}
+          whileTap={{ scale: 0.88 }}
+          className={tool(false)}
+          title={dark ? "Switch to the daylight lab" : "Switch to the after-dark lab"}
+          aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+        >
+          {dark ? <Sun className="h-[18px] w-[18px]" strokeWidth={2.2} /> : <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />}
+        </motion.button>
       </nav>
     </header>
   );
@@ -197,7 +233,7 @@ function Footer({
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-full w-full">
           <path
             d="M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z"
-            fill="#2E2016"
+            fill="var(--color-cocoa)"
           />
         </svg>
       </div>
@@ -211,7 +247,7 @@ function Footer({
                 Reaction Club
               </span>
             </div>
-            <p className="mt-3 text-[14px] leading-relaxed text-cream/65">
+            <p className="mt-3 text-[14px] leading-relaxed text-cream/65 dark:text-cream/80">
               Revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16), written to the
               2018 specification.
             </p>
@@ -225,7 +261,7 @@ function Footer({
                     exit={{ opacity: 0, scale: 0.85 }}
                     className="mb-4"
                   >
-                    <SpeechBubble bg="#FFFDF7" className="px-4 py-2.5">
+                    <SpeechBubble className="px-4 py-2.5">
                       <span className="font-display text-[13px] font-semibold text-ink">
                         Tap a unit to start revising.
                       </span>
@@ -237,7 +273,7 @@ function Footer({
           </div>
 
           <div>
-            <div className="font-display text-[12px] font-bold tracking-[0.2em] text-cream/50 uppercase">
+            <div className="font-display text-[12px] font-bold tracking-[0.2em] text-cream/50 uppercase dark:text-cream/70">
               Practice
             </div>
             <div className="mt-4 flex flex-col gap-3">
@@ -247,9 +283,9 @@ function Footer({
                 className="group flex cursor-pointer items-center gap-2.5 text-left"
               >
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-grape/25 text-grape transition-transform group-hover:scale-110">
-                  <Zap className="h-4 w-4" strokeWidth={2.5} />
+                  <Zap className="h-4 w-4" strokeWidth={2.2} />
                 </span>
-                <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream">
+                <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream dark:text-cream/85">
                   Flashcards · shuffled checkpoint questions
                 </span>
               </button>
@@ -259,9 +295,9 @@ function Footer({
                 className="group flex cursor-pointer items-center gap-2.5 text-left"
               >
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-mint/25 text-mint transition-transform group-hover:scale-110">
-                  <Sticker className="h-4 w-4" strokeWidth={2.5} />
+                  <Sticker className="h-4 w-4" strokeWidth={2.2} />
                 </span>
-                <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream">
+                <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream dark:text-cream/85">
                   Progress · topics revised
                 </span>
               </button>
@@ -271,9 +307,9 @@ function Footer({
                 className="group flex cursor-pointer items-center gap-2.5 text-left"
               >
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10 text-cream/70 transition-transform group-hover:scale-110">
-                  <Search className="h-4 w-4" strokeWidth={2.5} />
+                  <Search className="h-4 w-4" strokeWidth={2.2} />
                 </span>
-                <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream">
+                <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream dark:text-cream/85">
                   Search · press ⌘K
                 </span>
               </button>
@@ -281,7 +317,7 @@ function Footer({
           </div>
 
           <div>
-            <div className="font-display text-[12px] font-bold tracking-[0.2em] text-cream/50 uppercase">
+            <div className="font-display text-[12px] font-bold tracking-[0.2em] text-cream/50 uppercase dark:text-cream/70">
               Units
             </div>
             <div className="mt-4 grid grid-cols-2 gap-x-10 gap-y-3">
@@ -296,7 +332,7 @@ function Footer({
                     className="h-3 w-3 shrink-0 rounded-full transition-transform group-hover:scale-125"
                     style={{ background: u.candy.main }}
                   />
-                  <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream">
+                  <span className="text-[13px] font-bold text-cream/70 transition-colors group-hover:text-cream dark:text-cream/85">
                     {u.code.replace("WCH", "Unit ")} · {u.shortTitle}
                   </span>
                 </button>
@@ -306,7 +342,7 @@ function Footer({
         </div>
 
         <div className="mx-auto mt-10 max-w-6xl px-5 sm:px-8">
-          <p className="text-[11.5px] leading-relaxed font-semibold text-cream/40">
+          <p className="text-[11.5px] leading-relaxed font-semibold text-cream/40 dark:text-cream/60">
             Written to the Pearson Edexcel International A Level Chemistry (2018) specification
             · WCH11–WCH16 · not affiliated with or endorsed by Pearson Education Ltd.
           </p>

@@ -11,11 +11,26 @@ import { AnimatePresence, motion } from "framer-motion";
 
 /* ————— colour helpers (all mixing, no hard-coded shades) ————— */
 
-export const tint = (main: string, pct: number, base = "white") =>
+/* Pastels lean on --tint-base: white paper by day, warm chestnut
+   after dark — so every tinted chip/card adapts to the mood. */
+export const tint = (main: string, pct: number, base = "var(--tint-base)") =>
   `color-mix(in oklab, ${main} ${pct}%, ${base})`;
 
 export const shade = (main: string, pct = 78) =>
   `color-mix(in oklab, ${main} ${pct}%, #2e2016)`;
+
+/* Dark ink on light candy (lemon, sun yellows), white on the rest. */
+export function readableInk(main: string): string {
+  const m = /^#?([0-9a-f]{6})$/i.exec(main.trim());
+  if (!m) return "#FFFFFF";
+  const n = parseInt(m[1], 16);
+  const ch = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => {
+    const s = v / 255;
+    return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+  });
+  const lum = 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2];
+  return lum > 0.44 ? "#33241A" : "#FFFFFF";
+}
 
 export const fade = (main: string, pct: number) =>
   `color-mix(in oklab, ${main} ${pct}%, transparent)`;
@@ -91,8 +106,8 @@ export function CandyButton({
       onClick={onClick}
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.95, y: 2 }}
-      className={`candy inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[15.5px] font-semibold tracking-wide text-white select-none ${className ?? ""}`}
-      style={{ "--candy-bg": main, "--candy-side": shade(main) } as CSSProperties}
+      className={`candy inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[15.5px] font-semibold tracking-wide select-none ${className ?? ""}`}
+      style={{ "--candy-bg": main, "--candy-side": shade(main), color: readableInk(main) } as CSSProperties}
     >
       {children}
     </motion.button>
@@ -127,6 +142,7 @@ export function SoftButton({
 }
 
 /* ————— little label chips ————— */
+/* (bg-paper / text-ink ride the theme vars, so chips flip with the mood) */
 
 export function Chip({
   children,
@@ -143,7 +159,10 @@ export function Chip({
       style={
         main
           ? { background: tint(main, 16), color: shade(main, 60) }
-          : { background: "rgb(61 43 31 / 0.06)", color: "var(--color-ink-soft)" }
+          : {
+              background: "color-mix(in oklab, var(--color-ink) 7%, transparent)",
+              color: "var(--color-ink-soft)",
+            }
       }
     >
       {children}
@@ -162,8 +181,8 @@ export function SectionTag({
 }) {
   return (
     <span
-      className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-display text-[12px] font-semibold tracking-[0.16em] text-white uppercase select-none"
-      style={{ background: main, transform: `rotate(${tilt}deg)` }}
+      className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-display text-[12px] font-semibold tracking-[0.16em] uppercase select-none"
+      style={{ background: main, color: readableInk(main), transform: `rotate(${tilt}deg)` }}
     >
       {children}
     </span>
@@ -174,7 +193,7 @@ export function SectionTag({
 
 export function SpeechBubble({
   children,
-  bg = "#FFFDF7",
+  bg = "var(--color-paper)",
   className,
   tailClass = "left-9",
 }: {
@@ -201,7 +220,7 @@ export function SpeechBubble({
 /* ————— wave divider ————— */
 
 export function Wave({
-  fill = "#2E2016",
+  fill = "var(--color-cocoa)",
   flip = false,
   className,
 }: {
@@ -513,7 +532,7 @@ export function BeakerMeter({
       </clipPath>
       <path
         d="M27 20 L27 86 Q27 102 43 102 L47 102 Q63 102 63 86 L63 20 Z"
-        fill="#FFFFFF"
+        fill="var(--color-paper)"
       />
       <g clipPath={`url(#${clip})`}>
         <path
@@ -530,14 +549,14 @@ export function BeakerMeter({
       <path
         d="M27 20 L27 86 Q27 102 43 102 L47 102 Q63 102 63 86 L63 20 Z"
         fill="none"
-        stroke="#3D2B1F"
+        stroke="var(--color-ink)"
         strokeWidth="5"
         strokeLinejoin="round"
       />
-      <path d="M20 20 H70" stroke="#3D2B1F" strokeWidth="5" strokeLinecap="round" />
+      <path d="M20 20 H70" stroke="var(--color-ink)" strokeWidth="5" strokeLinecap="round" />
       <path
         d="M55 44 h8 M55 62 h8 M55 80 h8"
-        stroke="#3D2B1F"
+        stroke="var(--color-ink)"
         strokeWidth="2.5"
         strokeLinecap="round"
         opacity="0.25"

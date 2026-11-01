@@ -13,7 +13,7 @@ import {
   Sticker,
   Trophy,
   Zap,
-} from "lucide-react";
+} from "./icons";
 import type { Unit, UnitCode } from "@/lib/spectra/types";
 import { TOTALS } from "@/lib/spectra/units";
 import { toggleRevised, useRevised } from "@/lib/spectra/progress";
@@ -194,7 +194,7 @@ export function StickerBook({
                     key={u.code}
                     className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11.5px] font-extrabold"
                     style={{
-                      background: done > 0 ? tint(u.candy.main, full ? 90 : 16) : "rgb(61 43 31 / 0.05)",
+                      background: done > 0 ? tint(u.candy.main, full ? 90 : 16) : "color-mix(in oklab, var(--color-ink) 5%, transparent)",
                       color: done > 0 ? shade(u.candy.main, 62) : "var(--color-ink-faint)",
                     }}
                   >
@@ -235,7 +235,7 @@ export function StickerBook({
                 }`}
                 style={{
                   transform: `rotate(${[-2, 1.5, -1, 2, -1.5, 1][i % 6]}deg)`,
-                  background: a.earned ? tint(a.color, 14) : "rgb(61 43 31 / 0.035)",
+                  background: a.earned ? tint(a.color, 14) : "color-mix(in oklab, var(--color-ink) 4%, transparent)",
                 }}
                 title={a.hint}
               >
@@ -244,7 +244,7 @@ export function StickerBook({
                   style={
                     a.earned
                       ? { background: a.color, boxShadow: `0 4px 0 ${shade(a.color)}`, color: "#fff" }
-                      : { background: "rgb(61 43 31 / 0.06)", color: "var(--color-ink-faint)" }
+                      : { background: "color-mix(in oklab, var(--color-ink) 7%, transparent)", color: "var(--color-ink-faint)" }
                   }
                 >
                   {a.earned ? (
@@ -343,8 +343,8 @@ export function StickerBook({
                                 transform: `rotate(${ti % 2 ? 1.4 : -1.4}deg)`,
                               }
                             : {
-                                background: "rgba(255,253,247,0.75)",
-                                border: "2.5px dashed rgb(61 43 31 / 0.16)",
+                                background: "color-mix(in oklab, var(--color-paper) 75%, transparent)",
+                                border: "2.5px dashed color-mix(in oklab, var(--color-ink) 18%, transparent)",
                                 color: "var(--color-ink-faint)",
                                 transform: `rotate(${ti % 2 ? -0.7 : 0.7}deg)`,
                               }
@@ -396,7 +396,7 @@ export function StickerBook({
           style={
             confirmPour
               ? { background: "#FF6B6B", color: "#fff", boxShadow: "0 4px 0 #e8590c" }
-              : { background: "rgb(61 43 31 / 0.06)", color: "#8a7261" }
+              : { background: "color-mix(in oklab, var(--color-ink) 7%, transparent)", color: "var(--color-ink-soft)" }
           }
         >
           <Droplets className="h-4.5 w-4.5" />

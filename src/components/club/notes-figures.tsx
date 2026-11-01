@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw } from "./icons";
 import { tint, shade } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -350,7 +350,7 @@ export function FigFillDemo({ main = "#FF6B6B" }: { main?: string }) {
       : "Boxes are full, so electrons start pairing — opposite spins, Pauli Exclusion Principle.";
 
   return (
-    <div className="rounded-[26px] bg-paper p-5 puff sm:p-6">
+    <div className="rounded-[26px] bg-[#FFFDF7] p-5 puff sm:p-6">
       <div className="flex flex-wrap items-end justify-center gap-3 sm:gap-4">
         {[0, 1, 2].map((box) => {
           const up = count > box;
@@ -366,14 +366,14 @@ export function FigFillDemo({ main = "#FF6B6B" }: { main?: string }) {
                 {up && <span className="text-[26px]" style={{ color: shade(main) }}>↑</span>}
                 {up && down && <span className="ml-0.5 text-[26px]" style={{ color: "#12B886" }}>↓</span>}
               </motion.div>
-              {box === 0 && <span className="font-display text-[12px] font-bold tracking-wide text-ink-faint">2p</span>}
+              {box === 0 && <span className="font-display text-[12px] font-bold tracking-wide text-[#B7A18E]">2p</span>}
             </div>
           );
         })}
       </div>
       <div className="mt-5 flex flex-col items-center gap-3">
-        <p className="text-center text-[14.5px] font-bold text-ink">{status}</p>
-        <p className="text-center text-[12.5px] font-bold text-ink-faint">{count}/6 electrons placed</p>
+        <p className="text-center text-[14.5px] font-bold text-[#3D2B1F]">{status}</p>
+        <p className="text-center text-[12.5px] font-bold text-[#B7A18E]">{count}/6 electrons placed</p>
         <div className="flex gap-2.5">
           {!full ? (
             <motion.button
@@ -392,7 +392,7 @@ export function FigFillDemo({ main = "#FF6B6B" }: { main?: string }) {
               onClick={() => setCount(0)}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full bg-ink/5 px-5 py-2.5 font-display text-[14px] font-semibold text-ink-soft"
+              className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full bg-[rgb(61_43_31/0.05)] px-5 py-2.5 font-display text-[14px] font-semibold text-[#8A7261]"
             >
               <RotateCcw className="h-4 w-4" /> Empty the sub-shell
             </motion.button>
@@ -480,7 +480,7 @@ export function BoxNotation({
                 </div>
               ))}
             </div>
-            <span className="font-mono text-[11.5px] font-bold text-ink-soft">
+            <span className="font-mono text-[11.5px] font-bold text-[#8A7261]">
               {p.sub}
               {p.e}
             </span>
@@ -494,8 +494,8 @@ export function BoxNotation({
 export function FigBoxesC({ main = "#FF6B6B" }: { main?: string }) {
   const parts = buildConfig(6);
   return (
-    <div className="rounded-[26px] bg-paper p-5 puff sm:p-6">
-      <div className="mb-3 font-display text-[15px] font-semibold text-ink">
+    <div className="rounded-[26px] bg-[#FFFDF7] p-5 puff sm:p-6">
+      <div className="mb-3 font-display text-[15px] font-semibold text-[#3D2B1F]">
         Carbon (Z = 6): <span className="font-mono">1s² 2s² 2p²</span>
       </div>
       <BoxNotation parts={parts} main={main} />
@@ -506,8 +506,8 @@ export function FigBoxesC({ main = "#FF6B6B" }: { main?: string }) {
 export function FigBoxesS({ main = "#FF6B6B" }: { main?: string }) {
   const parts = buildConfig(16);
   return (
-    <div className="rounded-[26px] bg-paper p-5 puff sm:p-6">
-      <div className="mb-3 font-display text-[15px] font-semibold text-ink">
+    <div className="rounded-[26px] bg-[#FFFDF7] p-5 puff sm:p-6">
+      <div className="mb-3 font-display text-[15px] font-semibold text-[#3D2B1F]">
         Sulfur (Z = 16): <span className="font-mono">1s² 2s² 2p⁶ 3s² 3p⁴</span>
       </div>
       <BoxNotation parts={parts} main={main} />

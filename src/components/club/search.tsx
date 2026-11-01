@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Clock, Search, Sparkles } from "lucide-react";
+import { ArrowRight, Clock, Search, Sparkles } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { searchTopics, type SearchRow } from "@/lib/spectra/deck";
 import { Fmt } from "./format";

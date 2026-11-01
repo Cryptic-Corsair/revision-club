@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ═════════════════════════════════════════════════════════════════════
    REACTION CLUB · design system
    A candy-bright chemistry playground for Edexcel IAL (WCH11–WCH16).
@@ -9,16 +11,22 @@
    Six units, six flavours:
    WCH11 strawberry · WCH12 orange fizz · WCH13 mint chip
    WCH14 grape soda · WCH15 bubblegum · WCH16 lemon sherbet
+
+   Two moods, one set of tokens: every surface reads its colour from
+   the custom properties below, so the whole site flips between the
+   daylight cream lab and the after-hours cocoa lab (html.dark).
    ═════════════════════════════════════════════════════════════════════ */
 
-@theme inline {
-  --color-cream: #fff6ea;
-  --color-paper: #fffdf7;
-  --color-ink: #3d2b1f;
-  --color-ink-soft: #8a7261;
-  --color-ink-faint: #c9b6a6;
-  --color-cocoa: #2e2016;
+@theme {
+  /* — surfaces & ink (light lab) — */
+  --color-cream: #fff6ea; /* page background */
+  --color-paper: #fffdf7; /* cards, sheets, bubbles */
+  --color-ink: #3d2b1f; /* main text */
+  --color-ink-soft: #8a7261; /* secondary text */
+  --color-ink-faint: #c9b6a6; /* tertiary text, dotted lines */
+  --color-cocoa: #2e2016; /* footer, dark bands */
 
+  /* — candy shelf (shared by both moods) — */
   --color-coral: #ff6b6b;
   --color-tangerine: #ff922b;
   --color-mint: #12b886;
@@ -37,6 +45,27 @@
   --animate-bubble: bubble-up 4.5s ease-in infinite;
   --animate-wiggle: wiggle 2.6s ease-in-out infinite;
   --animate-spin-slow: spin 16s linear infinite;
+}
+
+/* ————— mood tokens —————
+   --tint-base is what pastel mixes lean toward: white paper by day,
+   warm chestnut after dark. Overriding these six values re-skins
+   every component at once. */
+
+:root {
+  --tint-base: #ffffff;
+  color-scheme: light;
+}
+
+html.dark {
+  --color-cream: #251a11;
+  --color-paper: #382818;
+  --color-ink: #f6ebdc;
+  --color-ink-soft: #c2a78e;
+  --color-ink-faint: #93765e;
+  --color-cocoa: #170e08;
+  --tint-base: #4a3521;
+  color-scheme: dark;
 }
 
 @keyframes float {
@@ -111,9 +140,17 @@ body {
   overflow-x: hidden;
 }
 
+html.dark body {
+  background-image: radial-gradient(rgb(255 236 205 / 0.055) 1.6px, transparent 1.7px);
+}
+
 ::selection {
   background: #ffe08a;
   color: var(--color-ink);
+}
+html.dark ::selection {
+  background: #ffd43b;
+  color: #33241a;
 }
 
 :focus-visible {
@@ -163,6 +200,11 @@ body {
     0 2px 0 0 rgb(61 43 31 / 0.04),
     0 18px 42px -20px rgb(61 43 31 / 0.22);
 }
+html.dark .puff {
+  box-shadow:
+    0 2px 0 0 rgb(0 0 0 / 0.22),
+    0 18px 42px -18px rgb(0 0 0 / 0.5);
+}
 
 .puff-lift {
   transition:
@@ -175,11 +217,16 @@ body {
     0 4px 0 0 rgb(61 43 31 / 0.04),
     0 30px 60px -24px rgb(61 43 31 / 0.3);
 }
+html.dark .puff-lift:hover {
+  box-shadow:
+    0 4px 0 0 rgb(0 0 0 / 0.22),
+    0 30px 60px -22px rgb(0 0 0 / 0.55);
+}
 
 /* marker-pen highlight for ==terms== */
 mark {
   background: linear-gradient(104deg, transparent 2%, #ffe08a 9%, #ffd43b 88%, transparent 96%);
-  color: inherit;
+  color: #33241a;
   padding: 0.06em 0.22em;
   margin: 0 -0.06em;
   border-radius: 0.5em;
@@ -233,3 +280,5 @@ mark {
     margin: 15mm;
   }
 }
+
+/* mood probe v2 */

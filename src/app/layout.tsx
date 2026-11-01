@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Fredoka, Nunito, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -27,8 +28,15 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
 };
 
+/* Sets the saved mood (or none) before first paint — no flash of the wrong lab.
+   beforeInteractive keeps it out of React's hydration tree. */
+const themeInit = `(function(){try{if(localStorage.getItem("rc-theme")==="dark"){document.documentElement.classList.add("dark")}}catch(e){}})();`;
+
 export const viewport: Viewport = {
-  themeColor: "#FFF6EA",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FFF6EA" },
+    { media: "(prefers-color-scheme: dark)", color: "#251A11" },
+  ],
 };
 
 export default function RootLayout({
@@ -37,8 +45,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fredoka.variable} ${nunito.variable} ${plex.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${fredoka.variable} ${nunito.variable} ${plex.variable}`}>
       <body className="min-h-screen bg-cream font-body text-ink antialiased">
+        <Script id="rc-theme" strategy="beforeInteractive">{themeInit}</Script>
         {children}
       </body>
     </html>

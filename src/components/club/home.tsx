@@ -6,8 +6,8 @@ import {
   ClipboardCheck,
   Clock,
   Flame,
-  Gamepad2,
   Gauge,
+  Gamepad2,
   ListChecks,
   MoveRight,
   NotebookPen,
@@ -16,7 +16,7 @@ import {
   Play,
   Sticker,
   TestTubes,
-} from "lucide-react";
+} from "./icons";
 import type { Unit } from "@/lib/spectra/types";
 import { TOTALS } from "@/lib/spectra/units";
 import { useRevised } from "@/lib/spectra/progress";
@@ -42,7 +42,9 @@ import {
 } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · home
+   Reaction Club · home — Material You surfaces, candy personality
+   Tonal layers, big soft radii, pill buttons; mascot and blobs
+   keep the club spirit. No edged boxes anywhere.
    ═══════════════════════════════════════════════════════════════ */
 
 const UNIT_ICONS = {
@@ -85,101 +87,112 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
 
   return (
     <div>
-      {/* ————— hero ————— */}
-      <section className="relative overflow-hidden">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pt-28 pb-16 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-4 lg:pt-36 lg:pb-24">
-          {/* left: words */}
-          <div className="relative z-10">
-            <PopIn>
-              <SectionTag main="#12B886" tilt={-2}>
-                Pearson Edexcel IAL · Chemistry · 2018 spec
-              </SectionTag>
-            </PopIn>
+      {/* ————— hero: a wide tonal sheet, M3 style ————— */}
+      <section className="px-3 pt-24 sm:px-5 sm:pt-28 lg:px-8 lg:pt-32">
+        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[36px] bg-paper puff sm:rounded-[44px]">
+          <Blob color={tint("#FF6B6B", 14)} className="top-[-28%] right-[-12%] h-[62%] w-[44%]" />
+          <Blob
+            color={tint("#FFD43B", 22)}
+            className="bottom-[-32%] left-[-10%] h-[58%] w-[40%]"
+            style={{ animationDuration: "15s" }}
+          />
+          <DoodlePlus className="absolute top-7 left-[6%] h-5 w-5 text-mint/40" />
+          <DoodleAtom className="absolute right-[4%] bottom-[8%] hidden h-9 w-9 text-coral/30 lg:block" />
 
-            <PopIn delay={0.08}>
-              <h1 className="mt-6 font-display text-[clamp(2.7rem,6.4vw,4.6rem)] leading-[1.04] font-semibold tracking-tight text-ink">
-                Edexcel IAL Chemistry{" "}
-                <span className="relative inline-block">
-                  spec point
-                  <Squiggle
-                    color="#FF6B6B"
-                    className="absolute -bottom-2 left-0 h-[12px] w-full"
-                  />
-                </span>{" "}
-                <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-lemon/60 px-[0.18em]">
-                  by spec point.
+          <div className="relative z-10 grid items-center gap-8 px-6 py-10 sm:px-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-4 lg:px-12 lg:py-16">
+            {/* left: words */}
+            <div>
+              <PopIn>
+                <SectionTag main="#12B886" tilt={-2}>
+                  Pearson Edexcel IAL · Chemistry · 2018 spec
+                </SectionTag>
+              </PopIn>
+
+              <PopIn delay={0.08}>
+                <h1 className="mt-6 font-display text-[clamp(2.5rem,5.6vw,4.2rem)] leading-[1.05] font-semibold tracking-tight text-ink">
+                  Edexcel IAL Chemistry{" "}
+                  <span className="relative inline-block">
+                    spec point
+                    <Squiggle
+                      color="#FF6B6B"
+                      className="absolute -bottom-2 left-0 h-[12px] w-full"
+                    />
+                  </span>{" "}
+                  <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-lemon/60 px-[0.18em]">
+                    by spec point.
+                  </span>
+                </h1>
+              </PopIn>
+
+              <PopIn delay={0.16}>
+                <p className="mt-6 max-w-[54ch] text-[16.5px] leading-[1.8] text-ink-soft">
+                  Welcome to <strong className="font-extrabold text-ink">Reaction Club</strong> —
+                  revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16). Each unit
+                  follows the 2018 specification in order, with definitions, equations, fully
+                  worked examples and checkpoint questions with answers. Your progress is saved
+                  in your browser.
+                </p>
+              </PopIn>
+
+              <PopIn delay={0.24} className="mt-8 flex flex-wrap items-center gap-3.5">
+                <CandyButton main="#FF6B6B" onClick={() => scrollTo("units")}>
+                  Browse the units <MoveRight className="h-5 w-5" />
+                </CandyButton>
+                <SoftButton onClick={() => onOpenUnit("WCH12")}>
+                  <Play className="h-4 w-4 text-coral" /> Open WCH12
+                </SoftButton>
+              </PopIn>
+
+              <PopIn delay={0.32} className="mt-9 flex flex-wrap gap-2.5">
+                {[
+                  { icon: Atom, label: `${units.length} units` },
+                  { icon: ListChecks, label: `${TOTALS.topics} topics` },
+                  { icon: Clock, label: `≈${hours} h of reading` },
+                  { icon: PencilRuler, label: `${TOTALS.examples} worked examples` },
+                  { icon: Gamepad2, label: `${TOTALS.checks} checkpoint Qs` },
+                ].map((s) => (
+                  <span
+                    key={s.label}
+                    className="inline-flex items-center gap-2 rounded-full bg-cream px-3.5 py-2 text-[13px] font-extrabold text-ink"
+                  >
+                    <s.icon className="h-4 w-4 text-coral" strokeWidth={2.5} />
+                    {s.label}
+                  </span>
+                ))}
+              </PopIn>
+            </div>
+
+            {/* right: mascot scene */}
+            <div className="relative mx-auto flex h-[300px] w-full max-w-[420px] items-center justify-center sm:h-[380px]">
+              <Blob color={tint("#FF6B6B", 18)} className="h-[86%] w-[86%]" />
+              <Blob
+                color={tint("#FFD43B", 30)}
+                className="top-[2%] right-[2%] h-[34%] w-[34%] opacity-80"
+                style={{ animationDuration: "9s" }}
+              />
+
+              <Float>
+                <Mascot main="#FF6B6B" size={250} boop onBoop={() => {}} className="relative z-10" />
+              </Float>
+
+              <Float delay={0.8} className="absolute top-[8%] left-[2%] z-20">
+                <span className="inline-block rotate-[-7deg] rounded-full bg-paper px-4 py-2 font-display text-[13px] font-bold text-ink puff">
+                  spec point by spec point
                 </span>
-              </h1>
-            </PopIn>
-
-            <PopIn delay={0.16}>
-              <p className="mt-6 max-w-[54ch] text-[16.5px] leading-[1.8] text-ink-soft">
-                Welcome to <strong className="font-extrabold text-ink">Reaction Club</strong> —
-                revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16). Each unit
-                follows the 2018 specification in order, with definitions, equations, fully
-                worked examples and checkpoint questions with answers. Your progress is saved
-                in your browser.
-              </p>
-            </PopIn>
-
-            <PopIn delay={0.24} className="mt-8 flex flex-wrap items-center gap-3.5">
-              <CandyButton main="#FF6B6B" onClick={() => scrollTo("units")}>
-                Browse the units <MoveRight className="h-5 w-5" />
-              </CandyButton>
-              <SoftButton onClick={() => onOpenUnit("WCH12")}>
-                <Play className="h-4 w-4 text-coral" /> Open WCH12
-              </SoftButton>
-            </PopIn>
-
-            <PopIn delay={0.32} className="mt-9 flex flex-wrap gap-2.5">
-              {[
-                { icon: Atom, label: `${units.length} units` },
-                { icon: ListChecks, label: `${TOTALS.topics} topics` },
-                { icon: Clock, label: `≈${hours} h of reading` },
-                { icon: PencilRuler, label: `${TOTALS.examples} worked examples` },
-                { icon: Gamepad2, label: `${TOTALS.checks} checkpoint Qs` },
-              ].map((s) => (
+              </Float>
+              <Float delay={1.6} slow className="absolute right-[0%] bottom-[12%] z-20">
                 <span
-                  key={s.label}
-                  className="inline-flex items-center gap-2 rounded-full bg-paper px-3.5 py-2 text-[13px] font-extrabold text-ink puff"
+                  className="inline-block rotate-[6deg] rounded-full px-4 py-2 font-display text-[13px] font-bold text-white puff"
+                  style={{ background: "#9775FA" }}
                 >
-                  <s.icon className="h-4 w-4 text-coral" strokeWidth={2.5} />
-                  {s.label}
+                  WCH11–WCH16
                 </span>
-              ))}
-            </PopIn>
-          </div>
+              </Float>
 
-          {/* right: mascot scene */}
-          <div className="relative mx-auto flex h-[340px] w-full max-w-[440px] items-center justify-center sm:h-[420px]">
-            <Blob color={tint("#FF6B6B", 18)} className="h-[86%] w-[86%]" />
-            <Blob
-              color={tint("#FFD43B", 30)}
-              className="top-[2%] right-[2%] h-[34%] w-[34%] opacity-80"
-              style={{ animationDuration: "9s" }}
-            />
-
-            <Float>
-              <Mascot main="#FF6B6B" size={280} boop onBoop={() => {}} className="relative z-10" />
-            </Float>
-
-            <Float delay={0.8} className="absolute top-[8%] left-[4%] z-20">
-              <span className="inline-block rotate-[-7deg] rounded-full bg-paper px-4 py-2 font-display text-[13px] font-bold text-ink puff">
-                spec point by spec point
-              </span>
-            </Float>
-            <Float delay={1.6} slow className="absolute right-[2%] bottom-[14%] z-20">
-              <span
-                className="inline-block rotate-[6deg] rounded-full px-4 py-2 font-display text-[13px] font-bold text-white puff"
-                style={{ background: "#9775FA" }}
-              >
-                WCH11–WCH16
-              </span>
-            </Float>
-
-            <DoodleAtom className="animate-float-slow absolute top-[6%] right-[12%] h-12 w-12 text-coral/50" />
-            <DoodleHex className="animate-float absolute bottom-[6%] left-[8%] h-11 w-11 text-grape/40" />
-            <DoodleMolecule className="animate-float absolute top-[42%] right-[0%] h-10 w-14 text-mint/50" />
+              <DoodleAtom className="animate-float-slow absolute top-[6%] right-[10%] h-11 w-11 text-coral/50" />
+              <DoodleHex className="animate-float absolute bottom-[4%] left-[6%] h-10 w-10 text-grape/40" />
+              <DoodleMolecule className="animate-float absolute top-[42%] right-[0%] h-9 w-12 text-mint/50" />
+            </div>
           </div>
         </div>
       </section>
@@ -187,10 +200,10 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
       {/* ————— marquee ribbons ————— */}
       <section aria-hidden className="relative z-10 -my-2 overflow-x-clip py-8">
         <Ribbon words={MARQUEE_A} bg="#FF6B6B" rotate={-1.6} />
-        <Ribbon words={MARQUEE_B} bg="#2E2016" rotate={1.2} reverse className="-mt-7" />
+        <Ribbon words={MARQUEE_B} bg="var(--color-cocoa)" rotate={1.2} reverse className="-mt-7" />
       </section>
 
-      {/* ————— units ————— */}
+      {/* ————— units: M3 elevated cards ————— */}
       <section id="units" className="mx-auto max-w-6xl scroll-mt-24 px-5 pt-20 pb-6 sm:px-8">
         <Reveal className="text-center">
           <SectionTag main="#FF922B" tilt={2}>
@@ -205,13 +218,13 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
           </p>
         </Reveal>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {units.map((u, i) => {
             const Icon = UNIT_ICONS[u.code];
             const done = revised.filter((k) => k.startsWith(`${u.code}/`)).length;
             const pct = u.topics.length ? done / u.topics.length : 0;
             const minutes = u.topics.reduce((m, t) => m + t.minutes, 0);
-            const tilt = [-1.6, 1.2, -0.9, 1.5, -1.2, 0.9][i % 6];
+            const tilt = [-1.2, 1, -0.8, 1.1, -1, 0.8][i % 6];
             return (
               <Reveal key={u.code} delay={i * 0.06}>
                 <motion.button
@@ -221,19 +234,19 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                   whileHover={{ y: -8, rotate: 0, scale: 1.015 }}
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 300, damping: 18 }}
-                  className="group relative block w-full cursor-pointer overflow-hidden rounded-[32px] bg-paper p-6 text-left puff"
+                  className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[28px] bg-paper p-6 text-left puff"
                   style={{ transform: `rotate(${tilt}deg)` }}
                 >
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute -top-4 right-3 font-display text-[92px] leading-none font-bold text-ink/[0.05] select-none"
+                    className="pointer-events-none absolute -top-4 right-3 font-display text-[88px] leading-none font-bold text-ink/[0.05] select-none"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
                   <div className="flex items-center gap-3">
                     <span
-                      className="grid h-12 w-12 place-items-center rounded-[18px]"
+                      className="grid h-12 w-12 place-items-center rounded-[16px]"
                       style={{ background: tint(u.candy.main, 15) }}
                     >
                       <Icon className="h-6 w-6" style={{ color: shade(u.candy.main, 62) }} />
@@ -291,7 +304,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
         </div>
       </section>
 
-      {/* ————— how it works ————— */}
+      {/* ————— how it works: M3 stepper ————— */}
       <section id="how" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20 sm:px-8">
         <Reveal className="text-center">
           <SectionTag main="#9775FA" tilt={-1.5}>
@@ -302,7 +315,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
           </h2>
         </Reveal>
 
-        <div className="mt-12 grid items-start gap-5 lg:grid-cols-[1fr_auto_1fr_auto_1fr]">
+        <div className="mt-12 flex flex-col items-stretch gap-4 lg:flex-row lg:items-center lg:gap-5">
           {[
             {
               n: "1",
@@ -327,18 +340,23 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
             },
           ].map((s, i) => (
             <div key={s.n} className="contents">
-              <Reveal delay={i * 0.1} className="h-full">
+              <Reveal delay={i * 0.1} className="min-w-0 flex-1">
                 <div
-                  className={`h-full rounded-[30px] bg-paper p-6 puff ${i % 2 ? "rotate-[0.8deg]" : "rotate-[-0.8deg]"}`}
+                  className={`h-full rounded-[28px] bg-paper p-6 puff ${i % 2 ? "rotate-[0.6deg]" : "rotate-[-0.6deg]"}`}
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3.5">
                     <span
-                      className="grid h-12 w-12 place-items-center rounded-full font-display text-[20px] font-bold text-white"
-                      style={{ background: s.color, boxShadow: `0 4px 0 ${shade(s.color)}` }}
+                      className="grid h-12 w-12 shrink-0 place-items-center rounded-full font-display text-[19px] font-bold"
+                      style={{ background: s.color, color: "#fff", boxShadow: `0 4px 0 ${shade(s.color)}` }}
                     >
                       {s.n}
                     </span>
-                    <s.icon className="h-6 w-6" style={{ color: s.color }} strokeWidth={2.2} />
+                    <span
+                      className="grid h-11 w-11 place-items-center rounded-[14px]"
+                      style={{ background: tint(s.color, 14) }}
+                    >
+                      <s.icon className="h-5.5 w-5.5" style={{ color: shade(s.color, 62) }} strokeWidth={2.2} />
+                    </span>
                   </div>
                   <h3 className="mt-4 font-display text-[20px] font-semibold text-ink">
                     {s.title}
@@ -347,11 +365,19 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                 </div>
               </Reveal>
               {i < 2 && (
-                <Reveal delay={i * 0.1 + 0.05} className="hidden items-center self-center lg:flex">
+                <Reveal delay={i * 0.1 + 0.05} className="flex flex-col items-center justify-center py-1 lg:py-0">
+                  <span aria-hidden className="dot-line h-8 w-[3px] lg:hidden" />
+                  <motion.span
+                    animate={{ y: [0, 6, 0] }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon lg:hidden"
+                  >
+                    <MoveRight className="h-5.5 w-5.5 rotate-90" strokeWidth={2.5} />
+                  </motion.span>
                   <motion.span
                     animate={{ x: [0, 8, 0] }}
                     transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                    className="grid h-12 w-12 place-items-center rounded-full bg-lemon/25 text-lemon"
+                    className="hidden h-12 w-12 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon lg:grid"
                   >
                     <MoveRight className="h-6 w-6" strokeWidth={2.5} />
                   </motion.span>
@@ -381,13 +407,13 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
               whileHover={{ y: -8, rotate: 0, scale: 1.015 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 300, damping: 18 }}
-              className="group relative block w-full cursor-pointer overflow-hidden rounded-[36px] p-7 text-left puff sm:p-8"
-              style={{ background: tint("#9775FA", 10), transform: "rotate(-1deg)" }}
+              className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[32px] p-7 text-left puff sm:p-8"
+              style={{ background: tint("#9775FA", 10), transform: "rotate(-0.8deg)" }}
             >
               <Blob color={tint("#9775FA", 22)} className="top-[-30%] right-[-15%] h-[75%] w-[55%]" />
-              <div className="relative z-10">
+              <div className="relative z-10 flex h-full flex-col">
                 <span
-                  className="grid h-14 w-14 place-items-center rounded-[22px] text-white"
+                  className="grid h-14 w-14 place-items-center rounded-[20px] text-white"
                   style={{ background: "#9775FA", boxShadow: `0 5px 0 ${shade("#9775FA")}` }}
                 >
                   <Gamepad2 className="h-7 w-7" strokeWidth={2.2} />
@@ -399,11 +425,11 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                   Every checkpoint question on the site, shuffled into one deck. Flip a card,
                   answer it, then reveal the answer and check yourself. Space flips, ← → marks.
                 </p>
-                <div className="mt-5 flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
+                <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
+                  <span className="rounded-full bg-paper/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
                     tap to flip
                   </span>
-                  <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
+                  <span className="rounded-full bg-paper/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
                     shuffled every round
                   </span>
                   <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[14px] font-bold text-grape">
@@ -421,13 +447,13 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
               whileHover={{ y: -8, rotate: 0, scale: 1.015 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 300, damping: 18 }}
-              className="group relative block w-full cursor-pointer overflow-hidden rounded-[36px] p-7 text-left puff sm:p-8"
-              style={{ background: tint("#12B886", 10), transform: "rotate(1deg)" }}
+              className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[32px] p-7 text-left puff sm:p-8"
+              style={{ background: tint("#12B886", 10), transform: "rotate(0.8deg)" }}
             >
               <Blob color={tint("#12B886", 22)} className="bottom-[-30%] left-[-15%] h-[75%] w-[55%]" />
-              <div className="relative z-10">
+              <div className="relative z-10 flex h-full flex-col">
                 <span
-                  className="grid h-14 w-14 place-items-center rounded-[22px] text-white"
+                  className="grid h-14 w-14 place-items-center rounded-[20px] text-white"
                   style={{ background: "#12B886", boxShadow: `0 5px 0 ${shade("#12B886")}` }}
                 >
                   <Sticker className="h-7 w-7" strokeWidth={2.2} />
@@ -439,11 +465,11 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                   Mark topics as revised as you finish them, and this page keeps count across
                   all six units. Currently {revised.length}/{TOTALS.topics} topics marked.
                 </p>
-                <div className="mt-5 flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
+                <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
+                  <span className="rounded-full bg-paper/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
                     6 badges
                   </span>
-                  <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
+                  <span className="rounded-full bg-paper/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
                     saved in your browser
                   </span>
                   <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[14px] font-bold text-mint">
@@ -456,10 +482,10 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
         </div>
       </section>
 
-      {/* ————— CTA band ————— */}
-      <section className="mx-auto max-w-6xl px-5 pb-24 sm:px-8">
+      {/* ————— CTA band: the cocoa card from the moodboard ————— */}
+      <section className="px-3 pb-24 sm:px-5 sm:pb-28 lg:px-8">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[44px] bg-cocoa px-7 py-12 text-center sm:px-12 sm:py-16">
+          <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[36px] bg-cocoa px-6 py-12 text-center sm:rounded-[44px] sm:px-12 sm:py-16">
             <Blob color="rgba(255,107,107,0.16)" className="top-[-30%] left-[-10%] h-[70%] w-[45%]" />
             <Blob
               color="rgba(151,117,250,0.16)"

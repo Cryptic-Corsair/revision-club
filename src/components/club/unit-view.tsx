@@ -1,17 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  Clock,
-  Flame,
-  PieChart,
-  Sparkles,
-  Target,
-  Timer,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Clock, Flame, PieChart, Sparkles, Target, Timer } from "./icons";
 import type { Unit } from "@/lib/spectra/types";
 import { UNITS } from "@/lib/spectra/units";
 import { useRevised } from "@/lib/spectra/progress";
@@ -141,7 +131,7 @@ export function UnitView({
                   ? "All topics revised — well done."
                   : `${done} of ${unit.topics.length} topics revised.`}
             </p>
-            <div className="mt-3 h-4 w-full max-w-xs overflow-hidden rounded-full bg-white/80">
+            <div className="mt-3 h-4 w-full max-w-xs overflow-hidden rounded-full bg-paper/80">
               <motion.div
                 className="h-full rounded-full"
                 style={{ background: main }}

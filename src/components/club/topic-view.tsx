@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ArrowLeft, ArrowRight, BookOpen, Check, PartyPopper, Sticker } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Check, PartyPopper, Sticker } from "./icons";
 import type { Topic, Unit } from "@/lib/spectra/types";
 import { toggleRevised, useRevised } from "@/lib/spectra/progress";
 import { TopicBlocks } from "./blocks";
@@ -150,9 +150,9 @@ export function TopicView({
                     transform: "rotate(-1.5deg)",
                   }
                 : {
-                    background: "#FFFDF7",
-                    color: "#3D2B1F",
-                    boxShadow: "0 5px 0 rgba(61,43,31,0.10)",
+                    background: "var(--color-paper)",
+                    color: "var(--color-ink)",
+                    boxShadow: "0 5px 0 color-mix(in oklab, var(--color-ink) 10%, transparent)",
                   }
             }
           >

@@ -11,7 +11,7 @@ import {
   Trophy,
   X,
   Zap,
-} from "lucide-react";
+} from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { DECK, DECK_BY_UNIT, shuffle, type Card } from "@/lib/spectra/deck";
 import { UNITS } from "@/lib/spectra/units";
@@ -218,8 +218,8 @@ export function Blend({
                 className="cursor-pointer rounded-full px-4 py-2.5 font-display text-[13.5px] font-bold"
                 style={
                   filter === "all"
-                    ? { background: "#3d2b1f", color: "#fff", boxShadow: "0 3px 0 #1f150e" }
-                    : { background: "rgb(61 43 31 / 0.07)", color: "#8a7261" }
+                    ? { background: "var(--color-ink)", color: "var(--color-cream)", boxShadow: "0 3px 0 color-mix(in oklab, var(--color-ink) 55%, #000)" }
+                    : { background: "color-mix(in oklab, var(--color-ink) 7%, transparent)", color: "var(--color-ink-soft)" }
                 }
               >
                 the whole course · {DECK.length}
@@ -281,7 +281,7 @@ export function Blend({
                         onClick={() => start(n)}
                         whileHover={{ y: -2 }}
                         whileTap={{ scale: 0.95 }}
-                        className="cursor-pointer rounded-full bg-white/80 px-4 py-2 text-[12.5px] font-extrabold text-ink-soft"
+                        className="cursor-pointer rounded-full bg-paper/80 px-4 py-2 text-[12.5px] font-extrabold text-ink-soft"
                       >
                         {n} cards
                       </motion.button>
@@ -312,7 +312,7 @@ export function Blend({
                         : "#ff6b6b"
                       : i === idx
                         ? "#3d2b1f"
-                        : "rgb(61 43 31 / 0.15)",
+                        : "color-mix(in oklab, var(--color-ink) 16%, transparent)",
                 }}
                 className="h-2.5 w-2.5 rounded-full"
               />
@@ -360,7 +360,7 @@ export function Blend({
                 className="mt-6 flex items-end justify-center gap-2"
               >
                 <Mascot main="#FFD43B" mood="cheer" size={72} bubbles={false} />
-                <SpeechBubble bg="#FFFDF7" className="mb-3" tailClass="left-[-9px] rotate-[135deg]">
+                <SpeechBubble className="mb-3" tailClass="left-[-9px] rotate-[135deg]">
                   <span className="font-display text-[13.5px] font-semibold text-ink">{quip}</span>
                 </SpeechBubble>
               </motion.div>
@@ -414,7 +414,7 @@ export function Blend({
 
                 {/* mini bars */}
                 <div className="mx-auto mt-6 flex max-w-sm items-center gap-3">
-                  <div className="h-5 flex-1 overflow-hidden rounded-full bg-white/80">
+                  <div className="h-5 flex-1 overflow-hidden rounded-full bg-paper/80">
                     <motion.div
                       className="h-full rounded-full bg-mint"
                       initial={{ width: 0 }}
@@ -584,7 +584,7 @@ function Flashcard({
         {/* back — the answer */}
         <CardFace back>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 font-display text-[12px] font-bold text-ink">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-paper px-3.5 py-1.5 font-display text-[12px] font-bold text-ink">
               <Check className="h-3.5 w-3.5 text-mint" strokeWidth={3} /> answer
             </span>
             <span className="text-[12px] font-extrabold text-ink-faint">
@@ -647,8 +647,8 @@ function CardFace({ children, back = false }: { children: React.ReactNode; back?
     <div
       className="absolute inset-0 flex flex-col rounded-[36px] p-6 sm:p-8"
       style={{
-        background: back ? "#FFFDF7" : "#fffdf7",
-        boxShadow: "0 4px 0 rgb(61 43 31 / 0.05), 0 26px 60px -26px rgb(61 43 31 / 0.35)",
+        background: "var(--color-paper)",
+        boxShadow: "0 4px 0 color-mix(in oklab, var(--color-ink) 6%, transparent), 0 26px 60px -26px rgb(0 0 0 / 0.4)",
         transform: back ? "rotateY(180deg)" : undefined,
         backfaceVisibility: "hidden",
         WebkitBackfaceVisibility: "hidden",
