@@ -117,7 +117,7 @@ function TopBar({
   }, [lab]);
 
   const tool = (active: boolean) =>
-    `grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors ${
+    `grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors sm:h-11 sm:w-11 ${
       active
         ? "bg-ink text-cream"
         : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
@@ -166,7 +166,7 @@ function TopBar({
             aria-label="Home"
             title="Home"
             whileTap={{ scale: 0.88 }}
-            className={`h-10 w-10 shrink-0 ${tool(view.kind === "home")}`}
+            className={tool(view.kind === "home")}
           >
             <HomeIcon className="h-[18px] w-[18px]" strokeWidth={2.2} />
           </motion.button>
@@ -178,7 +178,7 @@ function TopBar({
             whileTap={{ scale: 0.88 }}
             animate={{ scale: view.kind === "pack" ? 1.1 : 1 }}
             transition={{ type: "spring", stiffness: 380, damping: 16 }}
-            className={`relative h-10 w-10 shrink-0 ${tool(view.kind === "pack")}`}
+            className={`relative ${tool(view.kind === "pack")}`}
             title="Your revision pack · ticked spec points"
             aria-label={`Your revision pack${picks.length > 0 ? ` — ${picks.length} spec point${picks.length === 1 ? "" : "s"} ticked` : ""}`}
             style={
@@ -340,7 +340,9 @@ function Footer({
       </div>
 
       <div className="bg-cocoa pt-4 pb-12 text-milk">
-        <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 sm:px-8 md:flex-row md:items-start md:justify-between">
+        {/* two columns until the widescreen desktop three — at tablet
+            width three columns squeeze every caption into four lines */}
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:px-8 md:grid-cols-2 lg:flex lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-sm">
             <div className="flex items-center gap-3">
               <LogoMark size={34} />
@@ -430,7 +432,8 @@ function Footer({
                   <Search className="h-4 w-4" strokeWidth={2.2} />
                 </span>
                 <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
-                  Search<span className="hidden sm:inline"> · press ⌘K</span>
+                  Search
+                  <span className="hidden pointer-fine:inline"> · press ⌘K</span>
                 </span>
               </button>
             </div>

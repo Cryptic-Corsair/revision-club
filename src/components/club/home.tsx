@@ -170,7 +170,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
             </div>
 
             {/* right: mascot scene */}
-            <div className="relative mx-auto flex h-[300px] w-full max-w-[420px] items-center justify-center sm:h-[380px]">
+            <div className="relative mx-auto flex h-[300px] w-full max-w-[420px] items-center justify-center sm:h-[380px] md:h-[430px] md:max-w-[480px]">
               {/* soft peach wash — pink stays reserved for WCH15 and the mascot blush */}
               <Blob color={tint("#FF922B", 18)} className="h-[86%] w-[86%]" />
               <Blob
@@ -321,7 +321,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           >
             <Blob color={tint("#FFD43B", 20)} className="top-[-40%] right-[-8%] h-[70%] w-[38%]" />
             <DoodleHex className="absolute bottom-[8%] left-[3%] hidden h-8 w-8 text-lemon/40 sm:block" />
-            <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center">
+            <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center">
               <div className="min-w-0 flex-1">
                 <SectionTag main="#FFD43B" tilt={-1.5}>
                   your revision pack
@@ -356,7 +356,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   </SoftButton>
                 </div>
               </div>
-              <div className="flex shrink-0 items-center justify-center lg:pl-6">
+              <div className="flex shrink-0 items-center justify-center md:pl-6">
                 <div
                   className="flex items-center gap-4 rounded-[30px] px-6 py-5"
                   style={{ background: tint("#FFD43B", 14) }}
@@ -393,7 +393,9 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           </h2>
         </Reveal>
 
-        <div className="mt-12 flex flex-col items-stretch gap-4 lg:flex-row lg:items-center lg:gap-5">
+        {/* three-up as soon as there's room for it — on a tablet in
+            portrait the stack would burn three screens of scrolling */}
+        <div className="mt-12 flex flex-col items-stretch gap-4 md:flex-row md:items-stretch md:gap-4 lg:items-center lg:gap-5">
           {[
             {
               n: "1",
@@ -420,7 +422,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
             <div key={s.n} className="contents">
               <Reveal delay={i * 0.1} className="min-w-0 flex-1">
                 <div
-                  className={`h-full rounded-[28px] bg-paper p-6 puff ${i % 2 ? "rotate-[0.6deg]" : "rotate-[-0.6deg]"}`}
+                  className={`h-full rounded-[28px] bg-paper p-5 puff sm:p-6 md:p-5 lg:p-6 ${i % 2 ? "rotate-[0.6deg]" : "rotate-[-0.6deg]"}`}
                 >
                   <div className="flex items-center gap-3.5">
                     <span
@@ -444,18 +446,18 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               </Reveal>
               {i < 2 && (
                 <Reveal delay={i * 0.1 + 0.05} className="flex flex-col items-center justify-center py-1 lg:py-0">
-                  <span aria-hidden className="dot-line h-8 w-[3px] lg:hidden" />
+                  <span aria-hidden className="dot-line h-8 w-[3px] md:hidden" />
                   <motion.span
                     animate={{ y: [0, 6, 0] }}
                     transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon lg:hidden"
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon md:hidden"
                   >
                     <MoveRight className="h-5.5 w-5.5 rotate-90" strokeWidth={2.5} />
                   </motion.span>
                   <motion.span
                     animate={{ x: [0, 8, 0] }}
                     transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                    className="hidden h-12 w-12 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon lg:grid"
+                    className="hidden h-12 w-12 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon md:grid"
                   >
                     <MoveRight className="h-6 w-6" strokeWidth={2.5} />
                   </motion.span>

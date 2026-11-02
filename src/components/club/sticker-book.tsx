@@ -492,7 +492,7 @@ export function StickerBook({
                 >
                   {a.label}
                 </span>
-                <span className="mt-0.5 hidden text-[10.5px] leading-tight font-bold text-ink-faint sm:block">
+                <span className="mt-0.5 hidden text-[10.5px] leading-tight font-bold text-ink-faint md:block">
                   {a.hint}
                 </span>
               </motion.div>

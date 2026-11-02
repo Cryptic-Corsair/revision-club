@@ -109,7 +109,7 @@ function PackTick({ spec, accent }: { spec: string; accent: string }) {
           ? `${spec} is in your pack — tap to remove`
           : `Add ${spec} to your revision pack`
       }
-      className="grid h-8 w-8 shrink-0 cursor-pointer place-items-center rounded-full"
+      className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full"
       style={
         picked
           ? {
@@ -124,9 +124,9 @@ function PackTick({ spec, accent }: { spec: string; accent: string }) {
       }
     >
       {picked ? (
-        <ClipboardCheck className="h-[17px] w-[17px]" strokeWidth={2.4} />
+        <ClipboardCheck className="h-[18px] w-[18px]" strokeWidth={2.4} />
       ) : (
-        <ClipboardList className="h-[17px] w-[17px]" strokeWidth={2.4} />
+        <ClipboardList className="h-[18px] w-[18px]" strokeWidth={2.4} />
       )}
     </motion.button>
   );
@@ -328,7 +328,7 @@ export function NotesReader({
               </p>
             </div>
           </div>
-          <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
             {doc.sections.map((s, i) => (
               <SpecChip
                 key={s.spec}

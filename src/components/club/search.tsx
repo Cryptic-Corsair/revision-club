@@ -118,7 +118,7 @@ function PaletteBody({
                 aria-label="Search topics"
                 className="search-field min-w-0 flex-1 bg-transparent font-display text-[17px] font-semibold text-ink placeholder:text-ink-faint/70 focus:outline-none"
               />
-              <kbd className="hidden shrink-0 rounded-full bg-ink/5 px-2.5 py-1 font-mono text-[11px] font-bold text-ink-soft sm:block">
+              <kbd className="hidden shrink-0 rounded-full bg-ink/5 px-2.5 py-1 font-mono text-[11px] font-bold text-ink-soft pointer-fine:block">
                 esc
               </kbd>
             </div>
@@ -213,20 +213,20 @@ function PaletteBody({
               )}
             </div>
 
-            {/* footer hints — keyboard affordances are a desktop thing;
-                on touch, say what a tap does instead */}
+            {/* footer hints — keyboard affordances ride the pointer, not
+                the width: a tablet is wide but still a tap-first screen */}
             <div className="flex items-center justify-between border-t-[2.5px] border-dashed border-ink/10 px-5 py-3">
-              <span className="hidden items-center gap-1.5 text-[11px] font-extrabold text-ink-faint sm:flex">
+              <span className="hidden items-center gap-1.5 text-[11px] font-extrabold text-ink-faint pointer-fine:flex">
                 <span className="rounded-md bg-ink/5 px-1.5 py-0.5 font-mono">↑↓</span>
                 move
                 <span className="ml-2 rounded-md bg-ink/5 px-1.5 py-0.5 font-mono">↵</span>
                 open
               </span>
-              <span className="text-[11px] font-extrabold text-ink-faint sm:hidden">tap a topic to open</span>
-              <span className="hidden text-[11px] font-extrabold text-ink-faint sm:block">
+              <span className="text-[11px] font-extrabold text-ink-faint pointer-coarse:block hidden">tap a topic to open</span>
+              <span className="hidden text-[11px] font-extrabold text-ink-faint pointer-fine:block">
                 {q.trim() ? `${results.length} found` : "press ⌘K to search"}
               </span>
-              <span className="text-[11px] font-extrabold text-ink-faint sm:hidden">
+              <span className="hidden text-[11px] font-extrabold text-ink-faint pointer-coarse:block">
                 {q.trim() ? `${results.length} found` : "try a unit code too"}
               </span>
             </div>

@@ -200,7 +200,7 @@ export function SpecMapTrigger() {
         aria-expanded={open}
         aria-haspopup="dialog"
         title="Spec map — jump between sections"
-        className="grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full"
+        className="grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full sm:h-11 sm:w-11"
         style={{
           background: main,
           color: readableInk(main),

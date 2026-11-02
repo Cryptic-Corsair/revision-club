@@ -274,7 +274,7 @@ export function PackView({
                 picked strip uses above; nothing wraps, nothing
                 orphans, and the fade says there's more */}
             <ScrollFade>
-              <div className="flex w-max items-center gap-1.5">
+              <div className="flex w-max items-center gap-1">
                 <ToolButton onClick={onOpenSpec} label="Edit selection">
                   <Target className="h-4 w-4" /> Edit selection
                 </ToolButton>
@@ -524,7 +524,7 @@ function ToolButton({
       whileTap={{ scale: 0.95 }}
       aria-label={label}
       title={label}
-      className={`inline-flex h-[40px] shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3.5 font-display text-[12.5px] font-bold tracking-[0.02em] transition-colors ${
+      className={`inline-flex h-[40px] shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[12.5px] font-bold tracking-[0.02em] transition-colors ${
         !highlight && !danger
           ? "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
           : ""
