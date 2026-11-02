@@ -1,0 +1,761 @@
+     1→"use client";
+     2→
+     3→import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
+     4→import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
+     5→import {
+     6→  ArrowLeft,
+     7→  ArrowRight,
+     8→  BookOpen,
+     9→  Check,
+    10→  ChevronDown,
+    11→  Flame,
+    12→  Lightbulb,
+    13→  Magnet,
+    14→  PenLine,
+    15→  Sparkles,
+    16→  StickyNote,
+    17→  Target,
+    18→  Zap,
+    19→} from "./icons";
+    20→import type { NotesBlock, NotesDoc, SpecSection } from "@/lib/spectra/notes-types";
+    21→import type { Unit } from "@/lib/spectra/types";
+    22→import { Fmt } from "./format";
+    23→import { PopIn, Reveal, SoftButton, SpeechBubble, Squiggle, Mascot, readableInk, shade, tint } from "./bits";
+    24→import {
+    25→  FigAtom,
+    26→  FigBoxesC,
+    27→  FigBoxesS,
+    28→  FigCarbonLattices,
+    29→  FigDipoles,
+    30→  FigDotCross,
+    31→  FigFillDemo,
+    32→  FigFillOrder,
+    33→  FigFormulaTypes,
+    34→  FigFracCol,
+    35→  FigIeGraph,
+    36→  FigIsomers,
+    37→  FigMassSpec,
+    38→  FigMelting,
+    39→  FigNotation,
+    40→  FigOrbitals,
+    41→  FigPtBlocks,
+    42→  FigNaming,
+    43→  FigRadius,
+    44→  FigRadChain,
+    45→  FigShapes,
+    46→  FigShielding,
+    47→  FigSigmaPi,
+    48→  FigSpectrumBoron,
+    49→  FigSpectrumBromine,
+    50→  FigSpectrumCl2,
+    51→  FigSpectrumEthanol,
+    52→  FigSpectrumNeon,
+    53→  FigSuccIe,
+    54→} from "./notes-figures";
+    55→
+    56→/* ═══════════════════════════════════════════════════════════════
+    57→   Reaction Club · notes reader — one enclosed room per spec point.
+    58→   Each section is a full-width tonal band borrowing one candy
+    59→   colour, walking the hue wheel so neighbours always contrast.
+    60→   In the hybrid lab every third band is a deep cocoa room with
+    61→   milk-toned fonts (see html.hybrid .room in globals.css); in the
+    62→   other two labs the same bands stay candy — the class is inert.
+    63→   The footer's wave rides between the bands, so the note reads as
+    64→   a string of connected rooms rather than one long scroll.
+    65→   ═══════════════════════════════════════════════════════════════ */
+    66→
+    67→/* the rotating palette — hue-wheel order: red → orange → sun →
+    68→   green → purple → amber, so adjacent bands always differ (pink
+    69→   stays reserved for WCH15's own identity) */
+    70→const BANDS = ["#FF6B6B", "#FF922B", "#FFD43B", "#12B886", "#9775FA", "#F59F00"];
+    71→
+    72→const WAVE_D = "M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z";
+    73→
+    74→function BandWave({ from, to }: { from: string; to: string }) {
+    75→  return (
+    76→    <div aria-hidden style={{ background: from }}>
+    77→      <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-[46px] w-full sm:h-[68px]">
+    78→        {/* fill rides on style so var() strings with fallbacks resolve */}
+    79→        <path d={WAVE_D} style={{ fill: to }} />
+    80→      </svg>
+    81→    </div>
+    82→  );
+    83→}
+    84→
+    85→function scrollToSpec(spec: string) {
+    86→  document.getElementById(`spec-${spec.replace(".", "-")}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    87→}
+    88→
+    89→/* A candy accent pulled toward the current ink: deep brick by day,
+    90→   warm salmon after dark, pale gold inside a cocoa room — one
+    91→   helper, readable in every lab, no dark: variants needed. */
+    92→const inkMix = (main: string, pct = 45) =>
+    93→  `color-mix(in oklab, ${main} ${pct}%, var(--color-ink))`;
+    94→
+    95→/* ————— main reader ————— */
+    96→
+    97→export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; onBack: () => void }) {
+    98→  const main = unit.candy.main;
+    99→  const [active, setActive] = useState<string>(doc.sections[0]?.spec ?? "");
+   100→
+   101→  const { scrollYProgress } = useScroll();
+   102→  const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 26, mass: 0.4 });
+   103→
+   104→  /* scroll spy */
+   105→  const spy = useRef<IntersectionObserver | null>(null);
+   106→  useEffect(() => {
+   107→    spy.current = new IntersectionObserver(
+   108→      (entries) => {
+   109→        for (const e of entries) {
+   110→          if (e.isIntersecting) setActive(e.target.id.replace("spec-", "").replace("-", "."));
+   111→        }
+   112→      },
+   113→      { rootMargin: "-30% 0px -60% 0px" }
+   114→    );
+   115→    for (const s of doc.sections) {
+   116→      const el = document.getElementById(`spec-${s.spec.replace(".", "-")}`);
+   117→      if (el) spy.current?.observe(el);
+   118→    }
+   119→    return () => spy.current?.disconnect();
+   120→  }, [doc]);
+   121→
+   122→  const count = (k: NotesBlock["k"]) => {
+   123→    let n = 0;
+   124→    const walk = (blocks: NotesBlock[]) => blocks.forEach((b) => b.k === k && n++);
+   125→    walk(doc.intro);
+   126→    doc.sections.forEach((s) => walk(s.blocks));
+   127→    if (doc.outro) walk(doc.outro);
+   128→    return n;
+   129→  };
+   130→  const stats = [
+   131→    `${doc.sections.length} spec sections`,
+   132→    `${count("worked")} worked examples`,
+   133→    `${count("figure")} diagrams`,
+   134→    `${count("checkpoint")} textbook checkpoints`,
+   135→  ];
+   136→
+   137→  /* sticky spec rail — the chip strip scrolls sideways; gradient fades
+   138→     hint at the cut-off chips on whichever side is hiding more */
+   139→  const railRef = useRef<HTMLDivElement | null>(null);
+   140→  const [railCut, setRailCut] = useState({ l: false, r: false });
+   141→  const measureRail = () => {
+   142→    const el = railRef.current;
+   143→    if (!el) return;
+   144→    setRailCut({
+   145→      l: el.scrollLeft > 4,
+   146→      r: el.scrollLeft + el.clientWidth < el.scrollWidth - 4,
+   147→    });
+   148→  };
+   149→  useEffect(() => {
+   150→    measureRail();
+   151→    window.addEventListener("resize", measureRail);
+   152→    return () => window.removeEventListener("resize", measureRail);
+   153→    // eslint-disable-next-line react-hooks/exhaustive-deps
+   154→  }, [doc]);
+   155→
+   156→  const accentOf = (i: number) => BANDS[i % BANDS.length];
+   157→  /* bands mix their candy over --tint-base at --band-mix — 10% by
+   158→     day, 14% after dark, so roast-tone neighbours stay distinct */
+   159→  const bandOf = (i: number) =>
+   160→    `color-mix(in oklab, ${accentOf(i)} var(--band-mix, 10%), var(--tint-base))`;
+   161→  /* every third room goes cocoa in the hybrid lab (2.2, 2.5, 2.8 …).
+   162→     Elsewhere --room-surface is undefined and the fallback keeps the
+   163→     plain candy band — one expression, correct in all three labs. */
+   164→  const isRoom = (i: number) => i % 3 === 1;
+   165→  const bgOf = (i: number) => (isRoom(i) ? `var(--room-surface, ${bandOf(i)})` : bandOf(i));
+   166→  const activeIndex = Math.max(0, doc.sections.findIndex((s) => s.spec === active));
+   167→  const activeSection = doc.sections[activeIndex];
+   168→
+   169→  return (
+   170→    <div className="relative">
+   171→      {/* reading progress */}
+   172→      <motion.div
+   173→        aria-hidden
+   174→        className="fixed top-0 left-0 z-[70] h-[7px] w-full origin-left rounded-r-full"
+   175→        style={{ scaleX, background: `linear-gradient(90deg, ${main}, #FFD43B)` }}
+   176→      />
+   177→
+   178→      {/* ————— header ————— */}
+   179→      <header className="mx-auto max-w-3xl px-4 pt-24 sm:px-8">
+   180→        <PopIn>
+   181→          <SoftButton onClick={onBack} className="min-h-[42px] px-4 py-2 text-[13.5px]" ariaLabel="Back to the topic page">
+   182→            <ArrowLeft className="h-4 w-4" /> Back to the topic page
+   183→          </SoftButton>
+   184→        </PopIn>
+   185→
+   186→        <PopIn delay={0.05} className="mt-7 flex flex-wrap items-center gap-2">
+   187→          <span
+   188→            className="inline-flex -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[11.5px] font-bold tracking-[0.14em] text-white uppercase"
+   189→            style={{ background: main }}
+   190→          >
+   191→            <BookOpen className="h-3.5 w-3.5" /> Revision note
+   192→          </span>
+   193→          <span className="inline-flex items-center rounded-full bg-ink/5 px-3.5 py-1.5 text-[12.5px] font-bold capitalize text-ink-soft">
+   194→            {doc.source}
+   195→          </span>
+   196→        </PopIn>
+   197→        <PopIn delay={0.1}>
+   198→          <p className="mt-6 font-display text-[15px] font-semibold tracking-[0.06em] uppercase" style={{ color: inkMix(main, 52) }}>
+   199→            {doc.kicker}
+   200→          </p>
+   201→          <h1 className="mt-2 font-display text-[clamp(2.1rem,5vw,3.2rem)] leading-[1.05] font-semibold tracking-tight text-ink">
+   202→            {doc.title}
+   203→          </h1>
+   204→        </PopIn>
+   205→
+   206→        <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+   207→          <div className="shrink-0">
+   208→            <Mascot main={main} size={104} bubbles={false} />
+   209→          </div>
+   210→          <Reveal delay={0.15} className="min-w-0">
+   211→            <SpeechBubble tailClass="left-8 -top-[7px] rotate-[225deg]">
+   212→              <p className="text-[14.5px] leading-[1.75] text-ink">
+   213→                {doc.intro.map((b, i) =>
+   214→                  b.k === "p" ? (
+   215→                    <span key={i} className="block">
+   216→                      <Fmt text={b.text} />
+   217→                    </span>
+   218→                  ) : null
+   219→                )}
+   220→              </p>
+   221→            </SpeechBubble>
+   222→          </Reveal>
+   223→        </div>
+   224→
+   225→        <PopIn delay={0.18} className="mt-6 flex flex-wrap gap-2">
+   226→          {stats.map((s) => (
+   227→            <span key={s} className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-bold text-ink" style={{ background: tint(main, 12) }}>
+   228→              <Sparkles className="h-3.5 w-3.5" style={{ color: main }} /> {s}
+   229→            </span>
+   230→          ))}
+   231→        </PopIn>
+   232→
+   233→        <Squiggle color={main} className="mt-7 h-3.5 w-full opacity-60" />
+   234→      </header>
+   235→
+   236→      {/* ————— contents ————— */}
+   237→      <Reveal className="mx-auto max-w-3xl px-4 pt-4 sm:px-8">
+   238→        <div className="rounded-[30px] bg-paper p-5 puff sm:p-6">
+   239→          <div className="flex items-center gap-3">
+   240→            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl" style={{ background: tint(main, 16) }}>
+   241→              <Target className="h-5 w-5" style={{ color: inkMix(main, 60) }} />
+   242→            </span>
+   243→            <div>
+   244→              <h2 className="font-display text-[18px] font-semibold text-ink">Contents</h2>
+   245→              <p className="text-[12.5px] font-bold text-ink-faint">{doc.sections.length} sections · tap one to jump</p>
+   246→            </div>
+   247→          </div>
+   248→          <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+   249→            {doc.sections.map((s, i) => {
+   250→              const accent = accentOf(i);
+   251→              return (
+   252→                <button
+   253→                  key={s.spec}
+   254→                  type="button"
+   255→                  onClick={() => scrollToSpec(s.spec)}
+   256→                  className={`group flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left transition-transform hover:-translate-y-0.5${
+   257→                    isRoom(i) ? " room" : ""
+   258→                  }`}
+   259→                  style={{ background: bgOf(i) }}
+   260→                >
+   261→                  <span
+   262→                    className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[10.5px] font-bold"
+   263→                    style={{ background: accent, color: readableInk(accent) }}
+   264→                  >
+   265→                    {s.spec}
+   266→                  </span>
+   267→                  <span className="line-clamp-2 text-[12px] font-bold leading-[1.35] text-ink">{s.title}</span>
+   268→                </button>
+   269→              );
+   270→            })}
+   271→          </div>
+   272→        </div>
+   273→      </Reveal>
+   274→
+   275→      {/* ————— the string of rooms ————— */}
+   276→      <div className="mt-10">
+   277→        {/* sticky rail rides above every band */}
+   278→        <div className="sticky top-[76px] z-40 mx-auto max-w-3xl px-4 sm:px-8">
+   279→          <div
+   280→            className="rounded-[24px] bg-paper/95 px-3.5 py-2.5 backdrop-blur-md"
+   281→            style={{ boxShadow: "0 3px 0 var(--edge), 0 16px 34px -20px rgb(0 0 0 / 0.4)" }}
+   282→          >
+   283→            <div className="flex items-center gap-3">
+   284→              {activeSection ? (
+   285→                <span className="min-w-0 flex-1 truncate font-display text-[13.5px] font-semibold text-ink">
+   286→                  <span style={{ color: inkMix(accentOf(activeIndex), 45) }}>{activeSection.spec}</span> · {activeSection.title}
+   287→                </span>
+   288→              ) : (
+   289→                <span className="min-w-0 flex-1 truncate font-display text-[13.5px] font-semibold text-ink">{doc.title}</span>
+   290→              )}
+   291→            </div>
+   292→            <div className="relative mt-2">
+   293→              <div
+   294→                ref={railRef}
+   295→                onScroll={measureRail}
+   296→                className="no-scrollbar flex items-center gap-1.5 overflow-x-auto"
+   297→              >
+   298→                {doc.sections.map((s, i) => {
+   299→                  const isActive = active === s.spec;
+   300→                  const accent = accentOf(i);
+   301→                  return (
+   302→                    <motion.button
+   303→                      key={s.spec}
+   304→                      type="button"
+   305→                      whileTap={{ scale: 0.88 }}
+   306→                      onClick={() => scrollToSpec(s.spec)}
+   307→                      className="grid h-8 min-w-8 shrink-0 cursor-pointer place-items-center rounded-full px-2 font-display text-[11px] font-bold"
+   308→                      style={
+   309→                        isActive
+   310→                          ? { background: accent, color: readableInk(accent), boxShadow: `0 3px 0 ${shade(accent)}` }
+   311→                          : { background: tint(accent, 22), color: inkMix(accent, 62) }
+   312→                      }
+   313→                      title={`${s.spec} — ${s.title}`}
+   314→                      aria-label={`Jump to spec ${s.spec}`}
+   315→                      aria-current={isActive ? "true" : undefined}
+   316→                    >
+   317→                      {s.spec}
+   318→                    </motion.button>
+   319→                  );
+   320→                })}
+   321→              </div>
+   322→              {railCut.l && (
+   323→                <span
+   324→                  aria-hidden
+   325→                  className="pointer-events-none absolute inset-y-0 left-0 w-8"
+   326→                  style={{ background: "linear-gradient(to right, var(--color-paper) 25%, transparent)" }}
+   327→                />
+   328→              )}
+   329→              {railCut.r && (
+   330→                <span
+   331→                  aria-hidden
+   332→                  className="pointer-events-none absolute inset-y-0 right-0 w-8"
+   333→                  style={{ background: "linear-gradient(to left, var(--color-paper) 25%, transparent)" }}
+   334→                />
+   335→              )}
+   336→            </div>
+   337→          </div>
+   338→        </div>
+   339→
+   340→        <div className="mt-8">
+   341→          <BandWave from="var(--color-cream)" to={bgOf(0)} />
+   342→          {doc.sections.map((s, i) => {
+   343→            const accent = accentOf(i);
+   344→            const room = isRoom(i);
+   345→            const last = i === doc.sections.length - 1;
+   346→            return (
+   347→              <Fragment key={s.spec}>
+   348→                <section
+   349→                  id={`spec-${s.spec.replace(".", "-")}`}
+   350→                  className={`relative scroll-mt-[190px]${room ? " room" : ""}`}
+   351→                  style={{ background: bgOf(i) }}
+   352→                >
+   353→                  <div className="mx-auto max-w-3xl px-4 py-14 sm:px-8 sm:py-16">
+   354→                    <SpecSectionView section={s} accent={accent} />
+   355→                  </div>
+   356→                </section>
+   357→                <BandWave from={bgOf(i)} to={last ? "var(--color-cream)" : bgOf(i + 1)} />
+   358→              </Fragment>
+   359→            );
+   360→          })}
+   361→        </div>
+   362→      </div>
+   363→
+   364→      {/* ————— end of the note ————— */}
+   365→      <div className="mx-auto max-w-3xl px-4 pt-10 pb-24 text-center sm:px-8">
+   366→        <Reveal className="flex flex-col items-center gap-5">
+   367→          <Squiggle color={main} className="h-3 w-40 opacity-70" />
+   368→          <p className="font-display text-[19px] font-semibold text-ink">
+   369→            That&apos;s the whole note — every spec point, word for word.
+   370→          </p>
+   371→          <SoftButton onClick={onBack} ariaLabel="Back to the topic page">
+   372→            <ArrowLeft className="h-4.5 w-4.5" /> Back to the topic page
+   373→          </SoftButton>
+   374→          <p className="mt-2 text-[12px] leading-relaxed font-bold text-ink-soft">
+   375→            <Fmt text={`==${unit.code}== · ${unit.title} · text kept verbatim from the ${doc.source}`} />
+   376→          </p>
+   377→        </Reveal>
+   378→      </div>
+   379→    </div>
+   380→  );
+   381→}
+   382→
+   383→/* ————— one specification section — a room with its own colour ————— */
+   384→
+   385→function SpecSectionView({ section, accent }: { section: SpecSection; accent: string }) {
+   386→  return (
+   387→    <div className="flex flex-col gap-7">
+   388→      {/* spec banner — the official wording, stated above the section */}
+   389→      <div>
+   390→        <div className="flex items-center gap-3">
+   391→          <span
+   392→            className="inline-flex shrink-0 rotate-[-1.5deg] items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.08em] uppercase"
+   393→            style={{ background: accent, color: readableInk(accent), boxShadow: `0 3px 0 ${shade(accent)}` }}
+   394→          >
+   395→            <Target className="h-3.5 w-3.5" /> Spec {section.spec}
+   396→          </span>
+   397→          <span aria-hidden className="h-[3px] flex-1 rounded-full" style={{ background: tint(accent, 32) }} />
+   398→        </div>
+   399→        <h2 className="mt-3.5 font-display text-[clamp(1.55rem,3.4vw,1.95rem)] font-semibold tracking-tight text-ink">
+   400→          {section.title}
+   401→        </h2>
+   402→        <div className="mt-4 rounded-[22px] bg-paper/85 px-5 py-4" style={{ borderLeft: `5px solid ${tint(accent, 45)}` }}>
+   403→          <div className="font-display text-[10.5px] font-extrabold tracking-[0.2em] uppercase" style={{ color: inkMix(accent, 62) }}>
+   404→            From the specification
+   405→          </div>
+   406→          <p className="mt-1.5 text-[14.5px] leading-[1.75] text-ink italic">
+   407→            <Fmt text={section.statement} />
+   408→          </p>
+   409→        </div>
+   410→      </div>
+   411→
+   412→      <div className="flex flex-col gap-6">
+   413→        {section.blocks.map((b, i) => (
+   414→          <Reveal key={i} delay={Math.min(i * 0.03, 0.12)} y={18}>
+   415→            <BlockView block={b} accent={accent} />
+   416→          </Reveal>
+   417→        ))}
+   418→      </div>
+   419→    </div>
+   420→  );
+   421→}
+   422→
+   423→/* ————— block dispatcher ————— */
+   424→
+   425→function BlockView({ block: b, accent }: { block: NotesBlock; accent: string }) {
+   426→  switch (b.k) {
+   427→    case "p":
+   428→      return (
+   429→        <p className="max-w-[68ch] text-[16.5px] leading-[1.8] text-ink/90">
+   430→          <Fmt text={b.text} />
+   431→        </p>
+   432→      );
+   433→    case "h":
+   434→      return (
+   435→        <div className="flex items-center gap-2.5 pt-2">
+   436→          <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: accent }} />
+   437→          <h3 className="font-display text-[21px] font-semibold tracking-tight text-ink">
+   438→            <Fmt text={b.text} />
+   439→          </h3>
+   440→        </div>
+   441→      );
+   442→    case "bullets":
+   443→      return (
+   444→        <ul className="flex max-w-[70ch] flex-col gap-2.5">
+   445→          {b.items.map((t, i) => (
+   446→            <li key={i} className="flex items-start gap-3 text-[16px] leading-[1.8] text-ink/90">
+   447→              <span className="mt-[11px] h-2 w-2 shrink-0 rounded-full" style={{ background: tint(accent, 55) }} />
+   448→              <span>
+   449→                <Fmt text={t} />
+   450→              </span>
+   451→            </li>
+   452→          ))}
+   453→        </ul>
+   454→      );
+   455→    case "note":
+   456→      return (
+   457→        <div className="max-w-[72ch] rounded-[20px] px-4 py-3.5" style={{ background: tint("#FFD43B", 18) }}>
+   458→          <div className="flex items-start gap-3">
+   459→            <StickyNote className="mt-0.5 h-4.5 w-4.5 shrink-0" style={{ color: inkMix("#B08D00", 62) }} />
+   460→            <p className="text-[14.5px] leading-[1.7] text-ink">
+   461→              <span className="mr-1.5 font-display text-[11.5px] font-extrabold tracking-[0.12em] uppercase" style={{ color: inkMix("#B08D00", 58) }}>{b.label}:</span>
+   462→              <Fmt text={b.text} />
+   463→            </p>
+   464→          </div>
+   465→        </div>
+   466→      );
+   467→    case "def":
+   468→      return (
+   469→        <div className="max-w-[72ch] rounded-[20px] bg-paper px-5 py-4 puff" style={{ borderLeft: `5px solid ${tint(accent, 40)}` }}>
+   470→          <h4 className="font-display text-[16.5px] font-semibold text-ink">
+   471→            <Fmt text={b.term} />
+   472→          </h4>
+   473→          <p className="mt-1.5 text-[15.5px] leading-[1.75] text-ink-soft">
+   474→            <Fmt text={b.text} />
+   475→          </p>
+   476→        </div>
+   477→      );
+   478→    case "eq":
+   479→      return (
+   480→        <div className="max-w-[72ch] rounded-[22px] p-5" style={{ background: tint(accent, 9) }}>
+   481→          <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5">
+   482→            {b.eq.split(/\s{2,}/).map((part, i) => (
+   483→              <span key={i} className="rounded-2xl bg-paper px-4 py-2.5 font-mono text-[14.5px] font-semibold text-ink shadow-[0_3px_0_color-mix(in_oklab,var(--color-ink)_7%,transparent)]">
+   484→                <Fmt text={part.trim()} />
+   485→              </span>
+   486→            ))}
+   487→          </div>
+   488→          {b.note && (
+   489→            <p className="mt-3 text-[13px] leading-relaxed font-bold text-ink-soft">
+   490→              <Fmt text={b.note} />
+   491→            </p>
+   492→          )}
+   493→        </div>
+   494→      );
+   495→    case "table":
+   496→      return <CandyTable head={b.head} rows={b.rows} caption={b.caption} accent={accent} />;
+   497→    case "worked":
+   498→      return <Worked title={b.title} question={b.question} steps={b.steps} answer={b.answer} accent={accent} />;
+   499→    case "steps":
+   500→      return <Journey caption={b.caption} items={b.items} accent={accent} />;
+   501→    case "checkpoint":
+   502→      return (
+   503→        <div className="flex items-center gap-3 rounded-full bg-paper px-5 py-4 puff">
+   504→          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full" style={{ background: tint("#12B886", 18) }}>
+   505→            <BookOpen className="h-5 w-5 text-mint" />
+   506→          </span>
+   507→          <p className="text-[15px] font-bold text-ink">
+   508→            Checkpoint — the checkpoint questions for this section are on page {b.page} of the textbook.
+   509→          </p>
+   510→        </div>
+   511→      );
+   512→    case "figure":
+   513→      return <Figure kind={b.kind} caption={b.caption} accent={accent} />;
+   514→    case "wow":
+   515→      return (
+   516→        <div className="max-w-[72ch] rounded-[22px] p-5 sm:p-6" style={{ background: tint("#9775FA", 12) }}>
+   517→          <div className="flex items-start gap-3">
+   518→            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-paper">
+   519→              <Lightbulb className="h-5 w-5" style={{ color: inkMix("#9775FA", 72) }} />
+   520→            </span>
+   521→            <div>
+   522→              <div className="font-display text-[11px] font-extrabold tracking-[0.18em] uppercase" style={{ color: inkMix("#9775FA", 62) }}>Key idea</div>
+   523→              <p className="mt-1 text-[15px] leading-[1.75] text-ink">
+   524→                <Fmt text={b.text} />
+   525→              </p>
+   526→            </div>
+   527→          </div>
+   528→        </div>
+   529→      );
+   530→    default:
+   531→      return null;
+   532→  }
+   533→}
+   534→
+   535→/* ————— candy table ————— */
+   536→
+   537→function CandyTable({
+   538→  head,
+   539→  rows,
+   540→  caption,
+   541→  accent,
+   542→}: {
+   543→  head: string[];
+   544→  rows: string[][];
+   545→  caption?: string;
+   546→  accent: string;
+   547→}) {
+   548→  return (
+   549→    <div className="max-w-full">
+   550→      {caption && (
+   551→        <div className="mb-2 text-[12px] font-extrabold tracking-[0.08em] text-ink-faint uppercase">
+   552→          <Fmt text={caption} />
+   553→        </div>
+   554→      )}
+   555→      <div className="overflow-hidden rounded-[24px] bg-paper puff">
+   556→        <div className="overflow-x-auto">
+   557→          <table className="w-full min-w-[480px] border-collapse text-left">
+   558→            <thead>
+   559→              <tr style={{ background: tint(accent, 15) }}>
+   560→                {head.map((h, i) => (
+   561→                  <th key={i} className="px-4 py-3.5 font-display text-[12px] font-semibold tracking-[0.06em] whitespace-nowrap text-ink uppercase sm:px-5">
+   562→                    <Fmt text={h} />
+   563→                  </th>
+   564→                ))}
+   565→              </tr>
+   566→            </thead>
+   567→            <tbody>
+   568→              {rows.map((r, i) => (
+   569→                <tr key={i} className="border-t-[2.5px] border-dashed border-ink/10" style={{ background: i % 2 === 1 ? tint(accent, 4) : undefined }}>
+   570→                  {r.map((c, j) => (
+   571→                    <td key={j} className={`px-4 py-3.5 align-top text-[14px] leading-[1.65] sm:px-5 ${j === 0 ? "font-extrabold text-ink" : "text-ink-soft"}`}>
+   572→                      <Fmt text={c} />
+   573→                    </td>
+   574→                  ))}
+   575→                </tr>
+   576→              ))}
+   577→            </tbody>
+   578→          </table>
+   579→        </div>
+   580→      </div>
+   581→    </div>
+   582→  );
+   583→}
+   584→
+   585→/* ————— worked example ————— */
+   586→
+   587→function Worked({
+   588→  title,
+   589→  question,
+   590→  steps,
+   591→  answer,
+   592→  accent,
+   593→}: {
+   594→  title: string;
+   595→  question: string;
+   596→  steps: string[];
+   597→  answer: string;
+   598→  accent: string;
+   599→}) {
+   600→  return (
+   601→    <div className="rounded-[28px] bg-paper p-5 puff sm:p-6">
+   602→      <div className="flex flex-wrap items-center gap-3">
+   603→        <span
+   604→          className="inline-flex shrink-0 rotate-[-1.5deg] items-center rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.1em] uppercase"
+   605→          style={{ background: accent, color: readableInk(accent) }}
+   606→        >
+   607→          <PenLine className="mr-1.5 h-3.5 w-3.5" /> {title}
+   608→        </span>
+   609→        <p className="min-w-[16rem] flex-1 text-[15.5px] leading-[1.7] font-bold text-ink">
+   610→          <Fmt text={question} />
+   611→        </p>
+   612→      </div>
+   613→      <div className="mt-4 flex flex-col">
+   614→        {steps.map((s, i) => (
+   615→          <div key={i} style={{ marginLeft: `min(${i * 14}px, 56px)` }}>
+   616→            {i > 0 && <div className="dot-line mb-1 ml-6 h-4" aria-hidden />}
+   617→            <div className="inline-flex max-w-full items-start gap-2.5 rounded-[18px] px-4 py-2.5 text-[15px] leading-[1.7] text-ink" style={{ background: tint(accent, 9) }}>
+   618→              <span className="mt-0.5 grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full font-display text-[11px] font-bold" style={{ background: accent, color: readableInk(accent) }}>
+   619→                {i + 1}
+   620→              </span>
+   621→              <span>
+   622→                <Fmt text={s} />
+   623→              </span>
+   624→            </div>
+   625→          </div>
+   626→        ))}
+   627→      </div>
+   628→      <div
+   629→        className="mt-4 flex items-start gap-2.5 rounded-[20px] bg-paper px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_color-mix(in_oklab,var(--color-ink)_7%,transparent)]"
+   630→        style={{ borderLeft: `6px solid ${accent}` }}
+   631→      >
+   632→        <Check className="mt-0.5 h-5 w-5 shrink-0" style={{ color: accent }} strokeWidth={3} />
+   633→        <span>
+   634→          <Fmt text={answer} />
+   635→        </span>
+   636→      </div>
+   637→    </div>
+   638→  );
+   639→}
+   640→
+   641→/* ————— journey (the 5 stages etc.) ————— */
+   642→
+   643→const STEP_ICONS: Record<string, typeof Flame> = {
+   644→  flame: Flame,
+   645→  zap: Zap,
+   646→  arrow: ArrowRight,
+   647→  magnet: Magnet,
+   648→  target: Target,
+   649→  spark: Sparkles,
+   650→};
+   651→
+   652→function Journey({
+   653→  caption,
+   654→  items,
+   655→  accent,
+   656→}: {
+   657→  caption?: string;
+   658→  items: { title: string; text: string; icon?: string }[];
+   659→  accent: string;
+   660→}) {
+   661→  const [open, setOpen] = useState(0);
+   662→  return (
+   663→    <div>
+   664→      {caption && <p className="mb-3 text-[12px] font-extrabold tracking-[0.08em] text-ink-faint uppercase">{caption}</p>}
+   665→      <div className="flex flex-col gap-2.5">
+   666→        {items.map((it, i) => {
+   667→          const Icon = STEP_ICONS[it.icon ?? "spark"] ?? Sparkles;
+   668→          const isOpen = open === i;
+   669→          return (
+   670→            <motion.div key={i} layout className="rounded-[22px] bg-paper puff" animate={isOpen ? { rotate: 0 } : {}}>
+   671→              <button
+   672→                type="button"
+   673→                onClick={() => setOpen(isOpen ? -1 : i)}
+   674→                aria-expanded={isOpen}
+   675→                className="flex w-full cursor-pointer items-center gap-3 px-4 py-3.5 text-left sm:px-5"
+   676→              >
+   677→                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full" style={{ background: isOpen ? accent : tint(accent, 14) }}>
+   678→                  <Icon className="h-4.5 w-4.5" style={{ color: isOpen ? readableInk(accent) : inkMix(accent, 62) }} strokeWidth={2.5} />
+   679→                </span>
+   680→                <span className="min-w-0 flex-1 font-display text-[15.5px] font-semibold text-ink">{it.title}</span>
+   681→                <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
+   682→                  <ChevronDown className="h-4.5 w-4.5 text-ink-faint" />
+   683→                </motion.span>
+   684→              </button>
+   685→              <AnimatePresence initial={false}>
+   686→                {isOpen && (
+   687→                  <motion.div
+   688→                    initial={{ opacity: 0, height: 0 }}
+   689→                    animate={{ opacity: 1, height: "auto" }}
+   690→                    exit={{ opacity: 0, height: 0 }}
+   691→                    transition={{ type: "spring", stiffness: 260, damping: 26 }}
+   692→                    className="overflow-hidden"
+   693→                  >
+   694→                    <p className="px-5 pb-4 pl-[68px] text-[15px] leading-[1.75] text-ink/90">
+   695→                      <Fmt text={it.text} />
+   696→                    </p>
+   697→                  </motion.div>
+   698→                )}
+   699→              </AnimatePresence>
+   700→            </motion.div>
+   701→          );
+   702→        })}
+   703→      </div>
+   704→    </div>
+   705→  );
+   706→}
+   707→
+   708→/* ————— figures ————— */
+   709→
+   710→/* wide plots scroll sideways on phones instead of shrinking to mush */
+   711→const WIDE_FIGS = new Set(["mass-spec", "ie-graph", "succ-ie", "pt-blocks", "spectrum-bromine", "radius", "fill-order", "melting", "sigma-pi", "dotcross", "carbon-lattices", "shapes", "dipoles", "formula-types", "naming", "frac-col", "isomers", "radchain"]);
+   712→
+   713→function Figure({ kind, caption, accent }: { kind: string; caption?: string; accent: string }) {
+   714→  let node: ReactNode = null;
+   715→  switch (kind) {
+   716→    case "atom": node = <FigAtom accent={accent} />; break;
+   717→    case "notation": node = <FigNotation accent={accent} />; break;
+   718→    case "mass-spec": node = <FigMassSpec />; break;
+   719→    case "shielding": node = <FigShielding accent={accent} />; break;
+   720→    case "spectrum-neon": node = <FigSpectrumNeon />; break;
+   721→    case "spectrum-boron": node = <FigSpectrumBoron />; break;
+   722→    case "spectrum-bromine": node = <FigSpectrumBromine />; break;
+   723→    case "spectrum-cl2": node = <FigSpectrumCl2 />; break;
+   724→    case "spectrum-ethanol": node = <FigSpectrumEthanol />; break;
+   725→    case "orbitals": node = <FigOrbitals accent={accent} />; break;
+   726→    case "fill-demo": node = <FigFillDemo accent={accent} />; break;
+   727→    case "fill-order": node = <FigFillOrder accent={accent} />; break;
+   728→    case "boxes-c": node = <FigBoxesC accent={accent} />; break;
+   729→    case "boxes-s": node = <FigBoxesS accent={accent} />; break;
+   730→    case "ie-graph": node = <FigIeGraph />; break;
+   731→    case "succ-ie": node = <FigSuccIe />; break;
+   732→    case "melting": node = <FigMelting />; break;
+   733→    case "pt-blocks": node = <FigPtBlocks />; break;
+   734→    case "radius": node = <FigRadius accent={accent} />; break;
+   735→    case "sigma-pi": node = <FigSigmaPi accent={accent} />; break;
+   736→    case "dotcross": node = <FigDotCross accent={accent} />; break;
+   737→    case "carbon-lattices": node = <FigCarbonLattices accent={accent} />; break;
+   738→    case "shapes": node = <FigShapes accent={accent} />; break;
+   739→    case "dipoles": node = <FigDipoles accent={accent} />; break;
+   740→    case "formula-types": node = <FigFormulaTypes accent={accent} />; break;
+   741→    case "naming": node = <FigNaming accent={accent} />; break;
+   742→    case "frac-col": node = <FigFracCol accent={accent} />; break;
+   743→    case "isomers": node = <FigIsomers accent={accent} />; break;
+   744→    case "radchain": node = <FigRadChain accent={accent} />; break;
+   745→  }
+   746→  if (!node) return null;
+   747→  const wide = WIDE_FIGS.has(kind);
+   748→  return (
+   749→    <div className="rounded-[28px] bg-paper p-4 puff sm:p-6">
+   750→      <div className={wide ? "no-scrollbar overflow-x-auto" : "flex justify-center"}>
+   751→        <div className={wide ? "min-w-[620px]" : "flex w-full justify-center"}>{node}</div>
+   752→      </div>
+   753→      {caption && (
+   754→        <p className="mx-auto mt-3 max-w-[58ch] text-center text-[12.5px] leading-[1.65] font-semibold text-ink-faint">
+   755→          <Fmt text={caption} />
+   756→        </p>
+   757→      )}
+   758→    </div>
+   759→  );
+   760→}
+   761→
