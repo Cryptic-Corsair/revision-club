@@ -27,12 +27,15 @@ export function TopicView({
   onBack,
   onOpenTopic,
   onOpenNotes,
+  notesSpecRange,
 }: {
   unit: Unit;
   topic: Topic;
   onBack: () => void;
   onOpenTopic: (topicId: string) => void;
   onOpenNotes?: () => void;
+  /* "2.1 → 2.18" — the spec points the full note covers, from the doc itself */
+  notesSpecRange?: string;
 }) {
   const revised = useRevised();
   const key = `${unit.code}/${topic.id}`;
@@ -113,8 +116,9 @@ export function TopicView({
                 The full revision note — spec by spec
               </span>
               <span className="mt-1 block text-[13.5px] leading-[1.6] font-bold text-white/80">
-                The complete class note, word for word, cut into one section per specification point
-                (2.1 → 2.18) with the official wording above each, and every calculation worked in full.
+                The complete class note, word for word, cut into one section per specification
+                point{notesSpecRange ? ` (${notesSpecRange})` : ""} with the official wording above
+                each, and every calculation worked in full.
               </span>
             </span>
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/20 transition-transform group-hover:translate-x-1">

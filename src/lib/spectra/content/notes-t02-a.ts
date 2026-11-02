@@ -37,7 +37,7 @@ export const SECTIONS_A: SpecSection[] = [
     blocks: [
       {
         k: "table",
-        caption: "The structure of the atom in terms of the three sub atomic particles",
+        caption: "The structure of the atom in terms of the three sub-atomic particles",
         head: ["Particle", "Symbol", "Charge / C", "Relative charge", "Mass / g", "Relative mass"],
         rows: [
           ["Proton", "p", "+1.60 × 10^−19^", "+1", "1.67 × 10^−24^", "1"],

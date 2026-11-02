@@ -297,21 +297,23 @@ export function Blend({
       {/* ————— PLAYING: the card ————— */}
       {phase === "playing" && run && card && (
         <section ref={stageRef} className="mt-10 scroll-mt-24">
-          {/* progress dots */}
+          {/* progress dots — colours ride on style (motion can't tween
+              color-mix strings), only the scale springs */}
           <div className="mb-5 flex items-center justify-center gap-1.5">
             {run.cards.map((_, i) => (
               <motion.span
                 key={i}
                 aria-hidden
-                animate={{
-                  scale: i === idx ? 1.5 : 1,
+                animate={{ scale: i === idx ? 1.5 : 1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 18 }}
+                style={{
                   backgroundColor:
                     i < idx
                       ? run.picks[i] === "hit"
                         ? "#12b886"
                         : "#ff6b6b"
                       : i === idx
-                        ? "#3d2b1f"
+                        ? "var(--color-ink)"
                         : "color-mix(in oklab, var(--color-ink) 16%, transparent)",
                 }}
                 className="h-2.5 w-2.5 rounded-full"
@@ -541,8 +543,10 @@ function Flashcard({
 
   return (
     <div className="[perspective:1400px]">
+      {/* grid-stack: both faces share one cell, so the card grows to fit
+          whichever face is taller — long answers never spill out */}
       <motion.div
-        className="relative mx-auto w-full max-w-xl [transform-style:preserve-3d]"
+        className="relative mx-auto grid w-full max-w-xl [transform-style:preserve-3d]"
         animate={{ rotateY: flipped ? 180 : 0, x: nudge ? [0, -6, 6, -3, 0] : 0 }}
         transition={{
           rotateY: { type: "spring", stiffness: 260, damping: 22 },
@@ -645,7 +649,7 @@ function Flashcard({
 function CardFace({ children, back = false }: { children: React.ReactNode; back?: boolean }) {
   return (
     <div
-      className="absolute inset-0 flex flex-col rounded-[36px] p-6 sm:p-8"
+      className="flex flex-col rounded-[36px] p-6 [grid-area:1/1] sm:p-8"
       style={{
         background: "var(--color-paper)",
         boxShadow: "0 4px 0 color-mix(in oklab, var(--color-ink) 6%, transparent), 0 26px 60px -26px rgb(0 0 0 / 0.4)",

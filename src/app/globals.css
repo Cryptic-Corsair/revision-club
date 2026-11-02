@@ -259,6 +259,15 @@ html.dark ::selection {
   border-radius: 12px;
 }
 
+/* the ⌘K palette input — the dialog already frames it, so trade the
+   dashed marker ring for a quiet violet halo (unlayered: it must
+   beat the utility layer's focus:outline-none) */
+.search-field:focus-visible {
+  outline: 3px solid color-mix(in oklab, #9775fa 40%, transparent);
+  outline-offset: 1px;
+  border-radius: 999px;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;

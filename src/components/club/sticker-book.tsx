@@ -8,6 +8,7 @@ import {
   BookOpenCheck,
   Check,
   Droplets,
+  Gauge,
   Lock,
   Sparkles,
   Sticker,
@@ -252,7 +253,7 @@ export function StickerBook({
                     a.id === "first-round" ? <Sparkles className="h-5.5 w-5.5" strokeWidth={2.5} /> :
                     a.id === "course-complete" ? <Droplets className="h-5.5 w-5.5" strokeWidth={2.5} /> :
                     a.id === "unit-complete" ? <BookOpenCheck className="h-5.5 w-5.5" strokeWidth={2.5} /> :
-                    a.id === "halfway" ? <Droplets className="h-5.5 w-5.5" strokeWidth={2.5} /> :
+                    a.id === "halfway" ? <Gauge className="h-5.5 w-5.5" strokeWidth={2.5} /> :
                     <Sticker className="h-5.5 w-5.5" strokeWidth={2.5} />
                   ) : (
                     <Lock className="h-5 w-5" strokeWidth={2.5} />

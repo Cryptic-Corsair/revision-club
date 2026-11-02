@@ -251,8 +251,20 @@ function TopBar({
           onClick={cycle}
           whileTap={{ scale: 0.88 }}
           className={tool(false)}
-          title={lab === "light" ? "Switch to the after-dark lab" : lab === "dark" ? "Switch to the hybrid lab" : "Switch to the daylight lab"}
-          aria-label={lab === "light" ? "Switch to dark theme" : lab === "dark" ? "Switch to hybrid theme" : "Switch to light theme"}
+          title={
+            lab === "light"
+              ? "Switch to the after-dark lab"
+              : lab === "dark"
+                ? "Switch to the hybrid lab"
+                : "Switch to the daylight lab"
+          }
+          aria-label={
+            lab === "light"
+              ? "Switch to the after-dark lab"
+              : lab === "dark"
+                ? "Switch to the hybrid lab"
+                : "Switch to the daylight lab"
+          }
         >
           {/* the button wears today's lab; the toast announces the next one */}
           {lab === "light" ? (
@@ -341,11 +353,11 @@ function Footer({
               </span>
             </div>
             <p className="mt-3 text-[14px] leading-relaxed text-milk/80">
-              Revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16), written to the
-              2018 specification.
+              Notes for every topic in the International A Level course — read them in order,
+              try the checkpoints, and mark what you&apos;ve revised.
             </p>
             <div className="mt-5 flex items-end gap-1">
-              <Mascot main="#FFD43B" size={72} boop onBoop={boop} bubbles={false} />
+              <Mascot main="#FFD43B" size={88} boop onBoop={boop} bubbles={false} />
               <AnimatePresence>
                 {booped && (
                   <motion.div
@@ -550,6 +562,11 @@ export default function ClubApp() {
                 topic={topic}
                 onBack={() => openUnit(unit.code)}
                 onOpenTopic={(id) => openTopic(unit.code, id)}
+                notesSpecRange={
+                  notesDoc && notesDoc.sections.length > 0
+                    ? `${notesDoc.sections[0].spec} → ${notesDoc.sections[notesDoc.sections.length - 1].spec}`
+                    : undefined
+                }
                 onOpenNotes={
                   notesDoc
                     ? () => setView({ kind: "notes", code: unit.code, docId: notesDoc.id })

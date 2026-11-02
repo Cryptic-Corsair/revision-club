@@ -13,9 +13,9 @@ import {
   NotebookPen,
   Palette,
   PencilRuler,
-  Play,
   Sticker,
   TestTubes,
+  Zap,
 } from "./icons";
 import type { Unit } from "@/lib/spectra/types";
 import { TOTALS } from "@/lib/spectra/units";
@@ -138,8 +138,8 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                 <CandyButton main="#FF6B6B" onClick={() => scrollTo("units")}>
                   Browse the units <MoveRight className="h-5 w-5" />
                 </CandyButton>
-                <SoftButton onClick={() => onOpenUnit("WCH12")}>
-                  <Play className="h-4 w-4 text-coral" /> Open WCH12
+                <SoftButton onClick={onOpenBlend}>
+                  <Zap className="h-4 w-4 text-grape" /> Try the flashcards
                 </SoftButton>
               </PopIn>
 
@@ -177,7 +177,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
 
               <Float delay={0.8} className="absolute top-[8%] left-[2%] z-20">
                 <span className="inline-block rotate-[-7deg] rounded-full bg-paper px-4 py-2 font-display text-[13px] font-bold text-ink puff">
-                  spec point by spec point
+                  read → practise → done
                 </span>
               </Float>
               <Float delay={1.6} slow className="absolute right-[0%] bottom-[12%] z-20">
@@ -207,7 +207,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
       <section id="units" className="mx-auto max-w-6xl scroll-mt-24 px-5 pt-20 pb-6 sm:px-8">
         <Reveal className="text-center">
           <SectionTag main="#FF922B" tilt={2}>
-            the units
+            the course
           </SectionTag>
           <h2 className="mt-5 font-display text-[clamp(1.9rem,4vw,2.8rem)] leading-tight font-semibold text-ink">
             The six units
@@ -500,14 +500,14 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                 <Mascot main="#FFD43B" mood="cheer" size={150} bubbles={false} className="mx-auto" />
               </Float>
               <h2 className="mt-2 font-display text-[clamp(1.8rem,3.6vw,2.6rem)] font-semibold text-milk">
-                Pick a unit and start.
+                Pick a unit and dive in.
               </h2>
               <p className="mt-3 text-[15.5px] leading-relaxed text-milk/75">
-                Start with Unit 1, or jump straight to the topic you are revising.
+                Begin with Unit 1, or jump straight to the topic you are revising.
               </p>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3.5">
                 <CandyButton main="#FFD43B" onClick={() => scrollTo("units")}>
-                  Back to the units <MoveRight className="h-5 w-5" />
+                  Browse the units <MoveRight className="h-5 w-5" />
                 </CandyButton>
                 <SoftButton onClick={() => onOpenUnit("WCH11")}>
                   Open Unit 1 <DoodleSparkle className="h-4 w-4 text-lemon" />

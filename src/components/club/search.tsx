@@ -116,7 +116,7 @@ function PaletteBody({
                 onKeyDown={onKey}
                 placeholder="Search topics… try “buffer” or “WCH14”"
                 aria-label="Search topics"
-                className="min-w-0 flex-1 bg-transparent font-display text-[17px] font-semibold text-ink placeholder:text-ink-faint/70 focus:outline-none"
+                className="search-field min-w-0 flex-1 bg-transparent font-display text-[17px] font-semibold text-ink placeholder:text-ink-faint/70 focus:outline-none"
               />
               <kbd className="hidden shrink-0 rounded-full bg-ink/5 px-2.5 py-1 font-mono text-[11px] font-bold text-ink-soft sm:block">
                 esc

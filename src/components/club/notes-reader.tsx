@@ -455,7 +455,7 @@ function BlockView({ block: b, accent }: { block: NotesBlock; accent: string }) 
             <BookOpen className="h-5 w-5 text-mint" />
           </span>
           <p className="text-[15px] font-bold text-ink">
-            Checkpoint — the check point questions for this section are on page {b.page} of the textbook.
+            Checkpoint — the checkpoint questions for this section are on page {b.page} of the textbook.
           </p>
         </div>
       );
