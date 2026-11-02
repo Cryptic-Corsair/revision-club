@@ -42,7 +42,7 @@
   --color-paper: #fffdf7; /* cards, sheets, bubbles */
   --color-milk: #fff6ea; /* light text on dark bands (never flips) */
   --color-ink: #3d2b1f; /* main text */
-  --color-ink-soft: #8a7261; /* secondary text */
+  --color-ink-soft: #7c6454; /* secondary text — AA against cream (5.1:1) */
   --color-ink-faint: #c9b6a6; /* tertiary text, dotted lines */
   --color-cocoa: #2e2016; /* footer, dark bands */
 
@@ -101,25 +101,25 @@ html.dark {
    roast per day, baked in before first paint). Only the four surface
    tones change; text inks stay put, so contrast holds in every roast. */
 html.dark[data-mood="1"] {
-  /* roast 1 — "dark roast", a flatter, less saturated brown */
-  --color-cream: #1e1913;
-  --color-paper: #31291e;
-  --color-cocoa: #16110c;
-  --tint-base: #403425;
+  /* roast 1 — "dark roast", the neutral one: greyer, less orange */
+  --color-cream: #1e1b17;
+  --color-paper: #302b24;
+  --color-cocoa: #16130f;
+  --tint-base: #3e372e;
 }
 html.dark[data-mood="2"] {
   /* roast 2 — "mahogany", a red-leaning chestnut */
-  --color-cream: #221611;
-  --color-paper: #382519;
-  --color-cocoa: #190e09;
-  --tint-base: #46301f;
+  --color-cream: #221511;
+  --color-paper: #38241a;
+  --color-cocoa: #190e08;
+  --tint-base: #47301e;
 }
 html.dark[data-mood="3"] {
   /* roast 3 — "midnight cocoa", the deepest of the set */
-  --color-cream: #1a1411;
-  --color-paper: #2d231b;
+  --color-cream: #191412;
+  --color-paper: #2c231c;
   --color-cocoa: #130e0b;
-  --tint-base: #3a2d22;
+  --tint-base: #3a2e24;
 }
 
 /* ————— the hybrid lab —————
@@ -223,8 +223,25 @@ body {
   overflow-x: hidden;
 }
 
+/* ————— ambient lamp —————
+   One soft bloom above the bench: citrus in the daylight labs, a
+   warm lamp after dark. Paints above the polka dots, below every
+   element — depth without a single edged box. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(1100px 480px at 50% -140px, rgb(255 146 43 / 0.07), transparent 70%);
+}
+
 html.dark body {
   background-image: radial-gradient(rgb(255 236 205 / 0.055) 1.6px, transparent 1.7px);
+}
+
+html.dark body::before {
+  background: radial-gradient(1150px 520px at 50% -150px, rgb(255 224 178 / 0.075), transparent 72%);
 }
 
 ::selection {

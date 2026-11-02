@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FlaskConical, Home as HomeIcon, Moon, Search, Sticker, Sun, SunMoon, Zap } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
@@ -47,9 +47,17 @@ function LogoMark({ size = 38 }: { size?: number }) {
 /* ————— lab switch —————
    Three labs, one button: daylight → after-dark → hybrid → daylight.
    The hybrid lab keeps the daylight page but lets the notes reader
-   punch in deep cocoa rooms — the best of both moods. */
+   punch in deep cocoa rooms — the best of both moods. A candy toast
+   announces each switch, and the mobile browser chrome is re-painted
+   to the lab's cream so the address bar never fights the page. */
 
 export type Lab = "light" | "dark" | "hybrid";
+
+const LAB_LABEL: Record<Lab, string> = {
+  light: "Daylight lab",
+  dark: "After-dark lab",
+  hybrid: "Hybrid lab — day & night",
+};
 
 function readLab(): Lab {
   const r = document.documentElement;
@@ -58,10 +66,27 @@ function readLab(): Lab {
   return "light";
 }
 
+/* keep the mobile address bar in the lab's cream */
+function paintChrome(root: HTMLElement) {
+  const cream = getComputedStyle(root).getPropertyValue("--color-cream").trim();
+  if (!cream) return;
+  let m = document.querySelector('meta[name="theme-color"]:not([media])');
+  if (!m) {
+    m = document.createElement("meta");
+    m.setAttribute("name", "theme-color");
+    document.head.appendChild(m);
+  }
+  m.setAttribute("content", cream);
+}
+
 function useTheme() {
   const [lab, setLab] = useState<Lab>("light");
+  const [announce, setAnnounce] = useState<Lab | null>(null);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
-    setLab(readLab());
+    const current = readLab();
+    setLab(current);
+    paintChrome(document.documentElement);
   }, []);
   const cycle = useCallback(() => {
     const order: Lab[] = ["light", "dark", "hybrid"];
@@ -75,14 +100,18 @@ function useTheme() {
     /* dark + hybrid wear today's roast; the daylight lab needs none */
     if (next !== "light") root.dataset.mood = String(pickDarkMood());
     else delete root.dataset.mood;
+    paintChrome(root);
     try {
       localStorage.setItem("rc-theme", next);
     } catch {
       /* private mode — mood just won't persist */
     }
     setLab(next);
+    setAnnounce(next);
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => setAnnounce(null), 1800);
   }, []);
-  return { lab, cycle };
+  return { lab, announce, cycle };
 }
 
 function TopBar({
@@ -100,7 +129,7 @@ function TopBar({
   onOpenBlend: () => void;
   onSearch: () => void;
 }) {
-  const { lab, cycle } = useTheme();
+  const { lab, announce, cycle } = useTheme();
   const activeCode =
     view.kind === "unit" || view.kind === "topic" || view.kind === "notes" ? view.code : null;
 
@@ -110,7 +139,8 @@ function TopBar({
     }`;
 
   return (
-    <header className="fixed inset-x-0 top-2.5 z-50 flex justify-center px-2.5 sm:top-3 sm:px-3">
+    <>
+      <header className="fixed inset-x-0 top-2.5 z-50 flex justify-center px-2.5 sm:top-3 sm:px-3">
       <nav
         aria-label="Units"
         className="no-scrollbar flex max-w-[97vw] items-center gap-1.5 overflow-x-auto rounded-full bg-paper/90 py-2 pr-2.5 pl-2.5 backdrop-blur-xl"
@@ -224,16 +254,51 @@ function TopBar({
           title={lab === "light" ? "Switch to the after-dark lab" : lab === "dark" ? "Switch to the hybrid lab" : "Switch to the daylight lab"}
           aria-label={lab === "light" ? "Switch to dark theme" : lab === "dark" ? "Switch to hybrid theme" : "Switch to light theme"}
         >
+          {/* the button wears today's lab; the toast announces the next one */}
           {lab === "light" ? (
-            <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />
-          ) : lab === "dark" ? (
-            <SunMoon className="h-[18px] w-[18px]" strokeWidth={2.2} />
-          ) : (
             <Sun className="h-[18px] w-[18px]" strokeWidth={2.2} />
+          ) : lab === "dark" ? (
+            <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+          ) : (
+            <SunMoon className="h-[18px] w-[18px]" strokeWidth={2.2} />
           )}
         </motion.button>
       </nav>
-    </header>
+      </header>
+
+      {/* ————— lab toast — announces where you just landed ————— */}
+      <AnimatePresence>
+        {announce && (
+          <motion.div
+            key={announce}
+            initial={{ opacity: 0, y: 16, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.94 }}
+            transition={{ type: "spring", stiffness: 380, damping: 24 }}
+            className="fixed bottom-7 left-1/2 z-[80]"
+            style={{ x: "-50%" }}
+            role="status"
+          >
+            <span className="flex items-center gap-2.5 rounded-full bg-paper px-5 py-2.5 font-display text-[13.5px] font-semibold whitespace-nowrap text-ink puff">
+              <span
+                aria-hidden
+                className="h-3.5 w-3.5 shrink-0 rounded-full"
+                style={{
+                  background:
+                    announce === "light"
+                      ? "#FFD43B"
+                      : announce === "dark"
+                        ? "#2e2016"
+                        : "linear-gradient(90deg, #FFD43B 50%, #2e2016 50%)",
+                  boxShadow: "inset 0 0 0 2px rgb(61 43 31 / 0.12)",
+                }}
+              />
+              {LAB_LABEL[announce]}
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
