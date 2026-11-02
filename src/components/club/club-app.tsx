@@ -2,7 +2,16 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FlaskConical, Home as HomeIcon, Moon, Search, Sliders, Sticker, Sun, SunMoon } from "./icons";
+import {
+  FlaskConical,
+  Home as HomeIcon,
+  Moon,
+  Search,
+  Sliders,
+  Sticker,
+  Sun,
+  SunMoon,
+} from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { UNITS, getUnit, getTopic } from "@/lib/spectra/units";
 import { getNotes, getNotesForTopic } from "@/lib/spectra/notes";
@@ -16,6 +25,7 @@ import { StickerBook } from "./sticker-book";
 import { CustomizePanel } from "./customize";
 import { SearchPalette } from "./search";
 import { Mascot, SpeechBubble } from "./bits";
+import { SpecMapProvider, SpecMapTrigger } from "./spec-map";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · app shell — pill nav, views, footer
@@ -99,7 +109,9 @@ function TopBar({
 
   const tool = (active: boolean) =>
     `grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors ${
-      active ? "bg-ink text-cream" : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
+      active
+        ? "bg-ink text-cream"
+        : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
     }`;
 
   return (
@@ -111,7 +123,10 @@ function TopBar({
         <nav
           aria-label="Main"
           className="flex max-w-[97vw] items-center gap-1.5 rounded-full bg-paper/90 py-2 pr-2.5 pl-2.5 backdrop-blur-xl"
-          style={{ boxShadow: "0 3px 0 var(--edge), 0 16px 38px -18px rgb(0 0 0 / 0.4)" }}
+          style={{
+            boxShadow:
+              "0 3px 0 var(--edge), 0 16px 38px -18px rgb(0 0 0 / 0.4)",
+          }}
         >
           <button
             type="button"
@@ -125,7 +140,14 @@ function TopBar({
             </span>
           </button>
 
-          <span aria-hidden className="mx-1 hidden h-6 w-[3px] shrink-0 rounded-full bg-ink/10 sm:block" />
+          <span
+            aria-hidden
+            className="mx-1 hidden h-6 w-[3px] shrink-0 rounded-full bg-ink/10 sm:block"
+          />
+
+          {/* the note reader parks its Spec Map stop here — same 40px
+              rhythm as every other nav button, wearing the unit's candy */}
+          <SpecMapTrigger />
 
           {/* ————— home + tools ————— */}
           <motion.button
@@ -163,7 +185,11 @@ function TopBar({
             aria-label="Open your progress"
             style={
               view.kind === "sticker"
-                ? { background: "#12B886", color: "#fff", boxShadow: "0 3px 0 #0B7A57" }
+                ? {
+                    background: "#12B886",
+                    color: "#fff",
+                    boxShadow: "0 3px 0 #0B7A57",
+                  }
                 : undefined
             }
           >
@@ -258,7 +284,11 @@ function Footer({
   return (
     <footer className="mt-auto">
       <div aria-hidden className="h-[54px] bg-cream sm:h-[74px]">
-        <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-full w-full">
+        <svg
+          viewBox="0 0 1440 90"
+          preserveAspectRatio="none"
+          className="block h-full w-full"
+        >
           <path
             d="M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z"
             fill="var(--color-cocoa)"
@@ -276,12 +306,18 @@ function Footer({
               </span>
             </div>
             <p className="mt-3 text-[14px] leading-relaxed text-milk/80">
-              Notes for every topic in the International A Level course — read them in order,
-              try the checkpoints, and mark what you&apos;ve revised. Your reading time is
-              counted, topic by topic.
+              Notes for every topic in the International A Level course — read
+              them in order, try the checkpoints, and mark what you&apos;ve
+              revised. Your reading time is counted, topic by topic.
             </p>
             <div className="mt-5 flex items-end gap-1">
-              <Mascot main="#FFD43B" size={88} boop onBoop={boop} bubbles={false} />
+              <Mascot
+                main="#FFD43B"
+                size={88}
+                boop
+                onBoop={boop}
+                bubbles={false}
+              />
               <AnimatePresence>
                 {booped && (
                   <motion.div
@@ -372,9 +408,12 @@ function Footer({
 
         <div className="mx-auto mt-10 max-w-6xl px-5 pb-[var(--sa-bottom)] sm:px-8">
           <p className="text-[11.5px] leading-relaxed font-semibold text-milk/60">
-            Written to the Pearson Edexcel International A Level Chemistry (2018) specification
-            · WCH11–WCH16 · not affiliated with or endorsed by Pearson Education Ltd.
-            <span className="ml-1 whitespace-nowrap text-milk/40">· rev 4 · Nov 2026</span>
+            Written to the Pearson Edexcel International A Level Chemistry
+            (2018) specification · WCH11–WCH16 · not affiliated with or endorsed
+            by Pearson Education Ltd.
+            <span className="ml-1 whitespace-nowrap text-milk/40">
+              · rev 4 · Nov 2026
+            </span>
           </p>
         </div>
       </div>
@@ -413,7 +452,7 @@ export default function ClubApp() {
   }, []);
   const openTopic = useCallback(
     (code: UnitCode, topicId: string) => openTopicRaw(code, topicId),
-    [openTopicRaw]
+    [openTopicRaw],
   );
   const goHome = () => setView({ kind: "home" });
   const openSticker = useCallback(() => setView({ kind: "sticker" }), []);
@@ -442,95 +481,119 @@ export default function ClubApp() {
      topic pages and revision notes bank their seconds on the topic;
      everywhere else banks on the whole site. One call site, so the
      two can never double-count. */
-  const notesDoc =
-    view.kind === "notes"
-      ? getNotes(view.docId)
-      : undefined;
+  const notesDoc = view.kind === "notes" ? getNotes(view.docId) : undefined;
   useTimeScope(
     view.kind === "topic" || view.kind === "notes" ? view.code : undefined,
-    view.kind === "topic" ? view.topicId : notesDoc?.topicId
+    view.kind === "topic" ? view.topicId : notesDoc?.topicId,
   );
 
   const unit =
-    view.kind === "home" || view.kind === "sticker" ? undefined : getUnit(view.code);
-  const topic = view.kind === "topic" && unit ? getTopic(view.code, view.topicId) : undefined;
-  const topicNotes = unit && topic ? getNotesForTopic(unit.code, topic.id) : undefined;
+    view.kind === "home" || view.kind === "sticker"
+      ? undefined
+      : getUnit(view.code);
+  const topic =
+    view.kind === "topic" && unit
+      ? getTopic(view.code, view.topicId)
+      : undefined;
+  const topicNotes =
+    unit && topic ? getNotesForTopic(unit.code, topic.id) : undefined;
 
   return (
-    <div className="flex min-h-dvh flex-col">
-      <TopBar
-        view={view}
-        onHome={goHome}
-        onOpenSticker={openSticker}
-        onSearch={openSearch}
-        onOpenCustomize={openCustomize}
-      />
-      <SearchPalette open={searchOpen} onClose={() => setSearchOpen(false)} onOpenTopic={openTopic} />
-      <CustomizePanel open={customizeOpen} onClose={closeCustomize} />
-
-      <main className="relative flex-1">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={viewKey}
-            initial={{ opacity: 0, y: 22, scale: 0.995 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -14, scale: 0.995 }}
-            transition={{ type: "spring", stiffness: 260, damping: 26 }}
-          >
-            {view.kind === "home" && (
-              <Home
-                units={UNITS}
-                onOpenUnit={openUnit}
-                onOpenSticker={openSticker}
-                onOpenTopic={openTopic}
-              />
-            )}
-
-            {view.kind === "unit" && unit && (
-              <UnitView
-                unit={unit}
-                onOpenTopic={(id) => openTopic(unit.code, id)}
-                onBack={goHome}
-                onOpenUnit={openUnit}
-              />
-            )}
-
-            {view.kind === "topic" && unit && topic && (
-              <TopicView
-                unit={unit}
-                topic={topic}
-                onBack={() => openUnit(unit.code)}
-                onOpenTopic={(id) => openTopic(unit.code, id)}
-                notesSpecRange={
-                  topicNotes && topicNotes.sections.length > 0
-                    ? `${topicNotes.sections[0].spec} → ${topicNotes.sections[topicNotes.sections.length - 1].spec}`
-                    : undefined
-                }
-                onOpenNotes={
-                  topicNotes
-                    ? () => setView({ kind: "notes", code: unit.code, docId: topicNotes.id })
-                    : undefined
-                }
-              />
-            )}
-
-            {view.kind === "notes" && unit && notesDoc && (
-              <NotesReader key={notesDoc.id} doc={notesDoc} unit={unit} onBack={() => openTopic(unit.code, notesDoc.topicId)} />
-            )}
-
-            {view.kind === "sticker" && (
-              <StickerBook units={UNITS} onBack={goHome} onOpenUnit={openUnit} onOpenTopic={openTopic} />
-            )}
-          </motion.div>
-        </AnimatePresence>
-
-        <Footer
-          onOpenUnit={openUnit}
+    <SpecMapProvider>
+      <div className="flex min-h-dvh flex-col">
+        <TopBar
+          view={view}
+          onHome={goHome}
           onOpenSticker={openSticker}
-          onOpenCustomize={openCustomize}
           onSearch={openSearch}
+          onOpenCustomize={openCustomize}
         />
-      </main>
-    </div>
+        <SearchPalette
+          open={searchOpen}
+          onClose={() => setSearchOpen(false)}
+          onOpenTopic={openTopic}
+        />
+        <CustomizePanel open={customizeOpen} onClose={closeCustomize} />
+
+        <main className="relative flex-1">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={viewKey}
+              initial={{ opacity: 0, y: 22, scale: 0.995 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -14, scale: 0.995 }}
+              transition={{ type: "spring", stiffness: 260, damping: 26 }}
+            >
+              {view.kind === "home" && (
+                <Home
+                  units={UNITS}
+                  onOpenUnit={openUnit}
+                  onOpenSticker={openSticker}
+                  onOpenTopic={openTopic}
+                />
+              )}
+
+              {view.kind === "unit" && unit && (
+                <UnitView
+                  unit={unit}
+                  onOpenTopic={(id) => openTopic(unit.code, id)}
+                  onBack={goHome}
+                  onOpenUnit={openUnit}
+                />
+              )}
+
+              {view.kind === "topic" && unit && topic && (
+                <TopicView
+                  unit={unit}
+                  topic={topic}
+                  onBack={() => openUnit(unit.code)}
+                  onOpenTopic={(id) => openTopic(unit.code, id)}
+                  notesSpecRange={
+                    topicNotes && topicNotes.sections.length > 0
+                      ? `${topicNotes.sections[0].spec} → ${topicNotes.sections[topicNotes.sections.length - 1].spec}`
+                      : undefined
+                  }
+                  onOpenNotes={
+                    topicNotes
+                      ? () =>
+                          setView({
+                            kind: "notes",
+                            code: unit.code,
+                            docId: topicNotes.id,
+                          })
+                      : undefined
+                  }
+                />
+              )}
+
+              {view.kind === "notes" && unit && notesDoc && (
+                <NotesReader
+                  key={notesDoc.id}
+                  doc={notesDoc}
+                  unit={unit}
+                  onBack={() => openTopic(unit.code, notesDoc.topicId)}
+                />
+              )}
+
+              {view.kind === "sticker" && (
+                <StickerBook
+                  units={UNITS}
+                  onBack={goHome}
+                  onOpenUnit={openUnit}
+                  onOpenTopic={openTopic}
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
+
+          <Footer
+            onOpenUnit={openUnit}
+            onOpenSticker={openSticker}
+            onOpenCustomize={openCustomize}
+            onSearch={openSearch}
+          />
+        </main>
+      </div>
+    </SpecMapProvider>
   );
 }
