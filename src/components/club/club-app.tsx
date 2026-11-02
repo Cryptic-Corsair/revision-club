@@ -450,6 +450,7 @@ function Footer({
           <p className="text-[11.5px] leading-relaxed font-semibold text-milk/60">
             Written to the Pearson Edexcel International A Level Chemistry (2018) specification
             · WCH11–WCH16 · not affiliated with or endorsed by Pearson Education Ltd.
+            <span className="ml-1 whitespace-nowrap text-milk/40">· rev 3 · Nov 2026</span>
           </p>
         </div>
       </div>
