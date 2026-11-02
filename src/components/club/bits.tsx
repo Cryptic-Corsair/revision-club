@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -34,6 +34,55 @@ export function readableInk(main: string): string {
 
 export const fade = (main: string, pct: number) =>
   `color-mix(in oklab, ${main} ${pct}%, transparent)`;
+
+/* ————— scroll fade —————
+   Wraps a horizontally scrollable child (big tables, wide figures) and
+   paints a soft fade over whichever side is hiding content — the
+   affordance that says "keep swiping". The fade picks up the local
+   surface from --color-paper, so it is correct on cards, in rooms and
+   after dark without a single prop. */
+
+export function ScrollFade({ children, className }: { children: ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [cut, setCut] = useState({ l: false, r: false });
+  const measure = () => {
+    const el = ref.current;
+    if (!el) return;
+    setCut({
+      l: el.scrollLeft > 6,
+      r: el.scrollLeft + el.clientWidth < el.scrollWidth - 6,
+    });
+  };
+  useEffect(() => {
+    const el = ref.current;
+    measure();
+    el?.addEventListener("scroll", measure, { passive: true });
+    window.addEventListener("resize", measure);
+    return () => {
+      el?.removeEventListener("scroll", measure);
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+  const mask =
+    cut.l && cut.r
+      ? "linear-gradient(to right, transparent 0, black 34px, black calc(100% - 34px), transparent)"
+      : cut.r
+        ? "linear-gradient(to right, black calc(100% - 34px), transparent)"
+        : cut.l
+          ? "linear-gradient(to right, transparent 0, black 34px)"
+          : undefined;
+  return (
+    <div className={`relative${className ? ` ${className}` : ""}`}>
+      <div
+        ref={ref}
+        className="scroll-glide overflow-x-auto"
+        style={mask ? { maskImage: mask, WebkitMaskImage: mask } : undefined}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
 
 /* ————— scroll reveals ————— */
 

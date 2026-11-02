@@ -46,7 +46,7 @@ export function UnitView({
   const main = unit.candy.main;
 
   return (
-    <div className="mx-auto max-w-5xl px-5 pt-24 pb-20 sm:px-8">
+    <div className="mx-auto max-w-5xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
       {/* back */}
       <PopIn>
         <SoftButton onClick={onBack} className="min-h-[42px] px-4 py-2 text-[13.5px]">

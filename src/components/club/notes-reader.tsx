@@ -20,7 +20,7 @@ import type { NotesBlock, NotesDoc, SpecSection } from "@/lib/spectra/notes-type
 import type { Unit } from "@/lib/spectra/types";
 import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { Fmt } from "./format";
-import { PopIn, Reveal, SoftButton, SpeechBubble, Squiggle, Mascot, readableInk, shade, tint } from "./bits";
+import { PopIn, Reveal, SoftButton, SpeechBubble, Squiggle, Mascot, readableInk, shade, tint, ScrollFade } from "./bits";
 import {
   FigAtom,
   FigBoxesC,
@@ -155,12 +155,12 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
       {/* reading progress */}
       <motion.div
         aria-hidden
-        className="fixed top-0 left-0 z-[70] h-[7px] w-full origin-left rounded-r-full"
-        style={{ scaleX, background: `linear-gradient(90deg, ${main}, #FFD43B)` }}
+        className="fixed left-0 z-[70] h-[7px] w-full origin-left rounded-r-full"
+        style={{ top: "var(--sa-top)", scaleX, background: `linear-gradient(90deg, ${main}, #FFD43B)` }}
       />
 
       {/* ————— header ————— */}
-      <header className="mx-auto max-w-3xl px-4 pt-24 sm:px-8">
+      <header className="mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] sm:px-8">
         <PopIn>
           <SoftButton onClick={onBack} className="min-h-[42px] px-4 py-2 text-[13.5px]" ariaLabel="Back to the topic page">
             <ArrowLeft className="h-4 w-4" /> Back to the topic page
@@ -272,7 +272,7 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
               <Fragment key={s.spec}>
                 <section
                   id={`spec-${s.spec.replace(".", "-")}`}
-                  className={`relative scroll-mt-[100px]${room ? " room" : ""}`}
+                  className={`relative scroll-mt-[calc(100px+var(--sa-top))]${room ? " room" : ""}`}
                   style={{ background: bgOf(i) }}
                 >
                   <div className="mx-auto max-w-3xl px-4 py-14 sm:px-8 sm:py-16">
@@ -316,6 +316,10 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
 function ContentsBubble({ doc, main, active }: { doc: NotesDoc; main: string; active: string }) {
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
+  /* tucked-away state — while reading downward the bubble steps off
+     stage so it never sits on the words; one upward scroll (or opening
+     the window) brings it back */
+  const [tucked, setTucked] = useState(false);
 
   /* measure the real nav pill so the bubble hugs its right edge on
      every screen; re-measure on resize and once fonts have settled */
@@ -346,6 +350,27 @@ function ContentsBubble({ doc, main, active }: { doc: NotesDoc; main: string; ac
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  /* the polite bubble: hides while you scroll down through a section,
+     re-appears the moment you scroll back up — so it's always one
+     flick away, but never in the way of the sentence you're on */
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const dy = y - lastY;
+      lastY = y;
+      if (Math.abs(dy) < 4) return;
+      setTucked(dy > 0 && !open);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open]);
+
+  const closeWindow = () => {
+    setOpen(false);
+    setTucked(false);
+  };
+
   return (
     <>
       <motion.button
@@ -362,10 +387,15 @@ function ContentsBubble({ doc, main, active }: { doc: NotesDoc; main: string; ac
           background: main,
           color: readableInk(main),
           boxShadow: `0 4px 0 ${shade(main)}, 0 16px 30px -14px rgb(0 0 0 / 0.45)`,
+          pointerEvents: tucked ? "none" : "auto",
         }}
         initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: pos ? 1 : 0, scale: pos ? 1 : 0.5 }}
-        transition={{ type: "spring", stiffness: 320, damping: 20 }}
+        animate={
+          tucked
+            ? { opacity: 0, scale: 0.7, x: 84 }
+            : { opacity: pos ? 1 : 0, scale: pos ? 1 : 0.5, x: 0 }
+        }
+        transition={{ type: "spring", stiffness: 320, damping: 24 }}
       >
         {/* the bubble wears the spec you're on — the position context the
             old rail used to give, minus the obstruction */}
@@ -392,7 +422,7 @@ function ContentsBubble({ doc, main, active }: { doc: NotesDoc; main: string; ac
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.18 }}
-              onClick={() => setOpen(false)}
+              onClick={closeWindow}
               className="fixed inset-0 z-[59] bg-cocoa/30 backdrop-blur-[2px]"
             />
             <motion.div
@@ -429,7 +459,7 @@ function ContentsBubble({ doc, main, active }: { doc: NotesDoc; main: string; ac
                       type="button"
                       onClick={() => {
                         scrollToSpec(s.spec);
-                        setOpen(false);
+                        closeWindow();
                       }}
                       aria-current={here ? "true" : undefined}
                       className={`group flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left transition-transform hover:-translate-y-0.5${
@@ -639,7 +669,7 @@ function CandyTable({
         </div>
       )}
       <div className="overflow-hidden rounded-[24px] bg-paper puff">
-        <div className="overflow-x-auto">
+        <ScrollFade>
           <table className="w-full min-w-[480px] border-collapse text-left">
             <thead>
               <tr style={{ background: tint(accent, 15) }}>
@@ -662,7 +692,7 @@ function CandyTable({
               ))}
             </tbody>
           </table>
-        </div>
+        </ScrollFade>
       </div>
     </div>
   );
@@ -692,10 +722,10 @@ function Worked({
     <div className="rounded-[28px] bg-paper p-5 puff sm:p-6">
       <div className="flex flex-wrap items-center gap-3">
         <span
-          className="inline-flex shrink-0 rotate-[-1.5deg] items-center rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.1em] uppercase"
+          className="inline-flex min-w-0 max-w-full shrink-0 rotate-[-1.5deg] items-center rounded-full px-3.5 py-1.5 font-display text-[12px] leading-snug font-bold tracking-[0.1em] uppercase"
           style={{ background: accent, color: readableInk(accent) }}
         >
-          <PenLine className="mr-1.5 h-3.5 w-3.5" /> {title}
+          <PenLine className="mr-1.5 h-3.5 w-3.5 shrink-0" /> {title}
         </span>
         <p className="min-w-[16rem] flex-1 text-[15.5px] leading-[1.7] font-bold text-ink">
           <Fmt text={question} />
@@ -880,9 +910,15 @@ function Figure({ kind, caption, accent }: { kind: string; caption?: string; acc
   const wide = WIDE_FIGS.has(kind);
   return (
     <div className="rounded-[28px] bg-paper p-4 puff sm:p-6">
-      <div className={wide ? "no-scrollbar overflow-x-auto" : "flex justify-center"}>
-        <div className={wide ? "min-w-[620px]" : "flex w-full justify-center"}>{node}</div>
-      </div>
+      {wide ? (
+        <ScrollFade>
+          <div className="min-w-[620px]">{node}</div>
+        </ScrollFade>
+      ) : (
+        <div className="flex justify-center">
+          <div className="flex w-full justify-center">{node}</div>
+        </div>
+      )}
       {caption && (
         <p className="mx-auto mt-3 max-w-[58ch] text-center text-[12.5px] leading-[1.65] font-semibold text-ink-faint">
           <Fmt text={caption} />

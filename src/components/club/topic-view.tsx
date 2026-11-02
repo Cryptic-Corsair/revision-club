@@ -59,12 +59,13 @@ export function TopicView({
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-5 pt-24 pb-20 sm:px-8">
+    <div className="mx-auto max-w-3xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
       {/* reading progress — a candy strip filling up top */}
       <motion.div
         aria-hidden
-        className="fixed top-0 left-0 z-[70] h-[7px] w-full origin-left rounded-r-full"
+        className="fixed left-0 z-[70] h-[7px] w-full origin-left rounded-r-full"
         style={{
+          top: "var(--sa-top)",
           scaleX,
           background: `linear-gradient(90deg, ${main}, #FFD43B)`,
         }}
@@ -129,7 +130,7 @@ export function TopicView({
                 each, and every calculation worked in full.
               </span>
             </span>
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/20 transition-transform group-hover:translate-x-1">
+            <span className="hidden h-11 w-11 shrink-0 place-items-center rounded-full bg-white/20 transition-transform group-hover:translate-x-1 sm:grid">
               <ArrowRight className="h-5 w-5 text-white" strokeWidth={2.5} />
             </span>
           </motion.button>

@@ -104,7 +104,10 @@ function TopBar({
 
   return (
     <>
-      <header className="fixed inset-x-0 top-2.5 z-50 flex justify-center px-2.5 sm:top-3 sm:px-3">
+      <header
+        className="fixed inset-x-0 z-50 flex justify-center pl-[max(0.625rem,var(--sa-left))] pr-[max(0.625rem,var(--sa-right))] sm:pl-[max(0.75rem,var(--sa-left))] sm:pr-[max(0.75rem,var(--sa-right))]"
+        style={{ top: "calc(0.625rem + var(--sa-top))" }}
+      >
         <nav
           aria-label="Main"
           className="flex max-w-[97vw] items-center gap-1.5 rounded-full bg-paper/90 py-2 pr-2.5 pl-2.5 backdrop-blur-xl"
@@ -207,7 +210,7 @@ function TopBar({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.94 }}
             transition={{ type: "spring", stiffness: 380, damping: 24 }}
-            className="fixed bottom-7 left-1/2 z-[80]"
+            className="fixed bottom-[calc(1.75rem+var(--sa-bottom))] left-1/2 z-[80]"
             style={{ x: "-50%" }}
             role="status"
           >
@@ -336,7 +339,7 @@ function Footer({
                   <Search className="h-4 w-4" strokeWidth={2.2} />
                 </span>
                 <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
-                  Search · press ⌘K
+                  Search<span className="hidden sm:inline"> · press ⌘K</span>
                 </span>
               </button>
             </div>
@@ -367,7 +370,7 @@ function Footer({
           </div>
         </div>
 
-        <div className="mx-auto mt-10 max-w-6xl px-5 sm:px-8">
+        <div className="mx-auto mt-10 max-w-6xl px-5 pb-[var(--sa-bottom)] sm:px-8">
           <p className="text-[11.5px] leading-relaxed font-semibold text-milk/60">
             Written to the Pearson Edexcel International A Level Chemistry (2018) specification
             · WCH11–WCH16 · not affiliated with or endorsed by Pearson Education Ltd.
@@ -454,7 +457,7 @@ export default function ClubApp() {
   const topicNotes = unit && topic ? getNotesForTopic(unit.code, topic.id) : undefined;
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-dvh flex-col">
       <TopBar
         view={view}
         onHome={goHome}

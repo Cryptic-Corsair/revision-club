@@ -178,11 +178,11 @@ export function StickerBook({
       : "The beaker fills with every minute you spend reading. Open a topic to start the clock.";
 
   return (
-    <div className="mx-auto max-w-4xl px-5 pt-24 pb-20 sm:px-8">
+    <div className="mx-auto max-w-4xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
       {/* back */}
       <PopIn>
         <SoftButton onClick={onBack} className="min-h-[42px] px-4 py-2 text-[13.5px]">
-          <ArrowLeft className="h-4 w-4" /> back to all units
+          <ArrowLeft className="h-4 w-4" /> back to home
         </SoftButton>
       </PopIn>
 
@@ -313,12 +313,12 @@ export function StickerBook({
               >
                 {suggestion.unit.code.replace("WCH", "")}
               </span>
-              <div className="min-w-0 flex-1">
+              <div className="min-w-[230px] flex-1">
                 <div className="flex items-center gap-2 font-display text-[11.5px] font-bold tracking-[0.16em] text-ink-faint uppercase">
                   <Target className="h-3.5 w-3.5" style={{ color: suggestion.unit.candy.main }} />
                   today&apos;s pick
                 </div>
-                <p className="mt-0.5 truncate font-display text-[17px] font-semibold text-ink">
+                <p className="mt-0.5 line-clamp-2 font-display text-[17px] leading-snug font-semibold text-ink">
                   {suggestion.topic.label} · {suggestion.topic.title}
                 </p>
                 <p className="text-[12.5px] font-bold text-ink-soft">
@@ -330,7 +330,7 @@ export function StickerBook({
                 onClick={() => onOpenTopic(suggestion.unit.code, suggestion.topic.id)}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex min-h-[46px] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[14px] font-semibold text-white"
+                className="inline-flex min-h-[46px] w-full cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-2.5 font-display text-[14px] font-semibold text-white sm:w-auto"
                 style={{
                   background: suggestion.unit.candy.main,
                   boxShadow: `0 4px 0 ${shade(suggestion.unit.candy.main)}`,

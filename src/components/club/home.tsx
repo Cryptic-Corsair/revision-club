@@ -92,7 +92,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic }: { units:
   return (
     <div>
       {/* ————— hero: a wide tonal sheet, M3 style ————— */}
-      <section className="px-3 pt-24 sm:px-5 sm:pt-28 lg:px-8 lg:pt-32">
+      <section className="px-3 sm:px-5 lg:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
         <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[36px] bg-paper puff sm:rounded-[44px]">
           <Blob color={tint("#FF922B", 14)} className="top-[-28%] right-[-12%] h-[62%] w-[44%]" />
           <Blob
@@ -209,7 +209,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic }: { units:
       </section>
 
       {/* ————— units: M3 elevated cards ————— */}
-      <section id="units" className="mx-auto max-w-6xl scroll-mt-24 px-5 pt-20 pb-6 sm:px-8">
+      <section id="units" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-20 pb-6 sm:px-8">
         <Reveal className="text-center">
           <SectionTag main="#FF922B" tilt={2}>
             the course
@@ -310,7 +310,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic }: { units:
       </section>
 
       {/* ————— how it works: M3 stepper ————— */}
-      <section id="how" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20 sm:px-8">
+      <section id="how" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 py-20 sm:px-8">
         <Reveal className="text-center">
           <SectionTag main="#9775FA" tilt={-1.5}>
             how it works
@@ -394,7 +394,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic }: { units:
       </section>
 
       {/* ————— practice tools ————— */}
-      <section id="arcade" className="mx-auto max-w-6xl scroll-mt-24 px-5 pb-20 sm:px-8">
+      <section id="arcade" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pb-20 sm:px-8">
         <Reveal className="text-center">
           <SectionTag main="#FF6B6B" tilt={1.5}>
             stay on track

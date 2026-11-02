@@ -82,6 +82,12 @@
   --band-mix: 10%; /* candy share inside note-section bands */
   --edge: rgb(61 43 31 / 0.07); /* pedestal edge under floating bars */
   color-scheme: light;
+  /* notch & home-indicator insets — 0 on flat screens, real values
+     when the page extends under the system chrome (viewport-fit=cover) */
+  --sa-top: env(safe-area-inset-top, 0px);
+  --sa-bottom: env(safe-area-inset-bottom, 0px);
+  --sa-left: env(safe-area-inset-left, 0px);
+  --sa-right: env(safe-area-inset-right, 0px);
 }
 
 /* ————— the customize panel's knobs —————
@@ -246,6 +252,14 @@ html.hybrid .room {
 
 html {
   scroll-behavior: smooth;
+  /* phones: never inflate text on rotate; taps respond at once —
+     no 300ms double-tapZoom window, no accidental zoom on controls */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  touch-action: manipulation;
+  /* app feel: reading a note shouldn't be interrupted by an
+     accidental pull-to-refresh at the top of the page */
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -256,6 +270,25 @@ body {
   font-size: 16px;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+
+/* touch hygiene — our buttons give their own whileTap feedback, so the
+   browser's grey splash and long-press selection only get in the way */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* horizontal scrollers (wide figures, big tables) glide with momentum */
+.scroll-glide {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.scroll-glide::-webkit-scrollbar {
+  display: none;
 }
 
 /* ————— ambient lamp —————

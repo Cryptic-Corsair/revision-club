@@ -19,7 +19,7 @@ import {
 } from "./icons";
 import type { Block } from "@/lib/spectra/types";
 import { Fmt } from "./format";
-import { Mascot, SpeechBubble, tint, shade, Reveal, readableInk } from "./bits";
+import { Mascot, SpeechBubble, tint, shade, Reveal, readableInk, ScrollFade } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · blocks — topic content blocks
@@ -332,7 +332,7 @@ function CandyTable({
         </div>
       )}
       <div className="overflow-hidden rounded-[26px] bg-paper puff">
-        <div className="overflow-x-auto">
+        <ScrollFade>
           <table className="w-full min-w-[520px] border-collapse text-left">
             <thead>
               <tr style={{ background: tint(main, 15) }}>
@@ -367,7 +367,7 @@ function CandyTable({
               ))}
             </tbody>
           </table>
-        </div>
+        </ScrollFade>
       </div>
     </div>
   );

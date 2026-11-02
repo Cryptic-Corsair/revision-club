@@ -165,8 +165,11 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
             className="fixed inset-y-0 right-0 z-[95] flex w-[min(430px,94vw)] flex-col bg-cream shadow-[0_0_60px_rgb(0_0_0/0.35)]"
           >
-            {/* header */}
-            <div className="flex items-center gap-3 px-6 pt-6 pb-4">
+            {/* header — rides below the notch when the phone has one */}
+            <div
+              className="flex items-center gap-3 px-6 pb-4"
+              style={{ paddingTop: "calc(1.5rem + var(--sa-top))" }}
+            >
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-lemon/25">
                 <Sliders className="h-5.5 w-5.5 text-lemon" strokeWidth={2.2} />
               </span>
@@ -189,7 +192,10 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
               </motion.button>
             </div>
 
-            <div className="no-scrollbar flex flex-1 flex-col gap-7 overflow-y-auto px-6 pt-2 pb-8">
+            <div
+              className="no-scrollbar flex flex-1 flex-col gap-7 overflow-y-auto px-6 pt-2"
+              style={{ paddingBottom: "calc(2rem + var(--sa-bottom))" }}
+            >
               <Section title="The lab" hint="Daylight, after-dark, or a bit of both.">
                 <div className="flex flex-col gap-2">
                   {LABS.map((l) => {

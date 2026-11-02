@@ -114,7 +114,7 @@ function PaletteBody({
                   setSel(0);
                 }}
                 onKeyDown={onKey}
-                placeholder="Search topics… try “buffer” or “WCH14”"
+                placeholder="Search topics…"
                 aria-label="Search topics"
                 className="search-field min-w-0 flex-1 bg-transparent font-display text-[17px] font-semibold text-ink placeholder:text-ink-faint/70 focus:outline-none"
               />
@@ -126,7 +126,7 @@ function PaletteBody({
             <div className="mx-5 h-[3px] rounded-full bg-[linear-gradient(90deg,#FF6B6B,#FFD43B,#12B886,#9775FA)] opacity-70" />
 
             {/* results */}
-            <div ref={listRef} className="max-h-[46vh] overflow-y-auto px-3 py-3">
+            <div ref={listRef} className="max-h-[46dvh] overflow-y-auto px-3 py-3">
               {!q.trim() ? (
                 <div className="px-3 py-5">
                   <div className="flex items-center gap-2 font-display text-[12px] font-bold tracking-[0.16em] text-ink-faint uppercase">
@@ -213,16 +213,21 @@ function PaletteBody({
               )}
             </div>
 
-            {/* footer hints */}
+            {/* footer hints — keyboard affordances are a desktop thing;
+                on touch, say what a tap does instead */}
             <div className="flex items-center justify-between border-t-[2.5px] border-dashed border-ink/10 px-5 py-3">
-              <span className="flex items-center gap-1.5 text-[11px] font-extrabold text-ink-faint">
+              <span className="hidden items-center gap-1.5 text-[11px] font-extrabold text-ink-faint sm:flex">
                 <span className="rounded-md bg-ink/5 px-1.5 py-0.5 font-mono">↑↓</span>
                 move
                 <span className="ml-2 rounded-md bg-ink/5 px-1.5 py-0.5 font-mono">↵</span>
                 open
               </span>
-              <span className="text-[11px] font-extrabold text-ink-faint">
+              <span className="text-[11px] font-extrabold text-ink-faint sm:hidden">tap a topic to open</span>
+              <span className="hidden text-[11px] font-extrabold text-ink-faint sm:block">
                 {q.trim() ? `${results.length} found` : "press ⌘K to search"}
+              </span>
+              <span className="text-[11px] font-extrabold text-ink-faint sm:hidden">
+                {q.trim() ? `${results.length} found` : "try a unit code too"}
               </span>
             </div>
           </motion.div>

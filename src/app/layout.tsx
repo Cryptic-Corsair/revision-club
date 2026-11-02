@@ -67,6 +67,12 @@ r.style.zoom=String(z);
 }catch(e){}})();`;
 
 export const viewport: Viewport = {
+  /* viewport-fit=cover + the --sa-* vars in globals.css let fixed chrome
+     (pill nav, toast, drawers, footer) respect the notch and the home
+     indicator instead of being buried under them; interactiveWidget
+     keeps the search field visible above the on-screen keyboard. */
+  viewportFit: "cover",
+  interactiveWidget: "resizes-content",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#FFF6EA" },
     { media: "(prefers-color-scheme: dark)", color: "#201810" },
