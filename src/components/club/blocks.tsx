@@ -6,6 +6,7 @@ import {
   BadgeCheck,
   BookMarked,
   Check,
+  ChevronDown,
   Eye,
   EyeOff,
   Footprints,
@@ -193,7 +194,9 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
   }
 }
 
-/* ————— worked example: a staircase you climb one step at a time ————— */
+/* ————— worked example: a drop-down staircase —————
+   The question stands alone; "Show steps" unfurls the climb and
+   the answer, "Hide steps" folds it back to one tidy card. */
 
 function WorkedExample({
   title,
@@ -206,8 +209,7 @@ function WorkedExample({
   answer: string;
   main: string;
 }) {
-  const [shown, setShown] = useState(0);
-  const done = shown >= steps.length;
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="rounded-[28px] bg-paper p-5 puff sm:p-6">
@@ -218,80 +220,92 @@ function WorkedExample({
         >
           <Footprints className="h-5 w-5" style={{ color: shade(main, 62) }} />
         </span>
-        <h4 className="font-display text-[19px] font-semibold text-ink">
+        <h4 className="min-w-0 flex-1 font-display text-[19px] font-semibold text-ink">
           <Fmt text={title} />
         </h4>
       </div>
 
-      <div className="mt-4 flex flex-col">
-        {steps.slice(0, shown).map((s, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 14, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            style={{ marginLeft: `min(${i * 14}px, 56px)` }}
-          >
-            {i > 0 && <div className="dot-line mb-1 ml-6 h-4" aria-hidden />}
-            <div
-              className="inline-flex max-w-full items-start gap-2.5 rounded-[18px] px-4 py-2.5 text-[14.5px] leading-[1.6] text-ink"
-              style={{ background: tint(main, 9) }}
-            >
-              <span
-                className="mt-0.5 grid h-5.5 w-5.5 shrink-0 place-items-center rounded-full font-display text-[11px] font-bold text-white"
-                style={{ background: main, width: 22, height: 22 }}
-              >
-                {i + 1}
-              </span>
-              <span>
-                <Fmt text={s} />
-              </span>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+      <motion.button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        whileHover={{ y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        className="mt-4 inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[14px] font-semibold text-white"
+        style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
+      >
+        {open ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
+        {open ? "Hide steps" : "Show steps"}
+        <motion.span
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        >
+          <ChevronDown className="h-4 w-4" />
+        </motion.span>
+      </motion.button>
 
-      <AnimatePresence>
-        {done && (
+      <AnimatePresence initial={false}>
+        {open && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 320, damping: 15 }}
-            className="mt-4 flex items-start gap-2.5 rounded-full bg-paper px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_rgb(61_43_31/0.07)] sm:items-center"
-            style={{ borderLeft: `6px solid ${main}` }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ type: "spring", stiffness: 260, damping: 26 }}
+            className="overflow-hidden"
           >
-            <PartyPopper className="h-5 w-5 shrink-0" style={{ color: main }} />
-            <span>
-              <Fmt text={answer} />
-            </span>
+            <div className="mt-4 flex flex-col">
+              {steps.map((s, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 14, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 22,
+                    delay: 0.05 + i * 0.06,
+                  }}
+                  style={{ marginLeft: `min(${i * 14}px, 56px)` }}
+                >
+                  {i > 0 && <div className="dot-line mb-1 ml-6 h-4" aria-hidden />}
+                  <div
+                    className="inline-flex max-w-full items-start gap-2.5 rounded-[18px] px-4 py-2.5 text-[14.5px] leading-[1.6] text-ink"
+                    style={{ background: tint(main, 9) }}
+                  >
+                    <span
+                      className="mt-0.5 grid h-5.5 w-5.5 shrink-0 place-items-center rounded-full font-display text-[11px] font-bold text-white"
+                      style={{ background: main, width: 22, height: 22 }}
+                    >
+                      {i + 1}
+                    </span>
+                    <span>
+                      <Fmt text={s} />
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 320,
+                damping: 16,
+                delay: 0.1 + steps.length * 0.06,
+              }}
+              className="mt-4 flex items-start gap-2.5 rounded-full bg-paper px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_rgb(61_43_31/0.07)] sm:items-center"
+              style={{ borderLeft: `6px solid ${main}` }}
+            >
+              <PartyPopper className="h-5 w-5 shrink-0" style={{ color: main }} />
+              <span>
+                <Fmt text={answer} />
+              </span>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      <div className="mt-4">
-        {!done ? (
-          <motion.button
-            type="button"
-            onClick={() => setShown((n) => n + 1)}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[14px] font-semibold text-white"
-            style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
-          >
-            {shown === 0 ? "Show the first step" : `Next step (${shown}/${steps.length})`}
-          </motion.button>
-        ) : (
-          <motion.button
-            type="button"
-            onClick={() => setShown(0)}
-            whileHover={{ y: -1 }}
-            whileTap={{ scale: 0.96 }}
-            className="inline-flex min-h-[40px] cursor-pointer items-center gap-2 rounded-full bg-ink/5 px-4 py-2 text-[13px] font-bold text-ink-soft"
-          >
-            <EyeOff className="h-4 w-4" /> Hide steps
-          </motion.button>
-        )}
-      </div>
     </div>
   );
 }
@@ -359,13 +373,15 @@ function CandyTable({
   );
 }
 
-/* ————— checkpoint quiz: tap, reveal, wiggle ————— */
+/* ————— checkpoint quiz: flip cards —————
+   Question on the front, answer on the back, one fat 3D flip
+   between them — a card, not a fold. Tap the card or the button. */
 
 function Checkpoint({ qs, main }: { qs: { q: string; a: string }[]; main: string }) {
-  const [open, setOpen] = useState<number[]>([]);
+  const [flipped, setFlipped] = useState<number[]>([]);
 
-  const toggle = (i: number) =>
-    setOpen((arr) => (arr.includes(i) ? arr.filter((x) => x !== i) : [...arr, i]));
+  const flip = (i: number) =>
+    setFlipped((arr) => (arr.includes(i) ? arr.filter((x) => x !== i) : [...arr, i]));
 
   return (
     <div className="rounded-[30px] p-5 sm:p-6" style={{ background: tint(main, 9) }}>
@@ -375,63 +391,135 @@ function Checkpoint({ qs, main }: { qs: { q: string; a: string }[]; main: string
         </span>
         <h4 className="font-display text-[19px] font-semibold text-ink">Checkpoint</h4>
         <span className="ml-auto hidden rounded-full bg-paper/70 px-3 py-1 text-[12px] font-bold text-ink-soft sm:block">
-          {open.length}/{qs.length} revealed
+          {flipped.length}/{qs.length} revealed
         </span>
       </div>
 
       <div className="flex flex-col gap-3.5">
-        {qs.map((qa, i) => {
-          const isOpen = open.includes(i);
-          return (
-            <motion.div
-              key={i}
-              className="rounded-[22px] bg-paper p-4 puff sm:p-5"
-              animate={isOpen ? { rotate: [0, -1, 1, 0] } : { rotate: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <p className="min-w-[16rem] flex-1 text-[15.5px] leading-[1.65] font-bold text-ink">
-                  <Fmt text={qa.q} />
-                </p>
-                <motion.button
-                  type="button"
-                  onClick={() => toggle(i)}
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.94 }}
-                  className="inline-flex min-h-[40px] shrink-0 cursor-pointer items-center gap-2 rounded-full px-4 py-2 font-display text-[13px] font-semibold text-white"
-                  style={{ background: isOpen ? "#8A7261" : main, boxShadow: `0 3px 0 ${isOpen ? "#6d5a4c" : shade(main)}` }}
-                  aria-expanded={isOpen}
-                >
-                  {isOpen ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  {isOpen ? "Hide" : "Answer"}
-                </motion.button>
-              </div>
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                    animate={{ opacity: 1, height: "auto", marginTop: 14 }}
-                    exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 26 }}
-                    className="overflow-hidden"
-                  >
-                    <div
-                      className="rounded-[18px] px-4 py-3 text-[14.5px] leading-[1.7] text-ink"
-                      style={{ background: tint("#12B886", 10) }}
-                    >
-                      <span className="mr-1.5 inline-flex items-center gap-1 font-display text-[12px] font-bold tracking-[0.14em] text-mint uppercase">
-                        <Check className="h-3.5 w-3.5" /> answer
-                      </span>
-                      <br />
-                      <Fmt text={qa.a} />
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          );
-        })}
+        {qs.map((qa, i) => (
+          <CheckCard
+            key={i}
+            q={qa.q}
+            a={qa.a}
+            main={main}
+            index={i}
+            isFlipped={flipped.includes(i)}
+            onFlip={() => flip(i)}
+          />
+        ))}
       </div>
+    </div>
+  );
+}
+
+/* one flip card: front = the question, back = the answer.
+   Both faces share one grid cell, so the card always fits the
+   taller of the two — long answers never spill out. */
+
+function CheckCard({
+  q,
+  a,
+  main,
+  index,
+  isFlipped,
+  onFlip,
+}: {
+  q: string;
+  a: string;
+  main: string;
+  index: number;
+  isFlipped: boolean;
+  onFlip: () => void;
+}) {
+  return (
+    <div className="[perspective:1400px]">
+      <motion.div
+        className="relative grid [transform-style:preserve-3d]"
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{ type: "spring", stiffness: 260, damping: 24 }}
+      >
+        {/* front — the question */}
+        <div
+          className="flex min-h-[148px] flex-col rounded-[22px] bg-paper p-4 [grid-area:1/1] sm:p-5"
+          style={{
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            boxShadow: "0 3px 0 color-mix(in oklab, var(--color-ink) 6%, transparent)",
+          }}
+        >
+          <div className="flex items-center gap-2">
+            <span
+              className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[11px] font-bold"
+              style={{ background: main, color: readableInk(main) }}
+            >
+              {index + 1}
+            </span>
+            <span className="ml-auto text-[11px] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+              tap to flip
+            </span>
+          </div>
+          <p className="mt-3 flex-1 text-[15.5px] leading-[1.65] font-bold text-ink">
+            <Fmt text={q} />
+          </p>
+          <div className="pt-3">
+            <motion.button
+              type="button"
+              onClick={onFlip}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.94 }}
+              className="inline-flex min-h-[40px] cursor-pointer items-center gap-2 rounded-full px-4 py-2 font-display text-[13px] font-semibold text-white"
+              style={{ background: main, boxShadow: `0 3px 0 ${shade(main)}` }}
+            >
+              <Eye className="h-4 w-4" /> Reveal answer
+            </motion.button>
+          </div>
+        </div>
+
+        {/* back — the answer */}
+        <div
+          className="flex min-h-[148px] flex-col rounded-[22px] bg-paper p-4 [grid-area:1/1] sm:p-5"
+          style={{
+            transform: "rotateY(180deg)",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            boxShadow: "0 3px 0 color-mix(in oklab, var(--color-ink) 6%, transparent)",
+          }}
+        >
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 font-display text-[11px] font-bold tracking-[0.12em] text-mint uppercase">
+              <Check className="h-3.5 w-3.5" strokeWidth={3} /> answer
+            </span>
+          </div>
+          <p
+            className="mt-3 flex-1 rounded-[16px] px-3.5 py-2.5 text-[14.5px] leading-[1.7] text-ink"
+            style={{ background: tint("#12B886", 10) }}
+          >
+            <Fmt text={a} />
+          </p>
+          <div className="pt-3">
+            <motion.button
+              type="button"
+              onClick={onFlip}
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.96 }}
+              className="inline-flex min-h-[36px] cursor-pointer items-center gap-2 rounded-full bg-ink/5 px-4 py-2 text-[12.5px] font-bold text-ink-soft"
+            >
+              <EyeOff className="h-4 w-4" /> Flip back
+            </motion.button>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* the whole card is clickable while it shows the question */}
+      {!isFlipped && (
+        <button
+          type="button"
+          aria-label={`Reveal answer ${index + 1}`}
+          onClick={onFlip}
+          className="absolute inset-0 cursor-pointer rounded-[22px]"
+          style={{ zIndex: 5 }}
+        />
+      )}
     </div>
   );
 }

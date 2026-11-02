@@ -8,7 +8,9 @@ import {
   BookOpen,
   Check,
   ChevronDown,
+  EyeOff,
   Flame,
+  Footprints,
   Lightbulb,
   Magnet,
   PenLine,
@@ -582,7 +584,10 @@ function CandyTable({
   );
 }
 
-/* ————— worked example ————— */
+/* ————— worked example — a drop-down that guards its space —————
+   Collapsed: just the title pill, the question and one button.
+   "Show steps" unfurls the staircase and the answer; "Hide steps"
+   folds it all away again. The only drop-down on the site. */
 
 function Worked({
   title,
@@ -597,6 +602,8 @@ function Worked({
   answer: string;
   accent: string;
 }) {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="rounded-[28px] bg-paper p-5 puff sm:p-6">
       <div className="flex flex-wrap items-center gap-3">
@@ -610,35 +617,75 @@ function Worked({
           <Fmt text={question} />
         </p>
       </div>
-      <div className="mt-4 flex flex-col">
-        {steps.map((s, i) => (
-          <div key={i} style={{ marginLeft: `min(${i * 14}px, 56px)` }}>
-            {i > 0 && <div className="dot-line mb-1 ml-6 h-4" aria-hidden />}
-            <div className="inline-flex max-w-full items-start gap-2.5 rounded-[18px] px-4 py-2.5 text-[15px] leading-[1.7] text-ink" style={{ background: tint(accent, 9) }}>
-              <span className="mt-0.5 grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full font-display text-[11px] font-bold" style={{ background: accent, color: readableInk(accent) }}>
-                {i + 1}
-              </span>
-              <span>
-                <Fmt text={s} />
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div
-        className="mt-4 flex items-start gap-2.5 rounded-[20px] bg-paper px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_color-mix(in_oklab,var(--color-ink)_7%,transparent)]"
-        style={{ borderLeft: `6px solid ${accent}` }}
+
+      <motion.button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        whileHover={{ y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        className="mt-4 inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[14px] font-semibold text-white"
+        style={{ background: accent, boxShadow: `0 4px 0 ${shade(accent)}` }}
       >
-        <Check className="mt-0.5 h-5 w-5 shrink-0" style={{ color: accent }} strokeWidth={3} />
-        <span>
-          <Fmt text={answer} />
-        </span>
-      </div>
+        {open ? <EyeOff className="h-4.5 w-4.5" /> : <Footprints className="h-4.5 w-4.5" />}
+        {open ? "Hide steps" : "Show steps"}
+        <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
+          <ChevronDown className="h-4 w-4" />
+        </motion.span>
+      </motion.button>
+
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ type: "spring", stiffness: 260, damping: 26 }}
+            className="overflow-hidden"
+          >
+            <div className="mt-4 flex flex-col">
+              {steps.map((s, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 14, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 22, delay: 0.05 + i * 0.06 }}
+                  style={{ marginLeft: `min(${i * 14}px, 56px)` }}
+                >
+                  {i > 0 && <div className="dot-line mb-1 ml-6 h-4" aria-hidden />}
+                  <div className="inline-flex max-w-full items-start gap-2.5 rounded-[18px] px-4 py-2.5 text-[15px] leading-[1.7] text-ink" style={{ background: tint(accent, 9) }}>
+                    <span className="mt-0.5 grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full font-display text-[11px] font-bold" style={{ background: accent, color: readableInk(accent) }}>
+                      {i + 1}
+                    </span>
+                    <span>
+                      <Fmt text={s} />
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 320, damping: 18, delay: 0.1 + steps.length * 0.06 }}
+              className="mt-4 flex items-start gap-2.5 rounded-[20px] bg-paper px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_color-mix(in_oklab,var(--color-ink)_7%,transparent)]"
+              style={{ borderLeft: `6px solid ${accent}` }}
+            >
+              <Check className="mt-0.5 h-5 w-5 shrink-0" style={{ color: accent }} strokeWidth={3} />
+              <span>
+                <Fmt text={answer} />
+              </span>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
-/* ————— journey (the 5 stages etc.) ————— */
+/* ————— journey (the 5 stages etc.) — a timeline, not a fold —————
+   Every stage sits on the rail at once: icon node, connector, card.
+   No clicking, no chevrons — the whole journey is the picture. */
 
 const STEP_ICONS: Record<string, typeof Flame> = {
   flame: Flame,
@@ -658,49 +705,61 @@ function Journey({
   items: { title: string; text: string; icon?: string }[];
   accent: string;
 }) {
-  const [open, setOpen] = useState(0);
   return (
     <div>
       {caption && <p className="mb-3 text-[12px] font-extrabold tracking-[0.08em] text-ink-faint uppercase">{caption}</p>}
-      <div className="flex flex-col gap-2.5">
+      <ol className="flex flex-col">
         {items.map((it, i) => {
           const Icon = STEP_ICONS[it.icon ?? "spark"] ?? Sparkles;
-          const isOpen = open === i;
+          const last = i === items.length - 1;
           return (
-            <motion.div key={i} layout className="rounded-[22px] bg-paper puff" animate={isOpen ? { rotate: 0 } : {}}>
-              <button
-                type="button"
-                onClick={() => setOpen(isOpen ? -1 : i)}
-                aria-expanded={isOpen}
-                className="flex w-full cursor-pointer items-center gap-3 px-4 py-3.5 text-left sm:px-5"
-              >
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full" style={{ background: isOpen ? accent : tint(accent, 14) }}>
-                  <Icon className="h-4.5 w-4.5" style={{ color: isOpen ? readableInk(accent) : inkMix(accent, 62) }} strokeWidth={2.5} />
-                </span>
-                <span className="min-w-0 flex-1 font-display text-[15.5px] font-semibold text-ink">{it.title}</span>
-                <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
-                  <ChevronDown className="h-4.5 w-4.5 text-ink-faint" />
-                </motion.span>
-              </button>
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 26 }}
-                    className="overflow-hidden"
+            <li key={i} className="flex gap-3.5 sm:gap-4">
+              {/* the rail: node + connector down to the next stop */}
+              <div className="flex w-10 shrink-0 flex-col items-center sm:w-11">
+                <Reveal delay={Math.min(i * 0.05, 0.2)} y={12} className="shrink-0">
+                  <span
+                    className="grid h-10 w-10 place-items-center rounded-full sm:h-11 sm:w-11"
+                    style={{
+                      background: tint(accent, 14),
+                      boxShadow: `inset 0 0 0 2.5px ${tint(accent, 45)}`,
+                    }}
                   >
-                    <p className="px-5 pb-4 pl-[68px] text-[15px] leading-[1.75] text-ink/90">
-                      <Fmt text={it.text} />
-                    </p>
-                  </motion.div>
+                    <Icon className="h-4.5 w-4.5 sm:h-5 sm:w-5" style={{ color: inkMix(accent, 62) }} strokeWidth={2.5} />
+                  </span>
+                </Reveal>
+                {!last && (
+                  <span
+                    aria-hidden
+                    className="my-1.5 w-[3px] flex-1 rounded-full"
+                    style={{ background: tint(accent, 28), minHeight: 18 }}
+                  />
                 )}
-              </AnimatePresence>
-            </motion.div>
+              </div>
+
+              {/* the stop: title + text, always in view */}
+              <Reveal delay={Math.min(i * 0.05, 0.2) + 0.04} y={14} className="min-w-0 flex-1 pb-4 last:pb-0">
+                <div
+                  className="rounded-[20px] bg-paper px-4 py-3.5 puff sm:px-5"
+                  style={{ borderLeft: `5px solid ${tint(accent, 40)}` }}
+                >
+                  <div className="flex items-baseline gap-2">
+                    <span
+                      className="grid h-[22px] w-[22px] shrink-0 translate-y-[3px] place-items-center rounded-full font-display text-[11px] font-bold"
+                      style={{ background: accent, color: readableInk(accent) }}
+                    >
+                      {i + 1}
+                    </span>
+                    <span className="font-display text-[15.5px] font-semibold text-ink">{it.title}</span>
+                  </div>
+                  <p className="mt-1.5 text-[15px] leading-[1.75] text-ink/90">
+                    <Fmt text={it.text} />
+                  </p>
+                </div>
+              </Reveal>
+            </li>
           );
         })}
-      </div>
+      </ol>
     </div>
   );
 }
