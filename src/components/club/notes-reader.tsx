@@ -123,6 +123,25 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
     `${count("checkpoint")} textbook checkpoints`,
   ];
 
+  /* sticky spec rail — the chip strip scrolls sideways; gradient fades
+     hint at the cut-off chips on whichever side is hiding more */
+  const railRef = useRef<HTMLDivElement | null>(null);
+  const [railCut, setRailCut] = useState({ l: false, r: false });
+  const measureRail = () => {
+    const el = railRef.current;
+    if (!el) return;
+    setRailCut({
+      l: el.scrollLeft > 4,
+      r: el.scrollLeft + el.clientWidth < el.scrollWidth - 4,
+    });
+  };
+  useEffect(() => {
+    measureRail();
+    window.addEventListener("resize", measureRail);
+    return () => window.removeEventListener("resize", measureRail);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [doc]);
+
   const accentOf = (i: number) => BANDS[i % BANDS.length];
   /* bands mix their candy over --tint-base at --band-mix — 10% by
      day, 14% after dark, so roast-tone neighbours stay distinct */
@@ -160,7 +179,7 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
           >
             <BookOpen className="h-3.5 w-3.5" /> Revision note
           </span>
-          <span className="inline-flex items-center rounded-full bg-ink/5 px-3.5 py-1.5 text-[12.5px] font-bold text-ink-soft">
+          <span className="inline-flex items-center rounded-full bg-ink/5 px-3.5 py-1.5 text-[12.5px] font-bold capitalize text-ink-soft">
             {doc.source}
           </span>
         </PopIn>
@@ -234,7 +253,7 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
                   >
                     {s.spec}
                   </span>
-                  <span className="truncate text-[12px] font-bold text-ink">{s.title}</span>
+                  <span className="line-clamp-2 text-[12px] font-bold leading-[1.35] text-ink">{s.title}</span>
                 </button>
               );
             })}
@@ -259,30 +278,50 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
                 <span className="min-w-0 flex-1 truncate font-display text-[13.5px] font-semibold text-ink">{doc.title}</span>
               )}
             </div>
-            <div className="no-scrollbar mt-2 flex items-center gap-1.5 overflow-x-auto">
-              {doc.sections.map((s, i) => {
-                const isActive = active === s.spec;
-                const accent = accentOf(i);
-                return (
-                  <motion.button
-                    key={s.spec}
-                    type="button"
-                    whileTap={{ scale: 0.88 }}
-                    onClick={() => scrollToSpec(s.spec)}
-                    className="grid h-8 min-w-8 shrink-0 cursor-pointer place-items-center rounded-full px-2 font-display text-[11px] font-bold"
-                    style={
-                      isActive
-                        ? { background: accent, color: readableInk(accent), boxShadow: `0 3px 0 ${shade(accent)}` }
-                        : { background: tint(accent, 22), color: inkMix(accent, 62) }
-                    }
-                    title={`${s.spec} — ${s.title}`}
-                    aria-label={`Jump to spec ${s.spec}`}
-                    aria-current={isActive ? "true" : undefined}
-                  >
-                    {s.spec}
-                  </motion.button>
-                );
-              })}
+            <div className="relative mt-2">
+              <div
+                ref={railRef}
+                onScroll={measureRail}
+                className="no-scrollbar flex items-center gap-1.5 overflow-x-auto"
+              >
+                {doc.sections.map((s, i) => {
+                  const isActive = active === s.spec;
+                  const accent = accentOf(i);
+                  return (
+                    <motion.button
+                      key={s.spec}
+                      type="button"
+                      whileTap={{ scale: 0.88 }}
+                      onClick={() => scrollToSpec(s.spec)}
+                      className="grid h-8 min-w-8 shrink-0 cursor-pointer place-items-center rounded-full px-2 font-display text-[11px] font-bold"
+                      style={
+                        isActive
+                          ? { background: accent, color: readableInk(accent), boxShadow: `0 3px 0 ${shade(accent)}` }
+                          : { background: tint(accent, 22), color: inkMix(accent, 62) }
+                      }
+                      title={`${s.spec} — ${s.title}`}
+                      aria-label={`Jump to spec ${s.spec}`}
+                      aria-current={isActive ? "true" : undefined}
+                    >
+                      {s.spec}
+                    </motion.button>
+                  );
+                })}
+              </div>
+              {railCut.l && (
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-y-0 left-0 w-8"
+                  style={{ background: "linear-gradient(to right, var(--color-paper) 25%, transparent)" }}
+                />
+              )}
+              {railCut.r && (
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-y-0 right-0 w-8"
+                  style={{ background: "linear-gradient(to left, var(--color-paper) 25%, transparent)" }}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -321,7 +360,7 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
           <SoftButton onClick={onBack} ariaLabel="Back to the topic page">
             <ArrowLeft className="h-4.5 w-4.5" /> Back to the topic page
           </SoftButton>
-          <p className="mt-2 text-[12px] leading-relaxed font-bold text-ink-faint">
+          <p className="mt-2 text-[12px] leading-relaxed font-bold text-ink-soft">
             <Fmt text={`==${unit.code}== · ${unit.title} · text kept verbatim from the ${doc.source}`} />
           </p>
         </Reveal>

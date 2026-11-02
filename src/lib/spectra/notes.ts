@@ -13,7 +13,7 @@ export const NOTES_DOCS: NotesDoc[] = [
     topicId: "t02",
     kicker: "Unit 1 · Topic 2 — the complete class note, spec by spec",
     title: "Atomic structure & the periodic table",
-    source: "CHSE revision notes · Grade 11 · Unit 1 · Topic 2 · Semester 1, 2021",
+    source: "the complete class note (CHSE Grade 11, Unit 1 · Topic 2 · 2021)",
     intro: [
       {
         k: "p",

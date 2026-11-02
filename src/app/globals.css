@@ -43,7 +43,7 @@
   --color-milk: #fff6ea; /* light text on dark bands (never flips) */
   --color-ink: #3d2b1f; /* main text */
   --color-ink-soft: #7c6454; /* secondary text — AA against cream (5.1:1) */
-  --color-ink-faint: #c9b6a6; /* tertiary text, dotted lines */
+  --color-ink-faint: #947d69; /* tertiary labels — legible tier below ink-soft (3.6:1 on cream) */
   --color-cocoa: #2e2016; /* footer, dark bands */
 
   /* — candy shelf (shared by both moods) — */
@@ -87,7 +87,7 @@ html.dark {
   --color-milk: #f8efdf;
   --color-ink: #f6ebdc;
   --color-ink-soft: #c6ab92;
-  --color-ink-faint: #a5886b; /* lifted — small labels stay legible */
+  --color-ink-faint: #b29272; /* lifted — small labels stay legible (4.9:1 on paper) */
   --color-cocoa: #1a1009; /* footer — one step under the page, warm */
   --tint-base: #443220;
   --band-mix: 14%; /* a touch more candy so roast bands stay distinct */
@@ -336,8 +336,8 @@ html.dark .puff-lift:hover {
 mark {
   background: linear-gradient(104deg, transparent 2%, #ffe08a 9%, #ffd43b 88%, transparent 96%);
   color: #33241a;
-  padding: 0.06em 0.22em;
-  margin: 0 -0.06em;
+  padding: 0.14em 0.26em;
+  margin: 0 -0.1em;
   border-radius: 0.5em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;

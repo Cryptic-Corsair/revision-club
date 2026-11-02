@@ -580,21 +580,30 @@ const IE_VALUES = [
 ] as const;
 
 export function FigIeGraph() {
+  /* self-contained frame: three stacked rows under the axis (symbols,
+     atomic numbers, axis title) need more bottom room than ChartFrame's
+     single-label layout gives, and the annotations must clear the
+     y-axis ticks — so this chart draws its own axes. */
   const w = 760;
-  const h = 320;
-  const pad = { l: 58, r: 16, t: 24, b: 46 };
+  const h = 380;
+  const pad = { l: 58, r: 18, t: 30, b: 68 };
   const plotW = w - pad.l - pad.r;
   const plotH = h - pad.t - pad.b;
   const yMax = 2500;
+  const axisY = h - pad.b;
   const X = (i: number) => pad.l + (i / (IE_VALUES.length - 1)) * plotW;
-  const Y = (v: number) => h - pad.b - (v / yMax) * plotH;
+  const Y = (v: number) => axisY - (v / yMax) * plotH;
   const pts = IE_VALUES.map(([, v], i) => `${X(i)},${Y(v as number)}`).join(" ");
   const nobles = new Set([1, 9, 17]);
   const group1 = new Set([2, 10, 18]);
   const dips = new Set([4, 7, 12, 15]); // B, O, Al, S
 
   return (
-    <ChartFrame w={w} h={h} xLabel="atomic number (Z)" yLabel="1st IE / kJ mol⁻¹">
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="First ionisation energy against atomic number">
+      {/* axes */}
+      <line x1={pad.l} y1={axisY} x2={w - pad.r} y2={axisY} stroke={INK} strokeWidth="3" strokeLinecap="round" />
+      <line x1={pad.l} y1={pad.t} x2={pad.l} y2={axisY} stroke={INK} strokeWidth="3" strokeLinecap="round" />
+      {/* y ticks */}
       {[0, 500, 1000, 1500, 2000, 2500].map((t) => (
         <g key={t}>
           <line x1={pad.l - 6} y1={Y(t)} x2={pad.l} y2={Y(t)} stroke={INK} strokeWidth="2" />
@@ -603,25 +612,43 @@ export function FigIeGraph() {
           </text>
         </g>
       ))}
+      {/* y label, rotated like ChartFrame's */}
+      <text
+        x={14}
+        y={(axisY + pad.t) / 2}
+        textAnchor="middle"
+        fontSize="12"
+        fontWeight="700"
+        fill={INK}
+        fontFamily="var(--font-body)"
+        transform={`rotate(-90 14 ${(axisY + pad.t) / 2})`}
+      >
+        1st IE / kJ mol⁻¹
+      </text>
       <polyline points={pts} fill="none" stroke="#FF6B6B" strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" />
       {IE_VALUES.map(([sym, v], i) => (
         <g key={sym}>
           <circle cx={X(i)} cy={Y(v as number)} r={nobles.has(i) ? 7 : 5} fill={nobles.has(i) ? "#12B886" : group1.has(i) ? "#FF6B6B" : dips.has(i) ? "#9775FA" : INK} />
-          <text x={X(i)} y={h - pad.b + 20} textAnchor="middle" fontSize="10" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+          <text x={X(i)} y={axisY + 18} textAnchor="middle" fontSize="10" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
             {sym}
           </text>
-          <text x={X(i)} y={h - pad.b + 33} textAnchor="middle" fontSize="8.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+          <text x={X(i)} y={axisY + 31} textAnchor="middle" fontSize="8.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
             {i + 1}
           </text>
         </g>
       ))}
-      <text x={X(1)} y={Y(2370) - 14} textAnchor="middle" fontSize="11" fontWeight="800" fill="#12B886" fontFamily="var(--font-body)">
+      {/* x label — sits clear below the symbol + number rows */}
+      <text x={(w + pad.l) / 2} y={axisY + 52} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+        atomic number (Z)
+      </text>
+      {/* annotations — nudged clear of the y-axis ticks and the data line */}
+      <text x={X(2)} y={Y(2370) - 12} textAnchor="middle" fontSize="11" fontWeight="800" fill="#12B886" fontFamily="var(--font-body)">
         noble-gas peaks
       </text>
-      <text x={X(18)} y={Y(418) - 16} textAnchor="middle" fontSize="11" fontWeight="800" fill="#FF6B6B" fontFamily="var(--font-body)">
+      <text x={X(19)} y={axisY - 16} textAnchor="middle" fontSize="11" fontWeight="800" fill="#FF6B6B" fontFamily="var(--font-body)">
         Group 1 cliffs
       </text>
-    </ChartFrame>
+    </svg>
   );
 }
 
