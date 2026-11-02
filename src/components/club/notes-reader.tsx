@@ -9,10 +9,18 @@ import {
   useState,
 } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ArrowLeft, BookOpen, Sparkles, Target } from "./icons";
+import {
+  ArrowLeft,
+  BookOpen,
+  ClipboardCheck,
+  ClipboardList,
+  Sparkles,
+  Target,
+} from "./icons";
 import type { NotesBlock, NotesDoc } from "@/lib/spectra/notes-types";
 import type { Unit } from "@/lib/spectra/types";
 import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
+import { togglePick, usePacks } from "@/lib/spectra/packs";
 import { Fmt } from "./format";
 import {
   PopIn,
@@ -21,6 +29,8 @@ import {
   SpeechBubble,
   Squiggle,
   Mascot,
+  readableInk,
+  shade,
   tint,
 } from "./bits";
 import { BandWave, SpecChip, accentOf, bgOf, inkMix, isRoom } from "./bands";
@@ -70,6 +80,57 @@ function scrollToSpec(spec: string) {
 /* band helpers, waves and the shared SpecChip live in ./bands — the
    note's rooms, its contents card and the nav's Spec Map window all
    wear the exact same colours */
+
+/* ————— the pack tick —————
+   A section's banner carries one small control: is this spec point
+   in your revision pack? It rides the bannerAction slot of the
+   shared section renderer, so the reader can offer it while the
+   pack itself — which has its own controls — passes nothing. One
+   tap here and the navbar's pack badge grows; the point joins the
+   assembly in syllabus order. */
+
+function PackTick({ spec, accent }: { spec: string; accent: string }) {
+  const { picks } = usePacks();
+  const picked = picks.includes(spec);
+  return (
+    <motion.button
+      type="button"
+      onClick={() => togglePick(spec)}
+      whileTap={{ scale: 0.85 }}
+      whileHover={{ y: -1 }}
+      aria-pressed={picked}
+      aria-label={
+        picked
+          ? `Remove spec point ${spec} from your revision pack`
+          : `Add spec point ${spec} to your revision pack`
+      }
+      title={
+        picked
+          ? `${spec} is in your pack — tap to remove`
+          : `Add ${spec} to your revision pack`
+      }
+      className="grid h-8 w-8 shrink-0 cursor-pointer place-items-center rounded-full"
+      style={
+        picked
+          ? {
+              background: accent,
+              color: readableInk(accent),
+              boxShadow: `0 2px 0 ${shade(accent)}`,
+            }
+          : {
+              border: "2.5px dashed color-mix(in oklab, var(--color-ink) 32%, transparent)",
+              color: "var(--color-ink-faint)",
+            }
+      }
+    >
+      {picked ? (
+        <ClipboardCheck className="h-[17px] w-[17px]" strokeWidth={2.4} />
+      ) : (
+        <ClipboardList className="h-[17px] w-[17px]" strokeWidth={2.4} />
+      )}
+    </motion.button>
+  );
+}
 
 /* ————— main reader ————— */
 
@@ -300,7 +361,11 @@ export function NotesReader({
                   style={{ background: bgOf(i) }}
                 >
                   <div className="mx-auto max-w-3xl px-4 py-14 sm:px-8 sm:py-16">
-                    <SpecSectionView section={s} accent={accent} />
+                    <SpecSectionView
+                      section={s}
+                      accent={accent}
+                      bannerAction={<PackTick spec={s.spec} accent={accent} />}
+                    />
                   </div>
                 </section>
                 <BandWave

@@ -83,6 +83,9 @@ function buildEntries(): SpecEntry[] {
     const topic = unit?.topics.find((t) => t.id === doc.topicId);
     if (!unit || !topic) continue;
     doc.sections.forEach((s, i) => {
+      /* a doc may carry framing sections (intros, summaries) with no
+         spec number — they read in the note but never enter the map */
+      if (!s.spec) return;
       out.push({
         docId: doc.id,
         spec: s.spec,

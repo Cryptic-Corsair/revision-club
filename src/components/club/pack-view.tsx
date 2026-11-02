@@ -24,7 +24,7 @@ import { clearPicks, togglePick, toggleRead, usePacks } from "@/lib/spectra/pack
 import { BandWave, accentOf, bgOf, isRoom } from "./bands";
 import { SpecSectionView } from "./note-section";
 import { PackSetsDialog } from "./pack-sets";
-import { Mascot, PopIn, Reveal, SoftButton, readableInk, shade, tint } from "./bits";
+import { Confetti, Mascot, PopIn, Reveal, ScrollFade, SoftButton, readableInk, shade } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · the revision pack — the notes behind your ticked
@@ -62,6 +62,9 @@ export function PackView({
   const [copied, setCopied] = useState(false);
   const [confirmClear, setConfirmClear] = useState(false);
   const clearTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  /* the pack-completion burst — fires once, the moment the last
+     point is marked read (and again only after you leave and return) */
+  const [fire, setFire] = useState(0);
 
   /* picks → registry points (syllabus order), grouped by topic */
   const { points, groups, sectionCount } = useMemo(() => {
@@ -94,6 +97,16 @@ export function PackView({
     () => points.filter((p) => read.includes(p.spec)).length,
     [points, read],
   );
+  const allRead = points.length > 0 && readCount === points.length;
+
+  /* the completion burst — fired the moment the walk turns fully
+     read, wherever the last mark came from. Render-time adjust
+     (the React-recommended way to react to a derived crossing). */
+  const [prevAllRead, setPrevAllRead] = useState(allRead);
+  if (allRead !== prevAllRead) {
+    setPrevAllRead(allRead);
+    if (allRead) setFire((f) => f + 1);
+  }
 
   useEffect(() => {
     if (!confirmClear) return;
@@ -201,30 +214,38 @@ export function PackView({
           </p>
         </PopIn>
 
-        {/* picked chips — tap one to let it go */}
+        {/* picked chips — one swipeable line; tap one to let it go */}
         <PopIn delay={0.1} className="mt-4">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="mr-1 font-display text-[11px] font-bold tracking-[0.14em] text-ink-faint uppercase">
-              Picked:
+          <div className="flex items-center gap-3">
+            <span className="shrink-0 font-display text-[11px] font-bold tracking-[0.14em] text-ink-faint uppercase">
+              Picked
             </span>
-            {points.map((p) => (
-              <button
-                key={p.spec}
-                type="button"
-                onClick={() => removePoint(p.spec)}
-                aria-label={`Remove ${p.spec} from your pack`}
-                title={`Remove ${p.spec} — ${p.topicLabel}`}
-                className="group inline-flex min-h-[34px] cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[12px] font-bold transition-transform hover:-translate-y-0.5"
-                style={{
-                  background: tint(p.candy, 18),
-                  color: p.candy,
-                  boxShadow: "0 2px 0 var(--edge)",
-                }}
-              >
-                {p.spec}
-                <X className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-70" strokeWidth={3} />
-              </button>
-            ))}
+            <ScrollFade className="min-w-0 flex-1">
+              <div className="flex w-max items-center gap-1.5 py-0.5 pr-1">
+                {points.map((p) => (
+                  <button
+                    key={p.spec}
+                    type="button"
+                    onClick={() => removePoint(p.spec)}
+                    aria-label={`Remove ${p.spec} from your pack`}
+                    title={`Remove ${p.spec} — ${p.topicLabel}`}
+                    className="group inline-flex h-[34px] shrink-0 cursor-pointer items-center gap-2 rounded-full bg-paper px-3 font-display text-[12px] font-bold transition-transform hover:-translate-y-0.5"
+                    style={{ color: p.candy, boxShadow: "0 2px 0 var(--edge)" }}
+                  >
+                    <span
+                      aria-hidden
+                      className="h-2 w-2 shrink-0 rounded-full"
+                      style={{ background: p.candy }}
+                    />
+                    {p.spec}
+                    <X
+                      className="h-3 w-3 opacity-35 transition-opacity group-hover:opacity-90"
+                      strokeWidth={3}
+                    />
+                  </button>
+                ))}
+              </div>
+            </ScrollFade>
           </div>
         </PopIn>
 
@@ -241,49 +262,56 @@ export function PackView({
               />
             </div>
             <span className="shrink-0 font-display text-[12.5px] font-bold text-ink-soft">
-              {readCount}/{points.length} read
+              {readCount}/{points.length} read{allRead ? " ✓" : ""}
             </span>
           </div>
         </PopIn>
 
         {/* ————— toolbar ————— */}
         <Reveal delay={0.18} className="no-print mt-5">
-          <div className="flex flex-wrap gap-2 rounded-[26px] bg-paper p-3.5 puff sm:p-4">
-            <ToolButton onClick={onOpenSpec} label="Edit selection">
-              <Target className="h-4 w-4" /> Edit selection
-            </ToolButton>
-            <ToolButton onClick={() => setSetsOpen(true)} label="Saved revision sets" badge={sets.length}>
-              <Bookmark className="h-4 w-4" /> Sets
-            </ToolButton>
-            <ToolButton
-              onClick={() => setHideStatements((v) => !v)}
-              label={hideStatements ? "Show the verbatim statements" : "Hide the verbatim statements"}
-            >
-              {hideStatements ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
-              {hideStatements ? "Show statements" : "Hide statements"}
-            </ToolButton>
-            <ToolButton onClick={copyPack} label="Copy the pack as plain text" highlight={copied}>
-              {copied ? <Check className="h-4 w-4" strokeWidth={3} /> : <Copy className="h-4 w-4" />}
-              {copied ? "Copied" : "Copy pack"}
-            </ToolButton>
-            <ToolButton onClick={() => window.print()} label="Print this revision pack">
-              <Printer className="h-4 w-4" /> Print pack
-            </ToolButton>
-            <ToolButton
-              onClick={() => {
-                if (confirmClear) {
-                  clearPicks();
-                  setConfirmClear(false);
-                } else {
-                  setConfirmClear(true);
-                }
-              }}
-              label="Clear the selection"
-              danger={confirmClear}
-            >
-              <X className="h-4 w-4" strokeWidth={2.6} />
-              {confirmClear ? "Sure? Tap again" : "Clear"}
-            </ToolButton>
+          <div className="rounded-[26px] bg-paper p-2.5 puff sm:p-3.5">
+            {/* one steady line at every width — the same swipe the
+                picked strip uses above; nothing wraps, nothing
+                orphans, and the fade says there's more */}
+            <ScrollFade>
+              <div className="flex w-max items-center gap-1.5">
+                <ToolButton onClick={onOpenSpec} label="Edit selection">
+                  <Target className="h-4 w-4" /> Edit selection
+                </ToolButton>
+                <ToolButton onClick={() => setSetsOpen(true)} label="Saved revision sets" badge={sets.length}>
+                  <Bookmark className="h-4 w-4" /> Sets
+                </ToolButton>
+                <ToolButton
+                  onClick={() => setHideStatements((v) => !v)}
+                  label={hideStatements ? "Show the verbatim statements" : "Hide the verbatim statements"}
+                >
+                  {hideStatements ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
+                  Statements
+                </ToolButton>
+                <ToolButton onClick={copyPack} label="Copy the pack as plain text" highlight={copied}>
+                  {copied ? <Check className="h-4 w-4" strokeWidth={3} /> : <Copy className="h-4 w-4" />}
+                  {copied ? "Copied" : "Copy pack"}
+                </ToolButton>
+                <ToolButton onClick={() => window.print()} label="Print this revision pack">
+                  <Printer className="h-4 w-4" /> Print pack
+                </ToolButton>
+                <ToolButton
+                  onClick={() => {
+                    if (confirmClear) {
+                      clearPicks();
+                      setConfirmClear(false);
+                    } else {
+                      setConfirmClear(true);
+                    }
+                  }}
+                  label="Clear the selection"
+                  danger={confirmClear}
+                >
+                  <X className="h-4 w-4" strokeWidth={2.6} />
+                  {confirmClear ? "Sure? Tap again" : "Clear"}
+                </ToolButton>
+              </div>
+            </ScrollFade>
           </div>
         </Reveal>
       </header>
@@ -357,9 +385,9 @@ export function PackView({
                               onClick={() => onOpenNotes(s.point.entries[0].docId, s.point.spec)}
                               className="inline-flex min-h-[38px] cursor-pointer items-center gap-1.5 rounded-full bg-paper px-3.5 py-2 text-[12px] font-bold text-ink-soft transition-colors hover:text-ink"
                               style={{ boxShadow: "0 2px 0 var(--edge)" }}
-                              aria-label={`Open ${s.point.entries[0].title} in its topic`}
+                              aria-label={`Open ${s.point.entries[0].title} in the ${g.topicLabel} notes`}
                             >
-                              {g.topicLabel}
+                              {g.topicLabel} notes
                               <span aria-hidden>→</span>
                             </button>
                           )}
@@ -389,22 +417,39 @@ export function PackView({
       </div>
 
       {/* ————— end of the pack ————— */}
-      <div className="mx-auto max-w-3xl px-4 pt-10 pb-24 text-center sm:px-8">
+      <div className="relative mx-auto max-w-3xl px-4 pt-10 pb-24 text-center sm:px-8">
+        <Confetti fire={fire} />
         <Reveal className="flex flex-col items-center gap-5">
-          <span
-            aria-hidden
-            className="h-3 w-40 rounded-full"
-            style={{ background: "linear-gradient(90deg, #FFD43B, #12B886)" }}
-          />
-          <p className="font-display text-[19px] font-semibold text-ink">
-            That&apos;s your pack — {points.length} point{points.length === 1 ? "" : "s"}, read at your pace.
-          </p>
+          {allRead ? (
+            <>
+              <Mascot main="#12B886" size={120} bubbles={false} />
+              <p className="font-display text-[clamp(1.4rem,3.6vw,1.75rem)] leading-snug font-semibold text-ink">
+                Pack read — every point, marked off.
+              </p>
+              <p className="-mt-2 max-w-[46ch] text-[13.5px] leading-relaxed font-bold text-ink-soft">
+                {points.length} spec point{points.length === 1 ? "" : "s"} of
+                revision, done. Tick the next batch, or load a saved set and
+                walk it again.
+              </p>
+            </>
+          ) : (
+            <>
+              <span
+                aria-hidden
+                className="h-3 w-40 rounded-full"
+                style={{ background: "linear-gradient(90deg, #FFD43B, #12B886)" }}
+              />
+              <p className="font-display text-[19px] font-semibold text-ink">
+                That&apos;s your pack — {points.length} point{points.length === 1 ? "" : "s"}, read at your pace.
+              </p>
+            </>
+          )}
           <div className="flex flex-wrap items-center justify-center gap-3">
             <SoftButton onClick={onOpenSpec} ariaLabel="Edit the selection in the spec index">
               <Target className="h-4.5 w-4.5" /> Edit the selection
             </SoftButton>
-            <SoftButton onClick={() => window.print()} ariaLabel="Print this revision pack">
-              <Printer className="h-4.5 w-4.5" /> Print it
+            <SoftButton onClick={() => setSetsOpen(true)} ariaLabel="Open your saved revision sets">
+              <Bookmark className="h-4.5 w-4.5" /> Saved sets{sets.length > 0 ? ` (${sets.length})` : ""}
             </SoftButton>
           </div>
           <p className="mt-2 text-[12px] leading-relaxed font-bold text-ink-soft">
@@ -479,7 +524,7 @@ function ToolButton({
       whileTap={{ scale: 0.95 }}
       aria-label={label}
       title={label}
-      className={`inline-flex min-h-[40px] cursor-pointer items-center gap-2 rounded-full px-4 py-2 font-display text-[12.5px] font-bold tracking-[0.02em] transition-colors ${
+      className={`inline-flex h-[40px] shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3.5 font-display text-[12.5px] font-bold tracking-[0.02em] transition-colors ${
         !highlight && !danger
           ? "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
           : ""

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Bookmark, Check, Copy, X } from "./icons";
@@ -74,11 +74,6 @@ export function PackSetsDialog({
     if (editor) inputRef.current?.focus();
   }, [editor]);
 
-  const totalPoints = useMemo(
-    () => sets.reduce((n, s) => Math.max(n, s.picks.length), 0),
-    [sets],
-  );
-
   const beginSave = () => {
     setEditor("save");
     setName("");
@@ -142,7 +137,7 @@ export function PackSetsDialog({
               </span>
               <p className="min-w-0 flex-1 truncate text-[12.5px] font-bold text-ink-faint">
                 {sets.length > 0
-                  ? `${sets.length} saved${totalPoints > 0 ? " · up to " + totalPoints + " points" : ""}`
+                  ? `${sets.length} saved`
                   : "keep a selection for later"}
               </p>
               <button
@@ -161,39 +156,43 @@ export function PackSetsDialog({
               style={{ overscrollBehavior: "contain" }}
             >
               {sets.length === 0 && (
-                <p className="px-1 py-6 text-center text-[13px] font-bold text-ink-faint">
-                  {"// no sets yet — tick some spec points and"}
+                <p className="px-2 py-7 text-center text-[13px] leading-relaxed font-bold text-ink-faint">
+                  No sets yet.
                   <br />
-                  save them here for later
+                  Tick some statements, then save them
+                  <br />
+                  here for later.
                 </p>
               )}
-              <ul className="flex flex-col gap-2">
-                {sets.map((s) => (
-                  <SetRow
-                    key={s.id}
-                    s={s}
-                    loaded={activeSetId === s.id}
-                    currentPicks={picks}
-                    editor={editor}
-                    inputRef={inputRef}
-                    name={name}
-                    setName={setName}
-                    onBeginRename={() => {
-                      setEditor(`rename:${s.id}`);
-                      setName(s.name);
-                    }}
-                    onCommitRename={() => commitRename(s.id)}
-                    onToggleDelete={() =>
-                      setEditor((e) =>
-                        e === `delete:${s.id}` ? null : `delete:${s.id}`,
-                      )
-                    }
-                    onRemove={() => remove(s.id)}
-                    onCancel={() => setEditor(null)}
-                    onAfterChange={onAfterChange}
-                  />
-                ))}
-              </ul>
+              {sets.length > 0 && (
+                <ul className="flex flex-col gap-2">
+                  {sets.map((s) => (
+                    <SetRow
+                      key={s.id}
+                      s={s}
+                      loaded={activeSetId === s.id}
+                      currentPicks={picks}
+                      editor={editor}
+                      inputRef={inputRef}
+                      name={name}
+                      setName={setName}
+                      onBeginRename={() => {
+                        setEditor(`rename:${s.id}`);
+                        setName(s.name);
+                      }}
+                      onCommitRename={() => commitRename(s.id)}
+                      onToggleDelete={() =>
+                        setEditor((e) =>
+                          e === `delete:${s.id}` ? null : `delete:${s.id}`,
+                        )
+                      }
+                      onRemove={() => remove(s.id)}
+                      onCancel={() => setEditor(null)}
+                      onAfterChange={onAfterChange}
+                    />
+                  ))}
+                </ul>
+              )}
             </div>
 
             {/* footer — save the current selection */}

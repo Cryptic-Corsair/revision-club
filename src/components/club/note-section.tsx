@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   BookOpen,
@@ -70,11 +70,16 @@ export function SpecSectionView({
   section,
   accent,
   hideStatement = false,
+  bannerAction,
 }: {
   section: SpecSection;
   accent: string;
   /** revision packs can fold the official wording away */
   hideStatement?: boolean;
+  /** optional extra control at the end of the banner rule — the
+      reader parks its pack tick there; other callers pass nothing,
+      so a section renders identically everywhere by default */
+  bannerAction?: ReactNode;
 }) {
   return (
     <div className="flex flex-col gap-7">
@@ -96,6 +101,7 @@ export function SpecSectionView({
             className="h-[3px] flex-1 rounded-full"
             style={{ background: tint(accent, 32) }}
           />
+          {bannerAction}
         </div>
         <h2 className="mt-3.5 font-display text-[clamp(1.55rem,3.4vw,1.95rem)] font-semibold tracking-tight text-ink">
           {section.title}
@@ -368,6 +374,28 @@ function CandyTable({
   );
 }
 
+/* ————— the paper window —————
+   Browsers fire beforeprint before the snapshot and afterprint when
+   the sheet is done; a tiny hook lets folded things open for the
+   printer and fold back after. This is how worked examples print
+   whole: question, staircase and answer — while the screen keeps
+   guarding its space. */
+
+function usePrinting() {
+  const [printing, setPrinting] = useState(false);
+  useEffect(() => {
+    const before = () => setPrinting(true);
+    const after = () => setPrinting(false);
+    window.addEventListener("beforeprint", before);
+    window.addEventListener("afterprint", after);
+    return () => {
+      window.removeEventListener("beforeprint", before);
+      window.removeEventListener("afterprint", after);
+    };
+  }, []);
+  return printing;
+}
+
 /* ————— worked example — a drop-down that guards its space —————
    Collapsed: just the title pill, the question and one button.
    "Show steps" unfurls the staircase and the answer; "Hide steps"
@@ -387,6 +415,8 @@ function Worked({
   accent: string;
 }) {
   const [open, setOpen] = useState(false);
+  const printing = usePrinting();
+  const shown = open || printing;
 
   return (
     <div className="rounded-[28px] bg-paper p-5 puff sm:p-6">
@@ -426,25 +456,27 @@ function Worked({
       </motion.button>
 
       <AnimatePresence initial={false}>
-        {open && (
+        {shown && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
+            initial={printing ? false : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 26 }}
+            transition={
+              printing ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 26 }
+            }
             className="overflow-hidden"
           >
             <div className="mt-4 flex flex-col">
               {steps.map((s, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 14, scale: 0.97 }}
+                  initial={printing ? false : { opacity: 0, y: 14, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{
                     type: "spring",
                     stiffness: 300,
                     damping: 22,
-                    delay: 0.05 + i * 0.06,
+                    delay: printing ? 0 : 0.05 + i * 0.06,
                   }}
                   style={{ marginLeft: `min(${i * 14}px, 56px)` }}
                 >
@@ -469,13 +501,13 @@ function Worked({
               ))}
             </div>
             <motion.div
-              initial={{ opacity: 0, scale: 0.94, y: 10 }}
+              initial={printing ? false : { opacity: 0, scale: 0.94, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{
                 type: "spring",
                 stiffness: 320,
                 damping: 18,
-                delay: 0.1 + steps.length * 0.06,
+                delay: printing ? 0 : 0.1 + steps.length * 0.06,
               }}
               className="mt-4 flex items-start gap-2.5 rounded-[20px] bg-paper px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_color-mix(in_oklab,var(--color-ink)_7%,transparent)]"
               style={{ borderLeft: `6px solid ${accent}` }}

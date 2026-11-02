@@ -115,34 +115,36 @@ export function SpecIndex({
       {/* ————— your pack strip ————— */}
       <Reveal delay={0.16} className="mt-6">
         <div
-          className="flex flex-wrap items-center gap-3 rounded-[26px] px-5 py-4 puff"
+          className="flex flex-col gap-3.5 rounded-[26px] px-5 py-4 puff sm:flex-row sm:items-center"
           style={{ background: tint("#FFD43B", 16) }}
         >
-          <span
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-paper"
-            style={{ boxShadow: "0 2px 0 var(--edge)" }}
-          >
-            <ClipboardList className="h-5 w-5" style={{ color: "#E8A100" }} />
-          </span>
-          <p className="min-w-0 flex-1 text-[14px] font-bold leading-snug text-ink">
-            {picks.length > 0 ? (
-              <>
-                Your pack holds{" "}
-                <span style={{ color: "#E8A100" }}>
-                  {picks.length} spec point{picks.length === 1 ? "" : "s"}
-                </span>{" "}
-                — the notes behind them are waiting.
-              </>
-            ) : (
-              "Nothing ticked yet — tap statements below to build your pack."
-            )}
-          </p>
+          <div className="flex min-w-0 items-center gap-3">
+            <span
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-paper"
+              style={{ boxShadow: "0 2px 0 var(--edge)" }}
+            >
+              <ClipboardList className="h-5 w-5" style={{ color: "#E8A100" }} />
+            </span>
+            <p className="min-w-0 flex-1 text-[14px] font-bold leading-snug text-ink">
+              {picks.length > 0 ? (
+                <>
+                  Your pack holds{" "}
+                  <span style={{ color: "#E8A100" }}>
+                    {picks.length} spec point{picks.length === 1 ? "" : "s"}
+                  </span>{" "}
+                  — the notes behind them are waiting.
+                </>
+              ) : (
+                "Nothing ticked yet — tap statements below to build your pack."
+              )}
+            </p>
+          </div>
           <motion.button
             type="button"
             onClick={onOpenPack}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.96 }}
-            className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full px-4 py-2.5 font-display text-[13px] font-semibold text-white"
+            className="inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 rounded-full px-4 py-2.5 font-display text-[13px] font-semibold text-white sm:w-auto sm:shrink-0"
             style={{ background: "#FF922B", boxShadow: `0 4px 0 ${shade("#FF922B")}` }}
           >
             <ClipboardList className="h-4.5 w-4.5" />
