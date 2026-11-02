@@ -4,20 +4,17 @@ import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import {
   ArrowLeft,
-  ArrowRight,
   BookOpen,
   Check,
   ChevronDown,
   EyeOff,
-  Flame,
   Footprints,
   Lightbulb,
-  Magnet,
+  ListChecks,
   PenLine,
   Sparkles,
   StickyNote,
   Target,
-  Zap,
 } from "./icons";
 import type { NotesBlock, NotesDoc, SpecSection } from "@/lib/spectra/notes-types";
 import type { Unit } from "@/lib/spectra/types";
@@ -499,7 +496,7 @@ function BlockView({ block: b, accent }: { block: NotesBlock; accent: string }) 
     case "worked":
       return <Worked title={b.title} question={b.question} steps={b.steps} answer={b.answer} accent={accent} />;
     case "steps":
-      return <Journey caption={b.caption} items={b.items} accent={accent} />;
+      return <StepsPanel caption={b.caption} items={b.items} accent={accent} />;
     case "checkpoint":
       return (
         <div className="flex items-center gap-3 rounded-full bg-paper px-5 py-4 puff">
@@ -683,20 +680,14 @@ function Worked({
   );
 }
 
-/* ————— journey (the 5 stages etc.) — a timeline, not a fold —————
-   Every stage sits on the rail at once: icon node, connector, card.
-   No clicking, no chevrons — the whole journey is the picture. */
+/* ————— steps — the candy stage strip —————
+   One tinted panel, same recipe as the equation block: the caption
+   as a header beside a little icon square, and every step as a
+   paper mini-card in a loose grid. The accent number chips echo
+   the contents grid and the worked-example staircase, so the order
+   reads at a glance — no rail, no icons, just tidy cards. */
 
-const STEP_ICONS: Record<string, typeof Flame> = {
-  flame: Flame,
-  zap: Zap,
-  arrow: ArrowRight,
-  magnet: Magnet,
-  target: Target,
-  spark: Sparkles,
-};
-
-function Journey({
+function StepsPanel({
   caption,
   items,
   accent,
@@ -705,57 +696,53 @@ function Journey({
   items: { title: string; text: string; icon?: string }[];
   accent: string;
 }) {
-  return (
-    <div>
-      {caption && <p className="mb-3 text-[12px] font-extrabold tracking-[0.08em] text-ink-faint uppercase">{caption}</p>}
-      <ol className="flex flex-col">
-        {items.map((it, i) => {
-          const Icon = STEP_ICONS[it.icon ?? "spark"] ?? Sparkles;
-          const last = i === items.length - 1;
-          return (
-            <li key={i} className="flex gap-3.5 sm:gap-4">
-              {/* the rail: node + connector down to the next stop */}
-              <div className="flex w-10 shrink-0 flex-col items-center sm:w-11">
-                <Reveal delay={Math.min(i * 0.05, 0.2)} y={12} className="shrink-0">
-                  <span
-                    className="grid h-10 w-10 place-items-center rounded-full sm:h-11 sm:w-11"
-                    style={{
-                      background: tint(accent, 14),
-                      boxShadow: `inset 0 0 0 2.5px ${tint(accent, 45)}`,
-                    }}
-                  >
-                    <Icon className="h-4.5 w-4.5 sm:h-5 sm:w-5" style={{ color: inkMix(accent, 62) }} strokeWidth={2.5} />
-                  </span>
-                </Reveal>
-                {!last && (
-                  <span
-                    aria-hidden
-                    className="my-1.5 w-[3px] flex-1 rounded-full"
-                    style={{ background: tint(accent, 28), minHeight: 18 }}
-                  />
-                )}
-              </div>
+  const n = items.length;
+  /* short trios sit side by side; longer tellings wrap into two
+     columns, and an odd one out gets the full-width finale */
+  const roomy = n >= 4 || items.some((it) => it.text.length > 170);
+  const grid = [
+    "grid grid-cols-1 gap-2.5 sm:gap-3",
+    roomy ? "sm:grid-cols-2" : n === 3 ? "sm:grid-cols-3" : n === 2 ? "sm:grid-cols-2" : "",
+    roomy && n % 2 === 1 ? "sm:[&>li:last-child]:col-span-2" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
-              {/* the stop: title + text, always in view */}
-              <Reveal delay={Math.min(i * 0.05, 0.2) + 0.04} y={14} className="min-w-0 flex-1 pb-4 last:pb-0">
-                <div
-                  className="rounded-[20px] bg-paper px-4 py-3.5 puff sm:px-5"
-                  style={{ borderLeft: `5px solid ${tint(accent, 40)}` }}
+  return (
+    <div className="rounded-[26px] p-4 sm:p-5" style={{ background: tint(accent, 9) }}>
+      {caption && (
+        <div className="mb-3.5 flex items-center gap-2.5">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-paper shadow-[0_2px_0_color-mix(in_oklab,var(--color-ink)_6%,transparent)]">
+            <ListChecks className="h-4.5 w-4.5" style={{ color: inkMix(accent, 62) }} strokeWidth={2.2} />
+          </span>
+          <h4 className="font-display text-[15.5px] font-semibold tracking-tight text-ink">
+            <Fmt text={caption} />
+          </h4>
+        </div>
+      )}
+      <ol className={grid}>
+        {items.map((it, i) => {
+          /* titles like “1 · Vapourisation” hand their number to the chip */
+          const bare = it.title.replace(/^\s*\d+\s*[·•]\s*/, "");
+          return (
+            <li
+              key={i}
+              className="rounded-[18px] bg-paper px-4 py-3.5 shadow-[0_3px_0_color-mix(in_oklab,var(--color-ink)_7%,transparent)]"
+            >
+              <div className="flex items-center gap-2">
+                <span
+                  className="grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full font-display text-[11px] font-bold"
+                  style={{ background: accent, color: readableInk(accent) }}
                 >
-                  <div className="flex items-baseline gap-2">
-                    <span
-                      className="grid h-[22px] w-[22px] shrink-0 translate-y-[3px] place-items-center rounded-full font-display text-[11px] font-bold"
-                      style={{ background: accent, color: readableInk(accent) }}
-                    >
-                      {i + 1}
-                    </span>
-                    <span className="font-display text-[15.5px] font-semibold text-ink">{it.title}</span>
-                  </div>
-                  <p className="mt-1.5 text-[15px] leading-[1.75] text-ink/90">
-                    <Fmt text={it.text} />
-                  </p>
-                </div>
-              </Reveal>
+                  {i + 1}
+                </span>
+                <span className="font-display text-[15px] font-semibold text-ink">
+                  <Fmt text={bare} />
+                </span>
+              </div>
+              <p className="mt-1.5 text-[14.5px] leading-[1.7] text-ink-soft">
+                <Fmt text={it.text} />
+              </p>
             </li>
           );
         })}
