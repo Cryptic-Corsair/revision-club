@@ -92,6 +92,19 @@ function scrollToSpec(spec: string) {
 const inkMix = (main: string, pct = 45) =>
   `color-mix(in oklab, ${main} ${pct}%, var(--color-ink))`;
 
+/* band helpers — pure, so the in-page contents panel and the floating
+   contents window can dress their chips with the exact same colours */
+const accentOf = (i: number) => BANDS[i % BANDS.length];
+/* bands mix their candy over --tint-base at --band-mix — 10% by
+   day, 14% after dark, so roast-tone neighbours stay distinct */
+const bandOf = (i: number) =>
+  `color-mix(in oklab, ${accentOf(i)} var(--band-mix, 10%), var(--tint-base))`;
+/* every third room goes cocoa in the hybrid lab (2.2, 2.5, 2.8 …).
+   Elsewhere --room-surface is undefined and the fallback keeps the
+   plain candy band — one expression, correct in all three labs. */
+const isRoom = (i: number) => i % 3 === 1;
+const bgOf = (i: number) => (isRoom(i) ? `var(--room-surface, ${bandOf(i)})` : bandOf(i));
+
 /* ————— main reader ————— */
 
 export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; onBack: () => void }) {
@@ -136,37 +149,6 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
     `${count("checkpoint")} textbook checkpoints`,
     ...(spentHere >= 60 ? [`${fmtClock(spentHere)} of your time here`] : []),
   ];
-
-  /* sticky spec rail — the chip strip scrolls sideways; gradient fades
-     hint at the cut-off chips on whichever side is hiding more */
-  const railRef = useRef<HTMLDivElement | null>(null);
-  const [railCut, setRailCut] = useState({ l: false, r: false });
-  const measureRail = () => {
-    const el = railRef.current;
-    if (!el) return;
-    setRailCut({
-      l: el.scrollLeft > 4,
-      r: el.scrollLeft + el.clientWidth < el.scrollWidth - 4,
-    });
-  };
-  useEffect(() => {
-    measureRail();
-    window.addEventListener("resize", measureRail);
-    return () => window.removeEventListener("resize", measureRail);
-  }, [doc]);
-
-  const accentOf = (i: number) => BANDS[i % BANDS.length];
-  /* bands mix their candy over --tint-base at --band-mix — 10% by
-     day, 14% after dark, so roast-tone neighbours stay distinct */
-  const bandOf = (i: number) =>
-    `color-mix(in oklab, ${accentOf(i)} var(--band-mix, 10%), var(--tint-base))`;
-  /* every third room goes cocoa in the hybrid lab (2.2, 2.5, 2.8 …).
-     Elsewhere --room-surface is undefined and the fallback keeps the
-     plain candy band — one expression, correct in all three labs. */
-  const isRoom = (i: number) => i % 3 === 1;
-  const bgOf = (i: number) => (isRoom(i) ? `var(--room-surface, ${bandOf(i)})` : bandOf(i));
-  const activeIndex = Math.max(0, doc.sections.findIndex((s) => s.spec === active));
-  const activeSection = doc.sections[activeIndex];
 
   return (
     <div className="relative">
@@ -276,68 +258,9 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
 
       {/* ————— the string of rooms ————— */}
       <div className="mt-10">
-        {/* sticky rail rides above every band */}
-        <div className="sticky top-[76px] z-40 mx-auto max-w-3xl px-4 sm:px-8">
-          <div
-            className="rounded-[24px] bg-paper/95 px-3.5 py-2.5 backdrop-blur-md"
-            style={{ boxShadow: "0 3px 0 var(--edge), 0 16px 34px -20px rgb(0 0 0 / 0.4)" }}
-          >
-            <div className="flex items-center gap-3">
-              {activeSection ? (
-                <span className="min-w-0 flex-1 truncate font-display text-[13.5px] font-semibold text-ink">
-                  <span style={{ color: inkMix(accentOf(activeIndex), 45) }}>{activeSection.spec}</span> · {activeSection.title}
-                </span>
-              ) : (
-                <span className="min-w-0 flex-1 truncate font-display text-[13.5px] font-semibold text-ink">{doc.title}</span>
-              )}
-            </div>
-            <div className="relative mt-2">
-              <div
-                ref={railRef}
-                onScroll={measureRail}
-                className="no-scrollbar flex items-center gap-1.5 overflow-x-auto"
-              >
-                {doc.sections.map((s, i) => {
-                  const isActive = active === s.spec;
-                  const accent = accentOf(i);
-                  return (
-                    <motion.button
-                      key={s.spec}
-                      type="button"
-                      whileTap={{ scale: 0.88 }}
-                      onClick={() => scrollToSpec(s.spec)}
-                      className="grid h-8 min-w-8 shrink-0 cursor-pointer place-items-center rounded-full px-2 font-display text-[11px] font-bold"
-                      style={
-                        isActive
-                          ? { background: accent, color: readableInk(accent), boxShadow: `0 3px 0 ${shade(accent)}` }
-                          : { background: tint(accent, 22), color: inkMix(accent, 62) }
-                      }
-                      title={`${s.spec} — ${s.title}`}
-                      aria-label={`Jump to spec ${s.spec}`}
-                      aria-current={isActive ? "true" : undefined}
-                    >
-                      {s.spec}
-                    </motion.button>
-                  );
-                })}
-              </div>
-              {railCut.l && (
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-y-0 left-0 w-8"
-                  style={{ background: "linear-gradient(to right, var(--color-paper) 25%, transparent)" }}
-                />
-              )}
-              {railCut.r && (
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-y-0 right-0 w-8"
-                  style={{ background: "linear-gradient(to left, var(--color-paper) 25%, transparent)" }}
-                />
-              )}
-            </div>
-          </div>
-        </div>
+        {/* the old sticky spec rail is gone — the whole map now lives
+            in one bubble parked beside the nav (see ContentsBubble) */}
+        <ContentsBubble doc={doc} main={main} active={active} />
 
         <div className="mt-8">
           <BandWave from="var(--color-cream)" to={bgOf(0)} />
@@ -349,7 +272,7 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
               <Fragment key={s.spec}>
                 <section
                   id={`spec-${s.spec.replace(".", "-")}`}
-                  className={`relative scroll-mt-[190px]${room ? " room" : ""}`}
+                  className={`relative scroll-mt-[100px]${room ? " room" : ""}`}
                   style={{ background: bgOf(i) }}
                 >
                   <div className="mx-auto max-w-3xl px-4 py-14 sm:px-8 sm:py-16">
@@ -379,6 +302,167 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
         </Reveal>
       </div>
     </div>
+  );
+}
+
+/* ————— contents bubble —————
+   The old sticky spec rail rode above every band and got in the way
+   of the rooms. Now the whole map folds into one small bubble parked
+   against the pill nav — it wears the spec you're currently reading,
+   and a tap unfolds the full contents as a floating window dressed
+   like the note's own contents card. It sits beside the nav wherever
+   there's room, and tucks under its shoulder on narrow phones. */
+
+function ContentsBubble({ doc, main, active }: { doc: NotesDoc; main: string; active: string }) {
+  const [open, setOpen] = useState(false);
+  const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
+
+  /* measure the real nav pill so the bubble hugs its right edge on
+     every screen; re-measure on resize and once fonts have settled */
+  useEffect(() => {
+    const measure = () => {
+      const r = document.querySelector('nav[aria-label="Main"]')?.getBoundingClientRect();
+      if (!r) return;
+      const fits = r.right + 58 <= window.innerWidth - 10;
+      setPos(
+        fits
+          ? { x: r.right + 10, y: r.top }
+          : { x: window.innerWidth - 68, y: r.bottom + 8 }
+      );
+    };
+    measure();
+    const t = window.setTimeout(measure, 350);
+    window.addEventListener("resize", measure);
+    return () => {
+      window.clearTimeout(t);
+      window.removeEventListener("resize", measure);
+    };
+  }, [doc]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  return (
+    <>
+      <motion.button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        whileTap={{ scale: 0.88 }}
+        aria-label="Contents — jump between sections"
+        aria-expanded={open}
+        title="Contents — jump between sections"
+        className="fixed z-[60] grid h-12 w-12 cursor-pointer place-items-center rounded-full"
+        style={{
+          top: pos?.y ?? -60,
+          left: pos?.x ?? -60,
+          background: main,
+          color: readableInk(main),
+          boxShadow: `0 4px 0 ${shade(main)}, 0 16px 30px -14px rgb(0 0 0 / 0.45)`,
+        }}
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: pos ? 1 : 0, scale: pos ? 1 : 0.5 }}
+        transition={{ type: "spring", stiffness: 320, damping: 20 }}
+      >
+        {/* the bubble wears the spec you're on — the position context the
+            old rail used to give, minus the obstruction */}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={active}
+            initial={{ y: 9, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -9, opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="font-display text-[12px] font-bold"
+          >
+            {active}
+          </motion.span>
+        </AnimatePresence>
+      </motion.button>
+
+      <AnimatePresence>
+        {open && pos && (
+          <>
+            <motion.div
+              key="scrim"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.18 }}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 z-[59] bg-cocoa/30 backdrop-blur-[2px]"
+            />
+            <motion.div
+              key="panel"
+              role="dialog"
+              aria-label="Note contents"
+              initial={{ opacity: 0, y: -12, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.94 }}
+              transition={{ type: "spring", stiffness: 340, damping: 26 }}
+              className="fixed z-[60] max-h-[min(74vh,660px)] w-[min(560px,calc(100vw-20px))] overflow-y-auto rounded-[30px] bg-paper p-5 puff sm:p-6"
+              style={{
+                top: pos.y + 60,
+                right: Math.max(10, window.innerWidth - pos.x - 48),
+                transformOrigin: "top right",
+              }}
+            >
+              <div className="flex items-center gap-3">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl" style={{ background: tint(main, 16) }}>
+                  <Target className="h-5 w-5" style={{ color: inkMix(main, 60) }} />
+                </span>
+                <div>
+                  <h2 className="font-display text-[18px] font-semibold text-ink">Contents</h2>
+                  <p className="text-[12.5px] font-bold text-ink-faint">{doc.sections.length} sections · tap one to jump</p>
+                </div>
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                {doc.sections.map((s, i) => {
+                  const here = active === s.spec;
+                  const accent = accentOf(i);
+                  return (
+                    <button
+                      key={s.spec}
+                      type="button"
+                      onClick={() => {
+                        scrollToSpec(s.spec);
+                        setOpen(false);
+                      }}
+                      aria-current={here ? "true" : undefined}
+                      className={`group flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left transition-transform hover:-translate-y-0.5${
+                        here ? "" : isRoom(i) ? " room" : ""
+                      }`}
+                      style={
+                        here
+                          ? { background: accent, color: readableInk(accent), boxShadow: `0 3px 0 ${shade(accent)}` }
+                          : { background: bgOf(i) }
+                      }
+                    >
+                      <span
+                        className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[10.5px] font-bold"
+                        style={
+                          here
+                            ? { background: "rgb(255 255 255 / 0.28)", color: readableInk(accent) }
+                            : { background: accent, color: readableInk(accent) }
+                        }
+                      >
+                        {s.spec}
+                      </span>
+                      <span className={`line-clamp-2 text-[12px] font-bold leading-[1.35]${here ? "" : " text-ink"}`}>
+                        {s.title}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
