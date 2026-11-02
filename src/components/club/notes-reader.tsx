@@ -30,13 +30,18 @@ import {
   FigDotCross,
   FigFillDemo,
   FigFillOrder,
+  FigFormulaTypes,
+  FigFracCol,
   FigIeGraph,
+  FigIsomers,
   FigMassSpec,
   FigMelting,
   FigNotation,
   FigOrbitals,
   FigPtBlocks,
+  FigNaming,
   FigRadius,
+  FigRadChain,
   FigShapes,
   FigShielding,
   FigSigmaPi,
@@ -703,7 +708,7 @@ function Journey({
 /* ————— figures ————— */
 
 /* wide plots scroll sideways on phones instead of shrinking to mush */
-const WIDE_FIGS = new Set(["mass-spec", "ie-graph", "succ-ie", "pt-blocks", "spectrum-bromine", "radius", "fill-order", "melting", "sigma-pi", "dotcross", "carbon-lattices", "shapes", "dipoles"]);
+const WIDE_FIGS = new Set(["mass-spec", "ie-graph", "succ-ie", "pt-blocks", "spectrum-bromine", "radius", "fill-order", "melting", "sigma-pi", "dotcross", "carbon-lattices", "shapes", "dipoles", "formula-types", "naming", "frac-col", "isomers", "radchain"]);
 
 function Figure({ kind, caption, accent }: { kind: string; caption?: string; accent: string }) {
   let node: ReactNode = null;
@@ -732,6 +737,11 @@ function Figure({ kind, caption, accent }: { kind: string; caption?: string; acc
     case "carbon-lattices": node = <FigCarbonLattices accent={accent} />; break;
     case "shapes": node = <FigShapes accent={accent} />; break;
     case "dipoles": node = <FigDipoles accent={accent} />; break;
+    case "formula-types": node = <FigFormulaTypes accent={accent} />; break;
+    case "naming": node = <FigNaming accent={accent} />; break;
+    case "frac-col": node = <FigFracCol accent={accent} />; break;
+    case "isomers": node = <FigIsomers accent={accent} />; break;
+    case "radchain": node = <FigRadChain accent={accent} />; break;
   }
   if (!node) return null;
   const wide = WIDE_FIGS.has(kind);

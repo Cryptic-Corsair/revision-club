@@ -33,7 +33,12 @@ export type FigureKind =
   | "dotcross"
   | "carbon-lattices"
   | "shapes"
-  | "dipoles";
+  | "dipoles"
+  | "formula-types"
+  | "naming"
+  | "frac-col"
+  | "isomers"
+  | "radchain";
 
 export type NotesBlock =
   | { k: "p"; text: string }

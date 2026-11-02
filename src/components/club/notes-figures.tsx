@@ -1489,3 +1489,321 @@ export function FigDipoles({ accent = "#FF6B6B" }: { accent?: string }) {
     </svg>
   );
 }
+
+/* ————— 4.5 · butane, five ways — one molecule, every formula type ————— */
+
+export function FigFormulaTypes({ accent = "#FF6B6B" }: { accent?: string }) {
+  const card = tint(accent, 13);
+  const stroke = { stroke: INK, strokeWidth: 3, strokeLinecap: "round" as const };
+  const cards = [
+    { x: 12, tag: "MOLECULAR", note: ["the exact number of", "atoms of each element"] },
+    { x: 194, tag: "EMPIRICAL", note: ["the simplest whole-", "number ratio of atoms"] },
+    { x: 376, tag: "STRUCTURAL", note: ["minimal detail of how", "the atoms are arranged"] },
+    { x: 558, tag: "DISPLAYED", note: ["every bond drawn —", "all H atoms shown"] },
+    { x: 740, tag: "SKELETAL", note: ["a carbon at every join —", "H atoms are implied"] },
+  ];
+  return (
+    <svg viewBox="0 0 920 330" className="w-full" role="img" aria-label="Butane drawn as molecular, empirical, structural, displayed and skeletal formulae">
+      {cards.map((c, i) => (
+        <g key={c.tag}>
+          <rect x={c.x} y={22} width={168} height={286} rx={22} fill={i === 3 ? tint(accent, 22) : card} stroke={tint(accent, 45)} strokeWidth={2} />
+          <text x={c.x + 84} y={56} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1" fill={SOFT} fontFamily="var(--font-body)">{c.tag}</text>
+          {c.note.map((ln, j) => (
+            <text key={j} x={c.x + 84} y={282 + j * 17} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{ln}</text>
+          ))}
+        </g>
+      ))}
+
+      {/* molecular */}
+      <text x={96} y={160} textAnchor="middle" fontSize="34" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">C₄H₁₀</text>
+
+      {/* empirical */}
+      <text x={278} y={160} textAnchor="middle" fontSize="34" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">C₂H₅</text>
+
+      {/* structural */}
+      <text x={460} y={155} textAnchor="middle" fontSize="17.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₃CH₂CH₂CH₃</text>
+
+      {/* displayed */}
+      {(() => {
+        const cy = 148;
+        const cx = [586, 624, 662, 700];
+        const H: [number, number, number, number][] = [
+          // cx, cy of carbon, hx, hy of hydrogen
+          [cx[0], cy, cx[0], cy - 38],
+          [cx[0], cy, cx[0], cy + 38],
+          [cx[0], cy, cx[0] - 36, cy],
+          [cx[1], cy, cx[1], cy - 38],
+          [cx[1], cy, cx[1], cy + 38],
+          [cx[2], cy, cx[2], cy - 38],
+          [cx[2], cy, cx[2], cy + 38],
+          [cx[3], cy, cx[3], cy - 38],
+          [cx[3], cy, cx[3], cy + 38],
+          [cx[3], cy, cx[3] + 36, cy],
+        ];
+        return (
+          <g>
+            {cx.slice(0, -1).map((x, i) => (
+              <line key={`cc-${i}`} x1={x + 9} y1={cy} x2={cx[i + 1] - 9} y2={cy} {...stroke} />
+            ))}
+            {H.map(([x1, y1, x2, y2], i) => {
+              const dx = x2 - x1, dy = y2 - y1;
+              const len = Math.hypot(dx, dy);
+              const t = (len - 12) / len;
+              return <line key={`ch-${i}`} x1={x1} y1={y1} x2={x1 + dx * t} y2={y1 + dy * t} stroke={INK} strokeWidth={2.4} strokeLinecap="round" />;
+            })}
+            {H.map(([, , hx, hy], i) => (
+              <text key={`h-${i}`} x={hx} y={hy + 4.5} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+            ))}
+            {cx.map((x, i) => (
+              <text key={`c-${i}`} x={x} y={cy + 5.5} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">C</text>
+            ))}
+          </g>
+        );
+      })()}
+
+      {/* skeletal */}
+      <polyline points="768,168 804,128 840,168 876,128" fill="none" {...stroke} strokeWidth={3.4} />
+      {[[768, 168], [804, 128], [840, 168], [876, 128]].map(([x, y], i) => (
+        <circle key={`v-${i}`} cx={x} cy={y} r={5} fill={accent} />
+      ))}
+    </svg>
+  );
+}
+
+/* ————— 4.5 · anatomy of an IUPAC name ————— */
+
+export function FigNaming({ accent = "#FF6B6B" }: { accent?: string }) {
+  const chipBg = tint(accent, 16);
+  const chip = (label: string) => (
+    <text x={115} y={0} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">{label}</text>
+  );
+  const rows: { part: string; y: number; text: string; strong?: boolean }[] = [
+    { part: "3-ethyl", y: 150, text: "side-chain — named first: ethyl before methyl (alphabetical)", strong: true },
+    { part: "2", y: 188, text: "locant — the number of the carbon the methyl sits on" },
+    { part: "methyl", y: 226, text: "second side-chain — CH₃, its stem plus -yl" },
+    { part: "hex", y: 264, text: "stem — the longest continuous chain holds 6 carbons" },
+    { part: "ane", y: 302, text: "suffix — the family: an alkane" },
+  ];
+  return (
+    <svg viewBox="0 0 820 356" className="w-full" role="img" aria-label="The parts of the name 3-ethyl-2-methylhexane, labelled">
+      {/* the name itself */}
+      <text x={410} y={62} textAnchor="middle" fontSize="27" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">
+        <tspan fill={accent}>3-ethyl</tspan>
+        <tspan fill={FAINT}>-</tspan>
+        <tspan>2-</tspan>
+        <tspan fill={accent}>methyl</tspan>
+        <tspan>hexane</tspan>
+      </text>
+      <text x={410} y={92} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        numbering left to right gives 2,3 — from the other end it would be 4,5, so the lowest set wins
+      </text>
+
+      <line x1={40} y1={112} x2={780} y2={112} stroke={tint(accent, 40)} strokeWidth={2} />
+
+      {rows.map((r) => (
+        <g key={r.part}>
+          <rect x={40} y={r.y - 21} width={150} height={30} rx={15} fill={r.strong ? tint(accent, 34) : chipBg} stroke={tint(accent, 48)} strokeWidth={1.6} />
+          {(() => {
+            const t = chip(r.part);
+            return <g transform={`translate(0 ${r.y - 0.5})`}>{t}</g>;
+          })()}
+          <text x={210} y={r.y} fontSize="13.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{r.text}</text>
+        </g>
+      ))}
+
+      <text x={40} y={340} fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        punctuation — numbers join numbers with commas, numbers join letters with hyphens
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 4.12 · the fractionating column ————— */
+
+export function FigFracCol({ accent = "#FF6B6B" }: { accent?: string }) {
+  const fractions = [
+    { y: 76, name: "REFINERY GAS", c: "C₁ – C₄", use: "bottled fuel · feedstock for other synthesis" },
+    { y: 146, name: "GASOLINE", c: "C₅ – C₁₀", use: "petrol for car engines — the more branched, the better" },
+    { y: 216, name: "KEROSENE", c: "C₁₁ – C₁₂", use: "aircraft fuel · cracked for extra gasoline" },
+    { y: 286, name: "DIESEL · GAS OIL", c: "longer chains", use: "diesel engines · industrial boilers" },
+    { y: 356, name: "RESIDUE", c: "the heaviest", use: "lubricating oil · fuel oil · waxes · bitumen" },
+  ];
+  const colX = 128, colW = 74;
+  return (
+    <svg viewBox="0 0 880 440" className="w-full" role="img" aria-label="A fractionating column with its five fractions and their uses">
+      <defs>
+        <linearGradient id="fracGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={tint(accent, 16)} />
+          <stop offset="100%" stopColor={tint(accent, 58)} />
+        </linearGradient>
+      </defs>
+
+      {/* temperature rail */}
+      <text x={96} y={70} textAnchor="end" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">cool</text>
+      <text x={96} y={382} textAnchor="end" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">hot</text>
+      <line x1={104} y1={80} x2={104} y2={370} stroke={FAINT} strokeWidth={2.4} />
+      <polygon points="104,382 98,368 110,368" fill={FAINT} />
+      <text x={30} y={230} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)" transform="rotate(-90 30 230)" textAnchor="middle">temperature rises down the column</text>
+
+      {/* column */}
+      <rect x={colX} y={40} width={colW} height={370} rx={18} fill="url(#fracGrad)" stroke={INK} strokeWidth={2.6} />
+      {[80, 136, 192, 248, 304, 360].map((y) => (
+        <line key={y} x1={colX + 10} y1={y} x2={colX + colW - 10} y2={y} stroke={PAPER} strokeWidth={3} strokeLinecap="round" opacity={0.75} />
+      ))}
+
+      {/* crude oil in */}
+      <text x={165} y={432} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">crude oil in, heated</text>
+      <polygon points={`${colX + 37},400 ${colX + 29},414 ${colX + 45},414`} fill={INK} />
+
+      {fractions.map((f, i) => {
+        const fill = tint(accent, 14 + i * 11);
+        return (
+          <g key={f.name}>
+            <line x1={colX + colW} y1={f.y} x2={268} y2={f.y} stroke={tint(accent, 55)} strokeWidth={2.6} strokeDasharray="1 6" strokeLinecap="round" />
+            <circle cx={colX + colW} cy={f.y} r={4.5} fill={INK} />
+            <rect x={268} y={f.y - 20} width={250} height={40} rx={20} fill={fill} stroke={INK} strokeWidth={2} />
+            <text x={288} y={f.y - 2} fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{f.name}</text>
+            <text x={288 + 250 - 22} y={f.y - 2} textAnchor="end" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">{f.c}</text>
+            <text x={288} y={f.y + 36} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{f.use}</text>
+          </g>
+        );
+      })}
+
+      <text x={600} y={52} fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">each level takes off a fraction —</text>
+      <text x={600} y={72} fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">compounds with a similar boiling range</text>
+      <text x={600} y={96} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">boiling point climbs as chain length grows,</text>
+      <text x={600} y={114} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">so longer molecules condense lower down</text>
+    </svg>
+  );
+}
+
+/* ————— 4.11 · the three skeletal isomers of C₅H₁₂ ————— */
+
+export function FigIsomers({ accent = "#FF6B6B" }: { accent?: string }) {
+  const s = { stroke: INK, strokeWidth: 3.4, strokeLinecap: "round" as const, fill: "none" } as const;
+  const vertex = (x: number, y: number, k: string) => <circle key={k} cx={x} cy={y} r={5} fill={accent} />;
+  return (
+    <svg viewBox="0 0 880 250" className="w-full" role="img" aria-label="Skeletal formulae of pentane, 2-methylbutane and 2,2-dimethylpropane">
+      <text x={440} y={30} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        C₅H₁₂ — one molecular formula, three different skeletons
+      </text>
+
+      {/* pentane */}
+      <text x={160} y={66} textAnchor="middle" fontSize="14" fontWeight="800" fill={accent} fontFamily="var(--font-body)">pentane</text>
+      <polyline points="70,150 115,108 160,150 205,108 250,150" {...s} />
+      {[[70, 150], [115, 108], [160, 150], [205, 108], [250, 150]].map(([x, y], i) => vertex(x, y, `p-${i}`))}
+      <text x={160} y={200} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the straight chain — CH₃(CH₂)₃CH₃</text>
+
+      {/* 2-methylbutane */}
+      <text x={450} y={66} textAnchor="middle" fontSize="14" fontWeight="800" fill={accent} fontFamily="var(--font-body)">2-methylbutane</text>
+      <polyline points="375,150 420,108 465,150 510,108" {...s} />
+      <line x1={420} y1={108} x2={420} y2={64} {...s} />
+      {[[375, 150], [420, 108], [465, 150], [510, 108], [420, 64]].map(([x, y], i) => vertex(x, y, `m-${i}`))}
+      <text x={450} y={200} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">a four-carbon chain, one methyl branch on C-2</text>
+
+      {/* 2,2-dimethylpropane */}
+      <text x={740} y={66} textAnchor="middle" fontSize="14" fontWeight="800" fill={accent} fontFamily="var(--font-body)">2,2-dimethylpropane</text>
+      <g>
+        <line x1={740} y1={118} x2={740} y2={80} {...s} />
+        <line x1={740} y1={118} x2={740} y2={156} {...s} />
+        <line x1={740} y1={118} x2={700} y2={118} {...s} />
+        <line x1={740} y1={118} x2={780} y2={118} {...s} />
+        {[[740, 80], [740, 156], [700, 118], [780, 118]].map(([x, y], i) => vertex(x, y, `d-${i}`))}
+        <circle cx={740} cy={118} r={5} fill={INK} />
+      </g>
+      <text x={740} y={200} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">a central carbon carrying four methyls</text>
+    </svg>
+  );
+}
+
+/* ————— 4.18 · homolytic free-radical substitution, the chain ————— */
+
+/* single-barb (half-headed) arrow — one electron moves */
+function halfHook(x: number, y: number, dx: number, dy: number, c: string) {
+  const ex = x + dx, ey = y + dy;
+  const mx = x + dx * 0.5, my = y + dy * 0.5 - 12;
+  const a = Math.atan2(ey - my, ex - mx);
+  return (
+    <g stroke={c} strokeWidth={2.4} fill="none" strokeLinecap="round">
+      <path d={`M ${x} ${y} Q ${mx} ${my} ${ex} ${ey}`} />
+      <path d={`M ${ex} ${ey} L ${ex - 9 * Math.cos(a - 1.15)} ${ey - 9 * Math.sin(a - 1.15)}`} />
+    </g>
+  );
+}
+
+export function FigRadChain({ accent = "#FF6B6B" }: { accent?: string }) {
+  const stage = (y: number, label: string, fill: string) => (
+    <g>
+      <rect x={36} y={y - 17} width={158} height={34} rx={17} fill={fill} stroke={INK} strokeWidth={2} />
+      <text x={115} y={y + 5} textAnchor="middle" fontSize="13" fontWeight="800" letterSpacing="1" fill={INK} fontFamily="var(--font-body)">{label}</text>
+    </g>
+  );
+  const stepBox = (y: number, w: number, eq: string, note: string) => (
+    <g>
+      <rect x={236} y={y - 24} width={w} height={48} rx={20} fill={tint(accent, 12)} stroke={tint(accent, 42)} strokeWidth={2} />
+      <text x={256} y={y + 2} fontSize="15.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">{eq}</text>
+      <text x={256 + w - 36} y={y + 2} textAnchor="end" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{note}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 880 480" className="w-full" role="img" aria-label="The three stages of free-radical substitution: initiation, propagation, termination">
+      {/* ————— initiation ————— */}
+      {stage(76, "INITIATION", tint(accent, 22))}
+      <text x={236} y={62} fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">Cl—Cl</text>
+      {/* half-headed arrows: each atom keeps one electron */}
+      {halfHook(300, 56, -34, -18, accent)}
+      {halfHook(312, 56, 34, -18, accent)}
+      <text x={470} y={62} fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">Cl•   +   •Cl</text>
+      {(() => {
+        // wavy UV arrow
+        const d = "M 238 96 q 9 -9 18 0 q 9 9 18 0 q 9 -9 18 0 q 9 9 18 0";
+        return (
+          <g>
+            <path d={d} stroke={accent} strokeWidth={2.4} fill="none" strokeLinecap="round" />
+            <text x={346} y={100} fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">UV light supplies the energy</text>
+          </g>
+        );
+      })()}
+      <text x={236} y={128} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        homolytic fission — the bond splits evenly, one electron each way (half-headed arrows)
+      </text>
+
+      <line x1={36} y1={156} x2={856} y2={156} stroke={tint(accent, 40)} strokeWidth={2} />
+
+      {/* ————— propagation ————— */}
+      {stage(206, "PROPAGATION", tint(accent, 38))}
+      {stepBox(198, 560, "Cl• + CH₄ → •CH₃ + HCl", "a H atom is substituted")}
+      {stepBox(252, 560, "•CH₃ + Cl₂ → CH₃Cl + Cl•", "the Cl• is back — the chain turns over")}
+      {/* loop arrow = chain */}
+      <path d="M 800 180 C 836 196 836 250 800 266" fill="none" stroke={accent} strokeWidth={2.4} strokeLinecap="round" />
+      <polygon points="800,266 812,258 813,270" fill={accent} />
+      <text x={236} y={296} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        each step makes a new radical — one photon can churn out thousands of molecules
+      </text>
+
+      <line x1={36} y1={318} x2={856} y2={318} stroke={tint(accent, 40)} strokeWidth={2} />
+
+      {/* ————— termination ————— */}
+      {stage(356, "TERMINATION", tint(accent, 54))}
+      {[
+        { eq: "Cl• + Cl• → Cl₂", x: 316 },
+        { eq: "•CH₃ + Cl• → CH₃Cl", x: 520 },
+        { eq: "•CH₃ + •CH₃ → C₂H₆", x: 724 },
+      ].map((t) => (
+        <g key={t.eq}>
+          <rect x={t.x - 92} y={340} width={184} height={40} rx={20} fill={tint(accent, 12)} stroke={tint(accent, 42)} strokeWidth={2} />
+          <text x={t.x} y={365} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">{t.eq}</text>
+        </g>
+      ))}
+      <text x={236} y={412} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        any two radicals collide and pair up — the chain stops. The trace of ethane (C₂H₆) is the giveaway
+      </text>
+      <text x={236} y={432} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        that two •CH₃ found each other, and the examiner's favourite explanation.
+      </text>
+
+      {stage(466, "OVERALL", PAPER)}
+      <text x={236} y={471} fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₄ + Cl₂ → CH₃Cl + HCl   —   but it rarely stops there</text>
+    </svg>
+  );
+}

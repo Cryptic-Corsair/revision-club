@@ -3,6 +3,8 @@ import { SECTIONS_A } from "./content/notes-t02-a";
 import { SECTIONS_B } from "./content/notes-t02-b";
 import { SECTIONS_T03_A } from "./content/notes-t03-a";
 import { SECTIONS_T03_B } from "./content/notes-t03-b";
+import { SECTIONS_T04_A } from "./content/notes-t04-a";
+import { SECTIONS_T04_B } from "./content/notes-t04-b";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · the revision-note library
@@ -43,6 +45,25 @@ export const NOTES_DOCS: NotesDoc[] = [
       },
     ],
     sections: [...SECTIONS_T03_A, ...SECTIONS_T03_B],
+  },
+  {
+    id: "wch11-t04",
+    unitCode: "WCH11",
+    topicId: "t04",
+    kicker: "Unit 1 · Topic 4 — the complete class note, spec by spec",
+    title: "Introductory organic chemistry & alkanes",
+    source: "the complete class note (CHSE Grade 11, Unit 1 · Topic 4 · 2020)",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual revision note for Topic 4, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every exercise the class note sets in words is worked in full — no skipped lines.",
+      },
+      {
+        k: "p",
+        text: "Part **4A** teaches the language of organic chemistry: hazard and risk, the homologous series and functional groups, the full IUPAC naming and drawing toolkit, the reaction types, and the two ways a covalent bond splits. Part **4B** is the alkanes: sp^3^ shapes and cycloalkanes, the isomer drills, crude oil from fractionating column to cracker, combustion and its pollutants, alternative fuels and carbon neutrality — finishing with the ==free-radical substitution chain==, the first mechanism of the course.",
+      },
+    ],
+    sections: [...SECTIONS_T04_A, ...SECTIONS_T04_B],
   },
 ];
 
