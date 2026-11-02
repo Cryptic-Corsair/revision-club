@@ -28,7 +28,12 @@ export type FigureKind =
   | "succ-ie"
   | "melting"
   | "pt-blocks"
-  | "radius";
+  | "radius"
+  | "sigma-pi"
+  | "dotcross"
+  | "carbon-lattices"
+  | "shapes"
+  | "dipoles";
 
 export type NotesBlock =
   | { k: "p"; text: string }

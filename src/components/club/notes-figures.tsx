@@ -1035,3 +1035,457 @@ export function FigShielding({ accent = "#FF6B6B" }: { accent?: string }) {
     </svg>
   );
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Topic 3 · bonding figures — σ/π overlap, dot-and-cross,
+   the carbon lattices, VSEPR shapes and molecular dipoles
+   ═══════════════════════════════════════════════════════════════ */
+
+/* small arrow with a solid head */
+function t3Arrow(x1: number, y1: number, x2: number, y2: number, c: string, w = 2.5) {
+  const a = Math.atan2(y2 - y1, x2 - x1);
+  const h = 7.5;
+  const head = `${x2},${y2} ${x2 - h * Math.cos(a - 0.42)},${y2 - h * Math.sin(a - 0.42)} ${x2 - h * Math.cos(a + 0.42)},${y2 - h * Math.sin(a + 0.42)}`;
+  return (
+    <g>
+      <line x1={x1} y1={y1} x2={x2 - h * 0.55 * Math.cos(a)} y2={y2 - h * 0.55 * Math.sin(a)} stroke={c} strokeWidth={w} strokeLinecap="round" />
+      <polygon points={head} fill={c} />
+    </g>
+  );
+}
+
+/* ————— 3.10 · σ head-on overlaps vs the sideways π overlap ————— */
+
+export function FigSigmaPi({ accent = "#FF6B6B" }: { accent?: string }) {
+  const ghost = tint(accent, 78);
+  const mid = tint(accent, 42);
+  return (
+    <svg viewBox="0 0 780 320" className="w-full" role="img" aria-label="Sigma and pi bonding">
+      {/* watermarks + dividers */}
+      <text x={127} y={86} textAnchor="middle" fontSize="44" fontWeight="800" fill={tint(accent, 55)} fontFamily="var(--font-display)">σ</text>
+      <text x={387} y={86} textAnchor="middle" fontSize="44" fontWeight="800" fill={tint(accent, 55)} fontFamily="var(--font-display)">σ</text>
+      <text x={647} y={86} textAnchor="middle" fontSize="44" fontWeight="800" fill={tint(accent, 55)} fontFamily="var(--font-display)">π</text>
+      <line x1={258} y1={38} x2={258} y2={284} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={514} y1={38} x2={514} y2={284} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* panel 1 · s + s (H₂) */}
+      <circle cx={85} cy={168} r={52} fill={ghost} stroke={FAINT} strokeWidth="2.5" />
+      <circle cx={168} cy={168} r={52} fill={ghost} stroke={FAINT} strokeWidth="2.5" />
+      <path d="M 126.5 136.7 A 52 52 0 0 1 126.5 199.3 A 52 52 0 0 1 126.5 136.7 Z" fill={mid} />
+      <circle cx={120.5} cy={168} r={3.4} fill={INK} />
+      <g stroke={INK} strokeWidth={1.8} strokeLinecap="round">
+        <line x1={129.8} y1={164.8} x2={136.2} y2={171.2} />
+        <line x1={129.8} y1={171.2} x2={136.2} y2={164.8} />
+      </g>
+      <text x={127} y={252} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H₂ · s + s</text>
+      <text x={127} y={270} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">head-on, directly between the nuclei</text>
+
+      {/* panel 2 · p + p (F₂) */}
+      <ellipse cx={346} cy={168} rx={50} ry={17} fill={ghost} stroke={FAINT} strokeWidth="2.5" />
+      <ellipse cx={428} cy={168} rx={50} ry={17} fill={ghost} stroke={FAINT} strokeWidth="2.5" />
+      <ellipse cx={387} cy={168} rx={10} ry={15} fill={mid} />
+      <circle cx={381.5} cy={168} r={3.4} fill={INK} />
+      <g stroke={INK} strokeWidth={1.8} strokeLinecap="round">
+        <line x1={390.8} y1={164.8} x2={397.2} y2={171.2} />
+        <line x1={390.8} y1={171.2} x2={397.2} y2={164.8} />
+      </g>
+      <text x={387} y={252} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">F₂ · p + p</text>
+      <text x={387} y={270} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">one σ only — ever</text>
+
+      {/* panel 3 · π sideways (C=C) */}
+      <line x1={600} y1={168} x2={700} y2={168} stroke={FAINT} strokeWidth="2" strokeDasharray="3 6" />
+      <ellipse cx={633} cy={168} rx={16} ry={52} fill={ghost} stroke={FAINT} strokeWidth="2.5" />
+      <ellipse cx={661} cy={168} rx={16} ry={52} fill={ghost} stroke={FAINT} strokeWidth="2.5" />
+      <rect x={643} y={118} width={8} height={100} fill={mid} opacity={0.85} />
+      <circle cx={647} cy={162} r={3.4} fill={INK} />
+      <g stroke={INK} strokeWidth={1.8} strokeLinecap="round">
+        <line x1={651.8} y1={158.8} x2={658.2} y2={165.2} />
+        <line x1={651.8} y1={165.2} x2={658.2} y2={158.8} />
+      </g>
+      <text x={647} y={104} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">density above…</text>
+      <text x={647} y={240} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">…and below the axis</text>
+      <text x={647} y={266} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C=C · p + p sideways</text>
+      <text x={647} y={284} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">lateral overlap — weaker than σ</text>
+
+      {/* bond axis label */}
+      <text x={580} y={172} textAnchor="end" fontSize="10.5" fontWeight="700" fill={FAINT} fontFamily="var(--font-body)">bond axis</text>
+    </svg>
+  );
+}
+
+/* ————— 3.11 · dot-and-cross essentials ————— */
+
+function t3Dot(x: number, y: number, c = INK) {
+  return <circle cx={x} cy={y} r={3.4} fill={c} />;
+}
+function t3Cross(x: number, y: number, c = INK) {
+  return (
+    <g stroke={c} strokeWidth={1.8} strokeLinecap="round">
+      <line x1={x - 3.4} y1={y - 3.4} x2={x + 3.4} y2={y + 3.4} />
+      <line x1={x - 3.4} y1={y + 3.4} x2={x + 3.4} y2={y - 3.4} />
+    </g>
+  );
+}
+
+export function FigDotCross({ accent = "#FF6B6B" }: { accent?: string }) {
+  const shell = "none";
+  return (
+    <svg viewBox="0 0 780 330" className="w-full" role="img" aria-label="Dot and cross diagrams for HCl, CO2 and NH4+">
+      {/* legend */}
+      <text x={24} y={34} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        ·  electron from Cl / O / N        ×  electron from H / C        ———  outer shell
+      </text>
+      <line x1={248} y1={54} x2={248} y2={296} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={518} y1={54} x2={518} y2={296} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* HCl · single bond */}
+      <circle cx={105} cy={172} r={44} fill={shell} stroke={INK} strokeWidth="2.5" />
+      <circle cx={187} cy={172} r={60} fill={shell} stroke={INK} strokeWidth="2.5" />
+      {/* shared pair: dot (Cl) + cross (H) */}
+      {t3Dot(140.5, 172)}
+      {t3Cross(152.5, 172)}
+      {/* chlorine lone pairs */}
+      {t3Dot(183.5, 112)}{t3Dot(190.5, 112)}
+      {t3Dot(239, 168.5)}{t3Dot(239, 175.5)}
+      {t3Dot(183.5, 232)}{t3Dot(190.5, 232)}
+      <text x={98} y={179} textAnchor="middle" fontSize="22" fontWeight="800" fill={INK} fontFamily="var(--font-display)">H</text>
+      <text x={172} y={179} textAnchor="middle" fontSize="22" fontWeight="800" fill={INK} fontFamily="var(--font-display)">Cl</text>
+      <text x={146} y={304} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">HCl · single bond</text>
+      <text x={146} y={321} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">one shared pair</text>
+
+      {/* CO₂ · double bonds */}
+      <circle cx={287} cy={172} r={46} fill={shell} stroke={INK} strokeWidth="2.5" />
+      <circle cx={345} cy={172} r={36} fill={shell} stroke={INK} strokeWidth="2.5" />
+      <circle cx={403} cy={172} r={46} fill={shell} stroke={INK} strokeWidth="2.5" />
+      {/* left double bond: two mixed pairs in the lens */}
+      {t3Dot(315.5, 152)}{t3Cross(326.5, 152)}
+      {t3Dot(315.5, 192)}{t3Cross(326.5, 192)}
+      {/* right double bond */}
+      {t3Dot(363.5, 152)}{t3Cross(374.5, 152)}
+      {t3Dot(363.5, 192)}{t3Cross(374.5, 192)}
+      {/* oxygen lone pairs (two each) */}
+      {t3Dot(283.5, 118)}{t3Dot(290.5, 118)}
+      {t3Dot(283.5, 226)}{t3Dot(290.5, 226)}
+      {t3Dot(399.5, 118)}{t3Dot(406.5, 118)}
+      {t3Dot(399.5, 226)}{t3Dot(406.5, 226)}
+      <text x={280} y={179} textAnchor="middle" fontSize="20" fontWeight="800" fill={INK} fontFamily="var(--font-display)">O</text>
+      <text x={338} y={179} textAnchor="middle" fontSize="20" fontWeight="800" fill={INK} fontFamily="var(--font-display)">C</text>
+      <text x={396} y={179} textAnchor="middle" fontSize="20" fontWeight="800" fill={INK} fontFamily="var(--font-display)">O</text>
+      <text x={345} y={304} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">CO₂ · double bonds</text>
+      <text x={345} y={321} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">two shared pairs per C=O</text>
+
+      {/* NH₄⁺ · dative bond */}
+      <circle cx={640} cy={186} r={50} fill={shell} stroke={INK} strokeWidth="2.5" />
+      <circle cx={640} cy={118} r={28} fill={shell} stroke={INK} strokeWidth="2.5" />
+      <circle cx={594} cy={228} r={28} fill={shell} stroke={INK} strokeWidth="2.5" />
+      <circle cx={686} cy={228} r={28} fill={shell} stroke={INK} strokeWidth="2.5" />
+      <circle cx={700} cy={146} r={30} fill={shell} stroke={SOFT} strokeWidth="2.5" strokeDasharray="6 5" />
+      {/* three ordinary N—H pairs — dots from N, crosses from H */}
+      {t3Dot(634.5, 152)}{t3Cross(645.5, 152)}
+      {t3Dot(611, 206)}{t3Cross(621, 213)}
+      {t3Dot(669, 206)}{t3Cross(659, 213)}
+      {/* dative pair — BOTH electrons from N */}
+      {t3Dot(668, 162, accent)}{t3Dot(676, 155, accent)}
+      <path d="M 662 138 Q 686 108 704 124" fill="none" stroke={accent} strokeWidth="2.5" strokeLinecap="round" strokeDasharray="1 6" />
+      <text x={700} y={92} textAnchor="end" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">dative — both e⁻ from N</text>
+      <text x={633} y={193} textAnchor="middle" fontSize="20" fontWeight="800" fill={INK} fontFamily="var(--font-display)">N</text>
+      <text x={634} y={125} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-display)">H</text>
+      <text x={588} y={235} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-display)">H</text>
+      <text x={680} y={235} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-display)">H</text>
+      <text x={712} y={143} textAnchor="middle" fontSize="15" fontWeight="800" fill={SOFT} fontFamily="var(--font-display)">H⁺</text>
+      <circle cx={640} cy={252} r={11} fill={accent} stroke={INK} strokeWidth="2" />
+      <text x={640} y={256.5} textAnchor="middle" fontSize="13" fontWeight="800" fill="#fff" fontFamily="var(--font-body)">+</text>
+      <text x={645} y={304} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">NH₄⁺ · three ordinary + one dative</text>
+      <text x={645} y={321} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the coloured pair = donated by N</text>
+    </svg>
+  );
+}
+
+/* ————— 3.12 · diamond / graphite / graphene ————— */
+
+function t3Hex(cx: number, cy: number, r: number) {
+  const pts: string[] = [];
+  for (let i = 0; i < 6; i++) {
+    const a = (Math.PI / 180) * (60 * i - 90);
+    pts.push(`${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`);
+  }
+  return pts.join(" ");
+}
+
+export function FigCarbonLattices({ accent = "#FF6B6B" }: { accent?: string }) {
+  const r = 19.5;
+  const dx = 33.8;
+  const dy = 29;
+  const hexFill = tint(accent, 88);
+  const graphiteRows = [0, 1].flatMap((row) =>
+    [0, 1, 2, 3, 4].map((c) => ({ x: 298 + c * dx + (row % 2 ? dx / 2 : 0), y: 104 + row * dy }))
+  );
+  const graphiteRows2 = [0, 1].flatMap((row) =>
+    [0, 1, 2, 3, 4].map((c) => ({ x: 298 + c * dx + (row % 2 ? dx / 2 : 0), y: 204 + row * dy }))
+  );
+  const grapheneRows = [0, 1, 2, 3].flatMap((row) =>
+    [0, 1, 2, 3, 4, 5].map((c) => ({ x: 566 + c * dx + (row % 2 ? dx / 2 : 0), y: 108 + row * dy }))
+  );
+  return (
+    <svg viewBox="0 0 780 330" className="w-full" role="img" aria-label="Diamond, graphite and graphene lattices">
+      <line x1={256} y1={40} x2={256} y2={296} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={520} y1={40} x2={520} y2={296} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* diamond — tetrahedral network */}
+      {([
+        [130, 158, 130, 100],
+        [130, 158, 72, 214],
+        [130, 158, 188, 214],
+        [130, 158, 190, 120],
+      ] as [number, number, number, number][]).map(([x1, y1, x2, y2], i) => (
+        <line key={`b${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      ))}
+      {([
+        [130, 100, 104, 62],
+        [130, 100, 158, 66],
+        [72, 214, 40, 244],
+        [72, 214, 84, 266],
+        [188, 214, 222, 244],
+        [188, 214, 178, 268],
+        [190, 120, 238, 108],
+        [190, 120, 230, 164],
+      ] as [number, number, number, number][]).map(([x1, y1, x2, y2], i) => (
+        <line key={`s${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={FAINT} strokeWidth={2.5} strokeLinecap="round" />
+      ))}
+      {([[130, 158], [130, 100], [72, 214], [188, 214], [190, 120]] as [number, number][]).map(([x, y], i) => (
+        <g key={`a${i}`}>
+          <circle cx={x} cy={y} r={10} fill={INK} />
+          <circle cx={x - 3} cy={y - 3} r={2.6} fill={PAPER} />
+        </g>
+      ))}
+      {([[104, 62], [158, 66], [40, 244], [84, 266], [222, 244], [178, 268], [238, 108], [230, 164]] as [number, number][]).map(([x, y], i) => (
+        <circle key={`t${i}`} cx={x} cy={y} r={6} fill={tint(accent, 40)} stroke={INK} strokeWidth={1.6} />
+      ))}
+      <text x={130} y={306} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">diamond · tetrahedral 3-D network</text>
+      <text x={130} y={323} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">every C bonded to four others — very hard</text>
+
+      {/* graphite — two layers + London gap */}
+      {graphiteRows.map((p, i) => (
+        <polygon key={`g1-${i}`} points={t3Hex(p.x, p.y, r)} fill={hexFill} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
+      ))}
+      {graphiteRows2.map((p, i) => (
+        <polygon key={`g2-${i}`} points={t3Hex(p.x, p.y, r)} fill={hexFill} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
+      ))}
+      <line x1={278} y1={172} x2={496} y2={172} stroke={accent} strokeWidth={2} strokeDasharray="2 7" />
+      <text x={388} y={165} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">weak London forces — layers slide</text>
+      <circle cx={296} cy={68} r={5} fill={accent} stroke={INK} strokeWidth={1.6} />
+      <text x={308} y={72} fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">one free electron per atom → conducts</text>
+      <text x={388} y={306} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">graphite · trigonal layers at 120°</text>
+      <text x={388} y={323} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">slippery lubricant · pencil ‘lead’ · electrodes</text>
+
+      {/* graphene — one sheet */}
+      {grapheneRows.map((p, i) => (
+        <polygon key={`gn-${i}`} points={t3Hex(p.x, p.y, r)} fill={hexFill} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
+      ))}
+      <text x={648} y={306} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">graphene · one atom thick</text>
+      <text x={648} y={323} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">transparent · flexible · highly conductive</text>
+    </svg>
+  );
+}
+
+/* ————— 3.16–3.19 · the VSEPR shape gallery ————— */
+
+function t3Lobe(cx: number, cy: number, rx: number, ry: number, accent: string, keyId: string) {
+  return (
+    <g key={keyId}>
+      <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill={tint(accent, 14)} stroke={FAINT} strokeWidth={2} strokeDasharray="5 5" />
+      <circle cx={cx - 4.5} cy={cy} r={3} fill={INK} />
+      <circle cx={cx + 4.5} cy={cy} r={3} fill={INK} />
+    </g>
+  );
+}
+
+export function FigShapes({ accent = "#FF6B6B" }: { accent?: string }) {
+  const atom = tint(accent, 30);
+  const L = 56;
+  const cap1 = (x: number, name: string, ex: string, ang: string) => (
+    <g>
+      <text x={x} y={218} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{name}</text>
+      <text x={x} y={236} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{ex} · {ang}</text>
+    </g>
+  );
+  const cap2 = (x: number, name: string, ex: string, ang: string) => (
+    <g>
+      <text x={x} y={386} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{name}</text>
+      <text x={x} y={404} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{ex} · {ang}</text>
+    </g>
+  );
+  const bond = (x2: number, y2: number, cx: number, cy: number, keyId: string, dashed = false) => (
+    <g key={keyId}>
+      <line x1={cx} y1={cy} x2={x2} y2={y2} stroke={dashed ? SOFT : INK} strokeWidth={dashed ? 2.5 : 3.2} strokeLinecap="round" strokeDasharray={dashed ? "5 5" : undefined} />
+      <circle cx={x2} cy={y2} r={7.5} fill={atom} stroke={INK} strokeWidth={2} />
+    </g>
+  );
+  const wedge = (cx: number, cy: number, tx: number, ty: number, keyId: string) => (
+    <g key={keyId}>
+      <polygon points={`${cx},${cy} ${tx - 7},${ty - 4} ${tx + 7},${ty + 4}`} fill={tint(accent, 45)} stroke={INK} strokeWidth={1.6} strokeLinejoin="round" />
+      <circle cx={tx} cy={ty} r={7.5} fill={atom} stroke={INK} strokeWidth={2} />
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 780 430" className="w-full" role="img" aria-label="VSEPR shapes and bond angles">
+      {/* row 1 */}
+      {/* linear */}
+      {bond(110 - L, 140, 110, 140, "lin-l")}
+      {bond(110 + L, 140, 110, 140, "lin-r")}
+      <path d="M 84 140 A 26 26 0 0 1 136 140" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" />
+      <text x={110} y={106} textAnchor="middle" fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">180°</text>
+      {cap1(110, "linear", "BeCl₂ · CO₂", "180°")}
+      {/* trigonal planar */}
+      {bond(295, 140 - L, 295, 140, "tp-u")}
+      {bond(295 - L * 0.87, 140 + L * 0.5, 295, 140, "tp-l")}
+      {bond(295 + L * 0.87, 140 + L * 0.5, 295, 140, "tp-r")}
+      <path d="M 271 154 A 30 30 0 0 0 319 154" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" />
+      <text x={295} y={196} textAnchor="middle" fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">120°</text>
+      {cap1(295, "trigonal planar", "BCl₃", "120°")}
+      {/* tetrahedral */}
+      {bond(480 - L * 0.7, 140 - L * 0.7, 480, 140, "te-ul")}
+      {bond(480 + L * 0.7, 140 - L * 0.7, 480, 140, "te-ur")}
+      {wedge(480, 140, 480 - L * 0.7, 140 + L * 0.7, "te-w")}
+      {bond(480 + L * 0.7, 140 + L * 0.7, 480, 140, "te-dr", true)}
+      <path d="M 456 116 A 30 30 0 0 1 504 116" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" />
+      <text x={480} y={88} textAnchor="middle" fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">109.5°</text>
+      {cap1(480, "tetrahedral", "CH₄ · NH₄⁺", "109.5°")}
+      {/* trigonal bipyramidal */}
+      {bond(665, 140 - L, 665, 140, "tb-u")}
+      {bond(665, 140 + L, 665, 140, "tb-d")}
+      {bond(665 - L, 140, 665, 140, "tb-l")}
+      {bond(665 + L, 140, 665, 140, "tb-r")}
+      {wedge(665, 140, 665 - L * 0.45, 140 + L * 0.62, "tb-w")}
+      <text x={648} y={104} fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">90°</text>
+      <text x={700} y={170} fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">120°</text>
+      {cap1(665, "trigonal bipyramidal", "PCl₅ (gaseous)", "90° & 120°")}
+
+      {/* row 2 */}
+      {/* trigonal pyramidal */}
+      {t3Lobe(170, 258, 17, 24, accent, "py-lp")}
+      {bond(170 - L * 0.87, 310 + L * 0.5, 170, 310, "py-l")}
+      {bond(170 + L * 0.87, 310 + L * 0.5, 170, 310, "py-r")}
+      {wedge(170, 310, 170, 310 + L, "py-w")}
+      <path d="M 143 322 A 32 32 0 0 0 197 322" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" />
+      <text x={170} y={288} textAnchor="middle" fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">107°</text>
+      {cap2(170, "trigonal pyramidal", "NH₃ · PCl₃ · H₃O⁺", "107°")}
+      {/* bent */}
+      {t3Lobe(375, 262, 15, 21, accent, "be-lp1")}
+      {t3Lobe(415, 262, 15, 21, accent, "be-lp2")}
+      {bond(395 - L * 0.7, 310 + L * 0.7, 395, 310, "be-l")}
+      {bond(395 + L * 0.7, 310 + L * 0.7, 395, 310, "be-r")}
+      <path d="M 377 334 A 26 26 0 0 0 413 334" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" />
+      <text x={395} y={296} textAnchor="middle" fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">104.5°</text>
+      {cap2(395, "non-linear (bent)", "H₂O · OF₂ · ICl₂⁺", "104.5°")}
+      {/* octahedral */}
+      {bond(620, 310 - L, 620, 310, "oc-u")}
+      {bond(620, 310 + L, 620, 310, "oc-d")}
+      {bond(620 - L, 310, 620, 310, "oc-l")}
+      {bond(620 + L, 310, 620, 310, "oc-r")}
+      {wedge(620, 310, 620 - L * 0.55, 310 + L * 0.55, "oc-w")}
+      {bond(620 + L * 0.55, 310 - L * 0.55, 620, 310, "oc-b", true)}
+      <text x={640} y={266} fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">90°</text>
+      {cap2(620, "octahedral", "SF₆ · PF₆⁻", "90°")}
+
+      {/* footer note */}
+      <text x={390} y={424} textAnchor="middle" fontSize="11.5" fontWeight="700" fontStyle="italic" fill={SOFT} fontFamily="var(--font-body)">
+        dashed lobes = lone pairs — invisible in the shape, but they squeeze the angles ≈2.5° each
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 3.15 · bond dipoles: cancel or not ————— */
+
+export function FigDipoles({ accent = "#FF6B6B" }: { accent?: string }) {
+  const atom = tint(accent, 30);
+  const chip = (x: number, y: number, label: string, fill: string) => (
+    <g>
+      <rect x={x - 74} y={y - 16} width={148} height={32} rx={16} fill={fill} stroke={INK} strokeWidth={2} />
+      <text x={x} y={y + 5} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{label}</text>
+    </g>
+  );
+  const crossedTail = (x: number, y: number, c: string) => (
+    <g stroke={c} strokeWidth={2.2} strokeLinecap="round">
+      <line x1={x - 4} y1={y - 4} x2={x + 4} y2={y + 4} />
+      <line x1={x - 4} y1={y + 4} x2={x + 4} y2={y - 4} />
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 780 290" className="w-full" role="img" aria-label="Molecular dipoles: cancellation and net dipoles">
+      <line x1={256} y1={30} x2={256} y2={272} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={520} y1={30} x2={520} y2={272} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* CO₂ */}
+      <line x1={88} y1={120} x2={172} y2={120} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      <circle cx={130} cy={120} r={12} fill={INK} />
+      <circle cx={76} cy={120} r={17} fill={atom} stroke={INK} strokeWidth={2} />
+      <circle cx={184} cy={120} r={17} fill={atom} stroke={INK} strokeWidth={2} />
+      <text x={76} y={92} textAnchor="middle" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      <text x={130} y={96} textAnchor="middle" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
+      <text x={184} y={92} textAnchor="middle" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      {crossedTail(112, 146, INK)}
+      {t3Arrow(112, 146, 84, 146, INK)}
+      {crossedTail(148, 146, INK)}
+      {t3Arrow(148, 146, 176, 146, INK)}
+      <text x={130} y={182} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">equal & opposite — the dipoles cancel</text>
+      {chip(130, 232, "NON-POLAR", tint(accent, 18))}
+      <text x={130} y={52} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">CO₂ · linear</text>
+
+      {/* CCl₄ */}
+      <g>
+        {([
+          [388, 124, 340, 76],
+          [388, 124, 436, 76],
+          [388, 124, 340, 172],
+          [388, 124, 436, 172],
+        ] as [number, number, number, number][]).map(([x1, y1, x2, y2], i) => (
+          <line key={`cc-${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        ))}
+        <circle cx={388} cy={124} r={12} fill={INK} />
+        {([[340, 76], [436, 76], [340, 172], [436, 172]] as [number, number][]).map(([x, y], i) => (
+          <circle key={`cl-${i}`} cx={x} cy={y} r={15} fill={atom} stroke={INK} strokeWidth={2} />
+        ))}
+        <text x={388} y={64} textAnchor="middle" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+        <text x={388} y={102} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
+        {crossedTail(370, 106, INK)}
+        {t3Arrow(370, 106, 352, 88, INK)}
+        {crossedTail(406, 106, INK)}
+        {t3Arrow(406, 106, 424, 88, INK)}
+        {crossedTail(370, 142, INK)}
+        {t3Arrow(370, 142, 352, 160, INK)}
+        {crossedTail(406, 142, INK)}
+        {t3Arrow(406, 142, 424, 160, INK)}
+        <text x={388} y={204} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">four identical dipoles — perfectly balanced</text>
+        {chip(388, 232, "NON-POLAR", tint(accent, 18))}
+        <text x={388} y={52} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">CCl₄ · tetrahedral</text>
+      </g>
+
+      {/* CHCl₃ */}
+      <g>
+        {([
+          [650, 124, 602, 88],
+          [650, 124, 698, 88],
+          [650, 124, 624, 172],
+        ] as [number, number, number, number][]).map(([x1, y1, x2, y2], i) => (
+          <line key={`ch-${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        ))}
+        <line x1={650} y1={124} x2={676} y2={172} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        <circle cx={650} cy={124} r={12} fill={INK} />
+        {([[602, 88], [698, 88], [624, 172]] as [number, number][]).map(([x, y], i) => (
+          <circle key={`c3-${i}`} cx={x} cy={y} r={15} fill={atom} stroke={INK} strokeWidth={2} />
+        ))}
+        <circle cx={676} cy={172} r={10} fill={PAPER} stroke={INK} strokeWidth={2} />
+        <text x={602} y={68} textAnchor="middle" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+        <text x={698} y={68} textAnchor="middle" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+        <text x={612} y={200} textAnchor="middle" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+        <text x={694} y={192} textAnchor="middle" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
+        {t3Arrow(650, 196, 650, 244, accent, 3.5)}
+        <text x={662} y={226} fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">net dipole</text>
+        {chip(650, 268, "POLAR", tint(accent, 45))}
+        <text x={650} y={52} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">CHCl₃ · unsymmetrical</text>
+      </g>
+    </svg>
+  );
+}
