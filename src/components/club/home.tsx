@@ -7,19 +7,21 @@ import {
   Clock,
   Flame,
   Gauge,
-  Gamepad2,
   ListChecks,
   MoveRight,
   NotebookPen,
   Palette,
   PencilRuler,
   Sticker,
+  Target,
   TestTubes,
-  Zap,
+  Timer,
 } from "./icons";
-import type { Unit } from "@/lib/spectra/types";
+import type { Unit, UnitCode } from "@/lib/spectra/types";
 import { TOTALS } from "@/lib/spectra/units";
 import { useRevised } from "@/lib/spectra/progress";
+import { useTimeData } from "@/lib/spectra/time";
+import { pickSuggestion } from "@/lib/spectra/suggest";
 import {
   BeakerMeter,
   Blob,
@@ -78,9 +80,11 @@ const MARQUEE_B = [
   "RECRYSTALLISATION",
 ];
 
-export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units: Unit[]; onOpenUnit: (code: string) => void; onOpenBlend: () => void; onOpenSticker: () => void }) {
+export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic }: { units: Unit[]; onOpenUnit: (code: string) => void; onOpenSticker: () => void; onOpenTopic: (code: UnitCode, topicId: string) => void }) {
   const hours = Math.round(TOTALS.minutes / 60);
   const revised = useRevised();
+  const time = useTimeData();
+  const suggestion = pickSuggestion(units, revised, time);
 
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -138,8 +142,8 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                 <CandyButton main="#FF6B6B" onClick={() => scrollTo("units")}>
                   Browse the units <MoveRight className="h-5 w-5" />
                 </CandyButton>
-                <SoftButton onClick={onOpenBlend}>
-                  <Zap className="h-4 w-4 text-grape" /> Try the flashcards
+                <SoftButton onClick={onOpenSticker}>
+                  <Sticker className="h-4 w-4 text-mint" /> Track your progress
                 </SoftButton>
               </PopIn>
 
@@ -149,7 +153,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                   { icon: ListChecks, label: `${TOTALS.topics} topics` },
                   { icon: Clock, label: `≈${hours} h of reading` },
                   { icon: PencilRuler, label: `${TOTALS.examples} worked examples` },
-                  { icon: Gamepad2, label: `${TOTALS.checks} checkpoint Qs` },
+                  { icon: ClipboardCheck, label: `${TOTALS.checks} checkpoint Qs` },
                 ].map((s) => (
                   <span
                     key={s.label}
@@ -328,7 +332,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
             {
               n: "2",
               color: "#FF922B",
-              icon: Gamepad2,
+              icon: ClipboardCheck,
               title: "Check your answers",
               body: "Every topic ends with checkpoint questions. Try each one first, then reveal the answer and compare your working.",
             },
@@ -337,7 +341,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
               color: "#9775FA",
               icon: Sticker,
               title: "Track your progress",
-              body: "Mark a topic as revised when you finish it. The unit page and the progress page keep count of what is done and what is left.",
+              body: "Mark a topic as revised when you finish it. The progress page keeps count — and clocks the minutes you give each topic.",
             },
           ].map((s, i) => (
             <div key={s.n} className="contents">
@@ -393,10 +397,10 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
       <section id="arcade" className="mx-auto max-w-6xl scroll-mt-24 px-5 pb-20 sm:px-8">
         <Reveal className="text-center">
           <SectionTag main="#FF6B6B" tilt={1.5}>
-            practice
+            stay on track
           </SectionTag>
           <h2 className="mt-5 font-display text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-ink">
-            Two more ways to revise
+            Your bench, your pace
           </h2>
         </Reveal>
 
@@ -404,52 +408,12 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
           <Reveal delay={0.05}>
             <motion.button
               type="button"
-              onClick={onOpenBlend}
-              whileHover={{ y: -8, rotate: 0, scale: 1.015 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 300, damping: 18 }}
-              className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[32px] p-7 text-left puff sm:p-8"
-              style={{ background: tint("#9775FA", 10), transform: "rotate(-0.8deg)" }}
-            >
-              <Blob color={tint("#9775FA", 22)} className="top-[-30%] right-[-15%] h-[75%] w-[55%]" />
-              <div className="relative z-10 flex h-full flex-col">
-                <span
-                  className="grid h-14 w-14 place-items-center rounded-[20px] text-white"
-                  style={{ background: "#9775FA", boxShadow: `0 5px 0 ${shade("#9775FA")}` }}
-                >
-                  <Gamepad2 className="h-7 w-7" strokeWidth={2.2} />
-                </span>
-                <h3 className="mt-5 font-display text-[26px] font-semibold text-ink">
-                  Flashcards
-                </h3>
-                <p className="mt-2 max-w-[46ch] text-[14.5px] leading-[1.75] text-ink-soft">
-                  Every checkpoint question on the site, shuffled into one deck. Flip a card,
-                  answer it, then reveal the answer and check yourself. Space flips, ← → marks.
-                </p>
-                <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
-                  <span className="rounded-full bg-paper/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
-                    tap to flip
-                  </span>
-                  <span className="rounded-full bg-paper/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
-                    shuffled every round
-                  </span>
-                  <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[14px] font-bold text-grape">
-                    open <MoveRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
-                  </span>
-                </div>
-              </div>
-            </motion.button>
-          </Reveal>
-
-          <Reveal delay={0.12}>
-            <motion.button
-              type="button"
               onClick={onOpenSticker}
               whileHover={{ y: -8, rotate: 0, scale: 1.015 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 300, damping: 18 }}
               className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[32px] p-7 text-left puff sm:p-8"
-              style={{ background: tint("#12B886", 10), transform: "rotate(0.8deg)" }}
+              style={{ background: tint("#12B886", 10), transform: "rotate(-0.8deg)" }}
             >
               <Blob color={tint("#12B886", 22)} className="bottom-[-30%] left-[-15%] h-[75%] w-[55%]" />
               <div className="relative z-10 flex h-full flex-col">
@@ -457,21 +421,22 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
                   className="grid h-14 w-14 place-items-center rounded-[20px] text-white"
                   style={{ background: "#12B886", boxShadow: `0 5px 0 ${shade("#12B886")}` }}
                 >
-                  <Sticker className="h-7 w-7" strokeWidth={2.2} />
+                  <Timer className="h-7 w-7" strokeWidth={2.2} />
                 </span>
                 <h3 className="mt-5 font-display text-[26px] font-semibold text-ink">
-                  Progress tracker
+                  Time &amp; goals
                 </h3>
                 <p className="mt-2 max-w-[46ch] text-[14.5px] leading-[1.75] text-ink-soft">
-                  Mark topics as revised as you finish them, and this page keeps count across
-                  all six units. Currently {revised.length}/{TOTALS.topics} topics marked.
+                  The site quietly clocks your reading — today, this week and topic by topic.
+                  Set a weekly goal, then watch the beaker fill. Currently{" "}
+                  {revised.length}/{TOTALS.topics} topics marked as revised.
                 </p>
                 <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
                   <span className="rounded-full bg-paper/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
-                    6 badges
+                    weekly goals
                   </span>
                   <span className="rounded-full bg-paper/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
-                    saved in your browser
+                    minutes per topic
                   </span>
                   <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[14px] font-bold text-mint">
                     open <MoveRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
@@ -480,6 +445,70 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
               </div>
             </motion.button>
           </Reveal>
+
+          {suggestion ? (
+            <Reveal delay={0.12}>
+              <motion.button
+                type="button"
+                onClick={() => onOpenTopic(suggestion.unit.code, suggestion.topic.id)}
+                whileHover={{ y: -8, rotate: 0, scale: 1.015 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[32px] p-7 text-left puff sm:p-8"
+                style={{
+                  background: tint(suggestion.unit.candy.main, 10),
+                  transform: "rotate(0.8deg)",
+                }}
+              >
+                <Blob
+                  color={tint(suggestion.unit.candy.main, 22)}
+                  className="top-[-30%] right-[-15%] h-[75%] w-[55%]"
+                />
+                <div className="relative z-10 flex h-full flex-col">
+                  <span
+                    className="grid h-14 w-14 place-items-center rounded-[20px] text-white"
+                    style={{
+                      background: suggestion.unit.candy.main,
+                      boxShadow: `0 5px 0 ${shade(suggestion.unit.candy.main)}`,
+                    }}
+                  >
+                    <Target className="h-7 w-7" strokeWidth={2.2} />
+                  </span>
+                  <h3 className="mt-5 font-display text-[26px] font-semibold text-ink">
+                    Today&apos;s pick
+                  </h3>
+                  <p className="mt-2 font-display text-[15px] font-semibold text-ink">
+                    {suggestion.topic.label} · {suggestion.topic.title}
+                  </p>
+                  <p className="mt-1 max-w-[46ch] text-[14.5px] leading-[1.75] text-ink-soft">
+                    {suggestion.reason} — about {suggestion.topic.minutes} minutes of reading.
+                  </p>
+                  <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
+                    <span className="rounded-full bg-paper/85 px-3.5 py-1.5 text-[12px] font-extrabold text-ink">
+                      picked fresh daily
+                    </span>
+                    <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[14px] font-bold" style={{ color: suggestion.unit.candy.main }}>
+                      read it <MoveRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
+                    </span>
+                  </div>
+                </div>
+              </motion.button>
+            </Reveal>
+          ) : (
+            <Reveal delay={0.12}>
+              <button
+                type="button"
+                onClick={onOpenSticker}
+                className="block h-full w-full cursor-pointer rounded-[32px] p-7 text-left puff sm:p-8"
+                style={{ background: tint("#12B886", 10), transform: "rotate(0.8deg)" }}
+              >
+                <h3 className="font-display text-[26px] font-semibold text-ink">All done</h3>
+                <p className="mt-2 text-[14.5px] leading-[1.75] text-ink-soft">
+                  Every topic is marked as revised. Respect.
+                </p>
+              </button>
+            </Reveal>
+          )}
         </div>
       </section>
 

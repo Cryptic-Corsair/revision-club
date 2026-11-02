@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Clock, Search, Sparkles } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
-import { searchTopics, type SearchRow } from "@/lib/spectra/deck";
+import { searchTopics, type SearchRow } from "@/lib/spectra/search-index";
 import { Fmt } from "./format";
 import { tint, shade } from "./bits";
 

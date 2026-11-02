@@ -18,6 +18,7 @@ import {
 } from "./icons";
 import type { NotesBlock, NotesDoc, SpecSection } from "@/lib/spectra/notes-types";
 import type { Unit } from "@/lib/spectra/types";
+import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { Fmt } from "./format";
 import { PopIn, Reveal, SoftButton, SpeechBubble, Squiggle, Mascot, readableInk, shade, tint } from "./bits";
 import {
@@ -126,11 +127,14 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
     if (doc.outro) walk(doc.outro);
     return n;
   };
+  const time = useTimeData();
+  const spentHere = topicSeconds(time, `${unit.code}/${doc.topicId}`);
   const stats = [
     `${doc.sections.length} spec sections`,
     `${count("worked")} worked examples`,
     `${count("figure")} diagrams`,
     `${count("checkpoint")} textbook checkpoints`,
+    ...(spentHere >= 60 ? [`${fmtClock(spentHere)} of your time here`] : []),
   ];
 
   /* sticky spec rail — the chip strip scrolls sideways; gradient fades
@@ -149,7 +153,6 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
     measureRail();
     window.addEventListener("resize", measureRail);
     return () => window.removeEventListener("resize", measureRail);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [doc]);
 
   const accentOf = (i: number) => BANDS[i % BANDS.length];

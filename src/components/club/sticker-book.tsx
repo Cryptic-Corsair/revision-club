@@ -7,18 +7,32 @@ import {
   Award,
   BookOpenCheck,
   Check,
+  Clock,
   Droplets,
   Gauge,
   Lock,
+  MoveRight,
   Sparkles,
   Sticker,
+  Target,
+  Timer,
   Trophy,
-  Zap,
 } from "./icons";
 import type { Unit, UnitCode } from "@/lib/spectra/types";
 import { TOTALS } from "@/lib/spectra/units";
 import { toggleRevised, useRevised } from "@/lib/spectra/progress";
-import { useBlendStats } from "@/lib/spectra/blend-stats";
+import {
+  fmtClock,
+  fmtShort,
+  resetTime,
+  setGoalMin,
+  todaySeconds,
+  topicSeconds,
+  totalSeconds,
+  useTimeData,
+  weekSeconds,
+} from "@/lib/spectra/time";
+import { pickSuggestion } from "@/lib/spectra/suggest";
 import {
   BeakerMeter,
   Confetti,
@@ -36,7 +50,11 @@ import {
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · progress page
-   Topics marked as revised are counted here.
+   Two ledgers in one room: the topics you've marked as revised,
+   and the minutes the site has quietly banked — today, this week
+   against your goal, and topic by topic, so "how long did Topic 4
+   get vs Topic 7" is a glance, not a guess. A daily pick suggests
+   what to read next.
    ═══════════════════════════════════════════════════════════════ */
 
 interface Achievement {
@@ -47,11 +65,13 @@ interface Achievement {
   earned: boolean;
 }
 
-function progressLine(pct: number, count: number): string {
+const GOAL_CHIPS = [30, 60, 90, 120, 180];
+const goalChipLabel = (m: number) => (m < 60 ? `${m} min` : `${Math.floor(m / 60)} h${m % 60 ? ` ${m % 60}` : ""}`);
+
+function revisedLine(pct: number, count: number): string {
   if (count === 0)
     return "Nothing marked yet. Open any unit, finish a topic, then mark it as revised.";
-  if (pct >= 1)
-    return "Every topic revised — well done. Use the flashcards to keep it fresh.";
+  if (pct >= 1) return "Every topic revised — well done. The minutes keep the rust off.";
   if (pct >= 0.75) return "Three quarters of the course revised.";
   if (pct >= 0.5) return "Halfway through the course.";
   if (pct >= 0.25) return "A quarter of the course revised.";
@@ -62,21 +82,37 @@ export function StickerBook({
   units,
   onBack,
   onOpenUnit,
+  onOpenTopic,
 }: {
   units: Unit[];
   onBack: () => void;
   onOpenUnit: (code: UnitCode) => void;
+  onOpenTopic: (code: UnitCode, topicId: string) => void;
 }) {
   const revised = useRevised();
-  const stats = useBlendStats();
+  const time = useTimeData();
   const [confirmPour, setConfirmPour] = useState(false);
   const [confetti, setConfetti] = useState(0);
 
+  /* — time ledger — */
+  const today = todaySeconds(time);
+  const week = weekSeconds(time);
+  const all = totalSeconds(time);
+  const goalS = time.goalMin * 60;
+  const weekPct = goalS > 0 ? Math.min(1, week / goalS) : 0;
+  const goalMet = goalS > 0 && week >= goalS;
+
+  /* — revised ledger — */
   const count = revised.length;
   const pct = TOTALS.topics ? count / TOTALS.topics : 0;
 
   const unitDone = (u: Unit) =>
     u.topics.filter((t) => revised.includes(`${u.code}/${t.id}`)).length;
+
+  const oneTopicMax = Math.max(...units.flatMap((u) => u.topics.map((t) => topicSeconds(time, `${u.code}/${t.id}`))), 0);
+  const deepDive = oneTopicMax >= 30 * 60;
+
+  const suggestion = pickSuggestion(units, revised, time);
 
   const achievements: Achievement[] = [
     {
@@ -101,18 +137,18 @@ export function StickerBook({
       earned: pct >= 0.5,
     },
     {
-      id: "first-round",
-      label: "First round",
-      hint: "Play one round of flashcards",
-      color: "#9775FA",
-      earned: stats.blends >= 1,
+      id: "first-hour",
+      label: "First hour",
+      hint: "Spend 1 hour reading here",
+      color: "#F59F00",
+      earned: all >= 60 * 60,
     },
     {
-      id: "streak-5",
-      label: "On a streak",
-      hint: "Get a streak of 5 in Flashcards",
-      color: "#F59F00",
-      earned: stats.best >= 5,
+      id: "deep-dive",
+      label: "Deep dive",
+      hint: "Give one topic 30 minutes",
+      color: "#9775FA",
+      earned: deepDive,
     },
     {
       id: "course-complete",
@@ -130,9 +166,16 @@ export function StickerBook({
       return;
     }
     for (const k of revised) toggleRevised(k);
+    resetTime();
     setConfirmPour(false);
     setConfetti((c) => c + 1);
   };
+
+  const timeLine = goalMet
+    ? `Weekly goal met — ${fmtClock(week)} on the bench this week. Everything from here is extra credit.`
+    : week > 0
+      ? `${fmtClock(week)} this week against a ${goalChipLabel(time.goalMin)} goal — the beaker fills as you read.`
+      : "The beaker fills with every minute you spend reading. Open a topic to start the clock.";
 
   return (
     <div className="mx-auto max-w-4xl px-5 pt-24 pb-20 sm:px-8">
@@ -160,68 +203,250 @@ export function StickerBook({
         </PopIn>
       </header>
 
-      {/* ————— progress panel ————— */}
+      {/* ————— the time ledger ————— */}
       <Reveal className="relative mt-8">
-        <div className="flex flex-wrap items-center gap-7 rounded-[40px] bg-paper p-7 puff sm:p-9">
-          <Confetti fire={confetti} />
-          <Float className="shrink-0">
-            <BeakerMeter pct={pct} main="#12B886" size={130} />
-          </Float>
-          <div className="min-w-0 flex-1">
-            <div className="font-display text-[12px] font-bold tracking-[0.18em] text-ink-faint uppercase">
-              topics revised
-            </div>
-            <div className="mt-1 flex items-baseline gap-2">
-              <span className="font-display text-[clamp(2.4rem,6vw,3.6rem)] leading-none font-semibold text-ink">
-                {Math.round(pct * 100)}%
-              </span>
-              <span className="text-[14px] font-extrabold text-ink-soft">
-                {count} of {TOTALS.topics} topics
-              </span>
-            </div>
-            <div className="mt-4 h-5 w-full max-w-sm overflow-hidden rounded-full bg-ink/5">
-              <motion.div
-                className="h-full rounded-full bg-[linear-gradient(90deg,#12B886,#FFD43B)]"
-                initial={{ width: 0 }}
-                animate={{ width: `${Math.max(pct * 100, count > 0 ? 4 : 0)}%` }}
-                transition={{ type: "spring", stiffness: 110, damping: 20 }}
-              />
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {units.map((u) => {
-                const done = unitDone(u);
-                const full = u.topics.length > 0 && done === u.topics.length;
-                return (
-                  <span
-                    key={u.code}
-                    className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11.5px] font-extrabold"
-                    style={{
-                      background: done > 0 ? tint(u.candy.main, full ? 90 : 16) : "color-mix(in oklab, var(--color-ink) 5%, transparent)",
-                      color: done > 0 ? shade(u.candy.main, 62) : "var(--color-ink-faint)",
-                    }}
+        <div className="rounded-[40px] bg-paper p-6 puff sm:p-8">
+          <div className="grid gap-5 sm:grid-cols-3">
+            <StatPillar icon={Clock} label="today" value={fmtClock(today)} color="#FF922B" />
+            <StatPillar icon={Timer} label="this week" value={fmtClock(week)} color="#12B886" />
+            <StatPillar icon={Sparkles} label="all time" value={fmtClock(all)} color="#9775FA" />
+          </div>
+
+          {/* weekly goal bench */}
+          <div
+            className="mt-6 flex flex-col gap-5 rounded-[30px] p-5 sm:flex-row sm:items-center sm:gap-7"
+            style={{ background: tint("#12B886", 8) }}
+          >
+            <Float className="mx-auto shrink-0 sm:mx-0">
+              <BeakerMeter pct={weekPct} main="#12B886" size={96} />
+            </Float>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-baseline gap-x-2.5">
+                <span className="font-display text-[17px] font-semibold text-ink">weekly goal</span>
+                <span className="text-[13px] font-extrabold text-ink-soft">
+                  {fmtClock(week)} of {goalChipLabel(time.goalMin)} {goalMet ? "· goal met" : ""}
+                </span>
+              </div>
+              <div className="mt-2.5 h-4 w-full max-w-md overflow-hidden rounded-full bg-ink/[0.07]">
+                <motion.div
+                  className="h-full rounded-full bg-[linear-gradient(90deg,#12B886,#FFD43B)]"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${Math.max(weekPct * 100, week > 0 ? 4 : 0)}%` }}
+                  transition={{ type: "spring", stiffness: 110, damping: 20 }}
+                />
+              </div>
+              <div className="mt-3.5 flex flex-wrap items-center gap-2">
+                {GOAL_CHIPS.map((g) => {
+                  const active = time.goalMin === g;
+                  return (
+                    <motion.button
+                      key={g}
+                      type="button"
+                      onClick={() => setGoalMin(g)}
+                      whileTap={{ scale: 0.92 }}
+                      aria-pressed={active}
+                      aria-label={`Weekly goal ${goalChipLabel(g)}`}
+                      className="cursor-pointer rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold transition-colors"
+                      style={
+                        active
+                          ? { background: "#12B886", color: "#fff", boxShadow: "0 3px 0 #0B7A57" }
+                          : { background: "rgb(61 43 31 / 0.06)", color: "var(--color-ink-soft)" }
+                      }
+                    >
+                      {goalChipLabel(g)}
+                    </motion.button>
+                  );
+                })}
+                <span className="ml-1 inline-flex items-center gap-1.5 rounded-full bg-paper px-2 py-1">
+                  <motion.button
+                    type="button"
+                    onClick={() => setGoalMin(time.goalMin - 15)}
+                    whileTap={{ scale: 0.88 }}
+                    aria-label="Goal 15 minutes less"
+                    className="grid h-7 w-7 cursor-pointer place-items-center rounded-full bg-ink/[0.06] font-display text-[15px] leading-none font-bold text-ink-soft hover:bg-ink/[0.11]"
                   >
-                    {full && <Check className="h-3 w-3" strokeWidth={3.5} />}
-                    {u.code.replace("WCH", "")} · {done}/{u.topics.length}
+                    −
+                  </motion.button>
+                  <span className="min-w-[4.5ch] text-center font-display text-[12px] font-bold text-ink">
+                    {goalChipLabel(time.goalMin)}
                   </span>
-                );
-              })}
+                  <motion.button
+                    type="button"
+                    onClick={() => setGoalMin(time.goalMin + 15)}
+                    whileTap={{ scale: 0.88 }}
+                    aria-label="Goal 15 minutes more"
+                    className="grid h-7 w-7 cursor-pointer place-items-center rounded-full bg-ink/[0.06] font-display text-[15px] leading-none font-bold text-ink-soft hover:bg-ink/[0.11]"
+                  >
+                    +
+                  </motion.button>
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </Reveal>
 
-      {/* ————— progress line ————— */}
+      {/* ————— mascot line ————— */}
       <PopIn delay={0.15} className="mt-6 flex items-end gap-2 sm:gap-3">
         <div className="shrink-0 pb-1">
-          <Mascot main="#12B886" mood={pct >= 0.5 ? "cheer" : "idle"} size={88} bubbles={false} />
+          <Mascot main="#12B886" mood={goalMet || pct >= 0.5 ? "cheer" : "idle"} size={88} bubbles={false} />
         </div>
         <SpeechBubble bg={tint("#12B886", 10)} className="min-w-0 flex-1" tailClass="left-[-9px] rotate-[135deg]">
-          <p className="text-[15px] leading-[1.75] text-ink">{progressLine(pct, count)}</p>
+          <p className="text-[15px] leading-[1.75] text-ink">{timeLine}</p>
         </SpeechBubble>
       </PopIn>
 
-      {/* ————— achievements ————— */}
-      <section className="mt-12">
+      {/* ————— today's pick ————— */}
+      {suggestion && (
+        <Reveal className="mt-6">
+          <div
+            className="relative overflow-hidden rounded-[32px] p-5 sm:p-6"
+            style={{ background: tint(suggestion.unit.candy.main, 9) }}
+          >
+            <div className="flex flex-wrap items-center gap-4">
+              <span
+                className="grid h-14 w-14 shrink-0 place-items-center rounded-[20px] font-display text-[15px] font-bold text-white"
+                style={{
+                  background: suggestion.unit.candy.main,
+                  boxShadow: `0 4px 0 ${shade(suggestion.unit.candy.main)}`,
+                }}
+              >
+                {suggestion.unit.code.replace("WCH", "")}
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2 font-display text-[11.5px] font-bold tracking-[0.16em] text-ink-faint uppercase">
+                  <Target className="h-3.5 w-3.5" style={{ color: suggestion.unit.candy.main }} />
+                  today&apos;s pick
+                </div>
+                <p className="mt-0.5 truncate font-display text-[17px] font-semibold text-ink">
+                  {suggestion.topic.label} · {suggestion.topic.title}
+                </p>
+                <p className="text-[12.5px] font-bold text-ink-soft">
+                  {suggestion.reason} · about {suggestion.topic.minutes} min
+                </p>
+              </div>
+              <motion.button
+                type="button"
+                onClick={() => onOpenTopic(suggestion.unit.code, suggestion.topic.id)}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex min-h-[46px] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[14px] font-semibold text-white"
+                style={{
+                  background: suggestion.unit.candy.main,
+                  boxShadow: `0 4px 0 ${shade(suggestion.unit.candy.main)}`,
+                }}
+              >
+                Read it now <MoveRight className="h-4.5 w-4.5" />
+              </motion.button>
+            </div>
+          </div>
+        </Reveal>
+      )}
+
+      {/* ————— where the minutes go ————— */}
+      <section className="mt-14">
+        <Reveal>
+          <div className="mb-5 flex items-center gap-2 font-display text-[13px] font-bold tracking-[0.16em] text-ink-faint uppercase">
+            <Timer className="h-4 w-4 text-tangerine" /> where your minutes go · tap a topic to read
+          </div>
+        </Reveal>
+
+        <div className="flex flex-col gap-5">
+          {units.map((u, ui) => {
+            const main = u.candy.main;
+            const busiest = Math.max(...u.topics.map((t) => topicSeconds(time, `${u.code}/${t.id}`)), 0);
+            const unitTime = u.topics.reduce((s, t) => s + topicSeconds(time, `${u.code}/${t.id}`), 0);
+            const done = unitDone(u);
+            return (
+              <Reveal key={u.code} delay={Math.min(ui * 0.04, 0.2)}>
+                <div className="rounded-[32px] bg-paper p-5 puff sm:p-6">
+                  <button
+                    type="button"
+                    onClick={() => onOpenUnit(u.code)}
+                    className="group mb-4 flex w-full cursor-pointer flex-wrap items-center gap-3 text-left"
+                  >
+                    <span
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl font-display text-[15px] font-bold text-white"
+                      style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
+                    >
+                      {u.code.replace("WCH", "")}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate font-display text-[16.5px] font-semibold text-ink group-hover:underline">
+                        {u.code} · {u.shortTitle}
+                      </span>
+                      <span className="block text-[12px] font-extrabold text-ink-soft">
+                        {done}/{u.topics.length} revised · {fmtClock(unitTime)} this course
+                      </span>
+                    </span>
+                    <BeakerMeter pct={u.topics.length ? done / u.topics.length : 0} main={main} size={34} />
+                  </button>
+
+                  <div className="flex flex-col gap-2">
+                    {u.topics.map((t) => {
+                      const key = `${u.code}/${t.id}`;
+                      const s = topicSeconds(time, key);
+                      const has = revised.includes(key);
+                      const w = busiest > 0 ? Math.max((s / busiest) * 100, s > 0 ? 6 : 0) : 0;
+                      return (
+                        <button
+                          key={t.id}
+                          type="button"
+                          onClick={() => onOpenTopic(u.code, t.id)}
+                          className="group cursor-pointer rounded-[20px] px-4 py-3 text-left transition-colors"
+                          style={{ background: s > 0 ? tint(main, 7) : "rgb(61 43 31 / 0.035)" }}
+                          aria-label={`Open ${t.title} — ${fmtClock(s)} recorded`}
+                        >
+                          <div className="flex items-center gap-3">
+                            {has ? (
+                              <span
+                                className="grid h-6 w-6 shrink-0 place-items-center rounded-full"
+                                style={{ background: main }}
+                              >
+                                <Check className="h-3.5 w-3.5 text-white" strokeWidth={3.5} />
+                              </span>
+                            ) : (
+                              <span
+                                className="h-6 w-6 shrink-0 rounded-full"
+                                style={{ boxShadow: `inset 0 0 0 2.5px ${tint(main, 45)}` }}
+                              />
+                            )}
+                            <span className="min-w-0 flex-1 truncate text-[13.5px] font-extrabold text-ink">
+                              {t.label} · {t.title}
+                            </span>
+                            <span
+                              className="shrink-0 font-display text-[12.5px] font-bold"
+                              style={{ color: s > 0 ? shade(main, 62) : "var(--color-ink-faint)" }}
+                            >
+                              {s > 0 ? fmtShort(s) : "—"}
+                            </span>
+                          </div>
+                          <div className="mt-2 ml-9 h-[7px] overflow-hidden rounded-full bg-ink/[0.05]">
+                            <motion.div
+                              className="h-full rounded-full"
+                              style={{ background: main }}
+                              initial={{ width: 0 }}
+                              animate={{ width: `${w}%` }}
+                              transition={{ type: "spring", stiffness: 110, damping: 20 }}
+                            />
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+        <p className="mt-3 text-[12px] font-bold text-ink-faint">
+          the clock runs while a topic page or revision note is open and the tab is in view —
+          step away for five minutes and it pauses itself.
+        </p>
+      </section>
+
+      {/* ————— badges ————— */}
+      <section className="mt-14">
         <Reveal>
           <div className="mb-4 flex items-center gap-2 font-display text-[13px] font-bold tracking-[0.16em] text-ink-faint uppercase">
             <Award className="h-4 w-4 text-lemon" /> badges · {achievements.filter((a) => a.earned).length}/{achievements.length}
@@ -250,8 +475,8 @@ export function StickerBook({
                   }
                 >
                   {a.earned ? (
-                    a.id === "streak-5" ? <Zap className="h-5.5 w-5.5" strokeWidth={2.5} /> :
-                    a.id === "first-round" ? <Sparkles className="h-5.5 w-5.5" strokeWidth={2.5} /> :
+                    a.id === "first-hour" ? <Timer className="h-5.5 w-5.5" strokeWidth={2.5} /> :
+                    a.id === "deep-dive" ? <Target className="h-5.5 w-5.5" strokeWidth={2.5} /> :
                     a.id === "course-complete" ? <Droplets className="h-5.5 w-5.5" strokeWidth={2.5} /> :
                     a.id === "unit-complete" ? <BookOpenCheck className="h-5.5 w-5.5" strokeWidth={2.5} /> :
                     a.id === "halfway" ? <Gauge className="h-5.5 w-5.5" strokeWidth={2.5} /> :
@@ -276,7 +501,7 @@ export function StickerBook({
         </div>
       </section>
 
-      {/* ————— the sheets ————— */}
+      {/* ————— the sheets: revised topics ————— */}
       <section className="mt-14 flex flex-col gap-8">
         <Reveal>
           <div className="flex items-center gap-2 font-display text-[13px] font-bold tracking-[0.16em] text-ink-faint uppercase">
@@ -407,9 +632,43 @@ export function StickerBook({
       </Reveal>
       <p className="mt-3 text-center text-[12px] font-bold text-ink-faint">
         {confirmPour
-          ? "this clears the revised status of every topic — there is no undo"
-          : "progress is saved in this browser only"}
+          ? "this clears every revised mark and the whole time ledger — there is no undo"
+          : "progress and reading time are saved in this browser only"}
       </p>
+    </div>
+  );
+}
+
+/* ————— stat pillar ————— */
+
+function StatPillar({
+  icon: Icon,
+  label,
+  value,
+  color,
+}: {
+  icon: typeof Clock;
+  label: string;
+  value: string;
+  color: string;
+}) {
+  return (
+    <div
+      className="flex flex-col items-center rounded-[26px] px-3 py-5 text-center"
+      style={{ background: tint(color, 8) }}
+    >
+      <span
+        className="grid h-10 w-10 place-items-center rounded-full"
+        style={{ background: tint(color, 22), color: shade(color, 62) }}
+      >
+        <Icon className="h-5 w-5" strokeWidth={2.2} />
+      </span>
+      <span className="mt-2 font-display text-[clamp(1.35rem,3.2vw,1.8rem)] leading-none font-semibold text-ink">
+        {value}
+      </span>
+      <span className="mt-1.5 font-display text-[11px] font-bold tracking-[0.16em] text-ink-faint uppercase">
+        {label}
+      </span>
     </div>
   );
 }

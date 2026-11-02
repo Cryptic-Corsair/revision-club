@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Fredoka, Nunito, IBM_Plex_Mono } from "next/font/google";
+import { Baloo_2, Fredoka, Nunito, Patrick_Hand, Quicksand, IBM_Plex_Mono } from "next/font/google";
 import { DARK_MOOD_COUNT } from "@/lib/spectra/dark-mood";
 import "./globals.css";
 
@@ -10,10 +10,28 @@ const fredoka = Fredoka({
   weight: ["400", "500", "600", "700"],
 });
 
+const baloo = Baloo_2({
+  variable: "--font-baloo",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const patrick = Patrick_Hand({
+  variable: "--font-patrick",
+  subsets: ["latin"],
+  weight: "400",
+});
+
 const nunito = Nunito({
   variable: "--font-nunito",
   subsets: ["latin"],
   weight: ["400", "600", "700", "800", "900"],
+});
+
+const quicksand = Quicksand({
+  variable: "--font-quicksand",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const plex = IBM_Plex_Mono({
@@ -25,15 +43,28 @@ const plex = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "Reaction Club — Edexcel IAL Chemistry revision notes",
   description:
-    "Revision notes for Edexcel IAL Chemistry (WCH11–WCH16), written to the 2018 specification. Definitions, equations, worked examples and checkpoint questions for every topic, with progress saved in your browser.",
+    "Revision notes for Edexcel IAL Chemistry (WCH11–WCH16), written to the 2018 specification. Definitions, equations, worked examples and checkpoint questions for every topic, with progress and reading time saved in your browser.",
   icons: { icon: "/favicon.svg" },
 };
 
-/* Sets the saved lab (or none) before first paint — no flash of the wrong
-   one. dark and hybrid also pick today's roast (html[data-mood]) so the
-   day's shade set is on before the first pixel. beforeInteractive keeps
-   it out of React's hydration tree. */
-const themeInit = `(function(){try{var t=localStorage.getItem("rc-theme");if(t==="dark"||t==="hybrid"){var r=document.documentElement;r.classList.add(t);r.dataset.mood=String(Math.floor(Date.now()/864e5)%${DARK_MOOD_COUNT})}}catch(e){}})();`;
+/* Puts the saved preferences on <html> before the first paint — no
+   flash of the wrong lab, font size or family. dark and hybrid also
+   pick today's roast (html[data-mood]). beforeInteractive keeps it
+   out of React's hydration tree. The React side (prefs.ts) re-applies
+   the same values once it hydrates, then owns every change. */
+const prefsInit = `(function(){try{
+var r=document.documentElement,p=null;
+try{p=JSON.parse(localStorage.getItem("reaction-club-prefs-v1")||"null")}catch(e){}
+if(!p){var t=localStorage.getItem("rc-theme");p={theme:(t==="dark"||t==="hybrid")?t:"light"}}
+var th=p.theme==="dark"||p.theme==="hybrid"?p.theme:"light";
+if(th!=="light"){r.classList.add(th);r.dataset.mood=String(Math.floor(Date.now()/864e5)%${DARK_MOOD_COUNT})}
+if(p.headFont)r.dataset.head=String(p.headFont);
+if(p.bodyFont)r.dataset.body=String(p.bodyFont);
+r.dataset.dots=p.dots===false?"off":"on";
+r.dataset.motion=p.motion===false?"off":"on";
+var z=[0.9,1,1.15,1.3].indexOf(Number(p.zoom))>=0?Number(p.zoom):1;
+r.style.zoom=String(z);
+}catch(e){}})();`;
 
 export const viewport: Viewport = {
   themeColor: [
@@ -48,9 +79,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${fredoka.variable} ${nunito.variable} ${plex.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable}`}
+    >
       <body className="min-h-screen bg-cream font-body text-ink antialiased">
-        <Script id="rc-theme" strategy="beforeInteractive">{themeInit}</Script>
+        <Script id="rc-prefs" strategy="beforeInteractive">{prefsInit}</Script>
         {children}
       </body>
     </html>

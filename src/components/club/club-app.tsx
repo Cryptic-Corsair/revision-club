@@ -2,22 +2,25 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FlaskConical, Home as HomeIcon, Moon, Search, Sticker, Sun, SunMoon, Zap } from "./icons";
+import { FlaskConical, Home as HomeIcon, Moon, Search, Sliders, Sticker, Sun, SunMoon } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { UNITS, getUnit, getTopic } from "@/lib/spectra/units";
 import { getNotes, getNotesForTopic } from "@/lib/spectra/notes";
-import { pickDarkMood } from "@/lib/spectra/dark-mood";
+import { useTimeScope } from "@/lib/spectra/time";
+import { applyPrefs, setPrefs, usePrefs, type Lab } from "@/lib/spectra/prefs";
 import { Home } from "./home";
 import { UnitView } from "./unit-view";
 import { TopicView } from "./topic-view";
 import { NotesReader } from "./notes-reader";
-import { Blend } from "./blend";
 import { StickerBook } from "./sticker-book";
+import { CustomizePanel } from "./customize";
 import { SearchPalette } from "./search";
-import { Mascot, SpeechBubble, tint, shade } from "./bits";
+import { Mascot, SpeechBubble } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · app shell — pill nav, views, footer
+   The nav stays lean: home, then the tools. Units live on the
+   home page, where they have room to breathe.
    ═══════════════════════════════════════════════════════════════ */
 
 type View =
@@ -25,8 +28,7 @@ type View =
   | { kind: "unit"; code: string }
   | { kind: "topic"; code: string; topicId: string }
   | { kind: "notes"; code: string; docId: string }
-  | { kind: "sticker" }
-  | { kind: "blend" };
+  | { kind: "sticker" };
 
 function LogoMark({ size = 38 }: { size?: number }) {
   return (
@@ -45,13 +47,13 @@ function LogoMark({ size = 38 }: { size?: number }) {
 }
 
 /* ————— lab switch —————
-   Three labs, one button: daylight → after-dark → hybrid → daylight.
-   The hybrid lab keeps the daylight page but lets the notes reader
-   punch in deep cocoa rooms — the best of both moods. A candy toast
-   announces each switch, and the mobile browser chrome is re-painted
-   to the lab's cream so the address bar never fights the page. */
+   Daylight → after-dark → hybrid, one tap apart. The hybrid lab
+   keeps the daylight page but lets the notes reader punch in deep
+   cocoa rooms — the best of both moods. A candy toast announces
+   each switch, and the mobile browser chrome is re-painted to the
+   lab's cream so the address bar never fights the page. */
 
-export type Lab = "light" | "dark" | "hybrid";
+const LAB_ORDER: Lab[] = ["light", "dark", "hybrid"];
 
 const LAB_LABEL: Record<Lab, string> = {
   light: "Daylight lab",
@@ -59,79 +61,41 @@ const LAB_LABEL: Record<Lab, string> = {
   hybrid: "Hybrid lab — day & night",
 };
 
-function readLab(): Lab {
-  const r = document.documentElement;
-  if (r.classList.contains("dark")) return "dark";
-  if (r.classList.contains("hybrid")) return "hybrid";
-  return "light";
-}
-
-/* keep the mobile address bar in the lab's cream */
-function paintChrome(root: HTMLElement) {
-  const cream = getComputedStyle(root).getPropertyValue("--color-cream").trim();
-  if (!cream) return;
-  let m = document.querySelector('meta[name="theme-color"]:not([media])');
-  if (!m) {
-    m = document.createElement("meta");
-    m.setAttribute("name", "theme-color");
-    document.head.appendChild(m);
-  }
-  m.setAttribute("content", cream);
-}
-
-function useTheme() {
-  const [lab, setLab] = useState<Lab>("light");
-  const [announce, setAnnounce] = useState<Lab | null>(null);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(() => {
-    const current = readLab();
-    setLab(current);
-    paintChrome(document.documentElement);
-  }, []);
-  const cycle = useCallback(() => {
-    const order: Lab[] = ["light", "dark", "hybrid"];
-    const next = order[(order.indexOf(readLab()) + 1) % order.length];
-    const root = document.documentElement;
-    /* hold the colours while they ease over — one smooth move */
-    root.classList.add("theme-anim");
-    window.setTimeout(() => root.classList.remove("theme-anim"), 480);
-    root.classList.toggle("dark", next === "dark");
-    root.classList.toggle("hybrid", next === "hybrid");
-    /* dark + hybrid wear today's roast; the daylight lab needs none */
-    if (next !== "light") root.dataset.mood = String(pickDarkMood());
-    else delete root.dataset.mood;
-    paintChrome(root);
-    try {
-      localStorage.setItem("rc-theme", next);
-    } catch {
-      /* private mode — mood just won't persist */
-    }
-    setLab(next);
-    setAnnounce(next);
-    if (timer.current) clearTimeout(timer.current);
-    timer.current = setTimeout(() => setAnnounce(null), 1800);
-  }, []);
-  return { lab, announce, cycle };
-}
+const LAB_TITLE: Record<Lab, string> = {
+  light: "Switch to the after-dark lab",
+  dark: "Switch to the hybrid lab",
+  hybrid: "Switch to the daylight lab",
+};
 
 function TopBar({
   view,
   onHome,
-  onOpenUnit,
   onOpenSticker,
-  onOpenBlend,
   onSearch,
+  onOpenCustomize,
 }: {
   view: View;
   onHome: () => void;
-  onOpenUnit: (code: string) => void;
   onOpenSticker: () => void;
-  onOpenBlend: () => void;
   onSearch: () => void;
+  onOpenCustomize: () => void;
 }) {
-  const { lab, announce, cycle } = useTheme();
-  const activeCode =
-    view.kind === "unit" || view.kind === "topic" || view.kind === "notes" ? view.code : null;
+  const prefs = usePrefs();
+  const lab = prefs.theme;
+  const [announce, setAnnounce] = useState<Lab | null>(null);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const cycle = useCallback(() => {
+    const next = LAB_ORDER[(LAB_ORDER.indexOf(lab) + 1) % LAB_ORDER.length];
+    /* hold the colours while they ease over — one smooth move */
+    const root = document.documentElement;
+    root.classList.add("theme-anim");
+    window.setTimeout(() => root.classList.remove("theme-anim"), 480);
+    setPrefs({ theme: next });
+    setAnnounce(next);
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => setAnnounce(null), 1800);
+  }, [lab]);
 
   const tool = (active: boolean) =>
     `grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors ${
@@ -141,141 +105,97 @@ function TopBar({
   return (
     <>
       <header className="fixed inset-x-0 top-2.5 z-50 flex justify-center px-2.5 sm:top-3 sm:px-3">
-      <nav
-        aria-label="Units"
-        className="no-scrollbar flex max-w-[97vw] items-center gap-1.5 overflow-x-auto rounded-full bg-paper/90 py-2 pr-2.5 pl-2.5 backdrop-blur-xl"
-        style={{ boxShadow: "0 3px 0 var(--edge), 0 16px 38px -18px rgb(0 0 0 / 0.4)" }}
-      >
-        <button
-          type="button"
-          onClick={onHome}
-          className="flex shrink-0 cursor-pointer items-center gap-2.5 pr-1.5"
-          aria-label="Reaction Club — home"
+        <nav
+          aria-label="Main"
+          className="flex max-w-[97vw] items-center gap-1.5 rounded-full bg-paper/90 py-2 pr-2.5 pl-2.5 backdrop-blur-xl"
+          style={{ boxShadow: "0 3px 0 var(--edge), 0 16px 38px -18px rgb(0 0 0 / 0.4)" }}
         >
-          <LogoMark />
-          <span className="hidden font-display text-[16px] font-semibold tracking-tight text-ink md:block">
-            Reaction Club
-          </span>
-        </button>
+          <button
+            type="button"
+            onClick={onHome}
+            className="flex shrink-0 cursor-pointer items-center gap-2.5 pr-1.5"
+            aria-label="Reaction Club — home"
+          >
+            <LogoMark />
+            <span className="hidden font-display text-[16px] font-semibold tracking-tight text-ink md:block">
+              Reaction Club
+            </span>
+          </button>
 
-        <span aria-hidden className="mx-1 hidden h-6 w-[3px] shrink-0 rounded-full bg-ink/10 sm:block" />
+          <span aria-hidden className="mx-1 hidden h-6 w-[3px] shrink-0 rounded-full bg-ink/10 sm:block" />
 
-        {/* ————— home + units ————— */}
-        <motion.button
-          type="button"
-          onClick={onHome}
-          aria-current={view.kind === "home" ? "page" : undefined}
-          aria-label="Home"
-          title="Home"
-          whileTap={{ scale: 0.88 }}
-          className={`h-10 w-10 shrink-0 ${tool(view.kind === "home")}`}
-        >
-          <HomeIcon className="h-[18px] w-[18px]" strokeWidth={2.2} />
-        </motion.button>
+          {/* ————— home + tools ————— */}
+          <motion.button
+            type="button"
+            onClick={onHome}
+            aria-current={view.kind === "home" ? "page" : undefined}
+            aria-label="Home"
+            title="Home"
+            whileTap={{ scale: 0.88 }}
+            className={`h-10 w-10 shrink-0 ${tool(view.kind === "home")}`}
+          >
+            <HomeIcon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+          </motion.button>
 
-        {UNITS.map((u) => {
-          const active = activeCode === u.code;
-          return (
-            <motion.button
-              key={u.code}
-              type="button"
-              onClick={() => onOpenUnit(u.code)}
-              aria-current={active ? "page" : undefined}
-              whileTap={{ scale: 0.88 }}
-              animate={{ scale: active ? 1.1 : 1 }}
-              transition={{ type: "spring", stiffness: 380, damping: 16 }}
-              className="h-10 shrink-0 cursor-pointer rounded-full px-3 font-display text-[12px] font-bold tracking-wide"
-              style={
-                active
-                  ? { background: u.candy.main, color: "#fff", boxShadow: `0 3px 0 ${shade(u.candy.main)}` }
-                  : { background: tint(u.candy.main, 16), color: u.candy.main }
-              }
-              title={`${u.code} — ${u.shortTitle}`}
-            >
-              {u.code.replace("WCH", "")}
-            </motion.button>
-          );
-        })}
+          <motion.button
+            type="button"
+            onClick={onSearch}
+            whileTap={{ scale: 0.88 }}
+            className={tool(false)}
+            title="Search topics · ⌘K"
+            aria-label="Search topics"
+          >
+            <Search className="h-[18px] w-[18px]" strokeWidth={2.2} />
+          </motion.button>
 
-        <span aria-hidden className="mx-1 hidden h-6 w-[3px] shrink-0 rounded-full bg-ink/10 sm:block" />
+          <motion.button
+            type="button"
+            onClick={onOpenSticker}
+            aria-current={view.kind === "sticker" ? "page" : undefined}
+            whileTap={{ scale: 0.88 }}
+            animate={{ scale: view.kind === "sticker" ? 1.1 : 1 }}
+            transition={{ type: "spring", stiffness: 380, damping: 16 }}
+            className={tool(view.kind === "sticker")}
+            title="Your progress · time & goals"
+            aria-label="Open your progress"
+            style={
+              view.kind === "sticker"
+                ? { background: "#12B886", color: "#fff", boxShadow: "0 3px 0 #0B7A57" }
+                : undefined
+            }
+          >
+            <Sticker className="h-[18px] w-[18px]" strokeWidth={2.2} />
+          </motion.button>
 
-        {/* ————— tools ————— */}
-        <motion.button
-          type="button"
-          onClick={onSearch}
-          whileTap={{ scale: 0.88 }}
-          className={tool(false)}
-          title="Search topics · ⌘K"
-          aria-label="Search topics"
-        >
-          <Search className="h-[18px] w-[18px]" strokeWidth={2.2} />
-        </motion.button>
-        <motion.button
-          type="button"
-          onClick={onOpenBlend}
-          aria-current={view.kind === "blend" ? "page" : undefined}
-          whileTap={{ scale: 0.88 }}
-          animate={{ scale: view.kind === "blend" ? 1.1 : 1 }}
-          transition={{ type: "spring", stiffness: 380, damping: 16 }}
-          className={tool(view.kind === "blend")}
-          title="Flashcards"
-          aria-label="Open flashcards"
-          style={
-            view.kind === "blend"
-              ? { background: "#9775FA", color: "#fff", boxShadow: "0 3px 0 #6d4fd4" }
-              : undefined
-          }
-        >
-          <Zap className="h-[18px] w-[18px]" strokeWidth={2.2} />
-        </motion.button>
-        <motion.button
-          type="button"
-          onClick={onOpenSticker}
-          aria-current={view.kind === "sticker" ? "page" : undefined}
-          whileTap={{ scale: 0.88 }}
-          animate={{ scale: view.kind === "sticker" ? 1.1 : 1 }}
-          transition={{ type: "spring", stiffness: 380, damping: 16 }}
-          className={tool(view.kind === "sticker")}
-          title="Your progress"
-          aria-label="Open your progress"
-          style={
-            view.kind === "sticker"
-              ? { background: "#12B886", color: "#fff", boxShadow: "0 3px 0 #0B7A57" }
-              : undefined
-          }
-        >
-          <Sticker className="h-[18px] w-[18px]" strokeWidth={2.2} />
-        </motion.button>
-        <motion.button
-          type="button"
-          onClick={cycle}
-          whileTap={{ scale: 0.88 }}
-          className={tool(false)}
-          title={
-            lab === "light"
-              ? "Switch to the after-dark lab"
-              : lab === "dark"
-                ? "Switch to the hybrid lab"
-                : "Switch to the daylight lab"
-          }
-          aria-label={
-            lab === "light"
-              ? "Switch to the after-dark lab"
-              : lab === "dark"
-                ? "Switch to the hybrid lab"
-                : "Switch to the daylight lab"
-          }
-        >
-          {/* the button wears today's lab; the toast announces the next one */}
-          {lab === "light" ? (
-            <Sun className="h-[18px] w-[18px]" strokeWidth={2.2} />
-          ) : lab === "dark" ? (
-            <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />
-          ) : (
-            <SunMoon className="h-[18px] w-[18px]" strokeWidth={2.2} />
-          )}
-        </motion.button>
-      </nav>
+          <motion.button
+            type="button"
+            onClick={onOpenCustomize}
+            whileTap={{ scale: 0.88 }}
+            className={tool(false)}
+            title="Customize · fonts, sizes & themes"
+            aria-label="Customize the site"
+          >
+            <Sliders className="h-[18px] w-[18px]" strokeWidth={2.2} />
+          </motion.button>
+
+          <motion.button
+            type="button"
+            onClick={cycle}
+            whileTap={{ scale: 0.88 }}
+            className={tool(false)}
+            title={LAB_TITLE[lab]}
+            aria-label={LAB_TITLE[lab]}
+          >
+            {/* the button wears today's lab; the toast announces the next one */}
+            {lab === "light" ? (
+              <Sun className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            ) : lab === "dark" ? (
+              <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            ) : (
+              <SunMoon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            )}
+          </motion.button>
+        </nav>
       </header>
 
       {/* ————— lab toast — announces where you just landed ————— */}
@@ -317,12 +237,12 @@ function TopBar({
 function Footer({
   onOpenUnit,
   onOpenSticker,
-  onOpenBlend,
+  onOpenCustomize,
   onSearch,
 }: {
   onOpenUnit: (code: string) => void;
   onOpenSticker: () => void;
-  onOpenBlend: () => void;
+  onOpenCustomize: () => void;
   onSearch: () => void;
 }) {
   const [booped, setBooped] = useState(false);
@@ -354,7 +274,8 @@ function Footer({
             </div>
             <p className="mt-3 text-[14px] leading-relaxed text-milk/80">
               Notes for every topic in the International A Level course — read them in order,
-              try the checkpoints, and mark what you&apos;ve revised.
+              try the checkpoints, and mark what you&apos;ve revised. Your reading time is
+              counted, topic by topic.
             </p>
             <div className="mt-5 flex items-end gap-1">
               <Mascot main="#FFD43B" size={88} boop onBoop={boop} bubbles={false} />
@@ -379,21 +300,9 @@ function Footer({
 
           <div>
             <div className="font-display text-[12px] font-bold tracking-[0.2em] text-milk/60 uppercase">
-              Practice
+              The club
             </div>
             <div className="mt-4 flex flex-col gap-3">
-              <button
-                type="button"
-                onClick={onOpenBlend}
-                className="group flex cursor-pointer items-center gap-2.5 text-left"
-              >
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-grape/25 text-grape transition-transform group-hover:scale-110">
-                  <Zap className="h-4 w-4" strokeWidth={2.2} />
-                </span>
-                <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
-                  Flashcards · shuffled checkpoint questions
-                </span>
-              </button>
               <button
                 type="button"
                 onClick={onOpenSticker}
@@ -403,7 +312,19 @@ function Footer({
                   <Sticker className="h-4 w-4" strokeWidth={2.2} />
                 </span>
                 <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
-                  Progress · topics revised
+                  Progress · your time, topics & weekly goal
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={onOpenCustomize}
+                className="group flex cursor-pointer items-center gap-2.5 text-left"
+              >
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon transition-transform group-hover:scale-110">
+                  <Sliders className="h-4 w-4" strokeWidth={2.2} />
+                </span>
+                <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
+                  Customize · fonts, sizes & themes
                 </span>
               </button>
               <button
@@ -450,7 +371,7 @@ function Footer({
           <p className="text-[11.5px] leading-relaxed font-semibold text-milk/60">
             Written to the Pearson Edexcel International A Level Chemistry (2018) specification
             · WCH11–WCH16 · not affiliated with or endorsed by Pearson Education Ltd.
-            <span className="ml-1 whitespace-nowrap text-milk/40">· rev 3 · Nov 2026</span>
+            <span className="ml-1 whitespace-nowrap text-milk/40">· rev 4 · Nov 2026</span>
           </p>
         </div>
       </div>
@@ -461,6 +382,8 @@ function Footer({
 export default function ClubApp() {
   const [view, setView] = useState<View>({ kind: "home" });
   const [searchOpen, setSearchOpen] = useState(false);
+  const [customizeOpen, setCustomizeOpen] = useState(false);
+  const prefs = usePrefs();
   const viewKey =
     view.kind === "topic"
       ? `topic-${view.code}-${view.topicId}`
@@ -470,13 +393,16 @@ export default function ClubApp() {
           ? `notes-${view.docId}`
           : view.kind === "sticker"
             ? "sticker"
-            : view.kind === "blend"
-              ? "blend"
-              : "home";
+            : "home";
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
   }, [viewKey]);
+
+  /* the panel's knobs own <html>; make sure hydration agrees with it */
+  useEffect(() => {
+    applyPrefs(prefs);
+  }, [prefs]);
 
   const openUnit = (code: string) => setView({ kind: "unit", code });
   const openTopicRaw = useCallback((code: string, topicId: string) => {
@@ -488,8 +414,9 @@ export default function ClubApp() {
   );
   const goHome = () => setView({ kind: "home" });
   const openSticker = useCallback(() => setView({ kind: "sticker" }), []);
-  const openBlend = useCallback(() => setView({ kind: "blend" }), []);
   const openSearch = useCallback(() => setSearchOpen(true), []);
+  const openCustomize = useCallback(() => setCustomizeOpen(true), []);
+  const closeCustomize = useCallback(() => setCustomizeOpen(false), []);
 
   /* ⌘K / Ctrl+K (and "/") summon the search bubble */
   useEffect(() => {
@@ -508,27 +435,35 @@ export default function ClubApp() {
     return () => window.removeEventListener("keydown", onKey);
   }, [searchOpen]);
 
-  const unit =
-    view.kind === "home" || view.kind === "sticker" || view.kind === "blend" ? undefined : getUnit(view.code);
-  const topic = view.kind === "topic" && unit ? getTopic(view.code, view.topicId) : undefined;
+  /* ————— the quiet stopwatch —————
+     topic pages and revision notes bank their seconds on the topic;
+     everywhere else banks on the whole site. One call site, so the
+     two can never double-count. */
   const notesDoc =
     view.kind === "notes"
       ? getNotes(view.docId)
-      : unit && topic
-        ? getNotesForTopic(unit.code, topic.id)
-        : undefined;
+      : undefined;
+  useTimeScope(
+    view.kind === "topic" || view.kind === "notes" ? view.code : undefined,
+    view.kind === "topic" ? view.topicId : notesDoc?.topicId
+  );
+
+  const unit =
+    view.kind === "home" || view.kind === "sticker" ? undefined : getUnit(view.code);
+  const topic = view.kind === "topic" && unit ? getTopic(view.code, view.topicId) : undefined;
+  const topicNotes = unit && topic ? getNotesForTopic(unit.code, topic.id) : undefined;
 
   return (
     <div className="flex min-h-screen flex-col">
       <TopBar
         view={view}
         onHome={goHome}
-        onOpenUnit={openUnit}
         onOpenSticker={openSticker}
-        onOpenBlend={openBlend}
         onSearch={openSearch}
+        onOpenCustomize={openCustomize}
       />
       <SearchPalette open={searchOpen} onClose={() => setSearchOpen(false)} onOpenTopic={openTopic} />
+      <CustomizePanel open={customizeOpen} onClose={closeCustomize} />
 
       <main className="relative flex-1">
         <AnimatePresence mode="wait">
@@ -543,8 +478,8 @@ export default function ClubApp() {
               <Home
                 units={UNITS}
                 onOpenUnit={openUnit}
-                onOpenBlend={openBlend}
                 onOpenSticker={openSticker}
+                onOpenTopic={openTopic}
               />
             )}
 
@@ -564,13 +499,13 @@ export default function ClubApp() {
                 onBack={() => openUnit(unit.code)}
                 onOpenTopic={(id) => openTopic(unit.code, id)}
                 notesSpecRange={
-                  notesDoc && notesDoc.sections.length > 0
-                    ? `${notesDoc.sections[0].spec} → ${notesDoc.sections[notesDoc.sections.length - 1].spec}`
+                  topicNotes && topicNotes.sections.length > 0
+                    ? `${topicNotes.sections[0].spec} → ${topicNotes.sections[topicNotes.sections.length - 1].spec}`
                     : undefined
                 }
                 onOpenNotes={
-                  notesDoc
-                    ? () => setView({ kind: "notes", code: unit.code, docId: notesDoc.id })
+                  topicNotes
+                    ? () => setView({ kind: "notes", code: unit.code, docId: topicNotes.id })
                     : undefined
                 }
               />
@@ -581,11 +516,7 @@ export default function ClubApp() {
             )}
 
             {view.kind === "sticker" && (
-              <StickerBook units={UNITS} onBack={goHome} onOpenUnit={openUnit} />
-            )}
-
-            {view.kind === "blend" && (
-              <Blend onBack={goHome} onOpenTopic={openTopic} />
+              <StickerBook units={UNITS} onBack={goHome} onOpenUnit={openUnit} onOpenTopic={openTopic} />
             )}
           </motion.div>
         </AnimatePresence>
@@ -593,7 +524,7 @@ export default function ClubApp() {
         <Footer
           onOpenUnit={openUnit}
           onOpenSticker={openSticker}
-          onOpenBlend={openBlend}
+          onOpenCustomize={openCustomize}
           onSearch={openSearch}
         />
       </main>

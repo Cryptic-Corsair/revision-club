@@ -3,61 +3,10 @@ import { UNITS } from "./units";
 import { fmtPlain } from "@/components/club/format";
 
 /* ═══════════════════════════════════════════════════════════════
-   REACTION CLUB · deck + search index
-   Every checkpoint question becomes a flashcard; every topic
-   becomes a search row. Both are derived
-   from the same UNITS data — one source of truth, zero drift.
+   Reaction Club · search index
+   Every topic becomes a search row, derived from the UNITS data —
+   one source of truth, zero drift.
    ═══════════════════════════════════════════════════════════════ */
-
-export interface Card {
-  id: string;
-  unit: UnitCode;
-  unitMain: string;
-  topicId: string;
-  topicLabel: string;
-  topicTitle: string;
-  q: string;
-  a: string;
-}
-
-export const DECK: Card[] = UNITS.flatMap((u) =>
-  u.topics.flatMap((t) =>
-    t.blocks.flatMap((b, bi) =>
-      b.k === "check"
-        ? b.qs.map((qa, qi) => ({
-            id: `${u.code}/${t.id}#${bi}-${qi}`,
-            unit: u.code,
-            unitMain: u.candy.main,
-            topicId: t.id,
-            topicLabel: t.label,
-            topicTitle: t.title,
-            q: qa.q,
-            a: qa.a,
-          }))
-        : []
-    )
-  )
-);
-
-export const DECK_BY_UNIT: Record<UnitCode, number> = UNITS.reduce(
-  (acc, u) => {
-    acc[u.code] = DECK.filter((c) => c.unit === u.code).length;
-    return acc;
-  },
-  {} as Record<UnitCode, number>
-);
-
-/** Fisher–Yates, seeded by Math.random — a fresh shuffle every round */
-export function shuffle<T>(arr: readonly T[]): T[] {
-  const out = [...arr];
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [out[i], out[j]] = [out[j], out[i]];
-  }
-  return out;
-}
-
-/* ————— search index ————— */
 
 export interface SearchRow {
   unit: UnitCode;

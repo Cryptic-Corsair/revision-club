@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ArrowLeft, ArrowRight, BookOpen, Check, PartyPopper, Sticker } from "./icons";
+import { ArrowLeft, ArrowRight, BookOpen, Check, Clock, PartyPopper, Sticker } from "./icons";
 import type { Topic, Unit } from "@/lib/spectra/types";
 import { toggleRevised, useRevised } from "@/lib/spectra/progress";
+import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { TopicBlocks } from "./blocks";
 import { Fmt } from "./format";
 import {
@@ -38,8 +39,10 @@ export function TopicView({
   notesSpecRange?: string;
 }) {
   const revised = useRevised();
+  const time = useTimeData();
   const key = `${unit.code}/${topic.id}`;
   const isRevised = revised.includes(key);
+  const spent = topicSeconds(time, key);
   const [fire, setFire] = useState(0);
 
   const { scrollYProgress } = useScroll();
@@ -83,6 +86,11 @@ export function TopicView({
           <Chip main={main}>{topic.label}</Chip>
           <Chip>{topic.minutes} min read</Chip>
           <Chip>{topic.ao.join(" · ")}</Chip>
+          {spent >= 60 && (
+            <Chip>
+              <Clock className="h-3 w-3" /> {fmtClock(spent)} of yours
+            </Chip>
+          )}
         </PopIn>
 
         <PopIn delay={0.1}>

@@ -84,6 +84,33 @@
   color-scheme: light;
 }
 
+/* ————— the customize panel's knobs —————
+   Font swaps re-point the two family tokens; the dataset wins over
+   :root by specificity, so one attribute re-skins every heading or
+   body run on the site. */
+html[data-head="baloo"] {
+  --font-display: var(--font-baloo), "Trebuchet MS", sans-serif;
+}
+html[data-head="patrick"] {
+  --font-display: var(--font-patrick), "Trebuchet MS", sans-serif;
+}
+html[data-body="quicksand"] {
+  --font-body: var(--font-quicksand), "Trebuchet MS", sans-serif;
+}
+
+/* calm mode — the floating blobs, marquees and wiggles stand still;
+   (hover transitions stay, feedback is not decoration) */
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  animation: none !important;
+}
+
+/* plain paper — the polka dots step aside */
+html[data-dots="off"] body {
+  background-image: none;
+}
+
 html.dark {
   /* roast 0 — "espresso", the reference look from the design shot.
      The ladder rises footer #140d05 → page #2c2013 → card #3f2f1c

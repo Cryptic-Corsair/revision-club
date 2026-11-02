@@ -520,3 +520,19 @@ export function SunMoon(p: IcoProps) {
     </Ico>
   );
 }
+
+/* ————— the workshop ————— */
+
+/* sliders — the customize panel: three faders mid-set */
+export function Sliders(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <path d="M5.4 4.2 v5.4 M5.4 14.4 v5.4" />
+      <circle cx="5.4" cy="12" r="2.2" />
+      <path d="M12 4.2 v2.4 M12 11.4 v8.4" />
+      <circle cx="12" cy="9" r="2.2" />
+      <path d="M18.6 4.2 v8.4 M18.6 17.4 v2.4" />
+      <circle cx="18.6" cy="15" r="2.2" />
+    </Ico>
+  );
+}
