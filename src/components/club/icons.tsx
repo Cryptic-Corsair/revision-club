@@ -32,6 +32,52 @@ function Ico({ children, strokeWidth = 2.1, ...rest }: IcoProps) {
 
 /* ————— navigation & chrome ————— */
 
+/* the revision pack — a clipboard with a checklist */
+export function ClipboardList(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <rect x="5" y="4.4" width="14" height="16.2" rx="3.4" />
+      <path d="M9 4.8 V3.8 a1.6 1.6 0 0 1 1.6-1.6 h2.8 A1.6 1.6 0 0 1 15 3.8 V4.8" />
+      <path d="M8.8 10.2 h1.6" />
+      <path d="M13.4 10.2 h2" />
+      <path d="M8.8 14.4 h1.6" />
+      <path d="M13.4 14.4 h2" />
+      <path d="M8.8 18.4 h6.6" strokeWidth={1.7} />
+    </Ico>
+  );
+}
+
+/* two overlapping sheets — copy the pack as text */
+export function Copy(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <rect x="8.6" y="8.6" width="11.4" height="11.4" rx="3" />
+      <path d="M15.4 5.4 H7 A3.2 3.2 0 0 0 3.8 8.6 V16" />
+    </Ico>
+  );
+}
+
+/* a printer with a warm little light */
+export function Printer(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <path d="M7 8.6 V4.6 a1.6 1.6 0 0 1 1.6-1.6 h6.8 A1.6 1.6 0 0 1 17 4.6 V8.6" />
+      <path d="M7 17.4 H5.6 A1.8 1.8 0 0 1 3.8 15.6 V11.2 a2.6 2.6 0 0 1 2.6-2.6 h11.2 a2.6 2.6 0 0 1 2.6 2.6 V15.6 a1.8 1.8 0 0 1-1.8 1.8 H17" />
+      <rect x="7" y="14.6" width="10" height="6.2" rx="1.6" />
+      <circle cx="17.2" cy="11.8" r="0.9" strokeWidth={1.6} />
+    </Ico>
+  );
+}
+
+/* a bookmark ribbon — saved revision sets */
+export function Bookmark(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <path d="M6.4 6.2 A3 3 0 0 1 9.4 3.2 h5.2 a3 3 0 0 1 3 3 V20.6 L12 16.8 L6.4 20.6 Z" />
+    </Ico>
+  );
+}
+
 export function Search(p: IcoProps) {
   return (
     <Ico {...p}>

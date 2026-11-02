@@ -465,6 +465,58 @@ mark {
   }
 }
 
+/* ————— the revision pack, on paper —————
+   The pack prints as a clean worksheet: white rooms, daylight ink
+   no matter which lab is on, waves and doodles skipped, shadows
+   off — only the statements, the notes and the worked steps stay. */
+
+@media print {
+  .pack-sheet section {
+    background: #fff !important;
+  }
+  .pack-sheet,
+  .pack-sheet .room {
+    --color-ink: #201509;
+    --color-ink-soft: #4b3d2e;
+    --color-ink-faint: #8a7d69;
+    --color-paper: #ffffff;
+    --tint-base: #ffffff;
+    --room-surface: #ffffff;
+    --edge: rgb(0 0 0 / 0.14);
+    color: #201509;
+  }
+  .pack-sheet div[aria-hidden] {
+    display: none !important;
+  }
+  /* Reveal blocks below the fold never got their scroll animation —
+     print them at full strength instead of half-faded */
+  .pack-sheet [style*="opacity"],
+  .pack-sheet [style*="transform"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .pack-sheet .puff,
+  .pack-sheet .puff-lift {
+    box-shadow: none !important;
+  }
+  /* the worked-example toggle is meaningless on paper — the question
+     prints and the steps stay one tap away on screen */
+  .pack-sheet section button {
+    display: none !important;
+  }
+  .pack-sheet section {
+    break-inside: avoid-page;
+  }
+}
+
+/* ————— spec anchors —————
+   Every spec section (note reader and revision pack) clears the
+   fixed navbar when jumped to. A real class, not a Tailwind
+   arbitrary value — one place to retune the offset. */
+.spec-anchor {
+  scroll-margin-top: calc(100px + var(--sa-top));
+}
+
 /* ————— mood flip —————
    While the toggle is held, every colour eases to its new value so
    the switch reads as one smooth dim-the-lights move, not a cut. */

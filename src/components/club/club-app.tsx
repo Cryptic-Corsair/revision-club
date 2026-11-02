@@ -11,11 +11,13 @@ import {
   Sticker,
   Sun,
   SunMoon,
+  ClipboardList,
 } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { UNITS, getUnit, getTopic } from "@/lib/spectra/units";
 import { getNotes, getNotesForTopic } from "@/lib/spectra/notes";
 import { useTimeScope } from "@/lib/spectra/time";
+import { usePacks } from "@/lib/spectra/packs";
 import { applyPrefs, setPrefs, usePrefs, type Lab } from "@/lib/spectra/prefs";
 import { Home } from "./home";
 import { UnitView } from "./unit-view";
@@ -24,6 +26,8 @@ import { NotesReader } from "./notes-reader";
 import { StickerBook } from "./sticker-book";
 import { CustomizePanel } from "./customize";
 import { SearchPalette } from "./search";
+import { SpecIndex } from "./spec-index";
+import { PackView } from "./pack-view";
 import { Mascot, SpeechBubble } from "./bits";
 import { SpecMapProvider, SpecMapTrigger } from "./spec-map";
 
@@ -37,7 +41,9 @@ type View =
   | { kind: "home" }
   | { kind: "unit"; code: string }
   | { kind: "topic"; code: string; topicId: string }
-  | { kind: "notes"; code: string; docId: string }
+  | { kind: "notes"; code: string; docId: string; spec?: string }
+  | { kind: "spec" }
+  | { kind: "pack" }
   | { kind: "sticker" };
 
 function LogoMark({ size = 38 }: { size?: number }) {
@@ -81,17 +87,20 @@ function TopBar({
   view,
   onHome,
   onOpenSticker,
+  onOpenPack,
   onSearch,
   onOpenCustomize,
 }: {
   view: View;
   onHome: () => void;
   onOpenSticker: () => void;
+  onOpenPack: () => void;
   onSearch: () => void;
   onOpenCustomize: () => void;
 }) {
   const prefs = usePrefs();
   const lab = prefs.theme;
+  const { picks } = usePacks();
   const [announce, setAnnounce] = useState<Lab | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -160,6 +169,38 @@ function TopBar({
             className={`h-10 w-10 shrink-0 ${tool(view.kind === "home")}`}
           >
             <HomeIcon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+          </motion.button>
+
+          <motion.button
+            type="button"
+            onClick={onOpenPack}
+            aria-current={view.kind === "pack" ? "page" : undefined}
+            whileTap={{ scale: 0.88 }}
+            animate={{ scale: view.kind === "pack" ? 1.1 : 1 }}
+            transition={{ type: "spring", stiffness: 380, damping: 16 }}
+            className={`relative h-10 w-10 shrink-0 ${tool(view.kind === "pack")}`}
+            title="Your revision pack · ticked spec points"
+            aria-label={`Your revision pack${picks.length > 0 ? ` — ${picks.length} spec point${picks.length === 1 ? "" : "s"} ticked` : ""}`}
+            style={
+              view.kind === "pack"
+                ? {
+                    background: "#FFD43B",
+                    color: "#5f4a00",
+                    boxShadow: "0 3px 0 #E8A100",
+                  }
+                : undefined
+            }
+          >
+            <ClipboardList className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            {picks.length > 0 && view.kind !== "pack" && (
+              <span
+                aria-hidden
+                className="absolute -top-0.5 -right-0.5 grid h-[17px] min-w-[17px] place-items-center rounded-full px-0.5 font-display text-[9.5px] font-bold text-white"
+                style={{ background: "#FF922B", boxShadow: "0 0 0 2px var(--color-paper)" }}
+              >
+                {picks.length}
+              </span>
+            )}
           </motion.button>
 
           <motion.button
@@ -267,11 +308,13 @@ function Footer({
   onOpenUnit,
   onOpenSticker,
   onOpenCustomize,
+  onOpenPack,
   onSearch,
 }: {
   onOpenUnit: (code: string) => void;
   onOpenSticker: () => void;
   onOpenCustomize: () => void;
+  onOpenPack: () => void;
   onSearch: () => void;
 }) {
   const [booped, setBooped] = useState(false);
@@ -356,6 +399,18 @@ function Footer({
               </button>
               <button
                 type="button"
+                onClick={onOpenPack}
+                className="group flex cursor-pointer items-center gap-2.5 text-left"
+              >
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon transition-transform group-hover:scale-110">
+                  <ClipboardList className="h-4 w-4" strokeWidth={2.2} />
+                </span>
+                <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
+                  Revision pack · your ticked spec points
+                </span>
+              </button>
+              <button
+                type="button"
                 onClick={onOpenCustomize}
                 className="group flex cursor-pointer items-center gap-2.5 text-left"
               >
@@ -433,9 +488,13 @@ export default function ClubApp() {
         ? `unit-${view.code}`
         : view.kind === "notes"
           ? `notes-${view.docId}`
-          : view.kind === "sticker"
-            ? "sticker"
-            : "home";
+          : view.kind === "spec"
+            ? "spec"
+            : view.kind === "pack"
+              ? "pack"
+              : view.kind === "sticker"
+                ? "sticker"
+                : "home";
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
@@ -456,9 +515,17 @@ export default function ClubApp() {
   );
   const goHome = () => setView({ kind: "home" });
   const openSticker = useCallback(() => setView({ kind: "sticker" }), []);
+  const openPack = useCallback(() => setView({ kind: "pack" }), []);
+  const openSpec = useCallback(() => setView({ kind: "spec" }), []);
   const openSearch = useCallback(() => setSearchOpen(true), []);
   const openCustomize = useCallback(() => setCustomizeOpen(true), []);
   const closeCustomize = useCallback(() => setCustomizeOpen(false), []);
+  /* deep links from the spec index / pack — land on the section itself */
+  const openNotes = useCallback((docId: string, spec?: string) => {
+    const doc = getNotes(docId);
+    if (!doc) return;
+    setView({ kind: "notes", code: doc.unitCode, docId, spec });
+  }, []);
 
   /* ⌘K / Ctrl+K (and "/") summon the search bubble */
   useEffect(() => {
@@ -488,9 +555,9 @@ export default function ClubApp() {
   );
 
   const unit =
-    view.kind === "home" || view.kind === "sticker"
-      ? undefined
-      : getUnit(view.code);
+    view.kind === "unit" || view.kind === "topic" || view.kind === "notes"
+      ? getUnit(view.code)
+      : undefined;
   const topic =
     view.kind === "topic" && unit
       ? getTopic(view.code, view.topicId)
@@ -505,6 +572,7 @@ export default function ClubApp() {
           view={view}
           onHome={goHome}
           onOpenSticker={openSticker}
+          onOpenPack={openPack}
           onSearch={openSearch}
           onOpenCustomize={openCustomize}
         />
@@ -530,6 +598,8 @@ export default function ClubApp() {
                   onOpenUnit={openUnit}
                   onOpenSticker={openSticker}
                   onOpenTopic={openTopic}
+                  onOpenPack={openPack}
+                  onOpenSpec={openSpec}
                 />
               )}
 
@@ -572,6 +642,23 @@ export default function ClubApp() {
                   doc={notesDoc}
                   unit={unit}
                   onBack={() => openTopic(unit.code, notesDoc.topicId)}
+                  jumpToSpec={view.kind === "notes" ? view.spec : undefined}
+                />
+              )}
+
+              {view.kind === "spec" && (
+                <SpecIndex
+                  onHome={goHome}
+                  onOpenPack={openPack}
+                  onOpenNotes={openNotes}
+                />
+              )}
+
+              {view.kind === "pack" && (
+                <PackView
+                  onHome={goHome}
+                  onOpenSpec={openSpec}
+                  onOpenNotes={openNotes}
                 />
               )}
 
@@ -590,6 +677,7 @@ export default function ClubApp() {
             onOpenUnit={openUnit}
             onOpenSticker={openSticker}
             onOpenCustomize={openCustomize}
+            onOpenPack={openPack}
             onSearch={openSearch}
           />
         </main>

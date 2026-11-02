@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import {
   Atom,
   ClipboardCheck,
+  ClipboardList,
   Clock,
   Flame,
   Gauge,
@@ -20,6 +21,7 @@ import {
 import type { Unit, UnitCode } from "@/lib/spectra/types";
 import { TOTALS } from "@/lib/spectra/units";
 import { useRevised } from "@/lib/spectra/progress";
+import { usePacks } from "@/lib/spectra/packs";
 import { useTimeData } from "@/lib/spectra/time";
 import { pickSuggestion } from "@/lib/spectra/suggest";
 import {
@@ -80,9 +82,10 @@ const MARQUEE_B = [
   "RECRYSTALLISATION",
 ];
 
-export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic }: { units: Unit[]; onOpenUnit: (code: string) => void; onOpenSticker: () => void; onOpenTopic: (code: UnitCode, topicId: string) => void }) {
+export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack, onOpenSpec }: { units: Unit[]; onOpenUnit: (code: string) => void; onOpenSticker: () => void; onOpenTopic: (code: UnitCode, topicId: string) => void; onOpenPack: () => void; onOpenSpec: () => void }) {
   const hours = Math.round(TOTALS.minutes / 60);
   const revised = useRevised();
+  const { picks } = usePacks();
   const time = useTimeData();
   const suggestion = pickSuggestion(units, revised, time);
 
@@ -307,6 +310,76 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic }: { units:
             );
           })}
         </div>
+      </section>
+
+      {/* ————— the revision pack: tick points, get one read ————— */}
+      <section id="pack" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 py-10 sm:px-8">
+        <Reveal>
+          <div
+            className="relative overflow-hidden rounded-[36px] px-6 py-8 puff sm:rounded-[44px] sm:px-10 sm:py-10"
+            style={{ background: "var(--tint-base)" }}
+          >
+            <Blob color={tint("#FFD43B", 20)} className="top-[-40%] right-[-8%] h-[70%] w-[38%]" />
+            <DoodleHex className="absolute bottom-[8%] left-[3%] hidden h-8 w-8 text-lemon/40 sm:block" />
+            <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center">
+              <div className="min-w-0 flex-1">
+                <SectionTag main="#FFD43B" tilt={-1.5}>
+                  your revision pack
+                </SectionTag>
+                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.6vw,2.5rem)] leading-tight font-semibold text-ink">
+                  Tick spec points.
+                  <span className="relative ml-2 inline-block -rotate-1 rounded-[0.3em] bg-lemon/50 px-[0.2em]">
+                    Get one pack.
+                  </span>
+                </h2>
+                <p className="mt-3 max-w-[54ch] text-[15.5px] leading-[1.8] text-ink-soft">
+                  The spec index lists every statement the notes cover. Tick what
+                  you&apos;re revising — before a class test, a mock, the real
+                  thing — and the notes behind those points assemble into one
+                  continuous read you can mark off, print or copy.
+                </p>
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <CandyButton main="#FF922B" onClick={onOpenPack}>
+                    {picks.length > 0 ? (
+                      <>
+                        Open your pack · {picks.length} point{picks.length === 1 ? "" : "s"}{" "}
+                        <MoveRight className="h-5 w-5" />
+                      </>
+                    ) : (
+                      <>
+                        Build your pack <MoveRight className="h-5 w-5" />
+                      </>
+                    )}
+                  </CandyButton>
+                  <SoftButton onClick={onOpenSpec}>
+                    <Target className="h-4 w-4 text-coral" /> Browse the spec index
+                  </SoftButton>
+                </div>
+              </div>
+              <div className="flex shrink-0 items-center justify-center lg:pl-6">
+                <div
+                  className="flex items-center gap-4 rounded-[30px] px-6 py-5"
+                  style={{ background: tint("#FFD43B", 14) }}
+                >
+                  <span
+                    className="grid h-14 w-14 place-items-center rounded-[20px] bg-paper"
+                    style={{ boxShadow: "0 4px 0 var(--edge)" }}
+                  >
+                    <ClipboardList className="h-7 w-7" style={{ color: "#E8A100" }} />
+                  </span>
+                  <div>
+                    <div className="font-display text-[26px] font-bold leading-none text-ink">
+                      {picks.length}
+                    </div>
+                    <div className="mt-1 text-[11.5px] font-bold tracking-[0.1em] text-ink-faint uppercase">
+                      points ticked
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* ————— how it works: M3 stepper ————— */}
