@@ -59,9 +59,10 @@ import {
    a string of connected rooms rather than one long scroll.
    ═══════════════════════════════════════════════════════════════ */
 
-/* the rotating palette — hue-wheel order: red → orange → yellow →
-   green → purple → pink, so adjacent bands always differ */
-const BANDS = ["#FF6B6B", "#FF922B", "#FFD43B", "#12B886", "#9775FA", "#F06595"];
+/* the rotating palette — hue-wheel order: red → orange → sun →
+   green → purple → amber, so adjacent bands always differ (pink
+   stays reserved for WCH15's own identity) */
+const BANDS = ["#FF6B6B", "#FF922B", "#FFD43B", "#12B886", "#9775FA", "#F59F00"];
 
 const WAVE_D = "M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z";
 

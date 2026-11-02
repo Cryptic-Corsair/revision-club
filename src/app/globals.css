@@ -30,7 +30,12 @@
 
    Tonal order, one rule per lab (page → band → card):
    · daylight:  cream (lightest) < candy band < paper card
-   · after-dark: cocoa footer < cream page < candy band < paper card
+   · after-dark: an elevation ladder — every dark level is followed
+     by a clearly lighter one, never two similar darks side by side:
+       cocoa footer (darkest) < cream page < paper card < candy band
+     (Material dark-theme rule: surfaces climb lighter as they rise,
+     so footer → page → card each step up by ΔL ≥ 0.06 — the band,
+     mixed over --tint-base, tops the ladder so cards pop on it.)
    · hybrid:     the daylight order, with cocoa rooms punched in
    Bands mix their candy accent over --tint-base at --band-mix —
    a touch stronger after dark so rooms stay distinct there.
@@ -81,15 +86,17 @@
 
 html.dark {
   /* roast 0 — "espresso", the reference look from the design shot.
-     Order matters: footer < page < band < card, nothing near black. */
-  --color-cream: #201810; /* page background */
-  --color-paper: #342818; /* cards, sheets, bubbles */
+     The ladder rises footer #140d05 → page #2c2013 → card #3f2f1c
+     → band (candy over #4f3a24): every dark level steps clearly
+     lighter, nothing near black. */
+  --color-cream: #2c2013; /* page background */
+  --color-paper: #3f2f1c; /* cards, sheets, bubbles */
   --color-milk: #f8efdf;
   --color-ink: #f6ebdc;
   --color-ink-soft: #c6ab92;
-  --color-ink-faint: #b29272; /* lifted — small labels stay legible (4.9:1 on paper) */
-  --color-cocoa: #1a1009; /* footer — one step under the page, warm */
-  --tint-base: #443220;
+  --color-ink-faint: #bb9c7c; /* lifted — small labels stay legible (5.0:1 on paper) */
+  --color-cocoa: #140d05; /* footer — the darkest anchor of the ladder */
+  --tint-base: #4f3a24;
   --band-mix: 14%; /* a touch more candy so roast bands stay distinct */
   --edge: rgb(0 0 0 / 0.5);
   color-scheme: dark;
@@ -101,25 +108,26 @@ html.dark {
    roast per day, baked in before first paint). Only the four surface
    tones change; text inks stay put, so contrast holds in every roast. */
 html.dark[data-mood="1"] {
-  /* roast 1 — "dark roast", the neutral one: greyer, less orange */
-  --color-cream: #1e1b17;
-  --color-paper: #302b24;
-  --color-cocoa: #16130f;
-  --tint-base: #3e372e;
+  /* roast 1 — "dark roast", the neutral one: greyer, less orange.
+     Same ladder shape as roast 0: footer < page < card < band. */
+  --color-cream: #292421;
+  --color-paper: #3b342d;
+  --color-cocoa: #110f0c;
+  --tint-base: #483f35;
 }
 html.dark[data-mood="2"] {
-  /* roast 2 — "mahogany", a red-leaning chestnut */
-  --color-cream: #221511;
-  --color-paper: #38241a;
-  --color-cocoa: #190e08;
-  --tint-base: #47301e;
+  /* roast 2 — "mahogany", a red-leaning chestnut, same ladder */
+  --color-cream: #2e1b12;
+  --color-paper: #452819;
+  --color-cocoa: #140a06;
+  --tint-base: #52311f;
 }
 html.dark[data-mood="3"] {
-  /* roast 3 — "midnight cocoa", the deepest of the set */
-  --color-cream: #191412;
-  --color-paper: #2c231c;
-  --color-cocoa: #130e0b;
-  --tint-base: #3a2e24;
+  /* roast 3 — "midnight cocoa", the deepest of the set, same ladder */
+  --color-cream: #271d16;
+  --color-paper: #3a2c20;
+  --color-cocoa: #0f0b07;
+  --tint-base: #42311f;
 }
 
 /* ————— the hybrid lab —————

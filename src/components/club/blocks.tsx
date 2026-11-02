@@ -18,7 +18,7 @@ import {
 } from "./icons";
 import type { Block } from "@/lib/spectra/types";
 import { Fmt } from "./format";
-import { Mascot, SpeechBubble, tint, shade, Reveal } from "./bits";
+import { Mascot, SpeechBubble, tint, shade, Reveal, readableInk } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · blocks — topic content blocks
@@ -169,12 +169,12 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
           </div>
           <ol className="flex flex-col gap-3">
             {b.items.map((t, i) => {
-              const dots = ["#FF6B6B", "#FF922B", "#FFD43B", "#12B886", "#9775FA", "#F06595"];
+              const dots = ["#FF6B6B", "#FF922B", "#FFD43B", "#12B886", "#9775FA", "#F59F00"];
               return (
                 <li key={i} className="flex items-start gap-3">
                   <span
-                    className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full font-display text-[13px] font-bold text-white"
-                    style={{ background: dots[i % dots.length] }}
+                    className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full font-display text-[13px] font-bold"
+                    style={{ background: dots[i % dots.length], color: readableInk(dots[i % dots.length]) }}
                   >
                     {i + 1}
                   </span>

@@ -567,7 +567,7 @@ export function BeakerMeter({
 
 /* ————— confetti burst ————— */
 
-let confettiColors: string[] = ["#FF6B6B", "#FFD43B", "#12B886", "#9775FA", "#F06595"];
+let confettiColors: string[] = ["#FF6B6B", "#FFD43B", "#12B886", "#9775FA", "#FF922B"];
 
 export function Confetti({
   fire,

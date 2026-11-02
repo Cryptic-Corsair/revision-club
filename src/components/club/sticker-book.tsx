@@ -31,6 +31,7 @@ import {
   SpeechBubble,
   tint,
   shade,
+  readableInk,
 } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -110,7 +111,7 @@ export function StickerBook({
       id: "streak-5",
       label: "On a streak",
       hint: "Get a streak of 5 in Flashcards",
-      color: "#F06595",
+      color: "#F59F00",
       earned: stats.best >= 5,
     },
     {
@@ -244,7 +245,7 @@ export function StickerBook({
                   className="grid h-12 w-12 place-items-center rounded-full"
                   style={
                     a.earned
-                      ? { background: a.color, boxShadow: `0 4px 0 ${shade(a.color)}`, color: "#fff" }
+                      ? { background: a.color, boxShadow: `0 4px 0 ${shade(a.color)}`, color: readableInk(a.color) }
                       : { background: "color-mix(in oklab, var(--color-ink) 7%, transparent)", color: "var(--color-ink-faint)" }
                   }
                 >

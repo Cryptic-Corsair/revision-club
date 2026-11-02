@@ -90,7 +90,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
       {/* ————— hero: a wide tonal sheet, M3 style ————— */}
       <section className="px-3 pt-24 sm:px-5 sm:pt-28 lg:px-8 lg:pt-32">
         <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[36px] bg-paper puff sm:rounded-[44px]">
-          <Blob color={tint("#FF6B6B", 14)} className="top-[-28%] right-[-12%] h-[62%] w-[44%]" />
+          <Blob color={tint("#FF922B", 14)} className="top-[-28%] right-[-12%] h-[62%] w-[44%]" />
           <Blob
             color={tint("#FFD43B", 22)}
             className="bottom-[-32%] left-[-10%] h-[58%] w-[40%]"
@@ -164,7 +164,8 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
 
             {/* right: mascot scene */}
             <div className="relative mx-auto flex h-[300px] w-full max-w-[420px] items-center justify-center sm:h-[380px]">
-              <Blob color={tint("#FF6B6B", 18)} className="h-[86%] w-[86%]" />
+              {/* soft peach wash — pink stays reserved for WCH15 and the mascot blush */}
+              <Blob color={tint("#FF922B", 18)} className="h-[86%] w-[86%]" />
               <Blob
                 color={tint("#FFD43B", 30)}
                 className="top-[2%] right-[2%] h-[34%] w-[34%] opacity-80"
@@ -391,7 +392,7 @@ export function Home({ units, onOpenUnit, onOpenBlend, onOpenSticker }: { units:
       {/* ————— practice tools ————— */}
       <section id="arcade" className="mx-auto max-w-6xl scroll-mt-24 px-5 pb-20 sm:px-8">
         <Reveal className="text-center">
-          <SectionTag main="#F06595" tilt={1.5}>
+          <SectionTag main="#FF6B6B" tilt={1.5}>
             practice
           </SectionTag>
           <h2 className="mt-5 font-display text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-ink">
