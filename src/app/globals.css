@@ -336,6 +336,13 @@ html.dark ::selection {
   border-radius: 999px;
 }
 
+/* the floating Spec Map — the scrim plus the pressed bubble already
+   frame it, and it catches focus on open, so the dashed marker ring
+   would just draw a second border around the whole window */
+.spec-map:focus-visible {
+  outline: none;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;

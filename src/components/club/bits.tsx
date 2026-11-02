@@ -442,13 +442,16 @@ export function Mascot({
       <ellipse cx="110" cy="212" rx="58" ry="10" fill="#3D2B1F" opacity="0.10" />
 
       {/* beaker body */}
-      <clipPath id={clip}>
+      {/* clip ids may wobble between the server pass and a fast client
+          pass in dev — the shapes are identical, so hydration is told
+          to look the other way instead of crying wolf in the console */}
+      <clipPath id={clip} suppressHydrationWarning>
         <path d={body} />
       </clipPath>
       <path d={body} fill="#FFFDF7" />
 
       {/* liquid */}
-      <g clipPath={`url(#${clip})`}>
+      <g clipPath={`url(#${clip})`} suppressHydrationWarning>
         <path
           d="M66 128 C 80 118, 94 118, 108 128 C 122 138, 136 138, 154 126 L154 200 L66 200 Z"
           fill={main}
@@ -576,14 +579,14 @@ export function BeakerMeter({
 
   return (
     <svg viewBox="0 0 90 112" width={size} height={size * 1.18} aria-hidden className={className}>
-      <clipPath id={clip}>
+      <clipPath id={clip} suppressHydrationWarning>
         <path d="M27 20 L27 86 Q27 102 43 102 L47 102 Q63 102 63 86 L63 20 Z" />
       </clipPath>
       <path
         d="M27 20 L27 86 Q27 102 43 102 L47 102 Q63 102 63 86 L63 20 Z"
         fill="var(--color-paper)"
       />
-      <g clipPath={`url(#${clip})`}>
+      <g clipPath={`url(#${clip})`} suppressHydrationWarning>
         <path
           d={`M24 ${top + 4} C 33 ${top - 3}, 41 ${top - 3}, 48 ${top + 3} C 53 ${top + 7}, 58 ${top + 7}, 66 ${top + 2} L66 106 L24 106 Z`}
           fill={main}

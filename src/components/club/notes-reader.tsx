@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
-import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring, type HTMLMotionProps, type Variants } from "framer-motion";
 import {
   ArrowLeft,
   BookOpen,
@@ -15,6 +15,7 @@ import {
   Sparkles,
   StickyNote,
   Target,
+  X,
 } from "./icons";
 import type { NotesBlock, NotesDoc, SpecSection } from "@/lib/spectra/notes-types";
 import type { Unit } from "@/lib/spectra/types";
@@ -82,8 +83,27 @@ function BandWave({ from, to }: { from: string; to: string }) {
   );
 }
 
+/* hop to a spec room. scrollIntoView alone proved flaky under some
+   browsers (the smooth glide occasionally dies before it starts), so
+   the target is computed by hand and the landing is verified — if the
+   glide was silently cancelled, one instant snap finishes the trip */
 function scrollToSpec(spec: string) {
-  document.getElementById(`spec-${spec.replace(".", "-")}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const el = document.getElementById(`spec-${spec.replace(".", "-")}`);
+  if (!el) return;
+  const saTop = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--sa-top")) || 0;
+  const top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 100 - saTop);
+  const landed = () => Math.abs(window.scrollY - top) < 2;
+  window.scrollTo({ top, behavior: "smooth" });
+  /* two heartbeats: if the glide is still moving, leave it be; if it
+     stalled mid-trip, snap the rest of the way so the hop always lands */
+  window.setTimeout(() => {
+    if (landed()) return;
+    const y1 = window.scrollY;
+    window.setTimeout(() => {
+      if (!landed() && Math.abs(window.scrollY - y1) < 1)
+        window.scrollTo({ top, behavior: "instant" as ScrollBehavior });
+    }, 450);
+  }, 450);
 }
 
 /* A candy accent pulled toward the current ink: deep brick by day,
@@ -230,28 +250,9 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
             </div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {doc.sections.map((s, i) => {
-              const accent = accentOf(i);
-              return (
-                <button
-                  key={s.spec}
-                  type="button"
-                  onClick={() => scrollToSpec(s.spec)}
-                  className={`group flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left transition-transform hover:-translate-y-0.5${
-                    isRoom(i) ? " room" : ""
-                  }`}
-                  style={{ background: bgOf(i) }}
-                >
-                  <span
-                    className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[10.5px] font-bold"
-                    style={{ background: accent, color: readableInk(accent) }}
-                  >
-                    {s.spec}
-                  </span>
-                  <span className="line-clamp-2 text-[12px] font-bold leading-[1.35] text-ink">{s.title}</span>
-                </button>
-              );
-            })}
+            {doc.sections.map((s, i) => (
+              <SpecChip key={s.spec} s={s} i={i} here={active === s.spec} onClick={() => scrollToSpec(s.spec)} />
+            ))}
           </div>
         </div>
       </Reveal>
@@ -308,30 +309,102 @@ export function NotesReader({ doc, unit, onBack }: { doc: NotesDoc; unit: Unit; 
 /* ————— contents bubble —————
    The old sticky spec rail rode above every band and got in the way
    of the rooms. Now the whole map folds into one small bubble parked
-   against the pill nav — it wears the spec you're currently reading,
-   and a tap unfolds the full contents as a floating window dressed
-   like the note's own contents card. It sits beside the nav wherever
-   there's room, and tucks under its shoulder on narrow phones. */
+   against the pill nav — vertically centred on it, wearing a paper
+   ring so it reads as part of the nav family, and tipped a few
+   degrees like a sticker. It wears the spec you're currently reading;
+   a tap presses it down and unfolds the Spec Map: a floating window
+   that hangs off the nav's shoulder with a paper tail stitching it to
+   the bubble, a tilted badge header cut from the same cloth as the
+   spec badges in the rooms, staggered pop-in chips, and Bubbles the
+   mascot holding the door at the bottom. It sits beside the nav
+   wherever there's room, and tucks under its shoulder on narrow
+   phones — the tail always points home. */
+
+/* where the bubble + window hang, measured from the real nav pill */
+type Anchor = {
+  bx: number; /* bubble left */
+  by: number; /* bubble top */
+  pTop: number; /* window top */
+  pRight: number; /* window right offset */
+  tailRight: number; /* tail centre distance from window's right edge */
+};
+
+/* stagger choreography for the window's chips */
+const chipV: Variants = {
+  hidden: { opacity: 0, scale: 0.8, y: 10 },
+  show: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 380, damping: 22 } },
+};
+
+/* one spec chip — shared by the note's own contents card and the
+   floating Spec Map window, so both wear the exact same colours:
+   band-tinted by default, candy-splashed + footprints when it's the
+   room you're standing in */
+function SpecChip({ s, i, here, ...rest }: { s: SpecSection; i: number; here: boolean } & HTMLMotionProps<"button">) {
+  const accent = accentOf(i);
+  return (
+    <motion.button
+      type="button"
+      data-here={here ? "1" : undefined}
+      aria-current={here ? "true" : undefined}
+      whileHover={{ y: -2 }}
+      whileTap={{ scale: 0.95 }}
+      className={`flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left${
+        here ? "" : isRoom(i) ? " room" : ""
+      }`}
+      style={
+        here
+          ? { background: accent, color: readableInk(accent), boxShadow: `0 3px 0 ${shade(accent)}`, rotate: "-1deg" }
+          : { background: bgOf(i), boxShadow: "0 2px 0 var(--edge)" }
+      }
+      {...rest}
+    >
+      <span
+        className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[10.5px] font-bold"
+        style={here ? { background: "rgb(255 255 255 / 0.28)", color: readableInk(accent) } : { background: accent, color: readableInk(accent) }}
+      >
+        {s.spec}
+      </span>
+      <span className={`line-clamp-2 text-[12px] font-bold leading-[1.35]${here ? "" : " text-ink"}`}>{s.title}</span>
+      {here && <Footprints className="ml-auto h-3.5 w-3.5 shrink-0 opacity-80" />}
+    </motion.button>
+  );
+}
 
 function ContentsBubble({ doc, main, active }: { doc: NotesDoc; main: string; active: string }) {
   const [open, setOpen] = useState(false);
-  const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
+  const [a, setA] = useState<Anchor | null>(null);
   /* tucked-away state — while reading downward the bubble steps off
      stage so it never sits on the words; one upward scroll (or opening
      the window) brings it back */
   const [tucked, setTucked] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
-  /* measure the real nav pill so the bubble hugs its right edge on
-     every screen; re-measure on resize and once fonts have settled */
+  /* measure the real nav pill so the bubble hugs its right edge —
+     centred on the nav's own midline — and the window drops from
+     beneath it with the tail aimed at the bubble; re-measure on
+     resize and once fonts have settled */
   useEffect(() => {
     const measure = () => {
       const r = document.querySelector('nav[aria-label="Main"]')?.getBoundingClientRect();
       if (!r) return;
       const fits = r.right + 58 <= window.innerWidth - 10;
-      setPos(
+      setA(
         fits
-          ? { x: r.right + 10, y: r.top }
-          : { x: window.innerWidth - 68, y: r.bottom + 8 }
+          ? {
+              bx: r.right + 10,
+              by: r.top + (r.height - 48) / 2,
+              pTop: r.bottom + 12,
+              pRight: window.innerWidth - (r.right + 58),
+              tailRight: 17,
+            }
+          : {
+              bx: window.innerWidth - 68,
+              by: r.bottom + 8,
+              pTop: r.bottom + 66,
+              pRight: 10,
+              tailRight: 27,
+            },
       );
     };
     measure();
@@ -348,6 +421,22 @@ function ContentsBubble({ doc, main, active }: { doc: NotesDoc; main: string; ac
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  /* keyboard users land on the window itself, so esc/tab read right */
+  useEffect(() => {
+    if (open) panelRef.current?.focus({ preventScroll: true });
+  }, [open]);
+
+  /* when the map opens, walk the "you are here" chip into view */
+  useEffect(() => {
+    if (!open) return;
+    const t = window.setTimeout(() => {
+      const sc = gridRef.current;
+      const el = sc?.querySelector<HTMLElement>('[data-here="1"]');
+      if (sc && el) sc.scrollTop = Math.max(0, el.offsetTop - sc.offsetTop - 28);
+    }, 160);
+    return () => window.clearTimeout(t);
   }, [open]);
 
   /* the polite bubble: hides while you scroll down through a section,
@@ -382,39 +471,43 @@ function ContentsBubble({ doc, main, active }: { doc: NotesDoc; main: string; ac
         title="Contents — jump between sections"
         className="fixed z-[60] grid h-12 w-12 cursor-pointer place-items-center rounded-full"
         style={{
-          top: pos?.y ?? -60,
-          left: pos?.x ?? -60,
+          top: a?.by ?? -60,
+          left: a?.bx ?? -60,
           background: main,
           color: readableInk(main),
-          boxShadow: `0 4px 0 ${shade(main)}, 0 16px 30px -14px rgb(0 0 0 / 0.45)`,
+          /* paper ring ties it to the nav; the pedestal presses down
+             when the map is open, like every candy button on the site */
+          boxShadow: open
+            ? `0 0 0 3px var(--color-paper), 0 1px 0 ${shade(main)}`
+            : `0 0 0 3px var(--color-paper), 0 4px 0 ${shade(main)}, 0 16px 30px -14px rgb(0 0 0 / 0.45)`,
           pointerEvents: tucked ? "none" : "auto",
         }}
         initial={{ opacity: 0, scale: 0.5 }}
         animate={
           tucked
-            ? { opacity: 0, scale: 0.7, x: 84 }
-            : { opacity: pos ? 1 : 0, scale: pos ? 1 : 0.5, x: 0 }
+            ? { opacity: 0, scale: 0.7, x: 84, rotate: -4, y: 0 }
+            : { opacity: a ? 1 : 0, scale: a ? 1 : 0.5, x: 0, rotate: open ? 0 : -4, y: open ? 2 : 0 }
         }
         transition={{ type: "spring", stiffness: 320, damping: 24 }}
       >
-        {/* the bubble wears the spec you're on — the position context the
-            old rail used to give, minus the obstruction */}
+        {/* the bubble wears the spec you're on — and trades the number
+            for a map glyph while the window is open */}
         <AnimatePresence mode="wait" initial={false}>
           <motion.span
-            key={active}
+            key={open ? "map" : active}
             initial={{ y: 9, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -9, opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="font-display text-[12px] font-bold"
+            className="grid place-items-center font-display text-[12px] font-bold"
           >
-            {active}
+            {open ? <ListChecks className="h-[18px] w-[18px]" /> : active}
           </motion.span>
         </AnimatePresence>
       </motion.button>
 
       <AnimatePresence>
-        {open && pos && (
+        {open && a && (
           <>
             <motion.div
               key="scrim"
@@ -427,66 +520,86 @@ function ContentsBubble({ doc, main, active }: { doc: NotesDoc; main: string; ac
             />
             <motion.div
               key="panel"
+              ref={panelRef}
               role="dialog"
               aria-label="Note contents"
-              initial={{ opacity: 0, y: -12, scale: 0.9 }}
+              tabIndex={-1}
+              initial={{ opacity: 0, y: -14, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.94 }}
               transition={{ type: "spring", stiffness: 340, damping: 26 }}
-              className="fixed z-[60] max-h-[min(74vh,660px)] w-[min(560px,calc(100vw-20px))] overflow-y-auto rounded-[30px] bg-paper p-5 puff sm:p-6"
+              className="spec-map fixed z-[60] flex max-h-[min(76vh,680px)] w-[min(560px,calc(100vw-20px))] flex-col rounded-[30px] rounded-tr-[14px] bg-paper outline-none"
               style={{
-                top: pos.y + 60,
-                right: Math.max(10, window.innerWidth - pos.x - 48),
-                transformOrigin: "top right",
+                top: a.pTop,
+                right: a.pRight,
+                /* the window blooms out of the tail, not its middle */
+                transformOrigin: `calc(100% - ${a.tailRight + 7}px) 0`,
+                /* same pedestal language as the nav pill itself */
+                boxShadow: "0 3px 0 var(--edge), 0 26px 54px -22px rgb(0 0 0 / 0.4)",
               }}
             >
-              <div className="flex items-center gap-3">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl" style={{ background: tint(main, 16) }}>
-                  <Target className="h-5 w-5" style={{ color: inkMix(main, 60) }} />
+              {/* the paper tail stitches the window to the bubble above */}
+              <span
+                aria-hidden
+                className="absolute top-[-6px] h-3.5 w-3.5 rotate-45 rounded-[3px] bg-paper"
+                style={{ right: a.tailRight }}
+              />
+
+              {/* header — a tilted badge cut from the same cloth as the
+                  spec badges inside the rooms */}
+              <div className="flex items-center gap-3 px-5 pt-4 sm:px-6">
+                <span
+                  className="inline-flex rotate-[-2deg] items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.08em] uppercase"
+                  style={{ background: main, color: readableInk(main), boxShadow: `0 3px 0 ${shade(main)}` }}
+                >
+                  <ListChecks className="h-3.5 w-3.5" /> Spec map
                 </span>
-                <div>
-                  <h2 className="font-display text-[18px] font-semibold text-ink">Contents</h2>
-                  <p className="text-[12.5px] font-bold text-ink-faint">{doc.sections.length} sections · tap one to jump</p>
-                </div>
+                <button
+                  type="button"
+                  onClick={closeWindow}
+                  aria-label="Close contents"
+                  className="ml-auto grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full bg-ink/[0.06] text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
+                >
+                  <X className="h-[18px] w-[18px]" strokeWidth={2.2} />
+                </button>
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
-                {doc.sections.map((s, i) => {
-                  const here = active === s.spec;
-                  const accent = accentOf(i);
-                  return (
-                    <button
+              <p className="mt-1.5 px-5 text-[12.5px] font-bold text-ink-faint sm:px-6">
+                {doc.sections.length} stops · tap one to hop there
+              </p>
+              <Squiggle color={main} className="mx-6 mt-2 h-2 w-20 shrink-0 opacity-50" />
+
+              {/* the map itself */}
+              <motion.div
+                ref={gridRef}
+                initial="hidden"
+                animate="show"
+                variants={{ show: { transition: { staggerChildren: 0.028, delayChildren: 0.05 } } }}
+                className="overflow-y-auto px-4 py-3 sm:px-5"
+                style={{ overscrollBehavior: "contain" }}
+              >
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                  {doc.sections.map((s, i) => (
+                    <SpecChip
                       key={s.spec}
-                      type="button"
+                      s={s}
+                      i={i}
+                      here={active === s.spec}
+                      variants={chipV}
                       onClick={() => {
                         scrollToSpec(s.spec);
                         closeWindow();
                       }}
-                      aria-current={here ? "true" : undefined}
-                      className={`group flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left transition-transform hover:-translate-y-0.5${
-                        here ? "" : isRoom(i) ? " room" : ""
-                      }`}
-                      style={
-                        here
-                          ? { background: accent, color: readableInk(accent), boxShadow: `0 3px 0 ${shade(accent)}` }
-                          : { background: bgOf(i) }
-                      }
-                    >
-                      <span
-                        className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[10.5px] font-bold"
-                        style={
-                          here
-                            ? { background: "rgb(255 255 255 / 0.28)", color: readableInk(accent) }
-                            : { background: accent, color: readableInk(accent) }
-                        }
-                      >
-                        {s.spec}
-                      </span>
-                      <span className={`line-clamp-2 text-[12px] font-bold leading-[1.35]${here ? "" : " text-ink"}`}>
-                        {s.title}
-                      </span>
-                    </button>
-                  );
-                })}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* footer — Bubbles holds the door */}
+              <div className="mt-auto flex items-center gap-3 border-t-2 border-dashed border-ink/10 px-5 py-3 sm:px-6">
+                <Mascot main={main} size={44} bubbles={false} className="h-11 w-11 shrink-0" />
+                <p className="font-display text-[13px] font-semibold leading-snug text-ink-soft">
+                  Pick a stop — I&apos;ll hop you straight there.
+                </p>
               </div>
             </motion.div>
           </>
