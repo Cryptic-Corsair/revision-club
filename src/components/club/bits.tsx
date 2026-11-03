@@ -298,14 +298,16 @@ export function Wave({
 export function Blob({
   color,
   shape = "a",
+  still = false,
   className,
   style,
 }: {
   color: string;
   /* static organic silhouettes (.blob-shape-* in globals); the drift is
-     compositor-only (transform rotate/scale). data-freeze lets the page
-     pause the drift while the blob is offscreen. */
+     compositor-only (transform rotate/scale). still drops the drift for
+     quiet zones; data-freeze lets the page pause it offscreen. */
   shape?: "a" | "b" | "c";
+  still?: boolean;
   className?: string;
   style?: CSSProperties;
 }) {
@@ -313,7 +315,7 @@ export function Blob({
     <div
       aria-hidden
       data-freeze
-      className={`animate-blob blob-shape-${shape} absolute ${className ?? ""}`}
+      className={`${still ? "" : "animate-blob "}blob-shape-${shape} absolute ${className ?? ""}`}
       style={{ background: color, ...style }}
     />
   );

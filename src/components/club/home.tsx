@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { useEffect, type CSSProperties } from "react";
 import {
   Atom,
   ClipboardCheck,
@@ -37,7 +36,7 @@ import {
   Float,
   Mascot,
   PopIn,
-  Reveal,
+  readableInk,
   SectionTag,
   SoftButton,
   tint,
@@ -46,8 +45,10 @@ import {
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · home — Material You surfaces, candy personality
-   Tonal layers, big soft radii, pill buttons; mascot and blobs
-   keep the club spirit. No edged boxes anywhere.
+   Motion lives in the hero alone: blob drifts, the entrance pop,
+   floating cards, the boopable mascot. Everything below paints
+   once and holds still — no scroll reveals, no idle loops, and a
+   static wave divider where the marquees used to scroll.
    ═══════════════════════════════════════════════════════════════ */
 
 const UNIT_ICONS = {
@@ -59,27 +60,58 @@ const UNIT_ICONS = {
   WCH16: ClipboardCheck,
 } as const;
 
-const MARQUEE_A = [
-  "ENTHALPY",
-  "HESS'S LAW",
-  "TITRATIONS",
-  "CHIRALITY",
-  "BUFFER SOLUTIONS",
-  "FLAME TESTS",
-  "MOLE MATHS",
-  "EQUILIBRIA",
-];
+/* ————— static buttons for the still zones —————
+   Same candy skin as the hero pair, minus the spring: below the
+   hero every control paints once and answers hover with CSS only. */
 
-const MARQUEE_B = [
-  "CURLY ARROWS",
-  "ENTROPY",
-  "TRANSITION METALS",
-  "ELECTRODE POTENTIALS",
-  "HALOGENOALKANES",
-  "CARBONYLS",
-  "Kp & Kc",
-  "RECRYSTALLISATION",
-];
+function CandyBtn({
+  children,
+  main = "#FF6B6B",
+  onClick,
+  className,
+  ariaLabel,
+}: {
+  children: React.ReactNode;
+  main?: string;
+  onClick?: () => void;
+  className?: string;
+  ariaLabel?: string;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={ariaLabel}
+      onClick={onClick}
+      className={`candy inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[15.5px] font-semibold tracking-wide select-none ${className ?? ""}`}
+      style={{ "--candy-bg": main, "--candy-side": shade(main), color: readableInk(main) } as CSSProperties}
+    >
+      {children}
+    </button>
+  );
+}
+
+function SoftBtn({
+  children,
+  onClick,
+  className,
+  ariaLabel,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+  className?: string;
+  ariaLabel?: string;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={ariaLabel}
+      onClick={onClick}
+      className={`inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-6 py-3 font-display text-[15.5px] font-semibold text-ink puff select-none ${className ?? ""}`}
+    >
+      {children}
+    </button>
+  );
+}
 
 export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack, onOpenSpec }: { units: Unit[]; onOpenUnit: (code: string) => void; onOpenSticker: () => void; onOpenTopic: (code: UnitCode, topicId: string) => void; onOpenPack: () => void; onOpenSpec: () => void }) {
   const hours = Math.round(TOTALS.minutes / 60);
@@ -92,12 +124,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   /* ————— pause what you can't see —————
-     The drifts, bobs and marquees are pure compositor work, but even
-     free work adds up across a dozen layers — and the hero used to
-     keep performing while you were three screens deep. One observer
-     flips animation-play-state while a decorated element sits
-     offscreen; scroll back and it resumes mid-stride. Runs whenever
-     the suggestion card may have newly mounted. */
+     All the ambient motion on this page lives in the hero, and it
+     is pure compositor work — but even free work adds up. One
+     observer flips animation-play-state while a hero decoration
+     sits offscreen; scroll back and it resumes mid-stride. */
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>("[data-freeze]"));
     if (els.length === 0) return;
@@ -287,15 +317,12 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
         </div>
       </section>
 
-      {/* ————— marquee ribbons ————— */}
-      <section aria-hidden className="relative z-10 -my-2 overflow-x-clip py-8">
-        <Ribbon words={MARQUEE_A} bg="#FF6B6B" rotate={-1.6} />
-        <Ribbon words={MARQUEE_B} bg="var(--color-cocoa)" rotate={1.2} reverse className="-mt-7" />
-      </section>
+      {/* ————— wave divider (static) ————— */}
+      <WaveBand />
 
       {/* ————— units: M3 elevated cards ————— */}
       <section id="units" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-20 pb-6 sm:px-8">
-        <Reveal className="text-center">
+        <div className="text-center">
           <SectionTag main="#FF922B" tilt={2}>
             the course
           </SectionTag>
@@ -306,7 +333,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
             Tap a unit to see its topics in specification order. Topics you mark as revised
             are saved in your browser.
           </p>
-        </Reveal>
+        </div>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {units.map((u, i) => {
@@ -316,14 +343,11 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
             const minutes = u.topics.reduce((m, t) => m + t.minutes, 0);
             const tilt = [-1.2, 1, -0.8, 1.1, -1, 0.8][i % 6];
             return (
-              <Reveal key={u.code} delay={i * 0.06}>
-                <motion.button
+              <div key={u.code}>
+                <button
                   type="button"
                   onClick={() => onOpenUnit(u.code)}
                   aria-label={`Open ${u.code} — ${u.title}`}
-                  whileHover={{ y: -8, rotate: 0, scale: 1.015 }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 18 }}
                   className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[28px] bg-paper p-6 text-left puff"
                   style={{ transform: `rotate(${tilt}deg)` }}
                 >
@@ -387,8 +411,8 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                       </span>
                     </div>
                   </div>
-                </motion.button>
-              </Reveal>
+                </button>
+              </div>
             );
           })}
         </div>
@@ -396,12 +420,12 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
 
       {/* ————— the revision pack: tick points, get one read ————— */}
       <section id="pack" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 py-10 sm:px-8">
-        <Reveal>
+        <div>
           <div
             className="relative overflow-hidden rounded-[36px] px-6 py-8 puff sm:rounded-[44px] sm:px-10 sm:py-10"
             style={{ background: "var(--tint-base)" }}
           >
-            <Blob color={tint("#FFD43B", 20)} shape="b" className="top-[-40%] right-[-8%] h-[70%] w-[38%]" />
+            <Blob color={tint("#FFD43B", 20)} shape="b" still className="top-[-40%] right-[-8%] h-[70%] w-[38%]" />
             <DoodleHex className="absolute bottom-[8%] left-[3%] hidden h-8 w-8 text-lemon/40 sm:block" />
             <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center">
               <div className="min-w-0 flex-1">
@@ -421,7 +445,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   continuous read you can mark off, print or copy.
                 </p>
                 <div className="mt-6 flex flex-wrap items-center gap-3">
-                  <CandyButton main="#FF922B" onClick={onOpenPack}>
+                  <CandyBtn main="#FF922B" onClick={onOpenPack}>
                     {picks.length > 0 ? (
                       <>
                         Open your pack · {picks.length} point{picks.length === 1 ? "" : "s"}{" "}
@@ -432,10 +456,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                         Build your pack <MoveRight className="h-5 w-5" />
                       </>
                     )}
-                  </CandyButton>
-                  <SoftButton onClick={onOpenSpec}>
+                  </CandyBtn>
+                  <SoftBtn onClick={onOpenSpec}>
                     <Target className="h-4 w-4 text-coral" /> Browse the spec index
-                  </SoftButton>
+                  </SoftBtn>
                 </div>
               </div>
               <div className="flex shrink-0 items-center justify-center md:pl-6">
@@ -461,19 +485,19 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               </div>
             </div>
           </div>
-        </Reveal>
+        </div>
       </section>
 
       {/* ————— how it works: M3 stepper ————— */}
       <section id="how" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 py-20 sm:px-8">
-        <Reveal className="text-center">
+        <div className="text-center">
           <SectionTag main="#9775FA" tilt={-1.5}>
             how it works
           </SectionTag>
           <h2 className="mt-5 font-display text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-ink">
             Read, practise, then mark it as revised
           </h2>
-        </Reveal>
+        </div>
 
         {/* three-up as soon as there's room for it — on a tablet in
             portrait the stack would burn three screens of scrolling */}
@@ -502,7 +526,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
             },
           ].map((s, i) => (
             <div key={s.n} className="contents">
-              <Reveal delay={i * 0.1} className="min-w-0 flex-1">
+              <div className="min-w-0 flex-1">
                 <div
                   className={`h-full rounded-[28px] bg-paper p-5 puff sm:p-6 md:p-5 lg:p-6 ${i % 2 ? "rotate-[0.6deg]" : "rotate-[-0.6deg]"}`}
                 >
@@ -525,25 +549,17 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   </h3>
                   <p className="mt-2 text-[14.5px] leading-[1.75] text-ink-soft">{s.body}</p>
                 </div>
-              </Reveal>
+              </div>
               {i < 2 && (
-                <Reveal delay={i * 0.1 + 0.05} className="flex flex-col items-center justify-center py-1 lg:py-0">
+                <div className="flex flex-col items-center justify-center py-1 lg:py-0">
                   <span aria-hidden className="dot-line h-8 w-[3px] md:hidden" />
-                  <motion.span
-                    animate={{ y: [0, 6, 0] }}
-                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon md:hidden"
-                  >
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon md:hidden">
                     <MoveRight className="h-5.5 w-5.5 rotate-90" strokeWidth={2.5} />
-                  </motion.span>
-                  <motion.span
-                    animate={{ x: [0, 8, 0] }}
-                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                    className="hidden h-12 w-12 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon md:grid"
-                  >
+                  </span>
+                  <span className="hidden h-12 w-12 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon md:grid">
                     <MoveRight className="h-6 w-6" strokeWidth={2.5} />
-                  </motion.span>
-                </Reveal>
+                  </span>
+                </div>
               )}
             </div>
           ))}
@@ -552,27 +568,24 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
 
       {/* ————— practice tools ————— */}
       <section id="arcade" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pb-20 sm:px-8">
-        <Reveal className="text-center">
+        <div className="text-center">
           <SectionTag main="#FF6B6B" tilt={1.5}>
             stay on track
           </SectionTag>
           <h2 className="mt-5 font-display text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-ink">
             Your bench, your pace
           </h2>
-        </Reveal>
+        </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <Reveal delay={0.05}>
-            <motion.button
+          <div>
+            <button
               type="button"
               onClick={onOpenSticker}
-              whileHover={{ y: -8, rotate: 0, scale: 1.015 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 300, damping: 18 }}
               className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[32px] p-7 text-left puff sm:p-8"
               style={{ background: tint("#12B886", 10), transform: "rotate(-0.8deg)" }}
             >
-              <Blob color={tint("#12B886", 22)} shape="c" className="bottom-[-30%] left-[-15%] h-[75%] w-[55%]" />
+              <Blob color={tint("#12B886", 22)} shape="c" still className="bottom-[-30%] left-[-15%] h-[75%] w-[55%]" />
               <div className="relative z-10 flex h-full flex-col">
                 <span
                   className="grid h-14 w-14 place-items-center rounded-[20px] text-white"
@@ -600,17 +613,14 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   </span>
                 </div>
               </div>
-            </motion.button>
-          </Reveal>
+            </button>
+          </div>
 
           {suggestion ? (
-            <Reveal delay={0.12}>
-              <motion.button
+            <div>
+              <button
                 type="button"
                 onClick={() => onOpenTopic(suggestion.unit.code, suggestion.topic.id)}
-                whileHover={{ y: -8, rotate: 0, scale: 1.015 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 300, damping: 18 }}
                 className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[32px] p-7 text-left puff sm:p-8"
                 style={{
                   background: tint(suggestion.unit.candy.main, 10),
@@ -620,6 +630,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 <Blob
                   color={tint(suggestion.unit.candy.main, 22)}
                   shape="b"
+                  still
                   className="top-[-30%] right-[-15%] h-[75%] w-[55%]"
                 />
                 <div className="relative z-10 flex h-full flex-col">
@@ -650,10 +661,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                     </span>
                   </div>
                 </div>
-              </motion.button>
-            </Reveal>
+              </button>
+            </div>
           ) : (
-            <Reveal delay={0.12}>
+            <div>
               <button
                 type="button"
                 onClick={onOpenSticker}
@@ -665,29 +676,29 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   Every topic is marked as revised. Respect.
                 </p>
               </button>
-            </Reveal>
+            </div>
           )}
         </div>
       </section>
 
       {/* ————— CTA band: the cocoa card from the moodboard ————— */}
       <section className="px-3 pb-24 sm:px-5 sm:pb-28 lg:px-8">
-        <Reveal>
+        <div>
           <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[36px] bg-cocoa px-6 py-12 text-center sm:rounded-[44px] sm:px-12 sm:py-16">
-            <Blob color="rgba(255,107,107,0.16)" shape="b" className="top-[-30%] left-[-10%] h-[70%] w-[45%]" />
+            <Blob color="rgba(255,107,107,0.16)" shape="b" still className="top-[-30%] left-[-10%] h-[70%] w-[45%]" />
             <Blob
               color="rgba(151,117,250,0.16)"
               shape="c"
+              still
               className="right-[-12%] bottom-[-35%] h-[75%] w-[45%]"
-              style={{ animationDuration: "15s" }}
             />
             <DoodlePlus className="absolute top-8 left-[12%] h-6 w-6 text-milk/25" />
             <DoodleSparkle className="absolute right-[16%] bottom-10 h-7 w-7 text-lemon/50" />
 
             <div className="relative z-10 mx-auto max-w-xl">
-              <Float slow className="mx-auto w-fit">
+              <div className="mx-auto w-fit">
                 <Mascot main="#FFD43B" mood="cheer" size={150} bubbles={false} className="mx-auto" />
-              </Float>
+              </div>
               <h2 className="mt-2 font-display text-[clamp(1.8rem,3.6vw,2.6rem)] font-semibold text-milk">
                 Pick a unit and dive in.
               </h2>
@@ -695,59 +706,52 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 Begin with Unit 1, or jump straight to the topic you are revising.
               </p>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3.5">
-                <CandyButton main="#FFD43B" onClick={() => scrollTo("units")}>
+                <CandyBtn main="#FFD43B" onClick={() => scrollTo("units")}>
                   Browse the units <MoveRight className="h-5 w-5" />
-                </CandyButton>
-                <SoftButton onClick={() => onOpenUnit("WCH11")}>
+                </CandyBtn>
+                <SoftBtn onClick={() => onOpenUnit("WCH11")}>
                   Open Unit 1 <DoodleSparkle className="h-4 w-4 text-lemon" />
-                </SoftButton>
+                </SoftBtn>
               </div>
             </div>
           </div>
-        </Reveal>
+        </div>
       </section>
     </div>
   );
 }
 
-/* ————— marquee ribbon ————— */
+/* ————— wave divider (static) —————
+   Where the scrolling marquees used to run, three painted-once
+   wave layers roll into shore in the club colours. No animation,
+   no text track — one SVG raster the compositor never revisits. */
 
-function Ribbon({
-  words,
-  bg,
-  rotate,
-  reverse = false,
-  className,
-}: {
-  words: string[];
-  bg: string;
-  rotate: number;
-  reverse?: boolean;
-  className?: string;
-}) {
-  const list = [...words, ...words];
+function WaveBand() {
   return (
-    <div
-      className={`relative -mx-[4%] w-[108%] ${className ?? ""}`}
-      style={{ transform: `rotate(${rotate}deg)` }}
-    >
-      <div className="overflow-hidden py-3" style={{ background: bg }}>
-        <div
-          data-freeze
-          className="animate-marquee flex w-max items-center gap-10"
-          style={reverse ? { animationDirection: "reverse" } : undefined}
-        >
-          {list.map((w, i) => (
-            <span
-              key={i}
-              className="flex items-center gap-10 font-display text-[15px] font-bold tracking-[0.22em] whitespace-nowrap text-white uppercase"
-            >
-              {w}
-              <DoodleSparkle className="h-4 w-4 shrink-0 text-white/80" />
-            </span>
-          ))}
-        </div>
+    <section aria-hidden className="relative z-10 -my-2 overflow-x-clip py-10">
+      <div className="relative mx-[-3%] h-[110px] w-[106%] sm:h-[132px]">
+        <svg viewBox="0 0 1440 132" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
+          {/* back swell — lemon */}
+          <path
+            d="M0,36 C60,18 120,18 180,36 C240,54 300,54 360,36 C420,18 480,18 540,36 C600,54 660,54 720,36 C780,18 840,18 900,36 C960,54 1020,54 1080,36 C1140,18 1200,18 1260,36 C1320,54 1380,54 1440,36 L1440,132 L0,132 Z"
+            fill="#FFD43B"
+            opacity="0.9"
+          />
+          {/* mid break — coral */}
+          <path
+            d="M0,66 C80,38 160,38 240,66 C320,94 400,94 480,66 C560,38 640,38 720,66 C800,94 880,94 960,66 C1040,38 1120,38 1200,66 C1280,94 1360,94 1440,66 L1440,132 L0,132 Z"
+            fill="#FF6B6B"
+          />
+          {/* shore — cocoa */}
+          <path
+            d="M0,98 C120,78 240,78 360,98 C480,118 600,118 720,98 C840,78 960,78 1080,98 C1200,118 1320,118 1440,98 L1440,132 L0,132 Z"
+            fill="var(--color-cocoa)"
+          />
+        </svg>
+        <DoodlePlus className="absolute top-[8%] right-[15%] h-5 w-5 text-white/60" />
+        <DoodleSparkle className="absolute top-[40%] left-[21%] h-4.5 w-4.5 text-white/70" />
+        <DoodleAtom className="absolute top-[72%] right-[7%] h-6 w-6 text-lemon/70" />
       </div>
-    </div>
+    </section>
   );
 }
