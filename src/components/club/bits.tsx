@@ -302,9 +302,9 @@ export function Blob({
   style,
 }: {
   color: string;
-  /* static organic silhouettes (.blob-shape-* in globals) — blobs no
-     longer animate at all: painted once, they hold still while the
-     page scrolls, which is the cheapest thing a layer can do */
+  /* static organic silhouettes (.blob-shape-* in globals); the drift is
+     compositor-only (transform rotate/scale). data-freeze lets the page
+     pause the drift while the blob is offscreen. */
   shape?: "a" | "b" | "c";
   className?: string;
   style?: CSSProperties;
@@ -312,7 +312,8 @@ export function Blob({
   return (
     <div
       aria-hidden
-      className={`blob-shape-${shape} absolute ${className ?? ""}`}
+      data-freeze
+      className={`animate-blob blob-shape-${shape} absolute ${className ?? ""}`}
       style={{ background: color, ...style }}
     />
   );
@@ -703,6 +704,7 @@ export function Float({
 }) {
   return (
     <div
+      data-freeze
       className={`${slow ? "animate-float-slow" : "animate-float"} ${className ?? ""}`}
       style={{ animationDelay: `${delay}s` }}
     >
