@@ -31,7 +31,6 @@ import {
   Chip,
   DoodleAtom,
   DoodleHex,
-  DoodleMolecule,
   DoodlePlus,
   DoodleSparkle,
   Float,
@@ -40,7 +39,6 @@ import {
   Reveal,
   SectionTag,
   SoftButton,
-  Squiggle,
   tint,
   shade,
 } from "./bits";
@@ -111,33 +109,25 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
             <div>
               <PopIn>
                 <SectionTag main="#12B886" tilt={-2}>
-                  Pearson Edexcel IAL · Chemistry · 2018 spec
+                  Edexcel IAL Chemistry · 2018 spec
                 </SectionTag>
               </PopIn>
 
               <PopIn delay={0.08}>
-                <h1 className="mt-6 font-display text-[clamp(2.5rem,5.6vw,4.2rem)] leading-[1.05] font-semibold tracking-tight text-ink">
-                  Edexcel IAL Chemistry{" "}
-                  <span className="relative inline-block">
-                    spec point
-                    <Squiggle
-                      color="#FF6B6B"
-                      className="absolute -bottom-2 left-0 h-[12px] w-full"
-                    />
-                  </span>{" "}
+                <h1 className="mt-6 font-display text-[clamp(2.5rem,5.4vw,4.1rem)] leading-[1.06] font-semibold tracking-tight text-ink">
+                  Every spec point,{" "}
                   <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-lemon/60 px-[0.18em]">
-                    by spec point.
+                    made to stick.
                   </span>
                 </h1>
               </PopIn>
 
               <PopIn delay={0.16}>
-                <p className="mt-6 max-w-[54ch] text-[16.5px] leading-[1.8] text-ink-soft">
+                <p className="mt-6 max-w-[50ch] text-[15.5px] leading-[1.78] text-ink-soft sm:text-[16.5px] sm:leading-[1.8]">
                   Welcome to <strong className="font-extrabold text-ink">Reaction Club</strong> —
-                  revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16). Each unit
-                  follows the 2018 specification in order, with definitions, equations, fully
-                  worked examples and checkpoint questions with answers. Your progress is saved
-                  in your browser.
+                  revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16). Every unit runs
+                  the 2018 spec in order: definitions, equations, worked examples and checkpoint
+                  questions. Your progress saves itself in your browser.
                 </p>
               </PopIn>
 
@@ -145,32 +135,42 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 <CandyButton main="#FF6B6B" onClick={() => scrollTo("units")}>
                   Browse the units <MoveRight className="h-5 w-5" />
                 </CandyButton>
-                <SoftButton onClick={onOpenSticker}>
-                  <Sticker className="h-4 w-4 text-mint" /> Track your progress
+                <SoftButton onClick={() => scrollTo("how")}>
+                  <NotebookPen className="h-4 w-4 text-grape" /> How it works
                 </SoftButton>
               </PopIn>
 
-              <PopIn delay={0.32} className="mt-9 flex flex-wrap gap-2.5">
-                {[
-                  { icon: Atom, label: `${units.length} units` },
-                  { icon: ListChecks, label: `${TOTALS.topics} topics` },
-                  { icon: Clock, label: `≈${hours} h of reading` },
-                  { icon: PencilRuler, label: `${TOTALS.examples} worked examples` },
-                  { icon: ClipboardCheck, label: `${TOTALS.checks} checkpoint Qs` },
-                ].map((s) => (
-                  <span
-                    key={s.label}
-                    className="inline-flex items-center gap-2 rounded-full bg-cream px-3.5 py-2 text-[13px] font-extrabold text-ink"
-                  >
-                    <s.icon className="h-4 w-4 text-coral" strokeWidth={2.5} />
-                    {s.label}
-                  </span>
-                ))}
+              {/* the numbers, as one tidy strip */}
+              <PopIn delay={0.32} className="mt-9">
+                <div className="rounded-[26px] bg-cream px-4 py-4 sm:px-5">
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-4 sm:grid-cols-3 lg:grid-cols-5">
+                    {[
+                      { icon: Atom, value: String(units.length), label: "units" },
+                      { icon: ListChecks, value: String(TOTALS.topics), label: "topics" },
+                      { icon: Clock, value: `≈${hours} h`, label: "reading" },
+                      { icon: PencilRuler, value: String(TOTALS.examples), label: "examples" },
+                      { icon: ClipboardCheck, value: String(TOTALS.checks), label: "checkpoints" },
+                    ].map((s) => (
+                      <div key={s.label} className="flex items-center gap-2">
+                        <s.icon className="h-4 w-4 shrink-0 text-coral" strokeWidth={2.5} />
+                        <div className="min-w-0">
+                          <div className="font-display text-[19px] leading-none font-bold text-ink">
+                            {s.value}
+                          </div>
+                          <div className="mt-1 truncate text-[11px] font-bold text-ink-faint">
+                            {s.label}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </PopIn>
             </div>
 
-            {/* right: mascot scene */}
-            <div className="relative mx-auto flex h-[300px] w-full max-w-[420px] items-center justify-center sm:h-[380px] md:h-[430px] md:max-w-[480px]">
+            {/* right: a taste of what's inside — notes and equations
+                drift around Bubbles, so the scene sells the product */}
+            <div className="relative mx-auto flex h-[320px] w-full max-w-[440px] items-center justify-center sm:h-[400px] md:h-[440px] md:max-w-[480px]">
               {/* soft peach wash — pink stays reserved for WCH15 and the mascot blush */}
               <Blob color={tint("#FF922B", 18)} className="h-[86%] w-[86%]" />
               <Blob
@@ -179,27 +179,71 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 style={{ animationDuration: "9s" }}
               />
 
-              <Float>
-                <Mascot main="#FF6B6B" size={250} boop onBoop={() => {}} className="relative z-10" />
+              {/* a note, mid-read */}
+              <Float delay={0.35} className="absolute top-[9%] left-0 z-20 sm:left-[1%]">
+                <div
+                  aria-hidden
+                  className="w-[150px] -rotate-[4deg] rounded-[22px] bg-paper px-4 py-3.5 puff sm:w-[178px]"
+                >
+                  <span
+                    className="rounded-full px-2.5 py-1 font-display text-[10px] font-bold tracking-[0.08em] text-white uppercase"
+                    style={{ background: "#12B886" }}
+                  >
+                    definition
+                  </span>
+                  <div className="mt-2 font-display text-[13.5px] font-bold text-ink">
+                    Enthalpy change
+                  </div>
+                  <div className="mt-2 space-y-1.5">
+                    <span className="block h-[7px] w-[92%] rounded-full bg-ink/[0.09]" />
+                    <span className="block h-[7px] w-[68%] rounded-full bg-ink/[0.09]" />
+                    <span className="block h-[7px] w-[82%] rounded-full bg-ink/[0.09]" />
+                  </div>
+                </div>
               </Float>
 
-              <Float delay={0.8} className="absolute top-[8%] left-[2%] z-20">
-                <span className="inline-block rotate-[-7deg] rounded-full bg-paper px-4 py-2 font-display text-[13px] font-bold text-ink puff">
+              {/* an equation, done */}
+              <Float delay={1.2} slow className="absolute right-0 bottom-[7%] z-20 sm:right-[1%]">
+                <div
+                  aria-hidden
+                  className="rotate-[3deg] rounded-[22px] bg-paper px-5 py-4 puff sm:px-6"
+                >
+                  <span
+                    className="rounded-full px-2.5 py-1 font-display text-[10px] font-bold tracking-[0.08em] text-white uppercase"
+                    style={{ background: "#FF922B" }}
+                  >
+                    equation
+                  </span>
+                  <div className="mt-1.5 font-display text-[20px] font-bold tracking-tight text-ink sm:text-[22px]">
+                    pV = nRT
+                  </div>
+                </div>
+              </Float>
+
+              {/* Bubbles, dead centre — eased smaller on phones so the
+                  cards frame him instead of covering his face */}
+              <Float className="relative z-10">
+                <div className="origin-center scale-[0.8] translate-x-4 sm:scale-100 sm:translate-x-0">
+                  <Mascot main="#FF6B6B" size={250} boop onBoop={() => {}} className="relative z-10" />
+                </div>
+              </Float>
+
+              <Float delay={0.8} className="absolute top-[1%] right-[1%] z-30">
+                <span className="inline-block rotate-[-7deg] rounded-full bg-paper px-4 py-2 font-display text-[12.5px] font-bold whitespace-nowrap text-ink puff">
                   read → practise → done
                 </span>
               </Float>
-              <Float delay={1.6} slow className="absolute right-[0%] bottom-[12%] z-20">
+              <Float delay={1.6} slow className="absolute bottom-[1%] left-[3%] z-30">
                 <span
-                  className="inline-block rotate-[6deg] rounded-full px-4 py-2 font-display text-[13px] font-bold text-white puff"
+                  className="inline-block rotate-[6deg] rounded-full px-4 py-2 font-display text-[12.5px] font-bold text-white puff"
                   style={{ background: "#9775FA" }}
                 >
                   WCH11–WCH16
                 </span>
               </Float>
 
-              <DoodleAtom className="animate-float-slow absolute top-[6%] right-[10%] h-11 w-11 text-coral/50" />
-              <DoodleHex className="animate-float absolute bottom-[4%] left-[6%] h-10 w-10 text-grape/40" />
-              <DoodleMolecule className="animate-float absolute top-[42%] right-[0%] h-9 w-12 text-mint/50" />
+              <DoodleAtom className="animate-float-slow absolute top-[32%] right-[7%] h-9 w-9 text-coral/50" />
+              <DoodleHex className="animate-float absolute bottom-[26%] left-[7%] h-8 w-8 text-grape/40" />
             </div>
           </div>
         </div>
