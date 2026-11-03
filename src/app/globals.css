@@ -136,6 +136,10 @@ html.dark {
      their own candy tints via var() fallbacks. */
   --home-band-a: #3f2f1c;
   --home-band-b: #684625;
+  /* revision notes ride the same rhythm: every other note band wears
+     the warm flat roast instead of a candy tint, because candy at
+     14% over one roast all lands in the same few lightness steps */
+  --note-band-alt: #684625;
   --edge: rgb(0 0 0 / 0.5);
   color-scheme: dark;
 }

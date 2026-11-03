@@ -71,7 +71,11 @@ export const inkMix = (main: string, pct = 45) =>
    Map window dress their chips with the exact same colours */
 export const accentOf = (i: number) => BANDS[i % BANDS.length];
 /* bands mix their candy over --tint-base at --band-mix — 10% by
-   day, 14% after dark, so roast-tone neighbours stay distinct */
+   day, 14% after dark, so roast-tone neighbours stay distinct.
+   After dark the odd bands skip the mix entirely and wear the flat
+   warm roast (--note-band-alt) — at 14% every candy lands in the
+   same few lightness steps, so the alternation is what keeps
+   neighbouring sections readable as different places. */
 export const bandOf = (i: number) =>
   `color-mix(in oklab, ${accentOf(i)} var(--band-mix, 10%), var(--tint-base))`;
 /* every third room goes cocoa in the hybrid lab (2.2, 2.5, 2.8 …).
@@ -79,7 +83,11 @@ export const bandOf = (i: number) =>
    plain candy band — one expression, correct in all three labs. */
 export const isRoom = (i: number) => i % 3 === 1;
 export const bgOf = (i: number) =>
-  isRoom(i) ? `var(--room-surface, ${bandOf(i)})` : bandOf(i);
+  isRoom(i)
+    ? `var(--room-surface, ${bandOf(i)})`
+    : i % 2 === 1
+      ? `var(--note-band-alt, ${bandOf(i)})`
+      : bandOf(i);
 
 /* stagger choreography for the Spec Map window's chips */
 export const chipV: Variants = {
