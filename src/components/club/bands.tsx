@@ -24,10 +24,29 @@ export const BANDS = [
   "#F59F00",
 ];
 
-export const WAVE_D =
-  "M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z";
+/* the wave shelf — a shelf of hand-drawn seam curves, so a page can
+   put a differently-shaped wave at every section boundary and never
+   repeat itself twice in a row. Wave 0 is the original reader curve;
+   the footer's cream→cocoa seam and every note band still wear it. */
+export const WAVES = [
+  "M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z",
+  "M0,34 C220,72 460,76 720,50 C980,24 1220,20 1440,46 L1440,90 L0,90 Z",
+  "M0,48 C160,10 320,10 480,42 C640,74 800,74 960,42 C1120,10 1280,10 1440,38 L1440,90 L0,90 Z",
+  "M0,60 C190,82 350,26 560,30 C770,34 870,86 1080,72 C1250,60 1350,32 1440,40 L1440,90 L0,90 Z",
+  "M0,40 C130,62 250,68 410,58 C570,48 650,16 830,22 C1010,28 1090,72 1250,68 C1330,64 1395,50 1440,44 L1440,90 L0,90 Z",
+];
 
-export function BandWave({ from, to }: { from: string; to: string }) {
+export const WAVE_D = WAVES[0];
+
+export function BandWave({
+  from,
+  to,
+  wave = 0,
+}: {
+  from: string;
+  to: string;
+  wave?: number;
+}) {
   return (
     <div aria-hidden style={{ background: from }}>
       <svg
@@ -36,7 +55,7 @@ export function BandWave({ from, to }: { from: string; to: string }) {
         className="block h-[46px] w-full sm:h-[68px]"
       >
         {/* fill rides on style so var() strings with fallbacks resolve */}
-        <path d={WAVE_D} style={{ fill: to }} />
+        <path d={WAVES[wave % WAVES.length]} style={{ fill: to }} />
       </svg>
     </div>
   );

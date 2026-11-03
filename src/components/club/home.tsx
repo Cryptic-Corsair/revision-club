@@ -42,13 +42,17 @@ import {
   tint,
   shade,
 } from "./bits";
+import { BandWave, bandOf } from "./bands";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · home — Material You surfaces, candy personality
    Motion lives in the hero alone: blob drifts, the entrance pop,
    floating cards, the boopable mascot. Everything below paints
-   once and holds still — no scroll reveals, no idle loops, and a
-   static wave divider where the marquees used to scroll.
+   once and holds still — no scroll reveals, no idle loops. The
+   sections wear notes-style candy bands, and every seam between
+   neighbours is a BandWave — a different curve each time, straight
+   off the same shelf the note reader uses. Static SVG, painted
+   once; the compositor never revisits it.
    ═══════════════════════════════════════════════════════════════ */
 
 const UNIT_ICONS = {
@@ -317,11 +321,12 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
         </div>
       </section>
 
-      {/* ————— wave divider (static) ————— */}
-      <WaveBand />
+      {/* ————— the seam shelf: hero pours into the first band ————— */}
+      <BandWave from="var(--color-paper)" to={bandOf(1)} wave={1} />
 
-      {/* ————— units: M3 elevated cards ————— */}
-      <section id="units" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-20 pb-6 sm:px-8">
+      {/* ————— units: M3 elevated cards on the orange band ————— */}
+      <div style={{ background: bandOf(1) }}>
+      <section id="units" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-12 pb-8 sm:px-8">
         <div className="text-center">
           <SectionTag main="#FF922B" tilt={2}>
             the course
@@ -417,9 +422,13 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           })}
         </div>
       </section>
+      </div>
+
+      <BandWave from={bandOf(1)} to={bandOf(2)} wave={2} />
 
       {/* ————— the revision pack: tick points, get one read ————— */}
-      <section id="pack" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 py-10 sm:px-8">
+      <div style={{ background: bandOf(2) }}>
+      <section id="pack" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 py-12 sm:px-8">
         <div>
           <div
             className="relative overflow-hidden rounded-[36px] px-6 py-8 puff sm:rounded-[44px] sm:px-10 sm:py-10"
@@ -487,9 +496,13 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           </div>
         </div>
       </section>
+      </div>
+
+      <BandWave from={bandOf(2)} to={bandOf(4)} wave={3} />
 
       {/* ————— how it works: M3 stepper ————— */}
-      <section id="how" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 py-20 sm:px-8">
+      <div style={{ background: bandOf(4) }}>
+      <section id="how" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-12 pb-14 sm:px-8">
         <div className="text-center">
           <SectionTag main="#9775FA" tilt={-1.5}>
             how it works
@@ -565,9 +578,13 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           ))}
         </div>
       </section>
+      </div>
+
+      <BandWave from={bandOf(4)} to={bandOf(0)} wave={4} />
 
       {/* ————— practice tools ————— */}
-      <section id="arcade" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pb-20 sm:px-8">
+      <div style={{ background: bandOf(0) }}>
+      <section id="arcade" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-12 pb-20 sm:px-8">
         <div className="text-center">
           <SectionTag main="#FF6B6B" tilt={1.5}>
             stay on track
@@ -680,6 +697,11 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           )}
         </div>
       </section>
+      </div>
+
+      {/* last seam: the coral band drains back to the page cream the
+          footer wave starts from — same curve the footer wears */}
+      <BandWave from={bandOf(0)} to="var(--color-cream)" wave={0} />
 
       {/* ————— CTA band: the cocoa card from the moodboard ————— */}
       <section className="px-3 pb-24 sm:px-5 sm:pb-28 lg:px-8">
@@ -718,40 +740,5 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
         </div>
       </section>
     </div>
-  );
-}
-
-/* ————— wave divider (static) —————
-   Where the scrolling marquees used to run, three painted-once
-   wave layers roll into shore in the club colours. No animation,
-   no text track — one SVG raster the compositor never revisits. */
-
-function WaveBand() {
-  return (
-    <section aria-hidden className="relative z-10 -my-2 overflow-x-clip py-10">
-      <div className="relative mx-[-3%] h-[110px] w-[106%] sm:h-[132px]">
-        <svg viewBox="0 0 1440 132" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
-          {/* back swell — lemon */}
-          <path
-            d="M0,36 C60,18 120,18 180,36 C240,54 300,54 360,36 C420,18 480,18 540,36 C600,54 660,54 720,36 C780,18 840,18 900,36 C960,54 1020,54 1080,36 C1140,18 1200,18 1260,36 C1320,54 1380,54 1440,36 L1440,132 L0,132 Z"
-            fill="#FFD43B"
-            opacity="0.9"
-          />
-          {/* mid break — coral */}
-          <path
-            d="M0,66 C80,38 160,38 240,66 C320,94 400,94 480,66 C560,38 640,38 720,66 C800,94 880,94 960,66 C1040,38 1120,38 1200,66 C1280,94 1360,94 1440,66 L1440,132 L0,132 Z"
-            fill="#FF6B6B"
-          />
-          {/* shore — cocoa */}
-          <path
-            d="M0,98 C120,78 240,78 360,98 C480,118 600,118 720,98 C840,78 960,78 1080,98 C1200,118 1320,118 1440,98 L1440,132 L0,132 Z"
-            fill="var(--color-cocoa)"
-          />
-        </svg>
-        <DoodlePlus className="absolute top-[8%] right-[15%] h-5 w-5 text-white/60" />
-        <DoodleSparkle className="absolute top-[40%] left-[21%] h-4.5 w-4.5 text-white/70" />
-        <DoodleAtom className="absolute top-[72%] right-[7%] h-6 w-6 text-lemon/70" />
-      </div>
-    </section>
   );
 }

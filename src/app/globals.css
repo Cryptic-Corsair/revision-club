@@ -65,7 +65,6 @@
 
   --animate-float: float 7s ease-in-out infinite;
   --animate-float-slow: float 11s ease-in-out infinite;
-  --animate-marquee: marquee 28s linear infinite;
   --animate-blob: blob 12s ease-in-out infinite;
   --animate-bubble: bubble-up 4.5s ease-in infinite;
   --animate-wiggle: wiggle 2.6s ease-in-out infinite;
@@ -104,7 +103,7 @@ html[data-body="quicksand"] {
   --font-body: var(--font-quicksand), "Trebuchet MS", sans-serif;
 }
 
-/* calm mode — the floating blobs, marquees and wiggles stand still;
+/* calm mode — the floating blobs and wiggles stand still;
    (hover transitions stay, feedback is not decoration) */
 html[data-motion="off"] *,
 html[data-motion="off"] *::before,
@@ -202,15 +201,6 @@ html.hybrid .room {
   }
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 /* Blobs drift on the compositor only. The organic silhouette is a
    STATIC border-radius (rasterized once into a layer) and the "morph"
    is that lopsided shape slowly rotating — animating border-radius
@@ -286,7 +276,7 @@ body {
   font-size: 16px;
   text-rendering: optimizeLegibility;
   /* hidden stops touch panning but still lets script scrolls drift the
-     page sideways (scrollIntoView + the 108% marquee) — clip forbids
+     page sideways (scrollIntoView) — clip forbids
      horizontal movement entirely, every which way */
   overflow-x: hidden;
   overflow-x: clip;
