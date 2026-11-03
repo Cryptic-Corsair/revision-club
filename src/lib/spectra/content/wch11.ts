@@ -380,18 +380,18 @@ export const WCH11_TOPICS: Topic[] = [
     label: "Topic 5",
     title: "Alkenes",
     summary:
-      "The π bond makes alkenes reactive: electrophilic addition, Markownikoff's rule, E/Z isomerism and addition polymers.",
+      "The π bond makes alkenes reactive: electrophilic addition, E/Z isomerism and addition polymers.",
     minutes: 22,
     ao: ["AO1", "AO2"],
     blocks: [
       {
         k: "p",
-        text: "A carbon–carbon double bond is not twice a single bond. It is one strong σ bond plus one weak ==π bond==, and the π bond is what makes alkenes the most examinable family in Unit 1: its electron cloud sits above and below the bond axis, exposed — a standing invitation to electrophiles.",
+        text: "A carbon–carbon double bond is not twice a single bond. It is one strong σ bond plus one weak ==π bond== — the ==π bond== is the ==region of high electron density== that electrophiles attack.",
       },
       {
         k: "def",
         term: "Electrophilic addition",
-        text: "An unsymmetrical reagent H–X adds across C=C: the π cloud attacks the δ^+^ end of the polarised reagent, forming a carbocation intermediate, which the negative ion then attacks. Both new bonds form on the two carbons of the original double bond.",
+        text: "An unsymmetrical reagent H–X adds across C=C: the ==electron pair in the π bond== bonds with the δ^+^ end of the polarised reagent, forming a carbocation intermediate, which the negative ion then attacks. Both new bonds form on the two carbons of the original double bond.",
       },
       {
         k: "def",
@@ -444,11 +444,11 @@ export const WCH11_TOPICS: Topic[] = [
       {
         k: "recap",
         items: [
-          "C=C = σ + π; the exposed π cloud is the reactive part.",
+          "C=C = σ + π; the π bond is the reactive part.",
           "Electrophilic addition: π attacks δ^+^ H, carbocation, anion attacks.",
-          "Markownikoff: H to the H-rich carbon — via the more stable carbocation.",
+          "Addition of HBr to an unsymmetrical alkene: the major product is formed via the more stable carbocation.",
           "E/Z needs two different groups on each double-bond carbon.",
-          "Bromine water: orange → colourless for unsaturation.",
+          "Bromine water: reddish brown → colourless for unsaturation.",
         ],
       },
     ],

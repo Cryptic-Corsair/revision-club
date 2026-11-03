@@ -55,7 +55,7 @@ export const SECTIONS_T05_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "One shake, three colour stories: ==orange-brown → colourless== (bromine water), ==red-brown → colourless== (bromine in hexane), ==purple → green== in alkali or ==colourless== in acid (manganate). Any one of them is a positive test for unsaturation — but write the ==starting colour and the finishing colour==, not “it went clear”.",
+        text: "Three colour changes to know: ==reddish brown → colourless== (bromine water), ==reddish brown → colourless== (bromine in hexane), ==purple → green== in alkali or ==colourless== in acid (potassium manganate(VII)). Any one of them is a positive test for the C=C double bond — always quote the ==starting colour and the finishing colour==.",
       },
     ],
   },
@@ -67,11 +67,13 @@ export const SECTIONS_T05_B: SpecSection[] = [
     blocks: [
       { k: "h", text: "Example 1 · addition of HBr to ethene" },
       {
-        k: "steps",
-        caption: "HBr approaches the π cloud — two stages",
+        k: "bullets",
         items: [
-          { title: "Stage 1 · the attack", icon: "spark", text: "As the HBr approaches the alkene, the C=C bond breaks and the pair of electrons bonds with the ==δ^+^ hydrogen== (the **electrophile**) of HBr. A ==carbocation== is formed. At the same time, the H—Br bond breaks to form a bromide ion — ==heterolytic fission==." },
-          { title: "Stage 2 · the capture", icon: "spark", text: "The bromide ion behaves as a **nucleophile** and attacks the carbocation, forming the product. Overall, hydrogen bromide is added ==across the double bond==." },
+          "As the HBr approaches the alkene, the ==C=C bond breaks== and the pair of electrons bonds with the ==δ^+^ hydrogen== (the **electrophile**) of HBr.",
+          "A ==carbocation== is formed.",
+          "At the same time, the H—Br bond breaks to form a bromide ion — ==heterolytic fission==.",
+          "The bromide ion behaves as a **nucleophile** and attacks the carbocation, forming the product.",
+          "Overall, hydrogen bromide is added ==across the double bond==.",
         ],
       },
       {
@@ -82,20 +84,20 @@ export const SECTIONS_T05_B: SpecSection[] = [
       { k: "h", text: "Example 2 · addition of Br~2~ to ethene" },
       {
         k: "p",
-        text: "Bromine is ==non-polar== but it can still act as an electrophile. This is because, as the bromine molecule approaches the alkene, the ==electrons in the π bond repel the electron pair in the bromine–bromine bond==, thus ==inducing a dipole== — the near end turns δ^+^ and invites the attack.",
+        text: "Bromine is ==non-polar== but it can act as an **electrophile**. This is because, as the bromine molecule approaches the alkene, the ==electrons in the π bond of the alkene repel the electron pair in the bromine–bromine bond==, thus ==inducing a dipole==.",
       },
       { k: "h", text: "Example 3 · addition of HBr to propene" },
       {
         k: "bullets",
         items: [
-          "Addition of HBr to ==unsymmetrical== alkenes results in the formation of ==two isomeric products==.",
-          "The ==major product== is the one formed via the ==more stable carbocation==.",
+          "Addition of HBr to ==unsymmetrical== alkenes results in formation of ==two isomeric products==.",
+          "Major product is formed via the ==more stable carbocation==.",
         ],
       },
       {
         k: "figure",
         kind: "elecadd",
-        caption: "All three stories side by side: the π pair reaches for the δ^+^ H and the H—Br pair leaves with bromine; Br~2~ arrives non-polar and leaves polarised; propene's two possible carbocations decide the major product.",
+        caption: "The three mechanisms side by side: addition of HBr to ethene (heterolytic fission of the H—Br bond, then the bromide ion attacks the carbocation), addition of Br~2~ to ethene (the π bond induces a dipole in the non-polar bromine) and addition of HBr to propene (the major product forms via the more stable carbocation).",
       },
       { k: "h", text: "Stability of carbocations" },
       {
@@ -105,7 +107,7 @@ export const SECTIONS_T05_B: SpecSection[] = [
       {
         k: "figure",
         kind: "carbocation",
-        caption: "One, two, three alkyl neighbours — primary, secondary, tertiary. Stability increases as the alkyl groups pile on.",
+        caption: "Primary, secondary and tertiary carbocations — one, two and three alkyl groups directly bonded to the positively charged carbon atom. As the number of alkyl groups increases, the stability of the carbocation increases.",
       },
       {
         k: "bullets",
@@ -116,7 +118,7 @@ export const SECTIONS_T05_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "That ladder is the evidence for example 3: adding HBr to propene puts the positive charge on either the end carbon (==primary==) or the middle carbon (==secondary==). Secondary wins, so the major product is ==2-bromopropane== — the hydrogen goes to the carbon that already had more hydrogens.",
+        text: "This is the evidence for example 3: adding HBr to propene can give a carbocation with the positive charge on the end carbon (==primary==) or on the middle carbon (==secondary==). The ==secondary carbocation== is the more stable one, so the major product is ==2-bromopropane==.",
       },
     ],
   },
@@ -141,12 +143,12 @@ export const SECTIONS_T05_B: SpecSection[] = [
       {
         k: "eq",
         eq: "n CH~2~=CH~2~ → (—CH~2~—CH~2~—)~n~",
-        note: "The C=C opens up, the carbons join in a line, and the ==repeat unit== is drawn inside brackets with the ==continuation bonds== poking through.",
+        note: "The ==C=C bond opens up== and the ==repeat unit== is drawn inside brackets with the ==continuation bonds== extending through them.",
       },
       {
         k: "figure",
         kind: "polymer",
-        caption: "Monomer in, repeat unit out — ethene to polyethene, then the three exercise polymers built the same way: open the double bond, hang the substituents off the chain, carry the bonds through the brackets.",
+        caption: "Formation of polyethene from ethene, then the three Exercise 4 polymers: the double bond opens up, the substituents stay outside the chain, and the continuation bonds extend through the brackets.",
       },
       {
         k: "worked",
@@ -154,13 +156,13 @@ export const SECTIONS_T05_B: SpecSection[] = [
         question:
           "Identify the monomer units and give the repeat unit of: 1. poly(propene) 2. poly(chloroethene) 3. poly(tetrafluoroethene).",
         steps: [
-          "**Poly(propene)** — read the repeat unit backwards: —(CH~2~—CH(CH~3~))~n~—. Put the double bond back between the two chain carbons → the monomer is ==propene, CH~2~=CHCH~3~==.",
+          "**Poly(propene)** — repeat unit —(CH~2~—CH(CH~3~))~n~—; restore the C=C → the monomer is ==propene, CH~2~=CHCH~3~==.",
           "**Poly(chloroethene)** — repeat unit —(CH~2~—CHCl)~n~—; restore the C=C → the monomer is ==chloroethene, CH~2~=CHCl== (PVC).",
           "**Poly(tetrafluoroethene)** — repeat unit —(CF~2~—CF~2~)~n~—; restore the C=C → the monomer is ==tetrafluoroethene, CF~2~=CF~2~== (PTFE).",
           "Two repeating units of poly(propene), drawn out: —CH~2~—CH(CH~3~)—CH~2~—CH(CH~3~)—. The substituents always stay ==outside the chain==.",
         ],
         answer:
-          "Monomer → repeat unit: ==open the C=C== into two single bonds and carry the continuation bonds through the brackets. Repeat unit → monomer: ==put the double bond back== between the two carbons of the chain. Same two carbons, same substituents — only the bond order changes.",
+          "Monomer → repeat unit: ==open the C=C== into two single bonds and carry the ==continuation bonds== through the brackets. Repeat unit → monomer: ==restore the C=C== between the two carbons of the chain.",
       },
       { k: "checkpoint", page: 15 },
     ],
@@ -203,7 +205,7 @@ export const SECTIONS_T05_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "The specification's two answers are two escape routes from the same corner: make the polymer ==edible== (biodegradable — microbes finish it) or make the burning ==clean== (trap and remove the toxic waste gases instead of releasing them).",
+        text: "The specification's two ways to limit the problems of polymer disposal: ==developing biodegradable polymers==, which can be ==broken down by microbes== in the environment, and ==removing the toxic waste gases== produced by the incineration of polymers.",
       },
     ],
   },

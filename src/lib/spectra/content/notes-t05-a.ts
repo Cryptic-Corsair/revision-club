@@ -42,7 +42,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "One C=C is really ==two bonds doing two jobs==: head-on sp^2^ overlap gives the strong σ bond along the axis, and the sideways overlap of the leftover p orbitals adds the weak π bond — the exposed, electron-rich part that electrophiles attack.",
+        text: "The C=C double bond is ==one sigma (σ) bond and one pi (π) bond==: the σ bond is the overlap of ==sp^2^ hybrid orbitals== along the bond axis, and the π bond is the ==sideways overlap of the unhybridized p orbitals== — the ==region of high electron density== which can be ==readily attacked by electrophiles==.",
       },
       { k: "h", text: "Nomenclature" },
       {
@@ -101,7 +101,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
       },
       {
         k: "table",
-        caption: "The isomerism family tree",
+        caption: "Types of isomerism",
         head: ["Isomerism", "Its types"],
         rows: [
           ["Structural", "functional group isomerism · chain isomerism · position isomerism"],
@@ -127,12 +127,12 @@ export const SECTIONS_T05_A: SpecSection[] = [
         question:
           "But-2-ene, CH~3~CH=CHCH~3~, exists as two geometric isomers. Explain why, and name each one.",
         steps: [
-          "The C=C ==cannot rotate== — rotating it would break the double bond — so the two ends are locked in place.",
+          "The C=C ==cannot rotate== — the C=C ==would be broken== if it is rotated.",
           "In the first isomer the two hydrogens sit on the ==same side== and the two methyl groups sit on the ==same side== of the double bond → the name is **cis-but-2-ene**.",
           "In the second isomer the two hydrogens are on ==opposite sides== and the two methyl groups are on ==opposite sides== of the double bond → the name is **trans-but-2-ene**.",
         ],
         answer:
-          "**cis-but-2-ene** and **trans-but-2-ene** — similar groups same side = cis, similar groups across = trans. Each carbon of the C=C carries one H and one CH~3~, which is exactly the two-identical-groups condition the cis–trans system needs.",
+          "**cis-but-2-ene** and **trans-but-2-ene** — similar groups same side = cis, similar groups across = trans. Each carbon of the C=C carries one H and one CH~3~, so the cis–trans system can be used.",
       },
       {
         k: "figure",
@@ -151,7 +151,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
       { k: "h", text: "Why cis–trans doesn't work always" },
       {
         k: "p",
-        text: "For the cis–trans system to work, ==two identical groups or atoms attached to the two carbons== in C=C are needed. It doesn't work for compounds like the ones in the exercise where there are ==four different atoms attached== to the C=C — the E–Z system takes over.",
+        text: "For the cis–trans system to work, ==two identical groups or atoms attached to the two carbons== in C=C are needed. It doesn't work for compounds where there are ==four different atoms attached== to the C=C.",
       },
       { k: "h", text: "The priority rules" },
       {
@@ -180,7 +180,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
       {
         k: "figure",
         kind: "ez",
-        caption: "The tie-break worked through: Cl wins the right-hand carbon outright (17 vs 1); on the left-hand carbon the first shell is a tie (C vs C), so the next shell decides — the ethyl group's extra carbon beats the methyl's third hydrogen. Higher-priority groups opposite sides → E.",
+        caption: "The tie-break in the example: Cl (atomic number 17) has the higher priority over H on the right-hand carbon; on the left-hand carbon the two atoms attached are both C, so look at the atoms attached to them — C(6) in the C~2~H~5~ group against H(1) in the CH~3~ group. The higher priority groups are on opposite sides → the E-isomer.",
       },
       {
         k: "worked",
@@ -195,7 +195,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
           "The higher-priority groups are ==above== on one carbon and ==below== on the other → it is the **E-isomer**.",
         ],
         answer:
-          "**E-1-chloro-2-methylbut-1-ene** — Cl wins the right-hand carbon outright, the ethyl wins the left-hand carbon on the tie-break, and opposite sides means entgegen.",
+          "**E-1-chloro-2-methylbut-1-ene** — Cl has the higher priority on the right-hand carbon, the C~2~H~5~ group has the higher priority on the tie-break on the left-hand carbon, and the higher priority groups are on opposite sides (entgegen).",
       },
       { k: "checkpoint", page: 8 },
     ],
@@ -223,7 +223,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
       },
       {
         k: "table",
-        caption: "The five reactions at a glance",
+        caption: "Summary of the five reactions",
         head: ["Reaction", "Reagent", "Condition", "Product"],
         rows: [
           ["**1 · Hydrogenation**", "hydrogen gas", "==nickel catalyst== and heat (140–180 °C) — reduction of the alkene", "alkane"],
@@ -284,7 +284,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "Five reagents, one move: ==H~2~, Cl~2~, HBr, H~2~O and [O] all add across the same π bond==. Learn the ==condition== with each one — the nickel catalyst, the phosphoric acid catalyst and the two colour changes are the parts examiners ask for by name.",
+        text: "All five are ==addition reactions== — ==H~2~, Cl~2~, HBr, H~2~O and [O]== add across the ==π bond==. Learn the ==reagent, condition, type of reaction and product== for each — the nickel catalyst and heat, the phosphoric acid catalyst and heat, and the colour observations are the details to quote.",
       },
     ],
   },

@@ -2029,7 +2029,7 @@ export function FigElecAdd({ accent = "#FF6B6B" }: { accent?: string }) {
     </g>
   );
   return (
-    <svg viewBox="0 0 880 580" className="w-full" role="img" aria-label="Electrophilic addition mechanisms: HBr to ethene via a carbocation, Br2 polarised by the pi cloud, and HBr to propene choosing the more stable carbocation">
+    <svg viewBox="0 0 880 580" className="w-full" role="img" aria-label="Electrophilic addition mechanisms: HBr to ethene via a carbocation, Br2 polarised by the electrons of the pi bond, and HBr to propene forming the major product via the more stable carbocation">
       <line x1={28} y1={198} x2={852} y2={198} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
       <line x1={28} y1={390} x2={852} y2={390} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
 
@@ -2052,11 +2052,11 @@ export function FigElecAdd({ accent = "#FF6B6B" }: { accent?: string }) {
       {curlyPair(440, 84, 26, 18, accent)}
       {t3Arrow(556, 84, 606, 84, INK)}
       <text x={330} y={132} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the π pair bonds to the δ⁺ H — heterolytic fission of H—Br</text>
-      {/* stage 2: Br⁻ captures the carbocation */}
+      {/* stage 2: Br⁻ attacks the carbocation */}
       {curlyPair(776, 84, -58, 2, accent)}
       {t3Arrow(700, 118, 700, 148, INK)}
       <text x={640} y={172} fontSize="15.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₃—CH₂—Br</text>
-      <text x={250} y={166} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">stage 2 · Br⁻ (nucleophile) attacks the carbocation</text>
+      <text x={250} y={166} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Br⁻ (nucleophile) attacks the carbocation</text>
       <text x={250} y={186} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">overall: HBr added across the double bond</text>
 
       {/* ————— row 2 · Br₂ + ethene ————— */}
@@ -2070,7 +2070,7 @@ export function FigElecAdd({ accent = "#FF6B6B" }: { accent?: string }) {
       {t3Arrow(330, 276, 400, 278, SOFT, 2.2)}
       {t3Arrow(330, 296, 400, 294, SOFT, 2.2)}
       <text x={250} y={330} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the π electrons repel the Br—Br pair → a dipole is induced —</text>
-      <text x={250} y={348} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">non-polar bromine becomes its own electrophile</text>
+      <text x={250} y={348} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">so the non-polar bromine can act as an electrophile</text>
       {t3Arrow(540, 288, 592, 288, INK)}
       <text x={648} y={294} fontSize="15.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₂Br—CH₂Br</text>
       <text x={648} y={316} fontSize="11" fontWeight="700" fill={accent} fontFamily="var(--font-body)">di-substituted halogenoalkane</text>
@@ -2131,7 +2131,7 @@ export function FigCarbocation({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={387} y={212} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">two alkyl groups</text>
       <text x={647} y={212} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">three alkyl groups</text>
       {t3Arrow(120, 254, 660, 254, accent, 3)}
-      <text x={390} y={280} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">stability increases — alkyl groups are electron releasing and steady the positive charge</text>
+      <text x={390} y={280} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">stability increases — alkyl groups are electron releasing and help to stabilize the positive charge</text>
       <text x={700} y={30} textAnchor="end" fontSize="11.5" fontWeight="700" fill={FAINT} fontFamily="var(--font-body)">R = any alkyl group</text>
     </svg>
   );

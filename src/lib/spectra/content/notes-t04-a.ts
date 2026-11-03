@@ -421,7 +421,7 @@ export const SECTIONS_T04_A: SpecSection[] = [
       },
       {
         k: "p",
-        text: "That last line matters: these ==neutral species can be polarised== so that they act as electrophiles — an electron-rich site pushes the shared pair towards one atom of the neutral molecule, opening a δ^+^ end for the attack.",
+        text: "That last line matters: these ==neutral species can be polarised== so that they ==can act as electrophiles==.",
       },
       { k: "h", text: "Reaction mechanisms — naming them from three coordinates" },
       {
