@@ -97,11 +97,13 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
         <Blob color={tint("#FF922B", 14)} className="top-[-30%] right-[-16%] h-[85%] w-[54%]" />
         <Blob
           color={tint("#FFD43B", 22)}
+          shape="c"
           className="top-[36%] right-[-9%] h-[42%] w-[26%] opacity-80"
           style={{ animationDuration: "12s" }}
         />
         <Blob
           color={tint("#FFD43B", 16)}
+          shape="b"
           className="bottom-[-36%] left-[-14%] h-[58%] w-[36%]"
           style={{ animationDuration: "16s" }}
         />
@@ -177,9 +179,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 drift around Bubbles, so the scene sells the product */}
             <div className="relative mx-auto flex h-[320px] w-full max-w-[440px] items-center justify-center sm:h-[400px] md:h-[440px] md:max-w-[480px]">
               {/* soft peach wash — pink stays reserved for WCH15 and the mascot blush */}
-              <Blob color={tint("#FF922B", 18)} className="h-[86%] w-[86%]" />
+              <Blob color={tint("#FF922B", 18)} shape="b" className="h-[86%] w-[86%]" />
               <Blob
                 color={tint("#FFD43B", 30)}
+                shape="c"
                 className="top-[2%] right-[2%] h-[34%] w-[34%] opacity-80"
                 style={{ animationDuration: "9s" }}
               />
@@ -368,7 +371,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
             className="relative overflow-hidden rounded-[36px] px-6 py-8 puff sm:rounded-[44px] sm:px-10 sm:py-10"
             style={{ background: "var(--tint-base)" }}
           >
-            <Blob color={tint("#FFD43B", 20)} className="top-[-40%] right-[-8%] h-[70%] w-[38%]" />
+            <Blob color={tint("#FFD43B", 20)} shape="b" className="top-[-40%] right-[-8%] h-[70%] w-[38%]" />
             <DoodleHex className="absolute bottom-[8%] left-[3%] hidden h-8 w-8 text-lemon/40 sm:block" />
             <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center">
               <div className="min-w-0 flex-1">
@@ -539,7 +542,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[32px] p-7 text-left puff sm:p-8"
               style={{ background: tint("#12B886", 10), transform: "rotate(-0.8deg)" }}
             >
-              <Blob color={tint("#12B886", 22)} className="bottom-[-30%] left-[-15%] h-[75%] w-[55%]" />
+              <Blob color={tint("#12B886", 22)} shape="c" className="bottom-[-30%] left-[-15%] h-[75%] w-[55%]" />
               <div className="relative z-10 flex h-full flex-col">
                 <span
                   className="grid h-14 w-14 place-items-center rounded-[20px] text-white"
@@ -586,6 +589,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               >
                 <Blob
                   color={tint(suggestion.unit.candy.main, 22)}
+                  shape="b"
                   className="top-[-30%] right-[-15%] h-[75%] w-[55%]"
                 />
                 <div className="relative z-10 flex h-full flex-col">
@@ -640,9 +644,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
       <section className="px-3 pb-24 sm:px-5 sm:pb-28 lg:px-8">
         <Reveal>
           <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[36px] bg-cocoa px-6 py-12 text-center sm:rounded-[44px] sm:px-12 sm:py-16">
-            <Blob color="rgba(255,107,107,0.16)" className="top-[-30%] left-[-10%] h-[70%] w-[45%]" />
+            <Blob color="rgba(255,107,107,0.16)" shape="b" className="top-[-30%] left-[-10%] h-[70%] w-[45%]" />
             <Blob
               color="rgba(151,117,250,0.16)"
+              shape="c"
               className="right-[-12%] bottom-[-35%] h-[75%] w-[45%]"
               style={{ animationDuration: "15s" }}
             />

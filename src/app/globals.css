@@ -211,17 +211,33 @@ html.hybrid .room {
   }
 }
 
+/* Blobs drift on the compositor only. The organic silhouette is a
+   STATIC border-radius (rasterized once into a layer) and the "morph"
+   is that lopsided shape slowly rotating — animating border-radius
+   itself re-paints the element every animation frame, which is a
+   frame-budget killer once blobs go full-bleed. */
 @keyframes blob {
   0%,
   100% {
-    border-radius: 58% 42% 55% 45% / 52% 56% 44% 48%;
+    transform: rotate(0deg) scale(1);
   }
   33% {
-    border-radius: 45% 55% 48% 52% / 58% 44% 56% 42%;
+    transform: rotate(30deg) scale(1.06);
   }
   66% {
-    border-radius: 52% 48% 60% 40% / 45% 58% 42% 55%;
+    transform: rotate(-22deg) scale(0.95);
   }
+}
+
+/* three resting silhouettes, so neighbouring blobs don't twin */
+.blob-shape-a {
+  border-radius: 58% 42% 55% 45% / 52% 56% 44% 48%;
+}
+.blob-shape-b {
+  border-radius: 45% 55% 48% 52% / 58% 44% 56% 42%;
+}
+.blob-shape-c {
+  border-radius: 52% 48% 60% 40% / 45% 58% 42% 55%;
 }
 
 @keyframes bubble-up {

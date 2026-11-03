@@ -297,17 +297,21 @@ export function Wave({
 
 export function Blob({
   color,
+  shape = "a",
   className,
   style,
 }: {
   color: string;
+  /* static silhouettes (see .blob-shape-* in globals) — the drift is
+     compositor-only, so pick per-spot to keep neighbours from twinning */
+  shape?: "a" | "b" | "c";
   className?: string;
   style?: CSSProperties;
 }) {
   return (
     <div
       aria-hidden
-      className={`animate-blob absolute ${className ?? ""}`}
+      className={`animate-blob blob-shape-${shape} absolute ${className ?? ""}`}
       style={{ background: color, ...style }}
     />
   );
