@@ -322,8 +322,9 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
       </section>
 
       {/* ————— the seam shelf: hero pours into the first band —————
-          After dark the ladder alternates two roasts (--home-band-a/b);
-          by day each band keeps its own candy tint via the fallback. */}
+          After dark the seams ride the same study grounds as the
+          notes (--home-band-a/b alias --note-band-a/b); by day each
+          band keeps its own candy tint via the fallback. */}
       <BandWave from="var(--color-paper)" to={`var(--home-band-b, ${bandOf(1)})`} wave={1} />
 
       {/* ————— units: M3 elevated cards on the orange band ————— */}

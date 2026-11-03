@@ -33,7 +33,7 @@ import {
   shade,
   tint,
 } from "./bits";
-import { BandWave, SpecChip, accentOf, bgOf, inkMix, isRoom } from "./bands";
+import { BandWave, SpecChip, accentOf, bgOf, inkMix } from "./bands";
 import { useSpecMapRegister } from "./spec-map";
 import { SpecSectionView } from "./note-section";
 
@@ -41,10 +41,11 @@ import { SpecSectionView } from "./note-section";
    Reaction Club · notes reader — one enclosed room per spec point.
    Each section is a full-width tonal band borrowing one candy
    colour, walking the hue wheel so neighbours always contrast.
-   In the hybrid lab every third band is a deep cocoa room with
-   milk-toned fonts (see html.hybrid .room in globals.css); in the
-   other two labs the same bands stay candy — the class is inert.
-   The footer's wave rides between the bands, so the note reads as
+   By day the bands are candy tints; after dark both steps are
+   flat warm roasts at matched darkness (--note-band-a/b in
+   globals.css), so every section keeps the deep study-ground
+   feel and the highlighter still pops. The wave rides between
+   the bands, so the note reads as
    a string of connected rooms rather than one long scroll.
    ═══════════════════════════════════════════════════════════════ */
 
@@ -351,13 +352,12 @@ export function NotesReader({
           <BandWave from="var(--color-cream)" to={bgOf(0)} />
           {doc.sections.map((s, i) => {
             const accent = accentOf(i);
-            const room = isRoom(i);
             const last = i === doc.sections.length - 1;
             return (
               <Fragment key={s.spec}>
                 <section
                   id={`spec-${s.spec.replace(".", "-")}`}
-                  className={`spec-anchor relative${room ? " room" : ""}`}
+                  className="spec-anchor relative"
                   style={{ background: bgOf(i) }}
                 >
                   <div className="mx-auto max-w-3xl px-4 py-14 sm:px-8 sm:py-16">

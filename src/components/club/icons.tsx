@@ -556,17 +556,6 @@ export function Moon(p: IcoProps) {
   );
 }
 
-/* sun-moon — the hybrid lab: half day, half night */
-export function SunMoon(p: IcoProps) {
-  return (
-    <Ico {...p}>
-      <path d="M12 8.6 a 2.7 2.7 0 0 0 3.8 3.8 a 4 4 0 0 1 -3.8 -3.8 Z" />
-      <path d="M12 2.6 v1.9 M12 19.5 v1.9 M2.6 12 h1.9 M19.5 12 h1.9 M5.3 5.3 l1.4 1.4 M17.3 17.3 l1.4 1.4 M18.7 5.3 l-1.4 1.4" />
-      <path d="M13.2 20.9 A 8.9 8.9 0 1 1 3.1 10.8" />
-    </Ico>
-  );
-}
-
 /* ————— the workshop ————— */
 
 /* sliders — the customize panel: three faders mid-set */

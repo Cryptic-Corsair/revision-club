@@ -26,7 +26,6 @@ import {
 const LABS: { id: Lab; swatch: string }[] = [
   { id: "light", swatch: "#FFD43B" },
   { id: "dark", swatch: "#2e2016" },
-  { id: "hybrid", swatch: "linear-gradient(90deg, #FFD43B 50%, #2e2016 50%)" },
 ];
 
 const HEAD_FONTS: { id: HeadFont; label: string; stack: string }[] = [
@@ -196,7 +195,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
               className="no-scrollbar flex flex-1 flex-col gap-7 overflow-y-auto px-6 pt-2"
               style={{ paddingBottom: "calc(2rem + var(--sa-bottom))" }}
             >
-              <Section title="The lab" hint="Daylight, after-dark, or a bit of both.">
+              <Section title="The lab" hint="Daylight or after-dark.">
                 <div className="flex flex-col gap-2">
                   {LABS.map((l) => {
                     const active = prefs.theme === l.id;

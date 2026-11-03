@@ -21,7 +21,7 @@ import {
   type SpecPoint,
 } from "@/lib/spectra/registry";
 import { clearPicks, togglePick, toggleRead, usePacks } from "@/lib/spectra/packs";
-import { BandWave, accentOf, bgOf, isRoom } from "./bands";
+import { BandWave, accentOf, bgOf } from "./bands";
 import { SpecSectionView } from "./note-section";
 import { PackSetsDialog } from "./pack-sets";
 import { Confetti, Mascot, PopIn, Reveal, ScrollFade, SoftButton, readableInk, shade } from "./bits";
@@ -328,7 +328,6 @@ export function PackView({
               {g.sections.map((s, si) => {
                 const band = groupStart + si;
                 const accent = accentOf(band);
-                const room = isRoom(band);
                 const isRead = read.includes(s.point.spec);
                 const firstEntry = s.entryIndex === 0;
                 return (
@@ -337,7 +336,7 @@ export function PackView({
                   >
                     <section
                       id={`spec-${s.point.spec.replace(".", "-")}`}
-                      className={`spec-anchor relative${room ? " room" : ""}`}
+                      className="spec-anchor relative"
                       style={{ background: bgOf(band) }}
                     >
                       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-8 sm:py-14">

@@ -12,33 +12,30 @@
    WCH11 strawberry · WCH12 orange fizz · WCH13 mint chip
    WCH14 grape soda · WCH15 bubblegum · WCH16 lemon sherbet
 
-   Three labs, one set of tokens: every surface reads its colour from
+   Two labs, one set of tokens: every surface reads its colour from
    the custom properties below, so the whole site flips between
-   · the daylight cream lab (no class),
-   · the after-hours cocoa lab (html.dark), and
-   · the hybrid lab (html.hybrid) — a daylight page dotted with deep
-     cocoa "rooms" in the notes reader, the best of both moods.
+   · the daylight cream lab (no class), and
+   · the after-hours cocoa lab (html.dark).
    The dark lab also rotates through a few darker roasts — mood 0
    below is the reference look, data-mood="1..3" are the alternates.
-   The hybrid lab's rooms wear the same daily rotation, just pulled
-   less close to black so they sit warmly on a light page.
 
    `milk` is the one colour that never flips — it is "light text on a
-   dark band" in every lab (footer, recap cards, closing CTA, the
-   hybrid rooms), because `cream` itself becomes a dark surface
-   after dark.
+   dark band" in both labs (footer, recap cards, closing CTA),
+   because `cream` itself becomes a dark surface after dark.
 
    Tonal order, one rule per lab (page → band → card):
    · daylight:  cream (lightest) < candy band < paper card
-   · after-dark: an elevation ladder — every dark level is followed
-     by a clearly lighter one, never two similar darks side by side:
-       cocoa footer (darkest) < cream page < paper card < candy band
-     (Material dark-theme rule: surfaces climb lighter as they rise,
-     so footer → page → card each step up by ΔL ≥ 0.06 — the band,
-     mixed over --tint-base, tops the ladder so cards pop on it.)
-   · hybrid:     the daylight order, with cocoa rooms punched in
+   · after-dark: the study ground. Every band sits at the deep
+     cocoa level the eye settles into — body ink holds ≈ 12–14:1
+     and the yellow marker pops ≈ 10–12:1 on every step — and
+     neighbouring sections alternate by HUE, not lightness:
+     golden cocoa (--note-band-a) ↔ ember roast (--note-band-b).
+     Paper cards float clearly above both grounds. Nothing near
+     black, and red always leads blue, so no surface carries the
+     blue-light chill (and chromatic fringing) of typical dark
+     themes — it reads like lamplight on sepia paper.
    Bands mix their candy accent over --tint-base at --band-mix —
-   a touch stronger after dark so rooms stay distinct there.
+   by day only; after dark both band steps are flat roasts.
    ═════════════════════════════════════════════════════════════════════ */
 
 @theme {
@@ -118,28 +115,30 @@ html[data-dots="off"] body {
 
 html.dark {
   /* roast 0 — "espresso", the reference look from the design shot.
-     The ladder rises footer #140d05 → page #2c2013 → card #3f2f1c
-     → band (candy over #4f3a24): every dark level steps clearly
-     lighter, nothing near black. */
+     Surfaces stay in a narrow warm band around the page — nothing
+     near black, red always leading blue — and the paper card
+     (#3f2f1c) floats clearly above every one of them. */
   --color-cream: #2c2013; /* page background */
   --color-paper: #3f2f1c; /* cards, sheets, bubbles */
   --color-milk: #f8efdf;
-  --color-ink: #f6ebdc;
+  --color-ink: #f6ebdc; /* ~13.5:1 on the page, ~14:1 on the bands */
   --color-ink-soft: #c6ab92;
   --color-ink-faint: #bb9c7c; /* lifted — small labels stay legible (5.0:1 on paper) */
-  --color-cocoa: #140d05; /* footer — the darkest anchor of the ladder */
+  --color-cocoa: #140d05; /* footer — the darkest anchor */
   --tint-base: #4f3a24;
-  --band-mix: 14%; /* a touch more candy so roast bands stay distinct */
-  /* home's band ladder collapses to a strict two-step alternation
-     after dark: A = dark paper, B = the warm orange roast. The home
-     seams reference these; light and hybrid ignore them and keep
-     their own candy tints via var() fallbacks. */
-  --home-band-a: #3f2f1c;
-  --home-band-b: #684625;
-  /* revision notes ride the same rhythm: every other note band wears
-     the warm flat roast instead of a candy tint, because candy at
-     14% over one roast all lands in the same few lightness steps */
-  --note-band-alt: #684625;
+  /* the study ground — after dark, section bands stop borrowing
+     candy (a tint only muddies a roast) and alternate by hue at
+     matched darkness instead: A = deep golden cocoa, B = a half
+     step lifted and red-shifted toward ember. The alternation
+     still lets neighbours read as different places, but body ink
+     keeps ~14:1 on A and ~13:1 on B and the yellow marker pops
+     ~11:1 on both — every section studies like the deep cocoa
+     room this pair was tuned against (#2a2119). Home's seams
+     ride the same pair. */
+  --note-band-a: #291d10;
+  --note-band-b: #342212;
+  --home-band-a: var(--note-band-a);
+  --home-band-b: var(--note-band-b);
   --edge: rgb(0 0 0 / 0.5);
   color-scheme: dark;
 }
@@ -151,52 +150,31 @@ html.dark {
    tones change; text inks stay put, so contrast holds in every roast. */
 html.dark[data-mood="1"] {
   /* roast 1 — "dark roast", the neutral one: greyer, less orange.
-     Same ladder shape as roast 0: footer < page < card < band. */
+     Same shape as roast 0; the note bands follow the greyer hue. */
   --color-cream: #292421;
   --color-paper: #3b342d;
   --color-cocoa: #110f0c;
   --tint-base: #483f35;
+  --note-band-a: #272320;
+  --note-band-b: #322b26;
 }
 html.dark[data-mood="2"] {
-  /* roast 2 — "mahogany", a red-leaning chestnut, same ladder */
+  /* roast 2 — "mahogany", a red-leaning chestnut, same shape */
   --color-cream: #2e1b12;
   --color-paper: #452819;
   --color-cocoa: #140a06;
   --tint-base: #52311f;
+  --note-band-a: #2b1a10;
+  --note-band-b: #37211a;
 }
 html.dark[data-mood="3"] {
-  /* roast 3 — "midnight cocoa", the deepest of the set, same ladder */
+  /* roast 3 — "midnight cocoa", the deepest of the set, same shape */
   --color-cream: #271d16;
   --color-paper: #3a2c20;
   --color-cocoa: #0f0b07;
   --tint-base: #42311f;
-}
-
-/* ————— the hybrid lab —————
-   A daylight page with deep cocoa rooms punched into the notes
-   reader (every third section). The page keeps every daylight
-   token; only the rooms go dark. --room-surface is the room's
-   background: undefined in the other two labs, so a room there
-   falls back to its ordinary candy band and the class is inert.
-   Rooms wear the daily roast too — pulled less close to black
-   than the after-dark footer, so they read as warm brown rooms
-   on a cream page, never as holes. */
-html.hybrid {
-  --room-surface: #2e2016;
-  color-scheme: light;
-}
-html.hybrid[data-mood="1"] { --room-surface: #2a2119; }
-html.hybrid[data-mood="2"] { --room-surface: #31180f; }
-html.hybrid[data-mood="3"] { --room-surface: #261c15; }
-
-/* inside a room, ink and surfaces flip to their light-on-dark
-   counterparts — every text-ink / bg-paper / tint() within follows */
-html.hybrid .room {
-  --color-ink: var(--color-milk);
-  --color-ink-soft: color-mix(in oklab, var(--color-milk) 78%, var(--color-cocoa));
-  --color-ink-faint: color-mix(in oklab, var(--color-milk) 56%, var(--color-cocoa));
-  --color-paper: color-mix(in oklab, var(--color-milk) 13%, var(--color-cocoa));
-  --tint-base: color-mix(in oklab, var(--color-milk) 20%, var(--color-cocoa));
+  --note-band-a: #251c15;
+  --note-band-b: #31241c;
 }
 
 
@@ -494,14 +472,12 @@ mark {
   .pack-sheet section {
     background: #fff !important;
   }
-  .pack-sheet,
-  .pack-sheet .room {
+  .pack-sheet {
     --color-ink: #201509;
     --color-ink-soft: #4b3d2e;
     --color-ink-faint: #8a7d69;
     --color-paper: #ffffff;
     --tint-base: #ffffff;
-    --room-surface: #ffffff;
     --edge: rgb(0 0 0 / 0.14);
     color: #201509;
   }

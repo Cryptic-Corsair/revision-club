@@ -70,24 +70,17 @@ export const inkMix = (main: string, pct = 45) =>
 /* band helpers — pure, so the in-page contents card and the Spec
    Map window dress their chips with the exact same colours */
 export const accentOf = (i: number) => BANDS[i % BANDS.length];
-/* bands mix their candy over --tint-base at --band-mix — 10% by
-   day, 14% after dark, so roast-tone neighbours stay distinct.
-   After dark the odd bands skip the mix entirely and wear the flat
-   warm roast (--note-band-alt) — at 14% every candy lands in the
-   same few lightness steps, so the alternation is what keeps
-   neighbouring sections readable as different places. */
+/* bands mix their candy over --tint-base at --band-mix (10% by day)
+   — the daylight walk of the hue wheel. After dark both steps are
+   overridden by --note-band-a/b (see html.dark in globals.css):
+   two flat roasts at matched darkness that alternate by hue, so
+   every section keeps the deep study-ground contrast. */
 export const bandOf = (i: number) =>
   `color-mix(in oklab, ${accentOf(i)} var(--band-mix, 10%), var(--tint-base))`;
-/* every third room goes cocoa in the hybrid lab (2.2, 2.5, 2.8 …).
-   Elsewhere --room-surface is undefined and the fallback keeps the
-   plain candy band — one expression, correct in all three labs. */
-export const isRoom = (i: number) => i % 3 === 1;
 export const bgOf = (i: number) =>
-  isRoom(i)
-    ? `var(--room-surface, ${bandOf(i)})`
-    : i % 2 === 1
-      ? `var(--note-band-alt, ${bandOf(i)})`
-      : bandOf(i);
+  i % 2 === 1
+    ? `var(--note-band-b, ${bandOf(i)})`
+    : `var(--note-band-a, ${bandOf(i)})`;
 
 /* stagger choreography for the Spec Map window's chips */
 export const chipV: Variants = {
@@ -102,8 +95,8 @@ export const chipV: Variants = {
 
 /* one spec chip — shared by the note's own contents card and the
    floating Spec Map window, so both wear the exact same colours:
-   band-tinted by default, candy-splashed + footprints when it's the
-   room you're standing in */
+   band-tinted by default, candy-splashed + footprints when it's
+   the section you're standing in */
 export function SpecChip({
   s,
   i,
@@ -118,9 +111,7 @@ export function SpecChip({
       aria-current={here ? "true" : undefined}
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.95 }}
-      className={`flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left${
-        here ? "" : isRoom(i) ? " room" : ""
-      }`}
+      className="flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left"
       style={
         here
           ? {

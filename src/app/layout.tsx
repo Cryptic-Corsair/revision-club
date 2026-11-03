@@ -48,15 +48,15 @@ export const metadata: Metadata = {
 };
 
 /* Puts the saved preferences on <html> before the first paint — no
-   flash of the wrong lab, font size or family. dark and hybrid also
-   pick today's roast (html[data-mood]). beforeInteractive keeps it
+   flash of the wrong lab, font size or family. The dark lab also
+   picks today's roast (html[data-mood]). beforeInteractive keeps it
    out of React's hydration tree. The React side (prefs.ts) re-applies
    the same values once it hydrates, then owns every change. */
 const prefsInit = `(function(){try{
 var r=document.documentElement,p=null;
 try{p=JSON.parse(localStorage.getItem("reaction-club-prefs-v1")||"null")}catch(e){}
-if(!p){var t=localStorage.getItem("rc-theme");p={theme:(t==="dark"||t==="hybrid")?t:"light"}}
-var th=p.theme==="dark"||p.theme==="hybrid"?p.theme:"light";
+if(!p){var t=localStorage.getItem("rc-theme");p={theme:t==="dark"?"dark":"light"}}
+var th=p.theme==="dark"?"dark":"light";
 if(th!=="light"){r.classList.add(th);r.dataset.mood=String(Math.floor(Date.now()/864e5)%${DARK_MOOD_COUNT})}
 if(p.headFont)r.dataset.head=String(p.headFont);
 if(p.bodyFont)r.dataset.body=String(p.bodyFont);

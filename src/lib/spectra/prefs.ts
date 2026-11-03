@@ -5,7 +5,7 @@ import { pickDarkMood } from "./dark-mood";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · site preferences
-   The knobs behind the customize panel: lab (light/dark/hybrid),
+   The knobs behind the customize panel: lab (light/dark),
    page zoom, heading & body fonts, polka dots, decorative motion.
 
    localStorage · key "reaction-club-prefs-v1"
@@ -14,7 +14,7 @@ import { pickDarkMood } from "./dark-mood";
    re-skins at once and the mobile address bar keeps up.
    ═══════════════════════════════════════════════════════════════ */
 
-export type Lab = "light" | "dark" | "hybrid";
+export type Lab = "light" | "dark";
 export type HeadFont = "fredoka" | "baloo" | "patrick";
 export type BodyFont = "nunito" | "quicksand";
 
@@ -55,7 +55,7 @@ const listeners = new Set<() => void>();
 
 function sanitize(p: Partial<Prefs>): Prefs {
   const out: Prefs = { ...DEFAULT_PREFS };
-  if (p.theme === "light" || p.theme === "dark" || p.theme === "hybrid") out.theme = p.theme;
+  if (p.theme === "light" || p.theme === "dark") out.theme = p.theme;
   if (typeof p.zoom === "number" && ZOOM_STEPS.includes(p.zoom as (typeof ZOOM_STEPS)[number]))
     out.zoom = p.zoom;
   if (p.headFont === "fredoka" || p.headFont === "baloo" || p.headFont === "patrick")
@@ -74,9 +74,10 @@ function load() {
     if (raw) {
       state = sanitize(JSON.parse(raw));
     } else {
-      /* first run — honour the old theme key if it's there */
+      /* first run — honour the old theme key if it's there.
+         A stored "hybrid" (the retired third lab) reads as light. */
       const legacy = window.localStorage.getItem("rc-theme");
-      if (legacy === "dark" || legacy === "hybrid") state = { ...state, theme: legacy };
+      if (legacy === "dark") state = { ...state, theme: "dark" };
     }
   } catch {
     /* private mode / corrupt data — defaults */
@@ -114,8 +115,7 @@ export function applyPrefs(p: Prefs) {
   if (typeof document === "undefined") return;
   const root = document.documentElement;
   root.classList.toggle("dark", p.theme === "dark");
-  root.classList.toggle("hybrid", p.theme === "hybrid");
-  /* dark + hybrid wear today's roast; the daylight lab needs none */
+  /* the dark lab wears today's roast; the daylight lab needs none */
   if (p.theme !== "light") root.dataset.mood = String(pickDarkMood());
   else delete root.dataset.mood;
   root.dataset.head = p.headFont;
@@ -181,5 +181,4 @@ export function usePrefs(): Prefs {
 export const LAB_LABEL: Record<Lab, string> = {
   light: "Daylight lab",
   dark: "After-dark lab",
-  hybrid: "Hybrid lab — day & night",
 };
