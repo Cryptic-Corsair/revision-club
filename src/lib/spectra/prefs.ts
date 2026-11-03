@@ -5,8 +5,9 @@ import { pickDarkMood } from "./dark-mood";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · site preferences
-   The knobs behind the customize panel: lab (light/dark),
-   page zoom, heading & body fonts, polka dots, decorative motion.
+   The knobs behind the customize panel: lab (light/dark), the accent
+   wheel, page zoom, heading & body fonts, polka dots, decorative
+   motion.
 
    localStorage · key "reaction-club-prefs-v1"
    Every change runs through applyPrefs() — one function that paints
@@ -18,8 +19,28 @@ export type Lab = "light" | "dark";
 export type HeadFont = "fredoka" | "baloo" | "patrick";
 export type BodyFont = "nunito" | "quicksand";
 
+/* the candy wheel the site's sections take turns wearing. The full
+   shelf by default; the customize panel narrows it to your picks —
+   one pick dresses every section, two alternate, three+ rotate.
+   Order is fixed (hue-wheel, pink reserved for WCH15's identity) so
+   alternation is predictable no matter which subset is on. */
+export type AccentId = "coral" | "tangerine" | "sun" | "mint" | "grape" | "amber";
+
+export const ACCENTS: { id: AccentId; hex: string; label: string }[] = [
+  { id: "coral", hex: "#FF6B6B", label: "Coral" },
+  { id: "tangerine", hex: "#FF922B", label: "Tangerine" },
+  { id: "sun", hex: "#FFD43B", label: "Sun" },
+  { id: "mint", hex: "#12B886", label: "Mint" },
+  { id: "grape", hex: "#9775FA", label: "Grape" },
+  { id: "amber", hex: "#F59F00", label: "Amber" },
+];
+
+export const ACCENT_IDS: AccentId[] = ACCENTS.map((a) => a.id);
+
 export interface Prefs {
   theme: Lab;
+  /** the accent wheel — which candies the sections rotate through */
+  accents: AccentId[];
   /** page zoom — 0.9 to 1.3 */
   zoom: number;
   headFont: HeadFont;
@@ -32,6 +53,7 @@ export interface Prefs {
 
 export const DEFAULT_PREFS: Prefs = {
   theme: "light",
+  accents: [...ACCENT_IDS],
   zoom: 1,
   headFont: "fredoka",
   bodyFont: "nunito",
@@ -63,6 +85,16 @@ function sanitize(p: Partial<Prefs>): Prefs {
   if (p.bodyFont === "nunito" || p.bodyFont === "quicksand") out.bodyFont = p.bodyFont;
   if (typeof p.dots === "boolean") out.dots = p.dots;
   if (typeof p.motion === "boolean") out.motion = p.motion;
+  if (Array.isArray(p.accents)) {
+    const picked = new Set<AccentId>();
+    for (const a of p.accents) if (ACCENT_IDS.includes(a)) picked.add(a);
+    /* wheel order, never empty — the panel blocks deselecting the
+       last swatch, and a hand-edited empty array falls back to the
+       full shelf */
+    out.accents = picked.size
+      ? ACCENT_IDS.filter((id) => picked.has(id))
+      : [...ACCENT_IDS];
+  }
   return out;
 }
 
@@ -143,6 +175,16 @@ export function resetPrefs() {
   persist();
   applyPrefs(state);
   emit();
+}
+
+/* the wheel accentOf() reads while rendering (bands, chips, dots).
+   Plain state, deliberately no load() — the hydration pass must
+   paint the same default wheel the server did; the store's own
+   subscribe → load → re-render carries the user's picks in right
+   after commit, and every pick after that re-renders ClubApp, which
+   re-runs every accentOf in the tree. */
+export function currentAccents(): AccentId[] {
+  return state.accents;
 }
 
 /* ————— store plumbing ————— */

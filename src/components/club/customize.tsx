@@ -2,14 +2,18 @@
 
 import { useEffect, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { RotateCcw, Sliders, Sparkles, X } from "./icons";
+import { RotateCcw, Sliders, Sparkles, X, Check } from "./icons";
+import { readableInk, shade, tint } from "./bits";
+import { accentOf } from "./bands";
 import {
+  ACCENTS,
   DEFAULT_PREFS,
   LAB_LABEL,
   setPrefs,
   usePrefs,
   ZOOM_LABEL,
   ZOOM_STEPS,
+  type AccentId,
   type BodyFont,
   type HeadFont,
   type Lab,
@@ -18,9 +22,9 @@ import {
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · the customize panel
    A slide-over workshop (not a drop-down — those stay reserved for
-   the worked examples): the lab, page size, the two font families,
-   and the room's little comforts. Every knob lands in prefs.ts and
-   re-skins the site from <html> outward.
+   the worked examples): the lab, the accent wheel, page size, the
+   two font families, and the room's little comforts. Every knob
+   lands in prefs.ts and re-skins the site from <html> outward.
    ═══════════════════════════════════════════════════════════════ */
 
 const LABS: { id: Lab; swatch: string }[] = [
@@ -141,6 +145,36 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
     setPrefs({ theme: lab });
   };
 
+  /* tap a swatch to put it on (or take it off) the wheel — the
+     bands behind the panel re-dress as you tap. The wheel keeps at
+     least one colour on: with nothing to alternate, there's no
+     wheel. */
+  const toggleAccent = (id: AccentId) => {
+    if (prefs.accents.length === 1 && prefs.accents[0] === id) return;
+    const root = document.documentElement;
+    root.classList.add("theme-anim");
+    window.setTimeout(() => root.classList.remove("theme-anim"), 480);
+    setPrefs({
+      accents: prefs.accents.includes(id)
+        ? prefs.accents.filter((x) => x !== id)
+        : [...prefs.accents, id],
+    });
+  };
+
+  /* what the rotation reads as, in words — one pick dresses every
+     section, two alternate, three+ cycle, six is the full wheel */
+  const pickedLabels = prefs.accents.map(
+    (id) => ACCENTS.find((a) => a.id === id)!.label,
+  );
+  const rotationCaption =
+    pickedLabels.length === ACCENTS.length
+      ? "The full wheel — all six take turns down the page."
+      : pickedLabels.length === 1
+        ? `Every section wears ${pickedLabels[0]}.`
+        : pickedLabels.length === 2
+          ? `Sections alternate ${pickedLabels[0]} ↔ ${pickedLabels[1]}.`
+          : `Sections rotate ${pickedLabels.join(" → ")} — then back to ${pickedLabels[0]}.`;
+
   return (
     <AnimatePresence>
       {open && (
@@ -228,6 +262,90 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                       </button>
                     );
                   })}
+                </div>
+              </Section>
+
+              <Section title="Accent colours" hint="Pick the candies your sections take turns wearing — one pick dresses them all, two alternate, three or more rotate. The wheel always keeps at least one.">
+                <div className="grid grid-cols-3 gap-2">
+                  {ACCENTS.map((a) => {
+                    const on = prefs.accents.includes(a.id);
+                    const lastOne = on && prefs.accents.length === 1;
+                    return (
+                      <motion.button
+                        key={a.id}
+                        type="button"
+                        onClick={() => toggleAccent(a.id)}
+                        whileTap={lastOne ? undefined : { scale: 0.93 }}
+                        aria-pressed={on}
+                        aria-disabled={lastOne || undefined}
+                        aria-label={`${a.label} accent — ${
+                          lastOne
+                            ? "the only colour on the wheel, keep at least one on"
+                            : on
+                              ? "on the wheel, tap to take it off"
+                              : "off the wheel, tap to put it on"
+                        }`}
+                        className={`flex cursor-pointer flex-col items-center gap-2 rounded-[20px] px-2 py-3.5 transition-colors ${
+                          on ? "" : "hover:bg-ink/[0.09]"
+                        }`}
+                        style={
+                          on
+                            ? {
+                                background: tint(a.hex, 14),
+                                boxShadow: `inset 0 0 0 2.5px ${a.hex}`,
+                              }
+                            : { background: "rgb(61 43 31 / 0.045)" }
+                        }
+                      >
+                        <span
+                          aria-hidden
+                          className="grid h-10 w-10 place-items-center rounded-full transition-opacity"
+                          style={{
+                            background: a.hex,
+                            boxShadow: `0 3px 0 ${shade(a.hex)}`,
+                            opacity: on ? 1 : 0.32,
+                          }}
+                        >
+                          {on && (
+                            <Check
+                              className="h-5 w-5"
+                              strokeWidth={3.2}
+                              style={{ color: readableInk(a.hex) }}
+                            />
+                          )}
+                        </span>
+                        <span
+                          className={`font-display text-[11.5px] font-bold ${
+                            on ? "text-ink" : "text-ink-faint"
+                          }`}
+                        >
+                          {a.label}
+                        </span>
+                      </motion.button>
+                    );
+                  })}
+                </div>
+                {/* the rotation itself, previewed — the first eight
+                    sections, exactly as the bands will wear them */}
+                <div className="mt-3 rounded-[18px] bg-ink/[0.045] px-4 py-3">
+                  <div aria-hidden className="flex items-center gap-1.5">
+                    {Array.from({ length: 8 }, (_, k) => (
+                      <span
+                        key={k}
+                        className="h-2.5 rounded-full"
+                        style={{
+                          width: k === 7 ? 10 : 22,
+                          background: accentOf(k),
+                        }}
+                      />
+                    ))}
+                    <span className="ml-0.5 font-body text-[13px] font-bold text-ink-faint">
+                      …
+                    </span>
+                  </div>
+                  <p className="mt-2 text-[11.5px] leading-snug font-bold text-ink-faint">
+                    {rotationCaption}
+                  </p>
                 </div>
               </Section>
 

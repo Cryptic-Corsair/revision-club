@@ -11,18 +11,29 @@ import { motion, type HTMLMotionProps, type Variants } from "framer-motion";
 import { Footprints } from "./icons";
 import type { SpecSection } from "@/lib/spectra/notes-types";
 import { readableInk, shade } from "./bits";
+import {
+  ACCENTS,
+  ACCENT_IDS,
+  currentAccents,
+  type AccentId,
+} from "@/lib/spectra/prefs";
 
-/* the rotating palette — hue-wheel order: red → orange → sun →
+/* the full candy wheel, hue-wheel order: red → orange → sun →
    green → purple → amber, so adjacent bands always differ (pink
-   stays reserved for WCH15's own identity) */
-export const BANDS = [
-  "#FF6B6B",
-  "#FF922B",
-  "#FFD43B",
-  "#12B886",
-  "#9775FA",
-  "#F59F00",
-];
+   stays reserved for WCH15's own identity). This is the whole
+   shelf — the customize panel narrows it to your picks, and the
+   helpers below rotate whatever's on: one pick dresses every
+   section, two alternate, three+ cycle. */
+export const BANDS = ACCENTS.map((a) => a.hex);
+
+const ACCENT_HEX: Record<AccentId, string> = {
+  coral: ACCENTS[0].hex,
+  tangerine: ACCENTS[1].hex,
+  sun: ACCENTS[2].hex,
+  mint: ACCENTS[3].hex,
+  grape: ACCENTS[4].hex,
+  amber: ACCENTS[5].hex,
+};
 
 /* the wave shelf — a shelf of hand-drawn seam curves, so a page can
    put a differently-shaped wave at every section boundary and never
@@ -69,7 +80,10 @@ export const inkMix = (main: string, pct = 45) =>
 
 /* band helpers — pure, so the in-page contents card and the Spec
    Map window dress their chips with the exact same colours */
-export const accentOf = (i: number) => BANDS[i % BANDS.length];
+export const accentOf = (i: number) => {
+  const picks = currentAccents();
+  return ACCENT_HEX[picks[i % picks.length]];
+};
 /* bands mix their candy over --tint-base at --band-mix (10% by day)
    — the daylight walk of the hue wheel. After dark both steps are
    overridden by --note-band-a/b (see html.dark in globals.css):
@@ -81,6 +95,18 @@ export const bgOf = (i: number) =>
   i % 2 === 1
     ? `var(--note-band-b, ${bandOf(i)})`
     : `var(--note-band-a, ${bandOf(i)})`;
+
+/* home's ladder keeps its own four stops on the full wheel
+   (tangerine → sun → grape → coral) so the default daylight walk
+   stays exactly as designed; a narrowed wheel rotates consecutively
+   instead, so even two picks still alternate step over step */
+const HOME_STOPS = [1, 2, 4, 0];
+export const homeBandOf = (pos: number) =>
+  bandOf(
+    currentAccents().length === ACCENT_IDS.length
+      ? HOME_STOPS[pos % HOME_STOPS.length]
+      : pos,
+  );
 
 /* stagger choreography for the Spec Map window's chips */
 export const chipV: Variants = {

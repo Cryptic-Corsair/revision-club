@@ -42,7 +42,7 @@ import {
   tint,
   shade,
 } from "./bits";
-import { BandWave, bandOf } from "./bands";
+import { BandWave, homeBandOf } from "./bands";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · home — Material You surfaces, candy personality
@@ -325,10 +325,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           After dark the seams ride the same study grounds as the
           notes (--home-band-a/b alias --note-band-a/b); by day each
           band keeps its own candy tint via the fallback. */}
-      <BandWave from="var(--color-paper)" to={`var(--home-band-b, ${bandOf(1)})`} wave={1} />
+      <BandWave from="var(--color-paper)" to={`var(--home-band-b, ${homeBandOf(0)})`} wave={1} />
 
       {/* ————— units: M3 elevated cards on the orange band ————— */}
-      <div style={{ background: `var(--home-band-b, ${bandOf(1)})` }}>
+      <div style={{ background: `var(--home-band-b, ${homeBandOf(0)})` }}>
       <section id="units" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-12 pb-8 sm:px-8">
         <div className="text-center">
           <SectionTag main="#FF922B" tilt={2}>
@@ -427,10 +427,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
       </section>
       </div>
 
-      <BandWave from={`var(--home-band-b, ${bandOf(1)})`} to={`var(--home-band-a, ${bandOf(2)})`} wave={2} />
+      <BandWave from={`var(--home-band-b, ${homeBandOf(0)})`} to={`var(--home-band-a, ${homeBandOf(1)})`} wave={2} />
 
       {/* ————— the revision pack: tick points, get one read ————— */}
-      <div style={{ background: `var(--home-band-a, ${bandOf(2)})` }}>
+      <div style={{ background: `var(--home-band-a, ${homeBandOf(1)})` }}>
       <section id="pack" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 py-12 sm:px-8">
         <div>
           <div
@@ -501,10 +501,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
       </section>
       </div>
 
-      <BandWave from={`var(--home-band-a, ${bandOf(2)})`} to={`var(--home-band-b, ${bandOf(4)})`} wave={3} />
+      <BandWave from={`var(--home-band-a, ${homeBandOf(1)})`} to={`var(--home-band-b, ${homeBandOf(2)})`} wave={3} />
 
       {/* ————— how it works: M3 stepper ————— */}
-      <div style={{ background: `var(--home-band-b, ${bandOf(4)})` }}>
+      <div style={{ background: `var(--home-band-b, ${homeBandOf(2)})` }}>
       <section id="how" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-12 pb-14 sm:px-8">
         <div className="text-center">
           <SectionTag main="#9775FA" tilt={-1.5}>
@@ -583,10 +583,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
       </section>
       </div>
 
-      <BandWave from={`var(--home-band-b, ${bandOf(4)})`} to={`var(--home-band-a, ${bandOf(0)})`} wave={4} />
+      <BandWave from={`var(--home-band-b, ${homeBandOf(2)})`} to={`var(--home-band-a, ${homeBandOf(3)})`} wave={4} />
 
       {/* ————— practice tools ————— */}
-      <div style={{ background: `var(--home-band-a, ${bandOf(0)})` }}>
+      <div style={{ background: `var(--home-band-a, ${homeBandOf(3)})` }}>
       <section id="arcade" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-12 pb-20 sm:px-8">
         <div className="text-center">
           <SectionTag main="#FF6B6B" tilt={1.5}>
@@ -705,7 +705,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
       {/* last seam: the band drains back toward the footer — by day
           that's the page cream; after dark it's the B roast, the same
           colour the footer wave starts from */}
-      <BandWave from={`var(--home-band-a, ${bandOf(0)})`} to={`var(--home-band-b, var(--color-cream))`} wave={0} />
+      <BandWave from={`var(--home-band-a, ${homeBandOf(3)})`} to={`var(--home-band-b, var(--color-cream))`} wave={0} />
 
       {/* ————— CTA band: the cocoa card from the moodboard ————— */}
       <section className="px-3 pb-24 sm:px-5 sm:pb-28 lg:px-8" style={{ background: `var(--home-band-b, transparent)` }}>
