@@ -44,7 +44,18 @@ export type FigureKind =
   | "ez"
   | "elecadd"
   | "carbocation"
-  | "polymer";
+  | "polymer"
+  | "thermo"
+  | "levels"
+  | "profiles"
+  | "calorimetry"
+  | "hess-general"
+  | "hess-co"
+  | "hess-ch4"
+  | "hess-caco3"
+  | "hess-butane"
+  | "bond-h2o"
+  | "cooling-curve";
 
 export type NotesBlock =
   | { k: "p"; text: string }

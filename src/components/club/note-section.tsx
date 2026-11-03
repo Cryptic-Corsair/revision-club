@@ -20,10 +20,13 @@ import { Reveal, ScrollFade, readableInk, shade, tint } from "./bits";
 import { inkMix } from "./bands";
 import {
   FigAtom,
+  FigBondH2O,
   FigBoxesC,
   FigBoxesS,
+  FigCalorimetry,
   FigCarbonLattices,
   FigCarbocation,
+  FigCoolingCurve,
   FigDipoles,
   FigDotCross,
   FigElecAdd,
@@ -33,13 +36,20 @@ import {
   FigFormulaTypes,
   FigFracCol,
   FigGeometric,
+  FigHessButane,
+  FigHessCaco3,
+  FigHessCh4,
+  FigHessCo,
+  FigHessGeneral,
   FigIeGraph,
   FigIsomers,
+  FigLevels,
   FigMassSpec,
   FigMelting,
   FigNotation,
   FigOrbitals,
   FigPolymer,
+  FigProfiles,
   FigPtBlocks,
   FigNaming,
   FigRadius,
@@ -54,6 +64,7 @@ import {
   FigSpectrumEthanol,
   FigSpectrumNeon,
   FigSuccIe,
+  FigThermo,
 } from "./notes-figures";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -646,6 +657,17 @@ const WIDE_FIGS = new Set([
   "elecadd",
   "carbocation",
   "polymer",
+  "thermo",
+  "levels",
+  "profiles",
+  "calorimetry",
+  "hess-general",
+  "hess-co",
+  "hess-ch4",
+  "hess-caco3",
+  "hess-butane",
+  "bond-h2o",
+  "cooling-curve",
 ]);
 
 function Figure({
@@ -763,6 +785,39 @@ function Figure({
       break;
     case "polymer":
       node = <FigPolymer accent={accent} />;
+      break;
+    case "thermo":
+      node = <FigThermo accent={accent} />;
+      break;
+    case "levels":
+      node = <FigLevels accent={accent} />;
+      break;
+    case "profiles":
+      node = <FigProfiles accent={accent} />;
+      break;
+    case "calorimetry":
+      node = <FigCalorimetry accent={accent} />;
+      break;
+    case "hess-general":
+      node = <FigHessGeneral accent={accent} />;
+      break;
+    case "hess-co":
+      node = <FigHessCo accent={accent} />;
+      break;
+    case "hess-ch4":
+      node = <FigHessCh4 accent={accent} />;
+      break;
+    case "hess-caco3":
+      node = <FigHessCaco3 accent={accent} />;
+      break;
+    case "hess-butane":
+      node = <FigHessButane accent={accent} />;
+      break;
+    case "bond-h2o":
+      node = <FigBondH2O accent={accent} />;
+      break;
+    case "cooling-curve":
+      node = <FigCoolingCurve accent={accent} />;
       break;
   }
   if (!node) return null;

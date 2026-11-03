@@ -2179,3 +2179,471 @@ export function FigPolymer({ accent = "#FF6B6B" }: { accent?: string }) {
     </svg>
   );
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Topic 6 · Energetics — ΔH levels and profiles, calorimetry,
+   Hess's cycles, bond enthalpies and the cooling curve.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* small tspan helpers — sub/superscripts inside SVG text */
+const SubT = ({ children }: { children: ReactNode }) => (
+  <tspan dy="3.5" fontSize="10">{children}</tspan>
+);
+const SubBack = ({ children }: { children: ReactNode }) => (
+  <tspan dy="-3.5">{children}</tspan>
+);
+const SupT = ({ children }: { children: ReactNode }) => (
+  <tspan dy="-5.5" fontSize="10">{children}</tspan>
+);
+
+/* mini chart axes with arrowheads, shared by the level/profile panels */
+function MiniAxes({ ox, oy, w, up, yLabel }: { ox: number; oy: number; w: number; up: number; yLabel: string }) {
+  return (
+    <g>
+      {t3Arrow(ox, oy, ox + w, oy, INK, 3)}
+      {t3Arrow(ox, oy, ox, oy - up, INK, 3)}
+      <text
+        x={ox - 22}
+        y={oy - up / 2}
+        textAnchor="middle"
+        fontSize="11.5"
+        fontWeight="700"
+        fill={INK}
+        fontFamily="var(--font-body)"
+        transform={`rotate(-90 ${ox - 22} ${oy - up / 2})`}
+      >
+        {yLabel}
+      </text>
+      <text x={ox + w / 2} y={oy + 26} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+        Progress of reaction
+      </text>
+    </g>
+  );
+}
+
+/* ————— 6.2 · the chemical system and its surroundings ————— */
+
+export function FigThermo({ accent = "#FF6B6B" }: { accent?: string }) {
+  const hot = "#FF6B6B";
+  const cold = "#9775FA";
+  const thermo = (cx: number, top: number, bottom: number, mercury: number, c: string) => (
+    <g>
+      <rect x={cx - 9} y={top} width={18} height={bottom - top - 14} rx={9} fill="var(--color-paper)" stroke={INK} strokeWidth={2.4} />
+      <circle cx={cx} cy={bottom - 8} r={12} fill={c} stroke={INK} strokeWidth={2.4} />
+      <rect x={cx - 3.2} y={mercury} width={6.4} height={bottom - 18 - mercury} rx={3.2} fill={c} />
+      {[0, 1, 2, 3, 4].map((i) => (
+        <line key={i} x1={cx + 9} y1={top + 18 + i * 22} x2={cx + 15} y2={top + 18 + i * 22} stroke={INK} strokeWidth={2} strokeLinecap="round" />
+      ))}
+    </g>
+  );
+  const flowArrow = (x: number, y: number, out: boolean, c: string) =>
+    out ? t3Arrow(x, y, x < 0 ? x - 34 : x + 34, y, c, 3.2) : t3Arrow(x < 0 ? x - 34 : x + 34, y, x, y, c, 3.2);
+  return (
+    <svg viewBox="0 0 880 330" className="w-full" role="img" aria-label="Exothermic: heat flows out of the chemical system to the surroundings, temperature rises, delta T positive, the chemicals lose energy, delta H is negative. Endothermic: heat flows in from the surroundings, temperature falls, delta T negative, the chemicals gain energy, delta H is positive.">
+      <line x1={440} y1={26} x2={440} y2={304} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* ————— exothermic panel ————— */}
+      <text x={225} y={44} textAnchor="middle" fontSize="14" fontWeight="800" letterSpacing="1.5" fill={hot} fontFamily="var(--font-body)">EXOTHERMIC</text>
+      <rect x={148} y={128} width={154} height={64} rx={14} fill={tint(hot, 18)} stroke={INK} strokeWidth={2.4} />
+      <text x={225} y={156} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Chemical</text>
+      <text x={225} y={174} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">system</text>
+      {flowArrow(140, 160, true, hot)}
+      {flowArrow(310, 160, true, hot)}
+      {t3Arrow(225, 122, 225, 96, hot, 3.2)}
+      {t3Arrow(225, 198, 225, 224, hot, 3.2)}
+      <text x={112} y={92} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Surroundings</text>
+      <text x={338} y={92} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Surroundings</text>
+      <text x={112} y={248} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Surroundings</text>
+      <text x={338} y={248} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Surroundings</text>
+      {thermo(415, 84, 246, 150, hot)}
+      {t3Arrow(452, 230, 452, 110, hot, 3)}
+      <text x={466} y={128} fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Temperature</text>
+      <text x={466} y={144} fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">rise</text>
+      <text x={466} y={166} fontSize="12.5" fontWeight="800" fill={hot} fontFamily="var(--font-body)">ΔT+ve</text>
+      <text x={225} y={286} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">The chemicals lose energy. ΔH is negative.</text>
+
+      {/* ————— endothermic panel ————— */}
+      <text x={640} y={44} textAnchor="middle" fontSize="14" fontWeight="800" letterSpacing="1.5" fill={cold} fontFamily="var(--font-body)">ENDOTHERMIC</text>
+      <rect x={548} y={128} width={154} height={64} rx={14} fill={tint(cold, 16)} stroke={INK} strokeWidth={2.4} />
+      <text x={625} y={156} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Chemical</text>
+      <text x={625} y={174} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">system</text>
+      {flowArrow(540, 160, false, cold)}
+      {flowArrow(710, 160, false, cold)}
+      {t3Arrow(625, 96, 625, 122, cold, 3.2)}
+      {t3Arrow(625, 224, 625, 198, cold, 3.2)}
+      <text x={512} y={92} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Surroundings</text>
+      <text x={762} y={92} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Surroundings</text>
+      <text x={512} y={248} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Surroundings</text>
+      <text x={762} y={248} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Surroundings</text>
+      {thermo(848, 84, 246, 108, cold)}
+      {t3Arrow(812, 110, 812, 230, cold, 3)}
+      <text x={625} y={286} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">The chemicals gain energy. ΔH is positive.</text>
+      <text x={750} y={118} fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Temperature</text>
+      <text x={750} y={134} fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">fall</text>
+      <text x={750} y={156} fontSize="12.5" fontWeight="800" fill={cold} fontFamily="var(--font-body)">ΔT−ve</text>
+    </svg>
+  );
+}
+
+/* ————— 6.3 · energy level diagrams, exothermic + endothermic ————— */
+
+export function FigLevels({ accent = "#FF6B6B" }: { accent?: string }) {
+  const hot = "#FF6B6B";
+  const cold = "#9775FA";
+  return (
+    <svg viewBox="0 0 880 340" className="w-full" role="img" aria-label="Energy level diagrams. Exothermic: reactants level above products level, delta H = negative. Endothermic: reactants level below products level, delta H = positive. Both axes are enthalpy H against progress of reaction.">
+      {/* ————— exothermic ————— */}
+      <MiniAxes ox={100} oy={272} w={280} up={210} yLabel="Enthalpy, H" />
+      <line x1={130} y1={116} x2={262} y2={116} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <text x={196} y={102} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Reactants</text>
+      <line x1={262} y1={230} x2={386} y2={230} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <text x={330} y={216} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
+      {t3Arrow(262, 120, 262, 226, hot, 3.4)}
+      <text x={276} y={178} fontSize="13" fontWeight="800" fill={hot} fontFamily="var(--font-body)">ΔH = − ve</text>
+      <text x={238} y={52} textAnchor="middle" fontSize="12" fontWeight="800" letterSpacing="1" fill={SOFT} fontFamily="var(--font-body)">EXOTHERMIC</text>
+
+      {/* ————— endothermic ————— */}
+      <MiniAxes ox={520} oy={272} w={280} up={210} yLabel="Enthalpy, H" />
+      <line x1={550} y1={230} x2={682} y2={230} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <text x={616} y={252} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Reactants</text>
+      <line x1={682} y1={116} x2={806} y2={116} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <text x={748} y={102} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
+      {t3Arrow(682, 226, 682, 120, cold, 3.4)}
+      <text x={612} y={178} fontSize="13" fontWeight="800" fill={cold} fontFamily="var(--font-body)">ΔH = + ve</text>
+      <text x={658} y={52} textAnchor="middle" fontSize="12" fontWeight="800" letterSpacing="1" fill={SOFT} fontFamily="var(--font-body)">ENDOTHERMIC</text>
+    </svg>
+  );
+}
+
+/* ————— 6.3 · energy profile diagrams, exothermic + endothermic ————— */
+
+export function FigProfiles({ accent = "#FF6B6B" }: { accent?: string }) {
+  const hot = "#FF6B6B";
+  const cold = "#9775FA";
+  const mint = "#12B886";
+  return (
+    <svg viewBox="0 0 880 380" className="w-full" role="img" aria-label="Energy profile diagrams. Exothermic: the curve climbs the activation energy from the reactants to the peak and falls to products below the reactants, delta H negative. Endothermic: products sit above the reactants, delta H positive.">
+      {/* ————— exothermic ————— */}
+      <MiniAxes ox={100} oy={300} w={280} up={244} yLabel="Enthalpy, H" />
+      <line x1={126} y1={206} x2={214} y2={206} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <line x1={214} y1={206} x2={340} y2={206} stroke={FAINT} strokeWidth={2.4} strokeDasharray="5 6" />
+      <text x={160} y={192} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Reactants</text>
+      <line x1={288} y1={284} x2={388} y2={284} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <text x={344} y={270} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
+      <path d={`M 214 206 C 240 150, 262 112, 292 112 C 322 112, 336 220, 362 284`} fill="none" stroke={tint(accent, 45)} strokeWidth={4.5} strokeLinecap="round" />
+      {t3Arrow(292, 202, 292, 118, mint, 3.2)}
+      <text x={306} y={152} fontSize="11.5" fontWeight="700" fill={mint} fontFamily="var(--font-body)">Activation</text>
+      <text x={306} y={167} fontSize="11.5" fontWeight="700" fill={mint} fontFamily="var(--font-body)">energy</text>
+      {t3Arrow(254, 210, 254, 280, hot, 3.2)}
+      <text x={168} y={252} fontSize="12.5" fontWeight="800" fill={hot} fontFamily="var(--font-body)">ΔH − ve</text>
+      <text x={238} y={52} textAnchor="middle" fontSize="12" fontWeight="800" letterSpacing="1" fill={SOFT} fontFamily="var(--font-body)">EXOTHERMIC</text>
+
+      {/* ————— endothermic ————— */}
+      <MiniAxes ox={520} oy={300} w={280} up={244} yLabel="Enthalpy, H" />
+      <line x1={546} y1={284} x2={634} y2={284} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <line x1={634} y1={284} x2={760} y2={284} stroke={FAINT} strokeWidth={2.4} strokeDasharray="5 6" />
+      <text x={580} y={304} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Reactants</text>
+      <line x1={708} y1={206} x2={808} y2={206} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <text x={764} y={192} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
+      <path d={`M 634 284 C 660 210, 682 118, 712 118 C 742 118, 756 150, 782 206`} fill="none" stroke={tint(accent, 45)} strokeWidth={4.5} strokeLinecap="round" />
+      {t3Arrow(712, 280, 712, 124, mint, 3.2)}
+      <text x={726} y={164} fontSize="11.5" fontWeight="700" fill={mint} fontFamily="var(--font-body)">Activation</text>
+      <text x={726} y={179} fontSize="11.5" fontWeight="700" fill={mint} fontFamily="var(--font-body)">energy</text>
+      {t3Arrow(774, 280, 774, 210, cold, 3.2)}
+      <text x={700} y={252} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={cold} fontFamily="var(--font-body)">ΔH + ve</text>
+      <text x={658} y={52} textAnchor="middle" fontSize="12" fontWeight="800" letterSpacing="1" fill={SOFT} fontFamily="var(--font-body)">ENDOTHERMIC</text>
+    </svg>
+  );
+}
+
+/* ————— 6.5 · the two calorimeters ————— */
+
+export function FigCalorimetry({ accent = "#FF6B6B" }: { accent?: string }) {
+  const water = tint(accent, 20);
+  const label = (x: number, y: number, t: string, anchor: "start" | "middle" | "end" = "start") => (
+    <text x={x} y={y} textAnchor={anchor} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{t}</text>
+  );
+  return (
+    <svg viewBox="0 0 880 350" className="w-full" role="img" aria-label="Combustion calorimetry: a spirit burner below a beaker of water with a thermometer. Mixing calorimetry: a polystyrene cup held in a beaker with a thermometer stirring the solution.">
+      <line x1={440} y1={26} x2={440} y2={324} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* ————— spirit burner + beaker ————— */}
+      {/* beaker (open top) */}
+      <path d="M 130 96 L 130 250 Q 130 258 138 258 L 322 258 Q 330 258 330 250 L 330 96" fill="none" stroke={INK} strokeWidth={3.4} strokeLinecap="round" />
+      <rect x={134} y={132} width={192} height={122} rx={4} fill={water} />
+      {/* thermometer */}
+      <rect x={262} y={44} width={16} height={168} rx={8} fill="var(--color-paper)" stroke={INK} strokeWidth={2.4} />
+      <circle cx={270} cy={216} r={10} fill={accent} stroke={INK} strokeWidth={2.4} />
+      <rect x={266.4} y={150} width={5.2} height={58} rx={2.6} fill={accent} />
+      {/* spirit burner */}
+      <path d="M 194 296 Q 194 288 202 288 L 258 288 Q 266 288 266 296 L 266 322 L 194 322 Z" fill="var(--color-paper)" stroke={INK} strokeWidth={2.8} strokeLinejoin="round" />
+      <rect x={222} y={276} width={16} height={12} fill="var(--color-paper)" stroke={INK} strokeWidth={2.4} />
+      <path d="M 230 276 C 224 266, 226 258, 230 250 C 234 258, 236 266, 230 276 Z" fill={accent} stroke={shade(accent)} strokeWidth={1.6} />
+      {/* heat rays */}
+      {[0, 1, 2].map((i) => (
+        <path key={i} d={`M ${206 + i * 24} 246 q 4 -7 0 -14`} fill="none" stroke={tint(accent, 45)} strokeWidth={2.4} strokeLinecap="round" />
+      ))}
+      {label(120, 40, "thermometer", "start")}
+      <line x1={186} y1={46} x2={258} y2={56} stroke={FAINT} strokeWidth={2} />
+      {label(348, 130, "beaker")}
+      <line x1={344} y1={126} x2={330} y2={140} stroke={FAINT} strokeWidth={2} />
+      {label(348, 200, "water")}
+      <line x1={344} y1={196} x2={326} y2={200} stroke={FAINT} strokeWidth={2} />
+      {label(180, 344, "spirit burner", "middle")}
+      <text x={230} y={66} textAnchor="middle" fontSize="12" fontWeight="800" letterSpacing="1" fill={SOFT} fontFamily="var(--font-body)">COMBUSTION</text>
+
+      {/* ————— polystyrene cup in a beaker ————— */}
+      <path d="M 560 96 L 560 250 Q 560 258 568 258 L 752 258 Q 760 258 760 250 L 760 96" fill="none" stroke={INK} strokeWidth={3.4} strokeLinecap="round" />
+      {/* cup */}
+      <path d="M 592 118 L 610 244 L 710 244 L 728 118" fill="var(--color-paper)" stroke={INK} strokeWidth={2.8} strokeLinejoin="round" />
+      <path d="M 598 160 L 610 244 L 710 244 L 722 160" fill={water} opacity={0.75} />
+      {/* thermometer */}
+      <rect x={652} y={40} width={16} height={158} rx={8} fill="var(--color-paper)" stroke={INK} strokeWidth={2.4} />
+      <circle cx={660} cy={204} r={10} fill={accent} stroke={INK} strokeWidth={2.4} />
+      <rect x={656.4} y={168} width={5.2} height={28} rx={2.6} fill={accent} />
+      {label(560, 40, "thermometer", "start")}
+      <line x1={626} y1={46} x2={648} y2={54} stroke={FAINT} strokeWidth={2} />
+      {label(776, 130, "beaker")}
+      <line x1={772} y1={126} x2={758} y2={140} stroke={FAINT} strokeWidth={2} />
+      {label(776, 190, "polystyrene cup")}
+      <line x1={772} y1={186} x2={726} y2={200} stroke={FAINT} strokeWidth={2} />
+      {label(776, 250, "solution")}
+      <line x1={772} y1={246} x2={712} y2={230} stroke={FAINT} strokeWidth={2} />
+      <text x={660} y={66} textAnchor="middle" fontSize="12" fontWeight="800" letterSpacing="1" fill={SOFT} fontFamily="var(--font-body)">MIXING</text>
+      <text x={660} y={344} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">stir with the thermometer</text>
+    </svg>
+  );
+}
+
+/* ————— 6.8 · the cooling curve, plotted with the Exercise 6 data ————— */
+
+const COOLING_DATA: [number, number][] = [
+  [0, 20.0], [1, 20.0], [2, 20.0], [3, 20.0],
+  [4, 63.0], [5, 60.5], [6, 59.0], [7, 57.0], [8, 55.5], [9, 53.0],
+];
+
+export function FigCoolingCurve({ accent = "#FF6B6B" }: { accent?: string }) {
+  const w = 760;
+  const h = 420;
+  const pad = { l: 66, r: 26, t: 28, b: 64 };
+  const axisY = h - pad.b;
+  const xMax = 9.5;
+  const yMax = 70;
+  const X = (t: number) => pad.l + (t / xMax) * (w - pad.l - pad.r);
+  const Y = (v: number) => axisY - (v / yMax) * (axisY - pad.t);
+  const rise = COOLING_DATA.slice(3, 5).map(([t, v]) => `${X(t)},${Y(v)}`).join(" ");
+  const cool = COOLING_DATA.slice(4).map(([t, v]) => `${X(t)},${Y(v)}`).join(" ");
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="Cooling curve of the zinc and copper sulfate experiment: temperature flat at 20 degrees, a sharp rise when the reactants are mixed at 3.5 minutes, then a gradual fall. The cooling line is extrapolated back and the start line forward; delta T is read between them at the moment of mixing.">
+      {/* gridlines + y ticks */}
+      {[0, 10, 20, 30, 40, 50, 60, 70].map((t) => (
+        <g key={t}>
+          <line x1={pad.l - 6} y1={Y(t)} x2={pad.l} y2={Y(t)} stroke={INK} strokeWidth={2} />
+          <text x={pad.l - 10} y={Y(t) + 4} textAnchor="end" fontSize="10.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">{t}</text>
+        </g>
+      ))}
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((t) => (
+        <g key={t}>
+          <line x1={X(t)} y1={axisY} x2={X(t)} y2={axisY + 6} stroke={INK} strokeWidth={2} />
+          <text x={X(t)} y={axisY + 20} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">{t}</text>
+        </g>
+      ))}
+      <line x1={pad.l} y1={axisY} x2={w - pad.r} y2={axisY} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <line x1={pad.l} y1={pad.t} x2={pad.l} y2={axisY} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <text x={14} y={(axisY + pad.t) / 2} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform={`rotate(-90 14 ${(axisY + pad.t) / 2})`}>
+        Temperature / °C
+      </text>
+      <text x={(w + pad.l) / 2} y={h - 12} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Time / minutes</text>
+
+      {/* extrapolations */}
+      <line x1={X(0)} y1={Y(20)} x2={X(4.4)} y2={Y(20)} stroke={FAINT} strokeWidth={2.2} strokeDasharray="6 6" />
+      <line x1={X(3.42)} y1={Y(64.2)} x2={X(9.4)} y2={Y(52.2)} stroke={FAINT} strokeWidth={2.2} strokeDasharray="6 6" />
+      {/* the two curves */}
+      <polyline points={rise} fill="none" stroke={tint(accent, 45)} strokeWidth={4} strokeLinecap="round" />
+      <polyline points={cool} fill="none" stroke={tint(accent, 45)} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" />
+      {COOLING_DATA.map(([t, v]) => (
+        <circle key={t} cx={X(t)} cy={Y(v)} r={4.5} fill={INK} />
+      ))}
+      {/* ΔT construction at the moment of mixing */}
+      {t3Arrow(X(3.5), Y(20), X(3.5), Y(64), accent, 3.4)}
+      <circle cx={X(3.5)} cy={Y(64)} r={4.5} fill="none" stroke={accent} strokeWidth={2.4} />
+      <text x={X(3.5) - 26} y={Y(42)} textAnchor="end" fontSize="17" fontWeight="800" fill={accent} fontFamily="var(--font-body)">ΔT</text>
+      {/* annotations */}
+      <text x={X(1.5)} y={Y(20) - 14} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">before mixing</text>
+      <text x={X(6.8)} y={Y(56) - 12} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the mixture cools</text>
+      <text x={X(3.5) + 10} y={Y(64) - 10} fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">extrapolated lines</text>
+    </svg>
+  );
+}
+
+/* ————— 6.6 · the two general Hess routes ————— */
+
+function CycleBox({ x, y, w, lines }: { x: number; y: number; w: number; lines: ReactNode[] }) {
+  const h = 30 + (lines.length - 1) * 19;
+  return (
+    <g>
+      <rect x={x} y={y} width={w} height={h} rx={13} fill={tint("#FF6B6B", 10)} stroke={INK} strokeWidth={2.4} />
+      {lines.map((l, i) => (
+        <text key={i} x={x + w / 2} y={y + 20 + i * 19} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">
+          {l}
+        </text>
+      ))}
+    </g>
+  );
+}
+
+export function FigHessGeneral({ accent = "#FF6B6B" }: { accent?: string }) {
+  void accent;
+  const dH = (sub: string, rest: string) => (
+    <>
+      ΔH<SubT>{sub}</SubT><SubBack>{rest}</SubBack>
+    </>
+  );
+  return (
+    <svg viewBox="0 0 880 430" className="w-full" role="img" aria-label="The two general Hess cycles. With combustion data: reactants plus oxygen go to products plus oxygen via delta H reaction, and both burn to the combustion products. With formation data: the elements form the reactants and the products, and delta H reaction runs between them.">
+      <text x={222} y={40} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="0.8" fill={SOFT} fontFamily="var(--font-body)">when combustion data is given</text>
+      <text x={662} y={40} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="0.8" fill={SOFT} fontFamily="var(--font-body)">when formation data is given</text>
+      <line x1={440} y1={24} x2={440} y2={406} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* ————— combustion route ————— */}
+      <CycleBox x={30} y={86} w={150} lines={["Reactants + oxygen"]} />
+      <CycleBox x={262} y={86} w={150} lines={["Products + oxygen"]} />
+      {t3Arrow(186, 101, 256, 101, INK, 3)}
+      <text x={221} y={82} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{dH("", "[reaction]")}</text>
+      <CycleBox x={121} y={290} w={200} lines={["Combustion products"]} />
+      {t3Arrow(100, 122, 185, 284, INK, 2.8)}
+      {t3Arrow(342, 122, 257, 284, INK, 2.8)}
+      <text x={88} y={216} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">{dH("com", " [reactants]")}</text>
+      <text x={354} y={216} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">{dH("com", " [products]")}</text>
+
+      {/* ————— formation route ————— */}
+      <CycleBox x={502} y={86} w={116} lines={["Reactants"]} />
+      <CycleBox x={716} y={86} w={116} lines={["Products"]} />
+      {t3Arrow(624, 101, 710, 101, INK, 3)}
+      <text x={667} y={82} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{dH("", "[reaction]")}</text>
+      <CycleBox x={596} y={290} w={136} lines={["Elements"]} />
+      {t3Arrow(640, 284, 556, 122, INK, 2.8)}
+      {t3Arrow(688, 284, 778, 122, INK, 2.8)}
+      <text x={512} y={216} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">{dH("f", " [reactants]")}</text>
+      <text x={818} y={216} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">{dH("f", " [products]")}</text>
+    </svg>
+  );
+}
+
+/* ————— 6.6 · Example 1 — ΔfH of CO from two ΔcH values ————— */
+
+export function FigHessCo({ accent = "#FF6B6B" }: { accent?: string }) {
+  void accent;
+  const dfH = (
+    <>
+      Δ<SubT>f</SubT><SubBack>H</SubBack><SupT>θ</SupT>
+    </>
+  );
+  return (
+    <svg viewBox="0 0 720 330" className="w-full" role="img" aria-label="Hess cycle for carbon monoxide: C solid graphite plus half O2 gas forms CO gas along the top with delta f H theta; both the elements and CO burn to CO2 with minus 394 and minus 283 kJ per mol.">
+      <CycleBox x={56} y={70} w={240} lines={["C(s, graphite) + ½O₂(g)"]} />
+      <CycleBox x={478} y={70} w={120} lines={["CO(g)"]} />
+      {t3Arrow(302, 88, 472, 88, INK, 3)}
+      <text x={387} y={64} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{dfH}</text>
+      <CycleBox x={268} y={240} w={136} lines={["CO₂(g)"]} />
+      {t3Arrow(148, 116, 300, 236, INK, 2.8)}
+      {t3Arrow(518, 116, 396, 236, INK, 2.8)}
+      <text x={168} y={186} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−394</text>
+      <text x={122} y={206} fontSize="11.5" fontWeight="700" fill={FAINT} fontFamily="var(--font-mono)">+ ½O₂(g)</text>
+      <text x={486} y={186} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−283</text>
+      <text x={492} y={206} fontSize="11.5" fontWeight="700" fill={FAINT} fontFamily="var(--font-mono)">+ ½O₂(g)</text>
+    </svg>
+  );
+}
+
+/* ————— 6.6 · Example 2 — ΔfH of methane from combustion data ————— */
+
+export function FigHessCh4({ accent = "#FF6B6B" }: { accent?: string }) {
+  void accent;
+  const dfH = (
+    <>
+      Δ<SubT>f</SubT><SubBack>H</SubBack><SupT>θ</SupT>
+    </>
+  );
+  return (
+    <svg viewBox="0 0 760 340" className="w-full" role="img" aria-label="Hess cycle for methane: C graphite plus 2 H2 gas forms CH4 gas along the top with delta f H theta; the elements burn with minus 394 and 2 times minus 286, and methane burns with minus 890, all reaching CO2 plus 2 H2O liquid.">
+      <CycleBox x={56} y={70} w={234} lines={["C(graphite) + 2H₂(g)"]} />
+      <CycleBox x={508} y={70} w={128} lines={["CH₄(g)"]} />
+      {t3Arrow(296, 88, 502, 88, INK, 3)}
+      <text x={399} y={64} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{dfH}</text>
+      <CycleBox x={224} y={244} w={280} lines={["CO₂(g) + 2H₂O(l)"]} />
+      {t3Arrow(140, 116, 268, 240, INK, 2.8)}
+      {t3Arrow(230, 116, 350, 240, INK, 2.8)}
+      {t3Arrow(552, 116, 470, 240, INK, 2.8)}
+      <text x={132} y={186} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−394</text>
+      <text x={252} y={196} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">2×−286</text>
+      <text x={540} y={186} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−890</text>
+    </svg>
+  );
+}
+
+/* ————— 6.6 · Example 3 — ΔrH of CaCO₃ decomposition from formation data ————— */
+
+export function FigHessCaco3({ accent = "#FF6B6B" }: { accent?: string }) {
+  void accent;
+  const drH = (
+    <>
+      Δ<SubT>r</SubT><SubBack>H</SubBack><SupT>θ</SupT>
+    </>
+  );
+  return (
+    <svg viewBox="0 0 760 340" className="w-full" role="img" aria-label="Hess cycle for calcium carbonate decomposition: CaCO3 solid goes to CaO solid plus CO2 gas along the top with delta r H theta; the elements form CaCO3 with minus 1207 and the products with minus 635 and minus 394.">
+      <CycleBox x={90} y={70} w={150} lines={["CaCO₃(s)"]} />
+      <CycleBox x={470} y={70} w={230} lines={["CaO(s) + CO₂(g)"]} />
+      {t3Arrow(246, 88, 464, 88, INK, 3)}
+      <text x={355} y={64} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{drH}</text>
+      <CycleBox x={292} y={244} w={150} lines={["Elements"]} />
+      {t3Arrow(330, 240, 196, 116, INK, 2.8)}
+      {t3Arrow(398, 240, 496, 116, INK, 2.8)}
+      {t3Arrow(442, 240, 606, 116, INK, 2.8)}
+      <text x={188} y={186} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−1207</text>
+      <text x={440} y={200} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−635</text>
+      <text x={600} y={190} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−394</text>
+    </svg>
+  );
+}
+
+/* ————— Exercise 8 · the atomisation cycle for butane ————— */
+
+export function FigHessButane({ accent = "#FF6B6B" }: { accent?: string }) {
+  void accent;
+  return (
+    <svg viewBox="0 0 780 320" className="w-full" role="img" aria-label="The atomisation cycle for butane: C4H10 gas plus six and a half O2 gas going to 4 CO2 gas plus 5 H2O liquid along the top; both sides are pulled apart into 4 C gas, 10 H gas and 13 O gas atoms with plus 8410 and plus 11280 kJ per mol.">
+      <CycleBox x={80} y={56} w={620} lines={["C₄H₁₀(g) + 6½O₂(g) → 4CO₂(g) + 5H₂O(l)"]} />
+      <CycleBox x={228} y={228} w={320} lines={["4C(g) + 10H(g) + 13O(g)"]} />
+      {t3Arrow(268, 96, 348, 224, INK, 2.8)}
+      {t3Arrow(512, 96, 432, 224, INK, 2.8)}
+      <text x={196} y={170} textAnchor="end" fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">+8410 kJ mol⁻¹</text>
+      <text x={584} y={170} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">+11280 kJ mol⁻¹</text>
+    </svg>
+  );
+}
+
+/* ————— 6.9 · the bond-enthalpy cycle for gaseous water ————— */
+
+export function FigBondH2O({ accent = "#FF6B6B" }: { accent?: string }) {
+  void accent;
+  const dHr = (
+    <>
+      ΔH<SubT>r</SubT>
+    </>
+  );
+  return (
+    <svg viewBox="0 0 720 330" className="w-full" role="img" aria-label="Bond enthalpy cycle for gaseous water: H2 gas plus half O2 gas goes to H2O gas along the top with delta H r; breaking the reactant bonds costs E of H-H plus half E of O=O, making the two O-H bonds returns 2 E of O-H, with gaseous atoms below.">
+      <CycleBox x={56} y={70} w={220} lines={["H₂(g) + ½O₂(g)"]} />
+      <CycleBox x={488} y={70} w={130} lines={["H₂O(g)"]} />
+      {t3Arrow(282, 88, 482, 88, INK, 3)}
+      <text x={382} y={64} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{dHr}</text>
+      <CycleBox x={252} y={240} w={180} lines={["2H(g) + O(g)"]} />
+      {t3Arrow(148, 116, 296, 236, INK, 2.8)}
+      {t3Arrow(534, 236, 560, 116, INK, 2.8)}
+      <text x={148} y={186} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">E(H—H) + ½E(O=O)</text>
+      <text x={470} y={186} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">2E(O—H)</text>
+    </svg>
+  );
+}

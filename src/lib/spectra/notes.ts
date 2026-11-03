@@ -7,6 +7,8 @@ import { SECTIONS_T04_A } from "./content/notes-t04-a";
 import { SECTIONS_T04_B } from "./content/notes-t04-b";
 import { SECTIONS_T05_A } from "./content/notes-t05-a";
 import { SECTIONS_T05_B } from "./content/notes-t05-b";
+import { SECTIONS_T06_A } from "./content/notes-t06-a";
+import { SECTIONS_T06_B } from "./content/notes-t06-b";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · the revision-note library
@@ -85,6 +87,25 @@ export const NOTES_DOCS: NotesDoc[] = [
       },
     ],
     sections: [...SECTIONS_T05_A, ...SECTIONS_T05_B],
+  },
+  {
+    id: "wch12-t06",
+    unitCode: "WCH12",
+    topicId: "t06",
+    kicker: "Unit 2 · Topic 6 — the complete class note, spec by spec",
+    title: "Energetics",
+    source: "the complete class note (CHSE Grade 11, Unit 2 · Topic 6 · 2021, semester 2)",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual revision note for Topic 6, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every experiment and every exercise the class note sets in words is worked in full — no skipped lines.",
+      },
+      {
+        k: "p",
+        text: "Part **6A** builds enthalpy itself — the first law, the exothermic/endothermic sign convention, the level and profile diagrams, all ==five standard enthalpy changes== and both calorimetry experiments, with ==Q = mcΔT== worked every way the class note asks. Part **6B** is ==Hess's law==: the cycles built from Δ~c~H^θ^ and Δ~f~H^θ^ data, ==Core Practical 2==, the cooling-curve correction, and ==bond enthalpies== from mean values to the Si—F calculation.",
+      },
+    ],
+    sections: [...SECTIONS_T06_A, ...SECTIONS_T06_B],
   },
 ];
 
