@@ -517,13 +517,14 @@ export default function ClubApp() {
   }, [prefs]);
 
   const openUnit = (code: string) => setView({ kind: "unit", code });
-  const openTopicRaw = useCallback((code: string, topicId: string) => {
-    setView({ kind: "topic", code, topicId });
+  /* topics open their full revision note straight away — no intermediate
+     stop. The topic page itself stays only for the rare topic that has
+     no note doc behind it. */
+  const openTopic = useCallback((code: UnitCode, topicId: string) => {
+    const doc = getNotesForTopic(code, topicId);
+    if (doc) setView({ kind: "notes", code, docId: doc.id });
+    else setView({ kind: "topic", code, topicId });
   }, []);
-  const openTopic = useCallback(
-    (code: UnitCode, topicId: string) => openTopicRaw(code, topicId),
-    [openTopicRaw],
-  );
   const goHome = () => setView({ kind: "home" });
   const openSticker = useCallback(() => setView({ kind: "sticker" }), []);
   const openPack = useCallback(() => setView({ kind: "pack" }), []);
@@ -652,7 +653,7 @@ export default function ClubApp() {
                   key={notesDoc.id}
                   doc={notesDoc}
                   unit={unit}
-                  onBack={() => openTopic(unit.code, notesDoc.topicId)}
+                  onBack={() => openUnit(unit.code)}
                   jumpToSpec={view.kind === "notes" ? view.spec : undefined}
                 />
               )}

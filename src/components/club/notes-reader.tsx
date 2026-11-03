@@ -246,9 +246,9 @@ export function NotesReader({
           <SoftButton
             onClick={onBack}
             className="min-h-[42px] px-4 py-2 text-[13.5px]"
-            ariaLabel="Back to the topic page"
+            ariaLabel={`Back to ${unit.code}`}
           >
-            <ArrowLeft className="h-4 w-4" /> Back to the topic page
+            <ArrowLeft className="h-4 w-4" /> Back to {unit.code}
           </SoftButton>
         </PopIn>
 
@@ -385,8 +385,8 @@ export function NotesReader({
           <p className="font-display text-[19px] font-semibold text-ink">
             That&apos;s the whole note — every spec point, word for word.
           </p>
-          <SoftButton onClick={onBack} ariaLabel="Back to the topic page">
-            <ArrowLeft className="h-4.5 w-4.5" /> Back to the topic page
+          <SoftButton onClick={onBack} ariaLabel={`Back to ${unit.code}`}>
+            <ArrowLeft className="h-4.5 w-4.5" /> Back to {unit.code}
           </SoftButton>
           <p className="mt-2 text-[12px] leading-relaxed font-bold text-ink-soft">
             <Fmt
