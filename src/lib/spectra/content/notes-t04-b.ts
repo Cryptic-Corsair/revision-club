@@ -21,7 +21,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
         term: "Alkane",
         text: "A ==hydrocarbon== (a compound of carbon and hydrogen **only**) belonging to the homologous series with general formula ==C~n~H~2n+2~== (non-cyclic only). Alkanes are ==saturated==: every bond in the chain is a single bond. They are highly flammable, and their carbon atoms are ==sp^3^ hybridised==.",
       },
-      { k: "h", text: "Why tetrahedral — the sp³ story" },
+      { k: "h", text: "Why tetrahedral — sp^3^ hybridisation" },
       {
         k: "steps",
         caption: "From ground-state carbon to four equal bonds",
@@ -32,7 +32,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
           { title: "The shape", icon: "spark", text: "In alkanes the four sp^3^ orbitals ==repel each other into a tetrahedral arrangement==, so bonds are spaced tetrahedrally (109.5°) around each carbon — and carbon forms **sigma bonds** with other carbons and with hydrogens." },
         ],
       },
-      { k: "h", text: "The naming ladder, C₁ → C₁₀" },
+      { k: "h", text: "Naming the alkanes, C₁ → C₁₀" },
       {
         k: "table",
         caption: "Prefixes for compounds up to C₁₀ — the first four keep trivial names, the rest are Greek",
@@ -68,7 +68,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "One ring costs two hydrogens: C~6~H~14~ is hexane, C~6~H~12~ is cyclohexane — the same formula as an alkene, but with ==no double bond anywhere==. “Same formula as an alkene” and “saturated” are only contradictory until you remember the ring.",
+        text: "One ring costs two hydrogens: C~6~H~14~ is hexane, C~6~H~12~ is cyclohexane — the same formula as an alkene, but with ==no double bond anywhere==.",
       },
       { k: "checkpoint", page: 20 },
     ],
@@ -86,11 +86,11 @@ export const SECTIONS_T04_B: SpecSection[] = [
       },
       {
         k: "table",
-        caption: "The family tree of isomerism",
-        head: ["Branch", "Types", "One-line cause"],
+        caption: "Types of isomerism",
+        head: ["Isomerism", "Types", "Cause"],
         rows: [
           ["Structural isomerism", "chain · position · functional group", "same molecular formula, ==different structural formulae=="],
-          ["Stereoisomerism", "geometrical · optical", "same structural formula, different arrangement ==in space== — this joins the course with the alkenes"],
+          ["Stereoisomerism", "geometrical · optical", "same structural formula, different arrangement ==in space=="],
         ],
       },
       {
@@ -103,7 +103,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "Every isomer check starts from the ==molecular formula== and asks one question three ways: same atoms, ==different skeleton== (chain), ==different address== (position), or ==different family== (functional group)?",
+        text: "Every isomer check starts from the ==molecular formula==: same atoms, but a ==different structural formula== — chain (branching), position (where the functional group sits) or functional group (a different family).",
       },
     ],
   },
@@ -114,9 +114,9 @@ export const SECTIONS_T04_B: SpecSection[] = [
     blocks: [
       {
         k: "p",
-        text: "Alkanes exhibit ==structural isomerism== — the chain type, caused by branching. The first example of isomerism in the whole family appears at ==C~4~H~10~==, which has exactly two isomers: the straight-chain **butane** and the branched **2-methylpropane**.",
+        text: "Alkanes exhibit ==structural isomerism== — the chain type, caused by branching. ==C~4~H~10~== has exactly two isomers: the straight-chain **butane** and the branched **2-methylpropane**.",
       },
-      { k: "figure", kind: "isomers", caption: "The three skeletal isomers of C₅H₁₂ — a straight chain, one branch, and a quaternary centre. Same formula, three compounds with different boiling points and burning behaviour." },
+      { k: "figure", kind: "isomers", caption: "The three isomers of C₅H₁₂ — pentane, 2-methylbutane and 2,2-dimethylpropane." },
       {
         k: "worked",
         title: "Worked example · Exercise 2(a) — all the isomers of C~5~H~12~",
@@ -145,7 +145,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
         items: [
           "Work ==down the longest chain==: 6 → 5 → 4, deciding at each step where the spare carbons can go without creating a longer chain than you counted.",
           "Beware **duplicates in disguise**: a “different” numbering that just re-reads the same molecule is not a new isomer — 3-methylpentane numbered from the other end is still 3-methylpentane.",
-          "For cycloalkanes the same game runs one ring up: cyclopentane and its methyl-cyclobutane cousin share C~5~H~10~.",
+          "For cycloalkanes the same rule holds: cyclopentane and methylcyclobutane are both C~5~H~10~ — same molecular formula, different structural formula.",
         ],
       },
       { k: "checkpoint", page: 22 },
@@ -165,7 +165,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
         k: "p",
         text: "It can be split into useful fractions by ==fractional distillation==: distillation separates compounds according to their ==boiling point==, and at each level of the column a mixture of compounds in a ==similar boiling range== is taken off — a **fraction**. Rough fractions can be distilled further to obtain narrower boiling ranges. The lower-boiling fractions are usually the most important ones.",
       },
-      { k: "figure", kind: "frac-col", caption: "The fractionating column: compounds condense at the height where the temperature matches their boiling range. Long chains, high boiling point — low down." },
+      { k: "figure", kind: "frac-col", caption: "The fractionating column: compounds condense at the height where the temperature matches their boiling range." },
       {
         k: "table",
         caption: "The main fractions and their uses",
@@ -178,7 +178,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
           ["Residue", "a complex mixture of hydrocarbons", "further fractionated into lubricating oil, fuel oil, waxes and bitumen"],
         ],
       },
-      { k: "h", text: "Cracking — making the short chains the market wants" },
+      { k: "h", text: "Cracking" },
       {
         k: "p",
         text: "The demand for the ==lighter== fractions is higher than for the heavier ones — but the heavy, long-chain fractions make up ==more than 50 %== of the products from distillation. So the longer chains are broken down into simpler, more useful molecules by **cracking**. There are two types: ==thermal cracking== and ==catalytic cracking==.",
@@ -205,7 +205,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       {
         k: "note",
         label: "In the lab",
-        text: "The note's suggested practical: ==cracking liquid paraffin by thermal decomposition== over an ==aluminium oxide catalyst== — the same chemistry as the refinery, scaled to a test tube.",
+        text: "The note's suggested practical: ==cracking liquid paraffin by thermal decomposition== over an ==aluminium oxide catalyst==.",
       },
     ],
   },
@@ -251,7 +251,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       },
       {
         k: "table",
-        caption: "The pollutant line-up",
+        caption: "The pollutants from alkane-fuel combustion",
         head: ["Pollutant", "Where it comes from", "The problem"],
         rows: [
           ["CO", "incomplete combustion", "==toxic== — see 4.14 for why"],
@@ -264,7 +264,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "Every pollutant traces back to either ==what the fuel carries== (sulfur) or ==how completely it burned== (CO, particulates, unburned hydrocarbons) or ==how hot the engine runs== (NO~x~). Three causes, one exhaust pipe.",
+        text: "Every pollutant traces back to either ==what the fuel carries== (sulfur) or ==how completely it burned== (CO, particulates, unburned hydrocarbons) or ==how hot the engine runs== (NO~x~).",
       },
     ],
   },
@@ -288,13 +288,13 @@ export const SECTIONS_T04_B: SpecSection[] = [
       },
       {
         k: "note",
-        label: "Why CO is toxic",
-        text: "Carbon monoxide binds to the ==haemoglobin== in blood ==far more strongly than oxygen== does, so blood exposed to CO can carry less O~2~ — the body is slowly starved of the oxygen it needs. That is why a car engine must never be run in a closed space, and why the converter's job of oxidising CO to CO~2~ matters.",
+        label: "CO is toxic",
+        text: "Carbon monoxide is a ==poisonous gas== formed when combustion is ==incomplete== (4.13) — which is why the converter's oxidation of CO to CO~2~ matters.",
       },
       {
         k: "note",
         label: "The acidity link",
-        text: "The spec's “problems arising” are exactly the two heads of this note: ==toxicity== (CO — and its capture by haemoglobin) and ==acidity== (the oxides of nitrogen and sulfur dissolving to HNO~2~/HNO~3~ and H~2~SO~3~/H~2~SO~4~, driving acid rain).",
+        text: "The spec's “problems arising” are ==toxicity== (CO, a ==poisonous gas== from incomplete combustion) and ==acidity== (the oxides of nitrogen and sulfur dissolving to HNO~2~/HNO~3~ and H~2~SO~3~/H~2~SO~4~).",
       },
     ],
   },
@@ -314,7 +314,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "“Recently died” is the whole hinge: a biofuel returns to the atmosphere carbon that was ==drawn from it this generation==, while a fossil fuel returns carbon that was banked ==millions of years ago==.",
+        text: "A biofuel returns to the atmosphere carbon that was ==drawn from it recently==; a fossil fuel returns carbon that was absorbed ==millions of years ago==.",
       },
     ],
   },
@@ -336,7 +336,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       {
         k: "note",
         label: "The awkward case",
-        text: "By the same logic, ==fossil fuels formed from trees could be described as carbon neutral== — they too absorbed CO~2~ during growth and release the same amount when burned. The catch is the ==time period==: the repayment happens over millions of years of storage, so fossil fuels are not treated as carbon neutral in the sustainability argument.",
+        text: "By the same logic, ==fossil fuels formed from trees could be described as carbon neutral== — they too absorbed CO~2~ during growth and form the same amount when burned. The difference is the ==time period== over which the CO~2~ is returned.",
       },
       { k: "h", text: "Bioalcohols" },
       {
@@ -356,7 +356,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       { k: "h", text: "Comparing fuels — the four questions" },
       {
         k: "table",
-        caption: "The class note's comparison checklist for any proposed fuel",
+        caption: "The note's comparison for any proposed fuel",
         head: ["Question", "What it asks"],
         rows: [
           ["Land use", "how much land is used to grow the crop? Should the land grow ==food== to feed people instead?"],
@@ -372,7 +372,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "Applying “carbon neutral” is always a ==comparison of amounts over a time window==: petrol — stored carbon released, no repayment; bioethanol — this season's carbon, repaying more than it took; hydrogen — ==no carbon at all==, so nothing to balance.",
+        text: "Petrol: carbon absorbed ==millions of years ago== is released and not re-absorbed. Bioethanol: recently absorbed carbon, though ==more CO~2~ is formed than absorbed== overall. Hydrogen: ==no carbon dioxide is produced== at all.",
       },
     ],
   },
@@ -384,7 +384,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       { k: "h", text: "i · With oxygen in the air — combustion" },
       {
         k: "p",
-        text: "Alkanes ==burn easily in the presence of oxygen== to release energy in an ==exothermic== reaction — but only in the ==gaseous state==, so liquid and solid alkanes must be vaporised before they can burn. Methane (natural gas), propane and butane are the everyday fuels. Complete combustion gives ==CO~2~ and H~2~O==; incomplete combustion gives ==CO and H~2~O== (the pollutant story is 4.13).",
+        text: "Alkanes ==burn easily in the presence of oxygen== to release energy in an ==exothermic== reaction — but only in the ==gaseous state==, so liquid and solid alkanes must be vaporised before they can burn. Methane (natural gas), propane and butane are the everyday fuels. Complete combustion gives ==CO~2~ and H~2~O==; incomplete combustion gives ==CO and H~2~O== (see 4.13).",
       },
       {
         k: "worked",
@@ -409,7 +409,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
           "**Octane** C~8~H~18~: 8CO + 9H~2~O per molecule needs 8 + 9 = 17 O → 17/2 O~2~ per molecule; doubled.",
         ],
         answer:
-          "2C~3~H~8~ + 7O~2~ → 6CO + 8H~2~O  ·  2C~7~H~16~ + 15O~2~ → 14CO + 16H~2~O  ·  2C~8~H~18~ + 17O~2~ → 16CO + 18H~2~O — the examiner's follow-up: why is the product dangerous? ==CO is toxic== (4.14).",
+          "2C~3~H~8~ + 7O~2~ → 6CO + 8H~2~O  ·  2C~7~H~16~ + 15O~2~ → 14CO + 16H~2~O  ·  2C~8~H~18~ + 17O~2~ → 16CO + 18H~2~O — and ==CO is toxic== (4.14).",
       },
       { k: "h", text: "ii · With halogens — halogenation" },
       {
@@ -435,7 +435,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
         k: "p",
         text: "Alkanes undergo ==homolytic free radical substitution== when they react with a halogen — the chlorination of methane is the model reaction, and the mechanism runs in exactly ==three steps==.",
       },
-      { k: "figure", kind: "radchain", caption: "The chain at a glance: initiation makes radicals (half-headed arrows), propagation trades them forward, termination is any two radicals pairing up — the trace of ethane is the evidence." },
+      { k: "figure", kind: "radchain", caption: "The chain: initiation makes radicals (half-headed arrows), propagation regenerates them, termination combines two radicals into a neutral product — the trace of ethane is the evidence." },
       {
         k: "steps",
         caption: "The three steps, methane + chlorine",
@@ -448,9 +448,9 @@ export const SECTIONS_T04_B: SpecSection[] = [
       {
         k: "bullets",
         items: [
-          "The mechanism shows the possibility of forming ==hydrocarbons with more carbon atoms== than the reactant used — the trace of **ethane**, C~2~H~6~, from two methyl radicals pairing up.",
+          "The mechanism shows the possibility of forming ==hydrocarbons with more carbon atoms== than the reactant used — the trace of **ethane**, C~2~H~6~, from two methyl radicals ==combining together==.",
           "Halogenation of alkanes has ==limited use in synthesis== because the reaction ==cannot be controlled==: many substitution reactions (side reactions) occur at the same time, so a ==mixture of several products== is obtained.",
-          "That is the ladder of 4.17: once CH~3~Cl exists, further substitution carries on to CH~2~Cl~2~, CHCl~3~ and CCl~4~ — every stage running through the same chain.",
+          "That is 4.17: once CH~3~Cl exists, further substitution carries on to CH~2~Cl~2~, CHCl~3~ and CCl~4~ — each substitution running through the same chain reaction.",
         ],
       },
       {
@@ -461,20 +461,19 @@ export const SECTIONS_T04_B: SpecSection[] = [
         steps: [
           "**Initiation** — UV light splits the I–Cl bond homolytically (half-headed arrows, one electron each way):  I–Cl → I• + Cl•.",
           "**Propagation 1** — the chlorine radical removes a hydrogen:  Cl• + CH~3~CH~3~ → •CH~2~CH~3~ + HCl.",
-          "**Propagation 2** — the ethyl radical attacks the ==δ^+^ iodine== end of I–Cl (chlorine is the more electronegative atom, so iodine is the electron-poor end):  •CH~2~CH~3~ + I–Cl → CH~3~CH~2~I + Cl•. The Cl• is regenerated — the chain turns over.",
-          "**Termination** — any two radicals pair up: I• + Cl• → ICl, I• + I• → I~2~, Cl• + Cl• → Cl~2~, •CH~2~CH~3~ + Cl• → CH~3~CH~2~Cl, •CH~2~CH~3~ + I• → CH~3~CH~2~I, •CH~2~CH~3~ + •CH~2~CH~3~ → C~4~H~10~.",
+          "**Propagation 2** — the ethyl radical attacks the ==δ^+^ iodine== end of I–Cl (chlorine is the more electronegative atom, so iodine is the electron-poor end):  •CH~2~CH~3~ + I–Cl → CH~3~CH~2~I + Cl•. The Cl• is ==regenerated==.",
+          "**Termination** — two free radicals ==combine together to form a neutral product==: I• + Cl• → ICl, I• + I• → I~2~, Cl• + Cl• → Cl~2~, •CH~2~CH~3~ + Cl• → CH~3~CH~2~Cl, •CH~2~CH~3~ + I• → CH~3~CH~2~I, •CH~2~CH~3~ + •CH~2~CH~3~ → C~4~H~10~.",
         ],
         answer:
-          "Overall: ==CH~3~CH~3~ + I–Cl → CH~3~CH~2~I + HCl==. The iodine radical formed at initiation can also abstract a hydrogen (so some HI forms), but the two propagation steps shown are the self-sustaining pair — each one ==regenerates the radical the other needs==.",
+          "Overall: ==CH~3~CH~3~ + I–Cl → CH~3~CH~2~I + HCl==. The two propagation steps are the chain pair — each one ==regenerates the radical the other needs==.",
       },
       {
         k: "bullets",
         items: [
           "Radicals are drawn with a ==single dot== for the unpaired electron — no charge anywhere in this mechanism.",
-          "==Half-headed (fish-hook) arrows== belong to initiation and radical steps: one arrow per electron. Full curly arrows mean a *pair* — save them for the heterolytic mechanisms.",
-          "A propagation pair must ==regenerate the radical== it consumed; if your two steps do not chain back into each other, one of them is wrong.",
-          "Termination is the examiner's favourite “explain the trace of…” question: ==ethane in the products== means two •CH~3~ radicals collided.",
-          "“Why is this poor for synthesis?” — the answer is always ==further substitution cannot be stopped==: a mixture, not a single product.",
+          "==Half-headed curly arrows== belong to initiation and radical steps: ==one arrow per electron==. A ==full-headed curly arrow== represents the movement of a pair of electrons (the heterolytic mechanisms).",
+          "A propagation step must ==regenerate the radical== the next step needs.",
+          "==Ethane in the products== means two •CH~3~ radicals ==combined together== in a termination step.",
         ],
       },
       { k: "checkpoint", page: 30 },

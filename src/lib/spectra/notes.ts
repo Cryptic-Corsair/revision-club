@@ -62,7 +62,7 @@ export const NOTES_DOCS: NotesDoc[] = [
       },
       {
         k: "p",
-        text: "Part **4A** teaches the language of organic chemistry: hazard and risk, the homologous series and functional groups, the full IUPAC naming and drawing toolkit, the reaction types, and the two ways a covalent bond splits. Part **4B** is the alkanes: sp^3^ shapes and cycloalkanes, the isomer drills, crude oil from fractionating column to cracker, combustion and its pollutants, alternative fuels and carbon neutrality — finishing with the ==free-radical substitution chain==, the first mechanism of the course.",
+        text: "Part **4A** covers hazard and risk, the homologous series and functional groups, the IUPAC naming rules and drawing, the reaction types, and the two ways a covalent bond splits. Part **4B** is the alkanes: sp^3^ shapes and cycloalkanes, the isomer exercises, crude oil and its fractions, combustion and its pollutants, alternative fuels and carbon neutrality — finishing with the ==free-radical substitution chain==, the first mechanism of the course.",
       },
     ],
     sections: [...SECTIONS_T04_A, ...SECTIONS_T04_B],
@@ -81,7 +81,7 @@ export const NOTES_DOCS: NotesDoc[] = [
       },
       {
         k: "p",
-        text: "Part **5A** builds the double bond itself — σ plus π, the sp^2^ hybrids and the 120° plan — then the alkene naming rules, the ==isomer drills== (chain, positional and geometric) and the five addition reactions with their conditions and colour changes. Part **5B** is the mechanisms: ==electrophilic addition== of HBr and Br~2~ drawn with curly arrows, the carbocation stability ladder, the bromine-water test, and addition polymerisation from repeat unit to polymer disposal.",
+        text: "Part **5A** builds the double bond itself — σ plus π, the sp^2^ hybrids and the 120° arrangement — then the alkene naming rules, the isomer types (chain, positional and geometric) and the five addition reactions with their conditions and colour changes. Part **5B** is the mechanisms: ==electrophilic addition== of HBr and Br~2~ drawn with curly arrows, the ==stability of carbocations==, the bromine-water test, and addition polymerisation from repeat unit to polymer disposal.",
       },
     ],
     sections: [...SECTIONS_T05_A, ...SECTIONS_T05_B],

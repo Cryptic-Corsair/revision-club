@@ -534,7 +534,7 @@ export function FigFillOrder({ accent = "#FF6B6B" }: { accent?: string }) {
   const rowH = 44;
   const h = steps.length * rowH + 60;
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="Filling order energy ladder">
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="Filling order of orbitals, lowest energy first">
       <text x="26" y="26" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
         energy ↑
       </text>
@@ -1595,7 +1595,7 @@ export function FigNaming({ accent = "#FF6B6B" }: { accent?: string }) {
         <tspan>hexane</tspan>
       </text>
       <text x={410} y={92} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
-        numbering left to right gives 2,3 — from the other end it would be 4,5, so the lowest set wins
+        numbering left to right gives 2,3 — from the other end it would be 4,5, so 2,3 is the lower set
       </text>
 
       <line x1={40} y1={112} x2={780} y2={112} stroke={tint(accent, 40)} strokeWidth={2} />
@@ -1671,7 +1671,7 @@ export function FigFracCol({ accent = "#FF6B6B" }: { accent?: string }) {
 
       <text x={600} y={52} fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">each level takes off a fraction —</text>
       <text x={600} y={72} fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">compounds with a similar boiling range</text>
-      <text x={600} y={96} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">boiling point climbs as chain length grows,</text>
+      <text x={600} y={96} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">boiling point increases as chain length grows,</text>
       <text x={600} y={114} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">so longer molecules condense lower down</text>
     </svg>
   );
@@ -1796,14 +1796,14 @@ export function FigRadChain({ accent = "#FF6B6B" }: { accent?: string }) {
         </g>
       ))}
       <text x={236} y={412} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
-        any two radicals collide and pair up — the chain stops. The trace of ethane (C₂H₆) is the giveaway
+        two free radicals combine to form a neutral product — the chain stops. The trace of ethane (C₂H₆) is the evidence
       </text>
       <text x={236} y={432} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
-        that two •CH₃ found each other, and the examiner's favourite explanation.
+        that two •CH₃ radicals combined together in a termination step.
       </text>
 
       {stage(466, "OVERALL", PAPER)}
-      <text x={236} y={471} fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₄ + Cl₂ → CH₃Cl + HCl   —   but it rarely stops there</text>
+      <text x={236} y={471} fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₄ + Cl₂ → CH₃Cl + HCl   —   further substitution continues</text>
     </svg>
   );
 }
@@ -1869,7 +1869,7 @@ export function FigSp2({ accent = "#FF6B6B" }: { accent?: string }) {
     </g>
   );
   return (
-    <svg viewBox="0 0 780 320" className="w-full" role="img" aria-label="sp2 hybridisation: an s and two p orbitals give three sp2 hybrids plus one leftover p orbital; in ethene the p orbitals overlap sideways to make the pi bond">
+    <svg viewBox="0 0 780 320" className="w-full" role="img" aria-label="sp2 hybridisation: an s and two p orbitals give three sp2 hybrids plus one unhybridized p orbital; in ethene the p orbitals overlap sideways to make the pi bond">
       <text x={127} y={48} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">GROUND STATE</text>
       <text x={387} y={48} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">HYBRIDISED</text>
       <text x={647} y={48} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">IN ETHENE</text>
@@ -1910,7 +1910,7 @@ export function FigSp2({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={700} y={226} fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">π</text>
       <path d="M 596 162 A 26 26 0 0 0 596 194" fill="none" stroke={SOFT} strokeWidth={1.8} />
       <text x={583} y={183} textAnchor="middle" fontSize="10" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">120°</text>
-      <text x={647} y={262} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">bonds at 120° — the leftover p's</text>
+      <text x={647} y={262} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">bonds at 120° — the unhybridized p's</text>
       <text x={647} y={278} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">overlap sideways to add the π bond</text>
     </svg>
   );
@@ -1972,7 +1972,7 @@ export function FigEz({ accent = "#FF6B6B" }: { accent?: string }) {
     </g>
   );
   return (
-    <svg viewBox="0 0 780 340" className="w-full" role="img" aria-label="E-Z priority assignment for 1-chloro-2-methylbut-1-ene: chlorine wins the right carbon, the ethyl group wins the tie on the left carbon, and opposite sides means E">
+    <svg viewBox="0 0 780 340" className="w-full" role="img" aria-label="E-Z priority assignment for 1-chloro-2-methylbut-1-ene: chlorine has the higher priority on the right-hand carbon, the ethyl group has the higher priority on the tie-break on the left-hand carbon, and the higher priority groups are on opposite sides, so E">
       {/* the molecule */}
       <line x1={300} y1={175} x2={410} y2={175} {...bond} />
       <line x1={300} y1={185} x2={410} y2={185} {...bond} />
@@ -1997,7 +1997,7 @@ export function FigEz({ accent = "#FF6B6B" }: { accent?: string }) {
 
       {/* the tie-break callout */}
       <rect x={130} y={306} width={400} height={30} rx={15} fill={tint(accent, 12)} stroke={tint(accent, 40)} strokeWidth={2} />
-      <text x={330} y={326} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">tie on the left C (C vs C) → next shell: CH₃ = H,H,H · C₂H₅ = C,H,H → ethyl wins</text>
+      <text x={330} y={326} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">tie on the left C (C vs C) → next shell: CH₃ = H,H,H · C₂H₅ = C,H,H → the ethyl group has the higher priority</text>
 
       {/* the E/Z verdict card */}
       <rect x={570} y={84} width={186} height={200} rx={22} fill={tint(accent, 9)} stroke={tint(accent, 36)} strokeWidth={2} />
@@ -2035,7 +2035,7 @@ export function FigElecAdd({ accent = "#FF6B6B" }: { accent?: string }) {
 
       {/* ————— row 1 · HBr + ethene ————— */}
       {rowChip(100, "HBr + ETHENE", tint(accent, 22))}
-      {/* stage 1: pi attacks H, H–Br pair leaves */}
+      {/* stage 1: pi pair bonds to H, H–Br pair leaves */}
       <text x={250} y={78} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">H₂C=CH₂</text>
       <text x={415} y={72} fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
       <text x={470} y={72} fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>

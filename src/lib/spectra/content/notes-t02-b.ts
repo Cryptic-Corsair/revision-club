@@ -31,10 +31,10 @@ export const SECTIONS_B: SpecSection[] = [
         term: "Shielding effect",
         text: "The electron in the outermost energy level experiences more inter-electron repulsion known as ==shielding==. The greater the number of the inner shell electrons the greater is the shielding effect (screening effect). The force of attraction becomes weaker. Less energy is required to remove the electron (==lower ionization energy==).",
       },
-      { k: "figure", kind: "shielding", caption: "Shielding in sodium — the ten inner-shell electrons sit between the +11 nucleus and the outer 3s electron, so that electron feels far less than the full nuclear pull." },
+      { k: "figure", kind: "shielding", caption: "Shielding in sodium — the ten inner-shell electrons sit between the +11 nucleus and the outer 3s electron, so the outer electron experiences less than the full nuclear charge." },
       {
         k: "p",
-        text: "These three factors explain every trend: across a period the growing **nuclear charge** wins; down a group it is **distance and shielding**. Both trends are explained in full at **2.18**.",
+        text: "Across a period, the increasing **nuclear charge** raises the ionization energy; down a group, the increase in **distance and shielding** lowers it. Both trends are explained in full at **2.18**.",
       },
     ],
   },
@@ -167,7 +167,7 @@ export const SECTIONS_B: SpecSection[] = [
         text: "For example, 4s is filled before 3d. This is because the 4s orbital is at a ==lower energy level== than a 3d orbital.",
       },
       { k: "eq", eq: "the filling order: 1s → 2s → 2p → 3s → 3p → 4s → 3d → 4p → ………" },
-      { k: "figure", kind: "fill-order", caption: "The energy ladder — climb it in this exact order." },
+      { k: "figure", kind: "fill-order", caption: "Fill the orbitals in this exact order." },
       { k: "h", text: "spdf notation and box notation" },
       {
         k: "p",
@@ -322,7 +322,7 @@ export const SECTIONS_B: SpecSection[] = [
       {
         k: "table",
         caption: "The four blocks",
-        head: ["Block", "Who lives there", "Last electron fills"],
+        head: ["Block", "Elements", "Outermost electrons in"],
         rows: [
           ["**s**-Block", "elements of group 1 and 2", "the s sub-shell"],
           ["**p**-Block", "elements in groups 3 to 8", "the p sub-shell"],
@@ -352,13 +352,13 @@ export const SECTIONS_B: SpecSection[] = [
     blocks: [
       {
         k: "p",
-        text: "Plot first ionisation energy against atomic number and a repeating shape appears: every period climbs to a noble-gas peak and falls at the next Group 1 element, then the whole shape repeats. A property that repeats in this regular way across the periods is a ==periodic property==.",
+        text: "Plot first ionisation energy against atomic number and the same pattern repeats each period: it rises to a maximum at each noble gas and drops to a minimum at the next Group 1 element. A property that repeats in this regular way across the periods is a ==periodic property==.",
       },
       { k: "figure", kind: "ie-graph", caption: "First Ionisation Energies / kJ mol⁻¹ — the values from the note's table, elements 1–28, plotted against atomic number." },
       {
         k: "note",
         label: "Reading the graph",
-        text: "The peaks are the **noble gases** (He, Ne, Ar…), the cliffs are the **Group 1 metals** (Li, Na, K…), and the little dips at B/Al and O/S are the sub-shell deviations you will explain at **2.18(ii)**.",
+        text: "The peaks are the **noble gases** (He, Ne, Ar…), the minima are the **Group 1 metals** (Li, Na, K…), and the dips at B/Al and O/S are the deviations explained at **2.18(ii)**.",
       },
       { k: "h", text: "Atomic radius" },
       {
@@ -478,7 +478,7 @@ export const SECTIONS_B: SpecSection[] = [
           "Therefore, the attraction between the outer electrons and the nucleus increases. Hence, more energy is required to remove the electrons.",
         ],
       },
-      { k: "figure", kind: "ie-graph", caption: "First ionization energies for periods 1 – 3 — the same data, now as evidence." },
+      { k: "figure", kind: "ie-graph", caption: "First ionization energies for periods 1 – 3." },
       {
         k: "bullets",
         items: [

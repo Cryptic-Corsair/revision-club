@@ -58,7 +58,7 @@ export const WCH11_TOPICS: Topic[] = [
       },
       {
         k: "p",
-        text: "Two efficiency measures close the topic. ==Percentage yield== compares what you got with what you should have got; ==atom economy== compares the mass of atoms in the product with the mass of every atom that went in. A reaction can have a 100 % yield and a terrible atom economy — and examiners love asking why atom economy matters (sustainability: fewer wasted raw materials, less to dispose of).",
+        text: "Two efficiency measures close the topic. ==Percentage yield== compares what you got with what you should have got; ==atom economy== compares the mass of atoms in the product with the mass of every atom that went in. A reaction can have a 100 % yield and a terrible atom economy — atom economy matters for ==sustainability==: fewer wasted raw materials, less to dispose of.",
       },
       {
         k: "eq",
@@ -141,15 +141,15 @@ export const WCH11_TOPICS: Topic[] = [
       },
       {
         k: "p",
-        text: "Electrons fill shells, then sub-shells, then orbitals: two electrons per orbital, lowest energy first — 1s, 2s, 2p, 3s, 3p, then ==4s before 3d==. Configurations run to Z = 36 on this course, and two exceptions are examinable: chromium (…3d^5^4s^1^) and copper (…3d^10^4s^1^), where a half-filled or filled d sub-shell buys extra stability. When ions form, the 4s electrons leave *first* — they went in first, they come out first.",
+        text: "Electrons fill shells, then sub-shells, then orbitals: two electrons per orbital, lowest energy first — 1s, 2s, 2p, 3s, 3p, then ==4s before 3d==. Configurations run to Z = 36 on this course, with two exceptions: chromium (…3d^5^4s^1^) and copper (…3d^10^4s^1^), where a half-filled or filled d sub-shell is more stable. When ions form, the 4s electrons leave *first* — they went in first, they come out first.",
       },
       {
         k: "p",
-        text: "Ionisation energy depends on three levers, and every explanation you write should name them: ==nuclear charge== (more protons pull harder), ==distance== (outer shells further out are held more weakly) and ==shielding== (inner shells screen the outer electron). Across Period 3 the outer electron stays in n = 3 while nuclear charge climbs, so the trend is upward — with two famous dips.",
+        text: "Ionisation energy depends on three factors: ==nuclear charge== (more protons, greater attraction), ==distance== (outer shells further out are held more weakly) and ==shielding== (inner shells screen the outer electron). Across Period 3 the outer electron stays in n = 3 while nuclear charge increases, so the trend is upward — with two dips.",
       },
       {
         k: "table",
-        caption: "The two dips across Period 3 — the examiners' favourite",
+        caption: "The two dips across Period 3",
         head: ["Dip", "Configuration change", "Reason"],
         rows: [
           ["Mg → Al", "3s^2^ → 3s^2^3p^1^", "3p is higher in energy than 3s — a new sub-shell opens"],
@@ -158,13 +158,13 @@ export const WCH11_TOPICS: Topic[] = [
       },
       {
         k: "p",
-        text: "Down a group, ionisation energy falls: each element adds a whole new shell, so distance and shielding increase together and overwhelm the rising nuclear charge. And ==successive== ionisation energies climb within an atom, leaping sharply when an electron is pulled from a new inner shell — sodium's jump between the first and second electron is the standard evidence that shells exist at all.",
+        text: "Down a group, ionisation energy falls: each element adds a whole new shell, so distance and shielding increase together and outweigh the increasing nuclear charge. And ==successive== ionisation energies increase within an atom, rising sharply when an electron is removed from a new inner shell — sodium's jump between the first and second electron is evidence for quantum shells.",
       },
       {
         k: "tips",
         items: [
           "The definition of first ionisation energy must include **gaseous** atoms and **gaseous** ions — both states, or the mark is gone.",
-          "“Explain why” means full sentences naming the lever. “The paired 3p electron in sulfur experiences electron–electron repulsion, so it is removed more easily” scores; the lone word “shielding” does not.",
+          "“Explain why” means full sentences naming the factor. “The paired 3p electron in sulfur experiences electron–electron repulsion, so it is removed more easily” scores; the lone word “shielding” does not.",
           "Periodicity: atomic radius falls across a period (same shell, more protons) and rises down a group (more shells).",
         ],
       },
@@ -187,7 +187,7 @@ export const WCH11_TOPICS: Topic[] = [
           "Isotopes: same protons, different neutrons — same chemistry, different mass.",
           "Mass spectra → isotopic abundances → A~r~ (Cl: 3 : 1 gives 35.5).",
           "4s fills before 3d; ions lose 4s first. Cr and Cu are the exceptions.",
-          "IE levers: nuclear charge, distance, shielding — name them all.",
+          "IE factors: nuclear charge, distance, shielding.",
           "Dips at Groups 3 and 6; sharp jumps in successive IEs mark new shells.",
         ],
       },
@@ -205,7 +205,7 @@ export const WCH11_TOPICS: Topic[] = [
     blocks: [
       {
         k: "p",
-        text: "Three bond types, four structure types, one idea: ==opposite charges attract==. An ionic bond is the electrostatic attraction between oppositely charged ions; a covalent bond is the attraction of two nuclei for a shared pair of electrons; a metallic bond is a lattice of positive ions in a sea of delocalised electrons. Every property question in this topic is answered by locating the charged particles and asking what has to be broken or moved.",
+        text: "Three bond types, four structure types, one idea: ==opposite charges attract==. An ionic bond is the electrostatic attraction between oppositely charged ions; a covalent bond is the attraction of two nuclei for a shared pair of electrons; a metallic bond is a lattice of positive ions in a sea of delocalised electrons.",
       },
       {
         k: "def",
@@ -219,7 +219,7 @@ export const WCH11_TOPICS: Topic[] = [
       },
       {
         k: "p",
-        text: "==Shapes== come from electron-pair repulsion: pairs of electrons — bonding or lone — arrange themselves as far apart as possible, and ==lone pairs repel more strongly than bonding pairs==, squeezing bond angles a little below the ideal. Learn the table below and the whole question family collapses into pattern-matching.",
+        text: "==Shapes== come from electron-pair repulsion: pairs of electrons — bonding or lone — arrange themselves as far apart as possible, and ==lone pairs repel more strongly than bonding pairs==, reducing bond angles a little below the ideal.",
       },
       {
         k: "table",
@@ -236,11 +236,11 @@ export const WCH11_TOPICS: Topic[] = [
       },
       {
         k: "p",
-        text: "==Polarity== needs care. A polar *bond* just needs an electronegativity difference; a polar *molecule* needs the bond dipoles to be unsymmetrical. CO~2~ has two very polar C=O bonds that cancel — the molecule is non-polar. H~2~O has the same two lone-pair bend, so it is polar. Symmetry decides.",
+        text: "==Polarity== needs care. A polar *bond* just needs an electronegativity difference; a polar *molecule* needs the bond dipoles to be unsymmetrical. CO~2~ has two very polar C=O bonds that cancel — the molecule is non-polar. H~2~O's two lone pairs bend the molecule, so the dipoles do not cancel — it is polar.",
       },
       {
         k: "table",
-        caption: "Structure → properties: the four answers that cover every question",
+        caption: "Structure → properties",
         head: ["Structure", "Melting point", "Conduction", "Example"],
         rows: [
           ["Giant ionic lattice", "high — strong attractions to break", "solid: no; molten/aqueous: yes (mobile ions)", "NaCl"],
@@ -257,14 +257,14 @@ export const WCH11_TOPICS: Topic[] = [
           "Four electron pairs in total → tetrahedral electron arrangement.",
           "The lone pair repels more strongly than the bonding pairs, compressing the H–N–H angle.",
         ],
-        answer: "Trigonal pyramidal, 107° — one lone pair squeezing a tetrahedral arrangement.",
+        answer: "Trigonal pyramidal, 107° — a tetrahedral arrangement with one lone pair.",
       },
       {
         k: "tips",
         items: [
           "In dot-and-cross diagrams show *which electron came from which atom* — dots, crosses, and the outer shell brackets with the charge for ions.",
           "“Describe the bonding in magnesium” wants: lattice of Mg^2+^ ions, sea of delocalised electrons, electrostatic attraction — all three phrases.",
-          "Molten ionic compounds conduct; solid ones do not. The word ==mobile== is the one the mark scheme wants.",
+          "Molten ionic compounds conduct; solid ones do not — melting frees the ions to move.",
         ],
       },
       {
@@ -287,7 +287,7 @@ export const WCH11_TOPICS: Topic[] = [
           "Dative bond: both electrons from one atom (NH~4~^+^).",
           "Lone pairs repel more: 109.5° → 107° → 104.5° as lone pairs accumulate.",
           "Polar bond ≠ polar molecule — symmetry decides.",
-          "Structure table answers every property question: what breaks, what moves?",
+          "Structure explains the properties: which forces break, which particles move.",
         ],
       },
     ],
@@ -304,7 +304,7 @@ export const WCH11_TOPICS: Topic[] = [
     blocks: [
       {
         k: "p",
-        text: "Organic chemistry is a language before it is a science. A ==homologous series== is a family with the same functional group and the same general formula, differing by CH~2~ each step; the ==functional group== is the reactive part that gives the family its identity. Learn to name and draw fluently and every later mechanism becomes a translation exercise.",
+        text: "A ==homologous series== is a family with the same functional group and the same general formula, differing by CH~2~ each step; the ==functional group== is the group responsible for the characteristic reactions of the compound.",
       },
       {
         k: "def",
@@ -313,11 +313,11 @@ export const WCH11_TOPICS: Topic[] = [
       },
       {
         k: "p",
-        text: "Naming is a four-step algorithm: find the **longest** carbon chain containing the functional group → number it from the end giving the functional group and substituents the **lowest** numbers → list substituents alphabetically → end with the family suffix (-ane, -ene, -ol, -al, -one, -oic acid). Skeletal formulae count carbons at line ends and bends, and hydrogens are implied — check twice that you have not lost one.",
+        text: "Naming is a four-step algorithm: find the **longest** carbon chain containing the functional group → number it from the end giving the functional group and substituents the **lowest** numbers → list substituents alphabetically → end with the family suffix (-ane, -ene, -ol, -al, -one, -oic acid). Skeletal formulae count carbons at line ends and bends, and hydrogens are implied.",
       },
       {
         k: "p",
-        text: "Alkanes are saturated hydrocarbons from ==crude oil==, separated by ==fractional distillation== (boiling point rises with chain length, so fractions condense at different heights), then upgraded by ==cracking== (long chains → short alkenes + alkanes, thermally or over a zeolite catalyst) and ==reforming== (chains → ring structures with higher octane rating).",
+        text: "Alkanes are saturated hydrocarbons from ==crude oil==, separated by ==fractional distillation== (boiling point rises with chain length, so fractions condense at different heights), then broken by ==cracking== (long chains → short alkenes + alkanes, thermally or over a zeolite catalyst) and ==reforming== (chains → ring structures with higher octane rating).",
       },
       {
         k: "eq",
@@ -328,15 +328,15 @@ export const WCH11_TOPICS: Topic[] = [
       },
       {
         k: "p",
-        text: "The first mechanism of the course: ==free-radical substitution== of alkanes by halogens in ultraviolet light. A radical is a species with an unpaired electron; homolytic fission (each atom takes one electron, drawn with ==half-headed fishhook arrows==) makes the radicals that drive a three-stage chain.",
+        text: "The first mechanism of the course: ==free-radical substitution== of alkanes by halogens in ultraviolet light. A radical is a species with an unpaired electron; homolytic fission (each atom takes one electron, drawn with ==half-headed arrows==) makes the radicals for the three-step chain.",
       },
       {
         k: "ex",
         title: "CH₄ + Cl₂ in UV light — the chain",
         steps: [
           "Initiation — the bond splits homolytically:  Cl~2~ → 2Cl•  (UV supplies the energy)",
-          "Propagation — the chain turns over:  Cl• + CH~4~ → HCl + •CH~3~",
-          "…and again:  •CH~3~ + Cl~2~ → CH~3~Cl + Cl•  (the Cl• is regenerated — one photon, many molecules)",
+          "Propagation — the radical is regenerated:  Cl• + CH~4~ → HCl + •CH~3~",
+          "…and again:  •CH~3~ + Cl~2~ → CH~3~Cl + Cl•  (the Cl• is ==regenerated==)",
           "Termination — two radicals combine:  Cl• + Cl• → Cl~2~  •CH~3~ + Cl• → CH~3~Cl  •CH~3~ + •CH~3~ → C~2~H~6~",
         ],
         answer: "Overall: CH~4~ + Cl~2~ → CH~3~Cl + HCl — with further substitution to CH~2~Cl~2~, CHCl~3~ and CCl~4~ possible.",
@@ -344,9 +344,9 @@ export const WCH11_TOPICS: Topic[] = [
       {
         k: "tips",
         items: [
-          "Half-headed (fishhook) arrows belong to radicals — one arrow per electron. Full curly arrows arrive in Topic 5 and mean electron pairs.",
-          "Propagation steps must regenerate a radical; if your two steps do not chain, one is wrong.",
-          "Termination produces trace ethane — examiners ask you to explain its presence.",
+          "Half-headed arrows belong to radicals — ==one arrow per electron==. A full-headed curly arrow (Topic 5) represents the movement of a pair of electrons.",
+          "Each propagation step ==regenerates the radical== the next step needs.",
+          "Termination produces trace ethane — two •CH~3~ radicals combining.",
         ],
       },
       {
@@ -369,7 +369,7 @@ export const WCH11_TOPICS: Topic[] = [
           "Isomers here: chain and position.",
           "Fractional distillation separates; cracking shortens; reforming cyclises.",
           "Pollutants: CO, NO~x~, SO~2~, particulates — each has a cause and a fix.",
-          "Radical chain: initiation → propagation → termination, fishhook arrows.",
+          "Radical chain: initiation → propagation → termination, half-headed arrows.",
         ],
       },
     ],

@@ -29,7 +29,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
       { k: "h", text: "Trends in electronegativity" },
       {
         k: "table",
-        caption: "The two trends, with the reasons the mark scheme wants",
+        caption: "The two trends, and why",
         head: ["Direction", "Trend", "Why"],
         rows: [
           ["Across a period", "increases", "nuclear charge increases · the outer electrons are in the same shell · there is no extra shielding → more attraction between the nucleus and the shared pair of electrons"],
@@ -38,7 +38,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "Electronegativity is a ==tug-of-war over one shared pair==. Fluorine (4.0) pulls hardest, caesium (0.7) barely pulls at all — and the *difference* between the two contestants decides everything in 3.14 and 3.15.",
+        text: "Both atoms pull on the shared pair; the atom with the ==higher electronegativity== pulls it more strongly — the ==electronegativity difference== decides the bond type in 3.14 and 3.15.",
       },
       { k: "checkpoint", page: 77 },
     ],
@@ -86,7 +86,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
       {
         k: "note",
         label: "The ends of the continuum",
-        text: "Pure covalent (ΔEN = 0) at one end, ionic (ΔEN ≥ 1.7) at the other — and ==every real bond lives somewhere between==. The greater the electronegativity difference, the greater the bond polarity, until the pair tips over into a full transfer: ionic bonding.",
+        text: "Pure covalent (ΔEN = 0) at one end, ionic (ΔEN ≥ 1.7) at the other — and ==every real bond is somewhere between==. The greater the electronegativity difference, the greater the bond polarity — and if the difference is large enough, the electron pair transfers completely: ==ionic bonding==.",
       },
       { k: "checkpoint", page: 77 },
     ],
@@ -119,7 +119,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
           "Molecules are polar if the bond polarities **do not cancel** — ==angular and pyramidal molecules are polar==.",
         ],
       },
-      { k: "figure", kind: "dipoles", caption: "The cancellation test: CO~2~ and CCl~4~ are symmetrical, so their bond dipoles cancel; in CHCl~3~ the H breaks the symmetry and a net dipole remains." },
+      { k: "figure", kind: "dipoles", caption: "Cancellation of bond dipoles: CO~2~ and CCl~4~ are symmetrical, so their bond dipoles cancel; in CHCl~3~ the H breaks the symmetry and a net dipole remains." },
       {
         k: "worked",
         title: "Worked example · CCl~4~ vs CHCl~3~",
@@ -142,12 +142,12 @@ export const SECTIONS_T03_B: SpecSection[] = [
           "OCl~2~ — angular (two lone pairs on O); polar bonds, unsymmetrical → **polar**.",
           "SiCl~4~ — tetrahedral; four identical polar Si—Cl bonds cancel by symmetry → **non-polar**.",
         ],
-        answer: "N~2~ non-polar · NH~3~ polar · OCl~2~ polar · SiCl~4~ non-polar — bond polarity alone never decides; ==symmetry does==.",
+        answer: "N~2~ non-polar · NH~3~ polar · OCl~2~ polar · SiCl~4~ non-polar.",
       },
       {
         k: "note",
         label: "The exception: NF~3~",
-        text: "NF~3~ has the same geometry as NH~3~, but the molecule has very little polarity (often treated as non-polar) — the lone pair's dipole ==cancels== the polarity of the N—F bonds, which point the other way.",
+        text: "NF~3~ has the same geometry as NH~3~, but the molecule has very little polarity (often treated as non-polar) — the lone pair ==cancels out== the polarity of the N—F bonds.",
       },
       {
         k: "steps",
@@ -186,10 +186,10 @@ export const SECTIONS_T03_B: SpecSection[] = [
         items: [
           { title: "1 · Count", icon: "spark", text: "Count the number of **covalent bond pairs** and **lone pairs** around the central atom. For repulsion purposes, a ==double bond acts like a single bond==." },
           { title: "2 · Arrange", icon: "arrow", text: "Adopt the arrangement which keeps the electron pairs (and so the bonds) **as far apart as possible**." },
-          { title: "3 · Name", icon: "target", text: "Name the shape from the *atoms only* — the lone pairs are “invisible” in the final shape, but they still squeeze the angles." },
+          { title: "3 · Name", icon: "target", text: "Name the shape from the *atoms only* — the lone pairs are “invisible” in the final shape, but they still ==reduce the bond angles==." },
         ],
       },
-      { k: "figure", kind: "shapes", caption: "The complete shape set: electron pairs spread for maximum separation, and every lone pair squeezes the remaining angles by about 2.5°." },
+      { k: "figure", kind: "shapes", caption: "The complete shape set: electron pairs spread for maximum separation, and each lone pair decreases the remaining bond angle by about 2.5°." },
       { k: "h", text: "Species without lone pairs" },
       {
         k: "p",
@@ -206,7 +206,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "A water molecule is **angular** even though oxygen has 4 electron pairs — two of them are lone pairs and are “invisible” in the shape. Lone pairs are ==shape-shapers but shape-hiders==.",
+        text: "A water molecule is **angular** even though oxygen has 4 electron pairs — two of them are lone pairs, and the lone pairs are “invisible” in the shape.",
       },
     ],
   },
@@ -227,7 +227,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
       },
       {
         k: "p",
-        text: "The two terms are the vocabulary of every shape answer: name the shape, then quote the **bond angle** — and remember from 3.10 that shorter bonds are stronger bonds, because the two nuclei and the shared electrons attract each other more strongly over the shorter distance.",
+        text: "Name the shape, then quote the **bond angle** — and remember from 3.10 that shorter bonds are stronger bonds, because the two nuclei and the shared electrons attract each other more strongly over the shorter distance.",
       },
     ],
   },
@@ -239,7 +239,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
     blocks: [
       {
         k: "table",
-        caption: "The full WCH11 set — learn the pair counts, the rest follows",
+        caption: "The full WCH11 set",
         head: ["Species", "Bond pairs", "Lone pairs", "Shape", "Bond angle"],
         rows: [
           ["BeCl~2~", "2", "0", "Linear", "180°"],
@@ -261,9 +261,9 @@ export const SECTIONS_T03_B: SpecSection[] = [
         steps: [
           "Nitrogen has five outer electrons: **three** form bonding pairs with hydrogen, **one** remains a lone pair — 3 bond pairs + 1 lone pair (total = 4 pairs).",
           "Four pairs arrange as a **tetrahedron**.",
-          "Lone pair–bond pair repulsions are greater than bond pair–bond pair repulsions, so the H—N—H angle is squeezed from 109.5° to 107°.",
+          "Lone pair–bond pair repulsions are greater than bond pair–bond pair repulsions, so the H—N—H angle is reduced from 109.5° to 107°.",
         ],
-        answer: "Trigonal **pyramidal**, 107° — a tetrahedral arrangement with one invisible lone pair on top.",
+        answer: "Trigonal **pyramidal**, 107° — a tetrahedral arrangement with one lone pair.",
       },
       {
         k: "worked",
@@ -274,7 +274,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
           "The extra lone pair–lone pair repulsion pushes the H—O—H angle down further, to 104.5°.",
           "Only the atoms count in the shape name: two bonds, no more — **angular/bent**.",
         ],
-        answer: "**Angular (bent)**, 104.5° — two lone pairs squeezing a tetrahedron.",
+        answer: "**Angular (bent)**, 104.5° — a tetrahedral arrangement with two lone pairs.",
       },
       {
         k: "worked",
@@ -283,9 +283,9 @@ export const SECTIONS_T03_B: SpecSection[] = [
         steps: [
           "For repulsion purposes, ==double bonds act like single bonds== — each double bond is one bonding region.",
           "CO~2~: 2 double-bond regions, **no lone pairs** → two regions repel to maximum separation → **linear**, 180°.",
-          "SO~2~: 2 double-bond regions + **1 lone pair** → three regions, one invisible → **angular/bent**, squeezed to ≈117.5°.",
+          "SO~2~: 2 double-bond regions + **1 lone pair** → three regions, one invisible → **angular/bent**, reduced to ≈117.5°.",
         ],
-        answer: "CO~2~ linear 180° · SO~2~ bent ≈117.5° — count regions, not bonds.",
+        answer: "CO~2~ linear 180° · SO~2~ bent ≈117.5°.",
       },
       { k: "checkpoint", page: 83 },
     ],
@@ -336,7 +336,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
           "Two I—Cl bonds use 2 electrons → **2 lone pairs** remain: 2 bond pairs + 2 lone pairs (total = 4).",
           "Tetrahedral arrangement; the two lone pairs are invisible in the shape.",
         ],
-        answer: "**Angular/bent**, ≈104.5° — VSEPR works for cations exactly as for molecules.",
+        answer: "**Angular/bent**, ≈104.5°.",
       },
       {
         k: "table",
@@ -353,7 +353,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "One rule of thumb carries the whole table: ==carbon with 4 regions → 109.5° · carbon with 3 regions (any double bond) → 120° · oxygen with 2 lone pairs → 104.5°==. Spot the regions, quote the angle.",
+        text: "Carbon with 4 regions → ==109.5°== · carbon with 3 regions (any double bond) → ==120°== · oxygen with 2 lone pairs → ==104.5°==.",
       },
       { k: "checkpoint", page: 83 },
     ],
@@ -366,7 +366,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
     blocks: [
       {
         k: "p",
-        text: "The four types of solid structures covered in this topic are **1 · giant metallic lattices**, **2 · giant ionic lattices**, **3 · giant covalent lattices** and **4 · discrete (simple) molecular lattices**. Every property question is answered by asking what particles are present and what has to be broken or moved.",
+        text: "The four types of solid structures covered in this topic are **1 · giant metallic lattices**, **2 · giant ionic lattices**, **3 · giant covalent lattices** and **4 · discrete (simple) molecular lattices**.",
       },
       {
         k: "bullets",
@@ -379,7 +379,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
       },
       {
         k: "table",
-        caption: "The master table — major properties of each structure type",
+        caption: "Major properties of each structure type",
         head: ["", "Giant metallic", "Giant ionic", "Giant covalent", "Simple molecular"],
         rows: [
           ["Particles present", "positive ions and delocalised electrons", "positive and negative ions", "atoms", "molecules"],
@@ -404,7 +404,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "Why doesn't water decompose when it boils? Because ==melting and boiling break only the intermolecular forces== — the covalent O—H bonds inside each molecule survive intact. Low boiling point never means weak bonds.",
+        text: "==Melting and boiling break only the intermolecular forces== — the covalent bonds inside each molecule are not broken.",
       },
       { k: "checkpoint", page: 93 },
     ],

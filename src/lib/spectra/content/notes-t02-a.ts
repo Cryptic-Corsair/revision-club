@@ -61,14 +61,14 @@ export const SECTIONS_A: SpecSection[] = [
       {
         k: "def",
         term: "Atomic (proton) number, Z",
-        text: "The number of ==protons== in the nucleus. The Periodic Table is arranged in order of it — and it is what makes an element that element.",
+        text: "The number of ==protons== in the nucleus. The Periodic Table is arranged in order of it.",
       },
       {
         k: "def",
         term: "Mass number, A",
         text: "The total number of ==protons and neutrons== (the nucleons) in the nucleus.",
       },
-      { k: "eq", eq: "number of neutrons = A − Z        protons = Z        electrons = Z − charge", note: "These two numbers give every particle count — the method is applied in 2.4." },
+      { k: "eq", eq: "number of neutrons = A − Z        protons = Z        electrons = Z − charge", note: "The method is applied in 2.4." },
     ],
   },
   {
@@ -83,7 +83,7 @@ export const SECTIONS_A: SpecSection[] = [
           "**Protons** = atomic number, Z",
           "**Neutrons** = mass number − atomic number (A − Z)",
           "**Electrons** = protons − charge — for a neutral atom, electrons = protons",
-          "A **positive ion** has *lost* electrons; a **negative ion** has *gained* them. The nucleus never changes.",
+          "A **positive ion** has *lost* electrons; a **negative ion** has *gained* them.",
         ],
       },
       {
@@ -222,7 +222,7 @@ export const SECTIONS_A: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "Ions in a mass spectrometer may carry a **2+** charge. Knock *two* electrons off and the m/z ratio halves — X²⁺ behaves like a particle of half the mass, so watch for peaks sitting at ==half the expected mass==.",
+        text: "Ions in a mass spectrometer may carry a **2+** charge — a doubly-charged ion gives a peak at ==m/z = its mass ÷ 2==.",
       },
       { k: "figure", kind: "spectrum-neon", caption: "Mass spectrum of neon — an early application was the demonstration by Aston, (Nobel Prize, 1922), that naturally occurring neon consisted of three isotopes; ²⁰Ne, ²¹Ne and ²²Ne." },
       {
@@ -401,7 +401,7 @@ export const SECTIONS_A: SpecSection[] = [
       {
         k: "note",
         label: "Always gaseous",
-        text: "A simple way to compare effective nuclear charges is to knock off a + for every electron in a filled inner level — and every ionisation equation starts and ends in the **gaseous state**: the (g) is not optional.",
+        text: "A simple way to compare effective nuclear charges is to knock off a + for every electron in a filled inner level — and every ionisation equation starts and ends in the **gaseous state**.",
       },
       {
         k: "def",
@@ -427,7 +427,7 @@ export const SECTIONS_A: SpecSection[] = [
       { k: "eq", eq: "Na^2+^(g) → Na^3+^(g) + e^−^        Mg^2+^(g) → Mg^3+^(g) + e^−^" },
       {
         k: "wow",
-        text: "All ionisation energies are **endothermic** — energy must go *in* to pull an electron away from the nucleus's attraction. That is why every definition says “energy required”, never “energy released”.",
+        text: "All ionisation energies are **endothermic** — energy must go *in* to pull an electron away from the nucleus's attraction. That is why every definition says “energy required”.",
       },
     ],
   },

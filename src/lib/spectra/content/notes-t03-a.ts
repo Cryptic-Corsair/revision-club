@@ -93,11 +93,11 @@ export const SECTIONS_T03_A: SpecSection[] = [
       },
       {
         k: "p",
-        text: "**Shorter bonds have greater bond strength**, due to the increased electrostatic attraction between the two nuclei and the electrons in the overlapping atomic orbitals. More shared pairs pull the nuclei closer together — so a triple bond is shorter *and* stronger than the double bond between the same two atoms, which in turn beats the single bond.",
+        text: "**Shorter bonds have greater bond strength**, due to the increased electrostatic attraction between the two nuclei and the electrons in the overlapping atomic orbitals.",
       },
       {
         k: "wow",
-        text: "One number to hold on to: there can only ever be ==one σ bond between two atoms==. Every extra shared pair is a π — that is why “double bond = σ + π” and “triple bond = σ + 2π” never has an exception.",
+        text: "There can only be ==one σ bond between two atoms== — every extra shared pair in a double or triple bond is a π bond.",
       },
       { k: "checkpoint", page: 74 },
     ],
@@ -162,7 +162,7 @@ export const SECTIONS_T03_A: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "Four, six, ten, twelve — ==incomplete octets before boron, expanded octets from phosphorus==. If a dot-and-cross “doesn't fit” eight, count the central atom's electrons before assuming you drew it wrong.",
+        text: "Four, six, ten, twelve — ==incomplete octets before boron, expanded octets from phosphorus==.",
       },
       { k: "h", text: "Dative covalent (coordinate) bonds" },
       {
@@ -172,7 +172,7 @@ export const SECTIONS_T03_A: SpecSection[] = [
       },
       {
         k: "p",
-        text: "The basic requirement is an atom with a **lone pair** of electrons, and the other atom having an orbital with **no electrons**. Once formed, the dative bond is identical to any ordinary covalent bond — only the drawing remembers where the electrons came from.",
+        text: "The basic requirement is an atom with a **lone pair** of electrons, and the other atom having an orbital with **no electrons**.",
       },
       {
         k: "worked",
@@ -199,9 +199,9 @@ export const SECTIONS_T03_A: SpecSection[] = [
         steps: [
           "CO: carbon and oxygen share **two ordinary pairs**; oxygen donates its remaining lone pair into carbon's empty orbital — the third, dative bond.",
           "AlCl~4~^−^: the chloride ion donates a **lone pair** into the empty orbital of AlCl~3~ (which has only 6 electrons around aluminium) — the fourth bond is dative.",
-          "NH~3~·BF~3~: nitrogen's lone pair donates into boron's empty orbital — N→B, the classic adduct.",
+          "NH~3~·BF~3~: nitrogen's lone pair donates into boron's empty orbital — N→B.",
         ],
-        answer: "Dative bonds: O→C in CO · Cl→Al in AlCl~4~^−^ · N→B in NH~3~·BF~3~ — every one needs a lone pair meeting an empty orbital.",
+        answer: "Dative bonds: O→C in CO · Cl→Al in AlCl~4~^−^ · N→B in NH~3~·BF~3~ — each needs a lone pair and an empty orbital.",
       },
       { k: "checkpoint", page: 79 },
     ],
@@ -261,7 +261,7 @@ export const SECTIONS_T03_A: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "Same element, same bonds, three different lattices — and the properties could not be more different: ==the hardest natural material==, a lubricant that conducts, and a one-atom sheet stronger than steel. Structure decides everything.",
+        text: "Same element, same bonding, three different lattices: ==the hardest natural material== (diamond), a lubricant that conducts (graphite), and a one-atom-thick sheet (graphene).",
       },
       { k: "checkpoint", page: 91 },
     ],
