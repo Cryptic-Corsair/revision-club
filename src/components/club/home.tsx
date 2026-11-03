@@ -92,19 +92,24 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
 
   return (
     <div>
-      {/* ————— hero: a wide tonal sheet, M3 style ————— */}
-      <section className="px-3 sm:px-5 lg:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
-        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[36px] bg-paper puff sm:rounded-[44px]">
-          <Blob color={tint("#FF922B", 14)} className="top-[-28%] right-[-12%] h-[62%] w-[44%]" />
-          <Blob
-            color={tint("#FFD43B", 22)}
-            className="bottom-[-32%] left-[-10%] h-[58%] w-[40%]"
-            style={{ animationDuration: "15s" }}
-          />
-          <DoodlePlus className="absolute top-7 left-[6%] h-5 w-5 text-mint/40" />
-          <DoodleAtom className="absolute right-[4%] bottom-[8%] hidden h-9 w-9 text-coral/30 lg:block" />
+      {/* ————— hero: full-bleed tonal stage, edge to edge ————— */}
+      <section className="relative overflow-hidden bg-paper" style={{ paddingTop: "calc(5.25rem + var(--sa-top))" }}>
+        <Blob color={tint("#FF922B", 14)} className="top-[-30%] right-[-16%] h-[85%] w-[54%]" />
+        <Blob
+          color={tint("#FFD43B", 22)}
+          className="top-[36%] right-[-9%] h-[42%] w-[26%] opacity-80"
+          style={{ animationDuration: "12s" }}
+        />
+        <Blob
+          color={tint("#FFD43B", 16)}
+          className="bottom-[-36%] left-[-14%] h-[58%] w-[36%]"
+          style={{ animationDuration: "16s" }}
+        />
+        <DoodlePlus className="absolute top-[calc(1.4rem+var(--sa-top))] left-6 hidden h-5 w-5 text-mint/40 sm:block lg:left-10" />
+        <DoodleAtom className="absolute right-[3%] bottom-[12%] hidden h-9 w-9 text-coral/30 xl:block" />
 
-          <div className="relative z-10 grid items-center gap-8 px-6 py-10 sm:px-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-4 lg:px-12 lg:py-16">
+        <div className="relative z-10">
+          <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 pb-12 pt-3 sm:px-8 sm:pb-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-6 lg:px-10 lg:pb-24 lg:pt-4">
             {/* left: words */}
             <div>
               <PopIn>
@@ -114,7 +119,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               </PopIn>
 
               <PopIn delay={0.08}>
-                <h1 className="mt-6 font-display text-[clamp(2.5rem,5.4vw,4.1rem)] leading-[1.06] font-semibold tracking-tight text-ink">
+                <h1 className="mt-6 font-display text-[clamp(2.75rem,6.5vw,4.5rem)] leading-[1.05] font-semibold tracking-tight text-ink">
                   Every spec point,{" "}
                   <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-lemon/60 px-[0.18em]">
                     made to stick.
