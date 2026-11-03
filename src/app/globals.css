@@ -130,6 +130,12 @@ html.dark {
   --color-cocoa: #140d05; /* footer — the darkest anchor of the ladder */
   --tint-base: #4f3a24;
   --band-mix: 14%; /* a touch more candy so roast bands stay distinct */
+  /* home's band ladder collapses to a strict two-step alternation
+     after dark: A = dark paper, B = the warm orange roast. The home
+     seams reference these; light and hybrid ignore them and keep
+     their own candy tints via var() fallbacks. */
+  --home-band-a: #3f2f1c;
+  --home-band-b: #684625;
   --edge: rgb(0 0 0 / 0.5);
   color-scheme: dark;
 }

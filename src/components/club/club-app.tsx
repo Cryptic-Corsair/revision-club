@@ -310,12 +310,16 @@ function Footer({
   onOpenCustomize,
   onOpenPack,
   onSearch,
+  bandFrom = "var(--color-cream)",
 }: {
   onOpenUnit: (code: string) => void;
   onOpenSticker: () => void;
   onOpenCustomize: () => void;
   onOpenPack: () => void;
   onSearch: () => void;
+  /* the surface the cocoa wave rises from — home hands in its own
+     band colour so the seam above stays continuous after dark */
+  bandFrom?: string;
 }) {
   const [booped, setBooped] = useState(false);
 
@@ -326,7 +330,11 @@ function Footer({
 
   return (
     <footer className="mt-auto">
-      <div aria-hidden className="h-[54px] bg-cream sm:h-[74px]">
+      <div
+        aria-hidden
+        className="h-[54px] sm:h-[74px]"
+        style={{ background: bandFrom }}
+      >
         <svg
           viewBox="0 0 1440 90"
           preserveAspectRatio="none"
@@ -682,6 +690,11 @@ export default function ClubApp() {
             onOpenCustomize={openCustomize}
             onOpenPack={openPack}
             onSearch={openSearch}
+            bandFrom={
+              view.kind === "home"
+                ? "var(--home-band-b, var(--color-cream))"
+                : "var(--color-cream)"
+            }
           />
         </main>
       </div>
