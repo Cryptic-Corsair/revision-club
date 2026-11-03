@@ -5,6 +5,8 @@ import { SECTIONS_T03_A } from "./content/notes-t03-a";
 import { SECTIONS_T03_B } from "./content/notes-t03-b";
 import { SECTIONS_T04_A } from "./content/notes-t04-a";
 import { SECTIONS_T04_B } from "./content/notes-t04-b";
+import { SECTIONS_T05_A } from "./content/notes-t05-a";
+import { SECTIONS_T05_B } from "./content/notes-t05-b";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · the revision-note library
@@ -64,6 +66,25 @@ export const NOTES_DOCS: NotesDoc[] = [
       },
     ],
     sections: [...SECTIONS_T04_A, ...SECTIONS_T04_B],
+  },
+  {
+    id: "wch11-t05",
+    unitCode: "WCH11",
+    topicId: "t05",
+    kicker: "Unit 1 · Topic 5 — the complete class note, spec by spec",
+    title: "Alkenes",
+    source: "the complete class note (CHSE Grade 11, Unit 1 · Topic 5 · 2020)",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual revision note for Topic 5, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every exercise from the class note that is specified in words is worked in full — no skipped lines.",
+      },
+      {
+        k: "p",
+        text: "Part **5A** builds the double bond itself — σ plus π, the sp^2^ hybrids and the 120° plan — then the alkene naming rules, the ==isomer drills== (chain, positional and geometric) and the five addition reactions with their conditions and colour changes. Part **5B** is the mechanisms: ==electrophilic addition== of HBr and Br~2~ drawn with curly arrows, the carbocation stability ladder, the bromine-water test, and addition polymerisation from repeat unit to polymer disposal.",
+      },
+    ],
+    sections: [...SECTIONS_T05_A, ...SECTIONS_T05_B],
   },
 ];
 

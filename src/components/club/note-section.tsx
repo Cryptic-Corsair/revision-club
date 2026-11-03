@@ -23,18 +23,23 @@ import {
   FigBoxesC,
   FigBoxesS,
   FigCarbonLattices,
+  FigCarbocation,
   FigDipoles,
   FigDotCross,
+  FigElecAdd,
+  FigEz,
   FigFillDemo,
   FigFillOrder,
   FigFormulaTypes,
   FigFracCol,
+  FigGeometric,
   FigIeGraph,
   FigIsomers,
   FigMassSpec,
   FigMelting,
   FigNotation,
   FigOrbitals,
+  FigPolymer,
   FigPtBlocks,
   FigNaming,
   FigRadius,
@@ -42,6 +47,7 @@ import {
   FigShapes,
   FigShielding,
   FigSigmaPi,
+  FigSp2,
   FigSpectrumBoron,
   FigSpectrumBromine,
   FigSpectrumCl2,
@@ -634,6 +640,12 @@ const WIDE_FIGS = new Set([
   "frac-col",
   "isomers",
   "radchain",
+  "sp2",
+  "geometric",
+  "ez",
+  "elecadd",
+  "carbocation",
+  "polymer",
 ]);
 
 function Figure({
@@ -733,6 +745,24 @@ function Figure({
       break;
     case "radchain":
       node = <FigRadChain accent={accent} />;
+      break;
+    case "sp2":
+      node = <FigSp2 accent={accent} />;
+      break;
+    case "geometric":
+      node = <FigGeometric accent={accent} />;
+      break;
+    case "ez":
+      node = <FigEz accent={accent} />;
+      break;
+    case "elecadd":
+      node = <FigElecAdd accent={accent} />;
+      break;
+    case "carbocation":
+      node = <FigCarbocation accent={accent} />;
+      break;
+    case "polymer":
+      node = <FigPolymer accent={accent} />;
       break;
   }
   if (!node) return null;

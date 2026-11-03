@@ -3,7 +3,7 @@
 import { useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import { RotateCcw } from "./icons";
-import { tint, shade } from "./bits";
+import { tint, shade, readableInk } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · notes figures — candy-styled SVG data pictures
@@ -1804,6 +1804,378 @@ export function FigRadChain({ accent = "#FF6B6B" }: { accent?: string }) {
 
       {stage(466, "OVERALL", PAPER)}
       <text x={236} y={471} fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₄ + Cl₂ → CH₃Cl + HCl   —   but it rarely stops there</text>
+    </svg>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Topic 5 · alkene figures — sp² hybridisation, geometric (cis–trans
+   and E–Z) isomerism, the electrophilic-addition mechanisms,
+   carbocation stability and addition polymerisation
+   ═══════════════════════════════════════════════════════════════ */
+
+/* full-headed curly arrow — an electron PAIR moves */
+function curlyPair(x: number, y: number, dx: number, dy: number, c: string) {
+  const ex = x + dx, ey = y + dy;
+  const mx = x + dx * 0.5, my = y + dy * 0.5 - 13;
+  const a = Math.atan2(ey - my, ex - mx);
+  return (
+    <g stroke={c} strokeWidth={2.4} fill="none" strokeLinecap="round">
+      <path d={`M ${x} ${y} Q ${mx} ${my} ${ex} ${ey}`} />
+      <path d={`M ${ex} ${ey} L ${ex - 10 * Math.cos(a - 0.85)} ${ey - 10 * Math.sin(a - 0.85)}`} />
+      <path d={`M ${ex} ${ey} L ${ex - 10 * Math.cos(a + 0.85)} ${ey - 10 * Math.sin(a + 0.85)}`} />
+    </g>
+  );
+}
+
+/* priority badge — the numbered dot of the E–Z ranking */
+function prioBadge(x: number, y: number, n: number, accent: string) {
+  return (
+    <g>
+      <circle cx={x} cy={y} r={11} fill={accent} stroke={INK} strokeWidth={1.6} />
+      <text x={x} y={y + 4} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={readableInk(accent)} fontFamily="var(--font-body)">{n}</text>
+    </g>
+  );
+}
+
+/* ————— 5.1 · sp² hybridisation in the C=C carbons ————— */
+
+export function FigSp2({ accent = "#FF6B6B" }: { accent?: string }) {
+  const ghost = tint(accent, 78);
+  const mid = tint(accent, 40);
+  const sOrb = (x: number, y: number, label: string) => (
+    <g>
+      <circle cx={x} cy={y} r={24} fill={ghost} stroke={FAINT} strokeWidth={2.5} />
+      <text x={x} y={y + 5} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{label}</text>
+    </g>
+  );
+  const pH = (x: number, y: number, label: string) => (
+    <g>
+      <ellipse cx={x - 25} cy={y} rx={24} ry={12} fill={ghost} stroke={FAINT} strokeWidth={2.5} />
+      <ellipse cx={x + 25} cy={y} rx={24} ry={12} fill={ghost} stroke={FAINT} strokeWidth={2.5} />
+      <text x={x} y={y + 4} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">{label}</text>
+    </g>
+  );
+  const pV = (x: number, y: number, label?: string) => (
+    <g>
+      <ellipse cx={x} cy={y - 26} rx={12} ry={24} fill={ghost} stroke={FAINT} strokeWidth={2.5} />
+      <ellipse cx={x} cy={y + 26} rx={12} ry={24} fill={ghost} stroke={FAINT} strokeWidth={2.5} />
+      {label && <text x={x + 18} y={y + 4} fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">{label}</text>}
+    </g>
+  );
+  const sp2 = (cx: number, cy: number, a: number) => (
+    <g transform={`rotate(${a}, ${cx}, ${cy})`}>
+      <ellipse cx={cx + 36} cy={cy} rx={32} ry={13} fill={mid} stroke={FAINT} strokeWidth={2} />
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 780 320" className="w-full" role="img" aria-label="sp2 hybridisation: an s and two p orbitals give three sp2 hybrids plus one leftover p orbital; in ethene the p orbitals overlap sideways to make the pi bond">
+      <text x={127} y={48} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">GROUND STATE</text>
+      <text x={387} y={48} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">HYBRIDISED</text>
+      <text x={647} y={48} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">IN ETHENE</text>
+      <line x1={258} y1={60} x2={258} y2={284} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={514} y1={60} x2={514} y2={284} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* panel 1 · an s and two p's */}
+      {sOrb(127, 110, "s")}
+      {pH(127, 200, "p")}
+      <text x={127} y={262} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">an s and two p's —</text>
+      <text x={127} y={278} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the three orbitals that hybridise</text>
+
+      {/* panel 2 · three sp² + one p */}
+      {sp2(370, 168, 0)}
+      {sp2(370, 168, 120)}
+      {sp2(370, 168, 240)}
+      <circle cx={370} cy={168} r={5} fill={INK} />
+      {pV(462, 168, "p")}
+      <text x={370} y={242} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">three sp² hybrid orbitals…</text>
+      <text x={370} y={258} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">…and one normal p orbital left over</text>
+
+      {/* panel 3 · ethene */}
+      <ellipse cx={647} cy={136} rx={40} ry={11} fill={mid} opacity={0.7} />
+      <ellipse cx={647} cy={222} rx={40} ry={11} fill={mid} opacity={0.7} />
+      <line x1={612} y1={172} x2={682} y2={172} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      <line x1={612} y1={184} x2={682} y2={184} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      <line x1={612} y1={178} x2={578} y2={138} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      <line x1={612} y1={178} x2={578} y2={218} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      <line x1={682} y1={178} x2={716} y2={138} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      <line x1={682} y1={178} x2={716} y2={218} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      <circle cx={612} cy={178} r={6.5} fill={INK} />
+      <circle cx={682} cy={178} r={6.5} fill={INK} />
+      <text x={568} y={130} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={568} y={232} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={726} y={130} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={726} y={232} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={700} y={140} fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">π</text>
+      <text x={700} y={226} fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">π</text>
+      <path d="M 596 162 A 26 26 0 0 0 596 194" fill="none" stroke={SOFT} strokeWidth={1.8} />
+      <text x={583} y={183} textAnchor="middle" fontSize="10" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">120°</text>
+      <text x={647} y={262} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">bonds at 120° — the leftover p's</text>
+      <text x={647} y={278} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">overlap sideways to add the π bond</text>
+    </svg>
+  );
+}
+
+/* ————— 5.2 · cis–trans, but-2-ene ————— */
+
+export function FigGeometric({ accent = "#FF6B6B" }: { accent?: string }) {
+  const bond = { stroke: INK, strokeWidth: 3.2, strokeLinecap: "round" as const };
+  const molecule = (lx: number, rx: number, cy: number, trans: boolean, key: string) => {
+    const mx = (lx + rx) / 2;
+    const leftTop = trans ? "H" : "CH₃";
+    const leftBot = trans ? "CH₃" : "H";
+    const rightTop = trans ? "H" : "CH₃";
+    const rightBot = trans ? "CH₃" : "H";
+    return (
+      <g key={key}>
+        <line x1={lx} y1={cy - 6} x2={rx} y2={cy - 6} {...bond} />
+        <line x1={lx} y1={cy + 6} x2={rx} y2={cy + 6} {...bond} />
+        <line x1={lx} y1={cy} x2={lx - 46} y2={cy - 46} {...bond} />
+        <line x1={lx} y1={cy} x2={lx - 46} y2={cy + 46} {...bond} />
+        <line x1={rx} y1={cy} x2={rx + 46} y2={cy - 46} {...bond} />
+        <line x1={rx} y1={cy} x2={rx + 46} y2={cy + 46} {...bond} />
+        <circle cx={lx} cy={cy} r={6.5} fill={INK} />
+        <circle cx={rx} cy={cy} r={6.5} fill={INK} />
+        <text x={lx - 60} y={cy - 50} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{leftTop}</text>
+        <text x={lx - 60} y={cy + 60} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{leftBot}</text>
+        <text x={rx + 60} y={cy - 50} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{rightTop}</text>
+        <text x={rx + 60} y={cy + 60} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{rightBot}</text>
+        <text x={mx} y={cy + 34} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={FAINT} fontFamily="var(--font-body)">locked</text>
+      </g>
+    );
+  };
+  return (
+    <svg viewBox="0 0 780 320" className="w-full" role="img" aria-label="cis-but-2-ene and trans-but-2-ene: the double bond cannot rotate, so the two shapes are different compounds">
+      <rect x={288} y={16} width={204} height={32} rx={16} fill={tint(accent, 18)} stroke={INK} strokeWidth={2} />
+      <text x={390} y={37} textAnchor="middle" fontSize="12" fontWeight="800" letterSpacing="1" fill={INK} fontFamily="var(--font-body)">C=C CANNOT ROTATE</text>
+      <line x1={390} y1={64} x2={390} y2={284} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {molecule(200, 280, 170, false, "cis")}
+      <text x={220} y={66} textAnchor="middle" fontSize="15" fontWeight="800" fill={accent} fontFamily="var(--font-body)">cis-but-2-ene</text>
+      <text x={220} y={286} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">similar groups on the SAME side</text>
+
+      {molecule(500, 580, 170, true, "trans")}
+      <text x={560} y={66} textAnchor="middle" fontSize="15" fontWeight="800" fill={accent} fontFamily="var(--font-body)">trans-but-2-ene</text>
+      <text x={560} y={286} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">similar groups ACROSS the double bond</text>
+    </svg>
+  );
+}
+
+/* ————— 5.3 · the E–Z tie-break worked example ————— */
+
+export function FigEz({ accent = "#FF6B6B" }: { accent?: string }) {
+  const bond = { stroke: INK, strokeWidth: 3.2, strokeLinecap: "round" as const };
+  const chip = (x: number, y: number, label: string, w: number) => (
+    <g>
+      <rect x={x - w / 2} y={y - 16} width={w} height={32} rx={16} fill="var(--color-paper)" stroke={INK} strokeWidth={2} />
+      <text x={x} y={y + 5} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">{label}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 780 340" className="w-full" role="img" aria-label="E-Z priority assignment for 1-chloro-2-methylbut-1-ene: chlorine wins the right carbon, the ethyl group wins the tie on the left carbon, and opposite sides means E">
+      {/* the molecule */}
+      <line x1={300} y1={175} x2={410} y2={175} {...bond} />
+      <line x1={300} y1={185} x2={410} y2={185} {...bond} />
+      <line x1={300} y1={180} x2={244} y2={128} {...bond} />
+      <line x1={300} y1={180} x2={244} y2={232} {...bond} />
+      <line x1={410} y1={180} x2={466} y2={128} {...bond} />
+      <line x1={410} y1={180} x2={466} y2={232} {...bond} />
+      <circle cx={300} cy={180} r={6.5} fill={INK} />
+      <circle cx={410} cy={180} r={6.5} fill={INK} />
+      {chip(222, 118, "CH₃", 64)}
+      {prioBadge(258, 96, 2, accent)}
+      {chip(218, 242, "C₂H₅", 72)}
+      {prioBadge(254, 264, 1, accent)}
+      {chip(490, 118, "Cl", 52)}
+      {prioBadge(452, 96, 1, accent)}
+      {chip(492, 242, "H", 44)}
+      {prioBadge(454, 264, 2, accent)}
+      <text x={222} y={86} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">② lower priority</text>
+      <text x={218} y={288} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">① higher priority</text>
+      <text x={490} y={86} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">① higher priority</text>
+      <text x={492} y={288} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">② lower priority</text>
+
+      {/* the tie-break callout */}
+      <rect x={130} y={306} width={400} height={30} rx={15} fill={tint(accent, 12)} stroke={tint(accent, 40)} strokeWidth={2} />
+      <text x={330} y={326} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">tie on the left C (C vs C) → next shell: CH₃ = H,H,H · C₂H₅ = C,H,H → ethyl wins</text>
+
+      {/* the E/Z verdict card */}
+      <rect x={570} y={84} width={186} height={200} rx={22} fill={tint(accent, 9)} stroke={tint(accent, 36)} strokeWidth={2} />
+      <text x={663} y={116} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Z · zusammen = together</text>
+      <text x={663} y={134} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">higher-priority groups on the same side</text>
+      <text x={663} y={162} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">E · entgegen = opposite</text>
+      <text x={663} y={180} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">higher-priority groups across</text>
+      <line x1={590} y1={196} x2={736} y2={196} stroke={FAINT} strokeWidth="2" strokeDasharray="4 6" />
+      <text x={663} y={220} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">here: Cl above · C₂H₅ below</text>
+      <text x={663} y={238} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">opposite sides → the E-isomer</text>
+      <text x={663} y={266} textAnchor="middle" fontSize="13" fontWeight="800" fill={accent} fontFamily="var(--font-body)">E-1-chloro-2-methylbut-1-ene</text>
+    </svg>
+  );
+}
+
+/* ————— 5.6 · the electrophilic addition mechanisms ————— */
+
+export function FigElecAdd({ accent = "#FF6B6B" }: { accent?: string }) {
+  const rowChip = (y: number, label: string, fill: string) => (
+    <g>
+      <rect x={36} y={y - 17} width={168} height={34} rx={17} fill={fill} stroke={INK} strokeWidth={2} />
+      <text x={120} y={y + 5} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1" fill={INK} fontFamily="var(--font-body)">{label}</text>
+    </g>
+  );
+  const major = (x: number, y: number, label: string, on: boolean) => (
+    <g>
+      <rect x={x - 46} y={y - 15} width={92} height={30} rx={15} fill={on ? accent : "none"} stroke={on ? INK : SOFT} strokeWidth={2} />
+      <text x={x} y={y + 5} textAnchor="middle" fontSize="12" fontWeight="800" letterSpacing="1.5" fill={on ? readableInk(accent) : SOFT} fontFamily="var(--font-body)">{label}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 880 580" className="w-full" role="img" aria-label="Electrophilic addition mechanisms: HBr to ethene via a carbocation, Br2 polarised by the pi cloud, and HBr to propene choosing the more stable carbocation">
+      <line x1={28} y1={198} x2={852} y2={198} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={28} y1={390} x2={852} y2={390} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* ————— row 1 · HBr + ethene ————— */}
+      {rowChip(100, "HBr + ETHENE", tint(accent, 22))}
+      {/* stage 1: pi attacks H, H–Br pair leaves */}
+      <text x={250} y={78} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">H₂C=CH₂</text>
+      <text x={415} y={72} fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
+      <text x={470} y={72} fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      <text x={412} y={92} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">H</text>
+      <text x={430} y={92} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">—</text>
+      <text x={452} y={92} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">Br</text>
+      <text x={505} y={78} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">+</text>
+      <text x={640} y={84} fontSize="15.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">[CH₃—CH₂]⁺</text>
+      <text x={788} y={88} fontSize="15.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">Br⁻</text>
+      <text x={640} y={106} fontSize="11" fontWeight="700" fill={accent} fontFamily="var(--font-body)">carbocation</text>
+      <circle cx={793} cy={70} r={2.4} fill={INK} /><circle cx={799} cy={66} r={2.4} fill={INK} />
+      <circle cx={793} cy={102} r={2.4} fill={INK} /><circle cx={799} cy={106} r={2.4} fill={INK} />
+      {curlyPair(310, 68, 92, 8, accent)}
+      {curlyPair(440, 84, 26, 18, accent)}
+      {t3Arrow(556, 84, 606, 84, INK)}
+      <text x={330} y={132} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the π pair bonds to the δ⁺ H — heterolytic fission of H—Br</text>
+      {/* stage 2: Br⁻ captures the carbocation */}
+      {curlyPair(776, 84, -58, 2, accent)}
+      {t3Arrow(700, 118, 700, 148, INK)}
+      <text x={640} y={172} fontSize="15.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₃—CH₂—Br</text>
+      <text x={250} y={166} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">stage 2 · Br⁻ (nucleophile) attacks the carbocation</text>
+      <text x={250} y={186} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">overall: HBr added across the double bond</text>
+
+      {/* ————— row 2 · Br₂ + ethene ————— */}
+      {rowChip(292, "Br₂ + ETHENE", tint(accent, 22))}
+      <text x={250} y={288} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">H₂C=CH₂</text>
+      <text x={418} y={264} fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">δ+</text>
+      <text x={474} y={264} fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      <text x={412} y={288} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">Br</text>
+      <text x={442} y={288} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">—</text>
+      <text x={462} y={288} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">Br</text>
+      {t3Arrow(330, 276, 400, 278, SOFT, 2.2)}
+      {t3Arrow(330, 296, 400, 294, SOFT, 2.2)}
+      <text x={250} y={330} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the π electrons repel the Br—Br pair → a dipole is induced —</text>
+      <text x={250} y={348} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">non-polar bromine becomes its own electrophile</text>
+      {t3Arrow(540, 288, 592, 288, INK)}
+      <text x={648} y={294} fontSize="15.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₂Br—CH₂Br</text>
+      <text x={648} y={316} fontSize="11" fontWeight="700" fill={accent} fontFamily="var(--font-body)">di-substituted halogenoalkane</text>
+
+      {/* ————— row 3 · HBr + propene ————— */}
+      {rowChip(486, "HBr + PROPENE", tint(accent, 22))}
+      <text x={250} y={452} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₃—CH=CH₂</text>
+      <text x={402} y={452} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">+ HBr</text>
+      {t3Arrow(510, 446, 556, 420, INK)}
+      {t3Arrow(510, 462, 556, 488, SOFT, 2.2)}
+      <text x={562} y={412} fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₃—C⁺H—CH₃</text>
+      <text x={562} y={430} fontSize="11" fontWeight="700" fill={accent} fontFamily="var(--font-body)">secondary carbocation · 2 alkyl groups</text>
+      {t3Arrow(712, 416, 748, 416, INK)}
+      <text x={758} y={421} fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₃CHBrCH₃</text>
+      {major(790, 448, "MAJOR", true)}
+      <text x={562} y={500} fontSize="14.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">CH₃—CH₂—CH₂⁺</text>
+      <text x={562} y={518} fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">primary carbocation · 1 alkyl group</text>
+      {t3Arrow(712, 504, 748, 504, SOFT, 2.2)}
+      <text x={758} y={509} fontSize="14.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">CH₃CH₂CH₂Br</text>
+      {major(790, 536, "MINOR", false)}
+      <text x={250} y={556} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the major product is the one formed via the more stable carbocation</text>
+    </svg>
+  );
+}
+
+/* ————— 5.6 · primary, secondary, tertiary carbocations ————— */
+
+export function FigCarbocation({ accent = "#FF6B6B" }: { accent?: string }) {
+  const rChip = (x: number, y: number, key: string) => (
+    <g key={key}>
+      <rect x={x - 23} y={y - 14} width={46} height={28} rx={14} fill={tint(accent, 30)} stroke={INK} strokeWidth={2} />
+      <text x={x} y={y + 5} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">R</text>
+    </g>
+  );
+  const ion = (cx: number, cy: number, up: "H" | "R", left: "H" | "R", right: "H" | "R", key: string) => (
+    <g key={key}>
+      <line x1={cx} y1={cy} x2={cx} y2={cy - 44} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      <line x1={cx} y1={cy} x2={cx - 44} y2={cy} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      <line x1={cx} y1={cy} x2={cx + 44} y2={cy} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      {up === "R" ? rChip(cx, cy - 62, `${key}-u`) : <text x={cx} y={cy - 52} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>}
+      {left === "R" ? rChip(cx - 62, cy, `${key}-l`) : <text x={cx - 62} y={cy + 5} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>}
+      {right === "R" ? rChip(cx + 62, cy, `${key}-r`) : <text x={cx + 62} y={cy + 5} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>}
+      <circle cx={cx} cy={cy} r={17} fill="var(--color-paper)" stroke={INK} strokeWidth={2.5} />
+      <text x={cx} y={cy + 5} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C⁺</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 780 300" className="w-full" role="img" aria-label="Primary, secondary and tertiary carbocations — stability increases with the number of alkyl groups">
+      <text x={127} y={48} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">PRIMARY (1°)</text>
+      <text x={387} y={48} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">SECONDARY (2°)</text>
+      <text x={647} y={48} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">TERTIARY (3°)</text>
+      <line x1={258} y1={60} x2={258} y2={216} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={514} y1={60} x2={514} y2={216} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      {ion(127, 150, "H", "H", "R", "p")}
+      {ion(387, 150, "H", "R", "R", "s")}
+      {ion(647, 150, "R", "R", "R", "t")}
+      <text x={127} y={212} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">one alkyl group</text>
+      <text x={387} y={212} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">two alkyl groups</text>
+      <text x={647} y={212} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">three alkyl groups</text>
+      {t3Arrow(120, 254, 660, 254, accent, 3)}
+      <text x={390} y={280} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">stability increases — alkyl groups are electron releasing and steady the positive charge</text>
+      <text x={700} y={30} textAnchor="end" fontSize="11.5" fontWeight="700" fill={FAINT} fontFamily="var(--font-body)">R = any alkyl group</text>
+    </svg>
+  );
+}
+
+/* ————— 5.7 · addition polymerisation ————— */
+
+export function FigPolymer({ accent = "#FF6B6B" }: { accent?: string }) {
+  const bracketL = (x: number, y: number, h: number) => (
+    <path d={`M ${x + 10} ${y} L ${x} ${y} L ${x} ${y + h} L ${x + 10} ${y + h}`} fill="none" stroke={INK} strokeWidth={3} strokeLinecap="round" />
+  );
+  const bracketR = (x: number, y: number, h: number) => (
+    <path d={`M ${x - 10} ${y} L ${x} ${y} L ${x} ${y + h} L ${x - 10} ${y + h}`} fill="none" stroke={INK} strokeWidth={3} strokeLinecap="round" />
+  );
+  const mini = (cx: number, name: string, unit: string, monomer: string, key: string) => (
+    <g key={key}>
+      <text x={cx} y={252} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">{name}</text>
+      <text x={cx} y={282} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">{unit}</text>
+      {t3Arrow(cx, 296, cx, 320, SOFT, 2.2)}
+      <text x={cx} y={342} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-mono)">{monomer}</text>
+      <text x={cx} y={362} textAnchor="middle" fontSize="11" fontWeight="700" fill={FAINT} fontFamily="var(--font-body)">restore the C=C → monomer</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 880 380" className="w-full" role="img" aria-label="Ethene polymerises to polyethene; the repeat units of polypropene, polychloroethene and polytetrafluoroethene trace back to their monomers">
+      <text x={60} y={100} fontSize="15" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">n</text>
+      <rect x={84} y={74} width={118} height={42} rx={21} fill={tint(accent, 14)} stroke={tint(accent, 42)} strokeWidth={2} />
+      <text x={143} y={101} textAnchor="middle" fontSize="15.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₂=CH₂</text>
+      {t3Arrow(230, 95, 330, 95, INK)}
+      <text x={280} y={72} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">addition polymerisation</text>
+      <line x1={338} y1={95} x2={352} y2={95} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      {bracketL(356, 68, 56)}
+      <text x={446} y={102} textAnchor="middle" fontSize="15.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">—CH₂—CH₂—</text>
+      {bracketR(536, 68, 56)}
+      <line x1={536} y1={95} x2={550} y2={95} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      <text x={560} y={118} fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">n</text>
+      <text x={446} y={152} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">polyethene — the C=C opens, the chain carries on through the brackets</text>
+      <line x1={28} y1={182} x2={852} y2={182} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <text x={440} y={212} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1" fill={SOFT} fontFamily="var(--font-body)">THE EXERCISE THREE — REPEAT UNIT → MONOMER</text>
+      <line x1={293} y1={226} x2={293} y2={366} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={587} y1={226} x2={587} y2={366} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      {mini(160, "poly(propene)", "—[CH₂—CH(CH₃)]—ₙ", "CH₂=CHCH₃", "pp")}
+      {mini(440, "poly(chloroethene)", "—[CH₂—CHCl]—ₙ", "CH₂=CHCl", "pvc")}
+      {mini(720, "poly(tetrafluoroethene)", "—[CF₂—CF₂]—ₙ", "CF₂=CF₂", "ptfe")}
     </svg>
   );
 }

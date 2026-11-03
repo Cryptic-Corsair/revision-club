@@ -38,7 +38,13 @@ export type FigureKind =
   | "naming"
   | "frac-col"
   | "isomers"
-  | "radchain";
+  | "radchain"
+  | "sp2"
+  | "geometric"
+  | "ez"
+  | "elecadd"
+  | "carbocation"
+  | "polymer";
 
 export type NotesBlock =
   | { k: "p"; text: string }
