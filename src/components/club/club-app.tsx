@@ -1,9 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  FlaskConical,
   Home as HomeIcon,
   Moon,
   Search,
@@ -45,19 +44,84 @@ type View =
   | { kind: "pack" }
   | { kind: "sticker" };
 
+/* ————— the brand mark —————
+   The site's own object, drawn at logo size: the beaker itself —
+   paper-white glass, chunky cocoa outline, coral liquid caught
+   mid-fizz, measurement ticks — the mascot's visual language
+   condensed to a mark. No tile and no pedestal (those made it read
+   as a button rather than a brand), so it stands bare on the nav
+   pill and on the cocoa footer alike, in both labs. A bubble
+   escapes the rim because something is always reacting here. */
 function LogoMark({ size = 38 }: { size?: number }) {
+  const id = useId().replace(/[^a-zA-Z0-9]/g, "");
+  const clip = `logo-clip-${id}`;
+  const body =
+    "M11 11.5 L33 11.5 L33 34.5 Q33 42.5 25 42.5 L19 42.5 Q11 42.5 11 34.5 Z";
+
   return (
-    <span
-      className="grid shrink-0 place-items-center rounded-[14px]"
-      style={{
-        width: size,
-        height: size,
-        background: "#FF6B6B",
-        boxShadow: "0 4px 0 #E8590C",
-      }}
+    <motion.span
+      aria-hidden
+      whileHover={{ scale: 1.07, rotate: -3 }}
+      whileTap={{ scale: 0.9, rotate: 2 }}
+      transition={{ type: "spring", stiffness: 380, damping: 14 }}
+      className="inline-block shrink-0"
+      style={{ width: size, height: (size * 48) / 44 }}
     >
-      <FlaskConical className="h-5 w-5 text-white" strokeWidth={2.2} />
-    </span>
+      <svg viewBox="0 0 44 48" width="100%" height="100%">
+        {/* the fizz that got away — outlined gas above the rim, one
+            coral spark chasing it */}
+        <circle
+          cx="35.5"
+          cy="4.8"
+          r="2.5"
+          fill="none"
+          stroke="#3D2B1F"
+          strokeWidth="2"
+        />
+        <circle cx="30.5" cy="3.4" r="1.2" fill="#FF6B6B" opacity="0.55" />
+
+        {/* glass body */}
+        <path d={body} fill="#FFFDF7" />
+
+        {/* liquid, mid-fizz — clipped to the glass */}
+        <clipPath id={clip} suppressHydrationWarning>
+          <path d={body} />
+        </clipPath>
+        <g clipPath={`url(#${clip})`} suppressHydrationWarning>
+          <path
+            d="M8 26.5 C 13 23.5, 19 29.5, 24 26.5 C 29 23.5, 34 27, 37 25.5 L37 45 L8 45 Z"
+            fill="#FF6B6B"
+          />
+          <ellipse cx="16.5" cy="33" rx="3.2" ry="1.8" fill="#FFFFFF" opacity="0.3" />
+          <circle cx="23" cy="35.5" r="1.5" fill="#FFFFFF" opacity="0.85" />
+          <circle cx="28" cy="38.5" r="1.1" fill="#FFFFFF" opacity="0.7" />
+        </g>
+
+        {/* outline + rim, one chunky hand */}
+        <path
+          d={body}
+          fill="none"
+          stroke="#3D2B1F"
+          strokeWidth="3.6"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M7.5 11.5 H36.5"
+          stroke="#3D2B1F"
+          strokeWidth="3.6"
+          strokeLinecap="round"
+        />
+
+        {/* measurement ticks — the mascot's signature, kept faint */}
+        <path
+          d="M28.5 31.5 h5.5 M28.5 36.5 h5.5"
+          stroke="#3D2B1F"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          opacity="0.35"
+        />
+      </svg>
+    </motion.span>
   );
 }
 
@@ -346,7 +410,7 @@ function Footer({
         <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:px-8 md:grid-cols-2 lg:flex lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-sm">
             <div className="flex items-center gap-3">
-              <LogoMark size={34} />
+              <LogoMark size={38} />
               <span className="font-display text-[17px] font-semibold tracking-tight">
                 Reaction Club
               </span>
