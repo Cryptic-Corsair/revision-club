@@ -78,6 +78,9 @@ import {
   FigEthanolWater,
   FigSolubility,
   FigMixing,
+  FigETransfer,
+  FigAgents,
+  FigDisprop,
 } from "./notes-figures";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -694,6 +697,9 @@ const WIDE_FIGS = new Set([
   "ethanol-water",
   "solubility",
   "mixing",
+  "etransfer",
+  "agents",
+  "disprop",
 ]);
 
 function Figure({
@@ -883,6 +889,15 @@ function Figure({
       break;
     case "mixing":
       node = <FigMixing accent={accent} />;
+      break;
+    case "etransfer":
+      node = <FigETransfer accent={accent} />;
+      break;
+    case "agents":
+      node = <FigAgents accent={accent} />;
+      break;
+    case "disprop":
+      node = <FigDisprop accent={accent} />;
       break;
   }
   if (!node) return null;

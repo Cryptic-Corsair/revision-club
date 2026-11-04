@@ -68,7 +68,10 @@ export type FigureKind =
   | "hydration"
   | "ethanol-water"
   | "solubility"
-  | "mixing";
+  | "mixing"
+  | "etransfer"
+  | "agents"
+  | "disprop";
 
 export type NotesBlock =
   | { k: "p"; text: string }
