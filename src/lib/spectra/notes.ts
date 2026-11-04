@@ -13,6 +13,7 @@ import { SECTIONS_T07_A } from "./content/notes-t07-a";
 import { SECTIONS_T07_B } from "./content/notes-t07-b";
 import { SECTIONS_T08_A } from "./content/notes-t08-a";
 import { SECTIONS_T08_B } from "./content/notes-t08-b";
+import { SECTIONS_T08_C } from "./content/notes-t08-c";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · the revision-note library
@@ -135,20 +136,20 @@ export const NOTES_DOCS: NotesDoc[] = [
     unitCode: "WCH12",
     topicId: "t08",
     kicker: "Unit 2 · Topic 8 — the complete class note, spec by spec",
-    title: "Redox chemistry and Groups 1 & 2",
+    title: "Redox chemistry and Groups 1, 2 and 7",
     source:
-      "the complete class note (CHSE Grade 11, Unit 2 · Topics 8A & 8B · 2021, semester 2) — Redox Chemistry and the elements of Groups 1 and 2. Part 8C (Group 7) joins when its class note arrives.",
+      "the complete class note (CHSE Grade 11, Unit 2 · Topics 8A, 8B & 8C · 2021, semester 2) — Redox Chemistry and the elements of Groups 1, 2 and 7.",
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topics 8A and 8B, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and each method keeps ==one worked example==, worked in full — the repetitive exercise drill is left to the book.",
+        text: "This is the actual revision note for Topics 8A, 8B and 8C, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and each method keeps ==one worked example==, worked in full — the repetitive exercise drill is left to the book.",
       },
       {
         k: "p",
-        text: "Part **8A** is the redox machinery itself: oxidation numbers and their rules, the Roman-numeral systematic names, electron transfer and OIL RIG, oxidising and reducing agents, disproportionation — and the complete half-equation toolkit. Part **8B** puts the s-block on the bench: the radius, ionisation-energy and reactivity trends down Groups 1 and 2, the reactions with oxygen, chlorine and water, the oxides and hydroxides with their solubility ladders, ==thermal stability== and polarising power, flame colours and the ion tests — closing with ==volumetric analysis==: standard solutions, the titration method, concentration calculations and measurement uncertainty. Part **8C** (Group 7) will join later.",
+        text: "Part **8A** is the redox machinery itself: oxidation numbers and their rules, the Roman-numeral systematic names, electron transfer and OIL RIG, oxidising and reducing agents, disproportionation — and the complete half-equation toolkit. Part **8B** puts the s-block on the bench: the radius, ionisation-energy and reactivity trends down Groups 1 and 2, the reactions with oxygen, chlorine and water, the oxides and hydroxides with their solubility ladders, ==thermal stability== and polarising power, flame colours and the ion tests — closing with ==volumetric analysis==: standard solutions, the titration method, concentration calculations and measurement uncertainty. Part **8C** brings in the halogens: the Group 7 trend lines (radius and boiling temperatures up, electronegativity and reactivity down), the displacement reactions and their colours, chlorine's three disproportionations, the halide staircase with concentrated sulfuric acid, the silver-nitrate test, the hydrogen halides — and predictions for fluorine and astatine.",
       },
     ],
-    sections: [...SECTIONS_T08_A, ...SECTIONS_T08_B],
+    sections: [...SECTIONS_T08_A, ...SECTIONS_T08_B, ...SECTIONS_T08_C],
   },
 ];
 

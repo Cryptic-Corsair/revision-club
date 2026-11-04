@@ -80,7 +80,13 @@ export type FigureKind =
   | "thermal-exp"
   | "titration-rig"
   | "std-solution"
-  | "titre-targets";
+  | "titre-targets"
+  | "g7-trends"
+  | "halogen-colours"
+  | "displacement"
+  | "cl2-fates"
+  | "h2so4-ladder"
+  | "halide-test";
 
 export type NotesBlock =
   | { k: "p"; text: string }

@@ -3873,3 +3873,570 @@ export function FigTitreTargets({ accent = "#FF6B6B" }: { accent?: string }) {
     </svg>
   );
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   8C · inorganic chemistry of Group 7
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ————— 8.24 · the group 7 trend panel ————— */
+
+export function FigG7Trends({ accent = "#FF6B6B" }: { accent?: string }) {
+  const cy = 150;
+  const atoms = [
+    { x: 130, el: "F", shells: [16, 30], r: "0.064", c: "#EFE77F", state: "gas" },
+    { x: 330, el: "Cl", shells: [14, 26, 40], r: "0.099", c: "#8FC97E", state: "gas" },
+    { x: 530, el: "Br", shells: [13, 24, 35, 47], r: "0.111", c: "#8E3B2F", state: "liquid" },
+    { x: 730, el: "I", shells: [12, 22, 32, 42, 53], r: "0.128", c: "#3B3B44", state: "solid" },
+  ];
+  return (
+    <svg viewBox="0 0 920 430" className="w-full" role="img" aria-label="Four halogen atoms, fluorine chlorine bromine and iodine, growing bigger across the panel, each with seven outer electrons on its outermost shell: the colour swatches run pale yellow gas, green gas, red-brown liquid, grey-black solid, the atomic radii climb from 0.064 to 0.128 nanometres, melting and boiling temperatures rise as electrons and London forces increase, while electronegativity, reactivity, oxidising power and electron affinity all fall">
+      <text x={460} y={30} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        group 7 — heavier molecules, weaker grip
+      </text>
+
+      {/* the rising band — mp/bp */}
+      <text x={460} y={58} textAnchor="middle" fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">
+        melting &amp; boiling temperature ↑ — more electrons per molecule, stronger London forces
+      </text>
+      {atoms.map((a) => (
+        <polygon key={`up-${a.el}`} points={`${a.x - 5},82 ${a.x + 5},82 ${a.x},72`} fill={accent} />
+      ))}
+
+      {/* the atoms — shells stack up, seven outer electrons each */}
+      {atoms.map((a) => (
+        <g key={a.el}>
+          {a.shells.map((r, i) => (
+            <circle key={r} cx={a.x} cy={cy} r={r} fill="none" stroke={i === a.shells.length - 1 ? SOFT : FAINT} strokeWidth={i === a.shells.length - 1 ? 2.2 : 1.6} />
+          ))}
+          {a.shells.slice(-1).map((r) =>
+            [0, 1, 2, 3, 4, 5, 6].map((i) => {
+              const th = ((-90 + (360 / 7) * i) * Math.PI) / 180;
+              return (
+                <circle
+                  key={`d${i}`}
+                  cx={a.x + r * Math.cos(th)}
+                  cy={cy + r * Math.sin(th)}
+                  r={3}
+                  fill={SOFT}
+                />
+              );
+            })
+          )}
+          <circle cx={a.x} cy={cy} r={13} fill={tint(accent, 26)} />
+          <text x={a.x} y={cy + 4} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+            {a.el}
+          </text>
+        </g>
+      ))}
+
+      {/* colour-at-RTP swatches + radius chips */}
+      {atoms.map((a) => (
+        <g key={`sw-${a.el}`}>
+          <rect x={a.x - 48} y={212} width={96} height={24} rx={12} fill={a.c} />
+          <text x={a.x} y={228} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={readableInk(a.c)} fontFamily="var(--font-body)">
+            {a.state}
+          </text>
+          <rect x={a.x - 48} y={250} width={96} height={26} rx={13} fill={tint(accent, 12)} />
+          <text x={a.x} y={268} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+            {a.r} nm
+          </text>
+        </g>
+      ))}
+
+      {/* the falling band — electronegativity & reactivity */}
+      {atoms.map((a) => (
+        <polygon key={`dn-${a.el}`} points={`${a.x - 5},290 ${a.x + 5},290 ${a.x},300`} fill={INK} opacity={0.75} />
+      ))}
+      <text x={460} y={330} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        electronegativity ↓ · reactivity ↓ · oxidising power ↓ · electron affinity ↓
+      </text>
+
+      <rect x={125} y={366} width={670} height={40} rx={20} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={460} y={391} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        down the group: F → Cl → Br → I (→ At) — radius ↑ · melting &amp; boiling ↑ · electronegativity ↓ · reactivity ↓
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 8.25 · the colour rows to memorise ————— */
+
+export function FigHalogenColours({ accent = "#FF6B6B" }: { accent?: string }) {
+  const cols = [
+    { x: 233, el: "F₂" },
+    { x: 421, el: "Cl₂" },
+    { x: 609, el: "Br₂" },
+    { x: 797, el: "I₂" },
+  ];
+  const rows = [
+    { y: 92, label: "the element, at RTP" },
+    { y: 152, label: "in water" },
+    { y: 212, label: "in cyclohexane" },
+  ];
+  const swatches = [
+    [
+      { c: "#EFE77F", t: "pale yellow · gas" },
+      { c: "#8FC97E", t: "green · gas" },
+      { c: "#8E3B2F", t: "red-brown · liquid" },
+      { c: "#3B3B44", t: "grey-black · solid" },
+    ],
+    [
+      { c: "#F7F5C0", t: "very pale yellow" },
+      { c: "#CFE8C6", t: "pale green" },
+      { c: "#9C4A3A", t: "reddish brown" },
+      { c: "#C7A78B", t: "pale brown" },
+    ],
+    [
+      { c: "", t: "—" },
+      { c: "#CFE8C6", t: "pale green" },
+      { c: "#9C4A3A", t: "reddish brown" },
+      { c: "#7A5FA0", t: "violet" },
+    ],
+  ];
+  return (
+    <svg viewBox="0 0 920 310" className="w-full" role="img" aria-label="A colour chart of the halogens in three rows: the elements themselves are pale yellow gas, green gas, red-brown liquid and grey-black solid; in water they are very pale yellow, pale green, reddish brown and pale brown; in the hydrocarbon solvent cyclohexane the iodine shows its true violet while the note leaves the fluorine cell blank">
+      <text x={460} y={28} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        the colours to know — element, in water, in a hydrocarbon solvent
+      </text>
+
+      {cols.map((c) => (
+        <g key={c.el}>
+          <rect x={c.x - 32} y={46} width={64} height={26} rx={13} fill={tint(accent, 22)} />
+          <text x={c.x} y={64} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+            {c.el}
+          </text>
+        </g>
+      ))}
+
+      {rows.map((r, ri) => (
+        <g key={r.label}>
+          <text x={133} y={r.y + 27} textAnchor="end" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+            {r.label}
+          </text>
+          {cols.map((c, ci) => {
+            const sw = swatches[ri][ci];
+            return (
+              <g key={`${ri}-${ci}`}>
+                {sw.c ? (
+                  <rect x={c.x - 88} y={r.y} width={176} height={44} rx={14} fill={sw.c} />
+                ) : (
+                  <rect x={c.x - 88} y={r.y} width={176} height={44} rx={14} fill="none" stroke={FAINT} strokeWidth={1.6} strokeDasharray="4 5" />
+                )}
+                <text x={c.x} y={r.y + 27} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={sw.c ? readableInk(sw.c) : SOFT} fontFamily="var(--font-body)">
+                  {sw.t}
+                </text>
+              </g>
+            );
+          })}
+        </g>
+      ))}
+
+      <rect x={150} y={272} width={620} height={32} rx={16} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={460} y={292} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        shake with the non-polar solvent: iodine's violet shows at its best — every aqueous colour is paler
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 8.25 · the displacement matrix ————— */
+
+export function FigDisplacement({ accent = "#FF6B6B" }: { accent?: string }) {
+  const GREEN = "#CFE8C6";
+  const BROWN = "#9C4A3A";
+  const PALEBROWN = "#C7A78B";
+  const cols = [
+    { x: 350, el: "KCl(aq)" },
+    { x: 550, el: "KBr(aq)" },
+    { x: 750, el: "KI(aq)" },
+  ];
+  const rows = [
+    { y: 135, el: "Cl₂ added" },
+    { y: 235, el: "Br₂ added" },
+    { y: 335, el: "I₂ added" },
+  ];
+  /* r: "no" = no reaction (the tube keeps the added halogen's own colour) · "dis" = displacement */
+  const cells = [
+    [
+      { r: "no", c: GREEN, t: "very pale green" },
+      { r: "dis", c: BROWN, t: "reddish brown", who: "Br₂" },
+      { r: "dis", c: PALEBROWN, t: "pale brown", who: "I₂", hex: true },
+    ],
+    [
+      { r: "no", c: BROWN, t: "reddish brown" },
+      { r: "no", c: BROWN, t: "reddish brown" },
+      { r: "dis", c: PALEBROWN, t: "pale brown", who: "I₂", hex: true },
+    ],
+    [
+      { r: "no", c: PALEBROWN, t: "pale brown" },
+      { r: "no", c: PALEBROWN, t: "pale brown" },
+      { r: "no", c: PALEBROWN, t: "pale brown" },
+    ],
+  ];
+  return (
+    <svg viewBox="0 0 920 440" className="w-full" role="img" aria-label="The displacement matrix: chlorine added to potassium chloride stays very pale green but displaces bromine from potassium bromide, reddish brown, and iodine from potassium iodide, pale brown and violet in cyclohexane; bromine only displaces iodide; iodine displaces nothing — a halogen oxidises the halides below it on the ladder fluorine, chlorine, bromine, iodine, never one above">
+      <text x={460} y={28} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        who displaces whom — halogen added, halide in solution
+      </text>
+
+      {cols.map((c) => (
+        <g key={c.el}>
+          <rect x={c.x - 55} y={48} width={110} height={30} rx={15} fill={tint("var(--color-ink)", 9)} />
+          <text x={c.x} y={68} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+            {c.el}
+          </text>
+        </g>
+      ))}
+      {rows.map((r) => (
+        <g key={r.el}>
+          <rect x={88} y={r.y - 15} width={104} height={30} rx={15} fill={tint(accent, 22)} />
+          <text x={140} y={r.y + 5} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+            {r.el}
+          </text>
+        </g>
+      ))}
+
+      {rows.map((r, ri) =>
+        cols.map((c, ci) => {
+          const cell = cells[ri][ci];
+          const dis = cell.r === "dis";
+          return (
+            <g key={`${ri}-${ci}`} data-cell={`${ri}-${ci}`}>
+              <rect
+                x={c.x - 100}
+                y={r.y - 38}
+                width={200}
+                height={76}
+                rx={16}
+                fill={dis ? tint(accent, 16) : tint("var(--color-ink)", 5)}
+                stroke={dis ? accent : FAINT}
+                strokeWidth={dis ? 2.2 : 1.8}
+              />
+              {dis ? (
+                <text x={c.x} y={r.y - 12} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+                  {cell.who} displaced
+                </text>
+              ) : (
+                <text x={c.x} y={r.y - 12} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+                  no change
+                </text>
+              )}
+              <circle cx={c.x - 66} cy={r.y + 12} r={6} fill={cell.c} stroke={FAINT} strokeWidth={1.2} />
+              <text x={c.x - 54} y={r.y + 16} fontSize="11" fontWeight="700" fill={dis ? INK : SOFT} fontFamily="var(--font-body)">
+                {cell.t}
+              </text>
+              {"hex" in cell && cell.hex && (
+                <text x={c.x} y={r.y + 32} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+                  violet in cyclohexane
+                </text>
+              )}
+            </g>
+          );
+        })
+      )}
+
+      <rect x={150} y={396} width={620} height={36} rx={18} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={460} y={419} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        a halogen oxidises the halides below it on the ladder F₂ &gt; Cl₂ &gt; Br₂ &gt; I₂ — never one above
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 8.26 · chlorine's three disproportionations ————— */
+
+export function FigCl2Fates({ accent = "#FF6B6B" }: { accent?: string }) {
+  const panels = [
+    {
+      x: 170,
+      head: "with water",
+      eq: "Cl₂ + H₂O → HCl + HClO",
+      top: "+1",
+      up: "HClO",
+      upSub: "chloric(I) acid",
+      down: "HCl",
+      downSub: "hydrochloric acid · −1",
+      foot: "kills bacteria — water treatment",
+    },
+    {
+      x: 460,
+      head: "with cold dilute NaOH",
+      eq: "2NaOH + Cl₂ → NaCl + NaOCl + H₂O",
+      top: "+1",
+      up: "NaOCl",
+      upSub: "chlorate(I) — the bleach",
+      down: "NaCl",
+      downSub: "chloride · −1",
+      foot: "active ingredient in household bleach",
+    },
+    {
+      x: 750,
+      head: "with hot concentrated NaOH",
+      eq: "6NaOH + 3Cl₂ → 5NaCl + NaClO₃ + 3H₂O",
+      top: "+5",
+      up: "NaClO₃",
+      upSub: "chlorate(V) · +5",
+      down: "NaCl",
+      downSub: "chloride · −1",
+      foot: "bleaching + weed killer",
+    },
+  ];
+  return (
+    <svg viewBox="0 0 920 470" className="w-full" role="img" aria-label="Three panels each with a small oxidation-number ladder for chlorine: with water and with cold dilute sodium hydroxide one chlorine atom falls to minus one, hydrochloric acid or chloride, while its partner climbs to plus one, chloric(I) acid or the chlorate(I) that is household bleach; with the hot concentrated alkali the climbing atom reaches plus five, sodium chlorate(V), used in bleaching and as a weed killer">
+      <text x={460} y={24} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        chlorine's three disproportionations — one atom falls, its partner climbs
+      </text>
+
+      {panels.map((p) => {
+        const ax = p.x - 75; // the mini oxidation-number ladder
+        const px = p.x + 55; // the product chips
+        return (
+          <g key={p.head}>
+            <rect x={p.x - 115} y={42} width={230} height={28} rx={14} fill={tint("var(--color-ink)", 7)} />
+            <text x={p.x} y={61} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+              {p.head}
+            </text>
+            <text x={p.x} y={92} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+              {p.eq}
+            </text>
+
+            {/* the ladder */}
+            <line x1={ax} y1={362} x2={ax} y2={140} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+            <polygon points={`${ax},128 ${ax - 7},146 ${ax + 7},146`} fill={INK} />
+            {[
+              { y: 160, n: p.top },
+              { y: 255, n: "0" },
+              { y: 350, n: "−1" },
+            ].map((r) => (
+              <g key={r.n}>
+                <line x1={ax - 8} y1={r.y} x2={ax + 8} y2={r.y} stroke={INK} strokeWidth={2.2} strokeLinecap="round" />
+                <text x={ax - 52} y={r.y + 4} textAnchor="end" fontSize="11" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+                  {r.n}
+                </text>
+              </g>
+            ))}
+            <rect x={p.x - 120} y={238} width={90} height={34} rx={17} fill={tint(accent, 24)} />
+            <text x={p.x - 75} y={260} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+              Cl₂
+            </text>
+
+            {/* oxidation branch — the climb */}
+            <path d={`M ${p.x - 26} 240 C ${p.x + 34} 228 ${p.x - 36} 186 ${p.x - 58} 164`} fill="none" stroke={accent} strokeWidth={3} strokeLinecap="round" />
+            <polygon points={`${px - 52},160 ${px - 70},152 ${px - 68},168`} fill={accent} />
+            <rect x={px - 55} y={144} width={110} height={32} rx={16} fill={tint(accent, 26)} />
+            <text x={px} y={165} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+              {p.up}
+            </text>
+            <text x={px} y={192} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+              {p.upSub}
+            </text>
+
+            {/* reduction branch — the fall */}
+            <path d={`M ${p.x - 26} 270 C ${p.x + 34} 282 ${p.x - 36} 324 ${p.x - 58} 346`} fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round" strokeDasharray="7 6" />
+            <polygon points={`${px - 52},350 ${px - 70},342 ${px - 68},358`} fill={INK} />
+            <rect x={px - 55} y={334} width={110} height={32} rx={16} fill={tint("var(--color-ink)", 9)} />
+            <text x={px} y={355} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+              {p.down}
+            </text>
+            <text x={px} y={382} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+              {p.downSub}
+            </text>
+
+            <text x={p.x} y={410} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+              {p.foot}
+            </text>
+          </g>
+        );
+      })}
+
+      <rect x={150} y={428} width={620} height={36} rx={18} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={460} y={451} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        chlorine starts at 0 and lands on both sides at once — disproportionation in every panel
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 8.27(i) · the halide / H₂SO₄ staircase ————— */
+
+export function FigH2so4Ladder({ accent = "#FF6B6B" }: { accent?: string }) {
+  type Chip = { t: string; w: number; fill: string; stroke?: boolean; on?: string };
+  const steps: { x: number; y: number; salt: string; note: string; chips: Chip[] }[] = [
+    {
+      x: 40,
+      y: 190,
+      salt: "NaCl(s)",
+      note: "H₂SO₄ acts only as an acid",
+      chips: [{ t: "HCl — misty fumes", w: 150, fill: PAPER, stroke: true }],
+    },
+    {
+      x: 330,
+      y: 290,
+      salt: "NaBr(s)",
+      note: "acid — and oxidising agent too",
+      chips: [
+        { t: "HBr — misty fumes", w: 150, fill: PAPER, stroke: true },
+        { t: "Br₂ — brown fumes", w: 150, fill: "#9C4A3A" },
+        { t: "SO₂ — colourless, choking", w: 196, fill: "#DFDFD9", on: "+4" },
+      ],
+    },
+    {
+      x: 620,
+      y: 390,
+      salt: "NaI(s)",
+      note: "oxidising agent — S fully reduced",
+      chips: [
+        { t: "HI — misty fumes", w: 140, fill: PAPER, stroke: true },
+        { t: "I₂ — purple fumes, black solid", w: 214, fill: "#4A2A4A" },
+        { t: "SO₂ — colourless, choking", w: 196, fill: "#DFDFD9", on: "+4" },
+        { t: "S — yellow solid", w: 150, fill: "#F0DC7E", on: "0" },
+        { t: "H₂S — rotten-egg gas", w: 176, fill: "#EAE3B8", on: "−2" },
+      ],
+    },
+  ];
+  return (
+    <svg viewBox="0 0 920 480" className="w-full" role="img" aria-label="A descending staircase of reducing power: sodium chloride with concentrated sulfuric acid gives only misty hydrogen chloride fumes, sodium bromide adds brown bromine fumes and choking sulfur dioxide, and sodium iodide adds everything — purple iodine fumes with a black solid, sulfur dioxide, a yellow sulfur precipitate and rotten-egg hydrogen sulfide, as the sulfur of the acid is dragged down from plus six to plus four, zero and minus two">
+      <text x={460} y={24} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        the sodium halides vs concentrated H₂SO₄ — the staircase of reducing power
+      </text>
+
+      {steps.map((s) => {
+        const cx = s.x + 130;
+        return (
+          <g key={s.salt}>
+            {s.chips.map((c, i) => {
+              const y = s.y - 58 - i * 30;
+              return (
+                <g key={c.t}>
+                  <rect x={cx - c.w / 2} y={y} width={c.w} height={24} rx={12} fill={c.fill} stroke={c.stroke ? FAINT : "none"} strokeWidth={1.6} />
+                  <text x={cx} y={y + 16.5} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={c.stroke ? INK : readableInk(c.fill)} fontFamily="var(--font-body)">
+                    {c.t}
+                  </text>
+                  {c.on && (
+                    <g>
+                      <circle cx={cx + c.w / 2 + 11} cy={y + 12} r={10.5} fill={tint(accent, 30)} />
+                      <text x={cx + c.w / 2 + 11} y={y + 15.5} textAnchor="middle" fontSize="9" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+                        {c.on}
+                      </text>
+                    </g>
+                  )}
+                </g>
+              );
+            })}
+            <rect x={cx - 48} y={s.y - 28} width={96} height={28} rx={14} fill={tint(accent, 24)} />
+            <text x={cx} y={s.y - 9} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+              {s.salt}
+            </text>
+            <rect x={s.x} y={s.y} width={260} height={16} rx={8} fill={tint("var(--color-ink)", 10)} />
+            <text x={cx} y={s.y + 34} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+              {s.note}
+            </text>
+          </g>
+        );
+      })}
+
+      {/* the descent — each halide reduces the acid further */}
+      <path d="M 302 198 C 316 230 322 252 328 276" fill="none" stroke={accent} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="7 6" />
+      <polygon points="336,284 320,276 328,266" fill={accent} />
+      <path d="M 592 298 C 606 330 612 352 618 376" fill="none" stroke={accent} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="7 6" />
+      <polygon points="626,384 610,376 618,366" fill={accent} />
+
+      <rect x={130} y={440} width={660} height={34} rx={17} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={460} y={461} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        reducing power of the halide climbs the staircase — and the sulfur in H₂SO₄ steps down: +6 → +4 → 0 → −2
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 8.27(ii) · the silver-nitrate halide test ————— */
+
+export function FigHalideTest({ accent = "#FF6B6B" }: { accent?: string }) {
+  const stations = [
+    {
+      x: 190,
+      ion: "Cl⁻",
+      ppt: "#F2EFE4",
+      name: "white precipitate",
+      eq: "Ag⁺ + Cl⁻ → AgCl(s)",
+      nh3: [
+        { t: "dilute NH₃ → dissolves", level: "hot" },
+        { t: "conc. NH₃ → dissolves", level: "hot" },
+      ],
+    },
+    {
+      x: 460,
+      ion: "Br⁻",
+      ppt: "#E3D3AE",
+      name: "cream precipitate",
+      eq: "Ag⁺ + Br⁻ → AgBr(s)",
+      nh3: [
+        { t: "dilute NH₃ → slightly soluble", level: "warm" },
+        { t: "conc. NH₃ → dissolves", level: "hot" },
+      ],
+    },
+    {
+      x: 730,
+      ion: "I⁻",
+      ppt: "#E2C64B",
+      name: "yellow precipitate",
+      eq: "Ag⁺ + I⁻ → AgI(s)",
+      nh3: [
+        { t: "dilute NH₃ → insoluble", level: "cold" },
+        { t: "conc. NH₃ → insoluble", level: "cold" },
+      ],
+    },
+  ];
+  const chipFill = (level: string) =>
+    level === "hot" ? tint(accent, 18) : level === "warm" ? tint(accent, 8) : tint("var(--color-ink)", 8);
+  return (
+    <svg viewBox="0 0 920 440" className="w-full" role="img" aria-label="Three test tubes after silver nitrate is added to acidified halide solutions: chloride gives a white precipitate of silver chloride that dissolves in both dilute and concentrated ammonia, bromide gives a cream precipitate slightly soluble in dilute ammonia but soluble in concentrated ammonia, and iodide gives a yellow precipitate insoluble in both — the nitric acid is added first to remove carbonate ions">
+      <text x={460} y={26} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        the halide test — silver nitrate first, then ammonia
+      </text>
+      <text x={460} y={48} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        dilute HNO₃ added first — removes other anions (especially carbonates) that would also precipitate
+      </text>
+
+      {stations.map((s) => (
+        <g key={s.ion}>
+          <rect x={s.x - 32} y={62} width={64} height={26} rx={13} fill={tint(accent, 22)} />
+          <text x={s.x} y={80} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+            {s.ion}
+          </text>
+
+          {/* the tube */}
+          <path d={`M ${s.x - 30} 120 L ${s.x - 30} 214 Q ${s.x - 30} 250 ${s.x} 250 Q ${s.x + 30} 250 ${s.x + 30} 214 L ${s.x + 30} 120 Z`} fill={tint(accent, 9)} />
+          <path d={`M ${s.x - 30} 100 L ${s.x - 30} 214 Q ${s.x - 30} 250 ${s.x} 250 Q ${s.x + 30} 250 ${s.x + 30} 214 L ${s.x + 30} 100`} fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+          <line x1={s.x - 42} y1={100} x2={s.x - 30} y2={100} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+          <line x1={s.x + 30} y1={100} x2={s.x + 42} y2={100} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+          <ellipse cx={s.x} cy={236} rx={21} ry={10} fill={s.ppt} stroke={FAINT} strokeWidth={1.4} />
+
+          <text x={s.x} y={276} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+            {s.name}
+          </text>
+          <text x={s.x} y={296} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+            {s.eq}
+          </text>
+
+          {s.nh3.map((n, i) => (
+            <g key={n.t}>
+              <rect x={s.x - 90} y={310 + i * 30} width={180} height={24} rx={12} fill={chipFill(n.level)} />
+              <text x={s.x} y={326 + i * 30} textAnchor="middle" fontSize="10" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+                {n.t}
+              </text>
+            </g>
+          ))}
+        </g>
+      ))}
+
+      <text x={460} y={390} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        AgX(s) + 2NH₃(aq) → [Ag(NH₃)₂]⁺(aq) + X⁻(aq) — dissolves AgCl and AgBr
+      </text>
+      <rect x={155} y={402} width={610} height={32} rx={16} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={460} y={422} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        white → cream → yellow down the group — and only silver iodide refuses to dissolve in ammonia
+      </text>
+    </svg>
+  );
+}

@@ -90,6 +90,12 @@ import {
   FigTitrationRig,
   FigStdSolution,
   FigTitreTargets,
+  FigG7Trends,
+  FigHalogenColours,
+  FigDisplacement,
+  FigCl2Fates,
+  FigH2so4Ladder,
+  FigHalideTest,
 } from "./notes-figures";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -718,6 +724,12 @@ const WIDE_FIGS = new Set([
   "titration-rig",
   "std-solution",
   "titre-targets",
+  "g7-trends",
+  "halogen-colours",
+  "displacement",
+  "cl2-fates",
+  "h2so4-ladder",
+  "halide-test",
 ]);
 
 function Figure({
@@ -943,6 +955,24 @@ function Figure({
       break;
     case "titre-targets":
       node = <FigTitreTargets accent={accent} />;
+      break;
+    case "g7-trends":
+      node = <FigG7Trends accent={accent} />;
+      break;
+    case "halogen-colours":
+      node = <FigHalogenColours accent={accent} />;
+      break;
+    case "displacement":
+      node = <FigDisplacement accent={accent} />;
+      break;
+    case "cl2-fates":
+      node = <FigCl2Fates accent={accent} />;
+      break;
+    case "h2so4-ladder":
+      node = <FigH2so4Ladder accent={accent} />;
+      break;
+    case "halide-test":
+      node = <FigHalideTest accent={accent} />;
       break;
   }
   if (!node) return null;
