@@ -55,7 +55,20 @@ export type FigureKind =
   | "hess-caco3"
   | "hess-butane"
   | "bond-h2o"
-  | "cooling-curve";
+  | "cooling-curve"
+  | "london"
+  | "contact"
+  | "hbond-water"
+  | "hbond-nh3"
+  | "hbond-hf"
+  | "dimer"
+  | "viscosity"
+  | "hydrides"
+  | "ice"
+  | "hydration"
+  | "ethanol-water"
+  | "solubility"
+  | "mixing";
 
 export type NotesBlock =
   | { k: "p"; text: string }

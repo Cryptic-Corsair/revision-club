@@ -2647,3 +2647,589 @@ export function FigBondH2O({ accent = "#FF6B6B" }: { accent?: string }) {
     </svg>
   );
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Topic 7 · intermolecular forces — the drawings
+   Shared molecule helpers; hydrogen bonds always dashed in the
+   section accent, covalent bonds solid ink.
+   ═══════════════════════════════════════════════════════════════ */
+
+function t7Hbond(x1: number, y1: number, x2: number, y2: number, accent: string) {
+  return (
+    <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={accent} strokeWidth={3.2} strokeDasharray="7 6" strokeLinecap="round" />
+  );
+}
+
+function t7Water(x: number, y: number, rot: number, accent: string) {
+  return (
+    <g transform={`rotate(${rot} ${x} ${y})`}>
+      <line x1={x} y1={y} x2={x - 27} y2={y + 23} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={x} y1={y} x2={x + 27} y2={y + 23} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <circle cx={x} cy={y} r={15} fill={tint(accent, 26)} stroke={INK} strokeWidth={2.4} />
+      <circle cx={x - 27} cy={y + 23} r={8.5} fill={PAPER} stroke={INK} strokeWidth={2} />
+      <circle cx={x + 27} cy={y + 23} r={8.5} fill={PAPER} stroke={INK} strokeWidth={2} />
+      {/* two lone pairs on the oxygen */}
+      <circle cx={x - 9.5} cy={y - 12.5} r={2.4} fill={INK} />
+      <circle cx={x - 4.5} cy={y - 16.5} r={2.4} fill={INK} />
+      <circle cx={x + 4.5} cy={y - 16.5} r={2.4} fill={INK} />
+      <circle cx={x + 9.5} cy={y - 12.5} r={2.4} fill={INK} />
+    </g>
+  );
+}
+
+function t7Ammonia(x: number, y: number, accent: string) {
+  return (
+    <g>
+      <line x1={x} y1={y} x2={x - 26} y2={y + 24} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={x} y1={y} x2={x + 26} y2={y + 24} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={x} y1={y} x2={x} y2={y + 32} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <circle cx={x} cy={y} r={14.5} fill={tint(accent, 26)} stroke={INK} strokeWidth={2.4} />
+      <circle cx={x - 26} cy={y + 24} r={8.5} fill={PAPER} stroke={INK} strokeWidth={2} />
+      <circle cx={x + 26} cy={y + 24} r={8.5} fill={PAPER} stroke={INK} strokeWidth={2} />
+      <circle cx={x} cy={y + 32} r={8.5} fill={PAPER} stroke={INK} strokeWidth={2} />
+      {/* the one lone pair on nitrogen */}
+      <circle cx={x - 4.5} cy={y - 16} r={2.4} fill={INK} />
+      <circle cx={x + 4.5} cy={y - 16} r={2.4} fill={INK} />
+    </g>
+  );
+}
+
+/* ————— 7.1 · the flickering dipole and its induced neighbour ————— */
+
+export function FigLondon({ accent = "#FF6B6B" }: { accent?: string }) {
+  const cloud = tint(accent, 30);
+  const shell = tint(accent, 74);
+  const Molecule = ({ x, y, shift }: { x: number; y: number; shift: number }) => (
+    <g>
+      <circle cx={x} cy={y} r={34} fill={shell} stroke={INK} strokeWidth={2.4} />
+      <ellipse cx={x + shift} cy={y} rx={20} ry={27} fill={cloud} opacity={0.85} />
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 780 300" className="w-full" role="img" aria-label="An instantaneous dipole in one molecule inducing the opposite dipole in its neighbour; the two attract">
+      {/* pair one — the teaching pair */}
+      <Molecule x={150} y={104} shift={-11} />
+      <Molecule x={330} y={104} shift={11} />
+      <text x={112} y={62} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      <text x={188} y={62} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
+      <text x={296} y={62} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      <text x={368} y={62} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
+      <line x1={252} y1={104} x2={228} y2={104} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={228} y1={104} x2={236} y2={97} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={228} y1={104} x2={236} y2={111} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <text x={240} y={172} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">opposite sign — the pair attracts</text>
+      <text x={150} y={190} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">instantaneous dipole</text>
+      <text x={330} y={190} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">induced dipole</text>
+
+      {/* pair two — and so on through the liquid */}
+      <Molecule x={520} y={104} shift={-11} />
+      <Molecule x={700} y={104} shift={11} />
+      <line x1={622} y1={104} x2={598} y2={104} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={598} y1={104} x2={606} y2={97} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={598} y1={104} x2={606} y2={111} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <text x={482} y={62} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      <text x={558} y={62} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
+      <text x={666} y={62} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      <text x={738} y={62} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
+
+      {/* the flicker: same pair a moment later */}
+      <Molecule x={240} y={248} shift={11} />
+      <Molecule x={420} y={248} shift={-11} />
+      <text x={150} y={254} fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">…a moment later, everywhere:</text>
+      <text x={330} y={292} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the dipoles keep forming, vanishing and re-forming</text>
+    </svg>
+  );
+}
+
+/* ————— 7.5 · points of contact — methane vs hexane ————— */
+
+export function FigContact({ accent = "#FF6B6B" }: { accent?: string }) {
+  const blob = tint(accent, 20);
+  const chip = (x: number, y: number, label: string, w: number) => (
+    <g>
+      <rect x={x - w / 2} y={y - 15} width={w} height={30} rx={15} fill={blob} stroke={INK} strokeWidth={2} />
+      <text x={x} y={y + 5} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{label}</text>
+    </g>
+  );
+  const methane = (x: number, y: number) => (
+    <g>
+      <circle cx={x} cy={y} r={26} fill={blob} stroke={INK} strokeWidth={2.2} />
+      <circle cx={x} cy={y} r={8} fill={INK} />
+      {([[-24, -24], [24, -24], [-24, 24], [24, 24]] as [number, number][]).map(([dx, dy], i) => (
+        <g key={i}>
+          <line x1={x + dx * 0.42} y1={y + dy * 0.42} x2={x + dx} y2={y + dy} stroke={INK} strokeWidth={2.2} strokeLinecap="round" />
+          <circle cx={x + dx} cy={y + dy} r={6} fill={PAPER} stroke={INK} strokeWidth={1.8} />
+        </g>
+      ))}
+    </g>
+  );
+  const chain = (x: number, y: number, n: number) => {
+    const seg = 26;
+    const pts: [number, number][] = [];
+    for (let i = 0; i < n; i++) pts.push([x + i * seg, y + (i % 2 === 0 ? -8 : 8)]);
+    return (
+      <g>
+        <rect x={x - 20} y={y - 26} width={n * seg + 6} height={52} rx={26} fill="transparent" stroke={FAINT} strokeWidth={1.6} />
+        {pts.slice(0, -1).map(([px, py], i) => (
+          <line key={i} x1={px} y1={py} x2={pts[i + 1][0]} y2={pts[i + 1][1]} stroke={INK} strokeWidth={2.4} strokeLinecap="round" />
+        ))}
+        {pts.map(([px, py], i) => (
+          <circle key={`c${i}`} cx={px} cy={py} r={7.5} fill={PAPER} stroke={INK} strokeWidth={2} />
+        ))}
+      </g>
+    );
+  };
+  return (
+    <svg viewBox="0 0 920 330" className="w-full" role="img" aria-label="Two methane molecules touch at one point; two hexane chains lie alongside each other with many points of contact">
+      {/* methane — one contact */}
+      {methane(180, 130)}
+      {methane(330, 130)}
+      <line x1={286} y1={130} x2={226} y2={130} stroke={accent} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="6 6" />
+      <text x={255} y={196} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">one point of contact</text>
+      <text x={255} y={218} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">fewer contact points —</text>
+      <text x={255} y={236} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">weaker London forces</text>
+
+      {/* hexane — many contacts */}
+      {chain(560, 108, 6)}
+      {chain(560, 176, 6)}
+      {[[566, 142], [626, 142], [686, 142], [746, 142]].map(([x, y], i) => (
+        <line key={i} x1={x + 14} y1={y} x2={x - 14} y2={y} stroke={accent} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="6 6" />
+      ))}
+      <text x={660} y={218} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">many points of contact</text>
+      <text x={660} y={240} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">more contact — stronger London forces</text>
+
+      {chip(255, 292, "CH₄ · small sphere", 190)}
+      {chip(660, 292, "C₆H₁₄ · long chain", 200)}
+    </svg>
+  );
+}
+
+/* ————— 7.2 · hydrogen bonding in water ————— */
+
+export function FigHbondWater({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 760 340" className="w-full" role="img" aria-label="Three water molecules: dashed hydrogen bonds from an oxygen lone pair to a hydrogen of the neighbour, delta minus on oxygen and delta plus on hydrogen">
+      {/* central water */}
+      {t7Water(360, 170, 0, accent)}
+      <text x={332} y={150} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      <text x={416} y={218} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
+      {/* neighbour upper-right: its H points down-left at the central lone pair */}
+      {t7Water(586, 84, 138, accent)}
+      <text x={620} y={70} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      {t7Hbond(400, 152, 512, 128, accent)}
+      <text x={452} y={116} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">hydrogen bond</text>
+      {/* neighbour lower-left: receives the central water's H */}
+      {t7Water(130, 258, -42, accent)}
+      <text x={92} y={236} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      {t7Hbond(340, 200, 226, 246, accent)}
+      <text x={168} y={316} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">two lone pairs → water donates two</text>
+      <text x={168} y={334} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">and accepts two — up to four bonds</text>
+    </svg>
+  );
+}
+
+/* ————— 7.2 · hydrogen bonding in ammonia ————— */
+
+export function FigHbondNh3({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 720 250" className="w-full" role="img" aria-label="Two ammonia molecules: the lone pair on one nitrogen attracts a delta-plus hydrogen of the neighbour, labelled hydrogen bond and lone pair">
+      {t7Ammonia(220, 120, accent)}
+      {t7Ammonia(500, 120, accent)}
+      <text x={220} y={88} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Nδ−</text>
+      <text x={500} y={88} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Nδ−</text>
+      <text x={292} y={182} fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Hδ+</text>
+      {t7Hbond(252, 102, 472, 132, accent)}
+      <text x={362} y={96} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">hydrogen bond</text>
+      <text x={168} y={186} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">lone pair</text>
+      <line x1={196} y1={172} x2={212} y2={136} stroke={INK} strokeWidth={2} strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/* ————— 7.2 · the zig-zag (HF)n chain in the solid ————— */
+
+export function FigHbondHf({ accent = "#FF6B6B" }: { accent?: string }) {
+  const F = (x: number, y: number, k: string) => (
+    <g key={k}>
+      <circle cx={x} cy={y} r={15} fill={tint(accent, 30)} stroke={INK} strokeWidth={2.4} />
+      <text x={x} y={y + 5} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">F</text>
+      <text x={x - 4} y={y - 22} fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+    </g>
+  );
+  const H = (x: number, y: number, k: string) => (
+    <g key={k}>
+      <circle cx={x} cy={y} r={9} fill={PAPER} stroke={INK} strokeWidth={2.2} />
+      <text x={x} y={y + 4} textAnchor="middle" fontSize="11" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={x + 4} y={y - 16} fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 720 240" className="w-full" role="img" aria-label="Hydrogen fluoride solid: a zig-zag chain of F covalently bonded to H, each H hydrogen bonded to the next F">
+      {/* covalent F—H bonds (solid) */}
+      <line x1={130} y1={186} x2={196} y2={110} stroke={INK} strokeWidth={2.8} strokeLinecap="round" />
+      <line x1={266} y1={172} x2={332} y2={96} stroke={INK} strokeWidth={2.8} strokeLinecap="round" />
+      <line x1={402} y1={186} x2={468} y2={110} stroke={INK} strokeWidth={2.8} strokeLinecap="round" />
+      {/* hydrogen bonds (dashed) */}
+      {t7Hbond(205, 118, 252, 160, accent)}
+      {t7Hbond(341, 104, 388, 160, accent)}
+      {t7Hbond(477, 118, 524, 160, accent)}
+      {F(130, 186, "f1")}
+      {H(196, 110, "h1")}
+      {F(266, 172, "f2")}
+      {H(332, 96, "h2")}
+      {F(402, 186, "f3")}
+      {H(468, 110, "h3")}
+      {F(538, 172, "f4")}
+      <text x={320} y={226} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">solid HF — one long zig-zag chain, H bond angle ≈ 134°</text>
+    </svg>
+  );
+}
+
+/* ————— 7.4 · the ethanoic acid dimer ————— */
+
+export function FigDimer({ accent = "#FF6B6B" }: { accent?: string }) {
+  const lab = (x: number, y: number, t: string, s = 13) => (
+    <text x={x} y={y} textAnchor="middle" fontSize={s} fontWeight="800" fill={INK} fontFamily="var(--font-body)">{t}</text>
+  );
+  const bond = (x1: number, y1: number, x2: number, y2: number) => (
+    <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+  );
+  return (
+    <svg viewBox="0 0 720 330" className="w-full" role="img" aria-label="Two ethanoic acid molecules face each other; two dashed hydrogen bonds run from each O-H hydrogen to the carbonyl oxygen of the other molecule, closing a ring">
+      {/* left molecule: CH3 · C(=O) · O–H */}
+      {lab(238, 96, "O")}
+      <text x={238} y={62} textAnchor="middle" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">··</text>
+      <line x1={234} y1={106} x2={234} y2={134} stroke={INK} strokeWidth={2.6} />
+      <line x1={244} y1={106} x2={244} y2={134} stroke={INK} strokeWidth={2.6} />
+      {lab(238, 160, "C")}
+      {bond(226, 170, 168, 208)}
+      {lab(146, 224, "C")}
+      {bond(146, 208, 110, 186)} {lab(102, 176, "H")}
+      {bond(146, 240, 110, 262)} {lab(102, 278, "H")}
+      {bond(146, 224, 182, 262)} {lab(192, 278, "H")}
+      {bond(250, 168, 316, 202)}
+      {lab(330, 212, "O")}
+      <text x={348} y={196} fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">··</text>
+      {bond(344, 220, 390, 244)}
+      {lab(402, 254, "H")}
+
+      {/* right molecule: mirrored */}
+      {lab(482, 96, "O")}
+      <text x={482} y={62} textAnchor="middle" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">··</text>
+      <line x1={478} y1={106} x2={478} y2={134} stroke={INK} strokeWidth={2.6} />
+      <line x1={488} y1={106} x2={488} y2={134} stroke={INK} strokeWidth={2.6} />
+      {lab(482, 160, "C")}
+      {bond(494, 170, 552, 208)}
+      {lab(574, 224, "C")}
+      {bond(574, 208, 610, 186)} {lab(618, 176, "H")}
+      {bond(574, 240, 610, 262)} {lab(618, 278, "H")}
+      {bond(574, 224, 538, 262)} {lab(528, 278, "H")}
+      {bond(470, 168, 404, 202)}
+      {lab(390, 212, "O")}
+      <text x={408} y={230} fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">··</text>
+      {bond(376, 220, 330, 244)}
+      {lab(318, 254, "H")}
+
+      {/* the two hydrogen bonds: each O–H hydrogen to the other
+          molecule's carbonyl oxygen — ring sides, never crossing */}
+      {t7Hbond(398, 242, 474, 118, accent)}
+      {t7Hbond(322, 242, 246, 118, accent)}
+      <text x={360} y={54} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">two hydrogen bonds close the ring</text>
+      <text x={360} y={306} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the (CH₃COOH)₂ dimer — held as one unit in the solvent</text>
+    </svg>
+  );
+}
+
+/* ————— 7.5 · more –OH groups, thicker pour ————— */
+
+export function FigViscosity({ accent = "#FF6B6B" }: { accent?: string }) {
+  const cards = [
+    { name: "propan-1-ol", f: "CH₃CH₂CH₂OH", oh: 1 },
+    { name: "propan-1,2-diol", f: "CH₃CH(OH)CH₂OH", oh: 2 },
+    { name: "propan-1,2,3-triol", f: "CH₂(OH)CH(OH)CH₂OH", oh: 3 },
+  ];
+  return (
+    <svg viewBox="0 0 880 240" className="w-full" role="img" aria-label="Propan-1-ol, propan-1,2-diol and propan-1,2,3-triol with an increasing viscosity arrow; each extra OH group adds hydrogen bonds">
+      {cards.map((c, i) => {
+        const x = 150 + i * 290;
+        return (
+          <g key={c.name}>
+            <rect x={x - 132} y={26} width={264} height={124} rx={22} fill={tint(accent, 12)} stroke={tint(accent, 42)} strokeWidth={2} />
+            <text x={x} y={56} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{c.name}</text>
+            <text x={x} y={86} textAnchor="middle" fontSize="13" fontWeight="700" fill={SOFT} fontFamily="var(--font-mono)">{c.f}</text>
+            {Array.from({ length: 3 }).map((_, d) => (
+              <circle key={d} cx={x - 24 + d * 24} cy={116} r={7} fill={d < c.oh ? accent : "transparent"} stroke={d < c.oh ? accent : FAINT} strokeWidth={2} />
+            ))}
+          </g>
+        );
+      })}
+      <line x1={120} y1={196} x2={760} y2={196} stroke={INK} strokeWidth={2.8} strokeLinecap="round" />
+      <polygon points="760,196 746,189 746,203" fill={INK} />
+      <text x={440} y={222} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">increasing viscosity — more hydrogen bonds per molecule</text>
+    </svg>
+  );
+}
+
+/* ————— 7.5 · boiling temperatures of the hydrides ————— */
+
+export function FigHydrides({ accent = "#FF6B6B" }: { accent?: string }) {
+  void accent;
+  const w = 920;
+  const h = 380;
+  const pad = { l: 56, r: 24, t: 24, b: 44 };
+  const px = (p: number) => pad.l + ((p - 1) / 4) * (w - pad.l - pad.r);
+  const py = (v: number) => h - pad.b - ((v + 200) / 350) * (h - pad.t - pad.b);
+  const groups: { pts: [number, number, string][]; hot?: boolean[] }[] = [
+    { pts: [[2, -162, "CH₄"], [3, -112, "SiH₄"], [4, -88, "GeH₄"], [5, -52, "SnH₄"]] },
+    { pts: [[2, -33, "NH₃"], [3, -88, "PH₃"], [4, -62, "AsH₃"], [5, -17, "SbH₃"]], hot: [true, false, false, false] },
+    { pts: [[2, 100, "H₂O"], [3, -60, "H₂S"], [4, -41, "H₂Se"], [5, -2, "H₂Te"]], hot: [true, false, false, false] },
+    { pts: [[2, 20, "HF"], [3, -85, "HCl"], [4, -67, "HBr"], [5, -35, "HI"]], hot: [true, false, false, false] },
+  ];
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="Boiling temperature against period for the group 4, 5, 6 and 7 hydrides: water, ammonia and hydrogen fluoride sit far above the trend lines at period 2, then every series climbs steadily as the electron cloud grows">
+      {/* gridlines + y ticks */}
+      {[-200, -150, -100, -50, 0, 50, 100, 150].map((v) => (
+        <g key={v}>
+          <line x1={pad.l} y1={py(v)} x2={w - pad.r} y2={py(v)} stroke={FAINT} strokeWidth={1.2} strokeDasharray="3 7" />
+          <text x={pad.l - 8} y={py(v) + 4} textAnchor="end" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{v}</text>
+        </g>
+      ))}
+      <line x1={pad.l} y1={h - pad.b} x2={w - pad.r} y2={h - pad.b} stroke={INK} strokeWidth="3" strokeLinecap="round" />
+      <line x1={pad.l} y1={pad.t} x2={pad.l} y2={h - pad.b} stroke={INK} strokeWidth="3" strokeLinecap="round" />
+      {[1, 2, 3, 4, 5].map((p) => (
+        <text key={p} x={px(p)} y={h - pad.b + 20} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)">{p}</text>
+      ))}
+      <text x={(w + pad.l) / 2} y={h - 6} textAnchor="middle" fontSize="13" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Period</text>
+      <text x={14} y={(h - pad.b + pad.t) / 2} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform={`rotate(-90 14 ${(h - pad.b + pad.t) / 2})`}>Boiling temperature (°C)</text>
+
+      {groups.map((g, gi) => (
+        <g key={gi}>
+          <polyline
+            points={g.pts.map(([p, v]) => `${px(p)},${py(v)}`).join(" ")}
+            fill="none"
+            stroke={INK}
+            strokeWidth={2.6}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            opacity={0.75}
+          />
+          {g.pts.map(([p, v, name], i) => {
+            const hot = g.hot?.[i];
+            const dy = hot ? -12 : gi === 0 ? 20 : gi === 1 ? -14 : gi === 2 ? -14 : 20;
+            const dx = gi === 1 ? 14 : gi === 3 ? -14 : 0;
+            return (
+              <g key={name}>
+                {hot && <circle cx={px(p)} cy={py(v)} r={11} fill={tint(accent, 26)} stroke={accent} strokeWidth={2.4} />}
+                <circle cx={px(p)} cy={py(v)} r={hot ? 5.5 : 4.5} fill={hot ? accent : INK} />
+                <text
+                  x={px(p) + dx}
+                  y={py(v) + dy}
+                  textAnchor="middle"
+                  fontSize="12"
+                  fontWeight="800"
+                  fill={hot ? accent : SOFT}
+                  fontFamily="var(--font-body)"
+                >
+                  {name}
+                </text>
+              </g>
+            );
+          })}
+        </g>
+      ))}
+      <text x={px(2)} y={py(100) - 26} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">100 °C</text>
+      <text x={px(2) + 26} y={py(20) - 14} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">20 °C</text>
+      <text x={px(2) + 24} y={py(-33) + 26} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">−33 °C</text>
+      <text x={px(4) + 10} y={py(-160) + 24} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">every series climbs as the electron cloud grows</text>
+    </svg>
+  );
+}
+
+/* ————— 7.3 · ice rings vs liquid water ————— */
+
+export function FigIce({ accent = "#FF6B6B" }: { accent?: string }) {
+  const ring = (cx: number, cy: number, r: number) => {
+    const waters: [number, number][] = [];
+    for (let i = 0; i < 6; i++) {
+      const a = (Math.PI / 3) * i - Math.PI / 6;
+      waters.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]);
+    }
+    return waters;
+  };
+  const hex = ring(200, 158, 74);
+  return (
+    <svg viewBox="0 0 760 350" className="w-full" role="img" aria-label="Ice: water molecules in open rings of six; liquid water: the same molecules packed closer with bonds constantly breaking and re-forming">
+      {/* ice */}
+      <circle cx={200} cy={158} r={122} fill={tint(accent, 88)} stroke={FAINT} strokeWidth={2} />
+      {hex.map(([x, y], i) => {
+        const [nx, ny] = hex[(i + 1) % 6];
+        return <line key={i} x1={x} y1={y} x2={nx} y2={ny} stroke={accent} strokeWidth={2.6} strokeDasharray="6 6" strokeLinecap="round" />;
+      })}
+      {hex.map(([x, y], i) => (
+        <g key={`w${i}`}>
+          {t7Water(x, y, i * 60 + 30, accent)}
+        </g>
+      ))}
+      <text x={200} y={316} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Ice — hydrogen bonds are stable</text>
+
+      {/* liquid */}
+      <circle cx={560} cy={158} r={132} fill={tint(accent, 88)} stroke={FAINT} strokeWidth={2} />
+      {([[490, 100], [560, 88], [630, 102], [476, 168], [546, 152], [620, 164], [498, 232], [574, 222], [638, 226], [544, 268]] as [number, number][]).map(([x, y], i) => (
+        <g key={`l${i}`}>
+          {i > 0 && i % 2 === 0 && t7Hbond(x - 14, y - 6, x - 46, y - 34, accent)}
+          {t7Water(x, y, (i * 47) % 360, accent)}
+        </g>
+      ))}
+      <text x={560} y={316} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Liquid water — bonds constantly break and re-form</text>
+      <text x={200} y={46} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">rings of six — open space inside</text>
+      <text x={560} y={46} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">rings collapse — molecules sit closer</text>
+    </svg>
+  );
+}
+
+/* ————— 7.6 · hydration of the ions ————— */
+
+export function FigHydration({ accent = "#FF6B6B" }: { accent?: string }) {
+  const ion = (x: number, y: number, positive: boolean, k: string) => (
+    <g key={k}>
+      <circle cx={x} cy={y} r={15} fill={positive ? tint("#F59F00", 30) : tint("#9775FA", 30)} stroke={INK} strokeWidth={2.2} />
+      <text x={x} y={y + 5} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{positive ? "+" : "−"}</text>
+    </g>
+  );
+  const miniWater = (x: number, y: number, rot: number, accent2: string) => (
+    <g transform={`rotate(${rot} ${x} ${y})`}>
+      <circle cx={x} cy={y} r={10.5} fill={tint(accent2, 24)} stroke={INK} strokeWidth={1.8} />
+      <circle cx={x - 9} cy={y + 11} r={5} fill={PAPER} stroke={INK} strokeWidth={1.5} />
+      <circle cx={x + 9} cy={y + 11} r={5} fill={PAPER} stroke={INK} strokeWidth={1.5} />
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 760 390" className="w-full" role="img" aria-label="Sodium chloride lattice at the top; below, the separated ions each surrounded by water molecules — oxygen delta minus facing the sodium, hydrogens delta plus facing the chloride">
+      {/* the lattice */}
+      {([[330, 60], [386, 60], [442, 60], [330, 116], [386, 116], [442, 116], [330, 172], [386, 172], [442, 172]] as [number, number][]).map(([x, y], i) => (
+        ion(x, y, (Math.floor(i / 3) + i) % 2 === 0, `lat${i}`)
+      ))}
+      <text x={386} y={214} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the lattice — held by strong electrostatic attraction</text>
+
+      {t3Arrow(330, 208, 240, 262, FAINT, 3)}
+      {t3Arrow(442, 208, 530, 262, FAINT, 3)}
+
+      {/* Na+ hydrated: O faces the ion */}
+      {ion(240, 320, true, "na")}
+      {([[0, -40], [34, -20], [34, 20], [0, 40], [-34, 20], [-34, -20]] as [number, number][]).map(([dx, dy], i) => (
+        <g key={`nw${i}`}>{miniWater(240 + dx, 320 + dy, Math.atan2(-dy, -dx) * (180 / Math.PI) + 90, accent)}</g>
+      ))}
+      <text x={240} y={382} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Na⁺ — Oδ− turns toward it</text>
+
+      {/* Cl− hydrated: H faces the ion */}
+      {ion(530, 320, false, "cl")}
+      {([[0, -40], [34, -20], [34, 20], [0, 40], [-34, 20], [-34, -20]] as [number, number][]).map(([dx, dy], i) => (
+        <g key={`cw${i}`}>{miniWater(530 + dx, 320 + dy, Math.atan2(dy, dx) * (180 / Math.PI) - 90, accent)}</g>
+      ))}
+      <text x={530} y={382} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cl⁻ — Hδ+ turns toward it</text>
+    </svg>
+  );
+}
+
+/* ————— 7.6 · ethanol meets water ————— */
+
+export function FigEthanolWater({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 700 240" className="w-full" role="img" aria-label="Ethanol and water: a dashed hydrogen bond from the ethanol oxygen lone pair to a water hydrogen, labelled hydrogen bond and lone pair">
+      <text x={90} y={128} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">CH₃CH₂</text>
+      <text x={218} y={132} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Oδ−</text>
+      <circle cx={244} cy={112} r={2.4} fill={INK} />
+      <circle cx={251} cy={105} r={2.4} fill={INK} />
+      <line x1={150} y1={122} x2={192} y2={126} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={244} y1={124} x2={286} y2={120} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <text x={296} y={126} fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Hδ+</text>
+      {t7Hbond(330, 120, 418, 120, accent)}
+      <text x={374} y={102} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">hydrogen bond</text>
+      <text x={452} y={126} fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Hδ+</text>
+      <line x1={486} y1={122} x2={528} y2={126} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <text x={556} y={132} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Oδ−</text>
+      <line x1={586} y1={124} x2={628} y2={120} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <text x={638} y={126} fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Hδ+</text>
+      <text x={252} y={186} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">lone pair</text>
+      <line x1={258} y1={168} x2={248} y2={140} stroke={INK} strokeWidth={2} strokeLinecap="round" />
+      <text x={180} y={62} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">ethanol</text>
+      <text x={556} y={62} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">water</text>
+    </svg>
+  );
+}
+
+/* ————— 7.6 · the non-polar share grows ————— */
+
+export function FigSolubility({ accent = "#FF6B6B" }: { accent?: string }) {
+  const cards = [
+    { name: "methanol", f: "CH₃OH", c: 1, note: "very soluble in water" },
+    { name: "butanol", f: "CH₃(CH₂)₃OH", c: 4, note: "slightly soluble in water" },
+    { name: "octanol", f: "CH₃(CH₂)₇OH", c: 8, note: "very insoluble in water" },
+  ];
+  return (
+    <svg viewBox="0 0 920 300" className="w-full" role="img" aria-label="Methanol, butanol and octanol with the non-polar hydrocarbon share growing: solubility falls as the chain lengthens">
+      {cards.map((c, i) => {
+        const x = 160 + i * 300;
+        return (
+          <g key={c.name}>
+            <rect x={x - 138} y={30} width={276} height={188} rx={24} fill={tint(accent, 10)} stroke={tint(accent, 40)} strokeWidth={2} />
+            <text x={x} y={62} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{c.name}</text>
+            <text x={x} y={92} textAnchor="middle" fontSize="13.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-mono)">{c.f}</text>
+            {/* the chain of carbons vs the OH */}
+            {Array.from({ length: c.c }).map((_, d) => (
+              <circle key={d} cx={x - c.c * 13 + 6 + d * 26} cy={128} r={9} fill={FAINT} stroke={INK} strokeWidth={1.8} />
+            ))}
+            <text x={x + c.c * 13 + 4} y={134} fontSize="13" fontWeight="800" fill={accent} fontFamily="var(--font-body)">OH</text>
+            {c.c > 1 && (
+              <>
+                <path d={`M ${x - c.c * 13} 150 Q ${x} 168 ${x + c.c * 13 - 6} 150`} fill="none" stroke={INK} strokeWidth={1.8} />
+                <text x={x} y={188} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Non-polar</text>
+              </>
+            )}
+            <text x={x} y={238} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{c.note}</text>
+          </g>
+        );
+      })}
+      <line x1={90} y1={272} x2={830} y2={272} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <polygon points="830,272 816,265 816,279" fill={INK} />
+      <text x={460} y={292} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">solubility in water falls as the non-polar share grows</text>
+    </svg>
+  );
+}
+
+/* ————— 7.6 · two layers vs complete mixing ————— */
+
+export function FigMixing({ accent = "#FF6B6B" }: { accent?: string }) {
+  const blob = (x: number, y: number, dark: boolean, k: string) => (
+    <ellipse key={k} cx={x} cy={y} rx={13} ry={8.5} fill={dark ? FAINT : "transparent"} stroke={dark ? INK : SOFT} strokeWidth={1.8} />
+  );
+  return (
+    <svg viewBox="0 0 920 340" className="w-full" role="img" aria-label="A beaker of vegetable oil over water in two layers; beside it hexane and octane molecules mixing completely">
+      {/* water + oil layers */}
+      <g>
+        <path d="M 120 84 L 120 288 Q 120 306 138 306 L 274 306 Q 292 306 292 288 L 292 84" fill="none" stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        <rect x={124} y={104} width={164} height={70} rx={6} fill="rgb(245 159 0 / 0.30)" />
+        <rect x={124} y={178} width={164} height={122} rx={6} fill="rgb(18 184 134 / 0.22)" />
+        <line x1={124} y1={174} x2={288} y2={174} stroke={SOFT} strokeWidth={2} strokeDasharray="5 5" />
+        <text x={306} y={136} fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">oil layer</text>
+        <text x={306} y={156} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">non-polar — no H-bonds to offer</text>
+        <text x={306} y={210} fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">water layer</text>
+        <text x={306} y={230} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">hydrogen bonds hold it together</text>
+        <text x={206} y={70} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">two immiscible layers</text>
+      </g>
+
+      {/* hexane + octane mix */}
+      <g>
+        <rect x={560} y={84} width={300} height={222} rx={24} fill={tint(accent, 88)} stroke={FAINT} strokeWidth={2} />
+        {([[600, 130, 0], [668, 112, 1], [738, 128, 0], [806, 116, 1], [588, 186, 1], [658, 172, 0], [730, 190, 1], [800, 180, 0], [620, 244, 0], [692, 234, 1], [762, 250, 0], [822, 240, 1]] as [number, number, number][]).map(([x, y, d], i) => (
+          blob(x, y, d === 1, `m${i}`)
+        ))}
+        {([[600, 130, 668, 112], [668, 112, 738, 128], [658, 172, 730, 190], [620, 244, 692, 234], [692, 234, 762, 250], [588, 186, 658, 172]] as [number, number, number, number][]).map(([x1, y1, x2, y2], i) => (
+          <line key={`lk${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={accent} strokeWidth={2} strokeDasharray="5 6" strokeLinecap="round" />
+        ))}
+        <text x={710} y={70} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">hexane and octane — one uniform mix</text>
+        <text x={710} y={330} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">weak London forces throughout — so they mix completely</text>
+      </g>
+    </svg>
+  );
+}

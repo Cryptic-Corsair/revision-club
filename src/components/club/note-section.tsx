@@ -65,6 +65,19 @@ import {
   FigSpectrumNeon,
   FigSuccIe,
   FigThermo,
+  FigLondon,
+  FigContact,
+  FigHbondWater,
+  FigHbondNh3,
+  FigHbondHf,
+  FigDimer,
+  FigViscosity,
+  FigHydrides,
+  FigIce,
+  FigHydration,
+  FigEthanolWater,
+  FigSolubility,
+  FigMixing,
 } from "./notes-figures";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -668,6 +681,19 @@ const WIDE_FIGS = new Set([
   "hess-butane",
   "bond-h2o",
   "cooling-curve",
+  "london",
+  "contact",
+  "hbond-water",
+  "hbond-nh3",
+  "hbond-hf",
+  "dimer",
+  "viscosity",
+  "hydrides",
+  "ice",
+  "hydration",
+  "ethanol-water",
+  "solubility",
+  "mixing",
 ]);
 
 function Figure({
@@ -818,6 +844,45 @@ function Figure({
       break;
     case "cooling-curve":
       node = <FigCoolingCurve accent={accent} />;
+      break;
+    case "london":
+      node = <FigLondon accent={accent} />;
+      break;
+    case "contact":
+      node = <FigContact accent={accent} />;
+      break;
+    case "hbond-water":
+      node = <FigHbondWater accent={accent} />;
+      break;
+    case "hbond-nh3":
+      node = <FigHbondNh3 accent={accent} />;
+      break;
+    case "hbond-hf":
+      node = <FigHbondHf accent={accent} />;
+      break;
+    case "dimer":
+      node = <FigDimer accent={accent} />;
+      break;
+    case "viscosity":
+      node = <FigViscosity accent={accent} />;
+      break;
+    case "hydrides":
+      node = <FigHydrides accent={accent} />;
+      break;
+    case "ice":
+      node = <FigIce accent={accent} />;
+      break;
+    case "hydration":
+      node = <FigHydration accent={accent} />;
+      break;
+    case "ethanol-water":
+      node = <FigEthanolWater accent={accent} />;
+      break;
+    case "solubility":
+      node = <FigSolubility accent={accent} />;
+      break;
+    case "mixing":
+      node = <FigMixing accent={accent} />;
       break;
   }
   if (!node) return null;

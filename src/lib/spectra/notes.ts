@@ -9,6 +9,8 @@ import { SECTIONS_T05_A } from "./content/notes-t05-a";
 import { SECTIONS_T05_B } from "./content/notes-t05-b";
 import { SECTIONS_T06_A } from "./content/notes-t06-a";
 import { SECTIONS_T06_B } from "./content/notes-t06-b";
+import { SECTIONS_T07_A } from "./content/notes-t07-a";
+import { SECTIONS_T07_B } from "./content/notes-t07-b";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · the revision-note library
@@ -106,6 +108,25 @@ export const NOTES_DOCS: NotesDoc[] = [
       },
     ],
     sections: [...SECTIONS_T06_A, ...SECTIONS_T06_B],
+  },
+  {
+    id: "wch12-t07",
+    unitCode: "WCH12",
+    topicId: "t07",
+    kicker: "Unit 2 · Topic 7 — the complete class note, spec by spec",
+    title: "Intermolecular forces",
+    source: "the complete class note (CHSE Grade 11, Unit 2 · Topic 7 · 2021, semester 2)",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual revision note for Topic 7, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every exercise the class note sets in words is worked in full — no skipped lines.",
+      },
+      {
+        k: "p",
+        text: "Part **7A** builds the three forces themselves — London forces and the dipole that flickers into life, permanent dipole – dipole interactions, and the hydrogen bond with its two-part test — then the exercises that put them to work. Part **7B** is the consequences: boiling temperatures of alkanes, alcohols, noble gases and the hydrogen halides, water's two anomalies, and how solvents choose what dissolves.",
+      },
+    ],
+    sections: [...SECTIONS_T07_A, ...SECTIONS_T07_B],
   },
 ];
 
