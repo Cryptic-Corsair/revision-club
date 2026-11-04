@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import {
   ArrowLeft,
   Award,
@@ -228,7 +228,7 @@ export function StickerBook({
                 </span>
               </div>
               <div className="mt-2.5 h-4 w-full max-w-md overflow-hidden rounded-full bg-ink/[0.07]">
-                <motion.div
+                <m.div
                   className="h-full rounded-full bg-[linear-gradient(90deg,#12B886,#FFD43B)]"
                   initial={{ width: 0 }}
                   animate={{ width: `${Math.max(weekPct * 100, week > 0 ? 4 : 0)}%` }}
@@ -239,7 +239,7 @@ export function StickerBook({
                 {GOAL_CHIPS.map((g) => {
                   const active = time.goalMin === g;
                   return (
-                    <motion.button
+                    <m.button
                       key={g}
                       type="button"
                       onClick={() => setGoalMin(g)}
@@ -254,11 +254,11 @@ export function StickerBook({
                       }
                     >
                       {goalChipLabel(g)}
-                    </motion.button>
+                    </m.button>
                   );
                 })}
                 <span className="ml-1 inline-flex items-center gap-1.5 rounded-full bg-paper px-2 py-1">
-                  <motion.button
+                  <m.button
                     type="button"
                     onClick={() => setGoalMin(time.goalMin - 15)}
                     whileTap={{ scale: 0.88 }}
@@ -266,11 +266,11 @@ export function StickerBook({
                     className="grid h-7 w-7 cursor-pointer place-items-center rounded-full bg-ink/[0.06] font-display text-[15px] leading-none font-bold text-ink-soft hover:bg-ink/[0.11]"
                   >
                     −
-                  </motion.button>
+                  </m.button>
                   <span className="min-w-[4.5ch] text-center font-display text-[12px] font-bold text-ink">
                     {goalChipLabel(time.goalMin)}
                   </span>
-                  <motion.button
+                  <m.button
                     type="button"
                     onClick={() => setGoalMin(time.goalMin + 15)}
                     whileTap={{ scale: 0.88 }}
@@ -278,7 +278,7 @@ export function StickerBook({
                     className="grid h-7 w-7 cursor-pointer place-items-center rounded-full bg-ink/[0.06] font-display text-[15px] leading-none font-bold text-ink-soft hover:bg-ink/[0.11]"
                   >
                     +
-                  </motion.button>
+                  </m.button>
                 </span>
               </div>
             </div>
@@ -325,7 +325,7 @@ export function StickerBook({
                   {suggestion.reason} · about {suggestion.topic.minutes} min
                 </p>
               </div>
-              <motion.button
+              <m.button
                 type="button"
                 onClick={() => onOpenTopic(suggestion.unit.code, suggestion.topic.id)}
                 whileHover={{ y: -2 }}
@@ -337,7 +337,7 @@ export function StickerBook({
                 }}
               >
                 Read it now <MoveRight className="h-4.5 w-4.5" />
-              </motion.button>
+              </m.button>
             </div>
           </div>
         </Reveal>
@@ -422,7 +422,7 @@ export function StickerBook({
                             </span>
                           </div>
                           <div className="mt-2 ml-9 h-[7px] overflow-hidden rounded-full bg-ink/[0.05]">
-                            <motion.div
+                            <m.div
                               className="h-full rounded-full"
                               style={{ background: main }}
                               initial={{ width: 0 }}
@@ -455,7 +455,7 @@ export function StickerBook({
         <div className="grid grid-cols-3 gap-4 sm:grid-cols-6 sm:gap-3">
           {achievements.map((a, i) => (
             <Reveal key={a.id} delay={i * 0.05}>
-              <motion.div
+              <m.div
                 whileHover={{ y: -5, rotate: 0, scale: 1.04 }}
                 className={`relative flex cursor-default flex-col items-center rounded-[26px] px-2 py-5 text-center ${
                   a.earned ? "puff" : ""
@@ -495,7 +495,7 @@ export function StickerBook({
                 <span className="mt-0.5 hidden text-[10.5px] leading-tight font-bold text-ink-faint md:block">
                   {a.hint}
                 </span>
-              </motion.div>
+              </m.div>
             </Reveal>
           ))}
         </div>
@@ -547,7 +547,7 @@ export function StickerBook({
                   {u.topics.map((t, ti) => {
                     const has = revised.includes(`${u.code}/${t.id}`);
                     return (
-                      <motion.button
+                      <m.button
                         key={t.id}
                         type="button"
                         onClick={() => toggleRevised(`${u.code}/${t.id}`)}
@@ -601,7 +601,7 @@ export function StickerBook({
                             not marked yet
                           </span>
                         )}
-                      </motion.button>
+                      </m.button>
                     );
                   })}
                 </div>
@@ -613,7 +613,7 @@ export function StickerBook({
 
       {/* ————— reset ————— */}
       <Reveal className="mt-14 flex justify-center">
-        <motion.button
+        <m.button
           type="button"
           onClick={pour}
           whileHover={{ y: -2 }}
@@ -628,7 +628,7 @@ export function StickerBook({
         >
           <Droplets className="h-4.5 w-4.5" />
           {confirmPour ? "tap again to confirm" : "Reset all progress"}
-        </motion.button>
+        </m.button>
       </Reveal>
       <p className="mt-3 text-center text-[12px] font-bold text-ink-faint">
         {confirmPour

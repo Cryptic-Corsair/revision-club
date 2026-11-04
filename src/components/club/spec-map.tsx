@@ -25,7 +25,7 @@ import {
   type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ArrowLeft, ArrowRight, ListChecks, X } from "./icons";
 import type { SpecSection } from "@/lib/spectra/notes-types";
 import { Mascot, readableInk, shade } from "./bits";
@@ -186,7 +186,7 @@ export function SpecMapTrigger() {
 
   return (
     <>
-      <motion.button
+      <m.button
         ref={btnRef}
         type="button"
         onClick={() => {
@@ -215,7 +215,7 @@ export function SpecMapTrigger() {
             scroll (keying on the spec itself stalled mid-flip during
             fast glides, leaving a stale room on the badge) */}
         <AnimatePresence mode="wait" initial={false}>
-          <motion.span
+          <m.span
             key={open ? "map" : "spec"}
             initial={{ y: 8, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -224,15 +224,15 @@ export function SpecMapTrigger() {
             className="grid place-items-center font-display text-[10.5px] font-bold tracking-tight"
           >
             {open ? <ListChecks className="h-[18px] w-[18px]" /> : active}
-          </motion.span>
+          </m.span>
         </AnimatePresence>
-      </motion.button>
+      </m.button>
 
       {createPortal(
         <AnimatePresence>
           {open && geo && (
             <>
-              <motion.div
+              <m.div
                 key="scrim"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -241,7 +241,7 @@ export function SpecMapTrigger() {
                 onClick={close}
                 className="fixed inset-0 z-[59] bg-cocoa/30 backdrop-blur-[2px]"
               />
-              <motion.div
+              <m.div
                 key="panel"
                 ref={panelRef}
                 role="dialog"
@@ -322,7 +322,7 @@ export function SpecMapTrigger() {
                   className="mt-1 min-h-0 flex-1 overflow-y-auto px-4 py-3 sm:px-5"
                   style={{ overscrollBehavior: "contain" }}
                 >
-                  <motion.div
+                  <m.div
                     initial="hidden"
                     animate="show"
                     variants={{
@@ -348,7 +348,7 @@ export function SpecMapTrigger() {
                         }}
                       />
                     ))}
-                  </motion.div>
+                  </m.div>
                 </div>
 
                 {/* footer — walk the note without opening the map again */}
@@ -403,7 +403,7 @@ export function SpecMapTrigger() {
                     />
                   </button>
                 </div>
-              </motion.div>
+              </m.div>
             </>
           )}
         </AnimatePresence>,

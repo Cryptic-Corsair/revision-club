@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ArrowRight, Clock, Search, Sparkles } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { searchTopics, type SearchRow } from "@/lib/spectra/search-index";
@@ -90,7 +90,7 @@ function PaletteBody({
             className="absolute inset-0 cursor-pointer bg-cocoa/45 backdrop-blur-[6px]"
           />
 
-          <motion.div
+          <m.div
             role="dialog"
             aria-modal="true"
             aria-label="Search topics"
@@ -200,12 +200,12 @@ function PaletteBody({
                       </span>
                       <span className="flex shrink-0 items-center gap-1.5 text-[11.5px] font-extrabold text-ink-faint">
                         <Clock className="h-3.5 w-3.5" /> {r.minutes}m
-                        <motion.span
+                        <m.span
                           animate={{ x: active ? 3 : 0, opacity: active ? 1 : 0.35 }}
                           className="text-ink"
                         >
                           <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
-                        </motion.span>
+                        </m.span>
                       </span>
                     </button>
                   );
@@ -230,7 +230,7 @@ function PaletteBody({
                 {q.trim() ? `${results.length} found` : "try a unit code too"}
               </span>
             </div>
-          </motion.div>
+          </m.div>
     </div>
   );
 }

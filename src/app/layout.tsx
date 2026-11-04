@@ -8,36 +8,43 @@ const fredoka = Fredoka({
   variable: "--font-fredoka",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const baloo = Baloo_2({
   variable: "--font-baloo",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 const patrick = Patrick_Hand({
   variable: "--font-patrick",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
 });
 
+/* no 900 — the heaviest class anywhere is font-extrabold (800) */
 const nunito = Nunito({
   variable: "--font-nunito",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800", "900"],
+  weight: ["400", "600", "700", "800"],
+  display: "swap",
 });
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const plex = IBM_Plex_Mono({
   variable: "--font-plex",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

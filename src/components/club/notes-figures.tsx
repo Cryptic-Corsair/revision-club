@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { RotateCcw } from "./icons";
 import { tint, shade, readableInk } from "./bits";
 
@@ -361,7 +361,7 @@ export function FigFillDemo({ accent = "#FF6B6B" }: { accent?: string }) {
           const down = count > box + 3;
           return (
             <div key={box} className="flex flex-col items-center gap-2">
-              <motion.div
+              <m.div
                 layout
                 className="grid h-16 w-16 place-items-center rounded-[18px] bg-paper font-display text-[30px] font-bold"
                 style={{ boxShadow: "inset 0 0 0 3px color-mix(in oklab, var(--color-ink) 10%, transparent), 0 4px 0 color-mix(in oklab, var(--color-ink) 7%, transparent)" }}
@@ -369,7 +369,7 @@ export function FigFillDemo({ accent = "#FF6B6B" }: { accent?: string }) {
               >
                 {up && <span className="text-[26px]" style={{ color: shade(accent) }}>↑</span>}
                 {up && down && <span className="ml-0.5 text-[26px]" style={{ color: "#12B886" }}>↓</span>}
-              </motion.div>
+              </m.div>
               {box === 0 && <span className="font-display text-[12px] font-bold tracking-wide text-ink-faint">2p</span>}
             </div>
           );
@@ -380,7 +380,7 @@ export function FigFillDemo({ accent = "#FF6B6B" }: { accent?: string }) {
         <p className="text-center text-[12.5px] font-bold text-ink-faint">{count}/6 electrons placed</p>
         <div className="flex gap-2.5">
           {!full ? (
-            <motion.button
+            <m.button
               type="button"
               onClick={() => setCount((c) => Math.min(6, c + 1))}
               whileHover={{ y: -2 }}
@@ -389,9 +389,9 @@ export function FigFillDemo({ accent = "#FF6B6B" }: { accent?: string }) {
               style={{ background: accent, boxShadow: `0 4px 0 ${shade(accent)}` }}
             >
               +1 electron
-            </motion.button>
+            </m.button>
           ) : (
-            <motion.button
+            <m.button
               type="button"
               onClick={() => setCount(0)}
               whileHover={{ y: -2 }}
@@ -399,7 +399,7 @@ export function FigFillDemo({ accent = "#FF6B6B" }: { accent?: string }) {
               className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full bg-ink/5 px-5 py-2.5 font-display text-[14px] font-semibold text-ink-soft"
             >
               <RotateCcw className="h-4 w-4" /> Empty the sub-shell
-            </motion.button>
+            </m.button>
           )}
         </div>
       </div>

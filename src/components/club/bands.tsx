@@ -7,7 +7,7 @@
    window, so a stop is dressed identically wherever it appears.
    ═══════════════════════════════════════════════════════════════ */
 
-import { motion, type HTMLMotionProps, type Variants } from "framer-motion";
+import { m, type HTMLMotionProps, type Variants } from "framer-motion";
 import { Footprints } from "./icons";
 import type { SpecSection } from "@/lib/spectra/notes-types";
 import { readableInk, shade } from "./bits";
@@ -131,7 +131,7 @@ export function SpecChip({
 }: { s: SpecSection; i: number; here: boolean } & HTMLMotionProps<"button">) {
   const accent = accentOf(i);
   return (
-    <motion.button
+    <m.button
       type="button"
       data-here={here ? "1" : undefined}
       aria-current={here ? "true" : undefined}
@@ -171,6 +171,6 @@ export function SpecChip({
       {here && (
         <Footprints className="ml-auto h-3.5 w-3.5 shrink-0 opacity-80" />
       )}
-    </motion.button>
+    </m.button>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import {
   BookOpen,
   Check,
@@ -480,7 +480,7 @@ function Worked({
         </p>
       </div>
 
-      <motion.button
+      <m.button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
@@ -495,17 +495,17 @@ function Worked({
           <Footprints className="h-4.5 w-4.5" />
         )}
         {open ? "Hide steps" : "Show steps"}
-        <motion.span
+        <m.span
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
         >
           <ChevronDown className="h-4 w-4" />
-        </motion.span>
-      </motion.button>
+        </m.span>
+      </m.button>
 
       <AnimatePresence initial={false}>
         {shown && (
-          <motion.div
+          <m.div
             initial={printing ? false : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -516,7 +516,7 @@ function Worked({
           >
             <div className="mt-4 flex flex-col">
               {steps.map((s, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={printing ? false : { opacity: 0, y: 14, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -545,10 +545,10 @@ function Worked({
                       <Fmt text={s} />
                     </span>
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
-            <motion.div
+            <m.div
               initial={printing ? false : { opacity: 0, scale: 0.94, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{
@@ -568,8 +568,8 @@ function Worked({
               <span>
                 <Fmt text={answer} />
               </span>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

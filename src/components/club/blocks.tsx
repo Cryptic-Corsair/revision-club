@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import {
   BadgeCheck,
   BookMarked,
@@ -225,7 +225,7 @@ function WorkedExample({
         </h4>
       </div>
 
-      <motion.button
+      <m.button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
@@ -236,17 +236,17 @@ function WorkedExample({
       >
         {open ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
         {open ? "Hide steps" : "Show steps"}
-        <motion.span
+        <m.span
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
         >
           <ChevronDown className="h-4 w-4" />
-        </motion.span>
-      </motion.button>
+        </m.span>
+      </m.button>
 
       <AnimatePresence initial={false}>
         {open && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -255,7 +255,7 @@ function WorkedExample({
           >
             <div className="mt-4 flex flex-col">
               {steps.map((s, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, y: 14, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -282,11 +282,11 @@ function WorkedExample({
                       <Fmt text={s} />
                     </span>
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0.9, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{
@@ -302,8 +302,8 @@ function WorkedExample({
               <span>
                 <Fmt text={answer} />
               </span>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>
@@ -433,7 +433,7 @@ function CheckCard({
 }) {
   return (
     <div className="[perspective:1400px]">
-      <motion.div
+      <m.div
         className="relative grid [transform-style:preserve-3d]"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ type: "spring", stiffness: 260, damping: 24 }}
@@ -462,7 +462,7 @@ function CheckCard({
             <Fmt text={q} />
           </p>
           <div className="pt-3">
-            <motion.button
+            <m.button
               type="button"
               onClick={onFlip}
               whileHover={{ y: -2 }}
@@ -471,7 +471,7 @@ function CheckCard({
               style={{ background: main, boxShadow: `0 3px 0 ${shade(main)}` }}
             >
               <Eye className="h-4 w-4" /> Reveal answer
-            </motion.button>
+            </m.button>
           </div>
         </div>
 
@@ -497,7 +497,7 @@ function CheckCard({
             <Fmt text={a} />
           </p>
           <div className="pt-3">
-            <motion.button
+            <m.button
               type="button"
               onClick={onFlip}
               whileHover={{ y: -1 }}
@@ -505,10 +505,10 @@ function CheckCard({
               className="inline-flex min-h-[36px] cursor-pointer items-center gap-2 rounded-full bg-ink/5 px-4 py-2 text-[12.5px] font-bold text-ink-soft"
             >
               <EyeOff className="h-4 w-4" /> Flip back
-            </motion.button>
+            </m.button>
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* the whole card is clickable while it shows the question */}
       {!isFlipped && (

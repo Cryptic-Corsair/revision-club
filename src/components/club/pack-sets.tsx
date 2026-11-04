@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { Bookmark, Check, Copy, X } from "./icons";
 import {
   deleteSet,
@@ -98,7 +98,7 @@ export function PackSetsDialog({
     <AnimatePresence>
       {open && (
         <>
-          <motion.div
+          <m.div
             key="scrim"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -107,7 +107,7 @@ export function PackSetsDialog({
             onClick={close}
             className="fixed inset-0 z-[79] bg-cocoa/30 backdrop-blur-[2px]"
           />
-          <motion.div
+          <m.div
             key="panel"
             ref={panelRef}
             role="dialog"
@@ -244,7 +244,7 @@ export function PackSetsDialog({
                 </button>
               )}
             </div>
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>,

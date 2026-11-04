@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { RotateCcw, Sliders, Sparkles, X, Check } from "./icons";
 import { readableInk, shade, tint } from "./bits";
 import { accentOf } from "./bands";
@@ -67,7 +67,7 @@ function Chip({
   ariaLabel: string;
 }) {
   return (
-    <motion.button
+    <m.button
       type="button"
       onClick={onClick}
       whileTap={{ scale: 0.93 }}
@@ -79,7 +79,7 @@ function Chip({
       style={active ? { boxShadow: "0 3px 0 #E8590C" } : undefined}
     >
       {children}
-    </motion.button>
+    </m.button>
   );
 }
 
@@ -111,7 +111,7 @@ function Toggle({
         className="relative h-[26px] w-[46px] shrink-0 rounded-full transition-colors"
         style={{ background: on ? "#12B886" : "rgb(61 43 31 / 0.18)" }}
       >
-        <motion.span
+        <m.span
           className="absolute top-[3px] h-5 w-5 rounded-full bg-white shadow-sm"
           animate={{ left: on ? 23 : 3 }}
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -179,7 +179,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
     <AnimatePresence>
       {open && (
         <>
-          <motion.button
+          <m.button
             type="button"
             aria-label="Close the customize panel"
             initial={{ opacity: 0 }}
@@ -189,7 +189,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
             onClick={onClose}
             className="fixed inset-0 z-[90] cursor-pointer bg-cocoa/45 backdrop-blur-[2px]"
           />
-          <motion.aside
+          <m.aside
             role="dialog"
             aria-label="Customize Reaction Club"
             initial={{ x: "110%" }}
@@ -214,7 +214,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                   the whole site re-dresses as you tap
                 </p>
               </div>
-              <motion.button
+              <m.button
                 type="button"
                 onClick={onClose}
                 whileTap={{ scale: 0.88 }}
@@ -222,7 +222,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 className="grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
               >
                 <X className="h-5 w-5" strokeWidth={2.2} />
-              </motion.button>
+              </m.button>
             </div>
 
             <div
@@ -271,7 +271,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                     const on = prefs.accents.includes(a.id);
                     const lastOne = on && prefs.accents.length === 1;
                     return (
-                      <motion.button
+                      <m.button
                         key={a.id}
                         type="button"
                         onClick={() => toggleAccent(a.id)}
@@ -321,7 +321,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                         >
                           {a.label}
                         </span>
-                      </motion.button>
+                      </m.button>
                     );
                   })}
                 </div>
@@ -355,7 +355,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                     const active = prefs.zoom === z;
                     const px = [12, 14, 16, 19][ZOOM_STEPS.indexOf(z)];
                     return (
-                      <motion.button
+                      <m.button
                         key={z}
                         type="button"
                         onClick={() => setPrefs({ zoom: z })}
@@ -373,7 +373,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                         <span className="mt-1 font-display text-[10px] font-bold tracking-[0.1em]">
                           {ZOOM_LABEL[String(z)]}
                         </span>
-                      </motion.button>
+                      </m.button>
                     );
                   })}
                 </div>
@@ -443,7 +443,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 choices are saved in this browser only
               </p>
             </div>
-          </motion.aside>
+          </m.aside>
         </>
       )}
     </AnimatePresence>

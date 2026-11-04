@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · bits — the candy box
@@ -98,7 +98,7 @@ export function Reveal({
   className?: string;
 }) {
   return (
-    <motion.div
+    <m.div
       className={className}
       initial={{ opacity: 0, y, scale: 0.985 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -106,7 +106,7 @@ export function Reveal({
       transition={{ type: "spring", stiffness: 240, damping: 22, delay }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -120,14 +120,14 @@ export function PopIn({
   className?: string;
 }) {
   return (
-    <motion.div
+    <m.div
       className={className}
       initial={{ opacity: 0, scale: 0.72, y: 18 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 17, delay }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -149,7 +149,7 @@ export function CandyButton({
   type?: "button" | "submit";
 }) {
   return (
-    <motion.button
+    <m.button
       type={type}
       aria-label={ariaLabel}
       onClick={onClick}
@@ -159,7 +159,7 @@ export function CandyButton({
       style={{ "--candy-bg": main, "--candy-side": shade(main), color: readableInk(main) } as CSSProperties}
     >
       {children}
-    </motion.button>
+    </m.button>
   );
 }
 
@@ -177,7 +177,7 @@ export function SoftButton({
   type?: "button" | "submit";
 }) {
   return (
-    <motion.button
+    <m.button
       type={type}
       aria-label={ariaLabel}
       onClick={onClick}
@@ -186,7 +186,7 @@ export function SoftButton({
       className={`inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-6 py-3 font-display text-[15.5px] font-semibold text-ink puff select-none ${className ?? ""}`}
     >
       {children}
-    </motion.button>
+    </m.button>
   );
 }
 
@@ -551,7 +551,7 @@ export function Mascot({
   }
 
   return (
-    <motion.button
+    <m.button
       type="button"
       onClick={onBoop}
       whileHover={{ scale: 1.04, rotate: -2 }}
@@ -563,7 +563,7 @@ export function Mascot({
       <svg viewBox="0 0 220 230" width={size} height={size} aria-hidden>
         {inner}
       </svg>
-    </motion.button>
+    </m.button>
   );
 }
 
@@ -671,7 +671,7 @@ export function Confetti({
           className={`pointer-events-none absolute top-1/2 left-1/2 z-30 ${className ?? ""}`}
         >
           {pieces.map((p, i) => (
-            <motion.span
+            <m.span
               key={`${fire}-${i}`}
               className="absolute block"
               style={{

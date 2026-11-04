@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, Clock, Flame, PieChart, Sparkles, Target, Timer } from "./icons";
 import type { Unit } from "@/lib/spectra/types";
 import { UNITS } from "@/lib/spectra/units";
@@ -132,7 +132,7 @@ export function UnitView({
                   : `${done} of ${unit.topics.length} topics revised.`}
             </p>
             <div className="mt-3 h-4 w-full max-w-xs overflow-hidden rounded-full bg-paper/80">
-              <motion.div
+              <m.div
                 className="h-full rounded-full"
                 style={{ background: main }}
                 initial={{ width: 0 }}
@@ -168,7 +168,7 @@ export function UnitView({
               return (
                 <Reveal key={t.id} delay={Math.min(i * 0.05, 0.25)}>
                   <div className="flex items-start gap-4 sm:gap-6">
-                    <motion.span
+                    <m.span
                       className="z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full font-display text-[16px] font-bold text-white sm:h-14 sm:w-14 sm:text-[18px]"
                       style={{
                         background: isDone ? "#12B886" : main,
@@ -177,9 +177,9 @@ export function UnitView({
                       }}
                     >
                       {isDone ? <Check className="h-6 w-6" strokeWidth={3} /> : i + 1}
-                    </motion.span>
+                    </m.span>
 
-                    <motion.button
+                    <m.button
                       type="button"
                       onClick={() => onOpenTopic(t.id)}
                       aria-label={`Open ${t.label}: ${t.title}`}
@@ -209,7 +209,7 @@ export function UnitView({
                       <p className="mt-1.5 max-w-[62ch] text-[14.5px] leading-[1.7] text-ink-soft">
                         {t.summary}
                       </p>
-                    </motion.button>
+                    </m.button>
                   </div>
                 </Reveal>
               );
@@ -255,7 +255,7 @@ export function UnitView({
       {/* ————— prev / next ————— */}
       <div className="mt-12 grid gap-4 sm:grid-cols-2">
         {prev ? (
-          <motion.button
+          <m.button
             type="button"
             onClick={() => onOpenUnit(prev.code)}
             whileHover={{ y: -4 }}
@@ -273,12 +273,12 @@ export function UnitView({
                 {prev.code} · {prev.shortTitle}
               </span>
             </span>
-          </motion.button>
+          </m.button>
         ) : (
           <span aria-hidden />
         )}
         {next && (
-          <motion.button
+          <m.button
             type="button"
             onClick={() => onOpenUnit(next.code)}
             whileHover={{ y: -4 }}
@@ -297,7 +297,7 @@ export function UnitView({
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/20">
               <ArrowRight className="h-4.5 w-4.5" strokeWidth={2.5} />
             </span>
-          </motion.button>
+          </m.button>
         )}
       </div>
     </div>

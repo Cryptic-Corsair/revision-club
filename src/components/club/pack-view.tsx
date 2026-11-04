@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import {
   ArrowLeft,
   Bookmark,
@@ -163,7 +163,7 @@ export function PackView({
             here automatically, in syllabus order.
           </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-            <motion.button
+            <m.button
               type="button"
               onClick={onOpenSpec}
               whileHover={{ y: -2 }}
@@ -172,7 +172,7 @@ export function PackView({
               style={{ background: "#FF922B", boxShadow: `0 4px 0 ${shade("#FF922B")}` }}
             >
               <Target className="h-5 w-5" /> Browse the spec index
-            </motion.button>
+            </m.button>
             {sets.length > 0 && (
               <SoftButton onClick={() => setSetsOpen(true)} ariaLabel="Open your saved revision sets">
                 <Bookmark className="h-4 w-4 text-mint" /> Load a saved set ({sets.length})
@@ -253,7 +253,7 @@ export function PackView({
         <PopIn delay={0.14} className="mt-5">
           <div className="flex items-center gap-3">
             <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-ink/[0.07]">
-              <motion.div
+              <m.div
                 className="h-full rounded-full"
                 style={{ background: "linear-gradient(90deg, #12B886, #FFD43B)" }}
                 initial={false}
@@ -516,7 +516,7 @@ function ToolButton({
   children: React.ReactNode;
 }) {
   return (
-    <motion.button
+    <m.button
       type="button"
       onClick={onClick}
       whileHover={{ y: -2 }}
@@ -550,6 +550,6 @@ function ToolButton({
           {badge}
         </span>
       )}
-    </motion.button>
+    </m.button>
   );
 }

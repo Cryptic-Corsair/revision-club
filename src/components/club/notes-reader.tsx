@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { m, useScroll, useSpring } from "framer-motion";
 import {
   ArrowLeft,
   BookOpen,
@@ -115,7 +115,7 @@ function PackTick({ spec, accent }: { spec: string; accent: string }) {
   const { picks } = usePacks();
   const picked = picks.includes(spec);
   return (
-    <motion.button
+    <m.button
       type="button"
       onClick={() => togglePick(spec)}
       whileTap={{ scale: 0.85 }}
@@ -150,7 +150,7 @@ function PackTick({ spec, accent }: { spec: string; accent: string }) {
       ) : (
         <ClipboardList className="h-[18px] w-[18px]" strokeWidth={2.4} />
       )}
-    </motion.button>
+    </m.button>
   );
 }
 
@@ -281,7 +281,7 @@ function NotesReaderBody({
   return (
     <div className="notes-flow relative">
       {/* reading progress */}
-      <motion.div
+      <m.div
         aria-hidden
         className="fixed left-0 z-[70] h-[7px] w-full origin-left rounded-r-full"
         style={{

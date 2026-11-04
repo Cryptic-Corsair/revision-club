@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { m, useScroll, useSpring } from "framer-motion";
 import { ArrowLeft, ArrowRight, BookOpen, Check, Clock, PartyPopper, Sticker } from "./icons";
 import type { Topic, Unit } from "@/lib/spectra/types";
 import { toggleRevised, useRevised } from "@/lib/spectra/progress";
@@ -61,7 +61,7 @@ export function TopicView({
   return (
     <div className="mx-auto max-w-3xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
       {/* reading progress — a candy strip filling up top */}
-      <motion.div
+      <m.div
         aria-hidden
         className="fixed left-0 z-[70] h-[7px] w-full origin-left rounded-r-full"
         style={{
@@ -109,7 +109,7 @@ export function TopicView({
       {/* ————— full revision note CTA ————— */}
       {onOpenNotes && (
         <Reveal className="mt-8">
-          <motion.button
+          <m.button
             type="button"
             onClick={onOpenNotes}
             whileHover={{ y: -4, rotate: -0.4 }}
@@ -133,7 +133,7 @@ export function TopicView({
             <span className="hidden h-11 w-11 shrink-0 place-items-center rounded-full bg-white/20 transition-transform group-hover:translate-x-1 sm:grid">
               <ArrowRight className="h-5 w-5 text-white" strokeWidth={2.5} />
             </span>
-          </motion.button>
+          </m.button>
         </Reveal>
       )}
 
@@ -146,7 +146,7 @@ export function TopicView({
       <Reveal className="relative mt-14 flex justify-center">
         <div className="relative">
           <Confetti fire={fire} />
-          <motion.button
+          <m.button
             type="button"
             onClick={collect}
             aria-pressed={isRevised}
@@ -182,7 +182,7 @@ export function TopicView({
                 Mark as revised
               </>
             )}
-          </motion.button>
+          </m.button>
         </div>
       </Reveal>
       <p className="mt-3 text-center text-[12.5px] font-bold text-ink-faint">
@@ -194,7 +194,7 @@ export function TopicView({
       {/* ————— prev / next ————— */}
       <nav className="mt-10 grid gap-4 sm:grid-cols-2" aria-label="Topic navigation">
         {prev ? (
-          <motion.button
+          <m.button
             type="button"
             onClick={() => onOpenTopic(prev.id)}
             whileHover={{ y: -4 }}
@@ -212,12 +212,12 @@ export function TopicView({
                 {prev.title}
               </span>
             </span>
-          </motion.button>
+          </m.button>
         ) : (
           <span aria-hidden className="hidden sm:block" />
         )}
         {next ? (
-          <motion.button
+          <m.button
             type="button"
             onClick={() => onOpenTopic(next.id)}
             whileHover={{ y: -4 }}
@@ -236,9 +236,9 @@ export function TopicView({
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/20">
               <ArrowRight className="h-4.5 w-4.5" strokeWidth={2.5} />
             </span>
-          </motion.button>
+          </m.button>
         ) : (
-          <motion.button
+          <m.button
             type="button"
             onClick={onBack}
             whileHover={{ y: -4 }}
@@ -255,7 +255,7 @@ export function TopicView({
               </span>
             </span>
             <PartyPopper className="h-5 w-5 shrink-0" />
-          </motion.button>
+          </m.button>
         )}
       </nav>
 

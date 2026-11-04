@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowLeft, Check, ClipboardList, Search, Target } from "./icons";
 import { SPEC_POINTS, SPEC_STATS, SPEC_TOPIC_GROUPS } from "@/lib/spectra/registry";
 import { usePacks, togglePick } from "@/lib/spectra/packs";
@@ -139,7 +139,7 @@ export function SpecIndex({
               )}
             </p>
           </div>
-          <motion.button
+          <m.button
             type="button"
             onClick={onOpenPack}
             whileHover={{ y: -2 }}
@@ -149,7 +149,7 @@ export function SpecIndex({
           >
             <ClipboardList className="h-4.5 w-4.5" />
             Open your pack
-          </motion.button>
+          </m.button>
         </div>
       </Reveal>
 

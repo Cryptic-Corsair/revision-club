@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { AnimatePresence, motion } from "framer-motion";
+import { LazyMotion, domAnimation, AnimatePresence, m } from "framer-motion";
 import {
   Home as HomeIcon,
   Moon,
@@ -97,7 +97,7 @@ function LogoMark({ size = 38 }: { size?: number }) {
     "M11 11.5 L33 11.5 L33 34.5 Q33 42.5 25 42.5 L19 42.5 Q11 42.5 11 34.5 Z";
 
   return (
-    <motion.span
+    <m.span
       aria-hidden
       whileHover={{ scale: 1.07, rotate: -3 }}
       whileTap={{ scale: 0.9, rotate: 2 }}
@@ -159,7 +159,7 @@ function LogoMark({ size = 38 }: { size?: number }) {
           opacity="0.35"
         />
       </svg>
-    </motion.span>
+    </m.span>
   );
 }
 
@@ -256,7 +256,7 @@ function TopBar({
           <SpecMapTrigger />
 
           {/* ————— home + tools ————— */}
-          <motion.button
+          <m.button
             type="button"
             onClick={onHome}
             aria-current={view.kind === "home" ? "page" : undefined}
@@ -266,9 +266,9 @@ function TopBar({
             className={tool(view.kind === "home")}
           >
             <HomeIcon className="h-[18px] w-[18px]" strokeWidth={2.2} />
-          </motion.button>
+          </m.button>
 
-          <motion.button
+          <m.button
             type="button"
             onClick={onOpenPack}
             aria-current={view.kind === "pack" ? "page" : undefined}
@@ -298,9 +298,9 @@ function TopBar({
                 {picks.length}
               </span>
             )}
-          </motion.button>
+          </m.button>
 
-          <motion.button
+          <m.button
             type="button"
             onClick={onSearch}
             whileTap={{ scale: 0.88 }}
@@ -309,9 +309,9 @@ function TopBar({
             aria-label="Search topics"
           >
             <Search className="h-[18px] w-[18px]" strokeWidth={2.2} />
-          </motion.button>
+          </m.button>
 
-          <motion.button
+          <m.button
             type="button"
             onClick={onOpenSticker}
             aria-current={view.kind === "sticker" ? "page" : undefined}
@@ -332,9 +332,9 @@ function TopBar({
             }
           >
             <Sticker className="h-[18px] w-[18px]" strokeWidth={2.2} />
-          </motion.button>
+          </m.button>
 
-          <motion.button
+          <m.button
             type="button"
             onClick={onOpenCustomize}
             whileTap={{ scale: 0.88 }}
@@ -343,9 +343,9 @@ function TopBar({
             aria-label="Customize the site"
           >
             <Sliders className="h-[18px] w-[18px]" strokeWidth={2.2} />
-          </motion.button>
+          </m.button>
 
-          <motion.button
+          <m.button
             type="button"
             onClick={cycle}
             whileTap={{ scale: 0.88 }}
@@ -359,14 +359,14 @@ function TopBar({
             ) : (
               <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />
             )}
-          </motion.button>
+          </m.button>
         </nav>
       </header>
 
       {/* ————— lab toast — announces where you just landed ————— */}
       <AnimatePresence>
         {announce && (
-          <motion.div
+          <m.div
             key={announce}
             initial={{ opacity: 0, y: 16, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -392,7 +392,7 @@ function TopBar({
               />
               {LAB_LABEL[announce]}
             </span>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>
@@ -468,7 +468,7 @@ function Footer({
               />
               <AnimatePresence>
                 {booped && (
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, y: 8, scale: 0.85 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.85 }}
@@ -479,7 +479,7 @@ function Footer({
                         Tap a unit to start revising.
                       </span>
                     </SpeechBubble>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>
@@ -711,127 +711,129 @@ export default function ClubApp() {
     unit && topic ? getNotesMetaForTopic(unit.code, topic.id) : undefined;
 
   return (
-    <SpecMapProvider>
-      <div className="flex min-h-dvh flex-col">
-        <TopBar
-          view={view}
-          onHome={goHome}
-          onOpenSticker={openSticker}
-          onOpenPack={openPack}
-          onSearch={openSearch}
-          onOpenCustomize={openCustomize}
-        />
-        {(searchOpen || searchMounted) && (
-          <SearchPalette
-            open={searchOpen}
-            onClose={() => setSearchOpen(false)}
-            onOpenTopic={openTopic}
-          />
-        )}
-        {(customizeOpen || customizeMounted) && (
-          <CustomizePanel open={customizeOpen} onClose={closeCustomize} />
-        )}
-
-        <main className="relative flex-1">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={viewKey}
-              initial={{ opacity: 0, y: 22, scale: 0.995 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -14, scale: 0.995 }}
-              transition={{ type: "spring", stiffness: 260, damping: 26 }}
-            >
-              {view.kind === "home" && (
-                <Home
-                  units={UNITS}
-                  onOpenUnit={openUnit}
-                  onOpenSticker={openSticker}
-                  onOpenTopic={openTopic}
-                  onOpenPack={openPack}
-                  onOpenSpec={openSpec}
-                />
-              )}
-
-              {view.kind === "unit" && unit && (
-                <UnitView
-                  unit={unit}
-                  onOpenTopic={(id) => openTopic(unit.code, id)}
-                  onBack={goHome}
-                  onOpenUnit={openUnit}
-                />
-              )}
-
-              {view.kind === "topic" && unit && topic && (
-                <TopicView
-                  unit={unit}
-                  topic={topic}
-                  onBack={() => openUnit(unit.code)}
-                  onOpenTopic={(id) => openTopic(unit.code, id)}
-                  notesSpecRange={topicMeta?.specRange}
-                  onOpenNotes={
-                    topicMeta
-                      ? () =>
-                          setView({
-                            kind: "notes",
-                            code: unit.code,
-                            docId: topicMeta.id,
-                          })
-                      : undefined
-                  }
-                />
-              )}
-
-              {view.kind === "notes" && unit && notesMeta && (
-                <NotesReader
-                  key={view.docId}
-                  docId={view.docId}
-                  unit={unit}
-                  onBack={() => openUnit(unit.code)}
-                  jumpToSpec={view.spec}
-                />
-              )}
-
-              {view.kind === "spec" && (
-                <SpecIndex
-                  onHome={goHome}
-                  onOpenPack={openPack}
-                  onOpenNotes={openNotes}
-                />
-              )}
-
-              {view.kind === "pack" && (
-                <PackView
-                  onHome={goHome}
-                  onOpenSpec={openSpec}
-                  onOpenNotes={openNotes}
-                />
-              )}
-
-              {view.kind === "sticker" && (
-                <StickerBook
-                  units={UNITS}
-                  onBack={goHome}
-                  onOpenUnit={openUnit}
-                  onOpenTopic={openTopic}
-                />
-              )}
-            </motion.div>
-          </AnimatePresence>
-
-          <Footer
-            onOpenUnit={openUnit}
+    <LazyMotion features={domAnimation} strict>
+      <SpecMapProvider>
+        <div className="flex min-h-dvh flex-col">
+          <TopBar
+            view={view}
+            onHome={goHome}
             onOpenSticker={openSticker}
-            onOpenCustomize={openCustomize}
             onOpenPack={openPack}
             onSearch={openSearch}
-            bandFrom={
-              view.kind === "home"
-                ? "var(--home-band-b, var(--color-cream))"
-                : "var(--color-cream)"
-            }
+            onOpenCustomize={openCustomize}
           />
-        </main>
-      </div>
-    </SpecMapProvider>
+          {(searchOpen || searchMounted) && (
+            <SearchPalette
+              open={searchOpen}
+              onClose={() => setSearchOpen(false)}
+              onOpenTopic={openTopic}
+            />
+          )}
+          {(customizeOpen || customizeMounted) && (
+            <CustomizePanel open={customizeOpen} onClose={closeCustomize} />
+          )}
+  
+          <main className="relative flex-1">
+            <AnimatePresence mode="wait">
+              <m.div
+                key={viewKey}
+                initial={{ opacity: 0, y: 22, scale: 0.995 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -14, scale: 0.995 }}
+                transition={{ type: "spring", stiffness: 260, damping: 26 }}
+              >
+                {view.kind === "home" && (
+                  <Home
+                    units={UNITS}
+                    onOpenUnit={openUnit}
+                    onOpenSticker={openSticker}
+                    onOpenTopic={openTopic}
+                    onOpenPack={openPack}
+                    onOpenSpec={openSpec}
+                  />
+                )}
+  
+                {view.kind === "unit" && unit && (
+                  <UnitView
+                    unit={unit}
+                    onOpenTopic={(id) => openTopic(unit.code, id)}
+                    onBack={goHome}
+                    onOpenUnit={openUnit}
+                  />
+                )}
+  
+                {view.kind === "topic" && unit && topic && (
+                  <TopicView
+                    unit={unit}
+                    topic={topic}
+                    onBack={() => openUnit(unit.code)}
+                    onOpenTopic={(id) => openTopic(unit.code, id)}
+                    notesSpecRange={topicMeta?.specRange}
+                    onOpenNotes={
+                      topicMeta
+                        ? () =>
+                            setView({
+                              kind: "notes",
+                              code: unit.code,
+                              docId: topicMeta.id,
+                            })
+                        : undefined
+                    }
+                  />
+                )}
+  
+                {view.kind === "notes" && unit && notesMeta && (
+                  <NotesReader
+                    key={view.docId}
+                    docId={view.docId}
+                    unit={unit}
+                    onBack={() => openUnit(unit.code)}
+                    jumpToSpec={view.spec}
+                  />
+                )}
+  
+                {view.kind === "spec" && (
+                  <SpecIndex
+                    onHome={goHome}
+                    onOpenPack={openPack}
+                    onOpenNotes={openNotes}
+                  />
+                )}
+  
+                {view.kind === "pack" && (
+                  <PackView
+                    onHome={goHome}
+                    onOpenSpec={openSpec}
+                    onOpenNotes={openNotes}
+                  />
+                )}
+  
+                {view.kind === "sticker" && (
+                  <StickerBook
+                    units={UNITS}
+                    onBack={goHome}
+                    onOpenUnit={openUnit}
+                    onOpenTopic={openTopic}
+                  />
+                )}
+              </m.div>
+            </AnimatePresence>
+  
+            <Footer
+              onOpenUnit={openUnit}
+              onOpenSticker={openSticker}
+              onOpenCustomize={openCustomize}
+              onOpenPack={openPack}
+              onSearch={openSearch}
+              bandFrom={
+                view.kind === "home"
+                  ? "var(--home-band-b, var(--color-cream))"
+                  : "var(--color-cream)"
+              }
+            />
+          </main>
+        </div>
+      </SpecMapProvider>
+    </LazyMotion>
   );
 }
