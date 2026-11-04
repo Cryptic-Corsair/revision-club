@@ -45,7 +45,7 @@ import { SpecSectionView } from "./note-section";
    By day the bands are candy tints; after dark both steps are
    flat warm roasts at matched darkness (--note-band-a/b in
    globals.css), and in the classic lab the two steps are the
-   fixed espresso/lemon pair — so every section keeps contrast
+   fixed espresso/cream pair — so every section keeps contrast
    and the highlighter still pops. The wave rides between
    the bands, so the note reads as
    a string of connected rooms rather than one long scroll.
@@ -399,7 +399,7 @@ function NotesReaderBody({
         {/* the old sticky spec rail is gone — the map now lives inside
             the nav itself (see spec-map.tsx) */}
 
-        {/* .note-rooms scopes the classic lab's espresso/lemon pair
+        {/* .note-rooms scopes the classic lab's espresso/cream pair
             (html.classic .note-rooms) to the section bands only — the
             contents chips above stay on the daylight candy walk */}
         <div className="note-rooms mt-8">
