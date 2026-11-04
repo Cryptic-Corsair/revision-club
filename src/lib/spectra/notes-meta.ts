@@ -105,9 +105,9 @@ export const NOTES_META: NotesMeta[] = [
     unitCode: "WCH12",
     topicId: "t10",
     kicker: "Unit 2 · Topic 10 — the complete class note, spec by spec",
-    title: "Halogenoalkanes and alcohols",
-    source: "the complete class note (CHSE Grade 11, Unit 2 · Topic 10, Parts 10B & 10C · 2021, semester 2) — the halogenoalkanes and the alcohols; the spectra half joins later.",
-    specRange: "10.6 → 10.19",
+    title: "Halogenoalkanes, alcohols and spectra",
+    source: "the complete class note (CHSE Grade 11, Unit 2 · Topic 10, Parts 10B, 10C & 10D · 2021/2019, semester 2) — the halogenoalkanes, the alcohols, and the mass spectra; the IR half of the spectra note joins later.",
+    specRange: "10.6 → 10.21",
   },
 ];
 

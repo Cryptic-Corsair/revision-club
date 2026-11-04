@@ -62,6 +62,12 @@ import {
   FigSpectrumBromine,
   FigSpectrumCl2,
   FigSpectrumEthanol,
+  FigMsButane,
+  FigMsPropanal,
+  FigMsEthaneFrags,
+  FigMsIsoC,
+  FigMsIsoBr,
+  FigMsIsoCl,
   FigSpectrumNeon,
   FigSuccIe,
   FigThermo,
@@ -784,6 +790,12 @@ const WIDE_FIGS = new Set([
   "alc-solubility",
   "alc-dehydration",
   "alc-ox-flow",
+  "ms-butane",
+  "ms-propanal",
+  "ms-ethane-frags",
+  "ms-iso-c",
+  "ms-iso-br",
+  "ms-iso-cl",
 ]);
 
 function Figure({
@@ -823,6 +835,24 @@ function Figure({
       break;
     case "spectrum-ethanol":
       node = <FigSpectrumEthanol />;
+      break;
+    case "ms-butane":
+      node = <FigMsButane />;
+      break;
+    case "ms-propanal":
+      node = <FigMsPropanal />;
+      break;
+    case "ms-ethane-frags":
+      node = <FigMsEthaneFrags />;
+      break;
+    case "ms-iso-c":
+      node = <FigMsIsoC />;
+      break;
+    case "ms-iso-br":
+      node = <FigMsIsoBr />;
+      break;
+    case "ms-iso-cl":
+      node = <FigMsIsoCl />;
       break;
     case "orbitals":
       node = <FigOrbitals accent={accent} />;

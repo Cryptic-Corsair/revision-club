@@ -6360,3 +6360,260 @@ export function FigAlcBp({ accent = "#FF6B6B" }: { accent?: string }) {
     </svg>
   );
 }
+
+/* ————— 10.21 · mass spectra of organic molecules ————— */
+
+/* a stick plot with two-line labels: ion formula over the m/z value.
+   Used by the organic-spectra figures in Topic 10 (WCH12). */
+function OrgSpectrum({
+  w = 560,
+  h = 260,
+  peaks,
+  xTicks,
+  xMax,
+  xMin = 0,
+}: {
+  peaks: { x: number; h: number; ion?: string; mz: string; color?: string }[];
+  xTicks: number[];
+  xMax: number;
+  xMin?: number;
+  w?: number;
+  h?: number;
+}) {
+  const pad = { l: 56, r: 20, t: 30, b: 42 };
+  const plotW = w - pad.l - pad.r;
+  const plotH = h - pad.t - pad.b;
+  const X = (v: number) => pad.l + ((v - xMin) / (xMax - xMin)) * plotW;
+  const Y = (v: number) => h - pad.b - (v / 110) * plotH;
+  return (
+    <ChartFrame w={w} h={h} xLabel="m/z" yLabel="relative abundance">
+      {[0, 50, 100].map((t) => (
+        <g key={t}>
+          <line x1={pad.l - 6} y1={Y(t)} x2={pad.l} y2={Y(t)} stroke={INK} strokeWidth="2" />
+          <text x={pad.l - 10} y={Y(t) + 4} textAnchor="end" fontSize="11" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+            {t}
+          </text>
+        </g>
+      ))}
+      {xTicks.map((t, i) => (
+        <text key={i} x={X(t)} y={h - pad.b + 18} textAnchor="middle" fontSize="11" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+          {t}
+        </text>
+      ))}
+      {peaks.map((p, i) => (
+        <g key={i}>
+          <line x1={X(p.x)} y1={Y(0)} x2={X(p.x)} y2={Y(p.h)} stroke={p.color ?? INK} strokeWidth="4.5" strokeLinecap="round" />
+          {p.ion && (
+            <text x={X(p.x)} y={Y(p.h) - 22} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={p.color ?? INK} fontFamily="var(--font-body)">
+              {p.ion}
+            </text>
+          )}
+          <text x={X(p.x)} y={Y(p.h) - 7} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">
+            {p.mz}
+          </text>
+        </g>
+      ))}
+    </ChartFrame>
+  );
+}
+
+export function FigMsButane() {
+  return (
+    <OrgSpectrum
+      w={620}
+      xMax={90}
+      xTicks={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90]}
+      peaks={[
+        { x: 29, h: 62, ion: "CH₃CH₂⁺", mz: "29" },
+        { x: 43, h: 100, ion: "CH₃CH₂CH₂⁺", mz: "43" },
+        { x: 58, h: 22, ion: "C₄H₁₀⁺", mz: "58", color: "#FF6B6B" },
+      ]}
+    />
+  );
+}
+
+export function FigMsPropanal() {
+  return (
+    <OrgSpectrum
+      w={620}
+      xMax={90}
+      xTicks={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90]}
+      peaks={[
+        { x: 29, h: 100, ion: "[CHO]⁺", mz: "29", color: "#12B886" },
+        { x: 58, h: 26, ion: "[CH₃CH₂CHO]⁺", mz: "58", color: "#FF6B6B" },
+      ]}
+    />
+  );
+}
+
+export function FigMsEthaneFrags() {
+  const bond = { stroke: INK, strokeWidth: 2.6 } as const;
+  /* displayed CH₃– group: three H's on the free sides (the fourth
+     direction is the C–C bond, drawn separately). side = which
+     horizontal side keeps its hydrogen. */
+  const CH3 = ({ x, y, side }: { x: number; y: number; side: "l" | "r" }) => {
+    const sx = side === "r" ? 19 : -19;
+    const hx = side === "r" ? 27 : -27;
+    return (
+      <g>
+        <line x1={x} y1={y - 9} x2={x} y2={y - 24} {...bond} />
+        <line x1={x} y1={y + 9} x2={x} y2={y + 24} {...bond} />
+        <line x1={x + (side === "r" ? 8 : -8)} y1={y + 5} x2={x + sx} y2={y + 12} {...bond} />
+        <text x={x} y={y + 6} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+        <text x={x} y={y - 29} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+        <text x={x} y={y + 43} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+        <text x={x + hx} y={y + 17} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      </g>
+    );
+  };
+  return (
+    <svg viewBox="0 0 660 330" className="w-full" role="img" aria-label="Fragmentation of the ethane molecular ion">
+      {/* reactant: displayed ethane + electron */}
+      <CH3 x={170} y={148} side="l" />
+      <line x1={190} y1={148} x2={218} y2={148} {...bond} />
+      <CH3 x={238} y={148} side="r" />
+      <text x={318} y={136} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">+ e⁻</text>
+      <text x={318} y={158} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">bombardment</text>
+      {/* arrow */}
+      <line x1={372} y1={148} x2={414} y2={148} stroke={INK} strokeWidth="3" strokeLinecap="round" />
+      <path d="M 414 148 l -10 -6 v 12 z" fill={INK} />
+      {/* outcome 1 · molecular ion */}
+      <g>
+        <rect x={438} y={30} width={200} height={64} rx={14} fill={tint("#FF6B6B", 14)} stroke={INK} strokeWidth="2.4" />
+        <text x={538} y={55} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">[CH₃CH₃]•⁺</text>
+        <text x={538} y={78} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">m/z = 30 · molecular ion</text>
+      </g>
+      {/* outcome 2 · C–C bond breaks, charge on the ethyl side */}
+      <g>
+        <rect x={438} y={128} width={200} height={64} rx={14} fill={tint("#12B886", 14)} stroke={INK} strokeWidth="2.4" />
+        <text x={538} y={153} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">[CH₃CH₂]⁺  +  H•</text>
+        <text x={538} y={176} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">m/z = 29 · detected</text>
+      </g>
+      {/* outcome 3 · further loss, neutral methyl escapes */}
+      <g>
+        <rect x={438} y={226} width={200} height={64} rx={14} fill={tint("#9775FA", 14)} stroke={INK} strokeWidth="2.4" />
+        <text x={538} y={251} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">[CH₃]⁺  +  •CH₃</text>
+        <text x={538} y={274} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">m/z = 15 · (not detected by MS)</text>
+      </g>
+      {/* leader from molecule to the molecular-ion box */}
+      <line x1={430} y1={140} x2={438} y2={70} stroke={SOFT} strokeWidth="2" strokeDasharray="5 5" />
+      <text x={330} y={312} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        one electron is lost first; the beam's energy then snaps covalent bonds — only the charged pieces are detected
+      </text>
+    </svg>
+  );
+}
+
+export function FigMsIsoC() {
+  /* three mini stick plots: M and the M+1 stub, drawn to scale */
+  const Mini = ({ x, label, m, mz, m1, mz1 }: { x: number; label: string; m: number; mz: string; m1: number; mz1: string }) => {
+    const top = 190;
+    const base = 158;
+    const Y = (v: number) => base - (v / 115) * 108;
+    return (
+      <g transform={`translate(${x},0)`}>
+        <text x={90} y={26} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{label}</text>
+        <line x1={22} y1={base} x2={158} y2={base} stroke={INK} strokeWidth="2.6" strokeLinecap="round" />
+        <line x1={58} y1={base} x2={58} y2={Y(m)} stroke={INK} strokeWidth="4.5" strokeLinecap="round" />
+        <line x1={122} y1={base} x2={122} y2={Y(m1)} stroke={SOFT} strokeWidth="4.5" strokeLinecap="round" />
+        <text x={58} y={Y(m) - 7} textAnchor="middle" fontSize="11" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{mz}</text>
+        <text x={122} y={Y(m1) - 7} textAnchor="middle" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">{mz1}</text>
+        <text x={58} y={top + 14} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">M</text>
+        <text x={122} y={top + 14} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">M+1</text>
+      </g>
+    );
+  };
+  return (
+    <svg viewBox="0 0 660 212" className="w-full" role="img" aria-label="M and M+1 peaks for one, two and ten carbon atoms">
+      <Mini x={10} label="CH₄ · 1 carbon" m={100} mz="16" m1={3} mz1="17" />
+      <Mini x={230} label="C₂H₆ · 2 carbons" m={100} mz="30" m1={6} mz1="31" />
+      <Mini x={450} label="C₁₀H₂₂ · 10 carbons" m={100} mz="142" m1={10} mz1="143" />
+    </svg>
+  );
+}
+
+export function FigMsIsoBr() {
+  const Panel = ({ x, title, ratio, bars }: { x: number; title: string; ratio: string; bars: { dx: number; h: number; lab: string }[] }) => {
+    const base = 150;
+    const Y = (v: number) => base - (v / 115) * 96;
+    return (
+      <g transform={`translate(${x},0)`}>
+        <text x={155} y={26} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{title}</text>
+        <line x1={30} y1={base} x2={280} y2={base} stroke={INK} strokeWidth="2.6" strokeLinecap="round" />
+        {bars.map((b, i) => (
+          <g key={i}>
+            <line x1={b.dx} y1={base} x2={b.dx} y2={Y(b.h)} stroke={INK} strokeWidth="4.5" strokeLinecap="round" />
+            <text x={b.dx} y={Y(b.h) - 8} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{b.lab}</text>
+          </g>
+        ))}
+        <text x={155} y={184} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">intensity ratio {ratio}</text>
+      </g>
+    );
+  };
+  return (
+    <svg viewBox="0 0 660 212" className="w-full" role="img" aria-label="Bromine isotope patterns: one and two bromine atoms">
+      <Panel
+        x={0}
+        title="One bromine atom in molecular ion"
+        ratio="1:1"
+        bars={[
+          { dx: 90, h: 100, lab: "M" },
+          { dx: 220, h: 100, lab: "M+2" },
+        ]}
+      />
+      <Panel
+        x={330}
+        title="Two bromine atoms in molecular ion"
+        ratio="1:2:1"
+        bars={[
+          { dx: 80, h: 50, lab: "M" },
+          { dx: 155, h: 100, lab: "M+2" },
+          { dx: 230, h: 50, lab: "M+4" },
+        ]}
+      />
+    </svg>
+  );
+}
+
+export function FigMsIsoCl() {
+  const Panel = ({ x, title, ratio, bars }: { x: number; title: string; ratio: string; bars: { dx: number; h: number; lab: string }[] }) => {
+    const base = 150;
+    const Y = (v: number) => base - (v / 115) * 96;
+    return (
+      <g transform={`translate(${x},0)`}>
+        <text x={155} y={26} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{title}</text>
+        <line x1={30} y1={base} x2={280} y2={base} stroke={INK} strokeWidth="2.6" strokeLinecap="round" />
+        {bars.map((b, i) => (
+          <g key={i}>
+            <line x1={b.dx} y1={base} x2={b.dx} y2={Y(b.h)} stroke={INK} strokeWidth="4.5" strokeLinecap="round" />
+            <text x={b.dx} y={Y(b.h) - 8} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{b.lab}</text>
+          </g>
+        ))}
+        <text x={155} y={184} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">intensity ratio {ratio}</text>
+      </g>
+    );
+  };
+  return (
+    <svg viewBox="0 0 660 212" className="w-full" role="img" aria-label="Chlorine isotope patterns: one and two chlorine atoms">
+      <Panel
+        x={0}
+        title="One chlorine atom in molecular ion"
+        ratio="3:1"
+        bars={[
+          { dx: 90, h: 100, lab: "M" },
+          { dx: 220, h: 33, lab: "M+2" },
+        ]}
+      />
+      <Panel
+        x={330}
+        title="Two chlorine atoms in molecular ion"
+        ratio="9:6:1"
+        bars={[
+          { dx: 80, h: 100, lab: "M" },
+          { dx: 155, h: 67, lab: "M+2" },
+          { dx: 230, h: 11, lab: "M+4" },
+        ]}
+      />
+    </svg>
+  );
+}

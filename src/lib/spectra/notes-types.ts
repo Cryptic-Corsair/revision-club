@@ -121,7 +121,13 @@ export type FigureKind =
   | "alc-reflux"
   | "alc-fractional"
   | "alc-funnel"
-  | "alc-bp";
+  | "alc-bp"
+  | "ms-butane"
+  | "ms-propanal"
+  | "ms-ethane-frags"
+  | "ms-iso-c"
+  | "ms-iso-br"
+  | "ms-iso-cl";
 
 export type NotesBlock =
   | { k: "p"; text: string }
