@@ -126,19 +126,17 @@ html.dark {
   --color-ink-faint: #bb9c7c; /* lifted — small labels stay legible (5.0:1 on paper) */
   --color-cocoa: #140d05; /* footer — the darkest anchor */
   --tint-base: #4f3a24;
-  /* the study ground — after dark, section bands stop borrowing
-     candy (a tint only muddies a roast) and alternate by hue at
-     matched darkness instead: A = deep golden cocoa, B = a half
-     step lifted and red-shifted toward ember. The alternation
-     still lets neighbours read as different places, but body ink
-     keeps ~14:1 on A and ~13:1 on B and the honey marker pops
-     ~7–9:1 on both — every section studies like the deep cocoa
-     room this pair was tuned against (#2a2119). Home's seams
-     ride the same pair. */
-  --note-band-a: #291d10;
-  --note-band-b: #342212;
-  --home-band-a: var(--note-band-a);
-  --home-band-b: var(--note-band-b);
+  /* the study ground — after dark, the note sections hold one fixed
+     pair, chosen once and never rotated: A = the page espresso
+     (#2c2013) itself, B = a half step lifted into chestnut. Body ink
+     keeps ~13.5:1 on A and ~11.7:1 on B and the honey marker pops
+     ~11:1 / ~9.7:1 — every section studies like the deep cocoa room.
+     Home's seams stay pinned to the original pair below so only the
+     note sections wear the new ground. */
+  --note-band-a: #2c2013;
+  --note-band-b: #3a2a17;
+  --home-band-a: #291d10;
+  --home-band-b: #342212;
   --edge: rgb(0 0 0 / 0.5);
   color-scheme: dark;
 }
@@ -150,13 +148,13 @@ html.dark {
    tones change; text inks stay put, so contrast holds in every roast. */
 html.dark[data-mood="1"] {
   /* roast 1 — "dark roast", the neutral one: greyer, less orange.
-     Same shape as roast 0; the note bands follow the greyer hue. */
+     Same shape as roast 0; the note bands keep the fixed pair. */
   --color-cream: #292421;
   --color-paper: #3b342d;
   --color-cocoa: #110f0c;
   --tint-base: #483f35;
-  --note-band-a: #272320;
-  --note-band-b: #322b26;
+  --home-band-a: #272320;
+  --home-band-b: #322b26;
 }
 html.dark[data-mood="2"] {
   /* roast 2 — "mahogany", a red-leaning chestnut, same shape */
@@ -164,8 +162,8 @@ html.dark[data-mood="2"] {
   --color-paper: #452819;
   --color-cocoa: #140a06;
   --tint-base: #52311f;
-  --note-band-a: #2b1a10;
-  --note-band-b: #37211a;
+  --home-band-a: #2b1a10;
+  --home-band-b: #37211a;
 }
 html.dark[data-mood="3"] {
   /* roast 3 — "midnight cocoa", the deepest of the set, same shape */
@@ -173,8 +171,8 @@ html.dark[data-mood="3"] {
   --color-paper: #3a2c20;
   --color-cocoa: #0f0b07;
   --tint-base: #42311f;
-  --note-band-a: #251c15;
-  --note-band-b: #31241c;
+  --home-band-a: #251c15;
+  --home-band-b: #31241c;
 }
 
 
