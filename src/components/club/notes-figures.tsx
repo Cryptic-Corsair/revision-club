@@ -5412,3 +5412,425 @@ export function FigEqContact({ accent = "#FF6B6B" }: { accent?: string }) {
     </svg>
   );
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Topic 10 · halogenoalkane figures — isomer pairs, the three
+   classes, the C–X bond ladder, carbocation stability, the reflux
+   rig, the substitution mechanisms and the hydrolysis experiment
+   ═══════════════════════════════════════════════════════════════ */
+
+/* skeletal zigzag stroke */
+function hxSkel(pts: [number, number][], c = INK, w = 3) {
+  return (
+    <polyline
+      points={pts.map((p) => p.join(",")).join(" ")}
+      fill="none"
+      stroke={c}
+      strokeWidth={w}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  );
+}
+
+/* ————— 10.6 · chain vs position isomerism ————— */
+
+export function FigHxIsomers({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 860 320" className="w-full" role="img" aria-label="Skeletal formulas comparing chain isomerism and position isomerism of bromobutane. Chain isomerism: 1-bromobutane and 1-bromo-2-methylpropane share the molecular formula C4H9Br, but one backbone is a straight four-carbon chain and the other is branched. Position isomerism: 1-bromobutane and 2-bromobutane keep the same straight backbone while the bromine sits on carbon one or carbon two.">
+      <line x1={430} y1={28} x2={430} y2={300} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      {/* ————— chain isomerism ————— */}
+      <text x={215} y={44} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">
+        CHAIN ISOMERISM — the backbone branches
+      </text>
+      {/* 1-bromobutane */}
+      {hxSkel([[70, 180], [120, 150], [170, 180], [220, 150]])}
+      <line x1={70} y1={180} x2={70} y2={210} stroke={accent} strokeWidth={3} strokeLinecap="round" />
+      <text x={70} y={234} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">Br</text>
+      <text x={145} y={266} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">1-bromobutane</text>
+      {/* 1-bromo-2-methylpropane */}
+      {hxSkel([[290, 180], [340, 150], [390, 180]])}
+      <line x1={340} y1={150} x2={340} y2={120} stroke={accent} strokeWidth={3} strokeLinecap="round" />
+      <line x1={290} y1={180} x2={290} y2={210} stroke={accent} strokeWidth={3} strokeLinecap="round" />
+      <text x={290} y={234} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">Br</text>
+      <text x={340} y={266} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">1-bromo-2-methylpropane</text>
+      <text x={215} y={298} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">same molecular formula — C₄H₉Br</text>
+      {/* ————— position isomerism ————— */}
+      <text x={645} y={44} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">
+        POSITION ISOMERISM — the halogen slides
+      </text>
+      {/* 1-bromobutane again */}
+      {hxSkel([[480, 180], [530, 150], [580, 180], [630, 150]])}
+      <line x1={480} y1={180} x2={480} y2={210} stroke={accent} strokeWidth={3} strokeLinecap="round" />
+      <text x={480} y={234} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">Br</text>
+      <text x={555} y={266} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">1-bromobutane</text>
+      {/* 2-bromobutane */}
+      {hxSkel([[690, 180], [740, 150], [790, 180], [840, 150]])}
+      <line x1={740} y1={150} x2={740} y2={122} stroke={accent} strokeWidth={3} strokeLinecap="round" />
+      <text x={740} y={110} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">Br</text>
+      <text x={765} y={266} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">2-bromobutane</text>
+      <text x={645} y={298} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">same molecular formula — C₄H₉Br</text>
+    </svg>
+  );
+}
+
+/* ————— 10.7 · primary, secondary, tertiary ————— */
+
+export function FigHxClasses({ accent = "#FF6B6B" }: { accent?: string }) {
+  const cross = (cx: number, cy: number, top: string, left: string, right: string, bottom: string, halogen: string) => (
+    <g>
+      {/* bonds first, letters on top */}
+      <g stroke={INK} strokeWidth={2.4} strokeLinecap="round">
+        <line x1={cx} y1={cy - 17} x2={cx} y2={cy - 44} />
+        <line x1={cx} y1={cy + 17} x2={cx} y2={cy + 44} />
+        <line x1={cx - 17} y1={cy} x2={cx - 44} y2={cy} />
+        <line x1={cx + 17} y1={cy} x2={cx + 44} y2={cy} />
+      </g>
+      <circle cx={cx} cy={cy} r={17} fill={tint(accent, 25)} />
+      <text x={cx} y={cy + 5} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+      <text x={cx} y={cy - 50} textAnchor="middle" fontSize={top.length > 2 ? 11.5 : 13.5} fontWeight="800" fill={top === halogen ? accent : INK} fontFamily="var(--font-body)">{top}</text>
+      <text x={cx} y={cy + 62} textAnchor="middle" fontSize={bottom.length > 2 ? 11.5 : 13.5} fontWeight="800" fill={bottom === halogen ? accent : INK} fontFamily="var(--font-body)">{bottom}</text>
+      <text x={cx - 50} y={cy + 5} textAnchor="end" fontSize={left.length > 2 ? 11.5 : 13.5} fontWeight="800" fill={left === halogen ? accent : INK} fontFamily="var(--font-body)">{left}</text>
+      <text x={cx + 50} y={cy + 5} textAnchor="start" fontSize={right.length > 2 ? 11.5 : 13.5} fontWeight="800" fill={right === halogen ? accent : INK} fontFamily="var(--font-body)">{right}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 860 400" className="w-full" role="img" aria-label="Generic structures of primary, secondary and tertiary halogenoalkanes with the class note's worked examples. In a primary halogenoalkane the carbon carrying the halogen is attached to only one alkyl group, as in 1-chloroethane. In a secondary halogenoalkane it is joined to two alkyl groups, as in 2-bromopropane. In a tertiary halogenoalkane it is joined to three alkyl groups, as in 2-iodo-2-methylpropane.">
+      <line x1={287} y1={30} x2={287} y2={376} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={573} y1={30} x2={573} y2={376} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      {/* primary */}
+      <text x={145} y={48} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">PRIMARY</text>
+      <text x={145} y={66} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">one alkyl group</text>
+      {cross(145, 150, "X", "H", "H", "R", "X")}
+      {cross(145, 300, "H", "H₃C", "Cl", "H", "Cl")}
+      <text x={145} y={374} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">1-chloroethane</text>
+      {/* secondary */}
+      <text x={430} y={48} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">SECONDARY</text>
+      <text x={430} y={66} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">two alkyl groups</text>
+      {cross(430, 150, "X", "R", "H", "R", "X")}
+      {cross(430, 300, "CH₃", "H₃C", "Br", "H", "Br")}
+      <text x={430} y={374} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">2-bromopropane</text>
+      {/* tertiary */}
+      <text x={715} y={48} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">TERTIARY</text>
+      <text x={715} y={66} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">three alkyl groups</text>
+      {cross(715, 150, "X", "R", "R", "R", "X")}
+      {cross(715, 300, "CH₃", "H₃C", "I", "CH₃", "I")}
+      <text x={715} y={374} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">2-iodo-2-methylpropane</text>
+      <text x={430} y={396} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">R = an alkyl group · X = the halogen</text>
+    </svg>
+  );
+}
+
+/* ————— 10.13 · the C–X bond ladder ————— */
+
+export function FigHxBond({ accent = "#FF6B6B" }: { accent?: string }) {
+  const row = (y: number, name: string, xLen: number, hal: string, kj: number) => (
+    <g>
+      <text x={235} y={y + 5} textAnchor="end" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{name}</text>
+      <text x={258} y={y + 6} textAnchor="middle" fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+      <line x1={272} y1={y} x2={272 + xLen} y2={y} stroke={INK} strokeWidth={3.4} strokeLinecap="round" />
+      <text x={272 + xLen + 14} y={y + 6} fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{hal}</text>
+      <text x={258} y={y - 22} textAnchor="middle" fontSize="11" fontWeight="800" fill={accent} fontFamily="var(--font-body)">δ+</text>
+      <text x={272 + xLen + 14} y={y - 22} textAnchor="middle" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      <text x={272 + xLen / 2 + 6} y={y + 26} textAnchor="middle" fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">+{kj} kJ mol⁻¹</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 620 320" className="w-full max-w-xl" role="img" aria-label="The carbon halogen bond ladder: chloroalkane, bromoalkane and iodoalkane drawn with bonds of increasing length, each polarised with carbon delta positive and the halogen delta negative. Mean bond enthalpies fall from 346 to 290 to 228 kilojoules per mole down the ladder, so the rate of reaction increases as the bond becomes longer and hence weaker.">
+      {row(70, "Chloroalkane", 40, "Cl", 346)}
+      {row(155, "Bromoalkane", 95, "Br", 290)}
+      {row(240, "Iodoalkane", 150, "I", 228)}
+      {t3Arrow(520, 52, 520, 252, accent, 3.6)}
+      <text x={548} y={152} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)" transform="rotate(-90 548 152)">
+        rate of the reaction increases
+      </text>
+      <text x={280} y={302} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        the bond becomes longer — and hence weaker — so less energy is required to break it
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 10.12 · carbocation stability chain ————— */
+
+export function FigHxCarbocation({ accent = "#FF6B6B" }: { accent?: string }) {
+  const ion = (cx: number, top: string, left: string, bottom: string) => (
+    <g>
+      <g stroke={INK} strokeWidth={2.4} strokeLinecap="round">
+        <line x1={cx} y1={124} x2={cx} y2={100} />
+        <line x1={cx} y1={156} x2={cx} y2={180} />
+        <line x1={cx - 17} y1={140} x2={cx - 46} y2={140} />
+      </g>
+      <circle cx={cx} cy={140} r={17} fill={tint(accent, 25)} />
+      <text x={cx} y={145} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C⁺</text>
+      <text x={cx} y={top.length > 2 ? 92 : 90} textAnchor="middle" fontSize={top.length > 2 ? 11.5 : 13.5} fontWeight="800" fill={INK} fontFamily="var(--font-body)">{top}</text>
+      <text x={cx} y={200} textAnchor="middle" fontSize={bottom.length > 2 ? 11.5 : 13.5} fontWeight="800" fill={INK} fontFamily="var(--font-body)">{bottom}</text>
+      <text x={cx - 52} y={145} textAnchor="end" fontSize={left.length > 2 ? 11.5 : 13.5} fontWeight="800" fill={INK} fontFamily="var(--font-body)">{left}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 860 300" className="w-full" role="img" aria-label="The carbocation stability chain: tertiary, secondary, primary and methyl carbocations drawn structure by structure and separated by greater-than signs. Each extra alkyl group pushes electron density towards the positive carbon, so the tertiary carbocation is the most stable and the methyl carbocation the least.">
+      {ion(125, "CH₃", "CH₃", "CH₃")}
+      <text x={245} y={152} textAnchor="middle" fontSize="30" fontWeight="800" fill={FAINT} fontFamily="var(--font-body)">&gt;</text>
+      {ion(365, "CH₃", "CH₃", "H")}
+      <text x={485} y={152} textAnchor="middle" fontSize="30" fontWeight="800" fill={FAINT} fontFamily="var(--font-body)">&gt;</text>
+      {ion(605, "H", "CH₃", "H")}
+      <text x={702} y={152} textAnchor="middle" fontSize="30" fontWeight="800" fill={FAINT} fontFamily="var(--font-body)">&gt;</text>
+      {ion(800, "H", "H", "H")}
+      <text x={125} y={236} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Tertiary</text>
+      <text x={365} y={236} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Secondary</text>
+      <text x={605} y={236} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Primary</text>
+      <text x={800} y={236} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">methyl</text>
+      {t3Arrow(770, 262, 160, 262, INK, 2.4)}
+      <text x={465} y={286} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        carbocation stability increases — more alkyl groups pushing electron density
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 10.8 · heating under reflux ————— */
+
+export function FigHxReflux({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 460 590" className="w-full max-w-sm" role="img" aria-label="Heating under reflux. A round-bottomed flask sits in an electric heater with the reaction mixture boiling inside. Above it the condenser carries cooling water entering at the bottom and leaving at the top, so vapour rises into the cold jacket, condenses, and drips back into the flask. Nothing escapes, so the heating can be carried out for a longer period of time.">
+      {/* condenser — outer jacket + inner tube */}
+      <rect x={206} y={40} width={48} height={290} rx={12} fill={tint("#4DABF7", 14)} stroke={INK} strokeWidth={2.8} />
+      <rect x={222} y={40} width={16} height={290} rx={8} fill={PAPER} stroke={INK} strokeWidth={2.4} />
+      {/* water in low, out high */}
+      {t3Arrow(206, 82, 158, 68, "#4DABF7", 2.6)}
+      <text x={152} y={64} textAnchor="end" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Water out</text>
+      {t3Arrow(318, 276, 258, 290, "#4DABF7", 2.6)}
+      <text x={324} y={282} textAnchor="start" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Water in</text>
+      {/* vapour rising inside the inner tube */}
+      <line x1={230} y1={330} x2={230} y2={68} stroke={accent} strokeWidth={2.6} strokeDasharray="7 7" strokeLinecap="round" />
+      <polygon points="230,52 223,68 237,68" fill={accent} />
+      <line x1={262} y1={146} x2={244} y2={146} stroke={FAINT} strokeWidth={1.6} />
+      <text x={268} y={150} textAnchor="start" fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">vapour rises</text>
+      {/* condenser label */}
+      <text x={150} y={190} textAnchor="end" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">condenser</text>
+      <line x1={156} y1={186} x2={204} y2={182} stroke={FAINT} strokeWidth={1.6} />
+      {/* neck + dripping condensate */}
+      <rect x={216} y={330} width={28} height={48} fill={PAPER} stroke={INK} strokeWidth={2.4} />
+      <circle cx={222} cy={344} r={2.4} fill={INK} />
+      <circle cx={238} cy={352} r={2.4} fill={INK} />
+      <circle cx={229} cy={362} r={2.4} fill={INK} />
+      {/* round-bottomed flask with boiling liquid */}
+      <circle cx={230} cy={428} r={56} fill={PAPER} stroke={INK} strokeWidth={3} />
+      <path d="M 177 446 A 56 56 0 0 0 283 446 Z" fill={tint("#F59F00", 30)} />
+      <text x={302} y={432} textAnchor="start" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">round-bottomed flask</text>
+      <line x1={298} y1={428} x2={288} y2={428} stroke={FAINT} strokeWidth={1.6} />
+      {/* electric heater */}
+      <rect x={172} y={492} width={116} height={20} rx={5} fill={FAINT} opacity={0.25} stroke={INK} strokeWidth={2.2} />
+      <path d="M 202 486 q 4 -7 8 0" fill="none" stroke={accent} strokeWidth={2} strokeLinecap="round" />
+      <path d="M 242 486 q 4 -7 8 0" fill="none" stroke={accent} strokeWidth={2} strokeLinecap="round" />
+      <text x={230} y={534} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">electric heater</text>
+      <text x={230} y={564} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Heat under reflux</text>
+    </svg>
+  );
+}
+
+/* ————— 10.8 · the reactions crossroads ————— */
+
+export function FigHxScheme({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 780 420" className="w-full" role="img" aria-label="A reaction map summarising the class note's chemistry of a halogenoalkane. Bromobutane sits in the centre with four exits: with ethanolic potassium hydroxide under reflux it eliminates to the alkene C4H8; with aqueous potassium hydroxide under reflux it substitutes to the alcohol C4H9OH; with alcoholic ammonia under pressure in a sealed tube it substitutes to the amine C4H9NH2; and with potassium cyanide in aqueous ethanol under reflux it substitutes to the nitrile C4H9CN, growing the carbon chain by one carbon.">
+      {/* hub */}
+      <rect x={300} y={180} width={180} height={60} rx={30} fill={tint(accent, 22)} />
+      <text x={390} y={217} textAnchor="middle" fontSize="19" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C₄H₉Br</text>
+      <text x={390} y={270} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the δ+ carbon draws nucleophiles in</text>
+      {/* up-left — elimination to the alkene */}
+      {t3Arrow(320, 178, 188, 92, accent, 3.2)}
+      <text x={115} y={66} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C₄H₈</text>
+      <text x={115} y={90} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">ethanolic KOH — reflux</text>
+      <text x={115} y={108} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">elimination</text>
+      {/* up-right — substitution to the nitrile */}
+      {t3Arrow(460, 178, 592, 92, accent, 3.2)}
+      <text x={665} y={66} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C₄H₉CN</text>
+      <text x={665} y={90} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">KCN (aq/alc) — reflux</text>
+      <text x={665} y={108} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">substitution — the chain grows by one C</text>
+      {/* right — substitution to the alcohol */}
+      {t3Arrow(486, 210, 592, 210, accent, 3.2)}
+      <text x={676} y={216} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C₄H₉OH</text>
+      <text x={676} y={186} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">substitution</text>
+      <text x={676} y={242} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">aqueous KOH or NaOH — reflux</text>
+      {/* down-left — substitution to the amine */}
+      {t3Arrow(320, 242, 188, 328, accent, 3.2)}
+      <text x={115} y={356} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C₄H₉NH₂</text>
+      <text x={115} y={380} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">alcoholic NH₃ — pressure, sealed tube</text>
+      <text x={115} y={332} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">substitution</text>
+    </svg>
+  );
+}
+
+/* ————— 10.10 · the hydrolysis experiment ————— */
+
+export function FigHxHydrolysis({ accent = "#FF6B6B" }: { accent?: string }) {
+  const WHITE = "#E9ECEF";
+  const CREAM = "#F2E3BF";
+  const YELLOW = "#F6D34A";
+  const tube = (cx: number, ppt: string, whiteStroke: boolean) => (
+    <g>
+      <rect x={cx - 14} y={146} width={28} height={92} rx={11} fill={tint(accent, 16)} opacity={0.75} />
+      <rect x={cx - 14} y={196} width={28} height={42} rx={11} fill={ppt} stroke={whiteStroke ? SOFT : "none"} strokeWidth={whiteStroke ? 1.5 : 0} />
+      <rect x={cx - 19} y={96} width={38} height={150} rx={17} fill="none" stroke={INK} strokeWidth={2.6} />
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 860 380" className="w-full" role="img" aria-label="The hydrolysis rate experiment. Three test tubes stand in a water bath at 60 degrees Celsius, each holding 1 cubic centimetre of aqueous silver nitrate and 2 cubic centimetres of ethanol. Two drops of chlorobutane, bromobutane and iodobutane are added to the first, second and third tubes. As each halogenoalkane hydrolyses, the halide ion meets silver ions and a precipitate forms: silver chloride white, silver bromide cream and silver iodide yellow. The faster the precipitate appears, the faster the hydrolysis.">
+      {/* the water bath */}
+      <rect x={50} y={120} width={330} height={210} rx={16} fill="none" stroke={INK} strokeWidth={3} />
+      <rect x={56} y={168} width={318} height={156} rx={12} fill={tint("#4DABF7", 14)} />
+      <path d="M 62 168 q 14 -8 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0" fill="none" stroke={tint("#4DABF7", 45)} strokeWidth={2.2} />
+      <text x={215} y={84} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">aqueous AgNO₃ (1 cm³) + ethanol (2 cm³)</text>
+      {tube(120, WHITE, true)}
+      {tube(215, CREAM, false)}
+      {tube(310, YELLOW, false)}
+      <text x={120} y={272} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">chlorobutane</text>
+      <text x={215} y={272} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">bromobutane</text>
+      <text x={310} y={272} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">iodobutane</text>
+      <text x={215} y={354} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">water bath — 60 °C</text>
+      <line x1={430} y1={40} x2={430} y2={344} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      {/* the three observations */}
+      <rect x={470} y={92} width={56} height={56} rx={14} fill={WHITE} stroke={SOFT} strokeWidth={2} />
+      <text x={560} y={114} textAnchor="start" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">White ppt (AgCl) — chloroalkane</text>
+      <text x={560} y={134} textAnchor="start" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the slowest precipitate</text>
+      <rect x={470} y={167} width={56} height={56} rx={14} fill={CREAM} stroke={SOFT} strokeWidth={1} />
+      <text x={560} y={189} textAnchor="start" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cream ppt (AgBr) — bromoalkane</text>
+      <text x={560} y={209} textAnchor="start" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">in between</text>
+      <rect x={470} y={242} width={56} height={56} rx={14} fill={YELLOW} stroke={SOFT} strokeWidth={1} />
+      <text x={560} y={264} textAnchor="start" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Yellow ppt (AgI) — iodoalkane</text>
+      <text x={560} y={284} textAnchor="start" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the first to appear</text>
+      <text x={660} y={340} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the faster the precipitate appears, the faster the hydrolysis</text>
+    </svg>
+  );
+}
+
+/* ————— 10.9 · SN2 with hydroxide ————— */
+
+export function FigHxSn2Oh({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 860 360" className="w-full" role="img" aria-label="Nucleophilic substitution of bromoethane by hydroxide, drawn as the class note shows it. On the left the carbon carrying bromine is delta positive and bromine delta negative. The hydroxide ion donates a lone pair to the electron deficient carbon while the carbon bromine bonding pair moves out onto bromine. On the right ethanol and a bromide ion form. The carbon bromine bond has broken heterolytically, with bromine keeping both electrons.">
+      {/* reactant — bromoethane */}
+      <g stroke={INK} strokeWidth={2.4} strokeLinecap="round">
+        <line x1={330} y1={163} x2={330} y2={133} />
+        <line x1={330} y1={197} x2={330} y2={227} />
+        <line x1={313} y1={180} x2={283} y2={180} />
+        <line x1={347} y1={180} x2={377} y2={180} />
+      </g>
+      <circle cx={330} cy={180} r={17} fill={tint(accent, 25)} />
+      <text x={330} y={185} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+      <text x={330} y={123} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={330} y={243} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={277} y={185} textAnchor="end" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H₃C</text>
+      <text x={391} y={185} textAnchor="start" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Br</text>
+      <text x={296} y={156} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">δ+</text>
+      <text x={428} y={176} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      {/* the attacking hydroxide with its lone pair */}
+      <text x={255} y={290} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">HO⁻</text>
+      <circle cx={252} cy={268} r={2.2} fill={INK} />
+      <circle cx={260} cy={268} r={2.2} fill={INK} />
+      {curlyPair(261, 262, 54, -66, accent)}
+      <text x={255} y={316} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">nucleophile</text>
+      {/* the leaving pair */}
+      {curlyPair(362, 178, 34, -26, INK)}
+      <text x={410} y={140} textAnchor="start" fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the C–Br pair leaves</text>
+      {/* reaction arrow */}
+      {t3Arrow(455, 180, 515, 180, INK, 3.4)}
+      {/* product — ethanol */}
+      <g stroke={INK} strokeWidth={2.4} strokeLinecap="round">
+        <line x1={640} y1={163} x2={640} y2={133} />
+        <line x1={640} y1={197} x2={640} y2={227} />
+        <line x1={623} y1={180} x2={593} y2={180} />
+        <line x1={657} y1={180} x2={687} y2={180} />
+      </g>
+      <circle cx={640} cy={180} r={17} fill={tint(accent, 25)} />
+      <text x={640} y={185} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+      <text x={640} y={123} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={640} y={243} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={587} y={185} textAnchor="end" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H₃C</text>
+      <text x={701} y={185} textAnchor="start" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">OH</text>
+      <text x={755} y={185} textAnchor="start" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">+ :Br⁻</text>
+      <text x={640} y={290} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Ethanol</text>
+      <text x={330} y={64} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">one step — attack and departure together</text>
+    </svg>
+  );
+}
+
+/* ————— 10.9 · two-step substitution with ammonia ————— */
+
+export function FigHxSn2Nh3({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 860 400" className="w-full" role="img" aria-label="Nucleophilic substitution of a primary halogenoalkane by ammonia in two steps, redrawn from the class note. Step one: the nitrogen lone pair attacks the delta positive carbon and the carbon bromine pair leaves, forming an alkylammonium ion beside a bromide ion. Step two: a second ammonia molecule acts as a base and removes a proton from the ion, giving the amine and ammonium bromide.">
+      {/* ————— reactant ————— */}
+      <g stroke={INK} strokeWidth={2.4} strokeLinecap="round">
+        <line x1={165} y1={173} x2={165} y2={143} />
+        <line x1={165} y1={207} x2={165} y2={237} />
+        <line x1={148} y1={190} x2={118} y2={190} />
+        <line x1={182} y1={190} x2={212} y2={190} />
+      </g>
+      <circle cx={165} cy={190} r={17} fill={tint(accent, 25)} />
+      <text x={165} y={195} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+      <text x={165} y={133} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={165} y={253} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={112} y={195} textAnchor="end" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">CH₃CH₂</text>
+      <text x={226} y={195} textAnchor="start" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Br</text>
+      <text x={131} y={166} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">δ+</text>
+      <text x={262} y={178} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      {/* attacking ammonia */}
+      <text x={96} y={300} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H₃N</text>
+      <circle cx={114} cy={288} r={2.2} fill={INK} />
+      <circle cx={114} cy={297} r={2.2} fill={INK} />
+      {curlyPair(116, 282, 36, -76, accent)}
+      <text x={100} y={325} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">nucleophile</text>
+      {curlyPair(197, 188, 32, -24, INK)}
+      {t3Arrow(265, 190, 318, 190, INK, 3)}
+      <text x={286} y={228} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">+ :Br⁻</text>
+      {/* ————— the alkylammonium ion ————— */}
+      <g stroke={INK} strokeWidth={2.4} strokeLinecap="round">
+        <line x1={455} y1={173} x2={455} y2={143} />
+        <line x1={455} y1={207} x2={455} y2={237} />
+        <line x1={438} y1={190} x2={408} y2={190} />
+        <line x1={472} y1={190} x2={502} y2={190} />
+        <line x1={519} y1={181} x2={519} y2={157} />
+        <line x1={519} y1={209} x2={519} y2={233} />
+        <line x1={532} y1={190} x2={556} y2={190} />
+      </g>
+      <circle cx={455} cy={190} r={17} fill={tint(accent, 25)} />
+      <text x={455} y={195} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+      <text x={455} y={133} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={455} y={253} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={402} y={195} textAnchor="end" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">CH₃CH₂</text>
+      <text x={508} y={195} textAnchor="start" fontSize="14.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">N⁺</text>
+      <text x={519} y={147} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={519} y={249} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={566} y={195} textAnchor="start" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      {/* second ammonia removes the proton */}
+      <text x={550} y={330} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">NH₃</text>
+      <circle cx={535} cy={316} r={2.2} fill={INK} />
+      <circle cx={543} cy={316} r={2.2} fill={INK} />
+      {curlyPair(541, 310, -16, -54, accent)}
+      {curlyPair(519, 223, -3, -18, INK)}
+      <text x={550} y={355} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">a second NH₃ acts as a base</text>
+      {t3Arrow(590, 190, 638, 190, INK, 3)}
+      {/* ————— the amine ————— */}
+      <g stroke={INK} strokeWidth={2.4} strokeLinecap="round">
+        <line x1={775} y1={173} x2={775} y2={143} />
+        <line x1={775} y1={207} x2={775} y2={237} />
+        <line x1={758} y1={190} x2={728} y2={190} />
+        <line x1={792} y1={190} x2={822} y2={190} />
+      </g>
+      <circle cx={775} cy={190} r={17} fill={tint(accent, 25)} />
+      <text x={775} y={195} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+      <text x={775} y={133} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={775} y={253} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={722} y={195} textAnchor="end" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">CH₃CH₂</text>
+      <text x={828} y={195} textAnchor="start" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">NH₂</text>
+      <text x={850} y={300} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">+ NH₄Br</text>
+      <text x={775} y={330} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Amino propane</text>
+      {/* stage labels */}
+      <text x={240} y={64} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">step 1 · attack</text>
+      <text x={505} y={64} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">step 2 · deprotonation</text>
+    </svg>
+  );
+}

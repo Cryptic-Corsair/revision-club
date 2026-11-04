@@ -102,7 +102,16 @@ export type FigureKind =
   | "eq-temperature"
   | "eq-conflict"
   | "eq-haber"
-  | "eq-contact";
+  | "eq-contact"
+  | "hx-isomers"
+  | "hx-classes"
+  | "hx-bond"
+  | "hx-carbocation"
+  | "hx-reflux"
+  | "hx-scheme"
+  | "hx-hydrolysis"
+  | "hx-sn2-oh"
+  | "hx-sn2-nh3";
 
 export type NotesBlock =
   | { k: "p"; text: string }

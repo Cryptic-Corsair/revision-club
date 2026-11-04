@@ -100,6 +100,15 @@ export const NOTES_META: NotesMeta[] = [
     source: "the complete class note (CHSE Grade 11, Unit 2 · Topic 9, Parts 9A & 9B · 2021, semester 2) — Introduction to kinetics and equilibria.",
     specRange: "9.1 → 9.11",
   },
+  {
+    id: "wch12-t10",
+    unitCode: "WCH12",
+    topicId: "t10",
+    kicker: "Unit 2 · Topic 10 — the complete class note, spec by spec",
+    title: "Halogenoalkanes",
+    source: "the complete class note (CHSE Grade 11, Unit 2 · Topic 10 · 2021, semester 2) — the halogenoalkane half of the topic; the alcohols-and-spectra half joins later.",
+    specRange: "10.6 → 10.9",
+  },
 ];
 
 export function getNotesMeta(docId: string): NotesMeta | undefined {

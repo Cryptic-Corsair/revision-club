@@ -112,6 +112,15 @@ import {
   FigEqConflict,
   FigEqHaber,
   FigEqContact,
+  FigHxIsomers,
+  FigHxClasses,
+  FigHxBond,
+  FigHxCarbocation,
+  FigHxReflux,
+  FigHxScheme,
+  FigHxHydrolysis,
+  FigHxSn2Oh,
+  FigHxSn2Nh3,
 } from "./notes-figures";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -754,6 +763,13 @@ const WIDE_FIGS = new Set([
   "eq-chromate",
   "eq-conflict",
   "eq-haber",
+  "hx-isomers",
+  "hx-classes",
+  "hx-carbocation",
+  "hx-scheme",
+  "hx-hydrolysis",
+  "hx-sn2-oh",
+  "hx-sn2-nh3",
 ]);
 
 function Figure({
@@ -1045,6 +1061,33 @@ function Figure({
       break;
     case "eq-contact":
       node = <FigEqContact accent={accent} />;
+      break;
+    case "hx-isomers":
+      node = <FigHxIsomers accent={accent} />;
+      break;
+    case "hx-classes":
+      node = <FigHxClasses accent={accent} />;
+      break;
+    case "hx-bond":
+      node = <FigHxBond accent={accent} />;
+      break;
+    case "hx-carbocation":
+      node = <FigHxCarbocation accent={accent} />;
+      break;
+    case "hx-reflux":
+      node = <FigHxReflux accent={accent} />;
+      break;
+    case "hx-scheme":
+      node = <FigHxScheme accent={accent} />;
+      break;
+    case "hx-hydrolysis":
+      node = <FigHxHydrolysis accent={accent} />;
+      break;
+    case "hx-sn2-oh":
+      node = <FigHxSn2Oh accent={accent} />;
+      break;
+    case "hx-sn2-nh3":
+      node = <FigHxSn2Nh3 accent={accent} />;
       break;
   }
   if (!node) return null;
