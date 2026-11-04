@@ -81,6 +81,15 @@ import {
   FigETransfer,
   FigAgents,
   FigDisprop,
+  FigIeDownGroup,
+  FigG2Solubility,
+  FigPolarise,
+  FigFlameEtc,
+  FigFlameColours,
+  FigThermalExp,
+  FigTitrationRig,
+  FigStdSolution,
+  FigTitreTargets,
 } from "./notes-figures";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -700,6 +709,15 @@ const WIDE_FIGS = new Set([
   "etransfer",
   "agents",
   "disprop",
+  "ie-down",
+  "g2-solubility",
+  "polarise",
+  "flame-etc",
+  "flame-colours",
+  "thermal-exp",
+  "titration-rig",
+  "std-solution",
+  "titre-targets",
 ]);
 
 function Figure({
@@ -898,6 +916,33 @@ function Figure({
       break;
     case "disprop":
       node = <FigDisprop accent={accent} />;
+      break;
+    case "ie-down":
+      node = <FigIeDownGroup accent={accent} />;
+      break;
+    case "g2-solubility":
+      node = <FigG2Solubility accent={accent} />;
+      break;
+    case "polarise":
+      node = <FigPolarise accent={accent} />;
+      break;
+    case "flame-etc":
+      node = <FigFlameEtc accent={accent} />;
+      break;
+    case "flame-colours":
+      node = <FigFlameColours accent={accent} />;
+      break;
+    case "thermal-exp":
+      node = <FigThermalExp accent={accent} />;
+      break;
+    case "titration-rig":
+      node = <FigTitrationRig accent={accent} />;
+      break;
+    case "std-solution":
+      node = <FigStdSolution accent={accent} />;
+      break;
+    case "titre-targets":
+      node = <FigTitreTargets accent={accent} />;
       break;
   }
   if (!node) return null;

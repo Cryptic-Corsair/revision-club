@@ -202,7 +202,7 @@ export const WCH12_TOPICS: Topic[] = [
     title: "Redox chemistry and Groups 1, 2 and 7",
     summary:
       "Oxidation numbers, half-equations, and the s-block and halogen chemistry that starts — and ends — most Unit 2 papers.",
-    minutes: 26,
+    minutes: 38,
     ao: ["AO1", "AO2", "AO3"],
     blocks: [
       {

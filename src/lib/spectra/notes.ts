@@ -12,6 +12,7 @@ import { SECTIONS_T06_B } from "./content/notes-t06-b";
 import { SECTIONS_T07_A } from "./content/notes-t07-a";
 import { SECTIONS_T07_B } from "./content/notes-t07-b";
 import { SECTIONS_T08_A } from "./content/notes-t08-a";
+import { SECTIONS_T08_B } from "./content/notes-t08-b";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · the revision-note library
@@ -134,20 +135,20 @@ export const NOTES_DOCS: NotesDoc[] = [
     unitCode: "WCH12",
     topicId: "t08",
     kicker: "Unit 2 · Topic 8 — the complete class note, spec by spec",
-    title: "Redox chemistry",
+    title: "Redox chemistry and Groups 1 & 2",
     source:
-      "the complete class note (CHSE Grade 11, Unit 2 · Topic 8A · 2021, semester 2) — Redox Chemistry. Parts 8B and 8C (Groups 1 & 2, and Group 7) join when their class notes arrive.",
+      "the complete class note (CHSE Grade 11, Unit 2 · Topics 8A & 8B · 2021, semester 2) — Redox Chemistry and the elements of Groups 1 and 2. Part 8C (Group 7) joins when its class note arrives.",
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 8A, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and each method gets ==one worked example==, worked in full — the repetitive exercise drill is left to the book.",
+        text: "This is the actual revision note for Topics 8A and 8B, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and each method keeps ==one worked example==, worked in full — the repetitive exercise drill is left to the book.",
       },
       {
         k: "p",
-        text: "Part **8A** is the redox machinery itself: oxidation numbers and their rules, the Roman-numeral systematic names, electron transfer and OIL RIG, oxidising and reducing agents, disproportionation — and the complete half-equation toolkit, from the four-step simple balance to acidic and alkaline medium and the full ionic equations, each method shown once, in full. Parts **8B** and **8C** — Groups 1 & 2, and Group 7 — will join later.",
+        text: "Part **8A** is the redox machinery itself: oxidation numbers and their rules, the Roman-numeral systematic names, electron transfer and OIL RIG, oxidising and reducing agents, disproportionation — and the complete half-equation toolkit. Part **8B** puts the s-block on the bench: the radius, ionisation-energy and reactivity trends down Groups 1 and 2, the reactions with oxygen, chlorine and water, the oxides and hydroxides with their solubility ladders, ==thermal stability== and polarising power, flame colours and the ion tests — closing with ==volumetric analysis==: standard solutions, the titration method, concentration calculations and measurement uncertainty. Part **8C** (Group 7) will join later.",
       },
     ],
-    sections: [...SECTIONS_T08_A],
+    sections: [...SECTIONS_T08_A, ...SECTIONS_T08_B],
   },
 ];
 

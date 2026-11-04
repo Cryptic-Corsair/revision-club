@@ -3425,3 +3425,451 @@ export function FigDisprop({ accent = "#FF6B6B" }: { accent?: string }) {
     </svg>
   );
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   8B · the elements of Groups 1 and 2
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ————— 8.11 · why ionisation energy falls down group 1 ————— */
+
+export function FigIeDownGroup({ accent = "#FF6B6B" }: { accent?: string }) {
+  const atoms = [
+    { x: 170, el: "Li", z: "+3", shells: [30, 54], ie: "519" },
+    { x: 460, el: "Na", z: "+11", shells: [26, 48, 74], ie: "494" },
+    { x: 750, el: "K", z: "+19", shells: [21, 42, 64, 92], ie: "418" },
+  ];
+  return (
+    <svg viewBox="0 0 920 400" className="w-full" role="img" aria-label="Three group 1 atoms, lithium, sodium and potassium, each with one outer s-electron: the atoms stack on more shells down the group, the outer electron sits further from the nucleus behind more shielding, and the first ionisation energy falls from 519 to 494 to 418 kilojoules per mole">
+      <text x={460} y={34} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">group 1 — the same one outer s-electron, behind more and more shells</text>
+
+      {atoms.map((a) => (
+        <g key={a.el}>
+          {a.shells.map((r, i) => (
+            <circle key={r} cx={a.x} cy={180} r={r} fill="none" stroke={i === a.shells.length - 1 ? SOFT : FAINT} strokeWidth={i === a.shells.length - 1 ? 2.2 : 1.6} />
+          ))}
+          <circle cx={a.x} cy={180} r={17} fill={tint(accent, 24)} />
+          <text x={a.x} y={184.5} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{a.z}</text>
+          {/* the single outer electron, further out at every step */}
+          <circle cx={a.x} cy={180 - a.shells[a.shells.length - 1]} r={7} fill={accent} />
+          <text x={a.x + 12} y={180 - a.shells[a.shells.length - 1] - 10} fontSize="11.5" fontWeight="700" fill={accent} fontFamily="var(--font-body)">1 outer s-electron</text>
+          <text x={a.x} y={316} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{a.el}</text>
+        </g>
+      ))}
+
+      {/* the falling first IE */}
+      <text x={460} y={342} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">1st ionisation energy / kJ mol⁻¹</text>
+      {atoms.map((a, i) => (
+        <g key={a.ie}>
+          <rect x={a.x - 62} y={350} width={124} height={32} rx={16} fill={tint(accent, 10 + i * 6)} />
+          <text x={a.x} y={371} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{a.ie}</text>
+        </g>
+      ))}
+      <path d="M 240 366 L 390 366 M 530 366 L 680 366" fill="none" stroke={accent} strokeWidth={2.6} strokeLinecap="round" strokeDasharray="7 7" opacity={0.55} />
+      <polygon points="700,366 679,358 681,374" fill={accent} opacity={0.55} />
+      <text x={460} y={396} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">radius ↑ · shielding ↑ · attraction on the outer electron ↓ — so the reactivity ↑</text>
+    </svg>
+  );
+}
+
+/* ————— 8.15 · the two Group 2 solubility ladders ————— */
+
+export function FigG2Solubility({ accent = "#FF6B6B" }: { accent?: string }) {
+  const rows = [
+    { f: "Be", oh: "insoluble", ohW: 12, su: "very soluble", suW: 170 },
+    { f: "Mg", oh: "sparingly soluble", ohW: 48, su: "quite soluble", suW: 132 },
+    { f: "Ca", oh: "slightly soluble", ohW: 86, su: "slightly soluble", suW: 86 },
+    { f: "Sr", oh: "quite soluble", ohW: 132, su: "sparingly soluble", suW: 48 },
+    { f: "Ba", oh: "very soluble", ohW: 170, su: "insoluble", suW: 12 },
+  ];
+  const panel = (px: number, title: string, sub: string, key: "oh" | "su", wKey: "ohW" | "suW") => (
+    <g>
+      <text x={px + 210} y={44} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{title}</text>
+      <text x={px + 210} y={64} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{sub}</text>
+      {rows.map((r, i) => (
+        <g key={r.f}>
+          <text x={px + 48} y={104 + i * 42} textAnchor="end" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{key === "oh" ? `${r.f}(OH)₂` : `${r.f}SO₄`}</text>
+          <rect x={px + 56} y={90 + i * 42} width={r[wKey]} height={20} rx={10} fill={tint(accent, 14 + i * 9)} />
+          <text x={px + 56 + r[wKey] + 10} y={105 + i * 42} fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{r[key]}</text>
+        </g>
+      ))}
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 920 360" className="w-full" role="img" aria-label="Two bar ladders: the solubility of group 2 hydroxides grows from insoluble beryllium hydroxide to very soluble barium hydroxide, while the solubility of group 2 sulfates shrinks from very soluble beryllium sulfate to insoluble barium sulfate">
+      {panel(20, "hydroxides", "solubility increases down the group", "oh", "ohW")}
+      <line x1={460} y1={40} x2={460} y2={310} stroke={FAINT} strokeWidth={1.6} strokeDasharray="2 8" />
+      {panel(480, "sulfates", "solubility decreases down the group", "su", "suW")}
+      <rect x={150} y={318} width={620} height={34} rx={17} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={460} y={340} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the ladders run opposite ways — and BaSO₄'s insolubility is the sulfate test</text>
+    </svg>
+  );
+}
+
+/* ————— 8.16 · polarising power — the cation grips the anion ————— */
+
+export function FigPolarise({ accent = "#FF6B6B" }: { accent?: string }) {
+  const anion = (cx: number, squashed: boolean) => (
+    <g>
+      <ellipse cx={cx} cy={168} rx={squashed ? 84 : 92} ry={squashed ? 56 : 68} fill={tint(accent, 8)} stroke={INK} strokeWidth={2.4} />
+      <text x={cx} y={175} textAnchor="middle" fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-body)">CO₃²⁻</text>
+      {/* the C–O bonds inside the anion */}
+      <line x1={cx - 26} y1={122} x2={cx - 52} y2={96} stroke={INK} strokeWidth={2.2} strokeLinecap="round" />
+      <line x1={cx + 26} y1={122} x2={cx + 52} y2={96} stroke={INK} strokeWidth={2.2} strokeLinecap="round" />
+      <circle cx={cx - 58} cy={90} r={7.5} fill={PAPER} stroke={INK} strokeWidth={2} />
+      <circle cx={cx + 58} cy={90} r={7.5} fill={PAPER} stroke={INK} strokeWidth={2} />
+      <text x={cx - 58} y={94} textAnchor="middle" fontSize="10" fontWeight="800" fill={INK} fontFamily="var(--font-body)">O</text>
+      <text x={cx + 58} y={94} textAnchor="middle" fontSize="10" fontWeight="800" fill={INK} fontFamily="var(--font-body)">O</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 920 400" className="w-full" role="img" aria-label="Two panels: a small highly charged magnesium two-plus cation pulls hard on the carbonate anion, distorting it and weakening its carbon-oxygen bonds so the compound decomposes easily, while a large lowly charged barium two-plus cation barely grips the anion, which survives heating">
+      <text x={460} y={34} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">how hard the cation grips the anion decides how easily it decomposes</text>
+
+      {/* small, hungry cation */}
+      {anion(330, true)}
+      <circle cx={140} cy={168} r={32} fill={accent} />
+      <text x={140} y={173.5} textAnchor="middle" fontSize="14" fontWeight="800" fill={readableInk(accent)} fontFamily="var(--font-body)">Mg²⁺</text>
+      <text x={140} y={222} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">small · high charge</text>
+      <path d="M 178 152 Q 214 130 240 122" fill="none" stroke={accent} strokeWidth={3} strokeLinecap="round" />
+      <polygon points="252,118 231,113 234,131" fill={accent} />
+      <path d="M 184 190 Q 216 206 238 212" fill="none" stroke={accent} strokeWidth={3} strokeLinecap="round" />
+      <polygon points="250,215 232,202 229,219" fill={accent} />
+      <text x={200} y={74} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">pulls the electron cloud</text>
+      <rect x={80} y={288} width={320} height={44} rx={22} fill={tint(accent, 16)} />
+      <text x={240} y={305} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C–O bonds weaken — the anion gives way</text>
+      <text x={240} y={323} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">decomposes easily → XO + CO₂</text>
+
+      {/* large, gentle cation */}
+      {anion(768, false)}
+      <circle cx={548} cy={168} r={44} fill={tint("var(--color-ink)", 14)} />
+      <text x={548} y={173.5} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Ba²⁺</text>
+      <text x={548} y={234} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">large · low charge density</text>
+      <rect x={548} y={288} width={330} height={44} rx={22} fill={tint("var(--color-ink)", 7)} />
+      <text x={713} y={305} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the anion keeps its shape</text>
+      <text x={713} y={323} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">more energy needed to break it — stable to heat</text>
+
+      <rect x={205} y={352} width={510} height={36} rx={18} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={460} y={375} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">small + high charge → high polarizing power → less thermally stable</text>
+    </svg>
+  );
+}
+
+/* ————— 8.17 · excitation and the fall back that makes the colour ————— */
+
+export function FigFlameEtc({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 920 380" className="w-full" role="img" aria-label="An energy level diagram: heat excites the electron up to a higher energy level, the excited electron is unstable and falls back to the ground state, emitting light whose frequency and colour are fixed by the energy gap between the two shells">
+      {/* energy axis */}
+      <line x1={64} y1={330} x2={64} y2={66} stroke={INK} strokeWidth={2.8} strokeLinecap="round" />
+      <polygon points="64,54 56,72 72,72" fill={INK} />
+      <text x={46} y={198} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 46 198)">energy</text>
+
+      {/* the levels */}
+      <line x1={110} y1={110} x2={400} y2={110} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <text x={408} y={114} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">higher energy level</text>
+      <line x1={110} y1={330} x2={400} y2={330} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <text x={408} y={334} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">ground state</text>
+
+      {/* up — excitation */}
+      <circle cx={170} cy={330} r={9} fill={accent} />
+      <path d="M 186 318 Q 232 220 178 126" fill="none" stroke={accent} strokeWidth={3.2} strokeLinecap="round" />
+      <polygon points="174,110 165,132 184,128" fill={accent} />
+      <text x={318} y={210} fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">excitation —</text>
+      <text x={318} y={228} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">heat gives the electron</text>
+      <text x={318} y={244} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">energy to climb</text>
+
+      {/* down — the fall back */}
+      <circle cx={330} cy={110} r={9} fill={tint(accent, 30)} stroke={accent} strokeWidth={2} strokeDasharray="3 3" />
+      <text x={330} y={86} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">unstable up here</text>
+      <path d="M 318 122 Q 276 226 322 316" fill="none" stroke={INK} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="8 7" />
+      <polygon points="326,332 312,312 332,310" fill={INK} />
+      <text x={252} y={290} textAnchor="end" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">falls back,</text>
+      <text x={252} y={306} textAnchor="end" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">giving out light</text>
+
+      {/* the photon */}
+      <polyline points="420,220 464,196 488,244 536,196 560,244 608,196 632,244 668,224" fill="none" stroke={accent} strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+      <polygon points="684,220 660,212 664,234" fill={accent} />
+      <text x={545} y={176} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">light of a characteristic frequency</text>
+      <text x={545} y={272} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">its energy = the gap between the two shells</text>
+
+      <rect x={640} y={310} width={244} height={40} rx={20} fill={tint(accent, 16)} />
+      <text x={762} y={335} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">that light is the flame's colour</text>
+    </svg>
+  );
+}
+
+/* ————— 8.18(ii) · the flame colours to know ————— */
+
+const FLAME_COLOURS: { ion: string; grp: string; word: string; hex: string | null }[] = [
+  { ion: "Li⁺", grp: "Group 1", word: "crimson", hex: "#C2255C" },
+  { ion: "Na⁺", grp: "Group 1", word: "golden yellow", hex: "#F59F00" },
+  { ion: "K⁺", grp: "Group 1", word: "lilac", hex: "#B78FD6" },
+  { ion: "Mg²⁺", grp: "Group 2", word: "no colour", hex: null },
+  { ion: "Ca²⁺", grp: "Group 2", word: "brick red", hex: "#B04A2F" },
+  { ion: "Sr²⁺", grp: "Group 2", word: "crimson red", hex: "#E03131" },
+  { ion: "Ba²⁺", grp: "Group 2", word: "apple green", hex: "#74B816" },
+];
+
+export function FigFlameColours({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 920 320" className="w-full" role="img" aria-label="Seven cards showing the flame colours of the group 1 and 2 cations: lithium crimson, sodium golden yellow, potassium lilac, magnesium no colour, calcium brick red, strontium crimson red and barium apple green">
+      <text x={460} y={32} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the flame colours the specification asks for</text>
+      {FLAME_COLOURS.map((c, i) => {
+        const x = 24 + i * 126;
+        const cx = x + 58;
+        const flame = c.hex
+          ? <path d={`M ${cx} 176 C ${cx - 21} 156, ${cx - 16} 124, ${cx} 100 C ${cx + 16} 124, ${cx + 21} 156, ${cx} 176 Z`} fill={c.hex} />
+          : <path d={`M ${cx} 176 C ${cx - 21} 156, ${cx - 16} 124, ${cx} 100 C ${cx + 16} 124, ${cx + 21} 156, ${cx} 176 Z`} fill="none" stroke={FAINT} strokeWidth={2.4} strokeDasharray="5 5" />;
+        return (
+          <g key={c.ion}>
+            <rect x={x} y={48} width={116} height={196} rx={20} fill={c.hex ? tint(c.hex, 13) : tint("var(--color-ink)", 5)} stroke={FAINT} strokeWidth={1.8} />
+            <text x={cx} y={72} textAnchor="middle" fontSize="9.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">{c.grp}</text>
+            {flame}
+            <text x={cx} y={206} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{c.ion}</text>
+            <text x={cx} y={226} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{c.word}</text>
+          </g>
+        );
+      })}
+      <rect x={185} y={266} width={550} height={36} rx={18} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={460} y={289} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">each colour is its cation's own set of electron transitions — magnesium's give none</text>
+      <line x1={392} y1={40} x2={528} y2={40} stroke={accent} strokeWidth={3} strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/* ————— 8.18(i) · the thermal decomposition experiment ————— */
+
+export function FigThermalExp({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 920 440" className="w-full" role="img" aria-label="The thermal decomposition apparatus: a hard glass test tube holding the salt is clamped above a Bunsen burner, a delivery tube carries the gas to a water bath where an inverted test tube collects it up to a mark, and the time taken to reach the mark is measured">
+      {/* stand */}
+      <rect x={52} y={386} width={250} height={16} rx={8} fill={tint("var(--color-ink)", 10)} />
+      <rect x={72} y={80} width={12} height={308} rx={6} fill={tint("var(--color-ink)", 16)} />
+      <rect x={84} y={128} width={64} height={10} rx={5} fill={tint("var(--color-ink)", 16)} />
+
+      {/* the hard-glass test tube, tilted up to the right */}
+      <g transform="rotate(-25 200 160)">
+        <rect x={120} y={144} width={160} height={32} rx={16} fill={tint(accent, 5)} stroke={INK} strokeWidth={2.6} />
+        <rect x={128} y={162} width={40} height={10} rx={5} fill={tint(accent, 30)} />
+        <circle cx={136} cy={167} r={2.4} fill={INK} opacity={0.5} />
+        <circle cx={146} cy={164} r={2.4} fill={INK} opacity={0.5} />
+        <circle cx={155} cy={168} r={2.4} fill={INK} opacity={0.5} />
+      </g>
+      <text x={36} y={230} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">same amount</text>
+      <text x={36} y={246} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">of each salt</text>
+      <text x={236} y={96} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">hard-glass test tube</text>
+
+      {/* Bunsen burner under the low end */}
+      <rect x={110} y={290} width={26} height={54} rx={7} fill="none" stroke={INK} strokeWidth={2.6} />
+      <path d="M 100 344 L 146 344 L 138 358 L 108 358 Z" fill="none" stroke={INK} strokeWidth={2.6} strokeLinejoin="round" />
+      <path d="M 123 286 C 112 268, 116 256, 123 244 C 130 256, 134 268, 123 286 Z" fill={accent} />
+      <text x={163} y={352} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Bunsen burner</text>
+
+      {/* delivery tube */}
+      <path d="M 276 122 L 402 122 C 462 122, 478 156, 478 208 L 478 290 C 478 314, 486 330, 498 340" fill="none" stroke={INK} strokeWidth={2.8} strokeLinecap="round" />
+      <text x={310} y={108} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">delivery tube</text>
+
+      {/* water bath + collecting tube */}
+      <path d="M 424 254 L 424 384 Q 424 402 442 402 L 622 402 Q 640 402 640 384 L 640 254" fill={tint("#4a90d9", 12)} />
+      <path d="M 424 254 L 424 384 Q 424 402 442 402 L 622 402 Q 640 402 640 384 L 640 254" fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={424} y1={290} x2={640} y2={290} stroke="#4a90d9" strokeWidth={2.4} />
+      <text x={532} y={424} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">water bath</text>
+
+      {/* inverted collecting tube with its mark */}
+      <path d="M 500 258 L 500 346 M 548 258 L 548 346 M 500 258 Q 524 246 548 258" fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <rect x={500} y={262} width={48} height={38} rx={6} fill={tint(accent, 14)} />
+      <line x1={500} y1={306} x2={548} y2={306} stroke={accent} strokeWidth={2.6} strokeLinecap="round" />
+      <circle cx={514} cy={354} r={4} fill={tint(accent, 26)} />
+      <circle cx={524} cy={346} r={3} fill={tint(accent, 26)} />
+      <text x={566} y={310} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the mark — time taken</text>
+      <text x={566} y={326} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">for the gas to reach it</text>
+
+      {/* the verdict card */}
+      <rect x={690} y={150} width={198} height={92} rx={20} fill={tint(accent, 12)} />
+      <text x={789} y={184} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">shorter time =</text>
+      <text x={789} y={204} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">faster decomposition</text>
+      <text x={789} y={226} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">repeat with each salt</text>
+      <text x={789} y={106} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">same flame · same amounts</text>
+    </svg>
+  );
+}
+
+/* ————— 8.20 / CP3 · the titration rig ————— */
+
+export function FigTitrationRig({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 920 440" className="w-full" role="img" aria-label="The titration set-up: a burette clipped to a stand delivers solution to a conical flask standing on a white tile, a drop falling from the stopcock, while a pipette with its filler stands ready to transfer a fixed volume">
+      {/* stand */}
+      <rect x={64} y={404} width={260} height={16} rx={8} fill={tint("var(--color-ink)", 10)} />
+      <rect x={86} y={64} width={12} height={342} rx={6} fill={tint("var(--color-ink)", 16)} />
+      <rect x={98} y={116} width={92} height={10} rx={5} fill={tint("var(--color-ink)", 16)} />
+
+      {/* burette */}
+      <rect x={214} y={62} width={36} height={252} rx={9} fill={tint(accent, 6)} stroke={INK} strokeWidth={2.6} />
+      <rect x={218} y={96} width={28} height={210} rx={6} fill={tint(accent, 20)} />
+      {[110, 150, 190, 230, 270].map((y) => (
+        <line key={y} x1={218} y1={y} x2={228} y2={y} stroke={INK} strokeWidth={1.8} opacity={0.45} />
+      ))}
+      <rect x={206} y={318} width={52} height={16} rx={6} fill={INK} />
+      <path d="M 232 334 L 232 362" stroke={INK} strokeWidth={5} strokeLinecap="round" />
+      <text x={262} y={90} fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">burette</text>
+      <text x={262} y={108} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">definite but variable</text>
+      <text x={262} y={124} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">volumes of liquid</text>
+      <text x={276} y={332} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">stopcock</text>
+
+      {/* conical flask on the white tile */}
+      <path d="M 196 300 L 270 300 L 270 322 M 196 300 L 196 322" fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <path d="M 158 404 L 188 322 L 258 322 L 288 404 Z" fill={tint(accent, 9)} />
+      <path d="M 166 396 L 190 340 L 256 340 L 280 396 Z" fill={tint(accent, 16)} />
+      <path d="M 158 404 L 188 322 L 258 322 L 288 404 Z" fill="none" stroke={INK} strokeWidth={2.6} strokeLinejoin="round" />
+      <rect x={140} y={404} width={168} height={12} rx={4} fill={tint("var(--color-ink)", 9)} />
+      <text x={300} y={372} fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">conical flask</text>
+      <text x={300} y={390} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">mixes the solutions</text>
+      <text x={300} y={414} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">white tile — shows the colour change</text>
+
+      {/* pipette with filler */}
+      <rect x={590} y={40} width={120} height={34} rx={17} fill={tint(accent, 14)} />
+      <text x={650} y={62} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">pipette filler</text>
+      <rect x={634} y={74} width={32} height={170} rx={8} fill={tint(accent, 6)} stroke={INK} strokeWidth={2.6} />
+      <rect x={638} y={110} width={24} height={100} rx={6} fill={tint(accent, 20)} />
+      <ellipse cx={650} cy={272} rx={30} ry={44} fill={tint(accent, 6)} stroke={INK} strokeWidth={2.6} />
+      <ellipse cx={650} cy={272} rx={24} ry={36} fill={tint(accent, 20)} />
+      <path d="M 650 316 L 650 356" stroke={INK} strokeWidth={5} strokeLinecap="round" />
+      <text x={700} y={200} fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">pipette</text>
+      <text x={700} y={218} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">delivers one fixed</text>
+      <text x={700} y={234} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">volume — accurately</text>
+
+      <rect x={470} y={384} width={380} height={40} rx={20} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={660} y={409} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the indicator calls the end point</text>
+    </svg>
+  );
+}
+
+/* ————— 8.23 / CP4 · preparing a standard solution ————— */
+
+export function FigStdSolution({ accent = "#FF6B6B" }: { accent?: string }) {
+  const step = (x: number, n: number, label: string) => (
+    <g>
+      <rect x={x} y={296} width={280} height={36} rx={18} fill={tint(accent, 12)} />
+      <circle cx={x + 22} cy={314} r={11} fill={accent} />
+      <text x={x + 22} y={318.5} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={readableInk(accent)} fontFamily="var(--font-body)">{n}</text>
+      <text x={x + 42} y={319} fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{label}</text>
+    </g>
+  );
+  const volFlask = (cx: number, fillTo: number, withStopper: boolean) => (
+    <g>
+      {fillTo > 0 && (
+        <g>
+          <circle cx={cx} cy={236} r={46} fill={tint(accent, 16)} />
+          <rect x={cx - 15} y={fillTo} width={30} height={236 - fillTo} fill={tint(accent, 16)} />
+        </g>
+      )}
+      <circle cx={cx} cy={236} r={46} fill="none" stroke={INK} strokeWidth={2.6} />
+      <path d={`M ${cx - 15} 156 L ${cx - 15} 200 M ${cx + 15} 156 L ${cx + 15} 200`} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <path d={`M ${cx - 15} 200 Q ${cx - 15} 208 ${cx - 24} 214 M ${cx + 15} 200 Q ${cx + 15} 208 ${cx + 24} 214`} fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={cx - 13} y1={172} x2={cx + 13} y2={172} stroke={accent} strokeWidth={2.6} strokeLinecap="round" />
+      {withStopper && <rect x={cx - 17} y={136} width={34} height={20} rx={6} fill={tint("var(--color-ink)", 12)} stroke={INK} strokeWidth={2} />}
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 920 348" className="w-full" role="img" aria-label="Three stations for making a standard solution: dissolve the weighed solid in a beaker, transfer it through a funnel into the volumetric flask and rinse everything in, then make up to the graduation mark, stopper and shake">
+      {/* 1 · the beaker with the weighed solid */}
+      <path d="M 56 130 L 56 246 Q 56 262 72 262 L 212 262 Q 228 262 228 246 L 228 130" fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={46} y1={130} x2={56} y2={130} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={228} y1={130} x2={238} y2={130} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <rect x={56} y={196} width={172} height={66} rx={10} fill={tint(accent, 12)} />
+      <ellipse cx={142} cy={244} rx={38} ry={12} fill={tint("var(--color-ink)", 14)} />
+      <circle cx={120} cy={240} r={3} fill={INK} opacity={0.5} />
+      <circle cx={146} cy={246} r={3} fill={INK} opacity={0.5} />
+      <circle cx={168} cy={238} r={3} fill={INK} opacity={0.5} />
+      <line x1={186} y1={148} x2={142} y2={238} stroke={INK} strokeWidth={3} strokeLinecap="round" opacity={0.7} />
+      <text x={142} y={112} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the weighed solid, dissolving</text>
+      {step(30, 1, "dissolve it completely")}
+
+      {/* 2 · transfer through the funnel */}
+      <path d="M 372 118 L 452 118 L 416 162 Z" fill="none" stroke={INK} strokeWidth={2.6} strokeLinejoin="round" />
+      <g transform="rotate(-18 398 92)">
+        <rect x={370} y={70} width={56} height={44} rx={6} fill={tint(accent, 8)} stroke={INK} strokeWidth={2.4} />
+        <line x1={370} y1={86} x2={426} y2={86} stroke={accent} strokeWidth={2.4} />
+      </g>
+      <path d="M 424 116 Q 420 130 412 142" fill="none" stroke={accent} strokeWidth={2.6} strokeLinecap="round" strokeDasharray="4 5" />
+      {volFlask(412, 0, false)}
+      {step(330, 2, "transfer & rinse in")}
+
+      {/* 3 · made up to the mark */}
+      {volFlask(770, 172, true)}
+      <text x={770} y={124} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">meniscus on the mark</text>
+      {step(630, 3, "to the mark — stopper, shake")}
+
+      <path d="M 316 210 L 336 210" stroke={accent} strokeWidth={3} strokeLinecap="round" strokeDasharray="6 6" />
+      <polygon points="348,210 332,204 332,216" fill={accent} />
+      <path d="M 620 210 L 660 210" stroke={accent} strokeWidth={3} strokeLinecap="round" strokeDasharray="6 6" />
+      <polygon points="672,210 656,204 656,216" fill={accent} />
+    </svg>
+  );
+}
+
+/* ————— 8.22 · accuracy and precision, the archery trial ————— */
+
+export function FigTitreTargets({ accent = "#FF6B6B" }: { accent?: string }) {
+  const hit = (cx: number, cy: number, i: number) => (
+    <g key={i}>
+      <circle cx={cx} cy={cy} r={6.5} fill={INK} />
+      <circle cx={cx} cy={cy} r={2.2} fill={PAPER} />
+    </g>
+  );
+  const target = (cx: number, name: string, verdict: string, chipFill: string, hits: [number, number][], note: string) => (
+    <g>
+      <text x={cx} y={54} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{name}</text>
+      <circle cx={cx} cy={168} r={84} fill="none" stroke={FAINT} strokeWidth={2} />
+      <circle cx={cx} cy={168} r={56} fill="none" stroke={SOFT} strokeWidth={2} />
+      <circle cx={cx} cy={168} r={28} fill="none" stroke={SOFT} strokeWidth={2} />
+      <circle cx={cx} cy={168} r={7} fill={accent} />
+      {hits.map(([hx, hy], i) => hit(cx + hx, 168 + hy, i))}
+      <rect x={cx - 116} y={278} width={232} height={36} rx={18} fill={chipFill} />
+      <text x={cx} y={301} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{verdict}</text>
+      <text x={cx} y={338} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{note}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 920 360" className="w-full" role="img" aria-label="Three archery targets for three students' titres: student A's arrows cluster tightly but off the bullseye, precise but not accurate; student B's arrows scatter with a lucky mean, neither precise nor accurate; student C's arrows cluster on the bullseye, both accurate and precise">
+      <text x={460} y={24} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the titre values as an archery competition — the cluster is precision, the bullseye is accuracy</text>
+      {target(
+        170,
+        "Student A",
+        "precise · not accurate",
+        tint(accent, 14),
+        [
+          [38, -20],
+          [48, -12],
+          [33, -8],
+        ],
+        "all concordant — mean 0.57 cm³ high",
+      )}
+      {target(
+        460,
+        "Student B",
+        "neither — a lucky mean",
+        tint("var(--color-ink)", 7),
+        [
+          [-46, -30],
+          [42, 36],
+          [6, -52],
+        ],
+        "not concordant — mean within 0.07 cm³",
+      )}
+      {target(
+        750,
+        "Student C",
+        "accurate and precise",
+        tint(accent, 22),
+        [
+          [5, -4],
+          [-4, 6],
+          [7, 7],
+        ],
+        "all concordant — mean within 0.03 cm³",
+      )}
+    </svg>
+  );
+}

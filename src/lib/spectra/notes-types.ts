@@ -71,7 +71,16 @@ export type FigureKind =
   | "mixing"
   | "etransfer"
   | "agents"
-  | "disprop";
+  | "disprop"
+  | "ie-down"
+  | "g2-solubility"
+  | "polarise"
+  | "flame-etc"
+  | "flame-colours"
+  | "thermal-exp"
+  | "titration-rig"
+  | "std-solution"
+  | "titre-targets";
 
 export type NotesBlock =
   | { k: "p"; text: string }
