@@ -15,6 +15,7 @@ import { SECTIONS_T08_A } from "./content/notes-t08-a";
 import { SECTIONS_T08_B } from "./content/notes-t08-b";
 import { SECTIONS_T08_C } from "./content/notes-t08-c";
 import { SECTIONS_T09_A } from "./content/notes-t09-a";
+import { SECTIONS_T09_B } from "./content/notes-t09-b";
 import { NOTES_META } from "./notes-meta";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -163,20 +164,20 @@ export const NOTES_DOCS: NotesDoc[] = [
     unitCode: "WCH12",
     topicId: "t09",
     kicker: "Unit 2 · Topic 9 — the complete class note, spec by spec",
-    title: "Kinetics — rates, collisions and catalysts",
+    title: "Kinetics and equilibria",
     source:
-      "the complete class note (CHSE Grade 11, Unit 2 · Topic 9A · 2021, semester 2) — Kinetics. Part 9B, the equilibria half of the topic, joins later.",
+      "the complete class note (CHSE Grade 11, Unit 2 · Topic 9, Parts 9A & 9B · 2021, semester 2) — Introduction to kinetics and equilibria.",
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 9, Part **9A**, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and both rate calculations — 1/time and the tangent gradient — are each worked in full.",
+        text: "This is the actual revision note for Topic 9, Parts **9A** and **9B**, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and each rate calculation — rate = 1/time and the tangent gradient — keeps ==one worked example==, worked in full.",
       },
       {
         k: "p",
-        text: "Part **9A** is the kinetics half of the topic: what rate is and how it is measured, ==collision theory== and activation energy, the four rate factors (concentration, pressure, surface area, temperature), the ==Maxwell-Boltzmann distribution== with its temperature shift, and the catalyst — its alternative route, the reaction profiles, the industrial homogeneous and heterogeneous catalysts, and the atom-economy dividend. The equilibria half (**9B**) is not in yet.",
+        text: "Part **9A** is the kinetics half of the topic: what rate is and how it is measured, ==collision theory== and activation energy, the four rate factors (concentration, pressure, surface area, temperature), the ==Maxwell-Boltzmann distribution== with its temperature shift, and the catalyst — its alternative route, the reaction profiles, the industrial homogeneous and heterogeneous catalysts, and the atom-economy dividend. Part **9B** brings in the equilibria: reversible reactions and ==dynamic equilibrium==, the qualitative effects of concentration, pressure and temperature on the ==position of equilibrium== with their summary tables, why a catalyst shifts nothing, the honest limits of qualitative prediction — and the industrial compromises: ==the Haber process== at 450 °C and 250 atm, the ==Contact process== at 450 °C and 2 atm.",
       },
     ],
-    sections: [...SECTIONS_T09_A],
+    sections: [...SECTIONS_T09_A, ...SECTIONS_T09_B],
   },
 ];
 

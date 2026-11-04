@@ -95,7 +95,14 @@ export type FigureKind =
   | "mb-temperature"
   | "catalyst-profile"
   | "mb-catalyst"
-  | "het-catalyst";
+  | "het-catalyst"
+  | "eq-dynamic"
+  | "eq-chromate"
+  | "eq-pressure"
+  | "eq-temperature"
+  | "eq-conflict"
+  | "eq-haber"
+  | "eq-contact";
 
 export type NotesBlock =
   | { k: "p"; text: string }

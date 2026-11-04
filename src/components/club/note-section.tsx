@@ -105,6 +105,13 @@ import {
   FigCatalystProfile,
   FigMbCatalyst,
   FigHetCatalyst,
+  FigEqDynamic,
+  FigEqChromate,
+  FigEqPressure,
+  FigEqTemperature,
+  FigEqConflict,
+  FigEqHaber,
+  FigEqContact,
 } from "./notes-figures";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -744,6 +751,9 @@ const WIDE_FIGS = new Set([
   "rate-graphs",
   "catalyst-profile",
   "het-catalyst",
+  "eq-chromate",
+  "eq-conflict",
+  "eq-haber",
 ]);
 
 function Figure({
@@ -1014,6 +1024,27 @@ function Figure({
       break;
     case "het-catalyst":
       node = <FigHetCatalyst accent={accent} />;
+      break;
+    case "eq-dynamic":
+      node = <FigEqDynamic accent={accent} />;
+      break;
+    case "eq-chromate":
+      node = <FigEqChromate accent={accent} />;
+      break;
+    case "eq-pressure":
+      node = <FigEqPressure accent={accent} />;
+      break;
+    case "eq-temperature":
+      node = <FigEqTemperature accent={accent} />;
+      break;
+    case "eq-conflict":
+      node = <FigEqConflict accent={accent} />;
+      break;
+    case "eq-haber":
+      node = <FigEqHaber accent={accent} />;
+      break;
+    case "eq-contact":
+      node = <FigEqContact accent={accent} />;
       break;
   }
   if (!node) return null;

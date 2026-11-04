@@ -96,9 +96,9 @@ export const NOTES_META: NotesMeta[] = [
     unitCode: "WCH12",
     topicId: "t09",
     kicker: "Unit 2 · Topic 9 — the complete class note, spec by spec",
-    title: "Kinetics — rates, collisions and catalysts",
-    source: "the complete class note (CHSE Grade 11, Unit 2 · Topic 9A · 2021, semester 2) — Kinetics. Part 9B, the equilibria half of the topic, joins later.",
-    specRange: "9.1 → 9.8",
+    title: "Kinetics and equilibria",
+    source: "the complete class note (CHSE Grade 11, Unit 2 · Topic 9, Parts 9A & 9B · 2021, semester 2) — Introduction to kinetics and equilibria.",
+    specRange: "9.1 → 9.11",
   },
 ];
 

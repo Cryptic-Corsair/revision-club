@@ -4485,8 +4485,8 @@ function t9Surface(cx: number, y: number, n: number) {
 
 export function FigRateFactors({ accent = "#FF6B6B" }: { accent?: string }) {
   const spA = tint(accent, 26); /* species A chip */
-  const dot = (x: number, y: number, alt: boolean) => (
-    <circle cx={x} cy={y} r={6.5} fill={alt ? PAPER : spA} stroke={INK} strokeWidth={alt ? 2 : 1.4} />
+  const dot = (x: number, y: number, alt: boolean, k?: number | string) => (
+    <circle key={k} cx={x} cy={y} r={6.5} fill={alt ? PAPER : spA} stroke={INK} strokeWidth={alt ? 2 : 1.4} />
   );
   const chip = (x: number, t: string) => (
     <g>
@@ -4510,11 +4510,11 @@ export function FigRateFactors({ accent = "#FF6B6B" }: { accent?: string }) {
       {/* ————— concentration ————— */}
       {chip(160, "CONCENTRATION")}
       <rect x={38} y={62} width={118} height={104} rx={16} fill="none" stroke={INK} strokeWidth={2.6} />
-      {[0, 1, 2, 3, 4].map((i) => dot(62 + (i % 3) * 36, 88 + Math.floor(i / 3) * 38, i % 2 === 1))}
+      {[0, 1, 2, 3, 4].map((i) => dot(62 + (i % 3) * 36, 88 + Math.floor(i / 3) * 38, i % 2 === 1, i))}
       <rect x={214} y={62} width={118} height={104} rx={16} fill="none" stroke={INK} strokeWidth={2.6} />
       {[
         [232, 84], [262, 76], [292, 92], [314, 78], [240, 112], [272, 104], [302, 120], [320, 106], [250, 140], [282, 134], [312, 148],
-      ].map(([x, y], i) => dot(x, y, i % 2 === 1))}
+      ].map(([x, y], i) => dot(x, y, i % 2 === 1, i))}
       {t3Arrow(166, 114, 208, 114, accent, 3.4)}
       {note(160, 190, ["few molecules → few collisions", "the rate is low", "many molecules → more collisions", "the rate is greater"])}
       {note(160, 268, ["more particles crowded into", "the same volume"])}
@@ -4530,11 +4530,11 @@ export function FigRateFactors({ accent = "#FF6B6B" }: { accent?: string }) {
       <rect x={352} y={54} width={128} height={120} rx={16} fill="none" stroke={INK} strokeWidth={2.6} />
       {[
         [376, 80], [412, 72], [448, 88], [384, 112], [420, 106], [452, 122], [396, 144], [432, 140],
-      ].map(([x, y], i) => dot(x, y, i % 2 === 1))}
+      ].map(([x, y], i) => dot(x, y, i % 2 === 1, i))}
       <rect x={548} y={92} width={76} height={82} rx={14} fill="none" stroke={INK} strokeWidth={2.6} />
       {[
         [562, 110], [588, 102], [608, 120], [566, 134], [592, 130], [610, 148], [576, 156], [598, 162],
-      ].map(([x, y], i) => dot(x, y, i % 2 === 1))}
+      ].map(([x, y], i) => dot(x, y, i % 2 === 1, i))}
       {t3Arrow(486, 114, 540, 114, accent, 3.4)}
       <text x={513} y={100} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={accent} fontFamily="var(--font-body)">
         squeeze
@@ -5072,6 +5072,343 @@ export function FigMbCatalyst({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={354} y={311} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
         that can now react
       </text>
+    </svg>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   9B · Equilibria — the equilibrium story: establishment, the
+   chromate see-saw, pressure & temperature shifts, the NO₂/N₂O₄
+   conflict, and the two industrial compromise graphs
+   ═══════════════════════════════════════════════════════════════ */
+
+/* smooth path through data points (Catmull–Rom → cubic béziers) */
+function t9Smooth(pts: [number, number][]): string {
+  if (pts.length < 2) return "";
+  let d = `M ${pts[0][0]} ${pts[0][1]}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[Math.max(0, i - 1)];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[Math.min(pts.length - 1, i + 2)];
+    const c1x = p1[0] + (p2[0] - p0[0]) / 6;
+    const c1y = p1[1] + (p2[1] - p0[1]) / 6;
+    const c2x = p2[0] - (p3[0] - p1[0]) / 6;
+    const c2y = p2[1] - (p3[1] - p1[1]) / 6;
+    d += ` C ${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${p2[0]} ${p2[1]}`;
+  }
+  return d;
+}
+
+/* the reversible harpoons, drawn — two stacked arrows, one each way */
+function t9Harpoons({ x1, x2, y, gap = 13 }: { x1: number; x2: number; y: number; gap?: number }) {
+  return (
+    <g>
+      {t3Arrow(x1, y - gap / 2, x2, y - gap / 2, INK, 3.4)}
+      {t3Arrow(x2, y + gap / 2, x1, y + gap / 2, INK, 3.4)}
+    </g>
+  );
+}
+
+/* ————— 9.9 · the class note's fig A — how equilibrium is reached ————— */
+
+export function FigEqDynamic({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 560 340" className="w-full max-w-xl" role="img" aria-label="Rate of reaction against time for a reversible reaction. The forward reaction starts fast and its rate falls as the reactants are used up. The backward reaction starts from zero rate because there is no product yet, and its rate climbs as products accumulate. The two curves meet, and from that moment both reactions continue at one common rate: dynamic equilibrium is established.">
+      <line x1={60} y1={302} x2={528} y2={302} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <line x1={60} y1={304} x2={60} y2={40} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <text x={300} y={330} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Time</text>
+      <text x={26} y={171} textAnchor="middle" fontSize="11" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 26 171)">
+        Rate of reaction
+      </text>
+      {/* the common rate the two curves settle onto */}
+      <line x1={230} y1={252} x2={505} y2={252} stroke={tint(accent, 45)} strokeWidth={2.2} strokeDasharray="6 6" />
+      {/* forward — starts fast, falls as reactants thin out */}
+      <path d="M 66 62 C 110 100, 158 176, 214 220 C 262 256, 330 252.4, 400 252.2 C 440 252.1, 480 252, 505 252" fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
+      {/* backward — starts at zero, climbs as products pile up */}
+      <path d="M 66 302 C 100 284, 140 268, 190 261 C 240 255.5, 310 252.6, 400 252.2 C 440 252.1, 480 252, 505 252" fill="none" stroke={INK} strokeWidth={3.8} strokeLinecap="round" opacity={0.72} />
+      <text x={148} y={126} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">forward reaction</text>
+      <text x={148} y={290} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)" opacity={0.72}>backward reaction</text>
+      <text x={402} y={196} textAnchor="middle" fontSize="11" fontWeight="800" fill={accent} fontFamily="var(--font-body)">
+        equilibrium established
+      </text>
+      <text x={402} y={211} textAnchor="middle" fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        forward rate = backward rate
+      </text>
+      {t3Arrow(402, 218, 384, 247, FAINT, 2.2)}
+    </svg>
+  );
+}
+
+/* ————— 9.10 · the chromate/dichromate see-saw ————— */
+
+export function FigEqChromate({ accent = "#FF6B6B" }: { accent?: string }) {
+  const YELLOW = "#F2C40F";
+  const ORANGE = "#F76707";
+  const tube = (cx: number, liquid: string) => (
+    <g>
+      <rect x={cx - 29} y={116} width={58} height={152} rx={27} fill={PAPER} stroke={INK} strokeWidth={2.6} />
+      <rect x={cx - 24} y={166} width={48} height={97} rx={21} fill={liquid} opacity={0.9} />
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 860 330" className="w-full" role="img" aria-label="The chromate and dichromate equilibrium as a see-saw. On the left, yellow chromate(VI) ions in solution; on the right, orange dichromate(VI) ions. Adding acid, hydrogen ions, pushes the position of equilibrium to the right and the solution turns orange. Adding alkali, hydroxide ions, pulls the position back to the left and the solution turns yellow again.">
+      {/* top arc — acid pushes right */}
+      <path d="M 208 92 C 330 38, 530 38, 652 92" fill="none" stroke={accent} strokeWidth={3.4} strokeLinecap="round" />
+      <polygon points="657,95 640,79 636,96" fill={accent} />
+      <text x={430} y={30} textAnchor="middle" fontSize="13" fontWeight="800" fill={accent} fontFamily="var(--font-body)">
+        add acid (H⁺) — the position moves right
+      </text>
+      {/* bottom arc — alkali pulls left */}
+      <path d="M 652 234 C 530 288, 330 288, 208 234" fill="none" stroke={INK} strokeWidth={3.4} strokeLinecap="round" opacity={0.65} />
+      <polygon points="203,231 220,247 224,230" fill={INK} opacity={0.65} />
+      <text x={430} y={313} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)" opacity={0.75}>
+        add alkali (OH⁻) — the position moves left
+      </text>
+      {/* the two solutions */}
+      {tube(122, YELLOW)}
+      {tube(738, ORANGE)}
+      {t9Harpoons({ x1: 330, x2: 530, y: 192, gap: 18 })}
+      <text x={122} y={300} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">2CrO₄²⁻(aq)</text>
+      <text x={122} y={318} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">chromate(VI) — YELLOW</text>
+      <text x={738} y={300} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cr₂O₇²⁻(aq)</text>
+      <text x={738} y={318} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">dichromate(VI) — ORANGE</text>
+    </svg>
+  );
+}
+
+/* ————— 9.10 · ammonia at equilibrium against pressure ————— */
+
+export function FigEqPressure({ accent = "#FF6B6B" }: { accent?: string }) {
+  const x = (atm: number) => 60 + atm * 0.78;
+  const y = (pct: number) => 322 - pct * 2.7;
+  const pts: [number, number][] = [
+    [x(0), y(0)],
+    [x(80), y(42)],
+    [x(160), y(62)],
+    [x(240), y(74)],
+    [x(330), y(82)],
+    [x(430), y(87.5)],
+    [x(520), y(90)],
+    [x(600), y(91.5)],
+  ];
+  return (
+    <svg viewBox="0 0 560 390" className="w-full max-w-xl" role="img" aria-label="Percentage of ammonia in the equilibrium mixture against pressure in atmospheres for the reaction between nitrogen and hydrogen. The curve rises steeply at first and then flattens: at high pressure the equilibrium mixture contains far more ammonia, because the equilibrium has shifted to the side with fewer moles of gas.">
+      <line x1={60} y1={322} x2={528} y2={322} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <line x1={60} y1={324} x2={60} y2={52} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      {[
+        [0, 322],
+        [50, 187],
+        [100, 52],
+      ].map(([v, ty]) => (
+        <g key={v}>
+          <line x1={52} y1={ty} x2={60} y2={ty} stroke={INK} strokeWidth={2} />
+          <text x={46} y={ty + 4} textAnchor="end" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{v}</text>
+        </g>
+      ))}
+      {[
+        [0, 60],
+        [300, 294],
+        [600, 528],
+      ].map(([v, tx]) => (
+        <g key={v}>
+          <line x1={tx} y1={322} x2={tx} y2={330} stroke={INK} strokeWidth={2} />
+          <text x={tx} y={346} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{v}</text>
+        </g>
+      ))}
+      <text x={294} y={372} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Pressure/atm</text>
+      <text x={20} y={187} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 20 187)">
+        % of ammonia in equilibrium mixture
+      </text>
+      <path d={t9Smooth(pts)} fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/* ————— 9.10 · the ΔH direction map ————— */
+
+export function FigEqTemperature({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 560 240" className="w-full max-w-xl" role="img" aria-label="A reversible reaction drawn as two opposite arrows between reactants and products. The forward direction, reactants to products, is exothermic and releases energy, delta H negative. The backward direction, products to reactants, is endothermic and absorbs energy, delta H positive.">
+      <rect x={40} y={94} width={134} height={52} rx={24} fill={tint(accent, 20)} />
+      <text x={107} y={126} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Reactants</text>
+      <rect x={386} y={94} width={134} height={52} rx={24} fill={tint(accent, 20)} />
+      <text x={453} y={126} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
+      <g>
+        {t3Arrow(214, 111, 346, 111, accent, 3.6)}
+        <text x={280} y={92} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">ΔH = −ve</text>
+        {t3Arrow(346, 143, 214, 143, INK, 3.6)}
+        <text x={280} y={172} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)" opacity={0.72}>ΔH = +ve</text>
+      </g>
+      <text x={280} y={210} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        forward = exothermic · backward = endothermic
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 9.10 · one disturbance, two predictions — the NO₂/N₂O₄ conflict ————— */
+
+export function FigEqConflict({ accent = "#FF6B6B" }: { accent?: string }) {
+  const BROWN = "#A8651C";
+  const MINT = "#12B886";
+  const steam = (cx: number, y: number) => (
+    <path
+      d={`M ${cx - 10} ${y} c 4 -7, -4 -12, 0 -19 c 4 -7, -4 -12, 0 -19`}
+      fill="none"
+      stroke={SOFT}
+      strokeWidth={2.2}
+      strokeLinecap="round"
+      opacity={0.7}
+    />
+  );
+  return (
+    <svg viewBox="0 0 860 360" className="w-full" role="img" aria-label="A sealed tube containing the brown nitrogen dioxide and colourless dinitrogen tetroxide equilibrium, stood in a beaker of hot water. Both the temperature and the pressure of the gas rise, so two predictions compete: the temperature rise predicts the equilibrium shifts left producing more brown nitrogen dioxide, while the pressure rise predicts a shift right towards fewer moles. In practice the mixture becomes darker, so the temperature effect must be the greater.">
+      <line x1={430} y1={30} x2={430} y2={340} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* ————— left · the scene ————— */}
+      <g>
+        <text x={160} y={44} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">
+          the sealed tube goes into hot water —
+        </text>
+        <text x={160} y={62} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">
+          temperature AND pressure both rise
+        </text>
+        {steam(120, 140)}
+        {steam(160, 132)}
+        {steam(200, 140)}
+        {/* beaker of hot water */}
+        <rect x={66} y={158} width={188} height={152} rx={14} fill="none" stroke={INK} strokeWidth={3} />
+        <rect x={72} y={200} width={176} height={104} rx={10} fill={tint("#FF922B", 18)} />
+        <path d="M 78 200 q 14 -9, 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0" fill="none" stroke={tint("#FF922B", 45)} strokeWidth={2.4} />
+        <text x={160} y={262} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">hot water</text>
+        {/* sealed tube with the brown gas */}
+        <rect x={136} y={92} width={48} height={176} rx={13} fill={PAPER} stroke={INK} strokeWidth={2.8} />
+        <rect x={141} y={97} width={38} height={166} rx={9} fill={BROWN} opacity={0.3} />
+        <text x={160} y={338} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">2NO₂(g) ⇌ N₂O₄(g) — sealed</text>
+      </g>
+
+      {/* ————— right · two predictions, one observation ————— */}
+      <g>
+        <text x={648} y={52} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">
+          two predictions, one observation
+        </text>
+        <rect x={470} y={72} width={356} height={66} rx={18} fill={tint(accent, 16)} />
+        <text x={648} y={98} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Temperature rises…</text>
+        <text x={648} y={120} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">predicts a shift LEFT — more brown NO₂</text>
+        {t3Arrow(648, 142, 648, 158, FAINT, 2.2)}
+        <rect x={470} y={162} width={356} height={66} rx={18} fill={FAINT} opacity={0.22} />
+        <text x={648} y={188} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Pressure rises…</text>
+        <text x={648} y={210} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">predicts a shift RIGHT — fewer moles, colourless N₂O₄</text>
+        {t3Arrow(648, 232, 648, 248, FAINT, 2.2)}
+        <rect x={470} y={252} width={356} height={76} rx={18} fill={tint(MINT, 18)} />
+        <text x={648} y={280} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Observed: the mixture becomes DARKER</text>
+        <text x={648} y={302} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the temperature effect wins — the position moved LEFT,</text>
+        <text x={648} y={318} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">producing more NO₂</text>
+      </g>
+    </svg>
+  );
+}
+
+/* ————— 9.11 · Haber process — equilibrium yield against pressure ————— */
+
+export function FigEqHaber({ accent = "#FF6B6B" }: { accent?: string }) {
+  const x = (atm: number) => 74 + atm * 1.6;
+  const y = (pct: number) => 380 - pct * (320 / 70);
+  const series: { t: string; data: [number, number][]; op: number }[] = [
+    { t: "350", data: [[0, 0], [50, 26], [100, 40], [150, 50], [200, 57], [250, 61.5], [300, 65], [350, 68.5], [400, 72]], op: 0.85 },
+    { t: "400", data: [[0, 0], [50, 20], [100, 31], [150, 39], [200, 44.5], [250, 48.5], [300, 51.5], [350, 54], [400, 56]], op: 0.68 },
+    { t: "500", data: [[0, 0], [50, 11], [100, 17], [150, 21], [200, 24], [250, 26], [300, 27.5], [350, 29], [400, 30.5]], op: 0.52 },
+    { t: "550", data: [[0, 0], [50, 7.5], [100, 12], [150, 15], [200, 17.5], [250, 19.5], [300, 21], [350, 22], [400, 23]], op: 0.4 },
+    { t: "600", data: [[0, 0], [50, 5.5], [100, 8.5], [150, 11], [200, 13], [250, 14.5], [300, 15.5], [350, 16.5], [400, 17.5]], op: 0.3 },
+  ];
+  const t450: [number, number][] = [[0, 0], [50, 15.5], [100, 24], [150, 29.5], [200, 33], [250, 35.5], [300, 37.5], [350, 39.5], [400, 41]];
+  return (
+    <svg viewBox="0 0 780 460" className="w-full" role="img" aria-label="The equilibrium yield of ammonia against pressure at six temperatures, from 350 degrees to 600 degrees Celsius. At every pressure the cooler curves sit higher, so the highest yield belongs to low temperature and high pressure. Dashed guide lines mark the working compromise: at 250 atmospheres the 450 degrees Celsius curve reads about 35 percent ammonia.">
+      <line x1={74} y1={380} x2={718} y2={380} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <line x1={74} y1={382} x2={74} y2={48} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      {[0, 10, 20, 30, 40, 50, 60, 70].map((v) => (
+        <g key={v}>
+          <line x1={66} y1={y(v)} x2={74} y2={y(v)} stroke={INK} strokeWidth={2} />
+          <text x={60} y={y(v) + 4} textAnchor="end" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{v}</text>
+        </g>
+      ))}
+      {[0, 100, 200, 300, 400].map((v) => (
+        <g key={v}>
+          <line x1={x(v)} y1={380} x2={x(v)} y2={388} stroke={INK} strokeWidth={2} />
+          <text x={x(v)} y={404} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{v}</text>
+        </g>
+      ))}
+      <text x={396} y={430} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Pressure/atm</text>
+      <text x={22} y={214} textAnchor="middle" fontSize="11" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 22 214)">
+        Percentage yield of ammonia
+      </text>
+      {/* the compromise guides — 250 atm on the 450 °C curve */}
+      <line x1={x(250)} y1={380} x2={x(250)} y2={y(35.5)} stroke={FAINT} strokeWidth={2.2} strokeDasharray="6 5" />
+      <line x1={74} y1={y(35.5)} x2={x(250)} y2={y(35.5)} stroke={FAINT} strokeWidth={2.2} strokeDasharray="6 5" />
+      {series.map((s) => (
+        <g key={s.t}>
+          <path
+            d={t9Smooth(s.data.map(([a, p]) => [x(a), y(p)]))}
+            fill="none"
+            stroke={INK}
+            strokeWidth={3}
+            strokeLinecap="round"
+            opacity={s.op}
+          />
+          <text x={x(400) + 10} y={y(s.data[s.data.length - 1][1]) + 4} fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+            {s.t} °C
+          </text>
+        </g>
+      ))}
+      <path d={t9Smooth(t450.map(([a, p]) => [x(a), y(p)]))} fill="none" stroke={accent} strokeWidth={4.6} strokeLinecap="round" />
+      <text x={x(400) + 10} y={y(41) + 4} fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">450 °C</text>
+      <circle cx={x(250)} cy={y(35.5)} r={5} fill={accent} stroke={PAPER} strokeWidth={2} />
+      <text x={x(250)} y={y(35.5) - 12} textAnchor="middle" fontSize="11" fontWeight="800" fill={INK} fontFamily="var(--font-body)">250 atm</text>
+    </svg>
+  );
+}
+
+/* ————— 9.11 · Contact process — SO₃ yield against temperature ————— */
+
+export function FigEqContact({ accent = "#FF6B6B" }: { accent?: string }) {
+  const x = (t: number) => 70 + (t - 350) * (460 / 300);
+  const y = (pct: number) => 330 - (pct - 80) * 13.7;
+  const pts: [number, number][] = [
+    [x(350), y(99.6)],
+    [x(400), y(98.8)],
+    [x(450), y(97)],
+    [x(500), y(93.8)],
+    [x(550), y(87.5)],
+    [x(600), y(82.8)],
+    [x(650), y(80.6)],
+  ];
+  return (
+    <svg viewBox="0 0 560 400" className="w-full max-w-xl" role="img" aria-label="The percentage yield of sulfur trioxide against temperature at one atmosphere pressure for the Contact process. The yield is almost complete at 350 degrees Celsius and falls as temperature rises. Dashed guides mark the working point: at 450 degrees Celsius the yield still reads 97 percent, which is why the process runs there.">
+      <line x1={70} y1={330} x2={530} y2={330} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <line x1={70} y1={332} x2={70} y2={44} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      {[80, 85, 90, 95, 100].map((v) => (
+        <g key={v}>
+          <line x1={62} y1={y(v)} x2={70} y2={y(v)} stroke={INK} strokeWidth={2} />
+          <text x={56} y={y(v) + 4} textAnchor="end" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{v}</text>
+        </g>
+      ))}
+      {[350, 450, 550, 650].map((v) => (
+        <g key={v}>
+          <line x1={x(v)} y1={330} x2={x(v)} y2={338} stroke={INK} strokeWidth={2} />
+          <text x={x(v)} y={354} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{v}</text>
+        </g>
+      ))}
+      <text x={300} y={382} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Temperature/°C</text>
+      <text x={20} y={187} textAnchor="middle" fontSize="11" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 20 187)">
+        % yield of SO₃
+      </text>
+      {/* the 97% at 450 °C reading */}
+      <line x1={70} y1={y(97)} x2={x(450)} y2={y(97)} stroke={FAINT} strokeWidth={2.2} strokeDasharray="6 5" />
+      <line x1={x(450)} y1={330} x2={x(450)} y2={y(97)} stroke={FAINT} strokeWidth={2.2} strokeDasharray="6 5" />
+      <path d={t9Smooth(pts)} fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
+      <circle cx={x(450)} cy={y(97)} r={5} fill={accent} stroke={PAPER} strokeWidth={2} />
+      <text x={x(450) + 14} y={y(97) - 12} fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">97% at 450 °C</text>
     </svg>
   );
 }
