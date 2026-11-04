@@ -127,7 +127,15 @@ export type FigureKind =
   | "ms-ethane-frags"
   | "ms-iso-c"
   | "ms-iso-br"
-  | "ms-iso-cl";
+  | "ms-iso-cl"
+  | "ir-vibrations"
+  | "ir-axes"
+  | "ir-butanone"
+  | "ir-ethanol"
+  | "ir-propanoic"
+  | "ir-propene"
+  | "ir-halides"
+  | "ir-amines";
 
 export type NotesBlock =
   | { k: "p"; text: string }

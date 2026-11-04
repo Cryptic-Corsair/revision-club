@@ -19,6 +19,7 @@ import { SECTIONS_T09_B } from "./content/notes-t09-b";
 import { SECTIONS_T10_A } from "./content/notes-t10-a";
 import { SECTIONS_T10_B } from "./content/notes-t10-b";
 import { SECTIONS_T10_C } from "./content/notes-t10-c";
+import { SECTIONS_T10_D } from "./content/notes-t10-d";
 import { NOTES_META } from "./notes-meta";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -189,18 +190,18 @@ export const NOTES_DOCS: NotesDoc[] = [
     kicker: "Unit 2 · Topic 10 — the complete class note, spec by spec",
     title: "Halogenoalkanes, alcohols and spectra",
     source:
-      "the complete class note (CHSE Grade 11, Unit 2 · Topic 10, Parts 10B, 10C & 10D · 2021/2019, semester 2) — the halogenoalkanes, the alcohols, and the mass spectra; the IR half of the spectra note joins later.",
+      "the complete class note (CHSE Grade 11, Unit 2 · Topic 10, Parts 10B, 10C, 10D & 10E · 2021/2019, semester 2) — the halogenoalkanes, the alcohols, and the spectra: mass and infrared.",
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 10, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every reagent, condition and equation is carried exactly as the class note writes it — the exercise drill (Exercises 1–4 for the halogenoalkanes, Exercises 1–3 and Q1–Q2 for the alcohols, Exercises 1–2 for the mass spectra) stays in the book.",
+        text: "This is the actual revision note for Topic 10, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every reagent, condition and equation is carried exactly as the class note writes it — the exercise drill (Exercises 1–4 for the halogenoalkanes, Exercises 1–3 and Q1–Q2 for the alcohols, Exercises 1–2 for the mass spectra, Questions 1–5 for the infrared) stays in the book.",
       },
       {
         k: "p",
-        text: "The class note opens with **10A, the general principles**, and points objectives 10.1–10.5 at the introductory organic chemistry notes — on the bench that is ==the Topic 4 note==, where reaction types, mechanisms, heterolytic fission and nucleophiles already live. Part **10B** is the halogenoalkanes themselves: naming and isomers, the primary/secondary/tertiary classes, the two rate factors, the four reactions with their conditions, the two substitution mechanisms, and the hydrolysis race settled by bond enthalpy. Part **10C** puts the alcohols on the bench: the C~n~H~2n+1~OH family and its names, the three classes, the reactions — combustion, the three halogenating agents, dehydration at 170 °C — the dichromate oxidations with distill-versus-reflux deciding aldehyde or acid, and the five purification techniques with their rigs. Part **10D** starts the analytical machines: the ==mass spectrum== with its molecular ion and fragmentation pattern, the ==base peak==, and the isotope doublets — carbon's M+1 stub, bromine's 1:1 and 1:2:1, chlorine's 3:1 and 9:6:1. The infrared half of the spectra note joins when its pages arrive.",
+        text: "The class note opens with **10A, the general principles**, and points objectives 10.1–10.5 at the introductory organic chemistry notes — on the bench that is ==the Topic 4 note==, where reaction types, mechanisms, heterolytic fission and nucleophiles already live. Part **10B** is the halogenoalkanes themselves: naming and isomers, the primary/secondary/tertiary classes, the two rate factors, the four reactions with their conditions, the two substitution mechanisms, and the hydrolysis race settled by bond enthalpy. Part **10C** puts the alcohols on the bench: the C~n~H~2n+1~OH family and its names, the three classes, the reactions — combustion, the three halogenating agents, dehydration at 170 °C — the dichromate oxidations with distill-versus-reflux deciding aldehyde or acid, and the five purification techniques with their rigs. Part **10D** starts the analytical machines: the ==mass spectrum== with its molecular ion and fragmentation pattern, the ==base peak==, and the isotope doublets — carbon's M+1 stub, bromine's 1:1 and 1:2:1, chlorine's 3:1 and 9:6:1. Part **10E** finishes the machines with ==infrared spectroscopy==: bonds that vibrate by stretching and bending, the transmittance–wavenumber frame, the absorption table from C–O to C–I, the fingerprint region below 1500 cm^−1^ — and the teaching spectra read dip by dip: butanone's C=O at 1740, ethanol's broad O–H, propanoic acid's very broad one, propene's C=C, the alkyl-halide C–X stretches, and the amine rule of two bands, one band, none.",
       },
     ],
-    sections: [...SECTIONS_T10_A, ...SECTIONS_T10_B, ...SECTIONS_T10_C],
+    sections: [...SECTIONS_T10_A, ...SECTIONS_T10_B, ...SECTIONS_T10_C, ...SECTIONS_T10_D],
   },
 ];
 

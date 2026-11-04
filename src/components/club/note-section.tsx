@@ -68,6 +68,14 @@ import {
   FigMsIsoC,
   FigMsIsoBr,
   FigMsIsoCl,
+  FigIrVibrations,
+  FigIrAxes,
+  FigIrButanone,
+  FigIrEthanol,
+  FigIrPropanoic,
+  FigIrPropene,
+  FigIrHalides,
+  FigIrAmines,
   FigSpectrumNeon,
   FigSuccIe,
   FigThermo,
@@ -796,6 +804,14 @@ const WIDE_FIGS = new Set([
   "ms-iso-c",
   "ms-iso-br",
   "ms-iso-cl",
+  "ir-vibrations",
+  "ir-axes",
+  "ir-butanone",
+  "ir-ethanol",
+  "ir-propanoic",
+  "ir-propene",
+  "ir-halides",
+  "ir-amines",
 ]);
 
 function Figure({
@@ -853,6 +869,30 @@ function Figure({
       break;
     case "ms-iso-cl":
       node = <FigMsIsoCl />;
+      break;
+    case "ir-vibrations":
+      node = <FigIrVibrations />;
+      break;
+    case "ir-axes":
+      node = <FigIrAxes />;
+      break;
+    case "ir-butanone":
+      node = <FigIrButanone />;
+      break;
+    case "ir-ethanol":
+      node = <FigIrEthanol />;
+      break;
+    case "ir-propanoic":
+      node = <FigIrPropanoic />;
+      break;
+    case "ir-propene":
+      node = <FigIrPropene />;
+      break;
+    case "ir-halides":
+      node = <FigIrHalides />;
+      break;
+    case "ir-amines":
+      node = <FigIrAmines />;
       break;
     case "orbitals":
       node = <FigOrbitals accent={accent} />;

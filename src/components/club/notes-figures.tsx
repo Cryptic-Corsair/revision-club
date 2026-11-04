@@ -6617,3 +6617,442 @@ export function FigMsIsoCl() {
     </svg>
   );
 }
+
+/* ————— 10.22 · infrared spectroscopy ————— */
+
+/* emphasis colours, shared by the IR set so every O–H reads the same */
+const IR_GRAPE = "#9775FA";
+const IR_CORAL = "#FF6B6B";
+const IR_MINT = "#12B886";
+const IR_AMBER = "#F59F00";
+
+/* one IR absorption band: centre wavenumber, transmittance depth and
+   half-width — the class note's dips, redrawn as smooth gaussians */
+type IrBand = { at: number; depth: number; width: number };
+
+/* an annotation: a label floating above the trace with a leader
+   dropping into its dip, drawn the way the class note labels its
+   spectra */
+type IrMark = {
+  nu: number; // the dip this annotation points at
+  label: string;
+  label2?: string; // optional second line
+  color?: string;
+  ly?: number; // label baseline (panel coords, default 30)
+  lx?: number; // horizontal nudge from the dip
+  anchor?: "start" | "middle" | "end";
+};
+
+/* transmittance at wavenumber nu: a high plateau with the bands cut
+   into it, plus a light deterministic texture in the fingerprint half */
+function irTrace(bands: IrBand[], nu: number): number {
+  let t = 86;
+  for (const b of bands) {
+    const d = (nu - b.at) / b.width;
+    t -= b.depth * Math.exp(-0.5 * d * d);
+  }
+  if (nu < 1500) {
+    const w = Math.sin(nu / 17.3) * 2.4 + Math.sin(nu / 43.7 + 1.3) * 1.7;
+    t -= Math.max(0, w) * (0.3 + 0.7 * (1 - nu / 1500));
+  }
+  return Math.min(97, Math.max(2, t));
+}
+
+/* one IR panel drawn into a <g>: wavenumber axis DESCENDING from
+   xMax (left) to xMin (right) the way every IR spectrum is printed,
+   transmittance 0–100 on the y axis. Used by every figure below. */
+function IrPanelG({
+  ox = 0,
+  oy = 0,
+  w,
+  h,
+  bands,
+  marks = [],
+  windows = [],
+  xMin = 500,
+  xMax = 4000,
+  xTicks = [4000, 3000, 2000, 1500, 1000, 500],
+  yTicks = [0, 50, 100],
+  title,
+  formula,
+  xLabel,
+  yLabel,
+  padT,
+}: {
+  ox?: number;
+  oy?: number;
+  w: number;
+  h: number;
+  bands: IrBand[];
+  marks?: IrMark[];
+  windows?: { from: number; to: number; color?: string }[];
+  xMin?: number;
+  xMax?: number;
+  xTicks?: number[];
+  yTicks?: number[];
+  title?: string;
+  formula?: string;
+  xLabel?: string;
+  yLabel?: string;
+  padT?: number;
+}) {
+  const pad = { l: 50, r: 16, t: padT ?? (title ? 56 : 22), b: xLabel ? 46 : 34 };
+  const pw = w - pad.l - pad.r;
+  const ph = h - pad.t - pad.b;
+  const X = (nu: number) => ox + pad.l + ((xMax - nu) / (xMax - xMin)) * pw;
+  const Y = (t: number) => oy + pad.t + (1 - t / 100) * ph;
+  const pts: string[] = [];
+  for (let nu = xMax; nu >= xMin; nu -= 4) {
+    pts.push(`${X(nu).toFixed(1)},${Y(irTrace(bands, nu)).toFixed(1)}`);
+  }
+  return (
+    <g>
+      {title && (
+        <text x={ox + pad.l} y={oy + 22} textAnchor="start" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+          {title}
+        </text>
+      )}
+      {formula && (
+        <text x={ox + pad.l} y={oy + 40} textAnchor="start" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+          {formula}
+        </text>
+      )}
+      {windows.map((wn, i) => (
+        <rect
+          key={i}
+          x={Math.min(X(wn.from), X(wn.to))}
+          y={oy + pad.t}
+          width={Math.abs(X(wn.from) - X(wn.to))}
+          height={ph}
+          fill={wn.color ?? tint(IR_GRAPE, 26)}
+        />
+      ))}
+      {/* axes */}
+      <line x1={ox + pad.l} y1={oy + pad.t} x2={ox + pad.l} y2={oy + pad.t + ph} stroke={INK} strokeWidth="3" strokeLinecap="round" />
+      <line x1={ox + pad.l} y1={oy + pad.t + ph} x2={ox + pad.l + pw} y2={oy + pad.t + ph} stroke={INK} strokeWidth="3" strokeLinecap="round" />
+      {yTicks.map((t) => (
+        <g key={t}>
+          <line x1={ox + pad.l - 6} y1={Y(t)} x2={ox + pad.l} y2={Y(t)} stroke={INK} strokeWidth="2" />
+          <text x={ox + pad.l - 10} y={Y(t) + 4} textAnchor="end" fontSize="11" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+            {t}
+          </text>
+        </g>
+      ))}
+      {xTicks.map((t) => (
+        <g key={t}>
+          <line x1={X(t)} y1={oy + pad.t + ph} x2={X(t)} y2={oy + pad.t + ph + 6} stroke={INK} strokeWidth="2" />
+          <text x={X(t)} y={oy + pad.t + ph + 20} textAnchor="middle" fontSize="11" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+            {t}
+          </text>
+        </g>
+      ))}
+      {yLabel && (
+        <text
+          x={ox + 14}
+          y={oy + pad.t + ph / 2}
+          textAnchor="middle"
+          fontSize="12"
+          fontWeight="700"
+          fill={INK}
+          fontFamily="var(--font-body)"
+          transform={`rotate(-90 ${ox + 14} ${oy + pad.t + ph / 2})`}
+        >
+          {yLabel}
+        </text>
+      )}
+      {xLabel && (
+        <text x={ox + pad.l + pw / 2} y={oy + h - 8} textAnchor="middle" fontSize="13" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+          {xLabel}
+        </text>
+      )}
+      {/* the transmittance trace */}
+      <polyline points={pts.join(" ")} fill="none" stroke={INK} strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
+      {/* annotations: label above, leader dropping into the dip */}
+      {marks.map((m, i) => {
+        const c = m.color ?? SOFT;
+        const lx = X(m.nu) + (m.lx ?? 0);
+        const ly = (m.ly ?? 30) + oy;
+        const anchor = m.anchor ?? "middle";
+        const ty = Y(irTrace(bands, m.nu)) - 4;
+        return (
+          <g key={i}>
+            <text x={lx} y={ly} textAnchor={anchor} fontSize="11.5" fontWeight="800" fill={c} fontFamily="var(--font-body)">
+              {m.label}
+            </text>
+            {m.label2 && (
+              <text x={lx} y={ly + 15} textAnchor={anchor} fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+                {m.label2}
+              </text>
+            )}
+            {t3Arrow(lx, ly + (m.label2 ? 21 : 7), X(m.nu), ty, c, 2)}
+          </g>
+        );
+      })}
+    </g>
+  );
+}
+
+/* the single-spectrum wrapper used by the teaching figures */
+function IrSpectrum({
+  w = 620,
+  h = 300,
+  bands,
+  marks,
+  xTicks,
+  ariaLabel,
+}: {
+  w?: number;
+  h?: number;
+  bands: IrBand[];
+  marks: IrMark[];
+  xTicks?: number[];
+  ariaLabel: string;
+}) {
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label={ariaLabel}>
+      <IrPanelG w={w} h={h} bands={bands} marks={marks} xTicks={xTicks} xLabel="Wavenumber / cm⁻¹" yLabel="Transmittance / %" />
+    </svg>
+  );
+}
+
+/* the class note's three water vibrations: stretching in step,
+   bending, stretching in opposition */
+export function FigIrVibrations() {
+  const Water = ({ cx }: { cx: number }) => {
+    const bond = { stroke: INK, strokeWidth: 2.8 } as const;
+    return (
+      <g>
+        <line x1={cx} y1={90} x2={cx - 40} y2={122} {...bond} />
+        <line x1={cx} y1={90} x2={cx + 40} y2={122} {...bond} />
+        <text x={cx} y={88} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">O</text>
+        <text x={cx - 46} y={138} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+        <text x={cx + 46} y={138} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      </g>
+    );
+  };
+  return (
+    <svg viewBox="0 0 660 222" className="w-full" role="img" aria-label="Stretching and bending vibrations of the water molecule">
+      {/* symmetrical stretch — both bonds lengthen together */}
+      <Water cx={110} />
+      {t3Arrow(88, 97, 58, 125, IR_CORAL, 2.4)}
+      {t3Arrow(132, 97, 162, 125, IR_CORAL, 2.4)}
+      <text x={110} y={196} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">symmetrical stretch</text>
+      {/* bending — the H atoms swing toward each other */}
+      <Water cx={330} />
+      {t3Arrow(266, 152, 300, 152, IR_CORAL, 2.4)}
+      {t3Arrow(394, 152, 360, 152, IR_CORAL, 2.4)}
+      <text x={330} y={196} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">bending</text>
+      {/* asymmetrical stretch — one bond lengthens as the other shortens */}
+      <Water cx={550} />
+      {t3Arrow(528, 97, 498, 125, IR_CORAL, 2.4)}
+      {t3Arrow(602, 125, 572, 97, IR_CORAL, 2.4)}
+      <text x={550} y={196} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">asymmetrical stretch</text>
+    </svg>
+  );
+}
+
+/* the note's generic frame: how every IR spectrum is plotted */
+export function FigIrAxes() {
+  return (
+    <IrSpectrum
+      h={312}
+      ariaLabel="A generic infrared spectrum: transmittance against wavenumber"
+      bands={[
+        { at: 2950, depth: 30, width: 26 },
+        { at: 2360, depth: 14, width: 26 },
+        { at: 1740, depth: 74, width: 24 },
+        { at: 1460, depth: 34, width: 30 },
+        { at: 1370, depth: 26, width: 20 },
+        { at: 1150, depth: 46, width: 28 },
+        { at: 980, depth: 38, width: 20 },
+        { at: 760, depth: 52, width: 24 },
+        { at: 620, depth: 34, width: 18 },
+      ]}
+      marks={[
+        {
+          nu: 1740,
+          label: "Each peak is characteristic",
+          label2: "of a vibration of a particular group.",
+          lx: -130,
+          ly: 26,
+        },
+      ]}
+    />
+  );
+}
+
+/* butanone — the C=O absorption at 1740 cm⁻¹ */
+export function FigIrButanone() {
+  return (
+    <IrSpectrum
+      ariaLabel="Infrared spectrum of butanone with the C=O absorption at 1740 cm⁻¹"
+      bands={[
+        { at: 2960, depth: 32, width: 30 },
+        { at: 1740, depth: 78, width: 24 },
+        { at: 1460, depth: 32, width: 30 },
+        { at: 1360, depth: 24, width: 20 },
+        { at: 1170, depth: 38, width: 26 },
+        { at: 940, depth: 32, width: 20 },
+        { at: 760, depth: 34, width: 22 },
+      ]}
+      marks={[
+        { nu: 1740, label: "C=O absorption at 1740 cm⁻¹", color: IR_CORAL, ly: 26 },
+        { nu: 2960, label: "C–H @ 3000 – 2850 cm⁻¹", ly: 26 },
+      ]}
+    />
+  );
+}
+
+/* ethanol — broad O–H at 3300, sharp C–O at 1010 */
+export function FigIrEthanol() {
+  return (
+    <IrSpectrum
+      ariaLabel="Infrared spectrum of ethanol with O–H at 3300 cm⁻¹ and C–O at 1010 cm⁻¹"
+      bands={[
+        { at: 3250, depth: 72, width: 120 },
+        { at: 3400, depth: 34, width: 100 },
+        { at: 2950, depth: 20, width: 24 },
+        { at: 1450, depth: 22, width: 30 },
+        { at: 1110, depth: 18, width: 16 },
+        { at: 1010, depth: 62, width: 16 },
+        { at: 880, depth: 26, width: 18 },
+      ]}
+      marks={[
+        { nu: 3300, label: "O–H absorption at 3300 cm⁻¹", color: IR_GRAPE, ly: 26 },
+        { nu: 2950, label: "C–H @ 3000 cm⁻¹", ly: 52, lx: 118 },
+        { nu: 1010, label: "C–O absorption at 1010 cm⁻¹", color: IR_MINT, ly: 26, lx: -96 },
+      ]}
+    />
+  );
+}
+
+/* propanoic acid — very broad O–H between 2500 and 3500 */
+export function FigIrPropanoic() {
+  return (
+    <IrSpectrum
+      h={312}
+      ariaLabel="Infrared spectrum of propanoic acid with a very broad O–H absorption"
+      bands={[
+        { at: 3000, depth: 70, width: 280 },
+        { at: 3350, depth: 26, width: 120 },
+        { at: 1680, depth: 74, width: 22 },
+        { at: 1200, depth: 40, width: 18 },
+        { at: 1030, depth: 48, width: 20 },
+      ]}
+      marks={[
+        { nu: 3000, label: "Very broad O–H absorption", color: IR_GRAPE, label2: "between 2500 and 3500 cm⁻¹", ly: 24 },
+        { nu: 1680, label: "C=O absorption", color: IR_CORAL, label2: "at 1680 cm⁻¹", ly: 24 },
+        { nu: 1030, label: "C–O absorptions", color: IR_MINT, label2: "at 1200 and 1030 cm⁻¹", ly: 24, lx: 17 },
+      ]}
+    />
+  );
+}
+
+/* propene — =C–H just above 3000, C=C just below 1700 */
+export function FigIrPropene() {
+  return (
+    <IrSpectrum
+      ariaLabel="Infrared spectrum of propene with the C=C and =C–H stretches labelled"
+      bands={[
+        { at: 3080, depth: 24, width: 20 },
+        { at: 2920, depth: 36, width: 44 },
+        { at: 1660, depth: 40, width: 22 },
+        { at: 1420, depth: 26, width: 26 },
+      ]}
+      marks={[
+        { nu: 3080, label: "=C–H stretch", color: IR_MINT, label2: "3100 – 3000 cm⁻¹", ly: 22 },
+        { nu: 2920, label: "C–H (alkanes)", label2: "2850 – 3000 cm⁻¹", ly: 22, lx: 96 },
+        { nu: 1660, label: "C=C stretch", color: IR_MINT, label2: "1680 – 1640 cm⁻¹", ly: 22, lx: 124 },
+      ]}
+    />
+  );
+}
+
+/* the alkyl-halide pair: 1-chloro-2-methylpropane over 1-bromopropane */
+export function FigIrHalides() {
+  return (
+    <svg viewBox="0 0 660 662" className="w-full" role="img" aria-label="Infrared spectra of 1-chloro-2-methylpropane and 1-bromopropane">
+      <IrPanelG
+        oy={0}
+        w={660}
+        h={324}
+        padT={84}
+        xTicks={[4000, 3000, 2000, 1000, 500]}
+        title="1-chloro-2-methylpropane"
+        formula="CH₃—CH(CH₃)—CH₂—Cl"
+        bands={[
+          { at: 2976, depth: 66, width: 30 },
+          { at: 2873, depth: 40, width: 20 },
+          { at: 1450, depth: 34, width: 40 },
+          { at: 1271, depth: 46, width: 34 },
+          { at: 1100, depth: 24, width: 26 },
+          { at: 980, depth: 28, width: 20 },
+          { at: 743, depth: 52, width: 20 },
+        ]}
+        marks={[
+          { nu: 2976, label: "C–H stretch · 2976 cm⁻¹", ly: 62 },
+          { nu: 1271, label: "C–H wag · 1271 cm⁻¹", ly: 62, lx: -48 },
+          { nu: 743, label: "C–Cl stretches · 743 cm⁻¹", color: IR_AMBER, ly: 80, anchor: "end", lx: 41 },
+        ]}
+      />
+      <IrPanelG
+        oy={332}
+        w={660}
+        h={330}
+        padT={84}
+        xTicks={[4000, 3000, 2000, 1000, 500]}
+        title="1-bromopropane"
+        formula="CH₃—CH₂—CH₂—Br"
+        xLabel="Wavenumber / cm⁻¹"
+        bands={[
+          { at: 2976, depth: 62, width: 30 },
+          { at: 2940, depth: 36, width: 16 },
+          { at: 1460, depth: 28, width: 40 },
+          { at: 1231, depth: 38, width: 30 },
+          { at: 1130, depth: 22, width: 22 },
+          { at: 900, depth: 20, width: 20 },
+          { at: 651, depth: 46, width: 18 },
+        ]}
+        marks={[
+          { nu: 2976, label: "C–H stretch · 2976 cm⁻¹", label2: "(not specific to alkyl halides)", ly: 62 },
+          { nu: 1231, label: "C–H wag · 1231 cm⁻¹", label2: "terminal alkyl halides only", ly: 62, lx: -60 },
+          { nu: 651, label: "C–Br stretch · 651 cm⁻¹", color: IR_AMBER, ly: 95, anchor: "end", lx: 26 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+/* the amine rule on the N–H stretch region: two bands, one band, none */
+export function FigIrAmines() {
+  const Mini = ({ ox, title, bands, windows }: { ox: number; title: string; bands: IrBand[]; windows?: { from: number; to: number }[] }) => (
+    <g>
+      <IrPanelG
+        ox={ox}
+        oy={0}
+        w={216}
+        h={212}
+        padT={42}
+        xMin={3100}
+        xMax={3600}
+        xTicks={[3500, 3300, 3100]}
+        yTicks={[]}
+        bands={bands}
+        windows={windows}
+      />
+      <text x={ox + 125} y={24} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        {title}
+      </text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 660 240" className="w-full" role="img" aria-label="N–H stretch region of primary, secondary and tertiary amines">
+      <Mini ox={4} title="1° amine · two bands" bands={[{ at: 3360, depth: 50, width: 22 }, { at: 3270, depth: 42, width: 22 }]} windows={[{ from: 3400, to: 3300 }, { from: 3330, to: 3250 }]} />
+      <Mini ox={222} title="2° amine · one band" bands={[{ at: 3330, depth: 48, width: 28 }]} windows={[{ from: 3350, to: 3310 }]} />
+      <Mini ox={440} title="3° amine · no bands" bands={[]} />
+      <text x={330} y={232} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        the N–H stretch region, wavenumber / cm⁻¹ — shaded windows carry the bands
+      </text>
+    </svg>
+  );
+}
