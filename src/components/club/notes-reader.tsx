@@ -53,7 +53,11 @@ import { SpecSectionView } from "./note-section";
 /* hop to a spec room. scrollIntoView alone proved flaky under some
    browsers (the smooth glide occasionally dies before it starts), so
    the target is computed by hand and the landing is verified — if the
-   glide was silently cancelled, one instant snap finishes the trip */
+   glide was silently cancelled, one instant snap finishes the trip.
+   Rooms off-screen are content-visibility skipped in the reader, so
+   the first measurement can ride on estimates; a short render pass —
+   an instant pre-scroll to just shy of the target — materialises the
+   real layout, and the glide then aims at measured ground. */
 function scrollToSpec(spec: string) {
   const el = document.getElementById(`spec-${spec.replace(".", "-")}`);
   if (!el) return;
@@ -61,22 +65,38 @@ function scrollToSpec(spec: string) {
     parseFloat(
       getComputedStyle(document.documentElement).getPropertyValue("--sa-top"),
     ) || 0;
-  const top = Math.max(
-    0,
-    el.getBoundingClientRect().top + window.scrollY - 100 - saTop,
-  );
-  const landed = () => Math.abs(window.scrollY - top) < 2;
-  window.scrollTo({ top, behavior: "smooth" });
-  /* two heartbeats: if the glide is still moving, leave it be; if it
-     stalled mid-trip, snap the rest of the way so the hop always lands */
-  window.setTimeout(() => {
-    if (landed()) return;
-    const y1 = window.scrollY;
+  const topOf = () =>
+    Math.max(
+      0,
+      el.getBoundingClientRect().top + window.scrollY - 100 - saTop,
+    );
+  const landed = (top: number) => Math.abs(window.scrollY - top) < 2;
+  const glide = () => {
+    const top = topOf();
+    window.scrollTo({ top, behavior: "smooth" });
+    /* two heartbeats: if the glide is still moving, leave it be; if it
+       stalled mid-trip, snap the rest of the way so the hop always lands */
     window.setTimeout(() => {
-      if (!landed() && Math.abs(window.scrollY - y1) < 1)
-        window.scrollTo({ top, behavior: "instant" as ScrollBehavior });
+      if (landed(top)) return;
+      const y1 = window.scrollY;
+      window.setTimeout(() => {
+        if (!landed(top) && Math.abs(window.scrollY - y1) < 1)
+          window.scrollTo({ top, behavior: "instant" as ScrollBehavior });
+      }, 450);
     }, 450);
-  }, 450);
+  };
+  /* the render pass: park one-and-a-half viewports shy of the
+     estimate, let the browser lay the target out for real, then glide */
+  const estimate = topOf();
+  if (estimate > window.innerHeight * 2) {
+    window.scrollTo({
+      top: estimate - window.innerHeight * 1.5,
+      behavior: "instant" as ScrollBehavior,
+    });
+    requestAnimationFrame(() => requestAnimationFrame(glide));
+  } else {
+    glide();
+  }
 }
 
 /* band helpers, waves and the shared SpecChip live in ./bands — the
@@ -259,7 +279,7 @@ function NotesReaderBody({
   ];
 
   return (
-    <div className="relative">
+    <div className="notes-flow relative">
       {/* reading progress */}
       <motion.div
         aria-hidden

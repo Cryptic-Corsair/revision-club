@@ -547,6 +547,19 @@ html.dark mark {
   scroll-margin-top: calc(100px + var(--sa-top));
 }
 
+/* ————— render rooms only when they're near —————
+   A note stacks up to 28 spec sections and a dozen hand-drawn SVG
+   figures (Topic 8); in the reader the browser may skip layout and
+   paint for rooms that are off-screen, which is most of them.
+   contain-intrinsic-size keeps the scrollbar honest, and the `auto`
+   keyword remembers each room's real height once it has rendered,
+   so later measurements stop guessing. Scoped to the reader only —
+   packs and the spec index show few sections at a time. */
+.notes-flow .spec-anchor {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 880px;
+}
+
 /* ————— mood flip —————
    While the toggle is held, every colour eases to its new value so
    the switch reads as one smooth dim-the-lights move, not a cut. */
