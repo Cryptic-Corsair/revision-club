@@ -91,6 +91,15 @@ export const NOTES_META: NotesMeta[] = [
     source: "the complete class note (CHSE Grade 11, Unit 2 · Topics 8A, 8B & 8C · 2021, semester 2) — Redox Chemistry and the elements of Groups 1, 2 and 7.",
     specRange: "8.1 → 8.28",
   },
+  {
+    id: "wch12-t09",
+    unitCode: "WCH12",
+    topicId: "t09",
+    kicker: "Unit 2 · Topic 9 — the complete class note, spec by spec",
+    title: "Kinetics — rates, collisions and catalysts",
+    source: "the complete class note (CHSE Grade 11, Unit 2 · Topic 9A · 2021, semester 2) — Kinetics. Part 9B, the equilibria half of the topic, joins later.",
+    specRange: "9.1 → 9.8",
+  },
 ];
 
 export function getNotesMeta(docId: string): NotesMeta | undefined {

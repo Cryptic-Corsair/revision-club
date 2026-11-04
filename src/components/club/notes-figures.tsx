@@ -4442,3 +4442,636 @@ export function FigHalideTest({ accent = "#FF6B6B" }: { accent?: string }) {
     </svg>
   );
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   9A · Kinetics — rate graphs, collision theory, Maxwell–
+   Boltzmann distributions and the catalyst pictures
+   ═══════════════════════════════════════════════════════════════ */
+
+/* vertical double-headed measuring arrow (for Ea spans) */
+function t9Gauge(x: number, yTop: number, yBot: number, c: string, w = 3) {
+  return (
+    <g>
+      {t3Arrow(x, (yTop + yBot) / 2, x, yTop, c, w)}
+      {t3Arrow(x, (yTop + yBot) / 2, x, yBot, c, w)}
+    </g>
+  );
+}
+
+/* tiny atoms for the collision / surface pictures */
+function t9Atom(x: number, y: number, label: string, dark: boolean, r = 8.5) {
+  return (
+    <g>
+      <circle cx={x} cy={y} r={r} fill={dark ? INK : PAPER} stroke={INK} strokeWidth={dark ? 1 : 2} />
+      <text x={x} y={y + 3} textAnchor="middle" fontSize={r * 0.95} fontWeight="800" fill={dark ? PAPER : INK} fontFamily="var(--font-body)">
+        {label}
+      </text>
+    </g>
+  );
+}
+
+/* a row-pair of metal atoms — the catalyst surface */
+function t9Surface(cx: number, y: number, n: number) {
+  const atoms: ReactNode[] = [];
+  for (let i = 0; i < n; i++) {
+    const x = cx - (n - 1) * 14 + i * 28;
+    atoms.push(<circle key={`a${i}`} cx={x} cy={y} r={11} fill={tint("var(--color-ink)", 10)} stroke={FAINT} strokeWidth={1.4} />);
+    atoms.push(<circle key={`b${i}`} cx={x + 14} cy={y + 19} r={11} fill={tint("var(--color-ink)", 16)} stroke={FAINT} strokeWidth={1.4} />);
+  }
+  return <g>{atoms}</g>;
+}
+
+/* ————— 9.1 · the three physical rate factors ————— */
+
+export function FigRateFactors({ accent = "#FF6B6B" }: { accent?: string }) {
+  const spA = tint(accent, 26); /* species A chip */
+  const dot = (x: number, y: number, alt: boolean) => (
+    <circle cx={x} cy={y} r={6.5} fill={alt ? PAPER : spA} stroke={INK} strokeWidth={alt ? 2 : 1.4} />
+  );
+  const chip = (x: number, t: string) => (
+    <g>
+      <rect x={x - 92} y={14} width={184} height={27} rx={13.5} fill={tint(accent, 24)} />
+      <text x={x} y={32} textAnchor="middle" fontSize="11.5" fontWeight="800" letterSpacing="0.6" fill={INK} fontFamily="var(--font-body)">
+        {t}
+      </text>
+    </g>
+  );
+  const note = (x: number, y: number, lines: string[]) =>
+    lines.map((t, i) => (
+      <text key={i} x={x} y={y + i * 15} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        {t}
+      </text>
+    ));
+  return (
+    <svg viewBox="0 0 960 350" className="w-full" role="img" aria-label="Three panels. Concentration: a vessel with a few molecules has few collisions and a low rate; adding more particles packs more collisions into the same volume and the rate is greater. Pressure: the same number of gas molecules squeezed into a smaller vessel sit closer together and collide more often. Surface area: one lump of solid only reacts at its outer surface, while the powdered solid exposes far more surface for collision.">
+      <line x1={320} y1={40} x2={320} y2={300} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={640} y1={40} x2={640} y2={300} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* ————— concentration ————— */}
+      {chip(160, "CONCENTRATION")}
+      <rect x={38} y={62} width={118} height={104} rx={16} fill="none" stroke={INK} strokeWidth={2.6} />
+      {[0, 1, 2, 3, 4].map((i) => dot(62 + (i % 3) * 36, 88 + Math.floor(i / 3) * 38, i % 2 === 1))}
+      <rect x={214} y={62} width={118} height={104} rx={16} fill="none" stroke={INK} strokeWidth={2.6} />
+      {[
+        [232, 84], [262, 76], [292, 92], [314, 78], [240, 112], [272, 104], [302, 120], [320, 106], [250, 140], [282, 134], [312, 148],
+      ].map(([x, y], i) => dot(x, y, i % 2 === 1))}
+      {t3Arrow(166, 114, 208, 114, accent, 3.4)}
+      {note(160, 190, ["few molecules → few collisions", "the rate is low", "many molecules → more collisions", "the rate is greater"])}
+      {note(160, 268, ["more particles crowded into", "the same volume"])}
+      <g>
+        <rect x={82} y={288} width={156} height={24} rx={12} fill={tint(accent, 10)} />
+        <text x={160} y={304} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+          collisions more frequent
+        </text>
+      </g>
+
+      {/* ————— pressure ————— */}
+      {chip(480, "PRESSURE — GASES ONLY")}
+      <rect x={352} y={54} width={128} height={120} rx={16} fill="none" stroke={INK} strokeWidth={2.6} />
+      {[
+        [376, 80], [412, 72], [448, 88], [384, 112], [420, 106], [452, 122], [396, 144], [432, 140],
+      ].map(([x, y], i) => dot(x, y, i % 2 === 1))}
+      <rect x={548} y={92} width={76} height={82} rx={14} fill="none" stroke={INK} strokeWidth={2.6} />
+      {[
+        [562, 110], [588, 102], [608, 120], [566, 134], [592, 130], [610, 148], [576, 156], [598, 162],
+      ].map(([x, y], i) => dot(x, y, i % 2 === 1))}
+      {t3Arrow(486, 114, 540, 114, accent, 3.4)}
+      <text x={513} y={100} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={accent} fontFamily="var(--font-body)">
+        squeeze
+      </text>
+      {note(480, 190, ["the same molecules in a", "smaller space — they sit", "closer together", "collisions more frequent"])}
+      {note(480, 268, ["solids and liquids barely", "compress — almost no effect"])}
+      <g>
+        <rect x={402} y={288} width={156} height={24} rx={12} fill={tint(accent, 10)} />
+        <text x={480} y={304} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+          collisions more frequent
+        </text>
+      </g>
+
+      {/* ————— surface area ————— */}
+      {chip(800, "SURFACE AREA")}
+      {/* one lump — collisions only at its outer surface */}
+      <rect x={664} y={100} width={84} height={62} rx={12} fill={tint(accent, 22)} stroke={INK} strokeWidth={2.4} />
+      {t3Arrow(648, 90, 666, 108, accent, 2.4)}
+      {t3Arrow(650, 152, 666, 140, accent, 2.4)}
+      {t3Arrow(706, 82, 708, 98, accent, 2.4)}
+      {t3Arrow(764, 90, 748, 108, accent, 2.4)}
+      {/* powder it */}
+      {t3Arrow(758, 132, 790, 132, accent, 3)}
+      <text x={774} y={121} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={accent} fontFamily="var(--font-body)">
+        powder it
+      </text>
+      {/* the powder — far more surface exposed */}
+      <rect x={798} y={96} width={102} height={70} rx={12} fill="none" stroke={FAINT} strokeWidth={1.8} strokeDasharray="4 5" />
+      {[
+        [812, 110], [832, 104], [852, 114], [872, 108], [888, 118],
+        [818, 132], [840, 128], [862, 134], [882, 130], [826, 150], [848, 148], [872, 154],
+      ].map(([x, y], i) => (
+        <circle key={i} cx={x} cy={y} r={5} fill={tint(accent, 22)} stroke={INK} strokeWidth={1.6} />
+      ))}
+      {note(800, 190, ["one lump — only the outer", "surface can be attacked", "powdered — far more", "surface is exposed"])}
+      {note(800, 268, ["the H⁺ ions meet magnesium", "atoms everywhere at once"])}
+      <g>
+        <rect x={722} y={288} width={156} height={24} rx={12} fill={tint(accent, 10)} />
+        <text x={800} y={304} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+          collisions more frequent
+        </text>
+      </g>
+
+      <rect x={230} y={322} width={500} height={24} rx={12} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={480} y={338} textAnchor="middle" fontSize="11" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        all three raise the collision frequency → more effective collisions → faster rate
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 9.1 · volume of CO₂ collected, fast vs slow acid ————— */
+
+export function FigCo2Curves({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 540 360" className="w-full max-w-lg" role="img" aria-label="Volume of carbon dioxide against time for marble chips with hydrochloric acid. Curve A rises steeply and levels off quickly; curve B rises gently and takes longer to reach the same final volume. Same final volume, different rates.">
+      <line x1={62} y1={318} x2={508} y2={318} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <line x1={62} y1={320} x2={62} y2={40} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <text x={285} y={348} textAnchor="middle" fontSize="12.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Time</text>
+      <text x={20} y={180} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 20 180)">
+        Volume of CO₂
+      </text>
+      {/* same-final-volume guide */}
+      <line x1={62} y1={65} x2={508} y2={65} stroke={FAINT} strokeWidth={2} strokeDasharray="6 7" />
+      <text x={504} y={54} textAnchor="end" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        same final volume
+      </text>
+      {/* curve B — the slower acid */}
+      <path d="M 62 318 C 140 306, 210 252, 268 200 C 320 154, 366 112, 420 88 C 452 74, 480 68, 506 66" fill="none" stroke={INK} strokeWidth={4.5} strokeLinecap="round" opacity={0.55} />
+      {/* curve A — the faster acid */}
+      <path d="M 62 318 C 96 210, 118 122, 152 90 C 176 68, 206 64, 250 64 L 506 64" fill="none" stroke={accent} strokeWidth={4.5} strokeLinecap="round" />
+      <text x={92} y={168} fontSize="15" fontWeight="800" fill={accent} fontFamily="var(--font-body)">A</text>
+      <text x={296} y={222} fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-body)" opacity={0.65}>B</text>
+      <text x={200} y={86} fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        A levels off quickly — faster completion
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 9.2 · orientation — only one geometry reacts ————— */
+
+export function FigOrientation({ accent = "#FF6B6B" }: { accent?: string }) {
+  const ethene = (cx: number, cy: number) => {
+    const c1 = [cx - 17, cy];
+    const c2 = [cx + 17, cy];
+    return (
+      <g>
+        <line x1={c1[0]} y1={cy} x2={c2[0]} y2={cy} stroke={INK} strokeWidth={2.6} />
+        <line x1={c1[0]} y1={cy + 4.5} x2={c2[0]} y2={cy + 4.5} stroke={INK} strokeWidth={2.6} />
+        {[
+          [cx - 34, cy - 22], [cx + 34, cy - 22], [cx - 34, cy + 26], [cx + 34, cy + 26],
+        ].map(([hx, hy], i) => (
+          <g key={i}>
+            <line x1={hx > cx ? c2[0] : c1[0]} y1={hy < cy ? cy - 4 : cy + 6} x2={hx > cx ? hx - 9 : hx + 9} y2={hy < cy ? hy + 8 : hy - 8} stroke={INK} strokeWidth={2.2} />
+            {t9Atom(hx, hy, "H", false, 7.5)}
+          </g>
+        ))}
+        {t9Atom(c1[0], cy, "C", true)}
+        {t9Atom(c2[0], cy, "C", true)}
+      </g>
+    );
+  };
+  const verdict = (cx: number, ok: boolean) => (
+    <g>
+      <rect x={cx - 74} y={288} width={148} height={28} rx={14} fill={ok ? tint("#12B886", 22) : tint("var(--color-ink)", 8)} />
+      <text x={cx} y={306} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        {ok ? "possible reaction" : "no reaction"}
+      </text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 960 340" className="w-full" role="img" aria-label="Ethene meeting hydrogen bromide in three orientations. Collision 1: the hydrogen end of H—Br swings up into the carbon-carbon double bond — possible reaction. Collision 2: the bromine end leads — no reaction. Collision 3: H—Br attacks a hydrogen atom on the carbon instead of the double bond — no reaction.">
+      <line x1={320} y1={50} x2={320} y2={310} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={640} y1={50} x2={640} y2={310} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      {[
+        { cx: 160, n: "collision 1", ok: true },
+        { cx: 480, n: "collision 2", ok: false },
+        { cx: 800, n: "collision 3", ok: false },
+      ].map((p) => (
+        <g key={p.n}>
+          <text x={p.cx} y={44} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">
+            {p.n}
+          </text>
+          {ethene(p.cx, 118)}
+          {verdict(p.cx, p.ok)}
+        </g>
+      ))}
+      {/* collision 1 — H end leads, up into the π bond */}
+      <line x1={160} y1={196} x2={160} y2={228} stroke={INK} strokeWidth={2.4} />
+      {t9Atom(160, 196, "H", false)}
+      {t9Atom(160, 228, "Br", false, 10)}
+      {t3Arrow(160, 180, 160, 152, accent, 3)}
+      {/* collision 2 — Br end leads */}
+      <line x1={480} y1={196} x2={480} y2={228} stroke={INK} strokeWidth={2.4} />
+      {t9Atom(480, 196, "Br", false, 10)}
+      {t9Atom(480, 228, "H", false)}
+      {t3Arrow(480, 182, 480, 152, accent, 3)}
+      {/* collision 3 — attacks an H instead of the π bond */}
+      <line x1={856} y1={144} x2={888} y2={144} stroke={INK} strokeWidth={2.4} />
+      {t9Atom(856, 144, "H", false)}
+      {t9Atom(888, 144, "Br", false, 10)}
+      {t3Arrow(842, 144, 822, 144, accent, 3)}
+      <text x={480} y={336} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        same energy in all three — only the proper geometry can break the right bond
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 9.3 · the class note's two rate graphs ————— */
+
+export function FigRateGraphs({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 1000 400" className="w-full" role="img" aria-label="Two concentration-time graphs. Left, a reactant: concentration falls steeply then flattens; a tangent drawn at point A forms a gradient triangle with legs y (concentration change) and x (time change); the gradient is zero when the reaction is complete. Right, a product: concentration rises fast at first then flattens; the opening slope gives the initial rate, a tangent at time t gives the rate then, and the rate at the end is zero.">
+      <line x1={500} y1={30} x2={500} y2={370} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* ————— fig A · with respect to a reactant ————— */}
+      <g>
+        <rect x={62} y={12} width={210} height={26} rx={13} fill={tint(accent, 22)} />
+        <text x={167} y={30} textAnchor="middle" fontSize="11" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+          with respect to a reactant
+        </text>
+        <line x1={78} y1={330} x2={452} y2={330} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        <line x1={78} y1={332} x2={78} y2={58} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        <text x={30} y={200} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 30 200)">
+          Concentration
+        </text>
+        <text x={430} y={356} fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Time</text>
+        <path d="M 82 74 C 122 190, 172 258, 246 292 C 306 316, 380 326, 446 329" fill="none" stroke={tint(accent, 35)} strokeWidth={4.5} strokeLinecap="round" />
+        {/* tangent at A + gradient triangle */}
+        <line x1={168} y1={248} x2={318} y2={318} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        <line x1={318} y1={248} x2={318} y2={318} stroke={FAINT} strokeWidth={2.2} strokeDasharray="5 5" />
+        <line x1={168} y1={318} x2={318} y2={318} stroke={FAINT} strokeWidth={2.2} strokeDasharray="5 5" />
+        <circle cx={243} cy={283} r={5.5} fill={INK} />
+        <text x={222} y={266} fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">A</text>
+        <text x={326} y={288} fontSize="12" fontWeight="800" fontStyle="italic" fill={INK} fontFamily="var(--font-body)">y</text>
+        <text x={238} y={314} fontSize="12" fontWeight="800" fontStyle="italic" fill={INK} fontFamily="var(--font-body)">x</text>
+        <text x={400} y={140} textAnchor="end" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+          gradient = zero when
+        </text>
+        <text x={400} y={156} textAnchor="end" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+          the reaction is complete
+        </text>
+        {t3Arrow(404, 164, 428, 312, FAINT, 2.2)}
+        <text x={130} y={130} fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+          tangent at A → rate = y / x
+        </text>
+        {t3Arrow(196, 138, 230, 268, FAINT, 2.2)}
+      </g>
+
+      {/* ————— fig B · with respect to a product ————— */}
+      <g>
+        <rect x={562} y={12} width={210} height={26} rx={13} fill={tint(accent, 22)} />
+        <text x={667} y={30} textAnchor="middle" fontSize="11" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+          with respect to a product
+        </text>
+        <line x1={578} y1={330} x2={952} y2={330} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        <line x1={578} y1={332} x2={578} y2={58} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        <text x={530} y={200} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 530 200)">
+          Concentration
+        </text>
+        <text x={930} y={356} fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Time</text>
+        <path d="M 582 328 C 622 254, 668 202, 726 172 C 786 142, 862 128, 948 124" fill="none" stroke={tint(accent, 35)} strokeWidth={4.5} strokeLinecap="round" />
+        {/* initial-rate tangent */}
+        <line x1={582} y1={328} x2={688} y2={168} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        <text x={688} y={156} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+          initial rate
+        </text>
+        {t3Arrow(672, 164, 660, 235, FAINT, 2.2)}
+        {/* tangent at time t */}
+        <line x1={726} y1={177} x2={852} y2={119} stroke={INK} strokeWidth={2.6} strokeLinecap="round" strokeDasharray="8 6" />
+        <line x1={782} y1={330} x2={782} y2={155} stroke={FAINT} strokeWidth={2.2} strokeDasharray="5 5" />
+        <text x={782} y={348} textAnchor="middle" fontSize="11.5" fontWeight="800" fontStyle="italic" fill={INK} fontFamily="var(--font-body)">t</text>
+        <text x={788} y={106} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+          rate at time, t
+        </text>
+        <text x={950} y={100} textAnchor="end" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+          rate at end = zero
+        </text>
+        {t3Arrow(918, 108, 900, 122, FAINT, 2.2)}
+      </g>
+    </svg>
+  );
+}
+
+/* ————— 9.4 · the Maxwell–Boltzmann distribution ————— */
+
+function t9MbPath(): string {
+  return "M 58 318 C 88 232, 126 116, 186 94 C 234 78, 276 148, 326 202 C 376 254, 446 292, 516 303";
+}
+
+export function FigMbCurve({ accent = "#FF6B6B" }: { accent?: string }) {
+  const eaX = 326;
+  return (
+    <svg viewBox="0 0 560 360" className="w-full max-w-xl" role="img" aria-label="A Maxwell-Boltzmann distribution curve: number of molecules against molecular energy. The curve starts at the origin because no molecule has zero energy, peaks at the most probable energy, and trails off towards the axis without ever touching it. A dashed line marks the activation energy; the small shaded tail beyond it holds the few molecules with enough energy to react.">
+      <line x1={58} y1={318} x2={530} y2={318} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <line x1={58} y1={320} x2={58} y2={40} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <text x={300} y={348} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Molecular energy</text>
+      <text x={24} y={180} textAnchor="middle" fontSize="11" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 24 180)">
+        Number of molecules
+      </text>
+      {/* shaded reactive tail — the exact curve segment beyond Ea */}
+      <path d={`M ${eaX} 202 C 376 254, 446 292, 516 303 L 516 318 L ${eaX} 318 Z`} fill={tint(accent, 30)} />
+      <path d={t9MbPath()} fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      {/* Ea */}
+      <line x1={eaX} y1={318} x2={eaX} y2={192} stroke={INK} strokeWidth={2.2} strokeDasharray="6 5" />
+      <text x={eaX - 10} y={206} textAnchor="end" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        Ea
+      </text>
+      {/* most probable energy */}
+      <text x={186} y={56} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        most probable energy
+      </text>
+      {t3Arrow(186, 62, 186, 86, FAINT, 2.2)}
+      {/* origin annotations */}
+      <text x={96} y={266} fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        starts at the origin —
+      </text>
+      <text x={96} y={281} fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        no molecule has zero energy
+      </text>
+      <text x={430} y={240} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+        the few with E ≥ Ea
+      </text>
+      {t3Arrow(430, 248, 434, 282, FAINT, 2.2)}
+      <text x={452} y={334} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        the tail approaches the axis but never touches it
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 9.4 · the same distribution at two temperatures ————— */
+
+export function FigMbTemperature({ accent = "#FF6B6B" }: { accent?: string }) {
+  const eaX = 410;
+  return (
+    <svg viewBox="0 0 560 360" className="w-full max-w-xl" role="img" aria-label="Two Maxwell-Boltzmann curves at temperatures T one and T two, where T two is higher. The T two curve is broader and flatter with its peak shifted to the right; the area under both curves is the same. Beyond the activation energy line the shaded wedge between the curves is the extra molecules that now have sufficient energy to react.">
+      <line x1={58} y1={318} x2={530} y2={318} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <line x1={58} y1={320} x2={58} y2={40} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <text x={300} y={348} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Molecular energy</text>
+      <text x={24} y={180} textAnchor="middle" fontSize="11" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 24 180)">
+        Number of molecules
+      </text>
+      <rect x={196} y={14} width={168} height={26} rx={13} fill={tint(accent, 22)} />
+      <text x={280} y={32} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        TEMPERATURE T₂ &gt; T₁
+      </text>
+      {/* T2 — hot: broader, flatter, peak right */}
+      <path d="M 58 318 C 108 288, 178 216, 238 178 C 280 152, 316 156, 356 186 C 406 224, 474 282, 528 306" fill="none" stroke={INK} strokeWidth={3.6} strokeLinecap="round" opacity={0.55} />
+      {/* T1 — cooler: tall, peak left */}
+      <path d="M 58 318 C 86 234, 124 120, 182 100 C 228 86, 268 158, 318 214 C 366 266, 442 300, 526 310" fill="none" stroke={accent} strokeWidth={4.2} strokeLinecap="round" />
+      <text x={162} y={84} fontSize="14" fontWeight="800" fill={accent} fontFamily="var(--font-body)">T₁</text>
+      <text x={330} y={148} fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)" opacity={0.65}>T₂</text>
+      {/* Ea */}
+      <line x1={eaX} y1={318} x2={eaX} y2={208} stroke={INK} strokeWidth={2.2} strokeDasharray="6 5" />
+      <text x={eaX - 10} y={222} textAnchor="end" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Ea</text>
+      {/* the extra catch beyond Ea — exactly between the two curves */}
+      <path d="M 408.5 226.9 C 448.1 257.7, 491.3 289.7, 528 306 L 526 310 C 484.4 305.1, 444.8 294.3, 409.6 278.3 Z" fill={tint(accent, 45)} />
+      <text x={430} y={116} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+        extra molecules with enough
+      </text>
+      <text x={430} y={132} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+        energy to overcome the barrier
+      </text>
+      {t3Arrow(436, 140, 452, 252, FAINT, 2.2)}
+    </svg>
+  );
+}
+
+/* ————— 9.6 · catalysed vs uncatalysed profiles ————— */
+
+export function FigCatalystProfile({ accent = "#FF6B6B" }: { accent?: string }) {
+  const mint = "#12B886";
+  return (
+    <svg viewBox="0 0 960 400" className="w-full" role="img" aria-label="Two reaction profile diagrams. Left: the same exothermic reaction with and without a catalyst — both routes start at the reactants and end at the products, but the catalysed hump peaks lower, so its activation energy is smaller. Right: a catalysed route that forms an intermediate — two smaller humps with a dip between them, one hump per step of the reaction.">
+      <line x1={480} y1={30} x2={480} y2={380} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* ————— left · one hump, two heights ————— */}
+      <g>
+        <text x={240} y={26} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">
+          the catalysed route clears a lower Eₐ
+        </text>
+        <line x1={64} y1={344} x2={438} y2={344} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        <line x1={64} y1={346} x2={64} y2={64} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        <text x={30} y={200} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 30 200)">
+          Energy
+        </text>
+        <text x={250} y={372} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+          progress of reaction
+        </text>
+        <line x1={76} y1={254} x2={170} y2={254} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+        <text x={120} y={240} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Reactants</text>
+        <line x1={400} y1={324} x2={438} y2={324} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+        <text x={400} y={310} textAnchor="end" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
+        {/* uncatalysed */}
+        <path d="M 170 254 C 200 112, 222 96, 246 96 C 272 96, 302 222, 362 294 C 384 316, 398 322, 416 324" fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" opacity={0.5} />
+        {/* catalysed */}
+        <path d="M 170 254 C 220 206, 262 164, 330 164 C 372 164, 398 272, 420 324" fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
+        {t9Gauge(246, 100, 250, mint)}
+        <text x={246} y={80} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={mint} fontFamily="var(--font-body)">
+          Ea without catalyst
+        </text>
+        {t9Gauge(330, 168, 250, accent)}
+        <text x={338} y={144} fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">
+          Ea with catalyst
+        </text>
+        {t9Gauge(210, 258, 320, "#FF6B6B", 2.6)}
+        <text x={222} y={294} fontSize="11" fontWeight="800" fill="#FF6B6B" fontFamily="var(--font-body)">ΔH</text>
+      </g>
+
+      {/* ————— right · two humps + intermediate ————— */}
+      <g>
+        <text x={720} y={26} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">
+          an intermediate splits the climb in two
+        </text>
+        <line x1={544} y1={344} x2={918} y2={344} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        <line x1={544} y1={346} x2={544} y2={64} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+        <text x={510} y={200} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 510 200)">
+          Enthalpy, H
+        </text>
+        <text x={730} y={372} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)">
+          progress of reaction
+        </text>
+        <line x1={556} y1={254} x2={650} y2={254} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+        <text x={600} y={240} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Reactants</text>
+        <line x1={880} y1={324} x2={918} y2={324} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+        <text x={914} y={310} textAnchor="end" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
+        <path d="M 650 254 C 668 158, 686 140, 706 140 C 726 140, 736 210, 756 210 C 776 210, 786 160, 806 160 C 830 160, 858 292, 902 324" fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
+        <text x={756} y={252} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+          intermediate
+        </text>
+        {t3Arrow(756, 240, 756, 218, INK, 2.4)}
+        <text x={706} y={122} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+          step 1
+        </text>
+        <text x={806} y={142} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+          step 2
+        </text>
+        <text x={585} y={108} textAnchor="middle" fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+          e.g. S₂O₈²⁻ + 2I⁻ with an Fe²⁺ catalyst
+        </text>
+      </g>
+    </svg>
+  );
+}
+
+/* ————— 9.7 · adsorption → reaction → desorption ————— */
+
+export function FigHetCatalyst({ accent = "#FF6B6B" }: { accent?: string }) {
+  const stage = (cx: number, n: string, t: string) => (
+    <g>
+      <rect x={cx - 82} y={22} width={164} height={28} rx={14} fill={tint(accent, 24)} />
+      <text x={cx} y={41} textAnchor="middle" fontSize="11.5" fontWeight="800" letterSpacing="0.5" fill={INK} fontFamily="var(--font-body)">
+        {n} · {t}
+      </text>
+    </g>
+  );
+  const caption = (cx: number, y: number, lines: string[]) =>
+    lines.map((t, i) => (
+      <text key={i} x={cx} y={y + i * 15} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        {t}
+      </text>
+    ));
+  const h2 = (x: number, y: number) => (
+    <g>
+      <line x1={x - 7} y1={y} x2={x + 7} y2={y} stroke={INK} strokeWidth={2.2} />
+      {t9Atom(x - 7, y, "H", false, 7)}
+      {t9Atom(x + 7, y, "H", false, 7)}
+    </g>
+  );
+  /* ethene lying flat: two carbons double-bonded, two hydrogens each */
+  const c2h4 = (x: number, y: number) => (
+    <g>
+      <line x1={x - 11} y1={y - 2} x2={x + 11} y2={y - 2} stroke={INK} strokeWidth={2.2} />
+      <line x1={x - 11} y1={y + 2.5} x2={x + 11} y2={y + 2.5} stroke={INK} strokeWidth={2.2} />
+      <line x1={x - 11} y1={y} x2={x - 26} y2={y} stroke={INK} strokeWidth={2} />
+      <line x1={x + 11} y1={y} x2={x + 26} y2={y} stroke={INK} strokeWidth={2} />
+      {t9Atom(x - 26, y, "H", false, 6.5)}
+      {t9Atom(x + 26, y, "H", false, 6.5)}
+      {t9Atom(x - 11, y, "C", true, 8)}
+      {t9Atom(x + 11, y, "C", true, 8)}
+    </g>
+  );
+  /* ethyl intermediate: ethene plus one extra H hanging off the left carbon */
+  const c2h5 = (x: number, y: number) => (
+    <g>
+      <line x1={x - 11} y1={y} x2={x + 11} y2={y} stroke={INK} strokeWidth={2.4} />
+      <line x1={x - 11} y1={y} x2={x - 26} y2={y} stroke={INK} strokeWidth={2} />
+      <line x1={x + 11} y1={y} x2={x + 26} y2={y} stroke={INK} strokeWidth={2} />
+      <line x1={x - 11} y1={y} x2={x - 11} y2={y - 16} stroke={INK} strokeWidth={2} />
+      {t9Atom(x - 26, y, "H", false, 6.5)}
+      {t9Atom(x + 26, y, "H", false, 6.5)}
+      {t9Atom(x - 11, y - 16, "H", false, 6.5)}
+      {t9Atom(x - 11, y, "C", true, 8)}
+      {t9Atom(x + 11, y, "C", true, 8)}
+    </g>
+  );
+  /* ethane: single C—C with three H per carbon */
+  const c2h6 = (x: number, y: number) => (
+    <g>
+      <line x1={x - 11} y1={y} x2={x + 11} y2={y} stroke={INK} strokeWidth={2.4} />
+      {[
+        [x - 11, y - 16], [x - 11, y + 16], [x - 27, y],
+        [x + 11, y - 16], [x + 11, y + 16], [x + 27, y],
+      ].map(([hx, hy], i) => (
+        <g key={i}>
+          <line x1={hx < x - 20 ? x - 11 : hx > x + 20 ? x + 11 : hx} y1={hy === y - 16 ? y - 5 : hy === y + 16 ? y + 5 : y} x2={hx > x - 20 && hx < x + 20 ? hx : hx + (hx < x ? 6 : -6)} y2={hy} stroke={INK} strokeWidth={1.8} />
+          {t9Atom(hx, hy, "H", false, 6.5)}
+        </g>
+      ))}
+      {t9Atom(x - 11, y, "C", true, 8)}
+      {t9Atom(x + 11, y, "C", true, 8)}
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 960 470" className="w-full" role="img" aria-label="How a heterogeneous catalyst works, in three stages on a metal surface. One, adsorption: hydrogen and ethene molecules adsorb onto active sites, forming weak bonds with surface metal atoms. Two, reaction: the hydrogen-hydrogen bond breaks and the hydrogen atoms migrate along the surface; one attaches to the adsorbed ethene making the C2H5 intermediate, and the second is about to attach. Three, desorption: the completed ethane molecule releases from the surface, leaving the active sites free to work again.">
+      <line x1={320} y1={40} x2={320} y2={440} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={640} y1={40} x2={640} y2={440} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+
+      {/* ————— 1 · adsorption ————— */}
+      <g>
+        {stage(160, "1", "ADSORPTION")}
+        {h2(232, 92)}
+        {t3Arrow(232, 108, 226, 288, accent, 2.8)}
+        {c2h4(110, 120)}
+        {t3Arrow(110, 146, 108, 288, accent, 2.8)}
+        {t9Surface(160, 316, 9)}
+        <line x1={103} y1={300} x2={98} y2={308} stroke={accent} strokeWidth={2} strokeDasharray="3 3" />
+        <line x1={226} y1={296} x2={222} y2={306} stroke={accent} strokeWidth={2} strokeDasharray="3 3" />
+        {caption(160, 396, ["H₂ and C₂H₄ adsorb onto active sites —", "weak bonds form with the metal atoms"])}
+      </g>
+
+      {/* ————— 2 · reaction ————— */}
+      <g>
+        {stage(480, "2", "REACTION")}
+        {t9Surface(480, 316, 9)}
+        {c2h5(430, 296)}
+        {t9Atom(560, 296, "H", false, 7)}
+        {t3Arrow(548, 292, 470, 292, accent, 2.6)}
+        <text x={560} y={278} textAnchor="middle" fontSize="9.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+          2nd H
+        </text>
+        {caption(480, 396, ["the H—H bond breaks; H atoms migrate", "one H joins C₂H₄ → the C₂H₅ intermediate,", "the second is about to attach"])}
+      </g>
+
+      {/* ————— 3 · desorption ————— */}
+      <g>
+        {stage(800, "3", "DESORPTION")}
+        {t9Surface(800, 316, 9)}
+        {c2h6(800, 130)}
+        {t3Arrow(800, 292, 800, 172, accent, 3)}
+        {caption(800, 396, ["ethane, C₂H₆, desorbs —", "the products leave the active", "sites free to work again"])}
+      </g>
+
+      <rect x={240} y={444} width={480} height={24} rx={12} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={480} y={460} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        adsorption → reaction → desorption — then the same active sites start over
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 9.8 · the Maxwell–Boltzmann curve with a catalyst ————— */
+
+export function FigMbCatalyst({ accent = "#FF6B6B" }: { accent?: string }) {
+  const eaCat = 300;
+  const eaNo = 408;
+  return (
+    <svg viewBox="0 0 560 360" className="w-full max-w-xl" role="img" aria-label="A Maxwell-Boltzmann distribution curve with two activation energy lines. Without a catalyst the threshold sits far right and only the small tail beyond it can react. With a catalyst the threshold slides left; every molecule in the shaded wedge between the two lines now has sufficient energy, so the number of effective collisions increases and the rate rises.">
+      <line x1={58} y1={318} x2={530} y2={318} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <line x1={58} y1={320} x2={58} y2={40} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <text x={300} y={348} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Molecular energy</text>
+      <text x={24} y={180} textAnchor="middle" fontSize="11" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 24 180)">
+        Number of molecules
+      </text>
+      {/* the extra catch between the two thresholds — exact curve sub-segments */}
+      <path d="M 299.7 171.9 C 308.3 182.1, 317 192.3, 326 202 C 349.6 226.5, 377.6 247.9, 407.9 264.8 L 407.9 318 L 299.7 318 Z" fill={tint(accent, 32)} />
+      <path d={t9MbPath()} fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <line x1={eaCat} y1={318} x2={eaCat} y2={168} stroke={accent} strokeWidth={2.4} strokeDasharray="6 5" />
+      <line x1={eaNo} y1={318} x2={eaNo} y2={252} stroke={INK} strokeWidth={2.2} strokeDasharray="6 5" />
+      <text x={eaCat - 10} y={152} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">
+        Ea with catalyst
+      </text>
+      <text x={eaNo + 12} y={242} fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        Ea without
+      </text>
+      <text x={eaNo + 12} y={257} fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        catalyst
+      </text>
+      <text x={354} y={296} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        the extra particles
+      </text>
+      <text x={354} y={311} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        that can now react
+      </text>
+    </svg>
+  );
+}

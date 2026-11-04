@@ -96,6 +96,15 @@ import {
   FigCl2Fates,
   FigH2so4Ladder,
   FigHalideTest,
+  FigRateFactors,
+  FigCo2Curves,
+  FigOrientation,
+  FigRateGraphs,
+  FigMbCurve,
+  FigMbTemperature,
+  FigCatalystProfile,
+  FigMbCatalyst,
+  FigHetCatalyst,
 } from "./notes-figures";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -730,6 +739,11 @@ const WIDE_FIGS = new Set([
   "cl2-fates",
   "h2so4-ladder",
   "halide-test",
+  "rate-factors",
+  "orientation",
+  "rate-graphs",
+  "catalyst-profile",
+  "het-catalyst",
 ]);
 
 function Figure({
@@ -973,6 +987,33 @@ function Figure({
       break;
     case "halide-test":
       node = <FigHalideTest accent={accent} />;
+      break;
+    case "rate-factors":
+      node = <FigRateFactors accent={accent} />;
+      break;
+    case "co2-curves":
+      node = <FigCo2Curves accent={accent} />;
+      break;
+    case "orientation":
+      node = <FigOrientation accent={accent} />;
+      break;
+    case "rate-graphs":
+      node = <FigRateGraphs accent={accent} />;
+      break;
+    case "mb-curve":
+      node = <FigMbCurve accent={accent} />;
+      break;
+    case "mb-temperature":
+      node = <FigMbTemperature accent={accent} />;
+      break;
+    case "catalyst-profile":
+      node = <FigCatalystProfile accent={accent} />;
+      break;
+    case "mb-catalyst":
+      node = <FigMbCatalyst accent={accent} />;
+      break;
+    case "het-catalyst":
+      node = <FigHetCatalyst accent={accent} />;
       break;
   }
   if (!node) return null;

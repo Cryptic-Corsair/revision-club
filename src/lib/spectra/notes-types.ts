@@ -86,7 +86,16 @@ export type FigureKind =
   | "displacement"
   | "cl2-fates"
   | "h2so4-ladder"
-  | "halide-test";
+  | "halide-test"
+  | "rate-factors"
+  | "co2-curves"
+  | "orientation"
+  | "rate-graphs"
+  | "mb-curve"
+  | "mb-temperature"
+  | "catalyst-profile"
+  | "mb-catalyst"
+  | "het-catalyst";
 
 export type NotesBlock =
   | { k: "p"; text: string }
