@@ -317,7 +317,7 @@ export function PackView({
       </header>
 
       {/* ————— the string of rooms ————— */}
-      <div className="pack-sections mt-10">
+      <div className="pack-sections note-rooms mt-10">
         <BandWave from="var(--color-cream)" to={bgOf(0)} />
         {groups.map((g, gi) => {
           const groupStart = groups
@@ -336,7 +336,10 @@ export function PackView({
                   >
                     <section
                       id={`spec-${s.point.spec.replace(".", "-")}`}
-                      className="spec-anchor relative"
+                      /* even rooms wear --note-band-a — in the classic
+                         lab that's the espresso ground, so .room flips
+                         the ink and surfaces inside */
+                      className={`spec-anchor relative${band % 2 === 0 ? " room" : ""}`}
                       style={{ background: bgOf(band) }}
                     >
                       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-8 sm:py-14">

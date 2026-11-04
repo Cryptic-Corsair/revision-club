@@ -30,6 +30,7 @@ import {
 const LABS: { id: Lab; swatch: string }[] = [
   { id: "light", swatch: "#FFD43B" },
   { id: "dark", swatch: "#2e2016" },
+  { id: "classic", swatch: "linear-gradient(90deg, #2c2013 50%, #fffacd 50%)" },
 ];
 
 const HEAD_FONTS: { id: HeadFont; label: string; stack: string }[] = [
@@ -229,7 +230,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
               className="no-scrollbar flex flex-1 flex-col gap-7 overflow-y-auto px-6 pt-2"
               style={{ paddingBottom: "calc(2rem + var(--sa-bottom))" }}
             >
-              <Section title="The lab" hint="Daylight or after-dark.">
+              <Section title="The lab" hint="Light, dark, or classic — the daylight page with espresso & lemon sections.">
                 <div className="flex flex-col gap-2">
                   {LABS.map((l) => {
                     const active = prefs.theme === l.id;

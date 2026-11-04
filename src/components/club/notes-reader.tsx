@@ -44,8 +44,9 @@ import { SpecSectionView } from "./note-section";
    colour, walking the hue wheel so neighbours always contrast.
    By day the bands are candy tints; after dark both steps are
    flat warm roasts at matched darkness (--note-band-a/b in
-   globals.css), so every section keeps the deep study-ground
-   feel and the highlighter still pops. The wave rides between
+   globals.css), and in the classic lab the two steps are the
+   fixed espresso/lemon pair — so every section keeps contrast
+   and the highlighter still pops. The wave rides between
    the bands, so the note reads as
    a string of connected rooms rather than one long scroll.
    ═══════════════════════════════════════════════════════════════ */
@@ -398,7 +399,10 @@ function NotesReaderBody({
         {/* the old sticky spec rail is gone — the map now lives inside
             the nav itself (see spec-map.tsx) */}
 
-        <div className="mt-8">
+        {/* .note-rooms scopes the classic lab's espresso/lemon pair
+            (html.classic .note-rooms) to the section bands only — the
+            contents chips above stay on the daylight candy walk */}
+        <div className="note-rooms mt-8">
           <BandWave from="var(--color-cream)" to={bgOf(0)} />
           {doc.sections.map((s, i) => {
             const accent = accentOf(i);
@@ -407,7 +411,10 @@ function NotesReaderBody({
               <Fragment key={s.spec}>
                 <section
                   id={`spec-${s.spec.replace(".", "-")}`}
-                  className="spec-anchor relative"
+                  /* even rooms wear --note-band-a — in the classic lab
+                     that's the espresso ground, so .room flips the ink
+                     and surfaces inside (html.classic .room) */
+                  className={`spec-anchor relative${i % 2 === 0 ? " room" : ""}`}
                   style={{ background: bgOf(i) }}
                 >
                   <div className="mx-auto max-w-3xl px-4 py-14 sm:px-8 sm:py-16">

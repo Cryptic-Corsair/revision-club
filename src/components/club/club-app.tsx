@@ -10,6 +10,7 @@ import {
   Sliders,
   Sticker,
   Sun,
+  SunMoon,
   ClipboardList,
 } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
@@ -164,20 +165,22 @@ function LogoMark({ size = 38 }: { size?: number }) {
 }
 
 /* ————— lab switch —————
-   Daylight ↔ after-dark, one tap apart. A candy toast announces
+   Light → dark → classic, one tap apart. A candy toast announces
    each switch, and the mobile browser chrome is re-painted to the
    lab's cream so the address bar never fights the page. */
 
-const LAB_ORDER: Lab[] = ["light", "dark"];
+const LAB_ORDER: Lab[] = ["light", "dark", "classic"];
 
 const LAB_LABEL: Record<Lab, string> = {
-  light: "Daylight lab",
-  dark: "After-dark lab",
+  light: "Light",
+  dark: "Dark",
+  classic: "Classic",
 };
 
 const LAB_TITLE: Record<Lab, string> = {
-  light: "Switch to the after-dark lab",
-  dark: "Switch to the daylight lab",
+  light: "Switch to the dark lab",
+  dark: "Switch to the classic lab",
+  classic: "Switch to the light lab",
 };
 
 function TopBar({
@@ -356,8 +359,10 @@ function TopBar({
             {/* the button wears today's lab; the toast announces the next one */}
             {lab === "light" ? (
               <Sun className="h-[18px] w-[18px]" strokeWidth={2.2} />
-            ) : (
+            ) : lab === "dark" ? (
               <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            ) : (
+              <SunMoon className="h-[18px] w-[18px]" strokeWidth={2.2} />
             )}
           </m.button>
         </nav>
@@ -386,7 +391,7 @@ function TopBar({
                       ? "#FFD43B"
                       : announce === "dark"
                         ? "#2e2016"
-                        : "linear-gradient(90deg, #FFD43B 50%, #2e2016 50%)",
+                        : "linear-gradient(90deg, #2c2013 50%, #fffacd 50%)",
                   boxShadow: "inset 0 0 0 2px rgb(61 43 31 / 0.12)",
                 }}
               />

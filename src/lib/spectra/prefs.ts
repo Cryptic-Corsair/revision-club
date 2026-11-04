@@ -5,9 +5,9 @@ import { pickDarkMood } from "./dark-mood";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · site preferences
-   The knobs behind the customize panel: lab (light/dark), the accent
-   wheel, page zoom, heading & body fonts, polka dots, decorative
-   motion.
+   The knobs behind the customize panel: lab (light/dark/classic),
+   the accent wheel, page zoom, heading & body fonts, polka dots,
+   decorative motion.
 
    localStorage · key "reaction-club-prefs-v1"
    Every change runs through applyPrefs() — one function that paints
@@ -15,7 +15,7 @@ import { pickDarkMood } from "./dark-mood";
    re-skins at once and the mobile address bar keeps up.
    ═══════════════════════════════════════════════════════════════ */
 
-export type Lab = "light" | "dark";
+export type Lab = "light" | "dark" | "classic";
 export type HeadFont = "fredoka" | "baloo" | "patrick";
 export type BodyFont = "nunito" | "quicksand";
 
@@ -52,7 +52,7 @@ export interface Prefs {
 }
 
 export const DEFAULT_PREFS: Prefs = {
-  theme: "light",
+  theme: "classic",
   accents: [...ACCENT_IDS],
   zoom: 1,
   headFont: "fredoka",
@@ -77,7 +77,11 @@ const listeners = new Set<() => void>();
 
 function sanitize(p: Partial<Prefs>): Prefs {
   const out: Prefs = { ...DEFAULT_PREFS };
-  if (p.theme === "light" || p.theme === "dark") out.theme = p.theme;
+  if (p.theme === "light" || p.theme === "dark" || p.theme === "classic")
+    out.theme = p.theme;
+  else if (p.theme === "hybrid")
+    /* the retired third lab rides on as classic — its heir */
+    out.theme = "classic";
   if (typeof p.zoom === "number" && ZOOM_STEPS.includes(p.zoom as (typeof ZOOM_STEPS)[number]))
     out.zoom = p.zoom;
   if (p.headFont === "fredoka" || p.headFont === "baloo" || p.headFont === "patrick")
@@ -107,7 +111,8 @@ function load() {
       state = sanitize(JSON.parse(raw));
     } else {
       /* first run — honour the old theme key if it's there.
-         A stored "hybrid" (the retired third lab) reads as light. */
+         A stored "hybrid" (the retired third lab) reads as classic,
+         its direct heir; everything else starts on the default. */
       const legacy = window.localStorage.getItem("rc-theme");
       if (legacy === "dark") state = { ...state, theme: "dark" };
     }
@@ -147,8 +152,10 @@ export function applyPrefs(p: Prefs) {
   if (typeof document === "undefined") return;
   const root = document.documentElement;
   root.classList.toggle("dark", p.theme === "dark");
-  /* the dark lab wears today's roast; the daylight lab needs none */
-  if (p.theme !== "light") root.dataset.mood = String(pickDarkMood());
+  root.classList.toggle("classic", p.theme === "classic");
+  /* only the dark lab wears today's roast; light and classic keep
+     their daylight tokens */
+  if (p.theme === "dark") root.dataset.mood = String(pickDarkMood());
   else delete root.dataset.mood;
   root.dataset.head = p.headFont;
   root.dataset.body = p.bodyFont;
@@ -221,6 +228,7 @@ export function usePrefs(): Prefs {
 }
 
 export const LAB_LABEL: Record<Lab, string> = {
-  light: "Daylight lab",
-  dark: "After-dark lab",
+  light: "Light",
+  dark: "Dark",
+  classic: "Classic",
 };

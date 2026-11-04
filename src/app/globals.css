@@ -16,6 +16,10 @@
    the custom properties below, so the whole site flips between
    · the daylight cream lab (no class), and
    · the after-hours cocoa lab (html.dark).
+   The classic lab (html.classic) is the third face: a daylight page
+   whose note sections step between two fixed grounds — deep espresso
+   (#2c2013) and pale lemon (#fffacd) — dark room, light room, dark
+   room. Everything outside those sections keeps every daylight token.
    The dark lab also rotates through a few darker roasts — mood 0
    below is the reference look, data-mood="1..3" are the alternates.
 
@@ -173,6 +177,38 @@ html.dark[data-mood="3"] {
   --tint-base: #42311f;
   --home-band-a: #251c15;
   --home-band-b: #31241c;
+}
+
+/* ————— the classic lab —————
+   The heir of the retired hybrid, done properly: the page keeps
+   every daylight token — cream ground, polka dots, candy chrome —
+   and the note & pack sections step between two fixed grounds,
+   deep espresso (#2c2013) and pale lemon (#fffacd), alternating
+   dark room / light room down the page. The pair rides on the same
+   two vars the after-dark bands use, but scoped to the rooms
+   wrapper (.note-rooms) so the contents chips, the Spec Map window
+   and home's seams stay on their daylight candy walk. No roast
+   rotation here — this pair is the theme's signature and never
+   changes. */
+html.classic {
+  color-scheme: light;
+}
+html.classic .note-rooms {
+  --note-band-a: #2c2013;
+  --note-band-b: #fffacd;
+}
+
+/* inside an espresso room, ink and surfaces flip to their
+   light-on-dark counterparts — every text-ink / bg-paper / tint()
+   within follows, the same proven recipe the hybrid rooms wore.
+   Ink #fff6ea holds ≈ 14.6:1 on #2c2013; the yellow marker pops
+   the way it did in the old hybrid cocoa rooms. */
+html.classic .room {
+  --color-ink: var(--color-milk);
+  --color-ink-soft: color-mix(in oklab, var(--color-milk) 78%, var(--color-cocoa));
+  --color-ink-faint: color-mix(in oklab, var(--color-milk) 56%, var(--color-cocoa));
+  --color-paper: color-mix(in oklab, var(--color-milk) 13%, var(--color-cocoa));
+  --tint-base: color-mix(in oklab, var(--color-milk) 20%, var(--color-cocoa));
 }
 
 
