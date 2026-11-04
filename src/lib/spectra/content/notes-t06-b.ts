@@ -18,7 +18,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       {
         k: "def",
         term: "Hess's Law",
-        text: "The enthalpy change of a chemical reaction is ==independent of the path taken== in converting reactants into products, provided the ==initial and final conditions are the same==.",
+        text: "The enthalpy change of a chemical reaction is independent of the path taken in converting reactants into products, provided the initial and final conditions are the same.",
       },
       {
         k: "p",
@@ -29,8 +29,8 @@ export const SECTIONS_T06_B: SpecSection[] = [
         items: [
           "==High activation energy==",
           "==Slow rate of reaction==",
-          "==More than one reaction occurring at the same time==",
-          "==Difficult to measure temperature change==",
+          "More than one reaction occurring at the same time",
+          "Difficult to measure temperature change",
           "==Reaction does not stop== when the stated products are formed",
         ],
       },
@@ -45,7 +45,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       {
         k: "note",
         label: "Enthalpy cycles",
-        text: "The ==total energy for each route is the same==: these are called ==Enthalpy cycles== or ==Hess's cycles==.",
+        text: "The total energy for each route is the same: these are called ==Enthalpy cycles== or ==Hess's cycles==.",
       },
       {
         k: "figure",
@@ -55,7 +55,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       { k: "h", text: "Example 1 · Δ~f~H^θ^ of carbon monoxide from combustion data" },
       {
         k: "p",
-        text: "The Standard enthalpy change of formation of carbon monoxide is difficult to measure directly as ==some amount of carbon dioxide may form==. Hence, this enthalpy can be calculated using the enthalpy changes of combustion of carbon and carbon monoxide which can be determined experimentally.",
+        text: "The Standard enthalpy change of formation of carbon monoxide is difficult to measure directly as some amount of carbon dioxide may form. Hence, this enthalpy can be calculated using the enthalpy changes of combustion of carbon and carbon monoxide which can be determined experimentally.",
       },
       {
         k: "eq",
@@ -98,7 +98,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
         k: "steps",
         caption: "Calculate the enthalpy of formation of methane, CH~4~(g), using the enthalpy of combustion data",
         items: [
-          { title: "Step 1", text: "Write the equation for the formation of the compound: ==C(s, graphite) + 2H~2~(g) → CH~4~(g)==." },
+          { title: "Step 1", text: "Write the equation for the formation of the compound: C(s, graphite) + 2H~2~(g) → CH~4~(g)." },
           { title: "Step 2", text: "Construct an energy cycle using the enthalpies of combustion." },
           { title: "Step 3", text: "Apply Hess's law to the cycle: Δ~f~H^θ^ + (−890) = (−394) + (2 × −286)." },
         ],
@@ -126,19 +126,19 @@ export const SECTIONS_T06_B: SpecSection[] = [
       },
       {
         k: "p",
-        text: "In general, when the products are burned, the amount of ==CO~2~ and H~2~O produced is the same== as when the reactants are burned. By applying Hess's law, when combustion data is given:",
+        text: "In general, when the products are burned, the amount of CO~2~ and H~2~O produced is the same as when the reactants are burned. By applying Hess's law, when combustion data is given:",
       },
       {
         k: "eq",
         eq: "ΔH[reaction] + sum Δ~c~H^θ^ [products] = sum Δ~c~H^θ^ [reactants]",
-        note: "ΔH[reaction] = ==sum Δ~c~H^θ^ [reactants] − sum Δ~c~H^θ^ [products]==.",
+        note: "ΔH[reaction] = sum Δ~c~H^θ^ [reactants] − sum Δ~c~H^θ^ [products].",
       },
       { k: "h", text: "Example 3 · Δ~r~H^θ^ from formation data" },
       {
         k: "steps",
         caption: "Calculate the enthalpy change for CaCO₃(s) → CaO(s) + CO₂(g) using the enthalpy of formation data",
         items: [
-          { title: "Step 1", text: "Write the equation for the reaction: ==CaCO~3~(s) → CaO(s) + CO~2~(g)==." },
+          { title: "Step 1", text: "Write the equation for the reaction: CaCO~3~(s) → CaO(s) + CO~2~(g)." },
           { title: "Step 2", text: "Construct an energy cycle using the enthalpies of formation." },
           { title: "Step 3", text: "Apply Hess's law to the cycle: Δ~r~H^θ^ + (−1207) = (−635) + (−394)." },
         ],
@@ -164,16 +164,16 @@ export const SECTIONS_T06_B: SpecSection[] = [
       },
       {
         k: "p",
-        text: "When enthalpy of formation for all the reactants and products are given, the enthalpy change of the reaction can be calculated by drawing Hess's cycle with ==elements== required to form the reactant and products. By applying Hess's Law:",
+        text: "When enthalpy of formation for all the reactants and products are given, the enthalpy change of the reaction can be calculated by drawing Hess's cycle with elements required to form the reactant and products. By applying Hess's Law:",
       },
       {
         k: "eq",
         eq: "sum Δ~f~H^θ^ [reactants] + ΔH[reaction] = sum Δ~f~H^θ^ [products]",
-        note: "ΔH[reaction] = ==sum Δ~f~H^θ^ [products] − sum Δ~f~H^θ^ [reactants]==.",
+        note: "ΔH[reaction] = sum Δ~f~H^θ^ [products] − sum Δ~f~H^θ^ [reactants].",
       },
       {
         k: "wow",
-        text: "The two boxed rules, side by side: with ==combustion data==, ΔH[reaction] = ==sum Δ~c~H^θ^ [reactants] − sum Δ~c~H^θ^ [products]==; with ==formation data==, ΔH[reaction] = ==sum Δ~f~H^θ^ [products] − sum Δ~f~H^θ^ [reactants]==. Same idea from opposite ends — the arrows of the cycle decide which way the subtraction runs.",
+        text: "The two boxed rules, side by side: with ==combustion data==, ΔH[reaction] = sum Δ~c~H^θ^ [reactants] − sum Δ~c~H^θ^ [products]; with ==formation data==, ΔH[reaction] = sum Δ~f~H^θ^ [products] − sum Δ~f~H^θ^ [reactants]. Same idea from opposite ends — the arrows of the cycle decide which way the subtraction runs.",
       },
       {
         k: "worked",
@@ -181,7 +181,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
         question:
           "(a) The standard enthalpy changes of formation are: C~4~H~10~(g) −134.5, CO~2~(g) −393.5, H~2~O(l) −285.8 kJ mol^−1^. (i) Δ~f~H^θ^ of H~2~O(g) is −241.8 kJ mol^−1^ — explain why this is less negative than for H~2~O(l). (ii) Calculate the standard enthalpy change of combustion of 2-methylpropane. (iii) A refill canister for the cordless hair-styler holds 15 g of 2-methylpropane — calculate the energy in kJ from one canister. (b) The enthalpy change can also be calculated using the atomisation cycle: C~4~H~10~(g) + 6½O~2~(g) → 4CO~2~(g) + 5H~2~O(l), arrows of +8410 kJ mol^−1^ and +11280 kJ mol^−1^ down to 4C(g) + 10H(g) + 13O(g). Calculate the enthalpy change using this cycle.",
         steps: [
-          "**(a)(i)** A ==change of physical state is accompanied by an enthalpy change==. H~2~O(g) stops one state short of H~2~O(l) — the extra energy released when vapour condenses to liquid is never given out, so Δ~f~H^θ^ of H~2~O(g) is ==less negative==.",
+          "**(a)(i)** A change of physical state is accompanied by an enthalpy change. H~2~O(g) stops one state short of H~2~O(l) — the extra energy released when vapour condenses to liquid is never given out, so Δ~f~H^θ^ of H~2~O(g) is ==less negative==.",
           "**(ii)** Formation route: C~4~H~10~ + 6½O~2~ → 4CO~2~ + 5H~2~O(l). Δ~c~H^θ^ = sum Δ~f~H^θ^ [products] − sum Δ~f~H^θ^ [reactants] = [4×(−393.5) + 5×(−285.8)] − (−134.5) = (−1574 − 1429) + 134.5 = ==−2868.5 kJ mol^−1^==.",
           "**(iii)** Moles in the canister = 15 ÷ 58 = 0.2586 mol. Energy = 0.2586 × 2868.5 = ==742 kJ== (3 s.f.).",
           "**(b)(i)** Around the cycle: Δ~f~H^θ^ = +8410 − 11280 = ==−2870 kJ mol^−1^== — agreeing with (ii) within rounding.",
@@ -192,7 +192,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       {
         k: "figure",
         kind: "hess-butane",
-        caption: "The atomisation cycle of Exercise 8: both sides of the combustion equation are ==pulled apart into gaseous atoms== — +8410 kJ mol^−1^ to atomise the reactants, +11280 kJ mol^−1^ to atomise the products. The difference is the enthalpy change of the reaction.",
+        caption: "The atomisation cycle of Exercise 8: both sides of the combustion equation are pulled apart into gaseous atoms — +8410 kJ mol^−1^ to atomise the reactants, +11280 kJ mol^−1^ to atomise the products. The difference is the enthalpy change of the reaction.",
       },
     ],
   },
@@ -204,7 +204,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
     blocks: [
       {
         k: "p",
-        text: "The class note's section ==Hess's Law calculations for other reactions== is Core Practical 2 in action: for each reaction the enthalpy change cannot be measured directly, so ==two reactions that can be measured== are combined by Hess's law.",
+        text: "The class note's section Hess's Law calculations for other reactions is Core Practical 2 in action: for each reaction the enthalpy change cannot be measured directly, so two reactions that can be measured are combined by Hess's law.",
       },
       {
         k: "worked",
@@ -213,7 +213,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
           "Calculate Δ~r~H^θ^ for the thermal decomposition of calcium carbonate into calcium oxide and carbon dioxide given the following data. CaCO~3~(s) + 2HCl(aq) → CaCl~2~(aq) + H~2~O(l) + CO~2~(g), Δ~r~H^θ^ = −17 kJ/mol. CaO(s) + 2HCl(aq) → CaCl~2~(aq) + H~2~O(l), Δ~r~H^θ^ = −195 kJ/mol.",
         steps: [
           "Both measured reactions share ==CaCl~2~(aq) + H~2~O(l)== — that is the common level of the cycle.",
-          "==Reverse== the second equation — ==when a thermochemical equation is reversed, the sign of ΔH changes==: CaCl~2~(aq) + H~2~O(l) → CaO(s) + 2HCl(aq), Δ~r~H^θ^ = +195 kJ/mol.",
+          "==Reverse== the second equation — when a thermochemical equation is reversed, the sign of ΔH changes: CaCl~2~(aq) + H~2~O(l) → CaO(s) + 2HCl(aq), Δ~r~H^θ^ = +195 kJ/mol.",
           "==Add== the reversed equation to the first — the CaCl~2~(aq) + H~2~O(l) and the 2HCl(aq) cancel on both sides: CaCO~3~(s) → CaO(s) + CO~2~(g).",
           "Δ~r~H^θ^ = (−17) + (+195) = ==+178 kJ mol^−1^== — the same value Example 3 found from formation data.",
         ],
@@ -274,7 +274,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       {
         k: "bullets",
         items: [
-          "==1 cm^3^ of water is equal to 1 g==.",
+          "1 cm^3^ of water is equal to 1 g.",
           "==No heat is lost== to the surrounding.",
           "==All heat energy produced== by ethanol is ==absorbed by water==.",
         ],
@@ -285,7 +285,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
         k: "bullets",
         items: [
           "==Heat loss== to the surrounding.",
-          "The ==polystyrene cup and thermometer absorb== some of the heat produced.",
+          "The polystyrene cup and thermometer absorb some of the heat produced.",
           "==Uncertainties of measurements== involved with the use of pipette and thermometer.",
         ],
       },
@@ -293,8 +293,8 @@ export const SECTIONS_T06_B: SpecSection[] = [
       {
         k: "bullets",
         items: [
-          "==Specific heat capacity== of the resultant solution is ==equal to that of water== (4.18 J g^−1^ °C^−1^).",
-          "==Density== of the resultant solution is ==equal to that of water== (1 g cm^−3^).",
+          "==Specific heat capacity== of the resultant solution is equal to that of water (4.18 J g^−1^ °C^−1^).",
+          "==Density== of the resultant solution is equal to that of water (1 g cm^−3^).",
           "==No heat is lost== to the surrounding.",
           "==Total volume== of the solution is ==equal to the sum== of the volume of two solutions initially taken.",
         ],
@@ -310,20 +310,20 @@ export const SECTIONS_T06_B: SpecSection[] = [
         question:
           "(e) The experimental value for the enthalpy change of combustion of methanol is ==less negative== than the Data Booklet value. Identify two improvements — to the apparatus or the procedure — that would give a value closer to the Data Booklet, and justify them (no repeats, no better measuring equipment). (f) State and explain the effect on the value if the water was not stirred. (g) If there is insufficient oxygen for complete combustion, what is observed on the underside of the beaker?",
         steps: [
-          "**(e) Improvement 1** — put a ==lid== on the beaker (and add ==laggings== round it): cuts the ==heat loss to the surrounding==, so more of the heat released ends up in the water and Δ~c~H comes out ==more negative==.",
-          "**(e) Improvement 2** — shield the flame from draughts (a wind shield round the spirit burner): less heat ==heats up the air and not the water==, and the flame burns steadily instead of ==incompletely==.",
-          "**(f)** Without stirring the heat stays near the burner — the ==maximum temperature reached== is lower, so Q = mcΔT is smaller and the calculated Δ~c~H is ==less negative== than the true value.",
+          "**(e) Improvement 1** — put a ==lid== on the beaker (and add ==laggings== round it): cuts the heat loss to the surrounding, so more of the heat released ends up in the water and Δ~c~H comes out ==more negative==.",
+          "**(e) Improvement 2** — shield the flame from draughts (a wind shield round the spirit burner): less heat heats up the air and not the water, and the flame burns steadily instead of ==incompletely==.",
+          "**(f)** Without stirring the heat stays near the burner — the ==maximum temperature reached== is lower, so Q = mcΔT is smaller and the calculated Δ~c~H is less negative than the true value.",
           "**(g)** ==Black soot== deposited on the bottom of the beaker — the mark of ==incomplete combustion== of the fuel.",
         ],
         answer:
-          "(e) lid + laggings, and a wind shield — both attack ==heat loss to the surrounding== · (f) maximum temperature lower → Δ~c~H ==less negative== · (g) ==black soot==.",
+          "(e) lid + laggings, and a wind shield — both attack heat loss to the surrounding · (f) maximum temperature lower → Δ~c~H less negative · (g) ==black soot==.",
       },
       { k: "h", text: "Graphical method — cooling curves" },
       {
         k: "bullets",
         items: [
           "The temperature is taken ==every half minute== ==before== mixing the reactants.",
-          "Reactants are mixed ==after 3 minutes== — for example, at exactly ==3.0 minutes or 3.5 minutes==.",
+          "Reactants are mixed ==after 3 minutes== — for example, at exactly 3.0 minutes or 3.5 minutes.",
           "Further readings are taken ==every half minute== as the reaction mixture cools.",
           "==Extrapolate the lines== as shown and calculate the value of ==ΔT==.",
           "Extrapolating the graph ==compensates for heat loss== to the surrounding.",
@@ -342,12 +342,12 @@ export const SECTIONS_T06_B: SpecSection[] = [
           "Zn(s) + Cu^2+^(aq) → Zn^2+^(aq) + Cu(s). 5.0 g of zinc powder is added at exactly 3.5 minutes to 50 cm^3^ of 1.0 mol dm^−3^ CuSO~4~ in a polystyrene cup held in a 250 cm^3^ beaker. Temperature every minute: 20.0, 20.0, 20.0, 20.0, then 63.0, 60.5, 59.0, 57.0, 55.5, 53.0 °C. (a) Plot the graph and use it to find the maximum temperature change ΔT; give ONE reason why a series of readings is taken instead of just the starting and maximum temperatures. (b) Calculate the heat change in joules (c = 4.18 J g^−1^ °C^−1^); state the assumption made about the solution; calculate the amount of CuSO~4~ and the enthalpy change in kJ mol^−1^. (c) Suggest TWO improvements to the procedure, with reasons.",
         steps: [
           "**(a)(i)–(ii)** Plot the points, then extrapolate: the cooling line (falling about 2 °C per minute) carried back to ==3.5 minutes== reaches ==64 °C==, and the starting line sits at 20.0 °C → ΔT = ==44 °C==.",
-          "**(a)(iii)** A series of readings lets you ==extrapolate the lines== — the reading at the moment of mixing is recovered from the graph, which ==compensates for heat loss to the surrounding==.",
+          "**(a)(iii)** A series of readings lets you ==extrapolate the lines== — the reading at the moment of mixing is recovered from the graph, which compensates for heat loss to the surrounding.",
           "**(b)(i)** Q = 50 × 4.18 × 44 = ==9196 J==.",
-          "**(b)(ii)** Assumption: the ==specific heat capacity of the solution is that of water== (4.18 J g^−1^ °C^−1^).",
+          "**(b)(ii)** Assumption: the specific heat capacity of the solution is that of water (4.18 J g^−1^ °C^−1^).",
           "**(b)(iii)** Moles of CuSO~4~ = (1.0 × 50) ÷ 1000 = ==0.05 mol==.",
           "**(b)(iv)** ΔH = −9196 ÷ 1000 ÷ 0.05 = ==−184 kJ mol^−1^== (exothermic — the temperature rose).",
-          "**(c)** Take the temperature readings ==every half minute==, as the method describes — more points make the extrapolation of the cooling line more reliable; and use a ==lid== on the polystyrene cup — less ==heat loss to the surrounding==.",
+          "**(c)** Take the temperature readings every half minute, as the method describes — more points make the extrapolation of the cooling line more reliable; and use a lid on the polystyrene cup — less heat loss to the surrounding.",
         ],
         answer:
           "ΔT = ==44 °C== · Q = ==9196 J== · 0.05 mol · ΔH = ==−184 kJ mol^−1^== — the extrapolation is what turns a cooling, leaking cup into a fair measurement.",
@@ -364,7 +364,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       {
         k: "def",
         term: "Bond enthalpy, Δ~B~H",
-        text: "The enthalpy change when ==1 mol of a bond in the gaseous state== is broken.",
+        text: "The enthalpy change when 1 mol of a bond in the gaseous state is broken.",
       },
       {
         k: "eq",
@@ -373,7 +373,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       },
       {
         k: "p",
-        text: "For polyatomic molecules, ==each bond must be considered separately==. For example, the four steps of pulling methane apart:",
+        text: "For polyatomic molecules, each bond must be considered separately. For example, the four steps of pulling methane apart:",
       },
       {
         k: "table",
@@ -389,7 +389,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       {
         k: "def",
         term: "Mean bond enthalpy, E",
-        text: "The ==average quantity of energy== required to break ==one mole of covalent bond in a gaseous species== (at a pressure of 1 atm).",
+        text: "The ==average quantity of energy== required to break one mole of covalent bond in a gaseous species (at a pressure of 1 atm).",
       },
       {
         k: "p",
@@ -398,7 +398,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       {
         k: "bullets",
         items: [
-          "The enthalpy change calculated for a reaction using ==standard enthalpy of formation data or standard enthalpy of combustion data is more accurate== than the enthalpy change calculated for the same reaction using ==bond enthalpy values==.",
+          "The enthalpy change calculated for a reaction using standard enthalpy of formation data or standard enthalpy of combustion data is more accurate than the enthalpy change calculated for the same reaction using ==bond enthalpy values==.",
           "This is because the bond enthalpy values are ==mean values==.",
         ],
       },
@@ -410,7 +410,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       {
         k: "eq",
         eq: "ΔH[reaction] + sum E[products] = sum E[reactants]",
-        note: "ΔH[reaction] = ==sum E[reactants] − sum E[products]==.",
+        note: "ΔH[reaction] = sum E[reactants] − sum E[products].",
       },
       {
         k: "figure",
@@ -436,7 +436,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
         k: "bullets",
         items: [
           "Bond enthalpies are measured in ==gaseous state==.",
-          "Bond enthalpies are ==not exact values but an average value==.",
+          "Bond enthalpies are not exact values but an average value.",
         ],
       },
       {
@@ -467,7 +467,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "ΔH[reaction] = ==sum E[reactants] − sum E[products]== — break every bond in the reactants, make every bond in the products. But quote the limitations with it: the values are ==means== and everything happens ==in the gaseous state==.",
+        text: "ΔH[reaction] = sum E[reactants] − sum E[products] — break every bond in the reactants, make every bond in the products. But quote the limitations with it: the values are ==means== and everything happens ==in the gaseous state==.",
       },
     ],
   },
@@ -487,10 +487,10 @@ export const SECTIONS_T06_B: SpecSection[] = [
           "Calculate the mean bond enthalpy of the SiF bond in SiF~4~(g) given: enthalpy of formation of SiF~4~(g) = −1615 kJ mol^−1^; enthalpy of atomisation of silicon = +456 kJ mol^−1^; enthalpy of atomisation of fluorine = +79 kJ mol^−1^.",
         steps: [
           "The formation equation is Si(s) + 2F~2~(g) → SiF~4~(g), Δ~f~H^θ^ = ==−1615 kJ mol^−1^==.",
-          "Atomise the elements — ==one mole of gaseous atoms from the element in its standard state==: Si(s) → Si(g) costs +456, and 2F~2~(g) → 4F(g) costs 4 × +79 = +316.",
-          "From the gaseous atoms, ==four Si—F bonds are made==: −4E[Si—F].",
+          "Atomise the elements — one mole of gaseous atoms from the element in its standard state: Si(s) → Si(g) costs +456, and 2F~2~(g) → 4F(g) costs 4 × +79 = +316.",
+          "From the gaseous atoms, four Si—F bonds are made: −4E[Si—F].",
           "Hess's law around the cycle: Δ~f~H^θ^ = (+456 + 316) − 4E[Si—F] → −1615 = 772 − 4E[Si—F].",
-          "4E[Si—F] = 772 + 1615 = 2387 → E[Si—F] = 2387 ÷ 4 = ==+596.75 ≈ +597 kJ mol^−1^==.",
+          "4E[Si—F] = 772 + 1615 = 2387 → E[Si—F] = 2387 ÷ 4 = +596.75 ≈ +597 kJ mol^−1^.",
         ],
         answer:
           "The mean bond enthalpy of the Si—F bond = ==+597 kJ mol^−1^== — one of the strongest single bonds in the table.",
@@ -506,15 +506,15 @@ export const SECTIONS_T06_B: SpecSection[] = [
       {
         k: "note",
         label: "In the class note",
-        text: "The class note carries this objective through the methane ladder: the four C—H bonds in CH~4~ break at ==+423, +480, +425 and +335 kJ mol^−1^== — every value different, because ==the strength of a bond depends on its environment==, which is exactly why ==mean== values are quoted.",
+        text: "The class note carries this objective through the methane ladder: the four C—H bonds in CH~4~ break at +423, +480, +425 and +335 kJ mol^−1^ — every value different, because the strength of a bond depends on its environment, which is exactly why ==mean== values are quoted.",
       },
       {
         k: "p",
-        text: "Read the ladder as the specification asks: a bond with a ==smaller bond enthalpy== needs ==less energy== to break, so it is the ==easier== bond to break first — and the easier the bonds are to break, the ==more rapidly a reaction will take place at room temperature==. Bond enthalpy data is therefore the first guide to where a reaction starts.",
+        text: "Read the ladder as the specification asks: a bond with a ==smaller bond enthalpy== needs ==less energy== to break, so it is the ==easier== bond to break first — and the easier the bonds are to break, the more rapidly a reaction will take place at room temperature. Bond enthalpy data is therefore the first guide to where a reaction starts.",
       },
       {
         k: "wow",
-        text: "The weakest link leads: ==which bond will break first==, ==how easy or difficult== it is, and ==how rapidly the reaction takes place at room temperature== — all read straight off the bond enthalpies.",
+        text: "The weakest link leads: which bond will break first, ==how easy or difficult== it is, and how rapidly the reaction takes place at room temperature — all read straight off the bond enthalpies.",
       },
     ],
   },

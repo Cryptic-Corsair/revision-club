@@ -32,7 +32,7 @@ export const SECTIONS_T05_B: SpecSection[] = [
         k: "bullets",
         items: [
           "Bromine in hexane is ==reddish brown== in colour.",
-          "When an alkene is added to bromine, it becomes ==colourless==.",
+          "When an alkene is added to bromine, it becomes colourless.",
           "The double bond in the alkene is broken and the ==two Br atoms== are added across the double bond.",
         ],
       },
@@ -51,11 +51,11 @@ export const SECTIONS_T05_B: SpecSection[] = [
       {
         k: "eq",
         eq: "C~2~H~4~ + H~2~O + [O] → CH~2~OHCH~2~OH",
-        note: "The purple solution turns ==colourless== instead if the potassium manganate(VII) is dissolved in ==acid==.",
+        note: "The purple solution turns colourless instead if the potassium manganate(VII) is dissolved in ==acid==.",
       },
       {
         k: "wow",
-        text: "Three colour changes to know: ==reddish brown → colourless== (bromine water), ==reddish brown → colourless== (bromine in hexane), ==purple → green== in alkali or ==colourless== in acid (potassium manganate(VII)). Any one of them is a positive test for the C=C double bond — always quote the ==starting colour and the finishing colour==.",
+        text: "Three colour changes to know: ==reddish brown → colourless== (bromine water), ==reddish brown → colourless== (bromine in hexane), ==purple → green== in alkali or colourless in acid (potassium manganate(VII)). Any one of them is a positive test for the C=C double bond — always quote the starting colour and the finishing colour.",
       },
     ],
   },
@@ -79,12 +79,12 @@ export const SECTIONS_T05_B: SpecSection[] = [
       {
         k: "note",
         label: "The curly arrow rules",
-        text: "The curly arrows used in this type of reaction must either ==start from a bond and move to an atom==, or ==start from a lone pair of electrons and move to an atom==.",
+        text: "The curly arrows used in this type of reaction must either start from a bond and move to an atom, or start from a lone pair of electrons and move to an atom.",
       },
       { k: "h", text: "Example 2 · addition of Br~2~ to ethene" },
       {
         k: "p",
-        text: "Bromine is ==non-polar== but it can act as an **electrophile**. This is because, as the bromine molecule approaches the alkene, the ==electrons in the π bond of the alkene repel the electron pair in the bromine–bromine bond==, thus ==inducing a dipole==.",
+        text: "Bromine is ==non-polar== but it can act as an **electrophile**. This is because, as the bromine molecule approaches the alkene, the electrons in the π bond of the alkene repel the electron pair in the bromine–bromine bond, thus ==inducing a dipole==.",
       },
       { k: "h", text: "Example 3 · addition of HBr to propene" },
       {
@@ -102,7 +102,7 @@ export const SECTIONS_T05_B: SpecSection[] = [
       { k: "h", text: "Stability of carbocations" },
       {
         k: "p",
-        text: "The intermediate species formed in this reaction is called a ==carbocation==. Carbocations can be **primary, secondary or tertiary**, depending on the ==number of carbon atoms directly bonded to the positively charged carbon atom==.",
+        text: "The intermediate species formed in this reaction is called a ==carbocation==. Carbocations can be **primary, secondary or tertiary**, depending on the number of carbon atoms directly bonded to the positively charged carbon atom.",
       },
       {
         k: "figure",
@@ -112,8 +112,8 @@ export const SECTIONS_T05_B: SpecSection[] = [
       {
         k: "bullets",
         items: [
-          "The stability is ==increased by the presence of alkyl groups== — these groups are **electron releasing** relative to hydrogen atoms, and help to ==stabilize the positive charge== on the carbocation.",
-          "As the number of alkyl groups increases, the stability of the carbocation increases too: ==primary carbocations are the least stable== and ==tertiary carbocations are the most stable==.",
+          "The stability is increased by the presence of alkyl groups — these groups are **electron releasing** relative to hydrogen atoms, and help to ==stabilize the positive charge== on the carbocation.",
+          "As the number of alkyl groups increases, the stability of the carbocation increases too: primary carbocations are the least stable and tertiary carbocations are the most stable.",
         ],
       },
       {
@@ -130,13 +130,13 @@ export const SECTIONS_T05_B: SpecSection[] = [
     blocks: [
       {
         k: "p",
-        text: "During polymerization, an alkene ==undergoes addition reaction with itself==: many ==monomers== are joined together to form a ==polymer==. Long ==hydrocarbon chains== are formed when alkenes are polymerized.",
+        text: "During polymerization, an alkene undergoes addition reaction with itself: many ==monomers== are joined together to form a ==polymer==. Long ==hydrocarbon chains== are formed when alkenes are polymerized.",
       },
       {
         k: "bullets",
         items: [
-          "Many polymers are prepared by a ==free-radical process== involving ==high pressure, high temperature and a catalyst==.",
-          "The catalyst is usually a substance which readily breaks up to form ==radicals which initiate a chain reaction==.",
+          "Many polymers are prepared by a ==free-radical process== involving high pressure, high temperature and a catalyst.",
+          "The catalyst is usually a substance which readily breaks up to form radicals which initiate a chain reaction.",
         ],
       },
       { k: "h", text: "Example · formation of polyethene from ethene" },
@@ -175,7 +175,7 @@ export const SECTIONS_T05_B: SpecSection[] = [
     blocks: [
       {
         k: "p",
-        text: "Polymers derived from alkenes are ==very useful to modern society==. However, the ==disposal== of these polymers creates widespread problems.",
+        text: "Polymers derived from alkenes are very useful to modern society. However, the ==disposal== of these polymers creates widespread problems.",
       },
       {
         k: "bullets",
@@ -183,7 +183,7 @@ export const SECTIONS_T05_B: SpecSection[] = [
           "They are ==non-biodegradable==.",
           "If they are just discarded, they add to the ==landfill problem==.",
           "Incineration (burning of polymers) saves on landfill sites — however, if they are burned, ==toxic fumes like HCl== are formed from ==chlorinated polymers==.",
-          "They can be recycled — however, it is ==very expensive== and it is ==difficult to separate all the different polymers==.",
+          "They can be recycled — however, it is ==very expensive== and it is difficult to separate all the different polymers.",
         ],
       },
       { k: "h", text: "Incineration" },
@@ -191,7 +191,7 @@ export const SECTIONS_T05_B: SpecSection[] = [
         k: "bullets",
         items: [
           "An incinerator takes in polymer waste and converts it into ==heat energy==, which can be used in factories or used to ==generate electricity==.",
-          "It produces ==less solid waste==. However, ==toxic gases are formed and released to the atmosphere==.",
+          "It produces ==less solid waste==. However, toxic gases are formed and released to the atmosphere.",
           "Over the years, chemists have made progress in finding better ways to ==remove the toxic gases==.",
         ],
       },
@@ -205,7 +205,7 @@ export const SECTIONS_T05_B: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "The specification's two ways to limit the problems of polymer disposal: ==developing biodegradable polymers==, which can be ==broken down by microbes== in the environment, and ==removing the toxic waste gases== produced by the incineration of polymers.",
+        text: "The specification's two ways to limit the problems of polymer disposal: ==developing biodegradable polymers==, which can be ==broken down by microbes== in the environment, and removing the toxic waste gases produced by the incineration of polymers.",
       },
     ],
   },

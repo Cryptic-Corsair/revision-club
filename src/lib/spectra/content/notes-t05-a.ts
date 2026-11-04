@@ -18,7 +18,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
       {
         k: "def",
         term: "Unsaturated hydrocarbons",
-        text: "Alkenes and cycloalkenes are hydrocarbons which are ==unsaturated== — they ==contain at least one C=C bond==, and that carbon–carbon double bond consists of ==one sigma (σ) bond and one pi (π) bond==.",
+        text: "Alkenes and cycloalkenes are hydrocarbons which are ==unsaturated== — they contain at least one C=C bond, and that carbon–carbon double bond consists of one sigma (σ) bond and one pi (π) bond.",
       },
       {
         k: "bullets",
@@ -42,12 +42,12 @@ export const SECTIONS_T05_A: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "The C=C double bond is ==one sigma (σ) bond and one pi (π) bond==: the σ bond is the overlap of ==sp^2^ hybrid orbitals== along the bond axis, and the π bond is the ==sideways overlap of the unhybridized p orbitals== — the ==region of high electron density== which can be ==readily attacked by electrophiles==.",
+        text: "The C=C double bond is one sigma (σ) bond and one pi (π) bond: the σ bond is the overlap of ==sp^2^ hybrid orbitals== along the bond axis, and the π bond is the sideways overlap of the unhybridized p orbitals — the region of high electron density which can be ==readily attacked by electrophiles==.",
       },
       { k: "h", text: "Nomenclature" },
       {
         k: "p",
-        text: "In the IUPAC system, identify the longest chain of carbon atoms **containing the functional group, the C=C** — and remember that the ==principal chain is not always the longest chain==.",
+        text: "In the IUPAC system, identify the longest chain of carbon atoms **containing the functional group, the C=C** — and remember that the principal chain is not always the longest chain.",
       },
       {
         k: "bullets",
@@ -112,14 +112,14 @@ export const SECTIONS_T05_A: SpecSection[] = [
       {
         k: "bullets",
         items: [
-          "It occurs due to ==restricted rotation around the carbon–carbon double bond== — the C=C ==would be broken== if it were rotated.",
-          "To exhibit geometric isomerism, the carbons in the double bond should have ==different atoms or groups of atoms attached to each carbon==.",
+          "It occurs due to restricted rotation around the carbon–carbon double bond — the C=C ==would be broken== if it were rotated.",
+          "To exhibit geometric isomerism, the carbons in the double bond should have different atoms or groups of atoms attached to each carbon.",
         ],
       },
       {
         k: "def",
         term: "The cis–trans system",
-        text: "It can be used when there are ==two H's and two non-hydrogen groups== attached to the two carbons — or when ==two similar groups== are attached to the two carbons in C=C. **CIS**: similar groups on the ==same side== of the double bond. **TRANS**: similar groups ==across== the double bond.",
+        text: "It can be used when there are two H's and two non-hydrogen groups attached to the two carbons — or when ==two similar groups== are attached to the two carbons in C=C. **CIS**: similar groups on the ==same side== of the double bond. **TRANS**: similar groups ==across== the double bond.",
       },
       {
         k: "worked",
@@ -128,7 +128,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
           "But-2-ene, CH~3~CH=CHCH~3~, exists as two geometric isomers. Explain why, and name each one.",
         steps: [
           "The C=C ==cannot rotate== — the C=C ==would be broken== if it is rotated.",
-          "In the first isomer the two hydrogens sit on the ==same side== and the two methyl groups sit on the ==same side== of the double bond → the name is **cis-but-2-ene**.",
+          "In the first isomer the two hydrogens sit on the ==same side== and the two methyl groups sit on the same side of the double bond → the name is **cis-but-2-ene**.",
           "In the second isomer the two hydrogens are on ==opposite sides== and the two methyl groups are on ==opposite sides== of the double bond → the name is **trans-but-2-ene**.",
         ],
         answer:
@@ -151,16 +151,16 @@ export const SECTIONS_T05_A: SpecSection[] = [
       { k: "h", text: "Why cis–trans doesn't work always" },
       {
         k: "p",
-        text: "For the cis–trans system to work, ==two identical groups or atoms attached to the two carbons== in C=C are needed. It doesn't work for compounds where there are ==four different atoms attached== to the C=C.",
+        text: "For the cis–trans system to work, two identical groups or atoms attached to the two carbons in C=C are needed. It doesn't work for compounds where there are ==four different atoms attached== to the C=C.",
       },
       { k: "h", text: "The priority rules" },
       {
         k: "bullets",
         items: [
-          "In the E–Z system, the groups attached around the carbons in C=C are ==ranked based on the atomic number==.",
-          "The atom with the ==highest atomic number has highest priority== — carbon (atomic number 6) has priority over hydrogen (atomic number 1).",
-          "If the two higher-priority groups are on the ==same side== of the C=C, they are **zusammen** (together) and this is the **Z-isomer**.",
-          "If the two higher-priority groups are on ==opposite sides== of the C=C, they are **entgegen** (opposite) and this is the **E-isomer**.",
+          "In the E–Z system, the groups attached around the carbons in C=C are ranked based on the atomic number.",
+          "The atom with the highest atomic number has highest priority — carbon (atomic number 6) has priority over hydrogen (atomic number 1).",
+          "If the two higher-priority groups are on the same side of the C=C, they are **zusammen** (together) and this is the **Z-isomer**.",
+          "If the two higher-priority groups are on opposite sides of the C=C, they are **entgegen** (opposite) and this is the **E-isomer**.",
         ],
       },
       {
@@ -175,7 +175,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
       {
         k: "note",
         label: "When the priorities tie",
-        text: "If the atoms attached to the carbons in C=C are the same, then ==look at the atoms attached to those atoms== — the tie is broken one shell further out.",
+        text: "If the atoms attached to the carbons in C=C are the same, then look at the atoms attached to those atoms — the tie is broken one shell further out.",
       },
       {
         k: "figure",
@@ -208,13 +208,13 @@ export const SECTIONS_T05_A: SpecSection[] = [
     blocks: [
       {
         k: "p",
-        text: "Alkenes are ==much more reactive than alkanes== because:",
+        text: "Alkenes are much more reactive than alkanes because:",
       },
       {
         k: "bullets",
         items: [
-          "the ==π bond== in alkenes is a ==region of high electron density==, which can be readily attacked by **electrophiles**;",
-          "the π bond is ==weaker than the sigma bonds== — therefore ==less energy is required to break the π bond==.",
+          "the ==π bond== in alkenes is a region of high electron density, which can be readily attacked by **electrophiles**;",
+          "the π bond is weaker than the sigma bonds — therefore less energy is required to break the π bond.",
         ],
       },
       {
@@ -249,7 +249,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
         k: "bullets",
         items: [
           "**With bromine** — reagent: bromine dissolved in ==hexane==; condition: room temperature.",
-          "**Observation**: the ==brown bromine solution turns colourless==.",
+          "**Observation**: the brown bromine solution turns colourless.",
         ],
       },
       {
@@ -273,7 +273,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
         k: "bullets",
         items: [
           "Reagent: potassium manganate(VII) in ==dilute sodium hydroxide==; condition: room temperature — an ==oxidation== of the alkene.",
-          "**Observation**: the ==purple solution (MnO~4~^−^) turns green (MnO~4~^2−^)==.",
+          "**Observation**: the purple solution (MnO~4~^−^) turns green (MnO~4~^2−^).",
           "Product: a ==diol== — two —OH groups, one on each carbon.",
         ],
       },
@@ -284,7 +284,7 @@ export const SECTIONS_T05_A: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "All five are ==addition reactions== — ==H~2~, Cl~2~, HBr, H~2~O and [O]== add across the ==π bond==. Learn the ==reagent, condition, type of reaction and product== for each — the nickel catalyst and heat, the phosphoric acid catalyst and heat, and the colour observations are the details to quote.",
+        text: "All five are ==addition reactions== — H~2~, Cl~2~, HBr, H~2~O and [O] add across the ==π bond==. Learn the reagent, condition, type of reaction and product for each — the nickel catalyst and heat, the phosphoric acid catalyst and heat, and the colour observations are the details to quote.",
       },
     ],
   },

@@ -18,41 +18,41 @@ export const SECTIONS_T06_A: SpecSection[] = [
       {
         k: "def",
         term: "Energetics",
-        text: "==Energetics== is the study of ==energy transfers between reacting chemicals and their surroundings==. The study of these energy transfers is also known as ==thermodynamics==. Energetics deals with the energy changes in reactions and how these energy changes reflect changes at a molecular level — and in chemical systems the ==major transfer of energy is by heating==.",
+        text: "==Energetics== is the study of energy transfers between reacting chemicals and their surroundings. The study of these energy transfers is also known as ==thermodynamics==. Energetics deals with the energy changes in reactions and how these energy changes reflect changes at a molecular level — and in chemical systems the major transfer of energy is by heating.",
       },
       { k: "h", text: "First Law of Thermodynamics" },
       {
         k: "bullets",
         items: [
-          "==Energy can be neither created nor destroyed== but it can be ==converted from one form to another==.",
+          "Energy can be neither created nor destroyed but it can be converted from one form to another.",
           "Chemical reactions are accompanied by some form of energy change — changes can be obvious but in many cases it goes unnoticed.",
-          "The energy that is transferred to the surroundings is ==not lost to the universe== – it is ==dissipated or spread through the surroundings==.",
-          "This is an important principle in behavior of the universe which is known as the ==principle of conservation of energy==.",
-          "The ==total energy content of the universe is constant==.",
+          "The energy that is transferred to the surroundings is not lost to the universe – it is dissipated or spread through the surroundings.",
+          "This is an important principle in behavior of the universe which is known as the principle of conservation of energy.",
+          "The total energy content of the universe is constant.",
           "Two of the most important forms of energy are: ==chemical energy== and ==heat energy==.",
         ],
       },
       {
         k: "def",
         term: "Chemical energy",
-        text: "Chemical energy is made up of two components; ==kinetic== and ==potential energy==. **Kinetic energy** is a measure of the ==motion of particles== in a substance. **Potential energy** is a measure of ==how strong the particles interact with one another==.",
+        text: "Chemical energy is made up of two components; ==kinetic== and ==potential energy==. **Kinetic energy** is a measure of the ==motion of particles== in a substance. **Potential energy** is a measure of how strong the particles interact with one another.",
       },
       {
         k: "def",
         term: "Heat energy",
-        text: "Heat energy is the portion of the potential energy and kinetic energy of a substance that is ==responsible for the temperature== of the substance. The heat energy of the substance is ==directly proportional to its absolute temperature==.",
+        text: "Heat energy is the portion of the potential energy and kinetic energy of a substance that is ==responsible for the temperature== of the substance. The heat energy of the substance is directly proportional to its absolute temperature.",
       },
       { k: "h", text: "Enthalpy and enthalpy changes" },
       {
         k: "def",
         term: "Enthalpy",
-        text: "Enthalpy is a measure of the ==heat content of a substance at constant pressure==. Enthalpy of a system ==cannot be measured directly==. However, the ==enthalpy change at constant pressure== can be measured.",
+        text: "Enthalpy is a measure of the heat content of a substance at constant pressure. Enthalpy of a system ==cannot be measured directly==. However, the enthalpy change at constant pressure can be measured.",
       },
       {
         k: "bullets",
         items: [
           "Enthalpy change is denoted by the symbol, ==ΔH==, “delta H”, and is expressed in ==kJ/mol==.",
-          "Enthalpy change is the ==amount of heat energy taken in or given out== during any change in a system provided the ==pressure is constant==.",
+          "Enthalpy change is the amount of heat energy taken in or given out during any change in a system provided the ==pressure is constant==.",
           "The enthalpy of a substance depends on the; ==physical state== of the substance (solid, liquid or gas), ==amount of substance==, ==temperature and pressure==.",
         ],
       },
@@ -75,11 +75,11 @@ export const SECTIONS_T06_A: SpecSection[] = [
       {
         k: "note",
         label: "The symbol",
-        text: "Standard enthalpy change is shown by ==ΔH^θ^== or ΔH^θ^^298K^ — **H** for enthalpy, **Δ** for change in, and the ==θ symbol represents standard conditions==.",
+        text: "Standard enthalpy change is shown by ==ΔH^θ^== or ΔH^θ^^298K^ — **H** for enthalpy, **Δ** for change in, and the θ symbol represents standard conditions.",
       },
       {
         k: "wow",
-        text: "ΔH is the ==heat energy change measured at constant pressure== — you can never measure the enthalpy of a system directly, only the ==change==. The θ on ΔH^θ^ is the badge that says the reaction was carried out under ==standard conditions==, so every value in the data book is measured on the same ruler.",
+        text: "ΔH is the heat energy change measured at constant pressure — you can never measure the enthalpy of a system directly, only the ==change==. The θ on ΔH^θ^ is the badge that says the reaction was carried out under ==standard conditions==, so every value in the data book is measured on the same ruler.",
       },
     ],
   },
@@ -97,7 +97,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       {
         k: "bullets",
         items: [
-          "The enthalpy of reaction shows that the ==energy content of the system has decreased== – some energy has left the system and entered the surroundings as heat. Hence there is a ==net decrease in the potential energy== of the system.",
+          "The enthalpy of reaction shows that the energy content of the system has decreased – some energy has left the system and entered the surroundings as heat. Hence there is a net decrease in the potential energy of the system.",
           "Therefore, reactants are ==thermodynamically unstable== than the products.",
           "Many exothermic reactions are ==spontaneous==. However, despite being thermodynamically unstable, some exothermic reactions might not occur due to ==kinetic stability==, meaning ==high activation energy== is required to start the reaction.",
           "Example: ==combustion of petrol== is highly exothermic but occurs ==only when ignited==.",
@@ -111,7 +111,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       {
         k: "bullets",
         items: [
-          "The enthalpy of reaction shows that the ==energy content of the system has increased== as it has gained energy from its surroundings. Hence there is a ==net increase in the potential energy== of the system.",
+          "The enthalpy of reaction shows that the energy content of the system has increased as it has gained energy from its surroundings. Hence there is a net increase in the potential energy of the system.",
           "Therefore, reactants are ==thermodynamically stable== than the products.",
         ],
       },
@@ -123,7 +123,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       {
         k: "note",
         label: "Overall",
-        text: "A reaction is overall **exothermic** if the ==energy released for bond making is greater than energy absorbed for bond breaking== — and overall **endothermic** if the energy released for bond making is ==less than energy absorbed for bond breaking==.",
+        text: "A reaction is overall **exothermic** if the energy released for bond making is greater than energy absorbed for bond breaking — and overall **endothermic** if the energy released for bond making is less than energy absorbed for bond breaking.",
       },
       {
         k: "worked",
@@ -162,11 +162,11 @@ export const SECTIONS_T06_A: SpecSection[] = [
       {
         k: "figure",
         kind: "profiles",
-        caption: "Energy profile diagrams. The hump adds the ==activation energy== — the climb from the reactants up to the top of the curve. ΔH is still measured ==from the reactants' level to the products' level==: − ve when the products sit below, + ve when they sit above.",
+        caption: "Energy profile diagrams. The hump adds the ==activation energy== — the climb from the reactants up to the top of the curve. ΔH is still measured from the reactants' level to the products' level: − ve when the products sit below, + ve when they sit above.",
       },
       {
         k: "wow",
-        text: "Read the two diagrams differently: the ==level diagram== only compares the ==enthalpy of reactants with the enthalpy of products==, while the ==profile diagram== also shows the ==activation energy== — the high starting hurdle that gives exothermic reactions their ==kinetic stability==.",
+        text: "Read the two diagrams differently: the ==level diagram== only compares the enthalpy of reactants with the enthalpy of products, while the ==profile diagram== also shows the ==activation energy== — the high starting hurdle that gives exothermic reactions their ==kinetic stability==.",
       },
       {
         k: "worked",
@@ -177,7 +177,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
           "The reaction ==releases== heat → it is **exothermic** → the products' level sits ==below== the reactants' level and ΔH is ==negative==.",
           "Per mole of equation, 2H~2~(g) + O~2~(g) → 2H~2~O(l) releases ==571.8 kJ== → ΔH = ==−571.8 kJ mol^−1^== (per mol refers to one mole of equation — section 6.4).",
           "Draw the axes: ==Enthalpy, H== up the side, ==Progress of reaction== along the bottom. Left level: 2H~2~(g) + O~2~(g), labelled **reactants**.",
-          "Right level, lower: 2H~2~O(l), labelled **products**. A downward arrow between the two levels carries the label ==ΔH = −571.8 kJ mol^−1^==.",
+          "Right level, lower: 2H~2~O(l), labelled **products**. A downward arrow between the two levels carries the label ΔH = −571.8 kJ mol^−1^.",
         ],
         answer:
           "An exothermic level diagram: reactants (2H~2~(g) + O~2~(g)) on the higher level, products (2H~2~O(l)) below, arrow down labelled ΔH = ==−571.8 kJ mol^−1^==, axes labelled Enthalpy, H and Progress of reaction.",
@@ -194,7 +194,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       {
         k: "def",
         term: "Standard enthalpy change of reaction, Δ~r~H^θ^",
-        text: "The enthalpy change when the ==number of moles of reactants as specified in the balanced equation== react together.",
+        text: "The enthalpy change when the number of moles of reactants as specified in the balanced equation react together.",
       },
       {
         k: "eq",
@@ -204,13 +204,13 @@ export const SECTIONS_T06_A: SpecSection[] = [
       {
         k: "note",
         label: "Per mol",
-        text: "Per mol refers to ==one mole of equation== and ==not to one mole of any reactant or product==.",
+        text: "Per mol refers to ==one mole of equation== and not to one mole of any reactant or product.",
       },
       { k: "h", text: "2 · Combustion, Δ~c~H^θ^" },
       {
         k: "def",
         term: "Standard enthalpy change of combustion, Δ~c~H^θ^",
-        text: "The enthalpy change that occurs when ==ONE MOLE== of a substance is ==completely burnt in excess oxygen== under standard conditions. All reactants and products must be in their ==standard states==. It is ==always exothermic==.",
+        text: "The enthalpy change that occurs when ==ONE MOLE== of a substance is completely burnt in excess oxygen under standard conditions. All reactants and products must be in their ==standard states==. It is ==always exothermic==.",
       },
       {
         k: "eq",
@@ -226,13 +226,13 @@ export const SECTIONS_T06_A: SpecSection[] = [
       {
         k: "eq",
         eq: "H^+^(aq) + OH^−^(aq) → H~2~O(l)    Δ~neut~H^θ^ = −57.9 kJ mol^−1^",
-        note: "A value of ==−57 kJ mol^−1^== is obtained when ==strong acids react with strong alkalis==. This is because strong acids and alkalis are ==fully ionized==, so the reaction is the same in every case.",
+        note: "A value of ==−57 kJ mol^−1^== is obtained when strong acids react with strong alkalis. This is because strong acids and alkalis are ==fully ionized==, so the reaction is the same in every case.",
       },
       { k: "h", text: "4 · Formation, Δ~f~H^θ^" },
       {
         k: "def",
         term: "Standard enthalpy change of formation, Δ~f~H^θ^",
-        text: "The enthalpy change that occurs when ==ONE MOLE== of a substance is ==formed from its elements in their standard states== under standard conditions.",
+        text: "The enthalpy change that occurs when ==ONE MOLE== of a substance is formed from its elements in their standard states under standard conditions.",
       },
       {
         k: "eq",
@@ -250,17 +250,17 @@ export const SECTIONS_T06_A: SpecSection[] = [
       {
         k: "def",
         term: "Standard enthalpy change of atomisation, Δ~at~H^θ^",
-        text: "The enthalpy change that occurs when ==one mole of gaseous atoms== is formed from the ==element in its standard state== under standard conditions.",
+        text: "The enthalpy change that occurs when one mole of gaseous atoms is formed from the element in its standard state under standard conditions.",
       },
       {
         k: "eq",
         eq: "Na(s) → Na(g)    ½Cl~2~(g) → Cl(g)",
-        note: "It is ==always endothermic== as ==energy is required to break bonds==.",
+        note: "It is ==always endothermic== as energy is required to break bonds.",
       },
       {
         k: "bullets",
         items: [
-          "For diatomic molecules, ==bond enthalpy is twice the enthalpy of atomization==.",
+          "For diatomic molecules, bond enthalpy is twice the enthalpy of atomization.",
           "Enthalpy of atomization: ½Cl~2~(g) → Cl(g), ΔH = +121 kJ mol^−1^ — bond enthalpy: Cl~2~(g) → 2Cl(g), ΔH = +242 kJ mol^−1^.",
         ],
       },
@@ -268,7 +268,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       {
         k: "def",
         term: "Thermochemical equation",
-        text: "A ==chemical equation that includes the value of ΔH==.",
+        text: "A chemical equation that includes the value of ΔH.",
       },
       {
         k: "p",
@@ -282,7 +282,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       {
         k: "bullets",
         items: [
-          "In writing thermochemical equations, it is essential that ==state symbols are shown==, since a ==change of physical state is accompanied by an enthalpy change==.",
+          "In writing thermochemical equations, it is essential that ==state symbols are shown==, since a change of physical state is accompanied by an enthalpy change.",
           "When you ==multiply== a thermochemical equation, ==ΔH is also multiplied==: burning one mole of wax releases 20,000 kJ, so 2C~40~H~82~ + 121O~2~ → 80CO~2~ + 82H~2~O carries ΔH = −40,000 kJ.",
           "When a thermochemical equation is ==reversed==, the ==sign of ΔH changes== (law of conservation of energy).",
         ],
@@ -293,9 +293,9 @@ export const SECTIONS_T06_A: SpecSection[] = [
         question:
           "a. C(s) + 2H~2~(g) → CH~4~(g) + 74.8 kJ · b. (i) H~2~ and I~2~ react to form 2HI. This reaction requires 53.2 kJ · (ii) The reaction that forms one mole of HI.",
         steps: [
-          "**a.** The heat sits on the ==right-hand side== — it is given out → exothermic, so ΔH is negative: C(s) + 2H~2~(g) → CH~4~(g), ==ΔH = −74.8 kJ mol^−1^==.",
-          "**b. (i)** The reaction ==requires== energy → endothermic, so ΔH is positive: H~2~ + I~2~ → 2HI, ==ΔH = +53.2 kJ mol^−1^==.",
-          "**(ii)** One mole of HI is ==half== the equation as written — ==when you multiply a thermochemical equation, ΔH is multiplied== (here, halved): ½H~2~ + ½I~2~ → HI, ==ΔH = +26.6 kJ mol^−1^==.",
+          "**a.** The heat sits on the ==right-hand side== — it is given out → exothermic, so ΔH is negative: C(s) + 2H~2~(g) → CH~4~(g), ΔH = −74.8 kJ mol^−1^.",
+          "**b. (i)** The reaction ==requires== energy → endothermic, so ΔH is positive: H~2~ + I~2~ → 2HI, ΔH = +53.2 kJ mol^−1^.",
+          "**(ii)** One mole of HI is ==half== the equation as written — when you multiply a thermochemical equation, ΔH is multiplied (here, halved): ½H~2~ + ½I~2~ → HI, ΔH = +26.6 kJ mol^−1^.",
         ],
         answer:
           "**a.** C(s) + 2H~2~(g) → CH~4~(g)  ΔH = −74.8 kJ mol^−1^ · **b. (i)** H~2~ + I~2~ → 2HI  ΔH = +53.2 kJ mol^−1^ · **(ii)** ½H~2~ + ½I~2~ → HI  ΔH = +26.6 kJ mol^−1^.",
@@ -306,7 +306,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
         question:
           "Construct equations representing the standard enthalpy of combustion of a. hydrogen · b. carbon · c. methane · d. methanol.",
         steps: [
-          "The recipe: ==ONE MOLE== of the substance, ==completely burnt in excess oxygen==, everything in its ==standard state== — then balance the oxygen, carbon dioxide and water.",
+          "The recipe: ONE MOLE of the substance, completely burnt in excess oxygen, everything in its ==standard state== — then balance the oxygen, carbon dioxide and water.",
           "**a. Hydrogen** — one mole of H~2~ burns to water: H~2~(g) + ½O~2~(g) → H~2~O(l).",
           "**b. Carbon** — carbon as graphite: C(s, graphite) + O~2~(g) → CO~2~(g).",
           "**c. Methane** — CH~4~(g) + 2O~2~(g) → CO~2~(g) + 2H~2~O(l).",
@@ -321,7 +321,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
         question:
           "Construct equations representing the standard enthalpy of formation of methane · water · propanol.",
         steps: [
-          "The recipe: ==ONE MOLE== of the substance formed ==from its elements in their standard states== — carbon as ==graphite==, hydrogen and oxygen as H~2~(g) and O~2~(g).",
+          "The recipe: ONE MOLE of the substance formed from its elements in their standard states — carbon as ==graphite==, hydrogen and oxygen as H~2~(g) and O~2~(g).",
           "**Methane** — C(s, graphite) + 2H~2~(g) → CH~4~(g).",
           "**Water** — H~2~(g) + ½O~2~(g) → H~2~O(l).",
           "**Propanol** — three carbons, eight hydrogens, one oxygen: 3C(s, graphite) + 4H~2~(g) + ½O~2~(g) → C~3~H~7~OH(l).",
@@ -331,7 +331,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       },
       {
         k: "wow",
-        text: "Five definitions, five Δs: Δ~r~H^θ^, Δ~f~H^θ~, Δ~c~H^θ~, Δ~neut~H^θ^ and Δ~at~H^θ^. Every one is measured under ==standard conditions== and every one is ==per mole== — one mole of equation, one mole of substance formed, one mole completely burnt, one mole of water formed, one mole of gaseous atoms. Quote the definition word for word and the marks follow.",
+        text: "Five definitions, five Δs: Δ~r~H^θ^, Δ~f~H^θ~, Δ~c~H^θ~, Δ~neut~H^θ^ and Δ~at~H^θ^. Every one is measured under standard conditions and every one is ==per mole== — one mole of equation, one mole of substance formed, one mole completely burnt, one mole of water formed, one mole of gaseous atoms. Quote the definition word for word and the marks follow.",
       },
     ],
   },
@@ -361,11 +361,11 @@ export const SECTIONS_T06_A: SpecSection[] = [
         caption: "Experimental determination of enthalpy change of combustion of a liquid",
         items: [
           { title: "Step 1", text: "Weigh a ==spirit burner== containing the fuel." },
-          { title: "Step 2", text: "Place the spirit burner below a ==beaker (or calorimeter)== containing a ==known mass (volume) of water==." },
+          { title: "Step 2", text: "Place the spirit burner below a ==beaker (or calorimeter)== containing a known mass (volume) of water." },
           { title: "Step 3", text: "Measure the temperature of water." },
           { title: "Step 4", text: "Light the burner." },
           { title: "Step 5", text: "Stir the water at regular intervals." },
-          { title: "Step 6", text: "When the temperature of water has reached approximately ==20 °C above its initial temperature==, put out the flame." },
+          { title: "Step 6", text: "When the temperature of water has reached approximately 20 °C above its initial temperature, put out the flame." },
           { title: "Step 7", text: "Reweigh the burner." },
         ],
       },
@@ -415,9 +415,9 @@ export const SECTIONS_T06_A: SpecSection[] = [
         caption: "Experimental determination of enthalpy change of neutralisation",
         items: [
           { title: "Step 1", text: "Wear ==safety glasses== and lab coat." },
-          { title: "Step 2", text: "Using a ==pipette fitted with a safety filler==, place ==25.0 cm^3^ of 1.00 mol dm^−3^ acid== into an ==expanded polystyrene cup==." },
+          { title: "Step 2", text: "Using a pipette fitted with a safety filler, place 25.0 cm^3^ of 1.00 mol dm^−3^ acid into an ==expanded polystyrene cup==." },
           { title: "Step 3", text: "Measure the temperature of the acid." },
-          { title: "Step 4", text: "Place 25.0 cm^3^ of the ==alkali== (dilute sodium hydroxide of concentration ==slightly greater than 1 mol dm^−3^== – to ensure ==all acid has neutralized==) into a beaker." },
+          { title: "Step 4", text: "Place 25.0 cm^3^ of the ==alkali== (dilute sodium hydroxide of concentration slightly greater than 1 mol dm^−3^ – to ensure ==all acid has neutralized==) into a beaker." },
           { title: "Step 5", text: "Measure the temperature of the alkali." },
           { title: "Step 6", text: "Add the alkali to the acid, ==stir with the thermometer== and measure the ==maximum temperature reached==." },
         ],
