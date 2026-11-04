@@ -2699,7 +2699,9 @@ function t7Ammonia(x: number, y: number, accent: string) {
 export function FigLondon({ accent = "#FF6B6B" }: { accent?: string }) {
   const cloud = tint(accent, 30);
   const shell = tint(accent, 74);
-  const Molecule = ({ x, y, shift }: { x: number; y: number; shift: number }) => (
+  /* a plain draw helper, called directly — creating it as a
+     component would remount the whole figure on every render */
+  const molecule = (x: number, y: number, shift: number) => (
     <g>
       <circle cx={x} cy={y} r={34} fill={shell} stroke={INK} strokeWidth={2.4} />
       <ellipse cx={x + shift} cy={y} rx={20} ry={27} fill={cloud} opacity={0.85} />
@@ -2708,8 +2710,8 @@ export function FigLondon({ accent = "#FF6B6B" }: { accent?: string }) {
   return (
     <svg viewBox="0 0 780 300" className="w-full" role="img" aria-label="An instantaneous dipole in one molecule inducing the opposite dipole in its neighbour; the two attract">
       {/* pair one — the teaching pair */}
-      <Molecule x={150} y={104} shift={-11} />
-      <Molecule x={330} y={104} shift={11} />
+      {molecule(150, 104, -11)}
+      {molecule(330, 104, 11)}
       <text x={112} y={62} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
       <text x={188} y={62} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
       <text x={296} y={62} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
@@ -2722,8 +2724,8 @@ export function FigLondon({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={330} y={190} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">induced dipole</text>
 
       {/* pair two — and so on through the liquid */}
-      <Molecule x={520} y={104} shift={-11} />
-      <Molecule x={700} y={104} shift={11} />
+      {molecule(520, 104, -11)}
+      {molecule(700, 104, 11)}
       <line x1={622} y1={104} x2={598} y2={104} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
       <line x1={598} y1={104} x2={606} y2={97} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
       <line x1={598} y1={104} x2={606} y2={111} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
@@ -2733,8 +2735,8 @@ export function FigLondon({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={738} y={62} fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
 
       {/* the flicker: same pair a moment later */}
-      <Molecule x={240} y={248} shift={11} />
-      <Molecule x={420} y={248} shift={-11} />
+      {molecule(240, 248, 11)}
+      {molecule(420, 248, -11)}
       <text x={150} y={254} fontSize="12.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">…a moment later, everywhere:</text>
       <text x={330} y={292} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the dipoles keep forming, vanishing and re-forming</text>
     </svg>

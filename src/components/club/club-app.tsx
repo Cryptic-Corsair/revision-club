@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Home as HomeIcon,
@@ -13,21 +14,58 @@ import {
 } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { UNITS, getUnit, getTopic } from "@/lib/spectra/units";
-import { getNotes, getNotesForTopic } from "@/lib/spectra/notes";
+import { getNotesMeta, getNotesMetaForTopic } from "@/lib/spectra/notes-meta";
 import { useTimeScope } from "@/lib/spectra/time";
 import { usePacks } from "@/lib/spectra/packs";
 import { applyPrefs, setPrefs, usePrefs, type Lab } from "@/lib/spectra/prefs";
 import { Home } from "./home";
 import { UnitView } from "./unit-view";
-import { TopicView } from "./topic-view";
-import { NotesReader } from "./notes-reader";
-import { StickerBook } from "./sticker-book";
-import { CustomizePanel } from "./customize";
-import { SearchPalette } from "./search";
-import { SpecIndex } from "./spec-index";
-import { PackView } from "./pack-view";
 import { Mascot, SpeechBubble } from "./bits";
 import { SpecMapProvider, SpecMapTrigger } from "./spec-map";
+
+/* ————— the lazy rooms —————
+   Only the shell, the home page and the unit walk load up front;
+   every other room — the notes reader with its whole figure
+   sketchbook, the spec index, the pack bench, the sticker book,
+   the topic fallback, the search bubble and the customize drawer —
+   travels in its own chunk, fetched the moment it's first called
+   for (and quietly warmed during idle time, see the warm effect in
+   ClubApp). The shell knows *that* a note exists from
+   notes-meta.ts, a few hundred bytes — the note itself never
+   enters the first-paint bundle. */
+
+const RoomLoading = () => (
+  <div aria-busy="true" className="flex min-h-[55dvh] items-center justify-center">
+    <span className="h-7 w-7 animate-spin rounded-full border-[3.5px] border-ink/10 border-t-ink/45" />
+  </div>
+);
+
+const TopicView = dynamic(() => import("./topic-view").then((m) => m.TopicView), {
+  ssr: false,
+  loading: RoomLoading,
+});
+const NotesReader = dynamic(() => import("./notes-reader").then((m) => m.NotesReader), {
+  ssr: false,
+  loading: RoomLoading,
+});
+const StickerBook = dynamic(() => import("./sticker-book").then((m) => m.StickerBook), {
+  ssr: false,
+  loading: RoomLoading,
+});
+const SpecIndex = dynamic(() => import("./spec-index").then((m) => m.SpecIndex), {
+  ssr: false,
+  loading: RoomLoading,
+});
+const PackView = dynamic(() => import("./pack-view").then((m) => m.PackView), {
+  ssr: false,
+  loading: RoomLoading,
+});
+const SearchPalette = dynamic(() => import("./search").then((m) => m.SearchPalette), {
+  ssr: false,
+});
+const CustomizePanel = dynamic(() => import("./customize").then((m) => m.CustomizePanel), {
+  ssr: false,
+});
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · app shell — pill nav, views, footer
@@ -548,6 +586,44 @@ export default function ClubApp() {
   const [view, setView] = useState<View>({ kind: "home" });
   const [searchOpen, setSearchOpen] = useState(false);
   const [customizeOpen, setCustomizeOpen] = useState(false);
+  /* the two overlays live in their own chunks and mount on first
+     open; after that they stay mounted so their exit animation
+     keeps playing on every close */
+  const [searchMounted, setSearchMounted] = useState(false);
+  const [customizeMounted, setCustomizeMounted] = useState(false);
+
+  useEffect(() => {
+    if (searchOpen) setSearchMounted(true);
+  }, [searchOpen]);
+  useEffect(() => {
+    if (customizeOpen) setCustomizeMounted(true);
+  }, [customizeOpen]);
+
+  /* ————— warm the lazy rooms —————
+     Once the first paint has settled, fetch every deferred chunk in
+     the background, so the first tap into notes / packs / search
+     feels instant instead of waiting on a download. */
+  useEffect(() => {
+    const warm = () => {
+      void import("./notes-reader");
+      void import("./spec-index");
+      void import("./pack-view");
+      void import("./sticker-book");
+      void import("./topic-view");
+      void import("./search");
+      void import("./customize");
+    };
+    const ric = (
+      window as Window & {
+        requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void;
+      }
+    ).requestIdleCallback;
+    if (ric) ric(warm, { timeout: 4000 });
+    else {
+      const t = setTimeout(warm, 2500);
+      return () => clearTimeout(t);
+    }
+  }, []);
   const prefs = usePrefs();
   const viewKey =
     view.kind === "topic"
@@ -578,8 +654,8 @@ export default function ClubApp() {
      stop. The topic page itself stays only for the rare topic that has
      no note doc behind it. */
   const openTopic = useCallback((code: UnitCode, topicId: string) => {
-    const doc = getNotesForTopic(code, topicId);
-    if (doc) setView({ kind: "notes", code, docId: doc.id });
+    const meta = getNotesMetaForTopic(code, topicId);
+    if (meta) setView({ kind: "notes", code, docId: meta.id });
     else setView({ kind: "topic", code, topicId });
   }, []);
   const goHome = () => setView({ kind: "home" });
@@ -591,9 +667,9 @@ export default function ClubApp() {
   const closeCustomize = useCallback(() => setCustomizeOpen(false), []);
   /* deep links from the spec index / pack — land on the section itself */
   const openNotes = useCallback((docId: string, spec?: string) => {
-    const doc = getNotes(docId);
-    if (!doc) return;
-    setView({ kind: "notes", code: doc.unitCode, docId, spec });
+    const meta = getNotesMeta(docId);
+    if (!meta) return;
+    setView({ kind: "notes", code: meta.unitCode, docId, spec });
   }, []);
 
   /* ⌘K / Ctrl+K (and "/") summon the search bubble */
@@ -617,10 +693,10 @@ export default function ClubApp() {
      topic pages and revision notes bank their seconds on the topic;
      everywhere else banks on the whole site. One call site, so the
      two can never double-count. */
-  const notesDoc = view.kind === "notes" ? getNotes(view.docId) : undefined;
+  const notesMeta = view.kind === "notes" ? getNotesMeta(view.docId) : undefined;
   useTimeScope(
     view.kind === "topic" || view.kind === "notes" ? view.code : undefined,
-    view.kind === "topic" ? view.topicId : notesDoc?.topicId,
+    view.kind === "topic" ? view.topicId : notesMeta?.topicId,
   );
 
   const unit =
@@ -631,8 +707,8 @@ export default function ClubApp() {
     view.kind === "topic" && unit
       ? getTopic(view.code, view.topicId)
       : undefined;
-  const topicNotes =
-    unit && topic ? getNotesForTopic(unit.code, topic.id) : undefined;
+  const topicMeta =
+    unit && topic ? getNotesMetaForTopic(unit.code, topic.id) : undefined;
 
   return (
     <SpecMapProvider>
@@ -645,12 +721,16 @@ export default function ClubApp() {
           onSearch={openSearch}
           onOpenCustomize={openCustomize}
         />
-        <SearchPalette
-          open={searchOpen}
-          onClose={() => setSearchOpen(false)}
-          onOpenTopic={openTopic}
-        />
-        <CustomizePanel open={customizeOpen} onClose={closeCustomize} />
+        {(searchOpen || searchMounted) && (
+          <SearchPalette
+            open={searchOpen}
+            onClose={() => setSearchOpen(false)}
+            onOpenTopic={openTopic}
+          />
+        )}
+        {(customizeOpen || customizeMounted) && (
+          <CustomizePanel open={customizeOpen} onClose={closeCustomize} />
+        )}
 
         <main className="relative flex-1">
           <AnimatePresence mode="wait">
@@ -687,31 +767,27 @@ export default function ClubApp() {
                   topic={topic}
                   onBack={() => openUnit(unit.code)}
                   onOpenTopic={(id) => openTopic(unit.code, id)}
-                  notesSpecRange={
-                    topicNotes && topicNotes.sections.length > 0
-                      ? `${topicNotes.sections[0].spec} → ${topicNotes.sections[topicNotes.sections.length - 1].spec}`
-                      : undefined
-                  }
+                  notesSpecRange={topicMeta?.specRange}
                   onOpenNotes={
-                    topicNotes
+                    topicMeta
                       ? () =>
                           setView({
                             kind: "notes",
                             code: unit.code,
-                            docId: topicNotes.id,
+                            docId: topicMeta.id,
                           })
                       : undefined
                   }
                 />
               )}
 
-              {view.kind === "notes" && unit && notesDoc && (
+              {view.kind === "notes" && unit && notesMeta && (
                 <NotesReader
-                  key={notesDoc.id}
-                  doc={notesDoc}
+                  key={view.docId}
+                  docId={view.docId}
                   unit={unit}
                   onBack={() => openUnit(unit.code)}
-                  jumpToSpec={view.kind === "notes" ? view.spec : undefined}
+                  jumpToSpec={view.spec}
                 />
               )}
 

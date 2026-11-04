@@ -21,6 +21,7 @@ import type { NotesBlock, NotesDoc } from "@/lib/spectra/notes-types";
 import type { Unit } from "@/lib/spectra/types";
 import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { togglePick, usePacks } from "@/lib/spectra/packs";
+import { getNotes } from "@/lib/spectra/notes";
 import { Fmt } from "./format";
 import {
   PopIn,
@@ -136,6 +137,35 @@ function PackTick({ spec, accent }: { spec: string; accent: string }) {
 /* ————— main reader ————— */
 
 export function NotesReader({
+  docId,
+  unit,
+  onBack,
+  jumpToSpec,
+}: {
+  /** the shell passes only the id — the full doc lives in this
+      chunk, fetched by import() the first time a note is opened */
+  docId: string;
+  unit: Unit;
+  onBack: () => void;
+  /** deep link — land scrolled to this spec section */
+  jumpToSpec?: string;
+}) {
+  const doc = getNotes(docId);
+  if (!doc) {
+    /* the shell only opens notes it knows from notes-meta.ts, so
+       this is a belt-and-braces room — still, never a white screen */
+    return (
+      <div className="flex min-h-[55dvh] items-center justify-center">
+        <span className="h-7 w-7 animate-spin rounded-full border-[3.5px] border-ink/10 border-t-ink/45" />
+      </div>
+    );
+  }
+  return (
+    <NotesReaderBody doc={doc} unit={unit} onBack={onBack} jumpToSpec={jumpToSpec} />
+  );
+}
+
+function NotesReaderBody({
   doc,
   unit,
   onBack,
