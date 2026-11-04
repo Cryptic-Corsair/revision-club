@@ -3237,36 +3237,69 @@ export function FigMixing({ accent = "#FF6B6B" }: { accent?: string }) {
 /* ————— 8.5 · electron transfer, zinc and copper(II) ————— */
 
 export function FigETransfer({ accent = "#FF6B6B" }: { accent?: string }) {
-  const chip = (x: number, y: number, w: number, label: string) => (
+  const COPPER_BLUE = "#4a90d9"; // the Cu²⁺(aq) tint of copper(II) sulfate
+  const COPPER_METAL = "#c9834e";
+  const GREY = "color-mix(in oklab, var(--color-ink) 34%, var(--tint-base))";
+  const ZN_DOT = "color-mix(in oklab, var(--color-ink) 22%, transparent)";
+
+  /* one open beaker: walls, rim ticks, solution, surface line */
+  const beaker = (bx: number, solution: string) => (
     <g>
-      <rect x={x - w / 2} y={y - 19} width={w} height={38} rx={19} fill={tint(accent, 24)} stroke={INK} strokeWidth={2.2} />
-      <text x={x} y={y + 6} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{label}</text>
+      <path
+        d={`M ${bx - 122} 104 L ${bx - 122} 228 Q ${bx - 122} 248 ${bx - 102} 248 L ${bx + 102} 248 Q ${bx + 122} 248 ${bx + 122} 228 L ${bx + 122} 104 Z`}
+        fill={solution}
+      />
+      <line x1={bx - 122} y1={104} x2={bx + 122} y2={104} stroke={FAINT} strokeWidth={1.8} />
+      <path
+        d={`M ${bx - 122} 72 L ${bx - 122} 228 Q ${bx - 122} 248 ${bx - 102} 248 L ${bx + 102} 248 Q ${bx + 122} 248 ${bx + 122} 228 L ${bx + 122} 72`}
+        fill="none"
+        stroke={INK}
+        strokeWidth={2.6}
+        strokeLinecap="round"
+      />
+      <line x1={bx - 134} y1={72} x2={bx - 122} y2={72} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={bx + 122} y1={72} x2={bx + 134} y2={72} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
     </g>
   );
+
   return (
-    <svg viewBox="0 0 920 300" className="w-full" role="img" aria-label="Zinc metal gives up two electrons which are taken up by a copper(II) ion, depositing copper metal and leaving zinc(II) ions in solution">
-      {/* zinc side — oxidation */}
-      {chip(190, 110, 190, "Zn(s)")}
-      <text x={190} y={164} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Zn²⁺(aq) + 2e⁻</text>
-      <line x1={190} y1={132} x2={190} y2={146} stroke={INK} strokeWidth={2.4} strokeLinecap="round" />
-      <text x={190} y={188} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">[Oxidation]</text>
-      <text x={190} y={214} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">zinc metal gives up electrons</text>
+    <svg viewBox="0 0 920 400" className="w-full" role="img" aria-label="Two beakers side by side: a zinc rod in the left beaker dissolves to zinc(II) ions, giving up two electrons, which travel across to the right beaker where copper(II) ions in blue solution take them up and deposit as copper metal">
+      {/* the electron crossing — dashed guide with two electrons on it */}
+      <path d="M 250 50 Q 460 22 628 50" fill="none" stroke={accent} strokeWidth={3.2} strokeLinecap="round" strokeDasharray="9 8" />
+      <polygon points="648,50 626,41 630,59" fill={accent} />
+      <circle cx={372} cy={38} r={10} fill={accent} />
+      <text x={372} y={41.5} textAnchor="middle" fontSize="10" fontWeight="800" fill={readableInk(accent)} fontFamily="var(--font-body)">e⁻</text>
+      <circle cx={523} cy={38} r={10} fill={accent} />
+      <text x={523} y={41.5} textAnchor="middle" fontSize="10" fontWeight="800" fill={readableInk(accent)} fontFamily="var(--font-body)">e⁻</text>
+      <text x={460} y={16} textAnchor="middle" fontSize="15" fontWeight="800" fill={accent} fontFamily="var(--font-body)">2e⁻</text>
 
-      {/* the electron arc */}
-      <path d="M 300 84 Q 460 8 620 84" fill="none" stroke={accent} strokeWidth={3.2} strokeLinecap="round" strokeDasharray="9 8" />
-      <polygon points="628,90 608,84 618,70" fill={accent} />
-      <text x={460} y={38} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">2e⁻</text>
+      {/* zinc half — the rod goes greyer as Zn²⁺ drifts into a colourless solution */}
+      {beaker(225, tint(accent, 7))}
+      <rect x={208} y={46} width={34} height={168} rx={6} fill={GREY} stroke={INK} strokeWidth={2.4} />
+      <text x={225} y={38} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Zn(s)</text>
+      <circle cx={270} cy={148} r={5.5} fill={ZN_DOT} />
+      <circle cx={318} cy={192} r={5.5} fill={ZN_DOT} />
+      <text x={296} y={172} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Zn²⁺(aq)</text>
+      <text x={225} y={282} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Zn(s) → Zn²⁺(aq) + 2e⁻</text>
+      <rect x={120} y={300} width={210} height={28} rx={14} fill={tint(accent, 15)} />
+      <text x={225} y={319} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">oxidation — Zn: 0 → +2</text>
 
-      {/* copper side — reduction */}
-      {chip(730, 110, 210, "Cu²⁺(aq)")}
-      <text x={730} y={164} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cu(s)</text>
-      <line x1={730} y1={132} x2={730} y2={146} stroke={INK} strokeWidth={2.4} strokeLinecap="round" />
-      <text x={730} y={188} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">[Reduction]</text>
-      <text x={730} y={214} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the electrons are taken up by the copper ions</text>
+      {/* copper half — blue Cu²⁺ solution, copper plating onto the rod */}
+      {beaker(695, tint(COPPER_BLUE, 16))}
+      <rect x={678} y={46} width={34} height={168} rx={6} fill={COPPER_METAL} stroke={shade(COPPER_METAL, 62)} strokeWidth={2.4} />
+      <text x={695} y={38} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cu(s)</text>
+      <circle cx={600} cy={142} r={6.5} fill={COPPER_BLUE} />
+      <circle cx={648} cy={196} r={6.5} fill={COPPER_BLUE} />
+      <circle cx={757} cy={148} r={6.5} fill={COPPER_BLUE} />
+      <circle cx={742} cy={204} r={6.5} fill={COPPER_BLUE} />
+      <text x={625} y={172} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)">Cu²⁺(aq)</text>
+      <text x={695} y={282} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cu²⁺(aq) + 2e⁻ → Cu(s)</text>
+      <rect x={590} y={300} width={210} height={28} rx={14} fill={tint("var(--color-ink)", 8)} />
+      <text x={695} y={319} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">reduction — Cu: +2 → 0</text>
 
-      {/* overall */}
-      <rect x={200} y={236} width={520} height={44} rx={22} fill="none" stroke={FAINT} strokeWidth={2} />
-      <text x={460} y={264} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)</text>
+      {/* the two halves added together */}
+      <rect x={230} y={348} width={460} height={42} rx={21} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={460} y={375} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)</text>
     </svg>
   );
 }
@@ -3274,39 +3307,63 @@ export function FigETransfer({ accent = "#FF6B6B" }: { accent?: string }) {
 /* ————— 8.6 · oxidising and reducing agents, chlorine displacing bromine ————— */
 
 export function FigAgents({ accent = "#FF6B6B" }: { accent?: string }) {
-  const on = (x: number, y: number, t: string) => (
+  /* the equation, one species at a time, so the number chips sit true */
+  const eq = [
+    { t: "Cl₂", x: 277 },
+    { t: "+", x: 333 },
+    { t: "2KBr", x: 399 },
+    { t: "→", x: 465 },
+    { t: "2KCl", x: 531 },
+    { t: "+", x: 587 },
+    { t: "Br₂", x: 643 },
+  ];
+  /* oxidation-number chips under the species that change + arrows */
+  const chip = (x: number, label: string) => (
     <g>
-      <rect x={x - 21} y={y - 14} width={42} height={28} rx={14} fill={tint(accent, 26)} stroke={FAINT} strokeWidth={1.8} />
-      <text x={x} y={y + 5} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{t}</text>
+      <rect x={x - 20} y={76} width={40} height={26} rx={13} fill={tint(accent, 26)} stroke={FAINT} strokeWidth={1.8} />
+      <text x={x} y={94} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{label}</text>
     </g>
   );
+  const triUp = (x: number, y: number) => <polygon points={`${x},${y + 5} ${x + 9},${y + 5} ${x + 4.5},${y - 4}`} fill={accent} />;
+  const triDown = (x: number, y: number) => <polygon points={`${x},${y - 5} ${x + 9},${y - 5} ${x + 4.5},${y + 4}`} fill={INK} />;
   return (
-    <svg viewBox="0 0 920 340" className="w-full" role="img" aria-label="Chlorine oxidises bromide ions: chlorine is reduced from oxidation number 0 to minus 1 and is the oxidising agent, bromide is oxidised from minus 1 to 0 and is the reducing agent">
+    <svg viewBox="0 0 920 348" className="w-full" role="img" aria-label="Chlorine oxidises bromide ions: chlorine is reduced from oxidation number 0 to minus 1 and is the oxidising agent, bromide is oxidised from minus 1 to 0 and is the reducing agent, and the two electrons pass from the bromide to the chlorine">
       {/* the equation with its oxidation-number row */}
-      <text x={460} y={50} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cl₂ + 2KBr → 2KCl + Br₂</text>
-      {on(340, 92, "0")}
-      {on(398, 92, "+1")}
-      {on(452, 92, "−1")}
-      {on(530, 92, "+1")}
-      {on(584, 92, "−1")}
-      {on(640, 92, "0")}
+      {eq.map((s) => (
+        <text key={s.t + s.x} x={s.x} y={58} textAnchor="middle" fontSize="18" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{s.t}</text>
+      ))}
+      {chip(277, "0")}
+      {chip(410, "−1")}
+      {chip(542, "−1")}
+      {chip(643, "0")}
+      {triDown(301, 89)}
+      {triUp(434, 89)}
+      <text x={460} y={126} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">K⁺ stays +1 on both sides — a spectator ion, unchanged</text>
 
-      {/* left card — the reduced species */}
-      <rect x={64} y={132} width={384} height={128} rx={24} fill={tint(accent, 16)} stroke={FAINT} strokeWidth={2} />
-      <text x={256} y={166} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">reduction — Cl₂</text>
-      <text x={256} y={192} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cl: 0 → −1 (decrease)</text>
-      <text x={256} y={216} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Cl₂ is the oxidising agent —</text>
-      <text x={256} y={236} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">an electron acceptor; it oxidizes KBr</text>
+      {/* the handover — electrons cross from the donor to the acceptor */}
+      <path d="M 508 210 Q 460 176 412 206" fill="none" stroke={accent} strokeWidth={3} strokeLinecap="round" strokeDasharray="9 8" />
+      <polygon points="398,206 419,197 417,215" fill={accent} />
+      <text x={460} y="182" textAnchor="middle" fontSize="14" fontWeight="800" fill={accent} fontFamily="var(--font-body)">2e⁻</text>
+      <text x={460} y="240" textAnchor="middle" fontSize="11" fontWeight="800" fill={INK} fontFamily="var(--font-body)">handed across</text>
 
-      {/* right card — the oxidised species */}
-      <rect x={472} y={132} width={384} height={128} rx={24} fill={tint(accent, 16)} stroke={FAINT} strokeWidth={2} />
-      <text x={664} y={166} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">oxidation — KBr</text>
-      <text x={664} y={192} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Br: −1 → 0 (increase)</text>
-      <text x={664} y={216} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">KBr is the reducing agent —</text>
-      <text x={664} y={236} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">an electron donor; it reduces Cl₂</text>
+      {/* left card — the species that accepts them */}
+      <rect x={56} y={146} width={348} height={126} rx={24} fill={tint(accent, 16)} stroke={FAINT} strokeWidth={2} />
+      <text x={230} y={178} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cl₂ — the oxidising agent</text>
+      <rect x={141} y={192} width={178} height={24} rx={12} fill={tint(accent, 26)} />
+      <text x={230} y={209} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">electron acceptor · gains 2e⁻</text>
+      <text x={230} y={238} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cl: 0 → −1 — a decrease, reduced</text>
+      <text x={230} y={260} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">so it oxidizes the KBr</text>
+
+      {/* right card — the species that donates them */}
+      <rect x={516} y={146} width={348} height={126} rx={24} fill={tint("var(--color-ink)", 7)} stroke={FAINT} strokeWidth={2} />
+      <text x={690} y={178} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Br⁻ in KBr — the reducing agent</text>
+      <rect x={591} y={192} width={198} height={24} rx={12} fill={tint("var(--color-ink)", 12)} />
+      <text x={690} y={209} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">electron donor · loses 2e⁻</text>
+      <text x={690} y={238} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Br: −1 → 0 — an increase, oxidized</text>
+      <text x={690} y={260} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">so it reduces the Cl₂</text>
 
       {/* bottom rule */}
-      <text x={460} y={306} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the oxidising agent is reduced · the reducing agent is oxidized — at the same time</text>
+      <text x={460} y={318} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the oxidising agent is reduced · the reducing agent is oxidized — at the same time</text>
     </svg>
   );
 }
@@ -3314,36 +3371,57 @@ export function FigAgents({ accent = "#FF6B6B" }: { accent?: string }) {
 /* ————— 8.7 · disproportionation — chlorine in sodium hydroxide ————— */
 
 export function FigDisprop({ accent = "#FF6B6B" }: { accent?: string }) {
-  const chip = (x: number, y: number, w: number, label: string) => (
+  const AX = 280; // the vertical oxidation-number axis
+  const RUNG = { "+1": 146, "0": 214, "−1": 282 };
+  const chip = (x: number, y: number, w: number, label: string, fill: string) => (
     <g>
-      <rect x={x - w / 2} y={y - 19} width={w} height={38} rx={19} fill={tint(accent, 24)} stroke={INK} strokeWidth={2.2} />
-      <text x={x} y={y + 6} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{label}</text>
+      <rect x={x - w / 2} y={y - 20} width={w} height={40} rx={20} fill={fill} stroke={INK} strokeWidth={2.2} />
+      <text x={x} y={y + 6} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{label}</text>
     </g>
   );
   return (
-    <svg viewBox="0 0 920 320" className="w-full" role="img" aria-label="Chlorine gas in aqueous sodium hydroxide: one chlorine atom is oxidised to chlorate(I) and the other is reduced to chloride in the same reaction">
+    <svg viewBox="0 0 920 400" className="w-full" role="img" aria-label="Chlorine gas in aqueous sodium hydroxide, drawn on a vertical oxidation-number ladder: chlorine starts at zero, one atom climbs the axis to plus one in chlorate(I), oxidation, while the other falls to minus one in chloride, reduction — in the same reaction">
       {/* the equation */}
       <text x={460} y={54} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">2NaOH + Cl₂ → NaOCl + NaCl + H₂O</text>
 
-      {/* the chlorine — one species, two fates */}
-      {chip(380, 122, 110, "Cl₂")}
-      <text x={380} y={172} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">one element at oxidation number 0</text>
+      {/* the ladder — up the axis is oxidation, down is reduction */}
+      <line x1={AX} y1={330} x2={AX} y2={102} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <polygon points={`${AX},88 ${AX - 8},106 ${AX + 8},106`} fill={INK} />
+      <text x={250} y={216} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)" transform={`rotate(-90 250 216)`}>oxidation number</text>
+      {(["+1", "0", "−1"] as const).map((n) => (
+        <g key={n}>
+          <line x1={AX - 9} y1={RUNG[n]} x2={AX + 9} y2={RUNG[n]} stroke={INK} strokeWidth={2.4} strokeLinecap="round" />
+          <text x={AX - 18} y={RUNG[n] + 4.5} textAnchor="end" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{n}</text>
+        </g>
+      ))}
+      {/* rung guides out to the products */}
+      <line x1={AX + 12} y1={RUNG["+1"]} x2={566} y2={RUNG["+1"]} stroke={FAINT} strokeWidth={1.8} strokeDasharray="2 7" />
+      <line x1={AX + 12} y1={RUNG["−1"]} x2={566} y2={RUNG["−1"]} stroke={FAINT} strokeWidth={1.8} strokeDasharray="2 7" />
 
-      {/* oxidation branch */}
-      <path d="M 428 108 Q 600 30 738 78" fill="none" stroke={accent} strokeWidth={3} strokeLinecap="round" />
-      <polygon points="750,82 728,84 738,66" fill={accent} />
-      {chip(800, 96, 150, "NaOCl")}
-      <text x={800} y={140} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">oxidation: 0 → +1</text>
+      {/* the chlorine — one species at 0, two fates */}
+      {chip(AX, RUNG["0"], 96, "Cl₂", tint(accent, 22))}
 
-      {/* reduction branch */}
-      <path d="M 428 136 Q 600 214 738 166" fill="none" stroke={INK} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="8 7" />
-      <polygon points="750,162 728,160 738,178" fill={INK} />
-      {chip(800, 176, 150, "NaCl")}
-      <text x={800} y={220} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">reduction: 0 → −1</text>
+      {/* oxidation branch — the climb */}
+      <path d="M 332 202 C 420 168 500 150 577 148" fill="none" stroke={accent} strokeWidth={3.2} strokeLinecap="round" />
+      <polygon points="593,146 571,138 573,156" fill={accent} />
+      <text x={452} y={134} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">oxidation · 0 → +1</text>
+      {chip(664, RUNG["+1"], 132, "NaOCl", tint(accent, 24))}
+      <text x={664} y={184} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">chlorate(I) — the chlorine climbed</text>
+
+      {/* reduction branch — the fall */}
+      <path d="M 332 226 C 420 262 500 280 577 282" fill="none" stroke={INK} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="8 7" />
+      <polygon points="593,284 571,276 573,294" fill={INK} />
+      <text x={452} y={246} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">reduction · 0 → −1</text>
+      {chip(664, RUNG["−1"], 132, "NaCl", tint("var(--color-ink)", 9))}
+      <text x={664} y={320} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">chloride — the chlorine fell</text>
+
+      {/* the rest of the equation rides along */}
+      <text x={845} y={208} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Na⁺, H and O</text>
+      <text x={845} y={224} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">keep their numbers</text>
 
       {/* bottom line */}
-      <rect x={190} y={248} width={540} height={46} rx={23} fill="none" stroke={FAINT} strokeWidth={2} />
-      <text x={460} y={277} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the same element is oxidized and reduced simultaneously</text>
+      <rect x={185} y={344} width={550} height={42} rx={21} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={460} y={371} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the same element is oxidized and reduced simultaneously</text>
     </svg>
   );
 }

@@ -140,11 +140,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 8A, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every worked example, checkpoint and exercise the class note sets in words is worked in full — no skipped lines.",
+        text: "This is the actual revision note for Topic 8A, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and each method gets ==one worked example==, worked in full — the repetitive exercise drill is left to the book.",
       },
       {
         k: "p",
-        text: "Part **8A** is the redox machinery itself: oxidation numbers and their rules, the Roman-numeral systematic names, electron transfer and OIL RIG, oxidising and reducing agents, disproportionation — and the complete half-equation toolkit, from the four-step simple balance to acidic and alkaline medium and the full ionic equations, with every exercise worked. Parts **8B** and **8C** — Groups 1 & 2, and Group 7 — will join later.",
+        text: "Part **8A** is the redox machinery itself: oxidation numbers and their rules, the Roman-numeral systematic names, electron transfer and OIL RIG, oxidising and reducing agents, disproportionation — and the complete half-equation toolkit, from the four-step simple balance to acidic and alkaline medium and the full ionic equations, each method shown once, in full. Parts **8B** and **8C** — Groups 1 & 2, and Group 7 — will join later.",
       },
     ],
     sections: [...SECTIONS_T08_A],

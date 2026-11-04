@@ -4,8 +4,11 @@ import type { SpecSection } from "../notes-types";
    Topic 8 revision note · Part 8A — Redox Chemistry (spec 8.1–8.10)
    Text kept verbatim from the CHSE Grade 11 / Unit 2 / Topic 8A
    class note (2021, semester 2) — Redox Chemistry; page furniture
-   omitted. The worked examples, Checkpoint 1 and every exercise the
-   note sets in words are worked in full.
+   omitted. The exercise drill is left to the book: each method —
+   the basic sum, the Roman numeral, the formula, the agents, the
+   disproportionation test, and each balancing procedure through to
+   the full ionic equation — keeps exactly one worked example,
+   worked in full.
    Highlighting is kept deliberately light: one mark per key term,
    short spans only — the marker is for the words that name the
    idea, not for whole clauses.
@@ -78,17 +81,6 @@ export const SECTIONS_T08_A: SpecSection[] = [
         ],
         answer: "(a) −1 · (b) +1 · (c) +5",
       },
-      {
-        k: "worked",
-        title: "Worked example · nitrogen in NH~3~, NO~2~^−^ and NO~3~^−^",
-        question: "Deduce the oxidation number of nitrogen in: (a) NH~3~  (b) NO~2~^−^  (c) NO~3~^−^",
-        steps: [
-          "(a) NH~3~: N + 3(+1) = 0, so N = −3.",
-          "(b) NO~2~^−^: N + 2(−2) = −1, so N = +3.",
-          "(c) NO~3~^−^: N + 3(−2) = −1, so N = +5.",
-        ],
-        answer: "(a) −3 · (b) +3 · (c) +5",
-      },
       { k: "checkpoint", page: 8 },
       {
         k: "worked",
@@ -99,19 +91,6 @@ export const SECTIONS_T08_A: SpecSection[] = [
           "(b) H~2~O~2~ is a ==peroxide==, so each oxygen is −1 (rules table). Check with the sum: 2(+1) + 2(−1) = 0 — each hydrogen is +1.",
         ],
         answer: "(a) V = +5 · (b) O = −1 (peroxide rule), each H = +1",
-      },
-      {
-        k: "worked",
-        title: "Worked example · Exercise 2, question 2",
-        question: "If the oxidation number of O is −2, state the oxidation number of the other element in (a) NO~2~  (b) Cl~2~O~7~  (c) P~4~O~10~  (d) MnO~2~  (e) N~2~O",
-        steps: [
-          "(a) NO~2~: N + 2(−2) = 0, so N = +4.",
-          "(b) Cl~2~O~7~: 2Cl + 7(−2) = 0, so Cl = +7.",
-          "(c) P~4~O~10~: 4P + 10(−2) = 0, so P = +5.",
-          "(d) MnO~2~: Mn + 2(−2) = 0, so Mn = +4.",
-          "(e) N~2~O: 2N + (−2) = 0, so N = +1.",
-        ],
-        answer: "(a) +4 · (b) +7 · (c) +5 · (d) +4 · (e) +1",
       },
     ],
   },
@@ -163,20 +142,6 @@ export const SECTIONS_T08_A: SpecSection[] = [
         answer:
           "(a) phosphorus(III) chloride · (b) phosphorus(V) chloride · (c) vanadium(V) oxide · (d) lead(II) oxide · (e) copper(II) sulfate · (f) sodium chlorate(I) · (g) sodium chlorate(V)",
       },
-      {
-        k: "worked",
-        title: "Worked example · Exercise 3, question 2",
-        question: "Give the systematic name for each of the following ions: (a) NO~3~^−^  (b) NO~2~^−^  (c) ClO~4~^−^  (d) VO~2~^+^  (e) VO^2+^",
-        steps: [
-          "(a) NO~3~^−^: N + 3(−2) = −1, so N is +5 → nitrate(V).",
-          "(b) NO~2~^−^: N + 2(−2) = −1, so N is +3 → nitrate(III).",
-          "(c) ClO~4~^−^: Cl + 4(−2) = −1, so Cl is +7 → chlorate(VII).",
-          "(d) VO~2~^+^: V + 2(−2) = +1, so V is +5 → the dioxovanadium(V) ion.",
-          "(e) VO^2+^: V + (−2) = +2, so V is +4 → the oxovanadium(IV) ion.",
-        ],
-        answer:
-          "(a) nitrate(V) · (b) nitrate(III) · (c) chlorate(VII) · (d) dioxovanadium(V) · (e) oxovanadium(IV)",
-      },
     ],
   },
   {
@@ -198,30 +163,6 @@ export const SECTIONS_T08_A: SpecSection[] = [
           "(b) Iron(III) carries +3: two Fe^3+^ give +6 and three SO~4~^2−^ give −6 → Fe~2~(SO~4~)~3~.",
         ],
         answer: "(a) FeSO~4~ · (b) Fe~2~(SO~4~)~3~",
-      },
-      {
-        k: "worked",
-        title: "Worked example · Exercise 3, question 3",
-        question: "Deduce the formula for each of the following compounds: (a) copper(I) oxide  (b) copper(II) oxide  (c) chromium(III) sulfate(VI)  (d) lead(IV) iodide  (e) cobalt(III) nitrate(V)",
-        steps: [
-          "(a) Cu is +1, O is −2 → two Cu^+^ per O^2−^ → Cu~2~O.",
-          "(b) Cu is +2, O is −2 → 1 : 1 → CuO.",
-          "(c) Cr is +3, sulfate(VI) is SO~4~^2−^ → Cr~2~(SO~4~)~3~.",
-          "(d) Pb is +4, I is −1 → PbI~4~.",
-          "(e) Co is +3, nitrate(V) is NO~3~^−^ → Co(NO~3~)~3~.",
-        ],
-        answer: "(a) Cu~2~O · (b) CuO · (c) Cr~2~(SO~4~)~3~ · (d) PbI~4~ · (e) Co(NO~3~)~3~",
-      },
-      {
-        k: "worked",
-        title: "Worked example · Exercise 3, question 4",
-        question: "Why is it not necessary to refer to sodium chloride as sodium(I) chloride, or magnesium oxide as magnesium(II) oxide?",
-        steps: [
-          "The rules table pins a group 1 element at +1 and a group 2 element at +2 in its compounds — sodium and magnesium each have only one oxidation state available.",
-          "The Roman numeral only earns its place when the element shows ==more than one oxidation state== — iron, copper, manganese, chlorine…",
-        ],
-        answer:
-          "Because sodium is always +1 and magnesium is always +2 in their compounds — there is nothing for the Roman numeral to distinguish.",
       },
     ],
   },
@@ -429,18 +370,6 @@ export const SECTIONS_T08_A: SpecSection[] = [
         answer:
           "Bromine in KOBr (+1) is simultaneously reduced to −1 (KBr) and oxidized to +5 (KBrO~3~) — a disproportionation reaction.",
       },
-      {
-        k: "worked",
-        title: "Worked example · Checkpoint 1, question 2",
-        question: "Consider the reaction 2H~2~O~2~ → 2H~2~O + O~2~. Is this decomposition reaction a disproportionation reaction? Justify your answer.",
-        steps: [
-          "In H~2~O~2~ the oxygen is −1 — hydrogen peroxide is a peroxide.",
-          "In H~2~O the oxygen is −2 — a decrease, so part of the oxygen is reduced.",
-          "In O~2~ the oxygen is 0 — an increase, so part of the oxygen is oxidized.",
-          "Oxygen began as one species (−1 in H~2~O~2~) and moved both up and down simultaneously.",
-        ],
-        answer: "Yes — oxygen (−1 in H~2~O~2~) is simultaneously reduced to −2 (H~2~O) and oxidized to 0 (O~2~).",
-      },
     ],
   },
   {
@@ -611,140 +540,6 @@ export const SECTIONS_T08_A: SpecSection[] = [
         answer: "5Fe^2+^ + MnO~4~^−^ + 8H^+^ → 5Fe^3+^ + Mn^2+^ + 4H~2~O",
       },
       { k: "checkpoint", page: 16 },
-      {
-        k: "worked",
-        title: "Worked example · Exercise 4, question 1",
-        question: "Use oxidation numbers to balance the following equations: (a) Ag^+^(aq) to Ag(s)  (b) SO~2~(g) to SO~4~^2−^(aq), acidic medium  (c) ClO~3~^−^ to Cl^−^, acidic medium",
-        steps: [
-          "(a) Ag goes +1 → 0 — one electron gained:  Ag^+^ + e^−^ → Ag.",
-          "(b) S goes +4 → +6 — two electrons lost. Balance O with H~2~O, then H with H^+^:  SO~2~ + 2H~2~O → SO~4~^2−^ + 4H^+^ + 2e^−^.",
-          "(c) Cl goes +5 → −1 — six electrons gained:  ClO~3~^−^ + 6H^+^ + 6e^−^ → Cl^−^ + 3H~2~O.",
-        ],
-        answer:
-          "(a) Ag^+^ + e^−^ → Ag  ·  (b) SO~2~ + 2H~2~O → SO~4~^2−^ + 4H^+^ + 2e^−^  ·  (c) ClO~3~^−^ + 6H^+^ + 6e^−^ → Cl^−^ + 3H~2~O",
-      },
-      {
-        k: "worked",
-        title: "Worked example · Exercise 4, question 2 — first six conversions",
-        question: "Write half equations for the following conversions and state whether oxidation or reduction is taking place: Br^−^ to Br~2~ · Fe^3+^ to Fe^2+^ · Cl~2~ to Cl^−^ · Ca to Ca^2+^ · Al to Al^3+^ · O~2~ to O^2−^",
-        steps: [
-          "2Br^−^ → Br~2~ + 2e^−^ — oxidation (−1 → 0).",
-          "Fe^3+^ + e^−^ → Fe^2+^ — reduction (+3 → +2).",
-          "Cl~2~ + 2e^−^ → 2Cl^−^ — reduction (0 → −1).",
-          "Ca → Ca^2+^ + 2e^−^ — oxidation (0 → +2).",
-          "Al → Al^3+^ + 3e^−^ — oxidation (0 → +3).",
-          "O~2~ + 4e^−^ → 2O^2−^ — reduction (0 → −2).",
-        ],
-        answer: "Oxidations: Br^−^, Ca, Al  ·  reductions: Fe^3+^, Cl~2~, O~2~.",
-      },
-      {
-        k: "worked",
-        title: "Worked example · Exercise 4, question 2 — the acids and alkalis",
-        question: "Write half equations for the following conversions and state whether oxidation or reduction is taking place: H~2~SO~4~ to SO~2~ · HNO~3~ to NO~2~ · IO~3~^−^ to I~2~ (acidic) · MnO~4~^−^ to Mn^2+^ (acidic) · Cr~2~O~7~^2−^ to Cr^3+^ (acidic) · Cr^3+^ to CrO~4~^2−^ (alkaline) · MnO~4~^−^ to MnO~2~ (alkaline) · Cl~2~ to ClO~3~^−^ (alkaline)",
-        steps: [
-          "H~2~SO~4~ + 2H^+^ + 2e^−^ → SO~2~ + 2H~2~O — reduction (S: +6 → +4).",
-          "NO~3~^−^ + 2H^+^ + e^−^ → NO~2~ + H~2~O — reduction (N: +5 → +4).",
-          "2IO~3~^−^ + 12H^+^ + 10e^−^ → I~2~ + 6H~2~O — reduction (I: +5 → 0).",
-          "MnO~4~^−^ + 8H^+^ + 5e^−^ → Mn^2+^ + 4H~2~O — reduction (Mn: +7 → +2).",
-          "Cr~2~O~7~^2−^ + 14H^+^ + 6e^−^ → 2Cr^3+^ + 7H~2~O — reduction (Cr: +6 → +3).",
-          "Cr^3+^ + 8OH^−^ → CrO~4~^2−^ + 4H~2~O + 3e^−^ — oxidation (Cr: +3 → +6).",
-          "MnO~4~^−^ + 2H~2~O + 3e^−^ → MnO~2~ + 4OH^−^ — reduction (Mn: +7 → +4).",
-          "Cl~2~ + 12OH^−^ → 2ClO~3~^−^ + 6H~2~O + 10e^−^ — oxidation (Cl: 0 → +5).",
-        ],
-        answer: "The acidic set balances O with H~2~O then H with H^+^; the alkaline set uses OH^−^ doubled against the oxygen shortfall.",
-      },
-      { k: "checkpoint", page: 18 },
-      {
-        k: "worked",
-        title: "Worked example · Exercise 5, question 1 (a)–(d)",
-        question: "Write balanced overall equations for the following: (a) Cl~2~ + 2e^−^ → 2Cl^−^  and  Fe → Fe^3+^ + 3e^−^  (b) Sn^2+^ → Sn^4+^ + 2e^−^  and  Fe^3+^ + e^−^ → Fe^2+^  (c) SO~2~ + 2H~2~O → SO~4~^2−^ + 4H^+^ + 2e^−^  and  Fe^3+^ + e^−^ → Fe^2+^  (d) MnO~4~^−^ + 8H^+^ + 5e^−^ → Mn^2+^ + 4H~2~O  and  2I^−^ → I~2~ + 2e^−^",
-        steps: [
-          "(a) Electrons: 2 vs 3 → × 3 and × 1:  2Fe + 3Cl~2~ → 2Fe^3+^ + 6Cl^−^.",
-          "(b) Electrons: 2 vs 1 → × 1 and × 2:  Sn^2+^ + 2Fe^3+^ → Sn^4+^ + 2Fe^2+^.",
-          "(c) Electrons: 2 vs 1 → × 1 and × 2:  SO~2~ + 2H~2~O + 2Fe^3+^ → SO~4~^2−^ + 4H^+^ + 2Fe^2+^.",
-          "(d) Electrons: 5 vs 2 → × 2 and × 5:  2MnO~4~^−^ + 16H^+^ + 10I^−^ → 2Mn^2+^ + 8H~2~O + 5I~2~.",
-        ],
-        answer:
-          "(a) 2Fe + 3Cl~2~ → 2Fe^3+^ + 6Cl^−^  ·  (b) Sn^2+^ + 2Fe^3+^ → Sn^4+^ + 2Fe^2+^  ·  (c) SO~2~ + 2H~2~O + 2Fe^3+^ → SO~4~^2−^ + 4H^+^ + 2Fe^2+^  ·  (d) 2MnO~4~^−^ + 16H^+^ + 10I^−^ → 2Mn^2+^ + 8H~2~O + 5I~2~",
-      },
-      {
-        k: "worked",
-        title: "Worked example · Exercise 5, question 1 (e)–(f)",
-        question: "Write balanced overall equations for the following: (e) Mn^2+^ → MnO~4~^−^, acidic medium  and  PbO~2~ → Pb^2+^  (f) Cr~2~O~7~^2−^ → Cr^3+^, acidic medium  and  I^−^ → I~2~",
-        steps: [
-          "(e) Build each half equation first:  Mn^2+^ + 4H~2~O → MnO~4~^−^ + 8H^+^ + 5e^−^  (oxidation)  ·  PbO~2~ + 4H^+^ + 2e^−^ → Pb^2+^ + 2H~2~O  (reduction)",
-          "(e) Electrons: 5 vs 2 → × 2 and × 5, add, then cancel 10 e^−^, 8 H~2~O and 16 H^+^:  2Mn^2+^ + 5PbO~2~ + 4H^+^ → 2MnO~4~^−^ + 5Pb^2+^ + 2H~2~O.",
-          "(f) Half equations:  Cr~2~O~7~^2−^ + 14H^+^ + 6e^−^ → 2Cr^3+^ + 7H~2~O  ·  2I^−^ → I~2~ + 2e^−^ (× 3)",
-          "(f) Add and cancel 6 e^−^:  Cr~2~O~7~^2−^ + 14H^+^ + 6I^−^ → 2Cr^3+^ + 7H~2~O + 3I~2~.",
-        ],
-        answer:
-          "(e) 2Mn^2+^ + 5PbO~2~ + 4H^+^ → 2MnO~4~^−^ + 5Pb^2+^ + 2H~2~O  ·  (f) Cr~2~O~7~^2−^ + 14H^+^ + 6I^−^ → 2Cr^3+^ + 7H~2~O + 3I~2~",
-      },
-      {
-        k: "worked",
-        title: "Worked example · Exercise 5, question 2",
-        question: "Separate the following equations into oxidation and reduction ionic half equations, balance them and write the balanced overall equation: (a) ClO~2~ → ClO~3~^−^ + ClO~2~^−^, alkaline medium  (b) MnO~4~^−^ + C~2~O~4~^2−^ → Mn^2+^ + CO~2~, acidic medium  (c) H~2~O~2~ + Cl~2~O~7~ → ClO~2~ + O~2~, alkaline medium  (d) KBr + Cl~2~ → KCl + Br~2~",
-        steps: [
-          "(a) Oxidation:  ClO~2~ + 2OH^−^ → ClO~3~^−^ + H~2~O + e^−^  ·  reduction:  ClO~2~ + e^−^ → ClO~2~^−^  ·  overall:  2ClO~2~ + 2OH^−^ → ClO~3~^−^ + ClO~2~^−^ + H~2~O.",
-          "(b) Reduction:  MnO~4~^−^ + 8H^+^ + 5e^−^ → Mn^2+^ + 4H~2~O  ·  oxidation:  C~2~O~4~^2−^ → 2CO~2~ + 2e^−^  ·  overall:  2MnO~4~^−^ + 16H^+^ + 5C~2~O~4~^2−^ → 2Mn^2+^ + 8H~2~O + 10CO~2~.",
-          "(c) Oxidation:  H~2~O~2~ + 2OH^−^ → O~2~ + 2H~2~O + 2e^−^  ·  reduction:  Cl~2~O~7~ + 3H~2~O + 6e^−^ → 2ClO~2~ + 6OH^−^  ·  overall:  3H~2~O~2~ + Cl~2~O~7~ → 2ClO~2~ + 3O~2~ + 3H~2~O.",
-          "(d) Oxidation:  2Br^−^ → Br~2~ + 2e^−^  ·  reduction:  Cl~2~ + 2e^−^ → 2Cl^−^  ·  overall:  Cl~2~ + 2Br^−^ → 2Cl^−^ + Br~2~.",
-        ],
-        answer:
-          "(a) 2ClO~2~ + 2OH^−^ → ClO~3~^−^ + ClO~2~^−^ + H~2~O  ·  (b) 2MnO~4~^−^ + 16H^+^ + 5C~2~O~4~^2−^ → 2Mn^2+^ + 8H~2~O + 10CO~2~  ·  (c) 3H~2~O~2~ + Cl~2~O~7~ → 2ClO~2~ + 3O~2~ + 3H~2~O  ·  (d) Cl~2~ + 2Br^−^ → 2Cl^−^ + Br~2~",
-      },
-      { k: "checkpoint", page: 20 },
-      {
-        k: "worked",
-        title: "Exercise 6 · questions 1–3",
-        question: "1. What is the oxidation number of oxygen in OF~2~? (A −2  B −1  C +1  D +2)   2. In which reaction is sulfuric(IV) acid, H~2~SO~3~, acting as an oxidizing agent? (A with NaOH → Na~2~SO~3~  B with FeCl~3~ → FeCl~2~ + H~2~SO~4~  C with H~2~S → 3S + 3H~2~O  D → H~2~O + SO~2~)   3. What is the oxidation number of chlorine in the ClO~3~^−^ ion? (A −1  B +4  C +5  D +6)",
-        steps: [
-          "Q1 — F is −1 (rules table), so O + 2(−1) = 0 → O = +2. Answer D.",
-          "Q2 — S starts at +4. In A it ends at +4 (SO~3~^2−^); in B at +6 (H~2~SO~4~) — an increase, so H~2~SO~3~ there is the reducing agent; in C it falls to 0 (S) — a decrease, so H~2~SO~3~ is the oxidizing agent; in D it stays +4. Answer C.",
-          "Q3 — Cl + 3(−2) = −1, so Cl = +5. Answer C.",
-        ],
-        answer: "1 — D (+2) · 2 — C · 3 — C (+5)",
-      },
-      {
-        k: "worked",
-        title: "Exercise 6 · questions 4–7",
-        question: "4. Which of these reactions is not a redox reaction? (A Mg(NO~3~)~2~ → MgO + NO~2~ + O~2~  B HCl + NaOH → NaCl + H~2~O  C Fe + CuSO~4~ → FeSO~4~ + Cu  D Cl~2~ + 2Br^−^ → 2Cl^−^ + Br~2~)   5. Which term best describes what happens to the chlorine in: (a) Cl~2~ + H~2~O → HCl + HOCl  (b) Cl~2~ + 2Na → 2NaCl  (c) NaCl + H~2~SO~4~ → HCl + NaHSO~4~? (A oxidation  B reduction  C no change in oxidation number  D disproportionation)   6. What is the oxidation number of oxygen in dioxygen difluoride, O~2~F~2~? (A −1  B −2  C +1  D +2)   7. Which one of these reactions is not a disproportionation reaction? (A 2H~2~O~2~ → O~2~ + 2H~2~O  B S~2~O~3~^2−^ + 2H^+^ → SO~2~ + S + H~2~O  C Cl~2~ + 2Br^−^ → 2Cl^−^ + Br~2~  D 2Cu^+^ → Cu + Cu^2+^)",
-        steps: [
-          "Q4 — in B every element keeps its oxidation number (Na +1, O −2, H +1, Cl −1): a neutralisation, not redox. A (N +5 → +4, O −2 → 0), C (Fe 0 → +2, Cu +2 → 0) and D (Cl 0 → −1, Br −1 → 0) are all redox. Answer B.",
-          "Q5 (a) — Cl goes 0 → −1 (HCl) and 0 → +1 (HOCl): both directions at once, so D, disproportionation.",
-          "Q5 (b) — Cl goes 0 → −1 only: B, reduction.",
-          "Q5 (c) — Cl is −1 in NaCl and −1 in HCl: C, no change in oxidation number.",
-          "Q6 — each F is −1, so 2O + 2(−1) = 0 → O = +1. Answer C.",
-          "Q7 — in C chlorine only falls (0 → −1) while bromine rises: two different elements change, so no single element is both oxidised and reduced. A (O −1 → −2 and 0), B (S +2 → +4 and 0) and D (Cu +1 → 0 and +2) are disproportionations. Answer C.",
-        ],
-        answer: "4 — B · 5 (a) D, (b) B, (c) C · 6 — C (+1) · 7 — C",
-      },
-      {
-        k: "worked",
-        title: "Exercise 6 · question 8",
-        question: "Nitrogen monoxide, NO, is formed when nitrate ions, NO~3~^−^, in acidic solution are reduced by silver metal. (a) Calculate the oxidation number of nitrogen in NO and in NO~3~^−^. (b) Balance the half-equation for the reduction of nitrate ions in acidic solution: NO~3~^−^ + …H^+^ + …e^−^ → NO + …H~2~O. (c) Write the half-equation for the oxidation of silver metal to silver ions. (d) Hence deduce the full ionic equation for the reaction.",
-        steps: [
-          "(a) In NO: N + (−2) = 0, so N = +2. In NO~3~^−^: N + 3(−2) = −1, so N = +5.",
-          "(b) Balance O with H~2~O, then H with H^+^, then charge with electrons:  NO~3~^−^ + 4H^+^ + 3e^−^ → NO + 2H~2~O.",
-          "(c) Ag → Ag^+^ + e^−^.",
-          "(d) Electrons 3 vs 1 → × 1 and × 3, add, cancel:  NO~3~^−^ + 4H^+^ + 3Ag → NO + 2H~2~O + 3Ag^+^.",
-        ],
-        answer:
-          "(a) NO: +2 · NO~3~^−^: +5  ·  (b) NO~3~^−^ + 4H^+^ + 3e^−^ → NO + 2H~2~O  ·  (c) Ag → Ag^+^ + e^−^  ·  (d) NO~3~^−^ + 4H^+^ + 3Ag → NO + 2H~2~O + 3Ag^+^",
-      },
-      {
-        k: "worked",
-        title: "Exercise 6 · question 9",
-        question: "(a) Explain the term reducing agent in terms of oxidation number change. (b) Write balanced ionic half-equations (no state symbols) for: (i) chlorate(I) ions, ClO^−^, in acidic solution being reduced to chlorine molecules and water; (ii) chloride ions being oxidized to chlorine molecules. (c) Combine the two equations in (b) to show the effect of adding an acid to a mixture of chlorate(I) ions and chloride ions.",
-        steps: [
-          "(a) A reducing agent reduces another substance by giving it electrons — the oxidation number of the element in it increases.",
-          "(b)(i) Cl goes +1 → 0 for two Cl, and the H and O leave as water:  2ClO^−^ + 4H^+^ + 2e^−^ → Cl~2~ + 2H~2~O.",
-          "(b)(ii) 2Cl^−^ → Cl~2~ + 2e^−^.",
-          "(c) Add the two and cancel the 2e^−^:  2ClO^−^ + 4H^+^ + 2Cl^−^ → Cl~2~ + 2H~2~O + Cl~2~  — divide through by 2:  ClO^−^ + Cl^−^ + 2H^+^ → Cl~2~ + H~2~O.",
-        ],
-        answer:
-          "(a) its oxidation number increases as it gives electrons away  ·  (b)(i) 2ClO^−^ + 4H^+^ + 2e^−^ → Cl~2~ + 2H~2~O  ·  (ii) 2Cl^−^ → Cl~2~ + 2e^−^  ·  (c) ClO^−^ + Cl^−^ + 2H^+^ → Cl~2~ + H~2~O",
-      },
     ],
   },
 ];
