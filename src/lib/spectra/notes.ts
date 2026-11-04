@@ -17,6 +17,7 @@ import { SECTIONS_T08_C } from "./content/notes-t08-c";
 import { SECTIONS_T09_A } from "./content/notes-t09-a";
 import { SECTIONS_T09_B } from "./content/notes-t09-b";
 import { SECTIONS_T10_A } from "./content/notes-t10-a";
+import { SECTIONS_T10_B } from "./content/notes-t10-b";
 import { NOTES_META } from "./notes-meta";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -185,20 +186,20 @@ export const NOTES_DOCS: NotesDoc[] = [
     unitCode: "WCH12",
     topicId: "t10",
     kicker: "Unit 2 · Topic 10 — the complete class note, spec by spec",
-    title: "Halogenoalkanes",
+    title: "Halogenoalkanes and alcohols",
     source:
-      "the complete class note (CHSE Grade 11, Unit 2 · Topic 10 · 2021, semester 2) — the halogenoalkane half of the topic; the alcohols-and-spectra half joins later.",
+      "the complete class note (CHSE Grade 11, Unit 2 · Topic 10, Parts 10B & 10C · 2021, semester 2) — the halogenoalkanes and the alcohols; the spectra half joins later.",
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 10, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every reagent, condition and equation is carried exactly as the class note writes it — the exercise drill (Exercises 1–4) stays in the book.",
+        text: "This is the actual revision note for Topic 10, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every reagent, condition and equation is carried exactly as the class note writes it — the exercise drill (Exercises 1–4 for the halogenoalkanes, Exercises 1–3 and Q1–Q2 for the alcohols) stays in the book.",
       },
       {
         k: "p",
-        text: "The class note opens with **10A, the general principles**, and points objectives 10.1–10.5 at the introductory organic chemistry notes — on the bench that is ==the Topic 4 note==, where reaction types, mechanisms, heterolytic fission and nucleophiles already live. This note picks the topic up at **10B**, the halogenoalkanes themselves: naming and isomers, the primary/secondary/tertiary classes, the two rate factors, the four reactions with their conditions, the two substitution mechanisms, and the hydrolysis race settled by bond enthalpy. The alcohols-and-spectra half of Topic 10 joins when its class note arrives.",
+        text: "The class note opens with **10A, the general principles**, and points objectives 10.1–10.5 at the introductory organic chemistry notes — on the bench that is ==the Topic 4 note==, where reaction types, mechanisms, heterolytic fission and nucleophiles already live. Part **10B** is the halogenoalkanes themselves: naming and isomers, the primary/secondary/tertiary classes, the two rate factors, the four reactions with their conditions, the two substitution mechanisms, and the hydrolysis race settled by bond enthalpy. Part **10C** puts the alcohols on the bench: the C~n~H~2n+1~OH family and its names, the three classes, the reactions — combustion, the three halogenating agents, dehydration at 170 °C — the dichromate oxidations with distill-versus-reflux deciding aldehyde or acid, and the five purification techniques with their rigs. The spectra half of Topic 10 joins when its class note arrives.",
       },
     ],
-    sections: [...SECTIONS_T10_A],
+    sections: [...SECTIONS_T10_A, ...SECTIONS_T10_B],
   },
 ];
 

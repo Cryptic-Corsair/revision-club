@@ -5834,3 +5834,529 @@ export function FigHxSn2Nh3({ accent = "#FF6B6B" }: { accent?: string }) {
     </svg>
   );
 }
+
+/* ————— 10.15 · bond angles in alcohols ————— */
+
+export function FigAlcAngles({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 620 320" className="w-full max-w-xl" role="img" aria-label="The two bond angles inside an alcohol, redrawn from the class note. At every carbon the four bond pairs repel to a position of minimum repulsion, giving a tetrahedral shape with bond angles of 109.5 degrees. At the oxygen two lone pairs repel more than bond pairs, squeezing the H-O-C bond angle down to 104.5 degrees in a bent line shape.">
+      <line x1={310} y1={40} x2={310} y2={290} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      {/* ————— the carbon: tetrahedral, 109.5° ————— */}
+      <text x={160} y={48} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">AT EVERY CARBON — TETRAHEDRAL</text>
+      <g stroke={INK} strokeWidth={2.6} strokeLinecap="round">
+        <line x1={160} y1={132} x2={160} y2={96} />
+        <line x1={140} y1={166} x2={108} y2={186} />
+        <line x1={180} y1={166} x2={212} y2={186} />
+        <line x1={176} y1={144} x2={216} y2={120} />
+      </g>
+      <circle cx={160} cy={150} r={17} fill={tint(accent, 25)} />
+      <text x={160} y={155} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+      <text x={160} y={86} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={98} y={198} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={222} y={198} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={228} y={114} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+      <path d="M 160 112 A 38 38 0 0 1 195 132" fill="none" stroke={accent} strokeWidth={2.4} />
+      <text x={196} y={106} textAnchor="start" fontSize="14" fontWeight="800" fill={accent} fontFamily="var(--font-body)">109.5°</text>
+      <text x={160} y={252} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">4 bond pairs repelling</text>
+      <text x={160} y={272} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">to a position of minimum repulsion</text>
+      {/* ————— the oxygen: bent, 104.5° ————— */}
+      <text x={462} y={48} textAnchor="middle" fontSize="12.5" fontWeight="800" letterSpacing="1.5" fill={SOFT} fontFamily="var(--font-body)">AT THE OXYGEN — BENT</text>
+      <g stroke={INK} strokeWidth={2.6} strokeLinecap="round">
+        <line x1={400} y1={180} x2={443} y2={180} />
+        <line x1={483} y1={183} x2={520} y2={208} />
+      </g>
+      <circle cx={462} cy={180} r={17} fill={tint(accent, 25)} />
+      <text x={462} y={185} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">O</text>
+      <text x={388} y={185} textAnchor="end" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+      <text x={528} y={222} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      {/* the two lone pairs */}
+      <ellipse cx={442} cy={148} rx={9} ry={13} fill="none" stroke={INK} strokeWidth={2} transform="rotate(24 442 148)" />
+      <ellipse cx={482} cy={146} rx={9} ry={13} fill="none" stroke={INK} strokeWidth={2} transform="rotate(-24 482 146)" />
+      <circle cx={442} cy={141} r={2.2} fill={INK} />
+      <circle cx={482} cy={141} r={2.2} fill={INK} />
+      <text x={462} y={118} textAnchor="middle" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">2 lone pairs</text>
+      <path d="M 430 180 A 36 36 0 0 0 492 200" fill="none" stroke={accent} strokeWidth={2.4} />
+      <text x={466} y={230} textAnchor="middle" fontSize="14" fontWeight="800" fill={accent} fontFamily="var(--font-body)">104.5°</text>
+      <text x={462} y={252} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">2 bond pairs + 2 lone pairs —</text>
+      <text x={462} y={272} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">lone pairs repel more, so the angle is reduced</text>
+    </svg>
+  );
+}
+
+/* ————— 10.16 · the four classes ————— */
+
+export function FigAlcClasses({ accent = "#FF6B6B" }: { accent?: string }) {
+  /* a small displayed alcohol: centre atom plus four neighbours */
+  const unit = (
+    cx: number,
+    cy: number,
+    centre: string,
+    top: string,
+    left: string,
+    right: string,
+    bottom: string,
+  ) => (
+    <g>
+      <g stroke={INK} strokeWidth={2.4} strokeLinecap="round">
+        <line x1={cx} y1={cy - 16} x2={cx} y2={cy - 40} />
+        <line x1={cx} y1={cy + 16} x2={cx} y2={cy + 40} />
+        <line x1={cx - 16} y1={cy} x2={cx - 42} y2={cy} />
+        <line x1={cx + 16} y1={cy} x2={cx + 42} y2={cy} />
+      </g>
+      <circle cx={cx} cy={cy} r={16} fill="none" />
+      <text x={cx} y={cy + 5} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{centre}</text>
+      <text x={cx} y={cy - 46} textAnchor="middle" fontSize={top.length > 2 ? 11 : 13} fontWeight="800" fill={top === "OH" ? accent : INK} fontFamily="var(--font-body)">{top}</text>
+      <text x={cx} y={cy + 58} textAnchor="middle" fontSize={bottom.length > 2 ? 11 : 13} fontWeight="800" fill={bottom === "OH" ? accent : INK} fontFamily="var(--font-body)">{bottom}</text>
+      <text x={cx - 48} y={cy + 5} textAnchor="end" fontSize={left.length > 2 ? 11 : 13} fontWeight="800" fill={left === "OH" ? accent : INK} fontFamily="var(--font-body)">{left}</text>
+      <text x={cx + 48} y={cy + 5} textAnchor="start" fontSize={right.length > 2 ? 11 : 13} fontWeight="800" fill={right === "OH" ? accent : INK} fontFamily="var(--font-body)">{right}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 860 430" className="w-full" role="img" aria-label="The four classes of alcohol redrawn from the class note. Methyl alcohols carry no alkyl group on the carbon holding the OH. Primary alcohols carry one alkyl group, as in ethanol. Secondary alcohols carry two, as in propan-2-ol. Tertiary alcohols carry three, as in 2-methylpropan-2-ol. The hydroxyl group is picked out in colour in every structure.">
+      <line x1={215} y1={40} x2={215} y2={404} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={430} y1={40} x2={430} y2={404} stroke={FAINT} strokeDasharray="4 8" strokeWidth="2" />
+      <line x1={645} y1={40} x2={645} y2={404} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      {/* methyl */}
+      <text x={107} y={48} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">METHYL</text>
+      <text x={107} y={66} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">no alkyl group</text>
+      {unit(107, 150, "C", "H", "H", "OH", "H")}
+      {unit(107, 310, "C", "H", "H", "OH", "H")}
+      <text x={107} y={384} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">methanol</text>
+      {/* primary */}
+      <text x={322} y={48} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">PRIMARY · 1°</text>
+      <text x={322} y={66} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">one alkyl group</text>
+      {unit(322, 150, "C", "H", "R", "OH", "H")}
+      {unit(322, 310, "C", "H", "CH₃", "OH", "H")}
+      <text x={322} y={384} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">ethanol</text>
+      {/* secondary */}
+      <text x={537} y={48} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">SECONDARY · 2°</text>
+      <text x={537} y={66} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">two alkyl groups</text>
+      {unit(537, 150, "C", "OH", "R", "R", "H")}
+      {unit(537, 310, "C", "OH", "CH₃", "CH₃", "H")}
+      <text x={537} y={384} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">propan-2-ol</text>
+      {/* tertiary */}
+      <text x={752} y={48} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">TERTIARY · 3°</text>
+      <text x={752} y={66} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">three alkyl groups</text>
+      {unit(752, 150, "C", "R", "R", "OH", "R")}
+      {unit(752, 310, "C", "CH₃", "CH₃", "OH", "CH₃")}
+      <text x={752} y={384} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">2-methylpropan-2-ol</text>
+      <text x={430} y={418} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">R = an alkyl group · the –OH group is picked out in colour</text>
+    </svg>
+  );
+}
+
+/* ————— 10.16 · the solubility trio ————— */
+
+export function FigAlcSolubility({ accent = "#FF6B6B" }: { accent?: string }) {
+  const ohTail = (x: number, y: number) => (
+    <g>
+      <line x1={x} y1={y} x2={x + 26} y2={y + 16} stroke={accent} strokeWidth={3.2} strokeLinecap="round" />
+      <text x={x + 32} y={y + 24} textAnchor="start" fontSize="14.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">OH</text>
+    </g>
+  );
+  const bracket = (x1: number, x2: number) => (
+    <g stroke={SOFT} strokeWidth={2} fill="none">
+      <path d={`M ${x1} 96 L ${x1} 86 L ${x2} 86 L ${x2} 96`} />
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 860 300" className="w-full" role="img" aria-label="The solubility trio redrawn from the class note: methanol is very soluble in water, butanol slightly soluble, and octanol very insoluble. Each molecule is drawn as a carbon chain with an OH group at the end; the hydrocarbon part of butanol and octanol is bracketed and labelled non-polar. The growing non-polar tail strengthens the London forces between chains and wins over the hydrogen bonding to water.">
+      {/* methanol */}
+      <line x1={110} y1={150} x2={148} y2={172} stroke={INK} strokeWidth={3} strokeLinecap="round" />
+      <text x={100} y={158} textAnchor="end" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H₃C</text>
+      {ohTail(148, 172)}
+      <text x={130} y={236} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">methanol</text>
+      <text x={130} y={258} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={accent} fontFamily="var(--font-body)">very soluble in water</text>
+      <line x1={295} y1={40} x2={295} y2={272} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={545} y1={40} x2={545} y2={272} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      {/* butanol */}
+      {hxSkel([[330, 172], [368, 150], [406, 172], [444, 150]], INK, 3)}
+      {bracket(322, 444)}
+      <text x={383} y={74} textAnchor="middle" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">non-polar</text>
+      {ohTail(444, 150)}
+      <text x={415} y={236} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">butanol</text>
+      <text x={415} y={258} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={accent} fontFamily="var(--font-body)">slightly soluble in water</text>
+      {/* octanol */}
+      {hxSkel([[570, 172], [600, 150], [630, 172], [660, 150], [690, 172], [720, 150], [750, 172], [780, 150]], INK, 3)}
+      {bracket(562, 780)}
+      <text x={671} y={74} textAnchor="middle" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">non-polar</text>
+      {ohTail(780, 150)}
+      <text x={700} y={236} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">octanol</text>
+      <text x={700} y={258} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={accent} fontFamily="var(--font-body)">very insoluble in water</text>
+    </svg>
+  );
+}
+
+/* ————— 10.17 · dehydration, with the butan-2-ol fork ————— */
+
+export function FigAlcDehydration({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 860 448" className="w-full" role="img" aria-label="Dehydration of ethanol redrawn from the class note's displayed equation. Ethanol, drawn with all bonds, loses an H and an OH and forms water, while the two carbons join in a carbon-carbon double bond to give ethene. The conditions are excess concentrated sulfuric acid or concentrated phosphoric acid at 170 degrees Celsius under reflux. Below, the note's warning case: unsymmetrical butan-2-ol can lose a hydrogen from either neighbouring carbon, so a mixture of but-1-ene and but-2-ene forms.">
+      {/* ————— ethanol displayed ————— */}
+      <g stroke={INK} strokeWidth={2.4} strokeLinecap="round">
+        <line x1={140} y1={120} x2={140} y2={94} />
+        <line x1={140} y1={154} x2={140} y2={180} />
+        <line x1={118} y1={137} x2={92} y2={137} />
+        <line x1={162} y1={137} x2={228} y2={137} />
+        <line x1={250} y1={120} x2={250} y2={94} />
+        <line x1={250} y1={154} x2={250} y2={180} />
+        <line x1={272} y1={137} x2={316} y2={137} />
+      </g>
+      <circle cx={140} cy={137} r={16} fill={tint(accent, 25)} />
+      <circle cx={250} cy={137} r={16} fill={tint(accent, 25)} />
+      <text x={140} y={142} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+      <text x={250} y={142} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C</text>
+      <text x={140} y={86} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={140} y={196} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={82} y={142} textAnchor="end" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={250} y={86} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={250} y={196} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={322} y={142} textAnchor="start" fontSize="14.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">OH</text>
+      <text x={230} y={230} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">ethanol</text>
+      {/* the arrow with its conditions */}
+      {t3Arrow(390, 137, 470, 137, accent, 3.4)}
+      <text x={430} y={106} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">excess conc. H₂SO₄ or conc. H₃PO₄</text>
+      <text x={430} y={124} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">170 °C · reflux</text>
+      <text x={430} y={164} textAnchor="middle" fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">elimination / dehydration</text>
+      {/* ————— ethene + water ————— */}
+      <line x1={548} y1={137} x2={628} y2={137} stroke={INK} strokeWidth={2.4} />
+      <line x1={548} y1={130} x2={628} y2={130} stroke={INK} strokeWidth={2.4} />
+      <g stroke={INK} strokeWidth={2.4} strokeLinecap="round">
+        <line x1={548} y1={130} x2={548} y2={98} />
+        <line x1={548} y1={137} x2={548} y2={170} />
+        <line x1={628} y1={130} x2={628} y2={98} />
+        <line x1={628} y1={137} x2={628} y2={170} />
+      </g>
+      <text x={548} y={90} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={548} y={186} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={628} y={90} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={628} y={186} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+      <text x={588} y={230} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">ethene</text>
+      <text x={690} y={144} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">+</text>
+      <text x={748} y={144} textAnchor="middle" fontSize="15" fontWeight="800" fill={accent} fontFamily="var(--font-body)">H₂O</text>
+      {/* ————— the butan-2-ol fork ————— */}
+      <line x1={100} y1={300} x2={100} y2={396} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      {hxSkel([[130, 348], [170, 326], [210, 348], [250, 326]], INK, 3)}
+      <line x1={170} y1={326} x2={170} y2={296} stroke={accent} strokeWidth={3.2} strokeLinecap="round" />
+      <text x={170} y={286} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">OH</text>
+      <text x={190} y={396} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">butan-2-ol — drop either neighbour's H</text>
+      {t3Arrow(268, 336, 356, 316, accent, 2.8)}
+      {t3Arrow(268, 356, 356, 382, accent, 2.8)}
+      {/* but-1-ene — the double bond sits on the first segment */}
+      {hxSkel([[380, 310], [420, 288], [460, 310], [500, 288]], INK, 3)}
+      <line x1={380} y1={303} x2={420} y2={281} stroke={INK} strokeWidth={2.2} />
+      <text x={440} y={352} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">but-1-ene</text>
+      {/* but-2-ene */}
+      {hxSkel([[380, 396], [420, 374], [460, 396], [500, 374]], INK, 3)}
+      <line x1={420} y1={374} x2={460} y2={396} stroke={INK} strokeWidth={2.2} transform="translate(0 -7)" />
+      <text x={440} y={432} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">but-2-ene</text>
+      <text x={640} y={376} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">a mixture of isomeric products —</text>
+      <text x={640} y={396} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">unsymmetrical alcohols, more than three C atoms</text>
+    </svg>
+  );
+}
+
+/* ————— 10.18 · the oxidation map ————— */
+
+export function FigAlcOxFlow({ accent = "#FF6B6B" }: { accent?: string }) {
+  const box = (x: number, y: number, w: number, label: string, hot = false) => (
+    <g>
+      <rect x={x} y={y} width={w} height={46} rx={14} fill={hot ? tint(accent, 22) : PAPER} stroke={INK} strokeWidth={2.4} />
+      <text x={x + w / 2} y={y + 29} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{label}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 860 420" className="w-full" role="img" aria-label="The oxidation map redrawn from the class note. Primary alcohols oxidise to an aldehyde with heat and distil, and the aldehyde oxidises further to a carboxylic acid with heat under reflux; a second heat under reflux arrow runs straight from the primary alcohol to the carboxylic acid. Secondary alcohols oxidise to ketones, and ketones cannot be oxidized. Tertiary alcohols plus the oxidising agent give no reaction.">
+      {/* ————— primary band ————— */}
+      {box(40, 60, 170, "Primary alcohols")}
+      {t3Arrow(216, 83, 330, 83, accent, 3)}
+      <text x={272} y={64} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">heat and distil</text>
+      {box(336, 60, 140, "Aldehyde", true)}
+      {t3Arrow(482, 83, 596, 83, accent, 3)}
+      <text x={540} y={64} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">heat under reflux</text>
+      {box(602, 60, 200, "Carboxylic acid", true)}
+      {/* the long reflux arrow underneath */}
+      <path d="M 125 106 L 125 168 L 700 168 L 700 112" fill="none" stroke={accent} strokeWidth={3} strokeLinecap="round" />
+      <polygon points="700,106 693,122 707,122" fill={accent} />
+      <text x={412} y={158} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">heat under reflux — the aldehyde condenses back and gets oxidised to the acid</text>
+      <line x1={40} y1={216} x2={820} y2={216} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      {/* ————— secondary band ————— */}
+      {box(40, 252, 190, "Secondary alcohols")}
+      {t3Arrow(236, 275, 350, 275, accent, 3)}
+      {box(356, 252, 130, "Ketones", true)}
+      {t3Arrow(492, 275, 606, 275, INK, 3)}
+      <text x={622} y={281} textAnchor="start" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">cannot be oxidized</text>
+      {/* ————— tertiary band ————— */}
+      {box(40, 344, 170, "Tertiary alcohols")}
+      {t3Arrow(216, 367, 330, 367, INK, 3)}
+      <text x={272} y={350} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">+ [O]</text>
+      <text x={420} y={373} textAnchor="start" fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">No reaction</text>
+    </svg>
+  );
+}
+
+/* ————— 10.19 · distillation rig ————— */
+
+export function FigAlcDistillation({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 520 660" className="w-full max-w-sm" role="img" aria-label="The distillation rig redrawn from the class note. A round-bottomed flask holding the mixture and anti-bumping granules sits over heat. Vapour rises through the still head, where the thermometer bulb sits at the T junction joining the condenser, and passes into the sloping Liebig condenser. Cooling water enters at the bottom of the jacket and leaves at the top, going against gravity, so the vapour condenses and the distillate drips into the receiver.">
+      {/* thermometer */}
+      <rect x={148} y={168} width={5} height={196} fill={PAPER} stroke={INK} strokeWidth={2} />
+      <circle cx={150.5} cy={370} r={7} fill={accent} stroke={INK} strokeWidth={2} />
+      <text x={216} y={184} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">thermometer</text>
+      <line x1={212} y1={180} x2={156} y2={182} stroke={FAINT} strokeWidth={1.6} />
+      {/* still head + side arm */}
+      <rect x={136} y={352} width={29} height={44} fill={PAPER} stroke={INK} strokeWidth={2.6} />
+      <line x1={158} y1={366} x2={232} y2={394} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      {/* the Liebig condenser — tilted */}
+      <g transform="translate(232 390) rotate(22)">
+        <rect x={0} y={-16} width={190} height={32} rx={10} fill={tint("#4DABF7", 14)} stroke={INK} strokeWidth={2.8} />
+        <rect x={0} y={-7} width={190} height={14} fill={PAPER} stroke={INK} strokeWidth={2.4} />
+      </g>
+      {/* water in low, out high — against gravity */}
+      {t3Arrow(428, 508, 398, 476, "#4DABF7", 2.6)}
+      <text x={432} y={522} textAnchor="start" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Water in</text>
+      {t3Arrow(212, 344, 240, 372, "#4DABF7", 2.6)}
+      <text x={208} y={336} textAnchor="end" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Water out</text>
+      <text x={330} y={410} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)" transform="rotate(22 330 410)">Liebig condenser</text>
+      {/* distillate + receiver */}
+      <circle cx={420} cy={492} r={2.6} fill={INK} />
+      <circle cx={426} cy={508} r={2.6} fill={INK} />
+      <circle cx={430} cy={524} r={2.6} fill={INK} />
+      <path d="M 402 540 L 458 540 L 444 584 L 416 584 Z" fill={PAPER} stroke={INK} strokeWidth={2.6} strokeLinejoin="round" />
+      <path d="M 409 560 L 451 560 L 444 584 L 416 584 Z" fill={tint(accent, 30)} />
+      <text x={472} y={556} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">distillate</text>
+      {/* round-bottomed flask */}
+      <circle cx={150} cy={472} r={56} fill={PAPER} stroke={INK} strokeWidth={3} />
+      <path d="M 97 490 A 56 56 0 0 0 203 490 Z" fill={tint("#F59F00", 30)} />
+      <circle cx={134} cy={502} r={3} fill={INK} />
+      <circle cx={150} cy={508} r={3} fill={INK} />
+      <circle cx={166} cy={502} r={3} fill={INK} />
+      <text x={252} y={466} textAnchor="start" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">round bottomed</text>
+      <text x={252} y={482} textAnchor="start" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">flask</text>
+      <line x1={248} y1={470} x2={204} y2={470} stroke={FAINT} strokeWidth={1.6} />
+      <text x={58} y={516} textAnchor="start" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">anti-bumping</text>
+      <text x={58} y={532} textAnchor="start" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">granules</text>
+      <line x1={100} y1={508} x2={126} y2={500} stroke={FAINT} strokeWidth={1.6} />
+      {/* heat */}
+      {t3Arrow(150, 620, 150, 560, INK, 2.8)}
+      <text x={150} y={644} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">HEAT</text>
+      <text x={360} y={644} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Distillation</text>
+    </svg>
+  );
+}
+
+/* ————— 10.19 · reflux rig ————— */
+
+export function FigAlcReflux({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 460 660" className="w-full max-w-sm" role="img" aria-label="The reflux rig redrawn from the class note. A pear-shaped flask holding the mixture and anti-bumping granules is heated from below. Above it a vertical Liebig condenser is open at the top, with cooling water entering at the bottom and leaving at the top. Vapour rises into the cold jacket, condenses and drips back into the flask, so nothing escapes while the mixture is heated for long periods.">
+      {/* open top */}
+      <text x={296} y={56} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">open top</text>
+      <line x1={292} y1={52} x2={258} y2={56} stroke={FAINT} strokeWidth={1.6} />
+      {/* condenser */}
+      <rect x={206} y={48} width={48} height={300} rx={12} fill={tint("#4DABF7", 14)} stroke={INK} strokeWidth={2.8} />
+      <rect x={222} y={48} width={16} height={300} rx={8} fill={PAPER} stroke={INK} strokeWidth={2.4} />
+      {t3Arrow(206, 96, 158, 82, "#4DABF7", 2.6)}
+      <text x={152} y={78} textAnchor="end" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Water out</text>
+      {t3Arrow(318, 292, 258, 306, "#4DABF7", 2.6)}
+      <text x={324} y={298} textAnchor="start" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Water in</text>
+      {/* vapour rising */}
+      <line x1={230} y1={340} x2={230} y2={80} stroke={accent} strokeWidth={2.6} strokeDasharray="7 7" strokeLinecap="round" />
+      <polygon points="230,64 223,80 237,80" fill={accent} />
+      <text x={268} y={170} textAnchor="start" fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">vapour rises</text>
+      <text x={150} y={200} textAnchor="end" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">Liebig</text>
+      <text x={150} y={216} textAnchor="end" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">condenser</text>
+      <line x1={156} y1={204} x2={204} y2={200} stroke={FAINT} strokeWidth={1.6} />
+      {/* neck + condensate dripping back */}
+      <rect x={216} y={348} width={28} height={44} fill={PAPER} stroke={INK} strokeWidth={2.4} />
+      <circle cx={222} cy={362} r={2.4} fill={INK} />
+      <circle cx={238} cy={370} r={2.4} fill={INK} />
+      <circle cx={229} cy={380} r={2.4} fill={INK} />
+      {/* pear-shaped flask */}
+      <path
+        d="M 217 392 C 217 420 186 432 186 478 A 44 44 0 0 0 274 478 C 274 432 243 420 243 392 Z"
+        fill={PAPER}
+        stroke={INK}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+      <path d="M 189 494 A 44 44 0 0 0 271 494 Z" fill={tint("#F59F00", 30)} />
+      <circle cx={216} cy={502} r={3} fill={INK} />
+      <circle cx={232} cy={508} r={3} fill={INK} />
+      <circle cx={245} cy={501} r={3} fill={INK} />
+      <text x={296} y={452} textAnchor="start" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">pear-shaped</text>
+      <text x={296} y={468} textAnchor="start" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">flask</text>
+      <line x1={292} y1={456} x2={266} y2={456} stroke={FAINT} strokeWidth={1.6} />
+      <text x={296} y={514} textAnchor="start" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">anti-bumping</text>
+      <text x={296} y={530} textAnchor="start" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">granules</text>
+      <line x1={292} y1={516} x2={252} y2={508} stroke={FAINT} strokeWidth={1.6} />
+      {/* heat */}
+      {t3Arrow(230, 610, 230, 548, INK, 2.8)}
+      <text x={230} y={634} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">HEAT</text>
+      <text x={348} y={634} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Heat under reflux</text>
+    </svg>
+  );
+}
+
+/* ————— 10.19 · fractional distillation ————— */
+
+export function FigAlcFractional({ accent = "#FF6B6B" }: { accent?: string }) {
+  const beads: number[] = [];
+  for (let row = 0; row < 9; row++) {
+    for (let col = 0; col < 3; col++) {
+      beads.push(0);
+    }
+  }
+  return (
+    <svg viewBox="0 0 480 660" className="w-full max-w-sm" role="img" aria-label="Fractional distillation redrawn from the class note. A round-bottomed flask is heated, and its vapour enters a tall fractionating column packed with glass beads. The vapour condenses and revaporises many times on its way up, so only the lowest-boiling fraction reaches the top, passes the thermometer and turns to liquid in the sloping condenser, where water enters at the bottom and leaves at the top. The distillate collects in the receiver.">
+      {/* thermometer at the column head */}
+      <rect x={158} y={190} width={5} height={112} fill={PAPER} stroke={INK} strokeWidth={2} />
+      <circle cx={160.5} cy={306} r={6} fill={accent} stroke={INK} strokeWidth={2} />
+      <text x={216} y={206} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">thermometer</text>
+      <line x1={212} y1={202} x2={166} y2={204} stroke={FAINT} strokeWidth={1.6} />
+      {/* fractionating column packed with beads */}
+      <rect x={145} y={310} width={30} height={210} rx={7} fill={PAPER} stroke={INK} strokeWidth={2.8} />
+      {beads.map((_, i) => {
+        const col = i % 3;
+        const row = Math.floor(i / 3);
+        return (
+          <circle
+            key={i}
+            cx={152 + col * 8}
+            cy={322 + row * 22}
+            r={4.4}
+            fill={tint(accent, 45)}
+            stroke={FAINT}
+            strokeWidth={1}
+          />
+        );
+      })}
+      <text x={98} y={404} textAnchor="end" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">fractionating</text>
+      <text x={98} y={420} textAnchor="end" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">column</text>
+      <line x1={102} y1={410} x2={143} y2={410} stroke={FAINT} strokeWidth={1.6} />
+      <text x={98} y={470} textAnchor="end" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">glass beads</text>
+      <line x1={102} y1={466} x2={146} y2={466} stroke={FAINT} strokeWidth={1.6} />
+      {/* side arm + condenser */}
+      <line x1={175} y1={322} x2={238} y2={344} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <g transform="translate(238 340) rotate(18)">
+        <rect x={0} y={-16} width={180} height={32} rx={10} fill={tint("#4DABF7", 14)} stroke={INK} strokeWidth={2.8} />
+        <rect x={0} y={-7} width={180} height={14} fill={PAPER} stroke={INK} strokeWidth={2.4} />
+      </g>
+      {t3Arrow(412, 440, 386, 410, "#4DABF7", 2.6)}
+      <text x={416} y={456} textAnchor="start" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Water in</text>
+      {t3Arrow(222, 296, 248, 322, "#4DABF7", 2.6)}
+      <text x={218} y={288} textAnchor="end" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Water out</text>
+      {/* receiver */}
+      <circle cx={412} cy={452} r={2.4} fill={INK} />
+      <circle cx={416} cy={468} r={2.4} fill={INK} />
+      <circle cx={419} cy={484} r={2.4} fill={INK} />
+      <circle cx={421} cy={500} r={2.4} fill={INK} />
+      <path d="M 396 524 L 444 524 L 432 562 L 408 562 Z" fill={PAPER} stroke={INK} strokeWidth={2.6} strokeLinejoin="round" />
+      <text x={452} y={548} textAnchor="start" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">distillate</text>
+      {/* flask + heat */}
+      <circle cx={160} cy={560} r={46} fill={PAPER} stroke={INK} strokeWidth={3} />
+      <path d="M 116 576 A 46 46 0 0 0 204 576 Z" fill={tint("#F59F00", 30)} />
+      <circle cx={146} cy={586} r={2.8} fill={INK} />
+      <circle cx={160} cy={592} r={2.8} fill={INK} />
+      <circle cx={174} cy={586} r={2.8} fill={INK} />
+      {t3Arrow(160, 646, 160, 618, INK, 2.8)}
+      <text x={160} y={656} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Heat</text>
+    </svg>
+  );
+}
+
+/* ————— 10.19 · the separating funnel ————— */
+
+export function FigAlcFunnel({ accent = "#FF6B6B" }: { accent?: string }) {
+  const body =
+    "M 262 88 C 218 108 202 158 202 196 C 202 242 240 260 280 260 C 320 260 358 242 358 196 C 358 158 342 108 298 88 Z";
+  return (
+    <svg viewBox="0 0 620 540" className="w-full max-w-lg" role="img" aria-label="The separating funnel redrawn from the class note, on its stand. The funnel holds two immiscible layers, oil floating on water, with a stop-cock in the stem below. The stopper is in the neck, the tap is opened, and the lower water layer drains into a conical flask. Denser solvent will be the bottom layer.">
+      <defs>
+        <clipPath id="alc-funnel-clip">
+          <path d={body} />
+        </clipPath>
+      </defs>
+      {/* stand */}
+      <rect x={78} y={56} width={10} height={436} fill={tint(accent, 60)} stroke={INK} strokeWidth={2} />
+      <rect x={36} y={490} width={180} height={14} rx={4} fill={tint(accent, 60)} stroke={INK} strokeWidth={2} />
+      <rect x={88} y={150} width={110} height={9} rx={3} fill={tint(accent, 60)} stroke={INK} strokeWidth={1.8} />
+      <text x={116} y={472} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">stand</text>
+      {/* funnel neck + stopper */}
+      <rect x={264} y={58} width={32} height={30} fill={PAPER} stroke={INK} strokeWidth={2.6} />
+      <rect x={258} y={40} width={44} height={16} rx={5} fill={PAPER} stroke={INK} strokeWidth={2.4} />
+      {/* funnel body with the two layers */}
+      <g clipPath="url(#alc-funnel-clip)">
+        <rect x={180} y={60} width={200} height={210} fill={PAPER} />
+        <rect x={180} y={60} width={200} height={72} fill={tint("#F59F00", 34)} />
+        <rect x={180} y={132} width={200} height={135} fill={tint("#4DABF7", 22)} />
+        <line x1={180} y1={132} x2={380} y2={132} stroke={INK} strokeWidth={1.6} />
+      </g>
+      <path d={body} fill="none" stroke={INK} strokeWidth={2.8} />
+      {/* cone down to the stop-cock */}
+      <path d="M 262 256 L 298 256 L 289 302 L 271 302 Z" fill={PAPER} stroke={INK} strokeWidth={2.6} strokeLinejoin="round" />
+      <rect x={266} y={302} width={28} height={15} rx={4} fill={PAPER} stroke={INK} strokeWidth={2.4} />
+      <line x1={280} y1={296} x2={280} y2={324} stroke={INK} strokeWidth={2.4} />
+      <circle cx={280} cy={310} r={5} fill={tint(accent, 25)} stroke={INK} strokeWidth={1.6} />
+      <rect x={277} y={317} width={6} height={28} fill={PAPER} stroke={INK} strokeWidth={2.2} />
+      {/* drops + conical flask */}
+      <circle cx={280} cy={366} r={2.6} fill={INK} />
+      <circle cx={280} cy={382} r={2.6} fill={INK} />
+      <circle cx={280} cy={398} r={2.6} fill={INK} />
+      <path d="M 262 428 L 298 428 L 336 502 L 224 502 Z" fill={PAPER} stroke={INK} strokeWidth={2.6} strokeLinejoin="round" />
+      <path d="M 249 478 L 347 478 L 336 502 L 224 502 Z" fill={tint("#4DABF7", 22)} />
+      {/* labels */}
+      <text x={452} y={112} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">oil</text>
+      <line x1={448} y1={108} x2={340} y2={116} stroke={FAINT} strokeWidth={1.6} />
+      <text x={452} y={176} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">water</text>
+      <line x1={448} y1={172} x2={352} y2={176} stroke={FAINT} strokeWidth={1.6} />
+      <text x={452} y={244} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">separating funnel</text>
+      <line x1={448} y1={240} x2={352} y2={240} stroke={FAINT} strokeWidth={1.6} />
+      <text x={452} y={496} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">conical flask</text>
+      <line x1={448} y1={492} x2={330} y2={492} stroke={FAINT} strokeWidth={1.6} />
+      <text x={452} y={152} textAnchor="start" fontSize="10.5" fontWeight="700" fill={accent} fontFamily="var(--font-body)">the less dense layer</text>
+      <text x={452} y={214} textAnchor="start" fontSize="10.5" fontWeight="700" fill={accent} fontFamily="var(--font-body)">the denser layer — bottom</text>
+    </svg>
+  );
+}
+
+/* ————— 10.19 · boiling point determination ————— */
+
+export function FigAlcBp({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 560 620" className="w-full max-w-sm" role="img" aria-label="Boiling point determination redrawn from the class note. A small glass tubing holding the liquid sample and a capillary tube stands in a beaker of oil, heated below. The thermometer sits with its bulb above the level of the liquid surface, measuring the temperature of the saturated vapour. When the boiling point is found the value is compared with the data booklet values.">
+      {/* stand */}
+      <rect x={96} y={116} width={10} height={420} fill={tint(accent, 60)} stroke={INK} strokeWidth={2} />
+      <rect x={54} y={534} width={190} height={14} rx={4} fill={tint(accent, 60)} stroke={INK} strokeWidth={2} />
+      <rect x={106} y={236} width={124} height={9} rx={3} fill={tint(accent, 60)} stroke={INK} strokeWidth={1.8} />
+      {/* thermometer */}
+      <rect x={236} y={168} width={6} height={210} fill={PAPER} stroke={INK} strokeWidth={2} />
+      <circle cx={239} cy={384} r={7} fill={accent} stroke={INK} strokeWidth={2} />
+      <text x={150} y={182} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">THERMOMETER</text>
+      <line x1={168} y1={196} x2={234} y2={216} stroke={FAINT} strokeWidth={1.6} />
+      {/* the oil bath beaker */}
+      <rect x={196} y={392} width={220} height={142} rx={10} fill="none" stroke={INK} strokeWidth={3} />
+      <rect x={204} y={412} width={204} height={114} rx={7} fill={tint("#F59F00", 32)} />
+      {/* glass tubing with sample + capillary */}
+      <rect x={262} y={332} width={54} height={168} rx={15} fill={PAPER} stroke={INK} strokeWidth={2.8} />
+      <rect x={269} y={442} width={40} height={50} rx={12} fill={tint(accent, 22)} />
+      <rect x={286} y={300} width={7} height={190} rx={3.5} fill={PAPER} stroke={INK} strokeWidth={2} />
+      <circle cx={289.5} cy={486} r={2.4} fill={INK} />
+      <circle cx={289.5} cy={474} r={2.4} fill={INK} />
+      <circle cx={289.5} cy={462} r={2.4} fill={INK} />
+      {/* labels */}
+      <text x={408} y={330} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">GLASS</text>
+      <text x={408} y={346} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">TUBING</text>
+      <line x1={404} y1={336} x2={318} y2={356} stroke={FAINT} strokeWidth={1.6} />
+      <text x={408} y={432} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">CAPILLARY</text>
+      <text x={408} y={448} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">TUBE</text>
+      <line x1={404} y1={436} x2={296} y2={440} stroke={FAINT} strokeWidth={1.6} />
+      <text x={130} y={470} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">oil bath</text>
+      <line x1={148} y1={466} x2={198} y2={462} stroke={FAINT} strokeWidth={1.6} />
+      {/* heat */}
+      {t3Arrow(306, 600, 306, 556, INK, 2.8)}
+      <text x={306} y={616} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">HEAT</text>
+    </svg>
+  );
+}

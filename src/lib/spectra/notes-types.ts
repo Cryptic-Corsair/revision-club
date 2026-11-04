@@ -111,7 +111,17 @@ export type FigureKind =
   | "hx-scheme"
   | "hx-hydrolysis"
   | "hx-sn2-oh"
-  | "hx-sn2-nh3";
+  | "hx-sn2-nh3"
+  | "alc-angles"
+  | "alc-classes"
+  | "alc-solubility"
+  | "alc-dehydration"
+  | "alc-ox-flow"
+  | "alc-distillation"
+  | "alc-reflux"
+  | "alc-fractional"
+  | "alc-funnel"
+  | "alc-bp";
 
 export type NotesBlock =
   | { k: "p"; text: string }

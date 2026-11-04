@@ -121,6 +121,16 @@ import {
   FigHxHydrolysis,
   FigHxSn2Oh,
   FigHxSn2Nh3,
+  FigAlcAngles,
+  FigAlcClasses,
+  FigAlcSolubility,
+  FigAlcDehydration,
+  FigAlcOxFlow,
+  FigAlcDistillation,
+  FigAlcReflux,
+  FigAlcFractional,
+  FigAlcFunnel,
+  FigAlcBp,
 } from "./notes-figures";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -770,6 +780,10 @@ const WIDE_FIGS = new Set([
   "hx-hydrolysis",
   "hx-sn2-oh",
   "hx-sn2-nh3",
+  "alc-classes",
+  "alc-solubility",
+  "alc-dehydration",
+  "alc-ox-flow",
 ]);
 
 function Figure({
@@ -1088,6 +1102,36 @@ function Figure({
       break;
     case "hx-sn2-nh3":
       node = <FigHxSn2Nh3 accent={accent} />;
+      break;
+    case "alc-angles":
+      node = <FigAlcAngles accent={accent} />;
+      break;
+    case "alc-classes":
+      node = <FigAlcClasses accent={accent} />;
+      break;
+    case "alc-solubility":
+      node = <FigAlcSolubility accent={accent} />;
+      break;
+    case "alc-dehydration":
+      node = <FigAlcDehydration accent={accent} />;
+      break;
+    case "alc-ox-flow":
+      node = <FigAlcOxFlow accent={accent} />;
+      break;
+    case "alc-distillation":
+      node = <FigAlcDistillation accent={accent} />;
+      break;
+    case "alc-reflux":
+      node = <FigAlcReflux accent={accent} />;
+      break;
+    case "alc-fractional":
+      node = <FigAlcFractional accent={accent} />;
+      break;
+    case "alc-funnel":
+      node = <FigAlcFunnel accent={accent} />;
+      break;
+    case "alc-bp":
+      node = <FigAlcBp accent={accent} />;
       break;
   }
   if (!node) return null;
