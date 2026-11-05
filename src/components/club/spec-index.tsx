@@ -6,7 +6,7 @@ import { ArrowLeft, Check, ClipboardList, Search, Target } from "./icons";
 import { SPEC_POINTS, SPEC_STATS, SPEC_TOPIC_GROUPS } from "@/lib/spectra/registry";
 import { usePacks, togglePick } from "@/lib/spectra/packs";
 import { Fmt } from "./format";
-import { PopIn, Reveal, SoftButton, tint, readableInk, shade, Squiggle } from "./bits";
+import { PopIn, Reveal, SoftButton, chipWash, honeyWash, tint, readableInk, shade, Squiggle } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · spec index — every assessment statement the
@@ -116,7 +116,7 @@ export function SpecIndex({
       <Reveal delay={0.16} className="mt-6">
         <div
           className="flex flex-col gap-3.5 rounded-[26px] px-5 py-4 puff sm:flex-row sm:items-center"
-          style={{ background: tint("#FFD43B", 16) }}
+          style={{ background: honeyWash("#FFD43B", 16) }}
         >
           <div className="flex min-w-0 items-center gap-3">
             <span
@@ -290,7 +290,7 @@ function TopicGroup({
           </h2>
           <span
             className="rounded-full px-2.5 py-1 font-display text-[10.5px] font-bold tracking-[0.08em] uppercase"
-            style={{ background: tint(g.candy, 16), color: g.candy }}
+            style={{ background: chipWash(g.candy, 16), color: g.candy }}
           >
             {g.unitCode}
           </span>
@@ -383,7 +383,7 @@ function PointRow({
             <span className="flex flex-wrap items-center gap-1.5">
               <span
                 className="rounded-full px-2 py-0.5 font-display text-[10.5px] font-bold tracking-[0.06em]"
-                style={{ background: tint(p.candy, 20), color: p.candy }}
+                style={{ background: chipWash(p.candy, 20), color: p.candy }}
               >
                 {p.spec}
               </span>

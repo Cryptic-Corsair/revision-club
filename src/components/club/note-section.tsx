@@ -16,7 +16,7 @@ import {
 } from "./icons";
 import type { NotesBlock, SpecSection } from "@/lib/spectra/notes-types";
 import { Fmt } from "./format";
-import { liftWash, Reveal, ScrollFade, readableInk, shade, sunkWash, tint } from "./bits";
+import { honeyWash, liftWash, Reveal, ScrollFade, readableInk, shade, sunkWash, tint } from "./bits";
 import { inkMix } from "./bands";
 import {
   FigAtom,
@@ -283,7 +283,7 @@ function BlockView({
       return (
         <div
           className="max-w-[72ch] rounded-[20px] px-4 py-3.5"
-          style={{ background: liftWash("#FFD43B", 18) }}
+          style={{ background: honeyWash("#FFD43B", 18) }}
         >
           <div className="flex items-start gap-3">
             <StickyNote
@@ -365,7 +365,7 @@ function BlockView({
         <div className="flex items-center gap-3 rounded-full bg-paper px-5 py-4 puff">
           <span
             className="grid h-10 w-10 shrink-0 place-items-center rounded-full"
-            style={{ background: liftWash("#12B886", 18) }}
+            style={{ background: sunkWash("#12B886", 18) }}
           >
             <BookOpen className="h-5 w-5 text-mint" />
           </span>
@@ -525,7 +525,7 @@ function Worked({
           className="inline-flex min-w-0 max-w-full shrink-0 rotate-[-1.5deg] items-center rounded-full px-3.5 py-1.5 font-display text-[12px] leading-snug font-bold tracking-[0.1em] uppercase"
           style={{ background: accent, color: readableInk(accent) }}
         >
-          <PenLine className="mr-1.5 h-3.5 w-3.5 shrink-0" /> {title}
+          <PenLine className="mr-1.5 h-3.5 w-3.5 shrink-0" /> <Fmt text={title} />
         </span>
         <p className="min-w-[16rem] flex-1 text-[15.5px] leading-[1.7] font-bold text-ink">
           <Fmt text={question} />

@@ -144,26 +144,40 @@ html.dark {
   --note-band-b: #3a2a17;
   --home-band-a: #291d10;
   --home-band-b: #342212;
-  /* ————— content-surface grading —————
-     The deep-inspection finding: the big candy washes inherited the
-     daylight recipe verbatim (accent over --tint-base), so after dark
-     table headers sat ~0.10 L above the card at ~2.5× the chroma of
-     their daylight pastels — muddy orange/olive stripes. Here the
-     big content surfaces fold into the room instead: headers &
-     on-card insets sink just under the card (sunk), ground-level
-     panels lift as quiet whisper sheets (lift), zebra rows go
-     neutral milk, figure annotation ink eases back. Small candy
-     chips keep tint() and the daylight recipe. Measured with the
-     oklab audit (scripts/final-check.py): sunk headers −0.015..−0.033
-     L vs card, ink ≥ 11:1; lift panels +0.085 L vs ground, ink ≥ 8.4:1
-     on every roast. */
-  --sunk-share: 8%;
-  --sunk-base: var(--note-band-a);
-  --lift-share: 6%;
-  --lift-base: var(--color-paper);
-  --sticky-share: 10%;
-  --idea-share: 6%;
-  --check-share: 8%;
+  /* ————— content-surface grading v2 —————
+     After dark the candy shelf comes back as deep jewel tones instead
+     of mud. Two findings shaped the recipe. First, the v1 clamp
+     (every wash forced to one 6–8% share over a light base) flattened
+     all panels into the same whisper-brown. Second — the deeper
+     finding — mixing candy over a WARM base cancels its cool hues:
+     grape over the chestnut tint-base landed at chroma 0.018, greyer
+     than the ground itself. So the dark lab re-points both the share
+     AND the base, per family:
+     · lift  (eq / steps / worked / KEY IDEA panels on the room
+       ground) pools 16% of its candy over a deeper neutral roast
+       (#241d18) — panels sit at the card's level, wear their own
+       hue (C 0.021..0.039), and every accent lands in ±0.035 L of
+       the card across all four roasts;
+     · honey (the lemon sticky note) takes 14% over a deep neutral
+       well (#1e1713) — lemon is the most luminous candy on the
+       shelf and would otherwise float 0.04 L ABOVE the card;
+     · sunk  (table headers, step insets, the checkpoint tile) sinks
+       10% of its candy into a neutral coffee at the ground's
+       lightness (#2b2420) — headers stay value-neutral vs the card
+       (−0.026..+0.022 L) and carry the hue instead;
+     · chips hug the card they sit on (--chip-base), so their candy
+       text pops the way its daylight pastels do instead of
+       muddying over chestnut.
+     Zebra rows stay neutral milk; figure annotation ink eases back.
+     Measured with scripts/final-check.py (oklab): panel ink ≥ 10:1,
+     honey note ink 11.4:1, headers ink ≥ 10.5:1 on every accent. */
+  --sunk-share: 10%;
+  --sunk-base: #2b2420;
+  --lift-share: 16%;
+  --lift-base: #241d18;
+  --honey-share: 14%;
+  --honey-base: #1e1713;
+  --chip-base: var(--color-paper);
   --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
   --arc-ink: 70%;
   --edge: rgb(0 0 0 / 0.5);
@@ -236,13 +250,13 @@ html.classic .room {
   --tint-base: color-mix(in oklab, var(--color-milk) 20%, var(--color-cocoa));
   /* the espresso rooms wear the same content-surface grading as the
      after-dark lab — the cream rooms stay on the daylight recipe */
-  --sunk-share: 8%;
-  --sunk-base: var(--note-band-a);
-  --lift-share: 6%;
-  --lift-base: var(--color-paper);
-  --sticky-share: 10%;
-  --idea-share: 6%;
-  --check-share: 8%;
+  --sunk-share: 10%;
+  --sunk-base: #2b2420;
+  --lift-share: 16%;
+  --lift-base: #241d18;
+  --honey-share: 14%;
+  --honey-base: #1e1713;
+  --chip-base: var(--color-paper);
   --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
   --arc-ink: 70%;
 }

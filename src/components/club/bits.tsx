@@ -62,6 +62,21 @@ export const sunkWash = (main: string, pct: number) =>
 export const liftWash = (main: string, pct: number) =>
   wash(main, "--lift-share", pct, "--lift-base");
 
+/* the honey family — the lemon sticky note. Lemon is the most
+   luminous candy on the shelf, so after dark it mixes over its own
+   deeper well instead of the room ground: at the ground's level an
+   18% lemon wash floats ~0.04 L ABOVE the paper card (the note would
+   out-glow every surface around it). 14% over the well tucks it just
+   under the card. Daylight keeps the plain pastel over white. */
+export const honeyWash = (main: string, pct: number) =>
+  wash(main, "--honey-share", pct, "--honey-base");
+
+/* the chip family — small candy chips hug the card they sit on, so
+   their candy text pops the way its daylight pastels do instead of
+   muddying over the mid-tone chestnut. */
+export const chipWash = (main: string, pct: number) =>
+  wash(main, "--chip-share", pct, "--chip-base");
+
 /* ————— scroll fade —————
    Wraps a horizontally scrollable child (big tables, wide figures) and
    paints a soft fade over whichever side is hiding content — the

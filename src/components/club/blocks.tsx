@@ -22,11 +22,11 @@ import { Fmt } from "./format";
 import {
   Mascot,
   SpeechBubble,
-  tint,
   shade,
   Reveal,
   readableInk,
   ScrollFade,
+  chipWash,
   liftWash,
   sunkWash,
 } from "./bits";
@@ -68,7 +68,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
           <div className="flex items-center gap-3">
             <span
               className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl"
-              style={{ background: tint(main, 16) }}
+              style={{ background: chipWash(main, 16) }}
             >
               <BookMarked className="h-5 w-5" style={{ color: shade(main, 62) }} />
             </span>
@@ -140,7 +140,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
             <Mascot main={main} size={86} bubbles={false} />
           </div>
           <SpeechBubble
-            bg={tint("#FF922B", 12)}
+            bg={liftWash("#FF922B", 12)}
             className="min-w-0 flex-1"
             tailClass="left-[-9px] rotate-[135deg]"
           >
@@ -226,7 +226,7 @@ function WorkedExample({
       <div className="flex items-center gap-3">
         <span
           className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl"
-          style={{ background: tint(main, 16) }}
+          style={{ background: chipWash(main, 16) }}
         >
           <Footprints className="h-5 w-5" style={{ color: shade(main, 62) }} />
         </span>
