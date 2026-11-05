@@ -481,59 +481,45 @@ function Footer({
           />
         </div>
 
-        {/* ————— the melt —————
-            the room's ceiling is the page colour itself (the wrapper
-            paints bandFrom, so the handshake with the section above
-            is colour-on-colour), and three cocoa washes sink into it.
-            Each path starts at its own crest, so its gradient runs
-            crest → floor: every sheet reads as a soft dune line that
-            dissolves downward, the three stack into deepening warmth,
-            and the nearest one bottoms out at full cocoa so the body
-            below continues it without a seam. */}
+        {/* ————— the wave —————
+            the original seam curve, at its original size — same path,
+            same 54/74px band — but instead of a solid cut-out it is
+            filled with a cocoa gradient: the crest stays a defined
+            dune line while its body deepens until it lands on the
+            room at full cocoa, so the shape reads clearly and still
+            blends into the footer with no hard junction anywhere.
+            The wrapper paints bandFrom, so the sky behind the crest
+            is the page's own colour, continuing the section above. */}
         <div aria-hidden className="relative" style={{ background: bandFrom }}>
           <svg
-            viewBox="0 0 1440 200"
+            viewBox="0 0 1440 90"
             preserveAspectRatio="none"
-            className="block h-[104px] w-full sm:h-[150px]"
+            className="block h-[54px] w-full sm:h-[74px]"
           >
             <defs>
-              <linearGradient id="rc-melt-far" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.45 }} />
-                <stop offset="1" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.6 }} />
-              </linearGradient>
-              <linearGradient id="rc-melt-mid" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.5 }} />
-                <stop offset="1" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.75 }} />
-              </linearGradient>
-              <linearGradient id="rc-melt-near" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="rc-wave-blend" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.6 }} />
+                <stop offset="0.55" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.85 }} />
                 <stop offset="1" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 1 }} />
               </linearGradient>
             </defs>
             <path
-              d="M0,52 C150,78 320,16 520,34 C720,52 860,10 1040,26 C1200,40 1330,64 1440,44 L1440,200 L0,200 Z"
-              fill="url(#rc-melt-far)"
-            />
-            <path
-              d="M0,104 C170,132 340,66 520,84 C700,102 840,58 1020,76 C1190,92 1330,122 1440,96 L1440,200 L0,200 Z"
-              fill="url(#rc-melt-mid)"
-            />
-            <path
-              d="M0,138 C180,168 350,104 540,120 C730,136 870,96 1050,114 C1220,130 1340,158 1440,132 L1440,200 L0,200 Z"
-              fill="url(#rc-melt-near)"
+              d="M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z"
+              fill="url(#rc-wave-blend)"
             />
           </svg>
         </div>
 
         {/* ————— one continuous liquid-glass sheet —————
             no floating panel and no boxed sub-cards: one veil covers
-            melt and body alike, and it fades in from zero at the
-            ceiling so even the frost itself has no edge. The old
-            inset rim-light is gone — a rim is a line, and this room
+            wave and body alike, and it fades in from zero at the
+            ceiling so even the frost itself has no edge. No room-wide
+            blur — the wave's crest must stay crisp. The old inset
+            rim-light is gone too — a rim is a line, and this room
             doesn't have any. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 backdrop-blur-md backdrop-saturate-150"
+          className="pointer-events-none absolute inset-0"
           style={{
             background:
               "linear-gradient(180deg, rgb(255 255 255 / 0) 4px, rgb(255 255 255 / 0.05) 120px)",
