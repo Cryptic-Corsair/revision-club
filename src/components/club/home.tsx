@@ -188,7 +188,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               <PopIn delay={0.08}>
                 <h1 className="mt-6 font-display text-[clamp(2.75rem,6.5vw,4.5rem)] leading-[1.05] font-semibold tracking-tight text-ink">
                   Every spec point,{" "}
-                  <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-lemon/60 px-[0.18em]">
+                  <span className="hero-glow relative inline-block -rotate-2 rounded-[0.35em] px-[0.18em]">
                     made to stick.
                   </span>
                 </h1>
@@ -457,7 +457,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 </SectionTag>
                 <h2 className="mt-4 font-display text-[clamp(1.8rem,3.6vw,2.5rem)] leading-tight font-semibold text-ink">
                   Tick spec points.
-                  <span className="relative ml-2 inline-block -rotate-1 rounded-[0.3em] bg-lemon/50 px-[0.2em]">
+                  <span className="hero-glow relative ml-2 inline-block -rotate-1 rounded-[0.3em] px-[0.2em]">
                     Get one pack.
                   </span>
                 </h2>
@@ -714,7 +714,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
       </div>
 
       {/* last seam: the band drains back toward the footer — by day
-          that's the page cream; after dark it's the B roast, the same
+          that's the page cream; after dark it's the B seam ground, the
           colour the footer wave starts from */}
       <BandWave from={`var(--home-band-a, ${homeBandOf(3)})`} to={`var(--home-band-b, var(--color-cream))`} wave={0} />
 

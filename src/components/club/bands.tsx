@@ -92,8 +92,8 @@ export const accentOf = (i: number) => {
 /* bands mix their candy over --tint-base at --band-mix (10% by day)
    — the daylight walk of the hue wheel. After dark both steps are
    overridden by --note-band-a/b (see html.dark in globals.css):
-   two flat roasts at matched darkness that alternate by hue, so
-   every section keeps the deep study-ground contrast. */
+   two flat night grounds a half-step apart (plum → indigo), so
+   every section keeps the study contrast while the hue leans. */
 export const bandOf = (i: number) =>
   `color-mix(in oklab, ${accentOf(i)} var(--band-mix, 10%), var(--tint-base))`;
 export const bgOf = (i: number) =>

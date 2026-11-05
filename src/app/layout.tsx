@@ -65,8 +65,8 @@ export const metadata: Metadata = {
 
 /* Puts the saved preferences on <html> before the first paint — no
    flash of the wrong lab, font size or family. Only the dark lab
-   picks today's roast (html[data-mood]); classic is a daylight page
-   with its own section pair, so it needs no roast. beforeInteractive
+   picks tonight's mood (html[data-mood]); classic is a daylight page
+   with its own section pair, so it needs no mood. beforeInteractive
    keeps it out of React's hydration tree. The React side (prefs.ts)
    re-applies the same values once it hydrates, then owns every
    change. */
@@ -94,7 +94,7 @@ export const viewport: Viewport = {
   interactiveWidget: "resizes-content",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#FFF6EA" },
-    { media: "(prefers-color-scheme: dark)", color: "#201810" },
+    { media: "(prefers-color-scheme: dark)", color: "#1E1A26" },
   ],
 };
 

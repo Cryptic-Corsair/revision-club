@@ -12,16 +12,13 @@
    WCH11 strawberry · WCH12 orange fizz · WCH13 mint chip
    WCH14 grape soda · WCH15 bubblegum · WCH16 lemon sherbet
 
-   Two labs, one set of tokens: every surface reads its colour from
+   Three labs, one set of tokens: every surface reads its colour from
    the custom properties below, so the whole site flips between
-   · the daylight cream lab (no class), and
-   · the after-hours cocoa lab (html.dark).
-   The classic lab (html.classic) is the third face: a daylight page
-   whose note sections step between two fixed grounds — deep espresso
-   (#2c2013) and warm cream (#fdf6e3) — dark room, light room, dark
-   room. Everything outside those sections keeps every daylight token.
-   The dark lab also rotates through a few darker roasts — mood 0
-   below is the reference look, data-mood="1..3" are the alternates.
+   · the daylight cream lab (no class),
+   · the night lab (html.dark), and
+   · the classic lab (html.classic) — a daylight page whose note
+     sections step between two fixed grounds, deep espresso (#2c2013)
+     and warm cream (#fdf6e3): dark room, light room, dark room.
 
    `milk` is the one colour that never flips — it is "light text on a
    dark band" in both labs (footer, recap cards, closing CTA),
@@ -29,17 +26,19 @@
 
    Tonal order, one rule per lab (page → band → card):
    · daylight:  cream (lightest) < candy band < paper card
-   · after-dark: the study ground. Every band sits at the deep
-     cocoa level the eye settles into — body ink holds ≈ 12–14:1
-     and the honey marker pops ≈ 7–9:1 on every step — and
-     neighbouring sections alternate by HUE, not lightness:
-     golden cocoa (--note-band-a) ↔ ember roast (--note-band-b).
-     Paper cards float clearly above both grounds. Nothing near
-     black, and red always leads blue, so no surface carries the
-     blue-light chill (and chromatic fringing) of typical dark
-     themes — it reads like lamplight on sepia paper.
-   Bands mix their candy accent over --tint-base at --band-mix —
-   by day only; after dark both band steps are flat roasts.
+   · night lab: the candy shop after dark. The ground is a violet-ink
+     charcoal — the hue that sits BETWEEN the warm candies and grape,
+     so the whole shelf reads as neon against it — and the surfaces
+     climb a real ladder: page (#1e1a26) → band A (#221d2c) → band B
+     (#262134) → paper cards (#2e2744), cards floating a full 3.6 L*
+     above the bands so depth comes from lightness, not from borders.
+     Body ink holds ≥ 13:1 on every step; every candy keeps its
+     daylight brand value and still passes 4.5:1 as text — the shelf
+     glows without being re-tinted. Sections alternate by a half-step
+     of lightness and a lean of hue (plum → indigo), never by big
+     jumps. The marker after dark is a translucent lemon glow (ink
+     stays light over it, ≥ 5.7:1) instead of a solid mustard block —
+     dozens of highlights per page read as one calm pen, not stickers.
    ═════════════════════════════════════════════════════════════════════ */
 
 @theme {
@@ -120,63 +119,67 @@ html[data-dots="off"] body {
   background-image: none;
 }
 
+/* ————— the night lab —————
+   Recreated from scratch. The old after-dark lab was a monochrome
+   brown room: page, bands and cards all inside one narrow cocoa
+   band, so nothing separated and the solid-mustard marker shouted
+   over it. The night lab starts from a different hue family entirely
+   — violet-ink charcoal, chosen because it sits BETWEEN the warm
+   candies (coral, tangerine, lemon) and the cool ones (mint, grape,
+   bubble), so every flavour on the shelf reads as neon against it
+   without the blue-light chill of a true slate.
+
+   The surface ladder (measured with scripts/night-lab-palette.py):
+     page #1e1a26 (L* 10.2) → band A #221d2c (12.0) → band B #262134
+     (14.1) → paper #2e2744 (17.7) → raised #393052 (20.2), footer
+     #14101c (5.4). Real gaps between every rung — cards float 3.6 L*
+     above the top band, which is what "depth" means after dark.
+   Inks: #f4f1fb (15.3:1 on the page) / #b6aecb (8.0:1) / #9890b3
+     (5.7:1). Milk rides with ink.
+   The candy shelf is NOT re-tinted — every daylight brand value
+   passes 4.5:1 as text on the night grounds as-is, so the six
+   flavours stay the six flavours day and night. */
 html.dark {
-  /* roast 0 — "espresso", the reference look from the design shot.
-     Surfaces stay in a narrow warm band around the page — nothing
-     near black, red always leading blue — and the paper card
-     (#3f2f1c) floats clearly above every one of them. */
-  --color-cream: #2c2013; /* page background */
-  --color-paper: #3f2f1c; /* cards, sheets, bubbles */
-  --color-milk: #f8efdf;
-  --color-ink: #f6ebdc; /* ~13.5:1 on the page, ~14:1 on the bands */
-  --color-ink-soft: #c6ab92;
-  --color-ink-faint: #bb9c7c; /* lifted — small labels stay legible (5.0:1 on paper) */
-  --color-cocoa: #140d05; /* footer — the darkest anchor */
-  --tint-base: #4f3a24;
-  /* the study ground — after dark, the note sections hold one fixed
-     pair, chosen once and never rotated: A = the page espresso
-     (#2c2013) itself, B = a half step lifted into chestnut. Body ink
-     keeps ~13.5:1 on A and ~11.7:1 on B and the honey marker pops
-     ~11:1 / ~9.7:1 — every section studies like the deep cocoa room.
-     Home's seams stay pinned to the original pair below so only the
-     note sections wear the new ground. */
-  --note-band-a: #2c2013;
-  --note-band-b: #3a2a17;
-  --home-band-a: #291d10;
-  --home-band-b: #342212;
-  /* ————— content-surface grading v2 —————
-     After dark the candy shelf comes back as deep jewel tones instead
-     of mud. Two findings shaped the recipe. First, the v1 clamp
-     (every wash forced to one 6–8% share over a light base) flattened
-     all panels into the same whisper-brown. Second — the deeper
-     finding — mixing candy over a WARM base cancels its cool hues:
-     grape over the chestnut tint-base landed at chroma 0.018, greyer
-     than the ground itself. So the dark lab re-points both the share
-     AND the base, per family:
+  --color-cream: #1e1a26; /* page background */
+  --color-paper: #2e2744; /* cards, sheets, bubbles */
+  --color-milk: #f4f1fb;
+  --color-ink: #f4f1fb; /* 15.3:1 on the page, 13.4:1 on cards */
+  --color-ink-soft: #b6aecb; /* 8.0:1 on the page, 7.0:1 on cards */
+  --color-ink-faint: #9890b3; /* 5.7:1 on the page, 4.9:1 on cards */
+  --color-cocoa: #14101c; /* footer — the darkest anchor */
+  --tint-base: #393052; /* candy pastels lean here after dark */
+  --shade-ink: #1e1a26; /* shade() mixes candy toward the room, not cocoa */
+  /* the study ground — two fixed steps that alternate down the notes,
+     plum leaning into indigo; chosen once, never rotated (the home
+     seams rotate with the mood instead). Ink keeps 14.7:1 / 13.9:1
+     and the marker glow sits ≥ 5.9:1 on both steps. */
+  --note-band-a: #221d2c;
+  --note-band-b: #262134;
+  --home-band-a: #1b1723;
+  --home-band-b: #211c2e;
+  /* ————— content-surface grading v3 —————
+     Same three families as before, re-derived for the night grounds:
      · lift  (eq / steps / worked / KEY IDEA panels on the room
-       ground) pools 16% of its candy over a deeper neutral roast
-       (#241d18) — panels sit at the card's level, wear their own
-       hue (C 0.021..0.039), and every accent lands in ±0.035 L of
-       the card across all four roasts;
-     · honey (the lemon sticky note) takes 14% over a deep neutral
-       well (#1e1713) — lemon is the most luminous candy on the
-       shelf and would otherwise float 0.04 L ABOVE the card;
+       ground) pools 16% of its candy over a plum well a half-step
+       under the card (#251e33) — panels carry their own hue against
+       the violet room instead of vanishing into it;
+     · honey (the lemon sticky note) takes 12% over a deep well
+       (#171119) — lemon is the most luminous candy on the shelf, and
+       this lands the note 2.8 L* under the paper card instead of
+       floating above it;
      · sunk  (table headers, step insets, the checkpoint tile) sinks
-       10% of its candy into a neutral coffee at the ground's
-       lightness (#2b2420) — headers stay value-neutral vs the card
-       (−0.026..+0.022 L) and carry the hue instead;
+       10% of its candy into a violet coffee just under the card
+       (#251e36) — headers stay value-neutral vs the card and carry
+       the hue instead;
      · chips hug the card they sit on (--chip-base), so their candy
-       text pops the way its daylight pastels do instead of
-       muddying over chestnut.
-     Zebra rows stay neutral milk; figure annotation ink eases back.
-     Measured with scripts/final-check.py (oklab): panel ink ≥ 10:1,
-     honey note ink 11.4:1, headers ink ≥ 10.5:1 on every accent. */
+       text pops the way its daylight pastels do.
+     Zebra rows stay neutral milk; figure annotation ink eases back. */
   --sunk-share: 10%;
-  --sunk-base: #2b2420;
+  --sunk-base: #251e36;
   --lift-share: 16%;
-  --lift-base: #241d18;
-  --honey-share: 14%;
-  --honey-base: #1e1713;
+  --lift-base: #251e33;
+  --honey-share: 12%;
+  --honey-base: #171119;
   --chip-base: var(--color-paper);
   --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
   --arc-ink: 70%;
@@ -184,38 +187,42 @@ html.dark {
   color-scheme: dark;
 }
 
-/* ————— rotating roasts —————
-   The dark lab cycles through a few darker shade sets so it doesn't
-   wear the same brown every day (see lib/spectra/dark-mood.ts — one
-   roast per day, baked in before first paint). Only the four surface
-   tones change; text inks stay put, so contrast holds in every roast. */
+/* ————— night moods —————
+   The night lab keeps its nightly rotation, but the wardrobe is now
+   four night palettes instead of four roasts (see
+   lib/spectra/dark-mood.ts — one per day, baked in before first
+   paint). Only the surface tones change; the inks, the candy shelf
+   and the grading families stay put, so contrast holds in every
+   mood. Mood 0 above is the signature. */
 html.dark[data-mood="1"] {
-  /* roast 1 — "dark roast", the neutral one: greyer, less orange.
-     Same shape as roast 0; the note bands keep the fixed pair. */
-  --color-cream: #292421;
-  --color-paper: #3b342d;
-  --color-cocoa: #110f0c;
-  --tint-base: #483f35;
-  --home-band-a: #272320;
-  --home-band-b: #322b26;
+  /* mood 1 — "ink night", the neutral one: the violet drains out and
+     the charcoal reads plain graphite. */
+  --color-cream: #1d1e24;
+  --color-paper: #2c2d3a;
+  --color-cocoa: #121218;
+  --tint-base: #363849;
+  --home-band-a: #1a1b21;
+  --home-band-b: #20212b;
 }
 html.dark[data-mood="2"] {
-  /* roast 2 — "mahogany", a red-leaning chestnut, same shape */
-  --color-cream: #2e1b12;
-  --color-paper: #452819;
-  --color-cocoa: #140a06;
-  --tint-base: #52311f;
-  --home-band-a: #2b1a10;
-  --home-band-b: #37211a;
+  /* mood 2 — "aurora", the indigo one: a stronger lean toward the
+     grape end of the shelf. */
+  --color-cream: #1b1c2d;
+  --color-paper: #2a2e4d;
+  --color-cocoa: #101124;
+  --tint-base: #343963;
+  --home-band-a: #181a2b;
+  --home-band-b: #1e2136;
 }
 html.dark[data-mood="3"] {
-  /* roast 3 — "midnight cocoa", the deepest of the set, same shape */
-  --color-cream: #271d16;
-  --color-paper: #3a2c20;
-  --color-cocoa: #0f0b07;
-  --tint-base: #42311f;
-  --home-band-a: #251c15;
-  --home-band-b: #31241c;
+  /* mood 3 — "ember night", the warm one: a charcoal with a whisper
+     of the old cocoa, for evenings that want the fireplace. */
+  --color-cream: #231e1d;
+  --color-paper: #342b2a;
+  --color-cocoa: #161110;
+  --tint-base: #3f3432;
+  --home-band-a: #1f1a19;
+  --home-band-b: #251e1c;
 }
 
 /* ————— the classic lab —————
@@ -399,11 +406,11 @@ body::before {
 }
 
 html.dark body {
-  background-image: radial-gradient(rgb(255 236 205 / 0.055) 1.6px, transparent 1.7px);
+  background-image: radial-gradient(rgb(244 241 251 / 0.05) 1.6px, transparent 1.7px);
 }
 
 html.dark body::before {
-  background: radial-gradient(1150px 520px at 50% -150px, rgb(255 224 178 / 0.075), transparent 72%);
+  background: radial-gradient(1150px 520px at 50% -150px, rgb(151 117 250 / 0.09), transparent 72%);
 }
 
 ::selection {
@@ -412,7 +419,7 @@ html.dark body::before {
 }
 html.dark ::selection {
   background: #ffd43b;
-  color: #33241a;
+  color: #221c30;
 }
 
 :focus-visible {
@@ -480,8 +487,8 @@ html.dark ::selection {
 }
 html.dark .puff {
   box-shadow:
-    0 2px 0 0 rgb(0 0 0 / 0.22),
-    0 18px 42px -18px rgb(0 0 0 / 0.5);
+    0 2px 0 0 rgb(0 0 0 / 0.28),
+    0 18px 42px -18px rgb(0 0 0 / 0.55);
 }
 
 .puff-lift {
@@ -497,8 +504,8 @@ html.dark .puff {
 }
 html.dark .puff-lift:hover {
   box-shadow:
-    0 4px 0 0 rgb(0 0 0 / 0.22),
-    0 30px 60px -22px rgb(0 0 0 / 0.55);
+    0 4px 0 0 rgb(0 0 0 / 0.28),
+    0 30px 60px -22px rgb(0 0 0 / 0.6);
 }
 
 /* ————— the marker pen —————
@@ -512,11 +519,14 @@ html.dark .puff-lift:hover {
    fresh swipes, never as ink running out. The corners are cut
    lopsided and the paint rides low over the baseline (a swipe hugs
    the x-height), which is the difference between a hand stroke and
-   a decal. After dark the same pen reads as honey under the lamp:
-   the swipe keeps its shape but the neon settles to amber, so it
-   stops shouting at the sepia room — and stops twin-ing with the
-   bright yellow text selection — while roast ink on honey still
-   holds ≈ 8.8:1 and the pigment pops ≈ 7–9:1 over every ground. */
+   a decal. After dark the pen glows instead of shouting: the old
+   dark twin was a solid mustard block with roast ink, and a page of
+   notes wore dozens of mustard stickers that fought the ground. The
+   night-lab stroke lays down a translucent lemon wash over whatever
+   surface it crosses — the swipe keeps its exact shape — and the
+   text stays the room's own light ink, ≥ 5.7:1 over the wash on
+   every ground, so a paragraph with ten highlights reads as one
+   calm pen rather than a sticker sheet. */
 mark {
   background: linear-gradient(
     100deg,
@@ -537,13 +547,25 @@ mark {
 html.dark mark {
   background: linear-gradient(
     100deg,
-    rgb(244 207 106 / 0.55) 0%,
-    #f2ca5e 3.5%,
-    #e9ba49 16% 84%,
-    #d8a63a 96%,
-    rgb(216 166 58 / 0.55) 100%
+    rgb(255 216 122 / 0.16) 0%,
+    rgb(255 211 100 / 0.28) 3.5%,
+    rgb(255 199 66 / 0.34) 16% 84%,
+    rgb(250 184 46 / 0.4) 96%,
+    rgb(250 184 46 / 0.16) 100%
   );
-  color: #2c2013;
+  color: var(--color-ink);
+}
+
+/* the display-text highlighter — the hero words that ride on a lemon
+   wash ("made to stick.", "the bench."). By day: the 60% pigment
+   block. After dark the same wash goes translucent, the marker's
+   glow recipe — a solid lemon block under light ink would read as
+   one more loud sticker in the night room. */
+.hero-glow {
+  background: color-mix(in oklab, var(--color-lemon) 60%, transparent);
+}
+html.dark .hero-glow {
+  background: color-mix(in oklab, var(--color-lemon) 30%, transparent);
 }
 
 /* ————— helpers ————— */

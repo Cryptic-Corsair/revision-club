@@ -113,7 +113,7 @@ export function Desk({
             </SectionTag>
             <h1 className="mt-5 font-display text-[clamp(2.1rem,4.5vw,3.1rem)] leading-[1.08] font-semibold tracking-tight text-ink">
               Back to{" "}
-              <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-lemon/60 px-[0.18em]">
+              <span className="hero-glow relative inline-block -rotate-2 rounded-[0.35em] px-[0.18em]">
                 the bench.
               </span>
             </h1>

@@ -11,13 +11,13 @@ import { AnimatePresence, m } from "framer-motion";
 
 /* ————— colour helpers (all mixing, no hard-coded shades) ————— */
 
-/* Pastels lean on --tint-base: white paper by day, warm chestnut
-   after dark — so every tinted chip/card adapts to the mood. */
+/* Pastels lean on --tint-base: white paper by day, violet-ink
+   charcoal after dark — so every tinted chip/card adapts to the mood. */
 export const tint = (main: string, pct: number, base = "var(--tint-base)") =>
   `color-mix(in oklab, ${main} ${pct}%, ${base})`;
 
 export const shade = (main: string, pct = 78) =>
-  `color-mix(in oklab, ${main} ${pct}%, #2e2016)`;
+  `color-mix(in oklab, ${main} ${pct}%, var(--shade-ink, #2e2016))`;
 
 /* Dark ink on light candy (lemon, sun yellows), white on the rest. */
 export function readableInk(main: string): string {
