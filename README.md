@@ -56,10 +56,11 @@ source text, and marked up with a small inline syntax (`==highlight==`).
 
 ## Themes
 
-Three labs, switchable in-app (sun button or customize panel):
+Four labs, switchable in-app (theme button or customize panel):
 
 - **Light** — the daylight cream look
-- **Dark** — warm roast browns, rotates one of four roasts per day
+- **Night** — violet-ink charcoal; rotates one of four night moods per day
+- **Dune** — the chocolate room: deep cocoa grounds, sand inks, warm lamp
 - **Classic** *(default)* — daylight page with sections stepping between
   deep espresso `#2c2013` and warm cream `#fdf6e3`
 

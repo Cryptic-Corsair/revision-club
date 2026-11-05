@@ -56,7 +56,7 @@ src/
 ├─ app/
 │  ├─ layout.tsx        Root layout: fonts, metadata, pre-hydration prefs script
 │  ├─ page.tsx          Renders <ClubApp/>
-│  ├─ globals.css       ALL theming (three labs, fonts, highlights, seams)
+│  ├─ globals.css       ALL theming (four labs, fonts, highlights, seams)
 │  └─ fonts/            Self-hosted woff2 (see §6 — do NOT revert to Google)
 ├─ components/club/
 │  ├─ club-app.tsx      App shell + view switching + nav pill + footer
@@ -118,7 +118,7 @@ SVG figure types rendered by `notes-figures.tsx`.
 **How to add/extend a topic:** copy the shape of an existing `notes-tNN-x.ts`,
 build the `NotesDoc`, register it in the unit's `wchNN.ts` topic list, run
 `bun run build` (type errors in content are caught there), then eyeball all
-three labs in the reader (contents chips clamp, spec rail, highlights).
+four labs in the reader (contents chips clamp, spec rail, highlights).
 
 ### Content hard rules (violations have been reverted before — don't repeat them)
 
@@ -156,14 +156,17 @@ API (a fetch script exists at `scripts/fetch-fonts.sh`, untracked — the
 replace the files in `src/app/fonts/`, and keep the `weight` ranges in
 `layout.tsx` matching the file's variable axis (e.g. Fredoka `"300 700"`).
 
-## 7. Theming — three labs
+## 7. Theming — four labs
 
-`globals.css` defines three skins, selected by classes/attributes on `<html>`:
+`globals.css` defines four skins, selected by classes/attributes on `<html>`:
 
 - `:root` → **light** lab
-- `html.dark` → **dark** lab; plus `html.dark[data-mood="N"]` daily "roast"
-  variants (`DARK_MOOD_COUNT` in `dark-mood.ts`; mood = days-since-epoch mod
-  count, set pre-hydration)
+- `html.dark` → **night** lab (violet-ink charcoal); plus
+  `html.dark[data-mood="N"]` daily mood variants (`DARK_MOOD_COUNT` in
+  `dark-mood.ts`; mood = days-since-epoch mod count, set pre-hydration)
+- `html.dune` → **dune** lab (the chocolate room) — always paired with
+  `html.dark` (both classes on `<html>`): the dark class carries every
+  `dark:` utility, dune re-tints the tokens on top. No mood rotation.
 - `html.classic` → **classic** lab (the default): daylight cream `#fdf6e3`
   rooms with espresso `#2c2013` ink — this is the theme new visitors see
 
@@ -171,8 +174,8 @@ User prefs (`prefs.ts`, default in parentheses): `theme` (`"classic"`),
 `headFont` (`"fredoka"`), `bodyFont` (`"nunito"`), `zoom` (1; allowed
 0.9/1/1.15/1.3), `dots` (on), `motion` (on).
 
-**Iron rule: every visual change must hold in all three labs.** A change that
-looks great in classic but breaks dark (or vice versa) is a bug. Verify
+**Iron rule: every visual change must hold in all four labs.** A change that
+looks great in classic but breaks night or dune is a bug. Verify
 nothing in dark room mode uses light-only tokens — and there are many.
 
 ## 8. Design rules
@@ -185,7 +188,7 @@ nothing in dark room mode uses light-only tokens — and there are many.
   and was killed in `9bfe1fd`).
 - **Glass morphism pattern** (footer, control panel): translucent surface +
   backdrop-blur + hairline border + subtle top highlight — implemented so it
-  survives all three labs. Copy the existing footer treatment rather than
+  survives all four labs. Copy the existing footer treatment rather than
   inventing a new one.
 - **Iconography is centralized.** Every icon comes from `icons.tsx`. Never
   inline a stray `<svg>` in a view or import a second icon library.
@@ -245,8 +248,8 @@ browser → platform edge (*.space-z.ai) → Caddy :81 → Next dev :3000
 
 1. `bun run lint` — clean.
 2. `bun run build` — clean (this is the type gate).
-3. **Three labs × the touched views × desktop + mobile widths** — walk light,
-   dark (all moods you touched) and classic. Zero console errors.
+3. **Four labs × the touched views × desktop + mobile widths** — walk light,
+   night (moods you touched), dune and classic. Zero console errors.
 4. Reader checks for content work: contents chips clamp to two lines, spec
    rail scrolls with edge fades, `==highlights==` look right in all labs,
    figures have no collisions.

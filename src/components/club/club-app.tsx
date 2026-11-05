@@ -11,6 +11,7 @@ import {
   Sticker,
   Sun,
   SunMoon,
+  Dune,
   ClipboardList,
   ArrowUp,
   Command,
@@ -174,21 +175,23 @@ function LogoMark({ size = 38 }: { size?: number }) {
 }
 
 /* ————— lab switch —————
-   Light → dark → classic, one tap apart. A candy toast announces
-   each switch, and the mobile browser chrome is re-painted to the
-   lab's cream so the address bar never fights the page. */
+   Light → night → dune → classic, one tap apart. A candy toast
+   announces each switch, and the mobile browser chrome is re-painted
+   to the lab's cream so the address bar never fights the page. */
 
-const LAB_ORDER: Lab[] = ["light", "dark", "classic"];
+const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic"];
 
 const LAB_LABEL: Record<Lab, string> = {
   light: "Light",
-  dark: "Dark",
+  dark: "Night",
+  dune: "Dune",
   classic: "Classic",
 };
 
 const LAB_TITLE: Record<Lab, string> = {
-  light: "Switch to the dark lab",
-  dark: "Switch to the classic lab",
+  light: "Switch to the night lab",
+  dark: "Switch to the dune lab",
+  dune: "Switch to the classic lab",
   classic: "Switch to the light lab",
 };
 
@@ -370,6 +373,8 @@ function TopBar({
               <Sun className="h-[18px] w-[18px]" strokeWidth={2.2} />
             ) : lab === "dark" ? (
               <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            ) : lab === "dune" ? (
+              <Dune className="h-[18px] w-[18px]" strokeWidth={2.2} />
             ) : (
               <SunMoon className="h-[18px] w-[18px]" strokeWidth={2.2} />
             )}
@@ -399,8 +404,10 @@ function TopBar({
                     announce === "light"
                       ? "#FFD43B"
                       : announce === "dark"
-                        ? "#2e2016"
-                        : "linear-gradient(90deg, #2c2013 50%, #fdf6e3 50%)",
+                        ? "#1e1a26"
+                        : announce === "dune"
+                          ? "#342817"
+                          : "linear-gradient(90deg, #2c2013 50%, #fdf6e3 50%)",
                   boxShadow: "inset 0 0 0 2px rgb(61 43 31 / 0.12)",
                 }}
               />
@@ -646,7 +653,7 @@ function Footer({
                 {
                   icon: SunMoon,
                   chip: "text-lemon",
-                  text: "Three labs — light, dark & classic, one tap in Customize.",
+                  text: "Four labs — light, night, dune & classic, one tap in Customize.",
                 },
                 {
                   icon: Command,

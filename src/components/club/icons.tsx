@@ -550,34 +550,62 @@ export function Sticker(p: IcoProps) {
   );
 }
 
-/* ————— theme ————— */
+/* ————— theme — the four labs, one family —————
+   sunrise · moon-and-star · dune ridges · the half-day-half-night
+   circle. Redrawn as a set when the fourth lab arrived, so all
+   four read at the same weight in the nav pill. */
 
+/* light — the sun breaking over the horizon: a dome, five rays,
+   one level ground line */
 export function Sun(p: IcoProps) {
   return (
     <Ico {...p}>
-      <circle cx="12" cy="12" r="4.1" />
-      <path d="M12 2.9 v2.1 M12 19 v2.1 M2.9 12 H5 M19 12 h2.1 M5.6 5.6 l1.5 1.5 M16.9 16.9 l1.5 1.5 M18.4 5.6 l-1.5 1.5 M7.1 16.9 l-1.5 1.5" strokeWidth={1.8} />
+      <path d="M7.6 18.5 a4.4 4.4 0 0 1 8.8 0" />
+      <path d="M3.8 18.5 H20.2" strokeWidth={1.8} />
+      <path d="M12 12.6 V9.6" strokeWidth={1.8} />
+      <path d="M9.7 13.1 L8.6 10.3" strokeWidth={1.8} />
+      <path d="M14.3 13.1 L15.4 10.3" strokeWidth={1.8} />
+      <path d="M7.8 14.3 L5.7 12.2" strokeWidth={1.8} />
+      <path d="M16.2 14.3 L18.3 12.2" strokeWidth={1.8} />
     </Ico>
   );
 }
 
+/* night — the crescent with a four-point star beside it */
 export function Moon(p: IcoProps) {
   return (
     <Ico {...p}>
       <path d="M20.2 14.7 A8.5 8.5 0 1 1 9.3 3.8 a6.8 6.8 0 0 0 10.9 10.9 Z" />
-      <circle cx="16.8" cy="6.5" r="0.8" fill="currentColor" stroke="none" />
+      <path
+        d="M16.6 3.9 c0.28 1.55 0.75 2.02 2.3 2.3 -1.55 0.28-2.02 0.75-2.3 2.3 -0.28-1.55-0.75-2.02-2.3-2.3 1.55-0.28 2.02-0.75 2.3-2.3 Z"
+        strokeWidth={1.5}
+      />
     </Ico>
   );
 }
 
-/* sun-moon — the classic lab: a daylight page with espresso rooms,
-   so the icon wears half of each */
+/* dune — the chocolate room: two sand ridges under a low sun */
+export function Dune(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <circle cx="17.1" cy="6.3" r="2.1" />
+      <path d="M2.7 17.9 C6.4 13.1 10.6 13.4 14.2 18.6" />
+      <path d="M9.4 20.5 C13.4 15.6 17.6 15.4 21.3 20" />
+    </Ico>
+  );
+}
+
+/* classic — the half-day-half-night circle: rays off the light
+   half, a crescent riding the dark half (the lab alternates
+   daylight rooms and espresso rooms down the page) */
 export function SunMoon(p: IcoProps) {
   return (
     <Ico {...p}>
-      <path d="M12 8.6 a2.7 2.7 0 0 0 3.8 3.8 a4 4 0 0 1-3.8-3.8 Z" strokeWidth={1.8} />
-      <path d="M12 2.6 v1.9 M12 19.5 v1.9 M2.6 12 h1.9 M19.5 12 h1.9 M5.3 5.3 l1.4 1.4 M18.7 5.3 l-1.4 1.4" strokeWidth={1.8} />
-      <path d="M13.4 21 A9 9 0 1 1 3 10.6" strokeWidth={1.9} />
+      <circle cx="12" cy="12" r="5.2" />
+      <path d="M12 7.8 a4.2 4.2 0 0 1 0 8.4 a3.2 3.2 0 0 0 0 -8.4 Z" strokeWidth={1.7} />
+      <path d="M5.4 12 H3.4" strokeWidth={1.8} />
+      <path d="M7.6 7.6 L6.1 6.1" strokeWidth={1.8} />
+      <path d="M7.6 16.4 L6.1 17.9" strokeWidth={1.8} />
     </Ico>
   );
 }

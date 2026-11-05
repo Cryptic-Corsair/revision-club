@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
+import { useEffect, type ReactNode, type SVGProps } from "react";
 import { AnimatePresence, m } from "framer-motion";
-import { Check, RotateCcw, Sliders, Sparkles, X } from "./icons";
+import { Check, RotateCcw, Sliders, Sparkles, X, Sun, Moon, SunMoon, Dune } from "./icons";
 import { readableInk, shade, tint } from "./bits";
 import { accentOf } from "./bands";
 import {
@@ -109,7 +109,9 @@ function Toggle({
 
 /* ————— one lab, as a live miniature —————
    the actual palette each room wears, painted at stamp size so
-   picking a lab is picking what you see, not reading a label */
+   picking a lab is picking what you see, not reading a label.
+   The dark miniature is the night lab (violet ink); dune is the
+   chocolate room with its warm lamp. */
 
 function LabStage({ id }: { id: Lab }) {
   if (id === "light") {
@@ -127,16 +129,32 @@ function LabStage({ id }: { id: Lab }) {
   }
   if (id === "dark") {
     return (
-      <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[#2c2013] shadow-[inset_0_0_0_1px_rgb(255_246_234/0.08)]">
+      <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[#1e1a26] shadow-[inset_0_0_0_1px_rgb(255_246_234/0.08)]">
         <span
           className="absolute inset-0"
-          style={{ background: "radial-gradient(42px 30px at 68% 12%, rgb(255 212 59 / 0.28), transparent 70%)" }}
+          style={{ background: "radial-gradient(42px 30px at 68% 12%, rgb(151 117 250 / 0.3), transparent 70%)" }}
         />
-        <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#3f2f1c] shadow-[0_1.5px_0_rgb(0_0_0/0.35)]" />
+        <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#2e2744] shadow-[0_1.5px_0_rgb(0_0_0/0.35)]" />
         <span className="absolute bottom-2 left-2 flex items-center gap-1">
           <i className="h-1.5 w-1.5 rounded-full bg-[#f59f00]" />
           <i className="h-1.5 w-1.5 rounded-full bg-[#12b886]" />
           <i className="h-1.5 w-1.5 rounded-full bg-[#ff6b6b]" />
+        </span>
+      </span>
+    );
+  }
+  if (id === "dune") {
+    return (
+      <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[#221a11] shadow-[inset_0_0_0_1px_rgb(255_242_223/0.08)]">
+        <span
+          className="absolute inset-0"
+          style={{ background: "radial-gradient(42px 30px at 68% 12%, rgb(255 146 43 / 0.3), transparent 70%)" }}
+        />
+        <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#342817] shadow-[0_1.5px_0_rgb(0_0_0/0.35)]" />
+        <span className="absolute bottom-2 left-2 flex items-center gap-1">
+          <i className="h-1.5 w-1.5 rounded-full bg-[#ffd43b]" />
+          <i className="h-1.5 w-1.5 rounded-full bg-[#ff6b6b]" />
+          <i className="h-1.5 w-1.5 rounded-full bg-[#12b886]" />
         </span>
       </span>
     );
@@ -152,6 +170,15 @@ function LabStage({ id }: { id: Lab }) {
     </span>
   );
 }
+
+/* the four labs, each with its own mark — the same family the
+   nav pill wears */
+const LAB_ICONS: Record<Lab, (p: SVGProps<SVGSVGElement>) => ReactNode> = {
+  light: Sun,
+  dark: Moon,
+  dune: Dune,
+  classic: SunMoon,
+};
 
 export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () => void }) {
   const prefs = usePrefs();
@@ -285,10 +312,10 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
               <Section
                 title="The lab"
                 dot="#12B886"
-                hint="Light, dark, or classic — the daylight page with espresso & cream sections."
+                hint="Four rooms — light, night, dune & classic. Classic is the daylight page with espresso & cream sections."
               >
-                <div className="grid grid-cols-3 gap-2">
-                  {(["light", "dark", "classic"] as Lab[]).map((l) => {
+                <div className="grid grid-cols-4 gap-2">
+                  {(["light", "dark", "dune", "classic"] as Lab[]).map((l) => {
                     const active = prefs.theme === l;
                     return (
                       <button
@@ -313,10 +340,14 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                           )}
                         </span>
                         <span
-                          className={`text-center font-display text-[12.5px] font-bold ${
+                          className={`flex items-center justify-center gap-1.5 text-center font-display text-[12px] font-bold ${
                             active ? "text-ink" : "text-ink-soft"
                           }`}
                         >
+                          {(() => {
+                            const LabIcon = LAB_ICONS[l];
+                            return <LabIcon className="h-3.5 w-3.5 shrink-0" strokeWidth={2.3} />;
+                          })()}
                           {LAB_LABEL[l]}
                         </span>
                       </button>

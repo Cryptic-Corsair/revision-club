@@ -5,9 +5,9 @@ import { pickDarkMood } from "./dark-mood";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · site preferences
-   The knobs behind the customize panel: lab (light/dark/classic),
-   the accent wheel, page zoom, heading & body fonts, polka dots,
-   decorative motion.
+   The knobs behind the customize panel: lab (light/dark/dune/
+   classic), the accent wheel, page zoom, heading & body fonts,
+   polka dots, decorative motion.
 
    localStorage · key "reaction-club-prefs-v1"
    Every change runs through applyPrefs() — one function that paints
@@ -15,7 +15,7 @@ import { pickDarkMood } from "./dark-mood";
    re-skins at once and the mobile address bar keeps up.
    ═══════════════════════════════════════════════════════════════ */
 
-export type Lab = "light" | "dark" | "classic";
+export type Lab = "light" | "dark" | "dune" | "classic";
 export type HeadFont = "fredoka" | "baloo" | "patrick";
 export type BodyFont = "nunito" | "quicksand";
 
@@ -77,7 +77,12 @@ const listeners = new Set<() => void>();
 
 function sanitize(p: Partial<Prefs>): Prefs {
   const out: Prefs = { ...DEFAULT_PREFS };
-  if (p.theme === "light" || p.theme === "dark" || p.theme === "classic")
+  if (
+    p.theme === "light" ||
+    p.theme === "dark" ||
+    p.theme === "dune" ||
+    p.theme === "classic"
+  )
     out.theme = p.theme;
   else if (p.theme === "hybrid")
     /* the retired third lab rides on as classic — its heir */
@@ -151,10 +156,14 @@ function paintChrome(root: HTMLElement) {
 export function applyPrefs(p: Prefs) {
   if (typeof document === "undefined") return;
   const root = document.documentElement;
-  root.classList.toggle("dark", p.theme === "dark");
+  /* the two night rooms both wear .dark — every dark: utility in the
+     wardrobe keys off it — and the dune lab re-tints the tokens on
+     top with .dune */
+  root.classList.toggle("dark", p.theme === "dark" || p.theme === "dune");
+  root.classList.toggle("dune", p.theme === "dune");
   root.classList.toggle("classic", p.theme === "classic");
-  /* only the dark lab wears today's roast; light and classic keep
-     their daylight tokens */
+  /* only the night lab wears today's roast; dune's chocolate room is
+     a fixed signature, and light & classic keep their daylight tokens */
   if (p.theme === "dark") root.dataset.mood = String(pickDarkMood());
   else delete root.dataset.mood;
   root.dataset.head = p.headFont;
@@ -229,6 +238,7 @@ export function usePrefs(): Prefs {
 
 export const LAB_LABEL: Record<Lab, string> = {
   light: "Light",
-  dark: "Dark",
+  dark: "Night",
+  dune: "Dune",
   classic: "Classic",
 };

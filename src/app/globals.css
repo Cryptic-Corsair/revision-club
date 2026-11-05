@@ -12,10 +12,11 @@
    WCH11 strawberry · WCH12 orange fizz · WCH13 mint chip
    WCH14 grape soda · WCH15 bubblegum · WCH16 lemon sherbet
 
-   Three labs, one set of tokens: every surface reads its colour from
+   Four labs, one set of tokens: every surface reads its colour from
    the custom properties below, so the whole site flips between
    · the daylight cream lab (no class),
-   · the night lab (html.dark), and
+   · the night lab (html.dark) — violet-ink charcoal,
+   · the dune lab (html.dark + html.dune) — the chocolate room, and
    · the classic lab (html.classic) — a daylight page whose note
      sections step between two fixed grounds, deep espresso (#2c2013)
      and warm cream (#fdf6e3): dark room, light room, dark room.
@@ -225,6 +226,76 @@ html.dark[data-mood="3"] {
   --home-band-b: #251e1c;
 }
 
+/* ————— the dune lab —————
+   The chocolate room. The site's second dark lab — it wears BOTH
+   classes (html.dark carries every dark: utility; html.dune re-tints
+   the tokens on top), so the two night rooms share one wardrobe of
+   component styles and differ only in the room they paint.
+
+   Where the night lab is violet ink, dune is the bench at golden
+   hour: deep chocolate grounds with a caramel lean, sand-toned
+   inks, and the same candy shelf glowing on top. The failure mode
+   of the site's FIRST dark theme was a monochrome brown room —
+   page, bands and cards inside one narrow cocoa band, nothing
+   separating. Dune re-earns the brown with a real ladder (measured
+   with scripts/dune-palette.py):
+     footer #140d06 (L* 4.1) → home seam A #1d160d (7.8) → page
+     #221a11 (9.9) → seam B #231b11 (10.4) → note band A #261d12
+     (11.5) → band B #2b2216 (13.9) → paper #342817 (17.0) → raised
+     #41311d (21.6). Cards float a full 3.1 L* above the top band;
+     sections alternate by a half-step and a lean (cocoa → caramel).
+   Inks are sand, not grey: #fdf2df (15.5:1 on the page, 13.0:1 on
+     cards) / #dcc6a2 (10.3:1 / 8.6:1) / #bda27e (7.1:1 / 5.9:1).
+     Milk rides with ink.
+   The candy shelf is NOT re-tinted — every brand value passes on
+   the chocolate grounds (grape, the tightest, 4.3:1 on cards — a
+   hair better than the night lab's own paper). The marker after
+   dark here is a translucent AMBER wash (the night lab's lemon pen,
+   warmed to caramel — ink keeps ≥ 5.5:1 over the composite), and
+   the ambient lamp burns warm instead of violet. No mood rotation —
+   this pair is the theme's signature and never changes. */
+html.dune {
+  --color-cream: #221a11; /* page background */
+  --color-paper: #342817; /* cards, sheets, bubbles */
+  --color-milk: #fdf2df;
+  --color-ink: #fdf2df; /* 15.5:1 on the page, 13.0:1 on cards */
+  --color-ink-soft: #dcc6a2; /* 10.3:1 on the page, 8.6:1 on cards */
+  --color-ink-faint: #bda27e; /* 7.1:1 on the page, 5.9:1 on cards */
+  --color-cocoa: #140d06; /* footer — the darkest anchor */
+  --tint-base: #41311d; /* candy pastels lean here in the dune lab */
+  --shade-ink: #221a11; /* shade() mixes candy toward the room */
+  /* the study ground — two fixed steps that alternate down the
+     notes, cocoa leaning into caramel; chosen once, never rotated.
+     Ink keeps 15.0:1 / 14.1:1 on the pair. */
+  --note-band-a: #261d12;
+  --note-band-b: #2b2216;
+  --home-band-a: #1d160d;
+  --home-band-b: #231b11;
+  /* content-surface grading, re-derived for the chocolate grounds —
+     same three families as the night lab, wells sunk into warm
+     chocolate a half-step under the card:
+     · lift  (eq / steps / worked / KEY IDEA) pools 16% of its candy
+       over a caramel well just under the card (#2e2112);
+     · honey (the lemon sticky note) takes 12% over a deep well
+       (#1a1208) — lemon is the most luminous candy on the shelf;
+     · sunk  (table headers, step insets, the checkpoint tile) sinks
+       10% of its candy into a cocoa well just under the card
+       (#2f2314) — headers stay value-neutral vs the card.
+     Chips hug the card they sit on (--chip-base). Zebra rows stay
+     neutral milk; figure annotation ink eases back. */
+  --sunk-share: 10%;
+  --sunk-base: #2f2314;
+  --lift-share: 16%;
+  --lift-base: #2e2112;
+  --honey-share: 12%;
+  --honey-base: #1a1208;
+  --chip-base: var(--color-paper);
+  --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
+  --arc-ink: 70%;
+  --edge: rgb(0 0 0 / 0.5);
+  color-scheme: dark;
+}
+
 /* ————— the classic lab —————
    The heir of the retired hybrid, done properly: the page keeps
    every daylight token — cream ground, polka dots, candy chrome —
@@ -409,8 +480,18 @@ html.dark body {
   background-image: radial-gradient(rgb(244 241 251 / 0.05) 1.6px, transparent 1.7px);
 }
 
+/* dune: the dots turn to sand grains */
+html.dune body {
+  background-image: radial-gradient(rgb(253 242 223 / 0.05) 1.6px, transparent 1.7px);
+}
+
 html.dark body::before {
   background: radial-gradient(1150px 520px at 50% -150px, rgb(151 117 250 / 0.09), transparent 72%);
+}
+
+/* dune: the lamp burns warm — the bench at golden hour */
+html.dune body::before {
+  background: radial-gradient(1150px 520px at 50% -150px, rgb(255 146 43 / 0.09), transparent 72%);
 }
 
 ::selection {
@@ -420,6 +501,11 @@ html.dark body::before {
 html.dark ::selection {
   background: #ffd43b;
   color: #221c30;
+}
+
+html.dune ::selection {
+  background: #ffd43b;
+  color: #2a1c0e;
 }
 
 :focus-visible {
@@ -552,6 +638,20 @@ html.dark mark {
     rgb(255 199 66 / 0.34) 16% 84%,
     rgb(250 184 46 / 0.4) 96%,
     rgb(250 184 46 / 0.16) 100%
+  );
+  color: var(--color-ink);
+}
+
+/* dune: the pen warms to caramel — same translucent wash, the
+   composite keeps sand ink ≥ 5.5:1 over every ground */
+html.dune mark {
+  background: linear-gradient(
+    100deg,
+    rgb(255 196 92 / 0.16) 0%,
+    rgb(255 190 82 / 0.28) 3.5%,
+    rgb(255 184 77 / 0.36) 16% 84%,
+    rgb(250 172 62 / 0.42) 96%,
+    rgb(250 172 62 / 0.16) 100%
   );
   color: var(--color-ink);
 }
