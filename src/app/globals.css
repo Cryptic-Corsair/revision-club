@@ -67,6 +67,9 @@
   --animate-float: float 7s ease-in-out infinite;
   --animate-float-slow: float 11s ease-in-out infinite;
   --animate-blob: blob 12s ease-in-out infinite;
+  /* the one-time entrance: blobs swell into place and then hold
+     still — no idle drift on the home page */
+  --animate-blob-settle: blob-settle 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-bubble: bubble-up 4.5s ease-in infinite;
   --animate-wiggle: wiggle 2.6s ease-in-out infinite;
   --animate-spin-slow: spin 16s linear infinite;
@@ -238,6 +241,18 @@ html.classic .room {
   }
   66% {
     transform: rotate(-22deg) scale(0.95);
+  }
+}
+
+/* the hero's blobs don't drift — they arrive: one swell from
+   0.95 to resting, fill-mode both so a staggered delay holds the
+   small start frame, and then the compositor never revisits them */
+@keyframes blob-settle {
+  from {
+    transform: rotate(-7deg) scale(0.95);
+  }
+  to {
+    transform: rotate(0deg) scale(1);
   }
 }
 

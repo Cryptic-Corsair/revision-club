@@ -422,7 +422,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                     on={prefs.motion}
                     onChange={(v) => setPrefs({ motion: v })}
                     label="Gentle motion"
-                    hint="floating blobs and drifting ribbons"
+                    hint="one-time settles, floating cards & wiggles"
                   />
                 </div>
               </Section>

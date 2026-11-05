@@ -46,16 +46,17 @@ import { BandWave, homeBandOf } from "./bands";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · home — Material You surfaces, candy personality
-   Motion lives in the hero alone: blob drifts, the entrance pop,
-   floating cards, the boopable mascot. Everything below paints
-   once and holds still — no scroll reveals, no idle loops. The
-   sections wear notes-style candy bands, and every seam between
-   neighbours is a BandWave — a different curve each time, straight
-   off the same shelf the note reader uses. Static SVG, painted
-   once; the compositor never revisits it.
+   Motion lives in the hero alone: the one-time blob settle, the
+   entrance pop, floating cards, the boopable mascot. Everything
+   below paints once and holds still — no scroll reveals, no idle
+   loops. The sections wear notes-style candy bands, and every seam
+   between neighbours is a BandWave — a different curve each time,
+   straight off the same shelf the note reader uses. Static SVG,
+   painted once; the compositor never revisits it.
    ═══════════════════════════════════════════════════════════════ */
 
-const UNIT_ICONS = {
+/* each unit's bench mark — shared with the footer's directory */
+export const UNIT_ICONS = {
   WCH11: Atom,
   WCH12: Flame,
   WCH13: TestTubes,
@@ -154,18 +155,22 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
     <div>
       {/* ————— hero: full-bleed tonal stage, edge to edge ————— */}
       <section className="relative overflow-hidden bg-paper" style={{ paddingTop: "calc(5.25rem + var(--sa-top))" }}>
-        <Blob color={tint("#FF922B", 14)} className="top-[-30%] right-[-16%] h-[85%] w-[54%]" />
+        {/* the stage dressing — blobs swell into place once, then
+            hold perfectly still; the stagger makes it an arrival */}
+        <Blob color={tint("#FF922B", 14)} settle className="top-[-30%] right-[-16%] h-[85%] w-[54%]" />
         <Blob
           color={tint("#FFD43B", 22)}
           shape="c"
+          settle
           className="top-[36%] right-[-9%] h-[42%] w-[26%] opacity-80"
-          style={{ animationDuration: "12s" }}
+          style={{ animationDelay: "0.15s" }}
         />
         <Blob
           color={tint("#FFD43B", 16)}
           shape="b"
+          settle
           className="bottom-[-36%] left-[-14%] h-[58%] w-[36%]"
-          style={{ animationDuration: "16s" }}
+          style={{ animationDelay: "0.3s" }}
         />
         <DoodlePlus className="absolute top-[calc(1.4rem+var(--sa-top))] left-6 hidden h-5 w-5 text-mint/40 sm:block lg:left-10" />
         <DoodleAtom className="absolute right-[3%] bottom-[12%] hidden h-9 w-9 text-coral/30 xl:block" />
@@ -239,12 +244,13 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 drift around Bubbles, so the scene sells the product */}
             <div className="relative mx-auto flex h-[320px] w-full max-w-[440px] items-center justify-center sm:h-[400px] md:h-[440px] md:max-w-[480px]">
               {/* soft peach wash — pink stays reserved for WCH15 and the mascot blush */}
-              <Blob color={tint("#FF922B", 18)} shape="b" className="h-[86%] w-[86%]" />
+              <Blob color={tint("#FF922B", 18)} shape="b" settle className="h-[86%] w-[86%]" />
               <Blob
                 color={tint("#FFD43B", 30)}
                 shape="c"
+                settle
                 className="top-[2%] right-[2%] h-[34%] w-[34%] opacity-80"
-                style={{ animationDuration: "9s" }}
+                style={{ animationDelay: "0.2s" }}
               />
 
               {/* a note, mid-read */}

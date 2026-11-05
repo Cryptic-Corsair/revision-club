@@ -299,23 +299,28 @@ export function Blob({
   color,
   shape = "a",
   still = false,
+  settle = false,
   className,
   style,
 }: {
   color: string;
   /* static organic silhouettes (.blob-shape-* in globals); the drift is
-     compositor-only (transform rotate/scale). still drops the drift for
-     quiet zones; data-freeze lets the page pause it offscreen. */
+     compositor-only (transform rotate/scale). still drops the motion for
+     quiet zones; settle plays the one-time entrance and then freezes —
+     the hero's answer to "stop drifting"; data-freeze pauses whatever
+     remains while it sits offscreen. */
   shape?: "a" | "b" | "c";
   still?: boolean;
+  settle?: boolean;
   className?: string;
   style?: CSSProperties;
 }) {
+  const anim = still ? "" : settle ? "animate-blob-settle " : "animate-blob ";
   return (
     <div
       aria-hidden
       data-freeze
-      className={`${still ? "" : "animate-blob "}blob-shape-${shape} absolute ${className ?? ""}`}
+      className={`${anim}blob-shape-${shape} absolute ${className ?? ""}`}
       style={{ background: color, ...style }}
     />
   );

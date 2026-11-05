@@ -12,16 +12,23 @@ import {
   Sun,
   SunMoon,
   ClipboardList,
+  ArrowUp,
+  Command,
+  ShieldCheck,
+  BookMarked,
+  Atom,
+  ListChecks,
+  Clock,
 } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
-import { UNITS, getUnit, getTopic } from "@/lib/spectra/units";
+import { UNITS, getUnit, getTopic, TOTALS } from "@/lib/spectra/units";
 import { getNotesMeta, getNotesMetaForTopic } from "@/lib/spectra/notes-meta";
 import { useTimeScope } from "@/lib/spectra/time";
 import { usePacks } from "@/lib/spectra/packs";
 import { applyPrefs, setPrefs, usePrefs, type Lab } from "@/lib/spectra/prefs";
-import { Home } from "./home";
+import { Home, UNIT_ICONS } from "./home";
 import { UnitView } from "./unit-view";
-import { Mascot, SpeechBubble } from "./bits";
+import { Mascot, SpeechBubble, readableInk } from "./bits";
 import { SpecMapProvider, SpecMapTrigger } from "./spec-map";
 
 /* ————— the lazy rooms —————
@@ -409,6 +416,7 @@ function Footer({
   onOpenSticker,
   onOpenCustomize,
   onOpenPack,
+  onOpenSpec,
   onSearch,
   bandFrom = "var(--color-cream)",
 }: {
@@ -416,12 +424,14 @@ function Footer({
   onOpenSticker: () => void;
   onOpenCustomize: () => void;
   onOpenPack: () => void;
+  onOpenSpec: () => void;
   onSearch: () => void;
   /* the surface the cocoa wave rises from — home hands in its own
      band colour so the seam above stays continuous after dark */
   bandFrom?: string;
 }) {
   const [booped, setBooped] = useState(false);
+  const hours = Math.round(TOTALS.minutes / 60);
 
   const boop = () => {
     setBooped(true);
@@ -447,140 +457,231 @@ function Footer({
         </svg>
       </div>
 
-      <div className="bg-cocoa pt-4 pb-12 text-milk">
-        {/* two columns until the widescreen desktop three — at tablet
-            width three columns squeeze every caption into four lines */}
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:px-8 md:grid-cols-2 lg:flex lg:flex-row lg:items-start lg:justify-between">
-          <div className="max-w-sm">
-            <div className="flex items-center gap-3">
-              <LogoMark size={38} />
-              <span className="font-display text-[17px] font-semibold tracking-tight">
-                Reaction Club
-              </span>
-            </div>
-            <p className="mt-3 text-[14px] leading-relaxed text-milk/80">
-              Notes for every topic in the International A Level course — read
-              them in order, try the checkpoints, and mark what you&apos;ve
-              revised. Your reading time is counted, topic by topic.
-            </p>
-            <div className="mt-5 flex items-end gap-1">
-              <Mascot
-                main="#FFD43B"
-                size={88}
-                boop
-                onBoop={boop}
-                bubbles={false}
-              />
-              <AnimatePresence>
-                {booped && (
-                  <m.div
-                    initial={{ opacity: 0, y: 8, scale: 0.85 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.85 }}
-                    className="mb-4"
-                  >
-                    <SpeechBubble className="px-4 py-2.5">
-                      <span className="font-display text-[13px] font-semibold text-ink">
-                        Tap a unit to start revising.
-                      </span>
-                    </SpeechBubble>
-                  </m.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
+      <div className="bg-cocoa text-milk">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          {/* ————— three columns: the club · the units · the toolkit —————
+              two columns until tablet, where three would squeeze every
+              caption into four lines */}
+          <div className="grid gap-10 py-9 sm:py-11 md:grid-cols-2 lg:grid-cols-[1.3fr_1.25fr_0.9fr] lg:gap-8">
+            {/* who we are */}
+            <div className="max-w-sm">
+              <div className="flex items-center gap-3">
+                <LogoMark size={38} />
+                <span className="font-display text-[17px] font-semibold tracking-tight">
+                  Reaction Club
+                </span>
+              </div>
+              <p className="mt-3 text-[14px] leading-relaxed text-milk/80">
+                Notes for every topic in the International A Level course —
+                read them in order, try the checkpoints, and mark what
+                you&apos;ve revised. Your reading time is counted, topic by
+                topic.
+              </p>
 
-          <div>
-            <div className="font-display text-[12px] font-bold tracking-[0.2em] text-milk/60 uppercase">
-              The club
-            </div>
-            <div className="mt-4 flex flex-col gap-3">
-              <button
-                type="button"
-                onClick={onOpenSticker}
-                className="group flex cursor-pointer items-center gap-2.5 text-left"
-              >
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-mint/25 text-mint transition-transform group-hover:scale-110">
-                  <Sticker className="h-4 w-4" strokeWidth={2.2} />
-                </span>
-                <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
-                  Progress · your time, topics & weekly goal
-                </span>
-              </button>
-              <button
-                type="button"
-                onClick={onOpenPack}
-                className="group flex cursor-pointer items-center gap-2.5 text-left"
-              >
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon transition-transform group-hover:scale-110">
-                  <ClipboardList className="h-4 w-4" strokeWidth={2.2} />
-                </span>
-                <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
-                  Revision pack · your ticked spec points
-                </span>
-              </button>
-              <button
-                type="button"
-                onClick={onOpenCustomize}
-                className="group flex cursor-pointer items-center gap-2.5 text-left"
-              >
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon transition-transform group-hover:scale-110">
-                  <Sliders className="h-4 w-4" strokeWidth={2.2} />
-                </span>
-                <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
-                  Customize · fonts, sizes & themes
-                </span>
-              </button>
-              <button
-                type="button"
-                onClick={onSearch}
-                className="group flex cursor-pointer items-center gap-2.5 text-left"
-              >
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10 text-milk/80 transition-transform group-hover:scale-110">
-                  <Search className="h-4 w-4" strokeWidth={2.2} />
-                </span>
-                <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
-                  Search
-                  <span className="hidden pointer-fine:inline"> · press ⌘K</span>
-                </span>
-              </button>
-            </div>
-          </div>
-
-          <div>
-            <div className="font-display text-[12px] font-bold tracking-[0.2em] text-milk/60 uppercase">
-              Units
-            </div>
-            <div className="mt-4 grid grid-cols-2 gap-x-10 gap-y-3">
-              {UNITS.map((u) => (
-                <button
-                  key={u.code}
-                  type="button"
-                  onClick={() => onOpenUnit(u.code)}
-                  className="group flex cursor-pointer items-center gap-2.5 text-left"
-                >
+              {/* the whole course, as three quiet numbers */}
+              <div className="mt-5 flex flex-wrap gap-2">
+                {[
+                  { icon: Atom, value: String(UNITS.length), label: "units" },
+                  { icon: ListChecks, value: String(TOTALS.topics), label: "topics" },
+                  { icon: Clock, value: `≈${hours} h`, label: "of reading" },
+                ].map((s) => (
                   <span
-                    className="h-3 w-3 shrink-0 rounded-full transition-transform group-hover:scale-125"
-                    style={{ background: u.candy.main }}
-                  />
-                  <span className="text-[13px] font-bold text-milk/80 transition-colors group-hover:text-milk">
-                    {u.code.replace("WCH", "Unit ")} · {u.shortTitle}
+                    key={s.label}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] py-1.5 pl-3 pr-3.5"
+                  >
+                    <s.icon className="h-3.5 w-3.5 text-lemon" strokeWidth={2.2} />
+                    <span className="font-display text-[13px] font-bold leading-none">
+                      {s.value}
+                    </span>
+                    <span className="text-[11px] font-bold leading-none text-milk/60">
+                      {s.label}
+                    </span>
                   </span>
-                </button>
-              ))}
+                ))}
+              </div>
+
+              <div className="mt-5 flex items-end gap-1">
+                <Mascot
+                  main="#FFD43B"
+                  size={88}
+                  boop
+                  onBoop={boop}
+                  bubbles={false}
+                />
+                <AnimatePresence>
+                  {booped && (
+                    <m.div
+                      initial={{ opacity: 0, y: 8, scale: 0.85 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.85 }}
+                      className="mb-4"
+                    >
+                      <SpeechBubble className="px-4 py-2.5">
+                        <span className="font-display text-[13px] font-semibold text-ink">
+                          Tap a unit to start revising.
+                        </span>
+                      </SpeechBubble>
+                    </m.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* the six units — real bench marks now, not plain dots */}
+            <div>
+              <div className="font-display text-[12px] font-bold tracking-[0.2em] text-milk/60 uppercase">
+                The units
+              </div>
+              <div className="mt-4 flex flex-col gap-2.5">
+                {UNITS.map((u) => {
+                  const Icon = UNIT_ICONS[u.code];
+                  return (
+                    <button
+                      key={u.code}
+                      type="button"
+                      onClick={() => onOpenUnit(u.code)}
+                      className="group flex cursor-pointer items-center gap-3 text-left"
+                    >
+                      <span
+                        className="grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110"
+                        style={{ background: u.candy.main, color: readableInk(u.candy.main) }}
+                      >
+                        <Icon className="h-4 w-4" strokeWidth={2.2} />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-[13px] font-bold leading-tight text-milk/80 transition-colors group-hover:text-milk">
+                          Unit {u.code.slice(3)} · {u.shortTitle}
+                        </span>
+                        <span className="mt-0.5 block text-[10.5px] font-bold uppercase tracking-[0.12em] text-milk/40">
+                          {u.code}
+                        </span>
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* the toolkit */}
+            <div>
+              <div className="font-display text-[12px] font-bold tracking-[0.2em] text-milk/60 uppercase">
+                The toolkit
+              </div>
+              <div className="mt-4 flex flex-col gap-3">
+                {(
+                  [
+                    {
+                      icon: Sticker,
+                      chip: "bg-mint/25 text-mint",
+                      label: "Progress",
+                      hint: "your time, topics & weekly goal",
+                      open: onOpenSticker,
+                    },
+                    {
+                      icon: ClipboardList,
+                      chip: "bg-lemon/25 text-lemon",
+                      label: "Revision pack",
+                      hint: "your ticked spec points",
+                      open: onOpenPack,
+                    },
+                    {
+                      icon: BookMarked,
+                      chip: "bg-lemon/25 text-lemon",
+                      label: "Spec index",
+                      hint: "every statement, A to Z",
+                      open: onOpenSpec,
+                    },
+                    {
+                      icon: Sliders,
+                      chip: "bg-lemon/25 text-lemon",
+                      label: "Customize",
+                      hint: "fonts, sizes & themes",
+                      open: onOpenCustomize,
+                    },
+                    {
+                      icon: Search,
+                      chip: "bg-white/10 text-milk/80",
+                      label: "Search",
+                      hint: "press ⌘K anywhere",
+                      open: onSearch,
+                    },
+                  ] as const
+                ).map((row) => (
+                  <button
+                    key={row.label}
+                    type="button"
+                    onClick={row.open}
+                    className="group flex cursor-pointer items-center gap-2.5 text-left"
+                  >
+                    <span
+                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110 ${row.chip}`}
+                    >
+                      <row.icon className="h-4 w-4" strokeWidth={2.2} />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-[13px] font-bold leading-tight text-milk/80 transition-colors group-hover:text-milk">
+                        {row.label}
+                      </span>
+                      <span className="mt-0.5 block truncate text-[11px] font-semibold text-milk/45">
+                        {row.hint}
+                      </span>
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="mx-auto mt-10 max-w-6xl px-5 pb-[var(--sa-bottom)] sm:px-8">
-          <p className="text-[11.5px] leading-relaxed font-semibold text-milk/60">
-            Written to the Pearson Edexcel International A Level Chemistry
-            (2018) specification · WCH11–WCH16 · not affiliated with or endorsed
-            by Pearson Education Ltd.
-            <span className="ml-1 whitespace-nowrap text-milk/40">
-              · rev 4 · Nov 2026
-            </span>
-          </p>
+          {/* ————— good to know ————— */}
+          <div className="grid gap-2 rounded-[22px] border border-white/[0.08] bg-white/[0.04] p-3 sm:grid-cols-3 sm:p-4">
+            {(
+              [
+                {
+                  icon: ShieldCheck,
+                  chip: "text-mint",
+                  text: "Private by design — your progress never leaves this browser.",
+                },
+                {
+                  icon: SunMoon,
+                  chip: "text-lemon",
+                  text: "Three labs — light, dark & classic, one tap in Customize.",
+                },
+                {
+                  icon: Command,
+                  chip: "text-milk/80",
+                  text: "Search everything — topics, notes and spec points — from ⌘K.",
+                },
+              ] as const
+            ).map((n) => (
+              <div key={n.text} className="flex items-start gap-2.5 px-1.5 py-1.5">
+                <n.icon className={`mt-0.5 h-4.5 w-4.5 shrink-0 ${n.chip}`} strokeWidth={2} />
+                <p className="text-[12px] leading-snug font-semibold text-milk/65">
+                  {n.text}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* ————— colophon ————— */}
+          <div className="mt-7 flex flex-col gap-4 border-t border-white/10 pt-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-2xl text-[11.5px] leading-relaxed font-semibold text-milk/55">
+              © 2026 Reaction Club · Written to the Pearson Edexcel
+              International A Level Chemistry (2018) specification ·
+              WCH11–WCH16 · not affiliated with or endorsed by Pearson
+              Education Ltd.
+              <span className="ml-1 whitespace-nowrap text-milk/35">
+                · rev 4 · Nov 2026
+              </span>
+            </p>
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="group inline-flex shrink-0 cursor-pointer items-center gap-2 self-start rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-[12.5px] font-bold text-milk/80 transition-colors hover:bg-white/[0.12] hover:text-milk sm:self-auto"
+            >
+              <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" strokeWidth={2.2} />
+              Back to top
+            </button>
+          </div>
         </div>
       </div>
     </footer>
@@ -829,6 +930,7 @@ export default function ClubApp() {
               onOpenSticker={openSticker}
               onOpenCustomize={openCustomize}
               onOpenPack={openPack}
+              onOpenSpec={() => setView({ kind: "spec" })}
               onSearch={openSearch}
               bandFrom={
                 view.kind === "home"
