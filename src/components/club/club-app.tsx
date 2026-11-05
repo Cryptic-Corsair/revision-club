@@ -489,29 +489,59 @@ function Footer({
           />
         </div>
 
-        <div className="relative mx-auto max-w-6xl px-3 pt-3 sm:px-5">
-          {/* ————— the directory, behind one sheet of liquid glass —————
-              the whole index sits on frosted glass over the colour
-              lamps: blurred ambience, a hairline rim, a specular
-              sheen across the top — depth without a single flat box */}
-          <div className="relative rounded-[32px] border border-white/[0.13] bg-white/[0.055] shadow-[inset_0_1px_0_rgb(255_255_255/0.16),0_28px_70px_-32px_rgb(0_0_0/0.85)] backdrop-blur-xl backdrop-saturate-150 sm:rounded-[38px]">
-            {/* the specular sheen — the light that sells the glass */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-[32px] bg-[linear-gradient(112deg,rgb(255_255_255/0.09)_0%,transparent_26%,transparent_70%,rgb(255_255_255/0.05)_100%)] sm:rounded-[38px]"
-            />
+        <div className="relative">
+          {/* ————— one continuous liquid-glass sheet, edge to edge —————
+              no floating panel and no boxed sub-cards: the veil spans
+              the whole footer so the directory stretches and fills it */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-white/[0.05] shadow-[inset_0_1px_0_rgb(255_255_255/0.14)] backdrop-blur-xl backdrop-saturate-150"
+          />
+          {/* the specular sheen — full-width light falling from the top */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-[linear-gradient(180deg,rgb(255_255_255/0.075),transparent)]"
+          />
 
+          <div className="relative mx-auto max-w-6xl px-5 pt-10 sm:px-8 sm:pt-12">
             {/* ————— three columns: the club · the units · the toolkit —————
                 two columns until tablet, where three would squeeze every
                 caption into four lines */}
-            <div className="relative grid gap-9 p-6 sm:p-8 md:grid-cols-2 lg:grid-cols-[1.3fr_1.25fr_0.9fr] lg:gap-7">
+            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.3fr_1.25fr_0.9fr] lg:gap-12">
             {/* who we are */}
-            <div className="max-w-sm">
-              <div className="flex items-center gap-3">
-                <LogoMark size={38} />
-                <span className="font-display text-[17px] font-semibold tracking-tight">
-                  Reaction Club
-                </span>
+            <div className="max-w-md">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <LogoMark size={38} />
+                  <span className="font-display text-[17px] font-semibold tracking-tight">
+                    Reaction Club
+                  </span>
+                </div>
+                <div className="flex items-end gap-1">
+                  <Mascot
+                    main="#FFD43B"
+                    size={74}
+                    boop
+                    onBoop={boop}
+                    bubbles={false}
+                  />
+                  <AnimatePresence>
+                    {booped && (
+                      <m.div
+                        initial={{ opacity: 0, y: 8, scale: 0.85 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.85 }}
+                        className="mb-4"
+                      >
+                        <SpeechBubble className="px-4 py-2.5">
+                          <span className="font-display text-[13px] font-semibold text-ink">
+                            Tap a unit to start revising.
+                          </span>
+                        </SpeechBubble>
+                      </m.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
               <p className="mt-3 text-[14px] leading-relaxed text-milk/80">
                 Notes for every topic in the International A Level course —
@@ -540,32 +570,6 @@ function Footer({
                     </span>
                   </span>
                 ))}
-              </div>
-
-              <div className="mt-5 flex items-end gap-1">
-                <Mascot
-                  main="#FFD43B"
-                  size={88}
-                  boop
-                  onBoop={boop}
-                  bubbles={false}
-                />
-                <AnimatePresence>
-                  {booped && (
-                    <m.div
-                      initial={{ opacity: 0, y: 8, scale: 0.85 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.85 }}
-                      className="mb-4"
-                    >
-                      <SpeechBubble className="px-4 py-2.5">
-                        <span className="font-display text-[13px] font-semibold text-ink">
-                          Tap a unit to start revising.
-                        </span>
-                      </SpeechBubble>
-                    </m.div>
-                  )}
-                </AnimatePresence>
               </div>
             </div>
 
@@ -673,10 +677,9 @@ function Footer({
               </div>
             </div>
           </div>
-          </div>
 
-        {/* ————— good to know, as a slim glass bar ————— */}
-        <div className="relative mt-4 grid gap-2 rounded-[24px] border border-white/[0.11] bg-white/[0.045] p-3 backdrop-blur-lg sm:grid-cols-3 sm:p-4">
+        {/* ————— good to know — a quiet full-width strip, no box ————— */}
+        <div className="relative mt-10 grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-3 sm:gap-6">
             {(
               [
                 {
@@ -725,6 +728,7 @@ function Footer({
               Back to top
             </button>
           </div>
+        </div>
         </div>
       </div>
     </footer>
