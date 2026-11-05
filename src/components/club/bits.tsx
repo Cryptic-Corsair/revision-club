@@ -35,6 +35,33 @@ export function readableInk(main: string): string {
 export const fade = (main: string, pct: number) =>
   `color-mix(in oklab, ${main} ${pct}%, transparent)`;
 
+/* ————— content-surface washes —————
+   The BIG candy washes (table headers, panels, step pills) mix
+   through token pairs instead of tint()'s fixed --tint-base, so each
+   lab grades its own content: daylight keeps the candy pastel over
+   white paper; after dark the big surfaces fold into the room —
+   headers & on-card insets sink just under the card, ground-level
+   panels lift as quiet whisper sheets, zebra rows go neutral milk.
+   (Deep-inspection fix: candy-over-chestnut read as muddy stripes at
+   ~2.5× the chroma of their daylight pastels. Tokens live in
+   globals.css under html.dark and html.classic .room.) */
+export const wash = (
+  main: string,
+  shareToken: string,
+  pct: number,
+  baseToken = "--wash-base",
+  fallbackBase = "#ffffff",
+) =>
+  `color-mix(in oklab, ${main} var(${shareToken}, ${pct}%), var(${baseToken}, ${fallbackBase}))`;
+
+/* the sunk family — on-card insets & table headers (darker than card) */
+export const sunkWash = (main: string, pct: number) =>
+  wash(main, "--sunk-share", pct, "--sunk-base");
+
+/* the lift family — panels & pills sitting on the room ground */
+export const liftWash = (main: string, pct: number) =>
+  wash(main, "--lift-share", pct, "--lift-base");
+
 /* ————— scroll fade —————
    Wraps a horizontally scrollable child (big tables, wide figures) and
    paints a soft fade over whichever side is hiding content — the

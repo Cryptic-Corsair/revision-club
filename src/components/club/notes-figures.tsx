@@ -146,14 +146,17 @@ export function FigNotation({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x="252" y="152" textAnchor="middle" fontSize="96" fontWeight="800" fill={INK} fontFamily="var(--font-display)">
         C
       </text>
-      <path d="M240 84 Q 290 34 356 46" fill="none" stroke={accent} strokeWidth="3" strokeLinecap="round" strokeDasharray="1 8" />
+      {/* annotation arcs ease back after dark (--arc-ink), raw crayon
+          by day — the dotted callouts were the loudest mud source in
+          the cocoa room */}
+      <path d="M240 84 Q 290 34 356 46" fill="none" stroke={`color-mix(in oklab, ${accent} var(--arc-ink, 100%), transparent)`} strokeWidth="3" strokeLinecap="round" strokeDasharray="1 8" />
       <text x="366" y="40" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
         mass number = 12
       </text>
       <text x="366" y="58" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
         protons + neutrons
       </text>
-      <path d="M236 172 Q 300 196 356 188" fill="none" stroke="#12B886" strokeWidth="3" strokeLinecap="round" strokeDasharray="1 8" />
+      <path d="M236 172 Q 300 196 356 188" fill="none" stroke={`color-mix(in oklab, #12B886 var(--arc-ink, 100%), transparent)`} strokeWidth="3" strokeLinecap="round" strokeDasharray="1 8" />
       <text x="366" y="182" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
         atomic (proton) number = 6
       </text>

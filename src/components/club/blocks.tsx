@@ -19,7 +19,17 @@ import {
 } from "./icons";
 import type { Block } from "@/lib/spectra/types";
 import { Fmt } from "./format";
-import { Mascot, SpeechBubble, tint, shade, Reveal, readableInk, ScrollFade } from "./bits";
+import {
+  Mascot,
+  SpeechBubble,
+  tint,
+  shade,
+  Reveal,
+  readableInk,
+  ScrollFade,
+  liftWash,
+  sunkWash,
+} from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · blocks — topic content blocks
@@ -76,7 +86,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
       return (
         <div
           className="rounded-[26px] p-5 sm:p-6"
-          style={{ background: tint(main, 10) }}
+          style={{ background: liftWash(main, 10) }}
         >
           {b.title && (
             <div
@@ -270,7 +280,7 @@ function WorkedExample({
                   {i > 0 && <div className="dot-line mb-1 ml-6 h-4" aria-hidden />}
                   <div
                     className="inline-flex max-w-full items-start gap-2.5 rounded-[18px] px-4 py-2.5 text-[14.5px] leading-[1.6] text-ink"
-                    style={{ background: tint(main, 9) }}
+                    style={{ background: sunkWash(main, 9) }}
                   >
                     <span
                       className="mt-0.5 grid h-5.5 w-5.5 shrink-0 place-items-center rounded-full font-display text-[11px] font-bold text-white"
@@ -335,7 +345,7 @@ function CandyTable({
         <ScrollFade>
           <table className="w-full min-w-[520px] border-collapse text-left">
             <thead>
-              <tr style={{ background: tint(main, 15) }}>
+              <tr style={{ background: sunkWash(main, 15) }}>
                 {head.map((h, i) => (
                   <th
                     key={i}
@@ -351,7 +361,12 @@ function CandyTable({
                 <tr
                   key={i}
                   className="border-t-[2.5px] border-dashed border-ink/10"
-                  style={{ background: i % 2 === 1 ? tint(main, 4) : undefined }}
+                  style={{
+                    background:
+                      i % 2 === 1
+                        ? `var(--zebra-fill, color-mix(in oklab, ${main} 4%, #ffffff))`
+                        : undefined,
+                  }}
                 >
                   {r.map((c, j) => (
                     <td
@@ -384,7 +399,7 @@ function Checkpoint({ qs, main }: { qs: { q: string; a: string }[]; main: string
     setFlipped((arr) => (arr.includes(i) ? arr.filter((x) => x !== i) : [...arr, i]));
 
   return (
-    <div className="rounded-[30px] p-5 sm:p-6" style={{ background: tint(main, 9) }}>
+    <div className="rounded-[30px] p-5 sm:p-6" style={{ background: liftWash(main, 9) }}>
       <div className="mb-4 flex items-center gap-3">
         <span className="grid h-10 w-10 place-items-center rounded-2xl bg-paper">
           <Gamepad2 className="h-5 w-5" style={{ color: main }} />
@@ -492,7 +507,7 @@ function CheckCard({
           </div>
           <p
             className="mt-3 flex-1 rounded-[16px] px-3.5 py-2.5 text-[14.5px] leading-[1.7] text-ink"
-            style={{ background: tint("#12B886", 10) }}
+            style={{ background: sunkWash("#12B886", 10) }}
           >
             <Fmt text={a} />
           </p>

@@ -144,6 +144,28 @@ html.dark {
   --note-band-b: #3a2a17;
   --home-band-a: #291d10;
   --home-band-b: #342212;
+  /* ————— content-surface grading —————
+     The deep-inspection finding: the big candy washes inherited the
+     daylight recipe verbatim (accent over --tint-base), so after dark
+     table headers sat ~0.10 L above the card at ~2.5× the chroma of
+     their daylight pastels — muddy orange/olive stripes. Here the
+     big content surfaces fold into the room instead: headers &
+     on-card insets sink just under the card (sunk), ground-level
+     panels lift as quiet whisper sheets (lift), zebra rows go
+     neutral milk, figure annotation ink eases back. Small candy
+     chips keep tint() and the daylight recipe. Measured with the
+     oklab audit (scripts/final-check.py): sunk headers −0.015..−0.033
+     L vs card, ink ≥ 11:1; lift panels +0.085 L vs ground, ink ≥ 8.4:1
+     on every roast. */
+  --sunk-share: 8%;
+  --sunk-base: var(--note-band-a);
+  --lift-share: 6%;
+  --lift-base: var(--color-paper);
+  --sticky-share: 10%;
+  --idea-share: 6%;
+  --check-share: 8%;
+  --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
+  --arc-ink: 70%;
   --edge: rgb(0 0 0 / 0.5);
   color-scheme: dark;
 }
@@ -212,6 +234,17 @@ html.classic .room {
   --color-ink-faint: color-mix(in oklab, var(--color-milk) 56%, var(--color-cocoa));
   --color-paper: color-mix(in oklab, var(--color-milk) 13%, var(--color-cocoa));
   --tint-base: color-mix(in oklab, var(--color-milk) 20%, var(--color-cocoa));
+  /* the espresso rooms wear the same content-surface grading as the
+     after-dark lab — the cream rooms stay on the daylight recipe */
+  --sunk-share: 8%;
+  --sunk-base: var(--note-band-a);
+  --lift-share: 6%;
+  --lift-base: var(--color-paper);
+  --sticky-share: 10%;
+  --idea-share: 6%;
+  --check-share: 8%;
+  --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
+  --arc-ink: 70%;
 }
 
 

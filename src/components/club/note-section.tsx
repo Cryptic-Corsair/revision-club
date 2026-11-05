@@ -16,7 +16,7 @@ import {
 } from "./icons";
 import type { NotesBlock, SpecSection } from "@/lib/spectra/notes-types";
 import { Fmt } from "./format";
-import { Reveal, ScrollFade, readableInk, shade, tint } from "./bits";
+import { liftWash, Reveal, ScrollFade, readableInk, shade, sunkWash, tint } from "./bits";
 import { inkMix } from "./bands";
 import {
   FigAtom,
@@ -283,7 +283,7 @@ function BlockView({
       return (
         <div
           className="max-w-[72ch] rounded-[20px] px-4 py-3.5"
-          style={{ background: tint("#FFD43B", 18) }}
+          style={{ background: liftWash("#FFD43B", 18) }}
         >
           <div className="flex items-start gap-3">
             <StickyNote
@@ -320,7 +320,7 @@ function BlockView({
       return (
         <div
           className="max-w-[72ch] rounded-[22px] p-5"
-          style={{ background: tint(accent, 9) }}
+          style={{ background: liftWash(accent, 9) }}
         >
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5">
             {b.eq.split(/\s{2,}/).map((part, i) => (
@@ -365,7 +365,7 @@ function BlockView({
         <div className="flex items-center gap-3 rounded-full bg-paper px-5 py-4 puff">
           <span
             className="grid h-10 w-10 shrink-0 place-items-center rounded-full"
-            style={{ background: tint("#12B886", 18) }}
+            style={{ background: liftWash("#12B886", 18) }}
           >
             <BookOpen className="h-5 w-5 text-mint" />
           </span>
@@ -381,7 +381,7 @@ function BlockView({
       return (
         <div
           className="max-w-[72ch] rounded-[22px] p-5 sm:p-6"
-          style={{ background: tint("#9775FA", 12) }}
+          style={{ background: liftWash("#9775FA", 12) }}
         >
           <div className="flex items-start gap-3">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-paper">
@@ -433,7 +433,7 @@ function CandyTable({
         <ScrollFade>
           <table className="w-full min-w-[480px] border-collapse text-left">
             <thead>
-              <tr style={{ background: tint(accent, 15) }}>
+              <tr style={{ background: sunkWash(accent, 15) }}>
                 {head.map((h, i) => (
                   <th
                     key={i}
@@ -450,7 +450,10 @@ function CandyTable({
                   key={i}
                   className="border-t-[2.5px] border-dashed border-ink/10"
                   style={{
-                    background: i % 2 === 1 ? tint(accent, 4) : undefined,
+                    background:
+                      i % 2 === 1
+                        ? `var(--zebra-fill, color-mix(in oklab, ${accent} 4%, #ffffff))`
+                        : undefined,
                   }}
                 >
                   {r.map((c, j) => (
@@ -582,7 +585,7 @@ function Worked({
                   )}
                   <div
                     className="inline-flex max-w-full items-start gap-2.5 rounded-[18px] px-4 py-2.5 text-[15px] leading-[1.7] text-ink"
-                    style={{ background: tint(accent, 9) }}
+                    style={{ background: liftWash(accent, 9) }}
                   >
                     <span
                       className="mt-0.5 grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full font-display text-[11px] font-bold"
@@ -662,7 +665,7 @@ function StepsPanel({
   return (
     <div
       className="rounded-[26px] p-4 sm:p-5"
-      style={{ background: tint(accent, 9) }}
+      style={{ background: liftWash(accent, 9) }}
     >
       {caption && (
         <div className="mb-3.5 flex items-center gap-2.5">
