@@ -1,49 +1,58 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Baloo_2, Fredoka, Nunito, Patrick_Hand, Quicksand, IBM_Plex_Mono } from "next/font/google";
+/* Fonts are self-hosted (src/app/fonts/, latin woff2, variable where
+   available) instead of next/font/google: the Turbopack google-font
+   resolver kept corrupting its import map between dev-server restarts
+   ("next/font/google queries have exactly one entry") and taking the
+   whole workspace preview down with it. Same families, same weights,
+   same CSS variables — nothing else in the app had to change. */
+import localFont from "next/font/local";
 import { DARK_MOOD_COUNT } from "@/lib/spectra/dark-mood";
 import "./globals.css";
 
-const fredoka = Fredoka({
+const fredoka = localFont({
   variable: "--font-fredoka",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  src: "./fonts/fredoka-var.woff2",
+  weight: "300 700",
   display: "swap",
 });
 
-const baloo = Baloo_2({
+const baloo = localFont({
   variable: "--font-baloo",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  src: "./fonts/baloo2-var.woff2",
+  weight: "400 800",
   display: "swap",
 });
 
-const patrick = Patrick_Hand({
+const patrick = localFont({
   variable: "--font-patrick",
-  subsets: ["latin"],
+  src: "./fonts/patrick-hand-400.woff2",
   weight: "400",
   display: "swap",
 });
 
 /* no 900 — the heaviest class anywhere is font-extrabold (800) */
-const nunito = Nunito({
+const nunito = localFont({
   variable: "--font-nunito",
-  subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+  src: "./fonts/nunito-var.woff2",
+  weight: "400 800",
   display: "swap",
 });
 
-const quicksand = Quicksand({
+const quicksand = localFont({
   variable: "--font-quicksand",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  src: "./fonts/quicksand-var.woff2",
+  weight: "300 700",
   display: "swap",
 });
 
-const plex = IBM_Plex_Mono({
+const plex = localFont({
   variable: "--font-plex",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  src: [
+    { path: "./fonts/plex-500.woff2", weight: "500" },
+    { path: "./fonts/plex-600.woff2", weight: "600" },
+    { path: "./fonts/plex-700.woff2", weight: "700" },
+  ],
   display: "swap",
 });
 
