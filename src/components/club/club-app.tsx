@@ -426,9 +426,8 @@ function Footer({
   onOpenPack: () => void;
   onOpenSpec: () => void;
   onSearch: () => void;
-  /* the colour the footer melts from — home hands in its own band
-     colour so the sink into cocoa starts exactly where the page
-     leaves off, by day and after dark */
+  /* the surface the cocoa wave rises from — home hands in its own
+     band colour so the seam above stays continuous after dark */
   bandFrom?: string;
 }) {
   const [booped, setBooped] = useState(false);
@@ -441,115 +440,36 @@ function Footer({
 
   return (
     <footer className="mt-auto">
-      {/* ————— one continuous room —————
-          the band above doesn't end at a wave — it sinks through one.
-          Two washes of the page colour dissolve downward while a
-          swell of cocoa rises to meet them, and the colour lamps
-          below glow up through all three sheets, so the page and
-          the footer cross-fade with no edge anywhere between them.
-          The 1px pull keeps the handshake with the section above a
-          same-colour overlap, so no device can open a hairline. */}
-      <div className="relative -mt-px overflow-hidden bg-cocoa text-milk">
-        {/* ————— the ambience —————
-            colour lamps and a grain of light dots, painted under
-            the wave so the lamps reach up into the dunes. Paints
-            once, never moves. */}
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "radial-gradient(rgb(255 246 234 / 0.05) 1.6px, transparent 1.7px)",
-              backgroundSize: "26px 26px",
-            }}
+      <div
+        aria-hidden
+        className="h-[54px] sm:h-[74px]"
+        style={{ background: bandFrom }}
+      >
+        <svg
+          viewBox="0 0 1440 90"
+          preserveAspectRatio="none"
+          className="block h-full w-full"
+        >
+          <path
+            d="M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z"
+            fill="var(--color-cocoa)"
           />
-          <div
-            className="absolute -top-28 -left-24 h-[26rem] w-[26rem] rounded-full"
-            style={{ background: "radial-gradient(circle, rgb(255 107 107 / 0.22), transparent 68%)" }}
-          />
-          <div
-            className="absolute top-[34%] -right-32 h-[30rem] w-[30rem] rounded-full"
-            style={{ background: "radial-gradient(circle, rgb(151 117 250 / 0.18), transparent 68%)" }}
-          />
-          <div
-            className="absolute -bottom-36 left-[22%] h-[26rem] w-[26rem] rounded-full"
-            style={{ background: "radial-gradient(circle, rgb(18 184 134 / 0.14), transparent 68%)" }}
-          />
-          <div
-            className="absolute top-[24%] left-1/2 h-72 w-[34rem] max-w-full -translate-x-1/2 rounded-full"
-            style={{ background: "radial-gradient(circle, rgb(255 212 59 / 0.11), transparent 68%)" }}
-          />
-        </div>
+        </svg>
+      </div>
 
-        {/* ————— the wave —————
-            the original seam curve, at its original size — same path,
-            same 54/74px band — but instead of a solid cut-out it is
-            filled with a cocoa gradient: the crest stays a defined
-            dune line while its body deepens until it lands on the
-            room at full cocoa, so the shape reads clearly and still
-            blends into the footer with no hard junction anywhere.
-            The wrapper paints bandFrom, so the sky behind the crest
-            is the page's own colour, continuing the section above. */}
-        <div aria-hidden className="relative" style={{ background: bandFrom }}>
-          <svg
-            viewBox="0 0 1440 90"
-            preserveAspectRatio="none"
-            className="block h-[54px] w-full sm:h-[74px]"
-          >
-            <defs>
-              <linearGradient id="rc-wave-blend" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.6 }} />
-                <stop offset="0.55" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.85 }} />
-                <stop offset="1" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 1 }} />
-              </linearGradient>
-            </defs>
-            <path
-              d="M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z"
-              fill="url(#rc-wave-blend)"
-            />
-          </svg>
-        </div>
-
-        <div className="relative">
-
-          <div className="relative mx-auto max-w-6xl px-5 pt-10 sm:px-8 sm:pt-12">
-            {/* ————— three columns: the club · the units · the toolkit —————
-                two columns until tablet, where three would squeeze every
-                caption into four lines */}
-            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.3fr_1.25fr_0.9fr] lg:gap-12">
+      <div className="bg-cocoa text-milk">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          {/* ————— three columns: the club · the units · the toolkit —————
+              two columns until tablet, where three would squeeze every
+              caption into four lines */}
+          <div className="grid gap-10 py-9 sm:py-11 md:grid-cols-2 lg:grid-cols-[1.3fr_1.25fr_0.9fr] lg:gap-8">
             {/* who we are */}
-            <div className="max-w-md">
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <LogoMark size={38} />
-                  <span className="font-display text-[17px] font-semibold tracking-tight">
-                    Reaction Club
-                  </span>
-                </div>
-                <div className="flex items-end gap-1">
-                  <Mascot
-                    main="#FFD43B"
-                    size={74}
-                    boop
-                    onBoop={boop}
-                    bubbles={false}
-                  />
-                  <AnimatePresence>
-                    {booped && (
-                      <m.div
-                        initial={{ opacity: 0, y: 8, scale: 0.85 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.85 }}
-                        className="mb-4"
-                      >
-                        <SpeechBubble className="px-4 py-2.5">
-                          <span className="font-display text-[13px] font-semibold text-ink">
-                            Tap a unit to start revising.
-                          </span>
-                        </SpeechBubble>
-                      </m.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+            <div className="max-w-sm">
+              <div className="flex items-center gap-3">
+                <LogoMark size={38} />
+                <span className="font-display text-[17px] font-semibold tracking-tight">
+                  Reaction Club
+                </span>
               </div>
               <p className="mt-3 text-[14px] leading-relaxed text-milk/80">
                 Notes for every topic in the International A Level course —
@@ -567,7 +487,7 @@ function Footer({
                 ].map((s) => (
                   <span
                     key={s.label}
-                    className="inline-flex items-center gap-2 rounded-full border border-milk/20 py-1.5 pl-3 pr-3.5 transition-colors hover:border-milk/40"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] py-1.5 pl-3 pr-3.5"
                   >
                     <s.icon className="h-3.5 w-3.5 text-lemon" strokeWidth={2.2} />
                     <span className="font-display text-[13px] font-bold leading-none">
@@ -578,6 +498,32 @@ function Footer({
                     </span>
                   </span>
                 ))}
+              </div>
+
+              <div className="mt-5 flex items-end gap-1">
+                <Mascot
+                  main="#FFD43B"
+                  size={88}
+                  boop
+                  onBoop={boop}
+                  bubbles={false}
+                />
+                <AnimatePresence>
+                  {booped && (
+                    <m.div
+                      initial={{ opacity: 0, y: 8, scale: 0.85 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.85 }}
+                      className="mb-4"
+                    >
+                      <SpeechBubble className="px-4 py-2.5">
+                        <span className="font-display text-[13px] font-semibold text-ink">
+                          Tap a unit to start revising.
+                        </span>
+                      </SpeechBubble>
+                    </m.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
 
@@ -594,7 +540,7 @@ function Footer({
                       key={u.code}
                       type="button"
                       onClick={() => onOpenUnit(u.code)}
-                      className="group flex cursor-pointer items-center gap-3 py-2.5 text-left"
+                      className="group flex cursor-pointer items-center gap-3 text-left"
                     >
                       <span
                         className="grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110"
@@ -665,7 +611,7 @@ function Footer({
                     key={row.label}
                     type="button"
                     onClick={row.open}
-                    className="group flex cursor-pointer items-center gap-2.5 py-2.5 text-left"
+                    className="group flex cursor-pointer items-center gap-2.5 text-left"
                   >
                     <span
                       className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110 ${row.chip}`}
@@ -686,8 +632,8 @@ function Footer({
             </div>
           </div>
 
-        {/* ————— good to know — a quiet full-width strip, no box ————— */}
-        <div className="relative mt-10 grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-3 sm:gap-6">
+          {/* ————— good to know ————— */}
+          <div className="grid gap-2 rounded-[22px] border border-white/[0.08] bg-white/[0.04] p-3 sm:grid-cols-3 sm:p-4">
             {(
               [
                 {
@@ -716,8 +662,8 @@ function Footer({
             ))}
           </div>
 
-        {/* ————— colophon ————— */}
-        <div className="mt-7 flex flex-col gap-4 border-t border-white/10 px-1 pt-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
+          {/* ————— colophon ————— */}
+          <div className="mt-7 flex flex-col gap-4 border-t border-white/10 pt-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-2xl text-[11.5px] leading-relaxed font-semibold text-milk/55">
               © 2026 Reaction Club · Written to the Pearson Edexcel
               International A Level Chemistry (2018) specification ·
@@ -730,13 +676,12 @@ function Footer({
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="group inline-flex shrink-0 cursor-pointer items-center gap-2 self-start rounded-full bg-milk px-4 py-2 text-[12.5px] font-bold text-cocoa transition-transform hover:-translate-y-0.5 sm:self-auto"
+              className="group inline-flex shrink-0 cursor-pointer items-center gap-2 self-start rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-[12.5px] font-bold text-milk/80 transition-colors hover:bg-white/[0.12] hover:text-milk sm:self-auto"
             >
               <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" strokeWidth={2.2} />
               Back to top
             </button>
           </div>
-        </div>
         </div>
       </div>
     </footer>
