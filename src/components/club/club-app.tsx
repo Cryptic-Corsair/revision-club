@@ -450,11 +450,10 @@ function Footer({
           The 1px pull keeps the handshake with the section above a
           same-colour overlap, so no device can open a hairline. */}
       <div className="relative -mt-px overflow-hidden bg-cocoa text-milk">
-        {/* ————— the ambience behind the glass —————
-            colour lamps and a grain of light dots: this is what the
-            frosted sheets actually blur. Painted under the melt, so
-            the lamps reach up into the waves. Paints once, never
-            moves. */}
+        {/* ————— the ambience —————
+            colour lamps and a grain of light dots, painted under
+            the wave so the lamps reach up into the dunes. Paints
+            once, never moves. */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div
             className="absolute inset-0"
@@ -509,32 +508,6 @@ function Footer({
             />
           </svg>
         </div>
-
-        {/* ————— one continuous liquid-glass sheet —————
-            no floating panel and no boxed sub-cards: one veil covers
-            wave and body alike, and it fades in from zero at the
-            ceiling so even the frost itself has no edge. No room-wide
-            blur — the wave's crest must stay crisp. The old inset
-            rim-light is gone too — a rim is a line, and this room
-            doesn't have any. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgb(255 255 255 / 0) 4px, rgb(255 255 255 / 0.05) 120px)",
-          }}
-        />
-        {/* the specular sheen — light pooling on the dunes, rising
-            and dying away so it never draws a line of its own */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-[320px]"
-          style={{
-            background:
-              "linear-gradient(180deg, rgb(255 255 255 / 0) 8%, rgb(255 255 255 / 0.05) 30%, transparent 85%)",
-          }}
-        />
 
         <div className="relative">
 
