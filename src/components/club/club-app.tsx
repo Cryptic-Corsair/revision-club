@@ -426,8 +426,9 @@ function Footer({
   onOpenPack: () => void;
   onOpenSpec: () => void;
   onSearch: () => void;
-  /* the surface the cocoa wave rises from — home hands in its own
-     band colour so the seam above stays continuous after dark */
+  /* the colour the footer melts from — home hands in its own band
+     colour so the sink into cocoa starts exactly where the page
+     leaves off, by day and after dark */
   bandFrom?: string;
 }) {
   const [booped, setBooped] = useState(false);
@@ -440,29 +441,20 @@ function Footer({
 
   return (
     <footer className="mt-auto">
-      {/* 1px pull into the seam above: same-colour handshake, so no
-          device can open a bright hairline at the junction */}
-      <div
-        aria-hidden
-        className="relative -mt-px h-[54px] sm:h-[74px]"
-        style={{ background: bandFrom }}
-      >
-        <svg
-          viewBox="0 0 1440 90"
-          preserveAspectRatio="none"
-          className="block h-full w-full"
-        >
-          <path
-            d="M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z"
-            fill="var(--color-cocoa)"
-          />
-        </svg>
-      </div>
-
-      <div className="relative overflow-hidden bg-cocoa text-milk">
+      {/* ————— one continuous room —————
+          the band above doesn't end at a wave — it sinks through one.
+          Two washes of the page colour dissolve downward while a
+          swell of cocoa rises to meet them, and the colour lamps
+          below glow up through all three sheets, so the page and
+          the footer cross-fade with no edge anywhere between them.
+          The 1px pull keeps the handshake with the section above a
+          same-colour overlap, so no device can open a hairline. */}
+      <div className="relative -mt-px overflow-hidden bg-cocoa text-milk">
         {/* ————— the ambience behind the glass —————
             colour lamps and a grain of light dots: this is what the
-            frosted sheets actually blur. Paints once, never moves. */}
+            frosted sheets actually blur. Painted under the melt, so
+            the lamps reach up into the waves. Paints once, never
+            moves. */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div
             className="absolute inset-0"
@@ -484,24 +476,81 @@ function Footer({
             style={{ background: "radial-gradient(circle, rgb(18 184 134 / 0.14), transparent 68%)" }}
           />
           <div
-            className="absolute top-6 left-1/2 h-72 w-[34rem] max-w-full -translate-x-1/2 rounded-full"
+            className="absolute top-[24%] left-1/2 h-72 w-[34rem] max-w-full -translate-x-1/2 rounded-full"
             style={{ background: "radial-gradient(circle, rgb(255 212 59 / 0.11), transparent 68%)" }}
           />
         </div>
 
+        {/* ————— the melt —————
+            the room's ceiling is the page colour itself (the wrapper
+            paints bandFrom, so the handshake with the section above
+            is colour-on-colour), and three cocoa washes sink into it.
+            Each path starts at its own crest, so its gradient runs
+            crest → floor: every sheet reads as a soft dune line that
+            dissolves downward, the three stack into deepening warmth,
+            and the nearest one bottoms out at full cocoa so the body
+            below continues it without a seam. */}
+        <div aria-hidden className="relative" style={{ background: bandFrom }}>
+          <svg
+            viewBox="0 0 1440 200"
+            preserveAspectRatio="none"
+            className="block h-[104px] w-full sm:h-[150px]"
+          >
+            <defs>
+              <linearGradient id="rc-melt-far" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.45 }} />
+                <stop offset="1" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.6 }} />
+              </linearGradient>
+              <linearGradient id="rc-melt-mid" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.5 }} />
+                <stop offset="1" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.75 }} />
+              </linearGradient>
+              <linearGradient id="rc-melt-near" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 0.6 }} />
+                <stop offset="1" style={{ stopColor: "var(--color-cocoa)", stopOpacity: 1 }} />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0,52 C150,78 320,16 520,34 C720,52 860,10 1040,26 C1200,40 1330,64 1440,44 L1440,200 L0,200 Z"
+              fill="url(#rc-melt-far)"
+            />
+            <path
+              d="M0,104 C170,132 340,66 520,84 C700,102 840,58 1020,76 C1190,92 1330,122 1440,96 L1440,200 L0,200 Z"
+              fill="url(#rc-melt-mid)"
+            />
+            <path
+              d="M0,138 C180,168 350,104 540,120 C730,136 870,96 1050,114 C1220,130 1340,158 1440,132 L1440,200 L0,200 Z"
+              fill="url(#rc-melt-near)"
+            />
+          </svg>
+        </div>
+
+        {/* ————— one continuous liquid-glass sheet —————
+            no floating panel and no boxed sub-cards: one veil covers
+            melt and body alike, and it fades in from zero at the
+            ceiling so even the frost itself has no edge. The old
+            inset rim-light is gone — a rim is a line, and this room
+            doesn't have any. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 backdrop-blur-md backdrop-saturate-150"
+          style={{
+            background:
+              "linear-gradient(180deg, rgb(255 255 255 / 0) 4px, rgb(255 255 255 / 0.05) 120px)",
+          }}
+        />
+        {/* the specular sheen — light pooling on the dunes, rising
+            and dying away so it never draws a line of its own */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-[320px]"
+          style={{
+            background:
+              "linear-gradient(180deg, rgb(255 255 255 / 0) 8%, rgb(255 255 255 / 0.05) 30%, transparent 85%)",
+          }}
+        />
+
         <div className="relative">
-          {/* ————— one continuous liquid-glass sheet, edge to edge —————
-              no floating panel and no boxed sub-cards: the veil spans
-              the whole footer so the directory stretches and fills it */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-white/[0.05] shadow-[inset_0_1px_0_rgb(255_255_255/0.14)] backdrop-blur-xl backdrop-saturate-150"
-          />
-          {/* the specular sheen — full-width light falling from the top */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-[linear-gradient(180deg,rgb(255_255_255/0.075),transparent)]"
-          />
 
           <div className="relative mx-auto max-w-6xl px-5 pt-10 sm:px-8 sm:pt-12">
             {/* ————— three columns: the club · the units · the toolkit —————
