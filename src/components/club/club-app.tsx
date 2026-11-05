@@ -567,7 +567,7 @@ function Footer({
                 ].map((s) => (
                   <span
                     key={s.label}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/[0.14] bg-white/[0.08] py-1.5 pl-3 pr-3.5 backdrop-blur-sm transition-colors hover:border-white/[0.22] hover:bg-white/[0.13]"
+                    className="inline-flex items-center gap-2 rounded-full border border-milk/20 py-1.5 pl-3 pr-3.5 transition-colors hover:border-milk/40"
                   >
                     <s.icon className="h-3.5 w-3.5 text-lemon" strokeWidth={2.2} />
                     <span className="font-display text-[13px] font-bold leading-none">
@@ -594,10 +594,10 @@ function Footer({
                       key={u.code}
                       type="button"
                       onClick={() => onOpenUnit(u.code)}
-                      className="group -mx-3 flex cursor-pointer items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-white/[0.08]"
+                      className="group flex cursor-pointer items-center gap-3 py-2.5 text-left"
                     >
                       <span
-                        className="grid h-8 w-8 shrink-0 place-items-center rounded-full shadow-[inset_0_1px_0_rgb(255_255_255/0.35)] transition-transform group-hover:scale-110"
+                        className="grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110"
                         style={{ background: u.candy.main, color: readableInk(u.candy.main) }}
                       >
                         <Icon className="h-4 w-4" strokeWidth={2.2} />
@@ -665,10 +665,10 @@ function Footer({
                     key={row.label}
                     type="button"
                     onClick={row.open}
-                    className="group -mx-3 flex cursor-pointer items-center gap-2.5 rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-white/[0.08]"
+                    className="group flex cursor-pointer items-center gap-2.5 py-2.5 text-left"
                   >
                     <span
-                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full shadow-[inset_0_1px_0_rgb(255_255_255/0.25)] transition-transform group-hover:scale-110 ${row.chip}`}
+                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110 ${row.chip}`}
                     >
                       <row.icon className="h-4 w-4" strokeWidth={2.2} />
                     </span>
@@ -730,7 +730,7 @@ function Footer({
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="group inline-flex shrink-0 cursor-pointer items-center gap-2 self-start rounded-full border border-white/[0.16] bg-white/[0.08] px-4 py-2 text-[12.5px] font-bold text-milk/80 backdrop-blur-md transition-colors hover:bg-white/[0.15] hover:text-milk sm:self-auto"
+              className="group inline-flex shrink-0 cursor-pointer items-center gap-2 self-start rounded-full bg-milk px-4 py-2 text-[12.5px] font-bold text-cocoa transition-transform hover:-translate-y-0.5 sm:self-auto"
             >
               <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" strokeWidth={2.2} />
               Back to top
