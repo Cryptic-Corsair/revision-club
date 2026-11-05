@@ -440,9 +440,11 @@ function Footer({
 
   return (
     <footer className="mt-auto">
+      {/* 1px pull into the seam above: same-colour handshake, so no
+          device can open a bright hairline at the junction */}
       <div
         aria-hidden
-        className="h-[54px] sm:h-[74px]"
+        className="relative -mt-px h-[54px] sm:h-[74px]"
         style={{ background: bandFrom }}
       >
         <svg
@@ -457,12 +459,52 @@ function Footer({
         </svg>
       </div>
 
-      <div className="bg-cocoa text-milk">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          {/* ————— three columns: the club · the units · the toolkit —————
-              two columns until tablet, where three would squeeze every
-              caption into four lines */}
-          <div className="grid gap-10 py-9 sm:py-11 md:grid-cols-2 lg:grid-cols-[1.3fr_1.25fr_0.9fr] lg:gap-8">
+      <div className="relative overflow-hidden bg-cocoa text-milk">
+        {/* ————— the ambience behind the glass —————
+            colour lamps and a grain of light dots: this is what the
+            frosted sheets actually blur. Paints once, never moves. */}
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: "radial-gradient(rgb(255 246 234 / 0.05) 1.6px, transparent 1.7px)",
+              backgroundSize: "26px 26px",
+            }}
+          />
+          <div
+            className="absolute -top-28 -left-24 h-[26rem] w-[26rem] rounded-full"
+            style={{ background: "radial-gradient(circle, rgb(255 107 107 / 0.22), transparent 68%)" }}
+          />
+          <div
+            className="absolute top-[34%] -right-32 h-[30rem] w-[30rem] rounded-full"
+            style={{ background: "radial-gradient(circle, rgb(151 117 250 / 0.18), transparent 68%)" }}
+          />
+          <div
+            className="absolute -bottom-36 left-[22%] h-[26rem] w-[26rem] rounded-full"
+            style={{ background: "radial-gradient(circle, rgb(18 184 134 / 0.14), transparent 68%)" }}
+          />
+          <div
+            className="absolute top-6 left-1/2 h-72 w-[34rem] max-w-full -translate-x-1/2 rounded-full"
+            style={{ background: "radial-gradient(circle, rgb(255 212 59 / 0.11), transparent 68%)" }}
+          />
+        </div>
+
+        <div className="relative mx-auto max-w-6xl px-3 pt-3 sm:px-5">
+          {/* ————— the directory, behind one sheet of liquid glass —————
+              the whole index sits on frosted glass over the colour
+              lamps: blurred ambience, a hairline rim, a specular
+              sheen across the top — depth without a single flat box */}
+          <div className="relative rounded-[32px] border border-white/[0.13] bg-white/[0.055] shadow-[inset_0_1px_0_rgb(255_255_255/0.16),0_28px_70px_-32px_rgb(0_0_0/0.85)] backdrop-blur-xl backdrop-saturate-150 sm:rounded-[38px]">
+            {/* the specular sheen — the light that sells the glass */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 rounded-[32px] bg-[linear-gradient(112deg,rgb(255_255_255/0.09)_0%,transparent_26%,transparent_70%,rgb(255_255_255/0.05)_100%)] sm:rounded-[38px]"
+            />
+
+            {/* ————— three columns: the club · the units · the toolkit —————
+                two columns until tablet, where three would squeeze every
+                caption into four lines */}
+            <div className="relative grid gap-9 p-6 sm:p-8 md:grid-cols-2 lg:grid-cols-[1.3fr_1.25fr_0.9fr] lg:gap-7">
             {/* who we are */}
             <div className="max-w-sm">
               <div className="flex items-center gap-3">
@@ -487,7 +529,7 @@ function Footer({
                 ].map((s) => (
                   <span
                     key={s.label}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] py-1.5 pl-3 pr-3.5"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/[0.14] bg-white/[0.08] py-1.5 pl-3 pr-3.5 backdrop-blur-sm transition-colors hover:border-white/[0.22] hover:bg-white/[0.13]"
                   >
                     <s.icon className="h-3.5 w-3.5 text-lemon" strokeWidth={2.2} />
                     <span className="font-display text-[13px] font-bold leading-none">
@@ -540,10 +582,10 @@ function Footer({
                       key={u.code}
                       type="button"
                       onClick={() => onOpenUnit(u.code)}
-                      className="group flex cursor-pointer items-center gap-3 text-left"
+                      className="group -mx-3 flex cursor-pointer items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-white/[0.08]"
                     >
                       <span
-                        className="grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110"
+                        className="grid h-8 w-8 shrink-0 place-items-center rounded-full shadow-[inset_0_1px_0_rgb(255_255_255/0.35)] transition-transform group-hover:scale-110"
                         style={{ background: u.candy.main, color: readableInk(u.candy.main) }}
                       >
                         <Icon className="h-4 w-4" strokeWidth={2.2} />
@@ -611,10 +653,10 @@ function Footer({
                     key={row.label}
                     type="button"
                     onClick={row.open}
-                    className="group flex cursor-pointer items-center gap-2.5 text-left"
+                    className="group -mx-3 flex cursor-pointer items-center gap-2.5 rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-white/[0.08]"
                   >
                     <span
-                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110 ${row.chip}`}
+                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full shadow-[inset_0_1px_0_rgb(255_255_255/0.25)] transition-transform group-hover:scale-110 ${row.chip}`}
                     >
                       <row.icon className="h-4 w-4" strokeWidth={2.2} />
                     </span>
@@ -631,9 +673,10 @@ function Footer({
               </div>
             </div>
           </div>
+          </div>
 
-          {/* ————— good to know ————— */}
-          <div className="grid gap-2 rounded-[22px] border border-white/[0.08] bg-white/[0.04] p-3 sm:grid-cols-3 sm:p-4">
+        {/* ————— good to know, as a slim glass bar ————— */}
+        <div className="relative mt-4 grid gap-2 rounded-[24px] border border-white/[0.11] bg-white/[0.045] p-3 backdrop-blur-lg sm:grid-cols-3 sm:p-4">
             {(
               [
                 {
@@ -662,8 +705,8 @@ function Footer({
             ))}
           </div>
 
-          {/* ————— colophon ————— */}
-          <div className="mt-7 flex flex-col gap-4 border-t border-white/10 pt-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
+        {/* ————— colophon ————— */}
+        <div className="mt-7 flex flex-col gap-4 border-t border-white/10 px-1 pt-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-2xl text-[11.5px] leading-relaxed font-semibold text-milk/55">
               © 2026 Reaction Club · Written to the Pearson Edexcel
               International A Level Chemistry (2018) specification ·
@@ -676,7 +719,7 @@ function Footer({
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="group inline-flex shrink-0 cursor-pointer items-center gap-2 self-start rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-[12.5px] font-bold text-milk/80 transition-colors hover:bg-white/[0.12] hover:text-milk sm:self-auto"
+              className="group inline-flex shrink-0 cursor-pointer items-center gap-2 self-start rounded-full border border-white/[0.16] bg-white/[0.08] px-4 py-2 text-[12.5px] font-bold text-milk/80 backdrop-blur-md transition-colors hover:bg-white/[0.15] hover:text-milk sm:self-auto"
             >
               <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" strokeWidth={2.2} />
               Back to top

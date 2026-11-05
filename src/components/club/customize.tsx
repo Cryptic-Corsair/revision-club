@@ -2,7 +2,7 @@
 
 import { useEffect, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
-import { RotateCcw, Sliders, Sparkles, X, Check } from "./icons";
+import { Check, RotateCcw, Sliders, Sparkles, X } from "./icons";
 import { readableInk, shade, tint } from "./bits";
 import { accentOf } from "./bands";
 import {
@@ -21,17 +21,12 @@ import {
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · the customize panel
-   A slide-over workshop (not a drop-down — those stay reserved for
-   the worked examples): the lab, the accent wheel, page size, the
-   two font families, and the room's little comforts. Every knob
-   lands in prefs.ts and re-skins the site from <html> outward.
+   A slide-over workshop of frosted glass: the lab picker shows a
+   live miniature of each room, the accent wheel previews its own
+   rotation, and every knob lands in prefs.ts and re-skins the site
+   from <html> outward. The panel itself is liquid glass — the
+   dimmed page behind it blurs up through the cream frost.
    ═══════════════════════════════════════════════════════════════ */
-
-const LABS: { id: Lab; swatch: string }[] = [
-  { id: "light", swatch: "#FFD43B" },
-  { id: "dark", swatch: "#2e2016" },
-  { id: "classic", swatch: "linear-gradient(90deg, #2c2013 50%, #fdf6e3 50%)" },
-];
 
 const HEAD_FONTS: { id: HeadFont; label: string; stack: string }[] = [
   { id: "fredoka", label: "Fredoka", stack: "var(--font-fredoka), 'Trebuchet MS', sans-serif" },
@@ -44,43 +39,30 @@ const BODY_FONTS: { id: BodyFont; label: string; stack: string }[] = [
   { id: "quicksand", label: "Quicksand", stack: "var(--font-quicksand), 'Trebuchet MS', sans-serif" },
 ];
 
-function Section({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
-  return (
-    <section>
-      <div className="font-display text-[11.5px] font-bold tracking-[0.18em] text-ink-faint uppercase">
-        {title}
-      </div>
-      {hint && <p className="mt-1 text-[12px] leading-snug font-bold text-ink-faint">{hint}</p>}
-      <div className="mt-3">{children}</div>
-    </section>
-  );
-}
+const ZOOM_PX = [12, 14, 16, 19];
 
-function Chip({
-  active,
-  onClick,
+function Section({
+  title,
+  hint,
+  dot = "#FF922B",
   children,
-  ariaLabel,
 }: {
-  active: boolean;
-  onClick: () => void;
+  title: string;
+  hint?: string;
+  dot?: string;
   children: ReactNode;
-  ariaLabel: string;
 }) {
   return (
-    <m.button
-      type="button"
-      onClick={onClick}
-      whileTap={{ scale: 0.93 }}
-      aria-pressed={active}
-      aria-label={ariaLabel}
-      className={`cursor-pointer rounded-full px-4 py-2.5 font-display text-[13.5px] font-semibold transition-colors ${
-        active ? "bg-coral text-white" : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
-      }`}
-      style={active ? { boxShadow: "0 3px 0 #E8590C" } : undefined}
-    >
-      {children}
-    </m.button>
+    <section>
+      <div className="flex items-center gap-2">
+        <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: dot }} />
+        <div className="font-display text-[11.5px] font-bold tracking-[0.18em] text-ink-faint uppercase">
+          {title}
+        </div>
+      </div>
+      {hint && <p className="mt-1.5 text-[12px] leading-snug font-bold text-ink-faint">{hint}</p>}
+      <div className="mt-3">{children}</div>
+    </section>
   );
 }
 
@@ -110,7 +92,10 @@ function Toggle({
       <span
         aria-hidden
         className="relative h-[26px] w-[46px] shrink-0 rounded-full transition-colors"
-        style={{ background: on ? "#12B886" : "rgb(61 43 31 / 0.18)" }}
+        style={{
+          background: on ? "#12B886" : "rgb(61 43 31 / 0.18)",
+          boxShadow: on ? "inset 0 1px 2px rgb(0 0 0 / 0.18)" : "inset 0 1px 2px rgb(61 43 31 / 0.12)",
+        }}
       >
         <m.span
           className="absolute top-[3px] h-5 w-5 rounded-full bg-white shadow-sm"
@@ -119,6 +104,52 @@ function Toggle({
         />
       </span>
     </button>
+  );
+}
+
+/* ————— one lab, as a live miniature —————
+   the actual palette each room wears, painted at stamp size so
+   picking a lab is picking what you see, not reading a label */
+
+function LabStage({ id }: { id: Lab }) {
+  if (id === "light") {
+    return (
+      <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[#fff6ea] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.08)]">
+        <span className="absolute top-1.5 right-1.5 h-5 w-5 rounded-full bg-[#ffd43b]/70" />
+        <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#fffdf7] shadow-[0_1.5px_0_rgb(61_43_31/0.1)]" />
+        <span className="absolute bottom-2 left-2 flex items-center gap-1">
+          <i className="h-1.5 w-1.5 rounded-full bg-[#ff6b6b]" />
+          <i className="h-1.5 w-1.5 rounded-full bg-[#ff922b]" />
+          <i className="h-1.5 w-1.5 rounded-full bg-[#12b886]" />
+        </span>
+      </span>
+    );
+  }
+  if (id === "dark") {
+    return (
+      <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[#2c2013] shadow-[inset_0_0_0_1px_rgb(255_246_234/0.08)]">
+        <span
+          className="absolute inset-0"
+          style={{ background: "radial-gradient(42px 30px at 68% 12%, rgb(255 212 59 / 0.28), transparent 70%)" }}
+        />
+        <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#3f2f1c] shadow-[0_1.5px_0_rgb(0_0_0/0.35)]" />
+        <span className="absolute bottom-2 left-2 flex items-center gap-1">
+          <i className="h-1.5 w-1.5 rounded-full bg-[#f59f00]" />
+          <i className="h-1.5 w-1.5 rounded-full bg-[#12b886]" />
+          <i className="h-1.5 w-1.5 rounded-full bg-[#ff6b6b]" />
+        </span>
+      </span>
+    );
+  }
+  return (
+    <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[linear-gradient(115deg,#2c2013_49.5%,#fdf6e3_50.5%)] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.1)]">
+      <span className="absolute top-3 left-2 h-5 w-7 rounded-md bg-[#fdf6e3]/90" />
+      <span className="absolute top-4.5 right-2 h-5 w-7 rounded-md bg-[#2c2013]/90" />
+      <span className="absolute bottom-2 left-1/2 flex -translate-x-1/2 items-center gap-1">
+        <i className="h-1.5 w-1.5 rounded-full bg-[#fdf6e3]" />
+        <i className="h-1.5 w-1.5 rounded-full bg-[#2c2013]" />
+      </span>
+    </span>
   );
 }
 
@@ -197,14 +228,35 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
             animate={{ x: 0 }}
             exit={{ x: "110%" }}
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
-            className="fixed inset-y-0 right-0 z-[95] flex w-[min(430px,94vw)] flex-col bg-cream shadow-[0_0_60px_rgb(0_0_0/0.35)]"
+            className="fixed inset-y-0 right-0 z-[95] flex w-[min(440px,94vw)] flex-col overflow-hidden rounded-l-[30px] bg-cream/85 shadow-[-30px_0_80px_-40px_rgb(0_0_0/0.55)] backdrop-blur-2xl backdrop-saturate-150"
           >
+            {/* ————— the ambience inside the frost —————
+                two quiet lamps and a grain of dots, so the blur has
+                something warm to hold. Static; never animates. */}
+            <div aria-hidden className="pointer-events-none absolute inset-0">
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage: "radial-gradient(rgb(61 43 31 / 0.05) 1.6px, transparent 1.7px)",
+                  backgroundSize: "26px 26px",
+                }}
+              />
+              <div
+                className="absolute -top-24 -right-20 h-80 w-80 rounded-full"
+                style={{ background: "radial-gradient(circle, rgb(255 146 43 / 0.17), transparent 70%)" }}
+              />
+              <div
+                className="absolute -bottom-28 -left-24 h-96 w-96 rounded-full"
+                style={{ background: "radial-gradient(circle, rgb(151 117 250 / 0.12), transparent 70%)" }}
+              />
+            </div>
+
             {/* header — rides below the notch when the phone has one */}
             <div
-              className="flex items-center gap-3 px-6 pb-4"
+              className="relative flex items-center gap-3 border-b border-ink/[0.06] px-6 pb-4"
               style={{ paddingTop: "calc(1.5rem + var(--sa-top))" }}
             >
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-lemon/25">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-lemon/25 shadow-[inset_0_1px_0_rgb(255_255_255/0.5)]">
                 <Sliders className="h-5.5 w-5.5 text-lemon" strokeWidth={2.2} />
               </span>
               <div className="min-w-0 flex-1">
@@ -227,46 +279,57 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
             </div>
 
             <div
-              className="no-scrollbar flex flex-1 flex-col gap-7 overflow-y-auto px-6 pt-2"
+              className="no-scrollbar relative flex flex-1 flex-col gap-7 overflow-y-auto px-6 pt-5"
               style={{ paddingBottom: "calc(2rem + var(--sa-bottom))" }}
             >
-              <Section title="The lab" hint="Light, dark, or classic — the daylight page with espresso & cream sections.">
-                <div className="flex flex-col gap-2">
-                  {LABS.map((l) => {
-                    const active = prefs.theme === l.id;
+              <Section
+                title="The lab"
+                dot="#12B886"
+                hint="Light, dark, or classic — the daylight page with espresso & cream sections."
+              >
+                <div className="grid grid-cols-3 gap-2">
+                  {(["light", "dark", "classic"] as Lab[]).map((l) => {
+                    const active = prefs.theme === l;
                     return (
                       <button
-                        key={l.id}
+                        key={l}
                         type="button"
-                        onClick={() => pickLab(l.id)}
+                        onClick={() => pickLab(l)}
                         aria-pressed={active}
-                        className="flex cursor-pointer items-center gap-3 rounded-[22px] px-4 py-3 text-left transition-colors"
+                        aria-label={`${LAB_LABEL[l]} lab`}
+                        className="flex cursor-pointer flex-col gap-2 rounded-[20px] p-2.5 text-left transition-colors"
                         style={
                           active
-                            ? { background: "rgb(18 184 134 / 0.14)", boxShadow: "inset 0 0 0 2.5px #12B886" }
-                            : { background: "rgb(61 43 31 / 0.045)" }
+                            ? { background: "rgb(18 184 134 / 0.13)", boxShadow: "inset 0 0 0 2.5px #12B886" }
+                            : { background: "rgb(61 43 31 / 0.05)" }
                         }
                       >
-                        <span
-                          aria-hidden
-                          className="h-6 w-6 shrink-0 rounded-full"
-                          style={{ background: l.swatch, boxShadow: "inset 0 0 0 2px rgb(61 43 31 / 0.15)" }}
-                        />
-                        <span className="font-display text-[14px] font-semibold text-ink">
-                          {LAB_LABEL[l.id]}
+                        <span className="relative block w-full">
+                          <LabStage id={l} />
+                          {active && (
+                            <span className="absolute top-1.5 right-1.5 grid h-4.5 w-4.5 place-items-center rounded-full bg-mint text-white shadow-[0_1.5px_0_rgb(11_99_73)]">
+                              <Check className="h-3 w-3" strokeWidth={3.5} />
+                            </span>
+                          )}
                         </span>
-                        {active && (
-                          <span className="ml-auto font-display text-[11px] font-bold tracking-[0.14em] text-mint uppercase">
-                            on
-                          </span>
-                        )}
+                        <span
+                          className={`text-center font-display text-[12.5px] font-bold ${
+                            active ? "text-ink" : "text-ink-soft"
+                          }`}
+                        >
+                          {LAB_LABEL[l]}
+                        </span>
                       </button>
                     );
                   })}
                 </div>
               </Section>
 
-              <Section title="Accent colours" hint="Pick the candies your sections take turns wearing — one pick dresses them all, two alternate, three or more rotate. The wheel always keeps at least one.">
+              <Section
+                title="Accent colours"
+                dot="#FF6B6B"
+                hint="Pick the candies your sections take turns wearing — one pick dresses them all, two alternate, three or more rotate. The wheel always keeps at least one."
+              >
                 <div className="grid grid-cols-3 gap-2">
                   {ACCENTS.map((a) => {
                     const on = prefs.accents.includes(a.id);
@@ -295,7 +358,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                                 background: tint(a.hex, 14),
                                 boxShadow: `inset 0 0 0 2.5px ${a.hex}`,
                               }
-                            : { background: "rgb(61 43 31 / 0.045)" }
+                            : { background: "rgb(61 43 31 / 0.05)" }
                         }
                       >
                         <span
@@ -303,7 +366,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                           className="grid h-10 w-10 place-items-center rounded-full transition-opacity"
                           style={{
                             background: a.hex,
-                            boxShadow: `0 3px 0 ${shade(a.hex)}`,
+                            boxShadow: `0 3px 0 ${shade(a.hex)}, inset 0 1px 0 rgb(255 255 255 / 0.35)`,
                             opacity: on ? 1 : 0.32,
                           }}
                         >
@@ -329,11 +392,11 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 {/* the rotation itself, previewed — the first eight
                     sections, exactly as the bands will wear them */}
                 <div className="mt-3 rounded-[18px] bg-ink/[0.045] px-4 py-3">
-                  <div aria-hidden className="flex items-center gap-1.5">
+                  <div aria-hidden className="flex items-end gap-1.5">
                     {Array.from({ length: 8 }, (_, k) => (
                       <span
                         key={k}
-                        className="h-2.5 rounded-full"
+                        className="h-3 rounded-full"
                         style={{
                           width: k === 7 ? 10 : 22,
                           background: accentOf(k),
@@ -350,11 +413,10 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section title="Page size" hint="Zooms everything — notes, cards, nav.">
-                <div className="flex flex-wrap gap-2">
-                  {ZOOM_STEPS.map((z) => {
+              <Section title="Page size" dot="#FFD43B" hint="Zooms everything — notes, cards, nav.">
+                <div className="flex rounded-full bg-ink/[0.06] p-1">
+                  {ZOOM_STEPS.map((z, i) => {
                     const active = prefs.zoom === z;
-                    const px = [12, 14, 16, 19][ZOOM_STEPS.indexOf(z)];
                     return (
                       <m.button
                         key={z}
@@ -363,15 +425,19 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                         whileTap={{ scale: 0.93 }}
                         aria-pressed={active}
                         aria-label={`Page size ${ZOOM_LABEL[String(z)]}`}
-                        className={`flex cursor-pointer flex-col items-center rounded-[20px] px-4 py-2.5 transition-colors ${
-                          active ? "bg-coral text-white" : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
+                        className={`flex flex-1 cursor-pointer flex-col items-center rounded-full py-2 transition-colors ${
+                          active
+                            ? "bg-coral text-white shadow-[0_2px_0_#E8590C]"
+                            : "text-ink-soft hover:text-ink"
                         }`}
-                        style={active ? { boxShadow: "0 3px 0 #E8590C" } : undefined}
                       >
-                        <span className="font-display leading-none font-bold" style={{ fontSize: px }}>
-                          A
+                        <span
+                          className="font-display leading-none font-bold"
+                          style={{ fontSize: ZOOM_PX[i] }}
+                        >
+                          Aa
                         </span>
-                        <span className="mt-1 font-display text-[10px] font-bold tracking-[0.1em]">
+                        <span className="mt-1 font-display text-[9.5px] font-bold tracking-[0.08em]">
                           {ZOOM_LABEL[String(z)]}
                         </span>
                       </m.button>
@@ -380,7 +446,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section title="Headings" hint="The chunky display face on titles and buttons.">
+              <Section title="Headings" dot="#9775FA" hint="The chunky display face on titles and buttons.">
                 <div className="flex flex-col gap-2">
                   {HEAD_FONTS.map((f) => (
                     <FontRow
@@ -395,7 +461,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section title="Body text" hint="The reading face for paragraphs.">
+              <Section title="Body text" dot="#12B886" hint="The reading face for paragraphs.">
                 <div className="flex flex-col gap-2">
                   {BODY_FONTS.map((f) => (
                     <FontRow
@@ -410,7 +476,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section title="Room style">
+              <Section title="Room style" dot="#FF922B">
                 <div className="flex flex-col gap-2.5">
                   <Toggle
                     on={prefs.dots}
@@ -473,8 +539,8 @@ function FontRow({
       className="flex cursor-pointer items-center gap-3.5 rounded-[22px] px-4 py-3 text-left transition-colors"
       style={
         active
-          ? { background: "rgb(255 107 107 / 0.13)", boxShadow: "inset 0 0 0 2.5px #FF6B6B" }
-          : { background: "rgb(61 43 31 / 0.045)" }
+          ? { background: "rgb(255 107 107 / 0.11)", boxShadow: "inset 0 0 0 2.5px #FF6B6B" }
+          : { background: "rgb(61 43 31 / 0.05)" }
       }
     >
       <span
@@ -489,13 +555,14 @@ function FontRow({
           The quick brown fox
         </span>
       </span>
-      {active && (
-        <span className="ml-auto font-display text-[11px] font-bold tracking-[0.14em] text-coral uppercase">
-          on
-        </span>
-      )}
+      <span
+        aria-hidden
+        className={`ml-auto grid h-5 w-5 shrink-0 place-items-center rounded-full ${
+          active ? "bg-coral text-white" : "border-2 border-ink/15"
+        }`}
+      >
+        {active && <Check className="h-3 w-3" strokeWidth={3.5} />}
+      </span>
     </button>
   );
 }
-
-

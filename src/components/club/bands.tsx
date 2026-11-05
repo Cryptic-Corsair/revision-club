@@ -59,7 +59,12 @@ export function BandWave({
   wave?: number;
 }) {
   return (
-    <div aria-hidden style={{ background: from }}>
+    /* pulled 1px into both neighbours: every junction here is a
+       same-colour handshake, and on high-DPI phones the rounding
+       between two stacked solids can open a sub-pixel sliver that
+       lets the page background shine through as a bright hairline.
+       The overlap paints solid-on-solid, so no seam can ever open. */
+    <div aria-hidden className="relative -mt-px -mb-px" style={{ background: from }}>
       <svg
         viewBox="0 0 1440 90"
         preserveAspectRatio="none"
