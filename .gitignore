@@ -29,30 +29,38 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
 
-# env files (can opt-in for committing if needed)
+# env files (nothing to hide today — the app needs no env vars — but
+# keep secrets out of the repo by default)
 .env*
 
 # vercel
 .vercel
 
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-local-*
-.claude
-.z-ai-config
-*.log
-dev.log
-dev.out.log
-test
-prompt
 
-server.log
-# Skills directory
-/skills/
+# sandbox / workspace infra — these live only in the dev sandbox and
+# are not part of the app (startup scripts, deploy pipeline, local db)
+/.zscripts/
+/mini-services/
+/tests/
+/Caddyfile
+/db/
+*.pid
+*.zbak
+--path
+
 # session artifacts
 tool-results/
 upload/
+download/
 scripts/
+/skills/
+.claude
+.z-ai-config
+local-*
+test
+prompt
