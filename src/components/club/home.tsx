@@ -118,7 +118,7 @@ function SoftBtn({
   );
 }
 
-export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack, onOpenSpec }: { units: Unit[]; onOpenUnit: (code: string) => void; onOpenSticker: () => void; onOpenTopic: (code: UnitCode, topicId: string) => void; onOpenPack: () => void; onOpenSpec: () => void }) {
+export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack, onOpenSpec, onBackToDesk }: { units: Unit[]; onOpenUnit: (code: string) => void; onOpenSticker: () => void; onOpenTopic: (code: UnitCode, topicId: string) => void; onOpenPack: () => void; onOpenSpec: () => void; onBackToDesk?: () => void }) {
   const hours = Math.round(TOTALS.minutes / 60);
   const revised = useRevised();
   const { picks } = usePacks();
@@ -210,6 +210,11 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 <SoftButton onClick={() => scrollTo("how")}>
                   <NotebookPen className="h-4 w-4 text-grape" /> How it works
                 </SoftButton>
+                {onBackToDesk && (
+                  <SoftButton onClick={onBackToDesk} className="min-h-[44px] px-5 py-2.5 text-[14px]">
+                    Back to your desk
+                  </SoftButton>
+                )}
               </PopIn>
 
               {/* the numbers, as one tidy strip */}

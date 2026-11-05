@@ -25,8 +25,10 @@ import { UNITS, getUnit, getTopic, TOTALS } from "@/lib/spectra/units";
 import { getNotesMeta, getNotesMetaForTopic } from "@/lib/spectra/notes-meta";
 import { useTimeScope } from "@/lib/spectra/time";
 import { usePacks } from "@/lib/spectra/packs";
+import { useDesk, markUnit, markTopic } from "@/lib/spectra/desk";
 import { applyPrefs, setPrefs, usePrefs, type Lab } from "@/lib/spectra/prefs";
 import { Home, UNIT_ICONS } from "./home";
+import { Desk } from "./desk";
 import { UnitView } from "./unit-view";
 import { Mascot, SpeechBubble, readableInk } from "./bits";
 import { SpecMapProvider, SpecMapTrigger } from "./spec-map";
@@ -697,6 +699,12 @@ export default function ClubApp() {
      keeps playing on every close */
   const [searchMounted, setSearchMounted] = useState(false);
   const [customizeMounted, setCustomizeMounted] = useState(false);
+  /* the desk remembers its member: once a unit or topic has been
+     opened, home renders the desk instead of the introduction —
+     unless they asked for the introduction again (landing) */
+  const desk = useDesk();
+  const [landing, setLanding] = useState(false);
+  const deskActive = desk.engaged && !landing;
 
   useEffect(() => {
     if (searchOpen) setSearchMounted(true);
@@ -704,6 +712,10 @@ export default function ClubApp() {
   useEffect(() => {
     if (customizeOpen) setCustomizeMounted(true);
   }, [customizeOpen]);
+  /* leaving home always lands you back on the desk next time */
+  useEffect(() => {
+    if (view.kind !== "home") setLanding(false);
+  }, [view.kind]);
 
   /* ————— warm the lazy rooms —————
      Once the first paint has settled, fetch every deferred chunk in
@@ -755,16 +767,25 @@ export default function ClubApp() {
     applyPrefs(prefs);
   }, [prefs]);
 
-  const openUnit = (code: string) => setView({ kind: "unit", code });
+  /* opening a unit or topic is the membership moment: the desk flag
+     flips and the visit is remembered as the place to resume from */
+  const openUnit = (code: string) => {
+    markUnit(code);
+    setView({ kind: "unit", code });
+  };
   /* topics open their full revision note straight away — no intermediate
      stop. The topic page itself stays only for the rare topic that has
      no note doc behind it. */
   const openTopic = useCallback((code: UnitCode, topicId: string) => {
+    markTopic(code, topicId);
     const meta = getNotesMetaForTopic(code, topicId);
     if (meta) setView({ kind: "notes", code, docId: meta.id });
     else setView({ kind: "topic", code, topicId });
   }, []);
-  const goHome = () => setView({ kind: "home" });
+  const goHome = () => {
+    setLanding(false);
+    setView({ kind: "home" });
+  };
   const openSticker = useCallback(() => setView({ kind: "sticker" }), []);
   const openPack = useCallback(() => setView({ kind: "pack" }), []);
   const openSpec = useCallback(() => setView({ kind: "spec" }), []);
@@ -848,16 +869,30 @@ export default function ClubApp() {
                 exit={{ opacity: 0, y: -14, scale: 0.995 }}
                 transition={{ type: "spring", stiffness: 260, damping: 26 }}
               >
-                {view.kind === "home" && (
-                  <Home
-                    units={UNITS}
-                    onOpenUnit={openUnit}
-                    onOpenSticker={openSticker}
-                    onOpenTopic={openTopic}
-                    onOpenPack={openPack}
-                    onOpenSpec={openSpec}
-                  />
-                )}
+                {view.kind === "home" &&
+                  (deskActive ? (
+                    <Desk
+                      units={UNITS}
+                      desk={desk}
+                      onOpenUnit={openUnit}
+                      onOpenTopic={openTopic}
+                      onOpenSticker={openSticker}
+                      onOpenPack={openPack}
+                      onOpenSpec={openSpec}
+                      onSearch={openSearch}
+                      onShowLanding={() => setLanding(true)}
+                    />
+                  ) : (
+                    <Home
+                      units={UNITS}
+                      onOpenUnit={openUnit}
+                      onOpenSticker={openSticker}
+                      onOpenTopic={openTopic}
+                      onOpenPack={openPack}
+                      onOpenSpec={openSpec}
+                      onBackToDesk={desk.engaged ? () => setLanding(false) : undefined}
+                    />
+                  ))}
   
                 {view.kind === "unit" && unit && (
                   <UnitView
@@ -933,7 +968,9 @@ export default function ClubApp() {
               onOpenSpec={() => setView({ kind: "spec" })}
               onSearch={openSearch}
               bandFrom={
-                view.kind === "home"
+                /* the desk ends on cream, the introduction on its own
+                   last band — each hands the footer its own sky */
+                view.kind === "home" && !deskActive
                   ? "var(--home-band-b, var(--color-cream))"
                   : "var(--color-cream)"
               }
