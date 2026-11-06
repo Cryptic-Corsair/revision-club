@@ -5,8 +5,10 @@
    nav itself. The reader registers its sections + current stop with
    the provider; the nav then wears one candy "you are here" stop,
    same 40px rhythm as every other nav button. A tap unfolds the
-   map: a floating window centred under the nav pill, sized to the
-   screen (92vw, capped; dvh-tall), with a paper tail stitched to
+   map: a floating window centred under the nav pill, fitted to the
+   screen in JS (92vw wide, capped; height measured between the pill
+   and the screen bottom so it never runs off a tablet), with a
+   paper tail stitched to
    the stop that opened it, a rainbow progress track showing how far
    you've walked, the same band-coloured chips as the note's own
    contents card, and prev/next hops for reading without lifting
@@ -91,8 +93,9 @@ export function useSpecMapRegister(data: SpecMapData | null) {
 }
 
 /* where the window hangs — measured from the real nav pill and the
-   stop inside it, so the tail always points home */
-type Geo = { top: number; left: number; w: number; tail: number };
+   stop inside it, so the tail always points home. h rides along so
+   the window is fitted to the screen in JS, not in CSS. */
+type Geo = { top: number; left: number; w: number; h: number; tail: number };
 
 export function SpecMapTrigger() {
   const { data, open, setOpen } = useContext(SpecMapCtx);
@@ -108,36 +111,78 @@ export function SpecMapTrigger() {
     const btn = btnRef.current?.getBoundingClientRect();
     if (!nav || !btn || btn.width === 0) return;
     const vw = window.innerWidth;
+    const vh = window.innerHeight;
     const w = Math.min(vw * 0.92, 720);
-    const left = (vw - w) / 2;
+    const left = Math.max((vw - w) / 2, 8);
+    /* the window must always fit between the nav pill and the bottom
+       of the screen — computed here in JS, never in CSS: the old
+       min(72dvh, 640px) cap silently vanished on browsers without
+       dvh units (iOS < 15.4 — plenty of classroom tablets), and long
+       notes then ran the window clean off the screen. The home-
+       indicator inset is honoured so landscape tablets keep the
+       footer buttons clear of the gesture bar. */
+    const saBottom =
+      parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--sa-bottom",
+        ),
+      ) || 0;
+    const rawTop = nav.bottom + 10;
+    const h = Math.max(240, Math.min(vh - rawTop - 14 - saBottom, 640));
+    const top = Math.min(rawTop, Math.max(10, vh - h - 8));
     const tail = Math.min(
       Math.max(btn.left + btn.width / 2 - left, 26),
       w - 26,
     );
     /* keep the old object when nothing moved, so opening doesn't
-       ripple re-renders through the panel */
+       ripple re-renders through the panel — every field is compared
+       against its own final value */
     setGeo((g) =>
       g &&
-      Math.abs(g.top - nav.bottom) < 1 &&
+      Math.abs(g.top - top) < 1 &&
       g.w === w &&
+      g.h === h &&
       Math.abs(g.tail - tail) < 1
         ? g
-        : { top: nav.bottom + 10, left, w, tail },
+        : { top, left, w, h, tail },
     );
   }, []);
 
   /* measure before the open-paint (done eagerly in the tap handler,
      so no flicker and no setState-in-effect); re-measure on resize
-     and once fonts have settled */
+     (window + visual viewport — the latter catches keyboard, pinch
+     zoom and orientation on tablets) and once fonts have settled */
   useLayoutEffect(() => {
     if (!open) return;
     const t = window.setTimeout(measure, 350);
     window.addEventListener("resize", measure);
+    window.visualViewport?.addEventListener("resize", measure);
     return () => {
       window.clearTimeout(t);
       window.removeEventListener("resize", measure);
+      window.visualViewport?.removeEventListener("resize", measure);
     };
   }, [open, measure]);
+
+  /* the dimmed area must eat gestures: on tablets a drag on the
+     scrim used to scroll the whole note behind the window, and the
+     fixed panel swimming over moving content read as a glitch.
+     Native non-passive listeners (React's synthetic wheel is
+     passive-by-default on the root, so preventDefault would no-op).
+     The grid keeps its own scroll — only the scrim blocks. */
+  const scrimRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const scrim = scrimRef.current;
+    if (!scrim) return;
+    const stop = (e: Event) => e.preventDefault();
+    scrim.addEventListener("wheel", stop, { passive: false });
+    scrim.addEventListener("touchmove", stop, { passive: false });
+    return () => {
+      scrim.removeEventListener("wheel", stop);
+      scrim.removeEventListener("touchmove", stop);
+    };
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -151,24 +196,25 @@ export function SpecMapTrigger() {
     if (open) panelRef.current?.focus({ preventScroll: true });
   }, [open]);
 
-  /* walk the "you are here" chip into view — on open, and again
-     after every prev/next hop so the map follows the walk */
-  const followHere = useCallback((delay: number) => {
+  /* walk the "you are here" chip into view — on open (instantly, so
+     the list never visibly glides while the window itself is still
+     springing in) and after every prev/next hop (smoothly, so the
+     map follows the walk). offsetTop maths instead of rects: the
+     entrance spring scales the panel, and rect measurements taken
+     mid-scale aim at a moving target. */
+  const followHere = useCallback((delay: number, smooth = true) => {
     window.setTimeout(() => {
       const sc = gridRef.current;
       const el = sc?.querySelector<HTMLElement>('[data-here="1"]');
       if (!sc || !el) return;
-      const top =
-        el.getBoundingClientRect().top -
-        sc.getBoundingClientRect().top +
-        sc.scrollTop -
-        24;
-      sc.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      const top = Math.max(0, el.offsetTop - sc.offsetTop - 24);
+      if (smooth) sc.scrollTo({ top, behavior: "smooth" });
+      else sc.scrollTop = top;
     }, delay);
   }, []);
 
   useEffect(() => {
-    if (open) followHere(170);
+    if (open) followHere(60, false);
   }, [open, followHere]);
 
   /* hooks above — the trigger only exists once a note registers */
@@ -182,7 +228,7 @@ export function SpecMapTrigger() {
   const hop = (spec: string) => {
     jump(spec);
     followHere(80);
-  };
+  }; /* hop = smooth — the window is settled by then */
 
   return (
     <>
@@ -234,12 +280,14 @@ export function SpecMapTrigger() {
             <>
               <m.div
                 key="scrim"
+                ref={scrimRef}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.18 }}
                 onClick={close}
                 className="fixed inset-0 z-[59] bg-cocoa/30 backdrop-blur-[2px]"
+                style={{ touchAction: "none" }}
               />
               <m.div
                 key="panel"
@@ -256,7 +304,9 @@ export function SpecMapTrigger() {
                   top: geo.top,
                   left: geo.left,
                   width: geo.w,
-                  maxHeight: "min(72dvh, 640px)",
+                  /* fitted in JS (see measure) — a bare px number, so
+                     browsers without dvh can't drop the cap */
+                  maxHeight: geo.h,
                   /* the window blooms out of the tail, not its middle */
                   transformOrigin: `${geo.tail}px 0`,
                   /* same pedestal language as the nav pill itself */
