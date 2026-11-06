@@ -249,10 +249,11 @@ html.dark[data-mood="3"] {
      Milk rides with ink.
    The candy shelf is NOT re-tinted — every brand value passes on
    the chocolate grounds (grape, the tightest, 4.3:1 on cards — a
-   hair better than the night lab's own paper). The marker after
-   dark here is a translucent AMBER wash (the night lab's lemon pen,
-   warmed to caramel — ink keeps ≥ 5.5:1 over the composite), and
-   the ambient lamp burns warm instead of violet. No mood rotation —
+   hair better than the night lab's own paper). The marker is the
+   daylight pen in caramel — laid down SOLID like light & classic
+   lay their lemon (roast ink #33241a on the stroke, 5.5–11.1:1;
+   see the pen rule below), not a wash — and the ambient lamp burns
+   warm instead of violet. No mood rotation —
    this pair is the theme's signature and never changes. */
 html.dune {
   --color-cream: #221a11; /* page background */
@@ -605,14 +606,17 @@ html.dark .puff-lift:hover {
    fresh swipes, never as ink running out. The corners are cut
    lopsided and the paint rides low over the baseline (a swipe hugs
    the x-height), which is the difference between a hand stroke and
-   a decal. After dark the pen glows instead of shouting: the old
-   dark twin was a solid mustard block with roast ink, and a page of
-   notes wore dozens of mustard stickers that fought the ground. The
-   night-lab stroke lays down a translucent lemon wash over whatever
-   surface it crosses — the swipe keeps its exact shape — and the
-   text stays the room's own light ink, ≥ 5.7:1 over the wash on
-   every ground, so a paragraph with ten highlights reads as one
-   calm pen rather than a sticker sheet. */
+   a decal. After dark the two labs split the recipe: the night lab
+   keeps the wash — the old dark twin was a solid mustard block with
+   roast ink, and a page of notes wore dozens of mustard stickers
+   that fought the ground, so the night-lab stroke lays down a
+   translucent lemon glow and the text stays the room's own light
+   ink, ≥ 5.7:1 over the wash on every ground. Dune runs the recipe
+   the other way — its caramel pen lays down SOLID like the daylight
+   pen (its rule sits below; roast ink, 5.5–11.1:1), because the
+   user asked for the same bright swipe the daylight rooms get and
+   the faint wash read as mud on chocolate. One shape, two tempers:
+   night glows, dune paints. */
 mark {
   background: linear-gradient(
     100deg,
@@ -642,18 +646,25 @@ html.dark mark {
   color: var(--color-ink);
 }
 
-/* dune: the pen warms to caramel — same translucent wash, the
-   composite keeps sand ink ≥ 5.5:1 over every ground */
+/* dune: the pen lays its caramel down solid, the same recipe the
+   daylight pen runs — wetter entry, near-solid core, a pool one step
+   deeper where the stroke lifts. The old after-dark wash (36% caramel
+   over the chocolate grounds) read as a mud smear next to the bright
+   lemon swipes of light & classic; here the pigment is the point.
+   The ink flips to the daylight pen's own roast #33241a — sand ink on
+   solid caramel would fail outright (1.6:1) — and holds 5.5–11.1:1
+   across every stop and every ground the mark can cross
+   (scripts/marker-contrast.py). */
 html.dune mark {
   background: linear-gradient(
     100deg,
-    rgb(255 196 92 / 0.16) 0%,
-    rgb(255 190 82 / 0.28) 3.5%,
-    rgb(255 184 77 / 0.36) 16% 84%,
-    rgb(250 172 62 / 0.42) 96%,
-    rgb(250 172 62 / 0.16) 100%
+    rgb(255 216 163 / 0.8) 0%,
+    #ffd8a3 3.5%,
+    #ffb84d 16% 84%,
+    #ffa94d 96%,
+    rgb(255 169 77 / 0.8) 100%
   );
-  color: var(--color-ink);
+  color: #33241a;
 }
 
 /* the display-text highlighter — the hero words that ride on a lemon
