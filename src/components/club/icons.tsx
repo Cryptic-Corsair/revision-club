@@ -550,29 +550,11 @@ export function Sticker(p: IcoProps) {
   );
 }
 
-/* ————— theme — sun for the daylight rooms, moon for the night
-   ones. The GLYPH says which family you're in; the chip behind it
-   (see THEME_CHIP in prefs.ts) says which room. Classic is the
-   daylight page wearing espresso rooms, so it takes the sun too —
-   drawn with an espresso rim so one glyph reads across its split
-   cream/espresso chip. SunMoon survives for prose that talks about
-   the whole set. */
-
-/* light — the sun breaking over the horizon: a dome, five rays,
-   one level ground line */
-export function Sun(p: IcoProps) {
-  return (
-    <Ico {...p}>
-      <path d="M7.6 18.5 a4.4 4.4 0 0 1 8.8 0" />
-      <path d="M3.8 18.5 H20.2" strokeWidth={1.8} />
-      <path d="M12 12.6 V9.6" strokeWidth={1.8} />
-      <path d="M9.7 13.1 L8.6 10.3" strokeWidth={1.8} />
-      <path d="M14.3 13.1 L15.4 10.3" strokeWidth={1.8} />
-      <path d="M7.8 14.3 L5.7 12.2" strokeWidth={1.8} />
-      <path d="M16.2 14.3 L18.3 12.2" strokeWidth={1.8} />
-    </Ico>
-  );
-}
+/* ————— theme — one glyph across the whole set: the moon. The
+   chip behind it (see THEME_CHIP in prefs.ts) names the room —
+   daylight white for light, navy for night, chocolate for dune and
+   the diagonal black/white cut for classic. SunMoon survives for
+   prose that talks about the whole set. */
 
 /* night — the crescent with a four-point star beside it */
 export function Moon(p: IcoProps) {
@@ -600,23 +582,17 @@ export function SunMoon(p: IcoProps) {
   );
 }
 
-/* classic's chip is split — espresso on one side, cream on the
-   other — so no single ink reads across it. This sun is painted
-   twice: a wide espresso rim underneath (reads on the cream half)
-   and the daylight lemon face on top (reads on the espresso half).
-   Same sunrise as the light lab — dome, five rays, ground line —
-   which is what "classic is light plus espresso rooms" means. */
-const CLASSIC_SUN_PATHS = [
-  "M7.6 18.5 a4.4 4.4 0 0 1 8.8 0",
-  "M3.8 18.5 H20.2",
-  "M12 12.6 V9.6",
-  "M9.7 13.1 L8.6 10.3",
-  "M14.3 13.1 L15.4 10.3",
-  "M7.8 14.3 L5.7 12.2",
-  "M16.2 14.3 L18.3 12.2",
+/* classic's chip is cut on the diagonal — black on the top-left,
+   white on the bottom-right — so no single ink reads across it.
+   This moon is painted twice: a wide white rim underneath (reads
+   on the black half) and a black face on top (reads on the white
+   half). Same crescent and star as the night moon above. */
+const MOON_PATHS = [
+  "M20.2 14.7 A8.5 8.5 0 1 1 9.3 3.8 a6.8 6.8 0 0 0 10.9 10.9 Z",
+  "M16.6 3.9 c0.28 1.55 0.75 2.02 2.3 2.3 -1.55 0.28-2.02 0.75-2.3 2.3 -0.28-1.55-0.75-2.02-2.3-2.3 1.55-0.28 2.02-0.75 2.3-2.3 Z",
 ] as const;
 
-export function ClassicSun(p: IcoProps) {
+export function ClassicMoon(p: IcoProps) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -626,26 +602,26 @@ export function ClassicSun(p: IcoProps) {
       aria-hidden
       {...p}
     >
-      {/* rim pass — the outline that carries the shape on cream */}
+      {/* rim pass — the white that carries the shape on black */}
       <g
-        stroke="#2C2013"
-        strokeWidth={4.4}
+        stroke="#FFFFFF"
+        strokeWidth={4.2}
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        {CLASSIC_SUN_PATHS.map((d) => (
+        {MOON_PATHS.map((d) => (
           <path key={`rim-${d}`} d={d} />
         ))}
       </g>
-      {/* face pass — the lemon that carries it on espresso */}
+      {/* face pass — the black that carries it on white */}
       <g
-        stroke="#FFD43B"
+        stroke="#000000"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        {CLASSIC_SUN_PATHS.map((d, i) => (
-          <path key={d} d={d} strokeWidth={i === 0 ? 2 : 1.8} />
+        {MOON_PATHS.map((d, i) => (
+          <path key={d} d={d} strokeWidth={i === 0 ? 2.1 : 1.5} />
         ))}
       </g>
     </svg>

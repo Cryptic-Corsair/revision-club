@@ -351,27 +351,24 @@ export const LAB_LABEL: Record<Lab, string> = {
 
 /* ————— the theme chips —————
    Each theme's signature swatch — the background the nav button,
-   the lab toast and the panel's lab cards put BEHIND the glyph, so
+   the lab toast and the panel's lab cards put BEHIND the moon, so
    the current room is readable at a glance. Fixed brand values on
    purpose: they do not flip with the active lab (that's the whole
-   point — the chip says which room you're in). The glyph carries
-   the family (sun for the daylight themes light & classic, moon for
-   the night rooms night & dune); the chip names the room. The hues
-   are picked as a SET, to stay distinct side by side in the panel:
-   lemon sun (light) · violet indigo (night) · milk chocolate (dune)
-   · the espresso/cream split (classic). */
+   point — the chip says which room you're in). One glyph across
+   the set — the moon — and the background names the room: daylight
+   white (light) · navy (night) · chocolate (dune) · the diagonal
+   black/white cut (classic). */
 export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> = {
   light: {
-    bg: "#FFD43B", // the daylight sun
-    ink: "#5F4A00", // roast ink, the pen the sun is drawn with
-    side: "#E8A100",
+    bg: "#FFFFFF", // the bright daylight page
+    ink: "#3D2B1F", // the light room's own roast ink
+    side: "#D8CBB8", // a warm shadow so white still reads on cream
   },
   dark: {
-    // the violet the night room actually wears — its charcoal ground
-    // (#2e2744) lifted toward the grape lamp, not a generic navy
-    bg: "#3D3373",
-    ink: "#F4F1FB", // the night room's own ink
-    side: "#2B2455",
+    // navy — the night sky the room is named for
+    bg: "#23406E",
+    ink: "#EEF2FF", // moonlight
+    side: "#142A52",
   },
   dune: {
     bg: "#6B4A26", // chocolate — dune
@@ -379,9 +376,9 @@ export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> 
     side: "#4E3417",
   },
   classic: {
-    // both rooms at once — the espresso / cream pair the notes step through
-    bg: "linear-gradient(90deg, #2C2013 50%, #FDF6E3 50%)",
-    ink: "#FFD43B", // unused by the rimmed glyph; kept for the record
-    side: "#8F7A5C", // a roast that bridges both halves
+    // both rooms at once — black and white cut on the diagonal
+    bg: "linear-gradient(135deg, #000000 50%, #FFFFFF 50%)",
+    ink: "#000000", // unused by the split glyph; kept for the record
+    side: "#7D7D7D", // a grey that bridges both halves
   },
 };

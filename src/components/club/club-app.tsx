@@ -9,9 +9,8 @@ import {
   Search,
   Sliders,
   Sticker,
-  Sun,
   SunMoon,
-  ClassicSun,
+  ClassicMoon,
   ClipboardList,
   ArrowUp,
   Command,
@@ -213,12 +212,12 @@ function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
 
 /* ————— lab switch —————
    Light → night → dune → classic, one tap apart. The button wears
-   its room's chip (THEME_CHIP) — a yellow sun, a violet moon, a
-   chocolate moon, and the split espresso/cream chip for classic —
-   so the current theme reads at a glance, and a candy toast using
-   the same swatch announces each switch. Titles say the next stop,
-   nothing more. The mobile browser chrome is re-painted to the
-   lab's cream so the address bar never fights the page. */
+   its room's chip (THEME_CHIP) — white, navy, chocolate, and the
+   diagonal black/white cut for classic — with the moon on every
+   one, so the current theme reads at a glance, and a candy toast
+   using the same swatch announces each switch. Titles say the next
+   stop, nothing more. The mobile browser chrome is re-painted to
+   the lab's cream so the address bar never fights the page. */
 
 const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic"];
 
@@ -229,16 +228,14 @@ const LAB_TITLE: Record<Lab, string> = {
   classic: "Switch to Light",
 };
 
-/* the glyph for the current chip — sun for the daylight themes
-   (light, classic), moon for the night rooms (night, dune).
-   Classic takes the rimmed sun: its chip is split, and no single
-   ink reads across both halves. */
+/* the glyph for the current chip — the moon on every theme; the
+   chip's background names the room. Classic takes the split moon:
+   its chip is cut diagonally, and no single ink reads across both
+   halves. */
 function LabGlyph({ id }: { id: Lab }) {
   const cls = "h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]";
-  if (id === "classic") return <ClassicSun className={cls} />;
-  if (id === "dark" || id === "dune")
-    return <Moon className={cls} strokeWidth={2.2} style={{ color: THEME_CHIP[id].ink }} />;
-  return <Sun className={cls} strokeWidth={2.2} style={{ color: THEME_CHIP.light.ink }} />;
+  if (id === "classic") return <ClassicMoon className={cls} />;
+  return <Moon className={cls} strokeWidth={2.2} style={{ color: THEME_CHIP[id].ink }} />;
 }
 
 function TopBar({
@@ -442,9 +439,11 @@ function TopBar({
                 style={{
                   background: THEME_CHIP[announce].bg,
                   boxShadow:
-                    announce === "dark" || announce === "dune"
-                      ? "inset 0 0 0 2px rgb(244 241 251 / 0.22)"
-                      : "inset 0 0 0 2px rgb(61 43 31 / 0.12)",
+                    announce === "classic"
+                      ? "inset 0 0 0 2px rgb(125 125 125 / 0.45)"
+                      : announce === "dark" || announce === "dune"
+                        ? "inset 0 0 0 2px rgb(244 241 251 / 0.22)"
+                        : "inset 0 0 0 2px rgb(61 43 31 / 0.12)",
                 }}
               />
               {LAB_LABEL[announce]}

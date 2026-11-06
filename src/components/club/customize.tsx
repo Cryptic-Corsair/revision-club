@@ -2,7 +2,7 @@
 
 import { useEffect, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
-import { Check, RotateCcw, Sliders, Sparkles, X, Sun, Moon, ClassicSun } from "./icons";
+import { Check, RotateCcw, Sliders, Sparkles, X, Moon, ClassicMoon } from "./icons";
 import { readableInk, shade, tint } from "./bits";
 import { accentOf } from "./bands";
 import {
@@ -184,9 +184,9 @@ function LabStage({ id }: { id: Lab }) {
 }
 
 /* the four themes, each behind its own chip — the same swatch the
-   nav pill and the toast wear (THEME_CHIP): the glyph says sun or
-   moon, the background names the room. Classic takes the rimmed
-   sun, because its chip is split and no single ink crosses it. */
+   nav pill and the toast wear (THEME_CHIP): the moon everywhere,
+   the background names the room. Classic takes the split moon,
+   because its chip is cut and no single ink crosses it. */
 function LabChip({ id }: { id: Lab }) {
   const chip = THEME_CHIP[id];
   return (
@@ -196,9 +196,7 @@ function LabChip({ id }: { id: Lab }) {
       style={{ background: chip.bg, boxShadow: `0 1.5px 0 ${chip.side}` }}
     >
       {id === "classic" ? (
-        <ClassicSun className="h-[13px] w-[13px]" />
-      ) : id === "light" ? (
-        <Sun className="h-[11px] w-[11px]" strokeWidth={2.4} style={{ color: chip.ink }} />
+        <ClassicMoon className="h-[13px] w-[13px]" />
       ) : (
         <Moon className="h-[11px] w-[11px]" strokeWidth={2.4} style={{ color: chip.ink }} />
       )}
