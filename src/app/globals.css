@@ -551,34 +551,19 @@ html.dune ::selection {
    Chrome's page zoom (accessibility zoom, a remembered pinch,
    Samsung's screen zoom) keeps the layout viewport wide while the
    visible one shrinks — and media queries can't see the visible
-   one. The fixed chrome would stay tablet-sized and, because fixed
-   elements never pan, its far side sits permanently off-screen:
-   the customize and theme buttons simply unreachable. ClubApp
-   publishes the visible width as --vvw and stamps data-vv-narrow
-   (desktop-class layout squeezed below the phone breakpoint) and
-   data-vv-tight (below 420px visible) on <html>; these rules
-   re-fit that chrome to what the eye actually sees. */
-html[data-vv-narrow] nav[aria-label="Main"] {
-  max-width: calc(var(--vvw, 100vw) - 1.25rem);
-}
-html[data-vv-narrow] .nav-wordmark {
-  display: none;
-}
-html[data-vv-narrow] nav[aria-label="Main"] > span[aria-hidden] {
-  display: none;
-}
+   one. ClubApp publishes the visible width as --vvw and stamps
+   data-vv-narrow / data-vv-tight on <html> when a desktop-class
+   layout is squeezed into a phone-visible width, so pieces that
+   opt in can re-fit to what the eye actually sees. The navbar
+   deliberately NEVER opts in — the nav pill must not react to
+   page zoom in any way: same width, same wordmark, same buttons,
+   whatever the zoom is doing. These rules now only re-fit the
+   customize drawer and the lab toast. */
 html[data-vv-narrow] .customize-drawer {
   width: min(440px, calc(var(--vvw, 100vw) - 1rem));
 }
 html[data-vv-narrow] .lab-toast {
   left: calc(var(--vvw, 100vw) / 2);
-}
-html[data-vv-tight] nav[aria-label="Main"] {
-  gap: 0.25rem;
-}
-html[data-vv-tight] nav[aria-label="Main"] .nav-tool {
-  height: 2.25rem;
-  width: 2.25rem;
 }
 
 ::-webkit-scrollbar {

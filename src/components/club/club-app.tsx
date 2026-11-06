@@ -723,13 +723,13 @@ export default function ClubApp() {
   /* ————— the eye vs the layout —————
      Page zoom (Chrome accessibility zoom, a remembered pinch,
      Samsung screen zoom) keeps the layout viewport wide while the
-     eye sees far less — and media queries can't see it: the fixed
-     chrome stays tablet-sized and, since fixed elements never pan,
-     its far side is permanently off-screen. Publish what the eye
-     actually sees: --vvw carries the visible width, and
-     data-vv-narrow / data-vv-tight stamp <html> when a desktop-class
-     layout is squeezed into a phone-visible width, so the rules in
-     globals.css can re-fit the fixed chrome to the eye. */
+     eye sees far less — and media queries can't see it. Publish
+     what the eye actually sees: --vvw carries the visible width,
+     and data-vv-narrow / data-vv-tight stamp <html> when a
+     desktop-class layout is squeezed into a phone-visible width,
+     so the rules in globals.css can re-fit the pieces that opt in
+     (the customize drawer, the lab toast). The navbar deliberately
+     never opts in — page zoom must not restyle it, ever. */
   useEffect(() => {
     const root = document.documentElement;
     const apply = () => {
