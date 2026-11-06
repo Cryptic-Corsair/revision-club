@@ -103,13 +103,42 @@ type View =
 
 /* ————— the brand mark —————
    The site's own object, drawn at logo size: the beaker itself —
-   paper-white glass, chunky cocoa outline, coral liquid caught
-   mid-fizz, measurement ticks — the mascot's visual language
-   condensed to a mark. No tile and no pedestal (those made it read
-   as a button rather than a brand), so it stands bare on the nav
-   pill and on the cocoa footer alike, in both labs. A bubble
-   escapes the rim because something is always reacting here. */
-function LogoMark({ size = 38 }: { size?: number }) {
+   glass, chunky outline, liquid caught mid-fizz, measurement ticks
+   — the mascot's visual language condensed to a mark. No tile and
+   no pedestal (those made it read as a button rather than a brand),
+   so it stands bare on the nav pill and on the cocoa footer alike.
+   A bubble escapes the rim because something is always reacting
+   here.
+
+   The shape never changes; the dress follows the room — one edition
+   per lab, so the mark lives in whatever room it's standing in:
+   · light — the daylight original: warm white glass, cocoa outline,
+     coral liquid;
+   · classic — the reading-room edition: cream glass, espresso
+     outline, amber liquid — the same palette the notes wear there;
+   · night & dune — line art: the outline steps up to the room's own
+     ink and the glass fill steps out entirely, so on the dark pill
+     the mark is a drawn vessel with the liquid as its one bright
+     body (the old cocoa outline vanished into the dark chrome).
+   The footer sits on the same cocoa ground in every lab, so it pins
+   the daylight edition and never re-dresses. */
+function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
+  const prefs = usePrefs();
+  const room = lab ?? prefs.theme;
+  const nightRoom = room === "dark" || room === "dune";
+  const ink = room === "classic"
+    ? "#2C2013" // espresso — the reading room draws with its own pen
+    : nightRoom
+      ? room === "dune"
+        ? "#F6F0E6" // dune ink — pale sand
+        : "#F4F1FB" // night ink — pale violet
+      : "#3D2B1F"; // cocoa, the daylight pen
+  const glass = room === "classic"
+    ? "#FDF6E3" // the cream half of the classic pair
+    : nightRoom
+      ? "none" // line art — the room shows through the glass
+      : "#FFFDF7"; // warm white
+  const liquid = room === "classic" ? "#F59F00" : "#FF6B6B";
   const id = useId().replace(/[^a-zA-Z0-9]/g, "");
   const clip = `logo-clip-${id}`;
   const body =
@@ -132,13 +161,13 @@ function LogoMark({ size = 38 }: { size?: number }) {
           cy="4.8"
           r="2.5"
           fill="none"
-          stroke="#3D2B1F"
+          stroke={ink}
           strokeWidth="2"
         />
         <circle cx="30.5" cy="3.4" r="1.2" fill="#FF6B6B" opacity="0.55" />
 
         {/* glass body */}
-        <path d={body} fill="#FFFDF7" />
+        <path d={body} fill={glass} />
 
         {/* liquid, mid-fizz — clipped to the glass */}
         <clipPath id={clip} suppressHydrationWarning>
@@ -147,7 +176,7 @@ function LogoMark({ size = 38 }: { size?: number }) {
         <g clipPath={`url(#${clip})`} suppressHydrationWarning>
           <path
             d="M8 26.5 C 13 23.5, 19 29.5, 24 26.5 C 29 23.5, 34 27, 37 25.5 L37 45 L8 45 Z"
-            fill="#FF6B6B"
+            fill={liquid}
           />
           <ellipse cx="16.5" cy="33" rx="3.2" ry="1.8" fill="#FFFFFF" opacity="0.3" />
           <circle cx="23" cy="35.5" r="1.5" fill="#FFFFFF" opacity="0.85" />
@@ -158,13 +187,13 @@ function LogoMark({ size = 38 }: { size?: number }) {
         <path
           d={body}
           fill="none"
-          stroke="#3D2B1F"
+          stroke={ink}
           strokeWidth="3.6"
           strokeLinejoin="round"
         />
         <path
           d="M7.5 11.5 H36.5"
-          stroke="#3D2B1F"
+          stroke={ink}
           strokeWidth="3.6"
           strokeLinecap="round"
         />
@@ -172,7 +201,7 @@ function LogoMark({ size = 38 }: { size?: number }) {
         {/* measurement ticks — the mascot's signature, kept faint */}
         <path
           d="M28.5 31.5 h5.5 M28.5 36.5 h5.5"
-          stroke="#3D2B1F"
+          stroke={ink}
           strokeWidth="1.7"
           strokeLinecap="round"
           opacity="0.35"
@@ -184,7 +213,7 @@ function LogoMark({ size = 38 }: { size?: number }) {
 
 /* ————— lab switch —————
    Light → night → dune → classic, one tap apart. The button wears
-   its room's chip (THEME_CHIP) — a yellow sun, a navy moon, a
+   its room's chip (THEME_CHIP) — a yellow sun, a violet moon, a
    chocolate moon, and the split espresso/cream chip for classic —
    so the current theme reads at a glance, and a candy toast using
    the same swatch announces each switch. Titles say the next stop,
@@ -482,7 +511,7 @@ function Footer({
             {/* who we are */}
             <div className="max-w-sm">
               <div className="flex items-center gap-3">
-                <LogoMark size={38} />
+                <LogoMark size={38} lab="light" />
                 <span className="font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight">
                   Reaction Club
                 </span>

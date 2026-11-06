@@ -96,11 +96,14 @@ export interface Prefs {
 export const DEFAULT_PREFS: Prefs = {
   theme: "classic",
   accents: [...ACCENT_IDS],
+  /* the scale default is Medium here; load() lifts a FIRST RUN on a
+     big screen to Large — the factory setting is screen-aware, the
+     saved one is whatever you picked. */
   scale: "M",
-  specHeight: 0.94,
-  specDensity: "comfy",
+  specHeight: 0.8,
+  specDensity: "roomy",
   headFont: "fredoka",
-  bodyFont: "nunito",
+  bodyFont: "quicksand",
   dots: true,
   motion: true,
 };
@@ -177,6 +180,18 @@ function load() {
          its direct heir; everything else starts on the default. */
       const legacy = window.localStorage.getItem("rc-theme");
       if (legacy === "dark") state = { ...state, theme: "dark" };
+      /* first run on a big screen starts on Large — a desktop has the
+         room, so the extra size goes into the words instead of the
+         margins. Phones and tablets keep Medium. Only a factory
+         setting: the first size you pick yourself is kept for keeps
+         (and mirrors the pre-paint script in layout.tsx — the two
+         must agree or the first paint re-flows after hydration). */
+      try {
+        if (window.matchMedia("(min-width: 1024px)").matches)
+          state = { ...state, scale: "L" };
+      } catch {
+        /* no matchMedia — keep Medium */
+      }
     }
   } catch {
     /* private mode / corrupt data — defaults */
@@ -341,7 +356,10 @@ export const LAB_LABEL: Record<Lab, string> = {
    purpose: they do not flip with the active lab (that's the whole
    point — the chip says which room you're in). The glyph carries
    the family (sun for the daylight themes light & classic, moon for
-   the night rooms night & dune); the chip names the room. */
+   the night rooms night & dune); the chip names the room. The hues
+   are picked as a SET, to stay distinct side by side in the panel:
+   lemon sun (light) · violet indigo (night) · milk chocolate (dune)
+   · the espresso/cream split (classic). */
 export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> = {
   light: {
     bg: "#FFD43B", // the daylight sun
@@ -349,9 +367,11 @@ export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> 
     side: "#E8A100",
   },
   dark: {
-    bg: "#2A4FA3", // navy — night
+    // the violet the night room actually wears — its charcoal ground
+    // (#2e2744) lifted toward the grape lamp, not a generic navy
+    bg: "#3D3373",
     ink: "#F4F1FB", // the night room's own ink
-    side: "#1B3578",
+    side: "#2B2455",
   },
   dune: {
     bg: "#6B4A26", // chocolate — dune

@@ -67,9 +67,11 @@ export const metadata: Metadata = {
    flash of the wrong lab, font size, scale or family. Only the night
    lab picks tonight's mood (html[data-mood]); dune's chocolate room
    and classic are fixed signatures, so they need no mood.
-   beforeInteractive keeps it out of React's hydration tree. The
-   React side (prefs.ts) re-applies the same values once it hydrates,
-   then owns every change. */
+   A FIRST RUN on a big screen (≥1024px) starts on Large — mirroring
+   load() in prefs.ts exactly, or the first paint would re-flow after
+   hydration. beforeInteractive keeps it out of React's hydration
+   tree. The React side (prefs.ts) re-applies the same values once it
+   hydrates, then owns every change. */
 const prefsInit = `(function(){try{
 var r=document.documentElement,p=null;
 try{p=JSON.parse(localStorage.getItem("reaction-club-prefs-v1")||"null")}catch(e){}
@@ -82,7 +84,8 @@ if(p.headFont)r.dataset.head=String(p.headFont);
 if(p.bodyFont)r.dataset.body=String(p.bodyFont);
 r.dataset.dots=p.dots===false?"off":"on";
 r.dataset.motion=p.motion===false?"off":"on";
-var s=p.scale==="S"||p.scale==="M"||p.scale==="L"||p.scale==="XL"?p.scale:(p.zoom===0.9?"S":p.zoom===1.15?"L":p.zoom===1.3?"XL":"M");
+var fb="M";try{if(!localStorage.getItem("reaction-club-prefs-v1")&&window.matchMedia("(min-width:1024px)").matches)fb="L"}catch(e){}
+var s=p.scale==="S"||p.scale==="M"||p.scale==="L"||p.scale==="XL"?p.scale:(p.zoom===0.9?"S":p.zoom===1.15?"L":p.zoom===1.3?"XL":fb);
 r.dataset.scale=s;
 }catch(e){}})();`;
 

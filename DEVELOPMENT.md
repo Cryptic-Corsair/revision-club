@@ -141,7 +141,9 @@ All six families (Fredoka, Baloo 2, Nunito, Quicksand, Patrick Hand,
 IBM Plex Mono) are **local woff2 files** in `src/app/fonts/`, loaded with
 `next/font/local` in `layout.tsx`, exposed as CSS variables
 `--font-fredoka`, `--font-baloo`, `--font-patrick`, `--font-nunito`,
-`--font-quicksand`, `--font-plex`.
+`--font-quicksand`, `--font-plex`. The factory pair is **Fredoka + Quicksand**
+(the `@theme` tokens in `globals.css` carry it; `html[data-head]` /
+`html[data-body]` rules only re-point them).
 
 **Why not `next/font/google`:** its Turbopack resolver repeatedly corrupted
 its own import map between dev-server restarts
@@ -171,26 +173,40 @@ replace the files in `src/app/fonts/`, and keep the `weight` ranges in
   rooms with espresso `#2c2013` ink — this is the theme new visitors see
 
 User prefs (`prefs.ts`, default in parentheses): `theme` (`"classic"`),
-`headFont` (`"fredoka"`), `bodyFont` (`"nunito"`), `scale` (`"M"`; S/M/L/XL —
-legacy saved `zoom` values 0.9/1/1.15/1.3 migrate onto the matching step),
-`specHeight` (`0.94` — the spec-map drawer's viewport fraction; set by the
-panel's Peek/Tall/Full presets and by dragging the drawer's grabber, which
-persists any fraction in between), `specDensity` (`"comfy"`; compact/comfy/
-roomy — the chip min-width the drawer's grid packs against), `dots` (on),
-`motion` (on).
+`headFont` (`"fredoka"`), `bodyFont` (`"quicksand"`), `scale` (`"M"`, but a
+FIRST RUN on a screen ≥1024px starts on `"L"` — mirrored in the pre-paint
+script in `layout.tsx`, so the two must be changed together; a picked size
+always wins; legacy saved `zoom` values 0.9/1/1.15/1.3 migrate onto the
+matching step), `specHeight` (`0.8` — the spec-map drawer's viewport
+fraction; set by the panel's Peek/Tall/Full presets and by dragging the
+drawer's grabber, which persists any fraction in between), `specDensity`
+(`"roomy"`; compact/comfy/roomy — the chip min-width the drawer's grid
+packs against), `dots` (on), `motion` (on).
 
 ### Theme chips (THEME_CHIP)
 
-Each theme wears a fixed signature swatch — yellow sun for **light**, navy
-moon for **night**, chocolate moon for **dune**, and the split
+Each theme wears a fixed signature swatch — yellow sun for **light**, violet
+indigo moon for **night** (`#3D3373` — the room's charcoal lifted toward its
+grape lamp, not a generic navy), chocolate moon for **dune**, and the split
 espresso/cream chip for **classic** — defined once as `THEME_CHIP` in
 `prefs.ts` and used by the nav's theme button, the lab toast and the
-panel's theme cards. The glyph carries the family (sun for the daylight
-themes, moon for the night rooms; classic takes the rimmed two-tone
-`ClassicSun` because its chip is split and no single ink crosses both
-halves) while the chip names the room. These are fixed brand values that
-deliberately do NOT flip with the active lab — that is the whole point of
-a chip that says which room you're in.
+panel's theme cards. The four hues are picked as a set to stay distinct side
+by side. The glyph carries the family (sun for the daylight themes, moon for
+the night rooms; classic takes the rimmed two-tone `ClassicSun` because its
+chip is split and no single ink crosses both halves) while the chip names
+the room. These are fixed brand values that deliberately do NOT flip with
+the active lab — that is the whole point of a chip that says which room
+you're in.
+
+### The logo's room editions (LogoMark)
+
+`LogoMark` in `club-app.tsx` keeps one shape everywhere but re-dresses per
+lab: **light** is the daylight original (white glass, cocoa outline, coral
+liquid), **classic** the reading-room edition (cream glass, espresso
+outline, amber liquid), and **night/dune** draw it as line art (outline in
+the room's ink, no glass fill, so the liquid is the one bright body on the
+dark pill). The footer sits on cocoa in every lab, so it pins the daylight
+edition with `lab="light"` and never re-dresses.
 
 ### Content scale (S/M/L/XL)
 

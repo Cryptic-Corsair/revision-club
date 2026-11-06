@@ -38,8 +38,8 @@ const HEAD_FONTS: { id: HeadFont; label: string; stack: string }[] = [
 ];
 
 const BODY_FONTS: { id: BodyFont; label: string; stack: string }[] = [
-  { id: "nunito", label: "Nunito", stack: "var(--font-nunito), 'Trebuchet MS', sans-serif" },
   { id: "quicksand", label: "Quicksand", stack: "var(--font-quicksand), 'Trebuchet MS', sans-serif" },
+  { id: "nunito", label: "Nunito", stack: "var(--font-nunito), 'Trebuchet MS', sans-serif" },
 ];
 
 const SCALE_PX = [12, 14, 16, 19];
@@ -330,7 +330,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
             </div>
 
             <div
-              className="no-scrollbar relative flex flex-1 flex-col gap-7 overflow-y-auto px-6 pt-5"
+              className="no-scrollbar relative flex flex-1 flex-col gap-6 overflow-y-auto px-6 pt-5"
               style={{ paddingBottom: "calc(2rem + var(--sa-bottom))" }}
             >
               <Section title="Theme" dot="#12B886">
@@ -495,7 +495,40 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section title="Spec map" dot="#FF6B6B">
+              {/* one fonts section, two runs — the heading family and
+                  the body family are one decision, not two departments */}
+              <Section title="Fonts" dot="#9775FA">
+                <div className="flex flex-col gap-2">
+                  <p className="font-display text-[calc(10px*var(--ui-scale))] font-bold uppercase tracking-[0.16em] text-ink-faint">
+                    Headings
+                  </p>
+                  {HEAD_FONTS.map((f) => (
+                    <FontRow
+                      key={f.id}
+                      active={prefs.headFont === f.id}
+                      label={f.label}
+                      stack={f.stack}
+                      onClick={() => setPrefs({ headFont: f.id })}
+                      ariaLabel={`Heading font ${f.label}`}
+                    />
+                  ))}
+                  <p className="mt-2.5 font-display text-[calc(10px*var(--ui-scale))] font-bold uppercase tracking-[0.16em] text-ink-faint">
+                    Body
+                  </p>
+                  {BODY_FONTS.map((f) => (
+                    <FontRow
+                      key={f.id}
+                      active={prefs.bodyFont === f.id}
+                      label={f.label}
+                      stack={f.stack}
+                      onClick={() => setPrefs({ bodyFont: f.id })}
+                      ariaLabel={`Body font ${f.label}`}
+                    />
+                  ))}
+                </div>
+              </Section>
+
+              <Section title="Spec map" dot="#F06595">
                 <div className="flex flex-col gap-2.5">
                   {/* height — three rungs plus the drag: a dragged
                       fraction sits between rungs and the panel says
@@ -563,38 +596,8 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section title="Headings" dot="#9775FA">
-                <div className="flex flex-col gap-2">
-                  {HEAD_FONTS.map((f) => (
-                    <FontRow
-                      key={f.id}
-                      active={prefs.headFont === f.id}
-                      label={f.label}
-                      stack={f.stack}
-                      onClick={() => setPrefs({ headFont: f.id })}
-                      ariaLabel={`Heading font ${f.label}`}
-                    />
-                  ))}
-                </div>
-              </Section>
-
-              <Section title="Body" dot="#12B886">
-                <div className="flex flex-col gap-2">
-                  {BODY_FONTS.map((f) => (
-                    <FontRow
-                      key={f.id}
-                      active={prefs.bodyFont === f.id}
-                      label={f.label}
-                      stack={f.stack}
-                      onClick={() => setPrefs({ bodyFont: f.id })}
-                      ariaLabel={`Body font ${f.label}`}
-                    />
-                  ))}
-                </div>
-              </Section>
-
               <Section title="Details" dot="#FF922B">
-                <div className="flex flex-col gap-2.5">
+                <div className="grid grid-cols-2 gap-2.5">
                   <Toggle
                     on={prefs.dots}
                     onChange={(v) => setPrefs({ dots: v })}

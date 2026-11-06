@@ -61,7 +61,7 @@
   --color-lemon: #f59f00;
 
   --font-display: var(--font-fredoka), "Trebuchet MS", sans-serif;
-  --font-body: var(--font-nunito), "Trebuchet MS", sans-serif;
+  --font-body: var(--font-quicksand), "Trebuchet MS", sans-serif;
   --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, monospace;
 
   --animate-float: float 7s ease-in-out infinite;
@@ -152,15 +152,16 @@
 /* ————— the customize panel's knobs —————
    Font swaps re-point the two family tokens; the dataset wins over
    :root by specificity, so one attribute re-skins every heading or
-   body run on the site. */
+   body run on the site. The tokens above carry the factory pair
+   (Fredoka + Quicksand); the dataset rules only ever re-point them. */
 html[data-head="baloo"] {
   --font-display: var(--font-baloo), "Trebuchet MS", sans-serif;
 }
 html[data-head="patrick"] {
   --font-display: var(--font-patrick), "Trebuchet MS", sans-serif;
 }
-html[data-body="quicksand"] {
-  --font-body: var(--font-quicksand), "Trebuchet MS", sans-serif;
+html[data-body="nunito"] {
+  --font-body: var(--font-nunito), "Trebuchet MS", sans-serif;
 }
 
 /* ————— content scale —————
