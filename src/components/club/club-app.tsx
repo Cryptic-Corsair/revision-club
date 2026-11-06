@@ -28,7 +28,7 @@ import { useTimeScope } from "@/lib/spectra/time";
 import { usePacks } from "@/lib/spectra/packs";
 import { useDesk, markUnit, markTopic } from "@/lib/spectra/desk";
 import { applyPrefs, flashThemeAnim, setPrefs, usePrefs, type Lab } from "@/lib/spectra/prefs";
-import { Home, UNIT_ICONS } from "./home";
+import { Home } from "./home";
 import { Desk } from "./desk";
 import { UnitView } from "./unit-view";
 import { Mascot, SpeechBubble, readableInk } from "./bits";
@@ -540,7 +540,6 @@ function Footer({
               </div>
               <div className="mt-4 flex flex-col gap-2.5">
                 {UNITS.map((u) => {
-                  const Icon = UNIT_ICONS[u.code];
                   return (
                     <button
                       key={u.code}
@@ -549,14 +548,14 @@ function Footer({
                       className="group flex cursor-pointer items-center gap-3 text-left"
                     >
                       <span
-                        className="grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110"
+                        className="grid h-8 w-8 shrink-0 place-items-center rounded-full font-display text-[13.5px] font-bold transition-transform group-hover:scale-110"
                         style={{ background: u.candy.main, color: readableInk(u.candy.main) }}
                       >
-                        <Icon className="h-4 w-4" strokeWidth={2.2} />
+                        {u.index}
                       </span>
                       <span className="min-w-0">
                         <span className="block text-[13px] font-bold leading-tight text-milk/80 transition-colors group-hover:text-milk">
-                          Unit {u.code.slice(3)} · {u.shortTitle}
+                          Unit {u.index} · {u.shortTitle}
                         </span>
                         <span className="mt-0.5 block text-[10.5px] font-bold uppercase tracking-[0.12em] text-milk/40">
                           {u.code}

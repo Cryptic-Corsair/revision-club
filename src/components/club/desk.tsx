@@ -11,7 +11,6 @@ import {
   Target,
   Timer,
 } from "./icons";
-import { UNIT_ICONS } from "./home";
 import type { Unit, UnitCode } from "@/lib/spectra/types";
 import { TOTALS } from "@/lib/spectra/units";
 import { useRevised, useHydrated } from "@/lib/spectra/progress";
@@ -244,7 +243,6 @@ export function Desk({
 
           <div className="mt-6 flex flex-col gap-4 sm:gap-5">
             {units.map((u) => {
-              const Icon = UNIT_ICONS[u.code];
               const done = revised.filter((k) => k.startsWith(`${u.code}/`)).length;
               return (
                 <div key={u.code} className="rounded-[26px] bg-paper p-3 puff sm:p-4">
@@ -256,10 +254,10 @@ export function Desk({
                     className="group flex w-full cursor-pointer items-center gap-3 rounded-2xl px-2 pt-2 pb-3 text-left"
                   >
                     <span
-                      className="grid h-10 w-10 shrink-0 place-items-center rounded-[14px]"
-                      style={{ background: tint(u.candy.main, 15) }}
+                      className="grid h-10 w-10 shrink-0 place-items-center rounded-[14px] font-display text-[17px] font-bold"
+                      style={{ background: tint(u.candy.main, 15), color: shade(u.candy.main, 62) }}
                     >
-                      <Icon className="h-5 w-5" style={{ color: shade(u.candy.main, 62) }} />
+                      {u.index}
                     </span>
                     <span className="min-w-0 flex-1">
                       <span

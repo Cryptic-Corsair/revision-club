@@ -1,7 +1,7 @@
 "use client";
 
 import { m } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check, Clock, Flame, PieChart, Sparkles, Target, Timer } from "./icons";
+import { ArrowLeft, ArrowRight, Check, Clock, PieChart, Sparkles, Target, Timer } from "./icons";
 import type { Unit } from "@/lib/spectra/types";
 import { UNITS } from "@/lib/spectra/units";
 import { useRevised } from "@/lib/spectra/progress";
@@ -9,9 +9,7 @@ import { Fmt } from "./format";
 import {
   BeakerMeter,
   Chip,
-  DoodleHex,
   DoodleSparkle,
-  Float,
   Mascot,
   PopIn,
   Reveal,
@@ -217,40 +215,6 @@ export function UnitView({
           </div>
         </div>
       </section>
-
-      {/* ————— the flame behind the colour ————— */}
-      <Reveal className="mt-14">
-        <div
-          className="relative overflow-hidden rounded-[32px] p-6 sm:p-8"
-          style={{ background: tint(main, 10) }}
-        >
-          <DoodleHex className="absolute top-5 right-6 h-10 w-10 opacity-25" />
-          <div className="flex flex-wrap items-center gap-6">
-            <Float>
-              <span
-                className="grid h-24 w-24 place-items-center rounded-[28px] bg-paper font-display text-[44px] font-bold puff"
-                style={{ color: main }}
-              >
-                {unit.element.symbol}
-              </span>
-            </Float>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2 font-display text-[12px] font-bold tracking-[0.18em] uppercase" style={{ color: shade(main, 62) }}>
-                <Flame className="h-4 w-4" /> why this colour
-              </div>
-              <p className="mt-2 text-[15px] leading-[1.75] text-ink-soft">
-                <strong className="font-extrabold text-ink capitalize">
-                  {unit.element.name}
-                </strong>{" "}
-                burns {unit.element.flameName} at{" "}
-                <strong className="font-extrabold text-ink">{unit.element.nm} nm</strong> — the
-                colour this unit uses comes from that flame.{" "}
-                {unit.spectrumNote && <Fmt text={unit.spectrumNote} />}
-              </p>
-            </div>
-          </div>
-        </div>
-      </Reveal>
 
       {/* ————— prev / next ————— */}
       <div className="mt-12 grid gap-4 sm:grid-cols-2">

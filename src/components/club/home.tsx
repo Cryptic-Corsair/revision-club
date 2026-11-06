@@ -6,16 +6,12 @@ import {
   ClipboardCheck,
   ClipboardList,
   Clock,
-  Flame,
-  Gauge,
   ListChecks,
   MoveRight,
   NotebookPen,
-  Palette,
   PencilRuler,
   Sticker,
   Target,
-  TestTubes,
   Timer,
 } from "./icons";
 import type { Unit, UnitCode } from "@/lib/spectra/types";
@@ -54,16 +50,6 @@ import { BandWave, homeBandOf } from "./bands";
    straight off the same shelf the note reader uses. Static SVG,
    painted once; the compositor never revisits it.
    ═══════════════════════════════════════════════════════════════ */
-
-/* each unit's bench mark — shared with the footer's directory */
-export const UNIT_ICONS = {
-  WCH11: Atom,
-  WCH12: Flame,
-  WCH13: TestTubes,
-  WCH14: Gauge,
-  WCH15: Palette,
-  WCH16: ClipboardCheck,
-} as const;
 
 /* ————— static buttons for the still zones —————
    Same candy skin as the hero pair, minus the spring: below the
@@ -356,7 +342,6 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {units.map((u, i) => {
-            const Icon = UNIT_ICONS[u.code];
             const done = revised.filter((k) => k.startsWith(`${u.code}/`)).length;
             const pct = u.topics.length ? done / u.topics.length : 0;
             const minutes = u.topics.reduce((m, t) => m + t.minutes, 0);
@@ -379,10 +364,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
 
                   <div className="flex items-center gap-3">
                     <span
-                      className="grid h-12 w-12 place-items-center rounded-[16px]"
-                      style={{ background: tint(u.candy.main, 15) }}
+                      className="grid h-12 w-12 place-items-center rounded-[16px] font-display text-[20px] font-bold"
+                      style={{ background: tint(u.candy.main, 15), color: shade(u.candy.main, 62) }}
                     >
-                      <Icon className="h-6 w-6" style={{ color: shade(u.candy.main, 62) }} />
+                      {u.index}
                     </span>
                     <div>
                       <div
