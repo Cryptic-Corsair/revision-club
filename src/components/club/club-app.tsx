@@ -226,7 +226,7 @@ function TopBar({
   }, [lab]);
 
   const tool = (active: boolean) =>
-    `grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors sm:h-11 sm:w-11 ${
+    `nav-tool grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors sm:h-11 sm:w-11 ${
       active
         ? "bg-ink text-cream"
         : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
@@ -235,7 +235,7 @@ function TopBar({
   return (
     <>
       <header
-        className="fixed inset-x-0 z-50 flex justify-center pl-[max(0.625rem,var(--sa-left))] pr-[max(0.625rem,var(--sa-right))] sm:pl-[max(0.75rem,var(--sa-left))] sm:pr-[max(0.75rem,var(--sa-right))]"
+        className="site-header fixed inset-x-0 z-50 flex justify-center pl-[max(0.625rem,var(--sa-left))] pr-[max(0.625rem,var(--sa-right))] sm:pl-[max(0.75rem,var(--sa-left))] sm:pr-[max(0.75rem,var(--sa-right))]"
         style={{ top: "calc(0.625rem + var(--sa-top))" }}
       >
         <nav
@@ -253,7 +253,7 @@ function TopBar({
             aria-label="Reaction Club — home"
           >
             <LogoMark />
-            <span className="hidden font-display text-[16px] font-semibold tracking-tight text-ink md:block">
+            <span className="nav-wordmark hidden font-display text-[16px] font-semibold tracking-tight text-ink md:block">
               Reaction Club
             </span>
           </button>
@@ -388,7 +388,7 @@ function TopBar({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.94 }}
             transition={{ type: "spring", stiffness: 380, damping: 24 }}
-            className="fixed bottom-[calc(1.75rem+var(--sa-bottom))] left-1/2 z-[80]"
+            className="lab-toast fixed bottom-[calc(1.75rem+var(--sa-bottom))] left-1/2 z-[80]"
             style={{ x: "-50%" }}
             role="status"
           >
@@ -719,6 +719,38 @@ export default function ClubApp() {
   useEffect(() => {
     if (view.kind !== "home") setLanding(false);
   }, [view.kind]);
+
+  /* ————— the eye vs the layout —————
+     Page zoom (Chrome accessibility zoom, a remembered pinch,
+     Samsung screen zoom) keeps the layout viewport wide while the
+     eye sees far less — and media queries can't see it: the fixed
+     chrome stays tablet-sized and, since fixed elements never pan,
+     its far side is permanently off-screen. Publish what the eye
+     actually sees: --vvw carries the visible width, and
+     data-vv-narrow / data-vv-tight stamp <html> when a desktop-class
+     layout is squeezed into a phone-visible width, so the rules in
+     globals.css can re-fit the fixed chrome to the eye. */
+  useEffect(() => {
+    const root = document.documentElement;
+    const apply = () => {
+      const vv = window.visualViewport;
+      const visible = Math.min(
+        vv?.width ?? window.innerWidth,
+        window.innerWidth,
+      );
+      root.style.setProperty("--vvw", `${Math.round(visible)}px`);
+      const squeezed = window.innerWidth >= 640 && visible < 640;
+      root.toggleAttribute("data-vv-narrow", squeezed);
+      root.toggleAttribute("data-vv-tight", squeezed && visible < 420);
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    window.visualViewport?.addEventListener("resize", apply);
+    return () => {
+      window.removeEventListener("resize", apply);
+      window.visualViewport?.removeEventListener("resize", apply);
+    };
+  }, []);
 
   /* ————— warm the lazy rooms —————
      Once the first paint has settled, fetch every deferred chunk in

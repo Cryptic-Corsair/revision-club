@@ -252,7 +252,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
             animate={{ x: 0 }}
             exit={{ x: "110%" }}
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
-            className="fixed inset-y-0 right-0 z-[95] flex w-[min(440px,94vw)] flex-col overflow-hidden rounded-l-[30px] bg-cream/85 shadow-[-30px_0_80px_-40px_rgb(0_0_0/0.55)] backdrop-blur-2xl backdrop-saturate-150"
+            className="customize-drawer fixed inset-y-0 right-0 z-[95] flex w-[min(440px,94vw)] flex-col overflow-hidden rounded-l-[30px] bg-cream/85 shadow-[-30px_0_80px_-40px_rgb(0_0_0/0.55)] backdrop-blur-2xl backdrop-saturate-150"
           >
             {/* ————— the ambience inside the frost —————
                 two quiet lamps and a grain of dots, so the blur has
