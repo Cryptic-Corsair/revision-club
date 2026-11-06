@@ -4,16 +4,19 @@
    Reaction Club · Spec Map — the note's contents, living inside the
    nav itself. The reader registers its sections + current stop with
    the provider; the nav then wears one candy "you are here" stop,
-   same 40px rhythm as every other nav button. A tap unfolds the
-   map: a floating window that always opens dead-centre of the
-   screen — no anchoring, no tail, nothing to measure against the
-   page — so it lands in the same place on every device, every page
-   size, every zoom level. It is fitted to what the eye actually
-   sees in JS (92vw on phones, a 560px dialog on larger screens),
-   with a rainbow progress track showing how far you've walked, the
-   same band-coloured chips as the note's own contents card, and
-   prev/next hops for reading without lifting your eyes. Escape,
-   the scrim or the ✕ all fold it away.
+   same 40px rhythm as every other nav button. A tap slides the map
+   up from the bottom edge as a true sheet — the way Firefox's menu
+   or Gemini's tray behave — not a floating window: always docked
+   flush to the bottom of the screen, full width on phones and
+   tablets (a 720px bottom-docked dialog on desktops), taking at
+   most ~86% of the visible height so the note still peeks over the
+   top. Because it is anchored to screen edges instead of measured
+   against the page, there is no positioning left to get wrong on
+   any device, page size or zoom level. Inside: a rainbow progress
+   track showing how far you've walked, the same band-coloured chips
+   as the note's own contents card, and prev/next hops for reading
+   without lifting your eyes. Escape, the scrim or the ✕ all fold
+   it away.
    ═══════════════════════════════════════════════════════════════ */
 
 import {
@@ -93,11 +96,12 @@ export function useSpecMapRegister(data: SpecMapData | null) {
   }, [register, data]);
 }
 
-/* where the window hangs — dead-centre of the VISIBLE viewport.
-   Measured from visualViewport (offsets included) so it stays
-   centred under pinch zoom, page zoom and keyboard slides alike;
-   w/h ride along so the window is fitted to the screen in JS,
-   not in CSS. */
+/* where the sheet sits — docked to the bottom of the VISIBLE
+   viewport, full width (a 720px dock on desktops). Measured from
+   visualViewport (offsets included) so it stays glued to the bottom
+   edge under pinch zoom, page zoom and keyboard slides alike; w/h
+   ride along so the sheet is fitted to the screen in JS, not in
+   CSS. */
 type Geo = { top: number; left: number; w: number; h: number };
 
 export function SpecMapTrigger() {
@@ -107,19 +111,18 @@ export function SpecMapTrigger() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   const measure = useCallback(() => {
-    /* centre the window inside what the eye actually sees —
+    /* dock the sheet to the bottom of what the eye actually sees —
        visualViewport, offsets included. Tablets running browser page
        zoom (accessibility zoom, a remembered pinch) keep the layout
        viewport wide while the visible one shrinks, and innerWidth
-       maths then pushed the window clean past the right edge of the
-       screen. Centring inside the visible rect — instead of hanging
-       it off the nav pill — means there is nothing left to measure
-       on the page: the window lands in the same place on every
-       device, every page size, every zoom level. The min() belt also
-       covers exotic zoomed-out states. The width itself graduates
-       with the page: 92% of the visible viewport on phones, easing
-       into a 560px dialog on tablets and desktops — the same
-       floating-window width as the search bubble. */
+       maths then pushed the panel clean past the right edge of the
+       screen. Docking to edges rather than measuring against the
+       page means there is nothing left to get wrong: the sheet hugs
+       the bottom edge on every device, every page size, every zoom
+       level. The min() belt also covers exotic zoomed-out states.
+       The width IS the visible screen on phones and tablets — both
+       edges flush, the Firefox-menu look — easing into a 720px
+       bottom-docked dialog on desktops. */
     const vv = window.visualViewport;
     const offX = Math.round(vv?.offsetLeft ?? 0);
     const offY = Math.round(vv?.offsetTop ?? 0);
@@ -128,26 +131,23 @@ export function SpecMapTrigger() {
       vv?.height ?? window.innerHeight,
       window.innerHeight,
     );
-    const w = Math.min(vw * 0.92, 560);
-    /* the window is fitted to the screen in JS, never in CSS: the old
-       min(72dvh, 640px) cap silently vanished on browsers without
-       dvh units (iOS < 15.4 — plenty of classroom tablets), and long
-       notes then ran the window clean off the screen. The home-
-       indicator inset is honoured so landscape tablets keep the
-       footer buttons clear of the gesture bar. */
-    const saBottom =
-      parseFloat(
-        getComputedStyle(document.documentElement).getPropertyValue(
-          "--sa-bottom",
-        ),
-      ) || 0;
-    const h = Math.max(240, Math.min(vh - 20 - saBottom, 640));
-    const top = Math.round(offY + Math.max((vh - h) / 2, 10));
-    const left = Math.round(offX + Math.max((vw - w) / 2, 8));
+    const w = Math.min(vw, 720);
+    /* the sheet takes ~86% of the visible height at most — the note
+       still peeks over the top, the way Gemini's tray leaves the
+       chat visible — capped at 640px, floored at 240px, and fitted
+       here in JS, never in CSS: the old min(72dvh, 640px) cap
+       silently vanished on browsers without dvh units (iOS < 15.4 —
+       plenty of classroom tablets), and long notes then ran the
+       panel clean off the screen. The home-indicator inset is
+       honoured in CSS via env(safe-area-inset-bottom) on the panel
+       itself. */
+    const h = Math.max(240, Math.min(vh * 0.86, 640));
+    const top = Math.round(offY + Math.max(vh - h, 8));
+    const left = Math.round(offX + (vw - w) / 2);
     /* keep the old object when nothing moved, so opening doesn't
        ripple re-renders through the panel — every field is compared
-       against its own final value, TOP AND LEFT INCLUDED: a centred
-       window keeps w and h identical across viewport sizes, so a
+       against its own final value, TOP AND LEFT INCLUDED: a docked
+       sheet keeps w and h identical across viewport sizes, so a
        dedupe that skips them parks the panel at a stale position
        from the previous size and it sails off the screen */
     setGeo((g) =>
@@ -165,9 +165,9 @@ export function SpecMapTrigger() {
      so no flicker and no setState-in-effect); re-measure on resize
      (window + visual viewport — the latter catches keyboard, pinch
      zoom and orientation on tablets), on visual-viewport scroll
-     (a pinch-zoomed page pans the visible rect; the window glides
-     with it so it never drifts off-centre) and once fonts have
-     settled */
+     (a pinch-zoomed page pans the visible rect; the sheet glides
+     with it so it never drifts off the bottom edge) and once fonts
+     have settled */
   useLayoutEffect(() => {
     if (!open) return;
     const t = window.setTimeout(measure, 350);
@@ -312,11 +312,11 @@ export function SpecMapTrigger() {
                 role="dialog"
                 aria-label="Spec map"
                 tabIndex={-1}
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 340, damping: 26 }}
-                className="spec-map fixed z-[60] flex flex-col rounded-[28px] bg-paper outline-none"
+                initial={{ y: "102%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "102%" }}
+                transition={{ type: "spring", stiffness: 340, damping: 32 }}
+                className="spec-map fixed z-[60] flex flex-col rounded-t-[28px] bg-paper outline-none"
                 style={{
                   top: geo.top,
                   left: geo.left,
@@ -324,15 +324,26 @@ export function SpecMapTrigger() {
                   /* fitted in JS (see measure) — a bare px number, so
                      browsers without dvh can't drop the cap */
                   maxHeight: geo.h,
-                  /* the window blooms out of its own centre */
-                  transformOrigin: "50% 50%",
-                  /* same pedestal language as the nav pill itself */
+                  /* keep the hop buttons clear of the gesture bar on
+                     notched phones — env() is far older than dvh, so
+                     this survives on every classroom tablet */
+                  paddingBottom: "env(safe-area-inset-bottom, 0px)",
+                  /* the pedestal reads upward now: a crisp top edge
+                     like the nav pill's, and a soft shadow rising off
+                     the sheet into the page */
                   boxShadow:
-                    "0 4px 0 var(--edge), 0 30px 60px -24px rgb(0 0 0 / 0.45)",
+                    "0 -4px 0 var(--edge), 0 -30px 60px -24px rgb(0 0 0 / 0.4)",
                 }}
               >
+                {/* the grabber — Firefox-menu language: this is a
+                    tray docked to your screen, not a window */}
+                <span
+                  aria-hidden
+                  className="mx-auto mt-2.5 h-1 w-10 shrink-0 rounded-full bg-ink/[0.14]"
+                />
+
                 {/* header — the tilted badge, where you are, and the way out */}
-                <div className="flex items-center gap-3 px-5 pt-4 sm:px-6">
+                <div className="flex items-center gap-3 px-5 pt-3 sm:px-6">
                   <span
                     className="inline-flex shrink-0 -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.08em] uppercase"
                     style={{
