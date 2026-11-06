@@ -5,15 +5,15 @@
    nav itself. The reader registers its sections + current stop with
    the provider; the nav then wears one candy "you are here" stop,
    same 40px rhythm as every other nav button. A tap unfolds the
-   map: a floating window centred under the nav pill, fitted to the
-   screen in JS (92vw on phones, a 560px centred dialog on larger
-   screens; height measured between the pill and the screen bottom
-   so it never runs off a tablet), with a
-   paper tail stitched to
-   the stop that opened it, a rainbow progress track showing how far
-   you've walked, the same band-coloured chips as the note's own
-   contents card, and prev/next hops for reading without lifting
-   your eyes. Escape, the scrim or the ✕ all fold it away.
+   map: a floating window that always opens dead-centre of the
+   screen — no anchoring, no tail, nothing to measure against the
+   page — so it lands in the same place on every device, every page
+   size, every zoom level. It is fitted to what the eye actually
+   sees in JS (92vw on phones, a 560px dialog on larger screens),
+   with a rainbow progress track showing how far you've walked, the
+   same band-coloured chips as the note's own contents card, and
+   prev/next hops for reading without lifting your eyes. Escape,
+   the scrim or the ✕ all fold it away.
    ═══════════════════════════════════════════════════════════════ */
 
 import {
@@ -93,46 +93,43 @@ export function useSpecMapRegister(data: SpecMapData | null) {
   }, [register, data]);
 }
 
-/* where the window hangs — measured from the real nav pill and the
-   stop inside it, so the tail always points home. h rides along so
-   the window is fitted to the screen in JS, not in CSS. */
-type Geo = { top: number; left: number; w: number; h: number; tail: number };
+/* where the window hangs — dead-centre of the VISIBLE viewport.
+   Measured from visualViewport (offsets included) so it stays
+   centred under pinch zoom, page zoom and keyboard slides alike;
+   w/h ride along so the window is fitted to the screen in JS,
+   not in CSS. */
+type Geo = { top: number; left: number; w: number; h: number };
 
 export function SpecMapTrigger() {
   const { data, open, setOpen } = useContext(SpecMapCtx);
   const [geo, setGeo] = useState<Geo | null>(null);
-  const btnRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
   const measure = useCallback(() => {
-    const nav = document
-      .querySelector('nav[aria-label="Main"]')
-      ?.getBoundingClientRect();
-    const btn = btnRef.current?.getBoundingClientRect();
-    if (!nav || !btn || btn.width === 0) return;
-    /* size and centre the window against what the eye actually sees —
-       visualViewport, not innerWidth. Tablets running browser page
+    /* centre the window inside what the eye actually sees —
+       visualViewport, offsets included. Tablets running browser page
        zoom (accessibility zoom, a remembered pinch) keep the layout
        viewport wide while the visible one shrinks, and innerWidth
        maths then pushed the window clean past the right edge of the
-       screen. The min() belt also covers exotic zoomed-out states.
-       The width itself graduates with the page: 92% of the visible
-       viewport on phones, easing into a 560px centred dialog on
-       tablets and desktops — the same floating-window width as the
-       search bubble — so a 768px portrait tablet reads as a dialog,
-       not a slab, and every zoom level in between lands smoothly
-       because a narrower viewport simply drifts toward the phone fit. */
+       screen. Centring inside the visible rect — instead of hanging
+       it off the nav pill — means there is nothing left to measure
+       on the page: the window lands in the same place on every
+       device, every page size, every zoom level. The min() belt also
+       covers exotic zoomed-out states. The width itself graduates
+       with the page: 92% of the visible viewport on phones, easing
+       into a 560px dialog on tablets and desktops — the same
+       floating-window width as the search bubble. */
     const vv = window.visualViewport;
+    const offX = Math.round(vv?.offsetLeft ?? 0);
+    const offY = Math.round(vv?.offsetTop ?? 0);
     const vw = Math.min(vv?.width ?? window.innerWidth, window.innerWidth);
     const vh = Math.min(
       vv?.height ?? window.innerHeight,
       window.innerHeight,
     );
     const w = Math.min(vw * 0.92, 560);
-    const left = Math.max((vw - w) / 2, 8);
-    /* the window must always fit between the nav pill and the bottom
-       of the screen — computed here in JS, never in CSS: the old
+    /* the window is fitted to the screen in JS, never in CSS: the old
        min(72dvh, 640px) cap silently vanished on browsers without
        dvh units (iOS < 15.4 — plenty of classroom tablets), and long
        notes then ran the window clean off the screen. The home-
@@ -144,44 +141,44 @@ export function SpecMapTrigger() {
           "--sa-bottom",
         ),
       ) || 0;
-    const rawTop = nav.bottom + 10;
-    const h = Math.max(240, Math.min(vh - rawTop - 14 - saBottom, 640));
-    const top = Math.min(rawTop, Math.max(10, vh - h - 8));
-    const tail = Math.min(
-      Math.max(btn.left + btn.width / 2 - left, 26),
-      w - 26,
-    );
+    const h = Math.max(240, Math.min(vh - 20 - saBottom, 640));
+    const top = Math.round(offY + Math.max((vh - h) / 2, 10));
+    const left = Math.round(offX + Math.max((vw - w) / 2, 8));
     /* keep the old object when nothing moved, so opening doesn't
        ripple re-renders through the panel — every field is compared
-       against its own final value, LEFT INCLUDED: a centred window
-       keeps w, h and tail identical across viewport sizes, so a
-       dedupe that skips left parks the panel at a stale position
+       against its own final value, TOP AND LEFT INCLUDED: a centred
+       window keeps w and h identical across viewport sizes, so a
+       dedupe that skips them parks the panel at a stale position
        from the previous size and it sails off the screen */
     setGeo((g) =>
       g &&
       Math.abs(g.top - top) < 1 &&
       Math.abs(g.left - left) < 1 &&
       g.w === w &&
-      g.h === h &&
-      Math.abs(g.tail - tail) < 1
+      g.h === h
         ? g
-        : { top, left, w, h, tail },
+        : { top, left, w, h },
     );
   }, []);
 
   /* measure before the open-paint (done eagerly in the tap handler,
      so no flicker and no setState-in-effect); re-measure on resize
      (window + visual viewport — the latter catches keyboard, pinch
-     zoom and orientation on tablets) and once fonts have settled */
+     zoom and orientation on tablets), on visual-viewport scroll
+     (a pinch-zoomed page pans the visible rect; the window glides
+     with it so it never drifts off-centre) and once fonts have
+     settled */
   useLayoutEffect(() => {
     if (!open) return;
     const t = window.setTimeout(measure, 350);
     window.addEventListener("resize", measure);
     window.visualViewport?.addEventListener("resize", measure);
+    window.visualViewport?.addEventListener("scroll", measure);
     return () => {
       window.clearTimeout(t);
       window.removeEventListener("resize", measure);
       window.visualViewport?.removeEventListener("resize", measure);
+      window.visualViewport?.removeEventListener("scroll", measure);
     };
   }, [open, measure]);
 
@@ -254,7 +251,6 @@ export function SpecMapTrigger() {
   return (
     <>
       <m.button
-        ref={btnRef}
         type="button"
         onClick={() => {
           measure();
@@ -316,9 +312,9 @@ export function SpecMapTrigger() {
                 role="dialog"
                 aria-label="Spec map"
                 tabIndex={-1}
-                initial={{ opacity: 0, y: -14, scale: 0.92 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 340, damping: 26 }}
                 className="spec-map fixed z-[60] flex flex-col rounded-[28px] bg-paper outline-none"
                 style={{
@@ -328,20 +324,13 @@ export function SpecMapTrigger() {
                   /* fitted in JS (see measure) — a bare px number, so
                      browsers without dvh can't drop the cap */
                   maxHeight: geo.h,
-                  /* the window blooms out of the tail, not its middle */
-                  transformOrigin: `${geo.tail}px 0`,
+                  /* the window blooms out of its own centre */
+                  transformOrigin: "50% 50%",
                   /* same pedestal language as the nav pill itself */
                   boxShadow:
                     "0 4px 0 var(--edge), 0 30px 60px -24px rgb(0 0 0 / 0.45)",
                 }}
               >
-                {/* the paper tail stitches the window to the stop above */}
-                <span
-                  aria-hidden
-                  className="absolute top-[-6px] h-3.5 w-3.5 rotate-45 rounded-[3px] bg-paper"
-                  style={{ left: geo.tail - 7 }}
-                />
-
                 {/* header — the tilted badge, where you are, and the way out */}
                 <div className="flex items-center gap-3 px-5 pt-4 sm:px-6">
                   <span
