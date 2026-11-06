@@ -721,15 +721,17 @@ export default function ClubApp() {
   }, [view.kind]);
 
   /* ————— the eye vs the layout —————
-     Page zoom (Chrome accessibility zoom, a remembered pinch,
-     Samsung screen zoom) keeps the layout viewport wide while the
-     eye sees far less — and media queries can't see it. Publish
+     BROWSER page zoom (Chrome accessibility zoom, a remembered
+     pinch, Samsung screen zoom) keeps the layout viewport wide while
+     the eye sees far less — and media queries can't see it. Publish
      what the eye actually sees: --vvw carries the visible width,
      and data-vv-narrow / data-vv-tight stamp <html> when a
      desktop-class layout is squeezed into a phone-visible width,
      so the rules in globals.css can re-fit the pieces that opt in
      (the customize drawer, the lab toast). The navbar deliberately
-     never opts in — page zoom must not restyle it, ever. */
+     never opts in — browser zoom must not restyle it — and the
+     separate content-scale system can't either (the .site-header
+     --ui-scale pin). The pill stays put, whatever either is doing. */
   useEffect(() => {
     const root = document.documentElement;
     const apply = () => {

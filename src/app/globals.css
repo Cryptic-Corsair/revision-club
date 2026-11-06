@@ -607,18 +607,21 @@ html.dune ::selection {
   outline: none;
 }
 
-/* ═════════ page zoom — the eye vs the layout ═════════
-   Chrome's page zoom (accessibility zoom, a remembered pinch,
-   Samsung's screen zoom) keeps the layout viewport wide while the
-   visible one shrinks — and media queries can't see the visible
+/* ═════════ browser page zoom — the eye vs the layout ═════════
+   (Not the retired site zoom feature — that lived on html.style.zoom
+   and is gone; content scale is the data-scale / --ui-scale system
+   at the top of this file. This block is about the BROWSER's own
+   page zoom.) Chrome's page zoom (accessibility zoom, a remembered
+   pinch, Samsung's screen zoom) keeps the layout viewport wide while
+   the visible one shrinks — and media queries can't see the visible
    one. ClubApp publishes the visible width as --vvw and stamps
    data-vv-narrow / data-vv-tight on <html> when a desktop-class
    layout is squeezed into a phone-visible width, so pieces that
    opt in can re-fit to what the eye actually sees. The navbar
    deliberately NEVER opts in — the nav pill must not react to
-   page zoom in any way: same width, same wordmark, same buttons,
-   whatever the zoom is doing. These rules now only re-fit the
-   customize drawer and the lab toast. */
+   browser zoom — nor to content scale — in any way: same width,
+   same wordmark, same buttons, whatever either is doing. These
+   rules now only re-fit the customize drawer and the lab toast. */
 html[data-vv-narrow] .customize-drawer {
   width: min(calc(440px * var(--ui-scale)), calc(var(--vvw, 100vw) - 1rem));
 }

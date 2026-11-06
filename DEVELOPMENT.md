@@ -71,7 +71,7 @@ src/
 │  ├─ pack-sets.tsx / pack-view.tsx   Flashcard packs
 │  ├─ sticker-book.tsx  Sticker book (progress rewards)
 │  ├─ search.tsx        Search view
-│  ├─ customize.tsx     The control panel (theme/font/zoom/motion/dots)
+│  ├─ customize.tsx     The control panel (theme/scale/fonts/motion/dots)
 │  ├─ icons.tsx         **Central icon set** — every icon comes from here
 │  ├─ bits.tsx / blocks.tsx / format.tsx   Shared small components
 │  └─ spec-index.tsx / spec-map.tsx    Spec navigation helpers
@@ -84,7 +84,7 @@ src/
    ├─ notes.ts / notes-meta.ts          Notes loading + metadata
    ├─ registry.ts / deck.ts / packs.ts  Flashcard content
    ├─ search-index.ts / suggest.ts      Search
-   ├─ prefs.ts          User preferences (theme, fonts, zoom, motion, dots)
+   ├─ prefs.ts          User preferences (theme, scale, fonts, motion, dots)
    ├─ progress.ts       Reading progress / marks
    ├─ dark-mood.ts      DARK_MOOD_COUNT — daily "roast" variants for dark lab
    └─ time.ts           Reading-time estimates
@@ -97,10 +97,10 @@ progress). No server, no session, no accounts. If you change a prefs shape,
 bump the key version and write a migration — don't read/write old keys loosely.
 
 **Pre-hydration flash guard:** `layout.tsx` inlines a tiny script
-(`rc-prefs`, `beforeInteractive`) that applies the saved lab, fonts, zoom and
-dark "mood" to `<html>` before first paint. `prefs.ts` re-applies on hydration
-and then owns every change. If you add a preference, wire it into **both**
-places and add a `html[data-*]` selector in `globals.css`.
+(`rc-prefs`, `beforeInteractive`) that applies the saved lab, fonts, content
+scale and dark "mood" to `<html>` before first paint. `prefs.ts` re-applies on
+hydration and then owns every change. If you add a preference, wire it into
+**both** places and add a `html[data-*]` selector in `globals.css`.
 
 ## 5. Content system
 
@@ -171,8 +171,35 @@ replace the files in `src/app/fonts/`, and keep the `weight` ranges in
   rooms with espresso `#2c2013` ink — this is the theme new visitors see
 
 User prefs (`prefs.ts`, default in parentheses): `theme` (`"classic"`),
-`headFont` (`"fredoka"`), `bodyFont` (`"nunito"`), `zoom` (1; allowed
-0.9/1/1.15/1.3), `dots` (on), `motion` (on).
+`headFont` (`"fredoka"`), `bodyFont` (`"nunito"`), `scale` (`"M"`; S/M/L/XL —
+legacy saved `zoom` values 0.9/1/1.15/1.3 migrate onto the matching step),
+`dots` (on), `motion` (on).
+
+### Content scale (S/M/L/XL)
+
+The size knob does NOT zoom. The retired `html.style.zoom` scaled the whole
+coordinate system — layout viewport included — which squeezed the spec map
+drawer and every fixed surface on zoomed tablets. Instead the pref stamps
+`html[data-scale]`, which `globals.css` maps onto one custom property,
+`--ui-scale` (0.9/1/1.15/1.3):
+
+- Named Tailwind tokens ride it via the `@theme inline` block (`--spacing`,
+  `--radius-md/xl/2xl`). It MUST stay `inline`: a plain `@theme` token resolves
+  `var(--ui-scale)` once at `:root` and the computed length inherits into every
+  subtree, which would defeat the freeze pins below.
+- All px sizing utilities in components are written as
+  `calc(Npx * var(--ui-scale))` (borders, shadows, blurs, textures and
+  scrollbars stay literal px — thickness/material, not size).
+- Two subtrees are pinned: `.site-header` and `.spec-map` set `--ui-scale: 1`,
+  so the navbar pill and the spec-map drawer (incl. the shared SpecChip)
+  measure identical at every step. The customize panel deliberately does NOT
+  pin — it is content.
+- Root font-size never moves: rem breakpoints and dvh drawers stay honest.
+- New components: size with normal Tailwind utilities or
+  `calc(Npx * var(--ui-scale))`; never reintroduce bare px sizing, and never
+  `html.style.zoom`.
+- Verify with `bash scripts/measure-scale.sh /tmp/scale.json` — frozen-surface
+  rects must not differ between steps; content must scale ×0.9/×1.15/×1.3.
 
 **Iron rule: every visual change must hold in all four labs.** A change that
 looks great in classic but breaks night or dune is a bug. Verify
