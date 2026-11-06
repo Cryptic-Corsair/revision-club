@@ -68,7 +68,7 @@ export function BandWave({
       <svg
         viewBox="0 0 1440 90"
         preserveAspectRatio="none"
-        className="block h-[46px] w-full sm:h-[68px]"
+        className="block h-[calc(46px*var(--ui-scale))] w-full sm:h-[calc(68px*var(--ui-scale))]"
       >
         {/* fill rides on style so var() strings with fallbacks resolve */}
         <path d={WAVES[wave % WAVES.length]} style={{ fill: to }} />
@@ -142,7 +142,7 @@ export function SpecChip({
       aria-current={here ? "true" : undefined}
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.95 }}
-      className="flex cursor-pointer items-center gap-2 rounded-[18px] px-3 py-2.5 text-left"
+      className="flex cursor-pointer items-center gap-2 rounded-[calc(18px*var(--ui-scale))] px-3 py-2.5 text-left"
       style={
         here
           ? {
@@ -156,7 +156,7 @@ export function SpecChip({
       {...rest}
     >
       <span
-        className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[10.5px] font-bold"
+        className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[calc(10.5px*var(--ui-scale))] font-bold"
         style={
           here
             ? {
@@ -169,7 +169,7 @@ export function SpecChip({
         {s.spec}
       </span>
       <span
-        className={`line-clamp-2 text-[12px] font-bold leading-[1.35]${here ? "" : " text-ink"}`}
+        className={`line-clamp-2 text-[calc(12px*var(--ui-scale))] font-bold leading-[1.35]${here ? "" : " text-ink"}`}
       >
         {s.title}
       </span>

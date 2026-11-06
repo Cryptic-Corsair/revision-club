@@ -253,14 +253,14 @@ function TopBar({
             aria-label="Reaction Club — home"
           >
             <LogoMark />
-            <span className="nav-wordmark hidden font-display text-[16px] font-semibold tracking-tight text-ink md:block">
+            <span className="nav-wordmark hidden font-display text-[calc(16px*var(--ui-scale))] font-semibold tracking-tight text-ink md:block">
               Reaction Club
             </span>
           </button>
 
           <span
             aria-hidden
-            className="mx-1 hidden h-6 w-[3px] shrink-0 rounded-full bg-ink/10 sm:block"
+            className="mx-1 hidden h-6 w-[calc(3px*var(--ui-scale))] shrink-0 rounded-full bg-ink/10 sm:block"
           />
 
           {/* the note reader parks its Spec Map stop here — same 40px
@@ -277,7 +277,7 @@ function TopBar({
             whileTap={{ scale: 0.88 }}
             className={tool(view.kind === "home")}
           >
-            <HomeIcon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            <HomeIcon className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
@@ -300,11 +300,11 @@ function TopBar({
                 : undefined
             }
           >
-            <ClipboardList className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            <ClipboardList className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
             {picks.length > 0 && view.kind !== "pack" && (
               <span
                 aria-hidden
-                className="absolute -top-0.5 -right-0.5 grid h-[17px] min-w-[17px] place-items-center rounded-full px-0.5 font-display text-[9.5px] font-bold text-white"
+                className="absolute -top-0.5 -right-0.5 grid h-[calc(17px*var(--ui-scale))] min-w-[calc(17px*var(--ui-scale))] place-items-center rounded-full px-0.5 font-display text-[calc(9.5px*var(--ui-scale))] font-bold text-white"
                 style={{ background: "#FF922B", boxShadow: "0 0 0 2px var(--color-paper)" }}
               >
                 {picks.length}
@@ -320,7 +320,7 @@ function TopBar({
             title="Search topics · ⌘K"
             aria-label="Search topics"
           >
-            <Search className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            <Search className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
@@ -343,7 +343,7 @@ function TopBar({
                 : undefined
             }
           >
-            <Sticker className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            <Sticker className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
@@ -354,7 +354,7 @@ function TopBar({
             title="Customize · fonts, sizes & themes"
             aria-label="Customize the site"
           >
-            <Sliders className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            <Sliders className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
@@ -367,13 +367,13 @@ function TopBar({
           >
             {/* the button wears today's lab; the toast announces the next one */}
             {lab === "light" ? (
-              <Sun className="h-[18px] w-[18px]" strokeWidth={2.2} />
+              <Sun className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
             ) : lab === "dark" ? (
-              <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+              <Moon className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
             ) : lab === "dune" ? (
-              <Dune className="h-[18px] w-[18px]" strokeWidth={2.2} />
+              <Dune className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
             ) : (
-              <SunMoon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+              <SunMoon className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
             )}
           </m.button>
         </nav>
@@ -392,7 +392,7 @@ function TopBar({
             style={{ x: "-50%" }}
             role="status"
           >
-            <span className="flex items-center gap-2.5 rounded-full bg-paper px-5 py-2.5 font-display text-[13.5px] font-semibold whitespace-nowrap text-ink puff">
+            <span className="flex items-center gap-2.5 rounded-full bg-paper px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold whitespace-nowrap text-ink puff">
               <span
                 aria-hidden
                 className="h-3.5 w-3.5 shrink-0 rounded-full"
@@ -448,7 +448,7 @@ function Footer({
     <footer className="mt-auto">
       <div
         aria-hidden
-        className="h-[54px] sm:h-[74px]"
+        className="h-[calc(54px*var(--ui-scale))] sm:h-[calc(74px*var(--ui-scale))]"
         style={{ background: bandFrom }}
       >
         <svg
@@ -473,11 +473,11 @@ function Footer({
             <div className="max-w-sm">
               <div className="flex items-center gap-3">
                 <LogoMark size={38} />
-                <span className="font-display text-[17px] font-semibold tracking-tight">
+                <span className="font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight">
                   Reaction Club
                 </span>
               </div>
-              <p className="mt-3 text-[14px] leading-relaxed text-milk/80">
+              <p className="mt-3 text-[calc(14px*var(--ui-scale))] leading-relaxed text-milk/80">
                 Notes for every topic in the International A Level course —
                 read them in order, try the checkpoints, and mark what
                 you&apos;ve revised. Your reading time is counted, topic by
@@ -496,10 +496,10 @@ function Footer({
                     className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] py-1.5 pl-3 pr-3.5"
                   >
                     <s.icon className="h-3.5 w-3.5 text-lemon" strokeWidth={2.2} />
-                    <span className="font-display text-[13px] font-bold leading-none">
+                    <span className="font-display text-[calc(13px*var(--ui-scale))] font-bold leading-none">
                       {s.value}
                     </span>
-                    <span className="text-[11px] font-bold leading-none text-milk/60">
+                    <span className="text-[calc(11px*var(--ui-scale))] font-bold leading-none text-milk/60">
                       {s.label}
                     </span>
                   </span>
@@ -523,7 +523,7 @@ function Footer({
                       className="mb-4"
                     >
                       <SpeechBubble className="px-4 py-2.5">
-                        <span className="font-display text-[13px] font-semibold text-ink">
+                        <span className="font-display text-[calc(13px*var(--ui-scale))] font-semibold text-ink">
                           Tap a unit to start revising.
                         </span>
                       </SpeechBubble>
@@ -535,7 +535,7 @@ function Footer({
 
             {/* the six units — real bench marks now, not plain dots */}
             <div>
-              <div className="font-display text-[12px] font-bold tracking-[0.2em] text-milk/60 uppercase">
+              <div className="font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.2em] text-milk/60 uppercase">
                 The units
               </div>
               <div className="mt-4 flex flex-col gap-2.5">
@@ -548,16 +548,16 @@ function Footer({
                       className="group flex cursor-pointer items-center gap-3 text-left"
                     >
                       <span
-                        className="grid h-8 w-8 shrink-0 place-items-center rounded-full font-display text-[13.5px] font-bold transition-transform group-hover:scale-110"
+                        className="grid h-8 w-8 shrink-0 place-items-center rounded-full font-display text-[calc(13.5px*var(--ui-scale))] font-bold transition-transform group-hover:scale-110"
                         style={{ background: u.candy.main, color: readableInk(u.candy.main) }}
                       >
                         {u.index}
                       </span>
                       <span className="min-w-0">
-                        <span className="block text-[13px] font-bold leading-tight text-milk/80 transition-colors group-hover:text-milk">
+                        <span className="block text-[calc(13px*var(--ui-scale))] font-bold leading-tight text-milk/80 transition-colors group-hover:text-milk">
                           Unit {u.index} · {u.shortTitle}
                         </span>
-                        <span className="mt-0.5 block text-[10.5px] font-bold uppercase tracking-[0.12em] text-milk/40">
+                        <span className="mt-0.5 block text-[calc(10.5px*var(--ui-scale))] font-bold uppercase tracking-[0.12em] text-milk/40">
                           {u.code}
                         </span>
                       </span>
@@ -569,7 +569,7 @@ function Footer({
 
             {/* the toolkit */}
             <div>
-              <div className="font-display text-[12px] font-bold tracking-[0.2em] text-milk/60 uppercase">
+              <div className="font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.2em] text-milk/60 uppercase">
                 The toolkit
               </div>
               <div className="mt-4 flex flex-col gap-3">
@@ -624,10 +624,10 @@ function Footer({
                       <row.icon className="h-4 w-4" strokeWidth={2.2} />
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-[13px] font-bold leading-tight text-milk/80 transition-colors group-hover:text-milk">
+                      <span className="block text-[calc(13px*var(--ui-scale))] font-bold leading-tight text-milk/80 transition-colors group-hover:text-milk">
                         {row.label}
                       </span>
-                      <span className="mt-0.5 block truncate text-[11px] font-semibold text-milk/45">
+                      <span className="mt-0.5 block truncate text-[calc(11px*var(--ui-scale))] font-semibold text-milk/45">
                         {row.hint}
                       </span>
                     </span>
@@ -638,7 +638,7 @@ function Footer({
           </div>
 
           {/* ————— good to know ————— */}
-          <div className="grid gap-2 rounded-[22px] border border-white/[0.08] bg-white/[0.04] p-3 sm:grid-cols-3 sm:p-4">
+          <div className="grid gap-2 rounded-[calc(22px*var(--ui-scale))] border border-white/[0.08] bg-white/[0.04] p-3 sm:grid-cols-3 sm:p-4">
             {(
               [
                 {
@@ -660,7 +660,7 @@ function Footer({
             ).map((n) => (
               <div key={n.text} className="flex items-start gap-2.5 px-1.5 py-1.5">
                 <n.icon className={`mt-0.5 h-4.5 w-4.5 shrink-0 ${n.chip}`} strokeWidth={2} />
-                <p className="text-[12px] leading-snug font-semibold text-milk/65">
+                <p className="text-[calc(12px*var(--ui-scale))] leading-snug font-semibold text-milk/65">
                   {n.text}
                 </p>
               </div>
@@ -669,7 +669,7 @@ function Footer({
 
           {/* ————— colophon ————— */}
           <div className="mt-7 flex flex-col gap-4 border-t border-white/10 pt-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-2xl text-[11.5px] leading-relaxed font-semibold text-milk/55">
+            <p className="max-w-2xl text-[calc(11.5px*var(--ui-scale))] leading-relaxed font-semibold text-milk/55">
               © 2026 Reaction Club · Written to the Pearson Edexcel
               International A Level Chemistry (2018) specification ·
               WCH11–WCH16 · not affiliated with or endorsed by Pearson
@@ -681,7 +681,7 @@ function Footer({
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="group inline-flex shrink-0 cursor-pointer items-center gap-2 self-start rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-[12.5px] font-bold text-milk/80 transition-colors hover:bg-white/[0.12] hover:text-milk sm:self-auto"
+              className="group inline-flex shrink-0 cursor-pointer items-center gap-2 self-start rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/80 transition-colors hover:bg-white/[0.12] hover:text-milk sm:self-auto"
             >
               <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" strokeWidth={2.2} />
               Back to top

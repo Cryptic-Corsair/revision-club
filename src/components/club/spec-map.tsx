@@ -280,9 +280,9 @@ export function SpecMapTrigger() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -8, opacity: 0 }}
             transition={{ duration: 0.14 }}
-            className="grid place-items-center font-display text-[10.5px] font-bold tracking-tight"
+            className="grid place-items-center font-display text-[calc(10.5px*var(--ui-scale))] font-bold tracking-tight"
           >
-            {open ? <ListChecks className="h-[18px] w-[18px]" /> : active}
+            {open ? <ListChecks className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" /> : active}
           </m.span>
         </AnimatePresence>
       </m.button>
@@ -312,7 +312,7 @@ export function SpecMapTrigger() {
                 animate={{ y: 0 }}
                 exit={{ y: "104%" }}
                 transition={{ type: "spring", stiffness: 340, damping: 34 }}
-                className="spec-map fixed z-[60] flex flex-col overflow-hidden rounded-t-[28px] bg-paper outline-none"
+                className="spec-map fixed z-[60] flex flex-col overflow-hidden rounded-t-[calc(28px*var(--ui-scale))] bg-paper outline-none"
                 style={{
                   top: geo.top,
                   left: geo.left,
@@ -343,12 +343,12 @@ export function SpecMapTrigger() {
                 {/* the content column — full-bleed on phones and
                     tablets, centred on desktops where the drawer is
                     wider than a page of chips needs */}
-                <div className="mx-auto flex min-h-0 w-full max-w-[760px] flex-1 flex-col">
+                <div className="mx-auto flex min-h-0 w-full max-w-[calc(760px*var(--ui-scale))] flex-1 flex-col">
                   {/* header — the tilted badge, where you are, and the
                       way out */}
                   <div className="flex items-center gap-3 px-5 pt-3 sm:px-6">
                     <span
-                      className="inline-flex shrink-0 -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.08em] uppercase"
+                      className="inline-flex shrink-0 -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
                       style={{
                         background: main,
                         color: readableInk(main),
@@ -357,7 +357,7 @@ export function SpecMapTrigger() {
                     >
                       <ListChecks className="h-3.5 w-3.5" /> Spec map
                     </span>
-                    <p className="min-w-0 flex-1 truncate text-[12.5px] font-bold text-ink-faint">
+                    <p className="min-w-0 flex-1 truncate text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-faint">
                       Stop {idx + 1} of {sections.length} — tap one to hop
                     </p>
                     <button
@@ -366,7 +366,7 @@ export function SpecMapTrigger() {
                       aria-label="Close spec map"
                       className="grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full bg-ink/[0.06] text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
                     >
-                      <X className="h-[18px] w-[18px]" strokeWidth={2.2} />
+                      <X className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
                     </button>
                   </div>
 
@@ -374,7 +374,7 @@ export function SpecMapTrigger() {
                       own band colour; the current one stands taller */}
                   <div
                     aria-hidden
-                    className="mt-3 flex items-center gap-[3px] px-5 sm:px-6"
+                    className="mt-3 flex items-center gap-[calc(3px*var(--ui-scale))] px-5 sm:px-6"
                   >
                     {sections.map((s, i) => (
                       <span
@@ -442,10 +442,10 @@ export function SpecMapTrigger() {
                       className="flex h-10 min-w-0 cursor-pointer items-center gap-1.5 rounded-full bg-ink/[0.06] px-3.5 text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink disabled:cursor-default disabled:opacity-35 disabled:hover:bg-ink/[0.06]"
                     >
                       <ArrowLeft className="h-4 w-4 shrink-0" strokeWidth={2.2} />
-                      <span className="font-display text-[12.5px] font-bold">
+                      <span className="font-display text-[calc(12.5px*var(--ui-scale))] font-bold">
                         {idx > 0 ? sections[idx - 1].spec : "—"}
                       </span>
-                      <span className="hidden max-w-[130px] truncate text-[12px] font-bold sm:inline">
+                      <span className="hidden max-w-[calc(130px*var(--ui-scale))] truncate text-[calc(12px*var(--ui-scale))] font-bold sm:inline">
                         {idx > 0 ? sections[idx - 1].title : ""}
                       </span>
                     </button>
@@ -468,10 +468,10 @@ export function SpecMapTrigger() {
                       }
                       className="flex h-10 min-w-0 cursor-pointer items-center gap-1.5 rounded-full bg-ink/[0.06] px-3.5 text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink disabled:cursor-default disabled:opacity-35 disabled:hover:bg-ink/[0.06]"
                     >
-                      <span className="hidden max-w-[130px] truncate text-[12px] font-bold sm:inline">
+                      <span className="hidden max-w-[calc(130px*var(--ui-scale))] truncate text-[calc(12px*var(--ui-scale))] font-bold sm:inline">
                         {idx < sections.length - 1 ? sections[idx + 1].title : ""}
                       </span>
-                      <span className="font-display text-[12.5px] font-bold">
+                      <span className="font-display text-[calc(12.5px*var(--ui-scale))] font-bold">
                         {idx < sections.length - 1 ? sections[idx + 1].spec : "—"}
                       </span>
                       <ArrowRight

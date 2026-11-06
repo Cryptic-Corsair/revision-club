@@ -63,7 +63,7 @@ export function TopicView({
       {/* reading progress — a candy strip filling up top */}
       <m.div
         aria-hidden
-        className="fixed left-0 z-[70] h-[7px] w-full origin-left rounded-r-full"
+        className="fixed left-0 z-[70] h-[calc(7px*var(--ui-scale))] w-full origin-left rounded-r-full"
         style={{
           top: "var(--sa-top)",
           scaleX,
@@ -74,7 +74,7 @@ export function TopicView({
       <PopIn>
         <SoftButton
           onClick={onBack}
-          className="min-h-[42px] px-4 py-2 text-[13.5px]"
+          className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]"
           ariaLabel={`Back to ${unit.code}`}
         >
           <ArrowLeft className="h-4 w-4" /> Back to {unit.code}
@@ -98,7 +98,7 @@ export function TopicView({
           <h1 className="mt-5 font-display text-[clamp(2rem,4.6vw,3rem)] leading-[1.08] font-semibold tracking-tight text-ink">
             {topic.title}
           </h1>
-          <p className="mt-3.5 max-w-[60ch] text-[16.5px] leading-[1.8] text-ink-soft">
+          <p className="mt-3.5 max-w-[60ch] text-[calc(16.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
             {topic.summary}
           </p>
         </PopIn>
@@ -114,17 +114,17 @@ export function TopicView({
             onClick={onOpenNotes}
             whileHover={{ y: -4, rotate: -0.4 }}
             whileTap={{ scale: 0.97 }}
-            className="group flex w-full cursor-pointer items-center gap-4 rounded-[28px] p-5 text-left sm:p-6"
+            className="group flex w-full cursor-pointer items-center gap-4 rounded-[calc(28px*var(--ui-scale))] p-5 text-left sm:p-6"
             style={{ background: main, boxShadow: `0 6px 0 ${shade(main)}` }}
           >
-            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-[20px] bg-white/20">
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-[calc(20px*var(--ui-scale))] bg-white/20">
               <BookOpen className="h-7 w-7 text-white" strokeWidth={2.2} />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block font-display text-[18px] font-semibold text-white">
+              <span className="block font-display text-[calc(18px*var(--ui-scale))] font-semibold text-white">
                 The full revision note — spec by spec
               </span>
-              <span className="mt-1 block text-[13.5px] leading-[1.6] font-bold text-white/80">
+              <span className="mt-1 block text-[calc(13.5px*var(--ui-scale))] leading-[1.6] font-bold text-white/80">
                 The complete class note, word for word, cut into one section per specification
                 point{notesSpecRange ? ` (${notesSpecRange})` : ""} with the official wording above
                 each, and every calculation worked in full.
@@ -153,7 +153,7 @@ export function TopicView({
             whileHover={{ y: -3, scale: 1.02 }}
             whileTap={{ scale: 0.94 }}
             transition={{ type: "spring", stiffness: 320, damping: 15 }}
-            className="inline-flex min-h-[56px] cursor-pointer items-center gap-3 rounded-full px-7 py-4 font-display text-[16px] font-semibold"
+            className="inline-flex min-h-[calc(56px*var(--ui-scale))] cursor-pointer items-center gap-3 rounded-full px-7 py-4 font-display text-[calc(16px*var(--ui-scale))] font-semibold"
             style={
               isRevised
                 ? {
@@ -185,7 +185,7 @@ export function TopicView({
           </m.button>
         </div>
       </Reveal>
-      <p className="mt-3 text-center text-[12.5px] font-bold text-ink-faint">
+      <p className="mt-3 text-center text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-faint">
         {isRevised
           ? "Saved in this browser. Tap again to unmark it."
           : "One tap marks it done — progress is saved in this browser."}
@@ -205,10 +205,10 @@ export function TopicView({
               <ArrowLeft className="h-4.5 w-4.5" strokeWidth={2.5} />
             </span>
             <span className="min-w-0">
-              <span className="block text-[11px] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+              <span className="block text-[calc(11px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
                 previous · {prev.label}
               </span>
-              <span className="block truncate font-display text-[15px] font-semibold text-ink">
+              <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold text-ink">
                 {prev.title}
               </span>
             </span>
@@ -226,10 +226,10 @@ export function TopicView({
             style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
           >
             <span className="min-w-0">
-              <span className="block text-[11px] font-extrabold tracking-[0.14em] text-white/70 uppercase">
+              <span className="block text-[calc(11px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-white/70 uppercase">
                 next · {next.label}
               </span>
-              <span className="block truncate font-display text-[15px] font-semibold">
+              <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold">
                 {next.title}
               </span>
             </span>
@@ -247,10 +247,10 @@ export function TopicView({
             style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
           >
             <span className="min-w-0">
-              <span className="block text-[11px] font-extrabold tracking-[0.14em] text-white/70 uppercase">
+              <span className="block text-[calc(11px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-white/70 uppercase">
                 end of unit
               </span>
-              <span className="block truncate font-display text-[15px] font-semibold">
+              <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold">
                 Back to {unit.code}
               </span>
             </span>
@@ -259,7 +259,7 @@ export function TopicView({
         )}
       </nav>
 
-      <p className="mt-10 text-center text-[12px] leading-relaxed font-bold text-ink-faint">
+      <p className="mt-10 text-center text-[calc(12px*var(--ui-scale))] leading-relaxed font-bold text-ink-faint">
         <Fmt
           text={`==${unit.code}== · ${unit.title} · written to the 2018 specification`}
         />

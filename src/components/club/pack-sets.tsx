@@ -117,7 +117,7 @@ export function PackSetsDialog({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.96 }}
             transition={{ type: "spring", stiffness: 340, damping: 26 }}
-            className="fixed inset-x-3 top-[calc(1rem+var(--sa-top))] z-[80] mx-auto flex max-h-[min(78dvh,560px)] w-auto max-w-[440px] flex-col rounded-[28px] bg-paper outline-none sm:inset-x-auto sm:left-1/2 sm:w-[min(440px,92vw)] sm:-translate-x-1/2"
+            className="fixed inset-x-3 top-[calc(1rem+var(--sa-top))] z-[80] mx-auto flex max-h-[min(78dvh,560px)] w-auto max-w-[calc(440px*var(--ui-scale))] flex-col rounded-[calc(28px*var(--ui-scale))] bg-paper outline-none sm:inset-x-auto sm:left-1/2 sm:w-[min(440px,92vw)] sm:-translate-x-1/2"
             style={{
               boxShadow:
                 "0 4px 0 var(--edge), 0 30px 60px -24px rgb(0 0 0 / 0.45)",
@@ -126,7 +126,7 @@ export function PackSetsDialog({
             {/* header */}
             <div className="flex items-center gap-3 px-5 pt-4">
               <span
-                className="inline-flex shrink-0 -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.08em] uppercase"
+                className="inline-flex shrink-0 -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
                 style={{
                   background: "#12B886",
                   color: readableInk("#12B886"),
@@ -135,7 +135,7 @@ export function PackSetsDialog({
               >
                 <Bookmark className="h-3.5 w-3.5" /> Revision sets
               </span>
-              <p className="min-w-0 flex-1 truncate text-[12.5px] font-bold text-ink-faint">
+              <p className="min-w-0 flex-1 truncate text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-faint">
                 {sets.length > 0
                   ? `${sets.length} saved`
                   : "keep a selection for later"}
@@ -146,7 +146,7 @@ export function PackSetsDialog({
                 aria-label="Close revision sets"
                 className="grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full bg-ink/[0.06] text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
               >
-                <X className="h-[18px] w-[18px]" strokeWidth={2.2} />
+                <X className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
               </button>
             </div>
 
@@ -156,7 +156,7 @@ export function PackSetsDialog({
               style={{ overscrollBehavior: "contain" }}
             >
               {sets.length === 0 && (
-                <p className="px-2 py-7 text-center text-[13px] leading-relaxed font-bold text-ink-faint">
+                <p className="px-2 py-7 text-center text-[calc(13px*var(--ui-scale))] leading-relaxed font-bold text-ink-faint">
                   No sets yet.
                   <br />
                   Tick some statements, then save them
@@ -210,7 +210,7 @@ export function PackSetsDialog({
                     placeholder="Name this set — e.g. “Mock paper 2”"
                     aria-label="Name for the current selection"
                     maxLength={48}
-                    className="h-10 min-w-0 flex-1 rounded-full bg-ink/[0.05] px-4 text-[13.5px] font-bold text-ink outline-none placeholder:text-ink-faint/70 focus:bg-ink/[0.08]"
+                    className="h-10 min-w-0 flex-1 rounded-full bg-ink/[0.05] px-4 text-[calc(13.5px*var(--ui-scale))] font-bold text-ink outline-none placeholder:text-ink-faint/70 focus:bg-ink/[0.08]"
                   />
                   <button
                     type="button"
@@ -222,7 +222,7 @@ export function PackSetsDialog({
                     }}
                     aria-label="Save the current selection as a set"
                   >
-                    <Check className="h-[18px] w-[18px]" strokeWidth={2.6} />
+                    <Check className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.6} />
                   </button>
                 </div>
               ) : (
@@ -230,7 +230,7 @@ export function PackSetsDialog({
                   type="button"
                   onClick={beginSave}
                   disabled={picks.length === 0}
-                  className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-full font-display text-[12.5px] font-bold tracking-[0.06em] uppercase transition-opacity disabled:cursor-default disabled:opacity-40"
+                  className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-full font-display text-[calc(12.5px*var(--ui-scale))] font-bold tracking-[0.06em] uppercase transition-opacity disabled:cursor-default disabled:opacity-40"
                   style={{
                     background: "#12B886",
                     color: readableInk("#12B886"),
@@ -289,7 +289,7 @@ function SetRow({
 
   if (renaming) {
     return (
-      <li className="rounded-[20px] bg-ink/[0.04] p-3">
+      <li className="rounded-[calc(20px*var(--ui-scale))] bg-ink/[0.04] p-3">
         <input
           ref={inputRef}
           value={name}
@@ -300,20 +300,20 @@ function SetRow({
           }}
           aria-label={`Rename ${s.name}`}
           maxLength={48}
-          className="h-9 w-full rounded-full bg-paper px-3.5 text-[13px] font-bold text-ink outline-none"
+          className="h-9 w-full rounded-full bg-paper px-3.5 text-[calc(13px*var(--ui-scale))] font-bold text-ink outline-none"
         />
         <div className="mt-2 flex justify-end gap-2">
           <button
             type="button"
             onClick={onCancel}
-            className="h-8 cursor-pointer rounded-full px-3 text-[12px] font-bold text-ink-soft hover:text-ink"
+            className="h-8 cursor-pointer rounded-full px-3 text-[calc(12px*var(--ui-scale))] font-bold text-ink-soft hover:text-ink"
           >
             Cancel
           </button>
           <button
             type="button"
             onClick={onCommitRename}
-            className="h-8 cursor-pointer rounded-full bg-mint px-3.5 text-[12px] font-bold text-white"
+            className="h-8 cursor-pointer rounded-full bg-mint px-3.5 text-[calc(12px*var(--ui-scale))] font-bold text-white"
             style={{ background: "#12B886" }}
           >
             Save name
@@ -325,7 +325,7 @@ function SetRow({
 
   return (
     <li
-      className={`rounded-[20px] p-3 ${loaded ? "bg-mint/10" : "bg-ink/[0.04]"}`}
+      className={`rounded-[calc(20px*var(--ui-scale))] p-3 ${loaded ? "bg-mint/10" : "bg-ink/[0.04]"}`}
     >
       <div className="flex items-center gap-2">
         <button
@@ -338,19 +338,19 @@ function SetRow({
           aria-label={`Load set ${s.name} — ${s.picks.length} points`}
         >
           <span className="flex items-center gap-2">
-            <span className="truncate font-display text-[14px] font-bold text-ink">
+            <span className="truncate font-display text-[calc(14px*var(--ui-scale))] font-bold text-ink">
               {s.name}
             </span>
             {loaded && (
               <span
-                className="shrink-0 rounded-full px-2 py-0.5 font-display text-[9.5px] font-bold tracking-[0.1em] text-white uppercase"
+                className="shrink-0 rounded-full px-2 py-0.5 font-display text-[calc(9.5px*var(--ui-scale))] font-bold tracking-[0.1em] text-white uppercase"
                 style={{ background: "#12B886" }}
               >
                 Loaded
               </span>
             )}
           </span>
-          <span className="mt-0.5 block text-[11.5px] font-bold text-ink-faint">
+          <span className="mt-0.5 block text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-faint">
             {s.picks.length} point{s.picks.length === 1 ? "" : "s"} ·{" "}
             {fmtDay(s.savedAt)}
           </span>
@@ -365,20 +365,20 @@ function SetRow({
                 overwriteSet(s.id, currentPicks);
                 onAfterChange?.();
               }}
-              className="h-8 cursor-pointer rounded-full bg-ink/[0.06] px-3 text-[11.5px] font-bold text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
+              className="h-8 cursor-pointer rounded-full bg-ink/[0.06] px-3 text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
             >
               Overwrite with current
             </button>
           )
         ) : (
-          <span className="text-[11px] font-bold text-ink-faint/80">
+          <span className="text-[calc(11px*var(--ui-scale))] font-bold text-ink-faint/80">
             tap the name to load its ticks
           </span>
         )}
         <button
           type="button"
           onClick={onBeginRename}
-          className="ml-auto h-8 cursor-pointer rounded-full bg-ink/[0.06] px-3 text-[11.5px] font-bold text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
+          className="ml-auto h-8 cursor-pointer rounded-full bg-ink/[0.06] px-3 text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
         >
           Rename
         </button>
@@ -386,7 +386,7 @@ function SetRow({
           <button
             type="button"
             onClick={onRemove}
-            className="h-8 cursor-pointer rounded-full px-3 text-[11.5px] font-bold text-white"
+            className="h-8 cursor-pointer rounded-full px-3 text-[calc(11.5px*var(--ui-scale))] font-bold text-white"
             style={{ background: "#FF6B6B" }}
           >
             Delete for good
@@ -395,7 +395,7 @@ function SetRow({
           <button
             type="button"
             onClick={onToggleDelete}
-            className="h-8 cursor-pointer rounded-full bg-ink/[0.06] px-3 text-[11.5px] font-bold text-ink-soft transition-colors hover:bg-coral/15 hover:text-coral"
+            className="h-8 cursor-pointer rounded-full bg-ink/[0.06] px-3 text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-soft transition-colors hover:bg-coral/15 hover:text-coral"
           >
             Delete
           </button>

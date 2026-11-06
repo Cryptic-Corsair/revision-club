@@ -98,7 +98,7 @@ function PaletteBody({
             animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
             exit={{ opacity: 0, y: -18, scale: 0.95, rotate: 1 }}
             transition={{ type: "spring", stiffness: 340, damping: 24 }}
-            className="relative w-full max-w-xl overflow-hidden rounded-[32px] bg-paper puff"
+            className="relative w-full max-w-xl overflow-hidden rounded-[calc(32px*var(--ui-scale))] bg-paper puff"
             style={{ boxShadow: "0 8px 0 rgb(61 43 31 / 0.05), 0 40px 90px -30px rgb(46 32 22 / 0.5)" }}
           >
             {/* input row */}
@@ -116,20 +116,20 @@ function PaletteBody({
                 onKeyDown={onKey}
                 placeholder="Search topics…"
                 aria-label="Search topics"
-                className="search-field min-w-0 flex-1 bg-transparent font-display text-[17px] font-semibold text-ink placeholder:text-ink-faint/70 focus:outline-none"
+                className="search-field min-w-0 flex-1 bg-transparent font-display text-[calc(17px*var(--ui-scale))] font-semibold text-ink placeholder:text-ink-faint/70 focus:outline-none"
               />
-              <kbd className="hidden shrink-0 rounded-full bg-ink/5 px-2.5 py-1 font-mono text-[11px] font-bold text-ink-soft pointer-fine:block">
+              <kbd className="hidden shrink-0 rounded-full bg-ink/5 px-2.5 py-1 font-mono text-[calc(11px*var(--ui-scale))] font-bold text-ink-soft pointer-fine:block">
                 esc
               </kbd>
             </div>
 
-            <div className="mx-5 h-[3px] rounded-full bg-[linear-gradient(90deg,#FF6B6B,#FFD43B,#12B886,#9775FA)] opacity-70" />
+            <div className="mx-5 h-[calc(3px*var(--ui-scale))] rounded-full bg-[linear-gradient(90deg,#FF6B6B,#FFD43B,#12B886,#9775FA)] opacity-70" />
 
             {/* results */}
             <div ref={listRef} className="max-h-[46dvh] overflow-y-auto px-3 py-3">
               {!q.trim() ? (
                 <div className="px-3 py-5">
-                  <div className="flex items-center gap-2 font-display text-[12px] font-bold tracking-[0.16em] text-ink-faint uppercase">
+                  <div className="flex items-center gap-2 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">
                     <Sparkles className="h-3.5 w-3.5 text-lemon" /> try these
                   </div>
                   <div className="mt-3 flex flex-wrap gap-2">
@@ -142,7 +142,7 @@ function PaletteBody({
                           setSel(0);
                           inputRef.current?.focus();
                         }}
-                        className="cursor-pointer rounded-full bg-ink/5 px-3.5 py-2 text-[13px] font-extrabold text-ink-soft transition-colors hover:bg-grape/15 hover:text-grape"
+                        className="cursor-pointer rounded-full bg-ink/5 px-3.5 py-2 text-[calc(13px*var(--ui-scale))] font-extrabold text-ink-soft transition-colors hover:bg-grape/15 hover:text-grape"
                       >
                         {s}
                       </button>
@@ -151,10 +151,10 @@ function PaletteBody({
                 </div>
               ) : results.length === 0 ? (
                 <div className="px-3 py-8 text-center">
-                  <p className="font-display text-[16px] font-semibold text-ink">
+                  <p className="font-display text-[calc(16px*var(--ui-scale))] font-semibold text-ink">
                     No topics match “{q}”.
                   </p>
-                  <p className="mt-1 text-[13.5px] font-bold text-ink-faint">
+                  <p className="mt-1 text-[calc(13.5px*var(--ui-scale))] font-bold text-ink-faint">
                     Try a topic name or a unit code.
                   </p>
                 </div>
@@ -168,12 +168,12 @@ function PaletteBody({
                       type="button"
                       onMouseEnter={() => setSel(i)}
                       onClick={() => pick(r)}
-                      className={`flex w-full cursor-pointer items-center gap-3.5 rounded-[22px] px-3.5 py-3 text-left transition-colors ${
+                      className={`flex w-full cursor-pointer items-center gap-3.5 rounded-[calc(22px*var(--ui-scale))] px-3.5 py-3 text-left transition-colors ${
                         active ? "bg-ink/[0.055]" : ""
                       }`}
                     >
                       <span
-                        className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl font-display text-[12px] font-bold text-white"
+                        className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl font-display text-[calc(12px*var(--ui-scale))] font-bold text-white"
                         style={{
                           background: r.unitMain,
                           boxShadow: `0 3px 0 ${shade(r.unitMain)}`,
@@ -185,7 +185,7 @@ function PaletteBody({
                         <span className="flex items-center gap-2">
                           <Highlight text={r.title} q={q} />
                           <span
-                            className="hidden shrink-0 rounded-full px-2 py-0.5 text-[10.5px] font-extrabold sm:inline"
+                            className="hidden shrink-0 rounded-full px-2 py-0.5 text-[calc(10.5px*var(--ui-scale))] font-extrabold sm:inline"
                             style={{
                               background: tint(r.unitMain, 14),
                               color: shade(r.unitMain, 62),
@@ -194,11 +194,11 @@ function PaletteBody({
                             {r.label}
                           </span>
                         </span>
-                        <span className="mt-0.5 line-clamp-1 block text-[12.5px] font-bold text-ink-faint">
+                        <span className="mt-0.5 line-clamp-1 block text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-faint">
                           {r.summary}
                         </span>
                       </span>
-                      <span className="flex shrink-0 items-center gap-1.5 text-[11.5px] font-extrabold text-ink-faint">
+                      <span className="flex shrink-0 items-center gap-1.5 text-[calc(11.5px*var(--ui-scale))] font-extrabold text-ink-faint">
                         <Clock className="h-3.5 w-3.5" /> {r.minutes}m
                         <m.span
                           animate={{ x: active ? 3 : 0, opacity: active ? 1 : 0.35 }}
@@ -216,17 +216,17 @@ function PaletteBody({
             {/* footer hints — keyboard affordances ride the pointer, not
                 the width: a tablet is wide but still a tap-first screen */}
             <div className="flex items-center justify-between border-t-[2.5px] border-dashed border-ink/10 px-5 py-3">
-              <span className="hidden items-center gap-1.5 text-[11px] font-extrabold text-ink-faint pointer-fine:flex">
+              <span className="hidden items-center gap-1.5 text-[calc(11px*var(--ui-scale))] font-extrabold text-ink-faint pointer-fine:flex">
                 <span className="rounded-md bg-ink/5 px-1.5 py-0.5 font-mono">↑↓</span>
                 move
                 <span className="ml-2 rounded-md bg-ink/5 px-1.5 py-0.5 font-mono">↵</span>
                 open
               </span>
-              <span className="text-[11px] font-extrabold text-ink-faint pointer-coarse:block hidden">tap a topic to open</span>
-              <span className="hidden text-[11px] font-extrabold text-ink-faint pointer-fine:block">
+              <span className="text-[calc(11px*var(--ui-scale))] font-extrabold text-ink-faint pointer-coarse:block hidden">tap a topic to open</span>
+              <span className="hidden text-[calc(11px*var(--ui-scale))] font-extrabold text-ink-faint pointer-fine:block">
                 {q.trim() ? `${results.length} found` : "press ⌘K to search"}
               </span>
-              <span className="hidden text-[11px] font-extrabold text-ink-faint pointer-coarse:block">
+              <span className="hidden text-[calc(11px*var(--ui-scale))] font-extrabold text-ink-faint pointer-coarse:block">
                 {q.trim() ? `${results.length} found` : "try a unit code too"}
               </span>
             </div>
@@ -247,12 +247,12 @@ function Highlight({ text, q }: { text: string; q: string }) {
   }
   if (target < 0) {
     return (
-      <span className="truncate font-display text-[15px] font-semibold text-ink">{text}</span>
+      <span className="truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold text-ink">{text}</span>
     );
   }
   const w = words.find((x) => lower.startsWith(x, target))!;
   return (
-    <span className="min-w-0 truncate font-display text-[15px] font-semibold text-ink">
+    <span className="min-w-0 truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold text-ink">
       {text.slice(0, target)}
       <mark>{text.slice(target, target + w.length)}</mark>
       {text.slice(target + w.length)}

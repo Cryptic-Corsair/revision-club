@@ -181,7 +181,7 @@ export function StickerBook({
     <div className="mx-auto max-w-4xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
       {/* back */}
       <PopIn>
-        <SoftButton onClick={onBack} className="min-h-[42px] px-4 py-2 text-[13.5px]">
+        <SoftButton onClick={onBack} className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]">
           <ArrowLeft className="h-4 w-4" /> back to home
         </SoftButton>
       </PopIn>
@@ -205,7 +205,7 @@ export function StickerBook({
 
       {/* ————— the time ledger ————— */}
       <Reveal className="relative mt-8">
-        <div className="rounded-[40px] bg-paper p-6 puff sm:p-8">
+        <div className="rounded-[calc(40px*var(--ui-scale))] bg-paper p-6 puff sm:p-8">
           <div className="grid gap-5 sm:grid-cols-3">
             <StatPillar icon={Clock} label="today" value={fmtClock(today)} color="#FF922B" />
             <StatPillar icon={Timer} label="this week" value={fmtClock(week)} color="#12B886" />
@@ -214,7 +214,7 @@ export function StickerBook({
 
           {/* weekly goal bench */}
           <div
-            className="mt-6 flex flex-col gap-5 rounded-[30px] p-5 sm:flex-row sm:items-center sm:gap-7"
+            className="mt-6 flex flex-col gap-5 rounded-[calc(30px*var(--ui-scale))] p-5 sm:flex-row sm:items-center sm:gap-7"
             style={{ background: tint("#12B886", 8) }}
           >
             <Float className="mx-auto shrink-0 sm:mx-0">
@@ -222,8 +222,8 @@ export function StickerBook({
             </Float>
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-baseline gap-x-2.5">
-                <span className="font-display text-[17px] font-semibold text-ink">weekly goal</span>
-                <span className="text-[13px] font-extrabold text-ink-soft">
+                <span className="font-display text-[calc(17px*var(--ui-scale))] font-semibold text-ink">weekly goal</span>
+                <span className="text-[calc(13px*var(--ui-scale))] font-extrabold text-ink-soft">
                   {fmtClock(week)} of {goalChipLabel(time.goalMin)} {goalMet ? "· goal met" : ""}
                 </span>
               </div>
@@ -246,7 +246,7 @@ export function StickerBook({
                       whileTap={{ scale: 0.92 }}
                       aria-pressed={active}
                       aria-label={`Weekly goal ${goalChipLabel(g)}`}
-                      className="cursor-pointer rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold transition-colors"
+                      className="cursor-pointer rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold transition-colors"
                       style={
                         active
                           ? { background: "#12B886", color: "#fff", boxShadow: "0 3px 0 #0B7A57" }
@@ -263,11 +263,11 @@ export function StickerBook({
                     onClick={() => setGoalMin(time.goalMin - 15)}
                     whileTap={{ scale: 0.88 }}
                     aria-label="Goal 15 minutes less"
-                    className="grid h-7 w-7 cursor-pointer place-items-center rounded-full bg-ink/[0.06] font-display text-[15px] leading-none font-bold text-ink-soft hover:bg-ink/[0.11]"
+                    className="grid h-7 w-7 cursor-pointer place-items-center rounded-full bg-ink/[0.06] font-display text-[calc(15px*var(--ui-scale))] leading-none font-bold text-ink-soft hover:bg-ink/[0.11]"
                   >
                     −
                   </m.button>
-                  <span className="min-w-[4.5ch] text-center font-display text-[12px] font-bold text-ink">
+                  <span className="min-w-[4.5ch] text-center font-display text-[calc(12px*var(--ui-scale))] font-bold text-ink">
                     {goalChipLabel(time.goalMin)}
                   </span>
                   <m.button
@@ -275,7 +275,7 @@ export function StickerBook({
                     onClick={() => setGoalMin(time.goalMin + 15)}
                     whileTap={{ scale: 0.88 }}
                     aria-label="Goal 15 minutes more"
-                    className="grid h-7 w-7 cursor-pointer place-items-center rounded-full bg-ink/[0.06] font-display text-[15px] leading-none font-bold text-ink-soft hover:bg-ink/[0.11]"
+                    className="grid h-7 w-7 cursor-pointer place-items-center rounded-full bg-ink/[0.06] font-display text-[calc(15px*var(--ui-scale))] leading-none font-bold text-ink-soft hover:bg-ink/[0.11]"
                   >
                     +
                   </m.button>
@@ -292,7 +292,7 @@ export function StickerBook({
           <Mascot main="#12B886" mood={goalMet || pct >= 0.5 ? "cheer" : "idle"} size={88} bubbles={false} />
         </div>
         <SpeechBubble bg={tint("#12B886", 10)} className="min-w-0 flex-1" tailClass="left-[-9px] rotate-[135deg]">
-          <p className="text-[15px] leading-[1.75] text-ink">{timeLine}</p>
+          <p className="text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink">{timeLine}</p>
         </SpeechBubble>
       </PopIn>
 
@@ -300,12 +300,12 @@ export function StickerBook({
       {suggestion && (
         <Reveal className="mt-6">
           <div
-            className="relative overflow-hidden rounded-[32px] p-5 sm:p-6"
+            className="relative overflow-hidden rounded-[calc(32px*var(--ui-scale))] p-5 sm:p-6"
             style={{ background: tint(suggestion.unit.candy.main, 9) }}
           >
             <div className="flex flex-wrap items-center gap-4">
               <span
-                className="grid h-14 w-14 shrink-0 place-items-center rounded-[20px] font-display text-[15px] font-bold text-white"
+                className="grid h-14 w-14 shrink-0 place-items-center rounded-[calc(20px*var(--ui-scale))] font-display text-[calc(15px*var(--ui-scale))] font-bold text-white"
                 style={{
                   background: suggestion.unit.candy.main,
                   boxShadow: `0 4px 0 ${shade(suggestion.unit.candy.main)}`,
@@ -313,15 +313,15 @@ export function StickerBook({
               >
                 {suggestion.unit.code.replace("WCH", "")}
               </span>
-              <div className="min-w-[230px] flex-1">
-                <div className="flex items-center gap-2 font-display text-[11.5px] font-bold tracking-[0.16em] text-ink-faint uppercase">
+              <div className="min-w-[calc(230px*var(--ui-scale))] flex-1">
+                <div className="flex items-center gap-2 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">
                   <Target className="h-3.5 w-3.5" style={{ color: suggestion.unit.candy.main }} />
                   today&apos;s pick
                 </div>
-                <p className="mt-0.5 line-clamp-2 font-display text-[17px] leading-snug font-semibold text-ink">
+                <p className="mt-0.5 line-clamp-2 font-display text-[calc(17px*var(--ui-scale))] leading-snug font-semibold text-ink">
                   {suggestion.topic.label} · {suggestion.topic.title}
                 </p>
-                <p className="text-[12.5px] font-bold text-ink-soft">
+                <p className="text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-soft">
                   {suggestion.reason} · about {suggestion.topic.minutes} min
                 </p>
               </div>
@@ -330,7 +330,7 @@ export function StickerBook({
                 onClick={() => onOpenTopic(suggestion.unit.code, suggestion.topic.id)}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex min-h-[46px] w-full cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-2.5 font-display text-[14px] font-semibold text-white sm:w-auto"
+                className="inline-flex min-h-[calc(46px*var(--ui-scale))] w-full cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(14px*var(--ui-scale))] font-semibold text-white sm:w-auto"
                 style={{
                   background: suggestion.unit.candy.main,
                   boxShadow: `0 4px 0 ${shade(suggestion.unit.candy.main)}`,
@@ -346,7 +346,7 @@ export function StickerBook({
       {/* ————— where the minutes go ————— */}
       <section className="mt-14">
         <Reveal>
-          <div className="mb-5 flex items-center gap-2 font-display text-[13px] font-bold tracking-[0.16em] text-ink-faint uppercase">
+          <div className="mb-5 flex items-center gap-2 font-display text-[calc(13px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">
             <Timer className="h-4 w-4 text-tangerine" /> where your minutes go · tap a topic to read
           </div>
         </Reveal>
@@ -359,23 +359,23 @@ export function StickerBook({
             const done = unitDone(u);
             return (
               <Reveal key={u.code} delay={Math.min(ui * 0.04, 0.2)}>
-                <div className="rounded-[32px] bg-paper p-5 puff sm:p-6">
+                <div className="rounded-[calc(32px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
                   <button
                     type="button"
                     onClick={() => onOpenUnit(u.code)}
                     className="group mb-4 flex w-full cursor-pointer flex-wrap items-center gap-3 text-left"
                   >
                     <span
-                      className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl font-display text-[15px] font-bold text-white"
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl font-display text-[calc(15px*var(--ui-scale))] font-bold text-white"
                       style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
                     >
                       {u.code.replace("WCH", "")}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate font-display text-[16.5px] font-semibold text-ink group-hover:underline">
+                      <span className="block truncate font-display text-[calc(16.5px*var(--ui-scale))] font-semibold text-ink group-hover:underline">
                         {u.code} · {u.shortTitle}
                       </span>
-                      <span className="block text-[12px] font-extrabold text-ink-soft">
+                      <span className="block text-[calc(12px*var(--ui-scale))] font-extrabold text-ink-soft">
                         {done}/{u.topics.length} revised · {fmtClock(unitTime)} this course
                       </span>
                     </span>
@@ -393,7 +393,7 @@ export function StickerBook({
                           key={t.id}
                           type="button"
                           onClick={() => onOpenTopic(u.code, t.id)}
-                          className="group cursor-pointer rounded-[20px] px-4 py-3 text-left transition-colors"
+                          className="group cursor-pointer rounded-[calc(20px*var(--ui-scale))] px-4 py-3 text-left transition-colors"
                           style={{ background: s > 0 ? tint(main, 7) : "rgb(61 43 31 / 0.035)" }}
                           aria-label={`Open ${t.title} — ${fmtClock(s)} recorded`}
                         >
@@ -411,17 +411,17 @@ export function StickerBook({
                                 style={{ boxShadow: `inset 0 0 0 2.5px ${tint(main, 45)}` }}
                               />
                             )}
-                            <span className="min-w-0 flex-1 truncate text-[13.5px] font-extrabold text-ink">
+                            <span className="min-w-0 flex-1 truncate text-[calc(13.5px*var(--ui-scale))] font-extrabold text-ink">
                               {t.label} · {t.title}
                             </span>
                             <span
-                              className="shrink-0 font-display text-[12.5px] font-bold"
+                              className="shrink-0 font-display text-[calc(12.5px*var(--ui-scale))] font-bold"
                               style={{ color: s > 0 ? shade(main, 62) : "var(--color-ink-faint)" }}
                             >
                               {s > 0 ? fmtShort(s) : "—"}
                             </span>
                           </div>
-                          <div className="mt-2 ml-9 h-[7px] overflow-hidden rounded-full bg-ink/[0.05]">
+                          <div className="mt-2 ml-9 h-[calc(7px*var(--ui-scale))] overflow-hidden rounded-full bg-ink/[0.05]">
                             <m.div
                               className="h-full rounded-full"
                               style={{ background: main }}
@@ -439,7 +439,7 @@ export function StickerBook({
             );
           })}
         </div>
-        <p className="mt-3 text-[12px] font-bold text-ink-faint">
+        <p className="mt-3 text-[calc(12px*var(--ui-scale))] font-bold text-ink-faint">
           the clock runs while a topic page or revision note is open and the tab is in view —
           step away for five minutes and it pauses itself.
         </p>
@@ -448,7 +448,7 @@ export function StickerBook({
       {/* ————— badges ————— */}
       <section className="mt-14">
         <Reveal>
-          <div className="mb-4 flex items-center gap-2 font-display text-[13px] font-bold tracking-[0.16em] text-ink-faint uppercase">
+          <div className="mb-4 flex items-center gap-2 font-display text-[calc(13px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">
             <Award className="h-4 w-4 text-lemon" /> badges · {achievements.filter((a) => a.earned).length}/{achievements.length}
           </div>
         </Reveal>
@@ -457,7 +457,7 @@ export function StickerBook({
             <Reveal key={a.id} delay={i * 0.05}>
               <m.div
                 whileHover={{ y: -5, rotate: 0, scale: 1.04 }}
-                className={`relative flex cursor-default flex-col items-center rounded-[26px] px-2 py-5 text-center ${
+                className={`relative flex cursor-default flex-col items-center rounded-[calc(26px*var(--ui-scale))] px-2 py-5 text-center ${
                   a.earned ? "puff" : ""
                 }`}
                 style={{
@@ -486,13 +486,13 @@ export function StickerBook({
                   )}
                 </span>
                 <span
-                  className={`mt-2.5 font-display text-[12.5px] leading-tight font-bold ${
+                  className={`mt-2.5 font-display text-[calc(12.5px*var(--ui-scale))] leading-tight font-bold ${
                     a.earned ? "text-ink" : "text-ink-faint"
                   }`}
                 >
                   {a.label}
                 </span>
-                <span className="mt-0.5 hidden text-[10.5px] leading-tight font-bold text-ink-faint md:block">
+                <span className="mt-0.5 hidden text-[calc(10.5px*var(--ui-scale))] leading-tight font-bold text-ink-faint md:block">
                   {a.hint}
                 </span>
               </m.div>
@@ -504,7 +504,7 @@ export function StickerBook({
       {/* ————— the sheets: revised topics ————— */}
       <section className="mt-14 flex flex-col gap-8">
         <Reveal>
-          <div className="flex items-center gap-2 font-display text-[13px] font-bold tracking-[0.16em] text-ink-faint uppercase">
+          <div className="flex items-center gap-2 font-display text-[calc(13px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">
             <Trophy className="h-4 w-4 text-tangerine" /> all topics · tap one to mark or unmark it
           </div>
         </Reveal>
@@ -516,7 +516,7 @@ export function StickerBook({
           return (
             <Reveal key={u.code} delay={Math.min(ui * 0.04, 0.2)}>
               <div
-                className="rounded-[36px] p-5 sm:p-6"
+                className="rounded-[calc(36px*var(--ui-scale))] p-5 sm:p-6"
                 style={{ background: tint(main, 8) }}
               >
                 <button
@@ -525,16 +525,16 @@ export function StickerBook({
                   className="group mb-5 flex w-full cursor-pointer flex-wrap items-center gap-3 text-left"
                 >
                   <span
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl font-display text-[15px] font-bold text-white"
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl font-display text-[calc(15px*var(--ui-scale))] font-bold text-white"
                     style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
                   >
                     {u.code.replace("WCH", "")}
                   </span>
                   <span className="min-w-0">
-                    <span className="block font-display text-[17px] font-semibold text-ink group-hover:underline">
+                    <span className="block font-display text-[calc(17px*var(--ui-scale))] font-semibold text-ink group-hover:underline">
                       {u.code} · {u.shortTitle}
                     </span>
-                    <span className="block text-[12px] font-extrabold text-ink-soft">
+                    <span className="block text-[calc(12px*var(--ui-scale))] font-extrabold text-ink-soft">
                       {done}/{u.topics.length} revised
                     </span>
                   </span>
@@ -560,7 +560,7 @@ export function StickerBook({
                             ? `Unmark as revised: ${t.title}`
                             : `Mark as revised: ${t.title}`
                         }
-                        className="relative cursor-pointer rounded-[22px] p-3.5 text-left"
+                        className="relative cursor-pointer rounded-[calc(22px*var(--ui-scale))] p-3.5 text-left"
                         style={
                           has
                             ? {
@@ -583,21 +583,21 @@ export function StickerBook({
                           </span>
                         )}
                         <span
-                          className={`font-display text-[11px] font-bold tracking-[0.12em] uppercase ${
+                          className={`font-display text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.12em] uppercase ${
                             has ? "text-white/75" : ""
                           }`}
                         >
                           {t.label}
                         </span>
                         <span
-                          className={`mt-1 line-clamp-2 block text-[13px] leading-snug font-extrabold ${
+                          className={`mt-1 line-clamp-2 block text-[calc(13px*var(--ui-scale))] leading-snug font-extrabold ${
                             has ? "text-white" : "text-ink-soft"
                           }`}
                         >
                           {t.title}
                         </span>
                         {!has && (
-                          <span className="mt-1.5 block text-[10.5px] font-bold text-ink-faint">
+                          <span className="mt-1.5 block text-[calc(10.5px*var(--ui-scale))] font-bold text-ink-faint">
                             not marked yet
                           </span>
                         )}
@@ -619,7 +619,7 @@ export function StickerBook({
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.95, y: 2 }}
           aria-label="Reset all progress"
-          className="inline-flex min-h-[48px] cursor-pointer items-center gap-2 rounded-full px-6 py-3 font-display text-[14.5px] font-semibold"
+          className="inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-6 py-3 font-display text-[calc(14.5px*var(--ui-scale))] font-semibold"
           style={
             confirmPour
               ? { background: "#FF6B6B", color: "#fff", boxShadow: "0 4px 0 #e8590c" }
@@ -630,7 +630,7 @@ export function StickerBook({
           {confirmPour ? "tap again to confirm" : "Reset all progress"}
         </m.button>
       </Reveal>
-      <p className="mt-3 text-center text-[12px] font-bold text-ink-faint">
+      <p className="mt-3 text-center text-[calc(12px*var(--ui-scale))] font-bold text-ink-faint">
         {confirmPour
           ? "this clears every revised mark and the whole time ledger — there is no undo"
           : "progress and reading time are saved in this browser only"}
@@ -654,7 +654,7 @@ function StatPillar({
 }) {
   return (
     <div
-      className="flex flex-col items-center rounded-[26px] px-3 py-5 text-center"
+      className="flex flex-col items-center rounded-[calc(26px*var(--ui-scale))] px-3 py-5 text-center"
       style={{ background: tint(color, 8) }}
     >
       <span
@@ -666,7 +666,7 @@ function StatPillar({
       <span className="mt-2 font-display text-[clamp(1.35rem,3.2vw,1.8rem)] leading-none font-semibold text-ink">
         {value}
       </span>
-      <span className="mt-1.5 font-display text-[11px] font-bold tracking-[0.16em] text-ink-faint uppercase">
+      <span className="mt-1.5 font-display text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">
         {label}
       </span>
     </div>

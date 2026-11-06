@@ -56,11 +56,11 @@ function Section({
     <section>
       <div className="flex items-center gap-2">
         <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: dot }} />
-        <div className="font-display text-[11.5px] font-bold tracking-[0.18em] text-ink-faint uppercase">
+        <div className="font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.18em] text-ink-faint uppercase">
           {title}
         </div>
       </div>
-      {hint && <p className="mt-1.5 text-[12px] leading-snug font-bold text-ink-faint">{hint}</p>}
+      {hint && <p className="mt-1.5 text-[calc(12px*var(--ui-scale))] leading-snug font-bold text-ink-faint">{hint}</p>}
       <div className="mt-3">{children}</div>
     </section>
   );
@@ -84,23 +84,27 @@ function Toggle({
       aria-checked={on}
       aria-label={label}
       onClick={() => onChange(!on)}
-      className="flex w-full cursor-pointer items-center justify-between gap-3 rounded-[22px] bg-ink/[0.045] px-4 py-3.5 text-left transition-colors hover:bg-ink/[0.08]"
+      className="flex w-full cursor-pointer items-center justify-between gap-3 rounded-[calc(22px*var(--ui-scale))] bg-ink/[0.045] px-4 py-3.5 text-left transition-colors hover:bg-ink/[0.08]"
     >
       <span className="min-w-0">
-        <span className="block font-display text-[14px] font-semibold text-ink">{label}</span>
-        <span className="block text-[11.5px] font-bold text-ink-faint">{hint}</span>
+        <span className="block font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">{label}</span>
+        <span className="block text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-faint">{hint}</span>
       </span>
       <span
         aria-hidden
-        className="relative h-[26px] w-[46px] shrink-0 rounded-full transition-colors"
+        className="relative h-[calc(26px*var(--ui-scale))] w-[calc(46px*var(--ui-scale))] shrink-0 rounded-full transition-colors"
         style={{
           background: on ? "#12B886" : "rgb(61 43 31 / 0.18)",
           boxShadow: on ? "inset 0 1px 2px rgb(0 0 0 / 0.18)" : "inset 0 1px 2px rgb(61 43 31 / 0.12)",
         }}
       >
         <m.span
-          className="absolute top-[3px] h-5 w-5 rounded-full bg-white shadow-sm"
-          animate={{ left: on ? 23 : 3 }}
+          className="absolute top-[calc(3px*var(--ui-scale))] h-5 w-5 rounded-full bg-white shadow-sm"
+          /* percentage targets, not px: the track (w-[46px]) and the
+             knob (h-5 w-5) both ride --ui-scale, so a percentage
+             stays aligned at every scale step while a px target
+             would strand the knob short of its end stop */
+          animate={{ left: on ? "50%" : "6.5217%" }}
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
         />
       </span>
@@ -117,7 +121,7 @@ function Toggle({
 function LabStage({ id }: { id: Lab }) {
   if (id === "light") {
     return (
-      <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[#fff6ea] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.08)]">
+      <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#fff6ea] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.08)]">
         <span className="absolute top-1.5 right-1.5 h-5 w-5 rounded-full bg-[#ffd43b]/70" />
         <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#fffdf7] shadow-[0_1.5px_0_rgb(61_43_31/0.1)]" />
         <span className="absolute bottom-2 left-2 flex items-center gap-1">
@@ -130,7 +134,7 @@ function LabStage({ id }: { id: Lab }) {
   }
   if (id === "dark") {
     return (
-      <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[#1e1a26] shadow-[inset_0_0_0_1px_rgb(255_246_234/0.08)]">
+      <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#1e1a26] shadow-[inset_0_0_0_1px_rgb(255_246_234/0.08)]">
         <span
           className="absolute inset-0"
           style={{ background: "radial-gradient(42px 30px at 68% 12%, rgb(151 117 250 / 0.3), transparent 70%)" }}
@@ -146,7 +150,7 @@ function LabStage({ id }: { id: Lab }) {
   }
   if (id === "dune") {
     return (
-      <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[#1e1b16] shadow-[inset_0_0_0_1px_rgb(246_240_230/0.08)]">
+      <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#1e1b16] shadow-[inset_0_0_0_1px_rgb(246_240_230/0.08)]">
         <span
           className="absolute inset-0"
           style={{ background: "radial-gradient(42px 30px at 68% 12%, rgb(255 196 120 / 0.22), transparent 70%)" }}
@@ -161,7 +165,7 @@ function LabStage({ id }: { id: Lab }) {
     );
   }
   return (
-    <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[linear-gradient(115deg,#2c2013_49.5%,#fdf6e3_50.5%)] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.1)]">
+    <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[linear-gradient(115deg,#2c2013_49.5%,#fdf6e3_50.5%)] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.1)]">
       <span className="absolute top-3 left-2 h-5 w-7 rounded-md bg-[#fdf6e3]/90" />
       <span className="absolute top-4.5 right-2 h-5 w-7 rounded-md bg-[#2c2013]/90" />
       <span className="absolute bottom-2 left-1/2 flex -translate-x-1/2 items-center gap-1">
@@ -251,7 +255,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
             animate={{ x: 0 }}
             exit={{ x: "110%" }}
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
-            className="customize-drawer fixed inset-y-0 right-0 z-[95] flex w-[min(440px,94vw)] flex-col overflow-hidden rounded-l-[30px] bg-cream/85 shadow-[-30px_0_80px_-40px_rgb(0_0_0/0.55)] backdrop-blur-2xl backdrop-saturate-150"
+            className="customize-drawer fixed inset-y-0 right-0 z-[95] flex w-[min(calc(440px*var(--ui-scale)),94vw)] flex-col overflow-hidden rounded-l-[calc(30px*var(--ui-scale))] bg-cream/85 shadow-[-30px_0_80px_-40px_rgb(0_0_0/0.55)] backdrop-blur-2xl backdrop-saturate-150"
           >
             {/* ————— the ambience inside the frost —————
                 two quiet lamps and a grain of dots, so the blur has
@@ -283,10 +287,10 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 <Sliders className="h-5.5 w-5.5 text-lemon" strokeWidth={2.2} />
               </span>
               <div className="min-w-0 flex-1">
-                <h2 className="font-display text-[20px] leading-tight font-semibold text-ink">
+                <h2 className="font-display text-[calc(20px*var(--ui-scale))] leading-tight font-semibold text-ink">
                   Make it yours
                 </h2>
-                <p className="text-[12px] font-bold text-ink-faint">
+                <p className="text-[calc(12px*var(--ui-scale))] font-bold text-ink-faint">
                   the whole site re-dresses as you tap
                 </p>
               </div>
@@ -320,7 +324,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                         onClick={() => pickLab(l)}
                         aria-pressed={active}
                         aria-label={`${LAB_LABEL[l]} lab`}
-                        className="flex cursor-pointer flex-col gap-2 rounded-[20px] p-2.5 text-left transition-colors"
+                        className="flex cursor-pointer flex-col gap-2 rounded-[calc(20px*var(--ui-scale))] p-2.5 text-left transition-colors"
                         style={
                           active
                             ? { background: "rgb(18 184 134 / 0.13)", boxShadow: "inset 0 0 0 2.5px #12B886" }
@@ -336,7 +340,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                           )}
                         </span>
                         <span
-                          className={`flex items-center justify-center gap-1.5 text-center font-display text-[12px] font-bold ${
+                          className={`flex items-center justify-center gap-1.5 text-center font-display text-[calc(12px*var(--ui-scale))] font-bold ${
                             active ? "text-ink" : "text-ink-soft"
                           }`}
                         >
@@ -376,7 +380,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                               ? "on the wheel, tap to take it off"
                               : "off the wheel, tap to put it on"
                         }`}
-                        className={`flex cursor-pointer flex-col items-center gap-2 rounded-[20px] px-2 py-3.5 transition-colors ${
+                        className={`flex cursor-pointer flex-col items-center gap-2 rounded-[calc(20px*var(--ui-scale))] px-2 py-3.5 transition-colors ${
                           on ? "" : "hover:bg-ink/[0.09]"
                         }`}
                         style={
@@ -406,7 +410,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                           )}
                         </span>
                         <span
-                          className={`font-display text-[11.5px] font-bold ${
+                          className={`font-display text-[calc(11.5px*var(--ui-scale))] font-bold ${
                             on ? "text-ink" : "text-ink-faint"
                           }`}
                         >
@@ -418,23 +422,26 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
                 {/* the rotation itself, previewed — the first eight
                     sections, exactly as the bands will wear them */}
-                <div className="mt-3 rounded-[18px] bg-ink/[0.045] px-4 py-3">
+                <div className="mt-3 rounded-[calc(18px*var(--ui-scale))] bg-ink/[0.045] px-4 py-3">
                   <div aria-hidden className="flex items-end gap-1.5">
                     {Array.from({ length: 8 }, (_, k) => (
                       <span
                         key={k}
                         className="h-3 rounded-full"
                         style={{
-                          width: k === 7 ? 10 : 22,
+                          width:
+                            k === 7
+                              ? "calc(10px * var(--ui-scale))"
+                              : "calc(22px * var(--ui-scale))",
                           background: accentOf(k),
                         }}
                       />
                     ))}
-                    <span className="ml-0.5 font-body text-[13px] font-bold text-ink-faint">
+                    <span className="ml-0.5 font-body text-[calc(13px*var(--ui-scale))] font-bold text-ink-faint">
                       …
                     </span>
                   </div>
-                  <p className="mt-2 text-[11.5px] leading-snug font-bold text-ink-faint">
+                  <p className="mt-2 text-[calc(11.5px*var(--ui-scale))] leading-snug font-bold text-ink-faint">
                     {rotationCaption}
                   </p>
                 </div>
@@ -464,11 +471,13 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                       >
                         <span
                           className="font-display leading-none font-bold"
-                          style={{ fontSize: SCALE_PX[i] }}
+                          style={{
+                            fontSize: `calc(${SCALE_PX[i]}px * var(--ui-scale))`,
+                          }}
                         >
                           Aa
                         </span>
-                        <span className="mt-1 font-display text-[9.5px] font-bold tracking-[0.08em]">
+                        <span className="mt-1 font-display text-[calc(9.5px*var(--ui-scale))] font-bold tracking-[0.08em]">
                           {s}
                         </span>
                       </m.button>
@@ -530,11 +539,11 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                   flashThemeAnim();
                   setPrefs(DEFAULT_PREFS);
                 }}
-                className="mx-auto mt-2 inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full bg-ink/[0.06] px-5 py-2.5 font-display text-[13.5px] font-semibold text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
+                className="mx-auto mt-2 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full bg-ink/[0.06] px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
               >
                 <RotateCcw className="h-4 w-4" /> Reset to defaults
               </button>
-              <p className="flex items-start justify-center gap-1.5 text-center text-[11.5px] leading-relaxed font-bold text-ink-faint">
+              <p className="flex items-start justify-center gap-1.5 text-center text-[calc(11.5px*var(--ui-scale))] leading-relaxed font-bold text-ink-faint">
                 <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-lemon" />
                 choices are saved in this browser only
               </p>
@@ -565,7 +574,7 @@ function FontRow({
       onClick={onClick}
       aria-pressed={active}
       aria-label={ariaLabel}
-      className="flex cursor-pointer items-center gap-3.5 rounded-[22px] px-4 py-3 text-left transition-colors"
+      className="flex cursor-pointer items-center gap-3.5 rounded-[calc(22px*var(--ui-scale))] px-4 py-3 text-left transition-colors"
       style={
         active
           ? { background: "rgb(255 107 107 / 0.11)", boxShadow: "inset 0 0 0 2.5px #FF6B6B" }
@@ -573,14 +582,14 @@ function FontRow({
       }
     >
       <span
-        className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-paper text-[19px] leading-none font-bold text-ink shadow-[0_2px_0_rgb(61_43_31/0.08)]"
+        className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-paper text-[calc(19px*var(--ui-scale))] leading-none font-bold text-ink shadow-[0_2px_0_rgb(61_43_31/0.08)]"
         style={{ fontFamily: stack }}
       >
         Aa
       </span>
       <span className="min-w-0">
-        <span className="block font-display text-[14px] font-semibold text-ink">{label}</span>
-        <span className="block truncate text-[12px] font-bold text-ink-soft" style={{ fontFamily: stack }}>
+        <span className="block font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">{label}</span>
+        <span className="block truncate text-[calc(12px*var(--ui-scale))] font-bold text-ink-soft" style={{ fontFamily: stack }}>
           The quick brown fox
         </span>
       </span>

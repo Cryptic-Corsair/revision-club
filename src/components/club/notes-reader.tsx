@@ -147,9 +147,9 @@ function PackTick({ spec, accent }: { spec: string; accent: string }) {
       }
     >
       {picked ? (
-        <ClipboardCheck className="h-[18px] w-[18px]" strokeWidth={2.4} />
+        <ClipboardCheck className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.4} />
       ) : (
-        <ClipboardList className="h-[18px] w-[18px]" strokeWidth={2.4} />
+        <ClipboardList className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.4} />
       )}
     </m.button>
   );
@@ -284,7 +284,7 @@ function NotesReaderBody({
       {/* reading progress */}
       <m.div
         aria-hidden
-        className="fixed left-0 z-[70] h-[7px] w-full origin-left rounded-r-full"
+        className="fixed left-0 z-[70] h-[calc(7px*var(--ui-scale))] w-full origin-left rounded-r-full"
         style={{
           top: "var(--sa-top)",
           scaleX,
@@ -297,7 +297,7 @@ function NotesReaderBody({
         <PopIn>
           <SoftButton
             onClick={onBack}
-            className="min-h-[42px] px-4 py-2 text-[13.5px]"
+            className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]"
             ariaLabel={`Back to ${unit.code}`}
           >
             <ArrowLeft className="h-4 w-4" /> Back to {unit.code}
@@ -306,18 +306,18 @@ function NotesReaderBody({
 
         <PopIn delay={0.05} className="mt-7 flex flex-wrap items-center gap-2">
           <span
-            className="inline-flex -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[11.5px] font-bold tracking-[0.14em] text-white uppercase"
+            className="inline-flex -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] text-white uppercase"
             style={{ background: main }}
           >
             <BookOpen className="h-3.5 w-3.5" /> Revision note
           </span>
-          <span className="inline-flex items-center rounded-full bg-ink/5 px-3.5 py-1.5 text-[12.5px] font-bold capitalize text-ink-soft">
+          <span className="inline-flex items-center rounded-full bg-ink/5 px-3.5 py-1.5 text-[calc(12.5px*var(--ui-scale))] font-bold capitalize text-ink-soft">
             {doc.source}
           </span>
         </PopIn>
         <PopIn delay={0.1}>
           <p
-            className="mt-6 font-display text-[15px] font-semibold tracking-[0.06em] uppercase"
+            className="mt-6 font-display text-[calc(15px*var(--ui-scale))] font-semibold tracking-[0.06em] uppercase"
             style={{ color: inkMix(main, 52) }}
           >
             {doc.kicker}
@@ -332,8 +332,8 @@ function NotesReaderBody({
             <Mascot main={main} size={104} bubbles={false} />
           </div>
           <Reveal delay={0.15} className="min-w-0">
-            <SpeechBubble tailClass="left-8 -top-[7px] rotate-[225deg]">
-              <p className="text-[14.5px] leading-[1.75] text-ink">
+            <SpeechBubble tailClass="left-8 -top-[calc(7px*var(--ui-scale))] rotate-[225deg]">
+              <p className="text-[calc(14.5px*var(--ui-scale))] leading-[1.75] text-ink">
                 {doc.intro.map((b, i) =>
                   b.k === "p" ? (
                     <span key={i} className="block">
@@ -350,7 +350,7 @@ function NotesReaderBody({
           {stats.map((s) => (
             <span
               key={s}
-              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-bold text-ink"
+              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[calc(12px*var(--ui-scale))] font-bold text-ink"
               style={{ background: tint(main, 12) }}
             >
               <Sparkles className="h-3.5 w-3.5" style={{ color: main }} /> {s}
@@ -363,7 +363,7 @@ function NotesReaderBody({
 
       {/* ————— contents ————— */}
       <Reveal className="mx-auto max-w-3xl px-4 pt-4 sm:px-8">
-        <div className="rounded-[30px] bg-paper p-5 puff sm:p-6">
+        <div className="rounded-[calc(30px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
           <div className="flex items-center gap-3">
             <span
               className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl"
@@ -372,10 +372,10 @@ function NotesReaderBody({
               <Target className="h-5 w-5" style={{ color: inkMix(main, 60) }} />
             </span>
             <div>
-              <h2 className="font-display text-[18px] font-semibold text-ink">
+              <h2 className="font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
                 Contents
               </h2>
-              <p className="text-[12.5px] font-bold text-ink-faint">
+              <p className="text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-faint">
                 {doc.sections.length} sections · tap one to jump
               </p>
             </div>
@@ -439,13 +439,13 @@ function NotesReaderBody({
       <div className="mx-auto max-w-3xl px-4 pt-10 pb-24 text-center sm:px-8">
         <Reveal className="flex flex-col items-center gap-5">
           <Squiggle color={main} className="h-3 w-40 opacity-70" />
-          <p className="font-display text-[19px] font-semibold text-ink">
+          <p className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">
             That&apos;s the whole note — every spec point, word for word.
           </p>
           <SoftButton onClick={onBack} ariaLabel={`Back to ${unit.code}`}>
             <ArrowLeft className="h-4.5 w-4.5" /> Back to {unit.code}
           </SoftButton>
-          <p className="mt-2 text-[12px] leading-relaxed font-bold text-ink-soft">
+          <p className="mt-2 text-[calc(12px*var(--ui-scale))] leading-relaxed font-bold text-ink-soft">
             <Fmt
               text={`==${unit.code}== · ${unit.title} · text kept verbatim from the ${doc.source}`}
             />

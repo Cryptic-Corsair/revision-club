@@ -53,7 +53,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
   switch (b.k) {
     case "p":
       return (
-        <p className="max-w-[68ch] text-[16.5px] leading-[1.85] text-ink/90">
+        <p className="max-w-[68ch] text-[calc(16.5px*var(--ui-scale))] leading-[1.85] text-ink/90">
           <Fmt text={b.text} />
         </p>
       );
@@ -61,7 +61,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
     case "def":
       return (
         <div
-          className={`puff-lift relative rounded-[26px] bg-paper p-5 pr-6 puff sm:p-6 ${
+          className={`puff-lift relative rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 pr-6 puff sm:p-6 ${
             flip ? "rotate-[0.7deg]" : "rotate-[-0.7deg]"
           }`}
         >
@@ -72,11 +72,11 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
             >
               <BookMarked className="h-5 w-5" style={{ color: shade(main, 62) }} />
             </span>
-            <h4 className="font-display text-[19px] font-semibold text-ink">
+            <h4 className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">
               <Fmt text={b.term} />
             </h4>
           </div>
-          <p className="mt-3 text-[15px] leading-[1.75] text-ink-soft">
+          <p className="mt-3 text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink-soft">
             <Fmt text={b.text} />
           </p>
         </div>
@@ -85,12 +85,12 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
     case "eq":
       return (
         <div
-          className="rounded-[26px] p-5 sm:p-6"
+          className="rounded-[calc(26px*var(--ui-scale))] p-5 sm:p-6"
           style={{ background: liftWash(main, 10) }}
         >
           {b.title && (
             <div
-              className="mb-3 inline-flex -rotate-1 items-center gap-2 rounded-full px-3.5 py-1.5 font-display text-[12px] font-semibold tracking-[0.14em] text-white uppercase"
+              className="mb-3 inline-flex -rotate-1 items-center gap-2 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.14em] text-white uppercase"
               style={{ background: main }}
             >
               <Lightbulb className="h-3.5 w-3.5" /> {b.title}
@@ -100,7 +100,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
             {b.eq.split(/\s{2,}/).map((part, i) => (
               <span
                 key={i}
-                className="rounded-2xl bg-paper px-4 py-2.5 font-mono text-[15px] font-semibold text-ink shadow-[0_3px_0_rgb(61_43_31/0.06)]"
+                className="rounded-2xl bg-paper px-4 py-2.5 font-mono text-[calc(15px*var(--ui-scale))] font-semibold text-ink shadow-[0_3px_0_rgb(61_43_31/0.06)]"
               >
                 <Fmt text={part.trim()} />
               </span>
@@ -111,7 +111,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
               {b.ok.map((o, i) => (
                 <span
                   key={i}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-paper/70 px-3 py-1 text-[12.5px] font-bold text-ink"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-paper/70 px-3 py-1 text-[calc(12.5px*var(--ui-scale))] font-bold text-ink"
                 >
                   <BadgeCheck className="h-4 w-4" style={{ color: main }} />
                   <Fmt text={o} />
@@ -120,7 +120,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
             </div>
           )}
           {b.note && (
-            <p className="mt-3 flex items-start gap-2 text-[13.5px] leading-relaxed text-ink-soft">
+            <p className="mt-3 flex items-start gap-2 text-[calc(13.5px*var(--ui-scale))] leading-relaxed text-ink-soft">
               <Info className="mt-0.5 h-4 w-4 shrink-0" style={{ color: shade(main, 62) }} />
               <span>
                 <Fmt text={b.note} />
@@ -144,12 +144,12 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
             className="min-w-0 flex-1"
             tailClass="left-[-9px] rotate-[135deg]"
           >
-            <div className="mb-1.5 font-display text-[12px] font-bold tracking-[0.18em] text-tangerine uppercase">
+            <div className="mb-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.18em] text-tangerine uppercase">
               Tips
             </div>
             <ul className="flex flex-col gap-1.5">
               {b.items.map((t, i) => (
-                <li key={i} className="flex items-start gap-2 text-[14.5px] leading-[1.65] text-ink">
+                <li key={i} className="flex items-start gap-2 text-[calc(14.5px*var(--ui-scale))] leading-[1.65] text-ink">
                   <Sparkles className="mt-1 h-4 w-4 shrink-0 text-tangerine" />
                   <span>
                     <Fmt text={t} />
@@ -169,12 +169,12 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
 
     case "recap":
       return (
-        <div className="rotate-[-0.5deg] rounded-[30px] bg-cocoa p-6 text-milk sm:p-7">
+        <div className="rotate-[-0.5deg] rounded-[calc(30px*var(--ui-scale))] bg-cocoa p-6 text-milk sm:p-7">
           <div className="mb-4 flex items-center gap-3">
             <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white/10">
               <Timer className="h-5 w-5 text-lemon" />
             </span>
-            <h4 className="font-display text-[19px] font-semibold text-milk">
+            <h4 className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-milk">
               Quick recap
             </h4>
           </div>
@@ -184,12 +184,12 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
               return (
                 <li key={i} className="flex items-start gap-3">
                   <span
-                    className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full font-display text-[13px] font-bold"
+                    className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full font-display text-[calc(13px*var(--ui-scale))] font-bold"
                     style={{ background: dots[i % dots.length], color: readableInk(dots[i % dots.length]) }}
                   >
                     {i + 1}
                   </span>
-                  <p className="text-[15px] leading-[1.7] text-milk/90">
+                  <p className="text-[calc(15px*var(--ui-scale))] leading-[1.7] text-milk/90">
                     <Fmt text={t} />
                   </p>
                 </li>
@@ -222,7 +222,7 @@ function WorkedExample({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="rounded-[28px] bg-paper p-5 puff sm:p-6">
+    <div className="rounded-[calc(28px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
       <div className="flex items-center gap-3">
         <span
           className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl"
@@ -230,7 +230,7 @@ function WorkedExample({
         >
           <Footprints className="h-5 w-5" style={{ color: shade(main, 62) }} />
         </span>
-        <h4 className="min-w-0 flex-1 font-display text-[19px] font-semibold text-ink">
+        <h4 className="min-w-0 flex-1 font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">
           <Fmt text={title} />
         </h4>
       </div>
@@ -241,7 +241,7 @@ function WorkedExample({
         aria-expanded={open}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.95 }}
-        className="mt-4 inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[14px] font-semibold text-white"
+        className="mt-4 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(14px*var(--ui-scale))] font-semibold text-white"
         style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
       >
         {open ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
@@ -279,11 +279,11 @@ function WorkedExample({
                 >
                   {i > 0 && <div className="dot-line mb-1 ml-6 h-4" aria-hidden />}
                   <div
-                    className="inline-flex max-w-full items-start gap-2.5 rounded-[18px] px-4 py-2.5 text-[14.5px] leading-[1.6] text-ink"
+                    className="inline-flex max-w-full items-start gap-2.5 rounded-[calc(18px*var(--ui-scale))] px-4 py-2.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.6] text-ink"
                     style={{ background: sunkWash(main, 9) }}
                   >
                     <span
-                      className="mt-0.5 grid h-5.5 w-5.5 shrink-0 place-items-center rounded-full font-display text-[11px] font-bold text-white"
+                      className="mt-0.5 grid h-5.5 w-5.5 shrink-0 place-items-center rounded-full font-display text-[calc(11px*var(--ui-scale))] font-bold text-white"
                       style={{ background: main, width: 22, height: 22 }}
                     >
                       {i + 1}
@@ -305,7 +305,7 @@ function WorkedExample({
                 damping: 16,
                 delay: 0.1 + steps.length * 0.06,
               }}
-              className="mt-4 flex items-start gap-2.5 rounded-full bg-paper px-4 py-3 text-[15px] font-bold text-ink shadow-[0_4px_0_rgb(61_43_31/0.07)] sm:items-center"
+              className="mt-4 flex items-start gap-2.5 rounded-full bg-paper px-4 py-3 text-[calc(15px*var(--ui-scale))] font-bold text-ink shadow-[0_4px_0_rgb(61_43_31/0.07)] sm:items-center"
               style={{ borderLeft: `6px solid ${main}` }}
             >
               <PartyPopper className="h-5 w-5 shrink-0" style={{ color: main }} />
@@ -336,20 +336,20 @@ function CandyTable({
   return (
     <div>
       {caption && (
-        <div className="mb-3 inline-flex rotate-[-1.2deg] items-center gap-2 rounded-full px-4 py-1.5 font-display text-[12.5px] font-semibold text-white" style={{ background: main }}>
+        <div className="mb-3 inline-flex rotate-[-1.2deg] items-center gap-2 rounded-full px-4 py-1.5 font-display text-[calc(12.5px*var(--ui-scale))] font-semibold text-white" style={{ background: main }}>
           <Sparkles className="h-3.5 w-3.5" />
           <Fmt text={caption} />
         </div>
       )}
-      <div className="overflow-hidden rounded-[26px] bg-paper puff">
+      <div className="overflow-hidden rounded-[calc(26px*var(--ui-scale))] bg-paper puff">
         <ScrollFade>
-          <table className="w-full min-w-[520px] border-collapse text-left">
+          <table className="w-full min-w-[calc(520px*var(--ui-scale))] border-collapse text-left">
             <thead>
               <tr style={{ background: sunkWash(main, 15) }}>
                 {head.map((h, i) => (
                   <th
                     key={i}
-                    className="px-4 py-3.5 font-display text-[13px] font-semibold tracking-[0.08em] whitespace-nowrap text-ink uppercase sm:px-5"
+                    className="px-4 py-3.5 font-display text-[calc(13px*var(--ui-scale))] font-semibold tracking-[0.08em] whitespace-nowrap text-ink uppercase sm:px-5"
                   >
                     <Fmt text={h} />
                   </th>
@@ -371,7 +371,7 @@ function CandyTable({
                   {r.map((c, j) => (
                     <td
                       key={j}
-                      className={`px-4 py-3.5 align-top text-[14.5px] leading-[1.6] sm:px-5 ${
+                      className={`px-4 py-3.5 align-top text-[calc(14.5px*var(--ui-scale))] leading-[1.6] sm:px-5 ${
                         j === 0 ? "font-extrabold text-ink" : "text-ink-soft"
                       }`}
                     >
@@ -399,13 +399,13 @@ function Checkpoint({ qs, main }: { qs: { q: string; a: string }[]; main: string
     setFlipped((arr) => (arr.includes(i) ? arr.filter((x) => x !== i) : [...arr, i]));
 
   return (
-    <div className="rounded-[30px] p-5 sm:p-6" style={{ background: liftWash(main, 9) }}>
+    <div className="rounded-[calc(30px*var(--ui-scale))] p-5 sm:p-6" style={{ background: liftWash(main, 9) }}>
       <div className="mb-4 flex items-center gap-3">
         <span className="grid h-10 w-10 place-items-center rounded-2xl bg-paper">
           <Gamepad2 className="h-5 w-5" style={{ color: main }} />
         </span>
-        <h4 className="font-display text-[19px] font-semibold text-ink">Checkpoint</h4>
-        <span className="ml-auto hidden rounded-full bg-paper/70 px-3 py-1 text-[12px] font-bold text-ink-soft sm:block">
+        <h4 className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">Checkpoint</h4>
+        <span className="ml-auto hidden rounded-full bg-paper/70 px-3 py-1 text-[calc(12px*var(--ui-scale))] font-bold text-ink-soft sm:block">
           {flipped.length}/{qs.length} revealed
         </span>
       </div>
@@ -455,7 +455,7 @@ function CheckCard({
       >
         {/* front — the question */}
         <div
-          className="flex min-h-[148px] flex-col rounded-[22px] bg-paper p-4 [grid-area:1/1] sm:p-5"
+          className="flex min-h-[calc(148px*var(--ui-scale))] flex-col rounded-[calc(22px*var(--ui-scale))] bg-paper p-4 [grid-area:1/1] sm:p-5"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
@@ -464,16 +464,16 @@ function CheckCard({
         >
           <div className="flex items-center gap-2">
             <span
-              className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[11px] font-bold"
+              className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[calc(11px*var(--ui-scale))] font-bold"
               style={{ background: main, color: readableInk(main) }}
             >
               {index + 1}
             </span>
-            <span className="ml-auto text-[11px] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+            <span className="ml-auto text-[calc(11px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
               tap to flip
             </span>
           </div>
-          <p className="mt-3 flex-1 text-[15.5px] leading-[1.65] font-bold text-ink">
+          <p className="mt-3 flex-1 text-[calc(15.5px*var(--ui-scale))] leading-[1.65] font-bold text-ink">
             <Fmt text={q} />
           </p>
           <div className="pt-3">
@@ -482,7 +482,7 @@ function CheckCard({
               onClick={onFlip}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.94 }}
-              className="inline-flex min-h-[40px] cursor-pointer items-center gap-2 rounded-full px-4 py-2 font-display text-[13px] font-semibold text-white"
+              className="inline-flex min-h-[calc(40px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-4 py-2 font-display text-[calc(13px*var(--ui-scale))] font-semibold text-white"
               style={{ background: main, boxShadow: `0 3px 0 ${shade(main)}` }}
             >
               <Eye className="h-4 w-4" /> Reveal answer
@@ -492,7 +492,7 @@ function CheckCard({
 
         {/* back — the answer */}
         <div
-          className="flex min-h-[148px] flex-col rounded-[22px] bg-paper p-4 [grid-area:1/1] sm:p-5"
+          className="flex min-h-[calc(148px*var(--ui-scale))] flex-col rounded-[calc(22px*var(--ui-scale))] bg-paper p-4 [grid-area:1/1] sm:p-5"
           style={{
             transform: "rotateY(180deg)",
             backfaceVisibility: "hidden",
@@ -501,12 +501,12 @@ function CheckCard({
           }}
         >
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 font-display text-[11px] font-bold tracking-[0.12em] text-mint uppercase">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 font-display text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.12em] text-mint uppercase">
               <Check className="h-3.5 w-3.5" strokeWidth={3} /> answer
             </span>
           </div>
           <p
-            className="mt-3 flex-1 rounded-[16px] px-3.5 py-2.5 text-[14.5px] leading-[1.7] text-ink"
+            className="mt-3 flex-1 rounded-[calc(16px*var(--ui-scale))] px-3.5 py-2.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.7] text-ink"
             style={{ background: sunkWash("#12B886", 10) }}
           >
             <Fmt text={a} />
@@ -517,7 +517,7 @@ function CheckCard({
               onClick={onFlip}
               whileHover={{ y: -1 }}
               whileTap={{ scale: 0.96 }}
-              className="inline-flex min-h-[36px] cursor-pointer items-center gap-2 rounded-full bg-ink/5 px-4 py-2 text-[12.5px] font-bold text-ink-soft"
+              className="inline-flex min-h-[calc(36px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full bg-ink/5 px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-soft"
             >
               <EyeOff className="h-4 w-4" /> Flip back
             </m.button>
@@ -531,7 +531,7 @@ function CheckCard({
           type="button"
           aria-label={`Reveal answer ${index + 1}`}
           onClick={onFlip}
-          className="absolute inset-0 cursor-pointer rounded-[22px]"
+          className="absolute inset-0 cursor-pointer rounded-[calc(22px*var(--ui-scale))]"
           style={{ zIndex: 5 }}
         />
       )}

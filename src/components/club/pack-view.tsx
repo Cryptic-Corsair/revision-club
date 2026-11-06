@@ -148,7 +148,7 @@ export function PackView({
     return (
       <div className="mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] pb-24 sm:px-8">
         <PopIn>
-          <SoftButton onClick={onHome} className="min-h-[42px] px-4 py-2 text-[13.5px]" ariaLabel="Back home">
+          <SoftButton onClick={onHome} className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]" ariaLabel="Back home">
             <ArrowLeft className="h-4 w-4" /> Back home
           </SoftButton>
         </PopIn>
@@ -157,7 +157,7 @@ export function PackView({
           <h1 className="mt-6 font-display text-[clamp(1.9rem,4.6vw,2.7rem)] font-semibold tracking-tight text-ink">
             The pack is empty.
           </h1>
-          <p className="mt-3 max-w-[46ch] text-[15.5px] leading-[1.8] text-ink-soft">
+          <p className="mt-3 max-w-[46ch] text-[calc(15.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
             Head to the spec index and tick, say, <strong>2.1</strong> and{" "}
             <strong>3.6</strong> — the notes covering those statements assemble
             here automatically, in syllabus order.
@@ -168,7 +168,7 @@ export function PackView({
               onClick={onOpenSpec}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.96 }}
-              className="inline-flex min-h-[48px] cursor-pointer items-center gap-2 rounded-full px-5 py-3 font-display text-[14.5px] font-semibold text-white"
+              className="inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-3 font-display text-[calc(14.5px*var(--ui-scale))] font-semibold text-white"
               style={{ background: "#FF922B", boxShadow: `0 4px 0 ${shade("#FF922B")}` }}
             >
               <Target className="h-5 w-5" /> Browse the spec index
@@ -191,14 +191,14 @@ export function PackView({
       {/* ————— header card + toolbar ————— */}
       <header className="mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] sm:px-8">
         <PopIn>
-          <SoftButton onClick={onHome} className="min-h-[42px] px-4 py-2 text-[13.5px]" ariaLabel="Back home">
+          <SoftButton onClick={onHome} className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]" ariaLabel="Back home">
             <ArrowLeft className="h-4 w-4" /> Back home
           </SoftButton>
         </PopIn>
 
         <PopIn delay={0.05} className="mt-6">
           <span
-            className="inline-flex -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[11.5px] font-bold tracking-[0.14em] uppercase"
+            className="inline-flex -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
             style={{ background: "#FFD43B", color: "#5f4a00" }}
           >
             <ClipboardList className="h-3.5 w-3.5" /> Your pack
@@ -206,7 +206,7 @@ export function PackView({
           <h1 className="mt-5 font-display text-[clamp(2.1rem,5vw,3.1rem)] leading-[1.05] font-semibold tracking-tight text-ink">
             One pack. Your spec points.
           </h1>
-          <p className="mt-3 text-[15px] leading-[1.75] text-ink-soft">
+          <p className="mt-3 text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink-soft">
             {points.length} spec point{points.length === 1 ? "" : "s"} ·{" "}
             {sectionCount} section{sectionCount === 1 ? "" : "s"} of notes,
             pulled together in syllabus order. Every section below is your
@@ -217,7 +217,7 @@ export function PackView({
         {/* picked chips — one swipeable line; tap one to let it go */}
         <PopIn delay={0.1} className="mt-4">
           <div className="flex items-center gap-3">
-            <span className="shrink-0 font-display text-[11px] font-bold tracking-[0.14em] text-ink-faint uppercase">
+            <span className="shrink-0 font-display text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.14em] text-ink-faint uppercase">
               Picked
             </span>
             <ScrollFade className="min-w-0 flex-1">
@@ -229,7 +229,7 @@ export function PackView({
                     onClick={() => removePoint(p.spec)}
                     aria-label={`Remove ${p.spec} from your pack`}
                     title={`Remove ${p.spec} — ${p.topicLabel}`}
-                    className="group inline-flex h-[34px] shrink-0 cursor-pointer items-center gap-2 rounded-full bg-paper px-3 font-display text-[12px] font-bold transition-transform hover:-translate-y-0.5"
+                    className="group inline-flex h-[calc(34px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-2 rounded-full bg-paper px-3 font-display text-[calc(12px*var(--ui-scale))] font-bold transition-transform hover:-translate-y-0.5"
                     style={{ color: p.candy, boxShadow: "0 2px 0 var(--edge)" }}
                   >
                     <span
@@ -261,7 +261,7 @@ export function PackView({
                 transition={{ type: "spring", stiffness: 120, damping: 20 }}
               />
             </div>
-            <span className="shrink-0 font-display text-[12.5px] font-bold text-ink-soft">
+            <span className="shrink-0 font-display text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-soft">
               {readCount}/{points.length} read{allRead ? " ✓" : ""}
             </span>
           </div>
@@ -269,7 +269,7 @@ export function PackView({
 
         {/* ————— toolbar ————— */}
         <Reveal delay={0.18} className="no-print mt-5">
-          <div className="rounded-[26px] bg-paper p-2.5 puff sm:p-3.5">
+          <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-2.5 puff sm:p-3.5">
             {/* one steady line at every width — the same swipe the
                 picked strip uses above; nothing wraps, nothing
                 orphans, and the fade says there's more */}
@@ -358,7 +358,7 @@ export function PackView({
                             type="button"
                             onClick={() => toggleRead(s.point.spec)}
                             aria-pressed={isRead}
-                            className={`inline-flex min-h-[38px] cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-[12px] font-bold transition-colors ${
+                            className={`inline-flex min-h-[calc(38px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-[calc(12px*var(--ui-scale))] font-bold transition-colors ${
                               isRead ? "text-white" : "bg-paper text-ink-soft hover:text-ink"
                             }`}
                             style={
@@ -385,7 +385,7 @@ export function PackView({
                             <button
                               type="button"
                               onClick={() => onOpenNotes(s.point.entries[0].docId, s.point.spec)}
-                              className="inline-flex min-h-[38px] cursor-pointer items-center gap-1.5 rounded-full bg-paper px-3.5 py-2 text-[12px] font-bold text-ink-soft transition-colors hover:text-ink"
+                              className="inline-flex min-h-[calc(38px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-full bg-paper px-3.5 py-2 text-[calc(12px*var(--ui-scale))] font-bold text-ink-soft transition-colors hover:text-ink"
                               style={{ boxShadow: "0 2px 0 var(--edge)" }}
                               aria-label={`Open ${s.point.entries[0].title} in the ${g.topicLabel} notes`}
                             >
@@ -428,7 +428,7 @@ export function PackView({
               <p className="font-display text-[clamp(1.4rem,3.6vw,1.75rem)] leading-snug font-semibold text-ink">
                 Pack read — every point, marked off.
               </p>
-              <p className="-mt-2 max-w-[46ch] text-[13.5px] leading-relaxed font-bold text-ink-soft">
+              <p className="-mt-2 max-w-[46ch] text-[calc(13.5px*var(--ui-scale))] leading-relaxed font-bold text-ink-soft">
                 {points.length} spec point{points.length === 1 ? "" : "s"} of
                 revision, done. Tick the next batch, or load a saved set and
                 walk it again.
@@ -441,7 +441,7 @@ export function PackView({
                 className="h-3 w-40 rounded-full"
                 style={{ background: "linear-gradient(90deg, #FFD43B, #12B886)" }}
               />
-              <p className="font-display text-[19px] font-semibold text-ink">
+              <p className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">
                 That&apos;s your pack — {points.length} point{points.length === 1 ? "" : "s"}, read at your pace.
               </p>
             </>
@@ -454,7 +454,7 @@ export function PackView({
               <Bookmark className="h-4.5 w-4.5" /> Saved sets{sets.length > 0 ? ` (${sets.length})` : ""}
             </SoftButton>
           </div>
-          <p className="mt-2 text-[12px] leading-relaxed font-bold text-ink-soft">
+          <p className="mt-2 text-[calc(12px*var(--ui-scale))] leading-relaxed font-bold text-ink-soft">
             Assembled from the revision notes · ticks live in your browser
           </p>
         </Reveal>
@@ -486,14 +486,14 @@ function TopicBanner({
           boxShadow: `0 3px 0 ${shade(g.candy)}`,
         }}
       >
-        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/25 font-display text-[11px] font-bold">
+        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/25 font-display text-[calc(11px*var(--ui-scale))] font-bold">
           {g.unitCode.replace("WCH", "")}
         </span>
-        <span className="min-w-0 truncate font-display text-[13.5px] font-bold tracking-[0.04em]">
+        <span className="min-w-0 truncate font-display text-[calc(13.5px*var(--ui-scale))] font-bold tracking-[0.04em]">
           {g.topicLabel} — {g.topicTitle}
         </span>
       </div>
-      <p className="mt-2.5 pl-1 text-[11.5px] font-bold tracking-[0.1em] text-ink-faint uppercase">
+      <p className="mt-2.5 pl-1 text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.1em] text-ink-faint uppercase">
         {sections} section{sections === 1 ? "" : "s"} from this topic
         {!hideStatements && " · statements quoted above each note"}
       </p>
@@ -526,7 +526,7 @@ function ToolButton({
       whileTap={{ scale: 0.95 }}
       aria-label={label}
       title={label}
-      className={`inline-flex h-[40px] shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[12.5px] font-bold tracking-[0.02em] transition-colors ${
+      className={`inline-flex h-[calc(40px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[calc(12.5px*var(--ui-scale))] font-bold tracking-[0.02em] transition-colors ${
         !highlight && !danger
           ? "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
           : ""
@@ -549,7 +549,7 @@ function ToolButton({
     >
       {children}
       {typeof badge === "number" && badge > 0 && (
-        <span className="grid h-[18px] min-w-[18px] place-items-center rounded-full bg-ink/10 px-1 text-[10.5px] font-bold">
+        <span className="grid h-[calc(18px*var(--ui-scale))] min-w-[calc(18px*var(--ui-scale))] place-items-center rounded-full bg-ink/10 px-1 text-[calc(10.5px*var(--ui-scale))] font-bold">
           {badge}
         </span>
       )}
