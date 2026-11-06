@@ -6,8 +6,9 @@
    the provider; the nav then wears one candy "you are here" stop,
    same 40px rhythm as every other nav button. A tap unfolds the
    map: a floating window centred under the nav pill, fitted to the
-   screen in JS (92vw wide, capped; height measured between the pill
-   and the screen bottom so it never runs off a tablet), with a
+   screen in JS (92vw on phones, a 560px centred dialog on larger
+   screens; height measured between the pill and the screen bottom
+   so it never runs off a tablet), with a
    paper tail stitched to
    the stop that opened it, a rainbow progress track showing how far
    you've walked, the same band-coloured chips as the note's own
@@ -115,14 +116,20 @@ export function SpecMapTrigger() {
        zoom (accessibility zoom, a remembered pinch) keep the layout
        viewport wide while the visible one shrinks, and innerWidth
        maths then pushed the window clean past the right edge of the
-       screen. The min() belt also covers exotic zoomed-out states. */
+       screen. The min() belt also covers exotic zoomed-out states.
+       The width itself graduates with the page: 92% of the visible
+       viewport on phones, easing into a 560px centred dialog on
+       tablets and desktops — the same floating-window width as the
+       search bubble — so a 768px portrait tablet reads as a dialog,
+       not a slab, and every zoom level in between lands smoothly
+       because a narrower viewport simply drifts toward the phone fit. */
     const vv = window.visualViewport;
     const vw = Math.min(vv?.width ?? window.innerWidth, window.innerWidth);
     const vh = Math.min(
       vv?.height ?? window.innerHeight,
       window.innerHeight,
     );
-    const w = Math.min(vw * 0.92, 720);
+    const w = Math.min(vw * 0.92, 560);
     const left = Math.max((vw - w) / 2, 8);
     /* the window must always fit between the nav pill and the bottom
        of the screen — computed here in JS, never in CSS: the old
@@ -146,10 +153,14 @@ export function SpecMapTrigger() {
     );
     /* keep the old object when nothing moved, so opening doesn't
        ripple re-renders through the panel — every field is compared
-       against its own final value */
+       against its own final value, LEFT INCLUDED: a centred window
+       keeps w, h and tail identical across viewport sizes, so a
+       dedupe that skips left parks the panel at a stale position
+       from the previous size and it sails off the screen */
     setGeo((g) =>
       g &&
       Math.abs(g.top - top) < 1 &&
+      Math.abs(g.left - left) < 1 &&
       g.w === w &&
       g.h === h &&
       Math.abs(g.tail - tail) < 1
