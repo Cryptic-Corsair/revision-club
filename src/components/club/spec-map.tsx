@@ -110,8 +110,18 @@ export function SpecMapTrigger() {
       ?.getBoundingClientRect();
     const btn = btnRef.current?.getBoundingClientRect();
     if (!nav || !btn || btn.width === 0) return;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
+    /* size and centre the window against what the eye actually sees —
+       visualViewport, not innerWidth. Tablets running browser page
+       zoom (accessibility zoom, a remembered pinch) keep the layout
+       viewport wide while the visible one shrinks, and innerWidth
+       maths then pushed the window clean past the right edge of the
+       screen. The min() belt also covers exotic zoomed-out states. */
+    const vv = window.visualViewport;
+    const vw = Math.min(vv?.width ?? window.innerWidth, window.innerWidth);
+    const vh = Math.min(
+      vv?.height ?? window.innerHeight,
+      window.innerHeight,
+    );
     const w = Math.min(vw * 0.92, 720);
     const left = Math.max((vw - w) / 2, 8);
     /* the window must always fit between the nav pill and the bottom
