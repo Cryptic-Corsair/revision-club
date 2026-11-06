@@ -213,7 +213,7 @@ function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
 /* ————— lab switch —————
    Light → night → dune → classic, one tap apart. The button wears
    its room's chip (THEME_CHIP) — white, navy, chocolate, and the
-   diagonal black/white cut for classic — with the moon on every
+   diagonal espresso/cream cut for classic — with the moon on every
    one, so the current theme reads at a glance, and a candy toast
    using the same swatch announces each switch. Titles say the next
    stop, nothing more. The mobile browser chrome is re-painted to
@@ -440,7 +440,7 @@ function TopBar({
                   background: THEME_CHIP[announce].bg,
                   boxShadow:
                     announce === "classic"
-                      ? "inset 0 0 0 2px rgb(125 125 125 / 0.45)"
+                      ? "inset 0 0 0 2px rgb(143 122 92 / 0.5)"
                       : announce === "dark" || announce === "dune"
                         ? "inset 0 0 0 2px rgb(244 241 251 / 0.22)"
                         : "inset 0 0 0 2px rgb(61 43 31 / 0.12)",

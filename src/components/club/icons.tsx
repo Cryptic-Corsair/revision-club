@@ -582,11 +582,12 @@ export function SunMoon(p: IcoProps) {
   );
 }
 
-/* classic's chip is cut on the diagonal — black on the top-left,
-   white on the bottom-right — so no single ink reads across it.
-   This moon is painted twice: a wide white rim underneath (reads
-   on the black half) and a black face on top (reads on the white
-   half). Same crescent and star as the night moon above. */
+/* classic's chip is cut on the diagonal — espresso on the top-left,
+   cream on the bottom-right, the exact pair the classic notes step
+   through — so no single ink reads across it. This moon is painted
+   twice: a wide cream rim underneath (reads on the espresso half)
+   and an espresso face on top (reads on the cream half). Same
+   crescent and star as the night moon above. */
 const MOON_PATHS = [
   "M20.2 14.7 A8.5 8.5 0 1 1 9.3 3.8 a6.8 6.8 0 0 0 10.9 10.9 Z",
   "M16.6 3.9 c0.28 1.55 0.75 2.02 2.3 2.3 -1.55 0.28-2.02 0.75-2.3 2.3 -0.28-1.55-0.75-2.02-2.3-2.3 1.55-0.28 2.02-0.75 2.3-2.3 Z",
@@ -602,9 +603,9 @@ export function ClassicMoon(p: IcoProps) {
       aria-hidden
       {...p}
     >
-      {/* rim pass — the white that carries the shape on black */}
+      {/* rim pass — the cream that carries the shape on espresso */}
       <g
-        stroke="#FFFFFF"
+        stroke="#FDF6E3"
         strokeWidth={4.2}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -613,9 +614,9 @@ export function ClassicMoon(p: IcoProps) {
           <path key={`rim-${d}`} d={d} />
         ))}
       </g>
-      {/* face pass — the black that carries it on white */}
+      {/* face pass — the espresso that carries it on cream */}
       <g
-        stroke="#000000"
+        stroke="#2C2013"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"

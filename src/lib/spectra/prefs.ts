@@ -357,7 +357,7 @@ export const LAB_LABEL: Record<Lab, string> = {
    point — the chip says which room you're in). One glyph across
    the set — the moon — and the background names the room: daylight
    white (light) · navy (night) · chocolate (dune) · the diagonal
-   black/white cut (classic). */
+   espresso/cream cut (classic). */
 export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> = {
   light: {
     bg: "#FFFFFF", // the bright daylight page
@@ -376,9 +376,10 @@ export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> 
     side: "#4E3417",
   },
   classic: {
-    // both rooms at once — black and white cut on the diagonal
-    bg: "linear-gradient(135deg, #000000 50%, #FFFFFF 50%)",
-    ink: "#000000", // unused by the split glyph; kept for the record
-    side: "#7D7D7D", // a grey that bridges both halves
+    // both rooms at once — espresso and cream, the exact pair the
+    // classic notes alternate, cut on the diagonal
+    bg: "linear-gradient(135deg, #2C2013 50%, #FDF6E3 50%)",
+    ink: "#2C2013", // unused by the split glyph; kept for the record
+    side: "#8F7A5C", // a roast that bridges both halves
   },
 };

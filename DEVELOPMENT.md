@@ -187,12 +187,15 @@ packs against), `dots` (on), `motion` (on).
 
 Each theme wears a fixed signature swatch — white for **light**, navy for
 **night** (`#23406E`), chocolate for **dune** (`#6B4A26`), and the diagonal
-black/white cut for **classic** (`linear-gradient(135deg, #000 50%, #fff 50%)`)
+espresso/cream cut for **classic**
+(`linear-gradient(135deg, #2C2013 50%, #FDF6E3 50%)` — the exact pair the
+classic notes alternate, cut on the diagonal; pure black/white was tried and
+read harsh against the warm palette)
 — defined once as `THEME_CHIP` in `prefs.ts` and used by the nav's theme
 button, the lab toast and the panel's theme cards. The four backgrounds are
 picked as a set to stay distinct side by side and to name the room. The glyph
-is the moon on every theme; classic takes the two-pass `ClassicMoon` (white
-rim underneath, black face on top) because its chip is cut diagonally and no
+is the moon on every theme; classic takes the two-pass `ClassicMoon` (cream
+rim underneath, espresso face on top) because its chip is cut diagonally and no
 single ink crosses both halves. These are fixed brand values that deliberately
 do NOT flip with the active lab — that is the whole point of a chip that says
 which room you're in.
