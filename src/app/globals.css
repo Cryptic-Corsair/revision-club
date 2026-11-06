@@ -77,7 +77,12 @@
 
 /* ————— content scale —————
    The named size tokens ride --ui-scale too, so Tailwind's own
-   utilities (p-4, h-10, gap-2, rounded-xl…) scale with the knob.
+   utilities (p-4, h-10, gap-2, rounded-xl…) scale with the knob —
+   and the container tokens below mean the max-w-* frames (the page
+   frame, the reading columns, figure caps) widen WITH the text:
+   bigger type earns more line instead of a tighter box. Nothing can
+   spill — width:auto and the screen clamp every cap to the real
+   viewport, so widening only shows where there is room for it.
    This MUST be an `inline` theme block: a plain @theme token would
    live on :root, where var(--ui-scale) resolves ONCE — the computed
    length would then inherit into every subtree already scaled, and
@@ -95,6 +100,35 @@
   --radius-md: calc(0.375rem * var(--ui-scale));
   --radius-xl: calc(0.75rem * var(--ui-scale));
   --radius-2xl: calc(1rem * var(--ui-scale));
+  /* the container ladder (max-w-xs…7xl) cannot ride here: Tailwind
+     takes inline redeclarations of --spacing and --radius-* but
+     silently keeps its default --container-* keys (20–80rem), so
+     the named max-w-* classes are overridden in the utilities layer
+     directly below instead. */
+}
+
+/* ————— the widening frames —————
+   The named max-w-* caps re-declared in the utilities layer, after
+   Tailwind's own: same cascade layer, later source order, so these
+   win. Each carries the whole calc expression, so --ui-scale
+   resolves AT THE ELEMENT (the same semantics as the inlined
+   spacing utilities above): the reading column and the page frame
+   widen with the knob, and the .site-header / .spec-map pins
+   re-freeze them by inheritance. width:auto and the screen itself
+   remain the final caps — widening only shows where there is room,
+   and a phone just wraps more, never clips. */
+@layer utilities {
+  .max-w-xs { max-width: calc(20rem * var(--ui-scale)); }
+  .max-w-sm { max-width: calc(24rem * var(--ui-scale)); }
+  .max-w-md { max-width: calc(28rem * var(--ui-scale)); }
+  .max-w-lg { max-width: calc(32rem * var(--ui-scale)); }
+  .max-w-xl { max-width: calc(36rem * var(--ui-scale)); }
+  .max-w-2xl { max-width: calc(42rem * var(--ui-scale)); }
+  .max-w-3xl { max-width: calc(48rem * var(--ui-scale)); }
+  .max-w-4xl { max-width: calc(56rem * var(--ui-scale)); }
+  .max-w-5xl { max-width: calc(64rem * var(--ui-scale)); }
+  .max-w-6xl { max-width: calc(72rem * var(--ui-scale)); }
+  .max-w-7xl { max-width: calc(80rem * var(--ui-scale)); }
 }
 
 /* ————— mood tokens —————

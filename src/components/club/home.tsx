@@ -162,7 +162,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
         <DoodleAtom className="absolute right-[3%] bottom-[12%] hidden h-9 w-9 text-coral/30 xl:block" />
 
         <div className="relative z-10">
-          <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 pb-12 pt-3 sm:px-8 sm:pb-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-6 lg:px-10 lg:pb-24 lg:pt-4">
+          <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 pb-12 pt-3 sm:px-8 sm:pb-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-6 lg:px-10 lg:pb-24 lg:pt-4">
             {/* left: words */}
             <div>
               <PopIn>

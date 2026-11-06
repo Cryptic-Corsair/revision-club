@@ -117,7 +117,7 @@ export function PackSetsDialog({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.96 }}
             transition={{ type: "spring", stiffness: 340, damping: 26 }}
-            className="fixed inset-x-3 top-[calc(1rem+var(--sa-top))] z-[80] mx-auto flex max-h-[min(78dvh,560px)] w-auto max-w-[calc(440px*var(--ui-scale))] flex-col rounded-[calc(28px*var(--ui-scale))] bg-paper outline-none sm:inset-x-auto sm:left-1/2 sm:w-[min(440px,92vw)] sm:-translate-x-1/2"
+            className="fixed inset-x-3 top-[calc(1rem+var(--sa-top))] z-[80] mx-auto flex max-h-[min(78dvh,560px)] w-auto max-w-[calc(440px*var(--ui-scale))] flex-col rounded-[calc(28px*var(--ui-scale))] bg-paper outline-none sm:inset-x-auto sm:left-1/2 sm:w-[min(calc(440px*var(--ui-scale)),92vw)] sm:-translate-x-1/2"
             style={{
               boxShadow:
                 "0 4px 0 var(--edge), 0 30px 60px -24px rgb(0 0 0 / 0.45)",

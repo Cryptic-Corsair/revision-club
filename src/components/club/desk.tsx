@@ -104,7 +104,7 @@ export function Desk({
     <div>
       {/* ————— header + continue ————— */}
       <section className="bg-paper" style={{ paddingTop: "calc(5.25rem + var(--sa-top))" }}>
-        <div className="mx-auto grid max-w-6xl items-start gap-8 px-5 pb-12 pt-2 sm:px-8 lg:grid-cols-[1.35fr_0.85fr] lg:gap-6">
+        <div className="mx-auto grid max-w-6xl items-start gap-8 px-5 pb-12 pt-2 sm:px-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] lg:gap-6">
           {/* left: greeting + the continue card */}
           <div>
             <SectionTag main="#12B886" tilt={-1.5}>

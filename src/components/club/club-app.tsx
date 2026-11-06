@@ -468,7 +468,7 @@ function Footer({
           {/* ————— three columns: the club · the units · the toolkit —————
               two columns until tablet, where three would squeeze every
               caption into four lines */}
-          <div className="grid gap-10 py-9 sm:py-11 md:grid-cols-2 lg:grid-cols-[1.3fr_1.25fr_0.9fr] lg:gap-8">
+          <div className="grid gap-10 py-9 sm:py-11 md:grid-cols-2 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1.25fr)_minmax(0,0.9fr)] lg:gap-8">
             {/* who we are */}
             <div className="max-w-sm">
               <div className="flex items-center gap-3">

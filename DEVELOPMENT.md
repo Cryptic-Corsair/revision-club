@@ -187,6 +187,23 @@ drawer and every fixed surface on zoomed tablets. Instead the pref stamps
   `--radius-md/xl/2xl`). It MUST stay `inline`: a plain `@theme` token resolves
   `var(--ui-scale)` once at `:root` and the computed length inherits into every
   subtree, which would defeat the freeze pins below.
+- **Widths widen with the text (the e-reader rule).** The named `max-w-*`
+  frames (`max-w-3xl` reading column, `max-w-6xl` page frame, figure caps) are
+  re-declared in an `@layer utilities` block in `globals.css` as
+  `calc(Nrem * var(--ui-scale))`. Tailwind ignores `@theme inline`
+  redeclarations of its default `--container-*` keys (spacing/radius take,
+  container silently falls back), so the layer override is the mechanism; the
+  calc still resolves at the element, so the freeze pins re-freeze it too.
+  `width:auto` and the screen remain the final caps — widening shows only
+  where there is room; a phone just wraps more, never clips.
+- Paragraph measures are `max-w-[Nch]` on scaled fonts, so they widen with the
+  knob for free (same characters per line, more room).
+- Side-by-side rows must compress, not overflow: Tailwind's fixed
+  `grid-cols-N` already emits `minmax(0, 1fr)`; any arbitrary template must be
+  written `lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.9fr)]` — never bare `fr`.
+- Wide tables scroll inside their rounded card: `CandyTable` wraps the table
+  (`min-w-[calc(Npx*var(--ui-scale))]`) in `ScrollFade` (`overflow-x-auto` +
+  edge fade masks). Full-size text, swipe inside the card.
 - All px sizing utilities in components are written as
   `calc(Npx * var(--ui-scale))` (borders, shadows, blurs, textures and
   scrollbars stay literal px — thickness/material, not size).
