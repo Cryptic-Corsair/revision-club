@@ -173,7 +173,11 @@ replace the files in `src/app/fonts/`, and keep the `weight` ranges in
 User prefs (`prefs.ts`, default in parentheses): `theme` (`"classic"`),
 `headFont` (`"fredoka"`), `bodyFont` (`"nunito"`), `scale` (`"M"`; S/M/L/XL —
 legacy saved `zoom` values 0.9/1/1.15/1.3 migrate onto the matching step),
-`dots` (on), `motion` (on).
+`specHeight` (`0.94` — the spec-map drawer's viewport fraction; set by the
+panel's Peek/Tall/Full presets and by dragging the drawer's grabber, which
+persists any fraction in between), `specDensity` (`"comfy"`; compact/comfy/
+roomy — the chip min-width the drawer's grid packs against), `dots` (on),
+`motion` (on).
 
 ### Content scale (S/M/L/XL)
 
@@ -211,6 +215,11 @@ drawer and every fixed surface on zoomed tablets. Instead the pref stamps
   so the navbar pill and the spec-map drawer (incl. the shared SpecChip)
   measure identical at every step. The customize panel deliberately does NOT
   pin — it is content.
+- **The spec tray owns its size, outside the scale system.** Its height
+  (`--spec-h`, an inline style — a continuous drag fraction can't ride a
+  data-attribute ladder) and chip density (`data-spec-density` → `--spec-chip`
+  in `globals.css`) are absolute numbers that ignore `--ui-scale`, page size
+  and zoom on purpose. Don't wire them into the content-scale engine.
 - Root font-size never moves: rem breakpoints and dvh drawers stay honest.
 - New components: size with normal Tailwind utilities or
   `calc(Npx * var(--ui-scale))`; never reintroduce bare px sizing, and never

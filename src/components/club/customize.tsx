@@ -11,6 +11,8 @@ import {
   flashThemeAnim,
   LAB_LABEL,
   SCALES,
+  SPEC_DENSITIES,
+  SPEC_HEIGHTS,
   setPrefs,
   usePrefs,
   type AccentId,
@@ -234,6 +236,12 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
           ? `Sections alternate ${pickedLabels[0]} ↔ ${pickedLabels[1]}.`
           : `Sections rotate ${pickedLabels.join(" → ")} — then back to ${pickedLabels[0]}.`;
 
+  /* the tray's height pref only sits ON a preset when a drag hasn't
+     left it between rungs — off-rung, the panel says so honestly */
+  const heightOnPreset = SPEC_HEIGHTS.some(
+    (h) => Math.abs(prefs.specHeight - h.fraction) < 0.025,
+  );
+
   return (
     <AnimatePresence>
       {open && (
@@ -450,7 +458,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
               <Section
                 title="Text & component size"
                 dot="#FFD43B"
-                hint="Notes, cards and tables grow with the type. The navbar and the spec map keep their size."
+                hint="Notes, cards and tables grow with the type. The navbar keeps its size — the spec map tray has its own knobs below."
               >
                 <div className="flex rounded-full bg-ink/[0.06] p-1">
                   {SCALES.map((s, i) => {
@@ -483,6 +491,79 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                       </m.button>
                     );
                   })}
+                </div>
+              </Section>
+
+              <Section
+                title="Spec map"
+                dot="#FF6B6B"
+                hint="The tray's own size — absolute numbers, the same on every device regardless of text size or page zoom."
+              >
+                <div className="flex flex-col gap-2.5">
+                  {/* height — three rungs plus the drag: a dragged
+                      fraction sits between rungs and the panel says
+                      so, instead of pretending a preset is on */}
+                  <div className="flex rounded-full bg-ink/[0.06] p-1">
+                    {SPEC_HEIGHTS.map((h) => {
+                      const active =
+                        Math.abs(prefs.specHeight - h.fraction) < 0.025;
+                      return (
+                        <m.button
+                          key={h.id}
+                          type="button"
+                          onClick={() => setPrefs({ specHeight: h.fraction })}
+                          whileTap={{ scale: 0.93 }}
+                          aria-pressed={active}
+                          aria-label={`Spec map height ${h.label}`}
+                          className={`flex flex-1 cursor-pointer flex-col items-center rounded-full py-2 transition-colors ${
+                            active
+                              ? "bg-coral text-white shadow-[0_2px_0_#E8590C]"
+                              : "text-ink-soft hover:text-ink"
+                          }`}
+                        >
+                          <span className="font-display text-[calc(14px*var(--ui-scale))] leading-none font-bold">
+                            {Math.round(h.fraction * 100)}
+                            <span className="text-[calc(9.5px*var(--ui-scale))]">%</span>
+                          </span>
+                          <span className="mt-1 font-display text-[calc(9.5px*var(--ui-scale))] font-bold tracking-[0.08em]">
+                            {h.label}
+                          </span>
+                        </m.button>
+                      );
+                    })}
+                  </div>
+                  {!heightOnPreset && (
+                    <p className="text-center text-[calc(11px*var(--ui-scale))] font-bold text-ink-faint">
+                      custom — {Math.round(prefs.specHeight * 100)}%, from
+                      dragging the tray's grabber
+                    </p>
+                  )}
+                  {/* chip density — the min-width the tray's auto-fill
+                      grid packs columns against */}
+                  <div className="flex rounded-full bg-ink/[0.06] p-1">
+                    {SPEC_DENSITIES.map((d) => {
+                      const active = prefs.specDensity === d.id;
+                      return (
+                        <m.button
+                          key={d.id}
+                          type="button"
+                          onClick={() => setPrefs({ specDensity: d.id })}
+                          whileTap={{ scale: 0.93 }}
+                          aria-pressed={active}
+                          aria-label={`Spec map chip density ${d.label}`}
+                          className={`flex flex-1 cursor-pointer items-center justify-center rounded-full py-2 transition-colors ${
+                            active
+                              ? "bg-coral text-white shadow-[0_2px_0_#E8590C]"
+                              : "text-ink-soft hover:text-ink"
+                          }`}
+                        >
+                          <span className="font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.04em]">
+                            {d.label}
+                          </span>
+                        </m.button>
+                      );
+                    })}
+                  </div>
                 </div>
               </Section>
 

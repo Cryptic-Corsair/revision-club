@@ -200,6 +200,25 @@ html[data-scale="XL"] {
   --ui-scale: 1;
 }
 
+/* ————— the spec tray's OWN size knobs —————
+   Independent of --ui-scale on purpose: the tray is frozen against
+   the content-scale knob, and these prefs are absolute numbers that
+   read identically on every device, page size and zoom. --spec-h
+   (the drawer's viewport fraction) arrives as an inline style set
+   by prefs.ts — a continuous drag fraction can't ride a
+   data-attribute ladder. Density is a dataset: the chip min-width
+   the auto-fill grid packs columns against. rem is safe (not
+   scale-dependent) because the root font-size never moves. */
+:root {
+  --spec-chip: 8.5rem; /* comfy — the historical default */
+}
+html[data-spec-density="compact"] {
+  --spec-chip: 6.75rem;
+}
+html[data-spec-density="roomy"] {
+  --spec-chip: 10.75rem;
+}
+
 /* calm mode — the floating blobs and wiggles stand still;
    (hover transitions stay, feedback is not decoration) */
 html[data-motion="off"] *,

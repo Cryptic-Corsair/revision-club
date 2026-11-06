@@ -52,12 +52,39 @@ export const SCALE_VALUE: Record<ScaleId, number> = {
   XL: 1.3,
 };
 
+/* the spec-map drawer's own size knobs — deliberately OUTSIDE
+   --ui-scale. The tray is frozen against the content-scale knob
+   (.spec-map pins --ui-scale: 1), and these prefs are absolute
+   numbers: a fraction of the visible viewport and a chip width in
+   rem, reading identically on every device, page size and zoom —
+   exactly what "customize it regardless of page sizes" means. */
+export const SPEC_HEIGHTS = [
+  { id: "peek", label: "Peek", fraction: 0.62 },
+  { id: "tall", label: "Tall", fraction: 0.8 },
+  { id: "full", label: "Full", fraction: 0.94 },
+] as const;
+export type SpecDensity = "compact" | "comfy" | "roomy";
+export const SPEC_DENSITIES: { id: SpecDensity; label: string }[] = [
+  { id: "compact", label: "Compact" },
+  { id: "comfy", label: "Comfy" },
+  { id: "roomy", label: "Roomy" },
+];
+/* drag limits — the tray can never fold below a usable third of the
+   screen, nor swallow the last sliver of the note behind it */
+export const SPEC_H_MIN = 0.35;
+export const SPEC_H_MAX = 0.98;
+
 export interface Prefs {
   theme: Lab;
   /** the accent wheel — which candies the sections rotate through */
   accents: AccentId[];
   /** content scale — S/M/L/XL (multiplies --ui-scale) */
   scale: ScaleId;
+  /** the spec-map drawer's height, as a fraction of the visible
+      screen — set by the panel presets and by dragging the grabber */
+  specHeight: number;
+  /** spec-map chip size — how many columns the tray fills with */
+  specDensity: SpecDensity;
   headFont: HeadFont;
   bodyFont: BodyFont;
   /** polka-dot paper background */
@@ -70,6 +97,8 @@ export const DEFAULT_PREFS: Prefs = {
   theme: "classic",
   accents: [...ACCENT_IDS],
   scale: "M",
+  specHeight: 0.94,
+  specDensity: "comfy",
   headFont: "fredoka",
   bodyFont: "nunito",
   dots: true,
@@ -109,6 +138,14 @@ function sanitize(p: StoredPrefs): Prefs {
     );
     if (heir) out.scale = heir[0];
   }
+  if (typeof p.specHeight === "number" && Number.isFinite(p.specHeight))
+    out.specHeight = Math.min(SPEC_H_MAX, Math.max(SPEC_H_MIN, p.specHeight));
+  if (
+    p.specDensity === "compact" ||
+    p.specDensity === "comfy" ||
+    p.specDensity === "roomy"
+  )
+    out.specDensity = p.specDensity;
   if (p.headFont === "fredoka" || p.headFont === "baloo" || p.headFont === "patrick")
     out.headFont = p.headFont;
   if (p.bodyFont === "nunito" || p.bodyFont === "quicksand") out.bodyFont = p.bodyFont;
@@ -191,6 +228,11 @@ export function applyPrefs(p: Prefs) {
   root.dataset.dots = p.dots ? "on" : "off";
   root.dataset.motion = p.motion ? "on" : "off";
   root.dataset.scale = p.scale;
+  /* the spec tray's private knobs — --spec-h is an inline style
+     because a continuous drag fraction can't ride a data-attribute
+     ladder; density maps onto a chip width in globals.css */
+  root.style.setProperty("--spec-h", String(p.specHeight));
+  root.dataset.specDensity = p.specDensity;
   /* the retired page zoom rode on html.style.zoom — sweep off any
      stale inline value an earlier app version left in this tab */
   root.style.removeProperty("zoom");
