@@ -64,9 +64,9 @@ export const metadata: Metadata = {
 };
 
 /* Puts the saved preferences on <html> before the first paint — no
-   flash of the wrong lab, font size or family. Only the night lab
-   picks tonight's mood (html[data-mood]); dune's chocolate room and
-   classic are fixed signatures, so they need no mood.
+   flash of the wrong lab, font size, scale or family. Only the night
+   lab picks tonight's mood (html[data-mood]); dune's chocolate room
+   and classic are fixed signatures, so they need no mood.
    beforeInteractive keeps it out of React's hydration tree. The
    React side (prefs.ts) re-applies the same values once it hydrates,
    then owns every change. */
@@ -82,8 +82,8 @@ if(p.headFont)r.dataset.head=String(p.headFont);
 if(p.bodyFont)r.dataset.body=String(p.bodyFont);
 r.dataset.dots=p.dots===false?"off":"on";
 r.dataset.motion=p.motion===false?"off":"on";
-var z=[0.9,1,1.15,1.3].indexOf(Number(p.zoom))>=0?Number(p.zoom):1;
-r.style.zoom=String(z);
+var s=p.scale==="S"||p.scale==="M"||p.scale==="L"||p.scale==="XL"?p.scale:(p.zoom===0.9?"S":p.zoom===1.15?"L":p.zoom===1.3?"XL":"M");
+r.dataset.scale=s;
 }catch(e){}})();`;
 
 export const viewport: Viewport = {

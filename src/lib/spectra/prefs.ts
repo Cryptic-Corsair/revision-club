@@ -6,13 +6,13 @@ import { pickDarkMood } from "./dark-mood";
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · site preferences
    The knobs behind the customize panel: lab (light/dark/dune/
-   classic), the accent wheel, page zoom, heading & body fonts,
+   classic), the accent wheel, content scale, heading & body fonts,
    polka dots, decorative motion.
 
    localStorage · key "reaction-club-prefs-v1"
    Every change runs through applyPrefs() — one function that paints
-   the classes, datasets and zoom onto <html>, so the whole site
-   re-skins at once and the mobile address bar keeps up.
+   the classes and datasets onto <html>, so the whole site re-skins
+   at once and the mobile address bar keeps up.
    ═══════════════════════════════════════════════════════════════ */
 
 export type Lab = "light" | "dark" | "dune" | "classic";
@@ -37,12 +37,27 @@ export const ACCENTS: { id: AccentId; hex: string; label: string }[] = [
 
 export const ACCENT_IDS: AccentId[] = ACCENTS.map((a) => a.id);
 
+/* content scale — S/M/L/XL. NOT page zoom: the retired html zoom
+   property scaled the whole coordinate system (layout viewport
+   included), which is what kept squeezing the spec map and every
+   fixed surface. Scale instead feeds --ui-scale (see globals.css):
+   component sizes multiply with it, while the navbar pill and the
+   spec map pin the variable back to 1 and stay pixel-identical. */
+export const SCALES = ["S", "M", "L", "XL"] as const;
+export type ScaleId = (typeof SCALES)[number];
+export const SCALE_VALUE: Record<ScaleId, number> = {
+  S: 0.9,
+  M: 1,
+  L: 1.15,
+  XL: 1.3,
+};
+
 export interface Prefs {
   theme: Lab;
   /** the accent wheel — which candies the sections rotate through */
   accents: AccentId[];
-  /** page zoom — 0.9 to 1.3 */
-  zoom: number;
+  /** content scale — S/M/L/XL (multiplies --ui-scale) */
+  scale: ScaleId;
   headFont: HeadFont;
   bodyFont: BodyFont;
   /** polka-dot paper background */
@@ -54,19 +69,11 @@ export interface Prefs {
 export const DEFAULT_PREFS: Prefs = {
   theme: "classic",
   accents: [...ACCENT_IDS],
-  zoom: 1,
+  scale: "M",
   headFont: "fredoka",
   bodyFont: "nunito",
   dots: true,
   motion: true,
-};
-
-export const ZOOM_STEPS = [0.9, 1, 1.15, 1.3] as const;
-export const ZOOM_LABEL: Record<string, string> = {
-  "0.9": "S",
-  "1": "M",
-  "1.15": "L",
-  "1.3": "XL",
 };
 
 const KEY = "reaction-club-prefs-v1";
@@ -75,7 +82,11 @@ let state: Prefs = DEFAULT_PREFS;
 let hydrated = false;
 const listeners = new Set<() => void>();
 
-function sanitize(p: Partial<Prefs>): Prefs {
+/** what sanitize reads: today's prefs, plus the retired zoom number
+    that older saves carry (mapped onto scale below) */
+type StoredPrefs = Partial<Prefs> & { zoom?: unknown };
+
+function sanitize(p: StoredPrefs): Prefs {
   const out: Prefs = { ...DEFAULT_PREFS };
   if (
     p.theme === "light" ||
@@ -87,8 +98,17 @@ function sanitize(p: Partial<Prefs>): Prefs {
   else if (p.theme === "hybrid")
     /* the retired third lab rides on as classic — its heir */
     out.theme = "classic";
-  if (typeof p.zoom === "number" && ZOOM_STEPS.includes(p.zoom as (typeof ZOOM_STEPS)[number]))
-    out.zoom = p.zoom;
+  if (p.scale && SCALES.includes(p.scale)) out.scale = p.scale;
+  else if (typeof p.zoom === "number") {
+    /* the retired page-zoom pref rides on as scale — the saved
+       0.9 / 1 / 1.15 / 1.3 read straight onto S / M / L / XL, so an
+       updater never watches their chosen size jump to a random rung.
+       Hand-edited off-step values fall back to M with the rest. */
+    const heir = (Object.entries(SCALE_VALUE) as [ScaleId, number][]).find(
+      ([, v]) => v === p.zoom,
+    );
+    if (heir) out.scale = heir[0];
+  }
   if (p.headFont === "fredoka" || p.headFont === "baloo" || p.headFont === "patrick")
     out.headFont = p.headFont;
   if (p.bodyFont === "nunito" || p.bodyFont === "quicksand") out.bodyFont = p.bodyFont;
@@ -170,7 +190,10 @@ export function applyPrefs(p: Prefs) {
   root.dataset.body = p.bodyFont;
   root.dataset.dots = p.dots ? "on" : "off";
   root.dataset.motion = p.motion ? "on" : "off";
-  root.style.zoom = String(p.zoom);
+  root.dataset.scale = p.scale;
+  /* the retired page zoom rode on html.style.zoom — sweep off any
+     stale inline value an earlier app version left in this tab */
+  root.style.removeProperty("zoom");
   paintChrome(root);
 }
 

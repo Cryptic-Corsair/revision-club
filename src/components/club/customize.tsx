@@ -10,10 +10,9 @@ import {
   DEFAULT_PREFS,
   flashThemeAnim,
   LAB_LABEL,
+  SCALES,
   setPrefs,
   usePrefs,
-  ZOOM_LABEL,
-  ZOOM_STEPS,
   type AccentId,
   type BodyFont,
   type HeadFont,
@@ -40,7 +39,7 @@ const BODY_FONTS: { id: BodyFont; label: string; stack: string }[] = [
   { id: "quicksand", label: "Quicksand", stack: "var(--font-quicksand), 'Trebuchet MS', sans-serif" },
 ];
 
-const ZOOM_PX = [12, 14, 16, 19];
+const SCALE_PX = [12, 14, 16, 19];
 
 function Section({
   title,
@@ -441,18 +440,22 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section title="Page size" dot="#FFD43B" hint="Zooms everything — notes, cards, nav.">
+              <Section
+                title="Text & component size"
+                dot="#FFD43B"
+                hint="Notes, cards and tables grow with the type. The navbar and the spec map keep their size."
+              >
                 <div className="flex rounded-full bg-ink/[0.06] p-1">
-                  {ZOOM_STEPS.map((z, i) => {
-                    const active = prefs.zoom === z;
+                  {SCALES.map((s, i) => {
+                    const active = prefs.scale === s;
                     return (
                       <m.button
-                        key={z}
+                        key={s}
                         type="button"
-                        onClick={() => setPrefs({ zoom: z })}
+                        onClick={() => setPrefs({ scale: s })}
                         whileTap={{ scale: 0.93 }}
                         aria-pressed={active}
-                        aria-label={`Page size ${ZOOM_LABEL[String(z)]}`}
+                        aria-label={`Text and component size ${s}`}
                         className={`flex flex-1 cursor-pointer flex-col items-center rounded-full py-2 transition-colors ${
                           active
                             ? "bg-coral text-white shadow-[0_2px_0_#E8590C]"
@@ -461,12 +464,12 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                       >
                         <span
                           className="font-display leading-none font-bold"
-                          style={{ fontSize: ZOOM_PX[i] }}
+                          style={{ fontSize: SCALE_PX[i] }}
                         >
                           Aa
                         </span>
                         <span className="mt-1 font-display text-[9.5px] font-bold tracking-[0.08em]">
-                          {ZOOM_LABEL[String(z)]}
+                          {s}
                         </span>
                       </m.button>
                     );

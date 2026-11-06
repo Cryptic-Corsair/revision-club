@@ -107,6 +107,29 @@ html[data-body="quicksand"] {
   --font-body: var(--font-quicksand), "Trebuchet MS", sans-serif;
 }
 
+/* ————— content scale —————
+   NOT page zoom. html's retired zoom property scaled the whole
+   coordinate system — layout viewport included — which is what kept
+   squeezing the spec map and every fixed surface. The scale knob now
+   feeds one custom property: --ui-scale. Sizes opt in by multiplying
+   with it (Tailwind tokens and the px utilities alike), so the
+   cascade can freeze a subtree — the navbar pill and the spec map
+   pin --ui-scale back to 1 and stay pixel-identical — while the
+   root font size never moves, so rem-based media queries and dvh
+   drawers cannot drift either. M needs no rule: 1 is the default. */
+:root {
+  --ui-scale: 1;
+}
+html[data-scale="S"] {
+  --ui-scale: 0.9;
+}
+html[data-scale="L"] {
+  --ui-scale: 1.15;
+}
+html[data-scale="XL"] {
+  --ui-scale: 1.3;
+}
+
 /* calm mode — the floating blobs and wiggles stand still;
    (hover transitions stay, feedback is not decoration) */
 html[data-motion="off"] *,
