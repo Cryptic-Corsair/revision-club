@@ -179,6 +179,19 @@ persists any fraction in between), `specDensity` (`"comfy"`; compact/comfy/
 roomy — the chip min-width the drawer's grid packs against), `dots` (on),
 `motion` (on).
 
+### Theme chips (THEME_CHIP)
+
+Each theme wears a fixed signature swatch — yellow sun for **light**, navy
+moon for **night**, chocolate moon for **dune**, and the split
+espresso/cream chip for **classic** — defined once as `THEME_CHIP` in
+`prefs.ts` and used by the nav's theme button, the lab toast and the
+panel's theme cards. The glyph carries the family (sun for the daylight
+themes, moon for the night rooms; classic takes the rimmed two-tone
+`ClassicSun` because its chip is split and no single ink crosses both
+halves) while the chip names the room. These are fixed brand values that
+deliberately do NOT flip with the active lab — that is the whole point of
+a chip that says which room you're in.
+
 ### Content scale (S/M/L/XL)
 
 The size knob does NOT zoom. The retired `html.style.zoom` scaled the whole

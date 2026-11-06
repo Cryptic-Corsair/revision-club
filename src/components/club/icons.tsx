@@ -550,10 +550,13 @@ export function Sticker(p: IcoProps) {
   );
 }
 
-/* ————— theme — the four labs, one family —————
-   sunrise · moon-and-star · dune ridges · the half-day-half-night
-   circle. Redrawn as a set when the fourth lab arrived, so all
-   four read at the same weight in the nav pill. */
+/* ————— theme — sun for the daylight rooms, moon for the night
+   ones. The GLYPH says which family you're in; the chip behind it
+   (see THEME_CHIP in prefs.ts) says which room. Classic is the
+   daylight page wearing espresso rooms, so it takes the sun too —
+   drawn with an espresso rim so one glyph reads across its split
+   cream/espresso chip. SunMoon survives for prose that talks about
+   the whole set. */
 
 /* light — the sun breaking over the horizon: a dome, five rays,
    one level ground line */
@@ -584,20 +587,7 @@ export function Moon(p: IcoProps) {
   );
 }
 
-/* dune — the chocolate room: two sand ridges under a low sun */
-export function Dune(p: IcoProps) {
-  return (
-    <Ico {...p}>
-      <circle cx="17.1" cy="6.3" r="2.1" />
-      <path d="M2.7 17.9 C6.4 13.1 10.6 13.4 14.2 18.6" />
-      <path d="M9.4 20.5 C13.4 15.6 17.6 15.4 21.3 20" />
-    </Ico>
-  );
-}
-
-/* classic — the half-day-half-night circle: rays off the light
-   half, a crescent riding the dark half (the lab alternates
-   daylight rooms and espresso rooms down the page) */
+/* the whole set, in prose — rays off a sun, a crescent riding it */
 export function SunMoon(p: IcoProps) {
   return (
     <Ico {...p}>
@@ -607,6 +597,58 @@ export function SunMoon(p: IcoProps) {
       <path d="M7.6 7.6 L6.1 6.1" strokeWidth={1.8} />
       <path d="M7.6 16.4 L6.1 17.9" strokeWidth={1.8} />
     </Ico>
+  );
+}
+
+/* classic's chip is split — espresso on one side, cream on the
+   other — so no single ink reads across it. This sun is painted
+   twice: a wide espresso rim underneath (reads on the cream half)
+   and the daylight lemon face on top (reads on the espresso half).
+   Same sunrise as the light lab — dome, five rays, ground line —
+   which is what "classic is light plus espresso rooms" means. */
+const CLASSIC_SUN_PATHS = [
+  "M7.6 18.5 a4.4 4.4 0 0 1 8.8 0",
+  "M3.8 18.5 H20.2",
+  "M12 12.6 V9.6",
+  "M9.7 13.1 L8.6 10.3",
+  "M14.3 13.1 L15.4 10.3",
+  "M7.8 14.3 L5.7 12.2",
+  "M16.2 14.3 L18.3 12.2",
+] as const;
+
+export function ClassicSun(p: IcoProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={24}
+      height={24}
+      fill="none"
+      aria-hidden
+      {...p}
+    >
+      {/* rim pass — the outline that carries the shape on cream */}
+      <g
+        stroke="#2C2013"
+        strokeWidth={4.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {CLASSIC_SUN_PATHS.map((d) => (
+          <path key={`rim-${d}`} d={d} />
+        ))}
+      </g>
+      {/* face pass — the lemon that carries it on espresso */}
+      <g
+        stroke="#FFD43B"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {CLASSIC_SUN_PATHS.map((d, i) => (
+          <path key={d} d={d} strokeWidth={i === 0 ? 2 : 1.8} />
+        ))}
+      </g>
+    </svg>
   );
 }
 

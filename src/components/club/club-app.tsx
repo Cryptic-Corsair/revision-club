@@ -11,7 +11,7 @@ import {
   Sticker,
   Sun,
   SunMoon,
-  Dune,
+  ClassicSun,
   ClipboardList,
   ArrowUp,
   Command,
@@ -27,7 +27,15 @@ import { getNotesMeta, getNotesMetaForTopic } from "@/lib/spectra/notes-meta";
 import { useTimeScope } from "@/lib/spectra/time";
 import { usePacks } from "@/lib/spectra/packs";
 import { useDesk, markUnit, markTopic } from "@/lib/spectra/desk";
-import { applyPrefs, flashThemeAnim, setPrefs, usePrefs, type Lab } from "@/lib/spectra/prefs";
+import {
+  applyPrefs,
+  flashThemeAnim,
+  LAB_LABEL,
+  setPrefs,
+  THEME_CHIP,
+  usePrefs,
+  type Lab,
+} from "@/lib/spectra/prefs";
 import { Home } from "./home";
 import { Desk } from "./desk";
 import { UnitView } from "./unit-view";
@@ -175,25 +183,34 @@ function LogoMark({ size = 38 }: { size?: number }) {
 }
 
 /* ————— lab switch —————
-   Light → night → dune → classic, one tap apart. A candy toast
-   announces each switch, and the mobile browser chrome is re-painted
-   to the lab's cream so the address bar never fights the page. */
+   Light → night → dune → classic, one tap apart. The button wears
+   its room's chip (THEME_CHIP) — a yellow sun, a navy moon, a
+   chocolate moon, and the split espresso/cream chip for classic —
+   so the current theme reads at a glance, and a candy toast using
+   the same swatch announces each switch. Titles say the next stop,
+   nothing more. The mobile browser chrome is re-painted to the
+   lab's cream so the address bar never fights the page. */
 
 const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic"];
 
-const LAB_LABEL: Record<Lab, string> = {
-  light: "Light",
-  dark: "Night",
-  dune: "Dune",
-  classic: "Classic",
+const LAB_TITLE: Record<Lab, string> = {
+  light: "Switch to Night",
+  dark: "Switch to Dune",
+  dune: "Switch to Classic",
+  classic: "Switch to Light",
 };
 
-const LAB_TITLE: Record<Lab, string> = {
-  light: "Switch to the night lab",
-  dark: "Switch to the dune lab",
-  dune: "Switch to the classic lab",
-  classic: "Switch to the light lab",
-};
+/* the glyph for the current chip — sun for the daylight themes
+   (light, classic), moon for the night rooms (night, dune).
+   Classic takes the rimmed sun: its chip is split, and no single
+   ink reads across both halves. */
+function LabGlyph({ id }: { id: Lab }) {
+  const cls = "h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]";
+  if (id === "classic") return <ClassicSun className={cls} />;
+  if (id === "dark" || id === "dune")
+    return <Moon className={cls} strokeWidth={2.2} style={{ color: THEME_CHIP[id].ink }} />;
+  return <Sun className={cls} strokeWidth={2.2} style={{ color: THEME_CHIP.light.ink }} />;
+}
 
 function TopBar({
   view,
@@ -288,7 +305,7 @@ function TopBar({
             animate={{ scale: view.kind === "pack" ? 1.1 : 1 }}
             transition={{ type: "spring", stiffness: 380, damping: 16 }}
             className={`relative ${tool(view.kind === "pack")}`}
-            title="Your revision pack · ticked spec points"
+            title="Revision pack"
             aria-label={`Your revision pack${picks.length > 0 ? ` — ${picks.length} spec point${picks.length === 1 ? "" : "s"} ticked` : ""}`}
             style={
               view.kind === "pack"
@@ -317,7 +334,7 @@ function TopBar({
             onClick={onSearch}
             whileTap={{ scale: 0.88 }}
             className={tool(false)}
-            title="Search topics · ⌘K"
+            title="Search · ⌘K"
             aria-label="Search topics"
           >
             <Search className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
@@ -331,7 +348,7 @@ function TopBar({
             animate={{ scale: view.kind === "sticker" ? 1.1 : 1 }}
             transition={{ type: "spring", stiffness: 380, damping: 16 }}
             className={tool(view.kind === "sticker")}
-            title="Your progress · time & goals"
+            title="Progress"
             aria-label="Open your progress"
             style={
               view.kind === "sticker"
@@ -351,7 +368,7 @@ function TopBar({
             onClick={onOpenCustomize}
             whileTap={{ scale: 0.88 }}
             className={tool(false)}
-            title="Customize · fonts, sizes & themes"
+            title="Customize"
             aria-label="Customize the site"
           >
             <Sliders className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
@@ -362,19 +379,16 @@ function TopBar({
             onClick={cycle}
             whileTap={{ scale: 0.88 }}
             className={tool(false)}
+            style={{
+              background: THEME_CHIP[lab].bg,
+              color: THEME_CHIP[lab].ink,
+              boxShadow: `0 2.5px 0 ${THEME_CHIP[lab].side}`,
+            }}
             title={LAB_TITLE[lab]}
             aria-label={LAB_TITLE[lab]}
           >
-            {/* the button wears today's lab; the toast announces the next one */}
-            {lab === "light" ? (
-              <Sun className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
-            ) : lab === "dark" ? (
-              <Moon className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
-            ) : lab === "dune" ? (
-              <Dune className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
-            ) : (
-              <SunMoon className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
-            )}
+            {/* the chip wears today's lab; the toast announces it */}
+            <LabGlyph id={lab} />
           </m.button>
         </nav>
       </header>
@@ -397,15 +411,11 @@ function TopBar({
                 aria-hidden
                 className="h-3.5 w-3.5 shrink-0 rounded-full"
                 style={{
-                  background:
-                    announce === "light"
-                      ? "#FFD43B"
-                      : announce === "dark"
-                        ? "#1e1a26"
-                        : announce === "dune"
-                          ? "#2e2820"
-                          : "linear-gradient(90deg, #2c2013 50%, #fdf6e3 50%)",
-                  boxShadow: "inset 0 0 0 2px rgb(61 43 31 / 0.12)",
+                  background: THEME_CHIP[announce].bg,
+                  boxShadow:
+                    announce === "dark" || announce === "dune"
+                      ? "inset 0 0 0 2px rgb(244 241 251 / 0.22)"
+                      : "inset 0 0 0 2px rgb(61 43 31 / 0.12)",
                 }}
               />
               {LAB_LABEL[announce]}
@@ -478,10 +488,9 @@ function Footer({
                 </span>
               </div>
               <p className="mt-3 text-[calc(14px*var(--ui-scale))] leading-relaxed text-milk/80">
-                Notes for every topic in the International A Level course —
-                read them in order, try the checkpoints, and mark what
-                you&apos;ve revised. Your reading time is counted, topic by
-                topic.
+                Notes for every topic in the course — read them, try the
+                checkpoints, tick what you&apos;ve revised. Reading time is
+                counted topic by topic.
               </p>
 
               {/* the whole course, as three quiet numbers */}
@@ -524,7 +533,7 @@ function Footer({
                     >
                       <SpeechBubble className="px-4 py-2.5">
                         <span className="font-display text-[calc(13px*var(--ui-scale))] font-semibold text-ink">
-                          Tap a unit to start revising.
+                          Start with a unit.
                         </span>
                       </SpeechBubble>
                     </m.div>
@@ -536,7 +545,7 @@ function Footer({
             {/* the six units — real bench marks now, not plain dots */}
             <div>
               <div className="font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.2em] text-milk/60 uppercase">
-                The units
+                Units
               </div>
               <div className="mt-4 flex flex-col gap-2.5">
                 {UNITS.map((u) => {
@@ -570,7 +579,7 @@ function Footer({
             {/* the toolkit */}
             <div>
               <div className="font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.2em] text-milk/60 uppercase">
-                The toolkit
+                Toolkit
               </div>
               <div className="mt-4 flex flex-col gap-3">
                 {(
@@ -579,35 +588,35 @@ function Footer({
                       icon: Sticker,
                       chip: "bg-mint/25 text-mint",
                       label: "Progress",
-                      hint: "your time, topics & weekly goal",
+                      hint: "time & goals",
                       open: onOpenSticker,
                     },
                     {
                       icon: ClipboardList,
                       chip: "bg-lemon/25 text-lemon",
                       label: "Revision pack",
-                      hint: "your ticked spec points",
+                      hint: "ticked spec points",
                       open: onOpenPack,
                     },
                     {
                       icon: BookMarked,
                       chip: "bg-lemon/25 text-lemon",
                       label: "Spec index",
-                      hint: "every statement, A to Z",
+                      hint: "statements A to Z",
                       open: onOpenSpec,
                     },
                     {
                       icon: Sliders,
                       chip: "bg-lemon/25 text-lemon",
                       label: "Customize",
-                      hint: "fonts, sizes & themes",
+                      hint: "fonts & themes",
                       open: onOpenCustomize,
                     },
                     {
                       icon: Search,
                       chip: "bg-white/10 text-milk/80",
                       label: "Search",
-                      hint: "press ⌘K anywhere",
+                      hint: "⌘K",
                       open: onSearch,
                     },
                   ] as const
@@ -644,17 +653,17 @@ function Footer({
                 {
                   icon: ShieldCheck,
                   chip: "text-mint",
-                  text: "Private by design — your progress never leaves this browser.",
+                  text: "Private — progress never leaves this browser.",
                 },
                 {
                   icon: SunMoon,
                   chip: "text-lemon",
-                  text: "Four labs — light, night, dune & classic, one tap in Customize.",
+                  text: "Four themes — one tap in Customize.",
                 },
                 {
                   icon: Command,
                   chip: "text-milk/80",
-                  text: "Search everything — topics, notes and spec points — from ⌘K.",
+                  text: "⌘K finds topics, notes & spec points.",
                 },
               ] as const
             ).map((n) => (
@@ -670,8 +679,8 @@ function Footer({
           {/* ————— colophon ————— */}
           <div className="mt-7 flex flex-col gap-4 border-t border-white/10 pt-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-2xl text-[calc(11.5px*var(--ui-scale))] leading-relaxed font-semibold text-milk/55">
-              © 2026 Reaction Club · Written to the Pearson Edexcel
-              International A Level Chemistry (2018) specification ·
+              © 2026 Reaction Club · Notes for the Pearson Edexcel
+              International A Level Chemistry (2018) specification,
               WCH11–WCH16 · not affiliated with or endorsed by Pearson
               Education Ltd.
               <span className="ml-1 whitespace-nowrap text-milk/35">

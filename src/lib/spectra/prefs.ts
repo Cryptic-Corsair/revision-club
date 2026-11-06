@@ -333,3 +333,35 @@ export const LAB_LABEL: Record<Lab, string> = {
   dune: "Dune",
   classic: "Classic",
 };
+
+/* ————— the theme chips —————
+   Each theme's signature swatch — the background the nav button,
+   the lab toast and the panel's lab cards put BEHIND the glyph, so
+   the current room is readable at a glance. Fixed brand values on
+   purpose: they do not flip with the active lab (that's the whole
+   point — the chip says which room you're in). The glyph carries
+   the family (sun for the daylight themes light & classic, moon for
+   the night rooms night & dune); the chip names the room. */
+export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> = {
+  light: {
+    bg: "#FFD43B", // the daylight sun
+    ink: "#5F4A00", // roast ink, the pen the sun is drawn with
+    side: "#E8A100",
+  },
+  dark: {
+    bg: "#2A4FA3", // navy — night
+    ink: "#F4F1FB", // the night room's own ink
+    side: "#1B3578",
+  },
+  dune: {
+    bg: "#6B4A26", // chocolate — dune
+    ink: "#FFE9C7", // warm sand
+    side: "#4E3417",
+  },
+  classic: {
+    // both rooms at once — the espresso / cream pair the notes step through
+    bg: "linear-gradient(90deg, #2C2013 50%, #FDF6E3 50%)",
+    ink: "#FFD43B", // unused by the rimmed glyph; kept for the record
+    side: "#8F7A5C", // a roast that bridges both halves
+  },
+};

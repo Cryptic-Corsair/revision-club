@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, type ReactNode, type SVGProps } from "react";
+import { useEffect, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
-import { Check, RotateCcw, Sliders, Sparkles, X, Sun, Moon, SunMoon, Dune } from "./icons";
+import { Check, RotateCcw, Sliders, Sparkles, X, Sun, Moon, ClassicSun } from "./icons";
 import { readableInk, shade, tint } from "./bits";
 import { accentOf } from "./bands";
 import {
@@ -14,6 +14,7 @@ import {
   SPEC_DENSITIES,
   SPEC_HEIGHTS,
   setPrefs,
+  THEME_CHIP,
   usePrefs,
   type AccentId,
   type BodyFont,
@@ -23,7 +24,7 @@ import {
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · the customize panel
-   A slide-over workshop of frosted glass: the lab picker shows a
+   A slide-over workshop of frosted glass: the theme picker shows a
    live miniature of each room, the accent wheel previews its own
    rotation, and every knob lands in prefs.ts and re-skins the site
    from <html> outward. The panel itself is liquid glass — the
@@ -77,7 +78,7 @@ function Toggle({
   on: boolean;
   onChange: (v: boolean) => void;
   label: string;
-  hint: string;
+  hint?: string;
 }) {
   return (
     <button
@@ -90,14 +91,18 @@ function Toggle({
     >
       <span className="min-w-0">
         <span className="block font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">{label}</span>
-        <span className="block text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-faint">{hint}</span>
+        {hint && (
+          <span className="block text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-faint">{hint}</span>
+        )}
       </span>
       <span
         aria-hidden
         className="relative h-[calc(26px*var(--ui-scale))] w-[calc(46px*var(--ui-scale))] shrink-0 rounded-full transition-colors"
         style={{
-          background: on ? "#12B886" : "rgb(61 43 31 / 0.18)",
-          boxShadow: on ? "inset 0 1px 2px rgb(0 0 0 / 0.18)" : "inset 0 1px 2px rgb(61 43 31 / 0.12)",
+          background: on ? "#12B886" : "color-mix(in oklab, var(--color-ink) 16%, transparent)",
+          boxShadow: on
+            ? "inset 0 1px 2px rgb(0 0 0 / 0.18)"
+            : "inset 0 1px 2px rgb(0 0 0 / 0.14)",
         }}
       >
         <m.span
@@ -178,14 +183,28 @@ function LabStage({ id }: { id: Lab }) {
   );
 }
 
-/* the four labs, each with its own mark — the same family the
-   nav pill wears */
-const LAB_ICONS: Record<Lab, (p: SVGProps<SVGSVGElement>) => ReactNode> = {
-  light: Sun,
-  dark: Moon,
-  dune: Dune,
-  classic: SunMoon,
-};
+/* the four themes, each behind its own chip — the same swatch the
+   nav pill and the toast wear (THEME_CHIP): the glyph says sun or
+   moon, the background names the room. Classic takes the rimmed
+   sun, because its chip is split and no single ink crosses it. */
+function LabChip({ id }: { id: Lab }) {
+  const chip = THEME_CHIP[id];
+  return (
+    <span
+      aria-hidden
+      className="grid h-[18px] w-[18px] shrink-0 place-items-center rounded-full"
+      style={{ background: chip.bg, boxShadow: `0 1.5px 0 ${chip.side}` }}
+    >
+      {id === "classic" ? (
+        <ClassicSun className="h-[13px] w-[13px]" />
+      ) : id === "light" ? (
+        <Sun className="h-[11px] w-[11px]" strokeWidth={2.4} style={{ color: chip.ink }} />
+      ) : (
+        <Moon className="h-[11px] w-[11px]" strokeWidth={2.4} style={{ color: chip.ink }} />
+      )}
+    </span>
+  );
+}
 
 export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () => void }) {
   const prefs = usePrefs();
@@ -222,19 +241,18 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
     });
   };
 
-  /* what the rotation reads as, in words — one pick dresses every
-     section, two alternate, three+ cycle, six is the full wheel */
+  /* what the rotation reads as, in words — kept to a glance */
   const pickedLabels = prefs.accents.map(
     (id) => ACCENTS.find((a) => a.id === id)!.label,
   );
   const rotationCaption =
     pickedLabels.length === ACCENTS.length
-      ? "The full wheel — all six take turns down the page."
+      ? "All six, taking turns."
       : pickedLabels.length === 1
-        ? `Every section wears ${pickedLabels[0]}.`
+        ? `${pickedLabels[0]} everywhere.`
         : pickedLabels.length === 2
-          ? `Sections alternate ${pickedLabels[0]} ↔ ${pickedLabels[1]}.`
-          : `Sections rotate ${pickedLabels.join(" → ")} — then back to ${pickedLabels[0]}.`;
+          ? `${pickedLabels[0]} ↔ ${pickedLabels[1]}`
+          : `${pickedLabels.join(" → ")} …`;
 
   /* the tray's height pref only sits ON a preset when a drag hasn't
      left it between rungs — off-rung, the panel says so honestly */
@@ -272,7 +290,8 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
               <div
                 className="absolute inset-0"
                 style={{
-                  backgroundImage: "radial-gradient(rgb(61 43 31 / 0.05) 1.6px, transparent 1.7px)",
+                  backgroundImage:
+                    "radial-gradient(color-mix(in oklab, var(--color-ink) 7%, transparent) 1.6px, transparent 1.7px)",
                   backgroundSize: "26px 26px",
                 }}
               />
@@ -298,9 +317,6 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 <h2 className="font-display text-[calc(20px*var(--ui-scale))] leading-tight font-semibold text-ink">
                   Make it yours
                 </h2>
-                <p className="text-[calc(12px*var(--ui-scale))] font-bold text-ink-faint">
-                  the whole site re-dresses as you tap
-                </p>
               </div>
               <m.button
                 type="button"
@@ -317,11 +333,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
               className="no-scrollbar relative flex flex-1 flex-col gap-7 overflow-y-auto px-6 pt-5"
               style={{ paddingBottom: "calc(2rem + var(--sa-bottom))" }}
             >
-              <Section
-                title="The lab"
-                dot="#12B886"
-                hint="Four rooms — light, night, dune & classic. Classic is the daylight page with espresso & cream sections."
-              >
+              <Section title="Theme" dot="#12B886">
                 <div className="grid grid-cols-4 gap-2">
                   {(["light", "dark", "dune", "classic"] as Lab[]).map((l) => {
                     const active = prefs.theme === l;
@@ -331,12 +343,12 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                         type="button"
                         onClick={() => pickLab(l)}
                         aria-pressed={active}
-                        aria-label={`${LAB_LABEL[l]} lab`}
+                        aria-label={`${LAB_LABEL[l]} theme`}
                         className="flex cursor-pointer flex-col gap-2 rounded-[calc(20px*var(--ui-scale))] p-2.5 text-left transition-colors"
                         style={
                           active
                             ? { background: "rgb(18 184 134 / 0.13)", boxShadow: "inset 0 0 0 2.5px #12B886" }
-                            : { background: "rgb(61 43 31 / 0.05)" }
+                            : { background: "color-mix(in oklab, var(--color-ink) 5%, transparent)" }
                         }
                       >
                         <span className="relative block w-full">
@@ -352,10 +364,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                             active ? "text-ink" : "text-ink-soft"
                           }`}
                         >
-                          {(() => {
-                            const LabIcon = LAB_ICONS[l];
-                            return <LabIcon className="h-3.5 w-3.5 shrink-0" strokeWidth={2.3} />;
-                          })()}
+                          <LabChip id={l} />
                           {LAB_LABEL[l]}
                         </span>
                       </button>
@@ -364,11 +373,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section
-                title="Accent colours"
-                dot="#FF6B6B"
-                hint="Pick the candies your sections take turns wearing — one pick dresses them all, two alternate, three or more rotate. The wheel always keeps at least one."
-              >
+              <Section title="Colours" dot="#FF6B6B">
                 <div className="grid grid-cols-3 gap-2">
                   {ACCENTS.map((a) => {
                     const on = prefs.accents.includes(a.id);
@@ -381,12 +386,12 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                         whileTap={lastOne ? undefined : { scale: 0.93 }}
                         aria-pressed={on}
                         aria-disabled={lastOne || undefined}
-                        aria-label={`${a.label} accent — ${
+                        aria-label={`${a.label} — ${
                           lastOne
-                            ? "the only colour on the wheel, keep at least one on"
+                            ? "the wheel keeps one colour on"
                             : on
-                              ? "on the wheel, tap to take it off"
-                              : "off the wheel, tap to put it on"
+                              ? "on, tap to remove"
+                              : "off, tap to add"
                         }`}
                         className={`flex cursor-pointer flex-col items-center gap-2 rounded-[calc(20px*var(--ui-scale))] px-2 py-3.5 transition-colors ${
                           on ? "" : "hover:bg-ink/[0.09]"
@@ -397,7 +402,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                                 background: tint(a.hex, 14),
                                 boxShadow: `inset 0 0 0 2.5px ${a.hex}`,
                               }
-                            : { background: "rgb(61 43 31 / 0.05)" }
+                            : { background: "color-mix(in oklab, var(--color-ink) 5%, transparent)" }
                         }
                       >
                         <span
@@ -455,11 +460,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section
-                title="Text & component size"
-                dot="#FFD43B"
-                hint="Notes, cards and tables grow with the type. The navbar keeps its size — the spec map tray has its own knobs below."
-              >
+              <Section title="Text size" dot="#FFD43B">
                 <div className="flex rounded-full bg-ink/[0.06] p-1">
                   {SCALES.map((s, i) => {
                     const active = prefs.scale === s;
@@ -470,7 +471,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                         onClick={() => setPrefs({ scale: s })}
                         whileTap={{ scale: 0.93 }}
                         aria-pressed={active}
-                        aria-label={`Text and component size ${s}`}
+                        aria-label={`Text size ${s}`}
                         className={`flex flex-1 cursor-pointer flex-col items-center rounded-full py-2 transition-colors ${
                           active
                             ? "bg-coral text-white shadow-[0_2px_0_#E8590C]"
@@ -494,11 +495,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section
-                title="Spec map"
-                dot="#FF6B6B"
-                hint="The tray's own size — absolute numbers, the same on every device regardless of text size or page zoom."
-              >
+              <Section title="Spec map" dot="#FF6B6B">
                 <div className="flex flex-col gap-2.5">
                   {/* height — three rungs plus the drag: a dragged
                       fraction sits between rungs and the panel says
@@ -534,8 +531,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                   </div>
                   {!heightOnPreset && (
                     <p className="text-center text-[calc(11px*var(--ui-scale))] font-bold text-ink-faint">
-                      custom — {Math.round(prefs.specHeight * 100)}%, from
-                      dragging the tray's grabber
+                      custom — {Math.round(prefs.specHeight * 100)}%
                     </p>
                   )}
                   {/* chip density — the min-width the tray's auto-fill
@@ -550,7 +546,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                           onClick={() => setPrefs({ specDensity: d.id })}
                           whileTap={{ scale: 0.93 }}
                           aria-pressed={active}
-                          aria-label={`Spec map chip density ${d.label}`}
+                          aria-label={`Spec map density ${d.label}`}
                           className={`flex flex-1 cursor-pointer items-center justify-center rounded-full py-2 transition-colors ${
                             active
                               ? "bg-coral text-white shadow-[0_2px_0_#E8590C]"
@@ -567,7 +563,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section title="Headings" dot="#9775FA" hint="The chunky display face on titles and buttons.">
+              <Section title="Headings" dot="#9775FA">
                 <div className="flex flex-col gap-2">
                   {HEAD_FONTS.map((f) => (
                     <FontRow
@@ -582,7 +578,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section title="Body text" dot="#12B886" hint="The reading face for paragraphs.">
+              <Section title="Body" dot="#12B886">
                 <div className="flex flex-col gap-2">
                   {BODY_FONTS.map((f) => (
                     <FontRow
@@ -597,19 +593,17 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section title="Room style" dot="#FF922B">
+              <Section title="Details" dot="#FF922B">
                 <div className="flex flex-col gap-2.5">
                   <Toggle
                     on={prefs.dots}
                     onChange={(v) => setPrefs({ dots: v })}
-                    label="Polka-dot paper"
-                    hint="the dotted texture behind every page"
+                    label="Dots"
                   />
                   <Toggle
                     on={prefs.motion}
                     onChange={(v) => setPrefs({ motion: v })}
-                    label="Gentle motion"
-                    hint="one-time settles, floating cards & wiggles"
+                    label="Motion"
                   />
                 </div>
               </Section>
@@ -622,11 +616,11 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 }}
                 className="mx-auto mt-2 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full bg-ink/[0.06] px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
               >
-                <RotateCcw className="h-4 w-4" /> Reset to defaults
+                <RotateCcw className="h-4 w-4" /> Reset
               </button>
               <p className="flex items-start justify-center gap-1.5 text-center text-[calc(11.5px*var(--ui-scale))] leading-relaxed font-bold text-ink-faint">
                 <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-lemon" />
-                choices are saved in this browser only
+                saved on this device
               </p>
             </div>
           </m.aside>
@@ -659,7 +653,7 @@ function FontRow({
       style={
         active
           ? { background: "rgb(255 107 107 / 0.11)", boxShadow: "inset 0 0 0 2.5px #FF6B6B" }
-          : { background: "rgb(61 43 31 / 0.05)" }
+          : { background: "color-mix(in oklab, var(--color-ink) 5%, transparent)" }
       }
     >
       <span

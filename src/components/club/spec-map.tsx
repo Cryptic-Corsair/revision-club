@@ -131,7 +131,13 @@ export function SpecMapTrigger() {
   const [query, setQuery] = useState("");
   const hFrac = Math.min(SPEC_H_MAX, Math.max(SPEC_H_MIN, liveH ?? specHeight));
   const hFracRef = useRef(hFrac);
-  hFracRef.current = hFrac;
+  /* synced in an effect, not during render (the refs rule): effects
+     flush in declaration order, so this lands before the measure
+     effect below reads it — and before any real pointer or keyboard
+     event can fire, since passive effects run before the next input */
+  useEffect(() => {
+    hFracRef.current = hFrac;
+  }, [hFrac]);
   const dragState = useRef<{ startY: number; startFrac: number; live: number } | null>(
     null,
   );
@@ -265,10 +271,9 @@ export function SpecMapTrigger() {
     if (open) measure();
   }, [open, hFrac, measure]);
 
-  /* the finder starts clean every time the tray folds away */
-  useEffect(() => {
-    if (!open) setQuery("");
-  }, [open]);
+  /* the finder starts clean every time the tray unfolds — reset in
+    the open handler (an event, not an effect) so the state never
+    lags a render behind the fold */
 
   /* ————— the grabber resizes the tray —————
      Pointer-captured so the drag keeps tracking past the strip;
@@ -351,6 +356,7 @@ export function SpecMapTrigger() {
         type="button"
         onClick={() => {
           measure();
+          if (!open) setQuery("");
           setOpen(!open);
         }}
         whileTap={{ scale: 0.88 }}
