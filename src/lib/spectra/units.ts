@@ -93,7 +93,7 @@ export const UNITS: Unit[] = [
     spectrumNote:
       "Barium burns apple-green, its lines clustered across the green-yellow of the spectrum with the strongest at 553.5 nm.",
     blurb:
-      "The AS practical skills: measurement and uncertainty, titration technique, and presenting results in tables and graphs.",
+      "The AS practical skills: qualitative analysis — flame tests and the gas, ion and halide tests — plus the core practicals from molar volume to organic oxidation, the distillation and reflux rigs, and measurement uncertainty.",
     topics: WCH13_TOPICS,
   },
   {

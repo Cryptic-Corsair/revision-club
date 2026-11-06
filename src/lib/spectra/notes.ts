@@ -20,6 +20,14 @@ import { SECTIONS_T10_A } from "./content/notes-t10-a";
 import { SECTIONS_T10_B } from "./content/notes-t10-b";
 import { SECTIONS_T10_C } from "./content/notes-t10-c";
 import { SECTIONS_T10_D } from "./content/notes-t10-d";
+import { SECTIONS_P01 } from "./content/notes-p01";
+import { SECTIONS_P02 } from "./content/notes-p02";
+import { SECTIONS_P04 } from "./content/notes-p04";
+import { SECTIONS_P05 } from "./content/notes-p05";
+import { SECTIONS_P06 } from "./content/notes-p06";
+import { SECTIONS_P07 } from "./content/notes-p07";
+import { SECTIONS_P08 } from "./content/notes-p08";
+import { SECTIONS_P09 } from "./content/notes-p09";
 import { NOTES_META } from "./notes-meta";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -202,6 +210,166 @@ export const NOTES_DOCS: NotesDoc[] = [
       },
     ],
     sections: [...SECTIONS_T10_A, ...SECTIONS_T10_B, ...SECTIONS_T10_C, ...SECTIONS_T10_D],
+  },
+  {
+    id: "wch13-p01",
+    unitCode: "WCH13",
+    topicId: "p01",
+    kicker: "Unit 3 · Practical 1 — the complete practical note, technique by technique",
+    title: "Measurements, gas volumes and uncertainty",
+    source:
+      "the core practical reference notes (CHSE, Unit 3 · 2020) — safety and hazards, measuring gas volumes, and the uncertainty toolkit",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual practical reference note for Unit 3's measurement half, kept **word for word** and re-cut into ==one section per technique==. Every uncertainty rule the sheet prints is carried, and its worked example is worked in full.",
+      },
+      {
+        k: "p",
+        text: "The sections run from the hazard vocabulary to the discrepancy test: the five hazard labels and their precautions, gas syringes and collection over water with their honest errors, readings versus measurements, the apparatus uncertainty list, percentage uncertainty and how to shrink it — finishing with the rule that decides whether a result is wrong or just imprecise.",
+      },
+    ],
+    sections: SECTIONS_P01,
+  },
+  {
+    id: "wch13-p02",
+    unitCode: "WCH13",
+    topicId: "p02",
+    kicker: "Unit 3 · Practical 2 — the complete practical note, technique by technique",
+    title: "Solutions and titrations — Core Practicals 3 & 4",
+    source:
+      "the core practical reference notes (CHSE, Unit 3 · 2020) — Core Practical 3+4: make up a volumetric solution and carry out a simple acid–base titration",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual practical reference note for the titration core practicals, kept **word for word** and re-cut into ==one section per technique==. The method keeps every rinse, every meniscus rule and every reason the sheet gives for them.",
+      },
+      {
+        k: "p",
+        text: "The sections run from the standard solution to the equations: making up a volumetric solution by difference, diluting with a pipette, the titration ritual step by step, the two indicators and their colour changes, the burette rules to 0.05 cm^3^, recording results and averaging only the concordant titres, safety and testing batches — closing with the five common titration equations.",
+      },
+    ],
+    sections: SECTIONS_P02,
+  },
+  {
+    id: "wch13-p04",
+    unitCode: "WCH13",
+    topicId: "p04",
+    kicker: "Unit 3 · Practical 4 — the complete practical note, technique by technique",
+    title: "Flame tests and cation tests",
+    source:
+      "the Unit 3 practical notes (CHSE Grade 11 · Laboratory Chemistry) and the core practical reference notes (CHSE, Unit 3 · 2020) — Core Practical 8+15: testing for cations",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual practical note for the cation half of qualitative analysis, kept **word for word** and re-cut into ==one section per technique== — the flame test from both source sheets, the sodium hydroxide results for Group 2, and the ammonium test with its method.",
+      },
+      {
+        k: "p",
+        text: "The sections run from the wire to the summary table: carrying out the flame test, the colour table with the three-red warning, the full flame list including the silent ions, the Group 2 hydroxide precipitates with their pH values and ionic equations, the ammonium ion test — and the combined cation table every identification question leans on.",
+      },
+    ],
+    sections: SECTIONS_P04,
+  },
+  {
+    id: "wch13-p05",
+    unitCode: "WCH13",
+    topicId: "p05",
+    kicker: "Unit 3 · Practical 5 — the complete practical note, technique by technique",
+    title: "Tests for gases and anions",
+    source:
+      "the Unit 3 practical notes (CHSE Grade 11 · Laboratory Chemistry) and the core practical reference notes (CHSE, Unit 3 · 2020) — the gas tests, the anion tests, and the precipitation pages",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual practical note for the gases and anions, kept **word for word** and re-cut into ==one section per technique==. Every gas and every anion test the sheets print is carried with its observation, and the why-the-acid notes are kept in full.",
+      },
+      {
+        k: "p",
+        text: "The sections run from heating solids to writing ionic equations: the gases a heated solid breathes out, the full recognition table for eleven gases, the carbonate and hydrogencarbonate pair decided by magnesium sulfate, the sulfate and sulfite pair decided in excess acid, the nitrate reduction — and precipitation reactions with their solubility rules and spectator ions.",
+      },
+    ],
+    sections: SECTIONS_P05,
+  },
+  {
+    id: "wch13-p06",
+    unitCode: "WCH13",
+    topicId: "p06",
+    kicker: "Unit 3 · Practical 6 — the complete practical note, technique by technique",
+    title: "Tests for halides and halogens",
+    source:
+      "the Unit 3 practical notes (CHSE Grade 11 · Laboratory Chemistry) and the core practical reference notes (CHSE, Unit 3 · 2020) — the halide-ion tests, the solid halides with concentrated sulfuric acid, and the halogen tests",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual practical note for the halide and halogen tests, kept **word for word** and re-cut into ==one section per technique==. The three confirmation tests each keep their full table, and the concentrated-sulfuric-acid staircase keeps every equation and observation the reference sheet prints.",
+      },
+      {
+        k: "p",
+        text: "The sections run from silver nitrate to starch: the silver-nitrate test with its ammonia staircase and the nitric acid's job, the lead-nitrate crystals, the chlorine-water displacement colours in the organic layer, the halide staircase with its acid–base and redox steps and half-equations — and the halogens' own tests, from litmus bleaching to the starch blue-black.",
+      },
+    ],
+    sections: SECTIONS_P06,
+  },
+  {
+    id: "wch13-p07",
+    unitCode: "WCH13",
+    topicId: "p07",
+    kicker: "Unit 3 · Practical 7 — the complete practical note, technique by technique",
+    title: "Distillation, reflux and separation",
+    source:
+      "the Unit 3 practical notes (CHSE Grade 11 · Laboratory Chemistry) and the core practical reference notes (CHSE, Unit 3 · 2020) — the apparatus pages, purifying an organic liquid, and measuring boiling point",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual practical note for the apparatus, kept **word for word** and re-cut into ==one section per technique==. The rigs keep their methods step by step, and every “don't” the sheets print — no stopper, no thermometer, no drawn joints — is carried.",
+      },
+      {
+        k: "p",
+        text: "The sections run from the flask to the thermometer: simple distillation with the Liebig condenser question answered, heating under reflux and the never-seal rule, the separating funnel and its densities, filtration, the fractionating column, the full purification sequence for an organic liquid — and boiling point as a test of purity.",
+      },
+    ],
+    sections: SECTIONS_P07,
+  },
+  {
+    id: "wch13-p08",
+    unitCode: "WCH13",
+    topicId: "p08",
+    kicker: "Unit 3 · Practical 8 — the complete practical note, technique by technique",
+    title: "Molar volume, crucible and calorimetry — Core Practicals 1 & 2",
+    source:
+      "the core practical reference notes (CHSE, Unit 3 · 2020) — Core Practical 1, heating in a crucible, and Core Practical 2, with the sheet's Examples 1–5 worked in full",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual practical reference note for the gas-volume and energetics core practicals, kept **word for word** and re-cut into ==one section per technique== — and ==every one of the sheet's five worked examples is worked in full==, no skipped lines.",
+      },
+      {
+        k: "p",
+        text: "The sections run from the gas syringe to the spirit burner: Core Practical 1 with the propanone extension and Example 1, the crucible method with Example 2, the calorimetric method with its errors and cooling correction, the ΔH calculation chain with Examples 3 and 4, the Hess cycle for hydrating copper(II) sulfate with the detailed method — and flame calorimetry with Example 5.",
+      },
+    ],
+    sections: SECTIONS_P08,
+  },
+  {
+    id: "wch13-p09",
+    unitCode: "WCH13",
+    topicId: "p09",
+    kicker: "Unit 3 · Practical 9 — the complete practical note, technique by technique",
+    title: "Organic reactions and tests — Core Practicals 5, 6 & 7",
+    source:
+      "the core practical reference notes (CHSE, Unit 3 · 2020) — Core Practicals 5, 6 and 7, the cyclohexene and ester preparations, and the organic unknowns of Core Practical 8+15",
+    intro: [
+      {
+        k: "p",
+        text: "This is the actual practical reference note for the organic core practicals, kept **word for word** and re-cut into ==one section per technique==. Each preparation keeps its full method — every portion, every pressure release, every drying agent — and the unknown tests keep their summary table.",
+      },
+      {
+        k: "p",
+        text: "The sections run from the hydrolysis race to the unknowns: Core Practical 5 and the C–X bond that decides it, Core Practical 6's chlorination with its ten-step purification, cyclohexene from cyclohexanol, the ester with its two washes and its 100–103 °C fraction, Core Practical 7 twice — partial then full oxidation — and the functional-group tests that finish the analysis.",
+      },
+    ],
+    sections: SECTIONS_P09,
   },
 ];
 
