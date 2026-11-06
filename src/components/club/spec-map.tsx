@@ -4,19 +4,21 @@
    Reaction Club · Spec Map — the note's contents, living inside the
    nav itself. The reader registers its sections + current stop with
    the provider; the nav then wears one candy "you are here" stop,
-   same 40px rhythm as every other nav button. A tap slides the map
-   up from the bottom edge as a true sheet — the way Firefox's menu
-   or Gemini's tray behave — not a floating window: always docked
-   flush to the bottom of the screen, full width on phones and
-   tablets (a 720px bottom-docked dialog on desktops), taking at
-   most ~86% of the visible height so the note still peeks over the
-   top. Because it is anchored to screen edges instead of measured
-   against the page, there is no positioning left to get wrong on
-   any device, page size or zoom level. Inside: a rainbow progress
-   track showing how far you've walked, the same band-coloured chips
-   as the note's own contents card, and prev/next hops for reading
-   without lifting your eyes. Escape, the scrim or the ✕ all fold
-   it away.
+   same 40px rhythm as every other nav button. A tap pulls the map
+   up as a DRAWER — the Firefox-menu / Gemini-tray pattern, built
+   from scratch after every floating-window variant earned its
+   retirement. The drawer is not a window and refuses to behave like
+   one: it IS a fraction of the screen — 100% wide, edge to edge,
+   a fixed 94% tall with the note peeking over the top — docked
+   flush to the bottom edge, with a grabber, a rainbow progress
+   track, the same band-coloured chips as the note's own contents
+   card, and prev/next hops for reading without lifting your eyes.
+   Its body is always that tall and scrolls inside, the way a real
+   tray does — it never shrink-wraps its content, so it can never
+   read as a card again. And because every number is a fraction of
+   what the eye actually sees (visualViewport), there is no
+   positioning left to get wrong on any device, page size or zoom
+   level. Escape, the scrim or the ✕ all fold it away.
    ═══════════════════════════════════════════════════════════════ */
 
 import {
@@ -96,12 +98,12 @@ export function useSpecMapRegister(data: SpecMapData | null) {
   }, [register, data]);
 }
 
-/* where the sheet sits — docked to the bottom of the VISIBLE
-   viewport, full width (a 720px dock on desktops). Measured from
-   visualViewport (offsets included) so it stays glued to the bottom
-   edge under pinch zoom, page zoom and keyboard slides alike; w/h
-   ride along so the sheet is fitted to the screen in JS, not in
-   CSS. */
+/* where the drawer sits — pure fractions of the VISIBLE viewport,
+   measured from visualViewport (offsets included) so it stays glued
+   to the screen edges under pinch zoom, page zoom and keyboard
+   slides alike: 100% of the width, a fixed 94% of the height, flush
+   to the bottom edge. No px caps anywhere — a fraction can't lose
+   its meaning the way a dvh cap does on older browsers. */
 type Geo = { top: number; left: number; w: number; h: number };
 
 export function SpecMapTrigger() {
@@ -111,18 +113,21 @@ export function SpecMapTrigger() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   const measure = useCallback(() => {
-    /* dock the sheet to the bottom of what the eye actually sees —
-       visualViewport, offsets included. Tablets running browser page
-       zoom (accessibility zoom, a remembered pinch) keep the layout
-       viewport wide while the visible one shrinks, and innerWidth
-       maths then pushed the panel clean past the right edge of the
-       screen. Docking to edges rather than measuring against the
-       page means there is nothing left to get wrong: the sheet hugs
-       the bottom edge on every device, every page size, every zoom
-       level. The min() belt also covers exotic zoomed-out states.
-       The width IS the visible screen on phones and tablets — both
-       edges flush, the Firefox-menu look — easing into a 720px
-       bottom-docked dialog on desktops. */
+    /* the drawer IS a fraction of what the eye actually sees —
+       visualViewport, offsets included. 100% of the visible width
+       (both edges flush — there is no horizontal maths left at all)
+       and a fixed 94% of the visible height, docked flush to the
+       visible bottom edge; the note peeks over the top the way
+       Gemini's tray leaves the chat visible. Tablets running browser
+       page zoom (accessibility zoom, a remembered pinch) keep the
+       layout viewport wide while the visible one shrinks — and
+       innerWidth maths pushed earlier versions clean past the right
+       edge — but a fraction of the visible rect cannot miss, on any
+       device, any page size, any zoom. The min() belt covers exotic
+       zoomed-out states. No px floors, no px caps: shrink-wrapping
+       to its content is exactly what made every earlier version
+       read as a floating card, so the body is always this tall and
+       scrolls inside instead. */
     const vv = window.visualViewport;
     const offX = Math.round(vv?.offsetLeft ?? 0);
     const offY = Math.round(vv?.offsetTop ?? 0);
@@ -131,19 +136,10 @@ export function SpecMapTrigger() {
       vv?.height ?? window.innerHeight,
       window.innerHeight,
     );
-    const w = Math.min(vw, 720);
-    /* the sheet takes ~86% of the visible height at most — the note
-       still peeks over the top, the way Gemini's tray leaves the
-       chat visible — capped at 640px, floored at 240px, and fitted
-       here in JS, never in CSS: the old min(72dvh, 640px) cap
-       silently vanished on browsers without dvh units (iOS < 15.4 —
-       plenty of classroom tablets), and long notes then ran the
-       panel clean off the screen. The home-indicator inset is
-       honoured in CSS via env(safe-area-inset-bottom) on the panel
-       itself. */
-    const h = Math.max(240, Math.min(vh * 0.86, 640));
-    const top = Math.round(offY + Math.max(vh - h, 8));
-    const left = Math.round(offX + (vw - w) / 2);
+    const w = vw;
+    const h = Math.round(vh * 0.94);
+    const top = Math.round(offY + (vh - h));
+    const left = offX;
     /* keep the old object when nothing moved, so opening doesn't
        ripple re-renders through the panel — every field is compared
        against its own final value, TOP AND LEFT INCLUDED: a docked
@@ -209,17 +205,17 @@ export function SpecMapTrigger() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  /* keyboard users land on the window itself, so esc/tab read right */
+  /* keyboard users land on the drawer itself, so esc/tab read right */
   useEffect(() => {
     if (open) panelRef.current?.focus({ preventScroll: true });
   }, [open]);
 
   /* walk the "you are here" chip into view — on open (instantly, so
-     the list never visibly glides while the window itself is still
-     springing in) and after every prev/next hop (smoothly, so the
+     the list never visibly glides while the drawer itself is still
+     springing up) and after every prev/next hop (smoothly, so the
      map follows the walk). offsetTop maths instead of rects: the
-     entrance spring scales the panel, and rect measurements taken
-     mid-scale aim at a moving target. */
+     entrance spring slides the drawer, and rect measurements taken
+     mid-slide aim at a moving target. */
   const followHere = useCallback((delay: number, smooth = true) => {
     window.setTimeout(() => {
       const sc = gridRef.current;
@@ -246,7 +242,7 @@ export function SpecMapTrigger() {
   const hop = (spec: string) => {
     jump(spec);
     followHere(80);
-  }; /* hop = smooth — the window is settled by then */
+  }; /* hop = smooth — the drawer is settled by then */
 
   return (
     <>
@@ -273,7 +269,7 @@ export function SpecMapTrigger() {
         }}
       >
         {/* the stop wears the spec you're on — and trades the number
-            for a map glyph while the window is open. The key rides on
+            for a map glyph while the drawer is open. The key rides on
             the open state alone, so the number updates in place as you
             scroll (keying on the spec itself stalled mid-flip during
             fast glides, leaving a stale room on the badge) */}
@@ -307,172 +303,183 @@ export function SpecMapTrigger() {
                 style={{ touchAction: "none" }}
               />
               <m.div
-                key="panel"
+                key="drawer"
                 ref={panelRef}
                 role="dialog"
                 aria-label="Spec map"
                 tabIndex={-1}
-                initial={{ y: "102%" }}
+                initial={{ y: "104%" }}
                 animate={{ y: 0 }}
-                exit={{ y: "102%" }}
-                transition={{ type: "spring", stiffness: 340, damping: 32 }}
-                className="spec-map fixed z-[60] flex flex-col rounded-t-[28px] bg-paper outline-none"
+                exit={{ y: "104%" }}
+                transition={{ type: "spring", stiffness: 340, damping: 34 }}
+                className="spec-map fixed z-[60] flex flex-col overflow-hidden rounded-t-[28px] bg-paper outline-none"
                 style={{
                   top: geo.top,
                   left: geo.left,
                   width: geo.w,
-                  /* fitted in JS (see measure) — a bare px number, so
-                     browsers without dvh can't drop the cap */
-                  maxHeight: geo.h,
-                  /* keep the hop buttons clear of the gesture bar on
+                  /* a FIXED fraction of the visible screen (see
+                     measure) — never shrink-wrapped to the content,
+                     never a px cap, so no unit-support cliff (dvh…)
+                     can silently drop the height */
+                  height: geo.h,
+                  /* keeps the hop buttons clear of the gesture bar on
                      notched phones — env() is far older than dvh, so
                      this survives on every classroom tablet */
                   paddingBottom: "env(safe-area-inset-bottom, 0px)",
-                  /* the pedestal reads upward now: a crisp top edge
-                     like the nav pill's, and a soft shadow rising off
-                     the sheet into the page */
+                  /* a crisp top edge like the nav pill's pedestal, and
+                     a soft shadow rising off the drawer into the
+                     page */
                   boxShadow:
                     "0 -4px 0 var(--edge), 0 -30px 60px -24px rgb(0 0 0 / 0.4)",
                 }}
               >
-                {/* the grabber — Firefox-menu language: this is a
-                    tray docked to your screen, not a window */}
+                {/* the grabber — Firefox-menu language: you are holding
+                    a tray, not opening a dialog */}
                 <span
                   aria-hidden
-                  className="mx-auto mt-2.5 h-1 w-10 shrink-0 rounded-full bg-ink/[0.14]"
+                  className="mx-auto mt-3 h-1.5 w-12 shrink-0 rounded-full bg-ink/[0.16]"
                 />
 
-                {/* header — the tilted badge, where you are, and the way out */}
-                <div className="flex items-center gap-3 px-5 pt-3 sm:px-6">
-                  <span
-                    className="inline-flex shrink-0 -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.08em] uppercase"
-                    style={{
-                      background: main,
-                      color: readableInk(main),
-                      boxShadow: `0 3px 0 ${shade(main)}`,
-                    }}
-                  >
-                    <ListChecks className="h-3.5 w-3.5" /> Spec map
-                  </span>
-                  <p className="min-w-0 flex-1 truncate text-[12.5px] font-bold text-ink-faint">
-                    Stop {idx + 1} of {sections.length} — tap one to hop
-                  </p>
-                  <button
-                    type="button"
-                    onClick={close}
-                    aria-label="Close spec map"
-                    className="grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full bg-ink/[0.06] text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
-                  >
-                    <X className="h-[18px] w-[18px]" strokeWidth={2.2} />
-                  </button>
-                </div>
-
-                {/* the journey so far — one segment per stop, in its
-                    own band colour; the current one stands taller */}
-                <div
-                  aria-hidden
-                  className="mt-3 flex items-center gap-[3px] px-5 sm:px-6"
-                >
-                  {sections.map((s, i) => (
+                {/* the content column — full-bleed on phones and
+                    tablets, centred on desktops where the drawer is
+                    wider than a page of chips needs */}
+                <div className="mx-auto flex min-h-0 w-full max-w-[760px] flex-1 flex-col">
+                  {/* header — the tilted badge, where you are, and the
+                      way out */}
+                  <div className="flex items-center gap-3 px-5 pt-3 sm:px-6">
                     <span
-                      key={s.spec}
-                      className={`flex-1 rounded-full transition-colors duration-300 ${
-                        i === idx ? "h-2.5" : "h-1.5"
-                      }`}
+                      className="inline-flex shrink-0 -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[12px] font-bold tracking-[0.08em] uppercase"
                       style={{
-                        background: i <= idx ? accentOf(i) : "var(--edge)",
+                        background: main,
+                        color: readableInk(main),
+                        boxShadow: `0 3px 0 ${shade(main)}`,
                       }}
-                    />
-                  ))}
-                </div>
+                    >
+                      <ListChecks className="h-3.5 w-3.5" /> Spec map
+                    </span>
+                    <p className="min-w-0 flex-1 truncate text-[12.5px] font-bold text-ink-faint">
+                      Stop {idx + 1} of {sections.length} — tap one to hop
+                    </p>
+                    <button
+                      type="button"
+                      onClick={close}
+                      aria-label="Close spec map"
+                      className="grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full bg-ink/[0.06] text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
+                    >
+                      <X className="h-[18px] w-[18px]" strokeWidth={2.2} />
+                    </button>
+                  </div>
 
-                {/* the map itself — chips flow to fill whatever screen
-                    they're on: two-up on phones, four-up on wide ones */}
-                <div
-                  ref={gridRef}
-                  className="mt-1 min-h-0 flex-1 overflow-y-auto px-4 py-3 sm:px-5"
-                  style={{ overscrollBehavior: "contain" }}
-                >
-                  <m.div
-                    initial="hidden"
-                    animate="show"
-                    variants={{
-                      show: {
-                        transition: {
-                          staggerChildren: 0.024,
-                          delayChildren: 0.05,
-                        },
-                      },
-                    }}
-                    className="grid gap-2 [grid-template-columns:repeat(auto-fill,minmax(8.5rem,1fr))]"
+                  {/* the journey so far — one segment per stop, in its
+                      own band colour; the current one stands taller */}
+                  <div
+                    aria-hidden
+                    className="mt-3 flex items-center gap-[3px] px-5 sm:px-6"
                   >
                     {sections.map((s, i) => (
-                      <SpecChip
+                      <span
                         key={s.spec}
-                        s={s}
-                        i={i}
-                        here={s.spec === active}
-                        variants={chipV}
-                        onClick={() => {
-                          jump(s.spec);
-                          close();
+                        className={`flex-1 rounded-full transition-colors duration-300 ${
+                          i === idx ? "h-2.5" : "h-1.5"
+                        }`}
+                        style={{
+                          background: i <= idx ? accentOf(i) : "var(--edge)",
                         }}
                       />
                     ))}
-                  </m.div>
-                </div>
+                  </div>
 
-                {/* footer — walk the note without opening the map again */}
-                <div className="mt-auto flex items-center justify-between gap-2 border-t-2 border-dashed border-ink/10 px-4 py-3 sm:px-5">
-                  <button
-                    type="button"
-                    onClick={() => idx > 0 && hop(sections[idx - 1].spec)}
-                    disabled={idx <= 0}
-                    aria-label={
-                      idx > 0
-                        ? `Previous stop — ${sections[idx - 1].spec} ${sections[idx - 1].title}`
-                        : "No previous stop"
-                    }
-                    className="flex h-10 min-w-0 cursor-pointer items-center gap-1.5 rounded-full bg-ink/[0.06] px-3.5 text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink disabled:cursor-default disabled:opacity-35 disabled:hover:bg-ink/[0.06]"
+                  {/* the map itself — chips flow to fill whatever
+                      screen they're on: two-up on phones, four-up and
+                      more on wide ones; the body scrolls, the drawer
+                      itself never shrinks */}
+                  <div
+                    ref={gridRef}
+                    className="mt-1 min-h-0 flex-1 overflow-y-auto px-4 py-3 sm:px-5"
+                    style={{ overscrollBehavior: "contain" }}
                   >
-                    <ArrowLeft className="h-4 w-4 shrink-0" strokeWidth={2.2} />
-                    <span className="font-display text-[12.5px] font-bold">
-                      {idx > 0 ? sections[idx - 1].spec : "—"}
-                    </span>
-                    <span className="hidden max-w-[130px] truncate text-[12px] font-bold sm:inline">
-                      {idx > 0 ? sections[idx - 1].title : ""}
-                    </span>
-                  </button>
-                  <Mascot
-                    main={main}
-                    size={40}
-                    bubbles={false}
-                    className="hidden h-9 w-9 shrink-0 sm:block"
-                  />
-                  <button
-                    type="button"
-                    onClick={() =>
-                      idx < sections.length - 1 && hop(sections[idx + 1].spec)
-                    }
-                    disabled={idx >= sections.length - 1}
-                    aria-label={
-                      idx < sections.length - 1
-                        ? `Next stop — ${sections[idx + 1].spec} ${sections[idx + 1].title}`
-                        : "No next stop"
-                    }
-                    className="flex h-10 min-w-0 cursor-pointer items-center gap-1.5 rounded-full bg-ink/[0.06] px-3.5 text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink disabled:cursor-default disabled:opacity-35 disabled:hover:bg-ink/[0.06]"
-                  >
-                    <span className="hidden max-w-[130px] truncate text-[12px] font-bold sm:inline">
-                      {idx < sections.length - 1 ? sections[idx + 1].title : ""}
-                    </span>
-                    <span className="font-display text-[12.5px] font-bold">
-                      {idx < sections.length - 1 ? sections[idx + 1].spec : "—"}
-                    </span>
-                    <ArrowRight
-                      className="h-4 w-4 shrink-0"
-                      strokeWidth={2.2}
+                    <m.div
+                      initial="hidden"
+                      animate="show"
+                      variants={{
+                        show: {
+                          transition: {
+                            staggerChildren: 0.024,
+                            delayChildren: 0.05,
+                          },
+                        },
+                      }}
+                      className="grid gap-2 [grid-template-columns:repeat(auto-fill,minmax(8.5rem,1fr))]"
+                    >
+                      {sections.map((s, i) => (
+                        <SpecChip
+                          key={s.spec}
+                          s={s}
+                          i={i}
+                          here={s.spec === active}
+                          variants={chipV}
+                          onClick={() => {
+                            jump(s.spec);
+                            close();
+                          }}
+                        />
+                      ))}
+                    </m.div>
+                  </div>
+
+                  {/* footer — walk the note without opening the map
+                      again */}
+                  <div className="mt-auto flex items-center justify-between gap-2 border-t-2 border-dashed border-ink/10 px-4 py-3 sm:px-5">
+                    <button
+                      type="button"
+                      onClick={() => idx > 0 && hop(sections[idx - 1].spec)}
+                      disabled={idx <= 0}
+                      aria-label={
+                        idx > 0
+                          ? `Previous stop — ${sections[idx - 1].spec} ${sections[idx - 1].title}`
+                          : "No previous stop"
+                      }
+                      className="flex h-10 min-w-0 cursor-pointer items-center gap-1.5 rounded-full bg-ink/[0.06] px-3.5 text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink disabled:cursor-default disabled:opacity-35 disabled:hover:bg-ink/[0.06]"
+                    >
+                      <ArrowLeft className="h-4 w-4 shrink-0" strokeWidth={2.2} />
+                      <span className="font-display text-[12.5px] font-bold">
+                        {idx > 0 ? sections[idx - 1].spec : "—"}
+                      </span>
+                      <span className="hidden max-w-[130px] truncate text-[12px] font-bold sm:inline">
+                        {idx > 0 ? sections[idx - 1].title : ""}
+                      </span>
+                    </button>
+                    <Mascot
+                      main={main}
+                      size={40}
+                      bubbles={false}
+                      className="hidden h-9 w-9 shrink-0 sm:block"
                     />
-                  </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        idx < sections.length - 1 && hop(sections[idx + 1].spec)
+                      }
+                      disabled={idx >= sections.length - 1}
+                      aria-label={
+                        idx < sections.length - 1
+                          ? `Next stop — ${sections[idx + 1].spec} ${sections[idx + 1].title}`
+                          : "No next stop"
+                      }
+                      className="flex h-10 min-w-0 cursor-pointer items-center gap-1.5 rounded-full bg-ink/[0.06] px-3.5 text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink disabled:cursor-default disabled:opacity-35 disabled:hover:bg-ink/[0.06]"
+                    >
+                      <span className="hidden max-w-[130px] truncate text-[12px] font-bold sm:inline">
+                        {idx < sections.length - 1 ? sections[idx + 1].title : ""}
+                      </span>
+                      <span className="font-display text-[12.5px] font-bold">
+                        {idx < sections.length - 1 ? sections[idx + 1].spec : "—"}
+                      </span>
+                      <ArrowRight
+                        className="h-4 w-4 shrink-0"
+                        strokeWidth={2.2}
+                      />
+                    </button>
+                  </div>
                 </div>
               </m.div>
             </>
