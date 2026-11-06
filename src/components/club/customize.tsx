@@ -8,6 +8,7 @@ import { accentOf } from "./bands";
 import {
   ACCENTS,
   DEFAULT_PREFS,
+  flashThemeAnim,
   LAB_LABEL,
   setPrefs,
   usePrefs,
@@ -197,10 +198,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
   }, [open, onClose]);
 
   const pickLab = (lab: Lab) => {
-    /* hold the colours while they ease over — one smooth move */
-    const root = document.documentElement;
-    root.classList.add("theme-anim");
-    window.setTimeout(() => root.classList.remove("theme-anim"), 480);
+    flashThemeAnim();
     setPrefs({ theme: lab });
   };
 
@@ -210,9 +208,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
      wheel. */
   const toggleAccent = (id: AccentId) => {
     if (prefs.accents.length === 1 && prefs.accents[0] === id) return;
-    const root = document.documentElement;
-    root.classList.add("theme-anim");
-    window.setTimeout(() => root.classList.remove("theme-anim"), 480);
+    flashThemeAnim();
     setPrefs({
       accents: prefs.accents.includes(id)
         ? prefs.accents.filter((x) => x !== id)
@@ -527,9 +523,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
               <button
                 type="button"
                 onClick={() => {
-                  const root = document.documentElement;
-                  root.classList.add("theme-anim");
-                  window.setTimeout(() => root.classList.remove("theme-anim"), 480);
+                  flashThemeAnim();
                   setPrefs(DEFAULT_PREFS);
                 }}
                 className="mx-auto mt-2 inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full bg-ink/[0.06] px-5 py-2.5 font-display text-[13.5px] font-semibold text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"

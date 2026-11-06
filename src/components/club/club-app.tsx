@@ -27,7 +27,7 @@ import { getNotesMeta, getNotesMetaForTopic } from "@/lib/spectra/notes-meta";
 import { useTimeScope } from "@/lib/spectra/time";
 import { usePacks } from "@/lib/spectra/packs";
 import { useDesk, markUnit, markTopic } from "@/lib/spectra/desk";
-import { applyPrefs, setPrefs, usePrefs, type Lab } from "@/lib/spectra/prefs";
+import { applyPrefs, flashThemeAnim, setPrefs, usePrefs, type Lab } from "@/lib/spectra/prefs";
 import { Home, UNIT_ICONS } from "./home";
 import { Desk } from "./desk";
 import { UnitView } from "./unit-view";
@@ -218,10 +218,7 @@ function TopBar({
 
   const cycle = useCallback(() => {
     const next = LAB_ORDER[(LAB_ORDER.indexOf(lab) + 1) % LAB_ORDER.length];
-    /* hold the colours while they ease over — one smooth move */
-    const root = document.documentElement;
-    root.classList.add("theme-anim");
-    window.setTimeout(() => root.classList.remove("theme-anim"), 480);
+    flashThemeAnim();
     setPrefs({ theme: next });
     setAnnounce(next);
     if (timer.current) clearTimeout(timer.current);

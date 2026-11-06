@@ -419,6 +419,26 @@ html.classic .room {
 
 /* ————— base ————— */
 
+/* the paper's dot ink — registered as a real <color> so the polka
+   texture can ride the theme-anim ease with everything else. A
+   gradient can't transition, but a registered custom property can,
+   and the dots re-bake from it every frame. Browsers without
+   @property support just snap the dots like they always did. */
+@property --dot-ink {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgb(61 43 31 / 0.05);
+}
+
+/* the ambient lamp's ink, same trick — the top glow eases between
+   the daylight wash and the night rooms' violet / golden-hour burns
+   instead of snapping hue while the ground is still mid-flight */
+@property --lamp-ink {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgb(255 146 43 / 0.07);
+}
+
 html {
   scroll-behavior: smooth;
   /* phones: never inflate text on rotate; taps respond at once —
@@ -433,7 +453,7 @@ html {
 
 body {
   background-color: var(--color-cream);
-  background-image: radial-gradient(rgb(61 43 31 / 0.05) 1.6px, transparent 1.7px);
+  background-image: radial-gradient(var(--dot-ink) 1.6px, transparent 1.7px);
   background-size: 26px 26px;
   color: var(--color-ink);
   font-size: 16px;
@@ -474,25 +494,22 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: radial-gradient(1100px 480px at 50% -140px, rgb(255 146 43 / 0.07), transparent 70%);
+  /* one geometry for every lab — only the ink changes. The night
+     rooms used to wear a 4% larger lamp; nobody could see it, and a
+     shared shape is what lets the wash cross-fade with the room. */
+  background: radial-gradient(1150px 520px at 50% -150px, var(--lamp-ink), transparent 72%);
 }
 
 html.dark body {
-  background-image: radial-gradient(rgb(244 241 251 / 0.05) 1.6px, transparent 1.7px);
+  --dot-ink: rgb(244 241 251 / 0.05);
+  --lamp-ink: rgb(151 117 250 / 0.09); /* the violet lamp */
 }
 
-/* dune: the dots turn to sand grains */
+/* dune: the dots turn to sand grains, the lamp burns warm —
+   the bench at golden hour */
 html.dune body {
-  background-image: radial-gradient(rgb(253 242 223 / 0.05) 1.6px, transparent 1.7px);
-}
-
-html.dark body::before {
-  background: radial-gradient(1150px 520px at 50% -150px, rgb(151 117 250 / 0.09), transparent 72%);
-}
-
-/* dune: the lamp burns warm — the bench at golden hour */
-html.dune body::before {
-  background: radial-gradient(1150px 520px at 50% -150px, rgb(255 146 43 / 0.09), transparent 72%);
+  --dot-ink: rgb(253 242 223 / 0.05);
+  --lamp-ink: rgb(255 146 43 / 0.09);
 }
 
 ::selection {
@@ -804,6 +821,30 @@ html.theme-anim *::after {
     stroke 0.42s ease,
     box-shadow 0.42s ease,
     border-color 0.42s ease !important;
+  transition-delay: 0s !important;
+}
+
+/* the body's own copy of the ease, plus the registered dot ink —
+   written as longhands on purpose: the minifier drops a transition
+   shorthand that carries a custom property, but keeps the longhand
+   list. This is the one property the universal rule can't give the
+   body, and it's what lets the polka texture ease to the new lab's
+   grains instead of snapping onto a ground that's still mid-flight */
+html.theme-anim body {
+  transition-property:
+    background-color, color, fill, stroke, box-shadow, border-color,
+    --dot-ink !important;
+  transition-duration: 0.42s !important;
+  transition-timing-function: ease !important;
+  transition-delay: 0s !important;
+}
+
+/* the lamp's own copy — only the ink; the wash re-bakes from the
+   registered colour on every frame of the ease */
+html.theme-anim body::before {
+  transition-property: --lamp-ink !important;
+  transition-duration: 0.42s !important;
+  transition-timing-function: ease !important;
   transition-delay: 0s !important;
 }
 
