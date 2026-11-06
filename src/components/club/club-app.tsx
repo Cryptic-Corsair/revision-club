@@ -403,7 +403,7 @@ function TopBar({
                       : announce === "dark"
                         ? "#1e1a26"
                         : announce === "dune"
-                          ? "#342817"
+                          ? "#2e2820"
                           : "linear-gradient(90deg, #2c2013 50%, #fdf6e3 50%)",
                   boxShadow: "inset 0 0 0 2px rgb(61 43 31 / 0.12)",
                 }}
