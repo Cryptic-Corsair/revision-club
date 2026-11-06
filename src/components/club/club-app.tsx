@@ -238,7 +238,7 @@ function TopBar({
       >
         <nav
           aria-label="Main"
-          className="rc-glass-nav flex max-w-[97vw] items-center gap-1.5 rounded-full py-2 pr-2.5 pl-2.5 backdrop-blur-lg"
+          className="flex max-w-[97vw] items-center gap-1.5 rounded-full bg-paper/90 py-2 pr-2.5 pl-2.5 backdrop-blur-lg"
           style={{
             boxShadow:
               "0 3px 0 var(--edge), 0 16px 38px -18px rgb(0 0 0 / 0.4)",
