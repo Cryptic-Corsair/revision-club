@@ -83,6 +83,7 @@ function Toggle({
       type="button"
       role="switch"
       aria-checked={on}
+      aria-label={label}
       onClick={() => onChange(!on)}
       className="flex w-full cursor-pointer items-center justify-between gap-3 rounded-[22px] bg-ink/[0.045] px-4 py-3.5 text-left transition-colors hover:bg-ink/[0.08]"
     >
