@@ -503,7 +503,7 @@ export function CustomizePanel({
                     {rotationCaption}
                   </p>
                 </div>
-              </Section>    </Section>
+              </Section>
 
               <Section title="Text size" dot="#FFD43B">
                 <div className="flex rounded-full bg-ink/[0.06] p-1">
