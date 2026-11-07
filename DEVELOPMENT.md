@@ -56,7 +56,7 @@ src/
 ├─ app/
 │  ├─ layout.tsx        Root layout: fonts, metadata, pre-hydration prefs script
 │  ├─ page.tsx          Renders <ClubApp/>
-│  ├─ globals.css       ALL theming (four labs, fonts, highlights, seams)
+│  ├─ globals.css       ALL theming (five labs, fonts, highlights, seams)
 │  └─ fonts/            Self-hosted woff2 (see §6 — do NOT revert to Google)
 ├─ components/club/
 │  ├─ club-app.tsx      App shell + view switching + nav pill + footer
@@ -186,13 +186,13 @@ packs against), `dots` (on), `motion` (on).
 ### Theme chips (THEME_CHIP)
 
 Each theme wears a fixed signature swatch — white for **light**, navy for
-**night** (`#23406E`), chocolate for **dune** (`#6B4A26`), and the diagonal
-espresso/cream cut for **classic**
+**night** (velvet plum), chocolate for **dune** (`#6B4A26`), forest for
+**sage** (`#29483A`), and the diagonal espresso/cream cut for **classic**
 (`linear-gradient(135deg, #2C2013 50%, #FDF6E3 50%)` — the exact pair the
 classic notes alternate, cut on the diagonal; pure black/white was tried and
 read harsh against the warm palette)
 — defined once as `THEME_CHIP` in `prefs.ts` and used by the nav's theme
-button, the lab toast and the panel's theme cards. The four backgrounds are
+button, the lab toast and the panel's theme cards. The five backgrounds are
 picked as a set to stay distinct side by side and to name the room. The glyph
 is the moon on every theme; classic takes the two-pass `ClassicMoon` (cream
 rim underneath, espresso face on top) because its chip is cut diagonally and no
@@ -205,7 +205,7 @@ which room you're in.
 `LogoMark` in `club-app.tsx` keeps one shape everywhere but re-dresses per
 lab: **light** is the daylight original (white glass, cocoa outline, coral
 liquid), **classic** the reading-room edition (cream glass, espresso
-outline, amber liquid), and **night/dune** draw it as line art (outline in
+outline, amber liquid), and **night/dune/sage** draw it as line art (outline in
 the room's ink, no glass fill, so the liquid is the one bright body on the
 dark pill). The footer sits on cocoa in every lab, so it pins the daylight
 edition with `lab="light"` and never re-dresses.
