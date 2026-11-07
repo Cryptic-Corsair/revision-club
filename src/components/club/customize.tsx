@@ -241,7 +241,6 @@ export function CustomizePanel({
      wheel. */
   const toggleAccent = (id: AccentId) => {
     if (prefs.accents.length === 1 && prefs.accents[0] === id) return;
-    flashThemeAnim();
     setPrefs({
       accents: prefs.accents.includes(id)
         ? prefs.accents.filter((x) => x !== id)
