@@ -1,7 +1,7 @@
 import type { UnitCode } from "./types";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · spec-by-spec revision notes
+   IAL CHEM · spec-by-spec revision notes
    A full revision note (verbatim from the source document) cut
    into one section per specification point, with the official
    spec statement stated above each section.
