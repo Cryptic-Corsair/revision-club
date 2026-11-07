@@ -282,10 +282,8 @@ function TopBar({
   }, [themeOpen]);
 
   const tool = (active: boolean) =>
-    `nav-tool grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors sm:h-11 sm:w-11 ${
-      active
-        ? "bg-ink text-cream"
-        : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
+    `nav-tool nav-glass-button grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-all sm:h-11 sm:w-11 ${
+      active ? "is-active" : ""
     }`;
 
   return (
@@ -422,7 +420,7 @@ function TopBar({
             aria-haspopup="menu"
             aria-label={`Theme: ${LAB_LABEL[lab]}. Choose appearance`}
             title="Choose theme"
-            className="group flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-2.5 transition-all hover:-translate-y-px sm:h-11 sm:gap-2.5 sm:px-3"
+            className="nav-glass-button group relative flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-2.5 transition-all hover:-translate-y-px sm:h-11 sm:gap-2.5 sm:px-3"
             style={{
               background: lab === "classic" ? "#F1E6D0" : THEME_CHIP[lab].bg,
               color: lab === "dark" ? "#EEF2FF" : lab === "dune" ? "#FFE9C7" : "#3D2B1F",
@@ -677,7 +675,7 @@ function Footer({
                       key={u.code}
                       type="button"
                       onClick={() => onOpenUnit(u.code)}
-                      className="group flex cursor-pointer items-center gap-3 text-left"
+                      className="footer-glass-button group flex cursor-pointer items-center gap-3 rounded-2xl px-2.5 py-2 text-left"
                     >
                       <span
                         className="grid h-8 w-8 shrink-0 place-items-center rounded-full font-display text-[calc(13.5px*var(--ui-scale))] font-bold transition-transform group-hover:scale-110"
@@ -748,7 +746,7 @@ function Footer({
                     key={row.label}
                     type="button"
                     onClick={row.open}
-                    className="group flex cursor-pointer items-center gap-2.5 text-left"
+                    className="footer-glass-button group flex cursor-pointer items-center gap-2.5 rounded-2xl px-2.5 py-2 text-left"
                   >
                     <span
                       className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110 ${row.chip}`}
@@ -814,7 +812,7 @@ function Footer({
               <button
                 type="button"
                 onClick={onOpenLegal}
-                className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/80 transition-colors hover:bg-white/[0.12] hover:text-milk"
+                className="footer-glass-button group inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85"
                 aria-label="Open the disclaimer and legal information page"
               >
                 <ShieldCheck
