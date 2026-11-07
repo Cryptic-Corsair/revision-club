@@ -484,6 +484,15 @@ export function BadgeCheck(p: IcoProps) {
   );
 }
 
+export function Settings(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <path d="M10.2 3.8 10.7 2.9 h2.6 l.5.9.4 1.2 1.1.6 1.2-.2 1-.5 1.8 1.8-.5 1-.2 1.2.6 1.1 1.2.4.5.9v2.6l-.9.5-1.2.4-.6 1.1.2 1.2.5 1-1.8 1.8-1-.5-1.2-.2-1.1.6-.4 1.2-.5.9h-2.6l-.5-.9-.4-1.2-1.1-.6-1.2.2-1 .5-1.8-1.8.5-1 .2-1.2-.6-1.1-1.2-.4-.9-.5v-2.6l.9-.5 1.2-.4.6-1.1-.2-1.2-.5-1 1.8-1.8 1 .5 1.2.2 1.1-.6z" transform="translate(1.2 1.2) scale(.9)" />
+      <circle cx="12" cy="12" r="3.1" />
+    </Ico>
+  );
+}
+
 export function Sparkles(p: IcoProps) {
   return (
     <Ico {...p}>
