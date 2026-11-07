@@ -208,7 +208,6 @@ export function CustomizePanel({
   onOpenPack,
   onOpenProgress,
   onOpenLegal,
-  onOpenSample,
   fullscreen,
   onToggleFullscreen,
 }: {
@@ -219,7 +218,6 @@ export function CustomizePanel({
   onOpenPack: () => void;
   onOpenProgress: () => void;
   onOpenLegal: () => void;
-  onOpenSample: () => void;
   fullscreen: boolean;
   onToggleFullscreen: () => void;
 }) {
@@ -362,7 +360,6 @@ export function CustomizePanel({
                     { label: "Specification", detail: "Browse units & topics", icon: BookOpen, action: onOpenSpec },
                     { label: "Revision pack", detail: "Saved spec points", icon: ClipboardList, action: onOpenPack },
                     { label: "Progress", detail: "Time & study goals", icon: Sticker, action: onOpenProgress },
-                    { label: "Sample notes", detail: "A look inside a note", icon: NotebookPen, action: onOpenSample },
                     { label: "Disclaimer", detail: "Site information", icon: ShieldCheck, action: onOpenLegal },
                   ].map((item) => (
                     <button
