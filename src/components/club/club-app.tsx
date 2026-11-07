@@ -243,59 +243,36 @@ function TopBar({
   const lab = prefs.theme;
   const { picks } = usePacks();
   const [announce, setAnnounce] = useState<Lab | null>(null);
-  const [themeOpen, setThemeOpen] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const themeAreaRef = useRef<HTMLElement | null>(null);
 
-  const chooseTheme = useCallback((next: Lab) => {
-    if (next !== lab) {
-      flashThemeAnim();
-      setPrefs({ theme: next });
-      setAnnounce(next);
-      if (timer.current) clearTimeout(timer.current);
-      timer.current = setTimeout(() => setAnnounce(null), 1800);
-    }
-    setThemeOpen(false);
+  const cycle = useCallback(() => {
+    const next = LAB_ORDER[(LAB_ORDER.indexOf(lab) + 1) % LAB_ORDER.length];
+    /* hold the colours while they ease over — one smooth move */
+    const root = document.documentElement;
+    root.classList.add("theme-anim");
+    window.setTimeout(() => root.classList.remove("theme-anim"), 480);
+    setPrefs({ theme: next });
+    setAnnounce(next);
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => setAnnounce(null), 1800);
   }, [lab]);
 
-  /* the menu behaves like a proper popover — Escape or a press
-     anywhere outside the nav dismisses it, no theme chosen */
-  useEffect(() => {
-    if (!themeOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setThemeOpen(false);
-    };
-    const onDown = (e: PointerEvent) => {
-      if (
-        themeAreaRef.current &&
-        !themeAreaRef.current.contains(e.target as Node)
-      ) {
-        setThemeOpen(false);
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", onDown);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.removeEventListener("pointerdown", onDown);
-    };
-  }, [themeOpen]);
-
   const tool = (active: boolean) =>
-    `nav-tool nav-tool-button grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-all sm:h-11 sm:w-11 ${
-      active ? "is-active" : ""
+    `grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors sm:h-11 sm:w-11 ${
+      active
+        ? "bg-ink text-cream"
+        : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
     }`;
 
   return (
     <>
       <header
-        className="site-header fixed inset-x-0 z-50 flex justify-center pl-[max(0.625rem,var(--sa-left))] pr-[max(0.625rem,var(--sa-right))] sm:pl-[max(0.75rem,var(--sa-left))] sm:pr-[max(0.75rem,var(--sa-right))]"
+        className="fixed inset-x-0 z-50 flex justify-center pl-[max(0.625rem,var(--sa-left))] pr-[max(0.625rem,var(--sa-right))] sm:pl-[max(0.75rem,var(--sa-left))] sm:pr-[max(0.75rem,var(--sa-right))]"
         style={{ top: "calc(0.625rem + var(--sa-top))" }}
       >
         <nav
-          ref={themeAreaRef}
           aria-label="Main"
-          className="relative flex max-w-[97vw] items-center gap-1.5 rounded-full border border-edge bg-paper py-2 pr-2.5 pl-2.5"
+          className="flex max-w-[97vw] items-center gap-1.5 rounded-full bg-paper/90 py-2 pr-2.5 pl-2.5 backdrop-blur-lg"
           style={{
             boxShadow:
               "0 3px 0 var(--edge), 0 16px 38px -18px rgb(0 0 0 / 0.4)",
@@ -308,14 +285,14 @@ function TopBar({
             aria-label="Reaction Club — home"
           >
             <LogoMark />
-            <span className="nav-wordmark hidden font-display text-[calc(16px*var(--ui-scale))] font-semibold tracking-tight text-ink md:block">
+            <span className="hidden font-display text-[16px] font-semibold tracking-tight text-ink md:block">
               Reaction Club
             </span>
           </button>
 
           <span
             aria-hidden
-            className="mx-1 hidden h-6 w-[calc(3px*var(--ui-scale))] shrink-0 rounded-full bg-ink/10 sm:block"
+            className="mx-1 hidden h-6 w-[3px] shrink-0 rounded-full bg-ink/10 sm:block"
           />
 
           {/* the note reader parks its Spec Map stop here — same 40px
@@ -332,7 +309,7 @@ function TopBar({
             whileTap={{ scale: 0.88 }}
             className={tool(view.kind === "home")}
           >
-            <HomeIcon className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
+            <HomeIcon className="h-[18px] w-[18px]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
@@ -343,7 +320,7 @@ function TopBar({
             animate={{ scale: view.kind === "pack" ? 1.1 : 1 }}
             transition={{ type: "spring", stiffness: 380, damping: 16 }}
             className={`relative ${tool(view.kind === "pack")}`}
-            title="Revision pack"
+            title="Your revision pack · ticked spec points"
             aria-label={`Your revision pack${picks.length > 0 ? ` — ${picks.length} spec point${picks.length === 1 ? "" : "s"} ticked` : ""}`}
             style={
               view.kind === "pack"
@@ -355,11 +332,11 @@ function TopBar({
                 : undefined
             }
           >
-            <ClipboardList className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
+            <ClipboardList className="h-[18px] w-[18px]" strokeWidth={2.2} />
             {picks.length > 0 && view.kind !== "pack" && (
               <span
                 aria-hidden
-                className="absolute -top-0.5 -right-0.5 grid h-[calc(17px*var(--ui-scale))] min-w-[calc(17px*var(--ui-scale))] place-items-center rounded-full px-0.5 font-display text-[calc(9.5px*var(--ui-scale))] font-bold text-white"
+                className="absolute -top-0.5 -right-0.5 grid h-[17px] min-w-[17px] place-items-center rounded-full px-0.5 font-display text-[9.5px] font-bold text-white"
                 style={{ background: "#FF922B", boxShadow: "0 0 0 2px var(--color-paper)" }}
               >
                 {picks.length}
@@ -372,10 +349,10 @@ function TopBar({
             onClick={onSearch}
             whileTap={{ scale: 0.88 }}
             className={tool(false)}
-            title="Search · ⌘K"
+            title="Search topics · ⌘K"
             aria-label="Search topics"
           >
-            <Search className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
+            <Search className="h-[18px] w-[18px]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
@@ -386,7 +363,7 @@ function TopBar({
             animate={{ scale: view.kind === "sticker" ? 1.1 : 1 }}
             transition={{ type: "spring", stiffness: 380, damping: 16 }}
             className={tool(view.kind === "sticker")}
-            title="Progress"
+            title="Your progress · time & goals"
             aria-label="Open your progress"
             style={
               view.kind === "sticker"
@@ -398,7 +375,7 @@ function TopBar({
                 : undefined
             }
           >
-            <Sticker className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
+            <Sticker className="h-[18px] w-[18px]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
@@ -406,107 +383,29 @@ function TopBar({
             onClick={onOpenCustomize}
             whileTap={{ scale: 0.88 }}
             className={tool(false)}
-            title="Customize"
+            title="Customize · fonts, sizes & themes"
             aria-label="Customize the site"
           >
-            <Sliders className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
+            <Sliders className="h-[18px] w-[18px]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
             type="button"
-            onClick={() => setThemeOpen((open) => !open)}
-            whileTap={{ scale: 0.96 }}
-            aria-expanded={themeOpen}
-            aria-haspopup="menu"
-            aria-label={`Theme: ${LAB_LABEL[lab]}. Choose appearance`}
-            title="Choose theme"
-            className="nav-tool-button group relative flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-2.5 transition-all hover:-translate-y-px sm:h-11 sm:gap-2.5 sm:px-3"
-            style={{
-              background: lab === "classic" ? "#F1E6D0" : THEME_CHIP[lab].bg,
-              color: lab === "dark" ? "#EEF2FF" : lab === "dune" ? "#FFE9C7" : "#3D2B1F",
-              boxShadow: `0 2.5px 0 ${THEME_CHIP[lab].side}, inset 0 1px 0 rgb(255 255 255 / 0.24)`,
-            }}
+            onClick={cycle}
+            whileTap={{ scale: 0.88 }}
+            className={tool(false)}
+            title={LAB_TITLE[lab]}
+            aria-label={LAB_TITLE[lab]}
           >
-            <span
-              className="grid h-6 w-6 shrink-0 place-items-center rounded-full"
-              style={{
-                background: THEME_CHIP[lab].bg,
-                color: THEME_CHIP[lab].ink,
-                boxShadow: "inset 0 0 0 1px rgb(255 255 255 / 0.24)",
-              }}
-            >
-              <LabGlyph id={lab} />
-            </span>
-            <span className="hidden font-display text-[calc(12px*var(--ui-scale))] font-semibold sm:inline">
-              {LAB_LABEL[lab]}
-            </span>
-            <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform ${themeOpen ? "rotate-180" : ""}`} strokeWidth={2.5} />
-          </m.button>
-
-          <AnimatePresence>
-            {themeOpen && (
-              <m.div
-                initial={{ opacity: 0, y: -8, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -6, scale: 0.97 }}
-                transition={{ duration: 0.16, ease: "easeOut" }}
-                role="menu"
-                aria-label="Choose appearance"
-                className="absolute top-[calc(100%+0.8rem)] right-0 z-[70] w-[min(330px,calc(100vw-1.5rem))] rounded-[26px] p-3"
-                style={{
-                  background: "var(--color-paper)",
-                  boxShadow: "0 18px 55px -22px rgb(0 0 0 / 0.42), 0 3px 0 var(--edge)",
-                  border: "1px solid color-mix(in oklab, var(--color-ink) 8%, transparent)",
-                }}
-              >
-                <div className="flex items-center justify-between px-2 pb-3 pt-1">
-                  <div>
-                    <p className="font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">Choose your atmosphere</p>
-                    <p className="mt-0.5 text-[calc(10.5px*var(--ui-scale))] text-ink-soft">Four ways to set the mood</p>
-                  </div>
-                  <span className="rounded-full bg-ink/[0.06] px-2.5 py-1 font-mono text-[calc(9px*var(--ui-scale))] tracking-wider text-ink-soft">THEMES</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {LAB_ORDER.map((option) => {
-                    const selected = lab === option;
-                    return (
-                      <button
-                        key={option}
-                        type="button"
-                        role="menuitemradio"
-                        aria-checked={selected}
-                        onClick={() => chooseTheme(option)}
-                        className={`group relative flex min-w-0 cursor-pointer flex-col overflow-hidden rounded-[19px] p-2.5 text-left transition-all hover:-translate-y-0.5 ${selected ? "ring-2 ring-mint ring-offset-2 ring-offset-[var(--color-paper)]" : "hover:bg-ink/[0.045]"}`}
-                        style={{ background: selected ? "color-mix(in oklab, var(--color-mint) 9%, var(--color-paper))" : "color-mix(in oklab, var(--color-ink) 4%, var(--color-paper))" }}
-                      >
-                        <span
-                          aria-hidden
-                          className="mb-2.5 flex h-12 w-full items-end justify-between overflow-hidden rounded-[13px] p-2"
-                          style={{
-                            background: option === "light"
-                              ? "linear-gradient(135deg,#FFFDF7 0%,#F8E8D2 55%,#FFB9A8 100%)"
-                              : option === "dark"
-                                ? "linear-gradient(135deg,#171421 0%,#342A50 58%,#7562A5 100%)"
-                                : option === "dune"
-                                  ? "linear-gradient(135deg,#332316 0%,#80572E 58%,#D6A65F 100%)"
-                                  : "linear-gradient(135deg,#2C2013 0%,#2C2013 49%,#FDF6E3 50%,#FDF6E3 100%)",
-                          }}
-                        >
-                          <span className="h-2 w-9 rounded-full bg-white/75" />
-                          <span className="h-5 w-5 rounded-full" style={{ background: THEME_CHIP[option].bg, boxShadow: "0 1px 4px rgb(0 0 0 / 0.18)" }} />
-                        </span>
-                        <span className="flex w-full items-center justify-between gap-1">
-                          <span className="font-display text-[calc(12px*var(--ui-scale))] font-semibold text-ink">{LAB_LABEL[option]}</span>
-                          {selected && <Check className="h-4 w-4 shrink-0 text-mint" strokeWidth={2.8} />}
-                        </span>
-                        <span className="mt-0.5 text-[calc(9.5px*var(--ui-scale))] leading-snug text-ink-soft">{LAB_DESCRIPTION[option]}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </m.div>
+            {/* the button wears today's lab; the toast announces the next one */}
+            {lab === "light" ? (
+              <Sun className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            ) : lab === "dark" ? (
+              <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            ) : (
+              <SunMoon className="h-[18px] w-[18px]" strokeWidth={2.2} />
             )}
-          </AnimatePresence>
+          </m.button>
         </nav>
       </header>
 
@@ -519,22 +418,22 @@ function TopBar({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.94 }}
             transition={{ type: "spring", stiffness: 380, damping: 24 }}
-            className="lab-toast fixed bottom-[calc(1.75rem+var(--sa-bottom))] left-1/2 z-[80]"
+            className="fixed bottom-[calc(1.75rem+var(--sa-bottom))] left-1/2 z-[80]"
             style={{ x: "-50%" }}
             role="status"
           >
-            <span className="flex items-center gap-2.5 rounded-full bg-paper px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold whitespace-nowrap text-ink puff">
+            <span className="flex items-center gap-2.5 rounded-full bg-paper px-5 py-2.5 font-display text-[13.5px] font-semibold whitespace-nowrap text-ink puff">
               <span
                 aria-hidden
                 className="h-3.5 w-3.5 shrink-0 rounded-full"
                 style={{
-                  background: THEME_CHIP[announce].bg,
-                  boxShadow:
-                    announce === "classic"
-                      ? "inset 0 0 0 2px rgb(143 122 92 / 0.5)"
-                      : announce === "dark" || announce === "dune"
-                        ? "inset 0 0 0 2px rgb(244 241 251 / 0.22)"
-                        : "inset 0 0 0 2px rgb(61 43 31 / 0.12)",
+                  background:
+                    announce === "light"
+                      ? "#FFD43B"
+                      : announce === "dark"
+                        ? "#2e2016"
+                        : "linear-gradient(90deg, #2c2013 50%, #fdf6e3 50%)",
+                  boxShadow: "inset 0 0 0 2px rgb(61 43 31 / 0.12)",
                 }}
               />
               {LAB_LABEL[announce]}
