@@ -52,10 +52,12 @@ export function BandWave({
   from,
   to,
   wave = 0,
+  className,
 }: {
   from: string;
   to: string;
   wave?: number;
+  className?: string;
 }) {
   return (
     /* pulled 1px into both neighbours: every junction here is a
@@ -67,7 +69,7 @@ export function BandWave({
       <svg
         viewBox="0 0 1440 90"
         preserveAspectRatio="none"
-        className="block h-[calc(46px*var(--ui-scale))] w-full sm:h-[calc(68px*var(--ui-scale))]"
+        className={`block h-[calc(46px*var(--ui-scale))] w-full sm:h-[calc(68px*var(--ui-scale))] ${className ?? ""}`}
       >
         {/* fill rides on style so var() strings with fallbacks resolve */}
         <path d={WAVES[wave % WAVES.length]} style={{ fill: to }} />
