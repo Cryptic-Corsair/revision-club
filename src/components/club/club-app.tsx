@@ -394,12 +394,12 @@ function TopBar({
             onClick={cycle}
             whileTap={{ scale: 0.88 }}
             className={tool(false)}
-            title={LAB_TITLE[lab]}
-            aria-label={LAB_TITLE[lab]}
+            title={LAB_LABEL[lab]}
+            aria-label={LAB_LABEL[lab]}
           >
             {/* the button wears today's lab; the toast announces the next one */}
             {lab === "light" ? (
-              <Sun className="h-[18px] w-[18px]" strokeWidth={2.2} />
+              <SunMoon className="h-[18px] w-[18px]" strokeWidth={2.2} />
             ) : lab === "dark" ? (
               <Moon className="h-[18px] w-[18px]" strokeWidth={2.2} />
             ) : (
