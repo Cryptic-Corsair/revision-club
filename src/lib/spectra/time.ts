@@ -3,7 +3,7 @@
 import { useCallback, useSyncExternalStore } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · reading time
+   IAL CHEM · reading time
    While the club is open we keep a quiet stopwatch: seconds land
    on the day they happen and, when a topic page is on the bench,
    on that topic too — so "how long did Topic 4 get vs Topic 7"
