@@ -8,7 +8,6 @@ import { accentOf } from "./bands";
 import {
   ACCENTS,
   DEFAULT_PREFS,
-  flashThemeAnim,
   LAB_DESCRIPTION,
   LAB_LABEL,
   LAB_ORDER,
@@ -233,7 +232,6 @@ export function CustomizePanel({
 
   const pickLab = (lab: Lab) => {
     if (lab === prefs.theme) return;
-    flashThemeAnim();
     setPrefs({ theme: lab });
   };
 
@@ -658,7 +656,6 @@ export function CustomizePanel({
               <button
                 type="button"
                 onClick={() => {
-                  flashThemeAnim();
                   setPrefs(DEFAULT_PREFS);
                 }}
                 className="mx-auto mt-2 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full bg-ink/[0.06] px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
