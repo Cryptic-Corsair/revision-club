@@ -702,7 +702,7 @@ function Footer({
                       open: onOpenSpec,
                     },
                     {
-                      icon: Sliders,
+                      icon: Sparkles,
                       chip: "bg-lemon/25 text-lemon",
                       label: "Customize",
                       hint: "fonts & themes",
