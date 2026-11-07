@@ -267,7 +267,7 @@ function TopBar({
   return (
     <>
       <header
-        className="fixed inset-x-0 z-50 flex justify-center pl-[max(0.625rem,var(--sa-left))] pr-[max(0.625rem,var(--sa-right))] sm:pl-[max(0.75rem,var(--sa-left))] sm:pr-[max(0.75rem,var(--sa-right))]"
+        className="site-header fixed inset-x-0 z-50 flex justify-center pl-[max(0.625rem,var(--sa-left))] pr-[max(0.625rem,var(--sa-right))] sm:pl-[max(0.75rem,var(--sa-left))] sm:pr-[max(0.75rem,var(--sa-right))]"
         style={{ top: "calc(0.625rem + var(--sa-top))" }}
       >
         <nav
@@ -414,7 +414,7 @@ function TopBar({
             >
               <LabGlyph id={lab} />
             </span>
-            <span className="hidden font-display text-[calc(12px*var(--ui-scale))] font-semibold sm:inline">
+            <span className="hidden font-display text-[12px] leading-none font-semibold sm:inline">
               {LAB_LABEL[lab]}
             </span>
             <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform ${themeOpen ? "rotate-180" : ""}`} strokeWidth={2.5} />
@@ -1019,7 +1019,7 @@ export default function ClubApp() {
             />
           )}
           {(customizeOpen || customizeMounted) && (
-            <CustomizePanel open={customizeOpen} onClose={closeCustomize} />
+            <CustomizePanel open={customizeOpen} onClose={closeCustomize} onHome={goHome} onOpenSpec={openSpec} onOpenPack={openPack} onOpenProgress={openSticker} onOpenLegal={openLegal} />
           )}
   
           <main className="relative flex-1">
