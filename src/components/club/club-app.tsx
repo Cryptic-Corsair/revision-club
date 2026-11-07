@@ -562,271 +562,207 @@ function Footer({
   onOpenSpec: () => void;
   onOpenLegal: () => void;
   onSearch: () => void;
-  /* the surface the cocoa wave rises from — home hands in its own
-     band colour so the seam above stays continuous after dark */
   bandFrom?: string;
 }) {
-  const [booped, setBooped] = useState(false);
   const hours = Math.round(TOTALS.minutes / 60);
 
-  const boop = () => {
-    setBooped(true);
-    setTimeout(() => setBooped(false), 2200);
-  };
+  const tools = [
+    {
+      icon: Sticker,
+      label: "Progress",
+      detail: "Reading time and goals",
+      open: onOpenSticker,
+    },
+    {
+      icon: ClipboardList,
+      label: "Revision pack",
+      detail: "Your checked specification points",
+      open: onOpenPack,
+    },
+    {
+      icon: BookMarked,
+      label: "Specification",
+      detail: "Browse the course statements",
+      open: onOpenSpec,
+    },
+    {
+      icon: Sparkles,
+      label: "Appearance",
+      detail: "Themes, colours and type",
+      open: onOpenCustomize,
+    },
+    {
+      icon: Search,
+      label: "Search",
+      detail: "Find a topic or note · ⌘K",
+      open: onSearch,
+    },
+  ] as const;
 
   return (
-    <footer className="mt-auto">
+    <footer className="club-footer mt-auto">
       <div
         aria-hidden
         className="h-[calc(54px*var(--ui-scale))] sm:h-[calc(74px*var(--ui-scale))]"
         style={{ background: bandFrom }}
       >
-        <svg
-          viewBox="0 0 1440 90"
-          preserveAspectRatio="none"
-          className="block h-full w-full"
-        >
+        <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-full w-full">
           <path
-            d="M0,52 C160,92 340,8 540,30 C740,52 900,96 1100,68 C1260,46 1370,22 1440,40 L1440,90 L0,90 Z"
+            d="M0 48 C190 80 350 12 555 31 C760 50 900 88 1105 65 C1265 47 1375 27 1440 39 L1440 90 L0 90 Z"
             fill="var(--color-cocoa)"
           />
         </svg>
       </div>
 
-      <div className="bg-cocoa text-milk">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          {/* ————— three columns: the club · the units · the toolkit —————
-              two columns until tablet, where three would squeeze every
-              caption into four lines */}
-          <div className="grid gap-10 py-9 sm:py-11 md:grid-cols-2 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1.25fr)_minmax(0,0.9fr)] lg:gap-8">
-            {/* who we are */}
-            <div className="max-w-sm">
-              <div className="flex items-center gap-3">
-                <LogoMark size={38} lab="light" />
-                <span className="font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight">
+      <div className="club-footer-body bg-cocoa text-milk">
+        <div className="club-footer-container mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="footer-intro flex flex-col gap-6 border-b border-white/[0.11] py-8 sm:py-10 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-center gap-4">
+              <LogoMark size={44} lab="light" />
+              <div className="min-w-0">
+                <div className="font-display text-[calc(21px*var(--ui-scale))] font-bold leading-none tracking-tight">
                   Reaction Club
+                </div>
+                <p className="mt-2 text-[calc(11px*var(--ui-scale))] font-bold uppercase tracking-[0.16em] text-milk/45">
+                  Pearson Edexcel · International A Level Chemistry
+                </p>
+              </div>
+            </div>
+
+            <div className="footer-stat-grid grid grid-cols-3 divide-x divide-white/[0.12] rounded-2xl border border-white/[0.1] bg-white/[0.035] px-1 py-3 sm:min-w-[390px] sm:px-3">
+              {[
+                { value: String(UNITS.length), label: "Units" },
+                { value: String(TOTALS.topics), label: "Topics" },
+                { value: "≈" + hours + " h", label: "Reading time" },
+              ].map((stat) => (
+                <div key={stat.label} className="flex flex-col items-center justify-center px-2">
+                  <span className="font-display text-[calc(20px*var(--ui-scale))] font-bold leading-none tabular-nums">
+                    {stat.value}
+                  </span>
+                  <span className="mt-1.5 text-[calc(10px*var(--ui-scale))] font-bold uppercase tracking-[0.12em] text-milk/45">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-10 py-8 sm:py-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(260px,0.75fr)] lg:gap-14">
+            <section aria-labelledby="footer-course-heading">
+              <div className="mb-4 flex items-end justify-between gap-4">
+                <div>
+                  <p className="footer-eyebrow">The course</p>
+                  <h2 id="footer-course-heading" className="mt-1 font-display text-[calc(19px*var(--ui-scale))] font-semibold tracking-tight">
+                    Explore by unit
+                  </h2>
+                </div>
+                <span className="pb-1 font-mono text-[calc(10px*var(--ui-scale))] tracking-[0.12em] text-milk/35">
+                  WCH11 — WCH16
                 </span>
               </div>
-              <p className="mt-3 text-[calc(14px*var(--ui-scale))] leading-relaxed text-milk/80">
-                Notes for every topic in the course — read them, work the
-                examples, tick what you&apos;ve revised. Reading time is
-                counted topic by topic.
-              </p>
 
-              {/* the whole course, as three quiet numbers */}
-              <div className="mt-5 flex flex-wrap gap-2">
-                {[
-                  { icon: Atom, value: String(UNITS.length), label: "units" },
-                  { icon: ListChecks, value: String(TOTALS.topics), label: "topics" },
-                  { icon: Clock, value: `≈${hours} h`, label: "of reading" },
-                ].map((s) => (
-                  <span
-                    key={s.label}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] py-1.5 pl-3 pr-3.5"
-                  >
-                    <s.icon className="h-3.5 w-3.5 text-lemon" strokeWidth={2.2} />
-                    <span className="font-display text-[calc(13px*var(--ui-scale))] font-bold leading-none">
-                      {s.value}
-                    </span>
-                    <span className="text-[calc(11px*var(--ui-scale))] font-bold leading-none text-milk/60">
-                      {s.label}
-                    </span>
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-5 flex items-end gap-1">
-                <Mascot
-                  main="#FFD43B"
-                  size={88}
-                  boop
-                  onBoop={boop}
-                  bubbles={false}
-                />
-                <AnimatePresence>
-                  {booped && (
-                    <m.div
-                      initial={{ opacity: 0, y: 8, scale: 0.85 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.85 }}
-                      className="mb-4"
-                    >
-                      <SpeechBubble className="px-4 py-2.5">
-                        <span className="font-display text-[calc(13px*var(--ui-scale))] font-semibold text-ink">
-                          Start with a unit.
-                        </span>
-                      </SpeechBubble>
-                    </m.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </div>
-
-            {/* the six units — real bench marks now, not plain dots */}
-            <div>
-              <div className="font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.2em] text-milk/60 uppercase">
-                Units
-              </div>
-              <div className="mt-4 flex flex-col gap-2.5">
-                {UNITS.map((u) => {
-                  return (
-                    <button
-                      key={u.code}
-                      type="button"
-                      onClick={() => onOpenUnit(u.code)}
-                      className="footer-action-button group flex cursor-pointer items-center gap-3 rounded-2xl px-2.5 py-2 text-left"
-                    >
-                      <span
-                        className="grid h-8 w-8 shrink-0 place-items-center rounded-full font-display text-[calc(13.5px*var(--ui-scale))] font-bold transition-transform group-hover:scale-110"
-                        style={{ background: u.candy.main, color: readableInk(u.candy.main) }}
-                      >
-                        {u.index}
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block text-[calc(13px*var(--ui-scale))] font-bold leading-tight text-milk/80 transition-colors group-hover:text-milk">
-                          Unit {u.index} · {u.shortTitle}
-                        </span>
-                        <span className="mt-0.5 block text-[calc(10.5px*var(--ui-scale))] font-bold uppercase tracking-[0.12em] text-milk/40">
-                          {u.code}
-                        </span>
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* the toolkit */}
-            <div>
-              <div className="font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.2em] text-milk/60 uppercase">
-                Toolkit
-              </div>
-              <div className="mt-4 flex flex-col gap-3">
-                {(
-                  [
-                    {
-                      icon: Sticker,
-                      chip: "bg-mint/25 text-mint",
-                      label: "Progress",
-                      hint: "time & goals",
-                      open: onOpenSticker,
-                    },
-                    {
-                      icon: ClipboardList,
-                      chip: "bg-lemon/25 text-lemon",
-                      label: "Revision pack",
-                      hint: "ticked spec points",
-                      open: onOpenPack,
-                    },
-                    {
-                      icon: BookMarked,
-                      chip: "bg-lemon/25 text-lemon",
-                      label: "Spec index",
-                      hint: "statements A to Z",
-                      open: onOpenSpec,
-                    },
-                    {
-                      icon: Sparkles,
-                      chip: "bg-lemon/25 text-lemon",
-                      label: "Customize",
-                      hint: "fonts & themes",
-                      open: onOpenCustomize,
-                    },
-                    {
-                      icon: Search,
-                      chip: "bg-white/10 text-milk/80",
-                      label: "Search",
-                      hint: "⌘K",
-                      open: onSearch,
-                    },
-                  ] as const
-                ).map((row) => (
+              <div className="footer-unit-grid grid gap-2 sm:grid-cols-2">
+                {UNITS.map((u) => (
                   <button
-                    key={row.label}
+                    key={u.code}
                     type="button"
-                    onClick={row.open}
-                    className="footer-action-button group flex cursor-pointer items-center gap-2.5 rounded-2xl px-2.5 py-2 text-left"
+                    onClick={() => onOpenUnit(u.code)}
+                    className="footer-unit-link group flex min-w-0 items-center gap-3 rounded-xl px-3 py-3 text-left"
                   >
                     <span
-                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110 ${row.chip}`}
+                      className="grid h-9 w-9 shrink-0 place-items-center rounded-xl font-display text-[calc(14px*var(--ui-scale))] font-bold"
+                      style={{
+                        background: "color-mix(in oklab, " + u.candy.main + " 20%, transparent)",
+                        color: u.candy.main,
+                        border: "1px solid color-mix(in oklab, " + u.candy.main + " 28%, transparent)",
+                      }}
                     >
-                      <row.icon className="h-4 w-4" strokeWidth={2.2} />
+                      {String(u.index).padStart(2, "0")}
                     </span>
-                    <span className="min-w-0">
-                      <span className="block text-[calc(13px*var(--ui-scale))] font-bold leading-tight text-milk/80 transition-colors group-hover:text-milk">
-                        {row.label}
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85 transition-colors group-hover:text-milk">
+                        {u.shortTitle}
                       </span>
-                      <span className="mt-0.5 block truncate text-[calc(11px*var(--ui-scale))] font-semibold text-milk/45">
-                        {row.hint}
+                      <span className="mt-1 block text-[calc(9.5px*var(--ui-scale))] font-bold uppercase tracking-[0.14em] text-milk/35">
+                        {u.code}
                       </span>
                     </span>
+                    <ChevronRight className="h-4 w-4 shrink-0 text-milk/25 transition-transform group-hover:translate-x-0.5 group-hover:text-milk/70" />
                   </button>
                 ))}
               </div>
-            </div>
-          </div>
+            </section>
 
-          {/* ————— good to know ————— */}
-          <div className="grid gap-2 rounded-[calc(22px*var(--ui-scale))] border border-white/[0.08] bg-white/[0.04] p-3 sm:grid-cols-3 sm:p-4">
-            {(
-              [
-                {
-                  icon: ShieldCheck,
-                  chip: "text-mint",
-                  text: "Private — progress never leaves this browser.",
-                },
-                {
-                  icon: SunMoon,
-                  chip: "text-lemon",
-                  text: "Four themes — one tap in Customize.",
-                },
-                {
-                  icon: Command,
-                  chip: "text-milk/80",
-                  text: "⌘K finds topics, notes & spec points.",
-                },
-              ] as const
-            ).map((n) => (
-              <div key={n.text} className="flex items-start gap-2.5 px-1.5 py-1.5">
-                <n.icon className={`mt-0.5 h-4.5 w-4.5 shrink-0 ${n.chip}`} strokeWidth={2} />
-                <p className="text-[calc(12px*var(--ui-scale))] leading-snug font-semibold text-milk/65">
-                  {n.text}
-                </p>
+            <section aria-labelledby="footer-tools-heading">
+              <p className="footer-eyebrow">Your workspace</p>
+              <h2 id="footer-tools-heading" className="mt-1 font-display text-[calc(19px*var(--ui-scale))] font-semibold tracking-tight">
+                Study tools
+              </h2>
+              <div className="mt-4 flex flex-col">
+                {tools.map((tool) => (
+                  <button
+                    key={tool.label}
+                    type="button"
+                    onClick={tool.open}
+                    className="footer-tool-link group flex items-center gap-3 py-3 text-left"
+                  >
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-white/[0.1] bg-white/[0.045] text-milk/65 transition-colors group-hover:border-white/[0.2] group-hover:bg-white/[0.09] group-hover:text-milk">
+                      <tool.icon className="h-4 w-4" strokeWidth={2} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85 transition-colors group-hover:text-milk">
+                        {tool.label}
+                      </span>
+                      <span className="mt-0.5 block truncate text-[calc(10.5px*var(--ui-scale))] font-semibold text-milk/40">
+                        {tool.detail}
+                      </span>
+                    </span>
+                    <ChevronRight className="h-4 w-4 shrink-0 text-milk/20 transition-transform group-hover:translate-x-0.5 group-hover:text-milk/60" />
+                  </button>
+                ))}
               </div>
-            ))}
+            </section>
           </div>
 
-          {/* ————— colophon ————— */}
-          <div className="mt-7 flex flex-col gap-4 border-t border-white/10 pt-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-2xl text-[calc(11.5px*var(--ui-scale))] leading-relaxed font-semibold text-milk/55">
-              © 2026 Reaction Club · Notes for the Pearson Edexcel
-              International A Level Chemistry (2018) specification,
-              WCH11–WCH16 · not affiliated with or endorsed by Pearson
-              Education Ltd.
-              <span className="ml-1 whitespace-nowrap text-milk/35">
-                · rev 4 · Nov 2026
-              </span>
+          <div className="footer-note flex flex-col gap-3 border-y border-white/[0.1] py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-2 text-[calc(11px*var(--ui-scale))] font-semibold text-milk/55">
+              <ShieldCheck className="h-4 w-4 shrink-0 text-mint/80" strokeWidth={2} />
+              Your revision progress is stored locally in this browser.
+            </div>
+            <button
+              type="button"
+              onClick={onSearch}
+              className="inline-flex w-fit items-center gap-2 text-[calc(11px*var(--ui-scale))] font-bold text-milk/55 transition-colors hover:text-milk"
+            >
+              <Command className="h-3.5 w-3.5" />
+              Search shortcut
+              <kbd className="rounded-md border border-white/[0.14] bg-white/[0.05] px-1.5 py-0.5 font-mono text-[10px] text-milk/75">
+                ⌘ K
+              </kbd>
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-4 py-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-2xl text-[calc(10.5px*var(--ui-scale))] leading-relaxed font-semibold text-milk/40">
+              © 2026 Reaction Club · Notes for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. Not affiliated with or endorsed by Pearson Education Ltd.
+              <span className="ml-1 whitespace-nowrap text-milk/30">· rev 4 · Nov 2026</span>
             </p>
-            <div className="flex shrink-0 flex-wrap items-center gap-2.5 self-start sm:self-auto">
+            <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 self-start sm:self-auto">
               <button
                 type="button"
                 onClick={onOpenLegal}
-                className="footer-action-button group inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85"
+                className="footer-utility-link"
                 aria-label="Open the disclaimer and legal information page"
               >
-                <ShieldCheck
-                  className="h-4 w-4 transition-transform group-hover:scale-110"
-                  strokeWidth={2.2}
-                />
                 Disclaimer &amp; legal
               </button>
               <button
                 type="button"
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="footer-action-button group inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85"
+                className="footer-utility-link inline-flex items-center gap-1.5"
               >
-                <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" strokeWidth={2.2} />
                 Back to top
+                <ArrowUp className="h-3.5 w-3.5" strokeWidth={2.2} />
               </button>
             </div>
           </div>
