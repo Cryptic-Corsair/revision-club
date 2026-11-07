@@ -13,12 +13,10 @@ import {
   Settings,
   ClipboardList,
   ArrowUp,
+  ArrowRight,
   Command,
   ShieldCheck,
   BookMarked,
-  Atom,
-  ListChecks,
-  Clock,
   Check,
   ChevronDown,
 } from "./icons";
@@ -42,7 +40,6 @@ import {
 import { Home } from "./home";
 import { Desk } from "./desk";
 import { UnitView } from "./unit-view";
-import { Mascot, SpeechBubble, readableInk } from "./bits";
 import { SpecMapProvider, SpecMapTrigger } from "./spec-map";
 
 /* ————— the lazy rooms —————
@@ -687,7 +684,7 @@ function Footer({
                         {u.code}
                       </span>
                     </span>
-                    <ChevronRight className="h-4 w-4 shrink-0 text-milk/25 transition-transform group-hover:translate-x-0.5 group-hover:text-milk/70" />
+                    <ArrowRight className="h-4 w-4 shrink-0 text-milk/25 transition-transform group-hover:translate-x-0.5 group-hover:text-milk/70" />
                   </button>
                 ))}
               </div>
@@ -717,7 +714,7 @@ function Footer({
                         {tool.detail}
                       </span>
                     </span>
-                    <ChevronRight className="h-4 w-4 shrink-0 text-milk/20 transition-transform group-hover:translate-x-0.5 group-hover:text-milk/60" />
+                    <ArrowRight className="h-4 w-4 shrink-0 text-milk/20 transition-transform group-hover:translate-x-0.5 group-hover:text-milk/60" />
                   </button>
                 ))}
               </div>
