@@ -1846,9 +1846,3 @@ html.dark:not(.dune) .legal-closing {
   }
 }
 
-
-  background:
-    radial-gradient(ellipse at 100% 0%, rgb(142 170 145 / 0.12), transparent 46%),
-    var(--color-paper);
-  border-color: rgb(201 222 195 / 0.11);
-}
