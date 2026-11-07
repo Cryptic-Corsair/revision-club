@@ -2,7 +2,9 @@
 
 import { useEffect, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
-import { Check, RotateCcw, Sparkles, Settings, X, Palette, Home, BookOpen, ClipboardList, Sticker, ShieldCheck, ArrowRight } from "./icons";
+import { Check, RotateCcw, Sparkles, Settings,
+  Maximize,
+  Minimize, X, Palette, Home, BookOpen, ClipboardList, Sticker, ShieldCheck, ArrowRight } from "./icons";
 import { readableInk, shade, tint } from "./bits";
 import { accentOf } from "./bands";
 import {
@@ -206,6 +208,8 @@ export function CustomizePanel({
   onOpenPack,
   onOpenProgress,
   onOpenLegal,
+  fullscreen,
+  onToggleFullscreen,
 }: {
   open: boolean;
   onClose: () => void;
@@ -214,6 +218,8 @@ export function CustomizePanel({
   onOpenPack: () => void;
   onOpenProgress: () => void;
   onOpenLegal: () => void;
+  fullscreen: boolean;
+  onToggleFullscreen: () => void;
 }) {
   const prefs = usePrefs();
 
@@ -283,7 +289,7 @@ export function CustomizePanel({
           />
           <m.aside
             role="dialog"
-            aria-label="Customize Reaction Club"
+            aria-label="Customize IAL CHEM"
             initial={{ x: "110%" }}
             animate={{ x: 0 }}
             exit={{ x: "110%" }}
@@ -344,7 +350,7 @@ export function CustomizePanel({
                 <div className="mb-3 flex items-center justify-between">
                   <div>
                     <p className="font-display text-[13px] font-bold tracking-[0.12em] text-ink-faint uppercase">Navigate</p>
-                    <p className="mt-1 text-[12px] text-ink-soft">Go directly to a section of Reaction Club</p>
+                    <p className="mt-1 text-[12px] text-ink-soft">Go directly to a section of IAL CHEM</p>
                   </div>
                   <ArrowRight className="h-4 w-4 text-ink-faint" />
                 </div>
@@ -372,6 +378,20 @@ export function CustomizePanel({
                     </button>
                   ))}
                 </div>
+                <button
+                  type="button"
+                  onClick={() => { onToggleFullscreen(); onClose(); }}
+                  className="mt-2 flex w-full items-center gap-3 rounded-[15px] border border-ink/[0.07] bg-paper px-3 py-3 text-left transition-colors hover:border-ink/20 hover:bg-ink/[0.035]"
+                  aria-label={fullscreen ? "Exit full screen mode" : "Enter full screen mode"}
+                >
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ink/[0.055] text-ink-soft">
+                    {fullscreen ? <Minimize className="h-[17px] w-[17px]" /> : <Maximize className="h-[17px] w-[17px]" />}
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-display text-[13px] font-semibold text-ink">{fullscreen ? "Exit full screen" : "Full screen mode"}</span>
+                    <span className="mt-0.5 block text-[10.5px] leading-snug text-ink-faint">Use the full display for a more focused workspace</span>
+                  </span>
+                </button>
               </section>
 
               <Section
