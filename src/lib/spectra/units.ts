@@ -8,8 +8,8 @@ import { WCH16_TOPICS } from "./content/wch16";
 
 /* ═══════════════════════════════════════════════════════════════
    The six units of the IAL chemistry course — each wearing its
-   own candy colour across the site, and each with a glyph that
-   tells its chemistry story (see UNIT_GLYPH in components/club).
+   own candy colour across the site, labelled everywhere by its
+   plain number.
    ═══════════════════════════════════════════════════════════════ */
 
 export const UNITS: Unit[] = [

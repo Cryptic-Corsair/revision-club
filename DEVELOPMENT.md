@@ -283,13 +283,10 @@ nothing in dark room mode uses light-only tokens — and there are many.
   from `units.ts`/`types.ts` on purpose — don't reintroduce it. Chemistry
   prose about flame tests stays, of course; it just never claims a unit
   *is* a colour or an element.
-- **Every unit has a glyph.** `UNIT_GLYPH` in `icons.tsx` maps each unit to
-  a house icon that tells its chemistry story — WCH11 `BondDuo` (structure
-  & bonding), WCH12 `Flame` (energetics), WCH13 `TestTubes` (practical I),
-  WCH14 `Balance` (rates & equilibria), WCH15 `HexRing` (aromatics &
-  nitrogen), WCH16 `Burette` (practical II). Wherever a unit needs a face —
-  home cards, the unit badge, desk tray, footer, sticker book — render
-  `<UnitGlyph code={…} />`, not a bare number.
+- **Units are just numbers.** Wherever a unit needs a badge — home cards, the
+  unit header pill, desk tray, footer, sticker book — render its plain number
+  (`u.index` or `code.replace("WCH", "")`). A per-unit glyph system
+  (`UNIT_GLYPH`/`UnitGlyph`) was tried and reverted — don't rebuild it.
 - **Typography is variable-font driven** via the `--font-*` variables; respect
   the head/body font prefs rather than hardcoding families.
 

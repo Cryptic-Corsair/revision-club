@@ -1,7 +1,7 @@
 "use client";
 
 import { m } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check, Clock, PieChart, Sparkles, Target, Timer, UnitGlyph } from "./icons";
+import { ArrowLeft, ArrowRight, Check, Clock, PieChart, Sparkles, Target, Timer } from "./icons";
 import type { Unit } from "@/lib/spectra/types";
 import { UNITS } from "@/lib/spectra/units";
 import { useRevised } from "@/lib/spectra/progress";
@@ -56,10 +56,9 @@ export function UnitView({
       <header className="mt-8">
         <PopIn delay={0.05} className="flex flex-wrap items-center gap-3">
           <span
-            className="inline-flex rotate-[-2deg] items-center gap-2.5 rounded-2xl px-4 py-2 font-display text-[calc(17px*var(--ui-scale))] font-bold text-white"
+            className="inline-block rotate-[-2deg] rounded-2xl px-4 py-2 font-display text-[calc(17px*var(--ui-scale))] font-bold text-white"
             style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
           >
-            <UnitGlyph code={unit.code} className="h-5.5 w-5.5" strokeWidth={2.1} />
             {unit.code}
           </span>
           <Chip>

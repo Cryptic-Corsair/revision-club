@@ -13,7 +13,6 @@ import {
   Sticker,
   Target,
   Timer,
-  UnitGlyph,
 } from "./icons";
 import type { Unit, UnitCode } from "@/lib/spectra/types";
 import { TOTALS } from "@/lib/spectra/units";
@@ -365,10 +364,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
 
                   <div className="flex items-center gap-3">
                     <span
-                      className="grid h-12 w-12 place-items-center rounded-[calc(16px*var(--ui-scale))]"
+                      className="grid h-12 w-12 place-items-center rounded-[calc(16px*var(--ui-scale))] font-display text-[calc(20px*var(--ui-scale))] font-bold"
                       style={{ background: tint(u.candy.main, 15), color: shade(u.candy.main, 62) }}
                     >
-                      <UnitGlyph code={u.code} className="h-5.5 w-5.5" strokeWidth={2} />
+                      {u.index}
                     </span>
                     <div>
                       <div

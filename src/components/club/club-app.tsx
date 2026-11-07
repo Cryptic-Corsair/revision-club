@@ -19,7 +19,6 @@ import {
   Atom,
   ListChecks,
   Clock,
-  UnitGlyph,
 } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { UNITS, getUnit, getTopic, TOTALS } from "@/lib/spectra/units";
@@ -586,10 +585,10 @@ function Footer({
                       className="group flex cursor-pointer items-center gap-3 text-left"
                     >
                       <span
-                        className="grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110"
+                        className="grid h-8 w-8 shrink-0 place-items-center rounded-full font-display text-[calc(13.5px*var(--ui-scale))] font-bold transition-transform group-hover:scale-110"
                         style={{ background: u.candy.main, color: readableInk(u.candy.main) }}
                       >
-                        <UnitGlyph code={u.code} className="h-4.5 w-4.5" strokeWidth={2.1} />
+                        {u.index}
                       </span>
                       <span className="min-w-0">
                         <span className="block text-[calc(13px*var(--ui-scale))] font-bold leading-tight text-milk/80 transition-colors group-hover:text-milk">
