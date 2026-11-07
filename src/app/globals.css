@@ -1825,3 +1825,302 @@ html.dark:not(.dune) .legal-room { --legal-rust: #e0c4eb; }
   }
 }
 
+
+
+/* ═════════ Sample note · focused reading interface ═════════
+   Scoped to the Sample Notes preview; the legal/disclaimer page and
+   the standard note reader keep their own established treatments.
+*/
+.sample-note-page {
+  --sample-rule: color-mix(in oklab, var(--color-ink) 10%, transparent);
+}
+.sample-note-page .sample-note-hero {
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  border-radius: 32px;
+  background:
+    radial-gradient(ellipse at 86% 20%, color-mix(in oklab, var(--sample-main) 18%, transparent), transparent 36%),
+    radial-gradient(ellipse at 6% 100%, color-mix(in oklab, #d99a4b 13%, transparent), transparent 43%),
+    linear-gradient(135deg, color-mix(in oklab, var(--color-paper) 96%, white), var(--color-paper));
+  box-shadow: 0 3px 0 var(--edge), 0 28px 70px -52px rgb(0 0 0 / .42);
+}
+.sample-note-page .sample-note-hero > .relative.z-10 {
+  max-width: min(72%, 780px);
+}
+.sample-note-page .sample-note-hero .legal-hero-mark {
+  width: min(34%, 350px);
+  right: 3%;
+  opacity: .46;
+}
+.sample-note-page .sample-note-layout {
+  align-items: start;
+}
+.sample-note-page .sample-note-index {
+  padding: 15px;
+  border: 1px solid var(--sample-rule);
+  border-radius: 22px;
+  background: color-mix(in oklab, var(--color-paper) 94%, var(--color-ink) 6%);
+  box-shadow: 0 2px 0 var(--edge), 0 18px 38px -32px rgb(0 0 0 / .36);
+}
+.sample-note-page .sample-note-index-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 3px 12px;
+}
+.sample-note-page .sample-note-index-position {
+  margin-top: 3px;
+  color: var(--color-ink);
+  font-family: var(--font-display), sans-serif;
+  font-size: calc(26px * var(--ui-scale));
+  font-weight: 800;
+  letter-spacing: -.055em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.sample-note-page .sample-note-index-position span {
+  color: var(--color-ink-faint);
+  font-size: .62em;
+  letter-spacing: -.02em;
+}
+.sample-note-page .sample-note-index-count {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--sample-main) 12%, var(--color-paper));
+  color: var(--color-ink-soft);
+  font-family: var(--font-display), sans-serif;
+  font-size: calc(9px * var(--ui-scale));
+  font-weight: 800;
+  white-space: nowrap;
+}
+.sample-note-page .sample-note-index-progress {
+  height: 4px;
+  overflow: hidden;
+  margin: 0 3px 12px;
+  border-radius: 99px;
+  background: color-mix(in oklab, var(--color-ink) 9%, transparent);
+}
+.sample-note-page .sample-note-index-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  transition: width 220ms ease;
+}
+.sample-note-page .sample-note-index-nav {
+  max-height: min(62dvh, 620px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--color-ink) 20%, transparent) transparent;
+}
+.sample-note-page .sample-note-index-link {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  padding: 9px 10px;
+  font-size: calc(11.5px * var(--ui-scale));
+  line-height: 1.35;
+}
+.sample-note-page .sample-note-index-link span:first-child {
+  display: inline-grid;
+  min-width: 40px;
+  height: 24px;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 7px;
+  background: color-mix(in oklab, var(--color-ink) 5%, transparent);
+  color: var(--color-ink-faint);
+  font-size: calc(9px * var(--ui-scale));
+  font-variant-numeric: tabular-nums;
+}
+.sample-note-page .sample-note-index-link span:last-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sample-note-page .sample-note-index-link:hover {
+  background: color-mix(in oklab, var(--sample-main) 7%, var(--color-paper));
+}
+.sample-note-page .sample-note-index-link.is-active {
+  border-color: color-mix(in oklab, var(--sample-main) 30%, transparent);
+  background: color-mix(in oklab, var(--sample-main) 13%, var(--color-paper));
+  color: var(--color-ink);
+  font-weight: 800;
+}
+.sample-note-page .sample-note-index-link.is-active span:first-child {
+  background: var(--sample-main);
+  color: #fff;
+}
+.sample-note-page .sample-note-overview {
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 100% 0%, color-mix(in oklab, var(--sample-main) 8%, transparent), transparent 46%),
+    color-mix(in oklab, var(--color-paper) 95%, var(--color-ink) 5%);
+}
+.sample-note-page .sample-note-opening {
+  border-radius: 18px;
+  border-left: 3px solid var(--sample-main);
+  box-shadow: 0 2px 0 var(--edge);
+}
+.sample-note-page .sample-note-clause {
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 19px;
+  padding: 34px 0 38px;
+  border-bottom-color: var(--sample-rule);
+}
+.sample-note-page .sample-note-section-number {
+  width: 38px;
+  border-radius: 13px;
+  border-color: color-mix(in oklab, var(--sample-main) 25%, var(--sample-rule));
+  background: color-mix(in oklab, var(--sample-main) 11%, var(--color-paper));
+  color: var(--color-ink);
+  font-size: calc(10px * var(--ui-scale));
+}
+.sample-note-page .sample-note-clause .legal-clause-line {
+  margin-top: 14px;
+  background: var(--sample-rule);
+}
+.sample-note-page .sample-note-clause-content {
+  min-width: 0;
+}
+.sample-note-page .sample-note-section-meta {
+  min-height: 38px;
+}
+.sample-note-page .sample-note-clause-content h3 {
+  max-width: 34ch;
+  margin-top: 15px;
+  font-size: calc(clamp(23px, 2.2vw, 29px) * var(--ui-scale));
+  line-height: 1.16;
+  letter-spacing: -.035em;
+}
+.sample-note-page .sample-note-spec-statement {
+  border: 1px solid color-mix(in oklab, var(--sample-accent) 24%, var(--sample-rule));
+  border-left: 4px solid var(--sample-accent);
+  border-radius: 15px;
+  background: color-mix(in oklab, var(--sample-accent) 7%, var(--color-paper));
+  padding: 16px 19px;
+}
+.sample-note-page .sample-note-statement-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: color-mix(in oklab, var(--sample-accent) 66%, var(--color-ink));
+  font-size: calc(10px * var(--ui-scale));
+  letter-spacing: .16em;
+}
+.sample-note-page .sample-note-statement-label::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sample-accent);
+  content: "";
+}
+.sample-note-page .sample-note-statement-copy {
+  max-width: 68ch;
+  font-size: calc(15px * var(--ui-scale));
+  line-height: 1.8;
+  font-style: normal;
+}
+.sample-note-page .sample-note-clause-content > .mt-6 {
+  gap: 24px;
+}
+.sample-note-page .sample-note-clause-content .legal-card {
+  border-radius: 17px;
+}
+.sample-note-page .sample-note-closing {
+  border-radius: 24px;
+}
+.sample-note-page .sample-note-index-link:focus-visible {
+  outline: 2px solid var(--sample-main);
+  outline-offset: 2px;
+}
+html.dark .sample-note-page .sample-note-index,
+html.dune .sample-note-page .sample-note-index {
+  background: color-mix(in oklab, var(--color-paper) 94%, white 6%);
+  border-color: color-mix(in oklab, var(--color-ink) 12%, transparent);
+}
+html.dark .sample-note-page .sample-note-index-link.is-active,
+html.dune .sample-note-page .sample-note-index-link.is-active {
+  background: color-mix(in oklab, var(--sample-main) 18%, var(--color-paper));
+}
+html.dark .sample-note-page .sample-note-spec-statement,
+html.dune .sample-note-page .sample-note-spec-statement {
+  background: color-mix(in oklab, var(--sample-accent) 9%, var(--color-paper));
+}
+@media (max-width: 1023px) {
+  .sample-note-page .sample-note-index {
+    position: relative;
+    padding: 13px;
+  }
+  .sample-note-page .sample-note-index-nav {
+    max-height: none;
+    overflow-y: hidden;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .sample-note-page .sample-note-index-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .sample-note-page .sample-note-index-link {
+    width: auto;
+    min-width: min(190px, 58vw);
+    max-width: 245px;
+    flex: 0 0 auto;
+  }
+}
+@media (max-width: 639px) {
+  .sample-note-page .sample-note-hero {
+    min-height: 0;
+    border-radius: 24px;
+    padding: 25px 21px 28px;
+  }
+  .sample-note-page .sample-note-hero > .relative.z-10 {
+    max-width: 100%;
+  }
+  .sample-note-page .sample-note-hero .legal-hero-mark {
+    width: 140px;
+    right: -38px;
+    bottom: -42px;
+    top: auto;
+    opacity: .17;
+  }
+  .sample-note-page .sample-note-index-head {
+    padding-bottom: 9px;
+  }
+  .sample-note-page .sample-note-index-position {
+    font-size: calc(23px * var(--ui-scale));
+  }
+  .sample-note-page .sample-note-clause {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 10px;
+    padding: 26px 0 29px;
+  }
+  .sample-note-page .sample-note-section-number {
+    width: 28px;
+    border-radius: 9px;
+    font-size: calc(8.5px * var(--ui-scale));
+  }
+  .sample-note-page .sample-note-section-meta {
+    gap: 9px;
+  }
+  .sample-note-page .sample-note-clause-content h3 {
+    margin-top: 12px;
+    font-size: calc(21px * var(--ui-scale));
+  }
+  .sample-note-page .sample-note-spec-statement {
+    padding: 13px 14px;
+  }
+  .sample-note-page .sample-note-statement-copy {
+    font-size: calc(14px * var(--ui-scale));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sample-note-page .sample-note-index-progress span {
+    transition: none;
+  }
+}
