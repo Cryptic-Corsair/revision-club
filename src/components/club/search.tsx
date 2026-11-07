@@ -237,12 +237,12 @@ export function SearchPalette({
                             className={`group flex min-h-[76px] min-w-0 items-center gap-3 rounded-[16px] border px-3 py-3 text-left transition-colors ${active ? "border-grape/25 bg-grape/[0.065]" : "border-transparent hover:border-ink/[0.09] hover:bg-ink/[0.025]"}`}
                           >
                             <span
-                              className="grid h-9 w-9 shrink-0 place-items-center rounded-xl font-mono text-[10px] font-bold text-white"
-                              style={{ background: row.unitMain, boxShadow: `inset 0 1px 0 rgb(255 255 255 / .2), 0 2px 0 ${shade(row.unitMain)}` }}
-                            >
-                              {row.label}
-                            </span>
+                              aria-hidden="true"
+                              className="h-9 w-[3px] shrink-0 rounded-full"
+                              style={{ background: row.unitMain }}
+                            />
                             <span className="min-w-0 flex-1">
+                              <span className="mb-1 block whitespace-nowrap font-mono text-[9px] font-bold uppercase tracking-[0.12em] text-ink-faint">{row.label}</span>
                               <span className="block text-[12px] font-bold leading-snug text-ink sm:text-[12.5px]">{row.title}</span>
                               <span className="mt-1 block line-clamp-1 text-[10px] font-medium text-ink-faint">{row.summary}</span>
                             </span>
