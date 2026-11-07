@@ -39,7 +39,7 @@ import { useSpecMapRegister } from "./spec-map";
 import { SpecSectionView } from "./note-section";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · notes reader — one enclosed room per spec point.
+   IAL CHEM · notes reader — one enclosed room per spec point.
    Each section is a full-width tonal band borrowing one candy
    colour, walking the hue wheel so neighbours always contrast.
    By day the bands are candy tints; after dark both steps are
