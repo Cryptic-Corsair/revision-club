@@ -183,12 +183,30 @@ export function Legal({ onBack }: { onBack: () => void }) {
         ))}
       </div>
 
-      {/* ————— the stamp ————— */}
+      {/* ————— to reiterate —————
+          the disclaimer & legal, said once more in one breath —
+          the top strip opens the case, the clauses argue it, this
+          closes it */}
       <Reveal delay={0.1} className="mt-7">
-        <p className="text-center text-[calc(12px*var(--ui-scale))] font-bold text-ink-faint">
-          Last revised · rev 4 · November 2026 — this page changes when the
-          site does.
-        </p>
+        <div
+          className="rounded-[calc(26px*var(--ui-scale))] px-5 py-4.5 puff"
+          style={{ background: honeyWash("#FFD43B", 16) }}
+        >
+          <div className="flex items-center gap-2 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink uppercase">
+            <ShieldCheck className="h-4 w-4" strokeWidth={2.3} /> To reiterate
+          </div>
+          <p className="mt-3 text-[calc(13.5px*var(--ui-scale))] leading-[1.8] font-semibold text-ink">
+            Reaction Club is independent — no affiliation with, and no
+            endorsement or sponsorship by, Pearson Education Ltd or Edexcel.
+            The notes are original study support, provided as is, with no
+            warranty of accuracy or completeness; use them for personal
+            revision, and please don&apos;t redistribute or republish them.
+            Nothing you do here leaves your browser — no accounts, no ads, no
+            trackers, no data collected. Verify anything that matters against
+            the official specification and past papers, and read the clauses
+            above for the full picture.
+          </p>
+        </div>
       </Reveal>
     </div>
   );
