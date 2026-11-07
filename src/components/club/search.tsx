@@ -172,7 +172,7 @@ export function SearchPalette({
                           aria-current={active ? "true" : undefined}
                           onMouseEnter={() => setSel(index)}
                           onClick={() => pick(row)}
-                          className={`group flex w-full items-center gap-3 rounded-xl px-2.5 py-3.5 text-left transition-colors sm:px-3 ${active ? "bg-ink/[0.055]" : "hover:bg-ink/[0.03]"}`}
+                          className={`group flex w-full items-center gap-3 rounded-xl border px-3 py-3.5 text-left transition-colors sm:px-3.5 ${active ? "border-grape/25 bg-grape/[0.07] shadow-[0_5px_18px_-15px_rgb(40_28_18_/_0.28)]" : "border-transparent hover:border-ink/[0.09] hover:bg-ink/[0.025]"}`}
                         >
                           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl font-mono text-[10px] font-bold text-white" style={{ background: row.unitMain, boxShadow: `inset 0 1px 0 rgb(255 255 255 / .2), 0 2px 0 ${shade(row.unitMain)}` }}>{row.label}</span>
                           <span className="min-w-0 flex-1">
