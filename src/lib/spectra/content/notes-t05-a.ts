@@ -73,7 +73,6 @@ export const SECTIONS_T05_A: SpecSection[] = [
         label: "Multiple bonds",
         text: "Multiple bonds are named by adding an **'a' to the root word** — e.g. ==buta-1,3-diene==, whose chain carries two double bonds.",
       },
-      { k: "checkpoint", page: 4 },
     ],
   },
   {
@@ -139,7 +138,6 @@ export const SECTIONS_T05_A: SpecSection[] = [
         kind: "geometric",
         caption: "cis-but-2-ene and trans-but-2-ene — same bonds, locked into two different 3D shapes by the restricted rotation of the π bond.",
       },
-      { k: "checkpoint", page: 6 },
     ],
   },
   {
@@ -197,7 +195,6 @@ export const SECTIONS_T05_A: SpecSection[] = [
         answer:
           "**E-1-chloro-2-methylbut-1-ene** — Cl has the higher priority on the right-hand carbon, the C~2~H~5~ group has the higher priority on the tie-break on the left-hand carbon, and the higher priority groups are on opposite sides (entgegen).",
       },
-      { k: "checkpoint", page: 8 },
     ],
   },
   {

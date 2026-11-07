@@ -5,12 +5,10 @@ import { AnimatePresence, m } from "framer-motion";
 import {
   BadgeCheck,
   BookMarked,
-  Check,
   ChevronDown,
   Eye,
   EyeOff,
   Footprints,
-  Gamepad2,
   Info,
   Lightbulb,
   PartyPopper,
@@ -34,7 +32,7 @@ import {
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · blocks — topic content blocks
    p · def (term cards) · eq (equation pills) ·
-   ex (worked examples) · tips · table · check (checkpoint) · recap
+   ex (worked examples) · tips · table · recap
    ═══════════════════════════════════════════════════════════════ */
 
 export function TopicBlocks({ blocks, main }: { blocks: Block[]; main: string }) {
@@ -163,9 +161,6 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
 
     case "table":
       return <CandyTable head={b.head} rows={b.rows} caption={b.caption} main={main} />;
-
-    case "check":
-      return <Checkpoint qs={b.qs} main={main} />;
 
     case "recap":
       return (
@@ -384,157 +379,6 @@ function CandyTable({
           </table>
         </ScrollFade>
       </div>
-    </div>
-  );
-}
-
-/* ————— checkpoint quiz: flip cards —————
-   Question on the front, answer on the back, one fat 3D flip
-   between them — a card, not a fold. Tap the card or the button. */
-
-function Checkpoint({ qs, main }: { qs: { q: string; a: string }[]; main: string }) {
-  const [flipped, setFlipped] = useState<number[]>([]);
-
-  const flip = (i: number) =>
-    setFlipped((arr) => (arr.includes(i) ? arr.filter((x) => x !== i) : [...arr, i]));
-
-  return (
-    <div className="rounded-[calc(30px*var(--ui-scale))] p-5 sm:p-6" style={{ background: liftWash(main, 9) }}>
-      <div className="mb-4 flex items-center gap-3">
-        <span className="grid h-10 w-10 place-items-center rounded-2xl bg-paper">
-          <Gamepad2 className="h-5 w-5" style={{ color: main }} />
-        </span>
-        <h4 className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">Checkpoint</h4>
-        <span className="ml-auto hidden rounded-full bg-paper/70 px-3 py-1 text-[calc(12px*var(--ui-scale))] font-bold text-ink-soft sm:block">
-          {flipped.length}/{qs.length} revealed
-        </span>
-      </div>
-
-      <div className="flex flex-col gap-3.5">
-        {qs.map((qa, i) => (
-          <CheckCard
-            key={i}
-            q={qa.q}
-            a={qa.a}
-            main={main}
-            index={i}
-            isFlipped={flipped.includes(i)}
-            onFlip={() => flip(i)}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* one flip card: front = the question, back = the answer.
-   Both faces share one grid cell, so the card always fits the
-   taller of the two — long answers never spill out. */
-
-function CheckCard({
-  q,
-  a,
-  main,
-  index,
-  isFlipped,
-  onFlip,
-}: {
-  q: string;
-  a: string;
-  main: string;
-  index: number;
-  isFlipped: boolean;
-  onFlip: () => void;
-}) {
-  return (
-    <div className="[perspective:1400px]">
-      <m.div
-        className="relative grid [transform-style:preserve-3d]"
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ type: "spring", stiffness: 260, damping: 24 }}
-      >
-        {/* front — the question */}
-        <div
-          className="flex min-h-[calc(148px*var(--ui-scale))] flex-col rounded-[calc(22px*var(--ui-scale))] bg-paper p-4 [grid-area:1/1] sm:p-5"
-          style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            boxShadow: "0 3px 0 color-mix(in oklab, var(--color-ink) 6%, transparent)",
-          }}
-        >
-          <div className="flex items-center gap-2">
-            <span
-              className="grid h-6 w-6 shrink-0 place-items-center rounded-full font-display text-[calc(11px*var(--ui-scale))] font-bold"
-              style={{ background: main, color: readableInk(main) }}
-            >
-              {index + 1}
-            </span>
-            <span className="ml-auto text-[calc(11px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
-              tap to flip
-            </span>
-          </div>
-          <p className="mt-3 flex-1 text-[calc(15.5px*var(--ui-scale))] leading-[1.65] font-bold text-ink">
-            <Fmt text={q} />
-          </p>
-          <div className="pt-3">
-            <m.button
-              type="button"
-              onClick={onFlip}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.94 }}
-              className="inline-flex min-h-[calc(40px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-4 py-2 font-display text-[calc(13px*var(--ui-scale))] font-semibold text-white"
-              style={{ background: main, boxShadow: `0 3px 0 ${shade(main)}` }}
-            >
-              <Eye className="h-4 w-4" /> Reveal answer
-            </m.button>
-          </div>
-        </div>
-
-        {/* back — the answer */}
-        <div
-          className="flex min-h-[calc(148px*var(--ui-scale))] flex-col rounded-[calc(22px*var(--ui-scale))] bg-paper p-4 [grid-area:1/1] sm:p-5"
-          style={{
-            transform: "rotateY(180deg)",
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            boxShadow: "0 3px 0 color-mix(in oklab, var(--color-ink) 6%, transparent)",
-          }}
-        >
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1 font-display text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.12em] text-mint uppercase">
-              <Check className="h-3.5 w-3.5" strokeWidth={3} /> answer
-            </span>
-          </div>
-          <p
-            className="mt-3 flex-1 rounded-[calc(16px*var(--ui-scale))] px-3.5 py-2.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.7] text-ink"
-            style={{ background: sunkWash("#12B886", 10) }}
-          >
-            <Fmt text={a} />
-          </p>
-          <div className="pt-3">
-            <m.button
-              type="button"
-              onClick={onFlip}
-              whileHover={{ y: -1 }}
-              whileTap={{ scale: 0.96 }}
-              className="inline-flex min-h-[calc(36px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full bg-ink/5 px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-soft"
-            >
-              <EyeOff className="h-4 w-4" /> Flip back
-            </m.button>
-          </div>
-        </div>
-      </m.div>
-
-      {/* the whole card is clickable while it shows the question */}
-      {!isFlipped && (
-        <button
-          type="button"
-          aria-label={`Reveal answer ${index + 1}`}
-          onClick={onFlip}
-          className="absolute inset-0 cursor-pointer rounded-[calc(22px*var(--ui-scale))]"
-          style={{ zIndex: 5 }}
-        />
-      )}
     </div>
   );
 }

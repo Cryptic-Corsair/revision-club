@@ -7,9 +7,8 @@ import type { SpecSection } from "../notes-types";
    note opens with 10A general principles and refers objectives
    10.1–10.5 to the introductory organic chemistry notes — on the
    bench that is the Topic 4 note, so this file picks the topic up
-   at 10B. The exercise drill (Exercises 1–4) is left to the book;
-   the one Check point keeps its card and points at its page. The
-   topic is purely qualitative, so it carries no worked examples.
+   at 10B. The topic is purely qualitative, so it carries no
+   worked examples.
    Nine figures are redrawn: the isomer pairs, the three classes,
    the C–X bond ladder, the carbocation chain, the reflux rig, the
    two substitution mechanisms and the hydrolysis experiment, plus
@@ -122,7 +121,6 @@ export const SECTIONS_T10_A: SpecSection[] = [
         k: "p",
         text: "The same types of reaction are open to all three types of halogenolkanes but there is a ==difference in the rate== at which they react.",
       },
-      { k: "checkpoint", page: 4 },
       {
         k: "wow",
         text: "One carbon does all the deciding. Find the carbon wearing the halogen, count the alkyl groups holding its other hands — one, two or three — and the halogenoalkane is primary, secondary or tertiary. Nothing else about the molecule matters for the label; the rate differences that follow come later, from what that carbon does when the halogen leaves.",

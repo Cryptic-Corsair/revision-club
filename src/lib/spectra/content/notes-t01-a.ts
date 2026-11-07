@@ -4,10 +4,8 @@ import type { SpecSection } from "../notes-types";
    Topic 1 revision note · Part A — spec 1.1, 1.3, 1.12
    Text kept verbatim from the CHSE Grade 11 / Unit 1.3 / Topic 1
    class note (2020, semester 1) — Formulae, Equations and Amount
-   of Substance; page furniture omitted. The exercise drill
-   (Exercises 1–4) is left to the book; Checkpoint cards point at
-   its pages. Each balancing procedure keeps the class note's own
-   worked example, worked in full.
+   of Substance; page furniture omitted. Each balancing procedure
+   keeps the class note's own worked example, worked in full.
    Highlighting is kept deliberately light: one mark per key term,
    short spans only.
    ═══════════════════════════════════════════════════════════════ */
@@ -119,7 +117,6 @@ export const SECTIONS_T01_A: SpecSection[] = [
         label: "Also in this objective",
         text: "The last two terms of 1.1 — **empirical formula** and **molecular formula** — are defined and worked in full in section 1.6 below.",
       },
-      { k: "checkpoint", page: 4 },
     ],
   },
   {
@@ -211,12 +208,6 @@ export const SECTIONS_T01_A: SpecSection[] = [
         ],
         answer: "CaCO~3~(s) + 2H^+^(aq) → Ca^2+^(aq) + CO~2~(g) + H~2~O(l)",
       },
-      {
-        k: "note",
-        label: "In the book",
-        text: "**Exercise 1** drills the balancing steps on ten equations, from Ca(OH)~2~ + HNO~3~ through to KOH + Cl~2~ — it stays in the book.",
-      },
-      { k: "checkpoint", page: 7 },
     ],
   },
   {
@@ -230,11 +221,6 @@ export const SECTIONS_T01_A: SpecSection[] = [
       { k: "eq", eq: "Acid + Metal → Salt + Hydrogen", note: "objective 1.12(ii)" },
       { k: "eq", eq: "Acid + Metal oxide / Metal hydroxide → Salt + Water" },
       { k: "eq", eq: "Acid + Metal carbonate → Salt + Water + Carbon dioxide" },
-      {
-        k: "note",
-        label: "In the book",
-        text: "**Exercise 2** and **Exercise 3** set four balanced equations each against these general forms — aluminium with sulfuric acid, copper(II) oxide with hydrochloric acid, sodium hydroxide with phosphoric acid, lithium carbonate with nitric acid, and more. They stay in the book.",
-      },
       { k: "h", text: "Displacement reactions" },
       {
         k: "def",
@@ -282,12 +268,6 @@ export const SECTIONS_T01_A: SpecSection[] = [
           ],
         ],
       },
-      {
-        k: "note",
-        label: "In the book",
-        text: "**Exercise 4** completes five displacement and precipitation equations — Cl~2~ into NaBr, copper into silver nitrate, and so on. It stays in the book.",
-      },
-      { k: "checkpoint", page: 8 },
     ],
   },
 ];

@@ -53,11 +53,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 1, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and the class note's questions are worked in full — every mass, every ratio and every balance checked, no skipped lines. The bare exercise drills (Exercises 1–11) are left to the book; Checkpoint cards point at its pages.",
+        text: "Topic 1 is the toolkit the rest of the course borrows: names, formulae and the mole. The note opens with the vocabulary — ==atoms, elements, molecules, ions and compounds== — then builds equations step by step: the five-step molecular balance, ionic equations with the spectator ions fished out, and the three test-tube families of 1.12 (acids, displacement, precipitation) with the solubility rules that predict the precipitate.",
       },
       {
         k: "p",
-        text: "The topic opens with the vocabulary — ==atoms, elements, molecules, ions and compounds== — and then the equations: the five-step molecular balance, the ionic equation with its spectator ions, and the three test-tube families of 1.12 (acids, displacement, precipitation) with the solubility rules that decide what precipitates. From there it is the arithmetic of chemistry: the ==carbon-12 relative scale==, the ==mole== and Avogadro's constant, reacting masses, ==percentage yield== and ==atom economy==, empirical and molecular formulae, the ==ideal gas equation pV = nRT==, concentrations in mol dm^−3^ and g dm^−3^ — and the ==parts-per-million== end of the scale for both solutions and gases.",
+        text: "From there it is chemistry's arithmetic: the ==carbon-12 scale==, the ==mole== and Avogadro's constant, reacting masses, ==percentage yield== and ==atom economy==, empirical and molecular formulae, the ==ideal gas equation pV = nRT==, concentrations in mol dm^−3^ and g dm^−3^ — and ==ppm== for the very dilute end of solutions and gases.",
       },
     ],
     sections: [...SECTIONS_T01_A, ...SECTIONS_T01_B],
@@ -72,7 +72,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 2, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every calculation is worked in full — no skipped lines.",
+        text: "How do we know what an atom is like? Topic 2 answers with machines and evidence: the ==mass spectrometer== that weighs atoms and molecules, and the ==ionisation energies== that betray the shells beneath.",
+      },
+      {
+        k: "p",
+        text: "The note moves from counting protons, neutrons and electrons, through isotopes and their spectra, into electrons-in-boxes — orbital shapes, the filling rules, full configurations — and finishes on the periodic table as evidence: the s, p and d blocks, periodic properties, melting points and the ionisation-energy graphs that started it all.",
       },
     ],
     sections: [...SECTIONS_A, ...SECTIONS_B],
@@ -88,11 +92,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 3 — **Part II**, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every exercise from the class note is worked in full.",
+        text: "This half of Topic 3 is the covalent story. It starts with the shared pair and the two ways bonds overlap — ==σ and π== — drawn out in dot-and-cross diagrams, and walks through the carbon lattices on the way.",
       },
       {
         k: "p",
-        text: "The ionic-bonding half of the topic (Part I of the class note) is not in yet — this note covers everything covalent: the shared pair and σ/π bonds, dot-and-cross diagrams, the carbon lattices, electronegativity and polarity, and the complete set of molecular shapes.",
+        text: "Electronegativity decides who pulls hardest, polarity follows from it, and the note closes with the complete set of ==molecular shapes== — linear to octahedral — with the bond angles and lone-pair reasoning the questions ask for. The ionic half of the class note, Part I, is still to come.",
       },
     ],
     sections: [...SECTIONS_T03_A, ...SECTIONS_T03_B],
@@ -107,11 +111,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 4, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every exercise the class note sets in words is worked in full — no skipped lines.",
+        text: "Topic 4 lays down the rules of organic chemistry before the chemistry itself. Part **4A** covers hazard and risk, the homologous series and their functional groups, the IUPAC naming rules with their drawing practice, the reaction types, and the two ways a covalent bond can split.",
       },
       {
         k: "p",
-        text: "Part **4A** covers hazard and risk, the homologous series and functional groups, the IUPAC naming rules and drawing, the reaction types, and the two ways a covalent bond splits. Part **4B** is the alkanes: sp^3^ shapes and cycloalkanes, the isomer exercises, crude oil and its fractions, combustion and its pollutants, alternative fuels and carbon neutrality — finishing with the ==free-radical substitution chain==, the first mechanism of the course.",
+        text: "Part **4B** is the alkanes: sp^3^ shapes and the cycloalkanes, the isomers, crude oil and its fractions, combustion complete and incomplete with the pollutants that follow, alternative fuels and ==carbon neutrality== — closing with ==free-radical substitution==, the first mechanism of the course, in its full initiation–propagation–termination dress.",
       },
     ],
     sections: [...SECTIONS_T04_A, ...SECTIONS_T04_B],
@@ -126,11 +130,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 5, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every exercise from the class note that is specified in words is worked in full — no skipped lines.",
+        text: "The double bond takes centre stage in Topic 5. Part **5A** builds it from a σ plus a π, explains the sp^2^ hybrids and the 120° planar arrangement, then runs the naming rules, the three isomer types — chain, positional and ==geometric== — and the five addition reactions with their conditions and colour changes.",
       },
       {
         k: "p",
-        text: "Part **5A** builds the double bond itself — σ plus π, the sp^2^ hybrids and the 120° arrangement — then the alkene naming rules, the isomer types (chain, positional and geometric) and the five addition reactions with their conditions and colour changes. Part **5B** is the mechanisms: ==electrophilic addition== of HBr and Br~2~ drawn with curly arrows, the ==stability of carbocations==, the bromine-water test, and addition polymerisation from repeat unit to polymer disposal.",
+        text: "Part **5B** is where the mechanisms live: ==electrophilic addition== of HBr and Br~2~ drawn with curly arrows, the ==stability ranking of carbocations== that decides the major product, the bromine-water test, and addition polymerisation — from the repeat unit to what becomes of the polymer in the bin.",
       },
     ],
     sections: [...SECTIONS_T05_A, ...SECTIONS_T05_B],
@@ -145,11 +149,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 6, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every experiment and every exercise the class note sets in words is worked in full — no skipped lines.",
+        text: "Energetics is about measuring heat honestly. Part **6A** builds enthalpy itself: the first law, the exothermic/endothermic sign convention, level and profile diagrams, all ==five standard enthalpy changes==, and both calorimetry experiments with ==Q = mcΔT== worked every way the class note asks.",
       },
       {
         k: "p",
-        text: "Part **6A** builds enthalpy itself — the first law, the exothermic/endothermic sign convention, the level and profile diagrams, all ==five standard enthalpy changes== and both calorimetry experiments, with ==Q = mcΔT== worked every way the class note asks. Part **6B** is ==Hess's law==: the cycles built from Δ~c~H^θ^ and Δ~f~H^θ^ data, ==Core Practical 2==, the cooling-curve correction, and ==bond enthalpies== from mean values to the Si—F calculation.",
+        text: "Part **6B** answers what calorimetry cannot: ==Hess's law== cycles built from Δ~c~H^θ^ and Δ~f~H^θ^ data, ==Core Practical 2==, the cooling-curve correction, and bond enthalpies — from mean values to the Si—F calculation that shows why averages sometimes lie.",
       },
     ],
     sections: [...SECTIONS_T06_A, ...SECTIONS_T06_B],
@@ -164,11 +168,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 7, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every exercise the class note sets in words is worked in full — no skipped lines.",
+        text: "Why does water boil at 100 °C and methane at −162? Topic 7 is the three forces behind those numbers: ==London forces== and the flickering dipole that starts them, permanent dipole–dipole interactions, and the ==hydrogen bond== with its two-part test.",
       },
       {
         k: "p",
-        text: "Part **7A** builds the three forces themselves — London forces and the dipole that flickers into life, permanent dipole – dipole interactions, and the hydrogen bond with its two-part test — then the exercises that put them to work. Part **7B** is the consequences: boiling temperatures of alkanes, alcohols, noble gases and the hydrogen halides, water's two anomalies, and how solvents choose what dissolves.",
+        text: "Part **7A** builds each force and puts it to work on the class note's exercises; Part **7B** follows the consequences — boiling temperatures of alkanes, alcohols, noble gases and the hydrogen halides, water's two anomalies, and how a solvent chooses what dissolves.",
       },
     ],
     sections: [...SECTIONS_T07_A, ...SECTIONS_T07_B],
@@ -184,11 +188,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topics 8A, 8B and 8C, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and each method keeps ==one worked example==, worked in full — the repetitive exercise drill is left to the book.",
+        text: "Topic 8 is three topics in one coat. Part **8A** is the redox machinery: oxidation numbers and their rules, the Roman-numeral names, OIL RIG and electron transfer, oxidising and reducing agents, ==disproportionation==, and the complete half-equation toolkit.",
       },
       {
         k: "p",
-        text: "Part **8A** is the redox machinery itself: oxidation numbers and their rules, the Roman-numeral systematic names, electron transfer and OIL RIG, oxidising and reducing agents, disproportionation — and the complete half-equation toolkit. Part **8B** puts the s-block on the bench: the radius, ionisation-energy and reactivity trends down Groups 1 and 2, the reactions with oxygen, chlorine and water, the oxides and hydroxides with their solubility ladders, ==thermal stability== and polarising power, flame colours and the ion tests — closing with ==volumetric analysis==: standard solutions, the titration method, concentration calculations and measurement uncertainty. Part **8C** brings in the halogens: the Group 7 trend lines (radius and boiling temperatures up, electronegativity and reactivity down), the displacement reactions and their colours, chlorine's three disproportionations, the halide staircase with concentrated sulfuric acid, the silver-nitrate test, the hydrogen halides — and predictions for fluorine and astatine.",
+        text: "Part **8B** walks the s-block — radius, ionisation energy and reactivity trends down Groups 1 and 2, the reactions with oxygen, chlorine and water, the oxides and hydroxides with their solubility ladders, ==thermal stability==, flame colours and ion tests — and closes with volumetric analysis: standard solutions, the titration method and measurement uncertainty. Part **8C** brings in the halogens: the Group 7 trend lines, displacement colours, chlorine's three disproportionations, the halide staircase with concentrated sulfuric acid, the silver-nitrate test, the hydrogen halides — and predictions for fluorine and astatine.",
       },
     ],
     sections: [...SECTIONS_T08_A, ...SECTIONS_T08_B, ...SECTIONS_T08_C],
@@ -204,11 +208,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 9, Parts **9A** and **9B**, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and each rate calculation — rate = 1/time and the tangent gradient — keeps ==one worked example==, worked in full.",
+        text: "How fast, and how far? Part **9A** is the kinetics half: what rate means and how to measure it, ==collision theory== and activation energy, the four factors that speed reactions up, the ==Maxwell–Boltzmann distribution== with its temperature shift, and the catalyst — its alternative route, its reaction profiles, its industrial work, and the atom-economy dividend.",
       },
       {
         k: "p",
-        text: "Part **9A** is the kinetics half of the topic: what rate is and how it is measured, ==collision theory== and activation energy, the four rate factors (concentration, pressure, surface area, temperature), the ==Maxwell-Boltzmann distribution== with its temperature shift, and the catalyst — its alternative route, the reaction profiles, the industrial homogeneous and heterogeneous catalysts, and the atom-economy dividend. Part **9B** brings in the equilibria: reversible reactions and ==dynamic equilibrium==, the qualitative effects of concentration, pressure and temperature on the ==position of equilibrium== with their summary tables, why a catalyst shifts nothing, the honest limits of qualitative prediction — and the industrial compromises: ==the Haber process== at 450 °C and 250 atm, the ==Contact process== at 450 °C and 2 atm.",
+        text: "Part **9B** turns to equilibria: reversible reactions and ==dynamic equilibrium==, the effects of concentration, pressure and temperature on the position of equilibrium with their summary tables, why a catalyst shifts nothing — and the industrial compromises: ==the Haber process== at 450 °C and 250 atm, the ==Contact process== at 450 °C and 2 atm.",
       },
     ],
     sections: [...SECTIONS_T09_A, ...SECTIONS_T09_B],
@@ -224,11 +228,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual revision note for Topic 10, kept **word for word** and re-cut into ==one section per specification point==. The official statement sits above each section, and every reagent, condition and equation is carried exactly as the class note writes it — the exercise drill (Exercises 1–4 for the halogenoalkanes, Exercises 1–3 and Q1–Q2 for the alcohols, Exercises 1–2 for the mass spectra, Questions 1–5 for the infrared) stays in the book.",
+        text: "Topic 10 collects the halogenoalkanes, the alcohols and the two machines of structural analysis. The class note opens with **10A**, the general principles, and sends objectives 10.1–10.5 to the introductory organic notes — that is ==the Topic 4 note== here.",
       },
       {
         k: "p",
-        text: "The class note opens with **10A, the general principles**, and points objectives 10.1–10.5 at the introductory organic chemistry notes — on the bench that is ==the Topic 4 note==, where reaction types, mechanisms, heterolytic fission and nucleophiles already live. Part **10B** is the halogenoalkanes themselves: naming and isomers, the primary/secondary/tertiary classes, the two rate factors, the four reactions with their conditions, the two substitution mechanisms, and the hydrolysis race settled by bond enthalpy. Part **10C** puts the alcohols on the bench: the C~n~H~2n+1~OH family and its names, the three classes, the reactions — combustion, the three halogenating agents, dehydration at 170 °C — the dichromate oxidations with distill-versus-reflux deciding aldehyde or acid, and the five purification techniques with their rigs. Part **10D** starts the analytical machines: the ==mass spectrum== with its molecular ion and fragmentation pattern, the ==base peak==, and the isotope doublets — carbon's M+1 stub, bromine's 1:1 and 1:2:1, chlorine's 3:1 and 9:6:1. Part **10E** finishes the machines with ==infrared spectroscopy==: bonds that vibrate by stretching and bending, the transmittance–wavenumber frame, the absorption table from C–O to C–I, the fingerprint region below 1500 cm^−1^ — and the teaching spectra read dip by dip: butanone's C=O at 1740, ethanol's broad O–H, propanoic acid's very broad one, propene's C=C, the alkyl-halide C–X stretches, and the amine rule of two bands, one band, none.",
+        text: "Part **10B** covers the halogenoalkanes: naming and isomers, the primary/secondary/tertiary classes, the two rate factors, the four reactions with their conditions, the two substitution mechanisms, and the hydrolysis race settled by bond enthalpy. Part **10C** does the same for the alcohols — the C~n~H~2n+1~OH family and its names, the three classes, combustion, the three halogenating agents, dehydration, the dichromate oxidations with distill-versus-reflux deciding aldehyde or acid, and the five purification techniques with their rigs. Parts **10D** and **10E** are the machines: the ==mass spectrum== with its molecular ion, fragmentation pattern, base peak and isotope doublets, then ==infrared spectroscopy== — vibrating bonds, the absorption table, the fingerprint region, and a shelf of teaching spectra read dip by dip.",
       },
     ],
     sections: [...SECTIONS_T10_A, ...SECTIONS_T10_B, ...SECTIONS_T10_C, ...SECTIONS_T10_D],
@@ -244,11 +248,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual practical reference note for Unit 3's measurement half, kept **word for word** and re-cut into ==one section per technique==. Every uncertainty rule the sheet prints is carried, and its worked example is worked in full.",
+        text: "Before a practical result can be trusted it has to own its errors. This reference note assembles the measurement toolkit for Unit 3: the five hazard labels and their precautions, gas syringes and collection over water with their honest errors, and the line between ==readings== and ==measurements==.",
       },
       {
         k: "p",
-        text: "The sections run from the hazard vocabulary to the discrepancy test: the five hazard labels and their precautions, gas syringes and collection over water with their honest errors, readings versus measurements, the apparatus uncertainty list, percentage uncertainty and how to shrink it — finishing with the rule that decides whether a result is wrong or just imprecise.",
+        text: "It finishes with the uncertainty arithmetic — the per-apparatus list, ==percentage uncertainty== and how to shrink it — and the ==discrepancy test== that decides whether a result is wrong or merely imprecise.",
       },
     ],
     sections: SECTIONS_P01,
@@ -264,11 +268,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual practical reference note for the titration core practicals, kept **word for word** and re-cut into ==one section per technique==. The method keeps every rinse, every meniscus rule and every reason the sheet gives for them.",
+        text: "Core Practicals 3 and 4 live here: ==making up a volumetric solution== by difference, diluting with a pipette, and the titration itself — step by step, with every rinse and meniscus rule the sheet gives, and the reason for each.",
       },
       {
         k: "p",
-        text: "The sections run from the standard solution to the equations: making up a volumetric solution by difference, diluting with a pipette, the titration ritual step by step, the two indicators and their colour changes, the burette rules to 0.05 cm^3^, recording results and averaging only the concordant titres, safety and testing batches — closing with the five common titration equations.",
+        text: "The note carries the two indicators and their colour changes, the burette read to 0.05 cm^3^, recording results and averaging only the ==concordant titres==, the safety points — and the five titration equations that finish the calculation.",
       },
     ],
     sections: SECTIONS_P02,
@@ -284,11 +288,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual practical note for the cation half of qualitative analysis, kept **word for word** and re-cut into ==one section per technique== — the flame test from both source sheets, the sodium hydroxide results for Group 2, and the ammonium test with its method.",
+        text: "Qualitative analysis, cations first. The flame test is drawn from both source sheets — how to carry it out, the colour table with its ==three-red warning==, then the full flame list including the silent ions.",
       },
       {
         k: "p",
-        text: "The sections run from the wire to the summary table: carrying out the flame test, the colour table with the three-red warning, the full flame list including the silent ions, the Group 2 hydroxide precipitates with their pH values and ionic equations, the ammonium ion test — and the combined cation table every identification question leans on.",
+        text: "Then the wet tests: the ==Group 2 hydroxide precipitates== with their pH values and ionic equations, the ammonium test with its method, and the combined cation table every identification question leans on.",
       },
     ],
     sections: SECTIONS_P04,
@@ -304,11 +308,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual practical note for the gases and anions, kept **word for word** and re-cut into ==one section per technique==. Every gas and every anion test the sheets print is carried with its observation, and the why-the-acid notes are kept in full.",
+        text: "Gases and anions, the other half of the test-tube shelf. A heated solid breathes out a small cast of gases, and the recognition table covers ==eleven of them==, observation by observation.",
       },
       {
         k: "p",
-        text: "The sections run from heating solids to writing ionic equations: the gases a heated solid breathes out, the full recognition table for eleven gases, the carbonate and hydrogencarbonate pair decided by magnesium sulfate, the sulfate and sulfite pair decided in excess acid, the nitrate reduction — and precipitation reactions with their solubility rules and spectator ions.",
+        text: "The anion pairs follow: carbonate and hydrogencarbonate, decided with magnesium sulfate; sulfate and sulfite, decided in excess acid; the nitrate reduction with aluminium — then precipitation reactions with their solubility rules and spectator ions, so the ionic equations write themselves.",
       },
     ],
     sections: SECTIONS_P05,
@@ -324,11 +328,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual practical note for the halide and halogen tests, kept **word for word** and re-cut into ==one section per technique==. The three confirmation tests each keep their full table, and the concentrated-sulfuric-acid staircase keeps every equation and observation the reference sheet prints.",
+        text: "The halide tests in full. The ==silver-nitrate test== comes with its ammonia staircase and the reason the nitric acid is there; the lead-nitrate crystals get their own bright-yellow entry.",
       },
       {
         k: "p",
-        text: "The sections run from silver nitrate to starch: the silver-nitrate test with its ammonia staircase and the nitric acid's job, the lead-nitrate crystals, the chlorine-water displacement colours in the organic layer, the halide staircase with its acid–base and redox steps and half-equations — and the halogens' own tests, from litmus bleaching to the starch blue-black.",
+        text: "Then the halide staircase with concentrated sulfuric acid — every acid–base and redox step, half-equations included — the chlorine-water displacement colours in the organic layer, and the halogens' own tests, from litmus bleaching to the ==starch blue-black==.",
       },
     ],
     sections: SECTIONS_P06,
@@ -344,11 +348,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual practical note for the apparatus, kept **word for word** and re-cut into ==one section per technique==. The rigs keep their methods step by step, and every “don't” the sheets print — no stopper, no thermometer, no drawn joints — is carried.",
+        text: "The glassware half of Unit 3: simple distillation with the ==Liebig condenser== question answered, heating under reflux and the never-seal rule, the separating funnel and its densities, filtration, and the fractionating column.",
       },
       {
         k: "p",
-        text: "The sections run from the flask to the thermometer: simple distillation with the Liebig condenser question answered, heating under reflux and the never-seal rule, the separating funnel and its densities, filtration, the fractionating column, the full purification sequence for an organic liquid — and boiling point as a test of purity.",
+        text: "The purification sequence for an organic liquid is assembled step by step, and ==boiling point== closes the note as a test of purity — with every 'don't' the sheets print kept in place: no stopper, no thermometer, no drawn joints.",
       },
     ],
     sections: SECTIONS_P07,
@@ -364,11 +368,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual practical reference note for the gas-volume and energetics core practicals, kept **word for word** and re-cut into ==one section per technique== — and ==every one of the sheet's five worked examples is worked in full==, no skipped lines.",
+        text: "Core Practicals 1 and 2, with the reference sheet's five worked examples and ==every one of them worked in full==: the gas-syringe method with the propanone extension, the ==crucible== method for a formula from a mass loss, and calorimetry with its errors and cooling correction.",
       },
       {
         k: "p",
-        text: "The sections run from the gas syringe to the spirit burner: Core Practical 1 with the propanone extension and Example 1, the crucible method with Example 2, the calorimetric method with its errors and cooling correction, the ΔH calculation chain with Examples 3 and 4, the Hess cycle for hydrating copper(II) sulfate with the detailed method — and flame calorimetry with Example 5.",
+        text: "The ΔH calculation chain runs from Q = mcΔT through Examples 3 and 4, a ==Hess cycle== for hydrating copper(II) sulfate gets the detailed method, and flame calorimetry closes with Example 5.",
       },
     ],
     sections: SECTIONS_P08,
@@ -384,11 +388,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the actual practical reference note for the organic core practicals, kept **word for word** and re-cut into ==one section per technique==. Each preparation keeps its full method — every portion, every pressure release, every drying agent — and the unknown tests keep their summary table.",
+        text: "The organic core practicals, with every portion, pressure release and drying agent in place. ==Core Practical 5== is the hydrolysis race and the C–X bond that decides it; Core Practical 6's chlorination carries its ten-step purification.",
       },
       {
         k: "p",
-        text: "The sections run from the hydrolysis race to the unknowns: Core Practical 5 and the C–X bond that decides it, Core Practical 6's chlorination with its ten-step purification, cyclohexene from cyclohexanol, the ester with its two washes and its 100–103 °C fraction, Core Practical 7 twice — partial then full oxidation — and the functional-group tests that finish the analysis.",
+        text: "Then the preparations: ==cyclohexene== from cyclohexanol, the ester with its two washes and its 100–103 °C fraction, Core Practical 7 twice — partial then full oxidation — and the functional-group tests that finish the analysis of an unknown.",
       },
     ],
     sections: SECTIONS_P09,

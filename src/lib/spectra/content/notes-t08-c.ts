@@ -7,8 +7,7 @@ import type { SpecSection } from "../notes-types";
    class note (2021, semester 2); page furniture omitted. The
    worksheet blanks the note leaves for students — the displacement
    table, the sodium-halide equations, the silver-halide equations
-   and the metal-halide examples — are filled in as answers; the
-   exercise drill itself is left to the book. Each method —
+   and the metal-halide examples — are filled in as answers. Each method —
    predicting a displacement, writing the analogous alkali
    reactions, building an overall equation from half-equations, and
    dissolving a hydrogen halide in water — keeps exactly one worked

@@ -349,7 +349,6 @@ export const SECTIONS_T07_B: SpecSection[] = [
           "Ionic solutes such as sodium chloride (NaCl) generally dissolve in polar solvents but not in non-polar solvents.",
         ],
       },
-      { k: "checkpoint", page: 179 },
       {
         k: "wow",
         text: "One sentence survives the whole topic: like dissolves like — a solvent only takes a solute on board when the new attractions can pay for the ones they break.",

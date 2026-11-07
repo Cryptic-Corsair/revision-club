@@ -99,7 +99,6 @@ export const SECTIONS_T03_A: SpecSection[] = [
         k: "wow",
         text: "There can only be ==one σ bond between two atoms== — every extra shared pair in a double or triple bond is a π bond.",
       },
-      { k: "checkpoint", page: 74 },
     ],
   },
   {
@@ -203,7 +202,6 @@ export const SECTIONS_T03_A: SpecSection[] = [
         ],
         answer: "Dative bonds: O→C in CO · Cl→Al in AlCl~4~^−^ · N→B in NH~3~·BF~3~ — each needs a lone pair and an empty orbital.",
       },
-      { k: "checkpoint", page: 79 },
     ],
   },
   {
@@ -263,7 +261,6 @@ export const SECTIONS_T03_A: SpecSection[] = [
         k: "wow",
         text: "Same element, same bonding, three different lattices: ==the hardest natural material== (diamond), a lubricant that conducts (graphite), and a one-atom-thick sheet (graphene).",
       },
-      { k: "checkpoint", page: 91 },
     ],
   },
 ];

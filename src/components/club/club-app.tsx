@@ -523,8 +523,8 @@ function Footer({
                 </span>
               </div>
               <p className="mt-3 text-[calc(14px*var(--ui-scale))] leading-relaxed text-milk/80">
-                Notes for every topic in the course — read them, try the
-                checkpoints, tick what you&apos;ve revised. Reading time is
+                Notes for every topic in the course — read them, work the
+                examples, tick what you&apos;ve revised. Reading time is
                 counted topic by topic.
               </p>
 

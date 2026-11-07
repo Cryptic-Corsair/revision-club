@@ -87,19 +87,6 @@ export const WCH14_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "A reaction is first order in X. What happens to the rate when [X] rises from 0.20 to 0.60 mol dm^−3^ — and what happens to k?",
-            a: "Rate triples (× 3^1^). k is unchanged — it depends only on temperature (and catalysis), not concentration.",
-          },
-          {
-            q: "The rate equation is rate = k[NO~2~]^2^. Propose a two-step mechanism with a slow first step.",
-            a: "Slow: NO~2~ + NO~2~ → NO~3~ + NO (rate-determining, two NO~2~ involved → matches [NO~2~]^2^). Fast: NO~3~ + CO → NO~2~ + CO~2~. The NO~3~ intermediate cancels to give the overall equation.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "rate = k[A]^m^[B]^n^ — orders from experiment, never from the equation.",
@@ -182,19 +169,6 @@ export const WCH14_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "N~2~O~4~(g) → 2NO~2~(g) has ΔH = +57 kJ mol^−1^. Why does heating favour the brown NO~2~?",
-            a: "Both ΔH and ΔS are positive, so ΔG = ΔH − TΔS turns negative once T is large enough — more moles of gas raise ΔS, and higher T amplifies the −TΔS term.",
-          },
-          {
-            q: "Why is a reaction with ΔG = −200 kJ mol^−1^ not necessarily violent?",
-            a: "ΔG is thermodynamic — it says the reaction *can* run, nothing about rate. Activation energy (Topic 11) controls speed.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "S is absolute and always positive; gases > liquids > solids.",
@@ -266,19 +240,6 @@ export const WCH14_TOPICS: Topic[] = [
           "In Kp problems, convert moles to mole fractions ==first==, multiply by total pressure second — skipping steps is where marks die.",
           "State the units of Kc/Kp by substituting powers of mol dm^−3^ or Pa — and say “no units” when the powers cancel.",
           "“Explain the shift” answers: name Q vs K for equilibrium constants, or Le Chatelier for position — don't mix the two terms.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "H~2~(g) + I~2~(g) ⇌ 2HI(g). The total pressure doubles. What happens to the position of equilibrium and to Kp?",
-            a: "Neither shifts and Kp is unchanged: 2 moles of gas ⇌ 2 moles of gas, so pressure has no lever here — the mole fractions are untouched.",
-          },
-          {
-            q: "For an exothermic equilibrium, what happens to Kc if T rises, and how does the composition respond?",
-            a: "Kc falls. At the old composition Q now exceeds K, so the reverse reaction dominates until Q falls back to the new, smaller K — products convert to reactants.",
-          },
         ],
       },
       {
@@ -358,19 +319,6 @@ export const WCH14_TOPICS: Topic[] = [
           "Strong acid pH: [H^+^] = c directly. Weak acid: √(Ka·c). Mixing up the two routes is the single most common pH error.",
           "Dilution question: strong acid dilutes 10× → pH rises 1 unit. Weak acid rises *less*, because dissociation is pushed forward — worth a mark in AO3 questions.",
           "Indicator choice is a range question: the indicator's colour-change range must sit ==inside the vertical section== of the curve.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "A buffer contains equal moles of methanoic acid and sodium methanoate (pKa 3.75). Add 0.010 mol of HCl to 1 dm^3^. Does pH move much?",
-            a: "No: the H^+^ converts 0.010 mol of methanoate to methanoic acid, nudging the ratio slightly. pH = 3.75 + log(new ratio) — a shift of a few hundredths, not units.",
-          },
-          {
-            q: "Why is phenolphthalein wrong for a strong acid–weak base titration?",
-            a: "Equivalence sits below pH 7, but phenolphthalein changes 8.3–10.0 — after the steep region is over, so the end-point reads high.",
-          },
         ],
       },
       {
@@ -460,19 +408,6 @@ export const WCH14_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "Why does adding HCN to butanone give an optically inactive product?",
-            a: "The C=O is planar; CN^−^ attacks both faces equally, so the new chiral centre forms as a 50 : 50 racemic mixture — rotations cancel.",
-          },
-          {
-            q: "Give a reagent that converts CH~3~COCl into ethanamide, with conditions.",
-            a: "Excess ammonia, room temperature: CH~3~COCl + 2NH~3~ → CH~3~CONH~2~ + NH~4~Cl.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "C=O is polar: C δ+, attacked by nucleophiles.",
@@ -557,19 +492,6 @@ export const WCH14_TOPICS: Topic[] = [
           "Answer structure-deduction questions in the order the evidence locks in: IR narrows the family, M^+^ sets the formula, NMR finishes the skeleton — and finish with a check that every peak is assigned.",
           "O–H acids (2500–3300) and alcohols (3200–3550) overlap — the acid's reach down to 2500 and its pairing with C=O is the discriminator.",
           "Splitting only counts neighbours on ==adjacent carbons==; equivalent hydrogens do not split each other. A CH~3~ next to no hydrogens is a singlet.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "A 1H NMR spectrum shows three peaks with ratio 3 : 2 : 3, the middle one a quartet at δ 2.4. Suggest a structure.",
-            a: "CH~3~CH~2~COCH~3~ (butanone): ethyl group (3H triplet + 2H quartet, next to C=O at 2.4) plus a lone CH~3~ singlet at δ 2.1 (3H) next to the carbonyl.",
-          },
-          {
-            q: "Why is D~2~O shaken into a sample before NMR?",
-            a: "Labile O–H and N–H protons exchange with deuterium; D is not seen in 1H NMR, so those peaks disappear — identifying them by subtraction.",
-          },
         ],
       },
       {

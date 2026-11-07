@@ -139,15 +139,13 @@ export const TOTALS = (() => {
     (n, u) => n + u.topics.reduce((m, t) => m + t.minutes, 0),
     0
   );
-  let checks = 0;
   let examples = 0;
   let tables = 0;
   for (const u of UNITS)
     for (const t of u.topics)
       for (const b of t.blocks) {
-        if (b.k === "check") checks += b.qs.length;
         if (b.k === "ex") examples += 1;
         if (b.k === "table") tables += 1;
       }
-  return { topics, minutes, checks, examples, tables };
+  return { topics, minutes, examples, tables };
 })();

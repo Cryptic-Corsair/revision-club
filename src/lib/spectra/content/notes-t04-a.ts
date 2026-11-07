@@ -270,7 +270,7 @@ export const SECTIONS_T04_A: SpecSection[] = [
       { k: "h", text: "Drawing structural formulae from names" },
       {
         k: "worked",
-        title: "Worked example · structures from names (Exercise 5)",
+        title: "Worked example · structures from names",
         question:
           "Draw the structural formula of each: 3-bromopentane · 2,3-dimethyloctane · 3-methylhept-2-ene · 2-chlorohex-3-ene.",
         steps: [
@@ -284,7 +284,7 @@ export const SECTIONS_T04_A: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · alcohols from names (Exercise 5, continued)",
+        title: "Worked example · alcohols from names",
         question: "Draw the structural formula of each: butan-2-ol · propanol · 2-methylpropan-2-ol · 3-chloro-2-methylpentan-3-ol.",
         steps: [
           "**Butan-2-ol** — four-chain, —OH on C-2: CH~3~CHOHCH~2~CH~3~.",
@@ -297,10 +297,9 @@ export const SECTIONS_T04_A: SpecSection[] = [
       },
       {
         k: "note",
-        label: "Exercise 5, continued",
-        text: "Exercise 5 also asks for **4-ethylpentane**. Draw it as named — CH~3~CH~2~CH~2~CH(C~2~H~5~)CH~3~ — and then trace the longest chain: it runs *through* the ethyl branch and holds six carbons, so the molecule is really ==3-methylhexane==.",
+        label: "Watch the longest chain",
+        text: "A name can be a trap: **4-ethylpentane**. Draw it as named — CH~3~CH~2~CH~2~CH(C~2~H~5~)CH~3~ — and then trace the longest chain: it runs *through* the ethyl branch and holds six carbons, so the molecule is really ==3-methylhexane==.",
       },
-      { k: "checkpoint", page: 13 },
     ],
   },
   {

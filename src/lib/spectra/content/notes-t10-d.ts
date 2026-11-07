@@ -5,9 +5,7 @@ import type { SpecSection } from "../notes-types";
    Text kept verbatim from the CHSE Grade 11 / Unit 2 / Topic 10
    class note (Mass spectra and IR, 2019, semester 2), pages 11–19 —
    this is the IR half the mass-spectra file (t10-c) was waiting for.
-   Page furniture omitted. The exercise drill (Questions 1–5, pages
-   17–19, already answered in the note's margins) is left to the
-   book; one Checkpoint card points at its pages. The teaching text
+   Page furniture omitted. The teaching text
    carries no numeric example, so the section carries no worked
    example — the identification craft rides in the wow cards. Eight
    figures are redrawn: the three water vibrations, the generic
@@ -209,7 +207,6 @@ export const SECTIONS_T10_D: SpecSection[] = [
         caption:
           "The class note's amine rule, redrawn on the N–H stretch region: a primary amine carries two bands, a secondary one band — and a tertiary amine, like the note's triethylamine spectrum, shows no N–H stretch at all.",
       },
-      { k: "checkpoint", page: 17 },
       {
         k: "wow",
         text: "The O–H family is where spectra earn their marks: an alcohol's O–H is broad and strong around 3230–3550 cm⁻¹, the acid's spills wider still, 2500–3300 — and the acid pairs it with a C=O. So read the pair, not the peak: C=O with no O–H is an aldehyde or ketone; very broad O–H with a C=O is a carboxylic acid; broad O–H alone is an alcohol. Two dips, one structure family each — that is the whole game.",

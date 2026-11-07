@@ -68,19 +68,6 @@ export const WCH15_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "Cl~2~ + 2e^−^ ⇌ 2Cl^−^, E° = +1.36 V; Fe^3+^ + e^−^ ⇌ Fe^2+^, E° = +0.77 V. Is Fe^2+^ oxidised by chlorine?",
-            a: "Yes: Cl~2~ has the more positive E°, so it is reduced while Fe^2+^ → Fe^3+^ is oxidised. E°cell = 1.36 − 0.77 = +0.59 V > 0.",
-          },
-          {
-            q: "Why does a salt bridge contain KNO~3~ rather than NaCl?",
-            a: "The bridge ions must not react at the electrodes. K^+^ and NO~3~^−^ are spectators; Cl^−^ could be oxidised or form precipitates like AgCl, corrupting the cell.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "E°: voltage vs SHE at 298 K, 100 kPa, 1.00 mol dm^−3^.",
@@ -160,19 +147,6 @@ export const WCH15_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "Write the equation for the ligand substitution when concentrated HCl is added to [Cu(H~2~O)~6~]^2+^.",
-            a: "[Cu(H~2~O)~6~]^2+^ + 4Cl^−^ ⇌ [CuCl~4~]^2−^ + 6H~2~O — coordination number falls 6 → 4 (octahedral → tetrahedral), blue → yellow.",
-          },
-          {
-            q: "Why does the Haber process need a catalyst, and how does it work?",
-            a: "N≡N is too strong for useful rates at moderate T. Fe adsorbs N~2~ and H~2~ onto its surface, weakening their bonds so they react, then desorbs NH~3~ — the activation energy falls, the position of equilibrium does not move.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "Transition metal: an ion with a partially filled d sub-shell.",
@@ -238,19 +212,6 @@ export const WCH15_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "Why does benzene undergo substitution rather than addition with bromine, when cyclohexene adds instantly?",
-            a: "Addition would localise the π electrons and destroy the delocalisation worth 152 kJ mol^−1^. Substitution restores the ring — and benzene's electrons are too delocalised to polarise Br~2~ unaided, hence the AlCl~3~/FeBr~3~ carrier.",
-          },
-          {
-            q: "Write the equation for phenol + bromine water, and the observation.",
-            a: "C~6~H~5~OH + 3Br~2~ → C~6~H~2~Br~3~OH (2,4,6-tribromophenol, white precipitate) + 3HBr — bromine water decolourised from orange in the cold, no catalyst.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "Bonds 139 pm; hydrogenation 208 vs 360 predicted; 152 kJ mol^−1^ delocalisation energy.",
@@ -307,19 +268,6 @@ export const WCH15_TOPICS: Topic[] = [
           "Basicity explanations must name where the lone pair ==is==: pushed onto N by alkyl (more basic) or delocalised into the ring by phenyl (less basic).",
           "Draw peptide-bond formation with the water molecule explicitly lost — and be able to spot the bond's C=O and N–H when asked where hydrolysis attacks.",
           "A–T two H-bonds, C–G three: if a question says “explain why GC-rich DNA is more stable”, that asymmetry is the whole answer.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "Why is aqueous phenylamine a much weaker base than aqueous ethylamine?",
-            a: "In phenylamine the N lone pair is delocalised into the benzene ring, so it is less available to accept H^+^. In ethylamine the ethyl group donates electron density towards N, making the lone pair more available.",
-          },
-          {
-            q: "How does cis-platin attack cancer cells, in one mechanism sentence?",
-            a: "It enters the nucleus and substitutes its chloride ligands for water, then bonds to guanine N atoms on DNA — creating a cross-link that prevents replication and triggers cell death.",
-          },
         ],
       },
       {
@@ -392,19 +340,6 @@ export const WCH15_TOPICS: Topic[] = [
           "Write routes as a ==chain of named intermediates== with reagents and conditions on the arrows — full marks need all three layers, not just the products.",
           "Aqueous vs ethanolic NaOH is the most-asked condition distinction in the paper: same reagent, two different products.",
           "If the carbon count changes, the nitrile route (KCN then hydrolyse or reduce) is almost always the intended path.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "Give a two-step route from propene to propan-2-ol, naming conditions.",
-            a: "HBr (room temperature) → 2-bromopropane (Markownikoff); then NaOH(aq), warm, reflux → propan-2-ol.",
-          },
-          {
-            q: "Why might a synthesis of a chiral drug via a ketone reduction be unacceptable?",
-            a: "Planar C=O attacked from both faces gives a 50 : 50 racemate; the wrong enantiomer may be inactive or harmful, so the route needs asymmetric synthesis or resolution.",
-          },
         ],
       },
       {

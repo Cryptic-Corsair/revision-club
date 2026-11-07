@@ -184,8 +184,8 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 <p className="mt-6 max-w-[50ch] text-[calc(15.5px*var(--ui-scale))] leading-[1.78] text-ink-soft sm:text-[calc(16.5px*var(--ui-scale))] sm:leading-[1.8]">
                   Welcome to <strong className="font-extrabold text-ink">Reaction Club</strong> —
                   revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16). Every unit runs
-                  the 2018 spec in order: definitions, equations, worked examples and checkpoint
-                  questions. Your progress saves itself in your browser.
+                  the 2018 spec in order: definitions, equations and fully worked examples. Your
+                  progress saves itself in your browser.
                 </p>
               </PopIn>
 
@@ -206,13 +206,12 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               {/* the numbers, as one tidy strip */}
               <PopIn delay={0.32} className="mt-9">
                 <div className="rounded-[calc(26px*var(--ui-scale))] bg-cream px-4 py-4 sm:px-5">
-                  <div className="grid grid-cols-2 gap-x-3 gap-y-4 sm:grid-cols-3 lg:grid-cols-5">
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-4 sm:grid-cols-4">
                     {[
                       { icon: Atom, value: String(units.length), label: "units" },
                       { icon: ListChecks, value: String(TOTALS.topics), label: "topics" },
                       { icon: Clock, value: `≈${hours} h`, label: "reading" },
                       { icon: PencilRuler, value: String(TOTALS.examples), label: "examples" },
-                      { icon: ClipboardCheck, value: String(TOTALS.checks), label: "checkpoints" },
                     ].map((s) => (
                       <div key={s.label} className="flex items-center gap-2">
                         <s.icon className="h-4 w-4 shrink-0 text-coral" strokeWidth={2.5} />
@@ -526,8 +525,8 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               n: "2",
               color: "#FF922B",
               icon: ClipboardCheck,
-              title: "Check your answers",
-              body: "Every topic ends with checkpoint questions. Try each one first, then reveal the answer and compare your working.",
+              title: "Work the examples",
+              body: "Every exercise the notes set is worked line by line. Cover the answer, try it yourself, then compare your working.",
             },
             {
               n: "3",

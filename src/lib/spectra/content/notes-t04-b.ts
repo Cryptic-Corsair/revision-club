@@ -70,7 +70,6 @@ export const SECTIONS_T04_B: SpecSection[] = [
         k: "wow",
         text: "One ring costs two hydrogens: C~6~H~14~ is hexane, C~6~H~12~ is cyclohexane — the same formula as an alkene, but with ==no double bond anywhere==.",
       },
-      { k: "checkpoint", page: 20 },
     ],
   },
   {
@@ -119,7 +118,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       { k: "figure", kind: "isomers", caption: "The three isomers of C₅H₁₂ — pentane, 2-methylbutane and 2,2-dimethylpropane." },
       {
         k: "worked",
-        title: "Worked example · Exercise 2(a) — all the isomers of C~5~H~12~",
+        title: "Worked example · all the isomers of C~5~H~12~",
         question: "Draw and name all the isomers of C~5~H~12~.",
         steps: [
           "**Longest chain = 5**: pentane, CH~3~CH~2~CH~2~CH~2~CH~3~ — the straight chain.",
@@ -130,7 +129,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 2(b) — all the isomers of C~6~H~14~",
+        title: "Worked example · all the isomers of C~6~H~14~",
         question: "Draw and name all the isomers of C~6~H~14~.",
         steps: [
           "**Longest chain = 6**: hexane, CH~3~(CH~2~)~4~CH~3~.",
@@ -148,7 +147,6 @@ export const SECTIONS_T04_B: SpecSection[] = [
           "For cycloalkanes the same rule holds: cyclopentane and methylcyclobutane are both C~5~H~10~ — same molecular formula, different structural formula.",
         ],
       },
-      { k: "checkpoint", page: 22 },
     ],
   },
   {
@@ -388,7 +386,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 3(a) — complete combustion",
+        title: "Worked example · complete combustion",
         question: "Write equations for the complete combustion of butane, hexane and decane.",
         steps: [
           "**Butane** C~4~H~10~: C first — 4CO~2~; H next — 5H~2~O; count O — 8 + 5 = 13, so 13/2 O~2~; double everything to clear the fraction.",
@@ -400,7 +398,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 3(b) — incomplete combustion (to CO)",
+        title: "Worked example · incomplete combustion (to CO)",
         question: "Write equations for the incomplete combustion of propane, heptane and octane.",
         steps: [
           "Same order — C to CO, H to H~2~O — but only ==half the oxygen== of the complete case: O~2~ coefficient = C + H/4 with the CO~2~ halved to CO, i.e. ==C + H/4, all over 2== per one molecule.",
@@ -422,7 +420,6 @@ export const SECTIONS_T04_B: SpecSection[] = [
         eq: "CH~4~ + Cl~2~ → HCl + CH~3~Cl        CH~3~Cl + Cl~2~ → HCl + CH~2~Cl~2~        CH~2~Cl~2~ + Cl~2~ → HCl + CHCl~3~        CHCl~3~ + Cl~2~ → HCl + CCl~4~",
         note: "Reagents: chlorine and methane. Conditions: ==UV light or sunlight== — heat could be used as an alternative energy source. Products, step by step: chloromethane · dichloromethane · trichloromethane · tetrachloromethane.",
       },
-      { k: "checkpoint", page: 29 },
     ],
   },
   {
@@ -455,7 +452,7 @@ export const SECTIONS_T04_B: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 4 — ethane + iodine monochloride",
+        title: "Worked example · ethane + iodine monochloride",
         question:
           "Write the complete mechanism for the reaction of ethane with I–Cl to form iodoethane.",
         steps: [
@@ -476,7 +473,6 @@ export const SECTIONS_T04_B: SpecSection[] = [
           "==Ethane in the products== means two •CH~3~ radicals ==combined together== in a termination step.",
         ],
       },
-      { k: "checkpoint", page: 30 },
     ],
   },
 ];

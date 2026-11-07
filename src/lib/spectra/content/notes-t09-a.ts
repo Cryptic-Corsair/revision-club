@@ -3,9 +3,8 @@ import type { SpecSection } from "../notes-types";
 /* ═══════════════════════════════════════════════════════════════
    Topic 9 revision note · Part 9A — Kinetics (spec 9.1–9.8)
    Text kept verbatim from the CHSE Grade 11 / Unit 2 / Topic 9A
-   class note (2021, semester 2); page furniture omitted. The
-   checkpoint drill is left to the book — each checkpoint card
-   points at its page. The two rate-calculation methods (rate =
+   class note (2021, semester 2); page furniture omitted. The two
+   rate-calculation methods (rate =
    1/time, and the tangent gradient) each keep exactly one worked
    example, worked in full.
    Highlighting is kept deliberately light: one mark per key term,
@@ -157,7 +156,6 @@ export const SECTIONS_T09_A: SpecSection[] = [
         k: "p",
         text: "For simple reactions involving two species, the chance of them meeting each other in solution is proportional to their concentrations, same as in gas phase.",
       },
-      { k: "checkpoint", page: 9 },
       {
         k: "wow",
         text: "Every rate factor is one of two moves: concentration, pressure and surface area make collisions *more frequent*; temperature makes them *more energetic*. Either way, it is the frequency of successful collisions that decides the rate.",
@@ -215,7 +213,6 @@ export const SECTIONS_T09_A: SpecSection[] = [
         k: "wow",
         text: "A collision has to pass two gates: enough energy to clear the activation barrier, and the right geometry to break the right bond. Miss either one, and the particles bounce apart unchanged.",
       },
-      { k: "checkpoint", page: 5 },
     ],
   },
   {
@@ -376,7 +373,6 @@ export const SECTIONS_T09_A: SpecSection[] = [
           "The peak of the T~2~ distribution is to the right and lower than the peak of T~1~ distribution.",
         ],
       },
-      { k: "checkpoint", page: 12 },
       {
         k: "wow",
         text: "Heating creates no new particles — it reshuffles the same total area, flattening the peak rightwards until far more of the distribution sits beyond E~a~. That is how a small rise in temperature buys a large rise in rate.",
@@ -551,7 +547,6 @@ export const SECTIONS_T09_A: SpecSection[] = [
           "The whole process may be quicker so that more product is obtained in a given time.",
         ],
       },
-      { k: "checkpoint", page: 17 },
       {
         k: "wow",
         text: "Industry loves a catalyst twice over: lower temperatures cut the energy bill, and cleaner routes with fewer side products cut the waste — more of every atom fed in ends up inside the product.",

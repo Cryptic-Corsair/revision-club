@@ -7,9 +7,7 @@ import type { SpecSection } from "../notes-types";
    furniture omitted. The IR half (10.22) is listed on the same
    checklist but its class-note pages have not arrived yet, so it
    is not stubbed here — it joins as its own section later.
-   The exercise drill (Exercise 1 Q1–Q7, Exercise 2 Q1–Q14) is
-   left to the book; Checkpoint cards point at its pages. The
-   class note carries one numeric example in the teaching text —
+   The class note carries one numeric example in the teaching text —
    the benzoic-acid M+1 height — and the note keeps exactly that
    one worked example. Five spectra figures are redrawn: butane,
    propanal, the carbon-isotope trio, and the schematic bromine
@@ -110,7 +108,6 @@ export const SECTIONS_T10_C: SpecSection[] = [
         text: "The mass spectra of compounds are as unique as ==fingerprints==. It is very unlikely that two different compounds will fragment in exactly the same way. Mass spectrometry of organic compounds is thus useful for identifying:",
       },
       { k: "bullets", items: ["The relative molecular mass", "Parts of the structural form."] },
-      { k: "checkpoint", page: 4 },
       {
         k: "wow",
         text: "Read a spectrum from the right edge inwards: the rightmost major peak is the molecular ion, and its m/z is the relative molecular mass of the whole molecule — free. Every peak to its left is a piece the electron beam knocked off, and because only charged pieces survive the machine, each one tells you which half kept the charge. The tallest of them all is the base peak, pinned at 100% so every other height is measured against it.",
@@ -181,7 +178,6 @@ export const SECTIONS_T10_C: SpecSection[] = [
         caption:
           "The class note's two chlorine patterns, redrawn: one chlorine splits M and M+2 in a 3:1 doublet; two chlorines stack the combinations into a 9:6:1 triplet two mass units apart.",
       },
-      { k: "checkpoint", page: 9 },
       {
         k: "wow",
         text: "The isotope pattern is the free bonus clue in every spectrum: a doublet two mass units apart with equal legs is one bromine, a 3:1 doublet is one chlorine — and while you are there, the M+1 stub quietly counts your carbon atoms at 1% each. Three heights, read before you have assigned a single fragment, already narrow the formula.",

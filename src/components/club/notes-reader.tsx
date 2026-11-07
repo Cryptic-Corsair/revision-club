@@ -275,7 +275,6 @@ function NotesReaderBody({
     `${doc.sections.length} spec sections`,
     `${count("worked")} worked examples`,
     `${count("figure")} diagrams`,
-    `${count("checkpoint")} textbook checkpoints`,
     ...(spentHere >= 60 ? [`${fmtClock(spentHere)} of your time here`] : []),
   ];
 
@@ -440,14 +439,14 @@ function NotesReaderBody({
         <Reveal className="flex flex-col items-center gap-5">
           <Squiggle color={main} className="h-3 w-40 opacity-70" />
           <p className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">
-            That&apos;s the whole note — every spec point, word for word.
+            That&apos;s the whole note — every spec point of the topic.
           </p>
           <SoftButton onClick={onBack} ariaLabel={`Back to ${unit.code}`}>
             <ArrowLeft className="h-4.5 w-4.5" /> Back to {unit.code}
           </SoftButton>
           <p className="mt-2 text-[calc(12px*var(--ui-scale))] leading-relaxed font-bold text-ink-soft">
             <Fmt
-              text={`==${unit.code}== · ${unit.title} · text kept verbatim from the ${doc.source}`}
+              text={`==${unit.code}== · ${unit.title} · from ${doc.source}`}
             />
           </p>
         </Reveal>

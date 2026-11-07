@@ -4,8 +4,8 @@ import type { SpecSection } from "../notes-types";
    Topic 8 revision note · Part 8A — Redox Chemistry (spec 8.1–8.10)
    Text kept verbatim from the CHSE Grade 11 / Unit 2 / Topic 8A
    class note (2021, semester 2) — Redox Chemistry; page furniture
-   omitted. The exercise drill is left to the book: each method —
-   the basic sum, the Roman numeral, the formula, the agents, the
+   omitted. Each method — the basic sum, the Roman numeral, the
+   formula, the agents, the
    disproportionation test, and each balancing procedure through to
    the full ionic equation — keeps exactly one worked example,
    worked in full.
@@ -81,10 +81,9 @@ export const SECTIONS_T08_A: SpecSection[] = [
         ],
         answer: "(a) −1 · (b) +1 · (c) +5",
       },
-      { k: "checkpoint", page: 8 },
       {
         k: "worked",
-        title: "Worked example · Exercise 2, question 1",
+        title: "Worked example · oxidation numbers from the rules",
         question: "Calculate the oxidation number of the underlined element in each of the following species: (a) VO~2~^+^  (b) H~2~O~2~",
         steps: [
           "(a) VO~2~^+^ is an ion: V + 2(−2) = +1, so ==V = +5==.",
@@ -125,10 +124,9 @@ export const SECTIONS_T08_A: SpecSection[] = [
           ["Cr~2~O~7~^2−^", "Cr +6", "Chromate(VI)"],
         ],
       },
-      { k: "checkpoint", page: 13 },
       {
         k: "worked",
-        title: "Worked example · Exercise 3, question 1",
+        title: "Worked example · systematic names from oxidation numbers",
         question: "Give the systematic name for each of the following compounds: (a) PCl~3~  (b) PCl~5~  (c) V~2~O~5~  (d) PbO  (e) CuSO~4~  (f) NaClO  (g) NaClO~3~",
         steps: [
           "(a) PCl~3~: P + 3(−1) = 0, so P is +3 → phosphorus(III) chloride.",
@@ -356,10 +354,9 @@ export const SECTIONS_T08_A: SpecSection[] = [
         caption:
           "Chlorine(0) splits into chlorate(I), +1, and chloride, −1 — one atom climbs, the other falls, in the same reaction.",
       },
-      { k: "checkpoint", page: 6 },
       {
         k: "worked",
-        title: "Worked example · Checkpoint 1, question 1",
+        title: "Worked example · the potassium bromate(I) decomposition",
         question: "When potassium bromate(I) is heated, it decomposes according to the equation 3KOBr → 2KBr + KBrO~3~. Using oxidation numbers of the elements involved, explain why this is a disproportionation reaction.",
         steps: [
           "In KOBr: K is +1, O is −2, so Br is +1 — one species, one oxidation number to start.",
@@ -539,7 +536,6 @@ export const SECTIONS_T08_A: SpecSection[] = [
         ],
         answer: "5Fe^2+^ + MnO~4~^−^ + 8H^+^ → 5Fe^3+^ + Mn^2+^ + 4H~2~O",
       },
-      { k: "checkpoint", page: 16 },
     ],
   },
 ];

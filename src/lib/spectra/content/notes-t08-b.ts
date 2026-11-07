@@ -4,9 +4,9 @@ import type { SpecSection } from "../notes-types";
    Topic 8 revision note · Part 8B — The elements of Groups 1 and 2
    (spec 8.11–8.23)
    Text kept verbatim from the CHSE Grade 11 / Unit 2 / Topic 8B
-   class note (2021, semester 2); page furniture omitted. The
-   exercise drill is left to the book: each method — neutralising
-   with an oxide or hydroxide, applying the decomposition patterns,
+   class note (2021, semester 2); page furniture omitted. Each
+   method — neutralising with an oxide or hydroxide, applying the
+   decomposition patterns,
    the mean titre, the titration sum, the mol dm⁻³ → g dm⁻³ switch,
    each uncertainty estimate, and the standard-solution sum — keeps
    exactly one worked example, worked in full.
@@ -393,7 +393,6 @@ export const SECTIONS_T08_B: SpecSection[] = [
         caption:
           "A small, highly charged cation pulls hardest on the anion's electron cloud: the O–C bonds inside the carbonate weaken and the compound decomposes more easily. A large, lowly charged cation barely distorts the anion — the lattice survives heating.",
       },
-      { k: "checkpoint", page: 205 },
       {
         k: "wow",
         text: "One idea runs this whole topic: small and highly charged means polarising, and polarising means decomposing. It explains the nitrates, the carbonates, the lithium exceptions — and why the trend flips again between Group 1 and Group 2.",
@@ -904,8 +903,6 @@ export const SECTIONS_T08_B: SpecSection[] = [
           "Minimizing random errors: for example, in a thermochemistry experiment, minimizing heat loss will reduce random errors in the measurement of temperature change.",
         ],
       },
-      { k: "checkpoint", page: 227 },
-      { k: "checkpoint", page: 229 },
       {
         k: "wow",
         text: "A mistake is yours to make and yours to avoid; an error belongs to the apparatus. Concordant titres average the random error away — only a properly calibrated burette can touch the systematic kind.",

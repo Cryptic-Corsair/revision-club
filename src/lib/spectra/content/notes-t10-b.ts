@@ -4,9 +4,8 @@ import type { SpecSection } from "../notes-types";
    Topic 10 revision note · Part 10B — Alcohols (spec 10.15–10.19)
    Text kept verbatim from the CHSE Grade 11 / Unit 2 / Topic 10C
    class note (Alcohols, 2021, semester 2); page furniture omitted.
-   The exercise drill (Exercises 1–3, Q1–Q2) is left to the book;
-   Check point cards point at its pages. The topic is purely
-   qualitative, so it carries no worked examples. The physical
+   The topic is purely qualitative, so it carries no worked
+   examples. The physical
    properties page carries no objective badge in the class note,
    so it rides inside the 10.16 section in book order.
    Ten figures are redrawn: the bond angles, the four classes,
@@ -83,7 +82,6 @@ export const SECTIONS_T10_B: SpecSection[] = [
         eq: "CH~3~CH(OH)CH(OH)CH~3~        Butane-2,3-diol",
         note: "Eg. — two –OH groups, so di- plus locants to say where they sit",
       },
-      { k: "checkpoint", page: 3 },
       {
         k: "wow",
         text: "Three fixes rename any alcohol. Count the longest chain that owns the –OH, swap the alkane's -e for -ol, then spend the smallest numbers you can — one locant for the carbon wearing the oxygen, more for the branches. Two oxygens on one chain? The root keeps its 'ane' and di- carries the news.",
@@ -401,7 +399,6 @@ export const SECTIONS_T10_B: SpecSection[] = [
         k: "eq",
         eq: "2CH~3~CO~2~H + Na~2~CO~3~ → 2CH~3~CO~2~^−^Na^+^ + H~2~O + CO~2~",
       },
-      { k: "checkpoint", page: 10 },
       {
         k: "wow",
         text: "The aldehyde never gets a say. It is the obligatory middle step — but whether it survives to become the acid is decided entirely by the glassware: distil and it leaves the mixture the moment it forms, too fast for the oxidising agent to catch it; reflux and it drips straight back into the orange solution, which keeps oxidising until only the acid remains.",
@@ -611,7 +608,6 @@ export const SECTIONS_T10_B: SpecSection[] = [
         label: "Note the pressure",
         text: "Pressure should be noted as changing pressure can change the boiling point of a liquid",
       },
-      { k: "checkpoint", page: 15 },
       {
         k: "wow",
         text: "Purification is a relay of handoffs, each runner removing one impurity: reflux or distillation separates by boiling point, the fractionating column only stretches the same idea into many stages, the separating funnel pulls out the layer that will not mix, the anhydrous salt drinks the last traces of water — and the boiling point at the end is the receipt, checked against the data booklet.",

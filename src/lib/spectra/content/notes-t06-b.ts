@@ -177,7 +177,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 8, Question 2 — formation data and the canister",
+        title: "Worked example · formation data and the canister",
         question:
           "(a) The standard enthalpy changes of formation are: C~4~H~10~(g) −134.5, CO~2~(g) −393.5, H~2~O(l) −285.8 kJ mol^−1^. (i) Δ~f~H^θ^ of H~2~O(g) is −241.8 kJ mol^−1^ — explain why this is less negative than for H~2~O(l). (ii) Calculate the standard enthalpy change of combustion of 2-methylpropane. (iii) A refill canister for the cordless hair-styler holds 15 g of 2-methylpropane — calculate the energy in kJ from one canister. (b) The enthalpy change can also be calculated using the atomisation cycle: C~4~H~10~(g) + 6½O~2~(g) → 4CO~2~(g) + 5H~2~O(l), arrows of +8410 kJ mol^−1^ and +11280 kJ mol^−1^ down to 4C(g) + 10H(g) + 13O(g). Calculate the enthalpy change using this cycle.",
         steps: [
@@ -192,7 +192,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       {
         k: "figure",
         kind: "hess-butane",
-        caption: "The atomisation cycle of Exercise 8: both sides of the combustion equation are pulled apart into gaseous atoms — +8410 kJ mol^−1^ to atomise the reactants, +11280 kJ mol^−1^ to atomise the products. The difference is the enthalpy change of the reaction.",
+        caption: "The atomisation cycle: both sides of the combustion equation are pulled apart into gaseous atoms — +8410 kJ mol^−1^ to atomise the reactants, +11280 kJ mol^−1^ to atomise the products. The difference is the enthalpy change of the reaction.",
       },
     ],
   },
@@ -236,7 +236,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 8, Question 3 — the sodium hydrogencarbonate determination",
+        title: "Worked example · the sodium hydrogencarbonate determination",
         question:
           "Sodium hydrogencarbonate decomposes on heating: Reaction 1, 2NaHCO~3~(s) → Na~2~CO~3~(s) + H~2~O(l) + CO~2~(g). (a) Suggest why it is difficult to measure the enthalpy change of this reaction directly. (b) Apply Hess's law to Reaction 2, NaHCO~3~(s) + HCl(aq) → NaCl(aq) + H~2~O(l) + CO~2~(g), and Reaction 3, Na~2~CO~3~(s) + 2HCl(aq) → 2NaCl(aq) + H~2~O(l) + CO~2~(g). For Reaction 2: 100 cm^3^ of 1.25 mol dm^−3^ HCl in a 200 cm^3^ polystyrene beaker, initial temperature 21.5 °C; 8.00 g of solid NaHCO~3~ added, lid on, stirred; lowest temperature 14.2 °C. (i) Explain why the beaker is large. (ii) Show by calculation that the hydrochloric acid is in excess. (iii) Calculate the energy transferred and the enthalpy change in kJ mol^−1^ using energy transferred (J) = 100 × 4.18 × temperature change. (iv) Given that Reaction 3 has Δ~r~H^θ^ = −36.3 kJ mol^−1^, calculate the enthalpy change for Reaction 1.",
         steps: [
@@ -249,7 +249,6 @@ export const SECTIONS_T06_B: SpecSection[] = [
         answer:
           "(ii) HCl in excess by 0.0298 mol · (iii) 3051.4 J and ΔH = ==+32.0 kJ mol^−1^== · (iv) ΔH for Reaction 1 = ==+100.3 kJ mol^−1^== — Hess's law measured a reaction that no calorimeter could touch.",
       },
-      { k: "checkpoint", page: 159 },
     ],
   },
   {
@@ -306,7 +305,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 4 (e)–(g) — judging the methanol experiment",
+        title: "Worked example · judging the methanol experiment",
         question:
           "(e) The experimental value for the enthalpy change of combustion of methanol is ==less negative== than the Data Booklet value. Identify two improvements — to the apparatus or the procedure — that would give a value closer to the Data Booklet, and justify them (no repeats, no better measuring equipment). (f) State and explain the effect on the value if the water was not stirred. (g) If there is insufficient oxygen for complete combustion, what is observed on the underside of the beaker?",
         steps: [
@@ -333,11 +332,11 @@ export const SECTIONS_T06_B: SpecSection[] = [
       {
         k: "figure",
         kind: "cooling-curve",
-        caption: "The method, drawn with the Exercise 6 readings: flat at 20.0 °C before mixing, a sharp rise when the zinc is added at exactly 3.5 minutes, then a slow fall as the mixture cools. The cooling line ==extrapolated back== and the starting line ==carried forward== meet the moment of mixing — ΔT is read between them.",
+        caption: "The method, drawn with the class note's readings: flat at 20.0 °C before mixing, a sharp rise when the zinc is added at exactly 3.5 minutes, then a slow fall as the mixture cools. The cooling line ==extrapolated back== and the starting line ==carried forward== meet the moment of mixing — ΔT is read between them.",
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 6 — the zinc / copper(II) sulfate cooling curve",
+        title: "Worked example · the zinc / copper(II) sulfate cooling curve",
         question:
           "Zn(s) + Cu^2+^(aq) → Zn^2+^(aq) + Cu(s). 5.0 g of zinc powder is added at exactly 3.5 minutes to 50 cm^3^ of 1.0 mol dm^−3^ CuSO~4~ in a polystyrene cup held in a 250 cm^3^ beaker. Temperature every minute: 20.0, 20.0, 20.0, 20.0, then 63.0, 60.5, 59.0, 57.0, 55.5, 53.0 °C. (a) Plot the graph and use it to find the maximum temperature change ΔT; give ONE reason why a series of readings is taken instead of just the starting and maximum temperatures. (b) Calculate the heat change in joules (c = 4.18 J g^−1^ °C^−1^); state the assumption made about the solution; calculate the amount of CuSO~4~ and the enthalpy change in kJ mol^−1^. (c) Suggest TWO improvements to the procedure, with reasons.",
         steps: [
@@ -352,7 +351,6 @@ export const SECTIONS_T06_B: SpecSection[] = [
         answer:
           "ΔT = ==44 °C== · Q = ==9196 J== · 0.05 mol · ΔH = ==−184 kJ mol^−1^== — the extrapolation is what turns a cooling, leaking cup into a fair measurement.",
       },
-      { k: "checkpoint", page: 157 },
     ],
   },
   {
@@ -441,7 +439,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 9, Question 1 — ethanol from bond enthalpies",
+        title: "Worked example · ethanol from bond enthalpies",
         question:
           "Calculate the enthalpy of reaction for C~2~H~4~(g) + H~2~O(g) → CH~3~CH~2~OH(g), given the bond enthalpy terms: C—C +347, C=C +612, C—H +413, O—H +464, C—O +358 kJ mol^−1^.",
         steps: [
@@ -454,7 +452,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 9, Question 3 — but-1-ene and liquid bromine",
+        title: "Worked example · but-1-ene and liquid bromine",
         question:
           "Gaseous but-1-ene reacts with liquid bromine: C~4~H~8~ + Br~2~ → C~4~H~8~Br~2~. Bond enthalpies: C—H 413, C—C 347, C=C 612, C—Br 290, Br—Br 193 kJ mol^−1^. (i) Calculate the enthalpy change. (ii) Give one reason why the value calculated using bond enthalpies is different from the true value — do not consider experimental error, mean bond enthalpy values or non-standard conditions.",
         steps: [
@@ -482,7 +480,7 @@ export const SECTIONS_T06_B: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 9, Question 2 — the Si—F bond",
+        title: "Worked example · the Si—F bond",
         question:
           "Calculate the mean bond enthalpy of the SiF bond in SiF~4~(g) given: enthalpy of formation of SiF~4~(g) = −1615 kJ mol^−1^; enthalpy of atomisation of silicon = +456 kJ mol^−1^; enthalpy of atomisation of fluorine = +79 kJ mol^−1^.",
         steps: [

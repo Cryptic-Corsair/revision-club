@@ -4,8 +4,7 @@ import type { SpecSection } from "../notes-types";
    Topic 9 revision note · Part 9B — Equilibria (spec 9.9–9.11)
    Text kept verbatim from the CHSE Grade 11 / Unit 2 / Topic 9B
    class note (2021, semester 2); page furniture omitted. The
-   checkpoint drill and the exercise drill are left to the book —
-   each checkpoint card points at its page. The topic is purely
+   topic is purely
    qualitative, so it carries no worked examples: the summary
    tables from the class note are kept, and the three source
    graphs (fig A, ammonia-vs-pressure, Haber yield, Contact
@@ -117,7 +116,6 @@ export const SECTIONS_T09_B: SpecSection[] = [
           "Rate of the forward reaction is equal to the rate of the backward reaction",
         ],
       },
-      { k: "checkpoint", page: 4 },
       {
         k: "wow",
         text: "Dynamic is the operative word. At equilibrium neither reaction has stopped: particles are still swapping sides in both directions at equal rates, so the concentrations stop changing — the traffic never stops, the level just stops moving. And the whole state depends on two conditions: a reversible reaction and a closed container.",
@@ -334,7 +332,6 @@ export const SECTIONS_T09_B: SpecSection[] = [
           "In practice the mixture becomes darker in colour, so the temperature effect must be greater than the pressure effect. The equilibrium must have shifted to the left to produce more NO~2~(g).",
         ],
       },
-      { k: "checkpoint", page: 13 },
       {
         k: "wow",
         text: "Every shift is the same reflex — the position moves to restore what was changed. Extra reactant gets consumed, extra pressure escapes towards the side with fewer gas molecules, extra heat is swallowed by the endothermic direction. A catalyst is the one disturbance that changes nothing: it hurries both directions equally, so equilibrium simply arrives sooner — at the very same position.",
@@ -440,7 +437,6 @@ export const SECTIONS_T09_B: SpecSection[] = [
         label: "Conditions used in Contact process",
         text: "Temperature — 450 °C · Pressure — 2 atm",
       },
-      { k: "checkpoint", page: 17 },
       {
         k: "wow",
         text: "Vanadium(V)oxide plays give-and-take: it hands an oxygen atom to SO~2~ and drops down to vanadium(IV), then the air hands the oxygen back and vanadium(V) rises again. Changed twice, changed not at all overall — exactly what a catalyst must be.",

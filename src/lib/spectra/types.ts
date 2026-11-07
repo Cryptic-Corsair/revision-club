@@ -28,7 +28,6 @@ export type Block =
   | { k: "ex"; title: string; steps: string[]; answer: string }
   | { k: "tips"; items: string[] }
   | { k: "table"; head: string[]; rows: string[][]; caption?: string }
-  | { k: "check"; qs: { q: string; a: string }[] }
   | { k: "recap"; items: string[] };
 
 export interface Topic {

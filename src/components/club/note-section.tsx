@@ -3,7 +3,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import {
-  BookOpen,
   Check,
   ChevronDown,
   EyeOff,
@@ -360,21 +359,6 @@ function BlockView({
       );
     case "steps":
       return <StepsPanel caption={b.caption} items={b.items} accent={accent} />;
-    case "checkpoint":
-      return (
-        <div className="flex items-center gap-3 rounded-full bg-paper px-5 py-4 puff">
-          <span
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-full"
-            style={{ background: sunkWash("#12B886", 18) }}
-          >
-            <BookOpen className="h-5 w-5 text-mint" />
-          </span>
-          <p className="text-[calc(15px*var(--ui-scale))] font-bold text-ink">
-            Checkpoint — the checkpoint questions for this section are on page{" "}
-            {b.page} of the textbook.
-          </p>
-        </div>
-      );
     case "figure":
       return <Figure kind={b.kind} caption={b.caption} accent={accent} />;
     case "wow":

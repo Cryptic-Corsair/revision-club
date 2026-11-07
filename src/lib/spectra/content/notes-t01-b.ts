@@ -7,8 +7,7 @@ import type { SpecSection } from "../notes-types";
    of Substance; page furniture omitted. The class note prints the
    questions of its worked examples and leaves their solutions as
    worked spaces — every solution here is worked in full and
-   arithmetic-checked. The exercise drill (Exercises 5–11) is left
-   to the book.
+   arithmetic-checked.
    Highlighting is kept deliberately light: one mark per key term,
    short spans only.
    ═══════════════════════════════════════════════════════════════ */
@@ -101,7 +100,7 @@ export const SECTIONS_T01_B: SpecSection[] = [
       {
         k: "eq",
         eq: "number of moles = mass in grams ÷ molar mass        number of moles of gas = volume of gas (dm^3^) ÷ molar volume (24 dm^3^)",
-        note: "The molar-volume route is exercised in section 1.8; the class note leaves its exercise drill (Exercise 5, Questions 1–8) to the book.",
+        note: "The molar-volume route is exercised in section 1.8.",
       },
     ],
   },
@@ -164,11 +163,6 @@ export const SECTIONS_T01_B: SpecSection[] = [
           "Write the equation: Cu~2~O(s) + H~2~(g) → 2Cu(s) + H~2~O(l)",
         ],
         answer: "**Cu~2~O(s) + H~2~(g) → 2Cu(s) + H~2~O(l)**",
-      },
-      {
-        k: "note",
-        label: "In the book",
-        text: "**Exercise 6** drills reacting masses — from lead sulfate precipitates to the zinc sulfate hydrate ZnSO~4~.xH~2~O and gas volumes of SO~3~ — it stays in the book.",
       },
     ],
   },
@@ -277,11 +271,6 @@ export const SECTIONS_T01_B: SpecSection[] = [
         ],
         answer: "Atom economy = **29.5 %**",
       },
-      {
-        k: "note",
-        label: "In the book",
-        text: "**Exercise 7** asks for the percentage yield and atom economy of the Solvay process, and which of two routes to 1,2-dichloroethane is the greener choice — it stays in the book.",
-      },
     ],
   },
   {
@@ -327,11 +316,6 @@ export const SECTIONS_T01_B: SpecSection[] = [
           "Molecular formula = empirical formula (CH~2~) × 6",
         ],
         answer: "**C~6~H~12~**",
-      },
-      {
-        k: "note",
-        label: "In the book",
-        text: "**Exercise 8** drills empirical formulae from percentage compositions, from a dumped white powder's analysis, and from glucose — it stays in the book.",
       },
     ],
   },
@@ -434,11 +418,6 @@ export const SECTIONS_T01_B: SpecSection[] = [
         ],
         answer: "Molecular formula = **C~2~H~6~O**",
       },
-      {
-        k: "note",
-        label: "In the book",
-        text: "**Exercise 9** repeats the method on a 2.82 g gas sample and a C = 40.0 % compound — it stays in the book.",
-      },
     ],
   },
   {
@@ -473,7 +452,7 @@ export const SECTIONS_T01_B: SpecSection[] = [
       {
         k: "note",
         label: "Not required at this stage",
-        text: "==Titration calculations== are not required at this stage — the class note leaves Exercise 10 (the three molarity questions) in the book.",
+        text: "==Titration calculations== are not required at this stage.",
       },
       { k: "h", text: "Concentrations in ppm (parts per million)" },
       {
@@ -560,11 +539,6 @@ export const SECTIONS_T01_B: SpecSection[] = [
           "Compare: 350 ppm against 74 ppm",
         ],
         answer: "**Sample 2** has the higher concentration — 350 ppm",
-      },
-      {
-        k: "note",
-        label: "In the book",
-        text: "**Exercise 11** finishes the ppm drill — organophosphates in river water, sucrose solutions, a pesticide's toxic solubility and chlorine in air. It stays in the book.",
       },
     ],
   },

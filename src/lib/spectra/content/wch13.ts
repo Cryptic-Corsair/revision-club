@@ -49,19 +49,6 @@ export const WCH13_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "A titre of 22.30 cm^3^ is calculated from two burette readings. What is its absolute uncertainty?",
-            a: "± 0.10 cm^3^ — each reading carries ± 0.05 cm^3^, and uncertainties add when readings are subtracted.",
-          },
-          {
-            q: "Why does using a 250 cm^3^ volumetric flask beat a 250 cm^3^ measuring cylinder for a standard solution?",
-            a: "The flask is calibrated to contain exactly 250.0 cm^3^ with far tighter tolerance; a measuring cylinder's uncertainty is orders of magnitude larger, and the concentration would inherit it.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "Analogue: ± half smallest division. Digital: ± 1 last digit.",
@@ -124,19 +111,6 @@ export const WCH13_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "Titres of 22.35, 22.30, 22.90 and 22.25 cm^3^ are recorded. Which mean is quoted?",
-            a: "22.30 cm^3^ — from 22.35, 22.30 and 22.25 (concordant within 0.10). The 22.90 overshot and is discarded; the rough run never enters.",
-          },
-          {
-            q: "Why is the conical flask rinsed with distilled water but the burette with titrant?",
-            a: "Water left in the flask dilutes nothing that matters — the moles of solute delivered are unchanged. Water in the burette would dilute the titrant itself and corrupt its concentration.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "Standard solution: weigh by difference, dissolve, transfer with washings, make to the mark, invert.",
@@ -191,19 +165,6 @@ export const WCH13_TOPICS: Topic[] = [
           "A result can be precise and wrong: a mis-calibrated balance repeats beautifully, all of it shifted. Precision is not accuracy.",
           "When asked to “comment on the data”, quote numbers — compare the spread to the size of the values, as a percentage.",
           "Improvements must be *practical* — “do it more carefully” earns nothing; “insulate the calorimeter and use a lid” earns.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "Five repeats give 24.8, 24.9, 24.8, 30.1, 24.9 cm^3^. How do you report the value?",
-            a: "Mean of the concordant set only: (24.8 + 24.9 + 24.8 + 24.9) ÷ 4 = 24.85 cm^3^ — the 30.1 is an anomaly (overshoot), identified and excluded with a stated reason.",
-          },
-          {
-            q: "A student's titre is consistently 0.50 cm^3^ above everyone else's. Random or systematic?",
-            a: "Systematic — the deviation is one-signed. Likely a rinsing fault or an air bubble in the jet; repeating would reproduce it exactly.",
-          },
         ],
       },
       {
@@ -269,19 +230,6 @@ export const WCH13_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "A solid gives a red flame and a white precipitate with concentrated NaOH. Which ion?",
-            a: "Ca^2+^ — the red flame plus the white Ca(OH)~2~ precipitate (which needs more NaOH to appear, being partially soluble). Lithium and strontium flame red but do not precipitate.",
-          },
-          {
-            q: "Why does a suspension of Mg(OH)~2~ read pH 9 while Ca(OH)~2~ reads pH 11?",
-            a: "Calcium hydroxide is ==more soluble==, so more hydroxide ions reach the solution — the solubility ladder down Group 2 in action.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "Clean wire + conc HCl + non-luminous flame; walk into the hotter zones.",
@@ -340,19 +288,6 @@ export const WCH13_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "A gas bleaches moist blue litmus after turning it red. Which gas, and why the two stages?",
-            a: "Cl~2~ — it is acidic (turns the litmus red) and an oxidising agent (bleaches it). Bromine bleaches more slowly; iodine does neither.",
-          },
-          {
-            q: "Why is the nitrate test really two tests in one?",
-            a: "The aluminium first ==reduces== NO~3~^−^ to ammonia in the alkaline solution; the damp red litmus then identifies that ammonia — the ammonium ion test running on a gas the reduction made.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "Heat solids: CO~2~ from carbonates, O~2~ from Group 1 nitrates, NO~2~ + O~2~ from the rest, H~2~O from hydrates.",
@@ -403,19 +338,6 @@ export const WCH13_TOPICS: Topic[] = [
           "The nitric acid's job: kill ==carbonate impurities== that would precipitate Ag~2~CO~3~ and mask the halide colours.",
           "Reducing power ==increases down Group 7== — bigger ions give up their outer electrons more easily.",
           "Fluoride gives ==no precipitate== with silver nitrate at all.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "A cream precipitate dissolves in concentrated ammonia but not in dilute. Which ion?",
-            a: "Br^−^ — AgBr. AgCl dissolves in ==dilute== ammonia too; AgI dissolves in neither.",
-          },
-          {
-            q: "Solid sodium iodide + concentrated H~2~SO~4~ gives a bad-egg smell and a yellow solid. Explain both.",
-            a: "I^−^ is the strongest halide reducing agent: it reduces sulfur from +6 to ==−2== (H~2~S, bad eggs) and to ==0== (S, yellow solid), as well as to +4 (SO~2~) — three redox steps after the initial acid–base step.",
-          },
         ],
       },
       {
@@ -478,19 +400,6 @@ export const WCH13_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "Why must a reflux condenser never be sealed at the top?",
-            a: "Heating volatile liquids builds gas pressure; a sealed apparatus ==explodes==. The open top lets the vapour condense and return while pressure stays equalised.",
-          },
-          {
-            q: "A distillate still smells of acid. Which wash fixes it, and what must you do while shaking?",
-            a: "Sodium hydrogencarbonate solution — it ==neutralises the remaining acid==, releasing CO~2~, so you ==open the tap at intervals== to release the pressure.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "Distillation = most volatile leaves first; thermometer at the T-junction.",
@@ -549,19 +458,6 @@ export const WCH13_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "In Example 3, why is the zinc's mass left out of q = mcΔT?",
-            a: "The equation measures the ==solution== absorbing the heat — the zinc is a solid in excess; its heat capacity is not part of the assumed-water model.",
-          },
-          {
-            q: "Why can't ΔH for CuSO~4~(s) + 5H~2~O(l) → CuSO~4~·5H~2~O(s) be measured directly?",
-            a: "You cannot add ==exactly== the right amount of water without some solid dissolving, and measuring a temperature change of a solid is impractical — so both salts are dissolved in excess water and Hess's law combines the two ΔH of solution values.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "CP1: graph of V(CO~2~) against mass; molar volume = V ÷ n at 0.25 g.",
@@ -617,19 +513,6 @@ export const WCH13_TOPICS: Topic[] = [
           "Water is a ==poor nucleophile== — that is why the hydrolysis race needs a hot bath and patience.",
           "The ester prep: H~2~SO~4~ added ==drop by drop in ice== (exothermic), reflux ==30 minutes==, sodium carbonate wash ==vented==, fraction collected at ==100–103 °C==.",
           "Ketones do ==not== react with Fehling's — the blue stays blue.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "In the hydrolysis race, why must all three tubes enter the bath at the same moment?",
-            a: "The comparison is the ==time== each precipitate takes — staggered starts would corrupt the only variable the experiment reads.",
-          },
-          {
-            q: "Why is the aldehyde distilled off immediately but the acid only after reflux?",
-            a: "The aldehyde is the ==partial== oxidation product: distilling it out as it forms removes it from the oxidant before the reaction goes further. Under ==reflux with excess== dichromate, everything — aldehyde included — stays in the oxidising mixture until only the acid remains.",
-          },
         ],
       },
       {

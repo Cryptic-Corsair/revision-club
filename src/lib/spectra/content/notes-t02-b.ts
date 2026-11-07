@@ -280,7 +280,6 @@ export const SECTIONS_B: SpecSection[] = [
           ["P^3−^", "1s^2^ 2s^2^ 2p^6^ 3s^2^ 3p^6^"],
         ],
       },
-      { k: "checkpoint", page: 51 },
     ],
   },
   {
@@ -463,7 +462,6 @@ export const SECTIONS_B: SpecSection[] = [
           ],
         ],
       },
-      { k: "checkpoint", page: 59 },
       { k: "h", text: "(ii) Ionisation energy across Periods 2 and 3" },
       {
         k: "p",
@@ -527,7 +525,6 @@ export const SECTIONS_B: SpecSection[] = [
           "Hence less energy is required to remove an electron from sulfur.",
         ],
       },
-      { k: "checkpoint", page: 55 },
       { k: "h", text: "(iii) Ionisation energy down a group" },
       { k: "p", text: "Ionization energy ==decreases== down the group. This is because:" },
       {

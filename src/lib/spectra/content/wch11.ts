@@ -77,19 +77,6 @@ export const WCH11_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "What mass of calcium carbonate, CaCO~3~ (M = 100.1), contains 0.250 mol?",
-            a: "m = nM = 0.250 × 100.1 = 25.0 g (3 s.f.).",
-          },
-          {
-            q: "5.85 g of NaCl (M = 58.5) is dissolved and made up to 250 cm^3^. What is the concentration?",
-            a: "n = 5.85/58.5 = 0.100 mol; c = 0.100/0.250 = 0.400 mol dm^−3^.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "The mole: as many particles as atoms in 12 g of carbon-12; N~A~ = 6.02 × 10^23^ mol^−1^.",
@@ -166,19 +153,6 @@ export const WCH11_TOPICS: Topic[] = [
           "The definition of first ionisation energy must include **gaseous** atoms and **gaseous** ions — both states, or the mark is gone.",
           "“Explain why” means full sentences naming the factor. “The paired 3p electron in sulfur experiences electron–electron repulsion, so it is removed more easily” scores; the lone word “shielding” does not.",
           "Periodicity: atomic radius falls across a period (same shell, more protons) and rises down a group (more shells).",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "Write the full electron configuration of an Fe atom (Z = 26).",
-            a: "1s^2^2s^2^2p^6^3s^2^3p^6^3d^6^4s^2^ — 4s fills before 3d, but is written after it.",
-          },
-          {
-            q: "Why is the second ionisation energy of sodium (4 562 kJ mol^−1^) far larger than the first (496 kJ mol^−1^)?",
-            a: "Na^+^ is 1s^2^2s^2^2p^6^: the second electron comes from the full n = 2 shell — much closer to the nucleus and far less shielded. The sharp jump is evidence for shell structure.",
-          },
         ],
       },
       {
@@ -268,19 +242,6 @@ export const WCH11_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "Why is water non-linear while carbon dioxide is linear?",
-            a: "Carbon's two bonding regions have no lone pairs → 180°. Oxygen in H~2~O has two lone pairs; four regions arrange tetrahedrally, giving a bent molecule at 104.5°.",
-          },
-          {
-            q: "Solid sodium chloride does not conduct electricity, but the molten liquid does. Why?",
-            a: "The ions are fixed in the lattice when solid. Melting frees them to move — mobile charged particles carry the current.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "Bonding = electrostatics: ion–ion, nucleus–shared pair, ion–electron sea.",
@@ -350,19 +311,6 @@ export const WCH11_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "Name CH~3~–CH(CH~3~)–CH(CH~3~)–CH~3~.",
-            a: "2,3-dimethylbutane — four-carbon parent chain, two methyl groups on C-2 and C-3.",
-          },
-          {
-            q: "Why does a mixture of substitution products form in radical substitution?",
-            a: "Once CH~3~Cl forms, a Cl• can abstract another H, giving CH~2~Cl• and leading to CH~2~Cl~2~, CHCl~3~ and CCl~4~. The chain continues while radicals and reagent remain.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "Homologous series: same functional group, general formula, differ by CH~2~.",
@@ -426,19 +374,6 @@ export const WCH11_TOPICS: Topic[] = [
           "Curly arrows start where the electrons **are** (π bond, lone pair) and end where they **go** (δ^+^ atom). An arrow from the H of H–Br is the classic lost mark.",
           "Show δ^+^ and δ^−^ on the H–X before drawing the first arrow — the whole mechanism depends on that polarity.",
           "Repeating unit: brackets, continuation bonds through the brackets, and the small n. No double bonds survive polymerisation.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "But-1-ene + HBr — what forms, and why that isomer?",
-            a: "2-bromobutane dominates: H adds to C-1 (more hydrogens), giving a secondary carbocation on C-2; Br^−^ then attacks. The primary route is disfavoured.",
-          },
-          {
-            q: "Which of but-1-ene and but-2-ene shows E/Z isomerism, and why?",
-            a: "But-2-ene: each double-bond carbon carries CH~3~ and H — two different groups. But-1-ene has a carbon with two identical H atoms, so no E/Z pair exists.",
-          },
         ],
       },
       {

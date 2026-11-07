@@ -86,19 +86,6 @@ export const WCH12_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "50.0 g of water rises 25.0 °C in a calorimeter. How much heat went in?",
-            a: "q = mcΔT = 50.0 × 4.18 × 25.0 = 5 225 J ≈ 5.23 kJ.",
-          },
-          {
-            q: "Why is ΔH from bond enthalpies called an estimate?",
-            a: "The values are averages taken from many different compounds, and the method ignores everything but the gas-phase bonds — condensation and solution energies are left out entirely.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "ΔH < 0 exothermic; > 0 endothermic; standard state, 100 kPa, 298 K.",
@@ -168,19 +155,6 @@ export const WCH12_TOPICS: Topic[] = [
           "Never say “it has strong bonds” when you mean intermolecular forces — the distinction is the mark.",
           "Draw the hydrogen bond as a dashed line from H to the lone pair, and label it — diagram questions want the lone pair shown.",
           "Boiling point questions: state the strongest force in *each* substance, then compare strengths.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "Why does propan-1-ol (b.p. 97 °C) boil far higher than propane (−42 °C) despite similar size?",
-            a: "Propan-1-ol has an –OH group: hydrogen bonding between molecules. Propane manages only van der Waals. Much more energy is needed to separate alcohol molecules.",
-          },
-          {
-            q: "Which force must be broken to boil water — and which must *not* be?",
-            a: "Hydrogen bonds between molecules break; the O–H covalent bonds within molecules do not. Boiling separates molecules, never atoms.",
-          },
         ],
       },
       {
@@ -266,19 +240,6 @@ export const WCH12_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "Balance and interpret: Cl~2~ + KI → ?",
-            a: "Cl~2~ + 2KI → 2KCl + I~2~. Chlorine (0 → −1) is reduced; iodide (−1 → 0) is oxidised. The solution turns brown.",
-          },
-          {
-            q: "Why is silver nitrate added *after* dilute nitric acid in halide tests?",
-            a: "Nitric acid removes carbonate and sulfite ions, which would otherwise give precipitates of their own (Ag~2~CO~3~, Ag~2~SO~3~) and mask the halide result.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "Oxidation number bookkeeping: O −2, H +1, sum = charge; names carry Roman numerals.",
@@ -345,19 +306,6 @@ export const WCH12_TOPICS: Topic[] = [
           "“Dynamic” must appear in the definition — both reactions continue at equal rate.",
           "A catalyst changes rate, never the position — the single most-tested sentence in this topic.",
           "Pressure only matters when the two sides have different numbers of ==gas== molecules.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "Why does a mixture of flour dust ignite faster than a pile of flour?",
-            a: "Dust has enormous surface area — far more particles exposed to oxygen at once, so far more frequent successful collisions.",
-          },
-          {
-            q: "For 2SO~2~ + O~2~ ⇌ 2SO~3~ (exothermic), what happens to the position if temperature is raised?",
-            a: "It shifts left, favouring the endothermic reverse reaction — less SO~3~ at equilibrium. Rate rises, yield falls: the industrial compromise begins here.",
-          },
         ],
       },
       {
@@ -448,19 +396,6 @@ export const WCH12_TOPICS: Topic[] = [
           "“Aqueous” and “ethanolic” are one-word command signals for substitution vs elimination: circle them in the question.",
           "M and M+2 of equal height = one bromine; 3 : 1 = one chlorine — isotopes doing analytical work.",
           "The region below 1500 cm^−1^ is the fingerprint region: never assigned, only matched.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "Why does 1-iodobutane hydrolyse faster than 1-chlorobutane?",
-            a: "The C–I bond has a lower bond enthalpy than C–Cl, so it breaks more readily in the rate-determining step. Polarity runs the other way — it is bond strength that governs the rate.",
-          },
-          {
-            q: "Propan-2-ol is refluxed with acidified potassium dichromate. Product?",
-            a: "Propanone. A secondary alcohol oxidises once to a ketone and stops — no amount of reflux pushes it further.",
-          },
         ],
       },
       {

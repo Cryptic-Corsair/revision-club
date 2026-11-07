@@ -2418,7 +2418,7 @@ export function FigCalorimetry({ accent = "#FF6B6B" }: { accent?: string }) {
   );
 }
 
-/* ————— 6.8 · the cooling curve, plotted with the Exercise 6 data ————— */
+/* ————— 6.8 · the cooling curve, plotted with the class note's data ————— */
 
 const COOLING_DATA: [number, number][] = [
   [0, 20.0], [1, 20.0], [2, 20.0], [3, 20.0],
@@ -2611,7 +2611,7 @@ export function FigHessCaco3({ accent = "#FF6B6B" }: { accent?: string }) {
   );
 }
 
-/* ————— Exercise 8 · the atomisation cycle for butane ————— */
+/* ————— the atomisation cycle for butane ————— */
 
 export function FigHessButane({ accent = "#FF6B6B" }: { accent?: string }) {
   void accent;

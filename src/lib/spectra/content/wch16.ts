@@ -63,19 +63,6 @@ export const WCH16_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "Why must clock reactions be stopped early — why is the colour change timed well before completion?",
-            a: "rate ∝ 1/t assumes the measured window is the ==initial== period, where concentrations are effectively unchanged. As the reaction proceeds, rate falls and the proportionality breaks.",
-          },
-          {
-            q: "A student collects 48 cm^3^ of gas in 100 s, then 96 cm^3^ in 300 s. Is the average rate the same?",
-            a: "No: 0.48 cm^3^ s^−1^ vs 0.32 cm^3^ s^−1^ — the rate falls as reactants are used up, which is exactly why initial rates (tangents at t = 0) are preferred.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "Pick the method from the reaction's observable: gas, mass, colour, clock.",
@@ -142,19 +129,6 @@ export const WCH16_TOPICS: Topic[] = [
         ],
       },
       {
-        k: "check",
-        qs: [
-          {
-            q: "Why is the aldehyde collected by distillation during oxidation of a primary alcohol, while the acid is made under reflux?",
-            a: "The aldehyde boils lower than the alcohol and is itself oxidisable — distilling removes it from the oxidant before over-oxidation. The acid is the end-point, so reflux lets every drop of aldehyde return to be oxidised fully.",
-          },
-          {
-            q: "A student washes an ester layer with NaHCO~3~(aq) in a separating funnel. What must they do during the wash, and why?",
-            a: "Vent the funnel frequently (invert, open the tap): CO~2~ from the acid–hydrogencarbonate reaction builds pressure that could force the stopper out.",
-          },
-        ],
-      },
-      {
         k: "recap",
         items: [
           "Reflux returns reactants; distillation collects the product.",
@@ -213,19 +187,6 @@ export const WCH16_TOPICS: Topic[] = [
           "In every observation answer, colour ==and== state ==and== excess behaviour — three checkboxes, and the mark scheme ticks them separately.",
           "Salt bridge ions must be spectators: KNO~3~ is safe; KCl risks AgCl precipitation and Cl^−^ oxidation — name the interference.",
           "Concordant titres: within 0.10 cm^3^. Average only the concordant set, and say which runs you excluded and why.",
-        ],
-      },
-      {
-        k: "check",
-        qs: [
-          {
-            q: "Why must the voltmeter in an EMF measurement have a high resistance?",
-            a: "A high-resistance meter draws negligible current, so the cell runs reversibly and the reading equals the true EMF — with current flowing, the terminal voltage falls below E°cell.",
-          },
-          {
-            q: "A calorimetry value for ΔH is 12 % less exothermic than the data book. Evaluate in three beats.",
-            a: "Error: heat lost from the uninsulated polystyrene cup (and some absorbed heating the container). Direction: the measured temperature rise is too small, so ΔH is less exothermic. Improvement: fit a lid, insulate around the cup, or use a flame calorimeter; then quote the % error against the data-book value.",
-          },
         ],
       },
       {

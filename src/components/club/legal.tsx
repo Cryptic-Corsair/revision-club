@@ -31,7 +31,7 @@ const SECTIONS: Section[] = [
     main: "#FF6B6B",
     title: "What this site is",
     body: [
-      "Reaction Club is a free, independent revision companion for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. It offers original notes, worked examples and checkpoint questions to support your studying — it is not a course, a tutor, a textbook or an official Pearson resource, and it does not replace any of those.",
+      "Reaction Club is a free, independent revision companion for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. It offers original notes and worked examples to support your studying — it is not a course, a tutor, a textbook or an official Pearson resource, and it does not replace any of those.",
       "Your teacher, your class notes, the official specification and past papers remain the source of truth for your studies. Treat every page here as one helpful voice among several, not the final word.",
     ],
   },
@@ -58,7 +58,7 @@ const SECTIONS: Section[] = [
     main: "#F06595",
     title: "Copyright & fair use",
     body: [
-      "Unless stated otherwise, the notes, worked examples, checkpoint questions, figures and code on this site are original work belonging to Reaction Club. Past-paper questions and mark schemes are not reproduced — revise from your exam board's own papers for that.",
+      "Unless stated otherwise, the notes, worked examples, figures and code on this site are original work belonging to Reaction Club. Past-paper questions and mark schemes are not reproduced — revise from your exam board's own papers for that.",
       "You are welcome to read and revise from the site for personal study. Please don't scrape, redistribute, resell or republish its content without permission. If you believe material that belongs to you appears here in error, flag it and it will be removed promptly.",
     ],
   },

@@ -40,7 +40,6 @@ export const SECTIONS_T03_B: SpecSection[] = [
         k: "wow",
         text: "Both atoms pull on the shared pair; the atom with the ==higher electronegativity== pulls it more strongly — the ==electronegativity difference== decides the bond type in 3.14 and 3.15.",
       },
-      { k: "checkpoint", page: 77 },
     ],
   },
   {
@@ -88,7 +87,6 @@ export const SECTIONS_T03_B: SpecSection[] = [
         label: "The ends of the continuum",
         text: "Pure covalent (ΔEN = 0) at one end, ionic (ΔEN ≥ 1.7) at the other — and ==every real bond is somewhere between==. The greater the electronegativity difference, the greater the bond polarity — and if the difference is large enough, the electron pair transfers completely: ==ionic bonding==.",
       },
-      { k: "checkpoint", page: 77 },
     ],
   },
   {
@@ -158,7 +156,6 @@ export const SECTIONS_T03_B: SpecSection[] = [
           { title: "Watch the jet", icon: "spark", text: "**Polar** molecules are attracted and deflected towards the charged rod — water's jet bends; **non-polar** molecules (cyclohexane) run straight." },
         ],
       },
-      { k: "checkpoint", page: 85 },
     ],
   },
   {
@@ -287,7 +284,6 @@ export const SECTIONS_T03_B: SpecSection[] = [
         ],
         answer: "CO~2~ linear 180° · SO~2~ bent ≈117.5°.",
       },
-      { k: "checkpoint", page: 83 },
     ],
   },
   {
@@ -302,7 +298,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
       },
       {
         k: "table",
-        caption: "Molecules — from Exercise 4",
+        caption: "Molecules",
         head: ["Molecule", "Bond pairs", "Lone pairs", "Shape", "Bond angle"],
         rows: [
           ["BF~3~", "3", "0", "Trigonal planar", "120°"],
@@ -318,7 +314,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
       },
       {
         k: "table",
-        caption: "Ions — from Exercise 5",
+        caption: "Ions",
         head: ["Ion", "Bond pairs", "Lone pairs", "Shape", "Bond angle"],
         rows: [
           ["AlH~4~^−^", "4", "0", "Tetrahedral", "109.5°"],
@@ -340,7 +336,7 @@ export const SECTIONS_T03_B: SpecSection[] = [
       },
       {
         k: "table",
-        caption: "Organic molecules — from Exercise 6 (angles at the atoms shown)",
+        caption: "Organic molecules (angles at the atoms shown)",
         head: ["Molecule", "Bond angles"],
         rows: [
           ["Ethane, C~2~H~6~", "H—C—H = 109.5° · C—C—H = 109.5°"],
@@ -355,7 +351,6 @@ export const SECTIONS_T03_B: SpecSection[] = [
         k: "wow",
         text: "Carbon with 4 regions → ==109.5°== · carbon with 3 regions (any double bond) → ==120°== · oxygen with 2 lone pairs → ==104.5°==.",
       },
-      { k: "checkpoint", page: 83 },
     ],
   },
   {
@@ -406,7 +401,6 @@ export const SECTIONS_T03_B: SpecSection[] = [
         k: "wow",
         text: "==Melting and boiling break only the intermolecular forces== — the covalent bonds inside each molecule are not broken.",
       },
-      { k: "checkpoint", page: 93 },
     ],
   },
 ];

@@ -280,7 +280,7 @@ html.dark {
        (#171119) — lemon is the most luminous candy on the shelf, and
        this lands the note 2.8 L* under the paper card instead of
        floating above it;
-     · sunk  (table headers, step insets, the checkpoint tile) sinks
+     · sunk  (table headers, step insets) sinks
        10% of its candy into a violet coffee just under the card
        (#251e36) — headers stay value-neutral vs the card and carry
        the hue instead;
@@ -390,7 +390,7 @@ html.dune {
        over a neutral-cocoa well just under the card (#292419);
      · honey (the lemon sticky note) takes 12% over a deep well
        (#16130d) — lemon is the most luminous candy on the shelf;
-     · sunk  (table headers, step insets, the checkpoint tile) sinks
+     · sunk  (table headers, step insets) sinks
        10% of its candy into a cocoa well just under the card
        (#292520) — headers stay value-neutral vs the card.
      Chips hug the card they sit on (--chip-base). Zebra rows stay

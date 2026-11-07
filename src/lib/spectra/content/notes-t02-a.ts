@@ -116,7 +116,6 @@ export const SECTIONS_A: SpecSection[] = [
           ["H", "13", "14", "10", "3+", "13", "27", "^27^~13~Al^3+^"],
         ],
       },
-      { k: "checkpoint", page: 43 },
     ],
   },
   {
@@ -317,7 +316,6 @@ export const SECTIONS_A: SpecSection[] = [
         answer:
           "(a) **79 and 81** · (b) the molecular ions ⁷⁹Br₂⁺, ⁷⁹Br⁸¹Br⁺ and ⁸¹Br₂⁺ · (c) abundances **1 : 1**, peak heights **1 : 2 : 1**.",
       },
-      { k: "checkpoint", page: 47 },
     ],
   },
   {

@@ -127,7 +127,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 1 — classify the changes",
+        title: "Worked example · classify the changes",
         question:
           "Classify the following changes into exothermic reactions and endothermic reactions: freezing water · evaporating water · photosynthesis · combustion of petrol · acid/base reactions · dissolving sodium hydroxide in water · dissolving ammonium nitrate in water.",
         steps: [
@@ -170,7 +170,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 2 — an enthalpy level diagram",
+        title: "Worked example · an enthalpy level diagram",
         question:
           "2 mol of H~2~ gas reacts with 1 mol of O~2~ gas to produce 2 mol of H~2~O(l). At 25 °C and 1 atm of pressure this reaction releases 571.8 kJ of heat. Draw an enthalpy level diagram for the reaction. Label the axis and enthalpy change for the reaction.",
         steps: [
@@ -289,7 +289,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 2, Question 1 — write the thermochemical equation",
+        title: "Worked example · write the thermochemical equation",
         question:
           "a. C(s) + 2H~2~(g) → CH~4~(g) + 74.8 kJ · b. (i) H~2~ and I~2~ react to form 2HI. This reaction requires 53.2 kJ · (ii) The reaction that forms one mole of HI.",
         steps: [
@@ -302,7 +302,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 3 — construct the combustion equations",
+        title: "Worked example · construct the combustion equations",
         question:
           "Construct equations representing the standard enthalpy of combustion of a. hydrogen · b. carbon · c. methane · d. methanol.",
         steps: [
@@ -317,7 +317,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 7 — construct the formation equations",
+        title: "Worked example · construct the formation equations",
         question:
           "Construct equations representing the standard enthalpy of formation of methane · water · propanol.",
         steps: [
@@ -396,7 +396,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 4 — the methanol experiment",
+        title: "Worked example · the methanol experiment",
         question:
           "150 cm^3^ of water was heated by burning methanol in a spirit burner. The mass of spirit burner and methanol ==before== burning was 186.87 g and ==after== burning 185.27 g; the water ran from 21.5 °C to a maximum of 72.0 °C. Density of water = 1.0 g cm^−3^, specific heat capacity of water = 4.18 J g^−1^ °C^−1^. (a) Complete the table to show the mass of methanol burned and the temperature change. (b) Calculate the energy transferred, in joules. (c) Calculate the number of moles of methanol, CH~3~OH, burned. (d) Calculate the enthalpy change of combustion, Δ~c~H, in kJ mol^−1^, to the nearest whole number and with a sign.",
         steps: [
@@ -408,7 +408,6 @@ export const SECTIONS_T06_A: SpecSection[] = [
         answer:
           "(a) 1.60 g and 50.5 °C · (b) 31,663.5 J · (c) 0.05 mol · (d) Δ~c~H = ==−633 kJ mol^−1^==.",
       },
-      { k: "checkpoint", page: 155 },
       { k: "h", text: "Experiment 2 · enthalpy change of neutralisation" },
       {
         k: "steps",
@@ -451,7 +450,7 @@ export const SECTIONS_T06_A: SpecSection[] = [
       },
       {
         k: "worked",
-        title: "Worked example · Exercise 5 — three more calorimetry calculations",
+        title: "Worked example · three more calorimetry calculations",
         question:
           "1. 50 cm^3^ of 1 M HCl + 50 cm^3^ of 2 M NaOH (in excess), maximum temperature rise 6.75 °C — find the enthalpy of neutralization. 2. 25.0 cm^3^ of 1.0 M HCl mixed with 25.0 cm^3^ of 1.0 M NaOH, both at 22.5 °C; final temperature 29.2 °C; c = 4.2 J g^−1^ K^−1^, densities 1.00 g cm^−3^ — find the enthalpy change per mole of HCl. 3. 3.71 g of NaHCO~3~ added to 30 cm^3^ of 1 M HCl (an excess) in a polystyrene cup; the temperature fell by 8.5 °C — find the enthalpy of reaction.",
         steps: [

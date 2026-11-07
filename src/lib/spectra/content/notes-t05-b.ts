@@ -148,11 +148,11 @@ export const SECTIONS_T05_B: SpecSection[] = [
       {
         k: "figure",
         kind: "polymer",
-        caption: "Formation of polyethene from ethene, then the three Exercise 4 polymers: the double bond opens up, the substituents stay outside the chain, and the continuation bonds extend through the brackets.",
+        caption: "Formation of polyethene from ethene, then three more addition polymers: the double bond opens up, the substituents stay outside the chain, and the continuation bonds extend through the brackets.",
       },
       {
         k: "worked",
-        title: "Worked example · monomers and repeat units (Exercise 4)",
+        title: "Worked example · monomers and repeat units",
         question:
           "Identify the monomer units and give the repeat unit of: 1. poly(propene) 2. poly(chloroethene) 3. poly(tetrafluoroethene).",
         steps: [
@@ -164,7 +164,6 @@ export const SECTIONS_T05_B: SpecSection[] = [
         answer:
           "Monomer → repeat unit: ==open the C=C== into two single bonds and carry the ==continuation bonds== through the brackets. Repeat unit → monomer: ==restore the C=C== between the two carbons of the chain.",
       },
-      { k: "checkpoint", page: 15 },
     ],
   },
   {

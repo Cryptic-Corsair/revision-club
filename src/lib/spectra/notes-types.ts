@@ -147,7 +147,6 @@ export type NotesBlock =
   | { k: "table"; head: string[]; rows: string[][]; caption?: string }
   | { k: "worked"; title: string; question: string; steps: string[]; answer: string }
   | { k: "steps"; caption?: string; items: { title: string; text: string; icon?: string }[] }
-  | { k: "checkpoint"; page: number }
   | { k: "figure"; kind: FigureKind; caption?: string }
   | { k: "wow"; text: string };
 

@@ -125,8 +125,8 @@ export function TopicView({
                 The full revision note — spec by spec
               </span>
               <span className="mt-1 block text-[calc(13.5px*var(--ui-scale))] leading-[1.6] font-bold text-white/80">
-                The complete class note, word for word, cut into one section per specification
-                point{notesSpecRange ? ` (${notesSpecRange})` : ""} with the official wording above
+                The complete class note, cut into one section per specification
+                point{notesSpecRange ? ` (${notesSpecRange})` : ""} — the official wording above
                 each, and every calculation worked in full.
               </span>
             </span>
