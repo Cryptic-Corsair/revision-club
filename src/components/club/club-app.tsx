@@ -148,8 +148,8 @@ function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
       whileHover={{ scale: 1.06, rotate: -2 }}
       whileTap={{ scale: 0.94 }}
       transition={{ type: "spring", stiffness: 380, damping: 16 }}
-      className="inline-grid shrink-0 place-items-center"
-      style={{ width: size, height: size }}
+      className="inline-grid h-[34px] w-[34px] shrink-0 place-items-center sm:h-9 sm:w-9 md:h-[38px] md:w-[38px] lg:h-10 lg:w-10 2xl:h-[42px] 2xl:w-[42px]"
+      style={size !== 38 ? { width: size, height: size } : undefined}
     >
       <svg viewBox="0 0 48 48" width="100%" height="100%" fill="none">
         {/* A single, continuous flask silhouette: broad shoulders,
@@ -277,7 +277,7 @@ function TopBar({
   }, []);
 
   const tool = (active: boolean) =>
-    `grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors sm:h-11 sm:w-11 ${
+    `grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full transition-colors md:h-10 md:w-10 lg:h-[42px] lg:w-[42px] 2xl:h-11 2xl:w-11 ${
       active
         ? "bg-ink text-cream"
         : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
@@ -291,7 +291,7 @@ function TopBar({
       >
         <nav
           aria-label="Main"
-          className="flex max-w-[97vw] items-center gap-1.5 rounded-full bg-paper/90 py-2 pr-2.5 pl-2.5 backdrop-blur-lg"
+          className="flex max-w-[97vw] items-center gap-1 rounded-full bg-paper/90 py-1.5 pr-2 pl-2 backdrop-blur-lg sm:gap-1.5 sm:py-2 sm:pr-2.5 sm:pl-2.5 lg:gap-2 2xl:gap-2.5"
           style={{
             boxShadow:
               "0 3px 0 var(--edge), 0 16px 38px -18px rgb(0 0 0 / 0.4)",
@@ -300,7 +300,7 @@ function TopBar({
           <button
             type="button"
             onClick={onHome}
-            className="flex shrink-0 cursor-pointer items-center gap-2.5 pr-1.5"
+            className="flex shrink-0 cursor-pointer items-center gap-2 pr-1 sm:gap-2.5 sm:pr-1.5"
             aria-label="IAL CHEM — home"
           >
             <LogoMark />
@@ -311,7 +311,7 @@ function TopBar({
 
           <span
             aria-hidden
-            className="mx-1 hidden h-6 w-[3px] shrink-0 rounded-full bg-ink/10 sm:block"
+            className="mx-0.5 hidden h-5 w-[2px] shrink-0 rounded-full bg-ink/10 sm:mx-1 sm:block sm:h-6 sm:w-[3px]"
           />
 
           {/* the note reader parks its Spec Map stop here — same 40px
@@ -328,7 +328,7 @@ function TopBar({
             whileTap={{ scale: 0.88 }}
             className={tool(view.kind === "home")}
           >
-            <HomeIcon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            <HomeIcon className="h-4 w-4 md:h-[17px] md:w-[17px] lg:h-[18px] lg:w-[18px]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
@@ -351,7 +351,7 @@ function TopBar({
                 : undefined
             }
           >
-            <ClipboardList className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            <ClipboardList className="h-4 w-4 md:h-[17px] md:w-[17px] lg:h-[18px] lg:w-[18px]" strokeWidth={2.2} />
             {picks.length > 0 && view.kind !== "pack" && (
               <span
                 aria-hidden
@@ -371,7 +371,7 @@ function TopBar({
             title="Search topics · ⌘K"
             aria-label="Search topics"
           >
-            <Search className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            <Search className="h-4 w-4 md:h-[17px] md:w-[17px] lg:h-[18px] lg:w-[18px]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
@@ -394,7 +394,7 @@ function TopBar({
                 : undefined
             }
           >
-            <Sticker className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            <Sticker className="h-4 w-4 md:h-[17px] md:w-[17px] lg:h-[18px] lg:w-[18px]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
@@ -406,7 +406,7 @@ function TopBar({
             aria-label={fullscreen ? "Exit full screen mode" : "Enter full screen mode"}
             aria-pressed={fullscreen}
           >
-            {fullscreen ? <Minimize className="h-[18px] w-[18px]" strokeWidth={2.1} /> : <Maximize className="h-[18px] w-[18px]" strokeWidth={2.1} />}
+            {fullscreen ? <Minimize className="h-4 w-4 md:h-[17px] md:w-[17px] lg:h-[18px] lg:w-[18px]" strokeWidth={2.1} /> : <Maximize className="h-4 w-4 md:h-[17px] md:w-[17px] lg:h-[18px] lg:w-[18px]" strokeWidth={2.1} />}
           </m.button>
 
           <m.button
@@ -417,7 +417,7 @@ function TopBar({
             title="Customize · fonts, sizes & themes"
             aria-label="Customize the site"
           >
-            <Settings className="h-[18px] w-[18px]" strokeWidth={1.9} />
+            <Settings className="h-4 w-4 md:h-[17px] md:w-[17px] lg:h-[18px] lg:w-[18px]" strokeWidth={1.9} />
           </m.button>
 
           <div ref={themePickerRef} className="relative shrink-0">
@@ -430,7 +430,7 @@ function TopBar({
               aria-controls="theme-picker-options"
               aria-label={`Theme: ${LAB_LABEL[lab]}. Choose appearance`}
               title="Choose theme"
-              className="group flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-2.5 transition-all hover:-translate-y-px sm:h-11 sm:gap-2.5 sm:px-3"
+              className="group flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-2 transition-all hover:-translate-y-px md:h-10 md:gap-2 md:px-2.5 lg:h-[42px] lg:gap-2.5 lg:px-3 2xl:h-11"
               style={{
                 background: THEME_CHIP[lab].bg,
                 color: lab === "dark" ? "#F7ECFB" : lab === "dune" ? "#FFE9C7" : "#3D2B1F",
@@ -438,7 +438,7 @@ function TopBar({
               }}
             >
               <span
-                className="grid h-6 w-6 shrink-0 place-items-center rounded-full"
+                className="grid h-5 w-5 shrink-0 place-items-center rounded-full md:h-[22px] md:w-[22px] lg:h-6 lg:w-6"
                 style={{
                   background: THEME_CHIP[lab].bg,
                   color: THEME_CHIP[lab].ink,
@@ -447,7 +447,7 @@ function TopBar({
               >
                 <LabGlyph id={lab} />
               </span>
-              <span className="hidden font-display text-[12px] leading-none font-semibold sm:inline">
+              <span className="hidden font-display text-[11px] leading-none font-semibold sm:inline lg:text-[12px]">
                 {LAB_LABEL[lab]}
               </span>
               <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform ${themeOpen ? "rotate-180" : ""}`} strokeWidth={2.5} />
