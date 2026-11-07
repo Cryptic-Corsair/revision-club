@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · revision packs
+   IAL CHEM · revision packs
    Tick spec points anywhere on the site; the pack assembles the
    notes behind them. This store holds the ticks, the read marks
    and the named sets you save along the way.
