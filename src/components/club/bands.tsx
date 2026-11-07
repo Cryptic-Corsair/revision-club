@@ -69,7 +69,7 @@ export function BandWave({
       <svg
         viewBox="0 0 1440 90"
         preserveAspectRatio="none"
-        className={`block h-[calc(46px*var(--ui-scale))] w-full sm:h-[calc(68px*var(--ui-scale))] ${className ?? ""}`}
+        className={`block w-full ${className ?? "h-[calc(46px*var(--ui-scale))] sm:h-[calc(68px*var(--ui-scale))]"}`}
       >
         {/* fill rides on style so var() strings with fallbacks resolve */}
         <path d={WAVES[wave % WAVES.length]} style={{ fill: to }} />
