@@ -5,12 +5,11 @@ import dynamic from "next/dynamic";
 import { LazyMotion, domAnimation, AnimatePresence, m } from "framer-motion";
 import {
   Home as HomeIcon,
-  Moon,
   Search,
-  Sliders,
   Sticker,
   SunMoon,
-  ClassicMoon,
+  Palette,
+  Sparkles,
   ClipboardList,
   ArrowUp,
   Command,
@@ -220,8 +219,7 @@ const LAB_DESCRIPTION: Record<Lab, string> = {
    halves. */
 function LabGlyph({ id }: { id: Lab }) {
   const cls = "h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]";
-  if (id === "classic") return <ClassicMoon className={cls} />;
-  return <Moon className={cls} strokeWidth={2.2} style={{ color: THEME_CHIP[id].ink }} />;
+  return <Palette className={cls} strokeWidth={2.1} style={{ color: THEME_CHIP[id].ink }} />;
 }
 
 function TopBar({
@@ -386,7 +384,7 @@ function TopBar({
             title="Customize · fonts, sizes & themes"
             aria-label="Customize the site"
           >
-            <Sliders className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            <Sparkles className="h-[18px] w-[18px]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
