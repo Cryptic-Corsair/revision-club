@@ -412,10 +412,10 @@ function CandyTable({
         <div className="mb-2.5 flex items-start gap-2.5">
           <span
             aria-hidden
-            className="mt-[calc(13px*var(--ui-scale))] h-[calc(4px*var(--ui-scale))] w-[calc(24px*var(--ui-scale))] shrink-0 rounded-full"
+            className="mt-[calc(12px*var(--ui-scale))] h-[calc(4px*var(--ui-scale))] w-[calc(22px*var(--ui-scale))] shrink-0 rounded-full"
             style={{ background: accent }}
           />
-          <div className="min-w-0 font-display text-[calc(22px*var(--ui-scale))] leading-snug font-bold text-ink">
+          <div className="min-w-0 font-display text-[calc(20px*var(--ui-scale))] leading-snug font-bold text-ink">
             <Fmt text={caption} />
           </div>
         </div>
