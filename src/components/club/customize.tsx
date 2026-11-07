@@ -26,7 +26,7 @@ import {
 } from "@/lib/spectra/prefs";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · the customize panel
+   IAL CHEM · the customize panel
    A slide-over workshop of frosted glass: the theme picker shows a
    live miniature of each room, the accent wheel previews its own
    rotation, and every knob lands in prefs.ts and re-skins the site
