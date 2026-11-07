@@ -9,7 +9,7 @@ import { Fmt } from "./format";
 import { PopIn, Reveal, SoftButton, chipWash, honeyWash, tint, readableInk, shade, Squiggle } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · spec index — every assessment statement the
+   IAL CHEM · spec index — every assessment statement the
    notes cover, quoted verbatim, one tap from your pack.
 
    The list is *derived* from the notes by the registry: tick a
