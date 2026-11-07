@@ -1,4 +1,4 @@
-# Reaction Club
+# IAL CHEM
 
 Revision notes for the **Pearson Edexcel International A Level Chemistry (2018)** specification — WCH11–WCH16. Topic-by-topic notes with hand-drawn SVG figures, checkpoint questions, flashcards, revision packs, progress stickers and full-text search.
 
