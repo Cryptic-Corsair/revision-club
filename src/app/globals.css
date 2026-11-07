@@ -1091,6 +1091,8 @@ html.dune .nav-tool-button.is-active {
 .club-footer-wave {
   position: relative;
   isolation: isolate;
+  /* Overlap the footer surface slightly to hide SVG rasterization seams. */
+  margin-bottom: -2px;
 }
 .club-footer-wave-path {
   fill: var(--color-cocoa);
