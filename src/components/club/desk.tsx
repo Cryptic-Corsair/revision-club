@@ -31,7 +31,7 @@ import { BeakerMeter, CandyButton, readableInk, SectionTag, shade, tint } from "
 import { BandWave } from "./bands";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · the desk — the homepage for members (no account,
+   IAL CHEM · the desk — the homepage for members (no account,
    just a flag in the browser). Where the introduction sells the
    club, the desk assumes you're in: your last topic up front, your
    week at a glance, and every topic of the course one quiet tap
