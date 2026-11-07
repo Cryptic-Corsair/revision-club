@@ -1091,10 +1091,9 @@ html.dune .nav-tool-button.is-active {
 .club-footer-wave {
   position: relative;
   isolation: isolate;
-  filter: drop-shadow(0 -1px 0 rgb(255 255 255 / 0.055));
 }
 .club-footer-wave-path {
-  fill: color-mix(in oklab, var(--color-cocoa) 84%, var(--color-paper));
+  fill: var(--color-cocoa);
 }
 .club-footer-body {
   position: relative;
