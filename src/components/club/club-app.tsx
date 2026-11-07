@@ -10,6 +10,7 @@ import {
   SunMoon,
   Palette,
   Sparkles,
+  Settings,
   ClipboardList,
   ArrowUp,
   Command,
@@ -404,7 +405,7 @@ function TopBar({
             title="Customize · fonts, sizes & themes"
             aria-label="Customize the site"
           >
-            <Sparkles className="h-[18px] w-[18px]" strokeWidth={2.2} />
+            <Settings className="h-[18px] w-[18px]" strokeWidth={1.9} />
           </m.button>
 
           <div ref={themePickerRef} className="relative shrink-0">
