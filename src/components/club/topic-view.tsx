@@ -19,7 +19,7 @@ import {
 } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · topic reader — one stop on the trail
+   IAL CHEM · topic reader — one stop on the trail
    ═══════════════════════════════════════════════════════════════ */
 
 export function TopicView({
