@@ -88,7 +88,7 @@ export function SpecIndex({
         >
           <Target className="h-3.5 w-3.5" /> Spec index
         </span>
-        <h1 className="mt-5 font-display text-[clamp(2.1rem,5vw,3.2rem)] leading-[1.05] font-semibold tracking-tight text-ink">
+        <h1 className="mt-5 font-display text-[calc(clamp(2.1rem,5vw,3.2rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
           Tick the spec points.
           <br />
           Get one revision pack.

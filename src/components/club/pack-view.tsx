@@ -154,7 +154,7 @@ export function PackView({
         </PopIn>
         <Reveal delay={0.08} className="mt-14 flex flex-col items-center text-center">
           <Mascot main="#FFD43B" size={150} bubbles={false} />
-          <h1 className="mt-6 font-display text-[clamp(1.9rem,4.6vw,2.7rem)] font-semibold tracking-tight text-ink">
+          <h1 className="mt-6 font-display text-[calc(clamp(1.9rem,4.6vw,2.7rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
             The pack is empty.
           </h1>
           <p className="mt-3 max-w-[46ch] text-[calc(15.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
@@ -203,7 +203,7 @@ export function PackView({
           >
             <ClipboardList className="h-3.5 w-3.5" /> Your pack
           </span>
-          <h1 className="mt-5 font-display text-[clamp(2.1rem,5vw,3.1rem)] leading-[1.05] font-semibold tracking-tight text-ink">
+          <h1 className="mt-5 font-display text-[calc(clamp(2.1rem,5vw,3.1rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
             One pack. Your spec points.
           </h1>
           <p className="mt-3 text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink-soft">
@@ -425,7 +425,7 @@ export function PackView({
           {allRead ? (
             <>
               <Mascot main="#12B886" size={120} bubbles={false} />
-              <p className="font-display text-[clamp(1.4rem,3.6vw,1.75rem)] leading-snug font-semibold text-ink">
+              <p className="font-display text-[calc(clamp(1.4rem,3.6vw,1.75rem)*(1+(var(--ui-scale)-1)*0.5))] leading-snug font-semibold text-ink">
                 Pack read — every point, marked off.
               </p>
               <p className="-mt-2 max-w-[46ch] text-[calc(13.5px*var(--ui-scale))] leading-relaxed font-bold text-ink-soft">

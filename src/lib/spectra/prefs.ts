@@ -48,9 +48,21 @@ export type ScaleId = (typeof SCALES)[number];
 export const SCALE_VALUE: Record<ScaleId, number> = {
   S: 0.9,
   M: 1,
-  L: 1.15,
-  XL: 1.3,
+  L: 1.2,
+  XL: 1.4,
 };
+
+/* the retired page-zoom pref saved raw numbers. They map onto rungs
+   by their OLD values — kept as an explicit list, NOT read back from
+   SCALE_VALUE, so bumping a rung never orphans a save: a zoom of
+   1.15 still lands on L even though L now rides 1.2. Keep in step
+   with the pre-paint script in layout.tsx. */
+const LEGACY_ZOOM: [number, ScaleId][] = [
+  [0.9, "S"],
+  [1, "M"],
+  [1.15, "L"],
+  [1.3, "XL"],
+];
 
 /* the spec-map drawer's own size knobs — deliberately OUTSIDE
    --ui-scale. The tray is frozen against the content-scale knob
@@ -132,14 +144,11 @@ function sanitize(p: StoredPrefs): Prefs {
     out.theme = "classic";
   if (p.scale && SCALES.includes(p.scale)) out.scale = p.scale;
   else if (typeof p.zoom === "number") {
-    /* the retired page-zoom pref rides on as scale — the saved
-       0.9 / 1 / 1.15 / 1.3 read straight onto S / M / L / XL, so an
-       updater never watches their chosen size jump to a random rung.
-       Hand-edited off-step values fall back to M with the rest. */
-    const heir = (Object.entries(SCALE_VALUE) as [ScaleId, number][]).find(
-      ([, v]) => v === p.zoom,
-    );
-    if (heir) out.scale = heir[0];
+    /* the retired page-zoom pref rides on as scale — see LEGACY_ZOOM
+       above: an updater never watches their chosen size jump to a
+       random rung. Hand-edited off-step values fall back to M. */
+    const heir = LEGACY_ZOOM.find(([v]) => v === p.zoom);
+    if (heir) out.scale = heir[1];
   }
   if (typeof p.specHeight === "number" && Number.isFinite(p.specHeight))
     out.specHeight = Math.min(SPEC_H_MAX, Math.max(SPEC_H_MIN, p.specHeight));

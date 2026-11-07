@@ -102,7 +102,7 @@ export function Legal({ onBack }: { onBack: () => void }) {
             <span className="legal-kicker"><ShieldCheck className="h-3.5 w-3.5" /> DISCLAIMER</span>
             <span className="legal-meta">IAL CHEM · CHEMISTRY</span>
           </div>
-          <h1 className="mt-7 max-w-[760px] font-display text-[clamp(2.65rem,7vw,5.6rem)] leading-[.98] font-semibold tracking-[-.065em] text-ink">
+          <h1 className="mt-7 max-w-[760px] font-display text-[calc(clamp(2.65rem,7vw,5.6rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[.98] font-semibold tracking-[-.065em] text-ink">
             Disclaimer and
             <br />
             <span className="legal-heading-accent">terms of use.</span>

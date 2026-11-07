@@ -110,7 +110,7 @@ export function Desk({
             <SectionTag main="#12B886" tilt={-1.5}>
               welcome back{todayLine ? ` · ${todayLine}` : ""}
             </SectionTag>
-            <h1 className="mt-5 font-display text-[clamp(2.1rem,4.5vw,3.1rem)] leading-[1.08] font-semibold tracking-tight text-ink">
+            <h1 className="mt-5 font-display text-[calc(clamp(2.1rem,4.5vw,3.1rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.08] font-semibold tracking-tight text-ink">
               Back to{" "}
               <span className="hero-glow relative inline-block -rotate-2 rounded-[0.35em] px-[0.18em]">
                 the bench.

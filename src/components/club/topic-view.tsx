@@ -95,7 +95,7 @@ export function TopicView({
         </PopIn>
 
         <PopIn delay={0.1}>
-          <h1 className="mt-5 font-display text-[clamp(2rem,4.6vw,3rem)] leading-[1.08] font-semibold tracking-tight text-ink">
+          <h1 className="mt-5 font-display text-[calc(clamp(2rem,4.6vw,3rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.08] font-semibold tracking-tight text-ink">
             {topic.title}
           </h1>
           <p className="mt-3.5 max-w-[60ch] text-[calc(16.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">

@@ -194,7 +194,7 @@ export function StickerBook({
           </SectionTag>
         </PopIn>
         <PopIn delay={0.1}>
-          <h1 className="mt-5 font-display text-[clamp(2.3rem,5vw,3.4rem)] leading-[1.05] font-semibold tracking-tight text-ink">
+          <h1 className="mt-5 font-display text-[calc(clamp(2.3rem,5vw,3.4rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
             Your revision,{" "}
             <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-mint/15 px-[0.18em]">
               so far.
@@ -663,7 +663,7 @@ function StatPillar({
       >
         <Icon className="h-5 w-5" strokeWidth={2.2} />
       </span>
-      <span className="mt-2 font-display text-[clamp(1.35rem,3.2vw,1.8rem)] leading-none font-semibold text-ink">
+      <span className="mt-2 font-display text-[calc(clamp(1.35rem,3.2vw,1.8rem)*(1+(var(--ui-scale)-1)*0.5))] leading-none font-semibold text-ink">
         {value}
       </span>
       <span className="mt-1.5 font-display text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">

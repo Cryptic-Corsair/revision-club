@@ -67,7 +67,7 @@ export function UnitView({
         </PopIn>
 
         <PopIn delay={0.1}>
-          <h1 className="mt-6 font-display text-[clamp(2rem,4.6vw,3.1rem)] leading-[1.06] font-semibold tracking-tight text-ink">
+          <h1 className="mt-6 font-display text-[calc(clamp(2rem,4.6vw,3.1rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.06] font-semibold tracking-tight text-ink">
             {unit.title}
           </h1>
           <p className="mt-2 max-w-3xl text-[calc(16.5px*var(--ui-scale))] leading-snug font-extrabold text-ink-soft">
@@ -144,7 +144,7 @@ export function UnitView({
           <SectionTag main={main} tilt={-2}>
             topics
           </SectionTag>
-          <h2 className="mt-4 mb-8 font-display text-[clamp(1.7rem,3.4vw,2.4rem)] font-semibold text-ink">
+          <h2 className="mt-4 mb-8 font-display text-[calc(clamp(1.7rem,3.4vw,2.4rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold text-ink">
             {unit.code === "WCH13" || unit.code === "WCH16"
               ? "Practical skills, in order"
               : "Topics in this unit"}

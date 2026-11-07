@@ -177,10 +177,10 @@ html[data-scale="S"] {
   --ui-scale: 0.9;
 }
 html[data-scale="L"] {
-  --ui-scale: 1.15;
+  --ui-scale: 1.2;
 }
 html[data-scale="XL"] {
-  --ui-scale: 1.3;
+  --ui-scale: 1.4;
 }
 
 /* the two frozen surfaces. --ui-scale inherits, so pinning it back

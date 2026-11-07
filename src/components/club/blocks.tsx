@@ -331,9 +331,13 @@ function CandyTable({
   return (
     <div>
       {caption && (
-        <div className="mb-3 inline-flex rotate-[-1.2deg] items-center gap-2 rounded-full px-4 py-1.5 font-display text-[calc(12.5px*var(--ui-scale))] font-semibold text-white" style={{ background: main }}>
-          <Sparkles className="h-3.5 w-3.5" />
-          <Fmt text={caption} />
+        <div className="mb-2 flex pl-4 sm:pl-5">
+          <span
+            className="inline-flex items-center rounded-full px-4 py-1.5 font-display text-[calc(13.5px*var(--ui-scale))] font-bold"
+            style={{ background: main, color: readableInk(main) }}
+          >
+            <Fmt text={caption} />
+          </span>
         </div>
       )}
       <div className="overflow-hidden rounded-[calc(10px*var(--ui-scale))] bg-paper puff">
@@ -344,7 +348,7 @@ function CandyTable({
                 {head.map((h, i) => (
                   <th
                     key={i}
-                    className="px-4 py-3.5 font-display text-[calc(13px*var(--ui-scale))] font-semibold tracking-[0.08em] whitespace-nowrap text-ink uppercase sm:px-5"
+                    className="px-4 py-3.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.06em] whitespace-nowrap text-ink uppercase sm:px-5"
                   >
                     <Fmt text={h} />
                   </th>
@@ -366,7 +370,7 @@ function CandyTable({
                   {r.map((c, j) => (
                     <td
                       key={j}
-                      className={`px-4 py-3.5 align-top text-[calc(14.5px*var(--ui-scale))] leading-[1.6] sm:px-5 ${
+                      className={`px-4 py-3.5 align-top text-[calc(14px*var(--ui-scale))] leading-[1.65] sm:px-5 ${
                         j === 0 ? "font-extrabold text-ink" : "text-ink-soft"
                       }`}
                     >

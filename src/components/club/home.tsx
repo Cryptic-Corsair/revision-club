@@ -172,7 +172,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               </PopIn>
 
               <PopIn delay={0.08}>
-                <h1 className="mt-6 font-display text-[clamp(2.75rem,6.5vw,4.5rem)] leading-[1.05] font-semibold tracking-tight text-ink">
+                <h1 className="mt-6 font-display text-[calc(clamp(2.75rem,6.5vw,4.5rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
                   Every spec point,{" "}
                   <span className="hero-glow relative inline-block -rotate-2 rounded-[0.35em] px-[0.18em]">
                     made to stick.
@@ -330,7 +330,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           <SectionTag main="#FF922B" tilt={2}>
             the course
           </SectionTag>
-          <h2 className="mt-5 font-display text-[clamp(1.9rem,4vw,2.8rem)] leading-tight font-semibold text-ink">
+          <h2 className="mt-5 font-display text-[calc(clamp(1.9rem,4vw,2.8rem)*(1+(var(--ui-scale)-1)*0.5))] leading-tight font-semibold text-ink">
             The six units
           </h2>
           <p className="mx-auto mt-3 max-w-[52ch] text-[calc(15.5px*var(--ui-scale))] leading-relaxed text-ink-soft">
@@ -439,7 +439,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 <SectionTag main="#FFD43B" tilt={-1.5}>
                   your revision pack
                 </SectionTag>
-                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.6vw,2.5rem)] leading-tight font-semibold text-ink">
+                <h2 className="mt-4 font-display text-[calc(clamp(1.8rem,3.6vw,2.5rem)*(1+(var(--ui-scale)-1)*0.5))] leading-tight font-semibold text-ink">
                   Tick spec points.
                   <span className="hero-glow relative ml-2 inline-block -rotate-1 rounded-[0.3em] px-[0.2em]">
                     Get one pack.
@@ -505,7 +505,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           <SectionTag main="#9775FA" tilt={-1.5}>
             how it works
           </SectionTag>
-          <h2 className="mt-5 font-display text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-ink">
+          <h2 className="mt-5 font-display text-[calc(clamp(1.9rem,4vw,2.8rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold text-ink">
             Read, practise, then mark it as revised
           </h2>
         </div>
@@ -587,7 +587,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           <SectionTag main="#FF6B6B" tilt={1.5}>
             stay on track
           </SectionTag>
-          <h2 className="mt-5 font-display text-[clamp(1.9rem,4vw,2.8rem)] font-semibold text-ink">
+          <h2 className="mt-5 font-display text-[calc(clamp(1.9rem,4vw,2.8rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold text-ink">
             Your bench, your pace
           </h2>
         </div>
@@ -720,7 +720,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               <div className="mx-auto w-fit">
                 <Mascot main="#FFD43B" mood="cheer" size={150} bubbles={false} className="mx-auto" />
               </div>
-              <h2 className="mt-2 font-display text-[clamp(1.8rem,3.6vw,2.6rem)] font-semibold text-milk">
+              <h2 className="mt-2 font-display text-[calc(clamp(1.8rem,3.6vw,2.6rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold text-milk">
                 Pick a unit and dive in.
               </h2>
               <p className="mt-3 text-[calc(15.5px*var(--ui-scale))] leading-relaxed text-milk/75">

@@ -199,7 +199,7 @@ export function SpecSectionView({
           />
           {bannerAction}
         </div>
-        <h2 className="mt-3.5 font-display text-[clamp(1.55rem,3.4vw,1.95rem)] font-semibold tracking-tight text-ink">
+        <h2 className="mt-3.5 font-display text-[calc(clamp(1.55rem,3.4vw,1.95rem)*(1+(var(--ui-scale)-1)*0.5))] font-bold tracking-tight text-ink">
           {section.title}
         </h2>
         {!hideStatement && (
@@ -254,7 +254,7 @@ function BlockView({
             className="h-2.5 w-2.5 shrink-0 rounded-full"
             style={{ background: accent }}
           />
-          <h3 className="font-display text-[calc(21px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h3 className="font-display text-[calc(22px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             <Fmt text={b.text} />
           </h3>
         </div>
@@ -307,7 +307,7 @@ function BlockView({
           className="max-w-[72ch] rounded-[calc(20px*var(--ui-scale))] bg-paper px-5 py-4 puff"
           style={{ borderLeft: `5px solid ${tint(accent, 40)}` }}
         >
-          <h4 className="font-display text-[calc(16.5px*var(--ui-scale))] font-semibold text-ink">
+          <h4 className="font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
             <Fmt text={b.term} />
           </h4>
           <p className="mt-1.5 text-[calc(15.5px*var(--ui-scale))] leading-[1.75] text-ink-soft">
@@ -665,7 +665,7 @@ function StepsPanel({
               strokeWidth={2.2}
             />
           </span>
-          <h4 className="font-display text-[calc(15.5px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h4 className="font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             <Fmt text={caption} />
           </h4>
         </div>

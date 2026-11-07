@@ -321,7 +321,7 @@ function NotesReaderBody({
           >
             {doc.kicker}
           </p>
-          <h1 className="mt-2 font-display text-[clamp(2.1rem,5vw,3.2rem)] leading-[1.05] font-semibold tracking-tight text-ink">
+          <h1 className="mt-2 font-display text-[calc(clamp(2.1rem,5vw,3.2rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
             {doc.title}
           </h1>
         </PopIn>
