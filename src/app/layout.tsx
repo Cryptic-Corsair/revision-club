@@ -65,7 +65,7 @@ export const metadata: Metadata = {
 
 /* Puts the saved preferences on <html> before the first paint — no
    flash of the wrong lab, font size, scale or family. Only the night
-   lab picks tonight's mood (html[data-mood]); dune, sage and classic
+   lab picks tonight's mood (html[data-mood]); dune and classic
    are fixed signatures, so they need no mood.
    A FIRST RUN on a big screen (≥1024px) starts on Large — mirroring
    load() in prefs.ts exactly, or the first paint would re-flow after
@@ -76,10 +76,9 @@ const prefsInit = `(function(){try{
 var r=document.documentElement,p=null;
 try{p=JSON.parse(localStorage.getItem("reaction-club-prefs-v1")||"null")}catch(e){}
 if(!p){var t=localStorage.getItem("rc-theme");p={theme:t==="dark"?"dark":"classic"}}
-var th=p.theme==="dark"?"dark":p.theme==="dune"?"dune":p.theme==="sage"?"sage":p.theme==="classic"?"classic":"light";
+var th=p.theme==="dark"?"dark":p.theme==="dune"?"dune":p.theme==="classic"?"classic":"light";
 if(th==="dark"){r.classList.add("dark");r.dataset.mood=String(Math.floor(Date.now()/864e5)%${DARK_MOOD_COUNT})}
 else if(th==="dune"){r.classList.add("dark","dune")}
-else if(th==="sage"){r.classList.add("dark","sage")}
 else if(th==="classic"){r.classList.add("classic")}
 if(p.headFont)r.dataset.head=String(p.headFont);
 if(p.bodyFont)r.dataset.body=String(p.bodyFont);
