@@ -231,11 +231,9 @@ export function SpecSectionView({
   );
 }
 
-/* ————— block dispatcher —————
-   Exported so the sample-notes room can lay real note blocks into
-   its own editorial page with the exact same furniture. */
+/* ————— block dispatcher ————— */
 
-export function BlockView({
+function BlockView({
   block: b,
   accent,
 }: {
@@ -810,15 +808,9 @@ const WIDE_FIGS = new Set([
   "ir-amines",
 ]);
 
-function Figure({
-  kind,
-  caption,
-  accent,
-}: {
-  kind: string;
-  caption?: string;
-  accent: string;
-}) {
+/* the museum of diagrams, handed out so the sample room can frame
+   the very same art inside its own editorial exhibit cards */
+export function figureArt(kind: string, accent: string): ReactNode {
   let node: ReactNode = null;
   switch (kind) {
     case "atom":
@@ -1200,8 +1192,25 @@ function Figure({
       node = <FigAlcBp accent={accent} />;
       break;
   }
+  return node;
+}
+
+export function isWideFigure(kind: string): boolean {
+  return WIDE_FIGS.has(kind);
+}
+
+function Figure({
+  kind,
+  caption,
+  accent,
+}: {
+  kind: string;
+  caption?: string;
+  accent: string;
+}) {
+  const node = figureArt(kind, accent);
   if (!node) return null;
-  const wide = WIDE_FIGS.has(kind);
+  const wide = isWideFigure(kind);
   return (
     <div className="rounded-[calc(28px*var(--ui-scale))] bg-paper p-4 puff sm:p-6">
       {wide ? (

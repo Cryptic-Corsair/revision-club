@@ -1360,6 +1360,25 @@ html.dune .nav-tool-button.is-active {
 .legal-room {
   --legal-paper: var(--color-paper);
   --legal-ink: var(--color-ink);
+  /* the room's one body accent — the summary numeral's rust. The
+     band-walk colours stay on the clause icon chips; every label,
+     dash and numeral inside the body speaks this ink-family tone */
+  --legal-rust: color-mix(in oklab, #b66c4e 80%, var(--color-ink));
+  --legal-rust-soft: color-mix(in oklab, var(--legal-rust) 50%, transparent);
+}
+/* in the document room the highlighter becomes a pencil: a flat,
+   low-amber wash instead of the marker swipe */
+.legal-room mark {
+  background: color-mix(in oklab, #ffd43b 26%, transparent);
+  border-radius: 0.35em;
+}
+html.dark .legal-room mark {
+  background: color-mix(in oklab, #ffd43b 15%, transparent);
+}
+/* dune's marker keeps dark text by default; in the document room it
+   rides the same light-ink-on-pencil-wash treatment as night */
+html.dune .legal-room mark {
+  color: var(--color-ink);
 }
 .legal-hero {
   isolation: isolate;
@@ -1550,6 +1569,16 @@ html.dune .nav-tool-button.is-active {
   border: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
   box-shadow: 0 2px 0 var(--edge);
 }
+/* the room's paper card — the note's boxed furniture (definitions,
+   methods, worked examples, diagrams) rides on the summary's recipe */
+.legal-card {
+  background: color-mix(in oklab, var(--color-paper) 92%, #e9d7b9);
+  border: 1px solid color-mix(in oklab, var(--color-ink) 9%, transparent);
+  box-shadow: 0 2px 0 var(--edge);
+}
+html.dark .legal-card, html.dune .legal-card {
+  background: color-mix(in oklab, var(--color-paper) 95%, white 5%);
+}
 .legal-back-link {
   display: inline-flex;
   align-items: center;
@@ -1576,7 +1605,7 @@ html.dark .legal-closing, html.dune .legal-closing {
     radial-gradient(ellipse at 100% 0%, color-mix(in oklab, #d99a4b 11%, transparent), transparent 45%),
     var(--color-paper);
 }
-html.classic .legal-hero, html.classic .legal-summary, html.classic .legal-closing {
+html.classic .legal-hero, html.classic .legal-summary, html.classic .legal-closing, html.classic .legal-card {
   border-color: color-mix(in oklab, var(--color-ink) 16%, transparent);
 }
 @media (max-width: 639px) {
@@ -1784,6 +1813,11 @@ html.dark:not(.dune) .legal-closing {
   border-color: rgb(222 198 232 / 0.11);
   box-shadow: 0 2px 0 var(--edge);
 }
+html.dark:not(.dune) .legal-card {
+  background: color-mix(in oklab, var(--color-paper) 93%, #59455f);
+  border-color: rgb(222 198 232 / 0.1);
+}
+html.dark:not(.dune) .legal-room { --legal-rust: #e0c4eb; }
 @media (prefers-reduced-motion: reduce) {
   html.dark:not(.dune) .nav-tool-button,
   html.dark:not(.dune) .footer-action-button {

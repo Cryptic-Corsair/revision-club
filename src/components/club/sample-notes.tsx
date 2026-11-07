@@ -23,8 +23,8 @@ import {
   Zap,
 } from "./icons";
 import { PopIn, Reveal, SoftButton, tint } from "./bits";
-import { accentOf, inkMix } from "./bands";
-import { BlockView } from "./note-section";
+import { accentOf } from "./bands";
+import { EditorialLabel, SampleBlockView } from "./sample-blocks";
 import { useSpecMapRegister } from "./spec-map";
 import { Fmt } from "./format";
 import { getNotes } from "@/lib/spectra/notes";
@@ -64,8 +64,8 @@ const SECTION_ICONS = [
 const SUMMARY = [
   "One section per specification point, in syllabus order, with the official statement quoted above the teaching.",
   "Key definitions boxed for recall — the terms the specification itself uses.",
-  "Data tables, equation cards and diagrams that turn the prose into a picture.",
-  "Worked examples that unfold step by step, so the method sticks, not just the answer.",
+  "Data tables, displayed equations and diagrams that turn the prose into a picture.",
+  "Worked examples reasoned through line by line, so the method sticks, not just the answer.",
 ];
 
 const elId = (spec: string) => `sample-${spec.replace(".", "-")}`;
@@ -199,6 +199,19 @@ function SampleNotesBody({
     return n;
   }, [doc]);
 
+  /* every diagram is numbered as a plate, in reading order —
+     key “section index : block index” → figure number */
+  const figNo = useMemo(() => {
+    const m = new Map<string, number>();
+    let n = 0;
+    doc.sections.forEach((s, si) =>
+      s.blocks.forEach((b, bi) => {
+        if (b.k === "figure") m.set(`${si}:${bi}`, ++n);
+      }),
+    );
+    return m;
+  }, [doc]);
+
   const firstSpec = doc.sections[0]?.spec ?? "";
   const lastSpec = doc.sections[doc.sections.length - 1]?.spec ?? "";
 
@@ -227,7 +240,7 @@ function SampleNotesBody({
             <span className="legal-heading-accent">spec by spec.</span>
           </h1>
           <p className="mt-6 max-w-[570px] text-[calc(15px*var(--ui-scale))] leading-[1.85] text-ink-soft sm:text-[calc(16px*var(--ui-scale))]">
-            Every topic on IAL CHEM is a single note cut into sections — one per specification point, each opened by the official statement. This page is the complete note for Topic 3 of WCH11, bonding and structure — every section and every diagram, exactly as the reader shows them.
+            Every topic on IAL CHEM is a single note cut into sections — one per specification point, each opened by the official statement. This page is the complete note for Topic 3 of WCH11, bonding and structure — every section and every diagram, set in the site's editorial dress.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-ink/10 pt-5">
             <span className="legal-meta">WCH11 · TOPIC 3</span>
@@ -302,12 +315,12 @@ function SampleNotesBody({
 
             {/* the note's own opening words, verbatim from the doc */}
             <Reveal>
-              <div className="mb-7 max-w-[76ch] rounded-[24px] bg-paper px-5 py-4 puff">
-                <p className="legal-meta">HOW THE NOTE OPENS</p>
-                <div className="mt-2 flex flex-col gap-2">
+              <div className="legal-card mb-7 max-w-[76ch] rounded-[calc(18px*var(--ui-scale))] px-5 py-4">
+                <EditorialLabel>How the note opens</EditorialLabel>
+                <div className="mt-2.5 flex flex-col gap-2">
                   {doc.intro.map((b, i) =>
                     b.k === "p" ? (
-                      <p key={i} className="text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+                      <p key={i} className="text-[calc(14.5px*var(--ui-scale))] leading-[1.9] text-ink-soft">
                         <Fmt text={b.text} />
                       </p>
                     ) : null,
@@ -338,12 +351,11 @@ function SampleNotesBody({
                           {section.title}
                         </h3>
                         <div
-                          className="mt-4 max-w-[72ch] rounded-[calc(22px*var(--ui-scale))] bg-paper/85 px-5 py-4"
+                          className="mt-4 max-w-[72ch] rounded-[calc(18px*var(--ui-scale))] bg-paper/90 px-5 py-4"
                           style={{ borderLeft: `5px solid ${tint(accent, 45)}` }}
                         >
                           <div
-                            className="font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase"
-                            style={{ color: inkMix(accent, 62) }}
+                            className="font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]"
                           >
                             From the specification
                           </div>
@@ -351,9 +363,14 @@ function SampleNotesBody({
                             <Fmt text={section.statement} />
                           </p>
                         </div>
-                        <div className="mt-6 flex flex-col gap-6">
+                        <div className="mt-6 flex flex-col gap-5">
                           {section.blocks.map((b, j) => (
-                            <BlockView key={j} block={b} accent={accent} />
+                            <SampleBlockView
+                              key={j}
+                              block={b}
+                              accent={accent}
+                              fig={figNo.get(`${i}:${j}`)}
+                            />
                           ))}
                         </div>
                       </div>
@@ -371,7 +388,7 @@ function SampleNotesBody({
                 <p className="legal-meta">YOUR TURN</p>
               </div>
               <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ui-scale))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale))]">
-                That is the shape of every note on the site — the official statement first, then the teaching: definitions boxed, diagrams drawn, equations on cards and the maths worked through one step at a time. Open the specification to pick a unit and read the real thing.
+                That is the shape of every note on the site — the official statement first, then the teaching: definitions boxed, diagrams drawn, equations set apart and the maths reasoned through line by line. Open the specification to pick a unit and read the real thing.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-current/15 pt-4">
                 <span className="legal-meta">END OF SAMPLE</span>
