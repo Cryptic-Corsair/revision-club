@@ -148,7 +148,7 @@ function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
       whileHover={{ scale: 1.06, rotate: -2 }}
       whileTap={{ scale: 0.94 }}
       transition={{ type: "spring", stiffness: 380, damping: 16 }}
-      className="inline-grid h-[34px] w-[34px] shrink-0 place-items-center sm:h-9 sm:w-9 md:h-[38px] md:w-[38px] lg:h-10 lg:w-10 2xl:h-[42px] 2xl:w-[42px]"
+      className="inline-grid h-9 w-9 shrink-0 place-items-center sm:h-9 sm:w-9 md:h-[38px] md:w-[38px] lg:h-10 lg:w-10 2xl:h-[42px] 2xl:w-[42px]"
       style={size !== 38 ? { width: size, height: size } : undefined}
     >
       <svg viewBox="0 0 48 48" width="100%" height="100%" fill="none">
@@ -277,7 +277,7 @@ function TopBar({
   }, []);
 
   const tool = (active: boolean) =>
-    `grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-full transition-colors md:h-10 md:w-10 lg:h-[42px] lg:w-[42px] 2xl:h-11 2xl:w-11 ${
+    `grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors md:h-10 md:w-10 lg:h-[42px] lg:w-[42px] 2xl:h-11 2xl:w-11 ${
       active
         ? "bg-ink text-cream"
         : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
@@ -328,7 +328,7 @@ function TopBar({
             whileTap={{ scale: 0.88 }}
             className={tool(view.kind === "home")}
           >
-            <HomeIcon className="h-4 w-4 md:h-[17px] md:w-[17px] lg:h-[18px] lg:w-[18px]" strokeWidth={2.2} />
+            <HomeIcon className="h-[17px] w-[17px] md:h-[17px] md:w-[17px] lg:h-[18px] lg:w-[18px]" strokeWidth={2.2} />
           </m.button>
 
           <m.button
@@ -430,7 +430,7 @@ function TopBar({
               aria-controls="theme-picker-options"
               aria-label={`Theme: ${LAB_LABEL[lab]}. Choose appearance`}
               title="Choose theme"
-              className="group flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-2 transition-all hover:-translate-y-px md:h-10 md:gap-2 md:px-2.5 lg:h-[42px] lg:gap-2.5 lg:px-3 2xl:h-11"
+              className="group flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-2.5 transition-all hover:-translate-y-px md:h-10 md:gap-2 md:px-2.5 lg:h-[42px] lg:gap-2.5 lg:px-3 2xl:h-11"
               style={{
                 background: THEME_CHIP[lab].bg,
                 color: lab === "dark" ? "#F7ECFB" : lab === "dune" ? "#FFE9C7" : "#3D2B1F",
@@ -438,7 +438,7 @@ function TopBar({
               }}
             >
               <span
-                className="grid h-5 w-5 shrink-0 place-items-center rounded-full md:h-[22px] md:w-[22px] lg:h-6 lg:w-6"
+                className="grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full md:h-[22px] md:w-[22px] lg:h-6 lg:w-6"
                 style={{
                   background: THEME_CHIP[lab].bg,
                   color: THEME_CHIP[lab].ink,
