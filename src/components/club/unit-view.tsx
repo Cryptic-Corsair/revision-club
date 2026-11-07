@@ -21,7 +21,7 @@ import {
 } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · unit view — follow the dots
+   IAL CHEM · unit view — follow the dots
    ═══════════════════════════════════════════════════════════════ */
 
 export function UnitView({
