@@ -1,7 +1,8 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { ArrowLeft, BadgeCheck, BookOpen, Copy, Info, Lock, ShieldCheck } from "./icons";
-import { PopIn, Reveal, SoftButton, honeyWash, readableInk } from "./bits";
+import { PopIn, Reveal, SoftButton } from "./bits";
 
 type Section = {
   icon: typeof BookOpen;
@@ -182,7 +183,7 @@ export function Legal({ onBack }: { onBack: () => void }) {
                     </div>
                     <div className="legal-clause-content">
                       <div className="flex flex-wrap items-center gap-3">
-                        <span className="legal-clause-icon" style={{ "--legal-accent": section.main } as React.CSSProperties}>
+                        <span className="legal-clause-icon" style={{ "--legal-accent": section.main } as CSSProperties}>
                           <section.icon className="h-5 w-5" strokeWidth={1.9} />
                         </span>
                         <span className="legal-meta">{section.eyebrow}</span>
