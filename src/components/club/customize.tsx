@@ -422,91 +422,88 @@ export function CustomizePanel({
               </Section>
 
               <Section title="Colours" dot="#FF6B6B">
-                <div className="grid grid-cols-3 gap-2">
-                  {ACCENTS.map((a) => {
-                    const on = prefs.accents.includes(a.id);
-                    const lastOne = on && prefs.accents.length === 1;
-                    return (
-                      <m.button
-                        key={a.id}
-                        type="button"
-                        onClick={() => toggleAccent(a.id)}
-                        whileTap={lastOne ? undefined : { scale: 0.93 }}
-                        aria-pressed={on}
-                        aria-disabled={lastOne || undefined}
-                        aria-label={`${a.label} — ${
-                          lastOne
-                            ? "the wheel keeps one colour on"
-                            : on
-                              ? "on, tap to remove"
-                              : "off, tap to add"
-                        }`}
-                        className={`flex cursor-pointer flex-col items-center gap-2 rounded-[calc(20px*var(--ui-scale))] px-2 py-3.5 transition-colors ${
-                          on ? "" : "hover:bg-ink/[0.09]"
-                        }`}
-                        style={
-                          on
-                            ? {
-                                background: tint(a.hex, 14),
-                                boxShadow: `inset 0 0 0 2.5px ${a.hex}`,
-                              }
-                            : { background: "color-mix(in oklab, var(--color-ink) 5%, transparent)" }
-                        }
-                      >
-                        <span
-                          aria-hidden
-                          className="grid h-10 w-10 place-items-center rounded-full transition-opacity"
+                <div className="rounded-[20px] border border-ink/[0.09] bg-ink/[0.025] p-3.5">
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <div>
+                      <p className="font-display text-[12px] font-semibold text-ink">Accent palette</p>
+                      <p className="mt-0.5 text-[10.5px] text-ink-faint">Select the colours used across your revision pages</p>
+                    </div>
+                    <span className="shrink-0 rounded-full border border-ink/[0.08] bg-paper px-2.5 py-1 text-[10px] font-semibold tabular-nums text-ink-soft">
+                      {prefs.accents.length} selected
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-4 gap-2">
+                    {ACCENTS.map((a) => {
+                      const on = prefs.accents.includes(a.id);
+                      const lastOne = on && prefs.accents.length === 1;
+                      return (
+                        <m.button
+                          key={a.id}
+                          type="button"
+                          onClick={() => toggleAccent(a.id)}
+                          whileTap={lastOne ? undefined : { scale: 0.94 }}
+                          aria-pressed={on}
+                          aria-disabled={lastOne || undefined}
+                          aria-label={`${a.label} — ${
+                            lastOne
+                              ? "the wheel keeps one colour on"
+                              : on
+                                ? "selected, tap to remove"
+                                : "not selected, tap to add"
+                          }`}
+                          className="group flex min-w-0 cursor-pointer flex-col items-center gap-2 rounded-[13px] border px-1.5 py-2.5 transition-all"
                           style={{
-                            background: a.hex,
-                            boxShadow: `0 3px 0 ${shade(a.hex)}, inset 0 1px 0 rgb(255 255 255 / 0.35)`,
-                            opacity: on ? 1 : 0.32,
+                            borderColor: on ? a.hex : "color-mix(in oklab, var(--color-ink) 9%, transparent)",
+                            background: on ? tint(a.hex, 12) : "var(--color-paper)",
+                            boxShadow: on ? `0 2px 8px -5px ${a.hex}` : "none",
                           }}
                         >
-                          {on && (
-                            <Check
-                              className="h-5 w-5"
-                              strokeWidth={3.2}
-                              style={{ color: readableInk(a.hex) }}
-                            />
-                          )}
-                        </span>
-                        <span
-                          className={`font-display text-[11.5px] font-bold ${
+                          <span
+                            aria-hidden
+                            className="relative grid h-9 w-9 place-items-center rounded-full transition-transform group-hover:scale-105"
+                            style={{
+                              background: a.hex,
+                              boxShadow: `0 2px 0 ${shade(a.hex)}, inset 0 1px 0 rgb(255 255 255 / 0.38)`,
+                              opacity: on ? 1 : 0.78,
+                            }}
+                          >
+                            {on && (
+                              <Check
+                                className="h-4 w-4"
+                                strokeWidth={3.2}
+                                style={{ color: readableInk(a.hex) }}
+                              />
+                            )}
+                          </span>
+                          <span className={`max-w-full truncate font-display text-[10.5px] font-semibold ${
                             on ? "text-ink" : "text-ink-faint"
-                          }`}
-                        >
-                          {a.label}
-                        </span>
-                      </m.button>
-                    );
-                  })}
+                          }`}>
+                            {a.label}
+                          </span>
+                        </m.button>
+                      );
+                    })}
+                  </div>
                 </div>
-                {/* the rotation itself, previewed — the first eight
-                    sections, exactly as the bands will wear them */}
-                <div className="mt-3 rounded-[calc(18px*var(--ui-scale))] bg-ink/[0.045] px-4 py-3">
-                  <div aria-hidden className="flex items-end gap-1.5">
+                <div className="mt-3 rounded-[16px] border border-ink/[0.08] bg-paper px-3.5 py-3">
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="font-display text-[10px] font-bold tracking-[0.12em] text-ink-faint uppercase">Colour sequence preview</span>
+                    <span className="text-[10px] font-medium text-ink-faint">Applied to topic accents</span>
+                  </div>
+                  <div aria-hidden className="flex items-center gap-1.5">
                     {Array.from({ length: 8 }, (_, k) => (
                       <span
                         key={k}
-                        className="h-3 rounded-full"
-                        style={{
-                          width:
-                            k === 7
-                              ? "calc(10px * var(--ui-scale))"
-                              : "calc(22px * var(--ui-scale))",
-                          background: accentOf(k),
-                        }}
+                        className="h-2.5 min-w-0 flex-1 rounded-full"
+                        style={{ background: accentOf(k) }}
                       />
                     ))}
-                    <span className="ml-0.5 font-body text-[calc(13px*var(--ui-scale))] font-bold text-ink-faint">
-                      …
-                    </span>
                   </div>
-                  <p className="mt-2 text-[11.5px] leading-snug font-bold text-ink-faint">
+                  <p className="mt-2 text-[10.5px] leading-snug text-ink-soft">
                     {rotationCaption}
                   </p>
                 </div>
-              </Section>
+              </Section>    </Section>
 
               <Section title="Text size" dot="#FFD43B">
                 <div className="flex rounded-full bg-ink/[0.06] p-1">
