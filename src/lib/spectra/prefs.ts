@@ -15,7 +15,7 @@ import { pickDarkMood } from "./dark-mood";
    at once and the mobile address bar keeps up.
    ═══════════════════════════════════════════════════════════════ */
 
-export type Lab = "light" | "dark" | "dune" | "sage" | "classic";
+export type Lab = "light" | "dark" | "dune" | "classic";
 export type HeadFont = "fredoka" | "baloo" | "patrick";
 export type BodyFont = "nunito" | "quicksand";
 
@@ -124,7 +124,6 @@ function sanitize(p: StoredPrefs): Prefs {
     p.theme === "light" ||
     p.theme === "dark" ||
     p.theme === "dune" ||
-    p.theme === "sage" ||
     p.theme === "classic"
   )
     out.theme = p.theme;
@@ -232,9 +231,8 @@ export function applyPrefs(p: Prefs) {
   /* the two night rooms both wear .dark — every dark: utility in the
      wardrobe keys off it — and the dune lab re-tints the tokens on
      top with .dune */
-  root.classList.toggle("dark", p.theme === "dark" || p.theme === "dune" || p.theme === "sage");
+  root.classList.toggle("dark", p.theme === "dark" || p.theme === "dune");
   root.classList.toggle("dune", p.theme === "dune");
-  root.classList.toggle("sage", p.theme === "sage");
   root.classList.toggle("classic", p.theme === "classic");
   /* only the night lab wears today's roast; dune's chocolate room is
      a fixed signature, and light & classic keep their daylight tokens */
@@ -348,25 +346,22 @@ export const LAB_LABEL: Record<Lab, string> = {
   light: "Light",
   dark: "Night",
   dune: "Dune",
-  sage: "Sage",
   classic: "Classic",
 };
 
-export const LAB_ORDER: Lab[] = ["light", "dark", "dune", "sage", "classic"];
+export const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic"];
 
 export const LAB_DESCRIPTION: Record<Lab, string> = {
   light: "Warm paper & daylight",
   dark: "Velvet dusk & lilac",
   dune: "Sandstone & amber",
-  sage: "Forest green & celadon",
   classic: "Espresso & parchment",
 };
 
 /* ————— the theme chips —————
    Each theme has a fixed signature swatch shared by the navbar and
    theme controls. The swatch identifies the room independently of
-   the active page palette: daylight white · velvet plum · dune chocolate · sage forest
-   · classic parchment. */
+   the active page palette: daylight white · velvet plum · dune chocolate · classic parchment. */
 export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> = {
   light: {
     bg: "#FFFFFF", // the bright daylight page
@@ -383,11 +378,6 @@ export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> 
     bg: "#6B4A26", // chocolate — dune
     ink: "#FFE9C7", // warm sand
     side: "#4E3417",
-  },
-  sage: {
-    bg: "#29483A",
-    ink: "#E8F0E6",
-    side: "#172D23",
   },
   classic: {
     // antique parchment-gold: a single warm surface, not a split
