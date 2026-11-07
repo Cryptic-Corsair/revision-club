@@ -321,11 +321,11 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           After dark the seams ride the same study grounds as the
           notes (--home-band-a/b alias --note-band-a/b); by day each
           band keeps its own candy tint via the fallback. */}
-      <BandWave from="var(--color-paper)" to={`var(--home-band-b, ${homeBandOf(0)})`} wave={1} />
+      <BandWave from="var(--color-paper)" to={`var(--home-band-b, ${homeBandOf(0)})`} wave={1} className="h-[calc(38px*var(--ui-scale))] sm:h-[calc(52px*var(--ui-scale))]" />
 
       {/* ————— units: M3 elevated cards on the orange band ————— */}
       <div style={{ background: `var(--home-band-b, ${homeBandOf(0)})` }}>
-      <section id="units" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-12 pb-8 sm:px-8">
+      <section id="units" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-8 pb-8 sm:px-8">
         <div className="text-center">
           <SectionTag main="#FF922B" tilt={2}>
             the course
