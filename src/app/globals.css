@@ -1088,6 +1088,14 @@ html.dune .nav-tool-button.is-active {
 
 
 /* ═════════ Footer · editorial course directory ═════════ */
+.club-footer-wave {
+  position: relative;
+  isolation: isolate;
+  filter: drop-shadow(0 -1px 0 rgb(255 255 255 / 0.055));
+}
+.club-footer-wave-path {
+  fill: color-mix(in oklab, var(--color-cocoa) 84%, var(--color-paper));
+}
 .club-footer-body {
   position: relative;
   isolation: isolate;
@@ -1095,16 +1103,10 @@ html.dune .nav-tool-button.is-active {
   background: var(--color-cocoa);
   color: var(--color-milk);
 }
+/* Keep the brand lockup on a single, uninterrupted footer surface.
+   Ambient colour stays below the wave rather than washing behind the mark. */
 .club-footer-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.9;
-  background:
-    radial-gradient(ellipse 58% 42% at 8% 0%, color-mix(in oklab, var(--color-milk) 7%, transparent), transparent 72%),
-    radial-gradient(ellipse 38% 46% at 94% 30%, color-mix(in oklab, var(--color-lemon) 6%, transparent), transparent 76%);
+  content: none;
 }
 .club-footer-container {
   position: relative;
