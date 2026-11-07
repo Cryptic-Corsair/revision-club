@@ -18,6 +18,8 @@ import {
   BookMarked,
   Check,
   ChevronDown,
+  Maximize,
+  Minimize,
 } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { UNITS, getUnit, getTopic, TOTALS } from "@/lib/spectra/units";
@@ -218,6 +220,8 @@ function TopBar({
   onOpenPack,
   onSearch,
   onOpenCustomize,
+  fullscreen,
+  onToggleFullscreen,
 }: {
   view: View;
   onHome: () => void;
@@ -225,6 +229,8 @@ function TopBar({
   onOpenPack: () => void;
   onSearch: () => void;
   onOpenCustomize: () => void;
+  fullscreen: boolean;
+  onToggleFullscreen: () => void;
 }) {
   const prefs = usePrefs();
   const lab = prefs.theme;
@@ -332,7 +338,7 @@ function TopBar({
             whileTap={{ scale: 0.88 }}
             animate={{ scale: view.kind === "pack" ? 1.1 : 1 }}
             transition={{ type: "spring", stiffness: 380, damping: 16 }}
-            className={`relative ${tool(view.kind === "pack")}`}
+            className={`relative hidden md:grid ${tool(view.kind === "pack")}`}
             title="Your revision pack · ticked spec points"
             aria-label={`Your revision pack${picks.length > 0 ? ` — ${picks.length} spec point${picks.length === 1 ? "" : "s"} ticked` : ""}`}
             style={
@@ -375,7 +381,7 @@ function TopBar({
             whileTap={{ scale: 0.88 }}
             animate={{ scale: view.kind === "sticker" ? 1.1 : 1 }}
             transition={{ type: "spring", stiffness: 380, damping: 16 }}
-            className={tool(view.kind === "sticker")}
+            className={`hidden md:grid ${tool(view.kind === "sticker")}`}
             title="Your progress · time & goals"
             aria-label="Open your progress"
             style={
@@ -389,6 +395,18 @@ function TopBar({
             }
           >
             <Sticker className="h-[18px] w-[18px]" strokeWidth={2.2} />
+          </m.button>
+
+          <m.button
+            type="button"
+            onClick={onToggleFullscreen}
+            whileTap={{ scale: 0.88 }}
+            className={`hidden md:grid ${tool(false)}`}
+            title={fullscreen ? "Exit full screen" : "Enter full screen"}
+            aria-label={fullscreen ? "Exit full screen mode" : "Enter full screen mode"}
+            aria-pressed={fullscreen}
+          >
+            {fullscreen ? <Minimize className="h-[18px] w-[18px]" strokeWidth={2.1} /> : <Maximize className="h-[18px] w-[18px]" strokeWidth={2.1} />}
           </m.button>
 
           <m.button
@@ -770,6 +788,7 @@ export default function ClubApp() {
   const [view, setView] = useState<View>({ kind: "home" });
   const [searchOpen, setSearchOpen] = useState(false);
   const [customizeOpen, setCustomizeOpen] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
   /* the two overlays live in their own chunks and mount on first
      open; after that they stay mounted so their exit animation
      keeps playing on every close */
@@ -781,6 +800,25 @@ export default function ClubApp() {
   const desk = useDesk();
   const [landing, setLanding] = useState(false);
   const deskActive = desk.engaged && !landing;
+
+  useEffect(() => {
+    const syncFullscreen = () => setFullscreen(Boolean(document.fullscreenElement));
+    document.addEventListener("fullscreenchange", syncFullscreen);
+    syncFullscreen();
+    return () => document.removeEventListener("fullscreenchange", syncFullscreen);
+  }, []);
+
+  const toggleFullscreen = useCallback(async () => {
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else if (document.documentElement.requestFullscreen) {
+        await document.documentElement.requestFullscreen();
+      }
+    } catch {
+      // Fullscreen can be denied by browser or device policy; keep the app usable.
+    }
+  }, []);
 
   useEffect(() => {
     if (searchOpen) setSearchMounted(true);
@@ -962,6 +1000,8 @@ export default function ClubApp() {
             onOpenPack={openPack}
             onSearch={openSearch}
             onOpenCustomize={openCustomize}
+            fullscreen={fullscreen}
+            onToggleFullscreen={toggleFullscreen}
           />
           {(searchOpen || searchMounted) && (
             <SearchPalette
@@ -971,7 +1011,7 @@ export default function ClubApp() {
             />
           )}
           {(customizeOpen || customizeMounted) && (
-            <CustomizePanel open={customizeOpen} onClose={closeCustomize} onHome={goHome} onOpenSpec={openSpec} onOpenPack={openPack} onOpenProgress={openSticker} onOpenLegal={openLegal} />
+            <CustomizePanel open={customizeOpen} onClose={closeCustomize} onHome={goHome} onOpenSpec={openSpec} onOpenPack={openPack} onOpenProgress={openSticker} onOpenLegal={openLegal} fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
           )}
   
           <main className="relative flex-1">
