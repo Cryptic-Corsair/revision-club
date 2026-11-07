@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · <Fmt/> — inline markup → typography
+   IAL CHEM · <Fmt/> — inline markup → typography
    **bold** · *em* · ==highlight== · ~subscript~ · ^superscript^
    ═══════════════════════════════════════════════════════════════ */
 
