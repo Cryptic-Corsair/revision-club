@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { Sparkles } from "./icons";
-import { ScrollFade } from "./bits";
+import { ScrollFade, readableInk } from "./bits";
 import { Fmt } from "./format";
 import { figureArt, isWideFigure } from "./note-section";
 import type { NotesBlock } from "@/lib/spectra/notes-types";
@@ -231,16 +231,14 @@ function EditorialTable({
           <table className="w-full min-w-[calc(480px*var(--ui-scale))] border-collapse text-left">
             <thead>
               <tr
-                className="border-b border-ink/15"
-                style={{
-                  background:
-                    "color-mix(in oklab, var(--color-ink) 4%, transparent)",
-                }}
+                className="border-b border-ink/10" style={{ background: accent }}
               >
                 {head.map((h, i) => (
                   <th
                     key={i}
-                    className="px-4 py-3 font-display text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
+                    scope="col"
+                    className="px-4 py-4 text-left align-middle font-display text-[calc(15px*var(--ui-scale))] font-extrabold leading-[1.25] tracking-[0.055em] whitespace-normal uppercase sm:px-5 sm:py-[18px]"
+                    style={{ color: readableInk(accent) }}
                   >
                     <Fmt text={h} />
                   </th>
