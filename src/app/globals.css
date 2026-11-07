@@ -141,6 +141,8 @@
   --sa-bottom: env(safe-area-inset-bottom, 0px);
   --sa-left: env(safe-area-inset-left, 0px);
   --sa-right: env(safe-area-inset-right, 0px);
+  --dot-ink: rgb(61 43 31 / 0.05);
+  --lamp-ink: rgb(255 146 43 / 0.07);
 }
 
 /* ————— the customize panel's knobs —————
@@ -489,26 +491,6 @@ html.classic .room {
 }
 
 /* ————— base ————— */
-
-/* the paper's dot ink — registered as a real <color> so the polka
-   texture can ride the theme-anim ease with everything else. A
-   gradient can't transition, but a registered custom property can,
-   and the dots re-bake from it every frame. Browsers without
-   @property support just snap the dots like they always did. */
-@property --dot-ink {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: rgb(61 43 31 / 0.05);
-}
-
-/* the ambient lamp's ink, same trick — the top glow eases between
-   the daylight wash and the night rooms' violet / golden-hour burns
-   instead of snapping hue while the ground is still mid-flight */
-@property --lamp-ink {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: rgb(255 146 43 / 0.07);
-}
 
 html {
   scroll-behavior: smooth;
@@ -900,50 +882,10 @@ html.dark .hero-glow {
   contain-intrinsic-size: auto calc(880px * var(--ui-scale));
 }
 
-/* ————— mood flip —————
-   While the toggle is held, every colour eases to its new value so
-   the switch reads as one smooth dim-the-lights move, not a cut. */
-
-html.theme-anim,
-html.theme-anim *,
-html.theme-anim *::before,
-html.theme-anim *::after {
-  transition:
-    background-color 0.42s ease,
-    color 0.42s ease,
-    fill 0.42s ease,
-    stroke 0.42s ease,
-    box-shadow 0.42s ease,
-    border-color 0.42s ease !important;
-  transition-delay: 0s !important;
-}
-
-/* the body's own copy of the ease, plus the registered dot ink —
-   written as longhands on purpose: the minifier drops a transition
-   shorthand that carries a custom property, but keeps the longhand
-   list. This is the one property the universal rule can't give the
-   body, and it's what lets the polka texture ease to the new lab's
-   grains instead of snapping onto a ground that's still mid-flight */
-html.theme-anim body {
-  transition-property:
-    background-color, color, fill, stroke, box-shadow, border-color,
-    --dot-ink !important;
-  transition-duration: 0.42s !important;
-  transition-timing-function: ease !important;
-  transition-delay: 0s !important;
-}
-
-/* the lamp's own copy — only the ink; the wash re-bakes from the
-   registered colour on every frame of the ease */
-html.theme-anim body::before {
-  transition-property: --lamp-ink !important;
-  transition-duration: 0.42s !important;
-  transition-timing-function: ease !important;
-  transition-delay: 0s !important;
-}
-
-
-
+/* Theme tokens switch atomically on <html>. Do not add a transition
+   to html *, body * or every pseudo-element here: the revision reader can
+   contain hundreds of nodes and a page-wide colour/shadow tween causes
+   avoidable full-page paint work. Keep motion local to the control itself. */
 
 /* ═════════ premium glass controls ═════════
    A restrained liquid-glass treatment: translucent layered surfaces,
