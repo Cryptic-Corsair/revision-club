@@ -3,7 +3,7 @@ import { UNITS } from "./units";
 import { fmtPlain } from "@/components/club/format";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · search index
+   IAL CHEM · search index
    Every topic becomes a search row, derived from the UNITS data —
    one source of truth, zero drift.
    ═══════════════════════════════════════════════════════════════ */
