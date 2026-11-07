@@ -2,7 +2,7 @@
 
 import { useEffect, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
-import { Check, RotateCcw, Sparkles, X, Palette, Home, BookOpen, ClipboardList, Sticker, ShieldCheck, ArrowRight } from "./icons";
+import { Check, RotateCcw, Sparkles, Settings, X, Palette, Home, BookOpen, ClipboardList, Sticker, ShieldCheck, ArrowRight } from "./icons";
 import { readableInk, shade, tint } from "./bits";
 import { accentOf } from "./bands";
 import {
@@ -321,7 +321,7 @@ export function CustomizePanel({
               style={{ paddingTop: "calc(1.5rem + var(--sa-top))" }}
             >
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-lemon/25 shadow-[inset_0_1px_0_rgb(255_255_255/0.5)]">
-                <Sparkles className="h-5.5 w-5.5 text-lemon" strokeWidth={2.2} />
+                <Settings className="h-5.5 w-5.5 text-lemon" strokeWidth={1.9} />
               </span>
               <div className="min-w-0 flex-1">
                 <h2 className="font-display text-[20px] leading-tight font-semibold text-ink">
