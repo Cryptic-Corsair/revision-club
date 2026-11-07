@@ -27,7 +27,6 @@ import { usePacks } from "@/lib/spectra/packs";
 import { useDesk, markUnit, markTopic } from "@/lib/spectra/desk";
 import {
   applyPrefs,
-  flashThemeAnim,
   LAB_DESCRIPTION,
   LAB_LABEL,
   LAB_ORDER,
@@ -238,7 +237,6 @@ function TopBar({
 
   const chooseTheme = useCallback((next: Lab) => {
     if (next !== lab) {
-      flashThemeAnim();
       setPrefs({ theme: next });
       setAnnounce(next);
       if (timer.current) clearTimeout(timer.current);
