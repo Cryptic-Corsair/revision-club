@@ -1,7 +1,7 @@
 "use client";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · band kit — the rotating room palette and the one
+   IAL CHEM · band kit — the rotating room palette and the one
    spec chip that wears it. Shared by the note reader (waves, room
    backgrounds, in-page contents card) and the nav's Spec Map
    window, so a stop is dressed identically wherever it appears.
