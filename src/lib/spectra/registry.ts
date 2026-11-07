@@ -4,7 +4,7 @@ import { UNITS } from "./units";
 import { NOTES_DOCS } from "./notes";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · the spec registry — the single source of truth
+   IAL CHEM · the spec registry — the single source of truth
    for "which spec point is covered where".
 
    Nothing here is hand-written: the registry is *derived* from the
@@ -183,9 +183,9 @@ export function packToText(picks: string[]): string {
   const points = picks
     .map((s) => getSpecPoint(s))
     .filter((p): p is SpecPoint => Boolean(p));
-  if (points.length === 0) return "Reaction Club — empty revision pack";
+  if (points.length === 0) return "IAL CHEM — empty revision pack";
   const lines: string[] = [
-    "Reaction Club — revision pack",
+    "IAL CHEM — revision pack",
     `${points.length} spec point${points.length === 1 ? "" : "s"} · ${points.reduce((n, p) => n + p.entries.length, 0)} section${points.reduce((n, p) => n + p.entries.length, 0) === 1 ? "" : "s"}`,
   ];
   let lastTopic = "";
