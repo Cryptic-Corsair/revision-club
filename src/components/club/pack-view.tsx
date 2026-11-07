@@ -27,7 +27,7 @@ import { PackSetsDialog } from "./pack-sets";
 import { Confetti, Mascot, PopIn, Reveal, ScrollFade, SoftButton, readableInk, shade } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · the revision pack — the notes behind your ticked
+   IAL CHEM · the revision pack — the notes behind your ticked
    spec points, assembled in syllabus order.
 
    The sections you see here are not copies: the registry resolves
