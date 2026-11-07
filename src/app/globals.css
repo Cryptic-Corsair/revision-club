@@ -14,7 +14,7 @@
    Four labs, one set of tokens: every surface reads its colour from
    the custom properties below, so the whole site flips between
    · the daylight cream lab (no class),
-   · the night lab (html.dark) — midnight-blue graphite,
+   · the night lab (html.dark) — warm plum-charcoal,
    · the dune lab (html.dark + html.dune) — the chocolate room, and
    · the classic lab (html.classic) — a daylight page whose note
      sections step between two fixed grounds, deep espresso (#2c2013)
@@ -26,7 +26,7 @@
 
    Tonal order, one rule per lab (page → band → card):
    · daylight:  cream (lightest) < candy band < paper card
-   · night lab: a midnight observatory, built on deep marine ink
+   · night lab: velvet dusk, built on deep plum-charcoal
      charcoal — the hue that sits BETWEEN the warm candies and grape,
      so the whole shelf reads as neon against it — and the surfaces
      climb a real ladder: page (#0d1422) → band A (#111b2d) → band B
@@ -232,78 +232,75 @@ html[data-dots="off"] body {
   background-image: none;
 }
 
-/* ————— the night lab · midnight observatory —————
-   A cooler, quieter room built around deep marine ink rather than
-   violet charcoal. The page, study bands and cards now have distinct
-   value steps, while the original candy accents remain recognisable.
-   This block is deliberately separate from Dune: both themes use
-   .dark for native dark controls, but only Night receives this
-   blue-black palette and its ice-blue interaction language.
+/* ————— the night lab · velvet dusk —————
+   A soft, atmospheric dark room in plum-charcoal rather than a
+   literal blue night. Warm ivory carries the reading, smoky mauve
+   separates the surfaces, and a restrained lilac accent marks
+   controls. The candy accents remain the original topic language.
+   This block stays independent from Dune's sandstone/chocolate room.
 
    Surface ladder:
-     page #0d1422 → band A #111b2d → band B #152238
-     → paper #1a263b → raised #26364f → footer #080e19.
-   Main / secondary / tertiary ink keeps strong contrast throughout.
+     page #17131d → band A #1e1826 → band B #251d30
+     → paper #30263d → raised #40344f → footer #0f0b15.
 */
 html.dark:not(.dune) {
-  --color-cream: #0d1422;
-  --color-paper: #1a263b;
-  --color-milk: #eef4fd;
-  --color-ink: #eef4fd;
-  --color-ink-soft: #b5c2d4;
-  --color-ink-faint: #91a2ba;
-  --color-cocoa: #080e19;
-  --tint-base: #26364f;
-  --shade-ink: #0d1422;
+  --color-cream: #17131d;
+  --color-paper: #30263d;
+  --color-milk: #f5eff7;
+  --color-ink: #f5eff7;
+  --color-ink-soft: #c7bacd;
+  --color-ink-faint: #a99aae;
+  --color-cocoa: #0f0b15;
+  --tint-base: #40344f;
+  --shade-ink: #17131d;
 
-  --note-band-a: #111b2d;
-  --note-band-b: #152238;
-  --home-band-a: #0a111d;
-  --home-band-b: #101c2f;
+  --note-band-a: #1e1826;
+  --note-band-b: #251d30;
+  --home-band-a: #120e19;
+  --home-band-b: #191421;
 
   --sunk-share: 10%;
-  --sunk-base: #142137;
+  --sunk-base: #261e32;
   --lift-share: 16%;
-  --lift-base: #16243a;
+  --lift-base: #2a2037;
   --honey-share: 12%;
-  --honey-base: #0d1727;
+  --honey-base: #100c15;
   --chip-base: var(--color-paper);
   --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
   --arc-ink: 72%;
   --edge: rgb(0 0 0 / 0.56);
 
-  --night-accent: #83d9e9;
-  --night-accent-strong: #4eafc7;
-  --night-accent-ink: #071923;
+  --night-accent: #d7b5e7;
+  --night-accent-strong: #ae82c2;
+  --night-accent-ink: #24172b;
   color-scheme: dark;
 }
 
-/* The daily variations stay within the same blue-hour family. They
-   adjust only the atmosphere and the page/card relationship; text,
-   note bands, accent colours and interaction states remain stable. */
+/* Daily variations stay inside the same dusk palette. They only
+   shift the room's temperature and surface tone, never to blue. */
 html.dark:not(.dune)[data-mood="1"] {
-  --color-cream: #101722;
-  --color-paper: #1b293d;
-  --color-cocoa: #080e18;
-  --tint-base: #29394f;
-  --home-band-a: #0b121e;
-  --home-band-b: #121e30;
+  --color-cream: #19171d;
+  --color-paper: #302d39;
+  --color-cocoa: #100e14;
+  --tint-base: #403b4b;
+  --home-band-a: #131118;
+  --home-band-b: #1b1922;
 }
 html.dark:not(.dune)[data-mood="2"] {
-  --color-cream: #0b1724;
-  --color-paper: #193044;
-  --color-cocoa: #07111c;
-  --tint-base: #244055;
-  --home-band-a: #091522;
-  --home-band-b: #102234;
+  --color-cream: #1b1420;
+  --color-paper: #34243a;
+  --color-cocoa: #100b15;
+  --tint-base: #47334e;
+  --home-band-a: #150f1a;
+  --home-band-b: #211829;
 }
 html.dark:not(.dune)[data-mood="3"] {
-  --color-cream: #151923;
-  --color-paper: #252c3a;
-  --color-cocoa: #0c111a;
-  --tint-base: #30394a;
-  --home-band-a: #10151e;
-  --home-band-b: #191f2b;
+  --color-cream: #1c1518;
+  --color-paper: #35272f;
+  --color-cocoa: #110b0e;
+  --tint-base: #49343d;
+  --home-band-a: #150f12;
+  --home-band-b: #23191e;
 }
 
 /* ————— the dune lab —————
@@ -1577,28 +1574,28 @@ html.classic .legal-hero, html.classic .legal-summary, html.classic .legal-closi
 }
 
 
-/* ═════════ Night theme · component finish ═════════
-   The tokens above carry the room through all token-based pages.
-   These scoped finishes handle the few bespoke surfaces that have
-   their own gradients, fixed colour treatments or interaction chrome.
-   Every selector excludes Dune so its chocolate palette is untouched.
+
+
+/* ═════════ Night theme · velvet dusk finish ═════════
+   Bespoke component surfaces that do not come directly from the
+   shared tokens. Every rule is Night-only; Dune remains untouched.
 */
 html.dark:not(.dune) body {
-  --dot-ink: rgb(190 220 247 / 0.045);
-  --lamp-ink: rgb(87 169 205 / 0.13);
+  --dot-ink: rgb(245 225 249 / 0.045);
+  --lamp-ink: rgb(174 130 194 / 0.13);
   background-image:
     radial-gradient(var(--dot-ink) 1.4px, transparent 1.5px),
-    linear-gradient(180deg, rgb(12 28 47 / 0.18), transparent 38%);
+    linear-gradient(180deg, rgb(42 25 48 / 0.16), transparent 38%);
   background-size: 28px 28px, 100% 100%;
 }
 html.dark:not(.dune) body::before {
   background:
     radial-gradient(900px 500px at 50% -160px, var(--lamp-ink), transparent 74%),
-    radial-gradient(520px 360px at 100% 22%, rgb(93 128 190 / 0.055), transparent 74%);
+    radial-gradient(560px 340px at 100% 18%, rgb(201 157 119 / 0.055), transparent 76%);
 }
 html.dark:not(.dune) ::selection {
-  background: #9be4ef;
-  color: #071923;
+  background: #e7d3b3;
+  color: #2a1b2b;
 }
 html.dark:not(.dune) :focus-visible {
   outline: 2px solid var(--night-accent);
@@ -1619,16 +1616,16 @@ html.dark:not(.dune) .puff-lift:hover {
     0 28px 58px -25px rgb(0 0 0 / 0.78);
 }
 html.dark:not(.dune) .candy {
-  --candy-bg: #83d9e9;
-  --candy-side: #3d9bb3;
-  color: #071923;
+  --candy-bg: #d7b5e7;
+  --candy-side: #ae82c2;
+  color: #24172b;
 }
 html.dark:not(.dune) mark {
   background: linear-gradient(
     100deg,
-    rgb(255 211 122 / 0.12) 0%,
-    rgb(255 211 122 / 0.2) 16% 84%,
-    rgb(255 211 122 / 0.12) 100%
+    rgb(231 211 179 / 0.11) 0%,
+    rgb(231 211 179 / 0.2) 16% 84%,
+    rgb(231 211 179 / 0.11) 100%
   );
   color: var(--color-ink);
 }
@@ -1637,12 +1634,12 @@ html.dark:not(.dune) .hero-glow {
 }
 
 html.dark:not(.dune) .site-header nav {
-  background: color-mix(in oklab, var(--color-paper) 96%, #0a1728) !important;
-  border: 1px solid rgb(176 211 241 / 0.12) !important;
+  background: color-mix(in oklab, var(--color-paper) 96%, #160f1d) !important;
+  border: 1px solid rgb(226 205 235 / 0.11) !important;
   box-shadow:
     0 2px 0 rgb(0 0 0 / 0.22),
     0 15px 38px -25px rgb(0 0 0 / 0.82),
-    inset 0 1px 0 rgb(226 241 255 / 0.07) !important;
+    inset 0 1px 0 rgb(255 245 255 / 0.065) !important;
 }
 html.dark:not(.dune) .nav-tool-button {
   color: var(--color-ink-soft) !important;
@@ -1651,43 +1648,43 @@ html.dark:not(.dune) .nav-tool-button {
 }
 html.dark:not(.dune) .nav-tool-button:hover {
   color: var(--color-ink) !important;
-  background: rgb(180 213 244 / 0.075) !important;
-  border-color: rgb(180 213 244 / 0.08) !important;
+  background: rgb(218 190 231 / 0.075) !important;
+  border-color: rgb(218 190 231 / 0.08) !important;
 }
 html.dark:not(.dune) .nav-tool-button.is-active {
-  color: #e7fbff !important;
-  background: rgb(113 196 216 / 0.16) !important;
-  border-color: rgb(131 217 233 / 0.19) !important;
-  box-shadow: inset 0 1px 0 rgb(210 246 255 / 0.06) !important;
+  color: #fbf3ff !important;
+  background: rgb(196 157 214 / 0.16) !important;
+  border-color: rgb(215 181 231 / 0.19) !important;
+  box-shadow: inset 0 1px 0 rgb(255 245 255 / 0.06) !important;
 }
 html.dark:not(.dune) .footer-action-button {
-  color: #d8e5f3;
-  border-color: rgb(190 216 242 / 0.14) !important;
-  background: rgb(190 216 242 / 0.035) !important;
+  color: #e7dce9;
+  border-color: rgb(220 195 230 / 0.14) !important;
+  background: rgb(220 195 230 / 0.035) !important;
 }
 html.dark:not(.dune) .footer-action-button:hover {
-  color: #f2f8ff;
-  border-color: rgb(190 216 242 / 0.24) !important;
-  background: rgb(190 216 242 / 0.075) !important;
+  color: #fff7ff;
+  border-color: rgb(220 195 230 / 0.24) !important;
+  background: rgb(220 195 230 / 0.075) !important;
 }
 
 html.dark:not(.dune) .hero-stage {
   background:
-    radial-gradient(ellipse at 84% 20%, rgb(75 166 198 / 0.17), transparent 43%),
-    radial-gradient(ellipse at 9% 86%, rgb(95 115 181 / 0.13), transparent 42%),
+    radial-gradient(ellipse at 84% 20%, rgb(174 130 194 / 0.16), transparent 43%),
+    radial-gradient(ellipse at 9% 86%, rgb(196 157 119 / 0.09), transparent 42%),
     var(--color-paper);
-  border: 1px solid rgb(185 215 244 / 0.08);
+  border: 1px solid rgb(222 198 232 / 0.075);
 }
 html.dark:not(.dune) .hero-stage::before {
   opacity: 0.2;
-  background-image: radial-gradient(rgb(198 226 248 / 0.18) 0.65px, transparent 0.7px);
+  background-image: radial-gradient(rgb(239 220 245 / 0.16) 0.65px, transparent 0.7px);
   mask-image: linear-gradient(90deg, transparent 0%, black 68%, transparent 100%);
 }
 html.dark:not(.dune) .hero-stats {
-  background: color-mix(in oklab, var(--color-paper) 91%, #294b68) !important;
-  border-color: rgb(190 220 246 / 0.12);
+  background: color-mix(in oklab, var(--color-paper) 91%, #644d6d) !important;
+  border-color: rgb(226 205 235 / 0.11);
   box-shadow:
-    inset 0 1px 0 rgb(230 244 255 / 0.055),
+    inset 0 1px 0 rgb(255 245 255 / 0.05),
     0 14px 34px -28px rgb(0 0 0 / 0.8) !important;
 }
 html.dark:not(.dune) .hero-visual {
@@ -1695,69 +1692,69 @@ html.dark:not(.dune) .hero-visual {
 }
 html.dark:not(.dune) .hero-visual::before {
   background:
-    radial-gradient(circle at 33% 25%, rgb(213 246 255 / 0.2), transparent 26%),
-    linear-gradient(145deg, rgb(87 171 199 / 0.28), rgb(87 112 168 / 0.18) 58%, rgb(132 217 233 / 0.08));
-  border-color: rgb(202 231 249 / 0.18);
+    radial-gradient(circle at 33% 25%, rgb(247 228 251 / 0.17), transparent 26%),
+    linear-gradient(145deg, rgb(173 130 190 / 0.27), rgb(127 91 143 / 0.17) 58%, rgb(219 185 218 / 0.07));
+  border-color: rgb(230 209 239 / 0.16);
   box-shadow:
-    inset 0 1px 12px rgb(218 245 255 / 0.08),
+    inset 0 1px 12px rgb(255 239 255 / 0.075),
     0 26px 58px -38px rgb(0 0 0 / 0.7);
 }
 html.dark:not(.dune) .hero-float-card {
-  background: color-mix(in oklab, var(--color-paper) 94%, #8eb4cf 6%) !important;
-  border-color: rgb(198 224 246 / 0.14);
+  background: color-mix(in oklab, var(--color-paper) 94%, #b89abb 6%) !important;
+  border-color: rgb(230 209 239 / 0.13);
   box-shadow:
-    inset 0 1px 0 rgb(237 248 255 / 0.055),
+    inset 0 1px 0 rgb(255 245 255 / 0.05),
     0 16px 34px -25px rgb(0 0 0 / 0.76);
 }
 html.dark:not(.dune) .hero-sticker {
-  border-color: rgb(205 230 248 / 0.15);
+  border-color: rgb(230 209 239 / 0.14);
   box-shadow: 0 8px 20px -15px rgb(0 0 0 / 0.7);
 }
 html.dark:not(.dune) .customize-drawer {
-  border-color: rgb(188 216 242 / 0.12);
+  border-color: rgb(222 198 232 / 0.12);
   box-shadow: -24px 0 72px -36px rgb(0 0 0 / 0.88);
 }
 html.dark:not(.dune) .legal-hero {
   background:
-    radial-gradient(ellipse at 88% 14%, rgb(91 175 203 / 0.16), transparent 38%),
-    radial-gradient(ellipse at 5% 100%, rgb(99 112 176 / 0.13), transparent 43%),
+    radial-gradient(ellipse at 88% 14%, rgb(174 130 194 / 0.15), transparent 38%),
+    radial-gradient(ellipse at 5% 100%, rgb(196 157 119 / 0.08), transparent 43%),
     var(--color-paper);
-  border-color: rgb(190 218 243 / 0.12);
+  border-color: rgb(222 198 232 / 0.11);
   box-shadow: 0 24px 56px -42px rgb(0 0 0 / 0.82);
 }
 html.dark:not(.dune) .legal-kicker {
-  color: #09202c;
-  background: #8bd9e8;
+  color: #291b2f;
+  background: #d7b5e7;
 }
 html.dark:not(.dune) .legal-heading-accent {
-  color: #9eddec;
+  color: #e0c4eb;
 }
 html.dark:not(.dune) .legal-hero-mark {
-  color: color-mix(in oklab, #93d8e7 62%, var(--color-ink));
+  color: color-mix(in oklab, #d7b5e7 62%, var(--color-ink));
 }
 html.dark:not(.dune) .legal-mark-dot {
-  background: #83d9e9;
-  box-shadow: 0 0 0 6px rgb(131 217 233 / 0.13);
+  background: #d7b5e7;
+  box-shadow: 0 0 0 6px rgb(215 181 231 / 0.13);
 }
 html.dark:not(.dune) .legal-mark-dot-two {
-  background: #8f9ee3;
+  background: #d6b17e;
 }
 html.dark:not(.dune) .legal-summary {
-  background: color-mix(in oklab, var(--color-paper) 91%, #2d4a65);
-  border-color: rgb(190 218 243 / 0.1);
+  background: color-mix(in oklab, var(--color-paper) 91%, #59455f);
+  border-color: rgb(222 198 232 / 0.1);
 }
 html.dark:not(.dune) .legal-summary-number {
-  color: #a3dfeb;
+  color: #e0c4eb;
 }
 html.dark:not(.dune) .legal-clause {
-  border-bottom-color: rgb(190 218 243 / 0.13);
+  border-bottom-color: rgb(222 198 232 / 0.12);
 }
 html.dark:not(.dune) .legal-clause-number {
-  border-color: rgb(190 218 243 / 0.17);
-  color: #b9cce0;
+  border-color: rgb(222 198 232 / 0.16);
+  color: #d8c8dd;
 }
 html.dark:not(.dune) .legal-clause-line {
-  background: rgb(190 218 243 / 0.15);
+  background: rgb(222 198 232 / 0.14);
 }
 html.dark:not(.dune) .legal-clause-icon {
   background: color-mix(in oklab, var(--legal-accent) 12%, var(--color-paper));
@@ -1765,9 +1762,9 @@ html.dark:not(.dune) .legal-clause-icon {
 }
 html.dark:not(.dune) .legal-closing {
   background:
-    radial-gradient(ellipse at 100% 0%, rgb(91 175 203 / 0.13), transparent 46%),
+    radial-gradient(ellipse at 100% 0%, rgb(174 130 194 / 0.12), transparent 46%),
     var(--color-paper);
-  border-color: rgb(190 218 243 / 0.12);
+  border-color: rgb(222 198 232 / 0.11);
   box-shadow: 0 2px 0 var(--edge);
 }
 @media (prefers-reduced-motion: reduce) {
