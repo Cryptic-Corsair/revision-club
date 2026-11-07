@@ -1,168 +1,64 @@
 "use client";
 
-import type { CSSProperties } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import {
   ArrowLeft,
   Atom,
   BookOpenCheck,
-  PenLine,
+  Droplets,
+  FlaskConical,
+  Gauge,
+  Magnet,
+  PieChart,
+  Sparkles,
+  Target,
   TestTubes,
+  Zap,
 } from "./icons";
 import { PopIn, Reveal, SoftButton, tint } from "./bits";
 import { accentOf, inkMix } from "./bands";
 import { BlockView } from "./note-section";
+import { useSpecMapRegister } from "./spec-map";
 import { Fmt } from "./format";
-import type { NotesBlock } from "@/lib/spectra/notes-types";
+import { getNotes } from "@/lib/spectra/notes";
+import { getUnit } from "@/lib/spectra/units";
+import type { NotesDoc } from "@/lib/spectra/notes-types";
 
 /* ═══════════════════════════════════════════════════════════════
-   IAL CHEM · the sample note — a look inside a full revision note.
+   IAL CHEM · the sample note — an entire revision note, opened up.
    The disclaimer page's editorial dress (hero, sticky contents,
-   numbered clauses, closing card) wrapped around a real slice of
-   WCH11 Topic 1. The spec statements and note blocks below are
-   verbatim from the site's own note for that topic, and they are
-   rendered by the very same BlockView the reader uses — so this
-   page always shows the notes as they actually look.
+   numbered clause rails, closing card) wrapped around the complete
+   WCH11 Topic 3 note — every spec section, every diagram — pulled
+   through the very same getNotes() registry and BlockView renderer
+   the reader uses, so this page always shows the notes exactly as
+   they actually look. It also registers itself with the Spec Map,
+   so the nav wears the note's stops and the drawer hops between
+   sections just like it does inside a real topic note.
    Reached from the customize panel's Navigate grid.
    ═══════════════════════════════════════════════════════════════ */
 
-type SampleSection = {
-  icon: typeof BookOpenCheck;
-  spec: string;
-  title: string;
-  /** short form for the 210px contents rail */
-  short: string;
-  statement: string;
-  blocks: NotesBlock[];
-};
+const DOC_ID = "wch11-t03";
 
-const SECTIONS: SampleSection[] = [
-  {
-    icon: Atom,
-    spec: "1.1",
-    title: "Atoms, elements and molecules",
-    short: "Atoms and molecules",
-    statement:
-      "know the terms ‘atom’, ‘element’, ‘ion’, ‘molecule’, ‘compound’, ‘empirical formula’ and ‘molecular formula’",
-    blocks: [
-      {
-        k: "p",
-        text: "Chemistry starts with the particle. Before any calculation, the vocabulary has to be exact — what counts as an atom, an element, a molecule or a compound, and which of these particles carry a charge.",
-      },
-      {
-        k: "def",
-        term: "Molecule",
-        text: "A molecule is the smallest, electrically neutral particle, of an element or compound that can ==exist on its own==.",
-      },
-      {
-        k: "table",
-        caption: "The three sub-atomic particles",
-        head: ["Particle", "Symbol", "Charge / C", "Relative charge", "Mass / g", "Relative mass"],
-        rows: [
-          ["Proton", "p", "+1.60 × 10^−19^", "+1", "1.67 × 10^−24^", "1"],
-          ["Neutron", "n", "0", "0", "1.67 × 10^−24^", "1"],
-          ["Electron", "e^−^", "−1.60 × 10^−19^", "−1", "9.11 × 10^−28^", "1 / 1840"],
-        ],
-      },
-      {
-        k: "def",
-        term: "Atomic number",
-        text: "The number of ==protons== in the nucleus of an atom.",
-      },
-      {
-        k: "def",
-        term: "Mass number",
-        text: "The sum of ==protons and neutrons== in the nucleus of an atom.",
-      },
-    ],
-  },
-  {
-    icon: PenLine,
-    spec: "1.3",
-    title: "Writing chemical equations",
-    short: "Writing equations",
-    statement:
-      "write balanced full and ionic equations, including state symbols, for chemical reactions",
-    blocks: [
-      {
-        k: "p",
-        text: "Equations can be written in words or using chemical formula. Chemical equations could be either **molecular equations** or **ionic equations**.",
-      },
-      { k: "eq", eq: "hydrogen + oxygen → water        H~2~ + O~2~ → H~2~O" },
-      {
-        k: "bullets",
-        items: [
-          "A balanced chemical equation must have the same number of each kind of atoms on the **left-hand side (LHS)** of the equation as on the **right-hand side (RHS)**.",
-          "Net charge on both reactants and products side should be 0.",
-          "Simplest ==whole number ratios== should be used to balance the equations.",
-        ],
-      },
-      {
-        k: "steps",
-        items: [
-          {
-            title: "Step 1",
-            text: "Work out what has reacted and what has been formed. Write a **word equation**.",
-          },
-          {
-            title: "Step 2",
-            text: "Get the correct **formula** for each species. Include the **state symbols** where necessary. When the correct formula of a species has been obtained, ==do not change the formula== to balance the equation.",
-          },
-          {
-            title: "Step 3",
-            text: "Having written out the initial equation, check to see if it is balanced. An equation balances if the same number of each type of atom appears on either side of the arrow.",
-          },
-          {
-            title: "Step 4",
-            text: "Place whole numbers in front of any formula to indicate if more than one of it is required. This multiplies everything in the formula immediately behind it. Continue until the equation balances.",
-          },
-          {
-            title: "Step 5",
-            text: "Finally, check the equation to see that you have balanced it correctly.",
-          },
-        ],
-      },
-      {
-        k: "worked",
-        title: "Worked example · balancing a molecular equation",
-        question: "Balance: sodium + water → sodium hydroxide + hydrogen",
-        steps: [
-          "**Step 1** — word equation: sodium + water → sodium hydroxide + hydrogen",
-          "**Step 2** — formulae with state symbols: Na(s) + H~2~O(l) → NaOH(aq) + H~2~(g)",
-          "**Step 3** — count up the atoms. LHS … 1 × Na, 2 × H, 1 × O. RHS … 1 × Na, 3 × H, 1 × O. The equation doesn't balance; an extra H is needed on the LHS. However formulae should not be changed — one can only get extra H's by having two waters; multiply H~2~O by two: Na(s) + 2H~2~O(l) → NaOH(aq) + H~2~(g)",
-          "**Step 4** — now there are too many O's (2) and H's (4) on the LHS; multiplying the NaOH by two will solve this problem: Na(s) + 2H~2~O(l) → 2NaOH(aq) + H~2~(g). However this creates yet another problem because it has introduced an extra Na on the RHS; multiply the Na on the LHS by two: 2Na(s) + 2H~2~O(l) → 2NaOH(aq) + H~2~(g)",
-          "**Step 5** — check the equation. LHS … 2 × Na, 4 × H, 2 × O. RHS … 2 × Na, 4 × H, 2 × O. It is balanced.",
-        ],
-        answer: "2Na(s) + 2H~2~O(l) → 2NaOH(aq) + H~2~(g)",
-      },
-    ],
-  },
-  {
-    icon: TestTubes,
-    spec: "1.12",
-    title: "Test-tube reactions: acids, displacement, precipitation",
-    short: "Test-tube reactions",
-    statement:
-      "be able to relate ionic and full equations, with state symbols, to observations from simple test-tube experiments, to include: i displacement reactions ii typical reactions of acids iii precipitation reactions",
-    blocks: [
-      { k: "h", text: "Typical reactions of acids" },
-      { k: "p", text: "Three general equations carry every acid reaction at this level:" },
-      { k: "eq", eq: "Acid + Metal carbonate → Salt + Water + Carbon dioxide" },
-      {
-        k: "def",
-        term: "Displacement",
-        text: "In simple, it is a reaction in which ==one element replaces another element== in a compound.",
-      },
-      { k: "eq", eq: "Mg(s) + CuSO~4~(aq) → Cu(s) + MgSO~4~(aq)" },
-      {
-        k: "p",
-        text: "Remember a ==more reactive metal displaces the less reactive metal== from its compound.",
-      },
-      {
-        k: "wow",
-        text: "Only the particles that actually react appear in an ==ionic equation== — the spectator ions cancel from both sides and are written out of the equation.",
-      },
-    ],
-  },
+/* one friendly icon per clause, walked in order */
+const SECTION_ICONS = [
+  Atom,
+  Magnet,
+  Droplets,
+  FlaskConical,
+  Zap,
+  Gauge,
+  Target,
+  TestTubes,
+  PieChart,
+  Sparkles,
+  BookOpenCheck,
 ];
 
 const SUMMARY = [
@@ -172,6 +68,8 @@ const SUMMARY = [
   "Worked examples that unfold step by step, so the method sticks, not just the answer.",
 ];
 
+const elId = (spec: string) => `sample-${spec.replace(".", "-")}`;
+
 export function SampleNotes({
   onBack,
   onOpenSpec,
@@ -179,6 +77,131 @@ export function SampleNotes({
   onBack: () => void;
   onOpenSpec: () => void;
 }) {
+  const doc = getNotes(DOC_ID);
+  if (!doc) {
+    /* the doc ships in the registry this chunk already imports — this
+       room exists only as belt and braces, same as the reader's */
+    return (
+      <div className="flex min-h-[55dvh] items-center justify-center">
+        <span className="h-7 w-7 animate-spin rounded-full border-[3.5px] border-ink/10 border-t-ink/45" />
+      </div>
+    );
+  }
+  return <SampleNotesBody doc={doc} onBack={onBack} onOpenSpec={onOpenSpec} />;
+}
+
+function SampleNotesBody({
+  doc,
+  onBack,
+  onOpenSpec,
+}: {
+  doc: NotesDoc;
+  onBack: () => void;
+  onOpenSpec: () => void;
+}) {
+  const main = getUnit("WCH11")?.candy.main ?? accentOf(0);
+  const [active, setActive] = useState<string>(doc.sections[0]?.spec ?? "");
+
+  /* ————— scroll spy ————— the reader's recipe: after every scroll
+     frame the position is recomputed from the real rects, so a fast
+     glide can never leave a stale "you are here" behind */
+  const spyRaf = useRef(0);
+  useEffect(() => {
+    const pick = () => {
+      const y = window.scrollY + window.innerHeight * 0.35;
+      let current = doc.sections[0]?.spec ?? "";
+      for (const s of doc.sections) {
+        const el = document.getElementById(elId(s.spec));
+        if (el && el.getBoundingClientRect().top + window.scrollY <= y)
+          current = s.spec;
+      }
+      setActive(current);
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(spyRaf.current);
+      spyRaf.current = requestAnimationFrame(pick);
+    };
+    const first = requestAnimationFrame(pick);
+    const settle = window.setTimeout(pick, 350); /* once fonts have settled */
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(first);
+      cancelAnimationFrame(spyRaf.current);
+      window.clearTimeout(settle);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [doc]);
+
+  /* ————— the verified hop ————— the reader's glide, re-aimed at the
+     sample's clause rails: smooth scroll with a landing check, one
+     instant snap if the glide was silently cancelled */
+  const jump = useCallback((spec: string) => {
+    const el = document.getElementById(elId(spec));
+    if (!el) return;
+    const saTop =
+      parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue("--sa-top"),
+      ) || 0;
+    const topOf = () =>
+      Math.max(
+        0,
+        el.getBoundingClientRect().top + window.scrollY - 100 - saTop,
+      );
+    const landed = (top: number) => Math.abs(window.scrollY - top) < 2;
+    const glide = () => {
+      const top = topOf();
+      window.scrollTo({ top, behavior: "smooth" });
+      window.setTimeout(() => {
+        if (landed(top)) return;
+        const y1 = window.scrollY;
+        window.setTimeout(() => {
+          if (!landed(top) && Math.abs(window.scrollY - y1) < 1)
+            window.scrollTo({ top, behavior: "instant" as ScrollBehavior });
+        }, 450);
+      }, 450);
+    };
+    const estimate = topOf();
+    if (estimate > window.innerHeight * 2) {
+      window.scrollTo({
+        top: estimate - window.innerHeight * 1.5,
+        behavior: "instant" as ScrollBehavior,
+      });
+      requestAnimationFrame(() => requestAnimationFrame(glide));
+    } else {
+      glide();
+    }
+  }, []);
+
+  /* ————— the nav wears this note ————— same registration the reader
+     makes, so the Spec Map stop appears in the navbar and the drawer
+     lists, tracks and hops these sections like any real note */
+  useSpecMapRegister(
+    useMemo(
+      () => ({
+        id: `sample-${doc.id}`,
+        sections: doc.sections,
+        main,
+        active,
+        jump,
+      }),
+      [doc.id, doc.sections, main, active, jump],
+    ),
+  );
+
+  const figureCount = useMemo(() => {
+    let n = 0;
+    const walk = (blocks: NotesDoc["intro"]) =>
+      blocks.forEach((b) => b.k === "figure" && n++);
+    walk(doc.intro);
+    doc.sections.forEach((s) => walk(s.blocks));
+    return n;
+  }, [doc]);
+
+  const firstSpec = doc.sections[0]?.spec ?? "";
+  const lastSpec = doc.sections[doc.sections.length - 1]?.spec ?? "";
+
   return (
     <main className="legal-room mx-auto max-w-6xl px-4 pt-[calc(6.25rem+var(--sa-top))] pb-24 sm:px-7 lg:px-10">
       <PopIn>
@@ -204,12 +227,12 @@ export function SampleNotes({
             <span className="legal-heading-accent">spec by spec.</span>
           </h1>
           <p className="mt-6 max-w-[570px] text-[calc(15px*var(--ui-scale))] leading-[1.85] text-ink-soft sm:text-[calc(16px*var(--ui-scale))]">
-            Every topic on IAL CHEM is a single note cut into sections — one per specification point, each opened by the official statement. This page is a real slice of that: Topic 1 of WCH11, shown with the site&apos;s own definition boxes, data tables, equation cards and worked examples.
+            Every topic on IAL CHEM is a single note cut into sections — one per specification point, each opened by the official statement. This page is the complete note for Topic 3 of WCH11, bonding and structure — every section and every diagram, exactly as the reader shows them.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-ink/10 pt-5">
-            <span className="legal-meta">WCH11 · TOPIC 1</span>
-            <span className="legal-meta">THREE SPEC SECTIONS</span>
-            <span className="legal-meta">DEFS · TABLES · WORKED EXAMPLES</span>
+            <span className="legal-meta">WCH11 · TOPIC 3</span>
+            <span className="legal-meta">SPEC {firstSpec} → {lastSpec}</span>
+            <span className="legal-meta">{doc.sections.length} SECTIONS · {figureCount} DIAGRAMS</span>
           </div>
         </div>
         <div className="legal-hero-mark" aria-hidden>
@@ -225,10 +248,18 @@ export function SampleNotes({
         <aside className="legal-index h-fit lg:sticky lg:top-28">
           <p className="legal-meta mb-4">CONTENTS</p>
           <nav aria-label="Sample note sections" className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
-            {SECTIONS.map((section, i) => (
-              <a key={section.spec} href={`#sample-${i + 1}`} className="legal-index-link lg:min-w-0 lg:max-w-full">
-                <span>{String(i + 1).padStart(2, "0")}</span>
-                <span className="min-w-0 lg:truncate">{section.short}</span>
+            {doc.sections.map((section, i) => (
+              <a
+                key={section.spec}
+                href={`#${elId(section.spec)}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  jump(section.spec);
+                }}
+                className="legal-index-link lg:min-w-0 lg:max-w-full"
+              >
+                <span>{section.spec}</span>
+                <span className="min-w-0 lg:truncate">{section.title}</span>
               </a>
             ))}
           </nav>
@@ -266,25 +297,42 @@ export function SampleNotes({
                 <p className="legal-meta">SAMPLE NOTE</p>
                 <h2 className="mt-1 font-display text-[calc(25px*var(--ui-scale))] font-semibold tracking-tight text-ink">The note itself</h2>
               </div>
-              <span className="legal-meta hidden sm:block">01 — 03</span>
+              <span className="legal-meta hidden sm:block">{firstSpec} — {lastSpec}</span>
             </div>
 
+            {/* the note's own opening words, verbatim from the doc */}
+            <Reveal>
+              <div className="mb-7 max-w-[76ch] rounded-[24px] bg-paper px-5 py-4 puff">
+                <p className="legal-meta">HOW THE NOTE OPENS</p>
+                <div className="mt-2 flex flex-col gap-2">
+                  {doc.intro.map((b, i) =>
+                    b.k === "p" ? (
+                      <p key={i} className="text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+                        <Fmt text={b.text} />
+                      </p>
+                    ) : null,
+                  )}
+                </div>
+              </div>
+            </Reveal>
+
             <div className="legal-clauses">
-              {SECTIONS.map((section, i) => {
+              {doc.sections.map((section, i) => {
                 const accent = accentOf(i);
+                const Icon = SECTION_ICONS[i % SECTION_ICONS.length];
                 return (
-                  <Reveal key={section.spec} delay={Math.min(i * 0.035, 0.16)}>
-                    <section id={`sample-${i + 1}`} className="legal-clause scroll-mt-28">
+                  <Reveal key={section.spec} delay={Math.min(i * 0.03, 0.16)}>
+                    <section id={elId(section.spec)} className="legal-clause scroll-mt-28">
                       <div className="legal-clause-rail">
                         <span className="legal-clause-number">{String(i + 1).padStart(2, "0")}</span>
-                        {i < SECTIONS.length - 1 && <span className="legal-clause-line" />}
+                        {i < doc.sections.length - 1 && <span className="legal-clause-line" />}
                       </div>
                       <div className="legal-clause-content">
                         <div className="flex flex-wrap items-center gap-3">
                           <span className="legal-clause-icon" style={{ "--legal-accent": accent } as CSSProperties}>
-                            <section.icon className="h-5 w-5" strokeWidth={1.9} />
+                            <Icon className="h-5 w-5" strokeWidth={1.9} />
                           </span>
-                          <span className="legal-meta">SPEC {section.spec} · WCH11 TOPIC 1</span>
+                          <span className="legal-meta">SPEC {section.spec} · WCH11 TOPIC 3</span>
                         </div>
                         <h3 className="mt-4 font-display text-[calc(21px*var(--ui-scale))] font-semibold tracking-tight text-ink sm:text-[calc(24px*var(--ui-scale))]">
                           {section.title}
@@ -303,7 +351,7 @@ export function SampleNotes({
                             <Fmt text={section.statement} />
                           </p>
                         </div>
-                        <div className="mt-6 flex max-w-[76ch] flex-col gap-6">
+                        <div className="mt-6 flex flex-col gap-6">
                           {section.blocks.map((b, j) => (
                             <BlockView key={j} block={b} accent={accent} />
                           ))}
@@ -323,7 +371,7 @@ export function SampleNotes({
                 <p className="legal-meta">YOUR TURN</p>
               </div>
               <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ui-scale))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale))]">
-                That is the shape of every note on the site — the official statement first, then the teaching: definitions boxed, equations on cards and the maths worked through one step at a time. Open the specification to pick a unit and read the real thing.
+                That is the shape of every note on the site — the official statement first, then the teaching: definitions boxed, diagrams drawn, equations on cards and the maths worked through one step at a time. Open the specification to pick a unit and read the real thing.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-current/15 pt-4">
                 <span className="legal-meta">END OF SAMPLE</span>
