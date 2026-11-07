@@ -22,14 +22,7 @@ import {
   type Lab,
 } from "@/lib/spectra/prefs";
 
-/* ═══════════════════════════════════════════════════════════════
-   Reaction Club · the customize panel
-   A slide-over workshop of frosted glass: the theme picker shows a
-   live miniature of each room, the accent wheel previews its own
-   rotation, and every knob lands in prefs.ts and re-skins the site
-   from <html> outward. The panel itself is liquid glass — the
-   dimmed page behind it blurs up through the cream frost.
-   ═══════════════════════════════════════════════════════════════ */
+/* Reaction Club control panel. Settings remain connected to prefs.ts. */
 
 const HEAD_FONTS: { id: HeadFont; label: string; stack: string }[] = [
   { id: "fredoka", label: "Fredoka", stack: "var(--font-fredoka), 'Trebuchet MS', sans-serif" },
@@ -56,15 +49,13 @@ function Section({
   children: ReactNode;
 }) {
   return (
-    <section>
-      <div className="flex items-center gap-2">
-        <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: dot }} />
-        <div className="font-display text-[11.5px] font-bold tracking-[0.18em] text-ink-faint uppercase">
-          {title}
-        </div>
+    <section className="rounded-[22px] border border-ink/[0.085] bg-paper p-4 shadow-[0_3px_14px_-12px_rgb(35_25_15/0.3)] sm:p-[18px]">
+      <div className="flex items-center gap-2.5">
+        <span aria-hidden className="h-5 w-[3px] shrink-0 rounded-full" style={{ background: dot }} />
+        <div className="font-display text-[12px] font-bold tracking-[0.13em] text-ink uppercase">{title}</div>
       </div>
-      {hint && <p className="mt-1.5 text-[12px] leading-snug font-bold text-ink-faint">{hint}</p>}
-      <div className="mt-3">{children}</div>
+      {hint && <p className="mt-1.5 pl-[13px] text-[11.5px] leading-relaxed text-ink-faint">{hint}</p>}
+      <div className="mt-4">{children}</div>
     </section>
   );
 }
@@ -87,7 +78,7 @@ function Toggle({
       aria-checked={on}
       aria-label={label}
       onClick={() => onChange(!on)}
-      className="flex w-full cursor-pointer items-center justify-between gap-3 rounded-[calc(22px*var(--ui-scale))] bg-ink/[0.045] px-4 py-3.5 text-left transition-colors hover:bg-ink/[0.08]"
+      className="flex w-full cursor-pointer items-center justify-between gap-3 rounded-[15px] border border-ink/[0.07] bg-ink/[0.025] px-3.5 py-3 text-left transition-colors hover:bg-ink/[0.055]"
     >
       <span className="min-w-0">
         <span className="block font-display text-[14px] font-semibold text-ink">{label}</span>
@@ -97,7 +88,7 @@ function Toggle({
       </span>
       <span
         aria-hidden
-        className="relative h-[calc(26px*var(--ui-scale))] w-[calc(46px*var(--ui-scale))] shrink-0 rounded-full transition-colors"
+        className="relative h-[26px] w-[46px] shrink-0 rounded-full transition-colors"
         style={{
           background: on ? "#12B886" : "color-mix(in oklab, var(--color-ink) 16%, transparent)",
           boxShadow: on
@@ -106,7 +97,7 @@ function Toggle({
         }}
       >
         <m.span
-          className="absolute top-[calc(3px*var(--ui-scale))] h-5 w-5 rounded-full bg-white shadow-sm"
+          className="absolute top-[3px] h-5 w-5 rounded-full bg-white shadow-sm"
           /* percentage targets, not px: the track (w-[46px]) and the
              knob (h-5 w-5) both ride --ui-scale, so a percentage
              stays aligned at every scale step while a px target
@@ -128,7 +119,7 @@ function Toggle({
 function LabStage({ id }: { id: Lab }) {
   if (id === "light") {
     return (
-      <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#fff6ea] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.08)]">
+      <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[#fff6ea] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.08)]">
         <span className="absolute top-1.5 right-1.5 h-5 w-5 rounded-full bg-[#ffd43b]/70" />
         <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#fffdf7] shadow-[0_1.5px_0_rgb(61_43_31/0.1)]" />
         <span className="absolute bottom-2 left-2 flex items-center gap-1">
@@ -141,7 +132,7 @@ function LabStage({ id }: { id: Lab }) {
   }
   if (id === "dark") {
     return (
-      <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#1e1a26] shadow-[inset_0_0_0_1px_rgb(255_246_234/0.08)]">
+      <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[#1e1a26] shadow-[inset_0_0_0_1px_rgb(255_246_234/0.08)]">
         <span
           className="absolute inset-0"
           style={{ background: "radial-gradient(42px 30px at 68% 12%, rgb(151 117 250 / 0.3), transparent 70%)" }}
@@ -157,7 +148,7 @@ function LabStage({ id }: { id: Lab }) {
   }
   if (id === "dune") {
     return (
-      <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#1e1b16] shadow-[inset_0_0_0_1px_rgb(246_240_230/0.08)]">
+      <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[#1e1b16] shadow-[inset_0_0_0_1px_rgb(246_240_230/0.08)]">
         <span
           className="absolute inset-0"
           style={{ background: "radial-gradient(42px 30px at 68% 12%, rgb(255 196 120 / 0.22), transparent 70%)" }}
@@ -172,7 +163,7 @@ function LabStage({ id }: { id: Lab }) {
     );
   }
   return (
-    <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[linear-gradient(115deg,#2c2013_49.5%,#fdf6e3_50.5%)] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.1)]">
+    <span className="relative block h-14 w-full overflow-hidden rounded-[12px] bg-[linear-gradient(115deg,#2c2013_49.5%,#fdf6e3_50.5%)] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.1)]">
       <span className="absolute top-3 left-2 h-5 w-7 rounded-md bg-[#fdf6e3]/90" />
       <span className="absolute top-4.5 right-2 h-5 w-7 rounded-md bg-[#2c2013]/90" />
       <span className="absolute bottom-2 left-1/2 flex -translate-x-1/2 items-center gap-1">
@@ -295,7 +286,7 @@ export function CustomizePanel({
             animate={{ x: 0 }}
             exit={{ x: "110%" }}
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
-            className="customize-drawer fixed inset-y-0 right-0 z-[95] flex w-[min(460px,94vw)] flex-col overflow-hidden rounded-l-[28px] border-l border-ink/10 bg-paper shadow-[-24px_0_70px_-38px_rgb(0_0_0/0.42)]"
+            className="customize-drawer fixed inset-y-0 right-0 z-[95] flex w-[min(480px,95vw)] flex-col overflow-hidden rounded-l-[26px] border-l border-ink/10 bg-[#F7F1E7] shadow-[-24px_0_70px_-38px_rgb(0_0_0/0.42)]"
           >
             {/* ————— the ambience inside the frost —————
                 two quiet lamps and a grain of dots, so the blur has
@@ -321,16 +312,17 @@ export function CustomizePanel({
 
             {/* header — rides below the notch when the phone has one */}
             <div
-              className="relative flex items-center gap-3 border-b border-ink/[0.06] px-6 pb-4"
+              className="relative flex items-center gap-3 border-b border-ink/[0.09] bg-paper/80 px-5 pb-4 sm:px-6"
               style={{ paddingTop: "calc(1.5rem + var(--sa-top))" }}
             >
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-lemon/25 shadow-[inset_0_1px_0_rgb(255_255_255/0.5)]">
-                <Sliders className="h-5.5 w-5.5 text-lemon" strokeWidth={2.2} />
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px] bg-[#E9D7B8] text-[#614729]">
+                <Sliders className="h-5 w-5" strokeWidth={2.1} />
               </span>
               <div className="min-w-0 flex-1">
                 <h2 className="font-display text-[20px] leading-tight font-semibold text-ink">
-                  Customize
+                  Control panel
                 </h2>
+                <p className="mt-1 text-[11.5px] text-ink-soft">Appearance, reading and display settings</p>
               </div>
               <m.button
                 type="button"
@@ -344,14 +336,14 @@ export function CustomizePanel({
             </div>
 
             <div
-              className="no-scrollbar relative flex flex-1 flex-col gap-6 overflow-y-auto px-6 pt-5"
+              className="no-scrollbar relative flex flex-1 flex-col gap-3.5 overflow-y-auto px-4 pt-4 sm:px-5"
               style={{ paddingBottom: "calc(2rem + var(--sa-bottom))" }}
             >
-              <section className="rounded-[22px] border border-ink/[0.08] bg-ink/[0.025] p-4">
+              <section className="rounded-[22px] border border-ink/[0.085] bg-paper p-4 shadow-[0_3px_14px_-12px_rgb(35_25_15/0.3)]">
                 <div className="mb-3 flex items-center justify-between">
                   <div>
-                    <p className="font-display text-[13px] font-bold tracking-[0.12em] text-ink-faint uppercase">Navigate</p>
-                    <p className="mt-1 text-[12px] text-ink-soft">Go directly to a section of Reaction Club</p>
+                    <p className="font-display text-[13px] font-bold tracking-[0.12em] text-ink-faint uppercase">Site navigation</p>
+                    <p className="mt-1 text-[12px] text-ink-soft">Quick access to the main sections</p>
                   </div>
                   <ArrowRight className="h-4 w-4 text-ink-faint" />
                 </div>
@@ -367,7 +359,7 @@ export function CustomizePanel({
                       key={item.label}
                       type="button"
                       onClick={() => { item.action(); onClose(); }}
-                      className="group flex min-w-0 items-center gap-2.5 rounded-[15px] border border-ink/[0.07] bg-paper px-3 py-3 text-left transition-colors hover:border-ink/20 hover:bg-ink/[0.035]"
+                      className="group flex min-w-0 items-center gap-2.5 rounded-[13px] border border-ink/[0.08] bg-[#F8F4EC] px-2.5 py-2.5 text-left transition-all hover:-translate-y-0.5 hover:border-ink/20 hover:bg-paper"
                     >
                       <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ink/[0.055] text-ink-soft transition-colors group-hover:bg-mint/15 group-hover:text-ink">
                         <item.icon className="h-[17px] w-[17px]" strokeWidth={2} />
@@ -382,7 +374,7 @@ export function CustomizePanel({
               </section>
 
               <Section title="Theme" dot="#12B886">
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
                   {(["light", "dark", "dune", "classic"] as Lab[]).map((l) => {
                     const active = prefs.theme === l;
                     return (
@@ -392,11 +384,11 @@ export function CustomizePanel({
                         onClick={() => pickLab(l)}
                         aria-pressed={active}
                         aria-label={`${LAB_LABEL[l]} theme`}
-                        className="flex cursor-pointer flex-col gap-2 rounded-[calc(20px*var(--ui-scale))] p-2.5 text-left transition-colors"
+                        className="flex cursor-pointer flex-col gap-2 rounded-[16px] border p-2.5 text-left transition-all hover:-translate-y-0.5"
                         style={
                           active
-                            ? { background: "rgb(18 184 134 / 0.13)", boxShadow: "inset 0 0 0 2.5px #12B886" }
-                            : { background: "color-mix(in oklab, var(--color-ink) 5%, transparent)" }
+                            ? { background: "color-mix(in oklab, #12B886 10%, var(--color-paper))", borderColor: "#12B886", boxShadow: "0 3px 10px -7px rgb(18 184 134 / 0.55)" }
+                            : { background: "color-mix(in oklab, var(--color-paper) 78%, var(--color-ink))", borderColor: "color-mix(in oklab, var(--color-ink) 10%, transparent)" }
                         }
                       >
                         <span className="relative block w-full">
@@ -422,7 +414,7 @@ export function CustomizePanel({
               </Section>
 
               <Section title="Colours" dot="#FF6B6B">
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-3 gap-2.5">
                   {ACCENTS.map((a) => {
                     const on = prefs.accents.includes(a.id);
                     const lastOne = on && prefs.accents.length === 1;
@@ -441,7 +433,7 @@ export function CustomizePanel({
                               ? "on, tap to remove"
                               : "off, tap to add"
                         }`}
-                        className={`flex cursor-pointer flex-col items-center gap-2 rounded-[calc(20px*var(--ui-scale))] px-2 py-3.5 transition-colors ${
+                        className={`flex cursor-pointer flex-col items-center gap-2 rounded-[15px] border border-ink/[0.07] px-2 py-3 transition-all hover:-translate-y-0.5 ${
                           on ? "" : "hover:bg-ink/[0.09]"
                         }`}
                         style={
@@ -483,7 +475,7 @@ export function CustomizePanel({
                 </div>
                 {/* the rotation itself, previewed — the first eight
                     sections, exactly as the bands will wear them */}
-                <div className="mt-3 rounded-[calc(18px*var(--ui-scale))] bg-ink/[0.045] px-4 py-3">
+                <div className="mt-3 rounded-[14px] border border-ink/[0.07] bg-ink/[0.025] px-3.5 py-3">
                   <div aria-hidden className="flex items-end gap-1.5">
                     {Array.from({ length: 8 }, (_, k) => (
                       <span
@@ -492,13 +484,13 @@ export function CustomizePanel({
                         style={{
                           width:
                             k === 7
-                              ? "calc(10px * var(--ui-scale))"
-                              : "calc(22px * var(--ui-scale))",
+                              ? "10px"
+                              : "22px",
                           background: accentOf(k),
                         }}
                       />
                     ))}
-                    <span className="ml-0.5 font-body text-[calc(13px*var(--ui-scale))] font-bold text-ink-faint">
+                    <span className="ml-0.5 font-body text-[13px] font-bold text-ink-faint">
                       …
                     </span>
                   </div>
@@ -509,7 +501,7 @@ export function CustomizePanel({
               </Section>
 
               <Section title="Text size" dot="#FFD43B">
-                <div className="flex rounded-full bg-ink/[0.06] p-1">
+                <div className="flex rounded-[14px] border border-ink/[0.08] bg-ink/[0.035] p-1">
                   {SCALES.map((s, i) => {
                     const active = prefs.scale === s;
                     return (
@@ -520,7 +512,7 @@ export function CustomizePanel({
                         whileTap={{ scale: 0.93 }}
                         aria-pressed={active}
                         aria-label={`Text size ${s}`}
-                        className={`flex flex-1 cursor-pointer flex-col items-center rounded-full py-2 transition-colors ${
+                        className={`flex flex-1 cursor-pointer flex-col items-center rounded-[10px] py-2.5 transition-colors ${
                           active
                             ? "bg-coral text-white shadow-[0_2px_0_#E8590C]"
                             : "text-ink-soft hover:text-ink"
@@ -611,7 +603,7 @@ export function CustomizePanel({
                     })}
                   </div>
                   {!heightOnPreset && (
-                    <p className="text-center text-[calc(11px*var(--ui-scale))] font-bold text-ink-faint">
+                    <p className="text-center text-[11px] font-bold text-ink-faint">
                       custom — {Math.round(prefs.specHeight * 100)}%
                     </p>
                   )}
@@ -665,7 +657,7 @@ export function CustomizePanel({
                   flashThemeAnim();
                   setPrefs(DEFAULT_PREFS);
                 }}
-                className="mx-auto mt-2 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full bg-ink/[0.06] px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
+                className="mx-auto mt-1 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[13px] border border-ink/[0.09] bg-paper px-5 py-2.5 font-display text-[13px] font-semibold text-ink-soft shadow-sm transition-colors hover:bg-ink/[0.04] hover:text-ink"
               >
                 <RotateCcw className="h-4 w-4" /> Reset
               </button>
@@ -700,7 +692,7 @@ function FontRow({
       onClick={onClick}
       aria-pressed={active}
       aria-label={ariaLabel}
-      className="flex cursor-pointer items-center gap-3.5 rounded-[calc(22px*var(--ui-scale))] px-4 py-3 text-left transition-colors"
+      className="flex cursor-pointer items-center gap-3 rounded-[14px] border border-ink/[0.07] px-3.5 py-3 text-left transition-colors hover:bg-ink/[0.025]"
       style={
         active
           ? { background: "rgb(255 107 107 / 0.11)", boxShadow: "inset 0 0 0 2.5px #FF6B6B" }
@@ -708,7 +700,7 @@ function FontRow({
       }
     >
       <span
-        className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-paper text-[calc(19px*var(--ui-scale))] leading-none font-bold text-ink shadow-[0_2px_0_rgb(61_43_31/0.08)]"
+        className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-ink/[0.045] text-[19px] leading-none font-bold text-ink"
         style={{ fontFamily: stack }}
       >
         Aa
