@@ -84,6 +84,10 @@ const SearchPalette = dynamic(() => import("./search").then((m) => m.SearchPalet
 const CustomizePanel = dynamic(() => import("./customize").then((m) => m.CustomizePanel), {
   ssr: false,
 });
+const Legal = dynamic(() => import("./legal").then((m) => m.Legal), {
+  ssr: false,
+  loading: RoomLoading,
+});
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · app shell — pill nav, views, footer
@@ -98,7 +102,8 @@ type View =
   | { kind: "notes"; code: string; docId: string; spec?: string }
   | { kind: "spec" }
   | { kind: "pack" }
-  | { kind: "sticker" };
+  | { kind: "sticker" }
+  | { kind: "legal" };
 
 /* ————— the brand mark —————
    The site's own object, drawn at logo size: the beaker itself —
@@ -461,6 +466,7 @@ function Footer({
   onOpenCustomize,
   onOpenPack,
   onOpenSpec,
+  onOpenLegal,
   onSearch,
   bandFrom = "var(--color-cream)",
 }: {
@@ -469,6 +475,7 @@ function Footer({
   onOpenCustomize: () => void;
   onOpenPack: () => void;
   onOpenSpec: () => void;
+  onOpenLegal: () => void;
   onSearch: () => void;
   /* the surface the cocoa wave rises from — home hands in its own
      band colour so the seam above stays continuous after dark */
@@ -715,14 +722,28 @@ function Footer({
                 · rev 4 · Nov 2026
               </span>
             </p>
-            <button
-              type="button"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="group inline-flex shrink-0 cursor-pointer items-center gap-2 self-start rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/80 transition-colors hover:bg-white/[0.12] hover:text-milk sm:self-auto"
-            >
-              <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" strokeWidth={2.2} />
-              Back to top
-            </button>
+            <div className="flex shrink-0 flex-wrap items-center gap-2.5 self-start sm:self-auto">
+              <button
+                type="button"
+                onClick={onOpenLegal}
+                className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/80 transition-colors hover:bg-white/[0.12] hover:text-milk"
+                aria-label="Open the disclaimer and legal information page"
+              >
+                <ShieldCheck
+                  className="h-4 w-4 transition-transform group-hover:scale-110"
+                  strokeWidth={2.2}
+                />
+                Disclaimer &amp; legal
+              </button>
+              <button
+                type="button"
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/80 transition-colors hover:bg-white/[0.12] hover:text-milk"
+              >
+                <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" strokeWidth={2.2} />
+                Back to top
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -804,6 +825,7 @@ export default function ClubApp() {
       void import("./topic-view");
       void import("./search");
       void import("./customize");
+      void import("./legal");
     };
     const ric = (
       window as Window & {
@@ -830,7 +852,9 @@ export default function ClubApp() {
               ? "pack"
               : view.kind === "sticker"
                 ? "sticker"
-                : "home";
+                : view.kind === "legal"
+                  ? "legal"
+                  : "home";
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
@@ -863,6 +887,7 @@ export default function ClubApp() {
   const openSticker = useCallback(() => setView({ kind: "sticker" }), []);
   const openPack = useCallback(() => setView({ kind: "pack" }), []);
   const openSpec = useCallback(() => setView({ kind: "spec" }), []);
+  const openLegal = useCallback(() => setView({ kind: "legal" }), []);
   const openSearch = useCallback(() => setSearchOpen(true), []);
   const openCustomize = useCallback(() => setCustomizeOpen(true), []);
   const closeCustomize = useCallback(() => setCustomizeOpen(false), []);
@@ -1031,6 +1056,8 @@ export default function ClubApp() {
                     onOpenTopic={openTopic}
                   />
                 )}
+  
+                {view.kind === "legal" && <Legal onBack={goHome} />}
               </m.div>
             </AnimatePresence>
   
@@ -1040,6 +1067,7 @@ export default function ClubApp() {
               onOpenCustomize={openCustomize}
               onOpenPack={openPack}
               onOpenSpec={() => setView({ kind: "spec" })}
+              onOpenLegal={openLegal}
               onSearch={openSearch}
               bandFrom={
                 /* the desk ends on cream, the introduction on its own
