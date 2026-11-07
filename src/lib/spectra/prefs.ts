@@ -349,15 +349,20 @@ export const LAB_LABEL: Record<Lab, string> = {
   classic: "Classic",
 };
 
+export const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic"];
+
+export const LAB_DESCRIPTION: Record<Lab, string> = {
+  light: "Warm paper & daylight",
+  dark: "Violet-ink after hours",
+  dune: "Sandstone & amber",
+  classic: "Espresso & parchment",
+};
+
 /* ————— the theme chips —————
-   Each theme's signature swatch — the background the nav button,
-   the lab toast and the panel's lab cards put BEHIND the moon, so
-   the current room is readable at a glance. Fixed brand values on
-   purpose: they do not flip with the active lab (that's the whole
-   point — the chip says which room you're in). One glyph across
-   the set — the moon — and the background names the room: daylight
-   white (light) · navy (night) · chocolate (dune) · the diagonal
-   espresso/cream cut (classic). */
+   Each theme has a fixed signature swatch shared by the navbar and
+   theme controls. The swatch identifies the room independently of
+   the active page palette: daylight white · night blue · dune
+   chocolate · classic parchment. */
 export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> = {
   light: {
     bg: "#FFFFFF", // the bright daylight page
