@@ -153,13 +153,6 @@ function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
       style={{ width: size, height: size }}
     >
       <svg viewBox="0 0 48 48" width="100%" height="100%" fill="none">
-        <defs>
-          <linearGradient id="reaction-liquid" x1="12" y1="26" x2="36" y2="42" gradientUnits="userSpaceOnUse">
-            <stop stopColor={liquid} />
-            <stop offset="1" stopColor={liquid} stopOpacity=".72" />
-          </linearGradient>
-        </defs>
-
         {/* A single, continuous flask silhouette: broad shoulders,
             narrow neck and a weighted rounded base. */}
         <path
@@ -175,7 +168,7 @@ function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
             profile instead of the old cartoon wave. */}
         <path
           d="M14.2 33.1c4.1-2.7 7.1-2.5 10.1-.6 3.2 2 5.7 1.8 9.5-.5l3.1 5.5a2.5 2.5 0 0 1-2.2 3.7H13.3a2.5 2.5 0 0 1-2.2-3.7l3.1-4.4Z"
-          fill="url(#reaction-liquid)"
+          fill={liquid}
         />
         <path
           d="M15.2 33.4c3.6-2.1 6.1-1.9 9-.2 2.8 1.7 5.4 1.7 8.7-.1"
