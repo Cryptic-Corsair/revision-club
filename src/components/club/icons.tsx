@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · icons — the house ink set, v2
+   IAL CHEM · icons — the house ink set, v2
    Still drawn for this site, not pulled from a stock box — but
    now drawn to one shared discipline so the whole set sits
    together on any page:
