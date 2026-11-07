@@ -262,6 +262,16 @@ nothing in dark room mode uses light-only tokens — and there are many.
 
 ## 8. Design rules
 
+- **Theme switches are atomic, not page-wide animations.** Theme tokens live on
+  `html` and are applied by `setPrefs()`. Never reintroduce
+  `flashThemeAnim`, a `.theme-anim` class, or a transition that targets every
+  element / pseudo-element. The reader can contain hundreds of rendered nodes;
+  animating their backgrounds, text, borders and shadows together creates
+  unnecessary paint work and can visibly stutter on mobile. Keep transitions
+  local to the control being interacted with; changing the theme itself must
+  not animate the document.
+
+
 - **No infinite animations.** The hero blobs once drifted forever; users hated
   it. Framer Motion is for entrance, hover and interaction only. Anything
   ambient must settle.
