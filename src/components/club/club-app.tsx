@@ -599,13 +599,13 @@ function Footer({
     <footer className="club-footer mt-auto">
       <div
         aria-hidden
-        className="h-[calc(54px*var(--ui-scale))] sm:h-[calc(74px*var(--ui-scale))]"
+        className="club-footer-wave h-[calc(54px*var(--ui-scale))] sm:h-[calc(74px*var(--ui-scale))]"
         style={{ background: bandFrom }}
       >
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-full w-full">
           <path
             d="M0 48 C190 80 350 12 555 31 C760 50 900 88 1105 65 C1265 47 1375 27 1440 39 L1440 90 L0 90 Z"
-            fill="var(--color-cocoa)"
+            className="club-footer-wave-path"
           />
         </svg>
       </div>
