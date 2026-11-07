@@ -84,6 +84,22 @@ export function Bookmark(p: IcoProps) {
   );
 }
 
+export function Maximize(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <path d="M8 4.5H4.5V8M16 4.5h3.5V8M4.5 16v3.5H8M19.5 16v3.5H16" />
+    </Ico>
+  );
+}
+
+export function Minimize(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <path d="M4.5 8h3.5V4.5M19.5 8H16V4.5M8 19.5V16H4.5M16 19.5V16h3.5" />
+    </Ico>
+  );
+}
+
 export function Search(p: IcoProps) {
   return (
     <Ico {...p}>
