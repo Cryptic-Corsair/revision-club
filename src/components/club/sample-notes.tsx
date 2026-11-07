@@ -22,7 +22,7 @@ import {
   TestTubes,
   Zap,
 } from "./icons";
-import { PopIn, Reveal, SoftButton, tint } from "./bits";
+import { PopIn, Reveal, SoftButton } from "./bits";
 import { accentOf } from "./bands";
 import { EditorialLabel, SampleBlockView } from "./sample-blocks";
 import { useSpecMapRegister } from "./spec-map";
@@ -214,9 +214,11 @@ function SampleNotesBody({
 
   const firstSpec = doc.sections[0]?.spec ?? "";
   const lastSpec = doc.sections[doc.sections.length - 1]?.spec ?? "";
+  const activeIndex = Math.max(0, doc.sections.findIndex((section) => section.spec === active));
+  const progressPercent = doc.sections.length ? ((activeIndex + 1) / doc.sections.length) * 100 : 0;
 
   return (
-    <main className="sample-note-page legal-room mx-auto max-w-6xl px-4 pt-[calc(6.25rem+var(--sa-top))] pb-24 sm:px-7 lg:px-10">
+    <main className="sample-note-page legal-room mx-auto max-w-6xl px-4 pt-[calc(6.25rem+var(--sa-top))] pb-24 sm:px-7 lg:px-10" style={{ "--sample-main": main } as CSSProperties}>
       <PopIn>
         <SoftButton
           onClick={onBack}
@@ -263,14 +265,14 @@ function SampleNotesBody({
             <div>
               <p className="legal-meta">IN THIS NOTE</p>
               <p className="sample-note-index-position">
-                {String(Math.max(0, doc.sections.findIndex((section) => section.spec === active)) + 1).padStart(2, "0")}
+                {String(activeIndex + 1).padStart(2, "0")}
                 <span> / {String(doc.sections.length).padStart(2, "0")}</span>
               </p>
             </div>
             <span className="sample-note-index-count">{doc.sections.length} sections</span>
           </div>
-          <div className="sample-note-index-progress" role="progressbar" aria-label="Reading progress through this sample note" aria-valuemin={0} aria-valuemax={doc.sections.length} aria-valuenow={Math.max(0, doc.sections.findIndex((section) => section.spec === active)) + 1}>
-            <span style={{ width: ((Math.max(0, doc.sections.findIndex((section) => section.spec === active)) + 1) / doc.sections.length * 100) + "%", background: main }} />
+          <div className="sample-note-index-progress" role="progressbar" aria-label="Reading progress through this sample note" aria-valuemin={0} aria-valuemax={doc.sections.length} aria-valuenow={activeIndex + 1}>
+            <span style={{ width: progressPercent + "%", background: main }} />
           </div>
           <nav aria-label="Sample note sections" className="sample-note-index-nav flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
             {doc.sections.map((section, i) => (
