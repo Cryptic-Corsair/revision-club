@@ -27,12 +27,6 @@ export function SearchPalette({
   );
 
   useEffect(() => {
-    if (!open) return;
-    const t = window.setTimeout(() => inputRef.current?.focus(), 30);
-    return () => window.clearTimeout(t);
-  }, [open]);
-
-  useEffect(() => {
     setSel(0);
   }, [q]);
 
