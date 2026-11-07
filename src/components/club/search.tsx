@@ -82,7 +82,7 @@ export function SearchPalette({
   let rowIndex = -1;
 
   return (
-    <main className="fixed inset-0 z-[90] overflow-y-auto bg-paper text-ink" aria-label="Course search">
+    <main className="fixed inset-0 z-[90] overflow-y-auto bg-paper text-ink" aria-label="IAL CHEM search">
       <div className="sticky top-0 z-20 border-b border-ink/[0.09] bg-paper/95 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1240px] items-center justify-between gap-4 px-4 py-3 sm:px-7 lg:px-10">
           <div className="flex min-w-0 items-center gap-3">
@@ -91,7 +91,7 @@ export function SearchPalette({
             </div>
             <div className="min-w-0">
               <p className="truncate font-display text-[14px] font-bold text-ink">Course search</p>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-ink-faint">Reaction Club · Chemistry</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-ink-faint">IAL CHEM  /  PEARSON EDEXCEL</p>
             </div>
           </div>
           <button type="button" onClick={onClose} className="flex h-10 shrink-0 items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.035] px-3.5 text-[12px] font-semibold text-ink-soft transition hover:bg-ink/[0.08] hover:text-ink" aria-label="Close search">
@@ -105,11 +105,11 @@ export function SearchPalette({
       <div className="mx-auto grid max-w-[1240px] gap-8 px-4 pb-16 pt-8 sm:px-7 sm:pt-11 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-12 lg:px-10 lg:pt-14">
         <section className="min-w-0">
           <div className="max-w-[760px]">
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-grape">Find your next topic</p>
-            <h1 className="mt-2 font-display text-[clamp(28px,4vw,44px)] font-bold leading-[1.08] tracking-tight text-ink">Search the syllabus.<br className="hidden sm:block" /> Get straight to revision.</h1>
-            <p className="mt-3 max-w-[560px] text-[13px] leading-6 text-ink-soft">Look up a concept, topic title, specification point or unit code. Browse all 33 topics when you are not sure where to start.</p>
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-grape">THE COURSE INDEX · WCH11–WCH16</p>
+            <h1 className="mt-2 font-display text-[clamp(28px,4vw,44px)] font-bold leading-[1.08] tracking-tight text-ink">Find the topic.<br className="hidden sm:block" /> Get back to learning.</h1>
+            <p className="mt-3 max-w-[560px] text-[13px] leading-6 text-ink-soft">Search concepts, topic titles, specification points or unit codes. Or browse the complete course index.</p>
 
-            <div className="search-input-shell mt-7 flex items-center gap-3 rounded-2xl border border-ink/15 bg-white/65 px-4 py-4 shadow-[0_5px_20px_-15px_rgb(40_28_18_/_0.24)] transition focus-within:border-grape/50 focus-within:ring-4 focus-within:ring-grape/10 sm:px-5">
+            <div className="search-input-shell mt-7 flex items-center gap-3 rounded-2xl border border-ink/15 bg-paper px-4 py-4 shadow-[0_8px_28px_-22px_rgb(40_28_18_/_0.32)] transition focus-within:border-grape/50 focus-within:ring-4 focus-within:ring-grape/10 sm:px-5">
               <Search className="h-5 w-5 shrink-0 text-grape" strokeWidth={2.2} />
               <input
                 ref={inputRef}
@@ -128,27 +128,27 @@ export function SearchPalette({
             </div>
 
             <div className="mt-5 flex flex-wrap items-center gap-2">
-              <span className="mr-1 text-[10px] font-bold uppercase tracking-[0.14em] text-ink-faint">Try</span>
+              <span className="mr-1 text-[10px] font-bold uppercase tracking-[0.14em] text-ink-faint">Popular searches</span>
               {SUGGESTIONS.map((term) => (
                 <button key={term} type="button" onClick={() => { setQ(term); inputRef.current?.focus(); }} className="rounded-full border border-ink/10 bg-ink/[0.025] px-3 py-1.5 text-[11px] font-semibold text-ink-soft transition hover:border-grape/30 hover:bg-grape/10 hover:text-grape">{term}</button>
               ))}
             </div>
           </div>
 
-          <div className="mt-10 border-t border-ink/10 pt-5">
+          <div className="mt-10 border-t border-ink/10 pt-6">
             <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
               <div>
                 <p className="font-mono text-[10px] font-bold uppercase tracking-[0.17em] text-ink-faint">{q.trim() ? "Search results" : "Course directory"}</p>
-                <h2 className="mt-1 font-display text-[20px] font-bold tracking-tight text-ink">{q.trim() ? "Matching topics" : "Browse all topics"}</h2>
+                <h2 className="mt-1 font-display text-[20px] font-bold tracking-tight text-ink">{q.trim() ? "Matching topics" : "View all topics"}</h2>
               </div>
-              <span className="font-mono text-[11px] font-semibold tabular-nums text-ink-faint">{results.length} / {SEARCH_INDEX.length} topics</span>
+              <span aria-live="polite" className="rounded-full border border-ink/10 bg-ink/[0.025] px-3 py-1.5 font-mono text-[10px] font-semibold tabular-nums text-ink-faint">{results.length} of {SEARCH_INDEX.length} topics</span>
             </div>
 
             <div id="search-results" ref={listRef} className="space-y-7" aria-label="Course topics">
               {results.length === 0 ? (
                 <div className="rounded-2xl border border-dashed border-ink/15 bg-ink/[0.02] px-5 py-12 text-center">
                   <p className="font-display text-[16px] font-semibold text-ink">No matching topics</p>
-                  <p className="mt-2 text-[12px] text-ink-faint">Try a shorter phrase, a related concept or a unit code.</p>
+                  <p className="mt-2 text-[12px] text-ink-faint">Try a different keyword, a shorter phrase or a unit code.</p>
                   <button type="button" onClick={() => setQ("")} className="mt-4 rounded-full bg-ink px-4 py-2 text-[11px] font-semibold text-paper transition hover:opacity-85">Browse all topics</button>
                 </div>
               ) : Object.entries(groups).map(([unit, rows]) => (
@@ -159,7 +159,7 @@ export function SearchPalette({
                     <span className="text-[10px] text-ink-faint">{rows.length} {rows.length === 1 ? "topic" : "topics"}</span>
                     <span className="h-px flex-1 bg-ink/[0.08]" />
                   </div>
-                  <div className="divide-y divide-ink/[0.07]">
+                  <div className="space-y-1.5">
                     {rows.map((row) => {
                       const index = ++rowIndex;
                       const active = index === sel;
@@ -191,10 +191,10 @@ export function SearchPalette({
           </div>
         </section>
 
-        <aside className="order-first lg:order-none">
+        <aside className="order-last lg:order-none">
           <div className="lg:sticky lg:top-[88px]">
             <div className="rounded-2xl border border-ink/10 bg-ink/[0.025] p-4 sm:p-5">
-              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-ink-faint">At a glance</p>
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-ink-faint">COURSE OVERVIEW</p>
               <div className="mt-4 grid grid-cols-3 gap-3 lg:grid-cols-1">
                 <div><p className="font-display text-[25px] font-bold tabular-nums text-ink">6</p><p className="text-[10px] font-semibold uppercase tracking-[0.13em] text-ink-faint">Units</p></div>
                 <div><p className="font-display text-[25px] font-bold tabular-nums text-ink">33</p><p className="text-[10px] font-semibold uppercase tracking-[0.13em] text-ink-faint">Topics</p></div>
@@ -202,14 +202,14 @@ export function SearchPalette({
               </div>
             </div>
             <div className="mt-4 rounded-2xl border border-ink/10 p-4 sm:p-5">
-              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-ink-faint">Search tips</p>
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-ink-faint">SEARCH BY</p>
               <ul className="mt-3 space-y-3 text-[11px] leading-5 text-ink-soft">
                 <li><strong className="text-ink">Topic title</strong><br />Try “rates of reaction” or “redox”.</li>
                 <li><strong className="text-ink">Unit code</strong><br />Enter WCH11 through WCH16.</li>
                 <li><strong className="text-ink">Specification label</strong><br />Search for a point such as 2.3.</li>
               </ul>
             </div>
-            <p className="mt-4 px-1 text-[10px] leading-5 text-ink-faint">Use ↑ and ↓ to move through results, Enter to open a topic and Escape to leave search.</p>
+            <p className="mt-4 px-1 text-[10px] leading-5 text-ink-faint">Navigate results with ↑ and ↓. Press Enter to open a topic, or Escape to return to the course.</p>
           </div>
         </aside>
       </div>
