@@ -57,9 +57,9 @@ const plex = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Reaction Club — Edexcel IAL Chemistry revision notes",
+  title: "IAL CHEM — Edexcel IAL Chemistry revision notes",
   description:
-    "Revision notes for Edexcel IAL Chemistry (WCH11–WCH16), written to the 2018 specification. Definitions, equations and fully worked examples for every topic, with progress and reading time saved in your browser.",
+    "IAL CHEM provides revision notes for Edexcel IAL Chemistry (WCH11–WCH16), written to the 2018 specification. Definitions, equations and fully worked examples for every topic, with progress and reading time saved in your browser.",
   icons: { icon: "/favicon.svg" },
 };
 
