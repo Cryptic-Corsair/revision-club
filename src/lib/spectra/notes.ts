@@ -33,7 +33,7 @@ import { SECTIONS_P09 } from "./content/notes-p09";
 import { NOTES_META } from "./notes-meta";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · the revision-note library
+   IAL CHEM · the revision-note library
    ═══════════════════════════════════════════════════════════════ */
 
 /* ————— kept in step with notes-meta.ts —————
