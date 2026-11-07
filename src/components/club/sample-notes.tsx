@@ -216,7 +216,7 @@ function SampleNotesBody({
   const lastSpec = doc.sections[doc.sections.length - 1]?.spec ?? "";
 
   return (
-    <main className="legal-room mx-auto max-w-6xl px-4 pt-[calc(6.25rem+var(--sa-top))] pb-24 sm:px-7 lg:px-10">
+    <main className="sample-note-page legal-room mx-auto max-w-6xl px-4 pt-[calc(6.25rem+var(--sa-top))] pb-24 sm:px-7 lg:px-10">
       <PopIn>
         <SoftButton
           onClick={onBack}
@@ -227,7 +227,7 @@ function SampleNotesBody({
         </SoftButton>
       </PopIn>
 
-      <section className="legal-hero relative mt-7 overflow-hidden rounded-[30px] px-6 py-8 sm:px-9 sm:py-10 lg:px-12 lg:py-12">
+      <section className="legal-hero sample-note-hero relative mt-7 overflow-hidden rounded-[30px] px-6 py-8 sm:px-9 sm:py-10 lg:px-12 lg:py-12">
         <div className="legal-hero-grain" aria-hidden />
         <div className="relative z-10 max-w-3xl">
           <div className="flex flex-wrap items-center gap-2">
@@ -257,10 +257,22 @@ function SampleNotesBody({
         </div>
       </section>
 
-      <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-12">
-        <aside className="legal-index h-fit lg:sticky lg:top-28">
-          <p className="legal-meta mb-4">CONTENTS</p>
-          <nav aria-label="Sample note sections" className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
+      <div className="sample-note-layout mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[224px_minmax(0,1fr)] lg:gap-10">
+        <aside className="legal-index sample-note-index h-fit lg:sticky lg:top-28">
+          <div className="sample-note-index-head">
+            <div>
+              <p className="legal-meta">IN THIS NOTE</p>
+              <p className="sample-note-index-position">
+                {String(Math.max(0, doc.sections.findIndex((section) => section.spec === active)) + 1).padStart(2, "0")}
+                <span> / {String(doc.sections.length).padStart(2, "0")}</span>
+              </p>
+            </div>
+            <span className="sample-note-index-count">{doc.sections.length} sections</span>
+          </div>
+          <div className="sample-note-index-progress" role="progressbar" aria-label="Reading progress through this sample note" aria-valuemin={0} aria-valuemax={doc.sections.length} aria-valuenow={Math.max(0, doc.sections.findIndex((section) => section.spec === active)) + 1}>
+            <span style={{ width: ((Math.max(0, doc.sections.findIndex((section) => section.spec === active)) + 1) / doc.sections.length * 100) + "%", background: main }} />
+          </div>
+          <nav aria-label="Sample note sections" className="sample-note-index-nav flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
             {doc.sections.map((section, i) => (
               <a
                 key={section.spec}
@@ -269,7 +281,8 @@ function SampleNotesBody({
                   e.preventDefault();
                   jump(section.spec);
                 }}
-                className="legal-index-link lg:min-w-0 lg:max-w-full"
+                aria-current={active === section.spec ? "location" : undefined}
+                className={`legal-index-link sample-note-index-link lg:min-w-0 lg:max-w-full ${active === section.spec ? "is-active" : ""}`}
               >
                 <span>{section.spec}</span>
                 <span className="min-w-0 lg:truncate">{section.title}</span>
@@ -283,9 +296,9 @@ function SampleNotesBody({
           </div>
         </aside>
 
-        <div className="min-w-0">
+        <div className="sample-note-content min-w-0">
           <Reveal>
-            <section className="legal-summary rounded-[26px] p-5 sm:p-7">
+            <section className="legal-summary sample-note-overview rounded-[26px] p-5 sm:p-7">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <p className="legal-meta">SUMMARY</p>
@@ -315,7 +328,7 @@ function SampleNotesBody({
 
             {/* the note's own opening words, verbatim from the doc */}
             <Reveal>
-              <div className="legal-card mb-7 max-w-[76ch] rounded-[calc(18px*var(--ui-scale))] px-5 py-4">
+              <div className="legal-card sample-note-opening mb-7 max-w-[76ch] rounded-[calc(18px*var(--ui-scale))] px-5 py-4">
                 <EditorialLabel>How the note opens</EditorialLabel>
                 <div className="mt-2.5 flex flex-col gap-2">
                   {doc.intro.map((b, i) =>
@@ -335,13 +348,13 @@ function SampleNotesBody({
                 const Icon = SECTION_ICONS[i % SECTION_ICONS.length];
                 return (
                   <Reveal key={section.spec} delay={Math.min(i * 0.03, 0.16)}>
-                    <section id={elId(section.spec)} className="legal-clause scroll-mt-28">
+                    <section id={elId(section.spec)} className="legal-clause sample-note-clause scroll-mt-28">
                       <div className="legal-clause-rail">
-                        <span className="legal-clause-number">{String(i + 1).padStart(2, "0")}</span>
+                        <span className="legal-clause-number sample-note-section-number">{String(i + 1).padStart(2, "0")}</span>
                         {i < doc.sections.length - 1 && <span className="legal-clause-line" />}
                       </div>
-                      <div className="legal-clause-content">
-                        <div className="flex flex-wrap items-center gap-3">
+                      <div className="legal-clause-content sample-note-clause-content">
+                        <div className="sample-note-section-meta flex flex-wrap items-center gap-3">
                           <span className="legal-clause-icon" style={{ "--legal-accent": accent } as CSSProperties}>
                             <Icon className="h-5 w-5" strokeWidth={1.9} />
                           </span>
@@ -351,15 +364,15 @@ function SampleNotesBody({
                           {section.title}
                         </h3>
                         <div
-                          className="mt-4 max-w-[72ch] rounded-[calc(18px*var(--ui-scale))] bg-paper/90 px-5 py-4"
-                          style={{ borderLeft: `5px solid ${tint(accent, 45)}` }}
+                          className="sample-note-spec-statement mt-4 max-w-[72ch] rounded-[calc(18px*var(--ui-scale))] bg-paper/90 px-5 py-4"
+                          style={{ "--sample-accent": accent } as CSSProperties}
                         >
                           <div
-                            className="font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]"
+                            className="sample-note-statement-label font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]"
                           >
                             From the specification
                           </div>
-                          <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.75] text-ink italic">
+                          <p className="sample-note-statement-copy mt-1.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.75] text-ink italic">
                             <Fmt text={section.statement} />
                           </p>
                         </div>
@@ -382,7 +395,7 @@ function SampleNotesBody({
           </div>
 
           <Reveal delay={0.08}>
-            <section className="legal-closing mt-8 rounded-[26px] p-5 sm:p-7">
+            <section className="legal-closing sample-note-closing mt-8 rounded-[26px] p-5 sm:p-7">
               <div className="flex items-center gap-2">
                 <BookOpenCheck className="h-5 w-5" />
                 <p className="legal-meta">YOUR TURN</p>
