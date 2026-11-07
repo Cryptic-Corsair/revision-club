@@ -140,7 +140,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
   return (
     <div>
       {/* ————— hero: full-bleed tonal stage, edge to edge ————— */}
-      <section className="relative overflow-hidden bg-paper" style={{ paddingTop: "calc(5.25rem + var(--sa-top))" }}>
+      <section className="hero-stage relative overflow-hidden bg-paper" style={{ paddingTop: "calc(5.25rem + var(--sa-top))" }}>
         {/* the stage dressing — blobs swell into place once, then
             hold perfectly still; the stagger makes it an arrival */}
         <Blob color={tint("#FF922B", 14)} settle className="top-[-30%] right-[-16%] h-[85%] w-[54%]" />
@@ -162,7 +162,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
         <DoodleAtom className="absolute right-[3%] bottom-[12%] hidden h-9 w-9 text-coral/30 xl:block" />
 
         <div className="relative z-10">
-          <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 pb-12 pt-3 sm:px-8 sm:pb-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-6 lg:px-10 lg:pb-24 lg:pt-4">
+          <div className="hero-layout mx-auto grid max-w-6xl items-center gap-8 px-5 pb-12 pt-3 sm:px-8 sm:pb-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-6 lg:px-10 lg:pb-24 lg:pt-4">
             {/* left: words */}
             <div>
               <PopIn>
@@ -205,7 +205,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
 
               {/* the numbers, as one tidy strip */}
               <PopIn delay={0.32} className="mt-9">
-                <div className="rounded-[calc(26px*var(--ui-scale))] bg-cream px-4 py-4 sm:px-5">
+                <div className="hero-stats rounded-[calc(26px*var(--ui-scale))] bg-cream px-4 py-4 sm:px-5">
                   <div className="grid grid-cols-2 gap-x-3 gap-y-4 sm:grid-cols-4">
                     {[
                       { icon: Atom, value: String(units.length), label: "units" },
@@ -232,7 +232,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
 
             {/* right: a taste of what's inside — notes and equations
                 drift around Bubbles, so the scene sells the product */}
-            <div className="relative mx-auto flex h-[calc(320px*var(--ui-scale))] w-full max-w-[calc(440px*var(--ui-scale))] items-center justify-center sm:h-[calc(400px*var(--ui-scale))] md:h-[calc(440px*var(--ui-scale))] md:max-w-[calc(480px*var(--ui-scale))]">
+            <div className="hero-visual relative mx-auto flex h-[calc(320px*var(--ui-scale))] w-full max-w-[calc(440px*var(--ui-scale))] items-center justify-center sm:h-[calc(400px*var(--ui-scale))] md:h-[calc(440px*var(--ui-scale))] md:max-w-[calc(480px*var(--ui-scale))]">
               {/* soft peach wash behind Bubbles */}
               <Blob color={tint("#FF922B", 18)} shape="b" settle className="h-[86%] w-[86%]" />
               <Blob
@@ -247,7 +247,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               <Float delay={0.35} className="absolute top-[9%] left-0 z-20 sm:left-[1%]">
                 <div
                   aria-hidden
-                  className="w-[calc(150px*var(--ui-scale))] -rotate-[4deg] rounded-[calc(22px*var(--ui-scale))] bg-paper px-4 py-3.5 puff sm:w-[calc(178px*var(--ui-scale))]"
+                  className="hero-float-card w-[calc(150px*var(--ui-scale))] -rotate-[4deg] rounded-[calc(22px*var(--ui-scale))] bg-paper px-4 py-3.5 puff sm:w-[calc(178px*var(--ui-scale))]"
                 >
                   <span
                     className="rounded-full px-2.5 py-1 font-display text-[calc(10px*var(--ui-scale))] font-bold tracking-[0.08em] text-white uppercase"
@@ -270,7 +270,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               <Float delay={1.2} slow className="absolute right-0 bottom-[7%] z-20 sm:right-[1%]">
                 <div
                   aria-hidden
-                  className="rotate-[3deg] rounded-[calc(22px*var(--ui-scale))] bg-paper px-5 py-4 puff sm:px-6"
+                  className="hero-float-card rotate-[3deg] rounded-[calc(22px*var(--ui-scale))] bg-paper px-5 py-4 puff sm:px-6"
                 >
                   <span
                     className="rounded-full px-2.5 py-1 font-display text-[calc(10px*var(--ui-scale))] font-bold tracking-[0.08em] text-white uppercase"
@@ -293,13 +293,13 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               </Float>
 
               <Float delay={0.8} className="absolute top-[1%] right-[1%] z-30">
-                <span className="inline-block rotate-[-7deg] rounded-full bg-paper px-4 py-2 font-display text-[calc(12.5px*var(--ui-scale))] font-bold whitespace-nowrap text-ink puff">
+                <span className="hero-sticker inline-block rotate-[-7deg] rounded-full bg-paper px-4 py-2 font-display text-[calc(12.5px*var(--ui-scale))] font-bold whitespace-nowrap text-ink puff">
                   read → practise → done
                 </span>
               </Float>
               <Float delay={1.6} slow className="absolute bottom-[1%] left-[3%] z-30">
                 <span
-                  className="inline-block rotate-[6deg] rounded-full px-4 py-2 font-display text-[calc(12.5px*var(--ui-scale))] font-bold text-white puff"
+                  className="hero-sticker inline-block rotate-[6deg] rounded-full px-4 py-2 font-display text-[calc(12.5px*var(--ui-scale))] font-bold text-white puff"
                   style={{ background: "#9775FA" }}
                 >
                   WCH11–WCH16

@@ -1125,3 +1125,193 @@ html.dune .nav-glass-button.is-active {
 .footer-glass-button:active {
   transform: translateY(0) scale(0.985);
 }
+
+
+/* ═════════ Hero refresh · atmospheric glass study desk ═════════ */
+.hero-stage {
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 82% 34%, color-mix(in oklab, #f5b46a 24%, transparent), transparent 42%),
+    radial-gradient(ellipse at 8% 86%, color-mix(in oklab, #e58c76 15%, transparent), transparent 38%),
+    var(--color-paper);
+}
+.hero-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .32;
+  background-image: radial-gradient(color-mix(in oklab, var(--color-ink) 14%, transparent) .65px, transparent .65px);
+  background-size: 18px 18px;
+  mask-image: linear-gradient(90deg, transparent 0%, black 70%, transparent 100%);
+}
+.hero-layout {
+  position: relative;
+}
+.hero-layout > :first-child {
+  position: relative;
+  z-index: 2;
+}
+.hero-layout h1 {
+  text-wrap: balance;
+  letter-spacing: -.055em;
+}
+.hero-layout p {
+  text-wrap: pretty;
+}
+.hero-stats {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--color-ink) 7%, transparent);
+  background: color-mix(in oklab, var(--color-paper) 68%, #f0d8bd) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .8), 0 12px 32px -24px rgb(65 39 20 / .3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  backdrop-filter: blur(18px) saturate(1.3);
+}
+.hero-visual {
+  isolation: isolate;
+  filter: drop-shadow(0 24px 35px rgb(98 58 29 / .09));
+}
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  width: 78%;
+  aspect-ratio: 1;
+  border-radius: 48% 52% 57% 43% / 45% 42% 58% 55%;
+  background:
+    radial-gradient(circle at 34% 28%, rgb(255 255 255 / .78), transparent 24%),
+    linear-gradient(145deg, rgb(255 226 184 / .78), rgb(229 143 111 / .25) 56%, rgb(151 117 250 / .18));
+  border: 1px solid rgb(255 255 255 / .65);
+  box-shadow:
+    inset 0 2px 12px rgb(255 255 255 / .65),
+    inset 0 -18px 38px rgb(191 116 72 / .1),
+    0 24px 60px -35px rgb(105 63 39 / .36);
+  z-index: -1;
+}
+.hero-float-card {
+  border: 1px solid rgb(255 255 255 / .78);
+  background: linear-gradient(145deg, rgb(255 255 255 / .88), rgb(255 250 241 / .72)) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / .96),
+    inset 0 -1px 0 rgb(107 72 42 / .05),
+    0 16px 38px -22px rgb(70 42 23 / .38),
+    0 4px 10px -6px rgb(70 42 23 / .14);
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  backdrop-filter: blur(18px) saturate(1.35);
+}
+.hero-sticker {
+  border: 1px solid rgb(255 255 255 / .72);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .55), 0 10px 22px -14px rgb(64 39 22 / .4);
+}
+html.dark .hero-stage,
+html.dune .hero-stage {
+  background:
+    radial-gradient(ellipse at 80% 32%, color-mix(in oklab, var(--color-mint) 13%, transparent), transparent 43%),
+    radial-gradient(ellipse at 10% 88%, color-mix(in oklab, var(--color-coral) 12%, transparent), transparent 40%),
+    var(--color-paper);
+}
+html.dark .hero-stats,
+html.dune .hero-stats {
+  background: color-mix(in oklab, var(--color-paper) 82%, white 3%) !important;
+  border-color: rgb(255 255 255 / .1);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .12), 0 14px 36px -24px rgb(0 0 0 / .48);
+}
+html.dark .hero-float-card,
+html.dune .hero-float-card {
+  background: linear-gradient(145deg, color-mix(in oklab, var(--color-paper) 90%, white 10%), color-mix(in oklab, var(--color-paper) 96%, transparent)) !important;
+  border-color: rgb(255 255 255 / .14);
+}
+@media (max-width: 639px) {
+  .hero-visual { max-width: 390px; }
+  .hero-stage::before { opacity: .18; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-stage * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+
+
+/* ═════════ Refined surfaces · quieter glass, clearer material ═════════
+   Keep the depth and translucency, but remove the wet/plastic shine.
+   The surfaces should feel softly frosted, not chrome-coated.
+*/
+.site-header nav {
+  -webkit-backdrop-filter: blur(12px) saturate(1.08) !important;
+  backdrop-filter: blur(12px) saturate(1.08) !important;
+  background: color-mix(in oklab, var(--color-paper) 88%, transparent) !important;
+  border-color: color-mix(in oklab, var(--color-ink) 10%, transparent) !important;
+  box-shadow: 0 8px 26px -18px rgb(35 25 18 / .28), inset 0 1px 0 rgb(255 255 255 / .42) !important;
+}
+.nav-glass-button {
+  background: color-mix(in oklab, var(--color-paper) 82%, transparent) !important;
+  border-color: color-mix(in oklab, var(--color-ink) 9%, transparent) !important;
+  box-shadow: 0 2px 7px -5px rgb(35 25 18 / .28), inset 0 1px 0 rgb(255 255 255 / .38) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(1.04) !important;
+  backdrop-filter: blur(8px) saturate(1.04) !important;
+}
+.nav-glass-button.is-active {
+  background: color-mix(in oklab, var(--color-paper) 72%, var(--color-ink) 8%) !important;
+  box-shadow: inset 0 1px 2px rgb(35 25 18 / .08) !important;
+}
+html.dark .site-header nav,
+html.dune .site-header nav {
+  background: color-mix(in oklab, var(--color-paper) 88%, transparent) !important;
+  border-color: rgb(255 255 255 / .09) !important;
+  box-shadow: 0 8px 26px -18px rgb(0 0 0 / .55), inset 0 1px 0 rgb(255 255 255 / .07) !important;
+}
+html.dark .nav-glass-button,
+html.dune .nav-glass-button {
+  background: color-mix(in oklab, var(--color-paper) 88%, transparent) !important;
+  border-color: rgb(255 255 255 / .08) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .07) !important;
+}
+html.dark .nav-glass-button.is-active,
+html.dune .nav-glass-button.is-active {
+  background: color-mix(in oklab, var(--color-paper) 76%, white 5%) !important;
+  border-color: rgb(255 255 255 / .13) !important;
+}
+.footer-glass-button {
+  background: rgb(255 255 255 / .055) !important;
+  border-color: rgb(255 255 255 / .10) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .09), 0 2px 8px -7px rgb(0 0 0 / .45) !important;
+  -webkit-backdrop-filter: blur(9px) saturate(1.08) !important;
+  backdrop-filter: blur(9px) saturate(1.08) !important;
+}
+.footer-glass-button::before { display: none; }
+.footer-glass-button:hover {
+  background: rgb(255 255 255 / .09) !important;
+  border-color: rgb(255 255 255 / .16) !important;
+  box-shadow: 0 5px 14px -10px rgb(0 0 0 / .55) !important;
+}
+.hero-stats {
+  background: color-mix(in oklab, var(--color-paper) 90%, #f0d8bd 10%) !important;
+  box-shadow: 0 8px 24px -20px rgb(65 39 20 / .28) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(1.06);
+  backdrop-filter: blur(8px) saturate(1.06);
+}
+.hero-visual::before {
+  background: linear-gradient(145deg, rgb(255 226 184 / .48), rgb(229 143 111 / .16) 58%, rgb(151 117 250 / .10));
+  border-color: rgb(255 255 255 / .38);
+  box-shadow: 0 18px 46px -34px rgb(105 63 39 / .28);
+}
+.hero-float-card {
+  background: rgb(255 253 247 / .94) !important;
+  border-color: rgb(105 72 42 / .10);
+  box-shadow: 0 12px 28px -22px rgb(70 42 23 / .34), 0 2px 7px -5px rgb(70 42 23 / .16);
+  -webkit-backdrop-filter: blur(8px) saturate(1.04);
+  backdrop-filter: blur(8px) saturate(1.04);
+}
+.hero-sticker {
+  border-color: rgb(105 72 42 / .10);
+  box-shadow: 0 5px 14px -11px rgb(64 39 22 / .32);
+}
+html.dark .hero-stats,
+html.dune .hero-stats {
+  background: color-mix(in oklab, var(--color-paper) 94%, white 6%) !important;
+  box-shadow: 0 10px 26px -22px rgb(0 0 0 / .55) !important;
+}
+html.dark .hero-float-card,
+html.dune .hero-float-card {
+  background: color-mix(in oklab, var(--color-paper) 96%, white 4%) !important;
+  border-color: rgb(255 255 255 / .09);
+  box-shadow: 0 12px 28px -22px rgb(0 0 0 / .52);
+}
