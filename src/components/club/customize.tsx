@@ -2,7 +2,7 @@
 
 import { useEffect, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
-import { Check, RotateCcw, Sliders, Sparkles, X, Moon, ClassicMoon } from "./icons";
+import { Check, RotateCcw, Sliders, Sparkles, X, Moon, ClassicMoon, Home, BookOpen, ClipboardList, Sticker, ShieldCheck, ArrowRight } from "./icons";
 import { readableInk, shade, tint } from "./bits";
 import { accentOf } from "./bands";
 import {
@@ -59,11 +59,11 @@ function Section({
     <section>
       <div className="flex items-center gap-2">
         <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: dot }} />
-        <div className="font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.18em] text-ink-faint uppercase">
+        <div className="font-display text-[11.5px] font-bold tracking-[0.18em] text-ink-faint uppercase">
           {title}
         </div>
       </div>
-      {hint && <p className="mt-1.5 text-[calc(12px*var(--ui-scale))] leading-snug font-bold text-ink-faint">{hint}</p>}
+      {hint && <p className="mt-1.5 text-[12px] leading-snug font-bold text-ink-faint">{hint}</p>}
       <div className="mt-3">{children}</div>
     </section>
   );
@@ -90,9 +90,9 @@ function Toggle({
       className="flex w-full cursor-pointer items-center justify-between gap-3 rounded-[calc(22px*var(--ui-scale))] bg-ink/[0.045] px-4 py-3.5 text-left transition-colors hover:bg-ink/[0.08]"
     >
       <span className="min-w-0">
-        <span className="block font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">{label}</span>
+        <span className="block font-display text-[14px] font-semibold text-ink">{label}</span>
         {hint && (
-          <span className="block text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-faint">{hint}</span>
+          <span className="block text-[11.5px] font-bold text-ink-faint">{hint}</span>
         )}
       </span>
       <span
@@ -204,7 +204,23 @@ function LabChip({ id }: { id: Lab }) {
   );
 }
 
-export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function CustomizePanel({
+  open,
+  onClose,
+  onHome,
+  onOpenSpec,
+  onOpenPack,
+  onOpenProgress,
+  onOpenLegal,
+}: {
+  open: boolean;
+  onClose: () => void;
+  onHome: () => void;
+  onOpenSpec: () => void;
+  onOpenPack: () => void;
+  onOpenProgress: () => void;
+  onOpenLegal: () => void;
+}) {
   const prefs = usePrefs();
 
   /* Esc closes · the page behind holds still while the panel is out */
@@ -279,7 +295,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
             animate={{ x: 0 }}
             exit={{ x: "110%" }}
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
-            className="customize-drawer fixed inset-y-0 right-0 z-[95] flex w-[min(calc(440px*var(--ui-scale)),94vw)] flex-col overflow-hidden rounded-l-[calc(30px*var(--ui-scale))] bg-cream/85 shadow-[-30px_0_80px_-40px_rgb(0_0_0/0.55)] backdrop-blur-2xl backdrop-saturate-150"
+            className="customize-drawer fixed inset-y-0 right-0 z-[95] flex w-[min(460px,94vw)] flex-col overflow-hidden rounded-l-[28px] border-l border-ink/10 bg-paper shadow-[-24px_0_70px_-38px_rgb(0_0_0/0.42)]"
           >
             {/* ————— the ambience inside the frost —————
                 two quiet lamps and a grain of dots, so the blur has
@@ -312,7 +328,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 <Sliders className="h-5.5 w-5.5 text-lemon" strokeWidth={2.2} />
               </span>
               <div className="min-w-0 flex-1">
-                <h2 className="font-display text-[calc(20px*var(--ui-scale))] leading-tight font-semibold text-ink">
+                <h2 className="font-display text-[20px] leading-tight font-semibold text-ink">
                   Customize
                 </h2>
               </div>
@@ -331,6 +347,40 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
               className="no-scrollbar relative flex flex-1 flex-col gap-6 overflow-y-auto px-6 pt-5"
               style={{ paddingBottom: "calc(2rem + var(--sa-bottom))" }}
             >
+              <section className="rounded-[22px] border border-ink/[0.08] bg-ink/[0.025] p-4">
+                <div className="mb-3 flex items-center justify-between">
+                  <div>
+                    <p className="font-display text-[13px] font-bold tracking-[0.12em] text-ink-faint uppercase">Navigate</p>
+                    <p className="mt-1 text-[12px] text-ink-soft">Go directly to a section of Reaction Club</p>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-ink-faint" />
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { label: "Home", detail: "Study dashboard", icon: Home, action: onHome },
+                    { label: "Specification", detail: "Browse units & topics", icon: BookOpen, action: onOpenSpec },
+                    { label: "Revision pack", detail: "Saved spec points", icon: ClipboardList, action: onOpenPack },
+                    { label: "Progress", detail: "Time & study goals", icon: Sticker, action: onOpenProgress },
+                    { label: "Disclaimer", detail: "Site information", icon: ShieldCheck, action: onOpenLegal },
+                  ].map((item) => (
+                    <button
+                      key={item.label}
+                      type="button"
+                      onClick={() => { item.action(); onClose(); }}
+                      className="group flex min-w-0 items-center gap-2.5 rounded-[15px] border border-ink/[0.07] bg-paper px-3 py-3 text-left transition-colors hover:border-ink/20 hover:bg-ink/[0.035]"
+                    >
+                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ink/[0.055] text-ink-soft transition-colors group-hover:bg-mint/15 group-hover:text-ink">
+                        <item.icon className="h-[17px] w-[17px]" strokeWidth={2} />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block truncate font-display text-[13px] font-semibold text-ink">{item.label}</span>
+                        <span className="mt-0.5 block truncate text-[10.5px] leading-snug text-ink-faint">{item.detail}</span>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </section>
+
               <Section title="Theme" dot="#12B886">
                 <div className="grid grid-cols-4 gap-2">
                   {(["light", "dark", "dune", "classic"] as Lab[]).map((l) => {
@@ -358,7 +408,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                           )}
                         </span>
                         <span
-                          className={`flex items-center justify-center gap-1.5 text-center font-display text-[calc(12px*var(--ui-scale))] font-bold ${
+                          className={`flex items-center justify-center gap-1.5 text-center font-display text-[12px] font-bold ${
                             active ? "text-ink" : "text-ink-soft"
                           }`}
                         >
@@ -421,7 +471,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                           )}
                         </span>
                         <span
-                          className={`font-display text-[calc(11.5px*var(--ui-scale))] font-bold ${
+                          className={`font-display text-[11.5px] font-bold ${
                             on ? "text-ink" : "text-ink-faint"
                           }`}
                         >
@@ -452,7 +502,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                       …
                     </span>
                   </div>
-                  <p className="mt-2 text-[calc(11.5px*var(--ui-scale))] leading-snug font-bold text-ink-faint">
+                  <p className="mt-2 text-[11.5px] leading-snug font-bold text-ink-faint">
                     {rotationCaption}
                   </p>
                 </div>
@@ -484,7 +534,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                         >
                           Aa
                         </span>
-                        <span className="mt-1 font-display text-[calc(9.5px*var(--ui-scale))] font-bold tracking-[0.08em]">
+                        <span className="mt-1 font-display text-[9.5px] font-bold tracking-[0.08em]">
                           {s}
                         </span>
                       </m.button>
@@ -497,7 +547,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                   the body family are one decision, not two departments */}
               <Section title="Fonts" dot="#9775FA">
                 <div className="flex flex-col gap-2">
-                  <p className="font-display text-[calc(10px*var(--ui-scale))] font-bold uppercase tracking-[0.16em] text-ink-faint">
+                  <p className="font-display text-[10px] font-bold uppercase tracking-[0.16em] text-ink-faint">
                     Headings
                   </p>
                   {HEAD_FONTS.map((f) => (
@@ -510,7 +560,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                       ariaLabel={`Heading font ${f.label}`}
                     />
                   ))}
-                  <p className="mt-2.5 font-display text-[calc(10px*var(--ui-scale))] font-bold uppercase tracking-[0.16em] text-ink-faint">
+                  <p className="mt-2.5 font-display text-[10px] font-bold uppercase tracking-[0.16em] text-ink-faint">
                     Body
                   </p>
                   {BODY_FONTS.map((f) => (
@@ -549,11 +599,11 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                               : "text-ink-soft hover:text-ink"
                           }`}
                         >
-                          <span className="font-display text-[calc(14px*var(--ui-scale))] leading-none font-bold">
+                          <span className="font-display text-[14px] leading-none font-bold">
                             {Math.round(h.fraction * 100)}
-                            <span className="text-[calc(9.5px*var(--ui-scale))]">%</span>
+                            <span className="text-[9.5px]">%</span>
                           </span>
-                          <span className="mt-1 font-display text-[calc(9.5px*var(--ui-scale))] font-bold tracking-[0.08em]">
+                          <span className="mt-1 font-display text-[9.5px] font-bold tracking-[0.08em]">
                             {h.label}
                           </span>
                         </m.button>
@@ -584,7 +634,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                               : "text-ink-soft hover:text-ink"
                           }`}
                         >
-                          <span className="font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.04em]">
+                          <span className="font-display text-[11.5px] font-bold tracking-[0.04em]">
                             {d.label}
                           </span>
                         </m.button>
@@ -619,7 +669,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
               >
                 <RotateCcw className="h-4 w-4" /> Reset
               </button>
-              <p className="flex items-start justify-center gap-1.5 text-center text-[calc(11.5px*var(--ui-scale))] leading-relaxed font-bold text-ink-faint">
+              <p className="flex items-start justify-center gap-1.5 text-center text-[11.5px] leading-relaxed font-bold text-ink-faint">
                 <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-lemon" />
                 saved on this device
               </p>
@@ -664,8 +714,8 @@ function FontRow({
         Aa
       </span>
       <span className="min-w-0">
-        <span className="block font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">{label}</span>
-        <span className="block truncate text-[calc(12px*var(--ui-scale))] font-bold text-ink-soft" style={{ fontFamily: stack }}>
+        <span className="block font-display text-[14px] font-semibold text-ink">{label}</span>
+        <span className="block truncate text-[12px] font-bold text-ink-soft" style={{ fontFamily: stack }}>
           The quick brown fox
         </span>
       </span>
