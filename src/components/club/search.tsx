@@ -36,7 +36,7 @@ function PaletteBody({
   const [sel, setSel] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const results = useMemo(() => searchTopics(q), [q]);
+  const results = useMemo(() => searchTopics(q, 33), [q]);
 
   useEffect(() => {
     const t = window.setTimeout(() => inputRef.current?.focus(), 50);
