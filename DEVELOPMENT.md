@@ -71,10 +71,7 @@ src/
 │  ├─ pack-sets.tsx / pack-view.tsx   Flashcard packs
 │  ├─ sticker-book.tsx  Sticker book (progress rewards)
 │  ├─ search.tsx        Search view
-│  ├─ customize.tsx     The control panel — icon-chip sections on soft cards,
-│  │                    live summary line in the header, 2×2 room grid, the
-│  │                    accent wheel as a dashed-string row, font chips,
-│  │                    labelled tray rows (theme/scale/fonts/motion/dots)
+│  ├─ customize.tsx     The control panel (theme/scale/fonts/motion/dots)
 │  ├─ icons.tsx         **Central icon set** — every icon comes from here
 │  ├─ bits.tsx / blocks.tsx / format.tsx   Shared small components
 │  └─ spec-index.tsx / spec-map.tsx    Spec navigation helpers
