@@ -147,7 +147,7 @@ import {
 } from "./notes-figures";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · the note section renderer — the one true way a
+   IAL CHEM · the note section renderer — the one true way a
    spec section looks, wherever it appears.
 
    The note reader and the revision pack both render <SpecSectionView/>:
