@@ -131,92 +131,78 @@ type View =
 function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
   const prefs = usePrefs();
   const room = lab ?? prefs.theme;
-  const nightRoom = room === "dark" || room === "dune";
-  const ink = room === "classic"
-    ? "#2C2013" // espresso — the reading room draws with its own pen
-    : nightRoom
-      ? room === "dune"
-        ? "#F6F0E6" // dune ink — pale sand
-        : "#F4F1FB" // night ink — pale violet
-      : "#3D2B1F"; // cocoa, the daylight pen
-  const glass = room === "classic"
-    ? "#FDF6E3" // the cream half of the classic pair
-    : nightRoom
-      ? "none" // line art — the room shows through the glass
-      : "#FFFDF7"; // warm white
-  const liquid = room === "classic" ? "#F59F00" : "#FF6B6B";
-  const id = useId().replace(/[^a-zA-Z0-9]/g, "");
-  const clip = `logo-clip-${id}`;
-  const body =
-    "M11 11.5 L33 11.5 L33 34.5 Q33 42.5 25 42.5 L19 42.5 Q11 42.5 11 34.5 Z";
+  const ink =
+    room === "classic" ? "#3B2A1B" :
+    room === "dune" ? "#F5E8D2" :
+    room === "dark" ? "#F0ECFA" : "#493326";
+  const liquid =
+    room === "classic" ? "#C58A36" :
+    room === "dune" ? "#D9A65F" :
+    room === "dark" ? "#A995E8" : "#E97862";
+  const glass =
+    room === "dark" || room === "dune" ? "none" :
+    room === "classic" ? "#F7EEDB" : "#FFF9EF";
 
   return (
     <m.span
       aria-hidden
-      whileHover={{ scale: 1.07, rotate: -3 }}
-      whileTap={{ scale: 0.9, rotate: 2 }}
-      transition={{ type: "spring", stiffness: 380, damping: 14 }}
-      className="inline-block shrink-0"
-      style={{ width: size, height: (size * 48) / 44 }}
+      whileHover={{ scale: 1.06, rotate: -2 }}
+      whileTap={{ scale: 0.94 }}
+      transition={{ type: "spring", stiffness: 380, damping: 16 }}
+      className="inline-grid shrink-0 place-items-center"
+      style={{ width: size, height: size }}
     >
-      <svg viewBox="0 0 44 48" width="100%" height="100%">
-        {/* the fizz that got away — outlined gas above the rim, one
-            coral spark chasing it */}
-        <circle
-          cx="35.5"
-          cy="4.8"
-          r="2.5"
-          fill="none"
-          stroke={ink}
-          strokeWidth="2"
-        />
-        <circle cx="30.5" cy="3.4" r="1.2" fill="#FF6B6B" opacity="0.55" />
+      <svg viewBox="0 0 48 48" width="100%" height="100%" fill="none">
+        <defs>
+          <linearGradient id="reaction-liquid" x1="12" y1="26" x2="36" y2="42" gradientUnits="userSpaceOnUse">
+            <stop stopColor={liquid} />
+            <stop offset="1" stopColor={liquid} stopOpacity=".72" />
+          </linearGradient>
+        </defs>
 
-        {/* glass body */}
-        <path d={body} fill={glass} />
-
-        {/* liquid, mid-fizz — clipped to the glass */}
-        <clipPath id={clip} suppressHydrationWarning>
-          <path d={body} />
-        </clipPath>
-        <g clipPath={`url(#${clip})`} suppressHydrationWarning>
-          <path
-            d="M8 26.5 C 13 23.5, 19 29.5, 24 26.5 C 29 23.5, 34 27, 37 25.5 L37 45 L8 45 Z"
-            fill={liquid}
-          />
-          <ellipse cx="16.5" cy="33" rx="3.2" ry="1.8" fill="#FFFFFF" opacity="0.3" />
-          <circle cx="23" cy="35.5" r="1.5" fill="#FFFFFF" opacity="0.85" />
-          <circle cx="28" cy="38.5" r="1.1" fill="#FFFFFF" opacity="0.7" />
-        </g>
-
-        {/* outline + rim, one chunky hand */}
+        {/* A single, continuous flask silhouette: broad shoulders,
+            narrow neck and a weighted rounded base. */}
         <path
-          d={body}
-          fill="none"
+          d="M18 6.5h12M20 6.5v13L10.8 36.2A4.1 4.1 0 0 0 14.4 42h19.2a4.1 4.1 0 0 0 3.6-5.8L28 19.5v-13"
           stroke={ink}
-          strokeWidth="3.6"
+          strokeWidth="2.8"
+          strokeLinecap="round"
           strokeLinejoin="round"
-        />
-        <path
-          d="M7.5 11.5 H36.5"
-          stroke={ink}
-          strokeWidth="3.6"
-          strokeLinecap="round"
+          fill={glass}
         />
 
-        {/* measurement ticks — the mascot's signature, kept faint */}
+        {/* The reaction line gives the liquid a deliberate, dynamic
+            profile instead of the old cartoon wave. */}
         <path
-          d="M28.5 31.5 h5.5 M28.5 36.5 h5.5"
+          d="M14.2 33.1c4.1-2.7 7.1-2.5 10.1-.6 3.2 2 5.7 1.8 9.5-.5l3.1 5.5a2.5 2.5 0 0 1-2.2 3.7H13.3a2.5 2.5 0 0 1-2.2-3.7l3.1-4.4Z"
+          fill="url(#reaction-liquid)"
+        />
+        <path
+          d="M15.2 33.4c3.6-2.1 6.1-1.9 9-.2 2.8 1.7 5.4 1.7 8.7-.1"
           stroke={ink}
-          strokeWidth="1.7"
+          strokeWidth="1.5"
           strokeLinecap="round"
-          opacity="0.35"
+          opacity=".62"
+        />
+
+        {/* Three measured bubbles, balanced as a recognisable
+            signature at small navigation sizes. */}
+        <circle cx="21.5" cy="27.5" r="1.45" fill={ink} opacity=".72" />
+        <circle cx="27" cy="23.5" r="1.9" fill={liquid} stroke={ink} strokeWidth=".9" />
+        <circle cx="32.5" cy="29" r="1.15" fill={ink} opacity=".55" />
+
+        {/* Small reaction spark — offset, not a floating mascot bubble. */}
+        <path
+          d="M37.2 8.2l1.15 3.05 3.05 1.15-3.05 1.15-1.15 3.05-1.15-3.05L33 12.4l3.05-1.15 1.15-3.05Z"
+          fill={liquid}
+          stroke={ink}
+          strokeWidth=".8"
+          strokeLinejoin="round"
         />
       </svg>
     </m.span>
   );
 }
-
 /* ————— lab switch —————
    Light → night → dune → classic, one tap apart. The button wears
    its room's chip (THEME_CHIP) — white, navy, chocolate, and the
