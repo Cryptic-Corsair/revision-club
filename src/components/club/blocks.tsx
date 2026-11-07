@@ -30,7 +30,7 @@ import {
 } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · blocks — topic content blocks
+   IAL CHEM · blocks — topic content blocks
    p · def (term cards) · eq (equation pills) ·
    ex (worked examples) · tips · table · recap
    ═══════════════════════════════════════════════════════════════ */
