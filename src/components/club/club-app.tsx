@@ -7,7 +7,6 @@ import {
   Home as HomeIcon,
   Search,
   Sticker,
-  SunMoon,
   Palette,
   Sparkles,
   Settings,
