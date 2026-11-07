@@ -417,13 +417,11 @@ function CandyTable({
         <ScrollFade>
           <table className="w-full min-w-[calc(480px*var(--ui-scale))] border-collapse text-left">
             <thead>
-              <tr style={{ background: accent }}>
+              <tr style={{ background: sunkWash(accent, 15) }}>
                 {head.map((h, i) => (
                   <th
                     key={i}
-                    scope="col"
-                    className="px-4 py-4 text-left align-middle font-display text-[calc(15.5px*var(--ui-scale))] font-extrabold leading-[1.25] tracking-[0.055em] whitespace-normal uppercase sm:px-5 sm:py-[18px]"
-                    style={{ color: readableInk(accent) }}
+                    className="px-4 py-3.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.06em] whitespace-nowrap text-ink uppercase sm:px-5"
                   >
                     <Fmt text={h} />
                   </th>
