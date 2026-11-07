@@ -3,7 +3,7 @@ import type { TimeData } from "./time";
 import { topicSeconds } from "./time";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · today's pick
+   IAL CHEM · today's pick
    One topic, chosen for today: the next un-revised one in course
    order; once everything is marked, the topic with the least
    recorded time gets another pass.
