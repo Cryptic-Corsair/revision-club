@@ -415,7 +415,7 @@ function CandyTable({
             className="mt-[calc(12px*var(--ui-scale))] h-[calc(4px*var(--ui-scale))] w-[calc(22px*var(--ui-scale))] shrink-0 rounded-full"
             style={{ background: accent }}
           />
-          <div className="min-w-0 font-display text-[calc(20px*var(--ui-scale))] leading-snug font-bold text-ink">
+          <div className="min-w-0 font-display text-[calc(20px*var(--ui-scale))] leading-snug font-semibold text-ink">
             <Fmt text={caption} />
           </div>
         </div>
