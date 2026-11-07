@@ -11,12 +11,11 @@
    Six units, six candy accents — the code-to-colour pairing lives
    in units.ts and nowhere else.
 
-   Five labs, one set of tokens: every surface reads its colour from
+   Four labs, one set of tokens: every surface reads its colour from
    the custom properties below, so the whole site flips between
    · the daylight cream lab (no class),
    · the night lab (html.dark) — warm plum-charcoal,
    · the dune lab (html.dark + html.dune) — the chocolate room,
-   · the sage lab (html.dark + html.sage) — the forest room, and
    · the classic lab (html.classic) — a daylight page whose note
      sections step between two fixed grounds, deep espresso (#2c2013)
      and warm cream (#fdf6e3): dark room, light room, dark room.
@@ -1771,175 +1770,6 @@ html.dark:not(.dune) .legal-closing {
 }
 
 
-/* ═════════ Sage theme · forest room ═════════
-   A deep botanical reading room: pine-black page, layered forest
-   surfaces, warm mineral-white text and muted celadon controls.
-   Topic accents retain their own identities; Sage is a fifth
-   atmosphere, not a recolour of the existing accent wheel.
-*/
-html.dark.sage {
-  --color-cream: #18231f;
-  --color-paper: #30483c;
-  --color-milk: #e8f0e6;
-  --color-ink: #e8f0e6;
-  --color-ink-soft: #c1d0c0;
-  --color-ink-faint: #9eaf9e;
-  --color-cocoa: #0d1712;
-  --tint-base: #405b4b;
-  --shade-ink: #18231f;
-  --note-band-a: #1d2c24;
-  --note-band-b: #24372c;
-  --home-band-a: #111b15;
-  --home-band-b: #19271e;
-  --sunk-share: 10%;
-  --sunk-base: #24372c;
-  --lift-share: 16%;
-  --lift-base: #2a4033;
-  --honey-share: 12%;
-  --honey-base: #101b14;
-  --chip-base: var(--color-paper);
-  --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
-  --arc-ink: 72%;
-  --edge: rgb(0 0 0 / 0.56);
-  --sage-accent: #b5c8ad;
-  --sage-accent-strong: #8eaa91;
-  --sage-accent-ink: #17251c;
-  color-scheme: dark;
-}
-html.dark.sage ::selection {
-  background: #c5d2b4;
-  color: #17251c;
-}
-html.dark.sage :focus-visible {
-  outline: 2px solid var(--sage-accent);
-  outline-offset: 3px;
-}
-html.dark.sage body {
-  --dot-ink: rgb(220 238 216 / 0.04);
-  --lamp-ink: rgb(142 170 145 / 0.13);
-  background-image:
-    radial-gradient(var(--dot-ink) 1.4px, transparent 1.5px),
-    linear-gradient(180deg, rgb(25 55 38 / 0.18), transparent 38%);
-  background-size: 28px 28px, 100% 100%;
-}
-html.dark.sage body::before {
-  background:
-    radial-gradient(900px 500px at 50% -160px, var(--lamp-ink), transparent 74%),
-    radial-gradient(560px 340px at 100% 18%, rgb(194 174 130 / 0.045), transparent 76%);
-}
-html.dark.sage .candy {
-  --candy-bg: #b5c8ad;
-  --candy-side: #8eaa91;
-  color: #17251c;
-}
-html.dark.sage mark {
-  background: linear-gradient(
-    100deg,
-    rgb(197 210 180 / 0.11) 0%,
-    rgb(197 210 180 / 0.2) 16% 84%,
-    rgb(197 210 180 / 0.11) 100%
-  );
-  color: var(--color-ink);
-}
-html.dark.sage .hero-glow {
-  background: color-mix(in oklab, var(--sage-accent) 24%, transparent);
-}
-html.dark.sage .site-header nav {
-  background: color-mix(in oklab, var(--color-paper) 96%, #101b14) !important;
-  border: 1px solid rgb(201 222 195 / 0.11) !important;
-  box-shadow:
-    0 2px 0 rgb(0 0 0 / 0.22),
-    0 15px 38px -25px rgb(0 0 0 / 0.82),
-    inset 0 1px 0 rgb(235 247 230 / 0.06) !important;
-}
-html.dark.sage .nav-tool-button:hover {
-  color: var(--color-ink) !important;
-  background: rgb(181 200 173 / 0.075) !important;
-  border-color: rgb(181 200 173 / 0.08) !important;
-}
-html.dark.sage .nav-tool-button.is-active {
-  color: #f1f7ee !important;
-  background: rgb(142 170 145 / 0.16) !important;
-  border-color: rgb(181 200 173 / 0.19) !important;
-}
-html.dark.sage .footer-action-button {
-  color: #dce8d9;
-  border-color: rgb(201 222 195 / 0.14) !important;
-  background: rgb(201 222 195 / 0.035) !important;
-}
-html.dark.sage .footer-action-button:hover {
-  color: #f5faf2;
-  border-color: rgb(201 222 195 / 0.24) !important;
-  background: rgb(201 222 195 / 0.075) !important;
-}
-html.dark.sage .hero-stage {
-  background:
-    radial-gradient(ellipse at 84% 20%, rgb(142 170 145 / 0.16), transparent 43%),
-    radial-gradient(ellipse at 9% 86%, rgb(194 174 130 / 0.075), transparent 42%),
-    var(--color-paper);
-  border: 1px solid rgb(201 222 195 / 0.08);
-}
-html.dark.sage .hero-stage::before {
-  opacity: 0.2;
-  background-image: radial-gradient(rgb(220 238 216 / 0.16) 0.65px, transparent 0.7px);
-}
-html.dark.sage .hero-stats {
-  background: color-mix(in oklab, var(--color-paper) 91%, #52715b) !important;
-  border-color: rgb(201 222 195 / 0.11);
-}
-html.dark.sage .hero-visual::before {
-  background:
-    radial-gradient(circle at 33% 25%, rgb(232 240 230 / 0.17), transparent 26%),
-    linear-gradient(145deg, rgb(142 170 145 / 0.27), rgb(65 105 78 / 0.17) 58%, rgb(181 200 173 / 0.07));
-  border-color: rgb(201 222 195 / 0.16);
-}
-html.dark.sage .hero-float-card {
-  background: color-mix(in oklab, var(--color-paper) 94%, #a8c1a5 6%) !important;
-  border-color: rgb(201 222 195 / 0.13);
-}
-html.dark.sage .customize-drawer {
-  border-color: rgb(201 222 195 / 0.12);
-}
-html.dark.sage .legal-hero {
-  background:
-    radial-gradient(ellipse at 88% 14%, rgb(142 170 145 / 0.15), transparent 38%),
-    radial-gradient(ellipse at 5% 100%, rgb(194 174 130 / 0.07), transparent 43%),
-    var(--color-paper);
-  border-color: rgb(201 222 195 / 0.11);
-}
-html.dark.sage .legal-kicker {
-  color: #17251c;
-  background: #b5c8ad;
-}
-html.dark.sage .legal-heading-accent,
-html.dark.sage .legal-summary-number {
-  color: #c5d8bd;
-}
-html.dark.sage .legal-hero-mark {
-  color: color-mix(in oklab, #b5c8ad 62%, var(--color-ink));
-}
-html.dark.sage .legal-mark-dot {
-  background: #b5c8ad;
-  box-shadow: 0 0 0 6px rgb(181 200 173 / 0.13);
-}
-html.dark.sage .legal-mark-dot-two {
-  background: #c2ae82;
-}
-html.dark.sage .legal-summary {
-  background: color-mix(in oklab, var(--color-paper) 91%, #405d48);
-  border-color: rgb(201 222 195 / 0.1);
-}
-html.dark.sage .legal-clause {
-  border-bottom-color: rgb(201 222 195 / 0.12);
-}
-html.dark.sage .legal-clause-number {
-  border-color: rgb(201 222 195 / 0.16);
-  color: #cbdac7;
-}
-html.dark.sage .legal-clause-line {
-  background: rgb(201 222 195 / 0.14);
-}
-html.dark.sage .legal-closing {
   background:
     radial-gradient(ellipse at 100% 0%, rgb(142 170 145 / 0.12), transparent 46%),
     var(--color-paper);
