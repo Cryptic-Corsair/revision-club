@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · revision progress
+   IAL CHEM · revision progress
    localStorage, cross-tab · key "reaction-club-v1" · { revised: string[] }
    ═══════════════════════════════════════════════════════════════ */
 
