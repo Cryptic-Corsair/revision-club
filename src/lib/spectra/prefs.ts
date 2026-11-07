@@ -353,7 +353,7 @@ export const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic"];
 
 export const LAB_DESCRIPTION: Record<Lab, string> = {
   light: "Warm paper & daylight",
-  dark: "Violet-ink after hours",
+  dark: "Midnight blue & ice",
   dune: "Sandstone & amber",
   classic: "Espresso & parchment",
 };
@@ -371,9 +371,9 @@ export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> 
   },
   dark: {
     // navy — the night sky the room is named for
-    bg: "#23406E",
-    ink: "#EEF2FF", // moonlight
-    side: "#142A52",
+    bg: "#1B3A56",
+    ink: "#DFF7FF", // ice light
+    side: "#0F263A",
   },
   dune: {
     bg: "#6B4A26", // chocolate — dune

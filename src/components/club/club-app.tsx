@@ -136,11 +136,11 @@ function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
   const ink =
     room === "classic" ? "#3B2A1B" :
     room === "dune" ? "#F5E8D2" :
-    room === "dark" ? "#F0ECFA" : "#493326";
+    room === "dark" ? "#DFF2FC" : "#493326";
   const liquid =
     room === "classic" ? "#C58A36" :
     room === "dune" ? "#D9A65F" :
-    room === "dark" ? "#A995E8" : "#E97862";
+    room === "dark" ? "#75D5E8" : "#E97862";
   const glass =
     room === "dark" || room === "dune" ? "none" :
     room === "classic" ? "#F7EEDB" : "#FFF9EF";
@@ -421,7 +421,7 @@ function TopBar({
               className="group flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-2.5 transition-all hover:-translate-y-px sm:h-11 sm:gap-2.5 sm:px-3"
               style={{
                 background: THEME_CHIP[lab].bg,
-                color: lab === "dark" ? "#EEF2FF" : lab === "dune" ? "#FFE9C7" : "#3D2B1F",
+                color: lab === "dark" ? "#EAF8FF" : lab === "dune" ? "#FFE9C7" : "#3D2B1F",
                 boxShadow: `0 2.5px 0 ${THEME_CHIP[lab].side}, inset 0 1px 0 rgb(255 255 255 / 0.24)`,
               }}
             >
@@ -482,7 +482,7 @@ function TopBar({
                               background: option === "light"
                                 ? "linear-gradient(135deg,#FFFDF7 0%,#F8E8D2 55%,#FFB9A8 100%)"
                                 : option === "dark"
-                                  ? "linear-gradient(135deg,#171421 0%,#342A50 58%,#7562A5 100%)"
+                                  ? "linear-gradient(135deg,#0D1422 0%,#1A263B 58%,#4D8096 100%)"
                                   : option === "dune"
                                     ? "linear-gradient(135deg,#332316 0%,#80572E 58%,#D6A65F 100%)"
                                     : "linear-gradient(135deg,#2C2013 0%,#2C2013 49%,#FDF6E3 50%,#FDF6E3 100%)",
