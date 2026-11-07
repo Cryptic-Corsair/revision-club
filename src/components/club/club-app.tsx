@@ -824,7 +824,7 @@ function Footer({
               <button
                 type="button"
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/80 transition-colors hover:bg-white/[0.12] hover:text-milk"
+                className="footer-glass-button group inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85"
               >
                 <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" strokeWidth={2.2} />
                 Back to top
