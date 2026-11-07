@@ -266,6 +266,7 @@ function TopBar({
   const [announce, setAnnounce] = useState<Lab | null>(null);
   const [themeOpen, setThemeOpen] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const themeAreaRef = useRef<HTMLElement | null>(null);
 
   const chooseTheme = useCallback((next: Lab) => {
     if (next !== lab) {
@@ -277,6 +278,29 @@ function TopBar({
     }
     setThemeOpen(false);
   }, [lab]);
+
+  /* the menu behaves like a proper popover — Escape or a press
+     anywhere outside the nav dismisses it, no theme chosen */
+  useEffect(() => {
+    if (!themeOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setThemeOpen(false);
+    };
+    const onDown = (e: PointerEvent) => {
+      if (
+        themeAreaRef.current &&
+        !themeAreaRef.current.contains(e.target as Node)
+      ) {
+        setThemeOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onDown);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onDown);
+    };
+  }, [themeOpen]);
 
   const tool = (active: boolean) =>
     `nav-tool grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors sm:h-11 sm:w-11 ${
@@ -292,6 +316,7 @@ function TopBar({
         style={{ top: "calc(0.625rem + var(--sa-top))" }}
       >
         <nav
+          ref={themeAreaRef}
           aria-label="Main"
           className="relative flex max-w-[97vw] items-center gap-1.5 rounded-full bg-paper/90 py-2 pr-2.5 pl-2.5 backdrop-blur-lg"
           style={{
