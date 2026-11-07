@@ -41,7 +41,7 @@ import {
 import { BandWave, homeBandOf } from "./bands";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · home — Material You surfaces, candy personality
+   IAL CHEM · home — Material You surfaces, candy personality
    Motion lives in the hero alone: the one-time blob settle, the
    entrance pop, floating cards, the boopable mascot. Everything
    below paints once and holds still — no scroll reveals, no idle
@@ -182,7 +182,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
 
               <PopIn delay={0.16}>
                 <p className="mt-6 max-w-[50ch] text-[calc(15.5px*var(--ui-scale))] leading-[1.78] text-ink-soft sm:text-[calc(16.5px*var(--ui-scale))] sm:leading-[1.8]">
-                  Welcome to <strong className="font-extrabold text-ink">Reaction Club</strong> —
+                  Welcome to <strong className="font-extrabold text-ink">IAL CHEM</strong> —
                   revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16). Every unit runs
                   the 2018 spec in order: definitions, equations and fully worked examples. Your
                   progress saves itself in your browser.
