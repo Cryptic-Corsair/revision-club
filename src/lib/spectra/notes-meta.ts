@@ -1,7 +1,7 @@
 import type { UnitCode } from "./types";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · the notes card index — who has a note, where
+   IAL CHEM · the notes card index — who has a note, where
 
    The shell (club-app) needs to know *that* a topic has a revision
    note — its id, unit, topic, title and spec range — long before it
