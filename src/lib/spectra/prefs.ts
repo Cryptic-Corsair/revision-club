@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 import { pickDarkMood } from "./dark-mood";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · site preferences
+   IAL CHEM · site preferences
    The knobs behind the customize panel: lab (light/dark/dune/
    classic), the accent wheel, content scale, heading & body fonts,
    polka dots, decorative motion.
