@@ -89,7 +89,7 @@ const Legal = dynamic(() => import("./legal").then((m) => m.Legal), {
 });
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · app shell — pill nav, views, footer
+   IAL CHEM · app shell — pill nav, views, footer
    The nav stays lean: home, then the tools. Units live on the
    home page, where they have room to breathe.
    ═══════════════════════════════════════════════════════════════ */
@@ -295,11 +295,11 @@ function TopBar({
             type="button"
             onClick={onHome}
             className="flex shrink-0 cursor-pointer items-center gap-2.5 pr-1.5"
-            aria-label="Reaction Club — home"
+            aria-label="IAL CHEM — home"
           >
             <LogoMark />
             <span className="hidden font-display text-[16px] font-semibold tracking-tight text-ink md:block">
-              Reaction Club
+              IAL CHEM
             </span>
           </button>
 
@@ -615,7 +615,7 @@ function Footer({
               <LogoMark size={44} lab="light" />
               <div className="min-w-0">
                 <div className="font-display text-[calc(21px*var(--ui-scale))] font-bold leading-none tracking-tight">
-                  Reaction Club
+                  IAL CHEM
                 </div>
                 <p className="mt-2 text-[calc(11px*var(--ui-scale))] font-bold uppercase tracking-[0.16em] text-milk/45">
                   Pearson Edexcel · International A Level Chemistry
@@ -738,7 +738,7 @@ function Footer({
 
           <div className="flex flex-col gap-4 py-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-2xl text-[calc(10.5px*var(--ui-scale))] leading-relaxed font-semibold text-milk/40">
-              © 2026 Reaction Club · Notes for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. Not affiliated with or endorsed by Pearson Education Ltd.
+              © 2026 IAL CHEM · Notes for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. Not affiliated with or endorsed by Pearson Education Ltd.
               <span className="ml-1 whitespace-nowrap text-milk/30">· rev 4 · Nov 2026</span>
             </p>
             <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 self-start sm:self-auto">
