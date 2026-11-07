@@ -30,7 +30,9 @@ import { useDesk, markUnit, markTopic } from "@/lib/spectra/desk";
 import {
   applyPrefs,
   flashThemeAnim,
+  LAB_DESCRIPTION,
   LAB_LABEL,
+  LAB_ORDER,
   setPrefs,
   THEME_CHIP,
   usePrefs,
@@ -204,15 +206,6 @@ function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
    stop, nothing more. The mobile browser chrome is re-painted to
    the lab's cream so the address bar never fights the page. */
 
-const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic"];
-
-const LAB_DESCRIPTION: Record<Lab, string> = {
-  light: "Warm paper & daylight",
-  dark: "Violet-ink after hours",
-  dune: "Sandstone & amber",
-  classic: "Espresso & parchment",
-};
-
 /* the glyph for the current chip — the moon on every theme; the
    chip's background names the room. Classic takes the split moon:
    its chip is cut diagonally, and no single ink reads across both
@@ -243,6 +236,8 @@ function TopBar({
   const [announce, setAnnounce] = useState<Lab | null>(null);
   const [themeOpen, setThemeOpen] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const themePickerRef = useRef<HTMLDivElement | null>(null);
+  const themeTriggerRef = useRef<HTMLButtonElement | null>(null);
 
   const chooseTheme = useCallback((next: Lab) => {
     if (next !== lab) {
@@ -253,7 +248,32 @@ function TopBar({
       timer.current = setTimeout(() => setAnnounce(null), 1800);
     }
     setThemeOpen(false);
+    themeTriggerRef.current?.focus();
   }, [lab]);
+
+  useEffect(() => {
+    if (!themeOpen) return;
+    const onPointerDown = (event: PointerEvent) => {
+      if (event.target instanceof Node && !themePickerRef.current?.contains(event.target)) {
+        setThemeOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setThemeOpen(false);
+      themeTriggerRef.current?.focus();
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [themeOpen]);
+
+  useEffect(() => () => {
+    if (timer.current) clearTimeout(timer.current);
+  }, []);
 
   const tool = (active: boolean) =>
     `grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-colors sm:h-11 sm:w-11 ${
@@ -387,101 +407,102 @@ function TopBar({
             <Sparkles className="h-[18px] w-[18px]" strokeWidth={2.2} />
           </m.button>
 
-          <m.button
-            type="button"
-            onClick={() => setThemeOpen((open) => !open)}
-            whileTap={{ scale: 0.96 }}
-            aria-expanded={themeOpen}
-            aria-haspopup="menu"
-            aria-label={`Theme: ${LAB_LABEL[lab]}. Choose appearance`}
-            title="Choose theme"
-            className="group flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-2.5 transition-all hover:-translate-y-px sm:h-11 sm:gap-2.5 sm:px-3"
-            style={{
-              background: lab === "classic" ? "#F1E6D0" : THEME_CHIP[lab].bg,
-              color: lab === "dark" ? "#EEF2FF" : lab === "dune" ? "#FFE9C7" : "#3D2B1F",
-              boxShadow: `0 2.5px 0 ${THEME_CHIP[lab].side}, inset 0 1px 0 rgb(255 255 255 / 0.24)`,
-            }}
-          >
-            <span
-              className="grid h-6 w-6 shrink-0 place-items-center rounded-full"
+          <div ref={themePickerRef} className="relative shrink-0">
+            <m.button
+              ref={themeTriggerRef}
+              type="button"
+              onClick={() => setThemeOpen((open) => !open)}
+              whileTap={{ scale: 0.96 }}
+              aria-expanded={themeOpen}
+              aria-controls="theme-picker-options"
+              aria-label={`Theme: ${LAB_LABEL[lab]}. Choose appearance`}
+              title="Choose theme"
+              className="group flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-2.5 transition-all hover:-translate-y-px sm:h-11 sm:gap-2.5 sm:px-3"
               style={{
                 background: THEME_CHIP[lab].bg,
-                color: THEME_CHIP[lab].ink,
-                boxShadow: "inset 0 0 0 1px rgb(255 255 255 / 0.24)",
+                color: lab === "dark" ? "#EEF2FF" : lab === "dune" ? "#FFE9C7" : "#3D2B1F",
+                boxShadow: `0 2.5px 0 ${THEME_CHIP[lab].side}, inset 0 1px 0 rgb(255 255 255 / 0.24)`,
               }}
             >
-              <LabGlyph id={lab} />
-            </span>
-            <span className="hidden font-display text-[12px] leading-none font-semibold sm:inline">
-              {LAB_LABEL[lab]}
-            </span>
-            <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform ${themeOpen ? "rotate-180" : ""}`} strokeWidth={2.5} />
-          </m.button>
-
-          <AnimatePresence>
-            {themeOpen && (
-              <m.div
-                initial={{ opacity: 0, y: -8, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -6, scale: 0.97 }}
-                transition={{ duration: 0.16, ease: "easeOut" }}
-                role="menu"
-                aria-label="Choose appearance"
-                className="absolute top-[calc(100%+0.8rem)] right-0 z-[70] w-[min(330px,calc(100vw-1.5rem))] rounded-[26px] p-3"
+              <span
+                className="grid h-6 w-6 shrink-0 place-items-center rounded-full"
                 style={{
-                  background: "var(--color-paper)",
-                  boxShadow: "0 18px 55px -22px rgb(0 0 0 / 0.42), 0 3px 0 var(--edge)",
-                  border: "1px solid color-mix(in oklab, var(--color-ink) 8%, transparent)",
+                  background: THEME_CHIP[lab].bg,
+                  color: THEME_CHIP[lab].ink,
+                  boxShadow: "inset 0 0 0 1px rgb(255 255 255 / 0.24)",
                 }}
               >
-                <div className="flex items-center justify-between px-2 pb-3 pt-1">
-                  <div>
-                    <p className="font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">Choose your atmosphere</p>
-                    <p className="mt-0.5 text-[calc(10.5px*var(--ui-scale))] text-ink-soft">Four ways to set the mood</p>
+                <LabGlyph id={lab} />
+              </span>
+              <span className="hidden font-display text-[12px] leading-none font-semibold sm:inline">
+                {LAB_LABEL[lab]}
+              </span>
+              <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform ${themeOpen ? "rotate-180" : ""}`} strokeWidth={2.5} />
+            </m.button>
+
+            <AnimatePresence>
+              {themeOpen && (
+                <m.div
+                  id="theme-picker-options"
+                  initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                  transition={{ duration: 0.16, ease: "easeOut" }}
+                  className="absolute top-[calc(100%+0.8rem)] right-0 z-[70] w-[min(330px,calc(100vw-1.5rem))] rounded-[26px] p-3"
+                  style={{
+                    background: "var(--color-paper)",
+                    boxShadow: "0 18px 55px -22px rgb(0 0 0 / 0.42), 0 3px 0 var(--edge)",
+                    border: "1px solid color-mix(in oklab, var(--color-ink) 8%, transparent)",
+                  }}
+                >
+                  <div className="flex items-center justify-between px-2 pb-3 pt-1">
+                    <div>
+                      <p className="font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">Appearance</p>
+                      <p className="mt-0.5 text-[calc(10.5px*var(--ui-scale))] text-ink-soft">Saved automatically on this device</p>
+                    </div>
+                    <span className="rounded-full bg-ink/[0.06] px-2.5 py-1 font-mono text-[calc(9px*var(--ui-scale))] tracking-wider text-ink-soft">THEME</span>
                   </div>
-                  <span className="rounded-full bg-ink/[0.06] px-2.5 py-1 font-mono text-[calc(9px*var(--ui-scale))] tracking-wider text-ink-soft">THEMES</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {LAB_ORDER.map((option) => {
-                    const selected = lab === option;
-                    return (
-                      <button
-                        key={option}
-                        type="button"
-                        role="menuitemradio"
-                        aria-checked={selected}
-                        onClick={() => chooseTheme(option)}
-                        className={`group relative flex min-w-0 cursor-pointer flex-col overflow-hidden rounded-[19px] p-2.5 text-left transition-all hover:-translate-y-0.5 ${selected ? "ring-2 ring-mint ring-offset-2 ring-offset-[var(--color-paper)]" : "hover:bg-ink/[0.045]"}`}
-                        style={{ background: selected ? "color-mix(in oklab, var(--color-mint) 9%, var(--color-paper))" : "color-mix(in oklab, var(--color-ink) 4%, var(--color-paper))" }}
-                      >
-                        <span
-                          aria-hidden
-                          className="mb-2.5 flex h-12 w-full items-end justify-between overflow-hidden rounded-[13px] p-2"
-                          style={{
-                            background: option === "light"
-                              ? "linear-gradient(135deg,#FFFDF7 0%,#F8E8D2 55%,#FFB9A8 100%)"
-                              : option === "dark"
-                                ? "linear-gradient(135deg,#171421 0%,#342A50 58%,#7562A5 100%)"
-                                : option === "dune"
-                                  ? "linear-gradient(135deg,#332316 0%,#80572E 58%,#D6A65F 100%)"
-                                  : "linear-gradient(135deg,#2C2013 0%,#2C2013 49%,#FDF6E3 50%,#FDF6E3 100%)",
-                          }}
+                  <div role="group" aria-label="Appearance themes" className="grid grid-cols-2 gap-2">
+                    {LAB_ORDER.map((option) => {
+                      const selected = lab === option;
+                      return (
+                        <button
+                          key={option}
+                          type="button"
+                          aria-pressed={selected}
+                          onClick={() => chooseTheme(option)}
+                          className={`group relative flex min-w-0 cursor-pointer flex-col overflow-hidden rounded-[19px] p-2.5 text-left transition-all hover:-translate-y-0.5 ${selected ? "ring-2 ring-mint ring-offset-2 ring-offset-[var(--color-paper)]" : "hover:bg-ink/[0.045]"}`}
+                          style={{ background: selected ? "color-mix(in oklab, var(--color-mint) 9%, var(--color-paper))" : "color-mix(in oklab, var(--color-ink) 4%, var(--color-paper))" }}
                         >
-                          <span className="h-2 w-9 rounded-full bg-white/75" />
-                          <span className="h-5 w-5 rounded-full" style={{ background: THEME_CHIP[option].bg, boxShadow: "0 1px 4px rgb(0 0 0 / 0.18)" }} />
-                        </span>
-                        <span className="flex w-full items-center justify-between gap-1">
-                          <span className="font-display text-[calc(12px*var(--ui-scale))] font-semibold text-ink">{LAB_LABEL[option]}</span>
-                          {selected && <Check className="h-4 w-4 shrink-0 text-mint" strokeWidth={2.8} />}
-                        </span>
-                        <span className="mt-0.5 text-[calc(9.5px*var(--ui-scale))] leading-snug text-ink-soft">{LAB_DESCRIPTION[option]}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </m.div>
-            )}
-          </AnimatePresence>
+                          <span
+                            aria-hidden
+                            className="mb-2.5 flex h-12 w-full items-end justify-between overflow-hidden rounded-[13px] p-2"
+                            style={{
+                              background: option === "light"
+                                ? "linear-gradient(135deg,#FFFDF7 0%,#F8E8D2 55%,#FFB9A8 100%)"
+                                : option === "dark"
+                                  ? "linear-gradient(135deg,#171421 0%,#342A50 58%,#7562A5 100%)"
+                                  : option === "dune"
+                                    ? "linear-gradient(135deg,#332316 0%,#80572E 58%,#D6A65F 100%)"
+                                    : "linear-gradient(135deg,#2C2013 0%,#2C2013 49%,#FDF6E3 50%,#FDF6E3 100%)",
+                            }}
+                          >
+                            <span className="h-2 w-9 rounded-full bg-white/75" />
+                            <span className="h-5 w-5 rounded-full" style={{ background: THEME_CHIP[option].bg, boxShadow: "0 1px 4px rgb(0 0 0 / 0.18)" }} />
+                          </span>
+                          <span className="flex w-full items-center justify-between gap-1">
+                            <span className="font-display text-[calc(12px*var(--ui-scale))] font-semibold text-ink">{LAB_LABEL[option]}</span>
+                            {selected && <Check className="h-4 w-4 shrink-0 text-mint" strokeWidth={2.8} />}
+                          </span>
+                          <span className="mt-0.5 text-[calc(9.5px*var(--ui-scale))] leading-snug text-ink-soft">{LAB_DESCRIPTION[option]}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </m.div>
+              )}
+            </AnimatePresence>
+          </div>
         </nav>
       </header>
 
