@@ -17,69 +17,69 @@ const SECTIONS: Section[] = [
     icon: BookOpen,
     main: "#E47B61",
     eyebrow: "01 / THE PLATFORM",
-    title: "What this site is",
+    title: "Purpose and scope",
     body: [
-      "Reaction Club is a free, independent revision companion for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. It offers original notes and worked examples to support your studying — it is not a course, a tutor, a textbook or an official Pearson resource, and it does not replace any of those.",
-      "Your teacher, your class notes, the official specification and past papers remain the source of truth for your studies. Treat every page here as one helpful voice among several, not the final word.",
+      "Reaction Club is an independent revision resource for the Pearson Edexcel International Advanced Level Chemistry specification (2018), units WCH11–WCH16. The site provides revision notes and worked examples for educational use. It is not a course, tutoring service, textbook or official Pearson resource.",
+      "Use this material alongside instruction from your teachers, your course materials, the current specification and official past papers. It is intended to supplement, not replace, those resources.",
     ],
   },
   {
     icon: BadgeCheck,
     main: "#D99A4B",
     eyebrow: "02 / CONTENT STANDARD",
-    title: "Accuracy — provided as is",
+    title: "Accuracy and availability",
     body: [
-      "Every page is written and checked carefully against the published specification, but the content is provided “as is” and “as available”, with no warranty or guarantee of any kind, express or implied, about its accuracy, completeness, currency or fitness for a particular purpose.",
-      "Mistakes can slip through, the specification can change, and the site can be updated, corrected or taken offline at any time without notice. Before anything that matters — an exam answer, a coursework claim, a definition you will quote — verify it against official materials.",
+      "We take care to prepare and review the material against the published specification. However, the content is provided “as is” and “as available”. We make no warranty, express or implied, that it is accurate, complete, up to date or suitable for a particular purpose.",
+      "Errors or omissions may occur, and examination specifications may be revised. Content and site availability may also change without notice. Check important information against the official Pearson specification and other authoritative course materials before relying on it.",
     ],
   },
   {
     icon: ShieldCheck,
     main: "#8D82B8",
     eyebrow: "03 / INDEPENDENCE",
-    title: "Trademarks & no affiliation",
+    title: "Affiliation and trademarks",
     body: [
-      "Reaction Club is not affiliated with, endorsed by, sponsored by or connected to Pearson Education Ltd, Edexcel, or any examination board. “Pearson”, “Edexcel” and related names and marks are trademarks of Pearson Education Ltd; they appear here only for identification — to say honestly which specification the notes follow.",
-      "Specification statements are quoted briefly from the publicly available (2018) specification for teaching and reference. That quotation implies no endorsement, and it grants this site no ownership of, or official standing within, the qualification.",
+      "Reaction Club is independent and is not affiliated with, endorsed by, sponsored by or otherwise associated with Pearson Education Limited, Edexcel or any examination board. The names “Pearson” and “Edexcel”, and their associated marks, are used only to identify the qualification and specification to which this resource relates. Those names and marks remain the property of their respective owners.",
+      "Any brief extracts from the 2018 specification are included for educational reference. Their use does not imply approval or endorsement by Pearson, and does not give Reaction Club any official status in relation to the qualification.",
     ],
   },
   {
     icon: Copy,
     main: "#B87991",
     eyebrow: "04 / OWNERSHIP",
-    title: "Copyright & fair use",
+    title: "Copyright and permitted use",
     body: [
-      "Unless stated otherwise, the notes, worked examples, figures and code on this site are original work belonging to Reaction Club. Past-paper questions and mark schemes are not reproduced — revise from your exam board's own papers for that.",
-      "You are welcome to read and revise from the site for personal study. Please don't scrape, redistribute, resell or republish its content without permission. If you believe material that belongs to you appears here in error, flag it and it will be removed promptly.",
+      "Unless otherwise indicated, the notes, worked examples, illustrations and software on this site are original materials created for Reaction Club. They may not be copied or reused except as permitted by applicable law or with prior written permission. Official examination papers and mark schemes should be obtained from the relevant examination board.",
+      "You may access and use the materials for your own personal study. You must not reproduce, distribute, sell, publish or systematically extract site content without prior permission, unless applicable law permits that use. If you believe material on the site infringes your rights, contact the site operator with details of the material and the basis of your claim.",
     ],
   },
   {
     icon: Lock,
     main: "#5E9B83",
     eyebrow: "05 / YOUR DATA",
-    title: "Your privacy",
+    title: "Data and local storage",
     body: [
-      "The site runs without accounts, ads, trackers or analytics, and sets no cookies of its own. Everything you do here — revised ticks, reading time, goals, your revision pack, theme and font preferences — is saved in your own browser's local storage and never leaves your device.",
-      "There are no copies of that progress anywhere else. Clear your browser data and it is gone for good — which is a feature and a limitation at once: nothing is collected, so nothing can be recovered for you either.",
+      "Reaction Club does not require an account. Your revision progress, goals, reading information, saved revision-pack items and display preferences are stored in your browser’s local storage. This information is held in that browser on that device and is not available to us through the site.",
+      "Local storage is specific to the browser and device in which the information was saved. Clearing that browser’s site data, using a different browser or changing devices may remove or make the information unavailable. We cannot restore locally stored progress if it is lost.",
     ],
   },
   {
     icon: Info,
     main: "#C18C4C",
     eyebrow: "06 / RESPONSIBILITY",
-    title: "No liability",
+    title: "Limitation of liability",
     body: [
-      "To the fullest extent the law allows, Reaction Club accepts no liability for any loss or damage — including lost marks, missed deadlines or exam outcomes — claimed to follow from using the site or relying on its content. The site is a study aid, and study decisions, exam entries and final preparation belong to you and your school.",
-      "Nothing on this page limits liability where doing so would be unenforceable — for anything not covered above, the law of your jurisdiction applies as usual.",
+      "To the fullest extent permitted by applicable law, Reaction Club and its contributors exclude liability for loss or damage arising from, or in connection with, use of the site or reliance on its content. This includes, without limitation, indirect or consequential loss, loss of data, and academic or examination outcomes. You remain responsible for checking information and decisions relating to your studies with your teachers and the relevant examination board.",
+      "Nothing in this disclaimer excludes or limits liability where such exclusion or limitation is prohibited by law. Any rights that cannot lawfully be excluded remain unaffected.",
     ],
   },
 ];
 
 const SHORT_VERSION = [
-  "Independent revision support. Not affiliated with Pearson or Edexcel.",
-  "Content is best-effort and provided as is. Verify what matters.",
-  "No accounts, ads or trackers. Progress stays in your browser.",
-  "For personal study. It does not replace teachers or official materials.",
+  "An independent revision resource. Not affiliated with Pearson or Edexcel.",
+  "Content is provided as is. Check important information against official materials.",
+  "No account is required. Revision data is stored locally in your browser.",
+  "For personal study; it does not replace teaching or official course materials.",
 ];
 
 export function Legal({ onBack }: { onBack: () => void }) {
@@ -99,21 +99,21 @@ export function Legal({ onBack }: { onBack: () => void }) {
         <div className="legal-hero-grain" aria-hidden />
         <div className="relative z-10 max-w-3xl">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="legal-kicker"><ShieldCheck className="h-3.5 w-3.5" /> THE FINE PRINT</span>
+            <span className="legal-kicker"><ShieldCheck className="h-3.5 w-3.5" /> DISCLAIMER</span>
             <span className="legal-meta">REACTION CLUB · CHEMISTRY</span>
           </div>
           <h1 className="mt-7 max-w-[760px] font-display text-[clamp(2.65rem,7vw,5.6rem)] leading-[.98] font-semibold tracking-[-.065em] text-ink">
-            Clear boundaries.
+            Disclaimer and
             <br />
-            <span className="legal-heading-accent">No hidden clauses.</span>
+            <span className="legal-heading-accent">terms of use.</span>
           </h1>
           <p className="mt-6 max-w-[570px] text-[calc(15px*var(--ui-scale))] leading-[1.85] text-ink-soft sm:text-[calc(16px*var(--ui-scale))]">
-            A straightforward guide to what Reaction Club offers, how its content should be used, and what happens to the information you save here.
+            Please read the following information before using Reaction Club. It explains the scope of this resource, permitted use of its content, and how information saved by the site is stored.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-ink/10 pt-5">
             <span className="legal-meta">INDEPENDENT STUDY RESOURCE</span>
-            <span className="legal-meta">SIX KEY POINTS</span>
-            <span className="legal-meta">PLAIN-LANGUAGE SUMMARY</span>
+            <span className="legal-meta">SIX SECTIONS</span>
+            <span className="legal-meta">SUMMARY AND TERMS</span>
           </div>
         </div>
         <div className="legal-hero-mark" aria-hidden>
@@ -127,7 +127,7 @@ export function Legal({ onBack }: { onBack: () => void }) {
 
       <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-12">
         <aside className="legal-index h-fit lg:sticky lg:top-28">
-          <p className="legal-meta mb-4">ON THIS PAGE</p>
+          <p className="legal-meta mb-4">CONTENTS</p>
           <nav aria-label="Legal sections" className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
             {SECTIONS.map((section, i) => (
               <a key={section.title} href={`#legal-${i + 1}`} className="legal-index-link">
@@ -138,7 +138,7 @@ export function Legal({ onBack }: { onBack: () => void }) {
           </nav>
           <div className="mt-7 hidden border-t border-ink/10 pt-5 lg:block">
             <p className="text-[calc(12px*var(--ui-scale))] leading-[1.7] text-ink-soft">
-              Take a moment to read the full clauses below. The summary is only a starting point.
+              The summary is provided for convenience. The sections below contain the full disclaimer.
             </p>
           </div>
         </aside>
@@ -148,10 +148,10 @@ export function Legal({ onBack }: { onBack: () => void }) {
             <section className="legal-summary rounded-[26px] p-5 sm:p-7">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
-                  <p className="legal-meta">AT A GLANCE</p>
-                  <h2 className="mt-2 font-display text-[calc(23px*var(--ui-scale))] font-semibold tracking-tight text-ink">The short version</h2>
+                  <p className="legal-meta">SUMMARY</p>
+                  <h2 className="mt-2 font-display text-[calc(23px*var(--ui-scale))] font-semibold tracking-tight text-ink">Summary</h2>
                 </div>
-                <span className="legal-summary-stamp"><BadgeCheck className="h-4 w-4" /> THE ESSENTIALS</span>
+                <span className="legal-summary-stamp"><BadgeCheck className="h-4 w-4" /> KEY POINTS</span>
               </div>
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 {SHORT_VERSION.map((line, i) => (
@@ -167,8 +167,8 @@ export function Legal({ onBack }: { onBack: () => void }) {
           <div className="mt-8">
             <div className="mb-5 flex items-end justify-between gap-4">
               <div>
-                <p className="legal-meta">THE DETAILS</p>
-                <h2 className="mt-1 font-display text-[calc(25px*var(--ui-scale))] font-semibold tracking-tight text-ink">The full picture</h2>
+                <p className="legal-meta">DISCLAIMER</p>
+                <h2 className="mt-1 font-display text-[calc(25px*var(--ui-scale))] font-semibold tracking-tight text-ink">Full terms</h2>
               </div>
               <span className="legal-meta hidden sm:block">01 — 06</span>
             </div>
@@ -209,14 +209,14 @@ export function Legal({ onBack }: { onBack: () => void }) {
             <section className="legal-closing mt-8 rounded-[26px] p-5 sm:p-7">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="h-5 w-5" />
-                <p className="legal-meta">ONE LAST THING</p>
+                <p className="legal-meta">IMPORTANT</p>
               </div>
               <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ui-scale))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale))]">
                 Reaction Club is an independent study companion, not an official Pearson or Edexcel resource. Its original notes are provided as is for personal revision. No account is needed, and your saved progress remains in your browser. Use the site as a helpful supplement, and check important information against the official specification and your teachers' guidance.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-current/15 pt-4">
-                <span className="legal-meta">THANK YOU FOR READING</span>
-                <button type="button" onClick={onBack} className="legal-back-link">Return to your desk <ArrowLeft className="h-4 w-4 rotate-180" /></button>
+                <span className="legal-meta">END OF DISCLAIMER</span>
+                <button type="button" onClick={onBack} className="legal-back-link">Back to home <ArrowLeft className="h-4 w-4 rotate-180" /></button>
               </div>
             </section>
           </Reveal>
