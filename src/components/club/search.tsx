@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react"
 import { ArrowRight, Clock, Search, X } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { SEARCH_INDEX, searchTopics, type SearchRow } from "@/lib/spectra/search-index";
-import { tint, shade } from "./bits";
+import { shade } from "./bits";
 
 const SUGGESTIONS = ["moles", "enthalpy", "chirality", "buffers", "titration", "entropy"];
 
