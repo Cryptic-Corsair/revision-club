@@ -2,14 +2,16 @@
 
 import { useEffect, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
-import { Check, RotateCcw, Sparkles, X, Moon, ClassicMoon, Home, BookOpen, ClipboardList, Sticker, ShieldCheck, ArrowRight } from "./icons";
+import { Check, RotateCcw, Sparkles, X, Palette, Home, BookOpen, ClipboardList, Sticker, ShieldCheck, ArrowRight } from "./icons";
 import { readableInk, shade, tint } from "./bits";
 import { accentOf } from "./bands";
 import {
   ACCENTS,
   DEFAULT_PREFS,
   flashThemeAnim,
+  LAB_DESCRIPTION,
   LAB_LABEL,
+  LAB_ORDER,
   SCALES,
   SPEC_DENSITIES,
   SPEC_HEIGHTS,
@@ -183,10 +185,7 @@ function LabStage({ id }: { id: Lab }) {
   );
 }
 
-/* the four themes, each behind its own chip — the same swatch the
-   nav pill and the toast wear (THEME_CHIP): the moon everywhere,
-   the background names the room. Classic takes the split moon,
-   because its chip is cut and no single ink crosses it. */
+/* The same palette mark and theme swatches used by the navbar. */
 function LabChip({ id }: { id: Lab }) {
   const chip = THEME_CHIP[id];
   return (
@@ -195,11 +194,7 @@ function LabChip({ id }: { id: Lab }) {
       className="grid h-[18px] w-[18px] shrink-0 place-items-center rounded-full"
       style={{ background: chip.bg, boxShadow: `0 1.5px 0 ${chip.side}` }}
     >
-      {id === "classic" ? (
-        <ClassicMoon className="h-[13px] w-[13px]" />
-      ) : (
-        <Moon className="h-[11px] w-[11px]" strokeWidth={2.4} style={{ color: chip.ink }} />
-      )}
+      <Palette className="h-[11px] w-[11px]" strokeWidth={2.2} style={{ color: chip.ink }} />
     </span>
   );
 }
@@ -237,6 +232,7 @@ export function CustomizePanel({
   }, [open, onClose]);
 
   const pickLab = (lab: Lab) => {
+    if (lab === prefs.theme) return;
     flashThemeAnim();
     setPrefs({ theme: lab });
   };
@@ -381,9 +377,13 @@ export function CustomizePanel({
                 </div>
               </section>
 
-              <Section title="Theme" dot="#12B886">
-                <div className="grid grid-cols-4 gap-2">
-                  {(["light", "dark", "dune", "classic"] as Lab[]).map((l) => {
+              <Section
+                title="Appearance"
+                hint="Choose a theme. Changes are applied immediately and saved automatically."
+                dot="#12B886"
+              >
+                <div className="grid grid-cols-2 gap-2.5">
+                  {LAB_ORDER.map((l) => {
                     const active = prefs.theme === l;
                     return (
                       <button
@@ -391,30 +391,29 @@ export function CustomizePanel({
                         type="button"
                         onClick={() => pickLab(l)}
                         aria-pressed={active}
-                        aria-label={`${LAB_LABEL[l]} theme`}
-                        className="flex cursor-pointer flex-col gap-2 rounded-[calc(20px*var(--ui-scale))] p-2.5 text-left transition-colors"
-                        style={
-                          active
-                            ? { background: "rgb(18 184 134 / 0.13)", boxShadow: "inset 0 0 0 2.5px #12B886" }
-                            : { background: "color-mix(in oklab, var(--color-ink) 5%, transparent)" }
-                        }
+                        aria-label={`${LAB_LABEL[l]} theme — ${LAB_DESCRIPTION[l]}`}
+                        className="group flex min-w-0 cursor-pointer flex-col gap-2 rounded-[18px] border p-2.5 text-left transition-all hover:-translate-y-0.5"
+                        style={{
+                          borderColor: active ? "#12B886" : "color-mix(in oklab, var(--color-ink) 9%, transparent)",
+                          background: active
+                            ? "color-mix(in oklab, #12B886 8%, var(--color-paper))"
+                            : "color-mix(in oklab, var(--color-ink) 3%, var(--color-paper))",
+                          boxShadow: active ? "0 0 0 1px #12B886, 0 5px 14px -12px #12B886" : "none",
+                        }}
                       >
-                        <span className="relative block w-full">
-                          <LabStage id={l} />
-                          {active && (
-                            <span className="absolute top-1.5 right-1.5 grid h-4.5 w-4.5 place-items-center rounded-full bg-mint text-white shadow-[0_1.5px_0_rgb(11_99_73)]">
-                              <Check className="h-3 w-3" strokeWidth={3.5} />
-                            </span>
+                        <LabStage id={l} />
+                        <span className="flex w-full items-center justify-between gap-2">
+                          <span className="flex min-w-0 items-center gap-2">
+                            <LabChip id={l} />
+                            <span className="truncate font-display text-[12px] font-bold text-ink">{LAB_LABEL[l]}</span>
+                          </span>
+                          {active ? (
+                            <Check className="h-4 w-4 shrink-0 text-mint" strokeWidth={2.8} />
+                          ) : (
+                            <span className="text-[9px] font-semibold tracking-wide text-ink-faint uppercase">Select</span>
                           )}
                         </span>
-                        <span
-                          className={`flex items-center justify-center gap-1.5 text-center font-display text-[12px] font-bold ${
-                            active ? "text-ink" : "text-ink-soft"
-                          }`}
-                        >
-                          <LabChip id={l} />
-                          {LAB_LABEL[l]}
-                        </span>
+                        <span className="text-[10.5px] leading-snug text-ink-faint">{LAB_DESCRIPTION[l]}</span>
                       </button>
                     );
                   })}
