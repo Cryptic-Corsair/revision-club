@@ -26,19 +26,14 @@
 
    Tonal order, one rule per lab (page → band → card):
    · daylight:  cream (lightest) < candy band < paper card
-   · night lab: velvet dusk, built on deep plum-charcoal
-     charcoal — the hue that sits BETWEEN the warm candies and grape,
-     so the whole shelf reads as neon against it — and the surfaces
-     climb a real ladder: page (#0d1422) → band A (#111b2d) → band B
-     (#152238) → paper cards (#1a263b), cards floating a full 3.6 L*
-     above the bands so depth comes from lightness, not from borders.
-     Body ink holds ≥ 13:1 on every step; every candy keeps its
-     daylight brand value and still passes 4.5:1 as text — the shelf
-     glows without being re-tinted. Sections alternate by a half-step
-     of lightness and a lean of hue (plum → indigo), never by big
-     jumps. The marker after dark is a translucent lemon glow (ink
-     stays light over it, ≥ 5.7:1) instead of a solid mustard block —
-     dozens of highlights per page read as one calm pen, not stickers.
+   · night lab: velvet dusk, built on plum-charcoal. The room moves
+     from a near-black aubergine page (#17131d), through two smoky
+     mauve study bands (#1e1826, #251d30), to a raised plum card
+     (#30263d). Warm ivory ink carries the reading; soft lilac marks
+     the controls, with champagne used sparingly for light and warmth.
+     The six topic accents keep their original identities and are not
+     recoloured by the theme. The marker remains a translucent wash,
+     so important terms glow rather than becoming solid stickers.
    ═════════════════════════════════════════════════════════════════════ */
 
 @theme {
