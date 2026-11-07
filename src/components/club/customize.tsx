@@ -1,8 +1,23 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
+import { Fragment, useEffect, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
-import { Check, RotateCcw, Sliders, Sparkles, X, Moon, ClassicMoon } from "./icons";
+import {
+  Check,
+  ClassicMoon,
+  Eye,
+  Gauge,
+  Moon,
+  Palette,
+  PencilRuler,
+  RotateCcw,
+  ShieldCheck,
+  Sliders,
+  Sparkles,
+  Target,
+  X,
+  Zap,
+} from "./icons";
 import { readableInk, shade, tint } from "./bits";
 import { accentOf } from "./bands";
 import {
@@ -20,15 +35,20 @@ import {
   type BodyFont,
   type HeadFont,
   type Lab,
+  type ScaleId,
 } from "@/lib/spectra/prefs";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · the customize panel
-   A slide-over workshop of frosted glass: the theme picker shows a
-   live miniature of each room, the accent wheel previews its own
-   rotation, and every knob lands in prefs.ts and re-skins the site
-   from <html> outward. The panel itself is liquid glass — the
-   dimmed page behind it blurs up through the cream frost.
+   A slide-over workshop of frosted glass, rebuilt inside: the
+   header reads back your current setup in one line, every section
+   carries its own icon chip and sits on a soft card, the four
+   rooms open in a bigger two-by-two, the accent wheel finally
+   looks like a wheel (candies joined by a dashed string), text
+   size previews itself, fonts wear chips in their own lettering,
+   and the spec tray's two knobs get labelled rows. Every knob
+   still lands in prefs.ts and re-skins the site from <html>
+   outward; the frost, the lamps and the Esc-to-close stay.
    ═══════════════════════════════════════════════════════════════ */
 
 const HEAD_FONTS: { id: HeadFont; label: string; stack: string }[] = [
@@ -42,29 +62,58 @@ const BODY_FONTS: { id: BodyFont; label: string; stack: string }[] = [
   { id: "nunito", label: "Nunito", stack: "var(--font-nunito), 'Trebuchet MS', sans-serif" },
 ];
 
+const LABS: Lab[] = ["light", "dark", "dune", "classic"];
+
 const SCALE_PX = [12, 14, 16, 19];
 
+const SCALE_WORD: Record<ScaleId, string> = {
+  S: "Small",
+  M: "Medium",
+  L: "Large",
+  XL: "Extra-large",
+};
+
+/* ————— section chrome —————
+   an icon chip in the section's own candy, a name, one honest
+   hint — and the knobs themselves sit on a soft paper card, so
+   the panel reads as a bench with labelled trays, not a list. */
 function Section({
   title,
   hint,
-  dot = "#FF922B",
+  icon: Icon,
+  candy,
   children,
 }: {
   title: string;
   hint?: string;
-  dot?: string;
+  icon: typeof Moon;
+  candy: string;
   children: ReactNode;
 }) {
   return (
     <section>
-      <div className="flex items-center gap-2">
-        <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: dot }} />
-        <div className="font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.18em] text-ink-faint uppercase">
-          {title}
+      <div className="flex items-center gap-2.5">
+        <span
+          aria-hidden
+          className="grid h-8 w-8 shrink-0 place-items-center rounded-[calc(10px*var(--ui-scale))]"
+          style={{ background: tint(candy, 18), color: shade(candy, 62) }}
+        >
+          <Icon className="h-4.5 w-4.5" strokeWidth={2.2} />
+        </span>
+        <div className="min-w-0">
+          <h3 className="font-display text-[calc(14.5px*var(--ui-scale))] leading-tight font-bold text-ink">
+            {title}
+          </h3>
+          {hint && (
+            <p className="mt-0.5 text-[calc(11.5px*var(--ui-scale))] leading-snug font-semibold text-ink-faint">
+              {hint}
+            </p>
+          )}
         </div>
       </div>
-      {hint && <p className="mt-1.5 text-[calc(12px*var(--ui-scale))] leading-snug font-bold text-ink-faint">{hint}</p>}
-      <div className="mt-3">{children}</div>
+      <div className="mt-3 rounded-[calc(24px*var(--ui-scale))] bg-paper/80 px-4 py-4 shadow-[inset_0_0_0_1px_var(--edge)]">
+        {children}
+      </div>
     </section>
   );
 }
@@ -74,11 +123,13 @@ function Toggle({
   onChange,
   label,
   hint,
+  icon: Icon,
 }: {
   on: boolean;
   onChange: (v: boolean) => void;
   label: string;
   hint?: string;
+  icon?: typeof Moon;
 }) {
   return (
     <button
@@ -89,11 +140,14 @@ function Toggle({
       onClick={() => onChange(!on)}
       className="flex w-full cursor-pointer items-center justify-between gap-3 rounded-[calc(22px*var(--ui-scale))] bg-ink/[0.045] px-4 py-3.5 text-left transition-colors hover:bg-ink/[0.08]"
     >
-      <span className="min-w-0">
-        <span className="block font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">{label}</span>
-        {hint && (
-          <span className="block text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-faint">{hint}</span>
-        )}
+      <span className="flex min-w-0 items-center gap-2.5">
+        {Icon && <Icon aria-hidden className="h-4.5 w-4.5 shrink-0 text-ink-faint" strokeWidth={2.1} />}
+        <span className="min-w-0">
+          <span className="block font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">{label}</span>
+          {hint && (
+            <span className="block text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-faint">{hint}</span>
+          )}
+        </span>
       </span>
       <span
         aria-hidden
@@ -128,9 +182,10 @@ function Toggle({
 function LabStage({ id }: { id: Lab }) {
   if (id === "light") {
     return (
-      <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#fff6ea] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.08)]">
-        <span className="absolute top-1.5 right-1.5 h-5 w-5 rounded-full bg-[#ffd43b]/70" />
-        <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#fffdf7] shadow-[0_1.5px_0_rgb(61_43_31/0.1)]" />
+      <span className="relative block h-16 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#fff6ea] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.08)]">
+        <span className="absolute top-2 right-2 h-6 w-6 rounded-full bg-[#ffd43b]/70" />
+        <span className="absolute top-3.5 left-2 h-6 w-10 rounded-md bg-[#fffdf7] shadow-[0_1.5px_0_rgb(61_43_31/0.1)]" />
+        <span className="absolute top-6 left-3.5 h-1 w-6 rounded-full bg-[#3d2b1f]/15" />
         <span className="absolute bottom-2 left-2 flex items-center gap-1">
           <i className="h-1.5 w-1.5 rounded-full bg-[#ff6b6b]" />
           <i className="h-1.5 w-1.5 rounded-full bg-[#ff922b]" />
@@ -141,12 +196,13 @@ function LabStage({ id }: { id: Lab }) {
   }
   if (id === "dark") {
     return (
-      <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#1e1a26] shadow-[inset_0_0_0_1px_rgb(255_246_234/0.08)]">
+      <span className="relative block h-16 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#1e1a26] shadow-[inset_0_0_0_1px_rgb(255_246_234/0.08)]">
         <span
           className="absolute inset-0"
-          style={{ background: "radial-gradient(42px 30px at 68% 12%, rgb(151 117 250 / 0.3), transparent 70%)" }}
+          style={{ background: "radial-gradient(52px 36px at 68% 12%, rgb(151 117 250 / 0.3), transparent 70%)" }}
         />
-        <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#2e2744] shadow-[0_1.5px_0_rgb(0_0_0/0.35)]" />
+        <span className="absolute top-3.5 left-2 h-6 w-10 rounded-md bg-[#2e2744] shadow-[0_1.5px_0_rgb(0_0_0/0.35)]" />
+        <span className="absolute top-6 left-3.5 h-1 w-6 rounded-full bg-[#f4f1fb]/15" />
         <span className="absolute bottom-2 left-2 flex items-center gap-1">
           <i className="h-1.5 w-1.5 rounded-full bg-[#f59f00]" />
           <i className="h-1.5 w-1.5 rounded-full bg-[#12b886]" />
@@ -157,12 +213,13 @@ function LabStage({ id }: { id: Lab }) {
   }
   if (id === "dune") {
     return (
-      <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#1e1b16] shadow-[inset_0_0_0_1px_rgb(246_240_230/0.08)]">
+      <span className="relative block h-16 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#1e1b16] shadow-[inset_0_0_0_1px_rgb(246_240_230/0.08)]">
         <span
           className="absolute inset-0"
-          style={{ background: "radial-gradient(42px 30px at 68% 12%, rgb(255 196 120 / 0.22), transparent 70%)" }}
+          style={{ background: "radial-gradient(52px 36px at 68% 12%, rgb(255 196 120 / 0.22), transparent 70%)" }}
         />
-        <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#2e2820] shadow-[0_1.5px_0_rgb(0_0_0/0.35)]" />
+        <span className="absolute top-3.5 left-2 h-6 w-10 rounded-md bg-[#2e2820] shadow-[0_1.5px_0_rgb(0_0_0/0.35)]" />
+        <span className="absolute top-6 left-3.5 h-1 w-6 rounded-full bg-[#f6f0e6]/15" />
         <span className="absolute bottom-2 left-2 flex items-center gap-1">
           <i className="h-1.5 w-1.5 rounded-full bg-[#ffd43b]" />
           <i className="h-1.5 w-1.5 rounded-full bg-[#ff6b6b]" />
@@ -172,9 +229,9 @@ function LabStage({ id }: { id: Lab }) {
     );
   }
   return (
-    <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[linear-gradient(115deg,#2c2013_49.5%,#fdf6e3_50.5%)] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.1)]">
-      <span className="absolute top-3 left-2 h-5 w-7 rounded-md bg-[#fdf6e3]/90" />
-      <span className="absolute top-4.5 right-2 h-5 w-7 rounded-md bg-[#2c2013]/90" />
+    <span className="relative block h-16 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[linear-gradient(115deg,#2c2013_49.5%,#fdf6e3_50.5%)] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.1)]">
+      <span className="absolute top-3.5 left-2 h-6 w-8 rounded-md bg-[#fdf6e3]/90" />
+      <span className="absolute top-5 right-2 h-6 w-8 rounded-md bg-[#2c2013]/90" />
       <span className="absolute bottom-2 left-1/2 flex -translate-x-1/2 items-center gap-1">
         <i className="h-1.5 w-1.5 rounded-full bg-[#fdf6e3]" />
         <i className="h-1.5 w-1.5 rounded-full bg-[#2c2013]" />
@@ -201,6 +258,56 @@ function LabChip({ id }: { id: Lab }) {
         <Moon className="h-[11px] w-[11px]" strokeWidth={2.4} style={{ color: chip.ink }} />
       )}
     </span>
+  );
+}
+
+/* ————— one font family, as a chip —————
+   the chip itself is set in the family it picks, so browsing the
+   lettering is trying it on. One selection ink across the whole
+   panel: coral fill, the darker coral pedestal. */
+function FontChip({
+  active,
+  label,
+  stack,
+  onClick,
+  ariaLabel,
+}: {
+  active: boolean;
+  label: string;
+  stack: string;
+  onClick: () => void;
+  ariaLabel: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      aria-label={ariaLabel}
+      className={`inline-flex cursor-pointer items-center gap-1.5 rounded-full px-3.5 py-2 transition-colors ${
+        active ? "text-white" : "text-ink-soft hover:text-ink"
+      }`}
+      style={
+        active
+          ? { background: "#FF6B6B", boxShadow: "0 2px 0 #E8590C" }
+          : { background: "color-mix(in oklab, var(--color-ink) 5%, transparent)" }
+      }
+    >
+      <span
+        aria-hidden
+        className="text-[calc(14px*var(--ui-scale))] leading-none font-bold"
+        style={{ fontFamily: stack }}
+      >
+        Aa
+      </span>
+      <span
+        className="text-[calc(12.5px*var(--ui-scale))] font-bold"
+        style={{ fontFamily: stack }}
+      >
+        {label}
+      </span>
+      {active && <Check className="h-3.5 w-3.5" strokeWidth={3.2} />}
+    </button>
   );
 }
 
@@ -258,6 +365,22 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
     (h) => Math.abs(prefs.specHeight - h.fraction) < 0.025,
   );
 
+  /* the header's live read-back — the whole setup, one line */
+  const summary = `${LAB_LABEL[prefs.theme]} room · ${SCALE_WORD[prefs.scale]} text · ${
+    prefs.accents.length
+  } ${prefs.accents.length === 1 ? "candy" : "candies"} on the wheel`;
+
+  const scaleIdx = SCALES.indexOf(prefs.scale);
+
+  /* one selection ink for the whole panel — coral, the house
+     primary. Swatches keep their own hue when on (they ARE the
+     content); everything else selected wears coral. */
+  const selectedRing = {
+    background: "rgb(255 107 107 / 0.1)",
+    boxShadow: "inset 0 0 0 2.5px #FF6B6B",
+  };
+  const idleRing = { background: "color-mix(in oklab, var(--color-ink) 5%, transparent)" };
+
   return (
     <AnimatePresence>
       {open && (
@@ -303,7 +426,8 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
               />
             </div>
 
-            {/* header — rides below the notch when the phone has one */}
+            {/* header — rides below the notch when the phone has one,
+                and reads your setup back in one live line */}
             <div
               className="relative flex items-center gap-3 border-b border-ink/[0.06] px-6 pb-4"
               style={{ paddingTop: "calc(1.5rem + var(--sa-top))" }}
@@ -315,6 +439,9 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 <h2 className="font-display text-[calc(20px*var(--ui-scale))] leading-tight font-semibold text-ink">
                   Customize
                 </h2>
+                <p className="mt-0.5 truncate text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-faint">
+                  {summary}
+                </p>
               </div>
               <m.button
                 type="button"
@@ -328,12 +455,18 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
             </div>
 
             <div
-              className="no-scrollbar relative flex flex-1 flex-col gap-6 overflow-y-auto px-6 pt-5"
+              className="no-scrollbar relative flex flex-1 flex-col gap-7 overflow-y-auto px-6 pt-5"
               style={{ paddingBottom: "calc(2rem + var(--sa-bottom))" }}
             >
-              <Section title="Theme" dot="#12B886">
-                <div className="grid grid-cols-4 gap-2">
-                  {(["light", "dark", "dune", "classic"] as Lab[]).map((l) => {
+              {/* ————— theme ————— */}
+              <Section
+                title="Theme"
+                hint="Four rooms — the whole site re-dresses."
+                icon={Moon}
+                candy="#12B886"
+              >
+                <div className="grid grid-cols-2 gap-2.5">
+                  {LABS.map((l) => {
                     const active = prefs.theme === l;
                     return (
                       <button
@@ -343,16 +476,12 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                         aria-pressed={active}
                         aria-label={`${LAB_LABEL[l]} theme`}
                         className="flex cursor-pointer flex-col gap-2 rounded-[calc(20px*var(--ui-scale))] p-2.5 text-left transition-colors"
-                        style={
-                          active
-                            ? { background: "rgb(18 184 134 / 0.13)", boxShadow: "inset 0 0 0 2.5px #12B886" }
-                            : { background: "color-mix(in oklab, var(--color-ink) 5%, transparent)" }
-                        }
+                        style={active ? selectedRing : idleRing}
                       >
                         <span className="relative block w-full">
                           <LabStage id={l} />
                           {active && (
-                            <span className="absolute top-1.5 right-1.5 grid h-4.5 w-4.5 place-items-center rounded-full bg-mint text-white shadow-[0_1.5px_0_rgb(11_99_73)]">
+                            <span className="absolute top-1.5 right-1.5 grid h-4.5 w-4.5 place-items-center rounded-full bg-coral text-white shadow-[0_1.5px_0_#E8590C]">
                               <Check className="h-3 w-3" strokeWidth={3.5} />
                             </span>
                           )}
@@ -371,46 +500,52 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section title="Colours" dot="#FF6B6B">
-                <div className="grid grid-cols-3 gap-2">
-                  {ACCENTS.map((a) => {
+              {/* ————— the colour wheel ————— */}
+              <Section
+                title="Colours"
+                hint="Tap candies on and off the wheel — sections take turns wearing them."
+                icon={Palette}
+                candy="#FF6B6B"
+              >
+                <div className="flex items-center py-1">
+                  {ACCENTS.map((a, i) => {
                     const on = prefs.accents.includes(a.id);
                     const lastOne = on && prefs.accents.length === 1;
                     return (
-                      <m.button
-                        key={a.id}
-                        type="button"
-                        onClick={() => toggleAccent(a.id)}
-                        whileTap={lastOne ? undefined : { scale: 0.93 }}
-                        aria-pressed={on}
-                        aria-disabled={lastOne || undefined}
-                        aria-label={`${a.label} — ${
-                          lastOne
-                            ? "the wheel keeps one colour on"
-                            : on
-                              ? "on, tap to remove"
-                              : "off, tap to add"
-                        }`}
-                        className={`flex cursor-pointer flex-col items-center gap-2 rounded-[calc(20px*var(--ui-scale))] px-2 py-3.5 transition-colors ${
-                          on ? "" : "hover:bg-ink/[0.09]"
-                        }`}
-                        style={
-                          on
-                            ? {
-                                background: tint(a.hex, 14),
-                                boxShadow: `inset 0 0 0 2.5px ${a.hex}`,
-                              }
-                            : { background: "color-mix(in oklab, var(--color-ink) 5%, transparent)" }
-                        }
-                      >
-                        <span
-                          aria-hidden
-                          className="grid h-10 w-10 place-items-center rounded-full transition-opacity"
-                          style={{
-                            background: a.hex,
-                            boxShadow: `0 3px 0 ${shade(a.hex)}, inset 0 1px 0 rgb(255 255 255 / 0.35)`,
-                            opacity: on ? 1 : 0.32,
-                          }}
+                      <Fragment key={a.id}>
+                        {i > 0 && (
+                          <span
+                            aria-hidden
+                            className="mx-1 h-0 min-w-2 flex-1 border-t-2 border-dashed border-ink/15"
+                          />
+                        )}
+                        <m.button
+                          type="button"
+                          onClick={() => toggleAccent(a.id)}
+                          whileTap={lastOne ? undefined : { scale: 0.9 }}
+                          aria-pressed={on}
+                          aria-disabled={lastOne || undefined}
+                          aria-label={`${a.label} — ${
+                            lastOne
+                              ? "the wheel keeps one colour on"
+                              : on
+                                ? "on, tap to remove"
+                                : "off, tap to add"
+                          }`}
+                          title={`${a.label}${on ? " · on" : ""}`}
+                          className="grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-full transition-all"
+                          style={
+                            on
+                              ? {
+                                  background: a.hex,
+                                  boxShadow: `0 3px 0 ${shade(a.hex)}, inset 0 1px 0 rgb(255 255 255 / 0.35)`,
+                                }
+                              : {
+                                  background: "transparent",
+                                  boxShadow: `inset 0 0 0 2.5px color-mix(in oklab, ${a.hex} 45%, transparent)`,
+                                  opacity: 0.72,
+                                }
+                          }
                         >
                           {on && (
                             <Check
@@ -419,38 +554,22 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                               style={{ color: readableInk(a.hex) }}
                             />
                           )}
-                        </span>
-                        <span
-                          className={`font-display text-[calc(11.5px*var(--ui-scale))] font-bold ${
-                            on ? "text-ink" : "text-ink-faint"
-                          }`}
-                        >
-                          {a.label}
-                        </span>
-                      </m.button>
+                        </m.button>
+                      </Fragment>
                     );
                   })}
                 </div>
-                {/* the rotation itself, previewed — the first eight
-                    sections, exactly as the bands will wear them */}
-                <div className="mt-3 rounded-[calc(18px*var(--ui-scale))] bg-ink/[0.045] px-4 py-3">
-                  <div aria-hidden className="flex items-end gap-1.5">
-                    {Array.from({ length: 8 }, (_, k) => (
+                {/* the rotation itself, previewed — a full-width band
+                    wearing the picked candies in wheel order */}
+                <div className="mt-3.5 rounded-[calc(18px*var(--ui-scale))] bg-ink/[0.045] px-4 py-3">
+                  <div aria-hidden className="flex gap-1">
+                    {Array.from({ length: 12 }, (_, k) => (
                       <span
                         key={k}
-                        className="h-3 rounded-full"
-                        style={{
-                          width:
-                            k === 7
-                              ? "calc(10px * var(--ui-scale))"
-                              : "calc(22px * var(--ui-scale))",
-                          background: accentOf(k),
-                        }}
+                        className="h-2.5 flex-1 rounded-full"
+                        style={{ background: accentOf(k) }}
                       />
                     ))}
-                    <span className="ml-0.5 font-body text-[calc(13px*var(--ui-scale))] font-bold text-ink-faint">
-                      …
-                    </span>
                   </div>
                   <p className="mt-2 text-[calc(11.5px*var(--ui-scale))] leading-snug font-bold text-ink-faint">
                     {rotationCaption}
@@ -458,7 +577,13 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                 </div>
               </Section>
 
-              <Section title="Text size" dot="#FFD43B">
+              {/* ————— text size ————— */}
+              <Section
+                title="Text size"
+                hint="Words scale everywhere — the navbar and the spec tray stay put."
+                icon={Gauge}
+                candy="#F59F00"
+              >
                 <div className="flex rounded-full bg-ink/[0.06] p-1">
                   {SCALES.map((s, i) => {
                     const active = prefs.scale === s;
@@ -491,120 +616,166 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                     );
                   })}
                 </div>
+                {/* the chosen rung, read back on a real sentence */}
+                <p
+                  aria-hidden
+                  className="mt-3 rounded-[calc(16px*var(--ui-scale))] bg-ink/[0.045] px-4 py-3 font-semibold text-ink-soft"
+                  style={{ fontSize: `calc(${SCALE_PX[scaleIdx]}px * var(--ui-scale))` }}
+                >
+                  Chemistry, made to stick.
+                </p>
               </Section>
 
-              {/* one fonts section, two runs — the heading family and
-                  the body family are one decision, not two departments */}
-              <Section title="Fonts" dot="#9775FA">
-                <div className="flex flex-col gap-2">
-                  <p className="font-display text-[calc(10px*var(--ui-scale))] font-bold uppercase tracking-[0.16em] text-ink-faint">
-                    Headings
-                  </p>
-                  {HEAD_FONTS.map((f) => (
-                    <FontRow
-                      key={f.id}
-                      active={prefs.headFont === f.id}
-                      label={f.label}
-                      stack={f.stack}
-                      onClick={() => setPrefs({ headFont: f.id })}
-                      ariaLabel={`Heading font ${f.label}`}
-                    />
-                  ))}
-                  <p className="mt-2.5 font-display text-[calc(10px*var(--ui-scale))] font-bold uppercase tracking-[0.16em] text-ink-faint">
-                    Body
-                  </p>
-                  {BODY_FONTS.map((f) => (
-                    <FontRow
-                      key={f.id}
-                      active={prefs.bodyFont === f.id}
-                      label={f.label}
-                      stack={f.stack}
-                      onClick={() => setPrefs({ bodyFont: f.id })}
-                      ariaLabel={`Body font ${f.label}`}
-                    />
-                  ))}
+              {/* ————— fonts — chips in their own lettering ————— */}
+              <Section
+                title="Fonts"
+                hint="Headings and body — picked separately."
+                icon={PencilRuler}
+                candy="#9775FA"
+              >
+                <div className="flex flex-col gap-3.5">
+                  <div>
+                    <p className="font-display text-[calc(10px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">
+                      Headings
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {HEAD_FONTS.map((f) => (
+                        <FontChip
+                          key={f.id}
+                          active={prefs.headFont === f.id}
+                          label={f.label}
+                          stack={f.stack}
+                          onClick={() => setPrefs({ headFont: f.id })}
+                          ariaLabel={`Heading font ${f.label}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-display text-[calc(10px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">
+                      Body
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {BODY_FONTS.map((f) => (
+                        <FontChip
+                          key={f.id}
+                          active={prefs.bodyFont === f.id}
+                          label={f.label}
+                          stack={f.stack}
+                          onClick={() => setPrefs({ bodyFont: f.id })}
+                          ariaLabel={`Body font ${f.label}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </Section>
 
-              <Section title="Spec map" dot="#F06595">
-                <div className="flex flex-col gap-2.5">
+              {/* ————— the spec tray ————— */}
+              <Section
+                title="Spec map"
+                hint="The tray that rides over your notes — drag its grabber anytime, it remembers."
+                icon={Target}
+                candy="#F06595"
+              >
+                <div className="flex flex-col gap-3.5">
                   {/* height — three rungs plus the drag: a dragged
                       fraction sits between rungs and the panel says
                       so, instead of pretending a preset is on */}
-                  <div className="flex rounded-full bg-ink/[0.06] p-1">
-                    {SPEC_HEIGHTS.map((h) => {
-                      const active =
-                        Math.abs(prefs.specHeight - h.fraction) < 0.025;
-                      return (
-                        <m.button
-                          key={h.id}
-                          type="button"
-                          onClick={() => setPrefs({ specHeight: h.fraction })}
-                          whileTap={{ scale: 0.93 }}
-                          aria-pressed={active}
-                          aria-label={`Spec map height ${h.label}`}
-                          className={`flex flex-1 cursor-pointer flex-col items-center rounded-full py-2 transition-colors ${
-                            active
-                              ? "bg-coral text-white shadow-[0_2px_0_#E8590C]"
-                              : "text-ink-soft hover:text-ink"
-                          }`}
-                        >
-                          <span className="font-display text-[calc(14px*var(--ui-scale))] leading-none font-bold">
-                            {Math.round(h.fraction * 100)}
-                            <span className="text-[calc(9.5px*var(--ui-scale))]">%</span>
-                          </span>
-                          <span className="mt-1 font-display text-[calc(9.5px*var(--ui-scale))] font-bold tracking-[0.08em]">
-                            {h.label}
-                          </span>
-                        </m.button>
-                      );
-                    })}
-                  </div>
-                  {!heightOnPreset && (
-                    <p className="text-center text-[calc(11px*var(--ui-scale))] font-bold text-ink-faint">
-                      custom — {Math.round(prefs.specHeight * 100)}%
+                  <div>
+                    <p className="font-display text-[calc(10px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">
+                      Tray height
                     </p>
-                  )}
+                    <div className="mt-1.5 flex rounded-full bg-ink/[0.06] p-1">
+                      {SPEC_HEIGHTS.map((h) => {
+                        const active =
+                          Math.abs(prefs.specHeight - h.fraction) < 0.025;
+                        return (
+                          <m.button
+                            key={h.id}
+                            type="button"
+                            onClick={() => setPrefs({ specHeight: h.fraction })}
+                            whileTap={{ scale: 0.93 }}
+                            aria-pressed={active}
+                            aria-label={`Spec map height ${h.label}`}
+                            className={`flex flex-1 cursor-pointer flex-col items-center rounded-full py-2 transition-colors ${
+                              active
+                                ? "bg-coral text-white shadow-[0_2px_0_#E8590C]"
+                                : "text-ink-soft hover:text-ink"
+                            }`}
+                          >
+                            <span className="font-display text-[calc(14px*var(--ui-scale))] leading-none font-bold">
+                              {Math.round(h.fraction * 100)}
+                              <span className="text-[calc(9.5px*var(--ui-scale))]">%</span>
+                            </span>
+                            <span className="mt-1 font-display text-[calc(9.5px*var(--ui-scale))] font-bold tracking-[0.08em]">
+                              {h.label}
+                            </span>
+                          </m.button>
+                        );
+                      })}
+                    </div>
+                    {!heightOnPreset && (
+                      <p className="mt-1.5 text-center text-[calc(11px*var(--ui-scale))] font-bold text-ink-faint">
+                        custom — {Math.round(prefs.specHeight * 100)}%
+                      </p>
+                    )}
+                  </div>
                   {/* chip density — the min-width the tray's auto-fill
                       grid packs columns against */}
-                  <div className="flex rounded-full bg-ink/[0.06] p-1">
-                    {SPEC_DENSITIES.map((d) => {
-                      const active = prefs.specDensity === d.id;
-                      return (
-                        <m.button
-                          key={d.id}
-                          type="button"
-                          onClick={() => setPrefs({ specDensity: d.id })}
-                          whileTap={{ scale: 0.93 }}
-                          aria-pressed={active}
-                          aria-label={`Spec map density ${d.label}`}
-                          className={`flex flex-1 cursor-pointer items-center justify-center rounded-full py-2 transition-colors ${
-                            active
-                              ? "bg-coral text-white shadow-[0_2px_0_#E8590C]"
-                              : "text-ink-soft hover:text-ink"
-                          }`}
-                        >
-                          <span className="font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.04em]">
-                            {d.label}
-                          </span>
-                        </m.button>
-                      );
-                    })}
+                  <div>
+                    <p className="font-display text-[calc(10px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">
+                      Chip density
+                    </p>
+                    <div className="mt-1.5 flex rounded-full bg-ink/[0.06] p-1">
+                      {SPEC_DENSITIES.map((d) => {
+                        const active = prefs.specDensity === d.id;
+                        return (
+                          <m.button
+                            key={d.id}
+                            type="button"
+                            onClick={() => setPrefs({ specDensity: d.id })}
+                            whileTap={{ scale: 0.93 }}
+                            aria-pressed={active}
+                            aria-label={`Spec map density ${d.label}`}
+                            className={`flex flex-1 cursor-pointer items-center justify-center rounded-full py-2 transition-colors ${
+                              active
+                                ? "bg-coral text-white shadow-[0 2px 0 #E8590C]"
+                                : "text-ink-soft hover:text-ink"
+                            }`}
+                          >
+                            <span className="font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.04em]">
+                              {d.label}
+                            </span>
+                          </m.button>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </Section>
 
-              <Section title="Details" dot="#FF922B">
+              {/* ————— details ————— */}
+              <Section
+                title="Details"
+                hint="Small textures and springs."
+                icon={Sparkles}
+                candy="#FF922B"
+              >
                 <div className="grid grid-cols-2 gap-2.5">
                   <Toggle
                     on={prefs.dots}
                     onChange={(v) => setPrefs({ dots: v })}
                     label="Dots"
+                    hint="dotted paper"
+                    icon={Eye}
                   />
                   <Toggle
                     on={prefs.motion}
                     onChange={(v) => setPrefs({ motion: v })}
                     label="Motion"
+                    hint="blobs & springs"
+                    icon={Zap}
                   />
                 </div>
               </Section>
@@ -615,68 +786,18 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
                   flashThemeAnim();
                   setPrefs(DEFAULT_PREFS);
                 }}
-                className="mx-auto mt-2 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full bg-ink/[0.06] px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
+                className="mx-auto mt-1 inline-flex min-h-[calc(44px*var(--ui-scale))] w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-ink/[0.06] px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
               >
-                <RotateCcw className="h-4 w-4" /> Reset
+                <RotateCcw className="h-4 w-4" /> Back to the club defaults
               </button>
               <p className="flex items-start justify-center gap-1.5 text-center text-[calc(11.5px*var(--ui-scale))] leading-relaxed font-bold text-ink-faint">
-                <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-lemon" />
-                saved on this device
+                <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-mint" />
+                Saved on this device — nothing leaves your browser.
               </p>
             </div>
           </m.aside>
         </>
       )}
     </AnimatePresence>
-  );
-}
-
-function FontRow({
-  active,
-  label,
-  stack,
-  onClick,
-  ariaLabel,
-}: {
-  active: boolean;
-  label: string;
-  stack: string;
-  onClick: () => void;
-  ariaLabel: string;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      aria-label={ariaLabel}
-      className="flex cursor-pointer items-center gap-3.5 rounded-[calc(22px*var(--ui-scale))] px-4 py-3 text-left transition-colors"
-      style={
-        active
-          ? { background: "rgb(255 107 107 / 0.11)", boxShadow: "inset 0 0 0 2.5px #FF6B6B" }
-          : { background: "color-mix(in oklab, var(--color-ink) 5%, transparent)" }
-      }
-    >
-      <span
-        className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-paper text-[calc(19px*var(--ui-scale))] leading-none font-bold text-ink shadow-[0_2px_0_rgb(61_43_31/0.08)]"
-        style={{ fontFamily: stack }}
-      >
-        Aa
-      </span>
-      <span className="min-w-0">
-        <span className="block font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">{label}</span>
-        <span className="block truncate text-[calc(12px*var(--ui-scale))] font-bold text-ink-soft" style={{ fontFamily: stack }}>
-          The quick brown fox
-        </span>
-      </span>
-      <span
-        aria-hidden
-        className={`ml-auto grid h-5 w-5 shrink-0 place-items-center rounded-full ${
-          active ? "bg-coral text-white" : "border-2 border-ink/15"
-        }`}
-      >
-        {active && <Check className="h-3 w-3" strokeWidth={3.5} />}
-      </span>
-    </button>
   );
 }
