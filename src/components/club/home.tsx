@@ -162,7 +162,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
         <DoodleAtom className="absolute right-[3%] bottom-[12%] hidden h-9 w-9 text-coral/30 xl:block" />
 
         <div className="relative z-10">
-          <div className="hero-layout mx-auto grid max-w-6xl items-center gap-8 px-5 pb-12 pt-3 sm:px-8 sm:pb-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-6 lg:px-10 lg:pb-24 lg:pt-4">
+          <div className="hero-layout mx-auto grid max-w-6xl items-center gap-8 px-5 pb-8 pt-3 sm:px-8 sm:pb-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-6 lg:px-10 lg:pb-10 lg:pt-4">
             {/* left: words */}
             <div>
               <PopIn>
@@ -321,11 +321,11 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           After dark the seams ride the same study grounds as the
           notes (--home-band-a/b alias --note-band-a/b); by day each
           band keeps its own candy tint via the fallback. */}
-      <BandWave from="var(--color-paper)" to={`var(--home-band-b, ${homeBandOf(0)})`} wave={1} className="h-[calc(38px*var(--ui-scale))] sm:h-[calc(52px*var(--ui-scale))]" />
+      <BandWave from="var(--color-paper)" to={`var(--home-band-b, ${homeBandOf(0)})`} wave={1} className="h-[calc(30px*var(--ui-scale))] sm:h-[calc(40px*var(--ui-scale))]" />
 
       {/* ————— units: M3 elevated cards on the orange band ————— */}
       <div style={{ background: `var(--home-band-b, ${homeBandOf(0)})` }}>
-      <section id="units" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-8 pb-8 sm:px-8">
+      <section id="units" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-4 pb-8 sm:px-8">
         <div className="text-center">
           <SectionTag main="#FF922B" tilt={2}>
             the course
