@@ -3,12 +3,10 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, m } from "framer-motion";
-import { ArrowRight, Clock, Search, X } from "./icons";
+import { ArrowRight, Search, X } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { SEARCH_INDEX, searchTopics, type SearchRow } from "@/lib/spectra/search-index";
-import { shade } from "./bits";
 
-const SUGGESTIONS = ["moles", "enthalpy", "chirality", "buffers", "titration", "entropy"];
 
 export function SearchPalette({
   open,
@@ -162,39 +160,13 @@ export function SearchPalette({
                   )}
                 </div>
 
-                <div className="mt-3 flex items-center gap-2 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                  <span className="shrink-0 pr-1 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-ink-faint">Popular</span>
-                  {SUGGESTIONS.map((term) => (
-                    <button
-                      key={term}
-                      type="button"
-                      onClick={() => { setQ(term); }}
-                      className="shrink-0 rounded-full border border-ink/[0.09] bg-paper/70 px-3 py-1.5 text-[10px] font-semibold text-ink-soft transition-colors hover:border-grape/25 hover:bg-grape/[0.07] hover:text-grape"
-                    >
-                      {term}
-                    </button>
-                  ))}
-                </div>
-              </div>
 
-              <div className="flex shrink-0 items-center justify-between gap-3 border-y border-ink/10 px-4 py-2.5 sm:px-6">
-                <div className="min-w-0">
-                  <p className="font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-ink-faint">
-                    {q.trim() ? "SEARCH RESULTS" : "COURSE DIRECTORY"}
-                  </p>
-                  <p className="mt-0.5 truncate font-display text-[13px] font-bold text-ink">
-                    {q.trim() ? "Matching topics" : "Browse all topics"}
-                  </p>
-                </div>
-                <span aria-live="polite" className="shrink-0 rounded-full border border-ink/10 bg-ink/[0.025] px-3 py-1.5 font-mono text-[10px] font-semibold tabular-nums text-ink-faint">
-                  {results.length} / {SEARCH_INDEX.length}
-                </span>
               </div>
 
               <div
                 id="search-results"
                 ref={listRef}
-                className="min-h-0 flex-1 space-y-5 overflow-y-auto px-4 py-4 sm:px-6"
+                className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 py-3 sm:px-6"
                 aria-label="Course topics"
                 style={{ overscrollBehavior: "contain" }}
               >
@@ -208,20 +180,14 @@ export function SearchPalette({
                     <button type="button" onClick={() => setQ("")} className="mt-5 rounded-full bg-ink px-4 py-2.5 text-[11px] font-bold text-paper transition-opacity hover:opacity-85">Clear search</button>
                   </div>
                 ) : Object.entries(groups).map(([unit, rows]) => (
-                  <section key={unit} className="overflow-hidden rounded-[22px] border border-ink/[0.085] bg-paper shadow-[0_8px_24px_-22px_rgb(40_28_18/0.28)]">
-                    <div className="flex items-center gap-3 border-b border-ink/[0.07] px-4 py-3 sm:px-5">
-                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl font-mono text-[10px] font-bold text-white" style={{ background: rows[0].unitMain, boxShadow: `0 2px 0 ${shade(rows[0].unitMain)}` }}>
-                        {unit.replace("UNIT ", "")}
-                      </span>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="font-display text-[13px] font-bold tracking-tight text-ink">{unit}</h3>
-                        <p className="mt-0.5 text-[10px] font-medium text-ink-faint">{rows.length} {rows.length === 1 ? "topic" : "topics"} in this unit</p>
-                      </div>
-                      <span className="h-1.5 w-12 overflow-hidden rounded-full bg-ink/[0.07]">
-                        <span className="block h-full rounded-full" style={{ width: `${Math.min(100, rows.length / 8 * 100)}%`, background: rows[0].unitMain }} />
-                      </span>
+                  <section key={unit} className="space-y-1">
+                    <div className="flex items-center gap-2.5 px-1 pb-1 pt-2">
+                      <span className="h-4 w-[3px] rounded-full" style={{ background: rows[0].unitMain }} />
+                      <h3 className="font-display text-[11px] font-bold uppercase tracking-[0.12em] text-ink-soft">{unit}</h3>
+                      <span className="font-mono text-[9px] tabular-nums text-ink-faint">{rows.length}</span>
+                      <span className="h-px flex-1 bg-ink/[0.08]" />
                     </div>
-                    <div className="grid gap-1.5 p-2 sm:grid-cols-2 sm:gap-2 sm:p-3">
+                    <div className="divide-y divide-ink/[0.07]">
                       {rows.map((row) => {
                         const index = ++rowIndex;
                         const active = index === sel;
@@ -234,21 +200,15 @@ export function SearchPalette({
                             aria-current={active ? "true" : undefined}
                             onMouseEnter={() => setSel(index)}
                             onClick={() => pick(row)}
-                            className={`group flex min-h-[76px] min-w-0 items-center gap-3 rounded-[16px] border px-3 py-3 text-left transition-colors ${active ? "border-grape/25 bg-grape/[0.065]" : "border-transparent hover:border-ink/[0.09] hover:bg-ink/[0.025]"}`}
+                            className={`group flex min-h-[58px] w-full min-w-0 items-center gap-3 rounded-lg px-2.5 py-2 text-left transition-colors ${active ? "bg-grape/[0.075]" : "hover:bg-ink/[0.035]"}`}
                           >
-                            <span
-                              aria-hidden="true"
-                              className="h-9 w-[3px] shrink-0 rounded-full"
-                              style={{ background: row.unitMain }}
-                            />
                             <span className="min-w-0 flex-1">
-                              <span className="mb-1 block whitespace-nowrap font-mono text-[9px] font-bold uppercase tracking-[0.12em] text-ink-faint">{row.label}</span>
-                              <span className="block text-[12px] font-bold leading-snug text-ink sm:text-[12.5px]">{row.title}</span>
-                              <span className="mt-1 block line-clamp-1 text-[10px] font-medium text-ink-faint">{row.summary}</span>
+                              <span className="block font-mono text-[9px] font-semibold tracking-wide text-ink-faint">{row.label}</span>
+                              <span className="mt-0.5 block text-[12px] font-semibold leading-snug text-ink sm:text-[13px]">{row.title}</span>
                             </span>
-                            <span className="flex shrink-0 flex-col items-end gap-1 text-[9px] font-semibold tabular-nums text-ink-faint">
+                            <span className="flex shrink-0 items-center gap-2 text-[9px] font-medium tabular-nums text-ink-faint">
                               <span>{row.minutes} min</span>
-                              <ArrowRight className={`h-3.5 w-3.5 transition-transform ${active ? "translate-x-0.5 text-grape" : "text-ink-faint/50 group-hover:translate-x-0.5"}`} />
+                              <ArrowRight className={`h-3.5 w-3.5 ${active ? "text-grape" : "text-ink-faint/50"}`} />
                             </span>
                           </button>
                         );
