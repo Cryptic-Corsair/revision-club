@@ -376,10 +376,10 @@ export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> 
     side: "#4E3417",
   },
   classic: {
-    // both rooms at once — espresso and cream, the exact pair the
-    // classic notes alternate, cut on the diagonal
-    bg: "linear-gradient(135deg, #2C2013 50%, #FDF6E3 50%)",
-    ink: "#2C2013", // unused by the split glyph; kept for the record
-    side: "#8F7A5C", // a roast that bridges both halves
+    // antique parchment-gold: a single warm surface, not a split
+    // espresso/cream disc — the Classic identity stays in the ink.
+    bg: "#D6C19A",
+    ink: "#2C2013",
+    side: "#A58B62",
   },
 };
