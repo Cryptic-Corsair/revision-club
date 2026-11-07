@@ -124,8 +124,8 @@ function Toggle({
 /* ————— one lab, as a live miniature —————
    the actual palette each room wears, painted at stamp size so
    picking a lab is picking what you see, not reading a label.
-   The dark miniature is Night (velvet dusk), Sage is forest green,
-   and Dune is the chocolate room with its low amber lamp. */
+   The dark miniature is Night (velvet dusk), and Dune is the
+   chocolate room with its low amber lamp. */
 
 function LabStage({ id }: { id: Lab }) {
   if (id === "light") {
@@ -153,22 +153,6 @@ function LabStage({ id }: { id: Lab }) {
           <i className="h-1.5 w-1.5 rounded-full bg-[#f59f00]" />
           <i className="h-1.5 w-1.5 rounded-full bg-[#12b886]" />
           <i className="h-1.5 w-1.5 rounded-full bg-[#ff6b6b]" />
-        </span>
-      </span>
-    );
-  }
-  if (id === "sage") {
-    return (
-      <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#18231f] shadow-[inset_0_0_0_1px_rgb(232_240_230/0.1)]">
-        <span
-          className="absolute inset-0"
-          style={{ background: "radial-gradient(42px 30px at 68% 12%, rgb(181 200 173 / 0.24), transparent 70%)" }}
-        />
-        <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#30483c] shadow-[0_1.5px_0_rgb(0_0_0/0.35)]" />
-        <span className="absolute bottom-2 left-2 flex items-center gap-1">
-          <i className="h-1.5 w-1.5 rounded-full bg-[#b5c8ad]" />
-          <i className="h-1.5 w-1.5 rounded-full bg-[#d9c7a3]" />
-          <i className="h-1.5 w-1.5 rounded-full bg-[#e8f0e6]" />
         </span>
       </span>
     );
