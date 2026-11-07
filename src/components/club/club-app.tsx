@@ -135,15 +135,14 @@ function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
   const room = lab ?? prefs.theme;
   const ink =
     room === "classic" ? "#3B2A1B" :
-    room === "dune" || room === "sage" ? "#E8F0E6" :
+    room === "dune" ? "#FFE9C7" :
     room === "dark" ? "#F2EAF5" : "#493326";
   const liquid =
     room === "classic" ? "#C58A36" :
     room === "dune" ? "#D9A65F" :
-    room === "sage" ? "#B5C8AD" :
     room === "dark" ? "#C79ACD" : "#E97862";
   const glass =
-    room === "dark" || room === "dune" || room === "sage" ? "none" :
+    room === "dark" || room === "dune" ? "none" :
     room === "classic" ? "#F7EEDB" : "#FFF9EF";
 
   return (
@@ -422,7 +421,7 @@ function TopBar({
               className="group flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-2.5 transition-all hover:-translate-y-px sm:h-11 sm:gap-2.5 sm:px-3"
               style={{
                 background: THEME_CHIP[lab].bg,
-                color: lab === "dark" ? "#F7ECFB" : lab === "dune" ? "#FFE9C7" : lab === "sage" ? "#E8F0E6" : "#3D2B1F",
+                color: lab === "dark" ? "#F7ECFB" : lab === "dune" ? "#FFE9C7" : "#3D2B1F",
                 boxShadow: `0 2.5px 0 ${THEME_CHIP[lab].side}, inset 0 1px 0 rgb(255 255 255 / 0.24)`,
               }}
             >
@@ -486,8 +485,6 @@ function TopBar({
                                   ? "linear-gradient(135deg,#17131D 0%,#30263D 58%,#795B79 100%)"
                                   : option === "dune"
                                     ? "linear-gradient(135deg,#332316 0%,#80572E 58%,#D6A65F 100%)"
-                                    : option === "sage"
-                                      ? "linear-gradient(135deg,#18231F 0%,#30483C 58%,#B5C8AD 100%)"
                                       : "linear-gradient(135deg,#2C2013 0%,#2C2013 49%,#FDF6E3 50%,#FDF6E3 100%)",
                             }}
                           >
@@ -535,8 +532,6 @@ function TopBar({
                         ? "#493552"
                         : announce === "dune"
                           ? "#6B4A26"
-                          : announce === "sage"
-                            ? "#29483A"
                             : "linear-gradient(90deg, #2c2013 50%, #fdf6e3 50%)",
                   boxShadow: "inset 0 0 0 2px rgb(61 43 31 / 0.12)",
                 }}
