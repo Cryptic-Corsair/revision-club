@@ -409,7 +409,10 @@ function CandyTable({
   return (
     <div className="max-w-full">
       {caption && (
-        <div className="mb-2 text-[calc(12px*var(--ui-scale))] font-extrabold tracking-[0.08em] text-ink-faint uppercase">
+        <div
+          className="mb-2.5 px-4 font-display text-[calc(15px*var(--ui-scale))] font-extrabold tracking-[0.07em] uppercase sm:px-5"
+          style={{ color: inkMix(accent, 62) }}
+        >
           <Fmt text={caption} />
         </div>
       )}
