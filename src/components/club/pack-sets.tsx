@@ -16,7 +16,7 @@ import {
 import { readableInk, shade } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · revision sets — named snapshots of your ticked
+   IAL CHEM · revision sets — named snapshots of your ticked
    spec points, kept in the browser. One dialog, opened from both
    the spec index and the pack itself: save the current selection
    under a name, load a set back (it re-ticks its points), rename
