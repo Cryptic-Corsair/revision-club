@@ -282,7 +282,7 @@ function TopBar({
   }, [themeOpen]);
 
   const tool = (active: boolean) =>
-    `nav-tool nav-glass-button grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-all sm:h-11 sm:w-11 ${
+    `nav-tool nav-tool-button grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full transition-all sm:h-11 sm:w-11 ${
       active ? "is-active" : ""
     }`;
 
@@ -295,7 +295,7 @@ function TopBar({
         <nav
           ref={themeAreaRef}
           aria-label="Main"
-          className="relative flex max-w-[97vw] items-center gap-1.5 rounded-full bg-paper/90 py-2 pr-2.5 pl-2.5 backdrop-blur-lg"
+          className="relative flex max-w-[97vw] items-center gap-1.5 rounded-full border border-edge bg-paper py-2 pr-2.5 pl-2.5"
           style={{
             boxShadow:
               "0 3px 0 var(--edge), 0 16px 38px -18px rgb(0 0 0 / 0.4)",
@@ -420,7 +420,7 @@ function TopBar({
             aria-haspopup="menu"
             aria-label={`Theme: ${LAB_LABEL[lab]}. Choose appearance`}
             title="Choose theme"
-            className="nav-glass-button group relative flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-2.5 transition-all hover:-translate-y-px sm:h-11 sm:gap-2.5 sm:px-3"
+            className="nav-tool-button group relative flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-2.5 transition-all hover:-translate-y-px sm:h-11 sm:gap-2.5 sm:px-3"
             style={{
               background: lab === "classic" ? "#F1E6D0" : THEME_CHIP[lab].bg,
               color: lab === "dark" ? "#EEF2FF" : lab === "dune" ? "#FFE9C7" : "#3D2B1F",
@@ -675,7 +675,7 @@ function Footer({
                       key={u.code}
                       type="button"
                       onClick={() => onOpenUnit(u.code)}
-                      className="footer-glass-button group flex cursor-pointer items-center gap-3 rounded-2xl px-2.5 py-2 text-left"
+                      className="footer-action-button group flex cursor-pointer items-center gap-3 rounded-2xl px-2.5 py-2 text-left"
                     >
                       <span
                         className="grid h-8 w-8 shrink-0 place-items-center rounded-full font-display text-[calc(13.5px*var(--ui-scale))] font-bold transition-transform group-hover:scale-110"
@@ -746,7 +746,7 @@ function Footer({
                     key={row.label}
                     type="button"
                     onClick={row.open}
-                    className="footer-glass-button group flex cursor-pointer items-center gap-2.5 rounded-2xl px-2.5 py-2 text-left"
+                    className="footer-action-button group flex cursor-pointer items-center gap-2.5 rounded-2xl px-2.5 py-2 text-left"
                   >
                     <span
                       className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:scale-110 ${row.chip}`}
@@ -812,7 +812,7 @@ function Footer({
               <button
                 type="button"
                 onClick={onOpenLegal}
-                className="footer-glass-button group inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85"
+                className="footer-action-button group inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85"
                 aria-label="Open the disclaimer and legal information page"
               >
                 <ShieldCheck
@@ -824,7 +824,7 @@ function Footer({
               <button
                 type="button"
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="footer-glass-button group inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85"
+                className="footer-action-button group inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85"
               >
                 <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" strokeWidth={2.2} />
                 Back to top
