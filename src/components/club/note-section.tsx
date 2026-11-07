@@ -409,14 +409,16 @@ function CandyTable({
   return (
     <div className="max-w-full">
       {caption && (
-        <div
-          className="mb-2.5 px-4 font-display text-[calc(15px*var(--ui-scale))] font-extrabold tracking-[0.07em] uppercase sm:px-5"
-          style={{ color: inkMix(accent, 62) }}
-        >
-          <Fmt text={caption} />
+        <div className="mb-2 flex pl-4 sm:pl-5">
+          <span
+            className="inline-flex items-center rounded-full px-4 py-1.5 font-display text-[calc(13.5px*var(--ui-scale))] font-bold"
+            style={{ background: accent, color: readableInk(accent) }}
+          >
+            <Fmt text={caption} />
+          </span>
         </div>
       )}
-      <div className="overflow-hidden rounded-[calc(24px*var(--ui-scale))] bg-paper puff">
+      <div className="overflow-hidden rounded-[calc(10px*var(--ui-scale))] bg-paper puff">
         <ScrollFade>
           <table className="w-full min-w-[calc(480px*var(--ui-scale))] border-collapse text-left">
             <thead>

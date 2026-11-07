@@ -336,7 +336,7 @@ function CandyTable({
           <Fmt text={caption} />
         </div>
       )}
-      <div className="overflow-hidden rounded-[calc(26px*var(--ui-scale))] bg-paper puff">
+      <div className="overflow-hidden rounded-[calc(10px*var(--ui-scale))] bg-paper puff">
         <ScrollFade>
           <table className="w-full min-w-[calc(520px*var(--ui-scale))] border-collapse text-left">
             <thead>
