@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
-   Reaction Club · the desk
+   IAL CHEM · the desk
    The site remembers whether you've actually started studying.
    First visit lands on the introduction; the first tap into a
    unit or topic flips a flag, and every visit after that opens
