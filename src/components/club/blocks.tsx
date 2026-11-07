@@ -331,16 +331,18 @@ function CandyTable({
   return (
     <div>
       {caption && (
-        <div className="mb-2 flex pl-4 sm:pl-5">
+        <div className="mb-2.5 flex items-start gap-2.5">
           <span
-            className="inline-flex items-center rounded-full px-4 py-1.5 font-display text-[calc(13.5px*var(--ui-scale))] font-bold"
-            style={{ background: main, color: readableInk(main) }}
-          >
+            aria-hidden
+            className="mt-[calc(9px*var(--ui-scale))] h-[calc(3px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))] shrink-0 rounded-full"
+            style={{ background: main }}
+          />
+          <div className="min-w-0 font-display text-[calc(15px*var(--ui-scale))] leading-snug font-bold text-ink">
             <Fmt text={caption} />
-          </span>
+          </div>
         </div>
       )}
-      <div className="overflow-hidden rounded-[calc(10px*var(--ui-scale))] bg-paper puff">
+      <div className="overflow-hidden rounded-[calc(10px*var(--ui-scale))] rounded-tl-none bg-paper puff">
         <ScrollFade>
           <table className="w-full min-w-[calc(520px*var(--ui-scale))] border-collapse text-left">
             <thead>
