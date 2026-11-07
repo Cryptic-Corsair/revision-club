@@ -63,7 +63,7 @@ export function UnitView({
           </span>
           <Chip main={main}>
             <span className="h-2 w-2 rounded-full" style={{ background: main }} />
-            {unit.candy.name}
+            {unit.element.symbol} · {unit.element.name}
           </Chip>
           <Chip>
             {unit.stage} · {unit.topicRange}

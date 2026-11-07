@@ -19,11 +19,10 @@ import {
 } from "@/lib/spectra/prefs";
 
 /* the full candy wheel, hue-wheel order: red → orange → sun →
-   green → purple → amber, so adjacent bands always differ (pink
-   stays reserved for WCH15's own identity). This is the whole
-   shelf — the customize panel narrows it to your picks, and the
-   helpers below rotate whatever's on: one pick dresses every
-   section, two alternate, three+ cycle. */
+   green → purple → amber, so adjacent bands always differ. This is
+   the whole shelf — the customize panel narrows it to your picks,
+   and the helpers below rotate whatever's on: one pick dresses
+   every section, two alternate, three+ cycle. */
 export const BANDS = ACCENTS.map((a) => a.hex);
 
 const ACCENT_HEX: Record<AccentId, string> = {

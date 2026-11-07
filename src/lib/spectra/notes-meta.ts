@@ -29,6 +29,15 @@ export interface NotesMeta {
 
 export const NOTES_META: NotesMeta[] = [
   {
+    id: "wch11-t01",
+    unitCode: "WCH11",
+    topicId: "t01",
+    kicker: "Unit 1 · Topic 1 — the complete class note, spec by spec",
+    title: "Formulae, equations & amount of substance",
+    source: "the complete class note (CHSE Grade 11, Unit 1.3 · Topic 1 · 2020, semester 1)",
+    specRange: "1.1 → 1.12",
+  },
+  {
     id: "wch11-t02",
     unitCode: "WCH11",
     topicId: "t02",
@@ -181,6 +190,7 @@ export const NOTES_META: NotesMeta[] = [
     source: "the core practical reference notes (CHSE, Unit 3 · 2020) — Core Practicals 5, 6 and 7, the cyclohexene and ester preparations, and the organic unknowns of Core Practical 8+15",
     specRange: "P9.1 → P9.7",
   },
+
 ];
 
 export function getNotesMeta(docId: string): NotesMeta | undefined {

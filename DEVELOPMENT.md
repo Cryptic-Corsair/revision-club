@@ -79,7 +79,7 @@ src/
    ├─ types.ts          Core shared types
    ├─ units.ts          Unit registry: WCH11–WCH16 → topic lists
    ├─ content/          wch11.ts … wch16.ts (unit topic lists) +
-   │                    notes-t02-a.ts … notes-t10-c.ts (the actual notes)
+   │                    notes-t01-a.ts … notes-t10-d.ts (the actual notes)
    ├─ notes-types.ts    NotesDoc / SpecSection / NotesBlock / FigureKind
    ├─ notes.ts / notes-meta.ts          Notes loading + metadata
    ├─ registry.ts / deck.ts / packs.ts  Flashcard content

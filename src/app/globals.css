@@ -8,9 +8,8 @@
 
    Material: cream paper, polka dots, chunky rounded type, sticker cards.
    No hairline borders, no edged boxes — everything squishy and round.
-   Six units, six flavours:
-   WCH11 strawberry · WCH12 orange fizz · WCH13 mint chip
-   WCH14 grape soda · WCH15 bubblegum · WCH16 lemon sherbet
+   Six units, six candy accents — the code-to-colour pairing lives
+   in units.ts and nowhere else.
 
    Four labs, one set of tokens: every surface reads its colour from
    the custom properties below, so the whole site flips between

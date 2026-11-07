@@ -234,7 +234,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
             {/* right: a taste of what's inside — notes and equations
                 drift around Bubbles, so the scene sells the product */}
             <div className="relative mx-auto flex h-[calc(320px*var(--ui-scale))] w-full max-w-[calc(440px*var(--ui-scale))] items-center justify-center sm:h-[calc(400px*var(--ui-scale))] md:h-[calc(440px*var(--ui-scale))] md:max-w-[calc(480px*var(--ui-scale))]">
-              {/* soft peach wash — pink stays reserved for WCH15 and the mascot blush */}
+              {/* soft peach wash behind Bubbles */}
               <Blob color={tint("#FF922B", 18)} shape="b" settle className="h-[86%] w-[86%]" />
               <Blob
                 color={tint("#FFD43B", 30)}
@@ -381,7 +381,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                           className="h-2 w-2 rounded-full"
                           style={{ background: u.candy.main }}
                         />
-                        {u.candy.name}
+                        {u.element.symbol} · {u.element.name}
                       </div>
                     </div>
                   </div>

@@ -22,8 +22,8 @@ export type BodyFont = "nunito" | "quicksand";
 /* the candy wheel the site's sections take turns wearing. The full
    shelf by default; the customize panel narrows it to your picks —
    one pick dresses every section, two alternate, three+ rotate.
-   Order is fixed (hue-wheel, pink reserved for WCH15's identity) so
-   alternation is predictable no matter which subset is on. */
+   Order is fixed (hue-wheel) so alternation is predictable no
+   matter which subset is on. */
 export type AccentId = "coral" | "tangerine" | "sun" | "mint" | "grape" | "amber";
 
 export const ACCENTS: { id: AccentId; hex: string; label: string }[] = [

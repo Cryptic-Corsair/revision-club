@@ -313,7 +313,7 @@ export function CustomizePanel({ open, onClose }: { open: boolean; onClose: () =
               </span>
               <div className="min-w-0 flex-1">
                 <h2 className="font-display text-[calc(20px*var(--ui-scale))] leading-tight font-semibold text-ink">
-                  Make it yours
+                  Customize
                 </h2>
               </div>
               <m.button

@@ -12,8 +12,6 @@ export type UnitCode = "WCH11" | "WCH12" | "WCH13" | "WCH14" | "WCH15" | "WCH16"
 export interface Candy {
   /** main colour (hex) */
   main: string;
-  /** plain colour name, e.g. "red" */
-  name: string;
 }
 
 /** rel: relative intensity of an emission line — 3 is the dominant line */

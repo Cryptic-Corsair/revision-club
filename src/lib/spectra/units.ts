@@ -28,7 +28,7 @@ export const UNITS: Unit[] = [
     element: { symbol: "Li", name: "lithium", flameName: "crimson", nm: 670.8 },
     color: "#ff4d5e",
     cssVar: "--flame-11",
-    candy: { main: "#FF6B6B", name: "red" },
+    candy: { main: "#FF6B6B" },
     lines: [
       { nm: 670.8, rel: 3 },
       { nm: 610.4, rel: 1 },
@@ -56,7 +56,7 @@ export const UNITS: Unit[] = [
     element: { symbol: "Na", name: "sodium", flameName: "gold", nm: 589.0 },
     color: "#ffb224",
     cssVar: "--flame-12",
-    candy: { main: "#FF922B", name: "orange" },
+    candy: { main: "#FF922B" },
     lines: [
       { nm: 589.0, rel: 3 },
       { nm: 589.6, rel: 2 },
@@ -84,7 +84,7 @@ export const UNITS: Unit[] = [
     element: { symbol: "Ba", name: "barium", flameName: "apple-green", nm: 553.5 },
     color: "#43e08c",
     cssVar: "--flame-13",
-    candy: { main: "#12B886", name: "green" },
+    candy: { main: "#12B886" },
     lines: [
       { nm: 553.5, rel: 3 },
       { nm: 614.2, rel: 2 },
@@ -112,7 +112,7 @@ export const UNITS: Unit[] = [
     element: { symbol: "Cu", name: "copper", flameName: "blue-green", nm: 510.5 },
     color: "#2cd9c7",
     cssVar: "--flame-14",
-    candy: { main: "#9775FA", name: "violet" },
+    candy: { main: "#9775FA" },
     lines: [
       { nm: 510.5, rel: 3 },
       { nm: 515.3, rel: 2 },
@@ -141,7 +141,7 @@ export const UNITS: Unit[] = [
     element: { symbol: "Cs", name: "caesium", flameName: "deep blue", nm: 455.5 },
     color: "#5e8bff",
     cssVar: "--flame-15",
-    candy: { main: "#F06595", name: "pink" },
+    candy: { main: "#F06595" },
     lines: [
       { nm: 455.5, rel: 3 },
       { nm: 459.3, rel: 2 },
@@ -168,7 +168,7 @@ export const UNITS: Unit[] = [
     element: { symbol: "K", name: "potassium", flameName: "lilac", nm: 404.4 },
     color: "#a06bff",
     cssVar: "--flame-16",
-    candy: { main: "#F59F00", name: "amber" },
+    candy: { main: "#F59F00" },
     lines: [
       { nm: 404.4, rel: 3 },
       { nm: 404.7, rel: 2 },
