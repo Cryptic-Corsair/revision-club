@@ -100,7 +100,7 @@ export function Legal({ onBack }: { onBack: () => void }) {
         <div className="relative z-10 max-w-3xl">
           <div className="flex flex-wrap items-center gap-2">
             <span className="legal-kicker"><ShieldCheck className="h-3.5 w-3.5" /> DISCLAIMER</span>
-            <span className="legal-meta">REACTION CLUB · CHEMISTRY</span>
+            <span className="legal-meta">IAL CHEM · CHEMISTRY</span>
           </div>
           <h1 className="mt-7 max-w-[760px] font-display text-[clamp(2.65rem,7vw,5.6rem)] leading-[.98] font-semibold tracking-[-.065em] text-ink">
             Disclaimer and
