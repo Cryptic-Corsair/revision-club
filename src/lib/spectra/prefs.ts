@@ -273,31 +273,10 @@ export function resetPrefs() {
   emit();
 }
 
-/* ————— the theme-anim window —————
-   One helper for every surface that re-dresses the site (the topbar
-   cycle, the panel's lab cards, accent swatches, reset). It used to
-   be four copies of add-class + setTimeout, each with its own
-   unmanaged timer — so a quick second tap kept the ease running but
-   the FIRST timer still fired at its original 480ms and yanked the
-   class off mid-flight, snapping every colour that was halfway
-   eased. The singleton timer re-arms instead: each new call cancels
-   the last removal, so the window always closes a full 480ms after
-   the FINAL tap. Reduced-motion users skip the window entirely —
-   the theme-anim rule's !important would otherwise override their
-   0.01ms policy and force a 420ms ease they asked not to get. */
-let animTimer: ReturnType<typeof setTimeout> | null = null;
-
-export function flashThemeAnim() {
-  if (typeof window === "undefined") return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const root = document.documentElement;
-  root.classList.add("theme-anim");
-  if (animTimer) clearTimeout(animTimer);
-  animTimer = setTimeout(() => {
-    root.classList.remove("theme-anim");
-    animTimer = null;
-  }, 480);
-}
+/* Theme and accent changes are applied atomically by setPrefs().
+   Keep this path free of document-wide animation timers: local controls
+   own their own transitions, while the browser paints the new token set
+   in one style update. */
 
 /* the wheel accentOf() reads while rendering (bands, chips, dots).
    Plain state, deliberately no load() — the hydration pass must
