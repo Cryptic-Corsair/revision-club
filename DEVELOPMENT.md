@@ -276,6 +276,20 @@ nothing in dark room mode uses light-only tokens — and there are many.
   inventing a new one.
 - **Iconography is centralized.** Every icon comes from `icons.tsx`. Never
   inline a stray `<svg>` in a view or import a second icon library.
+- **Units don't wear names that aren't theirs.** A unit is its code
+  (`WCH11`…) and its chemistry — never an element tag ("Li · lithium"), a
+  colour name ("pink"), or flame lore speaking for it. That data
+  (`element`, `lines`, `spectrumNote`, dead `color`/`cssVar`) was stripped
+  from `units.ts`/`types.ts` on purpose — don't reintroduce it. Chemistry
+  prose about flame tests stays, of course; it just never claims a unit
+  *is* a colour or an element.
+- **Every unit has a glyph.** `UNIT_GLYPH` in `icons.tsx` maps each unit to
+  a house icon that tells its chemistry story — WCH11 `BondDuo` (structure
+  & bonding), WCH12 `Flame` (energetics), WCH13 `TestTubes` (practical I),
+  WCH14 `Balance` (rates & equilibria), WCH15 `HexRing` (aromatics &
+  nitrogen), WCH16 `Burette` (practical II). Wherever a unit needs a face —
+  home cards, the unit badge, desk tray, footer, sticker book — render
+  `<UnitGlyph code={…} />`, not a bare number.
 - **Typography is variable-font driven** via the `--font-*` variables; respect
   the head/body font prefs rather than hardcoding families.
 

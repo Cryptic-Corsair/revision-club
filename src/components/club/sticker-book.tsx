@@ -17,6 +17,7 @@ import {
   Target,
   Timer,
   Trophy,
+  UnitGlyph,
 } from "./icons";
 import type { Unit, UnitCode } from "@/lib/spectra/types";
 import { TOTALS } from "@/lib/spectra/units";
@@ -305,13 +306,13 @@ export function StickerBook({
           >
             <div className="flex flex-wrap items-center gap-4">
               <span
-                className="grid h-14 w-14 shrink-0 place-items-center rounded-[calc(20px*var(--ui-scale))] font-display text-[calc(15px*var(--ui-scale))] font-bold text-white"
+                className="grid h-14 w-14 shrink-0 place-items-center rounded-[calc(20px*var(--ui-scale))] text-white"
                 style={{
                   background: suggestion.unit.candy.main,
                   boxShadow: `0 4px 0 ${shade(suggestion.unit.candy.main)}`,
                 }}
               >
-                {suggestion.unit.code.replace("WCH", "")}
+                <UnitGlyph code={suggestion.unit.code} className="h-6.5 w-6.5" strokeWidth={2.1} />
               </span>
               <div className="min-w-[calc(230px*var(--ui-scale))] flex-1">
                 <div className="flex items-center gap-2 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">
@@ -366,10 +367,10 @@ export function StickerBook({
                     className="group mb-4 flex w-full cursor-pointer flex-wrap items-center gap-3 text-left"
                   >
                     <span
-                      className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl font-display text-[calc(15px*var(--ui-scale))] font-bold text-white"
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-white"
                       style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
                     >
-                      {u.code.replace("WCH", "")}
+                      <UnitGlyph code={u.code} className="h-5.5 w-5.5" strokeWidth={2.1} />
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="block truncate font-display text-[calc(16.5px*var(--ui-scale))] font-semibold text-ink group-hover:underline">
@@ -525,10 +526,10 @@ export function StickerBook({
                   className="group mb-5 flex w-full cursor-pointer flex-wrap items-center gap-3 text-left"
                 >
                   <span
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl font-display text-[calc(15px*var(--ui-scale))] font-bold text-white"
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-white"
                     style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
                   >
-                    {u.code.replace("WCH", "")}
+                    <UnitGlyph code={u.code} className="h-5.5 w-5.5" strokeWidth={2.1} />
                   </span>
                   <span className="min-w-0">
                     <span className="block font-display text-[calc(17px*var(--ui-scale))] font-semibold text-ink group-hover:underline">

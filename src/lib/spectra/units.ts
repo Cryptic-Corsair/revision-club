@@ -7,8 +7,9 @@ import { WCH15_TOPICS } from "./content/wch15";
 import { WCH16_TOPICS } from "./content/wch16";
 
 /* ═══════════════════════════════════════════════════════════════
-   SPECTRA · the six units, each carrying the colour of its flame
-   Li 670.8 · Na 589.0 · Ba 553.5 · Cu 510.5 · Cs 455.5 · K 404.4 nm
+   The six units of the IAL chemistry course — each wearing its
+   own candy colour across the site, and each with a glyph that
+   tells its chemistry story (see UNIT_GLYPH in components/club).
    ═══════════════════════════════════════════════════════════════ */
 
 export const UNITS: Unit[] = [
@@ -25,17 +26,7 @@ export const UNITS: Unit[] = [
       stageWeight: "AS 40%",
       ialWeight: "IAL 20%",
     },
-    element: { symbol: "Li", name: "lithium", flameName: "crimson", nm: 670.8 },
-    color: "#ff4d5e",
-    cssVar: "--flame-11",
     candy: { main: "#FF6B6B" },
-    lines: [
-      { nm: 670.8, rel: 3 },
-      { nm: 610.4, rel: 1 },
-      { nm: 460.3, rel: 1 },
-    ],
-    spectrumNote:
-      "Lithium's crimson line at 670.8 nm is among the strongest colours any flame makes — the rest of its visible spectrum is sparse.",
     blurb:
       "Covers Topics 1–5: formulae, equations and the mole, atomic structure, bonding, and an introduction to organic chemistry.",
     topics: WCH11_TOPICS,
@@ -53,17 +44,7 @@ export const UNITS: Unit[] = [
       stageWeight: "AS 40%",
       ialWeight: "IAL 20%",
     },
-    element: { symbol: "Na", name: "sodium", flameName: "gold", nm: 589.0 },
-    color: "#ffb224",
-    cssVar: "--flame-12",
     candy: { main: "#FF922B" },
-    lines: [
-      { nm: 589.0, rel: 3 },
-      { nm: 589.6, rel: 2 },
-      { nm: 615.4, rel: 1 },
-    ],
-    spectrumNote:
-      "Sodium's golden doublet at 589.0 / 589.6 nm is so intense that a trace of contamination yellows every flame — and every street lamp.",
     blurb:
       "Covers Topics 6–10: energetics, intermolecular forces, redox and group chemistry, halogenoalkanes and alcohols.",
     topics: WCH12_TOPICS,
@@ -81,17 +62,7 @@ export const UNITS: Unit[] = [
       stageWeight: "AS 20%",
       ialWeight: "IAL 10%",
     },
-    element: { symbol: "Ba", name: "barium", flameName: "apple-green", nm: 553.5 },
-    color: "#43e08c",
-    cssVar: "--flame-13",
     candy: { main: "#12B886" },
-    lines: [
-      { nm: 553.5, rel: 3 },
-      { nm: 614.2, rel: 2 },
-      { nm: 649.7, rel: 1 },
-    ],
-    spectrumNote:
-      "Barium burns apple-green, its lines clustered across the green-yellow of the spectrum with the strongest at 553.5 nm.",
     blurb:
       "The AS practical skills: qualitative analysis — flame tests and the gas, ion and halide tests — plus the core practicals from molar volume to organic oxidation, the distillation and reflux rigs, and measurement uncertainty.",
     topics: WCH13_TOPICS,
@@ -109,18 +80,7 @@ export const UNITS: Unit[] = [
       stageWeight: "A2 40%",
       ialWeight: "IAL 20%",
     },
-    element: { symbol: "Cu", name: "copper", flameName: "blue-green", nm: 510.5 },
-    color: "#2cd9c7",
-    cssVar: "--flame-14",
     candy: { main: "#9775FA" },
-    lines: [
-      { nm: 510.5, rel: 3 },
-      { nm: 515.3, rel: 2 },
-      { nm: 521.8, rel: 2 },
-      { nm: 570.0, rel: 1 },
-    ],
-    spectrumNote:
-      "Copper(II) colours the flame blue-green — the 510.5 / 515.3 / 521.8 nm triplet is its unmistakable signature.",
     blurb:
       "Covers Topics 11–16: reaction rates, chemical equilibrium, acid–base equilibria, and further organic chemistry including carbonyls and chirality.",
     topics: WCH14_TOPICS,
@@ -138,16 +98,7 @@ export const UNITS: Unit[] = [
       stageWeight: "A2 40%",
       ialWeight: "IAL 20%",
     },
-    element: { symbol: "Cs", name: "caesium", flameName: "deep blue", nm: 455.5 },
-    color: "#5e8bff",
-    cssVar: "--flame-15",
     candy: { main: "#F06595" },
-    lines: [
-      { nm: 455.5, rel: 3 },
-      { nm: 459.3, rel: 2 },
-    ],
-    spectrumNote:
-      "Caesium's blue lines at 455.5 / 459.3 nm sit deep in the violet-blue — the element whose microwave transition now defines the second itself.",
     blurb:
       "Covers Topics 17–21: redox and electrode potentials, transition metals, benzene and aromatic compounds, and nitrogen chemistry.",
     topics: WCH15_TOPICS,
@@ -165,16 +116,7 @@ export const UNITS: Unit[] = [
       stageWeight: "A2 20%",
       ialWeight: "IAL 10%",
     },
-    element: { symbol: "K", name: "potassium", flameName: "lilac", nm: 404.4 },
-    color: "#a06bff",
-    cssVar: "--flame-16",
     candy: { main: "#F59F00" },
-    lines: [
-      { nm: 404.4, rel: 3 },
-      { nm: 404.7, rel: 2 },
-    ],
-    spectrumNote:
-      "Potassium's lilac is faint: the violet doublet at 404.4 / 404.7 nm is easily masked by sodium's yellow, so cobalt glass filters it out. (Its strongest lines, 766.5 and 769.9 nm, sit just outside the visible band.)",
     blurb:
       "The A2 practical skills: kinetics experiments, organic techniques and tests, and how to write practical exam answers.",
     topics: WCH16_TOPICS,

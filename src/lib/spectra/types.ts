@@ -14,24 +14,11 @@ export interface Candy {
   main: string;
 }
 
-/** rel: relative intensity of an emission line — 3 is the dominant line */
-export interface SpectralLine {
-  nm: number;
-  rel: 1 | 2 | 3;
-}
-
 export interface PaperInfo {
   duration: string;
   marks: number;
   stageWeight: string;
   ialWeight: string;
-}
-
-export interface ElementId {
-  symbol: string;
-  name: string;
-  flameName: string;
-  nm: number;
 }
 
 export type Block =
@@ -64,13 +51,7 @@ export interface Unit {
   shortTitle: string;
   topicRange: string;
   paper: PaperInfo;
-  element: ElementId;
-  color: string;
-  cssVar: string;
   candy: Candy;
-  lines: SpectralLine[];
-  /** annotation shown under the unit's spectrum strip */
-  spectrumNote?: string;
   blurb: string;
   marksData?: { label: string; pct: number }[];
   marksSource?: string;

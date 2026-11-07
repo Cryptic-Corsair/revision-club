@@ -1,4 +1,5 @@
-import type { SVGProps } from "react";
+import type { ComponentType, SVGProps } from "react";
+import type { UnitCode } from "@/lib/spectra/types";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · icons — the house ink set, v2
@@ -312,6 +313,79 @@ export function Droplets(p: IcoProps) {
       <path d="M17.1 11.3 c-1.6 2.1-2.5 3.6-2.5 5 a2.5 2.5 0 0 0 5 0 c0-1.4-0.9-2.9-2.5-5 Z" strokeWidth={1.8} />
     </Ico>
   );
+}
+
+/* two atoms joined by a double bond — structure & bonding */
+export function BondDuo(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <circle cx="7.8" cy="15.2" r="3.2" />
+      <circle cx="16.2" cy="8.8" r="3.2" />
+      <path d="M9.6 12.3 L12.9 9.8" strokeWidth={1.7} />
+      <path d="M11.1 14.2 L14.4 11.7" strokeWidth={1.7} />
+    </Ico>
+  );
+}
+
+/* the balance — rates, equilibria, opposing pulls even out */
+export function Balance(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <path d="M4.9 6.4 H19.1" />
+      <circle cx="12" cy="6.4" r="1.05" fill="currentColor" stroke="none" />
+      <path d="M12 6.4 V19.9" />
+      <path d="M8.5 20 H15.5" />
+      <path d="M4.9 6.4 L3 10.6 M4.9 6.4 L6.8 10.6" strokeWidth={1.7} />
+      <path d="M3 10.6 q1.9 2.1 3.8 0" strokeWidth={1.7} />
+      <path d="M19.1 6.4 L17.2 10.6 M19.1 6.4 L21 10.6" strokeWidth={1.7} />
+      <path d="M17.2 10.6 q1.9 2.1 3.8 0" strokeWidth={1.7} />
+    </Ico>
+  );
+}
+
+/* the benzene ring — aromatics and the nitrogen chemistry on it */
+export function HexRing(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <path d="M12 4.6 L18.3 8.3 V15.7 L12 19.4 L5.7 15.7 V8.3 Z" />
+      <circle cx="12" cy="12" r="3.3" strokeWidth={1.7} />
+    </Ico>
+  );
+}
+
+/* the burette — practical skills: measured, one drop at a time */
+export function Burette(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <path d="M9.5 3.6 h5" />
+      <path d="M10.3 3.6 V12.2 M13.7 3.6 V12.2" />
+      <path d="M10.3 7.9 h3.4" strokeWidth={1.7} />
+      <path d="M10.3 12.2 L11.6 15.5 M13.7 12.2 L12.4 15.5" />
+      <path d="M10.5 14 h3" strokeWidth={1.7} />
+      <path d="M12 15.5 V17.1" />
+      <circle cx="12" cy="19.6" r="1.05" fill="currentColor" stroke="none" />
+    </Ico>
+  );
+}
+
+/* ————— unit glyphs ————— one chemistry story per unit, in spec
+   order. The glyph rides wherever a unit needs a face: home cards,
+   the unit header badge, the desk tray, the footer, the sticker
+   book. Numbers still label the pages; the glyph says what the
+   unit is about. */
+
+export const UNIT_GLYPH: Record<UnitCode, ComponentType<IcoProps>> = {
+  WCH11: BondDuo,
+  WCH12: Flame,
+  WCH13: TestTubes,
+  WCH14: Balance,
+  WCH15: HexRing,
+  WCH16: Burette,
+};
+
+export function UnitGlyph({ code, ...rest }: IcoProps & { code: UnitCode }) {
+  const Glyph = UNIT_GLYPH[code];
+  return <Glyph {...rest} />;
 }
 
 /* ————— reading & writing ————— */

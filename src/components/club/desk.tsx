@@ -10,6 +10,7 @@ import {
   MoveRight,
   Target,
   Timer,
+  UnitGlyph,
 } from "./icons";
 import type { Unit, UnitCode } from "@/lib/spectra/types";
 import { TOTALS } from "@/lib/spectra/units";
@@ -254,10 +255,10 @@ export function Desk({
                     className="group flex w-full cursor-pointer items-center gap-3 rounded-2xl px-2 pt-2 pb-3 text-left"
                   >
                     <span
-                      className="grid h-10 w-10 shrink-0 place-items-center rounded-[calc(14px*var(--ui-scale))] font-display text-[calc(17px*var(--ui-scale))] font-bold"
+                      className="grid h-10 w-10 shrink-0 place-items-center rounded-[calc(14px*var(--ui-scale))]"
                       style={{ background: tint(u.candy.main, 15), color: shade(u.candy.main, 62) }}
                     >
-                      {u.index}
+                      <UnitGlyph code={u.code} className="h-5 w-5" strokeWidth={2} />
                     </span>
                     <span className="min-w-0 flex-1">
                       <span

@@ -224,15 +224,15 @@ export const WCH12_TOPICS: Topic[] = [
       },
       {
         k: "table",
-        caption: "Flame tests — the six colours this site is named after",
+        caption: "Flame tests — the colours the specification asks for",
         head: ["Ion", "Flame", "Note"],
         rows: [
-          ["Li^+^", "crimson", "WCH11's colour, 670.8 nm"],
-          ["Na^+^", "golden yellow", "so bright it masks others — 589.0 nm"],
+          ["Li^+^", "crimson", "670.8 nm — one of the strongest colours a flame makes"],
+          ["Na^+^", "golden yellow", "so bright it masks every other colour — 589.0 nm"],
           ["K^+^", "lilac", "view through cobalt-blue glass to hide Na's glare"],
           ["Ca^2+^", "brick red", "Group 2"],
-          ["Ba^2+^", "apple green", "WCH13's colour, 553.5 nm"],
-          ["Cu^2+^", "blue-green", "WCH14's colour, 510.5 nm"],
+          ["Ba^2+^", "apple green", "553.5 nm, in the green-yellow band"],
+          ["Cu^2+^", "blue-green", "a triplet at 510.5 / 515.3 / 521.8 nm"],
         ],
       },
       {
