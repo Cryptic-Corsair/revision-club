@@ -231,9 +231,11 @@ export function SpecSectionView({
   );
 }
 
-/* ————— block dispatcher ————— */
+/* ————— block dispatcher —————
+   Exported so the sample-notes room can lay real note blocks into
+   its own editorial page with the exact same furniture. */
 
-function BlockView({
+export function BlockView({
   block: b,
   accent,
 }: {
