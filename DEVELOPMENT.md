@@ -1,4 +1,4 @@
-# DEVELOPMENT.md — Reaction Club developer guide
+# DEVELOPMENT.md — IAL CHEM developer guide
 
 Everything a future developer needs to work on this site: what it is, how it
 runs, how the content and theming systems work, the hard rules, and the
@@ -8,7 +8,7 @@ platform quirks that will bite you if you don't know them.
 
 ## 1. What this is
 
-**Reaction Club** — revision notes for **Pearson Edexcel International A Level
+**IAL CHEM** — revision notes for **Pearson Edexcel International A Level
 Chemistry (2018 spec)**, units **WCH11–WCH16**. Single-page-style app with a
 home feed, unit views, topic readers, flashcard packs, a sticker book, search
 and a customization panel ("control panel").
