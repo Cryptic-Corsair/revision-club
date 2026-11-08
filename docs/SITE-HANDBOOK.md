@@ -330,6 +330,38 @@ Do not create a new twin unless there is a clear presentation requirement and th
 
 See INTERFACES-ROADMAP.md for the detailed interface contract and planned boundaries.
 
+### 8.4 Rooms visual system and wave invariant
+
+The Rooms interface now uses a scoped **field-atlas** presentation: mineral accents,
+precise typographic hierarchy, restrained metadata, framed learning surfaces and
+theme-aware reading panels. Its component and CSS scope is identified by
+`.rooms-page` and the page-specific `.rooms-*-page` classes. Editorial and the
+homepage do not inherit this system.
+
+**The waves between specification sections are a protected structural feature.**
+Both `NotesReader` and `PackView` render a `BandWave` before the first room and
+after every specification section. Each wave transitions from the previous room's
+background to the next room's background; the final wave returns to the page surface.
+
+When rebuilding or refactoring Rooms:
+
+1. Keep the leading transition and the `BandWave` after every mapped section,
+   including the final section.
+2. Do not replace waves with borders, straight rules, generic spacing, gradients or
+   card gaps. Do not hide them at any breakpoint or theme.
+3. Preserve the correct `from` / `to` background sequence so adjacent sections
+   and wave fills meet without seams.
+4. Keep the same structure in the note reader and revision pack; both render the
+   shared `SpecSectionView`.
+5. Verify the wave sequence in Light, Night, Dune and Classic, at desktop and mobile
+   widths. Reduced-motion handling may remove motion, never the wave shape itself.
+
+The visual rebuild may change the rooms' typography, section framing, spacing,
+metadata, block surfaces, cards and controls. It must not alter chemistry source
+text, official specification wording, figure data, section order, IDs, deep links,
+revision state or saved preferences.
+
+
 ---
 
 ## 9. Themes, tokens and CSS ownership
