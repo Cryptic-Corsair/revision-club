@@ -200,3 +200,14 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** source-level width constraints inspected and updated. No lint, production build, browser visual inspection or deployment verification was run.
 - **Deployment:** not verified.
 - **Commit(s):** see this implementation commit.
+
+### 2026-11-09 — Simplify and refine Editorial contents navigation
+
+- **Contributor:** AI agent.
+- **Request / objective:** redesign the contents panel so it feels integrated with Editorial, is intuitive and supports scrolling.
+- **Changes made:** removed the heavy card surface, large rounded container and prominent shadow. Replaced them with a quiet document-style index, restrained divider, compact “On this page” heading, simple section count, lighter active state and smaller collapse control. The desktop list has a bounded independently scrollable region with contained overscroll and thin scrollbar. The compact rail remains number-only. Mobile keeps a horizontal scroll strip.
+- **Interaction:** retained section jump behavior, active-section state and Spec Map synchronization; kept accessible names and collapsed-state tooltips.
+- **Preserved invariants:** note content, section order and anchors, shared scroll helper, reading-surface widths, theme tokens and Rooms interface.
+- **Verification:** inspected and replaced the contents component styles and heading markup. No lint, production build, browser visual inspection or deployment verification was run.
+- **Deployment:** not verified.
+- **Commit(s):** see this implementation commit.

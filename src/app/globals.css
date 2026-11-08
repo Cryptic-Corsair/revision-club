@@ -1591,13 +1591,14 @@ html.dune .legal-room mark {
   }
 }
 .editorial-contents {
+  position: relative;
   min-width: 0;
   max-width: 100%;
-  padding: 12px 10px;
-  border: 1px solid color-mix(in oklab, var(--color-ink) 9%, transparent);
-  border-radius: 18px;
-  background: color-mix(in oklab, var(--color-paper) 94%, var(--color-ink) 6%);
-  box-shadow: 0 2px 0 var(--edge);
+  padding: 2px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 .editorial-contents-heading {
   display: flex;
@@ -1605,80 +1606,89 @@ html.dune .legal-room mark {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 0 2px 10px;
+  padding: 0 4px 12px;
+  border-bottom: 1px solid color-mix(in oklab, var(--color-ink) 11%, transparent);
+}
+.editorial-contents-titlebar {
+  color: var(--color-ink);
+  font-family: var(--font-display), sans-serif;
+  font-size: calc(12px * var(--ui-scale));
+  line-height: 1.35;
+  font-weight: 800;
+  letter-spacing: .045em;
 }
 .editorial-contents-count {
   margin-top: 3px;
   color: var(--color-ink-faint);
   font-size: calc(9px * var(--ui-scale));
-  line-height: 1.5;
-  font-weight: 650;
+  line-height: 1.4;
+  font-weight: 600;
 }
 .editorial-contents-toggle {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   flex: 0 0 auto;
   place-items: center;
   border: 1px solid color-mix(in oklab, var(--color-ink) 12%, transparent);
-  border-radius: 10px;
+  border-radius: 8px;
   color: var(--color-ink-soft);
+  background: transparent;
   cursor: pointer;
-  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
 }
 .editorial-contents-toggle:hover {
   color: var(--color-ink);
-  border-color: color-mix(in oklab, var(--color-ink) 26%, transparent);
-  background: color-mix(in oklab, var(--color-ink) 6%, transparent);
+  border-color: color-mix(in oklab, var(--color-ink) 24%, transparent);
+  background: color-mix(in oklab, var(--color-ink) 5%, transparent);
 }
 .editorial-contents-toggle:focus-visible,
 .editorial-contents-link:focus-visible {
   outline: 2px solid var(--legal-rust);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 .editorial-contents-nav {
   display: flex;
   min-width: 0;
-  max-height: min(66dvh, 680px);
+  max-height: min(68dvh, 720px);
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
+  scroll-padding-block: 12px;
   scrollbar-width: thin;
-  scrollbar-color: color-mix(in oklab, var(--color-ink) 22%, transparent) transparent;
-  padding: 2px 2px 4px;
+  scrollbar-color: color-mix(in oklab, var(--color-ink) 20%, transparent) transparent;
+  padding: 10px 3px 6px;
 }
 .editorial-contents-nav.is-collapsed { align-items: center; }
 .legal-index-link.editorial-contents-link {
   position: relative;
   display: flex;
   min-width: 0;
-  min-height: 38px;
+  min-height: 36px;
   align-items: center;
-  gap: 10px;
-  border-radius: 10px;
-  padding: 8px 9px;
+  gap: 11px;
+  border-radius: 8px;
+  padding: 6px 8px;
   color: var(--color-ink-soft);
   font-size: calc(11px * var(--ui-scale));
   line-height: 1.45;
-  transition: background-color 150ms ease, color 150ms ease;
+  text-decoration: none;
+  transition: background-color 140ms ease, color 140ms ease;
 }
 .editorial-contents-link .editorial-contents-number {
   display: inline-flex;
-  min-width: 31px;
-  min-height: 25px;
+  min-width: 30px;
   flex: 0 0 auto;
   align-items: center;
-  justify-content: center;
-  border-radius: 7px;
-  background: color-mix(in oklab, var(--color-ink) 5%, transparent);
+  justify-content: flex-start;
   color: var(--color-ink-faint);
   font-family: var(--font-display), sans-serif;
   font-size: calc(9px * var(--ui-scale));
-  font-weight: 850;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
-  letter-spacing: .01em;
+  letter-spacing: .015em;
 }
 .editorial-contents-link .editorial-contents-title {
   display: block;
@@ -1687,211 +1697,56 @@ html.dune .legal-room mark {
   word-break: normal;
 }
 .editorial-contents-link:hover {
-  background: color-mix(in oklab, var(--color-ink) 6%, transparent);
+  background: color-mix(in oklab, var(--color-ink) 5%, transparent);
   color: var(--color-ink);
 }
 .editorial-contents-link.is-active {
-  background: color-mix(in oklab, var(--legal-rust) 11%, var(--color-paper));
+  background: color-mix(in oklab, var(--legal-rust) 8%, transparent);
   color: var(--color-ink);
   box-shadow: inset 2px 0 0 var(--legal-rust);
 }
 .editorial-contents-link.is-active .editorial-contents-number {
-  background: var(--legal-rust);
-  color: var(--color-paper);
+  color: var(--legal-rust);
 }
 .editorial-contents-link.is-collapsed {
   width: 42px;
+  min-height: 34px;
   justify-content: center;
   gap: 0;
   padding: 5px;
 }
 .editorial-contents-link.is-collapsed .editorial-contents-number {
-  min-width: 32px;
+  min-width: 0;
+  justify-content: center;
 }
 .editorial-contents-rail-label {
   display: block;
-  width: 34px;
-  overflow: hidden;
-  text-align: center;
-  font-size: calc(8px * var(--ui-scale));
-}
-.editorial-contents-footnote {
-  margin: 10px 2px 0;
-  border-top: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
-  padding: 10px 2px 0;
+  width: 30px;
   color: var(--color-ink-faint);
-  font-size: calc(9px * var(--ui-scale));
-  line-height: 1.65;
-}
-.legal-summary {
-  background: color-mix(in oklab, var(--color-paper) 88%, #e9d7b9);
-  border: 1px solid color-mix(in oklab, var(--color-ink) 8%, transparent);
-  box-shadow: 0 2px 0 var(--edge);
-}
-.legal-summary-stamp {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border-radius: 999px;
-  padding: 7px 10px;
-  color: var(--color-ink-soft);
-  background: color-mix(in oklab, var(--color-ink) 6%, var(--color-paper));
+  text-align: center;
   font-family: var(--font-display), sans-serif;
   font-size: calc(8px * var(--ui-scale));
   font-weight: 800;
-  letter-spacing: .1em;
+  letter-spacing: .08em;
 }
-.legal-summary-line {
-  display: flex;
-  align-items: flex-start;
-  gap: 11px;
-  border-top: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
-  padding: 12px 2px 3px;
+@media (max-width: 1023px) {
+  .editorial-contents {
+    padding: 0;
+  }
+  .editorial-contents-heading {
+    padding-bottom: 8px;
+  }
+  .editorial-contents-nav {
+    max-height: none;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 8px 2px 9px;
+  }
+  .editorial-contents-link {
+    flex: 0 0 auto;
+  }
 }
-.legal-summary-number {
-  padding-top: 2px;
-  color: var(--legal-rust);
-  font-family: var(--font-display), sans-serif;
-  font-size: calc(10px * var(--ui-scale));
-  font-weight: 800;
-}
-.legal-summary-line p {
-  color: var(--color-ink-soft);
-  font-size: calc(12px * var(--ui-scale));
-  line-height: 1.65;
-}
-.legal-clauses { display: flex; flex-direction: column; }
-.legal-clause {
-  display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
-  gap: 13px;
-  padding: 24px 0 27px;
-  border-bottom: 1px solid color-mix(in oklab, var(--color-ink) 11%, transparent);
-}
-.legal-clause:first-child { padding-top: 8px; }
-.legal-clause-rail {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-.legal-clause-number {
-  display: grid;
-  width: 34px;
-  aspect-ratio: 1;
-  place-items: center;
-  border: 1px solid color-mix(in oklab, var(--color-ink) 13%, transparent);
-  border-radius: 50%;
-  color: var(--color-ink-soft);
-  font-family: var(--font-display), sans-serif;
-  font-size: calc(9px * var(--ui-scale));
-  font-weight: 800;
-}
-.legal-clause-line {
-  width: 1px;
-  flex: 1;
-  min-height: 38px;
-  margin-top: 12px;
-  background: color-mix(in oklab, var(--color-ink) 12%, transparent);
-}
-.legal-clause-icon {
-  display: grid;
-  width: 37px;
-  aspect-ratio: 1;
-  place-items: center;
-  border-radius: 12px;
-  color: var(--legal-accent, var(--legal-rust));
-  background: color-mix(in oklab, var(--legal-accent, var(--legal-rust)) 13%, var(--color-paper));
-  border: 1px solid color-mix(in oklab, var(--legal-accent, var(--legal-rust)) 24%, transparent);
-}
-.legal-closing {
-  color: var(--color-ink);
-  background:
-    radial-gradient(ellipse at 100% 0%, color-mix(in oklab, #d99a4b 17%, transparent), transparent 45%),
-    color-mix(in oklab, var(--color-paper) 88%, #dfc5a0);
-  border: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
-  box-shadow: 0 2px 0 var(--edge);
-}
-/* the room's paper card — the note's boxed furniture (definitions,
-   methods, worked examples, diagrams) rides on the summary's recipe */
-.legal-card {
-  background: color-mix(in oklab, var(--color-paper) 92%, #e9d7b9);
-  border: 1px solid color-mix(in oklab, var(--color-ink) 9%, transparent);
-  box-shadow: 0 2px 0 var(--edge);
-}
-html.dark .legal-card, html.dune .legal-card {
-  background: color-mix(in oklab, var(--color-paper) 95%, white 5%);
-}
-.legal-back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--color-ink);
-  font-size: calc(12px * var(--ui-scale));
-  font-weight: 700;
-}
-.legal-back-link:hover { text-decoration: underline; text-underline-offset: 4px; }
-html.dark .legal-hero, html.dune .legal-hero {
-  background:
-    radial-gradient(ellipse at 88% 16%, color-mix(in oklab, #d99a4b 13%, transparent), transparent 36%),
-    radial-gradient(ellipse at 4% 100%, color-mix(in oklab, #8d82b8 10%, transparent), transparent 42%),
-    var(--color-paper);
-}
-html.dark .legal-summary, html.dune .legal-summary {
-  background: color-mix(in oklab, var(--color-paper) 94%, white 6%);
-}
-html.dark .legal-closing, html.dune .legal-closing {
-  background:
-    radial-gradient(ellipse at 100% 0%, color-mix(in oklab, #d99a4b 11%, transparent), transparent 45%),
-    var(--color-paper);
-}
-html.classic .legal-hero, html.classic .legal-summary, html.classic .legal-closing, html.classic .legal-card {
-  border-color: color-mix(in oklab, var(--color-ink) 16%, transparent);
-}
-/* dune's document room — the amber signature: the rust re-pointed
-   amber so every label, numeral and heading accent follows the
-   family; the kicker pill, emblem and rails wear the same warmth.
-   (night's lilac pass lives in the night-lab finishes below) */
-html.dune .legal-room {
-  --legal-rust: color-mix(in oklab, #e6b77e 80%, var(--color-ink));
-}
-html.dune .legal-kicker {
-  color: #33210f;
-  background: #e6b77e;
-}
-html.dune .legal-hero-mark {
-  color: color-mix(in oklab, #e6b77e 62%, var(--color-ink));
-}
-html.dune .legal-mark-dot {
-  background: #e6b77e;
-  box-shadow: 0 0 0 6px rgb(230 183 126 / 0.14);
-}
-html.dune .legal-mark-dot-two {
-  background: #d99a4b;
-}
-html.dune .legal-clause {
-  border-bottom-color: rgb(230 183 126 / 0.13);
-}
-html.dune .legal-clause-number {
-  border-color: rgb(230 183 126 / 0.2);
-  color: #ecd3b1;
-}
-html.dune .legal-clause-line {
-  background: rgb(230 183 126 / 0.16);
-}
-@media (max-width: 639px) {
-  .legal-hero-mark { width: 150px; right: -42px; top: auto; bottom: -46px; transform: none; opacity: .2; }
-  .legal-hero { border-radius: 24px; }
-  .legal-clause { grid-template-columns: 31px minmax(0, 1fr); gap: 9px; padding: 21px 0 24px; }
-  .legal-clause-number { width: 28px; }
-  .legal-clause-icon { width: 33px; border-radius: 10px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .legal-index-link { transition: none; }
-}
-
-
-
-
 /* ═════════ Night theme · velvet dusk finish ═════════
    Bespoke component surfaces that do not come directly from the
    shared tokens. Every rule is Night-only; Dune remains untouched.
