@@ -34,6 +34,16 @@ import {
 } from "@/lib/spectra/time";
 import { pickSuggestion } from "@/lib/spectra/suggest";
 import {
+  ACHIEVEMENTS,
+  GOAL_CHIPS,
+  achievementEarned,
+  deepDiveOf,
+  goalChipLabel,
+  oneTopicMaxOf,
+  revisedLine,
+  unitDoneOf,
+} from "@/lib/spectra/progress-derive";
+import {
   BeakerMeter,
   Confetti,
   Float,
@@ -65,18 +75,16 @@ interface Achievement {
   earned: boolean;
 }
 
-const GOAL_CHIPS = [30, 60, 90, 120, 180];
-const goalChipLabel = (m: number) => (m < 60 ? `${m} min` : `${Math.floor(m / 60)} h${m % 60 ? ` ${m % 60}` : ""}`);
-
-function revisedLine(pct: number, count: number): string {
-  if (count === 0)
-    return "Nothing marked yet. Open any unit, finish a topic, then mark it as revised.";
-  if (pct >= 1) return "Every topic revised — well done. The minutes keep the rust off.";
-  if (pct >= 0.75) return "Three quarters of the course revised.";
-  if (pct >= 0.5) return "Halfway through the course.";
-  if (pct >= 0.25) return "A quarter of the course revised.";
-  return "Good start — keep going.";
-}
+/* the sticker grid's own candy per badge — presentation maps onto
+   the achievement ids; the maths lives in progress-derive.ts */
+const ACH_COLORS: Record<string, string> = {
+  "first-topic": "#FF6B6B",
+  "unit-complete": "#FF922B",
+  halfway: "#FFD43B",
+  "first-hour": "#F59F00",
+  "deep-dive": "#9775FA",
+  "course-complete": "#12B886",
+};
 
 export function StickerBook({
   units,
@@ -106,58 +114,19 @@ export function StickerBook({
   const count = revised.length;
   const pct = TOTALS.topics ? count / TOTALS.topics : 0;
 
-  const unitDone = (u: Unit) =>
-    u.topics.filter((t) => revised.includes(`${u.code}/${t.id}`)).length;
+  const unitDone = (u: Unit) => unitDoneOf(u, revised);
 
-  const oneTopicMax = Math.max(...units.flatMap((u) => u.topics.map((t) => topicSeconds(time, `${u.code}/${t.id}`))), 0);
-  const deepDive = oneTopicMax >= 30 * 60;
+  const oneTopicMax = oneTopicMaxOf(units, time);
+  const deepDive = deepDiveOf(oneTopicMax);
 
   const suggestion = pickSuggestion(units, revised, time);
 
-  const achievements: Achievement[] = [
-    {
-      id: "first-topic",
-      label: "First topic",
-      hint: "Mark 1 topic as revised",
-      color: "#FF6B6B",
-      earned: count >= 1,
-    },
-    {
-      id: "unit-complete",
-      label: "Unit complete",
-      hint: "Finish every topic in one unit",
-      color: "#FF922B",
-      earned: units.some((u) => unitDone(u) === u.topics.length && u.topics.length > 0),
-    },
-    {
-      id: "halfway",
-      label: "Halfway",
-      hint: "Revise half of the topics",
-      color: "#FFD43B",
-      earned: pct >= 0.5,
-    },
-    {
-      id: "first-hour",
-      label: "First hour",
-      hint: "Spend 1 hour reading here",
-      color: "#F59F00",
-      earned: all >= 60 * 60,
-    },
-    {
-      id: "deep-dive",
-      label: "Deep dive",
-      hint: "Give one topic 30 minutes",
-      color: "#9775FA",
-      earned: deepDive,
-    },
-    {
-      id: "course-complete",
-      label: "Course complete",
-      hint: "Revise every topic",
-      color: "#12B886",
-      earned: pct >= 1,
-    },
-  ];
+  const earnedArgs = { units, revised, revisedCount: count, pct, all, deepDive };
+  const achievements: Achievement[] = ACHIEVEMENTS.map((def) => ({
+    ...def,
+    color: ACH_COLORS[def.id] ?? "#FF6B6B",
+    earned: achievementEarned(def.id, earnedArgs),
+  }));
 
   const pour = () => {
     if (!confirmPour) {

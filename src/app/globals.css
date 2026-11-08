@@ -1417,7 +1417,7 @@ html.dune .legal-room mark {
 }
 .legal-meta { color: var(--color-ink-faint); }
 .legal-heading-accent {
-  color: color-mix(in oklab, #b66c4e 82%, var(--color-ink));
+  color: var(--legal-rust);
 }
 .legal-hero-mark {
   position: absolute;
@@ -1508,7 +1508,7 @@ html.dune .legal-room mark {
 }
 .legal-summary-number {
   padding-top: 2px;
-  color: color-mix(in oklab, #b66c4e 80%, var(--color-ink));
+  color: var(--legal-rust);
   font-family: var(--font-display), sans-serif;
   font-size: calc(10px * var(--ui-scale));
   font-weight: 800;
@@ -1557,9 +1557,9 @@ html.dune .legal-room mark {
   aspect-ratio: 1;
   place-items: center;
   border-radius: 12px;
-  color: var(--legal-accent);
-  background: color-mix(in oklab, var(--legal-accent) 13%, var(--color-paper));
-  border: 1px solid color-mix(in oklab, var(--legal-accent) 24%, transparent);
+  color: var(--legal-accent, var(--legal-rust));
+  background: color-mix(in oklab, var(--legal-accent, var(--legal-rust)) 13%, var(--color-paper));
+  border: 1px solid color-mix(in oklab, var(--legal-accent, var(--legal-rust)) 24%, transparent);
 }
 .legal-closing {
   color: var(--color-ink);
@@ -1594,9 +1594,6 @@ html.dark .legal-hero, html.dune .legal-hero {
     radial-gradient(ellipse at 4% 100%, color-mix(in oklab, #8d82b8 10%, transparent), transparent 42%),
     var(--color-paper);
 }
-html.dark .legal-heading-accent, html.dune .legal-heading-accent {
-  color: color-mix(in oklab, #e6b77e 80%, var(--color-ink));
-}
 html.dark .legal-summary, html.dune .legal-summary {
   background: color-mix(in oklab, var(--color-paper) 94%, white 6%);
 }
@@ -1607,6 +1604,37 @@ html.dark .legal-closing, html.dune .legal-closing {
 }
 html.classic .legal-hero, html.classic .legal-summary, html.classic .legal-closing, html.classic .legal-card {
   border-color: color-mix(in oklab, var(--color-ink) 16%, transparent);
+}
+/* dune's document room — the amber signature: the rust re-pointed
+   amber so every label, numeral and heading accent follows the
+   family; the kicker pill, emblem and rails wear the same warmth.
+   (night's lilac pass lives in the night-lab finishes below) */
+html.dune .legal-room {
+  --legal-rust: color-mix(in oklab, #e6b77e 80%, var(--color-ink));
+}
+html.dune .legal-kicker {
+  color: #33210f;
+  background: #e6b77e;
+}
+html.dune .legal-hero-mark {
+  color: color-mix(in oklab, #e6b77e 62%, var(--color-ink));
+}
+html.dune .legal-mark-dot {
+  background: #e6b77e;
+  box-shadow: 0 0 0 6px rgb(230 183 126 / 0.14);
+}
+html.dune .legal-mark-dot-two {
+  background: #d99a4b;
+}
+html.dune .legal-clause {
+  border-bottom-color: rgb(230 183 126 / 0.13);
+}
+html.dune .legal-clause-number {
+  border-color: rgb(230 183 126 / 0.2);
+  color: #ecd3b1;
+}
+html.dune .legal-clause-line {
+  background: rgb(230 183 126 / 0.16);
 }
 @media (max-width: 639px) {
   .legal-hero-mark { width: 150px; right: -42px; top: auto; bottom: -46px; transform: none; opacity: .2; }
@@ -1789,9 +1817,6 @@ html.dark:not(.dune) .legal-summary {
   background: color-mix(in oklab, var(--color-paper) 91%, #59455f);
   border-color: rgb(222 198 232 / 0.1);
 }
-html.dark:not(.dune) .legal-summary-number {
-  color: #e0c4eb;
-}
 html.dark:not(.dune) .legal-clause {
   border-bottom-color: rgb(222 198 232 / 0.12);
 }
@@ -1803,8 +1828,8 @@ html.dark:not(.dune) .legal-clause-line {
   background: rgb(222 198 232 / 0.14);
 }
 html.dark:not(.dune) .legal-clause-icon {
-  background: color-mix(in oklab, var(--legal-accent) 12%, var(--color-paper));
-  border-color: color-mix(in oklab, var(--legal-accent) 26%, transparent);
+  background: color-mix(in oklab, var(--legal-accent, var(--legal-rust)) 12%, var(--color-paper));
+  border-color: color-mix(in oklab, var(--legal-accent, var(--legal-rust)) 26%, transparent);
 }
 html.dark:not(.dune) .legal-closing {
   background:

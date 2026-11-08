@@ -2,10 +2,7 @@
 
 import {
   useCallback,
-  useEffect,
   useMemo,
-  useRef,
-  useState,
   type CSSProperties,
 } from "react";
 import {
@@ -29,6 +26,7 @@ import { useSpecMapRegister } from "./spec-map";
 import { Fmt } from "./format";
 import { getNotes } from "@/lib/spectra/notes";
 import { getUnit } from "@/lib/spectra/units";
+import { scrollToSpec, specAnchorId, useSpecSpy } from "@/lib/spectra/scroll-helpers";
 import type { NotesDoc } from "@/lib/spectra/notes-types";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -68,7 +66,7 @@ const SUMMARY = [
   "Worked examples reasoned through line by line, so the method sticks, not just the answer.",
 ];
 
-const elId = (spec: string) => `sample-${spec.replace(".", "-")}`;
+const elId = (spec: string) => specAnchorId("sample-", spec);
 
 export function SampleNotes({
   onBack,
@@ -100,79 +98,15 @@ function SampleNotesBody({
   onOpenSpec: () => void;
 }) {
   const main = getUnit("WCH11")?.candy.main ?? accentOf(0);
-  const [active, setActive] = useState<string>(doc.sections[0]?.spec ?? "");
-
-  /* ————— scroll spy ————— the reader's recipe: after every scroll
-     frame the position is recomputed from the real rects, so a fast
-     glide can never leave a stale "you are here" behind */
-  const spyRaf = useRef(0);
-  useEffect(() => {
-    const pick = () => {
-      const y = window.scrollY + window.innerHeight * 0.35;
-      let current = doc.sections[0]?.spec ?? "";
-      for (const s of doc.sections) {
-        const el = document.getElementById(elId(s.spec));
-        if (el && el.getBoundingClientRect().top + window.scrollY <= y)
-          current = s.spec;
-      }
-      setActive(current);
-    };
-    const onScroll = () => {
-      cancelAnimationFrame(spyRaf.current);
-      spyRaf.current = requestAnimationFrame(pick);
-    };
-    const first = requestAnimationFrame(pick);
-    const settle = window.setTimeout(pick, 350); /* once fonts have settled */
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      cancelAnimationFrame(first);
-      cancelAnimationFrame(spyRaf.current);
-      window.clearTimeout(settle);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [doc]);
+  const active = useSpecSpy(doc.sections, { prefix: "sample-" });
 
   /* ————— the verified hop ————— the reader's glide, re-aimed at the
-     sample's clause rails: smooth scroll with a landing check, one
-     instant snap if the glide was silently cancelled */
-  const jump = useCallback((spec: string) => {
-    const el = document.getElementById(elId(spec));
-    if (!el) return;
-    const saTop =
-      parseFloat(
-        getComputedStyle(document.documentElement).getPropertyValue("--sa-top"),
-      ) || 0;
-    const topOf = () =>
-      Math.max(
-        0,
-        el.getBoundingClientRect().top + window.scrollY - 100 - saTop,
-      );
-    const landed = (top: number) => Math.abs(window.scrollY - top) < 2;
-    const glide = () => {
-      const top = topOf();
-      window.scrollTo({ top, behavior: "smooth" });
-      window.setTimeout(() => {
-        if (landed(top)) return;
-        const y1 = window.scrollY;
-        window.setTimeout(() => {
-          if (!landed(top) && Math.abs(window.scrollY - y1) < 1)
-            window.scrollTo({ top, behavior: "instant" as ScrollBehavior });
-        }, 450);
-      }, 450);
-    };
-    const estimate = topOf();
-    if (estimate > window.innerHeight * 2) {
-      window.scrollTo({
-        top: estimate - window.innerHeight * 1.5,
-        behavior: "instant" as ScrollBehavior,
-      });
-      requestAnimationFrame(() => requestAnimationFrame(glide));
-    } else {
-      glide();
-    }
-  }, []);
+     sample's clause rails — the shared, landing-checked helper from
+     scroll-helpers, told which anchors this room names */
+  const jump = useCallback(
+    (spec: string) => scrollToSpec(spec, { prefix: "sample-" }),
+    [],
+  );
 
   /* ————— the nav wears this note ————— same registration the reader
      makes, so the Spec Map stop appears in the navbar and the drawer

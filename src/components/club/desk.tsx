@@ -16,16 +16,15 @@ import { TOTALS } from "@/lib/spectra/units";
 import { useRevised, useHydrated } from "@/lib/spectra/progress";
 import { usePacks } from "@/lib/spectra/packs";
 import {
-  dayKey,
   fmtClock,
   fmtShort,
   todaySeconds,
   topicSeconds,
   useTimeData,
   weekSeconds,
-  type TimeData,
 } from "@/lib/spectra/time";
 import { findTopic, pickSuggestion } from "@/lib/spectra/suggest";
+import { streakOf } from "@/lib/spectra/progress-derive";
 import type { DeskState } from "@/lib/spectra/desk";
 import { BeakerMeter, CandyButton, readableInk, SectionTag, shade, tint } from "./bits";
 import { BandWave } from "./bands";
@@ -40,19 +39,8 @@ import { BandWave } from "./bands";
    CSS hovers, saves every tap.
    ═══════════════════════════════════════════════════════════════ */
 
-/** consecutive days with real reading time, counting back from
-    today — with a one-day grace: this morning's session may not
-    have started yet, and a streak shouldn't die while you sleep */
-function streakOf(days: TimeData["days"]): number {
-  const d = new Date();
-  if (!days[dayKey(d)]?.total) d.setDate(d.getDate() - 1);
-  let n = 0;
-  while (days[dayKey(d)]?.total) {
-    n += 1;
-    d.setDate(d.getDate() - 1);
-  }
-  return n;
-}
+/** the streak maths lives in progress-derive.ts — shared with the
+    progress room and any interface that comes next */
 
 export function Desk({
   units,

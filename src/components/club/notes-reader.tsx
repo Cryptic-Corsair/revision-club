@@ -5,8 +5,6 @@ import {
   useCallback,
   useEffect,
   useMemo,
-  useRef,
-  useState,
 } from "react";
 import { m, useScroll, useSpring } from "framer-motion";
 import {
@@ -22,6 +20,7 @@ import type { Unit } from "@/lib/spectra/types";
 import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { togglePick, usePacks } from "@/lib/spectra/packs";
 import { getNotes } from "@/lib/spectra/notes";
+import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
 import { Fmt } from "./format";
 import {
   PopIn,
@@ -51,56 +50,11 @@ import { SpecSectionView } from "./note-section";
    a string of connected rooms rather than one long scroll.
    ═══════════════════════════════════════════════════════════════ */
 
-/* hop to a spec room. scrollIntoView alone proved flaky under some
-   browsers (the smooth glide occasionally dies before it starts), so
-   the target is computed by hand and the landing is verified — if the
-   glide was silently cancelled, one instant snap finishes the trip.
-   Rooms off-screen are content-visibility skipped in the reader, so
-   the first measurement can ride on estimates; a short render pass —
-   an instant pre-scroll to just shy of the target — materialises the
-   real layout, and the glide then aims at measured ground. */
-function scrollToSpec(spec: string) {
-  const el = document.getElementById(`spec-${spec.replace(".", "-")}`);
-  if (!el) return;
-  const saTop =
-    parseFloat(
-      getComputedStyle(document.documentElement).getPropertyValue("--sa-top"),
-    ) || 0;
-  const topOf = () =>
-    Math.max(
-      0,
-      el.getBoundingClientRect().top + window.scrollY - 100 - saTop,
-    );
-  const landed = (top: number) => Math.abs(window.scrollY - top) < 2;
-  const glide = () => {
-    const top = topOf();
-    window.scrollTo({ top, behavior: "smooth" });
-    /* two heartbeats: if the glide is still moving, leave it be; if it
-       stalled mid-trip, snap the rest of the way so the hop always lands */
-    window.setTimeout(() => {
-      if (landed(top)) return;
-      const y1 = window.scrollY;
-      window.setTimeout(() => {
-        if (!landed(top) && Math.abs(window.scrollY - y1) < 1)
-          window.scrollTo({ top, behavior: "instant" as ScrollBehavior });
-      }, 450);
-    }, 450);
-  };
-  /* the render pass: park one-and-a-half viewports shy of the
-     estimate, let the browser lay the target out for real, then glide */
-  const estimate = topOf();
-  if (estimate > window.innerHeight * 2) {
-    window.scrollTo({
-      top: estimate - window.innerHeight * 1.5,
-      behavior: "instant" as ScrollBehavior,
-    });
-    requestAnimationFrame(() => requestAnimationFrame(glide));
-  } else {
-    glide();
-  }
-}
-
-/* band helpers, waves and the shared SpecChip live in ./bands — the
+/* the verified hop and the scroll spy live in
+   @/lib/spectra/scroll-helpers — shared with the sample room and
+   any interface that comes next, so every skin lands on the same
+   measured ground. The band helpers, waves and the shared SpecChip
+   live in ./bands — the
    note's rooms, its contents card and the nav's Spec Map window all
    wear the exact same colours */
 
@@ -199,7 +153,7 @@ function NotesReaderBody({
   jumpToSpec?: string;
 }) {
   const main = unit.candy.main;
-  const [active, setActive] = useState<string>(doc.sections[0]?.spec ?? "");
+  const active = useSpecSpy(doc.sections);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -207,40 +161,6 @@ function NotesReaderBody({
     damping: 26,
     mass: 0.4,
   });
-
-  /* scroll spy — after every scroll frame the position is recomputed
-     from the real rects, so a fast glide (or a long map jump) can
-     never leave a stale "you are here" behind. An IntersectionObserver
-     was tried first, but Chrome occasionally swallows the final
-     crossing of a long smooth glide, leaving the nav stuck one room
-     back; eighteen rects per frame is a price too small to care. */
-  const spyRaf = useRef(0);
-  useEffect(() => {
-    const pick = () => {
-      const y = window.scrollY + window.innerHeight * 0.35;
-      let current = doc.sections[0]?.spec ?? "";
-      for (const s of doc.sections) {
-        const el = document.getElementById(`spec-${s.spec.replace(".", "-")}`);
-        if (el && el.getBoundingClientRect().top + window.scrollY <= y) current = s.spec;
-      }
-      setActive(current);
-    };
-    const onScroll = () => {
-      cancelAnimationFrame(spyRaf.current);
-      spyRaf.current = requestAnimationFrame(pick);
-    };
-    const first = requestAnimationFrame(pick);
-    const settle = window.setTimeout(pick, 350); /* once fonts have settled */
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      cancelAnimationFrame(first);
-      cancelAnimationFrame(spyRaf.current);
-      window.clearTimeout(settle);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [doc]);
 
   /* the nav's Spec Map — sections, current stop and the hop helper,
      announced so the stop can live inside the navbar itself */
