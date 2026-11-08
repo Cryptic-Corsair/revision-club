@@ -200,7 +200,7 @@ function NotesReaderBody({
   ];
 
   return (
-    <div className="notes-flow relative">
+    <div className="notes-flow rooms-page rooms-notes-page relative">
       {/* reading progress */}
       <m.div
         aria-hidden
@@ -213,7 +213,7 @@ function NotesReaderBody({
       />
 
       {/* ————— header ————— */}
-      <header className="mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] sm:px-8">
+      <header className="rooms-page-hero rooms-note-hero mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] sm:px-8">
         <PopIn>
           <SoftButton
             onClick={onBack}
@@ -224,7 +224,7 @@ function NotesReaderBody({
           </SoftButton>
         </PopIn>
 
-        <PopIn delay={0.05} className="mt-7 flex flex-wrap items-center gap-2">
+        <PopIn delay={0.05} className="rooms-meta-row mt-7 flex flex-wrap items-center gap-2">
           <span
             className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
             style={{ background: main, color: readableInk(main) }}
@@ -244,8 +244,8 @@ function NotesReaderBody({
           </h1>
         </PopIn>
 
-        <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-          <div className="shrink-0">
+        <div className="rooms-note-intro mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+          <div className="rooms-mascot shrink-0">
             <Mascot main={main} size={88} bubbles={false} />
           </div>
           <Reveal delay={0.15} className="min-w-0">
@@ -263,7 +263,7 @@ function NotesReaderBody({
           </Reveal>
         </div>
 
-        <PopIn delay={0.18} className="mt-6 flex flex-wrap gap-2">
+        <PopIn delay={0.18} className="rooms-facts mt-6 flex flex-wrap gap-2">
           {stats.map((s) => (
             <span
               key={s}
@@ -279,8 +279,8 @@ function NotesReaderBody({
       </header>
 
       {/* ————— contents ————— */}
-      <Reveal className="mx-auto max-w-3xl px-4 pt-4 sm:px-8">
-        <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
+      <Reveal className="rooms-contents-wrap mx-auto max-w-3xl px-4 pt-4 sm:px-8">
+        <div className="rooms-contents rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
           <div className="flex items-center gap-3">
             <span
               className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-ink/[0.08]"
@@ -297,7 +297,7 @@ function NotesReaderBody({
               </p>
             </div>
           </div>
-          <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="rooms-contents-grid mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
             {doc.sections.map((s, i) => (
               <SpecChip
                 key={s.spec}
@@ -319,7 +319,7 @@ function NotesReaderBody({
         {/* .note-rooms scopes the classic lab's espresso/cream pair
             (html.classic .note-rooms) to the section bands only — the
             contents chips above stay on the daylight candy walk */}
-        <div className="note-rooms mt-8">
+        <div className="note-rooms rooms-wave-sections mt-8">
           <BandWave from="var(--color-cream)" to={bgOf(0)} />
           {doc.sections.map((s, i) => {
             const accent = accentOf(i);
