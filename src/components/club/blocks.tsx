@@ -87,8 +87,8 @@ function BlockView({ block: b, main }: { block: Block; main: string }) {
         >
           {b.title && (
             <div
-              className="mb-3 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.1em] text-white uppercase"
-              style={{ background: main }}
+              className="mb-3 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.1em] uppercase"
+              style={{ background: main, color: readableInk(main) }}
             >
               <Lightbulb className="h-3.5 w-3.5" /> {b.title}
             </div>
@@ -235,8 +235,8 @@ function WorkedExample({
         aria-expanded={open}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.95 }}
-        className="mt-4 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(14px*var(--ui-scale))] font-semibold text-white"
-        style={{ background: main, boxShadow: `0 2px 0 ${shade(main)}` }}
+        className="mt-4 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(14px*var(--ui-scale))] font-semibold"
+        style={{ background: main, color: readableInk(main), boxShadow: `0 2px 0 ${shade(main)}` }}
       >
         {open ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
         {open ? "Hide steps" : "Show steps"}
@@ -277,8 +277,8 @@ function WorkedExample({
                     style={{ background: sunkWash(main, 9) }}
                   >
                     <span
-                      className="mt-0.5 grid h-5.5 w-5.5 shrink-0 place-items-center rounded-full font-display text-[calc(11px*var(--ui-scale))] font-bold text-white"
-                      style={{ background: main, width: 22, height: 22 }}
+                      className="mt-0.5 grid h-5.5 w-5.5 shrink-0 place-items-center rounded-full font-display text-[calc(11px*var(--ui-scale))] font-bold"
+                      style={{ background: main, color: readableInk(main), width: 22, height: 22 }}
                     >
                       {i + 1}
                     </span>
