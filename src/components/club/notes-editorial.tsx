@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { m, useScroll, useSpring } from "framer-motion";
 import {
   ArrowLeft,
@@ -42,6 +42,18 @@ const SUMMARY = [
   "Data tables, displayed equations and diagrams that turn the prose into a picture.",
   "Worked examples reasoned through line by line, so the method sticks, not just the answer.",
 ];
+
+/* the rail's remembered posture — its own tiny key, deliberately
+   outside the prefs schema: purely presentational, safe to drop */
+const TOC_KEY = "editorial-contents-expanded";
+const readTocPosture = () => {
+  try {
+    const v = localStorage.getItem(TOC_KEY);
+    return v === "collapsed" ? false : true;
+  } catch {
+    return true;
+  }
+};
 
 /* ————— the pack tick, editorially —————
    The reader's banner control: is this spec point in your revision
@@ -132,7 +144,66 @@ function NotesEditorialBody({
 }) {
   const main = unit.candy.main;
   const active = useSpecSpy(doc.sections);
-  const [contentsExpanded, setContentsExpanded] = useState(true);
+  const [contentsExpanded, setContentsExpanded] = useState(readTocPosture);
+
+  /* remember the posture for the next note — one small key, guarded */
+  useEffect(() => {
+    try {
+      localStorage.setItem(
+        TOC_KEY,
+        contentsExpanded ? "expanded" : "collapsed",
+      );
+    } catch {
+      /* private mode etc. — the rail simply forgets */
+    }
+  }, [contentsExpanded]);
+
+  const activeIndex = Math.max(
+    0,
+    doc.sections.findIndex((s) => s.spec === active),
+  );
+
+  /* the rail keeps your place in view: when the spy moves, the active
+     link is eased to the edge of its own scroller — never the page.
+     scrollTop math rather than scrollIntoView, so the window can't
+     be dragged along by an over-eager ancestor. */
+  const tocNavRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const nav = tocNavRef.current;
+    if (!nav) return;
+    const link = nav.querySelector<HTMLElement>("[data-toc-active='true']");
+    if (!link) return;
+    const vertical = nav.scrollHeight > nav.clientHeight + 1;
+    const horizontal = nav.scrollWidth > nav.clientWidth + 1;
+    if (!vertical && !horizontal) return;
+    const margin = 12;
+    const keepInView = (
+      pos: number,
+      size: number,
+      lo: number,
+      hi: number,
+    ) => (pos < lo ? pos - margin : pos + size > hi ? pos + size - hi + lo + margin : null);
+    if (vertical) {
+      const target = keepInView(
+        link.offsetTop,
+        link.offsetHeight,
+        nav.scrollTop,
+        nav.scrollTop + nav.clientHeight,
+      );
+      if (target !== null)
+        nav.scrollTo({ top: Math.max(0, target), behavior: "smooth" });
+    }
+    if (horizontal) {
+      const target = keepInView(
+        link.offsetLeft,
+        link.offsetWidth,
+        nav.scrollLeft,
+        nav.scrollLeft + nav.clientWidth,
+      );
+      if (target !== null)
+        nav.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
+    }
+  }, [active, contentsExpanded]);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -248,42 +319,78 @@ function NotesEditorialBody({
         </section>
       </Reveal>
 
-      {/* ————— contents rail + the clauses ————— */}
-      <div className={`mt-9 grid min-w-0 grid-cols-1 items-start gap-5 lg:gap-8 ${contentsExpanded ? "lg:grid-cols-[250px_minmax(0,1fr)]" : "lg:grid-cols-[56px_minmax(0,1fr)]"}`}>
-        <aside className={`legal-index h-fit min-w-0 lg:sticky lg:top-28 ${contentsExpanded ? "lg:w-[250px]" : "lg:w-14"}`}>
-          <div className={`mb-3 flex items-center ${contentsExpanded ? "justify-between gap-2" : "justify-center"}`}>
-            {contentsExpanded && <p className="legal-meta">CONTENTS</p>}
+      {/* ————— contents rail + the clauses —————
+          the wayfinder: your place in the note, always in sight.
+          A live counter and hairline track carry the reading position,
+          the active clause is inked in rust, and the collapsed rail
+          keeps a single rusted number so you never lose the thread.
+          Expansion is remembered between notes. */}
+      <div className={`etoc-layout mt-9 grid min-w-0 grid-cols-1 items-start gap-5 lg:gap-8 ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}>
+        <aside className={`legal-index h-fit min-w-0 lg:sticky lg:top-28 ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}>
+          <div className={`etoc-head mb-3 ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}>
+            {contentsExpanded && (
+              <p className="legal-meta">
+                CONTENTS
+                <span className="etoc-count" aria-hidden>
+                  {activeIndex + 1}/{doc.sections.length}
+                </span>
+              </p>
+            )}
             <button
               type="button"
               onClick={() => setContentsExpanded((open) => !open)}
               aria-label={contentsExpanded ? "Collapse contents" : "Expand contents"}
               aria-expanded={contentsExpanded}
+              aria-controls="etoc-nav"
               title={contentsExpanded ? "Collapse contents" : "Expand contents"}
-              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-ink/10 text-ink-soft transition-colors hover:border-ink/25 hover:bg-ink/[0.05] hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+              className="etoc-toggle"
             >
               <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${contentsExpanded ? "rotate-90" : "-rotate-90"}`} />
             </button>
           </div>
-          <nav aria-label="Note contents" className={`flex gap-2 overflow-x-auto pb-2 lg:overflow-visible lg:pb-0 ${contentsExpanded ? "lg:flex-col lg:gap-1" : "lg:flex-col lg:items-center lg:gap-1"}`}>
-            {doc.sections.map((s) => (
-              <a
-                key={s.spec}
-                href={`#spec-${s.spec.replace(".", "-")}`}
-                aria-current={active === s.spec ? "true" : undefined}
-                aria-label={contentsExpanded ? undefined : `Go to ${s.spec}: ${s.title}`}
-                title={contentsExpanded ? undefined : s.title}
-                className={`legal-index-link min-w-0 ${contentsExpanded ? "lg:w-full lg:max-w-full" : "justify-center lg:h-10 lg:w-10 lg:px-0"}`}
-                onClick={(e) => { e.preventDefault(); scrollToSpec(s.spec); }}
-              >
-                <span className="shrink-0">{s.spec}</span>
-                {contentsExpanded && <span className={`min-w-0 break-words [overflow-wrap:anywhere] ${active === s.spec ? "text-ink" : ""}`}>{s.title}</span>}
-              </a>
-            ))}
-          </nav>
+
+          {/* hairline reading track — where you are between first and last clause */}
+          <div className="etoc-track" aria-hidden>
+            <div
+              className="etoc-track-fill"
+              style={{ width: `${((activeIndex + 1) / doc.sections.length) * 100}%` }}
+            />
+          </div>
+
+          <div className="etoc-wrap">
+            <nav
+              id="etoc-nav"
+              ref={tocNavRef}
+              aria-label="Note contents"
+              className={`etoc-nav ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}
+            >
+              {doc.sections.map((s) => {
+                const isActive = active === s.spec;
+                return (
+                  <a
+                    key={s.spec}
+                    href={`#spec-${s.spec.replace(".", "-")}`}
+                    data-toc-active={isActive || undefined}
+                    aria-current={isActive ? "location" : undefined}
+                    aria-label={`Go to specification ${s.spec}: ${s.title}`}
+                    title={!contentsExpanded ? s.title : undefined}
+                    className={`etoc-link ${isActive ? "is-active" : ""} ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}
+                    onClick={(e) => { e.preventDefault(); scrollToSpec(s.spec); }}
+                  >
+                    <span className="etoc-num" aria-hidden>
+                      {s.spec}
+                    </span>
+                    {contentsExpanded && <span className="etoc-title">{s.title}</span>}
+                  </a>
+                );
+              })}
+            </nav>
+          </div>
+
           {contentsExpanded && (
-            <p className="mt-4 hidden border-t border-ink/10 pt-4 text-[calc(11px*var(--ui-scale))] leading-[1.7] text-ink-faint lg:block">
-              {firstSpec} — {lastSpec} · {unit.code} · read in order or hop
-              from the contents; the map in the navbar tracks you either way.
+            <p className="etoc-foot mt-4 hidden border-t border-ink/10 pt-4 text-[calc(11px*var(--ui-scale))] leading-[1.7] text-ink-faint lg:block">
+              {firstSpec} — {lastSpec} · read in order or hop — the map in
+              the navbar tracks you either way.
             </p>
           )}
         </aside>
