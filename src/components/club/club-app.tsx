@@ -1217,8 +1217,7 @@ export default function ClubApp() {
                   ))}
   
                 {view.kind === "unit" && unit && (() => {
-                  const UnitWalk =
-                    prefs.iface === "editorial" ? UnitEditorial : UnitView;
+                  const UnitWalk = UnitEditorial;
                   return (
                     <UnitWalk
                       key={unit.code}
@@ -1231,8 +1230,7 @@ export default function ClubApp() {
                 })()}
   
                 {view.kind === "topic" && unit && topic && (() => {
-                  const TopicReader =
-                    prefs.iface === "editorial" ? TopicEditorial : TopicView;
+                  const TopicReader = TopicEditorial;
                   return (
                     <TopicReader
                       key={`${unit.code}/${topic.id}`}
@@ -1259,8 +1257,7 @@ export default function ClubApp() {
                   /* the interface swap — the editorial twin wears the
                      same props contract, so the shell changes nothing
                      but the component picked */
-                  const Reader =
-                    prefs.iface === "editorial" ? NotesEditorial : NotesReader;
+                  const Reader = NotesEditorial;
                   return (
                     <Reader
                       key={view.docId}
@@ -1273,8 +1270,7 @@ export default function ClubApp() {
                 })()}
   
                 {view.kind === "spec" && (() => {
-                  const SpecIdx =
-                    prefs.iface === "editorial" ? SpecEditorial : SpecIndex;
+                  const SpecIdx = SpecEditorial;
                   return (
                     <SpecIdx
                       onHome={goHome}
@@ -1285,8 +1281,7 @@ export default function ClubApp() {
                 })()}
   
                 {view.kind === "pack" && (() => {
-                  const Pack =
-                    prefs.iface === "editorial" ? PackEditorial : PackView;
+                  const Pack = PackEditorial;
                   return (
                     <Pack
                       onHome={goHome}
@@ -1297,8 +1292,7 @@ export default function ClubApp() {
                 })()}
   
                 {view.kind === "sticker" && (() => {
-                  const Progress =
-                    prefs.iface === "editorial" ? ProgressEditorial : StickerBook;
+                  const Progress = ProgressEditorial;
                   return (
                     <Progress
                       units={UNITS}
