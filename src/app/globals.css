@@ -329,32 +329,44 @@ html.dark:not(.dune)[data-mood="3"] {
    a low amber instead of the old orange flare. No mood rotation —
    this pair is the theme's signature and never changes. */
 html.dune {
-  /* A richer desert-at-dusk palette: ink-dark umber, sun-warmed
-     sandstone and a distinct ochre signal. Keep the warmth vivid,
-     not orange; each surface has a clearer step in value. */
-  --color-cream: #1b1712;
-  --color-paper: #382a1e;
-  --color-milk: #fff3df;
-  --color-ink: #fff3df;
-  --color-ink-soft: #ddc9aa;
-  --color-ink-faint: #bca789;
-  --color-cocoa: #100c08;
-  --tint-base: #463522;
-  --shade-ink: #1b1712;
-  --note-band-a: #241b13;
-  --note-band-b: #2d2116;
-  --home-band-a: #15110d;
-  --home-band-b: #21180f;
-  --sunk-share: 12%;
-  --sunk-base: #302318;
-  --lift-share: 18%;
-  --lift-base: #3b2b1c;
-  --honey-share: 16%;
-  --honey-base: #1b130b;
+  --color-cream: #1e1b16; /* page background */
+  --color-paper: #2e2820; /* cards, sheets, bubbles */
+  --color-milk: #f6f0e6;
+  --color-ink: #f6f0e6; /* 15.1:1 on the page, 12.9:1 on cards */
+  --color-ink-soft: #c9bfb0; /* 9.5:1 on the page, 8.0:1 on cards */
+  --color-ink-faint: #a79c8c; /* 6.4:1 on the page, 5.4:1 on cards */
+  --color-cocoa: #121009; /* footer — the darkest anchor */
+  --tint-base: #38322a; /* candy pastels lean here in the dune lab */
+  --shade-ink: #1e1b16; /* shade() mixes candy toward the room */
+  /* the study ground — two fixed steps that alternate down the
+     notes, cocoa leaning into caramel; chosen once, never rotated.
+     Ink keeps 14.5:1 / 14.0:1 on the pair. */
+  --note-band-a: #221f1a;
+  --note-band-b: #262218;
+  --home-band-a: #191713;
+  --home-band-b: #1f1c17;
+  /* content-surface grading, re-derived for the chocolate grounds —
+     same three families as the night lab, wells sunk into roasted
+     chocolate a half-step under the card:
+     · lift  (eq / steps / worked / KEY IDEA) pools 16% of its candy
+       over a neutral-cocoa well just under the card (#292419);
+     · honey (the lemon sticky note) takes 12% over a deep well
+       (#16130d) — lemon is the most luminous candy on the shelf;
+     · sunk  (table headers, step insets) sinks
+       10% of its candy into a cocoa well just under the card
+       (#292520) — headers stay value-neutral vs the card.
+     Chips hug the card they sit on (--chip-base). Zebra rows stay
+     neutral milk; figure annotation ink eases back. */
+  --sunk-share: 10%;
+  --sunk-base: #292520;
+  --lift-share: 16%;
+  --lift-base: #292419;
+  --honey-share: 12%;
+  --honey-base: #16130d;
   --chip-base: var(--color-paper);
-  --zebra-fill: color-mix(in oklab, var(--color-milk) 5%, transparent);
-  --arc-ink: 72%;
-  --edge: rgb(0 0 0 / 0.48);
+  --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
+  --arc-ink: 70%;
+  --edge: rgb(0 0 0 / 0.5);
   color-scheme: dark;
 }
 
@@ -1992,19 +2004,19 @@ html.dark:not(.dune) .note-rooms {
 }
 html.dune .note-rooms {
   --room-accent: #d5a45d;
-  --color-cream: #1d1711;
-  --color-paper: #38291d;
-  --color-ink: #fff2dc;
-  --color-ink-soft: #ddc6a3;
-  --color-ink-faint: #bea27d;
-  --color-cocoa: #100b07;
-  --tint-base: #49331f;
-  --note-band-a: #251a11;
-  --note-band-b: #302116;
-  --edge: rgb(0 0 0 / 0.42);
-  --sunk-base: #302116;
-  --lift-base: #3d2b1a;
-  --honey-base: #1b120a;
+  --color-cream: #211f1b;
+  --color-paper: #302c25;
+  --color-ink: #f0e9dc;
+  --color-ink-soft: #c9c0b1;
+  --color-ink-faint: #a79d8d;
+  --color-cocoa: #15130f;
+  --tint-base: #393329;
+  --note-band-a: #26231e;
+  --note-band-b: #2b2822;
+  --edge: rgb(0 0 0 / 0.32);
+  --sunk-base: #29261f;
+  --lift-base: #26231e;
+  --honey-base: #211f1b;
 }
 html.classic .note-rooms {
   --room-accent: #9b8060;
