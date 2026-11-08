@@ -2652,7 +2652,7 @@ html.dune .rooms-page {
 
 /* compact devices: the same hierarchy, not a squeezed desktop */
 @media (max-width: 640px) {
-  .rooms-page { padding-left: calc(15px * var(--ui-scale)); padding-right: calc(15px * var(--ui-scale)); }
+  .rooms-page { padding-left: 0; padding-right: 0; }
   .rooms-page-hero::before { inset-inline: -0.4rem; border-radius: 18px; }
   .rooms-page .rooms-page-title { max-width: 16ch; }
   .rooms-unit-intro { margin-top: calc(1rem * var(--ui-scale)) !important; }
