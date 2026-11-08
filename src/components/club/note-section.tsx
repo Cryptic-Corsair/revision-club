@@ -295,7 +295,7 @@ function BlockView({
       return (
         <div
           className="rooms-callout room-callout max-w-[72ch] rounded-[calc(12px*var(--ui-scale))] px-4 py-3.5"
-          style={{ background: "color-mix(in oklab, var(--color-paper) 88%, var(--room-accent) 12%)" }}
+          style={{ background: "color-mix(in oklab, var(--color-paper) 88%, var(--rooms-accent) 12%)" }}
         >
           <div className="flex items-start gap-3">
             <StickyNote
