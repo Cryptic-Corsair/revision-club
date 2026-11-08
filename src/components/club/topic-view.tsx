@@ -61,7 +61,7 @@ export function TopicView({
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
+    <div className="rooms-page rooms-topic-page mx-auto max-w-3xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
       {/* reading progress — a candy strip filling up top */}
       <m.div
         aria-hidden
@@ -84,8 +84,8 @@ export function TopicView({
       </PopIn>
 
       {/* ————— header ————— */}
-      <header className="mt-8">
-        <PopIn delay={0.05} className="flex flex-wrap items-center gap-2">
+      <header className="rooms-page-hero rooms-topic-hero mt-8">
+        <PopIn delay={0.05} className="rooms-meta-row flex flex-wrap items-center gap-2">
           <Chip main={main}>{topic.label}</Chip>
           <Chip>{topic.minutes} min read</Chip>
           <Chip>{topic.ao.join(" · ")}</Chip>
@@ -97,10 +97,10 @@ export function TopicView({
         </PopIn>
 
         <PopIn delay={0.1}>
-          <h1 className="mt-5 font-display text-[calc(clamp(2rem,4.6vw,3rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.08] font-semibold tracking-tight text-ink">
+          <h1 className="rooms-page-title mt-5 font-display text-[calc(clamp(2rem,4.6vw,3rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.08] font-semibold tracking-tight text-ink">
             {topic.title}
           </h1>
-          <p className="mt-3.5 max-w-[60ch] text-[calc(16.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+          <p className="rooms-page-summary mt-3.5 max-w-[60ch] text-[calc(16.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
             <Fmt text={topic.summary} />
           </p>
         </PopIn>
@@ -116,10 +116,10 @@ export function TopicView({
             onClick={onOpenNotes}
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.97 }}
-            className="group flex w-full cursor-pointer items-center gap-4 rounded-[calc(22px*var(--ui-scale))] border border-ink/[0.08] bg-paper p-5 text-left puff sm:p-6"
+            className="rooms-feature-link group flex w-full cursor-pointer items-center gap-4 rounded-[calc(22px*var(--ui-scale))] border border-ink/[0.08] bg-paper p-5 text-left puff sm:p-6"
             style={{ borderLeft: `4px solid ${main}` }}
           >
-            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-[calc(20px*var(--ui-scale))] bg-ink/[0.06]">
+            <span className="rooms-feature-icon grid h-14 w-14 shrink-0 place-items-center rounded-[calc(20px*var(--ui-scale))] bg-ink/[0.06]">
               <BookOpen className="h-7 w-7" style={{ color: main }} strokeWidth={2.2} />
             </span>
             <span className="min-w-0 flex-1">
@@ -140,12 +140,12 @@ export function TopicView({
       )}
 
       {/* ————— content ————— */}
-      <div className="mt-10">
+      <div className="rooms-topic-content mt-10">
         <TopicBlocks blocks={topic.blocks} main={main} />
       </div>
 
       {/* ————— mark as revised ————— */}
-      <Reveal className="relative mt-14 flex justify-center">
+      <Reveal className="rooms-completion relative mt-14 flex justify-center">
         <div className="relative">
           <Confetti fire={fire} />
           <m.button
@@ -193,7 +193,7 @@ export function TopicView({
       </p>
 
       {/* ————— prev / next ————— */}
-      <nav className="mt-10 grid gap-4 sm:grid-cols-2" aria-label="Topic navigation">
+      <nav className="rooms-pager mt-10 grid gap-4 sm:grid-cols-2" aria-label="Topic navigation">
         {prev ? (
           <m.button
             type="button"
