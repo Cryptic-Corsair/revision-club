@@ -4,7 +4,6 @@ import { useState } from "react";
 import { m, useScroll, useSpring } from "framer-motion";
 import { ArrowLeft, ArrowRight, BookOpen, Check, Clock, PartyPopper, Sticker } from "./icons";
 import type { Topic, Unit } from "@/lib/spectra/types";
-import { ROOM_UNIT_ACCENTS } from "@/lib/spectra/units";
 import { toggleRevised, useRevised } from "@/lib/spectra/progress";
 import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { TopicBlocks } from "./blocks";
@@ -52,7 +51,7 @@ export function TopicView({
   const idx = unit.topics.findIndex((t) => t.id === topic.id);
   const prev = idx > 0 ? unit.topics[idx - 1] : undefined;
   const next = idx < unit.topics.length - 1 ? unit.topics[idx + 1] : undefined;
-  const main = ROOM_UNIT_ACCENTS[unit.code];
+  const main = "var(--color-ink-soft)";
 
   const collect = () => {
     if (!isRevised) setFire((f) => f + 1);
@@ -68,7 +67,7 @@ export function TopicView({
         style={{
           top: "var(--sa-top)",
           scaleX,
-          background: `linear-gradient(90deg, ${main}, #FFD43B)`,
+          background: `linear-gradient(90deg, ${main}, var(--color-ink))`,
         }}
       />
 

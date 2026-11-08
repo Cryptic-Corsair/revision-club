@@ -364,16 +364,12 @@ Dune uses the dark-mode foundation plus Dune-specific token overrides. Do not as
 
 ### 9.3 Accent ownership
 
-Accent responsibilities are distinct:
+Rooms and Editorial are intentionally neutral reading interfaces. Do not add unit-specific accent colours, rotating section colours, coloured spec chips, rust/lilac/amber clause markers or accent-tinted callouts to either interface.
 
-- `prefs.ts` owns the canonical six-colour Rooms palette and the user's selected sequence. Keep its six stored IDs stable; existing preference records depend on them.
-- `units.ts` exposes `ROOM_UNIT_ACCENTS`, mapping WCH11–WCH16 to the six signature colours in canonical order. The homepage's existing `Unit.candy.main` palette is separate.
-- `bands.tsx` exposes Rooms-specific `roomAccentOf`, `roomBandOf` and `roomBgOf` helpers. The Customize panel controls which selected accents rotate through Rooms specification sections.
-- Each Rooms section sets its own `--room-accent`; callout surfaces, borders and teaching cues must read that local value.
-- Editorial keeps the restrained `accentOf` marker and must not inherit the Rooms rotation. Shared components must branch by active interface where necessary.
-- Light uses subtle accent washes. Night, Dune and Classic keep their existing neutral surface ladders; use accents on labels, markers, selected states and learning details rather than large saturated fills.
-- Do not rename stored accent IDs or change the preference storage key without a compatibility migration.
-
+- Rooms section bands use only the active theme's neutral paper surfaces. Teaching cues use the theme's ink and soft-ink values.
+- Editorial's `--legal-rust` is a compatibility token for neutral soft ink; do not restore a coloured rust identity.
+- The six stored accent IDs remain part of the preference schema because Home still uses the independent accent palette. The Customize palette must describe and preview Home only.
+- Chemistry diagrams may retain colour where it conveys scientific meaning (atoms, ions, apparatus, indicator changes or plotted series). Do not confuse semantic scientific colour with interface accent decoration.
 Search all consumers before changing accent behaviour.
 
 ### 9.4 Visual design principles
@@ -710,18 +706,8 @@ IAL CHEM is an existing, carefully tuned educational product. Treat it as a syst
 **Preserve the source. Trace the system. Respect ownership boundaries. Change only what is needed. Verify the result. Document any new rule that future contributors must know.**
 
 
-## Rooms accent architecture
+## Neutral reading-interface colour policy
 
-Rooms uses a curated six-colour mineral palette: Terracotta, Sienna, Ochre, Eucalyptus, Slate and Mulberry. The stable accent IDs in `prefs.ts` are intentionally retained because saved preference records store those IDs; labels and hex values may evolve without invalidating existing selections.
+Rooms and Editorial do not have independent accent palettes. Their unit identifiers, progress indicators, section markers, specification chips, callouts, tables and editorial clause markers use neutral theme tokens. Home retains its independent accent palette and the existing stored accent IDs remain in the preference schema for compatibility. The Customize palette must be described and previewed as a Home setting only.
 
-Ownership and flow:
-
-- `prefs.ts` is the canonical palette and preference source. Customize stores the selected accent IDs in the existing preference record.
-- `units.ts` exposes `ROOM_UNIT_ACCENTS`, assigning one signature colour to each unit without changing the homepage's existing `Unit.candy.main` palette.
-- `bands.tsx` exposes `roomAccentOf`, `roomBandOf` and `roomBgOf` for Rooms. The selected palette is filtered in canonical order and cycles by specification-section position.
-- `unit-view.tsx`, `topic-view.tsx` and `notes-reader.tsx` use the Rooms unit mapping. Each note section sets its own `--room-accent` so callout surfaces and borders inherit the correct section colour.
-- Shared `SpecChip` checks the active interface: Rooms uses the selected sequence; Editorial retains its single restrained mineral marker.
-- `accentOf`, `bandOf` and Editorial section renderers remain deliberately restrained. Do not route the Rooms sequence into Editorial.
-- Theme ownership remains unchanged. Light uses subtle accent washes; Night, Dune and Classic retain their established neutral surface ladders. Accents appear on foreground learning cues and small content details, not as large saturated page fills.
-
-When changing this system, preserve the six stable IDs, the preference storage key, canonical order, unit-to-palette mapping, interface separation and readable foreground contrast. Test all four themes in both interfaces and verify that changing the palette updates Rooms without changing Home or Editorial.
+Keep scientifically meaningful diagram colours intact. Verify Rooms and Editorial in Light, Night, Dune and Classic. Theme switching must remain atomic, and no global transition should be introduced.

@@ -17,7 +17,7 @@ import { getNotes } from "@/lib/spectra/notes";
 import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
 import { Fmt, plural } from "./format";
 import { PopIn, Reveal, SoftButton, readableInk, shade } from "./bits";
-import { accentOf } from "./bands";
+import { editorialAccentOf } from "./bands";
 import { useSpecMapRegister } from "./spec-map";
 import { EditorialSectionView, figOffsetsOf } from "./spec-section-editorial";
 import { EditorialLabel, SampleBlockView } from "./sample-blocks";
@@ -129,7 +129,7 @@ function NotesEditorialBody({
   onBack: () => void;
   jumpToSpec?: string;
 }) {
-  const main = unit.candy.main;
+  const main = "var(--color-ink-soft)";
   const active = useSpecSpy(doc.sections);
 
   const { scrollYProgress } = useScroll();
@@ -336,11 +336,11 @@ function NotesEditorialBody({
                     section={section}
                     index={i}
                     total={doc.sections.length}
-                    accent={accentOf(i)}
+                    accent={editorialAccentOf(i)}
                     eyebrow={eyebrowFor(section.spec)}
                     anchorPrefix="spec-"
                     bannerAction={
-                      <EditorialPackTick spec={section.spec} accent={accentOf(i)} />
+                      <EditorialPackTick spec={section.spec} accent={editorialAccentOf(i)} />
                     }
                     figOffset={figOffsets[i]}
                   />

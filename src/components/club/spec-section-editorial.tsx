@@ -24,7 +24,7 @@ import type { SpecSection } from "@/lib/spectra/notes-types";
    IAL CHEM · the editorial section — the document room's one true
    way a spec section looks. The sibling of SpecSectionView: same
    idea, same data, the disclaimer page's dress — a numbered clause
-   rail, the accent icon chip, the official statement under its
+   rail, the neutral icon chip, the official statement under its
    five-point rule, and the note's blocks re-set editorially by
    SampleBlockView.
 
@@ -65,8 +65,7 @@ export function EditorialSectionView({
       clause numeral and the rail connector */
   index: number;
   total: number;
-  /** the band-walk accent — speaks through the icon chip and the
-      statement rule only; the body speaks the room's rust */
+  /** neutral marker shared by editorial clauses and content blocks */
   accent: string;
   /** the small caps line beside the icon chip —
       "SPEC 2.6 · WCH11 TOPIC 3" */

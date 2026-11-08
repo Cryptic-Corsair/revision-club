@@ -10,8 +10,8 @@
 import { m, type HTMLMotionProps, type Variants } from "framer-motion";
 import { Footprints } from "./icons";
 import type { SpecSection } from "@/lib/spectra/notes-types";
-import { readableInk, shade } from "./bits";
-import { ACCENTS, ACCENT_IDS, currentAccents, currentIface } from "@/lib/spectra/prefs";
+
+import { ACCENTS, ACCENT_IDS, currentAccents } from "@/lib/spectra/prefs";
 
 /* The canonical mineral palette. Customize narrows the sequence
    to the user's selected colours; helpers rotate those picks in
@@ -66,25 +66,15 @@ export function BandWave({
 export const inkMix = (main: string, pct = 45) =>
   `color-mix(in oklab, ${main} ${pct}%, var(--color-ink))`;
 
-/* Editorial keeps its restrained mineral marker. Rooms has its own
-   six-colour sequence, driven by the existing Customize selection. */
+/* Home retains its own accent language. Editorial and Rooms use
+   neutral markers and surfaces, independent of Home's palette. */
 export const accentOf = (_i: number) => "#B8874B";
+export const editorialAccentOf = (_i: number) => "var(--color-ink-soft)";
 
-export const roomAccentOf = (i: number) => {
-  const selected = currentAccents();
-  const id = selected[i % selected.length] ?? ACCENT_IDS[0];
-  return ACCENTS.find((a) => a.id === id)?.hex ?? ACCENTS[0].hex;
-};
-
-/* Daylight bands carry only a low-strength wash of their accent.
-   Dark, Dune and Classic keep their established neutral surface
-   ladders; colour remains in labels and learning details. */
-export const roomBandOf = (i: number) =>
-  `color-mix(in oklab, ${roomAccentOf(i)} var(--band-mix, 9%), var(--tint-base))`;
+/* Rooms section bands alternate only between the active theme's
+   neutral paper tones; no user-selected accent enters the reader. */
 export const roomBgOf = (i: number) =>
-  i % 2 === 1
-    ? `var(--note-band-b, ${roomBandOf(i)})`
-    : `var(--note-band-a, ${roomBandOf(i)})`;
+  i % 2 === 1 ? "var(--note-band-b)" : "var(--note-band-a)";
 
 export const bandOf = (i: number) =>
   `color-mix(in oklab, ${accentOf(i)} var(--band-mix, 10%), var(--tint-base))`;
@@ -126,9 +116,8 @@ export function SpecChip({
   here,
   ...rest
 }: { s: SpecSection; i: number; here: boolean } & HTMLMotionProps<"button">) {
-  const rooms = currentIface() === "rooms";
-  const accent = rooms ? roomAccentOf(i) : accentOf(i);
-  const band = rooms ? roomBgOf(i) : bgOf(i);
+  const accent = "var(--color-ink-soft)";
+  const band = "color-mix(in oklab, var(--color-ink) 3%, var(--color-paper))";
   return (
     <m.button
       type="button"
@@ -140,9 +129,9 @@ export function SpecChip({
       style={
         here
           ? {
-              background: accent,
-              color: readableInk(accent),
-              boxShadow: `0 3px 0 ${shade(accent)}`,
+              background: "var(--color-ink)",
+              color: "var(--color-paper)",
+              boxShadow: "0 3px 0 color-mix(in oklab, var(--color-ink) 70%, transparent)",
               rotate: "-1deg",
             }
           : { background: band, boxShadow: "0 2px 0 var(--edge)" }
@@ -154,10 +143,10 @@ export function SpecChip({
         style={
           here
             ? {
-                background: "rgb(255 255 255 / 0.28)",
-                color: readableInk(accent),
+                background: "rgb(255 255 255 / 0.18)",
+                color: "var(--color-paper)",
               }
-            : { background: accent, color: readableInk(accent) }
+            : { background: "color-mix(in oklab, var(--color-ink) 9%, var(--color-paper))", color: "var(--color-ink)" }
         }
       >
         {s.spec}

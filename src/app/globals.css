@@ -2035,3 +2035,78 @@ html.classic .note-rooms .room {
 @media (prefers-reduced-motion: reduce) {
   .note-rooms .spec-anchor { transition: none; }
 }
+
+
+/* ═════════ Neutral reading surfaces · Rooms + Editorial ═════════
+   Both reading interfaces use the active theme's ink and paper as
+   their only interface colours. Home keeps its independent palette.
+   Semantic colour inside chemistry diagrams and highlighted source
+   text is intentionally not overridden.
+*/
+.note-rooms,
+html.dark .note-rooms,
+html.dune .note-rooms,
+html.classic .note-rooms {
+  --room-accent: var(--color-ink-soft);
+}
+.note-rooms .spec-anchor .room-callout {
+  border-color: color-mix(in oklab, var(--color-ink) 14%, transparent);
+}
+.legal-room,
+html.dark .legal-room,
+html.dune .legal-room,
+html.classic .legal-room {
+  --legal-rust: var(--color-ink-soft);
+  --legal-rust-soft: color-mix(in oklab, var(--color-ink-soft) 42%, transparent);
+}
+.legal-room .legal-kicker,
+html.dark .legal-room .legal-kicker,
+html.dune .legal-room .legal-kicker,
+html.classic .legal-room .legal-kicker {
+  color: var(--color-paper);
+  background: var(--color-ink);
+}
+.legal-room .legal-heading-accent,
+.legal-room .legal-summary-number,
+.legal-room .legal-meta,
+.legal-room .legal-hero-mark,
+html.dark .legal-room .legal-heading-accent,
+html.dune .legal-room .legal-heading-accent,
+html.classic .legal-room .legal-heading-accent,
+html.dark .legal-room .legal-hero-mark,
+html.dune .legal-room .legal-hero-mark,
+html.classic .legal-room .legal-hero-mark {
+  color: var(--color-ink-soft);
+}
+.legal-room .legal-mark-dot,
+.legal-room .legal-mark-dot-two {
+  background: var(--color-ink-soft);
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-ink-soft) 12%, transparent);
+}
+.legal-room .legal-clause-icon,
+html.dark .legal-room .legal-clause-icon,
+html.dune .legal-room .legal-clause-icon,
+html.classic .legal-room .legal-clause-icon {
+  color: var(--color-ink-soft);
+  background: color-mix(in oklab, var(--color-ink) 5%, var(--color-paper));
+  border-color: color-mix(in oklab, var(--color-ink) 14%, transparent);
+}
+.legal-room .legal-closing,
+html.dark .legal-room .legal-closing,
+html.dune .legal-room .legal-closing,
+html.classic .legal-room .legal-closing {
+  background: var(--color-paper);
+  border-color: color-mix(in oklab, var(--color-ink) 12%, transparent);
+  box-shadow: 0 2px 0 var(--edge);
+}
+.legal-room .legal-summary,
+.legal-room .legal-card,
+html.dark .legal-room .legal-summary,
+html.dark .legal-room .legal-card,
+html.dune .legal-room .legal-summary,
+html.dune .legal-room .legal-card,
+html.classic .legal-room .legal-summary,
+html.classic .legal-room .legal-card {
+  background: color-mix(in oklab, var(--color-paper) 96%, var(--color-ink));
+  border-color: color-mix(in oklab, var(--color-ink) 12%, transparent);
+}

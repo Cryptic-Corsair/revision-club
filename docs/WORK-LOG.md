@@ -111,3 +111,17 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified.
 - **Commit(s):** implementation `187852022adae596085f42992aaefe0cadd45479`; this verification entry is included in the following journal commit.
 - **Follow-up / known limitations:** visual verification across all four themes and both interfaces remains outstanding.
+
+
+### 2026-11-08 — Remove interface accents from Rooms and Editorial
+
+- **Contributor:** AI agent.
+- **Request / objective:** restore the prior, less colour-led direction by removing decorative accent colours from both Rooms and Editorial.
+- **Investigation:** traced unit signatures, note-reader section colours, shared specification chips and blocks, Editorial clause markers, rust/lilac theme overrides, and the Customize palette's relationship to Home.
+- **Changes made:** removed the Rooms unit colour map and per-section rotation; made Rooms unit/topic headers, progress cues, spec chips, callouts and section bands use neutral theme tokens; made Editorial clause markers and rust-based details neutral across themes; retained the six stored preference IDs and Home's independent accent palette, relabelling the Customize control and preview as Home-only; updated the handbook and Development Guide.
+- **Preserved invariants:** no chemistry wording, specification text, topic order, IDs, progress records, preference schema or storage key changed. Home's independent palette and scientifically meaningful diagram colours remain intact. All four themes and the two interface choices remain available.
+- **Decisions and rationale:** remove interface colour decoration rather than stripping colours that carry scientific meaning inside diagrams. The reading hierarchy should come from typography, spacing, neutral surface contrast and the active theme.
+- **Verification:** source-level checks and changed call sites were reviewed. No local lint/build or browser visual checks were run; all theme/interface combinations remain to be visually inspected.
+- **Deployment:** not verified.
+- **Commit(s):** included in this commit.
+- **Follow-up / known limitations:** verify Rooms and Editorial in Light, Night, Dune and Classic, and confirm Home's palette still behaves independently.
