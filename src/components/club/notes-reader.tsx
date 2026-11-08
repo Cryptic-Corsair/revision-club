@@ -249,7 +249,7 @@ function NotesReaderBody({
             <Mascot main={main} size={88} bubbles={false} />
           </div>
           <Reveal delay={0.15} className="min-w-0">
-            <SpeechBubble className="rooms-lede" tailClass="left-8 -top-[calc(7px*var(--ui-scale))] rotate-[225deg]">
+            <SpeechBubble tailClass="left-8 -top-[calc(7px*var(--ui-scale))] rotate-[225deg]">
               <p className="text-[calc(14.5px*var(--ui-scale))] leading-[1.75] text-ink">
                 {doc.intro.map((b, i) =>
                   b.k === "p" ? (

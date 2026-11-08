@@ -295,7 +295,7 @@ function BlockView({
       return (
         <div
           className="rooms-callout room-callout max-w-[72ch] rounded-[calc(12px*var(--ui-scale))] px-4 py-3.5"
-          style={{ background: "color-mix(in oklab, var(--color-paper) 88%, var(--rooms-accent) 12%)" }}
+          style={{ background: "color-mix(in oklab, var(--color-paper) 88%, var(--room-accent) 12%)" }}
         >
           <div className="flex items-start gap-3">
             <StickyNote
@@ -317,7 +317,7 @@ function BlockView({
     case "def":
       return (
         <div
-          className="rooms-definition max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
+          className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
           style={{
             borderLeft: `3px solid ${tint(accent, 55)}`,
             boxShadow: "0 2px 0 var(--edge)",
@@ -337,7 +337,7 @@ function BlockView({
          lozenges. Reads like a textbook, keeps the classic warmth. */
       return (
         <div
-          className="rooms-equation max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] border-y border-ink/[0.09] px-5 py-4"
+          className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] border-y border-ink/[0.09] px-5 py-4"
           style={{ background: liftWash(accent, 6) }}
         >
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5">
@@ -379,7 +379,7 @@ function BlockView({
     case "steps":
       return <StepsPanel caption={b.caption} items={b.items} accent={accent} />;
     case "figure":
-      return <div className="rooms-figure"><Figure kind={b.kind} caption={b.caption} accent={accent} /></div>;
+      return <Figure kind={b.kind} caption={b.caption} accent={accent} />;
     case "wow":
       return (
         <div
@@ -390,11 +390,11 @@ function BlockView({
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl border border-ink/[0.08] bg-paper">
               <Lightbulb
                 className="h-5 w-5"
-                style={{ color: inkMix(accent, 72) }}
+                style={{ color: inkMix("#9775FA", 72) }}
               />
             </span>
             <div>
-              <Kicker color={inkMix(accent, 62)}>Key idea</Kicker>
+              <Kicker color={inkMix("#9775FA", 62)}>Key idea</Kicker>
               <p className="mt-1.5 text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink">
                 <Fmt text={b.text} />
               </p>

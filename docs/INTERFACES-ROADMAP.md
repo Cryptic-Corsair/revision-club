@@ -143,9 +143,8 @@ treatment. Both are still responding to the same global Dune selection.
 
 ### CSS and token boundaries
 
-1. Keep Rooms-only rules under explicit Rooms scopes: `.rooms-page` for
-   field-atlas page surfaces and `.note-rooms` (plus theme-qualified variants)
-   for the note/pack band palette in `src/app/globals.css`.
+1. Keep Rooms-only palette rules under an explicit Rooms scope, currently
+   `.note-rooms` and its theme-qualified variants in `src/app/globals.css`.
 2. Keep Editorial-only palette rules under explicit Editorial/legal scopes (for example
    `.legal-*` components and `html[data-iface="editorial"]` where the rule genuinely
    belongs to the interface). Theme variants may qualify those selectors, but must not
@@ -323,39 +322,6 @@ Editorial:
 Night, Dune and Classic at desktop and mobile widths. Check accent contrast in
 Dune, long topic titles, full-note CTA wrapping, and previous/next navigation.
 
-
-### R9 — The Rooms field-atlas rebuild
-
-A full presentation rebuild of the Rooms learning surfaces, retaining the existing
-wave-and-room reading structure:
-
-1. **One Rooms design system** — scoped `.rooms-page` foundations and page-specific
-   variants bring unit, topic, note, pack, specification-index and progress views into
-   one field-atlas language: strong typography, mineral accents, restrained metadata,
-   precise framing and calm surfaces.
-2. **Specification content remains intact** — note prose, specification statements,
-   equations, figure data, block order, registry identities and navigation remain
-   untouched. The shared `SpecSectionView` still renders the same data in notes and
-   packs.
-3. **Wave invariant** — retain the leading `BandWave` and every transition after each
-   mapped specification section in both `NotesReader` and `PackView`, including the
-   final transition back to the page surface. Do not replace, hide or remove waves at
-   any theme or viewport.
-4. **Theme-aware treatment** — preserve the existing Light, Night, Dune and Classic
-   surface ladders; use the existing mineral accents outside Dune and the paired
-   warm-cream / sea-glass accents in Dune.
-5. **Strict ownership** — scope the new system to Rooms. Editorial, the homepage,
-   shared navigation chrome, preferences and persistence are not part of this pass.
-6. **Responsive reading** — keep chemistry prose, long tables, figures, topic titles,
-   note contents chips and controls legible on mobile without horizontal page overflow.
-
-**Files:** Rooms unit/topic/note readers, shared Rooms section/block renderer, Rooms
-pack, progress and spec index components, and scoped additions to `globals.css`.  
-**Gate:** type-check + lint + production build; inspect all Rooms surfaces in all four
-themes at desktop and mobile widths. Confirm the number and order of `BandWave`
-components remains one transition after every mapped spec section in the note reader
-and pack. Compare Editorial and homepage before/after to confirm no visual changes.
-
 ---
 
 ## 3 · Risk register
@@ -380,8 +346,3 @@ and pack. Compare Editorial and homepage before/after to confirm no visual chang
 1. **Names** — internal `rooms` / `editorial`. Display options: **"Rooms" & "Editorial"** (recommended, honest) · "The Club" & "The Archive" · "Standard" & "Manuscript".
 2. **Switcher placement** — customize panel section (recommended for v1) vs a FOCUS/STUDIO-style segmented pill in the nav (can add in R6).
 3. **v1 scope of R5** — unit/topic/spec in editorial from the start, or accepted as classic until R5 lands (recommended: the three named surfaces first).
-
-
-## 5 · Rooms presentation decision — 2026-11-08
-
-The user chose to stop iterating on the bespoke Rooms visual system and adopt Editorial as the presentation baseline across unit, topic, notes, specification index, revision packs and progress. The app shell reuses the Editorial components and their existing data/state contracts. The note reader must retain the wave seam between every specification section; the Editorial-derived reader now includes the opening transition and all section transitions. The existing interface preference is retained for compatibility but no longer switches these six views, so its UI/meaning should be reconciled deliberately in a future change.

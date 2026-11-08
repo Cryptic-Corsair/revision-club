@@ -330,45 +330,6 @@ Do not create a new twin unless there is a clear presentation requirement and th
 
 See INTERFACES-ROADMAP.md for the detailed interface contract and planned boundaries.
 
-### 8.4 Rooms visual system and wave invariant
-
-The Rooms interface now uses a scoped **field-atlas** presentation: mineral accents,
-precise typographic hierarchy, restrained metadata, framed learning surfaces and
-theme-aware reading panels. The palette is driven by the paired `--rooms-accent` and
-`--rooms-accent-2` tokens, with corresponding readable foreground and soft-surface
-tokens. Dune uses warm cream `#FDF6E3` as its primary accent and sea-glass `#9DB9B0`
-as its secondary accent; the other themes use their own tuned mineral/sea-glass pair.
-Primary accents identify key actions and specification markers; secondary accents
-identify progress, completion and selected reading states. Topic/unit identity colours
-may remain as local metadata, but should not become a competing global control palette.
-Its component and CSS scope is identified by
-`.rooms-page` and the page-specific `.rooms-*-page` classes. Editorial and the
-homepage do not inherit this system.
-
-**The waves between specification sections are a protected structural feature.**
-Both `NotesReader` and `PackView` render a `BandWave` before the first room and
-after every specification section. Each wave transitions from the previous room's
-background to the next room's background; the final wave returns to the page surface.
-
-When rebuilding or refactoring Rooms:
-
-1. Keep the leading transition and the `BandWave` after every mapped section,
-   including the final section.
-2. Do not replace waves with borders, straight rules, generic spacing, gradients or
-   card gaps. Do not hide them at any breakpoint or theme.
-3. Preserve the correct `from` / `to` background sequence so adjacent sections
-   and wave fills meet without seams.
-4. Keep the same structure in the note reader and revision pack; both render the
-   shared `SpecSectionView`.
-5. Verify the wave sequence in Light, Night, Dune and Classic, at desktop and mobile
-   widths. Reduced-motion handling may remove motion, never the wave shape itself.
-
-The visual rebuild may change the rooms' typography, section framing, spacing,
-metadata, block surfaces, cards and controls. It must not alter chemistry source
-text, official specification wording, figure data, section order, IDs, deep links,
-revision state or saved preferences.
-
-
 ---
 
 ## 9. Themes, tokens and CSS ownership
@@ -393,7 +354,7 @@ Dune uses the dark-mode foundation plus Dune-specific token overrides. Do not as
 ### 9.2 CSS ownership rules
 
 - Shared foundations and global theme tokens belong in the global theme/token layer.
-- Rooms-specific rules must be scoped to `.rooms-page`, `.note-rooms` and relevant theme-qualified selectors. The field-atlas page shells use `.rooms-page`; the note/pack band palette remains scoped to `.note-rooms`.
+- Rooms-specific rules must be scoped to .note-rooms and relevant theme-qualified selectors.
 - Editorial-specific rules belong to the .legal-* / editorial styling system and appropriate interface scope (for example html[data-iface="editorial"] where needed).
 - Do not let a Rooms selector leak into Editorial or vice versa.
 - Avoid broad element selectors for local visual changes.
@@ -746,13 +707,3 @@ If a change makes any of these documents inaccurate, update the relevant documen
 IAL CHEM is an existing, carefully tuned educational product. Treat it as a system with established content, data contracts, visual decisions and compatibility obligations—not as a blank canvas.
 
 **Preserve the source. Trace the system. Respect ownership boundaries. Change only what is needed. Verify the result. Document any new rule that future contributors must know.**
-
-
-### Rooms presentation baseline (2026-11-08)
-
-Rooms now uses the Editorial component family as its presentation baseline for unit, topic, notes, specification index, revision pack and progress views. The older Rooms-specific renderers remain in the source tree as historical/reference implementations but are no longer selected by the app shell. This is a presentation decision only: shared content registries, chemistry data, progress/time/pack stores, navigation callbacks and note anchors remain the source of truth. The notes presentation retains the Rooms wave seam system: one opening cream-to-section wave and one transition after every specification section, ending back at cream. Do not remove or flatten these transitions when refining the Editorial-derived Rooms presentation. The shared `iface` preference is retained for compatibility, but these six views currently render the Editorial presentation regardless of its value; revisit the preference UI before claiming it still switches these views.
-
-
-### Revision-note opening masthead (2026-11-08)
-
-The first section of the Rooms revision-note page uses a dedicated `notes-hero` masthead rather than the generic Editorial/legal hero. It pairs the note title and opening paragraph with a topic folio (topic number and specification range), then places live note statistics in a restrained footer strip. Styling is scoped to `.notes-hero*` classes in `globals.css` and uses the document-room ink/paper/rust tokens so it follows Light, Night, Dune and Classic. The rest of the note layout, contents rail, section clauses and wave transitions are outside this change.

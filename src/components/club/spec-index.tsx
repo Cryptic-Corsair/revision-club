@@ -6,7 +6,7 @@ import { ArrowLeft, Check, ClipboardList, Search, Target } from "./icons";
 import { SPEC_POINTS, SPEC_STATS, SPEC_TOPIC_GROUPS } from "@/lib/spectra/registry";
 import { usePacks, togglePick } from "@/lib/spectra/packs";
 import { Fmt } from "./format";
-import { PopIn, Reveal, SoftButton, chipWash, tint, readableInk, shade, Squiggle } from "./bits";
+import { PopIn, Reveal, SoftButton, chipWash, honeyWash, tint, readableInk, shade, Squiggle } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · spec index — every assessment statement the
@@ -81,9 +81,10 @@ export function SpecIndex({
         </SoftButton>
       </PopIn>
 
-      <PopIn delay={0.05} className="rooms-spec-index-hero mt-7">
+      <PopIn delay={0.05} className="mt-7">
         <span
-          className="rooms-spec-index-kicker inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
+          className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
+          style={{ background: "#FFD43B", color: readableInk("#FFD43B") }}
         >
           <Target className="h-3.5 w-3.5" /> Spec index
         </span>
@@ -114,19 +115,20 @@ export function SpecIndex({
       {/* ————— your pack strip ————— */}
       <Reveal delay={0.16} className="mt-6">
         <div
-          className="rooms-pack-summary flex flex-col gap-3.5 rounded-[calc(26px*var(--ui-scale))] px-5 py-4 puff sm:flex-row sm:items-center"
+          className="flex flex-col gap-3.5 rounded-[calc(26px*var(--ui-scale))] px-5 py-4 puff sm:flex-row sm:items-center"
+          style={{ background: honeyWash("#FFD43B", 16) }}
         >
           <div className="flex min-w-0 items-center gap-3">
             <span
               className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-ink/[0.08] bg-paper"
             >
-              <ClipboardList className="h-5 w-5" />
+              <ClipboardList className="h-5 w-5" style={{ color: "var(--color-lemon)" }} />
             </span>
             <p className="min-w-0 flex-1 text-[calc(14px*var(--ui-scale))] font-semibold leading-snug text-ink">
               {picks.length > 0 ? (
                 <>
                   Your pack holds{" "}
-                  <span className="rooms-pack-summary-count">
+                  <span style={{ color: "var(--color-lemon)" }}>
                     {picks.length} spec point{picks.length === 1 ? "" : "s"}
                   </span>{" "}
                   — the notes behind them are waiting.
@@ -141,7 +143,8 @@ export function SpecIndex({
             onClick={onOpenPack}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.96 }}
-            className="rooms-open-pack inline-flex min-h-[calc(44px*var(--ui-scale))] w-full cursor-pointer items-center justify-center gap-2 rounded-full px-4 py-2.5 font-display text-[calc(13px*var(--ui-scale))] font-semibold sm:w-auto sm:shrink-0"
+            className="inline-flex min-h-[calc(44px*var(--ui-scale))] w-full cursor-pointer items-center justify-center gap-2 rounded-full px-4 py-2.5 font-display text-[calc(13px*var(--ui-scale))] font-semibold text-white sm:w-auto sm:shrink-0"
+            style={{ background: "#FF922B", boxShadow: `0 3px 0 ${shade("#FF922B")}` }}
           >
             <ClipboardList className="h-4.5 w-4.5" />
             Open your pack
@@ -184,7 +187,7 @@ export function SpecIndex({
                   className={`inline-flex min-h-[calc(36px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-full px-3.5 text-[calc(12.5px*var(--ui-scale))] font-semibold transition-colors ${
                     on ? "text-ink" : "bg-ink/[0.05] text-ink-soft hover:bg-ink/[0.09]"
                   }`}
-                  style={on ? { background: "var(--rooms-accent)", color: "var(--rooms-accent-ink)" } : undefined}
+                  style={on ? { background: "#FFD43B" } : undefined}
                 >
                   {f.label}
                   <span
@@ -233,7 +236,7 @@ export function SpecIndex({
 
       {/* ————— footer nudge ————— */}
       <Reveal className="mt-12 flex flex-col items-center gap-3 text-center">
-        <Squiggle color="var(--rooms-accent)" className="h-3 w-40 opacity-80" />
+        <Squiggle color="#FFD43B" className="h-3 w-40 opacity-80" />
         <p className="max-w-[46ch] text-[calc(13.5px*var(--ui-scale))] leading-relaxed font-semibold text-ink-soft">
           Ticks live in your browser and follow you everywhere — the pack page
           turns them into one continuous read.
@@ -276,7 +279,7 @@ function TopicGroup({
     <Reveal delay={Math.min(index * 0.03, 0.1)} className="mt-8">
       <div className="rooms-spec-group rounded-[calc(26px*var(--ui-scale))] bg-paper p-4 puff sm:p-6">
         {/* topic header */}
-        <div className="rooms-spec-group-heading flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <span
             className="h-3.5 w-3.5 shrink-0 rounded-full"
             style={{ background: g.candy }}

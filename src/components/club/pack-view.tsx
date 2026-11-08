@@ -26,7 +26,7 @@ import { clearPicks, togglePick, toggleRead, usePacks } from "@/lib/spectra/pack
 import { BandWave, accentOf, bgOf } from "./bands";
 import { SpecSectionView } from "./note-section";
 import { PackSetsDialog } from "./pack-sets";
-import { Confetti, Mascot, PopIn, Reveal, ScrollFade, SoftButton } from "./bits";
+import { Confetti, Mascot, PopIn, Reveal, ScrollFade, SoftButton, readableInk, shade } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the revision pack — the notes behind your ticked
@@ -126,7 +126,7 @@ export function PackView({
           </SoftButton>
         </PopIn>
         <Reveal delay={0.08} className="mt-14 flex flex-col items-center text-center">
-          <Mascot main="var(--rooms-accent-2)" size={150} bubbles={false} />
+          <Mascot main="#FFD43B" size={150} bubbles={false} />
           <h1 className="mt-6 font-display text-[calc(clamp(1.9rem,4.6vw,2.7rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
             The pack is empty.
           </h1>
@@ -141,7 +141,8 @@ export function PackView({
               onClick={onOpenSpec}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.96 }}
-              className="rooms-empty-pack-cta inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-3 font-display text-[calc(14.5px*var(--ui-scale))] font-semibold"
+              className="inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-3 font-display text-[calc(14.5px*var(--ui-scale))] font-semibold text-white"
+              style={{ background: "#FF922B", boxShadow: `0 3px 0 ${shade("#FF922B")}` }}
             >
               <Target className="h-5 w-5" /> Browse the spec index
             </m.button>
@@ -170,7 +171,8 @@ export function PackView({
 
         <PopIn delay={0.05} className="mt-6">
           <span
-            className="rooms-pack-kicker inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
+            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
+            style={{ background: "#FFD43B", color: readableInk("#FFD43B") }}
           >
             <ClipboardList className="h-3.5 w-3.5" /> Your pack
           </span>
@@ -186,7 +188,7 @@ export function PackView({
         </PopIn>
 
         {/* picked chips — one swipeable line; tap one to let it go */}
-        <PopIn delay={0.1} className="rooms-pack-picked mt-4">
+        <PopIn delay={0.1} className="mt-4">
           <div className="flex items-center gap-3">
             <span className="shrink-0 font-display text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.14em] text-ink-faint uppercase">
               Picked
@@ -200,11 +202,13 @@ export function PackView({
                     onClick={() => removePoint(p.spec)}
                     aria-label={`Remove ${p.spec} from your pack`}
                     title={`Remove ${p.spec} — ${p.topicLabel}`}
-                    className="rooms-picked-chip group inline-flex h-[calc(34px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-2 rounded-full border border-ink/[0.08] bg-paper px-3 font-display text-[calc(12px*var(--ui-scale))] font-semibold transition-transform hover:-translate-y-0.5"
+                    className="group inline-flex h-[calc(34px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-2 rounded-full border border-ink/[0.08] bg-paper px-3 font-display text-[calc(12px*var(--ui-scale))] font-semibold transition-transform hover:-translate-y-0.5"
+                    style={{ color: p.candy }}
                   >
                     <span
                       aria-hidden
-                      className="rooms-picked-dot h-2 w-2 shrink-0 rounded-full"
+                      className="h-2 w-2 shrink-0 rounded-full"
+                      style={{ background: p.candy }}
                     />
                     {p.spec}
                     <X
@@ -219,11 +223,12 @@ export function PackView({
         </PopIn>
 
         {/* read progress for this pack */}
-        <PopIn delay={0.14} className="rooms-pack-progress mt-5">
+        <PopIn delay={0.14} className="mt-5">
           <div className="flex items-center gap-3">
             <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-ink/[0.07]">
               <m.div
-                className="rooms-pack-progress-fill h-full rounded-full"
+                className="h-full rounded-full"
+                style={{ background: "linear-gradient(90deg, #12B886, #FFD43B)" }}
                 initial={false}
                 animate={{ width: `${points.length ? (readCount / points.length) * 100 : 0}%` }}
                 transition={{ type: "spring", stiffness: 120, damping: 20 }}
@@ -236,7 +241,7 @@ export function PackView({
         </PopIn>
 
         {/* ————— toolbar ————— */}
-        <Reveal delay={0.18} className="rooms-pack-toolbar no-print mt-5">
+        <Reveal delay={0.18} className="no-print mt-5">
           <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-2.5 puff sm:p-3.5">
             {/* one steady line at every width — the same swipe the
                 picked strip uses above; nothing wraps, nothing
@@ -326,7 +331,17 @@ export function PackView({
                             type="button"
                             onClick={() => toggleRead(s.point.spec)}
                             aria-pressed={isRead}
-                            className="rooms-pack-read inline-flex min-h-[calc(38px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-[calc(12px*var(--ui-scale))] font-semibold transition-colors"
+                            className={`inline-flex min-h-[calc(38px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-[calc(12px*var(--ui-scale))] font-semibold transition-colors ${
+                              isRead ? "text-white" : "bg-paper text-ink-soft hover:text-ink"
+                            }`}
+                            style={
+                              isRead
+                                ? {
+                                    background: "#12B886",
+                                    boxShadow: `0 2px 0 ${shade("#12B886")}`,
+                                  }
+                                : { boxShadow: "0 2px 0 var(--edge)" }
+                            }
                             aria-label={
                               isRead
                                 ? `Mark ${s.point.spec} as not read`
@@ -382,7 +397,7 @@ export function PackView({
         <Reveal className="flex flex-col items-center gap-5">
           {allRead ? (
             <>
-              <Mascot main="var(--rooms-accent-2)" size={120} bubbles={false} />
+              <Mascot main="#12B886" size={120} bubbles={false} />
               <p className="font-display text-[calc(clamp(1.4rem,3.6vw,1.75rem)*(1+(var(--ui-scale)-1)*0.5))] leading-snug font-semibold text-ink">
                 Pack read — every point, marked off.
               </p>
@@ -396,7 +411,8 @@ export function PackView({
             <>
               <span
                 aria-hidden
-                className="rooms-pack-end-progress h-3 w-40 rounded-full"
+                className="h-3 w-40 rounded-full"
+                style={{ background: "linear-gradient(90deg, #FFD43B, #12B886)" }}
               />
               <p className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">
                 That&apos;s your pack — {points.length} point{points.length === 1 ? "" : "s"}, read at your pace.
@@ -434,11 +450,15 @@ function TopicBanner({
   hideStatements: boolean;
 }) {
   return (
-    <div className="rooms-topic-banner no-print mb-8">
+    <div className="no-print mb-8">
       <div
-        className="rooms-topic-banner-label inline-flex max-w-full items-center gap-2.5 rounded-full py-2 pr-4 pl-2.5"
+        className="inline-flex max-w-full items-center gap-2.5 rounded-full py-2 pr-4 pl-2.5"
+        style={{
+          background: g.candy,
+          color: readableInk(g.candy),
+        }}
       >
-        <span className="rooms-topic-banner-unit grid h-8 w-8 shrink-0 place-items-center rounded-full font-display text-[calc(11px*var(--ui-scale))] font-bold">
+        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/25 font-display text-[calc(11px*var(--ui-scale))] font-bold">
           {g.unitCode.replace("WCH", "")}
         </span>
         <span className="min-w-0 truncate font-display text-[calc(13.5px*var(--ui-scale))] font-bold tracking-[0.04em]">
@@ -478,14 +498,26 @@ function ToolButton({
       whileTap={{ scale: 0.95 }}
       aria-label={label}
       title={label}
-      className={`rooms-tool-button inline-flex h-[calc(40px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[calc(12.5px*var(--ui-scale))] font-semibold tracking-[0.02em] transition-colors ${
-        highlight
-          ? "rooms-tool-button--highlight"
-          : danger
-            ? "rooms-tool-button--danger"
-            : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
+      className={`inline-flex h-[calc(40px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[calc(12.5px*var(--ui-scale))] font-semibold tracking-[0.02em] transition-colors ${
+        !highlight && !danger
+          ? "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
+          : ""
       }`}
-
+      style={
+        highlight
+          ? {
+              background: "#12B886",
+              color: readableInk("#12B886"),
+              boxShadow: `0 2px 0 ${shade("#12B886")}`,
+            }
+          : danger
+            ? {
+                background: "#FF6B6B",
+                color: "#fff",
+                boxShadow: `0 2px 0 ${shade("#FF6B6B")}`,
+              }
+            : undefined
+      }
     >
       {children}
       {typeof badge === "number" && badge > 0 && (

@@ -39,6 +39,7 @@ import {
 } from "@/lib/spectra/prefs";
 import { Home } from "./home";
 import { Desk } from "./desk";
+import { UnitView } from "./unit-view";
 import { SpecMapProvider, SpecMapTrigger } from "./spec-map";
 
 /* ————— the lazy rooms —————
@@ -58,16 +59,32 @@ const RoomLoading = () => (
   </div>
 );
 
+const TopicView = dynamic(() => import("./topic-view").then((m) => m.TopicView), {
+  ssr: false,
+  loading: RoomLoading,
+});
+const NotesReader = dynamic(() => import("./notes-reader").then((m) => m.NotesReader), {
+  ssr: false,
+  loading: RoomLoading,
+});
 /* the notes reader's editorial twin — same props, the document dress */
 const NotesEditorial = dynamic(
   () => import("./notes-editorial").then((m) => m.NotesEditorial),
   { ssr: false, loading: RoomLoading },
 );
+const StickerBook = dynamic(() => import("./sticker-book").then((m) => m.StickerBook), {
+  ssr: false,
+  loading: RoomLoading,
+});
 /* the progress room's editorial twin — same props, the document dress */
 const ProgressEditorial = dynamic(
   () => import("./progress-editorial").then((m) => m.ProgressEditorial),
   { ssr: false, loading: RoomLoading },
 );
+const SpecIndex = dynamic(() => import("./spec-index").then((m) => m.SpecIndex), {
+  ssr: false,
+  loading: RoomLoading,
+});
 /* the spec index's editorial twin — same props, the document dress */
 const SpecEditorial = dynamic(
   () => import("./spec-editorial").then((m) => m.SpecEditorial),
@@ -85,6 +102,10 @@ const UnitEditorial = dynamic(
   () => import("./unit-editorial").then((m) => m.UnitEditorial),
   { ssr: false, loading: RoomLoading },
 );
+const PackView = dynamic(() => import("./pack-view").then((m) => m.PackView), {
+  ssr: false,
+  loading: RoomLoading,
+});
 /* the pack's editorial twin — same props, the document dress */
 const PackEditorial = dynamic(
   () => import("./pack-editorial").then((m) => m.PackEditorial),
@@ -1196,7 +1217,8 @@ export default function ClubApp() {
                   ))}
   
                 {view.kind === "unit" && unit && (() => {
-                  const UnitWalk = UnitEditorial;
+                  const UnitWalk =
+                    prefs.iface === "editorial" ? UnitEditorial : UnitView;
                   return (
                     <UnitWalk
                       key={unit.code}
@@ -1209,7 +1231,8 @@ export default function ClubApp() {
                 })()}
   
                 {view.kind === "topic" && unit && topic && (() => {
-                  const TopicReader = TopicEditorial;
+                  const TopicReader =
+                    prefs.iface === "editorial" ? TopicEditorial : TopicView;
                   return (
                     <TopicReader
                       key={`${unit.code}/${topic.id}`}
@@ -1236,7 +1259,8 @@ export default function ClubApp() {
                   /* the interface swap — the editorial twin wears the
                      same props contract, so the shell changes nothing
                      but the component picked */
-                  const Reader = NotesEditorial;
+                  const Reader =
+                    prefs.iface === "editorial" ? NotesEditorial : NotesReader;
                   return (
                     <Reader
                       key={view.docId}
@@ -1249,7 +1273,8 @@ export default function ClubApp() {
                 })()}
   
                 {view.kind === "spec" && (() => {
-                  const SpecIdx = SpecEditorial;
+                  const SpecIdx =
+                    prefs.iface === "editorial" ? SpecEditorial : SpecIndex;
                   return (
                     <SpecIdx
                       onHome={goHome}
@@ -1260,7 +1285,8 @@ export default function ClubApp() {
                 })()}
   
                 {view.kind === "pack" && (() => {
-                  const Pack = PackEditorial;
+                  const Pack =
+                    prefs.iface === "editorial" ? PackEditorial : PackView;
                   return (
                     <Pack
                       onHome={goHome}
@@ -1271,7 +1297,8 @@ export default function ClubApp() {
                 })()}
   
                 {view.kind === "sticker" && (() => {
-                  const Progress = ProgressEditorial;
+                  const Progress =
+                    prefs.iface === "editorial" ? ProgressEditorial : StickerBook;
                   return (
                     <Progress
                       units={UNITS}

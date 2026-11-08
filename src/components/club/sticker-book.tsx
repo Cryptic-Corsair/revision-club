@@ -157,14 +157,14 @@ export function StickerBook({
       </PopIn>
 
       {/* ————— header ————— */}
-      <header className="rooms-page-hero rooms-progress-hero mt-8">
+      <header className="mt-8">
         <PopIn delay={0.05}>
-          <SectionTag main="#12B886" tilt={-2} className="rooms-progress-tag">
+          <SectionTag main="#12B886" tilt={-2}>
             progress
           </SectionTag>
         </PopIn>
         <PopIn delay={0.1}>
-          <h1 className="rooms-page-title mt-5 font-display text-[calc(clamp(2.3rem,5vw,3.4rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
+          <h1 className="mt-5 font-display text-[calc(clamp(2.3rem,5vw,3.4rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
             Your revision,{" "}
             <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-mint/15 px-[0.18em]">
               so far.
@@ -175,21 +175,22 @@ export function StickerBook({
 
       {/* ————— the time ledger ————— */}
       <Reveal className="relative mt-8">
-        <div className="rooms-time-ledger rounded-[calc(32px*var(--ui-scale))] bg-paper p-6 puff sm:p-8">
-          <div className="rooms-stat-grid grid gap-5 sm:grid-cols-3">
-            <StatPillar icon={Clock} label="today" value={fmtClock(today)} tone="primary" />
-            <StatPillar icon={Timer} label="this week" value={fmtClock(week)} tone="secondary" />
-            <StatPillar icon={Sparkles} label="all time" value={fmtClock(all)} tone="neutral" />
+        <div className="rounded-[calc(32px*var(--ui-scale))] bg-paper p-6 puff sm:p-8">
+          <div className="grid gap-5 sm:grid-cols-3">
+            <StatPillar icon={Clock} label="today" value={fmtClock(today)} color="#FF922B" />
+            <StatPillar icon={Timer} label="this week" value={fmtClock(week)} color="#12B886" />
+            <StatPillar icon={Sparkles} label="all time" value={fmtClock(all)} color="#9775FA" />
           </div>
 
           {/* weekly goal bench */}
           <div
-            className="rooms-weekly-goal mt-6 flex flex-col gap-5 rounded-[calc(26px*var(--ui-scale))] p-5 sm:flex-row sm:items-center sm:gap-7"
+            className="mt-6 flex flex-col gap-5 rounded-[calc(26px*var(--ui-scale))] p-5 sm:flex-row sm:items-center sm:gap-7"
+            style={{ background: tint("#12B886", 8) }}
           >
             <Float className="mx-auto shrink-0 sm:mx-0">
-              <BeakerMeter pct={weekPct} main="var(--rooms-accent-2)" size={96} />
+              <BeakerMeter pct={weekPct} main="#12B886" size={96} />
             </Float>
-            <div className="rooms-lede rooms-weekly-copy min-w-0 flex-1">
+            <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-baseline gap-x-2.5">
                 <span className="font-display text-[calc(17px*var(--ui-scale))] font-semibold text-ink">weekly goal</span>
                 <span className="text-[calc(13px*var(--ui-scale))] font-semibold text-ink-soft">
@@ -198,7 +199,7 @@ export function StickerBook({
               </div>
               <div className="mt-2.5 h-4 w-full max-w-md overflow-hidden rounded-full bg-ink/[0.07]">
                 <m.div
-                  className="rooms-progress-fill h-full rounded-full"
+                  className="h-full rounded-full bg-[linear-gradient(90deg,#12B886,#FFD43B)]"
                   initial={{ width: 0 }}
                   animate={{ width: `${Math.max(weekPct * 100, week > 0 ? 4 : 0)}%` }}
                   transition={{ type: "spring", stiffness: 110, damping: 20 }}
@@ -215,8 +216,12 @@ export function StickerBook({
                       whileTap={{ scale: 0.92 }}
                       aria-pressed={active}
                       aria-label={`Weekly goal ${goalChipLabel(g)}`}
-                      className="rooms-goal-chip cursor-pointer rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold transition-colors"
-                      
+                      className="cursor-pointer rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold transition-colors"
+                      style={
+                        active
+                          ? { background: "#12B886", color: readableInk("#12B886"), boxShadow: `0 2px 0 ${shade("#12B886")}` }
+                          : { background: "color-mix(in oklab, var(--color-ink) 6%, transparent)", color: "var(--color-ink-soft)" }
+                      }
                     >
                       {goalChipLabel(g)}
                     </m.button>
@@ -253,10 +258,10 @@ export function StickerBook({
 
       {/* ————— mascot line ————— */}
       <PopIn delay={0.15} className="mt-6 flex items-end gap-2 sm:gap-3">
-        <div className="rooms-mascot shrink-0 pb-1">
-          <Mascot main="var(--rooms-accent-2)" mood={goalMet || pct >= 0.5 ? "cheer" : "idle"} size={88} bubbles={false} />
+        <div className="shrink-0 pb-1">
+          <Mascot main="#12B886" mood={goalMet || pct >= 0.5 ? "cheer" : "idle"} size={88} bubbles={false} />
         </div>
-        <SpeechBubble bg="var(--rooms-accent-2-soft)" className="rooms-progress-lede min-w-0 flex-1" tailClass="left-[-9px] rotate-[135deg]">
+        <SpeechBubble bg={tint("#12B886", 10)} className="min-w-0 flex-1" tailClass="left-[-9px] rotate-[135deg]">
           <p className="text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink">{timeLine}</p>
         </SpeechBubble>
       </PopIn>
@@ -311,7 +316,7 @@ export function StickerBook({
       <section className="mt-14">
         <Reveal>
           <Kicker className="mb-5">
-            <Timer className="h-4 w-4" style={{ color: "var(--rooms-accent)" }} /> where your minutes go · tap a topic to read
+            <Timer className="h-4 w-4" style={{ color: "var(--color-tangerine)" }} /> where your minutes go · tap a topic to read
           </Kicker>
         </Reveal>
 
@@ -323,7 +328,7 @@ export function StickerBook({
             const done = unitDone(u);
             return (
               <Reveal key={u.code} delay={Math.min(ui * 0.04, 0.2)}>
-                <div className="rooms-time-unit-card rounded-[calc(32px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
+                <div className="rounded-[calc(32px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
                   <button
                     type="button"
                     onClick={() => onOpenUnit(u.code)}
@@ -357,7 +362,7 @@ export function StickerBook({
                           key={t.id}
                           type="button"
                           onClick={() => onOpenTopic(u.code, t.id)}
-                          className="rooms-time-topic group cursor-pointer rounded-[calc(16px*var(--ui-scale))] px-4 py-3 text-left transition-colors"
+                          className="group cursor-pointer rounded-[calc(16px*var(--ui-scale))] px-4 py-3 text-left transition-colors"
                           style={{
                             background:
                               s > 0 ? tint(main, 7) : "color-mix(in oklab, var(--color-ink) 4%, transparent)",
@@ -416,7 +421,7 @@ export function StickerBook({
       <section className="mt-14">
         <Reveal>
           <Kicker className="mb-4">
-            <Award className="h-4 w-4" style={{ color: "var(--rooms-accent-2)" }} /> badges · {achievements.filter((a) => a.earned).length}/{achievements.length}
+            <Award className="h-4 w-4" style={{ color: "var(--color-lemon)" }} /> badges · {achievements.filter((a) => a.earned).length}/{achievements.length}
           </Kicker>
         </Reveal>
         <div className="grid grid-cols-3 gap-4 sm:grid-cols-6 sm:gap-3">
@@ -471,7 +476,7 @@ export function StickerBook({
       <section className="mt-14 flex flex-col gap-8">
         <Reveal>
           <Kicker>
-            <Trophy className="h-4 w-4" style={{ color: "var(--rooms-accent)" }} /> all topics · tap one to mark or unmark it
+            <Trophy className="h-4 w-4" style={{ color: "var(--color-tangerine)" }} /> all topics · tap one to mark or unmark it
           </Kicker>
         </Reveal>
 
@@ -482,7 +487,7 @@ export function StickerBook({
           return (
             <Reveal key={u.code} delay={Math.min(ui * 0.04, 0.2)}>
               <div
-                className="rooms-revision-unit-card rounded-[calc(32px*var(--ui-scale))] p-5 sm:p-6"
+                className="rounded-[calc(32px*var(--ui-scale))] p-5 sm:p-6"
                 style={{ background: tint(main, 8) }}
               >
                 <button
@@ -526,7 +531,7 @@ export function StickerBook({
                             ? `Unmark as revised: ${t.title}`
                             : `Mark as revised: ${t.title}`
                         }
-                        className="rooms-revision-topic relative cursor-pointer rounded-[calc(18px*var(--ui-scale))] p-3.5 text-left"
+                        className="relative cursor-pointer rounded-[calc(18px*var(--ui-scale))] p-3.5 text-left"
                         style={
                           has
                             ? {
@@ -609,18 +614,22 @@ function StatPillar({
   icon: Icon,
   label,
   value,
-  tone,
+  color,
 }: {
   icon: typeof Clock;
   label: string;
   value: string;
-  tone: "primary" | "secondary" | "neutral";
+  color: string;
 }) {
   return (
     <div
-      className={`rooms-stat-pillar rooms-stat-pillar--${tone} flex flex-col items-center rounded-[calc(26px*var(--ui-scale))] px-3 py-5 text-center`}
+      className="flex flex-col items-center rounded-[calc(26px*var(--ui-scale))] px-3 py-5 text-center"
+      style={{ background: tint(color, 8) }}
     >
-      <span className="rooms-stat-icon grid h-10 w-10 place-items-center rounded-full">
+      <span
+        className="grid h-10 w-10 place-items-center rounded-full"
+        style={{ background: tint(color, 22), color: shade(color, 62) }}
+      >
         <Icon className="h-5 w-5" strokeWidth={2.2} />
       </span>
       <span className="mt-2 font-display text-[calc(clamp(1.35rem,3.2vw,1.8rem)*(1+(var(--ui-scale)-1)*0.5))] leading-none font-semibold text-ink">
