@@ -6,6 +6,7 @@ import type { Unit } from "@/lib/spectra/types";
 import { UNITS } from "@/lib/spectra/units";
 import { useRevised } from "@/lib/spectra/progress";
 import { Fmt } from "./format";
+import { accentOf } from "./bands";
 import {
   BeakerMeter,
   Chip,
@@ -41,7 +42,7 @@ export function UnitView({
   const minutes = unit.topics.reduce((m, t) => m + t.minutes, 0);
   const prev = UNITS[unit.index - 2];
   const next = UNITS[unit.index];
-  const main = unit.candy.main;
+  const main = accentOf(0);
 
   return (
     <div className="mx-auto max-w-5xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
@@ -243,8 +244,7 @@ export function UnitView({
             onClick={() => onOpenUnit(next.code)}
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.97 }}
-            className="flex cursor-pointer items-center justify-end gap-3 rounded-full px-5 py-4 text-right text-white sm:col-start-2"
-            style={{ background: next.candy.main, boxShadow: `0 2px 0 ${shade(next.candy.main)}` }}
+            className="flex cursor-pointer items-center justify-end gap-3 rounded-full border border-ink/[0.08] bg-paper px-5 py-4 text-right text-ink puff sm:col-start-2"
           >
             <span className="min-w-0">
               <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-white/70 uppercase">
