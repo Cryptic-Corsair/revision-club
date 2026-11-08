@@ -2003,7 +2003,8 @@ html.dark:not(.dune) .note-rooms {
   --honey-base: #191b1f;
 }
 html.dune .note-rooms {
-  --room-accent: #d5a45d;
+  --room-accent: #fdf6e3;
+  --room-accent-secondary: #9db9b0;
   --color-cream: #211f1b;
   --color-paper: #302c25;
   --color-ink: #f0e9dc;
