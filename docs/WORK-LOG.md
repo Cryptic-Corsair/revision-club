@@ -125,3 +125,17 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified.
 - **Commit(s):** stylesheet change immediately precedes this journal entry in main.
 - **Follow-up / known limitations:** visual inspection remains outstanding.
+
+
+### 2026-11-08 — Refine the Rooms reading flow
+
+- **Contributor:** AI agent.
+- **Request / objective:** enhance the Rooms interface with a more restrained, coherent visual hierarchy.
+- **Investigation:** reviewed the Rooms unit, topic and note readers, their shared topic-block renderer, the Rooms accent helper, Dune contrast tokens and the interface design contract.
+- **Changes made:** unified unit/topic/note-reader accents around the Rooms mineral accent outside Dune; retained Dune's warm-cream primary and cream/sea-glass note-detail pair; replaced the topic's full-colour revision-note panel and forward-navigation fills with paper surfaces and restrained accent details; simplified reading progress to a single accent; derived foreground text on accent-filled controls with `readableInk()`.
+- **Preserved invariants:** chemistry source files, specification statements, figures, block order, topic/unit registries, saved progress, preference schemas and storage keys were not changed. Editorial and the homepage were not modified.
+- **Decisions and rationale:** Rooms keeps its own band-and-room composition, but uses a quieter accent and secondary-action system so the learning flow has clearer hierarchy without copying Editorial's layout.
+- **Verification:** fetched the updated source files from GitHub after each write and checked the relevant accent, foreground-contrast and action styles. Build, lint and browser/visual checks were not run.
+- **Deployment:** not verified.
+- **Commit(s):** implementation commits: `94616cde`, `d3e8fb1`, `ae9a5b6`, `904d965`, `b6e4257`, `69d3b11`, `3d8b78d`, `3e39e53`, `a8ff334`, `282d273`. Roadmap documentation commit: `02988ce388336095ac1452031bea9a086728c84c`.
+- **Follow-up / known limitations:** run lint and the production build; visually inspect Rooms in all four themes at desktop and mobile sizes, with particular attention to Dune contrast and wrapping. Deployment remains unverified.
