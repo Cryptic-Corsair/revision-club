@@ -17,7 +17,9 @@ import {
 import type { UnitCode } from "@/lib/spectra/types";
 import {
   getSpecPoint,
+  packGroupsOf,
   packToText,
+  type PackGroup,
   type SpecPoint,
 } from "@/lib/spectra/registry";
 import { clearPicks, togglePick, toggleRead, usePacks } from "@/lib/spectra/packs";
@@ -33,19 +35,10 @@ import { Confetti, Mascot, PopIn, Reveal, ScrollFade, SoftButton, readableInk, s
    The sections you see here are not copies: the registry resolves
    each tick to its SpecSection and the pack renders the very same
    <SpecSectionView/> the note reader uses, walking the same band
-   colours across topics. Mark sections read, fold the official
-   statements away, copy the pack as a plain-text skeleton, print
-   it clean, or save the whole tick-list as a named set.
+   colours across topics. The grouping itself lives in the registry
+   (packGroupsOf), shared with the pack's editorial twin — both
+   interfaces assemble the very same pages.
    ═══════════════════════════════════════════════════════════════ */
-
-interface PackGroup {
-  key: string;
-  unitCode: UnitCode;
-  candy: string;
-  topicLabel: string;
-  topicTitle: string;
-  sections: { point: SpecPoint; entryIndex: number }[];
-}
 
 export function PackView({
   onHome,
@@ -66,32 +59,12 @@ export function PackView({
      point is marked read (and again only after you leave and return) */
   const [fire, setFire] = useState(0);
 
-  /* picks → registry points (syllabus order), grouped by topic */
-  const { points, groups, sectionCount } = useMemo(() => {
-    const pts = picks
-      .map((s) => getSpecPoint(s))
-      .filter((p): p is SpecPoint => Boolean(p));
-    const gs: PackGroup[] = [];
-    for (const p of pts) {
-      p.entries.forEach((e, entryIndex) => {
-        const key = `${e.unitCode}/${e.topicId}`;
-        let g = gs.find((x) => x.key === key);
-        if (!g) {
-          g = {
-            key,
-            unitCode: e.unitCode,
-            candy: e.candy,
-            topicLabel: p.topicLabel,
-            topicTitle: p.topicTitle,
-            sections: [],
-          };
-          gs.push(g);
-        }
-        g.sections.push({ point: p, entryIndex });
-      });
-    }
-    return { points: pts, groups: gs, sectionCount: pts.reduce((n, p) => n + p.entries.length, 0) };
-  }, [picks]);
+  /* picks → registry points (syllabus order), grouped by topic —
+     the shared derivation in registry.ts */
+  const { points, groups, sectionCount } = useMemo(
+    () => packGroupsOf(picks),
+    [picks],
+  );
 
   const readCount = useMemo(
     () => points.filter((p) => read.includes(p.spec)).length,

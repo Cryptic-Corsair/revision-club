@@ -84,6 +84,11 @@ const PackView = dynamic(() => import("./pack-view").then((m) => m.PackView), {
   ssr: false,
   loading: RoomLoading,
 });
+/* the pack's editorial twin — same props, the document dress */
+const PackEditorial = dynamic(
+  () => import("./pack-editorial").then((m) => m.PackEditorial),
+  { ssr: false, loading: RoomLoading },
+);
 const SearchPalette = dynamic(() => import("./search").then((m) => m.SearchPalette), {
   ssr: false,
 });
@@ -884,6 +889,7 @@ export default function ClubApp() {
       void import("./notes-editorial");
       void import("./spec-index");
       void import("./pack-view");
+      void import("./pack-editorial");
       void import("./sticker-book");
       void import("./topic-view");
       void import("./search");
@@ -1116,13 +1122,17 @@ export default function ClubApp() {
                   />
                 )}
   
-                {view.kind === "pack" && (
-                  <PackView
-                    onHome={goHome}
-                    onOpenSpec={openSpec}
-                    onOpenNotes={openNotes}
-                  />
-                )}
+                {view.kind === "pack" && (() => {
+                  const Pack =
+                    prefs.iface === "editorial" ? PackEditorial : PackView;
+                  return (
+                    <Pack
+                      onHome={goHome}
+                      onOpenSpec={openSpec}
+                      onOpenNotes={openNotes}
+                    />
+                  );
+                })()}
   
                 {view.kind === "sticker" && (
                   <StickerBook

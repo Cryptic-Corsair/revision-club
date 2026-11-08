@@ -178,6 +178,55 @@ export const SPEC_STATS = {
   units: new Set(SPEC_POINTS.map((p) => p.unitCode)).size,
 } as const;
 
+/* ————— the assembled pack —————
+   Picks resolved to their registry points (syllabus order) and
+   grouped by topic — the one derivation both pack interfaces read,
+   so the rooms dress and the document dress always assemble the
+   very same pages. */
+
+export interface PackGroup {
+  key: string;
+  unitCode: UnitCode;
+  candy: string;
+  topicLabel: string;
+  topicTitle: string;
+  sections: { point: SpecPoint; entryIndex: number }[];
+}
+
+export function packGroupsOf(picks: string[]): {
+  points: SpecPoint[];
+  groups: PackGroup[];
+  sectionCount: number;
+} {
+  const points = picks
+    .map((s) => getSpecPoint(s))
+    .filter((p): p is SpecPoint => Boolean(p));
+  const groups: PackGroup[] = [];
+  for (const p of points) {
+    p.entries.forEach((e, entryIndex) => {
+      const key = `${e.unitCode}/${e.topicId}`;
+      let g = groups.find((x) => x.key === key);
+      if (!g) {
+        g = {
+          key,
+          unitCode: e.unitCode,
+          candy: e.candy,
+          topicLabel: p.topicLabel,
+          topicTitle: p.topicTitle,
+          sections: [],
+        };
+        groups.push(g);
+      }
+      g.sections.push({ point: p, entryIndex });
+    });
+  }
+  return {
+    points,
+    groups,
+    sectionCount: points.reduce((n, p) => n + p.entries.length, 0),
+  };
+}
+
 /** pack copy/print text — one plain-text skeleton of a set of picks */
 export function packToText(picks: string[]): string {
   const points = picks

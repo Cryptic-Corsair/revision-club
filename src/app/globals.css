@@ -861,6 +861,50 @@ html.dark .hero-glow {
   }
 }
 
+/* ————— the editorial pack, on paper —————
+   The same worksheet in the document room's idiom: white cards,
+   daylight ink, hairlines kept, shadows off, clause furniture and
+   read-tick controls skipped. */
+@media print {
+  .pack-editorial {
+    --color-ink: #201509;
+    --color-ink-soft: #4b3d2e;
+    --color-ink-faint: #8a7d69;
+    --color-paper: #ffffff;
+    --tint-base: #ffffff;
+    --edge: rgb(0 0 0 / 0.14);
+    --legal-rust: #7a5433;
+    color: #201509;
+  }
+  .pack-editorial .legal-hero,
+  .pack-editorial .legal-card,
+  .pack-editorial .legal-summary,
+  .pack-editorial .legal-closing {
+    background: #fff !important;
+    box-shadow: none !important;
+    border-color: rgb(0 0 0 / 0.18) !important;
+  }
+  .pack-editorial .legal-hero-grain,
+  .pack-editorial .legal-hero-mark {
+    display: none !important;
+  }
+  .pack-editorial div[aria-hidden] {
+    display: none !important;
+  }
+  .pack-editorial [style*="opacity"],
+  .pack-editorial [style*="transform"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .pack-editorial section button {
+    display: none !important;
+  }
+  .pack-editorial .legal-clause,
+  .pack-editorial .legal-card {
+    break-inside: avoid-page;
+  }
+}
+
 /* ————— spec anchors —————
    Every spec section (note reader and revision pack) clears the
    fixed navbar when jumped to. A real class, not a Tailwind
