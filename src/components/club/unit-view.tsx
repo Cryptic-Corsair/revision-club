@@ -19,6 +19,7 @@ import {
   SoftButton,
   tint,
   shade,
+  readableInk,
 } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -166,9 +167,10 @@ export function UnitView({
                     {/* the trail stone — flat now, haloed by a ring of
                         its own colour instead of a pedestal */}
                     <m.span
-                      className="z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full font-display text-[calc(16px*var(--ui-scale))] font-bold text-white sm:h-14 sm:w-14 sm:text-[calc(18px*var(--ui-scale))]"
+                      className="z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full font-display text-[calc(16px*var(--ui-scale))] font-bold sm:h-14 sm:w-14 sm:text-[calc(18px*var(--ui-scale))]"
                       style={{
                         background: isDone ? "#12B886" : main,
+                        color: readableInk(isDone ? "#12B886" : main),
                         boxShadow: `0 0 0 5px ${tint(isDone ? "#12B886" : main, 18)}`,
                       }}
                     >
@@ -247,7 +249,7 @@ export function UnitView({
             className="flex cursor-pointer items-center justify-end gap-3 rounded-full border border-ink/[0.08] bg-paper px-5 py-4 text-right text-ink puff sm:col-start-2"
           >
             <span className="min-w-0">
-              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-white/70 uppercase">
+              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-ink-faint uppercase">
                 next unit
               </span>
               <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold">
