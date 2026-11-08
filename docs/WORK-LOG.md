@@ -111,3 +111,17 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified.
 - **Commit(s):** implementation commits are recorded immediately before this journal entry in the main branch history.
 - **Follow-up / known limitations:** visually inspect Dune Rooms, including section markers, callouts and Spec Map chips, at desktop and mobile widths; confirm contrast and balance in the rendered page.
+
+
+### 2026-11-08 — Align Dune callouts with the paired accent palette
+
+- **Contributor:** AI agent.
+- **Request / objective:** ensure Dune Rooms callouts use the new two-colour accent system rather than retaining the previous amber detail.
+- **Investigation:** audited remaining Dune-specific accent values in the Rooms stylesheet after the paired accents were introduced.
+- **Changes made:** replaced the legacy amber callout wash and border with tints derived from the muted sea-glass secondary accent.
+- **Preserved invariants:** Dune surfaces, note content, other themes, homepage styling and Editorial styling remain unchanged.
+- **Decisions and rationale:** callouts now reinforce the secondary accent, keeping Dune's note details within the warm-cream / sea-glass pair.
+- **Verification:** confirmed the old amber callout values were replaced in the source fetched from GitHub. Build, lint and browser/visual checks were not run.
+- **Deployment:** not verified.
+- **Commit(s):** stylesheet change immediately precedes this journal entry in main.
+- **Follow-up / known limitations:** visual inspection remains outstanding.
