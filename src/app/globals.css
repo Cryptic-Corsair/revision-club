@@ -1931,35 +1931,119 @@ html.dark:not(.dune) .legal-room { --legal-rust: #e0c4eb; }
   }
 }
 
-
-
-/* ═════════ Rooms · restrained editorial colour grade ═════════
-   Keep the Rooms composition intact. The section walk is now built
-   from quiet mineral paper tones; accent colours remain identifiers
-   on the controls and small markers rather than painting each room.
-   Editorial is the restraint reference, not a layout template.
+/* ═════════ Rooms · rebuilt tonal system ═════════
+   Rooms now reads as one composed study document in each theme.
+   Six user accents remain available elsewhere; the note itself uses
+   a single mineral accent and theme-specific neutral surface ladders.
 */
 .note-rooms {
-  --note-band-a: #f3eee6;
-  --note-band-b: #eee8df;
+  --room-accent: #80684f;
+  --color-cream: #f1eee7;
+  --color-paper: #faf8f3;
+  --color-ink: #292c2d;
+  --color-ink-soft: #606360;
+  --color-ink-faint: #85877f;
+  --color-cocoa: #292c2d;
+  --tint-base: #ffffff;
+  --note-band-a: #f1eee7;
+  --note-band-b: #ece8df;
+  --edge: rgb(44 40 34 / 0.08);
+  --band-mix: 0%;
+  --sunk-share: 4%;
+  --sunk-base: #e8e4dc;
+  --lift-share: 5%;
+  --lift-base: #ffffff;
+  --honey-share: 5%;
+  --honey-base: #eee9df;
 }
 .note-rooms .spec-anchor {
-  transition: background-color 180ms ease;
+  transition: background-color 220ms ease;
 }
 .note-rooms .spec-anchor .puff {
-  box-shadow:
-    0 1px 2px rgb(54 39 27 / 0.035),
-    0 12px 28px -24px rgb(54 39 27 / 0.18);
+  box-shadow: 0 1px 2px rgb(35 31 25 / 0.035), 0 14px 34px -28px rgb(35 31 25 / 0.2);
+}
+.note-rooms .spec-anchor .bg-paper {
+  border: 1px solid color-mix(in oklab, var(--color-ink) 8%, transparent);
+  box-shadow: 0 1px 2px color-mix(in oklab, var(--color-ink) 4%, transparent);
+}
+.note-rooms .spec-anchor .rounded-\[calc\(16px\*var\(--ui-scale\)\)\] {
+  border-radius: calc(10px * var(--ui-scale));
+}
+.note-rooms .spec-anchor .border-ink\/\[0\.09\] {
+  border-color: color-mix(in oklab, var(--color-ink) 12%, transparent);
+}
+.note-rooms .spec-anchor .max-w-\[72ch\] {
+  max-width: 68ch;
+}
+.note-rooms .spec-anchor .max-w-\[70ch\],
+.note-rooms .spec-anchor .max-w-\[68ch\] {
+  max-width: 68ch;
+}
+.note-rooms .spec-anchor .spec-body-rail {
+  border-color: color-mix(in oklab, var(--color-ink) 13%, transparent);
+}
+.note-rooms .spec-anchor .spec-body-rail > * {
+  max-width: 68ch;
+}
+.note-rooms .spec-anchor .spec-body-rail > p {
+  text-wrap: pretty;
+}
+.note-rooms .spec-anchor .spec-body-rail > ul {
+  padding-block: 0.1rem;
+}
+.note-rooms .spec-anchor .spec-body-rail .room-callout {
+  background: color-mix(in oklab, var(--color-paper) 78%, var(--color-ink) 2%);
 }
 html.dark:not(.dune) .note-rooms {
-  --note-band-a: #211b28;
-  --note-band-b: #251f2d;
+  --room-accent: #b7a18a;
+  --color-cream: #191b1f;
+  --color-paper: #25282d;
+  --color-ink: #eeeae2;
+  --color-ink-soft: #c0bdb5;
+  --color-ink-faint: #9b9b95;
+  --color-cocoa: #121418;
+  --tint-base: #2a2d33;
+  --note-band-a: #1d2024;
+  --note-band-b: #22252a;
+  --edge: rgb(0 0 0 / 0.34);
+  --sunk-base: #202329;
+  --lift-base: #1d2024;
+  --honey-base: #191b1f;
 }
 html.dune .note-rooms {
-  --note-band-a: #24211c;
-  --note-band-b: #28241e;
+  --room-accent: #c2a77b;
+  --color-cream: #211f1b;
+  --color-paper: #302c25;
+  --color-ink: #f0e9dc;
+  --color-ink-soft: #c9c0b1;
+  --color-ink-faint: #a79d8d;
+  --color-cocoa: #15130f;
+  --tint-base: #393329;
+  --note-band-a: #26231e;
+  --note-band-b: #2b2822;
+  --edge: rgb(0 0 0 / 0.32);
+  --sunk-base: #29261f;
+  --lift-base: #26231e;
+  --honey-base: #211f1b;
 }
 html.classic .note-rooms {
-  --note-band-a: #2c2013;
-  --note-band-b: #f7f0df;
+  --room-accent: #9b8060;
+  --color-ink: #2c2924;
+  --color-ink-soft: #625c52;
+  --color-ink-faint: #82796c;
+  --note-band-a: #292620;
+  --note-band-b: #f2eee5;
+}
+html.classic .note-rooms .room {
+  --color-ink: #f0eadf;
+  --color-ink-soft: #c9c1b4;
+  --color-ink-faint: #a79d8e;
+  --color-paper: #353129;
+  --tint-base: #403a30;
+  --sunk-base: #302b24;
+  --lift-base: #292620;
+  --honey-base: #211e19;
+}
+@media (prefers-reduced-motion: reduce) {
+  .note-rooms .spec-anchor { transition: none; }
 }
