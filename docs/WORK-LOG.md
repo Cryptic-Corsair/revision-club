@@ -176,3 +176,16 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified.
 - **Commit(s):** see the implementation commit containing this entry.
 - **Responsive follow-up:** kept the two-column rail layout desktop-only and removed the links’ intrinsic max-content minimum width, which was the source of the original horizontal overflow. On narrow screens, the contents remain in their existing horizontal strip.
+
+### 2026-11-09 — Rebuild the Editorial note contents navigation
+
+- **Contributor:** AI agent.
+- **Request / objective:** replace the recently patched contents area with a more robust, deliberate navigation system.
+- **Investigation:** inspected the Editorial note reader, current collapse implementation, shared legal-room styles, section spy and scroll helper. Confirmed the contents belongs to the note reader and that active-section state is already supplied by the shared spec spy.
+- **Changes made:** rebuilt the contents as a dedicated bounded sidebar with a section count/range header, internal vertical scrolling, distinct numbered markers, active-section treatment, keyboard focus styling and a compact number-only rail. Added a smoothly resizing two-column layout and retained full accessible names/tooltips when collapsed. The mobile layout remains a horizontally scrollable contents list rather than forcing a narrow desktop rail onto small screens.
+- **Preserved invariants:** specification order, note content, section anchors, scroll helper, active-section tracking, Spec Map registration, revision-pack actions, theme tokens and Rooms interface remain unchanged.
+- **Decisions and rationale:** the sidebar now owns its own scroll area with a viewport-relative height cap, so long notes cannot make the contents panel grow indefinitely. The reading column always retains a minmax(0, 1fr) track to prevent intrinsic content width from pushing it off-screen.
+- **Verification:** source and style changes were prepared against the current main branch. No lint, production build, browser interaction, responsive visual inspection or deployment verification was run.
+- **Deployment:** not verified.
+- **Commit(s):** see this implementation commit.
+- **Follow-up / known limitations:** inspect expanded and collapsed states at desktop and mobile widths, especially long titles and high section counts; verify keyboard navigation and active-item visibility while scrolling.
