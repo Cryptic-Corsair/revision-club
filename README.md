@@ -6,11 +6,11 @@ Revision notes for the **Pearson Edexcel International A Level Chemistry (2018)*
 
 ## Documentation
 
-- **[SITE-HANDBOOK.md](SITE-HANDBOOK.md)** — the comprehensive guide for human developers and AI agents. Covers protected content, architecture, themes, interfaces, persistence, design rules, safe workflows and verification.
-- **[DEVELOPMENT.md](DEVELOPMENT.md)** — detailed implementation and development guide.
-- **[INTERFACES-ROADMAP.md](INTERFACES-ROADMAP.md)** — Rooms and Editorial architecture and design boundaries.
+- **[SITE-HANDBOOK.md](docs/SITE-HANDBOOK.md)** — the comprehensive guide for human developers and AI agents. Covers protected content, architecture, themes, interfaces, persistence, design rules, safe workflows and verification.
+- **[DEVELOPMENT.md](docs/DEVELOPMENT.md)** — detailed implementation and development guide.
+- **[INTERFACES-ROADMAP.md](docs/INTERFACES-ROADMAP.md)** — Rooms and Editorial architecture and design boundaries.
 
-Read the Site Handbook before making changes.
+Read [the Site Handbook](docs/SITE-HANDBOOK.md) before making changes. All repository guides and the append-only work journal are in [docs/](docs/README.md).
 
 ## Tech stack
 
