@@ -1,12 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { m, useScroll, useSpring } from "framer-motion";
 import {
   ArrowLeft,
   BookOpen,
   BookOpenCheck,
   Check,
+  ChevronDown,
   Info,
 } from "./icons";
 import type { NotesBlock, NotesDoc } from "@/lib/spectra/notes-types";
@@ -131,6 +132,7 @@ function NotesEditorialBody({
 }) {
   const main = unit.candy.main;
   const active = useSpecSpy(doc.sections);
+  const [contentsExpanded, setContentsExpanded] = useState(true);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -247,34 +249,44 @@ function NotesEditorialBody({
       </Reveal>
 
       {/* ————— contents rail + the clauses ————— */}
-      <div className="mt-9 grid gap-10 lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-12">
-        <aside className="legal-index h-fit lg:sticky lg:top-28">
-          <p className="legal-meta mb-4">CONTENTS</p>
-          <nav aria-label="Note contents" className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
-            {doc.sections.map((s, i) => (
+      <div className="mt-9 grid min-w-0 grid-cols-1 items-start gap-5 lg:gap-8" style={{ gridTemplateColumns: contentsExpanded ? "250px minmax(0, 1fr)" : "56px minmax(0, 1fr)" }}>
+        <aside className={`legal-index h-fit min-w-0 lg:sticky lg:top-28 ${contentsExpanded ? "lg:w-[250px]" : "lg:w-14"}`}>
+          <div className={`mb-3 flex items-center ${contentsExpanded ? "justify-between gap-2" : "justify-center"}`}>
+            {contentsExpanded && <p className="legal-meta">CONTENTS</p>}
+            <button
+              type="button"
+              onClick={() => setContentsExpanded((open) => !open)}
+              aria-label={contentsExpanded ? "Collapse contents" : "Expand contents"}
+              aria-expanded={contentsExpanded}
+              title={contentsExpanded ? "Collapse contents" : "Expand contents"}
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-ink/10 text-ink-soft transition-colors hover:border-ink/25 hover:bg-ink/[0.05] hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+            >
+              <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${contentsExpanded ? "rotate-90" : "-rotate-90"}`} />
+            </button>
+          </div>
+          <nav aria-label="Note contents" className={`flex gap-2 overflow-x-auto pb-2 lg:overflow-visible lg:pb-0 ${contentsExpanded ? "lg:flex-col lg:gap-1" : "lg:flex-col lg:items-center lg:gap-1"}`}>
+            {doc.sections.map((s) => (
               <a
                 key={s.spec}
                 href={`#spec-${s.spec.replace(".", "-")}`}
                 aria-current={active === s.spec ? "true" : undefined}
-                className="legal-index-link lg:min-w-0 lg:max-w-full"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSpec(s.spec);
-                }}
+                aria-label={contentsExpanded ? undefined : `Go to ${s.spec}: ${s.title}`}
+                title={contentsExpanded ? undefined : s.title}
+                className={`legal-index-link min-w-0 ${contentsExpanded ? "lg:w-full lg:max-w-full" : "justify-center lg:h-10 lg:w-10 lg:px-0"}`}
+                onClick={(e) => { e.preventDefault(); scrollToSpec(s.spec); }}
               >
-                <span>{s.spec}</span>
-                <span className={active === s.spec ? "text-ink" : undefined}>
-                  {s.title}
-                </span>
+                <span className="shrink-0">{s.spec}</span>
+                {contentsExpanded && <span className={`min-w-0 break-words [overflow-wrap:anywhere] ${active === s.spec ? "text-ink" : ""}`}>{s.title}</span>}
               </a>
             ))}
           </nav>
-          <p className="mt-4 hidden border-t border-ink/10 pt-4 text-[calc(11px*var(--ui-scale))] leading-[1.7] text-ink-faint lg:block">
-            {firstSpec} — {lastSpec} · {unit.code} · read in order or hop
-            from the contents; the map in the navbar tracks you either way.
-          </p>
+          {contentsExpanded && (
+            <p className="mt-4 hidden border-t border-ink/10 pt-4 text-[calc(11px*var(--ui-scale))] leading-[1.7] text-ink-faint lg:block">
+              {firstSpec} — {lastSpec} · {unit.code} · read in order or hop
+              from the contents; the map in the navbar tracks you either way.
+            </p>
+          )}
         </aside>
-
         <div className="min-w-0">
           <Reveal>
             <section className="legal-summary rounded-[26px] p-5 sm:p-7">

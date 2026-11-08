@@ -165,3 +165,13 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** confirmed the exact previous footer label before editing. No lint, production build, deployment or browser visual inspection was run.
 - **Deployment:** not verified.
 - **Commit(s):** see the implementation commit containing this entry.
+
+### 2026-11-09 — Refine and collapse the Editorial contents rail
+
+- **Contributor:** AI agent.
+- **Request / objective:** prevent long specification titles from overflowing the Editorial contents sidebar and add a ChatGPT-style expand/collapse control.
+- **Changes made:** made the contents rail width-aware, allowed long titles to wrap within the expanded rail, and added a compact collapsed state that retains only specification numbers. Added an accessible toggle with descriptive labels and hover titles for number-only links. The rail keeps its horizontal mobile presentation while the desktop uses a two-column reading layout.
+- **Preserved invariants:** section order, anchors, active-section tracking, Spec Map registration, note text, theme styling and the note body content are unchanged.
+- **Verification:** inspected the existing Editorial note layout and exact contents markup before editing. No lint, production build, deployment or browser visual inspection was run.
+- **Deployment:** not verified.
+- **Commit(s):** see the implementation commit containing this entry.
