@@ -161,7 +161,7 @@ treatment. Both are still responding to the same global Dune selection.
 
 - Rooms uses a restrained, interface-owned accent system. Dune specifically alternates
   warm cream (`#FDF6E3`) and muted sea-glass (`#9DB9B0`) in its note details; its
-  supporting callout token is warm cream. Other Rooms labs retain the mineral accent.
+  supporting callout treatment uses the muted sea-glass secondary accent. Other Rooms labs retain the mineral accent.
   The wider application still has the user-configurable accent wheel. Do not silently
   reintroduce the rotating candy accents into Rooms.
 - Editorial owns its editorial accent treatment through its legal/editorial styling.
@@ -293,6 +293,34 @@ editorial twins untouched (verified by file diff); spec-map untouched.
 rooms + tables + equations + worked examples, pack, spec index, progress,
 customize) × labs (classic/dune/night) × 1440+390 → zero console/page errors;
 editorial swap verified live mid-session.
+
+
+### R8 — Restrained Rooms reading flow
+
+The next Rooms pass brings the unit, topic and note-reading surfaces under one
+quieter accent and action hierarchy, without turning Rooms into a copy of
+Editorial:
+
+1. **One mineral accent outside Dune** — unit and topic views, the note-reader
+   header and reading progress use the Rooms mineral accent
+   (`#B8874B`) rather than each unit's candy colour.
+2. **Dune keeps its paired identity** — the primary Rooms accent is warm cream
+   (`#FDF6E3`); note-section details alternate warm cream and muted sea-glass
+   (`#9DB9B0`). Foreground colours on accent-filled controls must come from
+   `readableInk()`, not hard-coded white.
+3. **Secondary actions become quieter** — the full-note link and forward
+   navigation use paper surfaces, fine borders and a restrained accent keyline
+   or icon instead of large solid-colour panels.
+4. **Progress chrome is simplified** — the reading indicator uses the active
+   Rooms accent without an unrelated yellow gradient.
+5. **Scope stays narrow** — chemistry text, figures, block order, saved progress,
+   preferences, the homepage and Editorial are not changed.
+
+**Files:** `unit-view.tsx`, `topic-view.tsx`, `notes-reader.tsx`,
+`blocks.tsx`.  
+**Gate:** production build, lint, then visual inspection of Rooms in Light,
+Night, Dune and Classic at desktop and mobile widths. Check accent contrast in
+Dune, long topic titles, full-note CTA wrapping, and previous/next navigation.
 
 ---
 
