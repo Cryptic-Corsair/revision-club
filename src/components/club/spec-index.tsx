@@ -184,7 +184,7 @@ export function SpecIndex({
                   className={`inline-flex min-h-[calc(36px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-full px-3.5 text-[calc(12.5px*var(--ui-scale))] font-semibold transition-colors ${
                     on ? "text-ink" : "bg-ink/[0.05] text-ink-soft hover:bg-ink/[0.09]"
                   }`}
-                  style={on ? { background: "#FFD43B" } : undefined}
+                  style={on ? { background: "var(--rooms-accent)", color: "var(--rooms-accent-ink)" } : undefined}
                 >
                   {f.label}
                   <span
@@ -233,7 +233,7 @@ export function SpecIndex({
 
       {/* ————— footer nudge ————— */}
       <Reveal className="mt-12 flex flex-col items-center gap-3 text-center">
-        <Squiggle color="#FFD43B" className="h-3 w-40 opacity-80" />
+        <Squiggle color="var(--rooms-accent)" className="h-3 w-40 opacity-80" />
         <p className="max-w-[46ch] text-[calc(13.5px*var(--ui-scale))] leading-relaxed font-semibold text-ink-soft">
           Ticks live in your browser and follow you everywhere — the pack page
           turns them into one continuous read.
