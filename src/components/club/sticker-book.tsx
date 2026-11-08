@@ -159,7 +159,7 @@ export function StickerBook({
       {/* ————— header ————— */}
       <header className="rooms-page-hero rooms-progress-hero mt-8">
         <PopIn delay={0.05}>
-          <SectionTag main="#12B886" tilt={-2}>
+          <SectionTag main="#12B886" tilt={-2} className="rooms-progress-tag">
             progress
           </SectionTag>
         </PopIn>
@@ -175,22 +175,21 @@ export function StickerBook({
 
       {/* ————— the time ledger ————— */}
       <Reveal className="relative mt-8">
-        <div className="rounded-[calc(32px*var(--ui-scale))] bg-paper p-6 puff sm:p-8">
+        <div className="rooms-time-ledger rounded-[calc(32px*var(--ui-scale))] bg-paper p-6 puff sm:p-8">
           <div className="rooms-stat-grid grid gap-5 sm:grid-cols-3">
-            <StatPillar icon={Clock} label="today" value={fmtClock(today)} color="#FF922B" />
-            <StatPillar icon={Timer} label="this week" value={fmtClock(week)} color="#12B886" />
-            <StatPillar icon={Sparkles} label="all time" value={fmtClock(all)} color="#9775FA" />
+            <StatPillar icon={Clock} label="today" value={fmtClock(today)} tone="primary" />
+            <StatPillar icon={Timer} label="this week" value={fmtClock(week)} tone="secondary" />
+            <StatPillar icon={Sparkles} label="all time" value={fmtClock(all)} tone="neutral" />
           </div>
 
           {/* weekly goal bench */}
           <div
-            className="mt-6 flex flex-col gap-5 rounded-[calc(26px*var(--ui-scale))] p-5 sm:flex-row sm:items-center sm:gap-7"
-            style={{ background: tint("#12B886", 8) }}
+            className="rooms-weekly-goal mt-6 flex flex-col gap-5 rounded-[calc(26px*var(--ui-scale))] p-5 sm:flex-row sm:items-center sm:gap-7"
           >
             <Float className="mx-auto shrink-0 sm:mx-0">
-              <BeakerMeter pct={weekPct} main="#12B886" size={96} />
+              <BeakerMeter pct={weekPct} main="var(--rooms-accent-2)" size={96} />
             </Float>
-            <div className="rooms-lede min-w-0 flex-1">
+            <div className="rooms-lede rooms-weekly-copy min-w-0 flex-1">
               <div className="flex flex-wrap items-baseline gap-x-2.5">
                 <span className="font-display text-[calc(17px*var(--ui-scale))] font-semibold text-ink">weekly goal</span>
                 <span className="text-[calc(13px*var(--ui-scale))] font-semibold text-ink-soft">
@@ -199,7 +198,7 @@ export function StickerBook({
               </div>
               <div className="mt-2.5 h-4 w-full max-w-md overflow-hidden rounded-full bg-ink/[0.07]">
                 <m.div
-                  className="h-full rounded-full bg-[linear-gradient(90deg,#12B886,#FFD43B)]"
+                  className="rooms-progress-fill h-full rounded-full"
                   initial={{ width: 0 }}
                   animate={{ width: `${Math.max(weekPct * 100, week > 0 ? 4 : 0)}%` }}
                   transition={{ type: "spring", stiffness: 110, damping: 20 }}
@@ -216,12 +215,8 @@ export function StickerBook({
                       whileTap={{ scale: 0.92 }}
                       aria-pressed={active}
                       aria-label={`Weekly goal ${goalChipLabel(g)}`}
-                      className="cursor-pointer rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold transition-colors"
-                      style={
-                        active
-                          ? { background: "#12B886", color: readableInk("#12B886"), boxShadow: `0 2px 0 ${shade("#12B886")}` }
-                          : { background: "color-mix(in oklab, var(--color-ink) 6%, transparent)", color: "var(--color-ink-soft)" }
-                      }
+                      className="rooms-goal-chip cursor-pointer rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold transition-colors"
+                      
                     >
                       {goalChipLabel(g)}
                     </m.button>
@@ -328,7 +323,7 @@ export function StickerBook({
             const done = unitDone(u);
             return (
               <Reveal key={u.code} delay={Math.min(ui * 0.04, 0.2)}>
-                <div className="rounded-[calc(32px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
+                <div className="rooms-time-unit-card rounded-[calc(32px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
                   <button
                     type="button"
                     onClick={() => onOpenUnit(u.code)}
@@ -362,7 +357,7 @@ export function StickerBook({
                           key={t.id}
                           type="button"
                           onClick={() => onOpenTopic(u.code, t.id)}
-                          className="group cursor-pointer rounded-[calc(16px*var(--ui-scale))] px-4 py-3 text-left transition-colors"
+                          className="rooms-time-topic group cursor-pointer rounded-[calc(16px*var(--ui-scale))] px-4 py-3 text-left transition-colors"
                           style={{
                             background:
                               s > 0 ? tint(main, 7) : "color-mix(in oklab, var(--color-ink) 4%, transparent)",
@@ -487,7 +482,7 @@ export function StickerBook({
           return (
             <Reveal key={u.code} delay={Math.min(ui * 0.04, 0.2)}>
               <div
-                className="rounded-[calc(32px*var(--ui-scale))] p-5 sm:p-6"
+                className="rooms-revision-unit-card rounded-[calc(32px*var(--ui-scale))] p-5 sm:p-6"
                 style={{ background: tint(main, 8) }}
               >
                 <button
@@ -531,7 +526,7 @@ export function StickerBook({
                             ? `Unmark as revised: ${t.title}`
                             : `Mark as revised: ${t.title}`
                         }
-                        className="relative cursor-pointer rounded-[calc(18px*var(--ui-scale))] p-3.5 text-left"
+                        className="rooms-revision-topic relative cursor-pointer rounded-[calc(18px*var(--ui-scale))] p-3.5 text-left"
                         style={
                           has
                             ? {
@@ -614,21 +609,18 @@ function StatPillar({
   icon: Icon,
   label,
   value,
-  color,
+  tone,
 }: {
   icon: typeof Clock;
   label: string;
   value: string;
-  color: string;
+  tone: "primary" | "secondary" | "neutral";
 }) {
   return (
     <div
-      className="flex flex-col items-center rounded-[calc(26px*var(--ui-scale))] px-3 py-5 text-center"
-      style={{ background: tint(color, 8) }}
+      className={`rooms-stat-pillar rooms-stat-pillar--${tone} flex flex-col items-center rounded-[calc(26px*var(--ui-scale))] px-3 py-5 text-center`}
     >
-      <span
-        className="grid h-10 w-10 place-items-center rounded-full"
-        style={{ background: tint(color, 22), color: shade(color, 62) }}
+      <span className="rooms-stat-icon grid h-10 w-10 place-items-center rounded-full">
       >
         <Icon className="h-5 w-5" strokeWidth={2.2} />
       </span>
