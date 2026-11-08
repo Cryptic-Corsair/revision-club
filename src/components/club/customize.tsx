@@ -10,6 +10,9 @@ import { accentOf } from "./bands";
 import {
   ACCENTS,
   DEFAULT_PREFS,
+  IFACE_DESCRIPTION,
+  IFACE_LABEL,
+  IFACE_ORDER,
   LAB_DESCRIPTION,
   LAB_LABEL,
   LAB_ORDER,
@@ -22,6 +25,7 @@ import {
   type AccentId,
   type BodyFont,
   type HeadFont,
+  type Iface,
   type Lab,
 } from "@/lib/spectra/prefs";
 
@@ -46,6 +50,39 @@ const BODY_FONTS: { id: BodyFont; label: string; stack: string }[] = [
 ];
 
 const SCALE_PX = [12, 14, 16, 19];
+
+/* the interface cards' live miniatures — two abstract rooms. The
+   rooms dress shows its band walk; the editorial dress shows the
+   document room: kicker pill, headline rule, numbered clause rails. */
+function IfaceStage({ id }: { id: Iface }) {
+  if (id === "rooms") {
+    return (
+      <span aria-hidden className="block overflow-hidden rounded-[12px] border border-ink/[0.08]">
+        <span className="relative block h-[38px] w-full" style={{ background: "color-mix(in oklab, #FF6B6B 16%, var(--tint-base))" }}>
+          <span className="absolute top-2 left-2 h-[10px] w-[26px] rounded-[6px] bg-paper/90 shadow-[0_1px_0_rgba(0,0,0,0.08)]" />
+          <span className="absolute right-2 bottom-1.5 h-[13px] w-[13px] rounded-full" style={{ background: "color-mix(in oklab, #FF6B6B 55%, var(--tint-base))" }} />
+        </span>
+        <span className="block h-[30px] w-full" style={{ background: "color-mix(in oklab, #12B886 16%, var(--tint-base))" }} />
+      </span>
+    );
+  }
+  return (
+    <span aria-hidden className="block rounded-[12px] border border-ink/[0.08] bg-paper p-2.5">
+      <span className="block h-[8px] w-[40px] rounded-full" style={{ background: "#b66c4e" }} />
+      <span className="mt-1.5 block h-[6px] w-3/4 rounded-full bg-ink/30" />
+      <span className="mt-1 block h-[6px] w-1/2 rounded-full bg-ink/15" />
+      <span className="mt-2.5 block h-px w-full bg-ink/12" />
+      <span className="mt-2 flex items-center gap-1.5">
+        <span className="h-[9px] w-[9px] shrink-0 rounded-full border border-ink/30" />
+        <span className="block h-[5px] flex-1 rounded-full bg-ink/15" />
+      </span>
+      <span className="mt-1.5 flex items-center gap-1.5">
+        <span className="h-[9px] w-[9px] shrink-0 rounded-full border border-ink/30" />
+        <span className="block h-[5px] flex-1 rounded-full bg-ink/15" />
+      </span>
+    </span>
+  );
+}
 
 function Section({
   title,
@@ -396,6 +433,46 @@ export function CustomizePanel({
                   </span>
                 </button>
               </section>
+
+              <Section
+                title="Interface"
+                hint="Two dresses for the same site — your notes, progress and pack stay exactly as they are."
+                dot="#8D82B8"
+              >
+                <div className="grid grid-cols-2 gap-2.5">
+                  {IFACE_ORDER.map((f) => {
+                    const active = prefs.iface === f;
+                    return (
+                      <button
+                        key={f}
+                        type="button"
+                        onClick={() => setPrefs({ iface: f })}
+                        aria-pressed={active}
+                        aria-label={`${IFACE_LABEL[f]} interface — ${IFACE_DESCRIPTION[f]}`}
+                        className="group flex min-w-0 cursor-pointer flex-col gap-2 rounded-[18px] border p-2.5 text-left transition-all hover:-translate-y-0.5"
+                        style={{
+                          borderColor: active ? "#8D82B8" : "color-mix(in oklab, var(--color-ink) 9%, transparent)",
+                          background: active
+                            ? "color-mix(in oklab, #8D82B8 8%, var(--color-paper))"
+                            : "color-mix(in oklab, var(--color-ink) 3%, var(--color-paper))",
+                          boxShadow: active ? "0 0 0 1px #8D82B8, 0 5px 14px -12px #8D82B8" : "none",
+                        }}
+                      >
+                        <IfaceStage id={f} />
+                        <span className="flex w-full items-center justify-between gap-2">
+                          <span className="truncate font-display text-[12px] font-bold text-ink">{IFACE_LABEL[f]}</span>
+                          {active ? (
+                            <Check className="h-4 w-4 shrink-0 text-mint" strokeWidth={2.8} />
+                          ) : (
+                            <span className="text-[9px] font-semibold tracking-wide text-ink-faint uppercase">Select</span>
+                          )}
+                        </span>
+                        <span className="text-[10.5px] leading-snug text-ink-faint">{IFACE_DESCRIPTION[f]}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </Section>
 
               <Section
                 title="Appearance"

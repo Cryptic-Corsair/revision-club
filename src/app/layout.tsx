@@ -87,6 +87,7 @@ r.dataset.motion=p.motion===false?"off":"on";
 var fb="M";try{if(!localStorage.getItem("reaction-club-prefs-v1")&&window.matchMedia("(min-width:1024px)").matches)fb="L"}catch(e){}
 var s=p.scale==="S"||p.scale==="M"||p.scale==="L"||p.scale==="XL"?p.scale:(p.zoom===0.9?"S":p.zoom===1.15?"L":p.zoom===1.3?"XL":fb);
 r.dataset.scale=s;
+if(p.iface==="editorial")r.dataset.iface="editorial";
 }catch(e){}})();`;
 
 export const viewport: Viewport = {

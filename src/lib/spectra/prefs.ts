@@ -19,6 +19,22 @@ export type Lab = "light" | "dark" | "dune" | "classic";
 export type HeadFont = "fredoka" | "baloo" | "patrick";
 export type BodyFont = "nunito" | "quicksand";
 
+/* the site's two interfaces — same rooms, same notes, two dresses.
+   "rooms" is the classic band-walked dress; "editorial" is the
+   document room the disclaimer page wears (hero, rails, numbered
+   clauses). The axis is independent of the labs: every lab re-tints
+   both interfaces, and the homepage keeps its own dress always. */
+export type Iface = "rooms" | "editorial";
+export const IFACE_LABEL: Record<Iface, string> = {
+  rooms: "Rooms",
+  editorial: "Editorial",
+};
+export const IFACE_DESCRIPTION: Record<Iface, string> = {
+  rooms: "Band-walked rooms, waves & the mascot",
+  editorial: "The document room — rails, clauses & exhibits",
+};
+export const IFACE_ORDER: Iface[] = ["rooms", "editorial"];
+
 /* the candy wheel the site's sections take turns wearing. The full
    shelf by default; the customize panel narrows it to your picks —
    one pick dresses every section, two alternate, three+ rotate.
@@ -88,6 +104,8 @@ export const SPEC_H_MAX = 0.98;
 
 export interface Prefs {
   theme: Lab;
+  /** which interface dresses the rooms — "rooms" | "editorial" */
+  iface: Iface;
   /** the accent wheel — which candies the sections rotate through */
   accents: AccentId[];
   /** content scale — S/M/L/XL (multiplies --ui-scale) */
@@ -107,6 +125,7 @@ export interface Prefs {
 
 export const DEFAULT_PREFS: Prefs = {
   theme: "classic",
+  iface: "rooms",
   accents: [...ACCENT_IDS],
   /* the scale default is Medium here; load() lifts a FIRST RUN on a
      big screen to Large — the factory setting is screen-aware, the
@@ -142,6 +161,7 @@ function sanitize(p: StoredPrefs): Prefs {
   else if (p.theme === "hybrid")
     /* the retired third lab rides on as classic — its heir */
     out.theme = "classic";
+  if (p.iface === "editorial" || p.iface === "rooms") out.iface = p.iface;
   if (p.scale && SCALES.includes(p.scale)) out.scale = p.scale;
   else if (typeof p.zoom === "number") {
     /* the retired page-zoom pref rides on as scale — see LEGACY_ZOOM
@@ -243,6 +263,10 @@ export function applyPrefs(p: Prefs) {
   root.classList.toggle("dark", p.theme === "dark" || p.theme === "dune");
   root.classList.toggle("dune", p.theme === "dune");
   root.classList.toggle("classic", p.theme === "classic");
+  /* the interface axis — CSS may micro-dress chrome off
+     html[data-iface="editorial"]; the component twins read the pref
+     from the store, not the dataset */
+  root.dataset.iface = p.iface;
   /* only the night lab wears today's roast; dune's chocolate room is
      a fixed signature, and light & classic keep their daylight tokens */
   if (p.theme === "dark") root.dataset.mood = String(pickDarkMood());
