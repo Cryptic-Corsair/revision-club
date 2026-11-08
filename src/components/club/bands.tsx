@@ -112,11 +112,9 @@ export const chipV: Variants = {
    the section you're standing in */
 export function SpecChip({
   s,
-  i,
   here,
   ...rest
 }: { s: SpecSection; i: number; here: boolean } & HTMLMotionProps<"button">) {
-  const accent = "var(--color-ink-soft)";
   const band = "color-mix(in oklab, var(--color-ink) 3%, var(--color-paper))";
   return (
     <m.button

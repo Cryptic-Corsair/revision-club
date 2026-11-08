@@ -125,3 +125,6 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified.
 - **Commit(s):** included in this commit.
 - **Follow-up / known limitations:** verify Rooms and Editorial in Light, Night, Dune and Classic, and confirm Home's palette still behaves independently.
+
+
+- **Verification addendum:** removed an unused accent local from the now-neutral shared SpecChip implementation. Confirmed the commit is present on main; Vercel's associated check was still pending at the time of review. No build, lint or browser visual test was performed.
