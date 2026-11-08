@@ -171,8 +171,7 @@ export function PackView({
 
         <PopIn delay={0.05} className="mt-6">
           <span
-            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
-            style={{ background: "#FFD43B", color: readableInk("#FFD43B") }}
+            className="rooms-pack-kicker inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
           >
             <ClipboardList className="h-3.5 w-3.5" /> Your pack
           </span>
@@ -202,13 +201,11 @@ export function PackView({
                     onClick={() => removePoint(p.spec)}
                     aria-label={`Remove ${p.spec} from your pack`}
                     title={`Remove ${p.spec} — ${p.topicLabel}`}
-                    className="group inline-flex h-[calc(34px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-2 rounded-full border border-ink/[0.08] bg-paper px-3 font-display text-[calc(12px*var(--ui-scale))] font-semibold transition-transform hover:-translate-y-0.5"
-                    style={{ color: p.candy }}
+                    className="rooms-picked-chip group inline-flex h-[calc(34px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-2 rounded-full border border-ink/[0.08] bg-paper px-3 font-display text-[calc(12px*var(--ui-scale))] font-semibold transition-transform hover:-translate-y-0.5"
                   >
                     <span
                       aria-hidden
-                      className="h-2 w-2 shrink-0 rounded-full"
-                      style={{ background: p.candy }}
+                      className="rooms-picked-dot h-2 w-2 shrink-0 rounded-full"
                     />
                     {p.spec}
                     <X
@@ -223,12 +220,11 @@ export function PackView({
         </PopIn>
 
         {/* read progress for this pack */}
-        <PopIn delay={0.14} className="mt-5">
+        <PopIn delay={0.14} className="rooms-pack-progress mt-5">
           <div className="flex items-center gap-3">
             <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-ink/[0.07]">
               <m.div
-                className="h-full rounded-full"
-                style={{ background: "linear-gradient(90deg, #12B886, #FFD43B)" }}
+                className="rooms-pack-progress-fill h-full rounded-full"
                 initial={false}
                 animate={{ width: `${points.length ? (readCount / points.length) * 100 : 0}%` }}
                 transition={{ type: "spring", stiffness: 120, damping: 20 }}
@@ -241,7 +237,7 @@ export function PackView({
         </PopIn>
 
         {/* ————— toolbar ————— */}
-        <Reveal delay={0.18} className="no-print mt-5">
+        <Reveal delay={0.18} className="rooms-pack-toolbar no-print mt-5">
           <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-2.5 puff sm:p-3.5">
             {/* one steady line at every width — the same swipe the
                 picked strip uses above; nothing wraps, nothing
@@ -331,17 +327,7 @@ export function PackView({
                             type="button"
                             onClick={() => toggleRead(s.point.spec)}
                             aria-pressed={isRead}
-                            className={`inline-flex min-h-[calc(38px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-[calc(12px*var(--ui-scale))] font-semibold transition-colors ${
-                              isRead ? "text-white" : "bg-paper text-ink-soft hover:text-ink"
-                            }`}
-                            style={
-                              isRead
-                                ? {
-                                    background: "#12B886",
-                                    boxShadow: `0 2px 0 ${shade("#12B886")}`,
-                                  }
-                                : { boxShadow: "0 2px 0 var(--edge)" }
-                            }
+                            className="rooms-pack-read inline-flex min-h-[calc(38px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-[calc(12px*var(--ui-scale))] font-semibold transition-colors"
                             aria-label={
                               isRead
                                 ? `Mark ${s.point.spec} as not read`
@@ -397,7 +383,7 @@ export function PackView({
         <Reveal className="flex flex-col items-center gap-5">
           {allRead ? (
             <>
-              <Mascot main="#12B886" size={120} bubbles={false} />
+              <Mascot main="var(--rooms-accent-2)" size={120} bubbles={false} />
               <p className="font-display text-[calc(clamp(1.4rem,3.6vw,1.75rem)*(1+(var(--ui-scale)-1)*0.5))] leading-snug font-semibold text-ink">
                 Pack read — every point, marked off.
               </p>
@@ -452,13 +438,9 @@ function TopicBanner({
   return (
     <div className="rooms-topic-banner no-print mb-8">
       <div
-        className="inline-flex max-w-full items-center gap-2.5 rounded-full py-2 pr-4 pl-2.5"
-        style={{
-          background: g.candy,
-          color: readableInk(g.candy),
-        }}
+        className="rooms-topic-banner-label inline-flex max-w-full items-center gap-2.5 rounded-full py-2 pr-4 pl-2.5"
       >
-        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/25 font-display text-[calc(11px*var(--ui-scale))] font-bold">
+        <span className="rooms-topic-banner-unit grid h-8 w-8 shrink-0 place-items-center rounded-full font-display text-[calc(11px*var(--ui-scale))] font-bold">
           {g.unitCode.replace("WCH", "")}
         </span>
         <span className="min-w-0 truncate font-display text-[calc(13.5px*var(--ui-scale))] font-bold tracking-[0.04em]">
