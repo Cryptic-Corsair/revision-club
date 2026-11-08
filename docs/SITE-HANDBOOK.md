@@ -751,3 +751,8 @@ IAL CHEM is an existing, carefully tuned educational product. Treat it as a syst
 ### Rooms presentation baseline (2026-11-08)
 
 Rooms now uses the Editorial component family as its presentation baseline for unit, topic, notes, specification index, revision pack and progress views. The older Rooms-specific renderers remain in the source tree as historical/reference implementations but are no longer selected by the app shell. This is a presentation decision only: shared content registries, chemistry data, progress/time/pack stores, navigation callbacks and note anchors remain the source of truth. The notes presentation retains the Rooms wave seam system: one opening cream-to-section wave and one transition after every specification section, ending back at cream. Do not remove or flatten these transitions when refining the Editorial-derived Rooms presentation. The shared `iface` preference is retained for compatibility, but these six views currently render the Editorial presentation regardless of its value; revisit the preference UI before claiming it still switches these views.
+
+
+### Revision-note opening masthead (2026-11-08)
+
+The first section of the Rooms revision-note page uses a dedicated `notes-hero` masthead rather than the generic Editorial/legal hero. It pairs the note title and opening paragraph with a topic folio (topic number and specification range), then places live note statistics in a restrained footer strip. Styling is scoped to `.notes-hero*` classes in `globals.css` and uses the document-room ink/paper/rust tokens so it follows Light, Night, Dune and Classic. The rest of the note layout, contents rail, section clauses and wave transitions are outside this change.

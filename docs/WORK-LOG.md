@@ -192,3 +192,14 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified.
 - **Commit(s):** `0e0100459216c7dcab622c1541ce1fe18d5d0712`, `29dc0db99336e9ce8cc168b6d00a00be8e921b4b`, `02e75e24505ba9afc04e27abbefd5b168450c3e9`, `722049d264e5cfc8b73de2aab95f92e680443102`.
 - **Follow-up:** align the interface selector copy and behavior with the new single presentation baseline; verify the wave joins and responsive Editorial layouts across all four themes when a build/browser check is available.
+
+
+### 2026-11-08 — Redesign revision-note opening section
+
+- **Contributor:** AI agent.
+- **Objective:** user clarified that “hero” referred only to the first section/opening of Rooms revision notes.
+- **Changes:** replaced the generic rounded orbit-emblem hero with a dedicated editorial masthead: restrained publication header, oversized title and intro, topic-number folio with specification range, and a compact at-a-glance statistics footer. Added responsive styling scoped to `.notes-hero*` and existing document-room theme tokens.
+- **Scope preserved:** no changes to the contents rail, format summary, opening-note exhibit, specification clauses, chemistry text, note data, pack controls, progress tracking or wave transitions.
+- **Verification:** re-fetched both changed source files; confirmed the new hero markup and CSS hooks are present, the old generic hero is no longer used by the notes page, and the global CSS brace balance is zero. No TypeScript/lint/build or browser visual check was run.
+- **Deployment:** not verified.
+- **Commits:** `d8d610c17f0089020e318f4bd84cc45c57e203c6`, `d862634039021f75600e1de664df66be4feaee75`.
