@@ -51,7 +51,7 @@ export function TopicView({
   const idx = unit.topics.findIndex((t) => t.id === topic.id);
   const prev = idx > 0 ? unit.topics[idx - 1] : undefined;
   const next = idx < unit.topics.length - 1 ? unit.topics[idx + 1] : undefined;
-  const main = "var(--color-ink-soft)";
+  const main = unit.candy.main;
 
   const collect = () => {
     if (!isRevised) setFire((f) => f + 1);
@@ -67,7 +67,7 @@ export function TopicView({
         style={{
           top: "var(--sa-top)",
           scaleX,
-          background: `linear-gradient(90deg, ${main}, var(--color-ink))`,
+          background: `linear-gradient(90deg, ${main}, #FFD43B)`,
         }}
       />
 

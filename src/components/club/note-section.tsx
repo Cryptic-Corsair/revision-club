@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import {
   Check,
@@ -178,7 +178,7 @@ export function SpecSectionView({
   bannerAction?: ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-7" style={{ "--room-accent": accent } as CSSProperties}>
+    <div className="flex flex-col gap-7">
       {/* spec banner — the official wording, stated above the section.
           Tailored: the pill stands square (no tilt, no pedestal) and
           the rule beneath it thins to a whisper. */}
@@ -390,11 +390,11 @@ function BlockView({
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl border border-ink/[0.08] bg-paper">
               <Lightbulb
                 className="h-5 w-5"
-                style={{ color: inkMix(accent, 72) }}
+                style={{ color: inkMix("#9775FA", 72) }}
               />
             </span>
             <div>
-              <Kicker color={inkMix(accent, 62)}>Key idea</Kicker>
+              <Kicker color={inkMix("#9775FA", 62)}>Key idea</Kicker>
               <p className="mt-1.5 text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink">
                 <Fmt text={b.text} />
               </p>

@@ -279,7 +279,7 @@ Registry invariants:
 - Do not duplicate a topic in another unit to make a view easier to render.
 - Do not hardcode a second copy of unit/topic metadata in a component if it can be derived from the registry.
 - Search and derived totals should continue to use the registry as their source.
-- Unit labels use the plain unit number where the established design calls for it. Do not invent per-unit element/glyph identities. Rooms unit colours are presentation tokens held in `ROOM_UNIT_ACCENTS`; the homepage's existing `Unit.candy.main` values remain separate.
+- Unit labels use the plain unit number where the established design calls for it. Do not invent per-unit element/glyph identities or colour-name identities.
 
 When adding or changing a unit/topic, trace every consumer: home, unit view, topic view, note metadata, note registry, search index, progress, revision packs, suggested topics and both interface variants.
 
@@ -364,12 +364,15 @@ Dune uses the dark-mode foundation plus Dune-specific token overrides. Do not as
 
 ### 9.3 Accent ownership
 
-Rooms and Editorial are intentionally neutral reading interfaces. Do not add unit-specific accent colours, rotating section colours, coloured spec chips, rust/lilac/amber clause markers or accent-tinted callouts to either interface.
+Accent responsibilities are distinct:
 
-- Rooms section bands use only the active theme's neutral paper surfaces. Teaching cues use the theme's ink and soft-ink values.
-- Editorial's `--legal-rust` is a compatibility token for neutral soft ink; do not restore a coloured rust identity.
-- The six stored accent IDs remain part of the preference schema because Home still uses the independent accent palette. The Customize palette must describe and preview Home only.
-- Chemistry diagrams may retain colour where it conveys scientific meaning (atoms, ions, apparatus, indicator changes or plotted series). Do not confuse semantic scientific colour with interface accent decoration.
+- The legacy/general accent preference system remains part of shared preferences and may be consumed by non-Rooms surfaces.
+- Rooms note content currently uses a restrained, theme-aware mineral accent system rather than indiscriminately rotating bright candy colours through every block.
+- Editorial owns its editorial accent treatment.
+- Rooms band/wave helpers and the Rooms note renderer are related but not interchangeable. Inspect call sites before changing accent helpers.
+- Do not silently restore rotating candy accents to Rooms notes.
+- Do not assume the same hex value should serve the same semantic role in every interface and theme.
+
 Search all consumers before changing accent behaviour.
 
 ### 9.4 Visual design principles
@@ -704,10 +707,3 @@ If a change makes any of these documents inaccurate, update the relevant documen
 IAL CHEM is an existing, carefully tuned educational product. Treat it as a system with established content, data contracts, visual decisions and compatibility obligations—not as a blank canvas.
 
 **Preserve the source. Trace the system. Respect ownership boundaries. Change only what is needed. Verify the result. Document any new rule that future contributors must know.**
-
-
-## Neutral reading-interface colour policy
-
-Rooms and Editorial do not have independent accent palettes. Their unit identifiers, progress indicators, section markers, specification chips, callouts, tables and editorial clause markers use neutral theme tokens. Home retains its independent accent palette and the existing stored accent IDs remain in the preference schema for compatibility. The Customize palette must be described and previewed as a Home setting only.
-
-Keep scientifically meaningful diagram colours intact. Verify Rooms and Editorial in Light, Night, Dune and Classic. Theme switching must remain atomic, and no global transition should be introduced.

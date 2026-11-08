@@ -10,12 +10,14 @@
 import { m, type HTMLMotionProps, type Variants } from "framer-motion";
 import { Footprints } from "./icons";
 import type { SpecSection } from "@/lib/spectra/notes-types";
-
+import { readableInk, shade } from "./bits";
 import { ACCENTS, ACCENT_IDS, currentAccents } from "@/lib/spectra/prefs";
 
-/* The canonical mineral palette. Customize narrows the sequence
-   to the user's selected colours; helpers rotate those picks in
-   fixed palette order. */
+/* the full candy wheel, hue-wheel order: red → orange → sun →
+   green → purple → amber, so adjacent bands always differ. This is
+   the whole shelf — the customize panel narrows it to your picks,
+   and the helpers below rotate whatever's on: one pick dresses
+   every section, two alternate, three+ cycle. */
 export const BANDS = ACCENTS.map((a) => a.hex);
 
 /* the wave shelf — a shelf of hand-drawn seam curves, so a page can
@@ -62,20 +64,23 @@ export function BandWave({
   );
 }
 
-/* Pull an accent toward the current ink for small labels and rules. */
+/* A candy accent pulled toward the current ink: deep brick by day,
+   warm salmon after dark, pale gold inside a cocoa room — one
+   helper, readable in every lab, no dark: variants needed. */
 export const inkMix = (main: string, pct = 45) =>
   `color-mix(in oklab, ${main} ${pct}%, var(--color-ink))`;
 
-/* Home retains its own accent language. Editorial and Rooms use
-   neutral markers and surfaces, independent of Home's palette. */
+/* band helpers — pure, so the in-page contents card and the Spec
+   Map window dress their chips with the exact same colours */
+/* Rooms use one restrained mineral accent. The six selected accents
+   remain intact for the wider app, but no longer colour every note
+   section; the reader's hierarchy comes from type, spacing and tone. */
 export const accentOf = (_i: number) => "#B8874B";
-export const editorialAccentOf = (_i: number) => "var(--color-ink-soft)";
-
-/* Rooms section bands alternate only between the active theme's
-   neutral paper tones; no user-selected accent enters the reader. */
-export const roomBgOf = (i: number) =>
-  i % 2 === 1 ? "var(--note-band-b)" : "var(--note-band-a)";
-
+/* bands mix their candy over --tint-base at --band-mix (10% by day)
+   — the daylight walk of the hue wheel. After dark both steps are
+   overridden by --note-band-a/b (see html.dark in globals.css):
+   two flat night grounds a half-step apart (plum → indigo), so
+   every section keeps the study contrast while the hue leans. */
 export const bandOf = (i: number) =>
   `color-mix(in oklab, ${accentOf(i)} var(--band-mix, 10%), var(--tint-base))`;
 export const bgOf = (i: number) =>
@@ -112,10 +117,11 @@ export const chipV: Variants = {
    the section you're standing in */
 export function SpecChip({
   s,
+  i,
   here,
   ...rest
 }: { s: SpecSection; i: number; here: boolean } & HTMLMotionProps<"button">) {
-  const band = "color-mix(in oklab, var(--color-ink) 3%, var(--color-paper))";
+  const accent = accentOf(i);
   return (
     <m.button
       type="button"
@@ -127,12 +133,12 @@ export function SpecChip({
       style={
         here
           ? {
-              background: "var(--color-ink)",
-              color: "var(--color-paper)",
-              boxShadow: "0 3px 0 color-mix(in oklab, var(--color-ink) 70%, transparent)",
+              background: accent,
+              color: readableInk(accent),
+              boxShadow: `0 3px 0 ${shade(accent)}`,
               rotate: "-1deg",
             }
-          : { background: band, boxShadow: "0 2px 0 var(--edge)" }
+          : { background: bgOf(i), boxShadow: "0 2px 0 var(--edge)" }
       }
       {...rest}
     >
@@ -141,10 +147,10 @@ export function SpecChip({
         style={
           here
             ? {
-                background: "rgb(255 255 255 / 0.18)",
-                color: "var(--color-paper)",
+                background: "rgb(255 255 255 / 0.28)",
+                color: readableInk(accent),
               }
-            : { background: "color-mix(in oklab, var(--color-ink) 9%, var(--color-paper))", color: "var(--color-ink)" }
+            : { background: accent, color: readableInk(accent) }
         }
       >
         {s.spec}

@@ -361,8 +361,3 @@ browser → platform edge (*.space-z.ai) → Caddy :81 → Next dev :3000
 
 *Keep this file honest: when the architecture or the rules change, update it
 in the same commit.*
-
-
-### Neutral reading interfaces
-
-Rooms and Editorial do not have independent accent palettes. Their unit identifiers, progress indicators, section markers, specification chips, callouts, tables and editorial clause markers use neutral theme tokens. The six preference accent IDs remain in `prefs.ts` for Home's independent palette and backward compatibility; Customize must label and preview that palette as a Home setting only. Keep scientifically meaningful diagram colours intact. Test both reading interfaces in all four themes after colour changes.

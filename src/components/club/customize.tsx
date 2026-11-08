@@ -6,7 +6,7 @@ import { Check, RotateCcw, Sparkles, Settings,
   Maximize,
   Minimize, X, Palette, Home, BookOpen, ClipboardList, Sticker, ShieldCheck, ArrowRight, NotebookPen } from "./icons";
 import { readableInk, shade, tint } from "./bits";
-import { homeBandOf } from "./bands";
+import { accentOf } from "./bands";
 import {
   ACCENTS,
   DEFAULT_PREFS,
@@ -519,7 +519,7 @@ export function CustomizePanel({
                   <div className="mb-3 flex items-center justify-between gap-3">
                     <div>
                       <p className="font-display text-[12px] font-semibold text-ink">Accent palette</p>
-                      <p className="mt-0.5 text-[10.5px] text-ink-faint">Choose the accent sequence used on Home</p>
+                      <p className="mt-0.5 text-[10.5px] text-ink-faint">Select the colours used across your revision pages</p>
                     </div>
                     <span className="shrink-0 rounded-full border border-ink/[0.08] bg-paper px-2.5 py-1 text-[10px] font-semibold tabular-nums text-ink-soft">
                       {prefs.accents.length} selected
@@ -580,15 +580,15 @@ export function CustomizePanel({
                 </div>
                 <div className="mt-3 rounded-[16px] border border-ink/[0.08] bg-paper px-3.5 py-3">
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="font-display text-[10px] font-bold tracking-[0.12em] text-ink-faint uppercase">Home colour sequence preview</span>
-                    <span className="text-[10px] font-medium text-ink-faint">Home accents</span>
+                    <span className="font-display text-[10px] font-bold tracking-[0.12em] text-ink-faint uppercase">Colour sequence preview</span>
+                    <span className="text-[10px] font-medium text-ink-faint">Applied to topic accents</span>
                   </div>
                   <div aria-hidden className="flex items-center gap-1.5">
                     {Array.from({ length: 8 }, (_, k) => (
                       <span
                         key={k}
                         className="h-2.5 min-w-0 flex-1 rounded-full"
-                        style={{ background: homeBandOf(k) }}
+                        style={{ background: accentOf(k) }}
                       />
                     ))}
                   </div>

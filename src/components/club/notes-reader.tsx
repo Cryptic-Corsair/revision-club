@@ -34,16 +34,16 @@ import {
   shade,
   tint,
 } from "./bits";
-import { BandWave, SpecChip, roomBgOf, inkMix } from "./bands";
+import { BandWave, SpecChip, accentOf, bgOf, inkMix } from "./bands";
 import { useSpecMapRegister } from "./spec-map";
 import { SpecSectionView } from "./note-section";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · notes reader — one enclosed room per spec point.
-   Each section belongs to a considered six-colour mineral sequence.
-   The note uses neutral learning cues and theme-specific surfaces.
-   By day the bands stay tonal; after dark both steps are
-   flat neutral grounds (--note-band-a/b in
+   Each section is a full-width tonal band borrowing one candy
+   colour, walking the hue wheel so neighbours always contrast.
+   By day the bands are candy tints; after dark both steps are
+   flat warm roasts at matched darkness (--note-band-a/b in
    globals.css), and in the classic lab the two steps are the
    fixed espresso/cream pair — so every section keeps contrast
    and the highlighter still pops. The wave rides between
@@ -153,7 +153,7 @@ function NotesReaderBody({
   /** deep link — land scrolled to this spec section */
   jumpToSpec?: string;
 }) {
-  const main = "var(--color-ink-soft)";
+  const main = unit.candy.main;
   const active = useSpecSpy(doc.sections);
 
   const { scrollYProgress } = useScroll();
@@ -316,12 +316,13 @@ function NotesReaderBody({
         {/* the old sticky spec rail is gone — the map now lives inside
             the nav itself (see spec-map.tsx) */}
 
-        {/* .note-rooms scopes theme-specific neutral surfaces to the
-            section bands without introducing a separate accent palette. */}
+        {/* .note-rooms scopes the classic lab's espresso/cream pair
+            (html.classic .note-rooms) to the section bands only — the
+            contents chips above stay on the daylight candy walk */}
         <div className="note-rooms mt-8">
-          <BandWave from="var(--color-cream)" to={roomBgOf(0)} />
+          <BandWave from="var(--color-cream)" to={bgOf(0)} />
           {doc.sections.map((s, i) => {
-            const accent = "var(--color-ink-soft)";
+            const accent = accentOf(i);
             const last = i === doc.sections.length - 1;
             return (
               <Fragment key={s.spec}>
@@ -331,7 +332,7 @@ function NotesReaderBody({
                      that's the espresso ground, so .room flips the ink
                      and surfaces inside (html.classic .room) */
                   className={`spec-anchor relative${i % 2 === 0 ? " room" : ""}`}
-                  style={{ background: roomBgOf(i) }}
+                  style={{ background: bgOf(i) }}
                 >
                   <div className="mx-auto max-w-3xl px-4 py-14 sm:px-8 sm:py-16">
                     <SpecSectionView
@@ -342,8 +343,8 @@ function NotesReaderBody({
                   </div>
                 </section>
                 <BandWave
-                  from={roomBgOf(i)}
-                  to={last ? "var(--color-cream)" : roomBgOf(i + 1)}
+                  from={bgOf(i)}
+                  to={last ? "var(--color-cream)" : bgOf(i + 1)}
                 />
               </Fragment>
             );
