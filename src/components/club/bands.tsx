@@ -11,12 +11,7 @@ import { m, type HTMLMotionProps, type Variants } from "framer-motion";
 import { Footprints } from "./icons";
 import type { SpecSection } from "@/lib/spectra/notes-types";
 import { readableInk, shade } from "./bits";
-import {
-  ACCENTS,
-  ACCENT_IDS,
-  currentAccents,
-  type AccentId,
-} from "@/lib/spectra/prefs";
+import { ACCENTS, ACCENT_IDS, currentAccents } from "@/lib/spectra/prefs";
 
 /* the full candy wheel, hue-wheel order: red → orange → sun →
    green → purple → amber, so adjacent bands always differ. This is
@@ -24,15 +19,6 @@ import {
    and the helpers below rotate whatever's on: one pick dresses
    every section, two alternate, three+ cycle. */
 export const BANDS = ACCENTS.map((a) => a.hex);
-
-const ACCENT_HEX: Record<AccentId, string> = {
-  coral: ACCENTS[0].hex,
-  tangerine: ACCENTS[1].hex,
-  sun: ACCENTS[2].hex,
-  mint: ACCENTS[3].hex,
-  grape: ACCENTS[4].hex,
-  amber: ACCENTS[5].hex,
-};
 
 /* the wave shelf — a shelf of hand-drawn seam curves, so a page can
    put a differently-shaped wave at every section boundary and never
