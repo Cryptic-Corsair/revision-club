@@ -190,7 +190,7 @@ export function StickerBook({
             <Float className="mx-auto shrink-0 sm:mx-0">
               <BeakerMeter pct={weekPct} main="#12B886" size={96} />
             </Float>
-            <div className="min-w-0 flex-1">
+            <div className="rooms-lede min-w-0 flex-1">
               <div className="flex flex-wrap items-baseline gap-x-2.5">
                 <span className="font-display text-[calc(17px*var(--ui-scale))] font-semibold text-ink">weekly goal</span>
                 <span className="text-[calc(13px*var(--ui-scale))] font-semibold text-ink-soft">
@@ -258,7 +258,7 @@ export function StickerBook({
 
       {/* ————— mascot line ————— */}
       <PopIn delay={0.15} className="mt-6 flex items-end gap-2 sm:gap-3">
-        <div className="shrink-0 pb-1">
+        <div className="rooms-mascot shrink-0 pb-1">
           <Mascot main="#12B886" mood={goalMet || pct >= 0.5 ? "cheer" : "idle"} size={88} bubbles={false} />
         </div>
         <SpeechBubble bg={tint("#12B886", 10)} className="min-w-0 flex-1" tailClass="left-[-9px] rotate-[135deg]">
