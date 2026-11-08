@@ -155,3 +155,15 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** GitHub changes were committed on `main`; Vercel deployment status requires confirmation. No successful deployment is claimed.
 - **Commit(s):** component and styling commits: `61fa87e3`, `65485362`, `e16cd37f`, `8c5d3ec9`, `3a08dd0e`, `1ca7bac4`, `306a35e8`, `13d0318f`, `8e764247`, `5765321f`, `2dca85d7`, `f923e16f`, `99642174`, `e90167b9`. Documentation commits: handbook `859824c8`; roadmap `70f5afa8`.
 - **Follow-up / known limitations:** perform TypeScript/ESLint/production-build checks and visually inspect each Rooms surface in Light, Night, Dune and Classic at desktop and mobile sizes. Pay particular attention to long tables, figure frames, Dune accent contrast, content-scale behaviour and the visible wave joins. Check that Editorial and homepage remain visually unchanged. Deployment remains unverified.
+
+
+### 2026-11-08 — Finalize Rooms mobile spacing and ownership documentation
+
+- **Contributor:** AI agent.
+- **Request / objective:** complete responsive refinements discovered during source-level review of the Rooms field-atlas rebuild.
+- **Changes made:** removed the redundant mobile page-shell inset, added the progress introduction to the shared no-mascot/no-tail header treatment, and updated the Site Handbook and Interface Roadmap to recognise both `.rooms-page` and `.note-rooms` as explicit Rooms styling scopes.
+- **Preserved invariants:** no chemistry content, wave components, wave paths or section sequencing changed. Editorial and homepage styling remain outside the new scope.
+- **Verification:** fetched the affected source and documentation back from GitHub. Browser and build checks were not run.
+- **Deployment:** not verified.
+- **Commit(s):** progress component `5283e65f`; CSS `a5931dd6`; handbook `a02d1d7cd86e2a7e3416ed2a2e2b360686308df7`; roadmap `c78a5c91693b375c078793915b65eaab4fccbfcb`.
+- **Follow-up / known limitations:** desktop/mobile visual inspection and all four theme checks remain outstanding.
