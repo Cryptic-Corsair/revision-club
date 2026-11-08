@@ -4,65 +4,52 @@ Revision notes for the **Pearson Edexcel International A Level Chemistry (2018)*
 
 > Not affiliated with or endorsed by Pearson Education Ltd.
 
+## Documentation
+
+- **[SITE-HANDBOOK.md](SITE-HANDBOOK.md)** — the comprehensive guide for human developers and AI agents. Covers protected content, architecture, themes, interfaces, persistence, design rules, safe workflows and verification.
+- **[DEVELOPMENT.md](DEVELOPMENT.md)** — detailed implementation and development guide.
+- **[INTERFACES-ROADMAP.md](INTERFACES-ROADMAP.md)** — Rooms and Editorial architecture and design boundaries.
+
+Read the Site Handbook before making changes.
+
 ## Tech stack
 
 - **Next.js 16** (App Router, Turbopack) + **React 19** + **TypeScript**
 - **Tailwind CSS 4** (tokens in `src/app/globals.css` `@theme`)
 - **Framer Motion** for animations
-- **No backend** — the whole app is client-side; progress, packs and
-  preferences live in the browser's `localStorage`. Content is
-  type-checked TypeScript under `src/lib/spectra/content/`.
+- **No backend** — the whole app is client-side; progress, packs and preferences live in the browser's `localStorage`. Content is type-checked TypeScript under `src/lib/spectra/content/`.
 
 ## Getting started
 
 ```bash
-bun install          # or: npm install
-
+bun install
 bun run dev          # dev server → http://localhost:3000
 bun run build        # production build (also emits .next/standalone)
 bun run start        # serve the standalone build
 bun run lint         # eslint
 ```
 
-Requires **Bun** (or Node 20+ with npm — swap `bun` for `npm`/`npx`).
+Requires **Bun** (or Node 20+ with npm).
 
 ## Deploying to Vercel
 
-Zero-config beyond this repo:
-
 1. Push the repo to GitHub.
-2. In Vercel, **Add New → Project** and import the repo — the Next.js
-   framework is detected automatically (`vercel.json` pins it).
-3. Deploy. No environment variables are needed; the build command is
-   `next build` (the `cp` steps in `package.json`'s `build` script serve
-   the sandbox's container deploy and never run on Vercel).
+2. In Vercel, import the repository — Next.js is detected automatically (`vercel.json` pins it).
+3. Deploy. No environment variables are required.
 
 ## Project structure
 
 ```
 src/
-  app/                  # one route: the club (client-side app) + layout
-  components/club/      # all features: notes reader, SVG figures, packs,
-                        #   search, sticker book, customize panel, themes
-  lib/spectra/          # content + data model
-    content/            # the notes themselves, one file per topic part
-    notes.ts            # registry: topics → spec sections → content
-    prefs.ts            # theme/accent/font preferences (localStorage)
-public/                 # favicon, logo, robots.txt
+  app/                  # app entry, layout, global styling
+  components/club/      # app shell, interfaces, notes, figures, packs, search and settings
+  lib/spectra/          # content, registries, preferences and study-state stores
+    content/            # unit topic lists and chemistry notes
+public/                 # static assets
 ```
 
-Notes content is written against the 2018 spec, kept verbatim from the
-source text, and marked up with a small inline syntax (`==highlight==`).
+Notes content is written against the 2018 specification, kept verbatim from the approved source text, and marked up with a small inline syntax (`==highlight==`).
 
-## Themes
+## Themes and interfaces
 
-Four labs, switchable in-app (theme button or customize panel):
-
-- **Light** — the daylight cream look
-- **Night** — violet-ink charcoal; rotates one of four night moods per day
-- **Dune** — the chocolate room: deep cocoa grounds, sand inks, warm lamp
-- **Classic** *(default)* — daylight page with sections stepping between
-  deep espresso `#2c2013` and warm cream `#fdf6e3`
-
-Six accent colours rotate through the sections; the customize panel
-narrows the wheel, swaps fonts, zoom and motion.
+Four global themes are available: **Light**, **Night**, **Dune** and **Classic**. The site also has two presentation interfaces: **Rooms** and **Editorial**. Theme and interface are independent preferences; the active theme applies globally while each interface has its own presentation system. See the Site Handbook and Interface Roadmap for the rules governing them.
