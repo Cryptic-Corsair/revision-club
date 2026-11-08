@@ -249,7 +249,7 @@ function NotesEditorialBody({
       </Reveal>
 
       {/* ————— contents rail + the clauses ————— */}
-      <div className="mt-9 grid min-w-0 grid-cols-1 items-start gap-5 lg:gap-8" style={{ gridTemplateColumns: contentsExpanded ? "250px minmax(0, 1fr)" : "56px minmax(0, 1fr)" }}>
+      <div className={`mt-9 grid min-w-0 grid-cols-1 items-start gap-5 lg:gap-8 ${contentsExpanded ? "lg:grid-cols-[250px_minmax(0,1fr)]" : "lg:grid-cols-[56px_minmax(0,1fr)]"}`}>
         <aside className={`legal-index h-fit min-w-0 lg:sticky lg:top-28 ${contentsExpanded ? "lg:w-[250px]" : "lg:w-14"}`}>
           <div className={`mb-3 flex items-center ${contentsExpanded ? "justify-between gap-2" : "justify-center"}`}>
             {contentsExpanded && <p className="legal-meta">CONTENTS</p>}

@@ -175,3 +175,4 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** inspected the existing Editorial note layout and exact contents markup before editing. No lint, production build, deployment or browser visual inspection was run.
 - **Deployment:** not verified.
 - **Commit(s):** see the implementation commit containing this entry.
+- **Responsive follow-up:** kept the two-column rail layout desktop-only and removed the links’ intrinsic max-content minimum width, which was the source of the original horizontal overflow. On narrow screens, the contents remain in their existing horizontal strip.

@@ -1545,12 +1545,16 @@ html.dune .legal-room mark {
   display: flex;
   align-items: center;
   gap: 10px;
-  min-width: max-content;
+  min-width: 0;
   border-radius: 12px;
   padding: 9px 10px;
   color: var(--color-ink-soft);
   font-size: calc(11px * var(--ui-scale));
   transition: background-color 160ms ease, color 160ms ease;
+}
+.legal-index-link > span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .legal-index-link span:first-child {
   color: var(--color-ink-faint);
