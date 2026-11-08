@@ -11,7 +11,7 @@ import { m, type HTMLMotionProps, type Variants } from "framer-motion";
 import { Footprints } from "./icons";
 import type { SpecSection } from "@/lib/spectra/notes-types";
 import { readableInk, shade } from "./bits";
-import { ACCENTS, ACCENT_IDS, currentAccents } from "@/lib/spectra/prefs";
+import { ACCENTS, ACCENT_IDS, currentAccents, currentLab } from "@/lib/spectra/prefs";
 
 /* the full candy wheel, hue-wheel order: red → orange → sun →
    green → purple → amber, so adjacent bands always differ. This is
@@ -72,10 +72,12 @@ export const inkMix = (main: string, pct = 45) =>
 
 /* band helpers — pure, so the in-page contents card and the Spec
    Map window dress their chips with the exact same colours */
-/* Rooms use one restrained mineral accent. The six selected accents
-   remain intact for the wider app, but no longer colour every note
-   section; the reader's hierarchy comes from type, spacing and tone. */
-export const accentOf = (_i: number) => "#B8874B";
+/* Rooms keep a restrained accent system. Dune is the exception:
+   warm cream and muted sea-glass alternate through its note details.
+   The wider app retains its own configurable accent wheel. */
+const DUNE_ACCENTS = ["#FDF6E3", "#9DB9B0"] as const;
+export const accentOf = (i: number) =>
+  currentLab() === "dune" ? DUNE_ACCENTS[i % DUNE_ACCENTS.length] : "#B8874B";
 /* bands mix their candy over --tint-base at --band-mix (10% by day)
    — the daylight walk of the hue wheel. After dark both steps are
    overridden by --note-band-a/b (see html.dark in globals.css):
@@ -93,12 +95,8 @@ export const bgOf = (i: number) =>
    stays exactly as designed; a narrowed wheel rotates consecutively
    instead, so even two picks still alternate step over step */
 const HOME_STOPS = [1, 2, 4, 0];
-export const homeBandOf = (pos: number) =>
-  bandOf(
-    currentAccents().length === ACCENT_IDS.length
-      ? HOME_STOPS[pos % HOME_STOPS.length]
-      : pos,
-  );
+export const homeBandOf = (_pos: number) =>
+  `color-mix(in oklab, #B8874B var(--band-mix, 10%), var(--tint-base))`;
 
 /* stagger choreography for the Spec Map window's chips */
 export const chipV: Variants = {
