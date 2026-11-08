@@ -280,19 +280,18 @@ function BlockView({
     case "note":
       return (
         <div
-          className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] px-4 py-3.5"
           className="room-callout max-w-[72ch] rounded-[calc(12px*var(--ui-scale))] px-4 py-3.5"
           style={{ background: "color-mix(in oklab, var(--color-paper) 88%, var(--room-accent) 12%)" }}
         >
           <div className="flex items-start gap-3">
             <StickyNote
               className="mt-0.5 h-4.5 w-4.5 shrink-0"
-              style={{ color: inkMix("#B08D00", 62) }}
+              style={{ color: inkMix(accent, 70) }}
             />
             <p className="text-[calc(14.5px*var(--ui-scale))] leading-[1.7] text-ink">
               <span
                 className="mr-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
-                style={{ color: inkMix("#B08D00", 58) }}
+                style={{ color: inkMix(accent, 70) }}
               >
                 {b.label}:
               </span>
