@@ -26,7 +26,7 @@ import { clearPicks, togglePick, toggleRead, usePacks } from "@/lib/spectra/pack
 import { BandWave, accentOf, bgOf } from "./bands";
 import { SpecSectionView } from "./note-section";
 import { PackSetsDialog } from "./pack-sets";
-import { Confetti, Mascot, PopIn, Reveal, ScrollFade, SoftButton, readableInk, shade } from "./bits";
+import { Confetti, Mascot, PopIn, Reveal, ScrollFade, SoftButton } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the revision pack — the notes behind your ticked
