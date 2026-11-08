@@ -15,7 +15,7 @@ import {
 } from "./icons";
 import type { NotesBlock, SpecSection } from "@/lib/spectra/notes-types";
 import { Fmt } from "./format";
-import { Kicker, liftWash, Reveal, ScrollFade, readableInk, shade, sunkWash, tint } from "./bits";
+import { Confetti, Kicker, liftWash, Reveal, ScrollFade, readableInk, shade, sunkWash, tint } from "./bits";
 import { inkMix } from "./bands";
 import {
   FigAtom,
@@ -180,23 +180,30 @@ export function SpecSectionView({
   return (
     <div className="flex flex-col gap-7">
       {/* spec banner — the official wording, stated above the section.
-          Tailored: the pill stands square (no tilt, no pedestal) and
-          the rule beneath it thins to a whisper. */}
+          v2: the pill tilts like a sticker and sits on a hard shadow,
+          and the rule beside it is a perforated candy line — the
+          "cut here" edge every room hangs its spec on. */}
       <div>
         <div className="flex items-center gap-3">
           <span
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
+            className="inline-flex shrink-0 -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
             style={{
               background: accent,
               color: readableInk(accent),
+              boxShadow: `0 3px 0 ${shade(accent)}`,
             }}
           >
             <Target className="h-3.5 w-3.5" /> Spec {section.spec}
           </span>
           <span
             aria-hidden
-            className="h-[calc(2px*var(--ui-scale))] flex-1 rounded-full"
-            style={{ background: tint(accent, 40) }}
+            className="h-[calc(3px*var(--ui-scale))] flex-1"
+            style={{
+              backgroundImage: `radial-gradient(circle, ${tint(accent, 42)} 2.2px, transparent 2.4px)`,
+              backgroundSize: "12px 4px",
+              backgroundRepeat: "repeat-x",
+              backgroundPosition: "0 center",
+            }}
           />
           {bannerAction}
         </div>
@@ -205,11 +212,8 @@ export function SpecSectionView({
         </h2>
         {!hideStatement && (
           <div
-            className="mt-4 rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
-            style={{
-              borderLeft: `3px solid ${accent}`,
-              boxShadow: "0 2px 0 var(--edge)",
-            }}
+            className="sticker mt-4 rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
+            style={{ borderLeft: `4px solid ${accent}` }}
           >
             <Kicker color={inkMix(accent, 62)}>From the specification</Kicker>
             <p className="mt-2 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft italic">
@@ -294,8 +298,8 @@ function BlockView({
     case "note":
       return (
         <div
-          className="room-callout max-w-[72ch] rounded-[calc(12px*var(--ui-scale))] px-4 py-3.5"
-          style={{ background: "color-mix(in oklab, var(--color-paper) 88%, var(--room-accent) 12%)" }}
+          className="room-callout tape relative max-w-[72ch] -rotate-[0.35deg] rounded-[calc(12px*var(--ui-scale))] px-4 py-4"
+          style={{ background: "color-mix(in oklab, var(--color-paper) 86%, var(--room-accent) 14%)", boxShadow: "0 3px 0 var(--edge)" }}
         >
           <div className="flex items-start gap-3">
             <StickyNote
@@ -317,11 +321,8 @@ function BlockView({
     case "def":
       return (
         <div
-          className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
-          style={{
-            borderLeft: `3px solid ${tint(accent, 55)}`,
-            boxShadow: "0 2px 0 var(--edge)",
-          }}
+          className="sticker max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
+          style={{ borderLeft: `4px solid ${tint(accent, 55)}` }}
         >
           <h4 className="font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
             <Fmt text={b.term} />
@@ -332,19 +333,20 @@ function BlockView({
         </div>
       );
     case "eq":
-      /* the tailored re-set: a print-style band — hairline rules above
-         and below, species as flat framed chips instead of shadowed
-         lozenges. Reads like a textbook, keeps the classic warmth. */
+      /* v2: the reaction strip — a candy-washed band with the species
+         as paper chips, each wearing a whisper of the accent. Reads
+         like a textbook that learned to have fun. */
       return (
         <div
-          className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] border-y border-ink/[0.09] px-5 py-4"
-          style={{ background: liftWash(accent, 6) }}
+          className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] border-y-2 border-ink/[0.09] px-5 py-4"
+          style={{ background: liftWash(accent, 8) }}
         >
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5">
             {b.eq.split(/\s{2,}/).map((part, i) => (
               <span
                 key={i}
-                className="rounded-[calc(10px*var(--ui-scale))] border border-ink/[0.09] bg-paper px-3.5 py-2 font-mono text-[calc(14.5px*var(--ui-scale))] font-semibold text-ink"
+                className="rounded-[calc(10px*var(--ui-scale))] bg-paper px-3.5 py-2 font-mono text-[calc(14.5px*var(--ui-scale))] font-semibold text-ink"
+                style={{ boxShadow: "0 2px 0 var(--edge)" }}
               >
                 <Fmt text={part.trim()} />
               </span>
@@ -383,8 +385,8 @@ function BlockView({
     case "wow":
       return (
         <div
-          className="max-w-[72ch] rounded-[calc(20px*var(--ui-scale))] p-5 sm:p-6"
-          style={{ background: "color-mix(in oklab, var(--color-paper) 92%, var(--room-accent) 8%)", border: "1px solid color-mix(in oklab, var(--color-ink) 10%, transparent)" }}
+          className="tape relative max-w-[72ch] -rotate-[0.4deg] rounded-[calc(20px*var(--ui-scale))] p-5 sm:p-6"
+          style={{ background: "color-mix(in oklab, var(--color-paper) 90%, var(--room-accent) 10%)", boxShadow: "0 3px 0 var(--edge)" }}
         >
           <div className="flex items-start gap-3">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl border border-ink/[0.08] bg-paper">
@@ -522,13 +524,16 @@ function Worked({
   const [open, setOpen] = useState(false);
   const printing = usePrinting();
   const shown = open || printing;
+  /* the reveal pays out: unfurling a worked example throws a small
+     burst from the button — never on print, never when folding */
+  const [fire, setFire] = useState(0);
 
   return (
-    <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
+    <div className="sticker rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 sm:p-6">
       <div className="flex flex-wrap items-center gap-3">
         <span
-          className="inline-flex min-w-0 max-w-full shrink-0 items-center rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] leading-snug font-bold tracking-[0.1em] uppercase"
-          style={{ background: accent, color: readableInk(accent) }}
+          className="inline-flex min-w-0 max-w-full shrink-0 -rotate-1 items-center rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] leading-snug font-bold tracking-[0.1em] uppercase"
+          style={{ background: accent, color: readableInk(accent), boxShadow: `0 2px 0 ${shade(accent)}` }}
         >
           <PenLine className="mr-1.5 h-3.5 w-3.5 shrink-0" /> <Fmt text={title} />
         </span>
@@ -537,28 +542,34 @@ function Worked({
         </p>
       </div>
 
-      <m.button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        whileHover={{ y: -2 }}
-        whileTap={{ scale: 0.95 }}
-        className="mt-4 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(14px*var(--ui-scale))] font-semibold text-white"
-        style={{ background: accent, boxShadow: `0 2px 0 ${shade(accent)}` }}
-      >
-        {open ? (
-          <EyeOff className="h-4.5 w-4.5" />
-        ) : (
-          <Footprints className="h-4.5 w-4.5" />
-        )}
-        {open ? "Hide steps" : "Show steps"}
-        <m.span
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      <div className="relative mt-4 inline-block">
+        <Confetti fire={fire} className="-translate-y-2" />
+        <m.button
+          type="button"
+          onClick={() => {
+            if (!open) setFire((f) => f + 1);
+            setOpen((o) => !o);
+          }}
+          aria-expanded={open}
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          className="inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(14px*var(--ui-scale))] font-semibold text-white"
+          style={{ background: accent, boxShadow: `0 3px 0 ${shade(accent)}` }}
         >
-          <ChevronDown className="h-4 w-4" />
-        </m.span>
-      </m.button>
+          {open ? (
+            <EyeOff className="h-4.5 w-4.5" />
+          ) : (
+            <Footprints className="h-4.5 w-4.5" />
+          )}
+          {open ? "Hide steps" : "Show steps"}
+          <m.span
+            animate={{ rotate: open ? 180 : 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <ChevronDown className="h-4 w-4" />
+          </m.span>
+        </m.button>
+      </div>
 
       <AnimatePresence initial={false}>
         {shown && (
@@ -583,14 +594,17 @@ function Worked({
                     damping: 22,
                     delay: printing ? 0 : 0.05 + i * 0.06,
                   }}
-                  style={{ marginLeft: `min(${i * 14}px, 56px)` }}
+                  style={{
+                    marginLeft: `min(${i * 14}px, 56px)`,
+                    rotate: `${i % 2 ? 0.35 : -0.35}deg`,
+                  }}
                 >
                   {i > 0 && (
                     <div className="dot-line mb-1 ml-6 h-4" aria-hidden />
                   )}
                   <div
                     className="inline-flex max-w-full items-start gap-2.5 rounded-[calc(18px*var(--ui-scale))] px-4 py-2.5 text-[calc(15px*var(--ui-scale))] leading-[1.7] text-ink"
-                    style={{ background: liftWash(accent, 9) }}
+                    style={{ background: liftWash(accent, 9), boxShadow: "0 2px 0 var(--edge)" }}
                   >
                     <span
                       className="mt-0.5 grid h-[calc(22px*var(--ui-scale))] w-[calc(22px*var(--ui-scale))] shrink-0 place-items-center rounded-full font-display text-[calc(11px*var(--ui-scale))] font-bold"

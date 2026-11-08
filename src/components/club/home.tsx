@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
   Atom,
   ClipboardCheck,
@@ -25,35 +25,62 @@ import {
   Blob,
   CandyButton,
   Chip,
+  Confetti,
   DoodleAtom,
+  DoodleFlask,
   DoodleHex,
   DoodlePlus,
   DoodleSparkle,
+  DoodleTube,
   Float,
   Mascot,
   PopIn,
   readableInk,
   SectionTag,
-  SoftButton,
+  StickerButton,
   tint,
   shade,
 } from "./bits";
 import { BandWave, homeBandOf } from "./bands";
 
 /* ═══════════════════════════════════════════════════════════════
-   IAL CHEM · home — Material You surfaces, candy personality
-   Motion lives in the hero alone: the one-time blob settle, the
-   entrance pop, floating cards, the boopable mascot. Everything
-   below paints once and holds still — no scroll reveals, no idle
-   loops. The sections wear notes-style candy bands, and every seam
-   between neighbours is a BandWave — a different curve each time,
-   straight off the same shelf the note reader uses. Static SVG,
-   painted once; the compositor never revisits it.
+   IAL CHEM · home — Bubbles' candy lab, v2
+   The rebuilt rooms front door: a sticker-built hero where Bubbles
+   boops back (confetti included), a candy ticker drifting the
+   course facts, and every unit as a candy tin you can't help but
+   poke. The seams are still BandWaves — the one structure that
+   never changes — and every sticker answers hover with the kit's
+   lift-and-straighten, CSS-only below the fold so the page stays
+   cheap. Motion knobs off → the ticker and bobbles stand still and
+   everything else is a plain hover.
    ═══════════════════════════════════════════════════════════════ */
 
-/* ————— static buttons for the still zones —————
-   Same candy skin as the hero pair, minus the spring: below the
+/* ————— static sticker button for the still zones —————
+   Same sticker skin as the hero pair, minus the spring: below the
    hero every control paints once and answers hover with CSS only. */
+
+function StickerBtn({
+  children,
+  onClick,
+  className,
+  ariaLabel,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+  className?: string;
+  ariaLabel?: string;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={ariaLabel}
+      onClick={onClick}
+      className={`sticker sticker-pop inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale))] font-semibold text-ink select-none ${className ?? ""}`}
+    >
+      {children}
+    </button>
+  );
+}
 
 function CandyBtn({
   children,
@@ -81,26 +108,42 @@ function CandyBtn({
   );
 }
 
-function SoftBtn({
-  children,
-  onClick,
-  className,
-  ariaLabel,
-}: {
-  children: React.ReactNode;
-  onClick?: () => void;
-  className?: string;
-  ariaLabel?: string;
-}) {
+/* ————— the candy ticker —————
+   One line of course facts drifting between the hero and the units.
+   Content twice over (the copy feeds the scroll), aria-hidden on the
+   echo, paused on hover, frozen by the motion knob. */
+
+function Ticker({ units }: { units: Unit[] }) {
+  const facts = [
+    `${units.length} units, WCH11 → WCH16`,
+    `${TOTALS.topics} topics in spec order`,
+    `≈${Math.round(TOTALS.minutes / 60)} hours of reading`,
+    `${TOTALS.examples} worked examples`,
+    "definitions, equations, diagrams",
+    "progress saved in your browser",
+  ];
+  const line = (hidden: boolean) => (
+    <div aria-hidden={hidden || undefined} className="flex shrink-0 items-center">
+      {facts.map((f, i) => (
+        <span key={i} className="flex items-center">
+          <span className="px-6 font-display text-[calc(13px*var(--ui-scale))] font-bold tracking-[0.14em] whitespace-nowrap uppercase">
+            {f}
+          </span>
+          <DoodleSparkle className="h-3.5 w-3.5 shrink-0 opacity-70" />
+        </span>
+      ))}
+    </div>
+  );
   return (
-    <button
-      type="button"
-      aria-label={ariaLabel}
-      onClick={onClick}
-      className={`inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale))] font-semibold text-ink puff select-none ${className ?? ""}`}
+    <div
+      className="ticker border-y-2 border-ink/[0.07] py-2.5 text-ink"
+      style={{ background: tint("#FFD43B", 22) }}
     >
-      {children}
-    </button>
+      <div className="ticker-track">
+        {line(false)}
+        {line(true)}
+      </div>
+    </div>
   );
 }
 
@@ -111,13 +154,29 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
   const time = useTimeData();
   const suggestion = pickSuggestion(units, revised, time);
 
+  /* ————— the boop —————
+     Bubbles has been boopable since the first build; v2 gives the
+     boop a payoff: he cheers and throws a handful of confetti. */
+  const [boops, setBoops] = useState(0);
+  const [cheer, setCheer] = useState(false);
+  const cheerTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const boop = () => {
+    setBoops((b) => b + 1);
+    setCheer(true);
+    if (cheerTimer.current) clearTimeout(cheerTimer.current);
+    cheerTimer.current = setTimeout(() => setCheer(false), 1400);
+  };
+  useEffect(() => () => {
+    if (cheerTimer.current) clearTimeout(cheerTimer.current);
+  }, []);
+
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   /* ————— pause what you can't see —————
-     All the ambient motion on this page lives in the hero, and it
-     is pure compositor work — but even free work adds up. One
-     observer flips animation-play-state while a hero decoration
+     All the ambient motion on this page lives in the hero and the
+     ticker, and it is pure compositor work — but even free work adds
+     up. One observer flips animation-play-state while a decoration
      sits offscreen; scroll back and it resumes mid-stride. */
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>("[data-freeze]"));
@@ -193,13 +252,13 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 <CandyButton main="#FF6B6B" onClick={() => scrollTo("units")}>
                   Browse the units <MoveRight className="h-5 w-5" />
                 </CandyButton>
-                <SoftButton onClick={() => scrollTo("how")}>
+                <StickerButton onClick={() => scrollTo("how")}>
                   <NotebookPen className="h-4 w-4 text-grape" /> How it works
-                </SoftButton>
+                </StickerButton>
                 {onBackToDesk && (
-                  <SoftButton onClick={onBackToDesk} className="min-h-[calc(44px*var(--ui-scale))] px-5 py-2.5 text-[calc(14px*var(--ui-scale))]">
+                  <StickerButton onClick={onBackToDesk} className="min-h-[calc(44px*var(--ui-scale))] px-5 py-2.5 text-[calc(14px*var(--ui-scale))]">
                     Back to your desk
-                  </SoftButton>
+                  </StickerButton>
                 )}
               </PopIn>
 
@@ -247,11 +306,11 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               <Float delay={0.35} className="absolute top-[9%] left-0 z-20 sm:left-[1%]">
                 <div
                   aria-hidden
-                  className="hero-float-card w-[calc(150px*var(--ui-scale))] -rotate-[4deg] rounded-[calc(22px*var(--ui-scale))] bg-paper px-4 py-3.5 puff sm:w-[calc(178px*var(--ui-scale))]"
+                  className="hero-float-card sticker w-[calc(150px*var(--ui-scale))] -rotate-[4deg] rounded-[calc(22px*var(--ui-scale))] bg-paper px-4 py-3.5 sm:w-[calc(178px*var(--ui-scale))]"
                 >
                   <span
                     className="rounded-full px-2.5 py-1 font-display text-[calc(10px*var(--ui-scale))] font-bold tracking-[0.08em] text-white uppercase"
-                    style={{ background: "#12B886" }}
+                    style={{ background: "#12B886", boxShadow: "0 2px 0 #0B7A57" }}
                   >
                     definition
                   </span>
@@ -270,11 +329,11 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               <Float delay={1.2} slow className="absolute right-0 bottom-[7%] z-20 sm:right-[1%]">
                 <div
                   aria-hidden
-                  className="hero-float-card rotate-[3deg] rounded-[calc(22px*var(--ui-scale))] bg-paper px-5 py-4 puff sm:px-6"
+                  className="hero-float-card sticker rotate-[3deg] rounded-[calc(22px*var(--ui-scale))] bg-paper px-5 py-4 sm:px-6"
                 >
                   <span
                     className="rounded-full px-2.5 py-1 font-display text-[calc(10px*var(--ui-scale))] font-bold tracking-[0.08em] text-white uppercase"
-                    style={{ background: "#FF922B" }}
+                    style={{ background: "#FF922B", boxShadow: "0 2px 0 #D46A08" }}
                   >
                     equation
                   </span>
@@ -284,23 +343,32 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 </div>
               </Float>
 
-              {/* Bubbles, dead centre — eased smaller on phones so the
-                  cards frame him instead of covering his face */}
+              {/* Bubbles, dead centre — bigger in v2, and the boop
+                  pays out confetti. Eased smaller on phones so the
+                  cards frame him instead of covering his face. */}
               <Float className="relative z-10">
-                <div className="origin-center scale-[0.8] translate-x-4 sm:scale-100 sm:translate-x-0">
-                  <Mascot main="#FF6B6B" size={250} boop onBoop={() => {}} className="relative z-10" />
+                <div className="relative origin-center scale-[0.8] translate-x-4 sm:scale-100 sm:translate-x-0">
+                  <Confetti fire={boops} className="-translate-y-1/3" />
+                  <Mascot
+                    main="#FF6B6B"
+                    size={260}
+                    mood={cheer ? "cheer" : "idle"}
+                    boop
+                    onBoop={boop}
+                    className="relative z-10"
+                  />
                 </div>
               </Float>
 
               <Float delay={0.8} className="absolute top-[1%] right-[1%] z-30">
-                <span className="hero-sticker inline-block rotate-[-7deg] rounded-full bg-paper px-4 py-2 font-display text-[calc(12.5px*var(--ui-scale))] font-bold whitespace-nowrap text-ink puff">
+                <span className="hero-sticker sticker inline-block rotate-[-7deg] rounded-full bg-paper px-4 py-2 font-display text-[calc(12.5px*var(--ui-scale))] font-bold whitespace-nowrap text-ink">
                   read → practise → done
                 </span>
               </Float>
               <Float delay={1.6} slow className="absolute bottom-[1%] left-[3%] z-30">
                 <span
-                  className="hero-sticker inline-block rotate-[6deg] rounded-full px-4 py-2 font-display text-[calc(12.5px*var(--ui-scale))] font-bold text-white puff"
-                  style={{ background: "#9775FA" }}
+                  className="hero-sticker sticker inline-block rotate-[6deg] rounded-full px-4 py-2 font-display text-[calc(12.5px*var(--ui-scale))] font-bold text-white"
+                  style={{ background: "#9775FA", boxShadow: "0 3px 0 #7048E8" }}
                 >
                   WCH11–WCH16
                 </span>
@@ -312,18 +380,27 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               <span data-freeze className="animate-float absolute bottom-[26%] left-[7%] block">
                 <DoodleHex className="h-8 w-8 text-grape/40" />
               </span>
+              <span data-freeze className="animate-float absolute top-[6%] left-[38%] hidden sm:block" style={{ animationDelay: "0.9s" }}>
+                <DoodleTube className="h-10 w-10 -rotate-12 text-tangerine/45" />
+              </span>
+              <span data-freeze className="animate-float-slow absolute bottom-[34%] right-[30%] hidden lg:block" style={{ animationDelay: "1.4s" }}>
+                <DoodleFlask className="h-9 w-9 rotate-6 text-mint/40" />
+              </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ————— the seam shelf: hero pours into the first band —————
+      {/* ————— the candy ticker — the course facts, drifting ————— */}
+      <Ticker units={units} />
+
+      {/* ————— the seam shelf: ticker pours into the first band —————
           After dark the seams ride the same study grounds as the
           notes (--home-band-a/b alias --note-band-a/b); by day each
           band keeps its own candy tint via the fallback. */}
-      <BandWave from="var(--color-paper)" to={`var(--home-band-b, ${homeBandOf(0)})`} wave={1} className="h-[calc(30px*var(--ui-scale))] sm:h-[calc(40px*var(--ui-scale))]" />
+      <BandWave from={tint("#FFD43B", 22)} to={`var(--home-band-b, ${homeBandOf(0)})`} wave={1} className="h-[calc(30px*var(--ui-scale))] sm:h-[calc(40px*var(--ui-scale))]" />
 
-      {/* ————— units: M3 elevated cards on the orange band ————— */}
+      {/* ————— units: candy tins on the orange band ————— */}
       <div style={{ background: `var(--home-band-b, ${homeBandOf(0)})` }}>
       <section id="units" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-4 pb-8 sm:px-8">
         <div className="text-center">
@@ -344,19 +421,19 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
             const done = revised.filter((k) => k.startsWith(`${u.code}/`)).length;
             const pct = u.topics.length ? done / u.topics.length : 0;
             const minutes = u.topics.reduce((m, t) => m + t.minutes, 0);
-            const tilt = [-1.2, 1, -0.8, 1.1, -1, 0.8][i % 6];
+            const tilt = [-1.4, 1.1, -0.9, 1.2, -1.1, 0.9][i % 6];
             return (
               <div key={u.code}>
                 <button
                   type="button"
                   onClick={() => onOpenUnit(u.code)}
                   aria-label={`Open ${u.code} — ${u.title}`}
-                  className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[calc(28px*var(--ui-scale))] bg-paper p-6 text-left puff"
-                  style={{ transform: `rotate(${tilt}deg)` }}
+                  className="sticker sticker-pop group relative block h-full w-full cursor-pointer overflow-hidden rounded-[calc(28px*var(--ui-scale))] p-6 text-left"
+                  style={{ background: tint(u.candy.main, 9), transform: `rotate(${tilt}deg)` }}
                 >
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute -top-4 right-3 font-display text-[calc(88px*var(--ui-scale))] leading-none font-bold text-ink/[0.05] select-none"
+                    className="pointer-events-none absolute -top-4 right-3 font-display text-[calc(88px*var(--ui-scale))] leading-none font-bold text-ink/[0.06] select-none"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -364,14 +441,18 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   <div className="flex items-center gap-3">
                     <span
                       className="grid h-12 w-12 place-items-center rounded-[calc(16px*var(--ui-scale))] font-display text-[calc(20px*var(--ui-scale))] font-bold"
-                      style={{ background: tint(u.candy.main, 15), color: shade(u.candy.main, 62) }}
+                      style={{
+                        background: u.candy.main,
+                        color: readableInk(u.candy.main),
+                        boxShadow: `0 3px 0 ${shade(u.candy.main)}`,
+                      }}
                     >
                       {u.index}
                     </span>
                     <div>
                       <div
                         className="font-display text-[calc(13px*var(--ui-scale))] font-bold tracking-[0.14em]"
-                        style={{ color: u.candy.main }}
+                        style={{ color: shade(u.candy.main, 68) }}
                       >
                         {u.code}
                       </div>
@@ -407,8 +488,8 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                     <div className="flex items-end gap-2">
                       <BeakerMeter pct={pct} main={u.candy.main} size={40} />
                       <span
-                        className="grid h-9 w-9 place-items-center rounded-full transition-transform group-hover:translate-x-1"
-                        style={{ background: tint(u.candy.main, 15), color: shade(u.candy.main, 62) }}
+                        className="grid h-9 w-9 place-items-center rounded-full text-white transition-transform group-hover:translate-x-1 group-hover:-rotate-6"
+                        style={{ background: u.candy.main, boxShadow: `0 2px 0 ${shade(u.candy.main)}` }}
                       >
                         <MoveRight className="h-4.5 w-4.5" strokeWidth={2.5} />
                       </span>
@@ -429,7 +510,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
       <section id="pack" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 py-12 sm:px-8">
         <div>
           <div
-            className="relative overflow-hidden rounded-[calc(36px*var(--ui-scale))] px-6 py-8 puff sm:rounded-[calc(44px*var(--ui-scale))] sm:px-10 sm:py-10"
+            className="sticker relative overflow-hidden rounded-[calc(36px*var(--ui-scale))] px-6 py-8 sm:rounded-[calc(44px*var(--ui-scale))] sm:px-10 sm:py-10"
             style={{ background: "var(--tint-base)" }}
           >
             <Blob color={tint("#FFD43B", 20)} shape="b" still className="top-[-40%] right-[-8%] h-[70%] w-[38%]" />
@@ -464,14 +545,14 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                       </>
                     )}
                   </CandyBtn>
-                  <SoftBtn onClick={onOpenSpec}>
+                  <StickerBtn onClick={onOpenSpec}>
                     <Target className="h-4 w-4 text-coral" /> Browse the spec index
-                  </SoftBtn>
+                  </StickerBtn>
                 </div>
               </div>
               <div className="flex shrink-0 items-center justify-center md:pl-6">
                 <div
-                  className="flex items-center gap-4 rounded-[calc(30px*var(--ui-scale))] px-6 py-5"
+                  className="sticker flex items-center gap-4 rounded-[calc(30px*var(--ui-scale))] px-6 py-5"
                   style={{ background: tint("#FFD43B", 14) }}
                 >
                   <span
@@ -498,7 +579,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
 
       <BandWave from={`var(--home-band-a, ${homeBandOf(1)})`} to={`var(--home-band-b, ${homeBandOf(2)})`} wave={3} />
 
-      {/* ————— how it works: M3 stepper ————— */}
+      {/* ————— how it works: three candy stones on a dotted trail ————— */}
       <div style={{ background: `var(--home-band-b, ${homeBandOf(2)})` }}>
       <section id="how" className="mx-auto max-w-6xl scroll-mt-[calc(6rem+var(--sa-top))] px-5 pt-12 pb-14 sm:px-8">
         <div className="text-center">
@@ -539,7 +620,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
             <div key={s.n} className="contents">
               <div className="min-w-0 flex-1">
                 <div
-                  className={`h-full rounded-[calc(28px*var(--ui-scale))] bg-paper p-5 puff sm:p-6 md:p-5 lg:p-6 ${i % 2 ? "rotate-[0.6deg]" : "rotate-[-0.6deg]"}`}
+                  className={`sticker h-full rounded-[calc(28px*var(--ui-scale))] bg-paper p-5 sm:p-6 md:p-5 lg:p-6 ${i % 2 ? "rotate-[0.8deg]" : "rotate-[-0.8deg]"}`}
                 >
                   <div className="flex items-center gap-3.5">
                     <span
@@ -549,7 +630,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                       {s.n}
                     </span>
                     <span
-                      className="grid h-11 w-11 place-items-center rounded-[calc(14px*var(--ui-scale))]"
+                      className="wiggle-hover grid h-11 w-11 place-items-center rounded-[calc(14px*var(--ui-scale))]"
                       style={{ background: tint(s.color, 14) }}
                     >
                       <s.icon className="h-5.5 w-5.5" style={{ color: shade(s.color, 62) }} strokeWidth={2.2} />
@@ -567,7 +648,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon md:hidden">
                     <MoveRight className="h-5.5 w-5.5 rotate-90" strokeWidth={2.5} />
                   </span>
-                  <span className="hidden h-12 w-12 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon md:grid">
+                  <span className="wiggle-hover hidden h-12 w-12 shrink-0 place-items-center rounded-full bg-lemon/25 text-lemon md:grid">
                     <MoveRight className="h-6 w-6" strokeWidth={2.5} />
                   </span>
                 </div>
@@ -597,7 +678,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
             <button
               type="button"
               onClick={onOpenSticker}
-              className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[calc(32px*var(--ui-scale))] p-7 text-left puff sm:p-8"
+              className="sticker sticker-pop group relative block h-full w-full cursor-pointer overflow-hidden rounded-[calc(32px*var(--ui-scale))] p-7 text-left sm:p-8"
               style={{ background: tint("#12B886", 10), transform: "rotate(-0.8deg)" }}
             >
               <Blob color={tint("#12B886", 22)} shape="c" still className="bottom-[-30%] left-[-15%] h-[75%] w-[55%]" />
@@ -617,10 +698,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   {revised.length}/{TOTALS.topics} topics marked as revised.
                 </p>
                 <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
-                  <span className="rounded-full bg-paper/85 px-3.5 py-1.5 text-[calc(12px*var(--ui-scale))] font-extrabold text-ink">
+                  <span className="sticker rounded-full bg-paper/85 px-3.5 py-1.5 text-[calc(12px*var(--ui-scale))] font-extrabold text-ink">
                     weekly goals
                   </span>
-                  <span className="rounded-full bg-paper/85 px-3.5 py-1.5 text-[calc(12px*var(--ui-scale))] font-extrabold text-ink">
+                  <span className="sticker rounded-full bg-paper/85 px-3.5 py-1.5 text-[calc(12px*var(--ui-scale))] font-extrabold text-ink">
                     minutes per topic
                   </span>
                   <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[calc(14px*var(--ui-scale))] font-bold text-mint">
@@ -636,7 +717,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               <button
                 type="button"
                 onClick={() => onOpenTopic(suggestion.unit.code, suggestion.topic.id)}
-                className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-[calc(32px*var(--ui-scale))] p-7 text-left puff sm:p-8"
+                className="sticker sticker-pop group relative block h-full w-full cursor-pointer overflow-hidden rounded-[calc(32px*var(--ui-scale))] p-7 text-left sm:p-8"
                 style={{
                   background: tint(suggestion.unit.candy.main, 10),
                   transform: "rotate(0.8deg)",
@@ -668,7 +749,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                     {suggestion.reason} — about {suggestion.topic.minutes} minutes of reading.
                   </p>
                   <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
-                    <span className="rounded-full bg-paper/85 px-3.5 py-1.5 text-[calc(12px*var(--ui-scale))] font-extrabold text-ink">
+                    <span className="sticker rounded-full bg-paper/85 px-3.5 py-1.5 text-[calc(12px*var(--ui-scale))] font-extrabold text-ink">
                       picked fresh daily
                     </span>
                     <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[calc(14px*var(--ui-scale))] font-bold" style={{ color: suggestion.unit.candy.main }}>
@@ -683,7 +764,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               <button
                 type="button"
                 onClick={onOpenSticker}
-                className="block h-full w-full cursor-pointer rounded-[calc(32px*var(--ui-scale))] p-7 text-left puff sm:p-8"
+                className="sticker sticker-pop block h-full w-full cursor-pointer rounded-[calc(32px*var(--ui-scale))] p-7 text-left sm:p-8"
                 style={{ background: tint("#12B886", 10), transform: "rotate(0.8deg)" }}
               >
                 <h3 className="font-display text-[calc(26px*var(--ui-scale))] font-semibold text-ink">All done</h3>
@@ -702,7 +783,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           colour the footer wave starts from */}
       <BandWave from={`var(--home-band-a, ${homeBandOf(3)})`} to={`var(--home-band-b, var(--color-cream))`} wave={0} />
 
-      {/* ————— CTA band: the cocoa card from the moodboard ————— */}
+      {/* ————— CTA band: the cocoa card, with Bubbles on the lid ————— */}
       <section className="px-3 pb-24 sm:px-5 sm:pb-28 lg:px-8" style={{ background: `var(--home-band-b, transparent)` }}>
         <div>
           <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[calc(36px*var(--ui-scale))] bg-cocoa px-6 py-12 text-center sm:rounded-[calc(44px*var(--ui-scale))] sm:px-12 sm:py-16">
@@ -718,7 +799,9 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
 
             <div className="relative z-10 mx-auto max-w-xl">
               <div className="mx-auto w-fit">
-                <Mascot main="#FFD43B" mood="cheer" size={150} bubbles={false} className="mx-auto" />
+                <div className="bobble">
+                  <Mascot main="#FFD43B" mood="cheer" size={150} bubbles={false} className="mx-auto" />
+                </div>
               </div>
               <h2 className="mt-2 font-display text-[calc(clamp(1.8rem,3.6vw,2.6rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold text-milk">
                 Pick a unit and dive in.
@@ -730,9 +813,14 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 <CandyBtn main="#FFD43B" onClick={() => scrollTo("units")}>
                   Browse the units <MoveRight className="h-5 w-5" />
                 </CandyBtn>
-                <SoftBtn onClick={() => onOpenUnit("WCH11")}>
+                <button
+                  type="button"
+                  onClick={() => onOpenUnit("WCH11")}
+                  className="sticker inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale))] font-semibold select-none"
+                  style={{ background: "rgb(255 255 255 / 0.94)", color: "#4a2f18", boxShadow: "0 4px 0 rgb(0 0 0 / 0.32)" }}
+                >
                   Open Unit 1 <DoodleSparkle className="h-4 w-4 text-lemon" />
-                </SoftBtn>
+                </button>
               </div>
             </div>
           </div>

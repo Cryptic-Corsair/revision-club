@@ -132,7 +132,7 @@
 
 :root {
   --tint-base: #ffffff;
-  --band-mix: 10%; /* candy share inside note-section bands */
+  --band-mix: 18%; /* candy share inside note-section bands — the v2 walk is juicier */
   --edge: rgb(61 43 31 / 0.07); /* pedestal edge under floating bars */
   color-scheme: light;
   /* notch & home-indicator insets — 0 on flat screens, real values
@@ -256,11 +256,11 @@ html.dark:not(.dune) {
   --home-band-a: #120e19;
   --home-band-b: #191421;
 
-  --sunk-share: 10%;
+  --sunk-share: 14%;
   --sunk-base: #261e32;
-  --lift-share: 16%;
+  --lift-share: 20%;
   --lift-base: #2a2037;
-  --honey-share: 12%;
+  --honey-share: 14%;
   --honey-base: #100c15;
   --chip-base: var(--color-paper);
   --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
@@ -341,10 +341,10 @@ html.dune {
   /* the study ground — two fixed steps that alternate down the
      notes, cocoa leaning into caramel; chosen once, never rotated.
      Ink keeps 14.5:1 / 14.0:1 on the pair. */
-  --note-band-a: #221f1a;
-  --note-band-b: #262218;
-  --home-band-a: #191713;
-  --home-band-b: #1f1c17;
+  --note-band-a: #231e15;
+  --note-band-b: #2c2415;
+  --home-band-a: #1a1610;
+  --home-band-b: #211c12;
   /* content-surface grading, re-derived for the chocolate grounds —
      same three families as the night lab, wells sunk into roasted
      chocolate a half-step under the card:
@@ -357,11 +357,11 @@ html.dune {
        (#292520) — headers stay value-neutral vs the card.
      Chips hug the card they sit on (--chip-base). Zebra rows stay
      neutral milk; figure annotation ink eases back. */
-  --sunk-share: 10%;
+  --sunk-share: 14%;
   --sunk-base: #292520;
-  --lift-share: 16%;
+  --lift-share: 20%;
   --lift-base: #292419;
-  --honey-share: 12%;
+  --honey-share: 16%;
   --honey-base: #16130d;
   --chip-base: var(--color-paper);
   --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
@@ -401,12 +401,13 @@ html.classic .room {
   --color-paper: color-mix(in oklab, var(--color-milk) 13%, var(--color-cocoa));
   --tint-base: color-mix(in oklab, var(--color-milk) 20%, var(--color-cocoa));
   /* the espresso rooms wear the same content-surface grading as the
-     after-dark lab — the cream rooms stay on the daylight recipe */
-  --sunk-share: 10%;
+     after-dark lab — juicier shares so the candy pops on cocoa —
+     and the cream rooms stay on the daylight recipe */
+  --sunk-share: 16%;
   --sunk-base: #2b2420;
-  --lift-share: 16%;
+  --lift-share: 22%;
   --lift-base: #241d18;
-  --honey-share: 14%;
+  --honey-share: 18%;
   --honey-base: #1e1713;
   --chip-base: var(--color-paper);
   --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
@@ -669,6 +670,98 @@ html.dark .puff {
   box-shadow:
     0 2px 0 0 rgb(0 0 0 / 0.28),
     0 18px 42px -18px rgb(0 0 0 / 0.55);
+}
+
+/* ————— the sticker kit (Rooms v2) —————
+   The rebuilt Rooms dress everything as stickers: a 2px ink-tinted
+   outline plus one hard offset shadow, so a card reads as a cut
+   piece of candy paper rather than a floating pane. Pair with
+   .sticker-pop on interactive cards — hover lifts and straightens,
+   press squashes into the page. */
+.sticker {
+  border: 2px solid color-mix(in oklab, var(--color-ink) 13%, transparent);
+  box-shadow: 0 4px 0 var(--edge);
+}
+html.dark .sticker,
+html.dune .sticker {
+  border-color: rgb(255 255 255 / 0.11);
+}
+.sticker-pop {
+  transition:
+    transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.28s ease;
+}
+.sticker-pop:hover {
+  transform: translateY(-4px) rotate(-0.5deg);
+  box-shadow: 0 8px 0 var(--edge);
+}
+.sticker-pop:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 var(--edge);
+}
+
+/* the wiggle — a one-shot happy shake on hover, for icons and
+   mascots that deserve a reaction but not a spring */
+@keyframes wiggle {
+  0%, 100% { rotate: 0deg; }
+  25% { rotate: -3.5deg; }
+  65% { rotate: 2.6deg; }
+}
+.wiggle-hover:hover {
+  animation: wiggle 0.45s ease-in-out;
+}
+
+/* the bobble — a slow idle sway for mascots and floaters */
+@keyframes bobble {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-6px) rotate(1.4deg); }
+}
+.bobble {
+  animation: bobble 3.6s ease-in-out infinite;
+}
+
+/* washi tape — a little strip pinned across the top of a sticky
+   note; pair .tape with `relative` on the note itself */
+.tape::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  width: 88px;
+  height: 22px;
+  translate: -50% 0;
+  rotate: -2.5deg;
+  border-radius: 3px;
+  background: color-mix(in oklab, var(--color-lemon) 42%, transparent);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.1);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* the candy ticker — one line of facts drifting across the seam
+   between hero and units; pure CSS marquee, duplicated content,
+   paused by the motion knob */
+.ticker {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  gap: 0;
+  animation: ticker-scroll 30s linear infinite;
+}
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+@keyframes ticker-scroll {
+  to { transform: translateX(-50%); }
+}
+html[data-motion="off"] .ticker-track {
+  animation: none;
+}
+html[data-motion="off"] .bobble {
+  animation: none;
 }
 
 .puff-lift {

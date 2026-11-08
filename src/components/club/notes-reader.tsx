@@ -25,7 +25,7 @@ import { Fmt, plural } from "./format";
 import {
   PopIn,
   Reveal,
-  SoftButton,
+  StickerButton,
   SpeechBubble,
   Squiggle,
   Mascot,
@@ -215,23 +215,23 @@ function NotesReaderBody({
       {/* ————— header ————— */}
       <header className="mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] sm:px-8">
         <PopIn>
-          <SoftButton
+          <StickerButton
             onClick={onBack}
             className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]"
             ariaLabel={`Back to ${unit.code}`}
           >
             <ArrowLeft className="h-4 w-4" /> Back to {unit.code}
-          </SoftButton>
+          </StickerButton>
         </PopIn>
 
         <PopIn delay={0.05} className="mt-7 flex flex-wrap items-center gap-2">
           <span
-            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
-            style={{ background: main, color: readableInk(main) }}
+            className="inline-flex -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
+            style={{ background: main, color: readableInk(main), boxShadow: `0 3px 0 ${shade(main)}` }}
           >
             <BookOpen className="h-3.5 w-3.5" /> Revision note
           </span>
-          <span className="inline-flex items-center rounded-full bg-ink/5 px-3.5 py-1.5 text-[calc(12.5px*var(--ui-scale))] font-semibold capitalize text-ink-soft">
+          <span className="sticker inline-flex rounded-full bg-paper px-3.5 py-1.5 text-[calc(12.5px*var(--ui-scale))] font-semibold capitalize text-ink-soft">
             {doc.source}
           </span>
         </PopIn>
@@ -245,8 +245,8 @@ function NotesReaderBody({
         </PopIn>
 
         <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-          <div className="shrink-0">
-            <Mascot main={main} size={88} bubbles={false} />
+          <div className="bobble shrink-0">
+            <Mascot main={main} size={100} />
           </div>
           <Reveal delay={0.15} className="min-w-0">
             <SpeechBubble tailClass="left-8 -top-[calc(7px*var(--ui-scale))] rotate-[225deg]">
@@ -267,8 +267,7 @@ function NotesReaderBody({
           {stats.map((s) => (
             <span
               key={s}
-              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[calc(12px*var(--ui-scale))] font-semibold text-ink"
-              style={{ background: tint(main, 12) }}
+              className="sticker inline-flex items-center gap-1.5 rounded-full bg-paper px-3 py-1.5 text-[calc(12px*var(--ui-scale))] font-semibold text-ink"
             >
               <Sparkles className="h-3.5 w-3.5" style={{ color: main }} /> {s}
             </span>
@@ -280,10 +279,10 @@ function NotesReaderBody({
 
       {/* ————— contents ————— */}
       <Reveal className="mx-auto max-w-3xl px-4 pt-4 sm:px-8">
-        <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
+        <div className="sticker rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 sm:p-6">
           <div className="flex items-center gap-3">
             <span
-              className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-ink/[0.08]"
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl"
               style={{ background: tint(main, 16) }}
             >
               <Target className="h-5 w-5" style={{ color: inkMix(main, 60) }} />
@@ -355,13 +354,16 @@ function NotesReaderBody({
       {/* ————— end of the note ————— */}
       <div className="mx-auto max-w-3xl px-4 pt-10 pb-24 text-center sm:px-8">
         <Reveal className="flex flex-col items-center gap-5">
+          <div className="bobble">
+            <Mascot main={main} mood="cheer" size={110} bubbles={false} />
+          </div>
           <Squiggle color={main} className="h-3 w-40 opacity-70" />
           <p className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">
             That&apos;s the whole note — every spec point of the topic.
           </p>
-          <SoftButton onClick={onBack} ariaLabel={`Back to ${unit.code}`}>
+          <StickerButton onClick={onBack} ariaLabel={`Back to ${unit.code}`}>
             <ArrowLeft className="h-4.5 w-4.5" /> Back to {unit.code}
-          </SoftButton>
+          </StickerButton>
           <p className="mt-2 text-[calc(12px*var(--ui-scale))] leading-relaxed font-semibold text-ink-soft">
             <Fmt
               text={`==${unit.code}== · ${unit.title} · from ${doc.source}`}

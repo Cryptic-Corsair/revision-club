@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 const prefsInit = `(function(){try{
 var r=document.documentElement,p=null;
 try{p=JSON.parse(localStorage.getItem("reaction-club-prefs-v1")||"null")}catch(e){}
-if(!p){var t=localStorage.getItem("rc-theme");p={theme:t==="dark"?"dark":"classic"}}
+if(!p){var t=localStorage.getItem("rc-theme");p={theme:t==="dark"?"dark":"light"}}
 var th=p.theme==="dark"?"dark":p.theme==="dune"?"dune":p.theme==="classic"?"classic":"light";
 if(th==="dark"){r.classList.add("dark");r.dataset.mood=String(Math.floor(Date.now()/864e5)%${DARK_MOOD_COUNT})}
 else if(th==="dune"){r.classList.add("dark","dune")}

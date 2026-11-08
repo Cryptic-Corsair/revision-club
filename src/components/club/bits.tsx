@@ -195,13 +195,77 @@ export function CandyButton({
       type={type}
       aria-label={ariaLabel}
       onClick={onClick}
-      whileHover={{ y: -2 }}
-      whileTap={{ scale: 0.95, y: 2 }}
+      whileHover={{ y: -3, rotate: -1 }}
+      whileTap={{ scale: 0.94, y: 2, rotate: 0 }}
+      transition={{ type: "spring", stiffness: 420, damping: 14 }}
       className={`candy inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale))] font-semibold tracking-wide select-none ${className ?? ""}`}
       style={{ "--candy-bg": main, "--candy-side": shade(main), color: readableInk(main) } as CSSProperties}
     >
       {children}
     </m.button>
+  ); }
+
+/* the sticker button — Rooms v2's everyday control. A paper sticker
+   with the kit's 2px outline and one hard shadow; hover lifts it off
+   the page, press squashes it flat. Editorial keeps the quieter
+   SoftButton — this one is the rooms' own voice. */
+export function StickerButton({
+  children,
+  onClick,
+  className,
+  ariaLabel,
+  type = "button",
+}: {
+  children: ReactNode;
+  onClick?: () => void;
+  className?: string;
+  ariaLabel?: string;
+  type?: "button" | "submit";
+}) {
+  return (
+    <m.button
+      type={type}
+      aria-label={ariaLabel}
+      onClick={onClick}
+      whileHover={{ y: -3, rotate: -0.8 }}
+      whileTap={{ scale: 0.94, y: 1 }}
+      transition={{ type: "spring", stiffness: 420, damping: 15 }}
+      className={`sticker inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale))] font-semibold text-ink select-none ${className ?? ""}`}
+    >
+      {children}
+    </m.button>
+  ); }
+
+/* the sticker card — the same cut-paper recipe as a resting div.
+   tilt gives it a hand-placed angle; pop makes it answer hover.
+   Pure CSS below the fold, so long pages stay cheap. */
+export function StickerCard({
+  children,
+  className,
+  tilt = 0,
+  pop = false,
+  as = "div",
+  onClick,
+  ariaLabel,
+}: {
+  children: ReactNode;
+  className?: string;
+  tilt?: number;
+  pop?: boolean;
+  as?: "div" | "button";
+  onClick?: () => void;
+  ariaLabel?: string;
+}) {
+  const cls = `sticker ${pop ? "sticker-pop cursor-pointer" : ""} rounded-[calc(24px*var(--ui-scale))] bg-paper ${className ?? ""}`;
+  const style = tilt ? { transform: `rotate(${tilt}deg)` } : undefined;
+  return as === "button" ? (
+    <button type="button" onClick={onClick} aria-label={ariaLabel} className={cls} style={style}>
+      {children}
+    </button>
+  ) : (
+    <div className={cls} style={style}>
+      {children}
+    </div>
   );
 }
 
@@ -273,7 +337,12 @@ export function SectionTag({
   return (
     <span
       className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.16em] uppercase select-none"
-      style={{ background: main, color: readableInk(main), transform: `rotate(${tilt}deg)` }}
+      style={{
+        background: main,
+        color: readableInk(main),
+        transform: `rotate(${tilt}deg)`,
+        boxShadow: `0 3px 0 ${shade(main)}`,
+      }}
     >
       {children}
     </span>
@@ -458,6 +527,36 @@ export function DoodleMolecule({ className }: { className?: string }) {
   );
 }
 
+export function DoodleFlask({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden className={className} fill="none" stroke="currentColor">
+      <path
+        d="M26 8h12M28 8v14L15.5 46a5 5 0 0 0 4.5 7.5h24A5 5 0 0 0 48.5 46L36 22V8"
+        strokeWidth="3.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M21 40h22" strokeWidth="3" strokeLinecap="round" opacity=".45" />
+      <circle cx="28" cy="47" r="2.4" fill="currentColor" stroke="none" opacity=".6" />
+      <circle cx="37" cy="50" r="1.8" fill="currentColor" stroke="none" opacity=".45" />
+    </svg>
+  );
+}
+
+export function DoodleTube({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 40 64" aria-hidden className={className} fill="none" stroke="currentColor">
+      <path
+        d="M13 6h14M16 6v40a4.5 4.5 0 0 0 9 0V6"
+        strokeWidth="3.2"
+        strokeLinecap="round"
+      />
+      <path d="M16 34h9" strokeWidth="2.6" strokeLinecap="round" opacity=".5" />
+      <circle cx="20.5" cy="44" r="2" fill="currentColor" stroke="none" opacity=".55" />
+    </svg>
+  );
+}
+
 export function Squiggle({
   color = "#FF6B6B",
   className,
@@ -489,7 +588,7 @@ export function Mascot({
   bubbles = true,
 }: {
   main?: string;
-  mood?: "idle" | "cheer";
+  mood?: "idle" | "cheer" | "wow";
   size?: number;
   className?: string;
   boop?: boolean;
@@ -595,6 +694,29 @@ export function Mascot({
             strokeLinecap="round"
             fill="none"
           />
+        </g>
+      ) : mood === "wow" ? (
+        <g>
+          {/* raised brows + big eyes + a round "ooh" mouth */}
+          <path
+            d="M85 82 Q 92 77, 99 82"
+            stroke="#3D2B1F"
+            strokeWidth="5"
+            strokeLinecap="round"
+            fill="none"
+          />
+          <path
+            d="M121 82 Q 128 77, 135 82"
+            stroke="#3D2B1F"
+            strokeWidth="5"
+            strokeLinecap="round"
+            fill="none"
+          />
+          <circle cx="92" cy="94" r="8" fill="#3D2B1F" />
+          <circle cx="128" cy="94" r="8" fill="#3D2B1F" />
+          <circle cx="94.8" cy="91.2" r="2.8" fill="#FFFFFF" />
+          <circle cx="130.8" cy="91.2" r="2.8" fill="#FFFFFF" />
+          <ellipse cx="110" cy="112" rx="7" ry="9" fill="#3D2B1F" />
         </g>
       ) : (
         <g>
@@ -730,14 +852,16 @@ export function Confetti({
   }, [fire]);
 
   const pieces = useMemo(() => {
-    return Array.from({ length: 26 }, (_, i) => {
-      const angle = (i / 26) * Math.PI * 2 + Math.random() * 0.6;
-      const dist = 70 + Math.random() * 100;
+    return Array.from({ length: 34 }, (_, i) => {
+      const angle = (i / 34) * Math.PI * 2 + Math.random() * 0.6;
+      const dist = 70 + Math.random() * 110;
       return {
         x: Math.cos(angle) * dist,
-        y: Math.sin(angle) * dist - 44,
+        y: Math.sin(angle) * dist - 48,
         size: 7 + Math.random() * 9,
         color: palette[i % palette.length],
+        /* one in four pieces is a little star */
+        star: i % 4 === 3,
         round: Math.random() > 0.35,
         rot: Math.random() * 280 - 140,
       };
@@ -758,13 +882,23 @@ export function Confetti({
               style={{
                 width: p.size,
                 height: p.size,
-                background: p.color,
+                color: p.color,
+                background: p.star ? "transparent" : p.color,
                 borderRadius: p.round ? "999px" : "5px",
               }}
               initial={{ x: 0, y: 0, opacity: 1, scale: 0.4, rotate: 0 }}
               animate={{ x: p.x, y: p.y, opacity: 0, scale: 1.1, rotate: p.rot }}
               transition={{ duration: 0.95, ease: [0.16, 0.84, 0.44, 1] }}
-            />
+            >
+              {p.star && (
+                <svg viewBox="0 0 48 48" width="100%" height="100%">
+                  <path
+                    d="M24 2c2.2 10.8 6 18.6 22 22-16 3.4-19.8 11.2-22 22-2.2-10.8-6-18.6-22-22 16-3.4 19.8-11.2 22-22z"
+                    fill="currentColor"
+                  />
+                </svg>
+              )}
+            </m.span>
           ))}
         </span>
       )}

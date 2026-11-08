@@ -124,7 +124,10 @@ export interface Prefs {
 }
 
 export const DEFAULT_PREFS: Prefs = {
-  theme: "classic",
+  /* v2 of the rooms lands new visitors in the daylight lab — the
+     sunny candy walk is the site's front door. Anyone who has picked
+     a lab keeps theirs; this is only the factory setting. */
+  theme: "light",
   iface: "rooms",
   accents: [...ACCENT_IDS],
   /* the scale default is Medium here; load() lifts a FIRST RUN on a

@@ -8,10 +8,10 @@ import { toggleRevised, useRevised } from "@/lib/spectra/progress";
 import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { TopicBlocks } from "./blocks";
 import { Fmt } from "./format";
-import { accentOf } from "./bands";
 import {
   Chip,
   Confetti,
+  Mascot,
   PopIn,
   Reveal,
   SoftButton,
@@ -21,7 +21,10 @@ import {
 } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
-   IAL CHEM · topic reader — one stop on the trail
+   IAL CHEM · topic reader — one stop on the trail, v2
+   Same trail etiquette, sticker dress: candy chips, a sticker
+   note-CTA, and Bubbles above the revised button — idle until you
+   mark it done, then cheering with confetti.
    ═══════════════════════════════════════════════════════════════ */
 
 export function TopicView({
@@ -53,7 +56,8 @@ export function TopicView({
   const idx = unit.topics.findIndex((t) => t.id === topic.id);
   const prev = idx > 0 ? unit.topics[idx - 1] : undefined;
   const next = idx < unit.topics.length - 1 ? unit.topics[idx + 1] : undefined;
-  const main = accentOf(0);
+  /* the topic wears its unit's candy — the code-to-colour pairing */
+  const main = unit.candy.main;
 
   const collect = () => {
     if (!isRevised) setFire((f) => f + 1);
@@ -116,11 +120,14 @@ export function TopicView({
             onClick={onOpenNotes}
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.97 }}
-            className="group flex w-full cursor-pointer items-center gap-4 rounded-[calc(22px*var(--ui-scale))] border border-ink/[0.08] bg-paper p-5 text-left puff sm:p-6"
+            className="sticker group flex w-full cursor-pointer items-center gap-4 rounded-[calc(22px*var(--ui-scale))] bg-paper p-5 text-left sm:p-6"
             style={{ borderLeft: `4px solid ${main}` }}
           >
-            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-[calc(20px*var(--ui-scale))] bg-ink/[0.06]">
-              <BookOpen className="h-7 w-7" style={{ color: main }} strokeWidth={2.2} />
+            <span
+              className="grid h-14 w-14 shrink-0 place-items-center rounded-[calc(20px*var(--ui-scale))] text-white"
+              style={{ background: main, boxShadow: `0 3px 0 ${shade(main)}` }}
+            >
+              <BookOpen className="h-7 w-7" strokeWidth={2.2} />
             </span>
             <span className="min-w-0 flex-1">
               <span className="block font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
@@ -148,6 +155,11 @@ export function TopicView({
       <Reveal className="relative mt-14 flex justify-center">
         <div className="relative">
           <Confetti fire={fire} />
+          <div className="mb-3 flex justify-center">
+            <div className="bobble">
+              <Mascot main={main} mood={isRevised ? "cheer" : "idle"} size={96} />
+            </div>
+          </div>
           <m.button
             type="button"
             onClick={collect}
@@ -161,12 +173,12 @@ export function TopicView({
                 ? {
                     background: main,
                     color: readableInk(main),
-                    boxShadow: `0 3px 0 ${shade(main)}`,
+                    boxShadow: `0 4px 0 ${shade(main)}`,
                   }
                 : {
                     background: "var(--color-paper)",
                     color: "var(--color-ink)",
-                    boxShadow: "0 3px 0 color-mix(in oklab, var(--color-ink) 10%, transparent)",
+                    boxShadow: "0 4px 0 color-mix(in oklab, var(--color-ink) 12%, transparent)",
                   }
             }
           >
@@ -200,7 +212,7 @@ export function TopicView({
             onClick={() => onOpenTopic(prev.id)}
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.97 }}
-            className="flex cursor-pointer items-center gap-3 rounded-full bg-paper px-5 py-4 text-left puff"
+            className="sticker flex cursor-pointer items-center gap-3 rounded-full bg-paper px-5 py-4 text-left"
           >
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink/5 text-ink-soft">
               <ArrowLeft className="h-4.5 w-4.5" strokeWidth={2.5} />
@@ -223,7 +235,7 @@ export function TopicView({
             onClick={() => onOpenTopic(next.id)}
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.97 }}
-            className="flex cursor-pointer items-center justify-end gap-3 rounded-full border border-ink/[0.08] bg-paper px-5 py-4 text-right text-ink puff sm:col-start-2"
+            className="sticker flex cursor-pointer items-center justify-end gap-3 rounded-full bg-paper px-5 py-4 text-right text-ink sm:col-start-2"
           >
             <span className="min-w-0">
               <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-ink-faint uppercase">
@@ -243,7 +255,7 @@ export function TopicView({
             onClick={onBack}
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.97 }}
-            className="flex cursor-pointer items-center justify-end gap-3 rounded-full border border-ink/[0.08] bg-paper px-5 py-4 text-right text-ink puff sm:col-start-2"
+            className="sticker flex cursor-pointer items-center justify-end gap-3 rounded-full bg-paper px-5 py-4 text-right text-ink sm:col-start-2"
           >
             <span className="min-w-0">
               <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-ink-faint uppercase">

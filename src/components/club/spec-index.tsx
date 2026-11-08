@@ -83,8 +83,8 @@ export function SpecIndex({
 
       <PopIn delay={0.05} className="mt-7">
         <span
-          className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
-          style={{ background: "#FFD43B", color: readableInk("#FFD43B") }}
+          className="inline-flex -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
+          style={{ background: "#FFD43B", color: readableInk("#FFD43B"), boxShadow: "0 3px 0 #D4990A" }}
         >
           <Target className="h-3.5 w-3.5" /> Spec index
         </span>
@@ -115,7 +115,7 @@ export function SpecIndex({
       {/* ————— your pack strip ————— */}
       <Reveal delay={0.16} className="mt-6">
         <div
-          className="flex flex-col gap-3.5 rounded-[calc(26px*var(--ui-scale))] px-5 py-4 puff sm:flex-row sm:items-center"
+          className="sticker tape relative flex rotate-[0.4deg] flex-col gap-3.5 rounded-[calc(26px*var(--ui-scale))] px-5 py-4 sm:flex-row sm:items-center"
           style={{ background: honeyWash("#FFD43B", 16) }}
         >
           <div className="flex min-w-0 items-center gap-3">
@@ -154,7 +154,7 @@ export function SpecIndex({
 
       {/* ————— search + filters ————— */}
       <Reveal delay={0.2} className="mt-6">
-        <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-4 puff sm:p-5">
+        <div className="sticker rounded-[calc(26px*var(--ui-scale))] bg-paper p-4 sm:p-5">
           <label className="flex h-11 items-center gap-2.5 rounded-full bg-ink/[0.05] px-4 focus-within:bg-ink/[0.08]">
             <Search className="h-4.5 w-4.5 shrink-0 text-ink-faint" />
             <input
@@ -277,7 +277,7 @@ function TopicGroup({
 
   return (
     <Reveal delay={Math.min(index * 0.03, 0.1)} className="mt-8">
-      <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-4 puff sm:p-6">
+      <div className="sticker rounded-[calc(26px*var(--ui-scale))] bg-paper p-4 sm:p-6">
         {/* topic header */}
         <div className="flex flex-wrap items-center gap-3">
           <span

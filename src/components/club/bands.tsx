@@ -11,7 +11,7 @@ import { m, type HTMLMotionProps, type Variants } from "framer-motion";
 import { Footprints } from "./icons";
 import type { SpecSection } from "@/lib/spectra/notes-types";
 import { readableInk, shade } from "./bits";
-import { ACCENTS, currentLab } from "@/lib/spectra/prefs";
+import { ACCENTS, ACCENT_IDS, currentAccents, currentLab } from "@/lib/spectra/prefs";
 
 /* the full candy wheel, hue-wheel order: red → orange → sun →
    green → purple → amber, so adjacent bands always differ. This is
@@ -72,17 +72,25 @@ export const inkMix = (main: string, pct = 45) =>
 
 /* band helpers — pure, so the in-page contents card and the Spec
    Map window dress their chips with the exact same colours */
-/* Rooms keep a restrained accent system. Dune is the exception:
-   warm cream and muted sea-glass alternate through its note details.
-   The wider app retains its own configurable accent wheel. */
-const DUNE_ACCENTS = ["#FDF6E3", "#9DB9B0"] as const;
-export const accentOf = (i: number) =>
-  currentLab() === "dune" ? DUNE_ACCENTS[i % DUNE_ACCENTS.length] : "#B8874B";
-/* bands mix their candy over --tint-base at --band-mix (10% by day)
-   — the daylight walk of the hue wheel. After dark both steps are
-   overridden by --note-band-a/b (see html.dark in globals.css):
-   two flat night grounds a half-step apart (plum → indigo), so
-   every section keeps the study contrast while the hue leans. */
+/* Rooms v2 brings the candy wheel back: every section borrows the
+   next colour on the user's shelf (the customize panel's picks,
+   full shelf by default), so a note is a walk around the hue wheel
+   and no two neighbours ever dress alike. Dune keeps its scoped
+   sand/sea-glass pair, and the mineral amber stays the chrome
+   accent wherever a page wants one fixed brand tone. */
+const DUNE_ACCENTS = ["#EFC98A", "#9DB9B0"] as const;
+export const wheelAccentOf = (i: number) => {
+  if (currentLab() === "dune") return DUNE_ACCENTS[i % DUNE_ACCENTS.length];
+  const selected = currentAccents();
+  const id = selected[i % selected.length] ?? ACCENT_IDS[0];
+  return ACCENTS.find((a) => a.id === id)?.hex ?? ACCENTS[0].hex;
+};
+export const accentOf = (i: number) => wheelAccentOf(i);
+/* bands mix their candy over --tint-base at --band-mix (18% by day
+   in v2 — the daylight walk of the hue wheel. After dark both steps
+   are overridden by --note-band-a/b (see html.dark in globals.css):
+   two flat night grounds a half-step apart, so every section keeps
+   the study contrast while the hue leans. */
 export const bandOf = (i: number) =>
   `color-mix(in oklab, ${accentOf(i)} var(--band-mix, 10%), var(--tint-base))`;
 export const bgOf = (i: number) =>
@@ -97,19 +105,21 @@ export const homeBandOf = (_pos: number) =>
 
 /* stagger choreography for the Spec Map window's chips */
 export const chipV: Variants = {
-  hidden: { opacity: 0, scale: 0.8, y: 10 },
+  hidden: { opacity: 0, scale: 0.7, y: 14, rotate: -4 },
   show: {
     opacity: 1,
     scale: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 380, damping: 22 },
+    rotate: 0,
+    transition: { type: "spring", stiffness: 460, damping: 17 },
   },
 };
 
 /* one spec chip — shared by the note's own contents card and the
    floating Spec Map window, so both wear the exact same colours:
-   band-tinted by default, candy-splashed + footprints when it's
-   the section you're standing in */
+   band-tinted stickers at rest (each tilted like a hand-placed
+   note), candy-splashed + footprints when it's the section you're
+   standing in */
 export function SpecChip({
   s,
   i,
@@ -117,23 +127,30 @@ export function SpecChip({
   ...rest
 }: { s: SpecSection; i: number; here: boolean } & HTMLMotionProps<"button">) {
   const accent = accentOf(i);
+  const restTilt = i % 2 === 0 ? -0.7 : 0.7;
   return (
     <m.button
       type="button"
       data-here={here ? "1" : undefined}
       aria-current={here ? "true" : undefined}
-      whileHover={{ y: -2 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ y: -3, rotate: 0 }}
+      whileTap={{ scale: 0.93 }}
+      transition={{ type: "spring", stiffness: 420, damping: 15 }}
       className="flex cursor-pointer items-center gap-2 rounded-[calc(18px*var(--ui-scale))] px-3 py-2.5 text-left"
       style={
         here
           ? {
               background: accent,
               color: readableInk(accent),
-              boxShadow: `0 3px 0 ${shade(accent)}`,
-              rotate: "-1deg",
+              boxShadow: `0 4px 0 ${shade(accent)}`,
+              rotate: "-1.5deg",
             }
-          : { background: bgOf(i), boxShadow: "0 2px 0 var(--edge)" }
+          : {
+              background: bgOf(i),
+              boxShadow: "0 3px 0 var(--edge)",
+              border: "2px solid color-mix(in oklab, var(--color-ink) 9%, transparent)",
+              rotate: `${restTilt}deg`,
+            }
       }
       {...rest}
     >

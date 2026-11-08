@@ -26,17 +26,28 @@ import {
 import { findTopic, pickSuggestion } from "@/lib/spectra/suggest";
 import { streakOf } from "@/lib/spectra/progress-derive";
 import type { DeskState } from "@/lib/spectra/desk";
-import { BeakerMeter, CandyButton, readableInk, SectionTag, shade, tint } from "./bits";
+import {
+  BeakerMeter,
+  CandyButton,
+  Mascot,
+  PopIn,
+  readableInk,
+  Reveal,
+  SectionTag,
+  SpeechBubble,
+  tint,
+  shade,
+} from "./bits";
 import { BandWave } from "./bands";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the desk — the homepage for members (no account,
-   just a flag in the browser). Where the introduction sells the
-   club, the desk assumes you're in: your last topic up front, your
-   week at a glance, and every topic of the course one quiet tap
-   away — rows, not brochures. Nothing here animates: a returning
-   visitor wants the bench, not a show. Paints once, answers with
-   CSS hovers, saves every tap.
+   just a flag in the browser). v2 gives the bench its sticker
+   dress: Bubbles greets you by the continue card, the week card
+   is a pinned sticky, and every topic row carries its candy
+   number dot. The desk still paints once and answers with CSS —
+   a returning visitor wants the bench, not a show — but now the
+   bench itself is made of candy.
    ═══════════════════════════════════════════════════════════════ */
 
 /** the streak maths lives in progress-derive.ts — shared with the
@@ -95,124 +106,146 @@ export function Desk({
         <div className="mx-auto grid max-w-6xl items-start gap-8 px-5 pb-12 pt-2 sm:px-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] lg:gap-6">
           {/* left: greeting + the continue card */}
           <div>
-            <SectionTag main="#12B886" tilt={-1.5}>
-              welcome back{todayLine ? ` · ${todayLine}` : ""}
-            </SectionTag>
-            <h1 className="mt-5 font-display text-[calc(clamp(2.1rem,4.5vw,3.1rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.08] font-semibold tracking-tight text-ink">
-              Back to{" "}
-              <span className="hero-glow relative inline-block -rotate-2 rounded-[0.35em] px-[0.18em]">
-                the bench.
-              </span>
-            </h1>
+            <PopIn>
+              <SectionTag main="#12B886" tilt={-1.5}>
+                welcome back{todayLine ? ` · ${todayLine}` : ""}
+              </SectionTag>
+            </PopIn>
+            <PopIn delay={0.06}>
+              <h1 className="mt-5 font-display text-[calc(clamp(2.1rem,4.5vw,3.1rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.08] font-semibold tracking-tight text-ink">
+                Back to{" "}
+                <span className="hero-glow relative inline-block -rotate-2 rounded-[0.35em] px-[0.18em]">
+                  the bench.
+                </span>
+              </h1>
+            </PopIn>
 
             {lead && (
-              <div className="mt-7 rounded-[calc(26px*var(--ui-scale))] border border-ink/[0.06] bg-cream p-5 sm:p-6">
-                <div className="text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.18em] text-ink-faint uppercase">
-                  {leadTag}
-                </div>
-                <div className="mt-2.5 flex items-center gap-2.5">
-                  <span
-                    className="h-2.5 w-2.5 shrink-0 rounded-full"
-                    style={{ background: lead.unit.candy.main }}
-                  />
-                  <h2 className="font-display text-[calc(18px*var(--ui-scale))] leading-snug font-semibold text-ink sm:text-[calc(20px*var(--ui-scale))]">
-                    {lead.topic.label} · {lead.topic.title}
-                  </h2>
-                </div>
-                <p className="mt-2 text-[calc(13.5px*var(--ui-scale))] leading-relaxed text-ink-soft">
-                  {last && !lastDone
-                    ? topicSeconds(time, lastKey as string) > 0
-                      ? `You've spent ${fmtClock(topicSeconds(time, lastKey as string))} here — the full read is about ${lead.topic.minutes} min.`
-                      : `Fresh read — about ${lead.topic.minutes} min all in.`
-                    : suggestion
-                      ? `${suggestion.reason} — about ${lead.topic.minutes} min of reading.`
-                      : ""}
-                </p>
-                <div className="mt-4 flex flex-wrap items-center gap-3">
-                  <CandyButton
-                    main={lead.unit.candy.main}
-                    onClick={() => onOpenTopic(lead.unit.code, lead.topic.id)}
-                  >
-                    {last && !lastDone ? "Resume reading" : "Start reading"}{" "}
-                    <MoveRight className="h-5 w-5" />
-                  </CandyButton>
-                  {last && !lastDone && suggestion && suggestion.key !== lastKey && (
-                    <button
-                      type="button"
-                      onClick={() => onOpenTopic(suggestion.unit.code, suggestion.topic.id)}
-                      className="inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink-soft transition-colors hover:text-ink"
+              <PopIn delay={0.12}>
+                <div
+                  className="sticker relative mt-7 rounded-[calc(26px*var(--ui-scale))] p-5 sm:p-6"
+                  style={{ background: tint(lead.unit.candy.main, 9) }}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="bobble shrink-0">
+                      <Mascot main={lead.unit.candy.main} size={86} bubbles={false} />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.18em] text-ink-faint uppercase">
+                        {leadTag}
+                      </div>
+                      <div className="mt-2.5 flex items-center gap-2.5">
+                        <span
+                          className="h-2.5 w-2.5 shrink-0 rounded-full"
+                          style={{ background: lead.unit.candy.main }}
+                        />
+                        <h2 className="font-display text-[calc(18px*var(--ui-scale))] leading-snug font-semibold text-ink sm:text-[calc(20px*var(--ui-scale))]">
+                          {lead.topic.label} · {lead.topic.title}
+                        </h2>
+                      </div>
+                      <p className="mt-2 text-[calc(13.5px*var(--ui-scale))] leading-relaxed text-ink-soft">
+                        {last && !lastDone
+                          ? topicSeconds(time, lastKey as string) > 0
+                            ? `You've spent ${fmtClock(topicSeconds(time, lastKey as string))} here — the full read is about ${lead.topic.minutes} min.`
+                            : `Fresh read — about ${lead.topic.minutes} min all in.`
+                          : suggestion
+                            ? `${suggestion.reason} — about ${lead.topic.minutes} min of reading.`
+                            : ""}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex flex-wrap items-center gap-3">
+                    <CandyButton
+                      main={lead.unit.candy.main}
+                      onClick={() => onOpenTopic(lead.unit.code, lead.topic.id)}
                     >
-                      instead: {suggestion.topic.label} — {suggestion.topic.title}
-                      <MoveRight className="h-4 w-4" />
-                    </button>
-                  )}
+                      {last && !lastDone ? "Resume reading" : "Start reading"}{" "}
+                      <MoveRight className="h-5 w-5" />
+                    </CandyButton>
+                    {last && !lastDone && suggestion && suggestion.key !== lastKey && (
+                      <button
+                        type="button"
+                        onClick={() => onOpenTopic(suggestion.unit.code, suggestion.topic.id)}
+                        className="inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink-soft transition-colors hover:text-ink"
+                      >
+                        instead: {suggestion.topic.label} — {suggestion.topic.title}
+                        <MoveRight className="h-4 w-4" />
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </PopIn>
             )}
           </div>
 
-          {/* right: the week at a glance */}
-          <div className="rounded-[calc(26px*var(--ui-scale))] border border-ink/[0.06] bg-cream p-5 sm:p-6">
-            <div className="flex items-center justify-between gap-2">
-              <div className="text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.18em] text-ink-faint uppercase">
-                your week
+          {/* right: the week at a glance — a pinned sticky note */}
+          <PopIn delay={0.1}>
+            <div className="sticker relative mt-2 rotate-[0.6deg] rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 sm:p-6">
+              <div className="flex items-center justify-between gap-2">
+                <div className="text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.18em] text-ink-faint uppercase">
+                  your week
+                </div>
+                {streak >= 2 && (
+                  <span className="sticker inline-flex items-center gap-1.5 rounded-full bg-coral/15 px-2.5 py-1 text-[calc(11px*var(--ui-scale))] font-extrabold text-coral">
+                    <Footprints className="h-3.5 w-3.5" strokeWidth={2.4} />
+                    {streak}-day streak
+                  </span>
+                )}
               </div>
-              {streak >= 2 && (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-coral/15 px-2.5 py-1 text-[calc(11px*var(--ui-scale))] font-extrabold text-coral">
-                  <Footprints className="h-3.5 w-3.5" strokeWidth={2.4} />
-                  {streak}-day streak
-                </span>
-              )}
-            </div>
 
-            <div className="mt-4 flex items-center gap-5">
-              <BeakerMeter pct={goalPct} main="#12B886" size={62} />
-              <div className="min-w-0">
-                <div className="font-display text-[calc(19px*var(--ui-scale))] leading-tight font-bold text-ink">
-                  {fmtClock(week)}
-                </div>
-                <div className="mt-0.5 text-[calc(12px*var(--ui-scale))] font-semibold text-ink-soft">
-                  of your {Math.round(time.goalMin / 60)} h weekly goal
-                </div>
-                <div className="mt-1 text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-faint">
-                  {today > 0 ? `${fmtClock(today)} today` : "today's clock is still at zero"}
+              <div className="mt-4 flex items-center gap-5">
+                <BeakerMeter pct={goalPct} main="#12B886" size={62} />
+                <div className="min-w-0">
+                  <div className="font-display text-[calc(19px*var(--ui-scale))] leading-tight font-bold text-ink">
+                    {fmtClock(week)}
+                  </div>
+                  <div className="mt-0.5 text-[calc(12px*var(--ui-scale))] font-semibold text-ink-soft">
+                    of your {Math.round(time.goalMin / 60)} h weekly goal
+                  </div>
+                  <div className="mt-1 text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-faint">
+                    {today > 0 ? `${fmtClock(today)} today` : "today's clock is still at zero"}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="mt-5 grid grid-cols-2 gap-2 border-t border-ink/[0.08] pt-4">
-              <button
-                type="button"
-                onClick={onOpenSticker}
-                className="flex cursor-pointer items-center gap-2.5 rounded-2xl px-2 py-2 text-left transition-colors hover:bg-ink/[0.035]"
-              >
-                <Check className="h-4 w-4 shrink-0 text-mint" strokeWidth={3} />
-                <span className="min-w-0">
-                  <span className="block font-display text-[calc(14.5px*var(--ui-scale))] leading-none font-bold text-ink">
-                    {revised.length}/{TOTALS.topics}
+              <div className="mt-5 grid grid-cols-2 gap-2 border-t-2 border-dashed border-ink/[0.09] pt-4">
+                <button
+                  type="button"
+                  onClick={onOpenSticker}
+                  className="flex cursor-pointer items-center gap-2.5 rounded-2xl px-2 py-2 text-left transition-colors hover:bg-ink/[0.035]"
+                >
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-mint/15">
+                    <Check className="h-4 w-4 text-mint" strokeWidth={3} />
                   </span>
-                  <span className="mt-1 block text-[calc(10.5px*var(--ui-scale))] font-bold text-ink-faint uppercase tracking-[0.08em]">
-                    revised
+                  <span className="min-w-0">
+                    <span className="block font-display text-[calc(14.5px*var(--ui-scale))] leading-none font-bold text-ink">
+                      {revised.length}/{TOTALS.topics}
+                    </span>
+                    <span className="mt-1 block text-[calc(10.5px*var(--ui-scale))] font-bold text-ink-faint uppercase tracking-[0.08em]">
+                      revised
+                    </span>
                   </span>
-                </span>
-              </button>
-              <button
-                type="button"
-                onClick={onOpenPack}
-                className="flex cursor-pointer items-center gap-2.5 rounded-2xl px-2 py-2 text-left transition-colors hover:bg-ink/[0.035]"
-              >
-                <ClipboardList className="h-4 w-4 shrink-0 text-lemon" strokeWidth={2.4} />
-                <span className="min-w-0">
-                  <span className="block font-display text-[calc(14.5px*var(--ui-scale))] leading-none font-bold text-ink">
-                    {picks.length}
+                </button>
+                <button
+                  type="button"
+                  onClick={onOpenPack}
+                  className="flex cursor-pointer items-center gap-2.5 rounded-2xl px-2 py-2 text-left transition-colors hover:bg-ink/[0.035]"
+                >
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-lemon/20">
+                    <ClipboardList className="h-4 w-4 text-lemon" strokeWidth={2.4} />
                   </span>
-                  <span className="mt-1 block text-[calc(10.5px*var(--ui-scale))] font-bold text-ink-faint uppercase tracking-[0.08em]">
-                    points ticked
+                  <span className="min-w-0">
+                    <span className="block font-display text-[calc(14.5px*var(--ui-scale))] leading-none font-bold text-ink">
+                      {picks.length}
+                    </span>
+                    <span className="mt-1 block text-[calc(10.5px*var(--ui-scale))] font-bold text-ink-faint uppercase tracking-[0.08em]">
+                      points ticked
+                    </span>
                   </span>
-                </span>
-              </button>
+                </button>
+              </div>
             </div>
-          </div>
+          </PopIn>
         </div>
       </section>
 
@@ -233,7 +266,7 @@ export function Desk({
             {units.map((u) => {
               const done = revised.filter((k) => k.startsWith(`${u.code}/`)).length;
               return (
-                <div key={u.code} className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-3 puff sm:p-4">
+                <div key={u.code} className="sticker rounded-[calc(26px*var(--ui-scale))] bg-paper p-3 sm:p-4">
                   {/* unit header */}
                   <button
                     type="button"
@@ -243,14 +276,18 @@ export function Desk({
                   >
                     <span
                       className="grid h-10 w-10 shrink-0 place-items-center rounded-[calc(14px*var(--ui-scale))] font-display text-[calc(17px*var(--ui-scale))] font-bold"
-                      style={{ background: tint(u.candy.main, 15), color: shade(u.candy.main, 62) }}
+                      style={{
+                        background: u.candy.main,
+                        color: readableInk(u.candy.main),
+                        boxShadow: `0 2px 0 ${shade(u.candy.main)}`,
+                      }}
                     >
                       {u.index}
                     </span>
                     <span className="min-w-0 flex-1">
                       <span
                         className="block font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.14em]"
-                        style={{ color: u.candy.main }}
+                        style={{ color: shade(u.candy.main, 68) }}
                       >
                         {u.code}
                       </span>
@@ -284,8 +321,11 @@ export function Desk({
                           className={`group flex cursor-pointer items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-ink/[0.035] ${i > 0 ? "border-t border-ink/[0.06]" : ""}`}
                         >
                           <span
-                            className="w-7 shrink-0 text-center font-display text-[calc(14px*var(--ui-scale))] font-bold"
-                            style={{ color: u.candy.main }}
+                            className="grid h-7 w-7 shrink-0 place-items-center rounded-full font-display text-[calc(12.5px*var(--ui-scale))] font-bold"
+                            style={{
+                              background: tint(u.candy.main, 16),
+                              color: shade(u.candy.main, 62),
+                            }}
                           >
                             {t.no}
                           </span>
@@ -357,12 +397,13 @@ export function Desk({
                   open: onOpenSticker,
                 },
               ] as const
-            ).map((tool) => (
+            ).map((tool, i) => (
               <button
                 key={tool.label}
                 type="button"
                 onClick={tool.open}
-                className="flex cursor-pointer items-center gap-3.5 rounded-[calc(22px*var(--ui-scale))] border border-ink/[0.06] bg-cream px-4 py-4 text-left transition-transform duration-200 hover:-translate-y-0.5"
+                className="sticker sticker-pop flex cursor-pointer items-center gap-3.5 rounded-[calc(22px*var(--ui-scale))] bg-paper px-4 py-4 text-left"
+                style={{ transform: `rotate(${i % 2 ? 0.5 : -0.5}deg)` }}
               >
                 <span
                   className="grid h-11 w-11 shrink-0 place-items-center rounded-[calc(15px*var(--ui-scale))]"
@@ -388,16 +429,24 @@ export function Desk({
           </div>
 
           {/* the escape hatch back to the introduction */}
-          <p className="mt-10 text-center text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink-faint">
-            New here, or feeling nostalgic?{" "}
-            <button
-              type="button"
-              onClick={onShowLanding}
-              className="cursor-pointer font-bold text-ink-soft underline decoration-ink/20 underline-offset-4 transition-colors hover:text-ink"
-            >
-              Read the introduction
-            </button>
-          </p>
+          <Reveal className="mt-10">
+            <div className="mx-auto flex w-fit items-center gap-3">
+              <SpeechBubble bg="var(--color-cream)" tailClass="left-6 -top-[calc(7px*var(--ui-scale))] rotate-[225deg]">
+                <p className="text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink-soft">
+                  New here, or feeling nostalgic?
+                </p>
+              </SpeechBubble>
+            </div>
+            <p className="mt-4 text-center">
+              <button
+                type="button"
+                onClick={onShowLanding}
+                className="sticker sticker-pop inline-flex min-h-[calc(42px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full bg-paper px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink"
+              >
+                Read the introduction
+              </button>
+            </p>
+          </Reveal>
         </div>
       </section>
 

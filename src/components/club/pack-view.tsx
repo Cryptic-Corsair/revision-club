@@ -171,8 +171,8 @@ export function PackView({
 
         <PopIn delay={0.05} className="mt-6">
           <span
-            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
-            style={{ background: "#FFD43B", color: readableInk("#FFD43B") }}
+            className="inline-flex -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
+            style={{ background: "#FFD43B", color: readableInk("#FFD43B"), boxShadow: "0 3px 0 #D4990A" }}
           >
             <ClipboardList className="h-3.5 w-3.5" /> Your pack
           </span>
@@ -242,7 +242,7 @@ export function PackView({
 
         {/* ————— toolbar ————— */}
         <Reveal delay={0.18} className="no-print mt-5">
-          <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-2.5 puff sm:p-3.5">
+          <div className="sticker rounded-[calc(26px*var(--ui-scale))] bg-paper p-2.5 sm:p-3.5">
             {/* one steady line at every width — the same swipe the
                 picked strip uses above; nothing wraps, nothing
                 orphans, and the fade says there's more */}
@@ -452,10 +452,11 @@ function TopicBanner({
   return (
     <div className="no-print mb-8">
       <div
-        className="inline-flex max-w-full items-center gap-2.5 rounded-full py-2 pr-4 pl-2.5"
+        className="inline-flex max-w-full -rotate-1 items-center gap-2.5 rounded-full py-2 pr-4 pl-2.5"
         style={{
           background: g.candy,
           color: readableInk(g.candy),
+          boxShadow: `0 3px 0 ${shade(g.candy)}`,
         }}
       >
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/25 font-display text-[calc(11px*var(--ui-scale))] font-bold">

@@ -40,6 +40,7 @@ import {
 import { Home } from "./home";
 import { Desk } from "./desk";
 import { UnitView } from "./unit-view";
+import { Mascot } from "./bits";
 import { SpecMapProvider, SpecMapTrigger } from "./spec-map";
 
 const BUILD_VERSION = (process.env.NEXT_PUBLIC_BUILD_VERSION ?? "local").slice(0, 7);
@@ -518,7 +519,7 @@ function TopBar({
                           type="button"
                           aria-pressed={selected}
                           onClick={() => chooseTheme(option)}
-                          className={`group relative flex min-w-0 cursor-pointer flex-col overflow-hidden rounded-[19px] p-2.5 text-left transition-all hover:-translate-y-0.5 ${selected ? "ring-2 ring-mint ring-offset-2 ring-offset-[var(--color-paper)]" : "hover:bg-ink/[0.045]"}`}
+                          className={`sticker group relative flex min-w-0 cursor-pointer flex-col overflow-hidden rounded-[19px] p-2.5 text-left transition-all hover:-translate-y-0.5 ${selected ? "ring-2 ring-mint ring-offset-2 ring-offset-[var(--color-paper)]" : "hover:bg-ink/[0.045]"}`}
                           style={{ background: selected ? "color-mix(in oklab, var(--color-mint) 9%, var(--color-paper))" : "color-mix(in oklab, var(--color-ink) 4%, var(--color-paper))" }}
                         >
                           <span
@@ -646,10 +647,10 @@ function Footer({
   ] as const;
 
   return (
-    <footer className="club-footer mt-auto">
+    <footer className="club-footer relative mt-auto">
       <div
         aria-hidden
-        className="club-footer-wave h-[calc(54px*var(--ui-scale))] sm:h-[calc(74px*var(--ui-scale))]"
+        className="club-footer-wave relative h-[calc(54px*var(--ui-scale))] sm:h-[calc(74px*var(--ui-scale))]"
         style={{ background: bandFrom }}
       >
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-full w-full">
@@ -659,6 +660,19 @@ function Footer({
           />
         </svg>
       </div>
+      {/* Bubbles, sitting on the crest of the footer wave — he watches
+          you pack up for the day. Anchored to the footer root (the
+          wave and body are isolated stacking contexts that would
+          otherwise paint over him); the waterline rides the wave
+          path's height at the right edge. Desktop only. */}
+      <span
+        aria-hidden
+        className="absolute right-[6%] top-[calc(30px*var(--ui-scale))] z-10 hidden -translate-y-1/2 lg:block"
+      >
+        <span className="bobble block">
+          <Mascot main="#FF6B6B" size={92} bubbles={false} />
+        </span>
+      </span>
 
       <div className="club-footer-body bg-cocoa text-milk">
         <div className="club-footer-container mx-auto max-w-6xl px-5 sm:px-8">
