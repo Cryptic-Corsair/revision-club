@@ -256,7 +256,7 @@ export function UnitView({
                 {next.code} · {next.shortTitle}
               </span>
             </span>
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/20">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink/[0.06] text-ink-soft">
               <ArrowRight className="h-4.5 w-4.5" strokeWidth={2.5} />
             </span>
           </m.button>
