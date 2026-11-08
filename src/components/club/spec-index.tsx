@@ -73,7 +73,7 @@ export function SpecIndex({
   ];
 
   return (
-    <div className="rooms-page rooms-spec-index-page mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] pb-24 sm:px-8">
+    <div className="mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] pb-24 sm:px-8">
       {/* ————— header ————— */}
       <PopIn>
         <SoftButton onClick={onHome} className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]" ariaLabel="Back home">
@@ -277,7 +277,7 @@ function TopicGroup({
 
   return (
     <Reveal delay={Math.min(index * 0.03, 0.1)} className="mt-8">
-      <div className="rooms-spec-group rounded-[calc(26px*var(--ui-scale))] bg-paper p-4 puff sm:p-6">
+      <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-4 puff sm:p-6">
         {/* topic header */}
         <div className="flex flex-wrap items-center gap-3">
           <span
@@ -344,7 +344,7 @@ function PointRow({
 
   return (
     <li
-      className="rooms-spec-point rounded-[calc(16px*var(--ui-scale))] transition-colors"
+      className="rounded-[calc(16px*var(--ui-scale))] transition-colors"
       style={{
         background: picked ? tint(p.candy, 12) : "var(--tint-base)",
         borderLeft: picked ? `3px solid ${p.candy}` : `3px solid transparent`,

@@ -46,7 +46,7 @@ export function UnitView({
   const main = accentOf(0);
 
   return (
-    <div className="rooms-page rooms-unit-page mx-auto max-w-5xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
+    <div className="mx-auto max-w-5xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
       {/* back */}
       <PopIn>
         <SoftButton onClick={onBack} className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]">
@@ -55,10 +55,10 @@ export function UnitView({
       </PopIn>
 
       {/* ————— header ————— */}
-      <header className="rooms-page-hero rooms-unit-hero mt-8">
-        <PopIn delay={0.05} className="rooms-meta-row flex flex-wrap items-center gap-3">
+      <header className="mt-8">
+        <PopIn delay={0.05} className="flex flex-wrap items-center gap-3">
           <span
-            className="rooms-unit-code inline-block rounded-[calc(14px*var(--ui-scale))] px-4 py-2 font-display text-[calc(17px*var(--ui-scale))] font-bold"
+            className="inline-block rounded-[calc(14px*var(--ui-scale))] px-4 py-2 font-display text-[calc(17px*var(--ui-scale))] font-bold"
             style={{ background: tint(main, 16), color: shade(main, 62) }}
           >
             {unit.code}
@@ -69,7 +69,7 @@ export function UnitView({
         </PopIn>
 
         <PopIn delay={0.1}>
-          <h1 className="rooms-page-title mt-6 font-display text-[calc(clamp(2rem,4.6vw,3.1rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.06] font-semibold tracking-tight text-ink">
+          <h1 className="mt-6 font-display text-[calc(clamp(2rem,4.6vw,3.1rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.06] font-semibold tracking-tight text-ink">
             {unit.title}
           </h1>
           <p className="mt-2 max-w-3xl text-[calc(16.5px*var(--ui-scale))] leading-snug font-semibold text-ink-soft">
@@ -77,11 +77,11 @@ export function UnitView({
           </p>
         </PopIn>
 
-        <PopIn delay={0.16} className="rooms-unit-intro mt-6 flex items-end gap-2 sm:gap-3">
-          <div className="rooms-mascot shrink-0 pb-1">
+        <PopIn delay={0.16} className="mt-6 flex items-end gap-2 sm:gap-3">
+          <div className="shrink-0 pb-1">
             <Mascot main={main} size={84} bubbles={false} />
           </div>
-          <SpeechBubble bg={tint(main, 8)} className="rooms-lede min-w-0 flex-1">
+          <SpeechBubble bg={tint(main, 8)} className="min-w-0 flex-1">
             <p className="text-[calc(15.5px*var(--ui-scale))] leading-[1.75] text-ink">
               <Fmt text={unit.blurb} />
             </p>
@@ -90,7 +90,7 @@ export function UnitView({
       </header>
 
       {/* ————— paper facts ————— */}
-      <PopIn delay={0.2} className="rooms-facts mt-8 flex flex-wrap gap-2.5">
+      <PopIn delay={0.2} className="mt-8 flex flex-wrap gap-2.5">
         {[
           { icon: Timer, label: unit.paper.duration },
           { icon: Target, label: `${unit.paper.marks} marks` },
@@ -99,7 +99,7 @@ export function UnitView({
         ].map((f) => (
           <span
             key={f.label}
-            className="rooms-fact inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2.5 text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink puff"
+            className="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2.5 text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink puff"
           >
             <f.icon className="h-4 w-4" style={{ color: main }} strokeWidth={2.5} />
             {f.label}
@@ -108,16 +108,16 @@ export function UnitView({
       </PopIn>
 
       {/* ————— progress ————— */}
-      <Reveal className="rooms-progress-slot mt-10">
+      <Reveal className="mt-10">
         <div
-          className="rooms-progress-card flex items-center gap-6 rounded-[calc(32px*var(--ui-scale))] p-6 sm:p-7"
+          className="flex items-center gap-6 rounded-[calc(32px*var(--ui-scale))] p-6 sm:p-7"
           style={{ background: tint(main, 10) }}
         >
           <div className="shrink-0">
             <BeakerMeter pct={pct} main={main} size={92} />
           </div>
           <div className="min-w-0">
-            <h3 className="rooms-card-title font-display text-[calc(21px*var(--ui-scale))] font-semibold text-ink">
+            <h3 className="font-display text-[calc(21px*var(--ui-scale))] font-semibold text-ink">
               Progress
             </h3>
             <p className="mt-1 text-[calc(14.5px*var(--ui-scale))] leading-relaxed text-ink-soft">
@@ -141,7 +141,7 @@ export function UnitView({
       </Reveal>
 
       {/* ————— topics ————— */}
-      <section className="rooms-topic-section mt-14">
+      <section className="mt-14">
         <Reveal>
           <SectionTag main={main} tilt={-2}>
             topics
@@ -153,21 +153,21 @@ export function UnitView({
           </h2>
         </Reveal>
 
-        <div className="rooms-topic-list relative">
+        <div className="relative">
           <div
             aria-hidden
-            className="rooms-topic-spine dot-line absolute top-2 bottom-6 left-[calc(23px*var(--ui-scale))] sm:left-[calc(27px*var(--ui-scale))]"
+            className="dot-line absolute top-2 bottom-6 left-[calc(23px*var(--ui-scale))] sm:left-[calc(27px*var(--ui-scale))]"
           />
           <div className="flex flex-col gap-6">
             {unit.topics.map((t, i) => {
               const isDone = revised.includes(`${unit.code}/${t.id}`);
               return (
                 <Reveal key={t.id} delay={Math.min(i * 0.05, 0.25)}>
-                  <div className="rooms-topic-row flex items-start gap-4 sm:gap-6">
+                  <div className="flex items-start gap-4 sm:gap-6">
                     {/* the trail stone — flat now, haloed by a ring of
                         its own colour instead of a pedestal */}
                     <m.span
-                      className="rooms-topic-marker z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full font-display text-[calc(16px*var(--ui-scale))] font-bold sm:h-14 sm:w-14 sm:text-[calc(18px*var(--ui-scale))]"
+                      className="z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full font-display text-[calc(16px*var(--ui-scale))] font-bold sm:h-14 sm:w-14 sm:text-[calc(18px*var(--ui-scale))]"
                       style={{
                         background: isDone ? "#12B886" : main,
                         color: readableInk(isDone ? "#12B886" : main),
@@ -184,7 +184,7 @@ export function UnitView({
                       whileHover={{ y: -4 }}
                       whileTap={{ scale: 0.98 }}
                       transition={{ type: "spring", stiffness: 300, damping: 18 }}
-                      className="rooms-topic-card group min-w-0 flex-1 cursor-pointer rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 text-left puff sm:p-6"
+                      className="group min-w-0 flex-1 cursor-pointer rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 text-left puff sm:p-6"
                     >
                       <div className="flex flex-wrap items-center gap-2">
                         <Chip main={main}>{t.label}</Chip>
@@ -216,7 +216,7 @@ export function UnitView({
       </section>
 
       {/* ————— prev / next ————— */}
-      <div className="rooms-pager mt-12 grid gap-4 sm:grid-cols-2">
+      <div className="mt-12 grid gap-4 sm:grid-cols-2">
         {prev ? (
           <m.button
             type="button"

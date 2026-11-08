@@ -178,14 +178,14 @@ export function SpecSectionView({
   bannerAction?: ReactNode;
 }) {
   return (
-    <div className="rooms-spec-section flex flex-col gap-7">
+    <div className="flex flex-col gap-7">
       {/* spec banner — the official wording, stated above the section.
           Tailored: the pill stands square (no tilt, no pedestal) and
           the rule beneath it thins to a whisper. */}
       <div>
-        <div className="rooms-spec-banner flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <span
-            className="rooms-spec-pill inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
             style={{
               background: accent,
               color: readableInk(accent),
@@ -195,17 +195,17 @@ export function SpecSectionView({
           </span>
           <span
             aria-hidden
-            className="rooms-spec-rule h-[calc(2px*var(--ui-scale))] flex-1 rounded-full"
+            className="h-[calc(2px*var(--ui-scale))] flex-1 rounded-full"
             style={{ background: tint(accent, 40) }}
           />
           {bannerAction}
         </div>
-        <h2 className="rooms-spec-title mt-3.5 font-display text-[calc(clamp(1.7rem,3.6vw,2.15rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
+        <h2 className="mt-3.5 font-display text-[calc(clamp(1.7rem,3.6vw,2.15rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
           {section.title}
         </h2>
         {!hideStatement && (
           <div
-            className="rooms-spec-statement mt-4 rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
+            className="mt-4 rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
             style={{
               borderLeft: `3px solid ${accent}`,
               boxShadow: "0 2px 0 var(--edge)",
@@ -219,7 +219,7 @@ export function SpecSectionView({
         )}
       </div>
 
-      <div className="rooms-spec-blocks flex flex-col gap-6">
+      <div className="flex flex-col gap-6">
         {section.blocks.map((b, i) => {
           /* A quiet typographic staircase: subheads step in once,
              their explanatory content steps in a little further.
@@ -233,7 +233,7 @@ export function SpecSectionView({
                 : "ml-5 sm:ml-9";
           return (
             <Reveal key={i} delay={Math.min(i * 0.03, 0.12)} y={18}>
-              <div className={`rooms-spec-block ${inset}`}>
+              <div className={inset}>
                 <BlockView block={b} accent={accent} />
               </div>
             </Reveal>
@@ -256,7 +256,7 @@ function BlockView({
   switch (b.k) {
     case "p":
       return (
-        <p className="rooms-copy max-w-[68ch] text-[calc(16.5px*var(--ui-scale))] leading-[1.8] text-ink/90">
+        <p className="max-w-[68ch] text-[calc(16.5px*var(--ui-scale))] leading-[1.8] text-ink/90">
           <Fmt text={b.text} />
         </p>
       );
@@ -267,14 +267,14 @@ function BlockView({
             className="h-2.5 w-2.5 shrink-0 rounded-full"
             style={{ background: accent }}
           />
-          <h3 className="rooms-subheading font-display text-[calc(22px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h3 className="font-display text-[calc(22px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             <Fmt text={b.text} />
           </h3>
         </div>
       );
     case "bullets":
       return (
-        <ul className="rooms-bullets flex max-w-[70ch] flex-col gap-2.5">
+        <ul className="flex max-w-[70ch] flex-col gap-2.5">
           {b.items.map((t, i) => (
             <li
               key={i}
@@ -294,7 +294,7 @@ function BlockView({
     case "note":
       return (
         <div
-          className="rooms-callout room-callout max-w-[72ch] rounded-[calc(12px*var(--ui-scale))] px-4 py-3.5"
+          className="room-callout max-w-[72ch] rounded-[calc(12px*var(--ui-scale))] px-4 py-3.5"
           style={{ background: "color-mix(in oklab, var(--color-paper) 88%, var(--room-accent) 12%)" }}
         >
           <div className="flex items-start gap-3">
@@ -383,7 +383,7 @@ function BlockView({
     case "wow":
       return (
         <div
-          className="rooms-key-idea max-w-[72ch] rounded-[calc(20px*var(--ui-scale))] p-5 sm:p-6"
+          className="max-w-[72ch] rounded-[calc(20px*var(--ui-scale))] p-5 sm:p-6"
           style={{ background: "color-mix(in oklab, var(--color-paper) 92%, var(--room-accent) 8%)", border: "1px solid color-mix(in oklab, var(--color-ink) 10%, transparent)" }}
         >
           <div className="flex items-start gap-3">
@@ -421,7 +421,7 @@ function CandyTable({
   accent: string;
 }) {
   return (
-    <div className="rooms-table max-w-full">
+    <div className="max-w-full">
       {caption && (
         <div className="mb-2.5 flex items-start gap-2.5">
           <span
@@ -524,7 +524,7 @@ function Worked({
   const shown = open || printing;
 
   return (
-    <div className="rooms-worked rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
+    <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
       <div className="flex flex-wrap items-center gap-3">
         <span
           className="inline-flex min-w-0 max-w-full shrink-0 items-center rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] leading-snug font-bold tracking-[0.1em] uppercase"
@@ -672,7 +672,7 @@ function StepsPanel({
 
   return (
     <div
-      className="rooms-steps rounded-[calc(26px*var(--ui-scale))] p-4 sm:p-5"
+      className="rounded-[calc(26px*var(--ui-scale))] p-4 sm:p-5"
       style={{ background: liftWash(accent, 7) }}
     >
       {caption && (
