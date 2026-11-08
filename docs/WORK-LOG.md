@@ -141,3 +141,17 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Follow-up / known limitations:** run lint and the production build; visually inspect Rooms in all four themes at desktop and mobile sizes, with particular attention to Dune contrast and wrapping. Deployment remains unverified.
 
 - **Documentation follow-up:** updated the roadmap's Dune callout accent description and added the specification-heading hierarchy change. Roadmap commit: `4006f941f17950e42b4f6d10c0187b2bb5f184e3`.
+
+
+### 2026-11-08 — Refine Dune Rooms and expose the deployed build version
+
+- **Contributor:** AI agent.
+- **Request / objective:** improve the Dune palette specifically within Rooms; display the build version at the end of the site footer and include it in implementation chat reports going forward.
+- **Investigation:** inspected the Dune-specific Rooms token block, the shared footer, Next.js configuration and the existing work journal.
+- **Changes made:** tuned Dune Rooms toward a more legible sandstone-and-chocolate balance: brighter brass primary accent, clearer sea-glass secondary accent, slightly more distinct section grounds, lifted paper surfaces and stronger callout definition. Added a build-version value sourced from Vercel's commit SHA (or GitHub Actions SHA), shortened to seven characters in the footer; local builds display `local`.
+- **Preserved invariants:** changes are scoped to Dune note Rooms; other theme palettes, homepage styling, chemistry content, wave structures, note ordering, progress state and preference storage are untouched.
+- **Decisions and rationale:** brass provides a visible warm accent without returning to an orange-heavy palette; sea-glass remains a secondary cue. The footer reports the actual source revision rather than a manually maintained release label.
+- **Verification:** source edits were prepared against the current main branch and are committed together. No lint, production build, deployment or browser visual inspection was run.
+- **Deployment:** not verified.
+- **Commit(s):** see the implementation commit containing this entry.
+- **Follow-up / known limitations:** verify the Vercel build injects `VERCEL_GIT_COMMIT_SHA` and inspect Dune Rooms at desktop and mobile widths. The footer uses `local` outside Vercel/GitHub Actions.
