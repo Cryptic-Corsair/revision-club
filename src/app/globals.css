@@ -2687,3 +2687,128 @@ html.dune .rooms-page {
   .rooms-topic-card { transition: none; }
 }
 
+
+
+
+/* final page-specific calibrations */
+.rooms-pack-page .rooms-pack-hero > div:nth-child(2) > span:first-child,
+.rooms-spec-index-hero > span:first-child {
+  border: 1px solid var(--rooms-accent-line);
+  border-radius: 6px !important;
+  background: var(--rooms-accent) !important;
+  color: var(--rooms-accent-ink) !important;
+  font-family: var(--font-mono);
+  font-size: calc(10.5px * var(--ui-scale)) !important;
+  letter-spacing: 0.08em !important;
+}
+.rooms-spec-index-hero h1 {
+  max-width: 20ch;
+  font-size: calc(clamp(2.5rem, 5vw, 4rem) * (1 + (var(--ui-scale) - 1) * 0.48)) !important;
+  line-height: 1 !important;
+  letter-spacing: -0.055em;
+}
+.rooms-spec-index-hero p {
+  max-width: 60ch;
+  font-size: calc(16px * var(--ui-scale));
+  line-height: 1.82;
+}
+.rooms-pack-page .rooms-topic-banner > div:first-child {
+  border: 1px solid var(--rooms-accent-line);
+  border-radius: 8px !important;
+  background: var(--rooms-accent) !important;
+  color: var(--rooms-accent-ink) !important;
+  padding: calc(5px * var(--ui-scale)) calc(9px * var(--ui-scale)) !important;
+}
+.rooms-pack-page .rooms-topic-banner > p {
+  color: var(--color-ink-faint);
+  font-family: var(--font-mono);
+  font-size: calc(10px * var(--ui-scale));
+  letter-spacing: 0.07em;
+}
+.rooms-pack-page header > div:nth-child(3) {
+  border: 1px solid var(--rooms-line);
+  border-radius: 9px !important;
+  background: var(--color-paper);
+  padding: calc(10px * var(--ui-scale));
+}
+.rooms-pack-page header > div:nth-child(4) {
+  padding-top: calc(5px * var(--ui-scale));
+}
+.rooms-pack-page .pack-sections > section > div > .no-print button {
+  min-height: calc(36px * var(--ui-scale)) !important;
+  border: 1px solid var(--rooms-line) !important;
+  border-radius: 7px !important;
+  background: var(--color-paper) !important;
+  color: var(--color-ink-soft) !important;
+  box-shadow: none !important;
+  padding-inline: calc(10px * var(--ui-scale));
+}
+.rooms-pack-page .pack-sections > section > div > .no-print button[aria-pressed="true"] {
+  border-color: color-mix(in oklab, #12b886 36%, transparent) !important;
+  background: color-mix(in oklab, #12b886 13%, var(--color-paper)) !important;
+  color: var(--color-ink) !important;
+}
+.rooms-progress-page .rooms-stat-grid > div {
+  align-items: flex-start !important;
+  border: 1px solid var(--rooms-line);
+  border-radius: 12px !important;
+  background: transparent !important;
+  padding: calc(15px * var(--ui-scale)) !important;
+  text-align: left !important;
+}
+.rooms-progress-page .rooms-stat-grid > div > span:first-child {
+  width: calc(34px * var(--ui-scale)) !important;
+  height: calc(34px * var(--ui-scale)) !important;
+  border: 1px solid var(--rooms-accent-line);
+  border-radius: 8px !important;
+  background: var(--rooms-accent-soft) !important;
+  color: var(--rooms-accent) !important;
+}
+.rooms-progress-page .rooms-stat-grid > div > span:nth-child(2) {
+  margin-top: calc(14px * var(--ui-scale)) !important;
+  font-size: calc(1.65rem * var(--ui-scale)) !important;
+  letter-spacing: -0.045em;
+}
+.rooms-progress-page .rooms-stat-grid > div > span:nth-child(3) {
+  margin-top: calc(5px * var(--ui-scale)) !important;
+  font-family: var(--font-mono);
+  font-size: calc(9.5px * var(--ui-scale)) !important;
+  letter-spacing: 0.1em;
+}
+.rooms-progress-page .rooms-stat-grid + div {
+  border: 1px solid var(--rooms-line);
+  border-radius: 12px !important;
+  background: color-mix(in oklab, var(--color-paper) 88%, var(--rooms-accent) 6%) !important;
+}
+.rooms-progress-page .rooms-stat-grid + div button[aria-pressed="true"] {
+  border-radius: 6px !important;
+  background: var(--rooms-accent) !important;
+  color: var(--rooms-accent-ink) !important;
+  box-shadow: none !important;
+}
+.rooms-progress-page section > div > div[style*="background"] {
+  box-shadow: none !important;
+}
+.rooms-progress-page .rooms-topic-banner,
+.rooms-progress-page .rooms-spec-group {
+  border-radius: 12px !important;
+}
+.rooms-progress-page .rooms-spec-group > button:first-child > span:first-child {
+  border-radius: 8px !important;
+  background: var(--rooms-accent) !important;
+  color: var(--rooms-accent-ink) !important;
+  box-shadow: none !important;
+}
+.rooms-progress-page .rooms-spec-group > div:last-child > button {
+  border: 1px solid var(--rooms-line);
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+.rooms-progress-page .rooms-spec-group > div:last-child > button[aria-pressed="true"] {
+  background: var(--rooms-accent) !important;
+  color: var(--rooms-accent-ink) !important;
+}
+.rooms-progress-page .rooms-spec-group > div:last-child > button[aria-pressed="true"] span {
+  color: var(--rooms-accent-ink) !important;
+}
+
