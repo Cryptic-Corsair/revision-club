@@ -108,6 +108,11 @@ unchanged. Reading time, scroll-spy and deep-links behave identically.
 
 ## 2 · Releases (each shippable, each revertible)
 
+> **Status: R0–R4 shipped.** The interface axis is live: notes, pack and progress
+> wear both dresses, the switch works live from the customize panel in both
+> directions, and classic parity holds at 28/28 screenshots within 2% across all
+> four labs. R5 (unit/topic/spec twins) and R6 (seamlessness polish) remain.
+
 ### R0 — Groundwork (no visible change)
 1. Lift progress derivations → `progress-derive.ts`; lift `scrollToSpec`/scroll-spy → `scroll-helpers.ts` (classic views now import them — behaviour-identical refactor).
 2. Legal token hygiene in globals.css: give `--legal-accent` a fallback (`var(--legal-rust)`); consolidate the three scattered per-lab legal override blocks into one token re-tint per lab; **fill the dune gaps** (kicker, grain, index-link, clause numerals) — today dune is only partially tuned.
