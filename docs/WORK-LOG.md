@@ -97,3 +97,17 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified.
 - **Commit(s):** restoration commit and journal entry follow.
 - **Follow-up / known limitations:** none known.
+
+
+### 2026-11-08 — Add paired accents to the Dune Rooms theme
+
+- **Contributor:** AI agent.
+- **Request / objective:** use warm cream (`#FDF6E3`) as one Dune accent and introduce a complementary second accent.
+- **Investigation:** reviewed the theme preference store, Rooms accent helper and note renderer, Dune-specific CSS tokens, homepage accent helper and interface/theme documentation.
+- **Changes made:** added a render-time active-lab accessor; Dune Rooms now alternates warm cream (`#FDF6E3`) with muted sea-glass (`#9DB9B0`) across its section details and shared specification chips. Set the Dune Rooms accent token to warm cream and added a secondary accent token. Kept the homepage's existing mineral treatment unchanged. Updated the interface roadmap and development guide.
+- **Preserved invariants:** no chemistry content, specification wording, note ordering, identifiers, persistence keys, theme selection behaviour or Editorial styling was changed. The Dune chocolate surface palette remains intact; the new pair is scoped to Rooms.
+- **Decisions and rationale:** selected muted sea-glass as a cool, low-chroma counterpoint to warm cream. It separates the two accent roles while sitting comfortably against the existing chocolate surfaces, without introducing a bright candy colour.
+- **Verification:** fetched the changed source and documentation files back from GitHub and confirmed the two Dune accent values, active-lab accessor and homepage separation. Build, lint and browser/visual checks were not run.
+- **Deployment:** not verified.
+- **Commit(s):** implementation commits are recorded immediately before this journal entry in the main branch history.
+- **Follow-up / known limitations:** visually inspect Dune Rooms, including section markers, callouts and Spec Map chips, at desktop and mobile widths; confirm contrast and balance in the rendered page.
