@@ -219,7 +219,7 @@ export function SpecSectionView({
         )}
       </div>
 
-      <div className="flex flex-col gap-6">
+      <div className="spec-body-rail ml-1 flex flex-col gap-7 border-l pl-4 sm:ml-2 sm:pl-7">
         {section.blocks.map((b, i) => (
           <Reveal key={i} delay={Math.min(i * 0.03, 0.12)} y={18}>
             <BlockView block={b} accent={accent} />
@@ -281,7 +281,8 @@ function BlockView({
       return (
         <div
           className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] px-4 py-3.5"
-          style={{ background: honeyWash("#FFD43B", 18) }}
+          className="room-callout max-w-[72ch] rounded-[calc(12px*var(--ui-scale))] px-4 py-3.5"
+          style={{ background: "color-mix(in oklab, var(--color-paper) 88%, var(--room-accent) 12%)" }}
         >
           <div className="flex items-start gap-3">
             <StickyNote
@@ -370,7 +371,7 @@ function BlockView({
       return (
         <div
           className="max-w-[72ch] rounded-[calc(20px*var(--ui-scale))] p-5 sm:p-6"
-          style={{ background: liftWash("#9775FA", 10) }}
+          style={{ background: "color-mix(in oklab, var(--color-paper) 92%, var(--room-accent) 8%)", border: "1px solid color-mix(in oklab, var(--color-ink) 10%, transparent)" }}
         >
           <div className="flex items-start gap-3">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl border border-ink/[0.08] bg-paper">
