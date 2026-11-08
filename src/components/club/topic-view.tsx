@@ -51,7 +51,7 @@ export function TopicView({
   const idx = unit.topics.findIndex((t) => t.id === topic.id);
   const prev = idx > 0 ? unit.topics[idx - 1] : undefined;
   const next = idx < unit.topics.length - 1 ? unit.topics[idx + 1] : undefined;
-  const main = unit.candy.main;
+  const main = accentOf(0);
 
   const collect = () => {
     if (!isRevised) setFire((f) => f + 1);
@@ -67,7 +67,7 @@ export function TopicView({
         style={{
           top: "var(--sa-top)",
           scaleX,
-          background: `linear-gradient(90deg, ${main}, #FFD43B)`,
+          background: main,
         }}
       />
 
@@ -114,17 +114,17 @@ export function TopicView({
             onClick={onOpenNotes}
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.97 }}
-            className="group flex w-full cursor-pointer items-center gap-4 rounded-[calc(22px*var(--ui-scale))] p-5 text-left sm:p-6"
-            style={{ background: main, boxShadow: `0 3px 0 ${shade(main)}` }}
+            className="group flex w-full cursor-pointer items-center gap-4 rounded-[calc(22px*var(--ui-scale))] border border-ink/[0.08] bg-paper p-5 text-left puff sm:p-6"
+            style={{ borderLeft: `4px solid ${main}` }}
           >
             <span className="grid h-14 w-14 shrink-0 place-items-center rounded-[calc(20px*var(--ui-scale))] bg-white/20">
               <BookOpen className="h-7 w-7 text-white" strokeWidth={2.2} />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block font-display text-[calc(18px*var(--ui-scale))] font-semibold text-white">
+              <span className="block font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
                 The full revision note — spec by spec
               </span>
-              <span className="mt-1 block text-[calc(13.5px*var(--ui-scale))] leading-[1.6] font-bold text-white/80">
+              <span className="mt-1 block text-[calc(13.5px*var(--ui-scale))] leading-[1.65] font-medium text-ink-soft">
                 The complete class note, cut into one section per specification
                 point{notesSpecRange ? ` (${notesSpecRange})` : ""} — the official wording above
                 each, and every calculation worked in full.
@@ -221,11 +221,10 @@ export function TopicView({
             onClick={() => onOpenTopic(next.id)}
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.97 }}
-            className="flex cursor-pointer items-center justify-end gap-3 rounded-full px-5 py-4 text-right text-white sm:col-start-2"
-            style={{ background: main, boxShadow: `0 2px 0 ${shade(main)}` }}
+            className="flex cursor-pointer items-center justify-end gap-3 rounded-full border border-ink/[0.08] bg-paper px-5 py-4 text-right text-ink puff sm:col-start-2"
           >
             <span className="min-w-0">
-              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-white/70 uppercase">
+              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-ink-faint uppercase">
                 next · {next.label}
               </span>
               <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold">
@@ -242,11 +241,10 @@ export function TopicView({
             onClick={onBack}
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.97 }}
-            className="flex cursor-pointer items-center justify-end gap-3 rounded-full px-5 py-4 text-right text-white sm:col-start-2"
-            style={{ background: main, boxShadow: `0 2px 0 ${shade(main)}` }}
+            className="flex cursor-pointer items-center justify-end gap-3 rounded-full border border-ink/[0.08] bg-paper px-5 py-4 text-right text-ink puff sm:col-start-2"
           >
             <span className="min-w-0">
-              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-white/70 uppercase">
+              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-ink-faint uppercase">
                 end of unit
               </span>
               <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold">
