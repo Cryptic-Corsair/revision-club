@@ -97,3 +97,17 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified.
 - **Commit(s):** implementation and journal entry are included in the same commit.
 - **Follow-up / known limitations:** manually inspect Rooms and Editorial in Light, Night, Dune and Classic; test changing the accent selection and confirm Home and Editorial remain visually unchanged.
+
+
+### 2026-11-08 — Verify Rooms accent implementation commit
+
+- **Contributor:** AI agent.
+- **Request / objective:** record the exact implementation commit and verify its repository-level result.
+- **Investigation:** inspected commit metadata, changed-file list, combined status, associated workflow runs and the committed Rooms reader/block source.
+- **Changes made:** no application changes; this entry records verification of commit `187852022adae596085f42992aaefe0cadd45479`.
+- **Preserved invariants:** no additional code, content, preference data or theme/interface behaviour was changed during verification.
+- **Decisions and rationale:** keep this verification record separate so the implementation journal entry can point to its exact immutable commit.
+- **Verification:** commit `187852022adae596085f42992aaefe0cadd45479` is present on main and contains the 12 intended source/documentation files. Combined status and workflow results are recorded in the repository response; no local lint/build or browser visual test was performed.
+- **Deployment:** not verified.
+- **Commit(s):** implementation `187852022adae596085f42992aaefe0cadd45479`; this verification entry is included in the following journal commit.
+- **Follow-up / known limitations:** visual verification across all four themes and both interfaces remains outstanding.
