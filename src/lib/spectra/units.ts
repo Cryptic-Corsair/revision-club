@@ -1,4 +1,4 @@
-import type { Unit, Topic } from "./types";
+import type { Unit, Topic, UnitCode } from "./types";
 import { WCH11_TOPICS } from "./content/wch11";
 import { WCH12_TOPICS } from "./content/wch12";
 import { WCH13_TOPICS } from "./content/wch13";
@@ -122,6 +122,19 @@ export const UNITS: Unit[] = [
     topics: WCH16_TOPICS,
   },
 ];
+
+/* Rooms-only unit signature colours. The homepage retains its
+   established candy palette on Unit.candy.main; this separate map
+   lets Rooms use the refined mineral system without repainting Home
+   or changing Editorial. Keep order aligned with ACCENTS in prefs.ts. */
+export const ROOM_UNIT_ACCENTS: Record<UnitCode, string> = {
+  WCH11: "#A95F55", // Terracotta
+  WCH12: "#A3633C", // Sienna
+  WCH13: "#916B32", // Ochre
+  WCH14: "#527563", // Eucalyptus
+  WCH15: "#5E7187", // Slate
+  WCH16: "#805F78", // Mulberry
+};
 
 /* ————— helpers ————— */
 

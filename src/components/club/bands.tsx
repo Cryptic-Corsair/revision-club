@@ -11,13 +11,11 @@ import { m, type HTMLMotionProps, type Variants } from "framer-motion";
 import { Footprints } from "./icons";
 import type { SpecSection } from "@/lib/spectra/notes-types";
 import { readableInk, shade } from "./bits";
-import { ACCENTS, ACCENT_IDS, currentAccents } from "@/lib/spectra/prefs";
+import { ACCENTS, ACCENT_IDS, currentAccents, currentIface } from "@/lib/spectra/prefs";
 
-/* the full candy wheel, hue-wheel order: red → orange → sun →
-   green → purple → amber, so adjacent bands always differ. This is
-   the whole shelf — the customize panel narrows it to your picks,
-   and the helpers below rotate whatever's on: one pick dresses
-   every section, two alternate, three+ cycle. */
+/* The canonical mineral palette. Customize narrows the sequence
+   to the user's selected colours; helpers rotate those picks in
+   fixed palette order. */
 export const BANDS = ACCENTS.map((a) => a.hex);
 
 /* the wave shelf — a shelf of hand-drawn seam curves, so a page can
@@ -64,23 +62,30 @@ export function BandWave({
   );
 }
 
-/* A candy accent pulled toward the current ink: deep brick by day,
-   warm salmon after dark, pale gold inside a cocoa room — one
-   helper, readable in every lab, no dark: variants needed. */
+/* Pull an accent toward the current ink for small labels and rules. */
 export const inkMix = (main: string, pct = 45) =>
   `color-mix(in oklab, ${main} ${pct}%, var(--color-ink))`;
 
-/* band helpers — pure, so the in-page contents card and the Spec
-   Map window dress their chips with the exact same colours */
-/* Rooms use one restrained mineral accent. The six selected accents
-   remain intact for the wider app, but no longer colour every note
-   section; the reader's hierarchy comes from type, spacing and tone. */
+/* Editorial keeps its restrained mineral marker. Rooms has its own
+   six-colour sequence, driven by the existing Customize selection. */
 export const accentOf = (_i: number) => "#B8874B";
-/* bands mix their candy over --tint-base at --band-mix (10% by day)
-   — the daylight walk of the hue wheel. After dark both steps are
-   overridden by --note-band-a/b (see html.dark in globals.css):
-   two flat night grounds a half-step apart (plum → indigo), so
-   every section keeps the study contrast while the hue leans. */
+
+export const roomAccentOf = (i: number) => {
+  const selected = currentAccents();
+  const id = selected[i % selected.length] ?? ACCENT_IDS[0];
+  return ACCENTS.find((a) => a.id === id)?.hex ?? ACCENTS[0].hex;
+};
+
+/* Daylight bands carry only a low-strength wash of their accent.
+   Dark, Dune and Classic keep their established neutral surface
+   ladders; colour remains in labels and learning details. */
+export const roomBandOf = (i: number) =>
+  `color-mix(in oklab, ${roomAccentOf(i)} var(--band-mix, 9%), var(--tint-base))`;
+export const roomBgOf = (i: number) =>
+  i % 2 === 1
+    ? `var(--note-band-b, ${roomBandOf(i)})`
+    : `var(--note-band-a, ${roomBandOf(i)})`;
+
 export const bandOf = (i: number) =>
   `color-mix(in oklab, ${accentOf(i)} var(--band-mix, 10%), var(--tint-base))`;
 export const bgOf = (i: number) =>
@@ -121,7 +126,9 @@ export function SpecChip({
   here,
   ...rest
 }: { s: SpecSection; i: number; here: boolean } & HTMLMotionProps<"button">) {
-  const accent = accentOf(i);
+  const rooms = currentIface() === "rooms";
+  const accent = rooms ? roomAccentOf(i) : accentOf(i);
+  const band = rooms ? roomBgOf(i) : bgOf(i);
   return (
     <m.button
       type="button"
@@ -138,7 +145,7 @@ export function SpecChip({
               boxShadow: `0 3px 0 ${shade(accent)}`,
               rotate: "-1deg",
             }
-          : { background: bgOf(i), boxShadow: "0 2px 0 var(--edge)" }
+          : { background: band, boxShadow: "0 2px 0 var(--edge)" }
       }
       {...rest}
     >

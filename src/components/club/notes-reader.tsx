@@ -5,6 +5,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  type CSSProperties,
 } from "react";
 import { m, useScroll, useSpring } from "framer-motion";
 import {
@@ -17,6 +18,7 @@ import {
 } from "./icons";
 import type { NotesBlock, NotesDoc } from "@/lib/spectra/notes-types";
 import type { Unit } from "@/lib/spectra/types";
+import { ROOM_UNIT_ACCENTS } from "@/lib/spectra/units";
 import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { togglePick, usePacks } from "@/lib/spectra/packs";
 import { getNotes } from "@/lib/spectra/notes";
@@ -34,16 +36,16 @@ import {
   shade,
   tint,
 } from "./bits";
-import { BandWave, SpecChip, accentOf, bgOf, inkMix } from "./bands";
+import { BandWave, SpecChip, roomAccentOf, roomBgOf, inkMix } from "./bands";
 import { useSpecMapRegister } from "./spec-map";
 import { SpecSectionView } from "./note-section";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · notes reader — one enclosed room per spec point.
-   Each section is a full-width tonal band borrowing one candy
-   colour, walking the hue wheel so neighbours always contrast.
-   By day the bands are candy tints; after dark both steps are
-   flat warm roasts at matched darkness (--note-band-a/b in
+   Each section belongs to a considered six-colour mineral sequence.
+   Accents identify the learning cues; surfaces stay tonal and calm.
+   By day the bands carry a light wash; after dark both steps are
+   flat neutral grounds (--note-band-a/b in
    globals.css), and in the classic lab the two steps are the
    fixed espresso/cream pair — so every section keeps contrast
    and the highlighter still pops. The wave rides between
@@ -153,7 +155,7 @@ function NotesReaderBody({
   /** deep link — land scrolled to this spec section */
   jumpToSpec?: string;
 }) {
-  const main = unit.candy.main;
+  const main = ROOM_UNIT_ACCENTS[unit.code];
   const active = useSpecSpy(doc.sections);
 
   const { scrollYProgress } = useScroll();
@@ -320,9 +322,9 @@ function NotesReaderBody({
             (html.classic .note-rooms) to the section bands only — the
             contents chips above stay on the daylight candy walk */}
         <div className="note-rooms mt-8">
-          <BandWave from="var(--color-cream)" to={bgOf(0)} />
+          <BandWave from="var(--color-cream)" to={roomBgOf(0)} />
           {doc.sections.map((s, i) => {
-            const accent = accentOf(i);
+            const accent = roomAccentOf(i);
             const last = i === doc.sections.length - 1;
             return (
               <Fragment key={s.spec}>
@@ -332,7 +334,7 @@ function NotesReaderBody({
                      that's the espresso ground, so .room flips the ink
                      and surfaces inside (html.classic .room) */
                   className={`spec-anchor relative${i % 2 === 0 ? " room" : ""}`}
-                  style={{ background: bgOf(i) }}
+                  style={{ background: roomBgOf(i), "--room-accent": accent } as CSSProperties}
                 >
                   <div className="mx-auto max-w-3xl px-4 py-14 sm:px-8 sm:py-16">
                     <SpecSectionView
@@ -343,8 +345,8 @@ function NotesReaderBody({
                   </div>
                 </section>
                 <BandWave
-                  from={bgOf(i)}
-                  to={last ? "var(--color-cream)" : bgOf(i + 1)}
+                  from={roomBgOf(i)}
+                  to={last ? "var(--color-cream)" : roomBgOf(i + 1)}
                 />
               </Fragment>
             );

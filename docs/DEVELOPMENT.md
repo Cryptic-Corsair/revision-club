@@ -361,3 +361,10 @@ browser → platform edge (*.space-z.ai) → Caddy :81 → Next dev :3000
 
 *Keep this file honest: when the architecture or the rules change, update it
 in the same commit.*
+
+
+### Rooms accent sequence
+
+The Rooms accent system is separate from Editorial's restrained marker colour and Home's existing candy palette. Its canonical six-colour palette (Terracotta, Sienna, Ochre, Eucalyptus, Slate and Mulberry) lives in `prefs.ts`; stable IDs must not be renamed because saved preferences store them. `units.ts` exposes `ROOM_UNIT_ACCENTS` for WCH11–WCH16 without changing `Unit.candy.main`. The Customize panel selects which colours participate in the Rooms section sequence, and `bands.tsx` exposes the pure `roomAccentOf` / `roomBgOf` helpers used by the reader and Spec Map. Each note section sets `--room-accent` locally so callout borders and washes follow the section colour.
+
+Editorial intentionally continues to use `accentOf`'s restrained mineral marker. Do not merge the two palettes or apply the Rooms rotation to Editorial. Light may use a subtle accent wash; Night, Dune and Classic keep their existing neutral band surfaces. Theme switching remains atomic and no global transition should be introduced.

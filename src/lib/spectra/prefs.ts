@@ -35,20 +35,20 @@ export const IFACE_DESCRIPTION: Record<Iface, string> = {
 };
 export const IFACE_ORDER: Iface[] = ["rooms", "editorial"];
 
-/* the candy wheel the site's sections take turns wearing. The full
-   shelf by default; the customize panel narrows it to your picks —
-   one pick dresses every section, two alternate, three+ rotate.
-   Order is fixed (hue-wheel) so alternation is predictable no
-   matter which subset is on. */
+/* Rooms' six-colour accent sequence. IDs remain stable because
+   existing preference records store these values. The palette is
+   deliberately mineral rather than candy-bright: warm earth tones
+   lead, balanced by eucalyptus, slate and muted plum. Each swatch
+   supports white foreground text at WCAG AA contrast. */
 export type AccentId = "coral" | "tangerine" | "sun" | "mint" | "grape" | "amber";
 
 export const ACCENTS: { id: AccentId; hex: string; label: string }[] = [
-  { id: "coral", hex: "#FF6B6B", label: "Coral" },
-  { id: "tangerine", hex: "#FF922B", label: "Tangerine" },
-  { id: "sun", hex: "#FFD43B", label: "Sun" },
-  { id: "mint", hex: "#12B886", label: "Mint" },
-  { id: "grape", hex: "#9775FA", label: "Grape" },
-  { id: "amber", hex: "#F59F00", label: "Amber" },
+  { id: "coral", hex: "#A95F55", label: "Terracotta" },
+  { id: "tangerine", hex: "#A3633C", label: "Sienna" },
+  { id: "sun", hex: "#916B32", label: "Ochre" },
+  { id: "mint", hex: "#527563", label: "Eucalyptus" },
+  { id: "grape", hex: "#5E7187", label: "Slate" },
+  { id: "amber", hex: "#805F78", label: "Mulberry" },
 ];
 
 export const ACCENT_IDS: AccentId[] = ACCENTS.map((a) => a.id);
@@ -106,7 +106,7 @@ export interface Prefs {
   theme: Lab;
   /** which interface dresses the rooms — "rooms" | "editorial" */
   iface: Iface;
-  /** the accent wheel — which candies the sections rotate through */
+  /** selected Rooms accents, rotated in their fixed palette order */
   accents: AccentId[];
   /** content scale — S/M/L/XL (multiplies --ui-scale) */
   scale: ScaleId;
@@ -311,14 +311,16 @@ export function resetPrefs() {
    own their own transitions, while the browser paints the new token set
    in one style update. */
 
-/* the wheel accentOf() reads while rendering (bands, chips, dots).
-   Plain state, deliberately no load() — the hydration pass must
-   paint the same default wheel the server did; the store's own
-   subscribe → load → re-render carries the user's picks in right
-   after commit, and every pick after that re-renders ClubApp, which
-   re-runs every accentOf in the tree. */
+/* Read-only accessors for presentation helpers. They deliberately
+   do not trigger load(): hydration paints the same factory defaults
+   on server and client, then the preference store's subscription
+   re-renders the app with the saved values. */
 export function currentAccents(): AccentId[] {
   return state.accents;
+}
+
+export function currentIface(): Iface {
+  return state.iface;
 }
 
 /* ————— store plumbing ————— */

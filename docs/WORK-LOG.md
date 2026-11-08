@@ -83,3 +83,17 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified; no application code changed.
 - **Commit(s):** structural reorganisation: `d855e6010c644b7e1788301def68e874296660e5`. This verification entry is recorded in the following commit.
 - **Follow-up / known limitations:** future contributors must continue appending journal entries for meaningful work. No known path-verification issues.
+
+
+### 2026-11-08 — Rebuild the Rooms accent system
+
+- **Contributor:** AI agent.
+- **Request / objective:** reconstruct the accent architecture, introduce a better colour palette and implement it in Rooms while preserving the separate Editorial interface.
+- **Investigation:** traced the existing accent preference model in `prefs.ts`, unit signature colours in `units.ts`, shared band/chip helpers in `bands.tsx`, note rendering in `notes-reader.tsx`, shared teaching blocks in `note-section.tsx`, the Customize panel, and theme-scoped Rooms CSS. Confirmed Editorial also consumes `accentOf`, so changing that helper globally would violate the interface boundary.
+- **Changes made:** replaced the six candy-bright Rooms swatches with a mineral palette (Terracotta `#A95F55`, Sienna `#A3633C`, Ochre `#916B32`, Eucalyptus `#527563`, Slate `#5E7187`, Mulberry `#805F78`); retained the six stored accent IDs and preference key for compatibility; added `ROOM_UNIT_ACCENTS` and applied it to Rooms unit, topic and note views while preserving Home's existing `Unit.candy.main` palette; added Rooms-only palette and band helpers; made shared SpecChip select its palette from the active interface; applied section-local `--room-accent` values; removed the fixed Dune callout override and replaced the fixed purple Key idea icon with the current section accent; clarified the Customize copy; documented the architecture in the handbook and Development Guide.
+- **Preserved invariants:** no chemistry prose, specification statements, IDs, topic ordering, saved progress, preference schema or storage key changed. The four global themes and independent Rooms/Editorial interface selection remain intact. Home's existing palette and Editorial's restrained `accentOf` remain separate.
+- **Decisions and rationale:** accents identify sections and learning cues rather than painting large surfaces. Light mode uses a low-strength wash; Night, Dune and Classic retain their existing neutral surface ladders. Stable legacy IDs are retained even though their displayed names and hex values changed, preventing existing user selections from being discarded.
+- **Verification:** source-level consistency and intended call sites were reviewed. Automated lint/build and browser visual checks were not run in this repository session; theme/interface combinations and saved-preference behaviour remain to be verified.
+- **Deployment:** not verified.
+- **Commit(s):** implementation and journal entry are included in the same commit.
+- **Follow-up / known limitations:** manually inspect Rooms and Editorial in Light, Night, Dune and Classic; test changing the accent selection and confirm Home and Editorial remain visually unchanged.

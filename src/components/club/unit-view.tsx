@@ -3,7 +3,7 @@
 import { m } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, Clock, PieChart, Sparkles, Target, Timer } from "./icons";
 import type { Unit } from "@/lib/spectra/types";
-import { UNITS } from "@/lib/spectra/units";
+import { ROOM_UNIT_ACCENTS, UNITS } from "@/lib/spectra/units";
 import { useRevised } from "@/lib/spectra/progress";
 import { Fmt } from "./format";
 import {
@@ -41,7 +41,7 @@ export function UnitView({
   const minutes = unit.topics.reduce((m, t) => m + t.minutes, 0);
   const prev = UNITS[unit.index - 2];
   const next = UNITS[unit.index];
-  const main = unit.candy.main;
+  const main = ROOM_UNIT_ACCENTS[unit.code];
 
   return (
     <div className="mx-auto max-w-5xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
