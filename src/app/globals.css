@@ -1541,187 +1541,30 @@ html.dune .legal-room mark {
 .legal-mark-dot-one { top: 14%; right: 23%; }
 .legal-mark-dot-two { bottom: 18%; left: 18%; width: 7px; background: #e47b61; }
 .legal-index { min-width: 0; }
-/* Keep editorial reading surfaces on one shared width track.
-   Text measure stays controlled inside each surface; the surface
-   itself always fills the reading column as the contents rail changes. */
-.editorial-reading-layout > .min-w-0 {
-  width: 100%;
-  min-width: 0;
-}
-.editorial-reading-layout .legal-summary,
-.editorial-reading-layout .editorial-opening-card,
-.editorial-reading-layout .legal-clause,
-.editorial-reading-layout .editorial-specification-card,
-.editorial-reading-layout .legal-closing {
-  width: 100%;
-  min-width: 0;
-  max-width: none;
-}
-.editorial-reading-layout .legal-clause-content {
-  min-width: 0;
-  width: 100%;
-}
-.editorial-reading-layout .editorial-opening-card p,
-.editorial-reading-layout .editorial-specification-card p,
-.editorial-reading-layout .legal-closing > p {
-  max-width: 76ch;
-}
-.editorial-reading-layout {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media (min-width: 1024px) {
-  .editorial-reading-layout {
-    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
-    transition: grid-template-columns 220ms cubic-bezier(.2,.75,.25,1);
-  }
-  .editorial-reading-layout.is-collapsed {
-    grid-template-columns: 64px minmax(0, 1fr);
-  }
-}
-@media (max-width: 1023px) {
-  .editorial-contents-nav {
-    max-height: none;
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 7px;
-  }
-  .editorial-contents-link {
-    flex: 0 0 auto;
-  }
-}
-.editorial-contents {
-  min-width: 0;
-  max-width: 100%;
-  padding: 12px 10px;
-  border: 1px solid color-mix(in oklab, var(--color-ink) 9%, transparent);
-  border-radius: 18px;
-  background: color-mix(in oklab, var(--color-paper) 94%, var(--color-ink) 6%);
-  box-shadow: 0 2px 0 var(--edge);
-}
-.editorial-contents-heading {
+.legal-index-link {
   display: flex;
-  min-width: 0;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 0 2px 10px;
-}
-.editorial-contents-count {
-  margin-top: 3px;
-  color: var(--color-ink-faint);
-  font-size: calc(9px * var(--ui-scale));
-  line-height: 1.5;
-  font-weight: 650;
-}
-.editorial-contents-toggle {
-  display: grid;
-  width: 34px;
-  height: 34px;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 1px solid color-mix(in oklab, var(--color-ink) 12%, transparent);
-  border-radius: 10px;
-  color: var(--color-ink-soft);
-  cursor: pointer;
-  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
-}
-.editorial-contents-toggle:hover {
-  color: var(--color-ink);
-  border-color: color-mix(in oklab, var(--color-ink) 26%, transparent);
-  background: color-mix(in oklab, var(--color-ink) 6%, transparent);
-}
-.editorial-contents-toggle:focus-visible,
-.editorial-contents-link:focus-visible {
-  outline: 2px solid var(--legal-rust);
-  outline-offset: 2px;
-}
-.editorial-contents-nav {
-  display: flex;
-  min-width: 0;
-  max-height: min(66dvh, 680px);
-  flex-direction: column;
-  gap: 3px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in oklab, var(--color-ink) 22%, transparent) transparent;
-  padding: 2px 2px 4px;
-}
-.editorial-contents-nav.is-collapsed { align-items: center; }
-.legal-index-link.editorial-contents-link {
-  position: relative;
-  display: flex;
-  min-width: 0;
-  min-height: 38px;
   align-items: center;
   gap: 10px;
-  border-radius: 10px;
-  padding: 8px 9px;
+  min-width: 0;
+  border-radius: 12px;
+  padding: 9px 10px;
   color: var(--color-ink-soft);
   font-size: calc(11px * var(--ui-scale));
-  line-height: 1.45;
-  transition: background-color 150ms ease, color 150ms ease;
+  transition: background-color 160ms ease, color 160ms ease;
 }
-.editorial-contents-link .editorial-contents-number {
-  display: inline-flex;
-  min-width: 31px;
-  min-height: 25px;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  border-radius: 7px;
-  background: color-mix(in oklab, var(--color-ink) 5%, transparent);
+.legal-index-link > span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.legal-index-link span:first-child {
   color: var(--color-ink-faint);
   font-family: var(--font-display), sans-serif;
   font-size: calc(9px * var(--ui-scale));
-  font-weight: 850;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: .01em;
+  font-weight: 800;
 }
-.editorial-contents-link .editorial-contents-title {
-  display: block;
-  min-width: 0;
-  overflow-wrap: anywhere;
-  word-break: normal;
-}
-.editorial-contents-link:hover {
-  background: color-mix(in oklab, var(--color-ink) 6%, transparent);
+.legal-index-link:hover {
+  background: color-mix(in oklab, var(--color-ink) 6%, var(--color-paper));
   color: var(--color-ink);
-}
-.editorial-contents-link.is-active {
-  background: color-mix(in oklab, var(--legal-rust) 11%, var(--color-paper));
-  color: var(--color-ink);
-  box-shadow: inset 2px 0 0 var(--legal-rust);
-}
-.editorial-contents-link.is-active .editorial-contents-number {
-  background: var(--legal-rust);
-  color: var(--color-paper);
-}
-.editorial-contents-link.is-collapsed {
-  width: 42px;
-  justify-content: center;
-  gap: 0;
-  padding: 5px;
-}
-.editorial-contents-link.is-collapsed .editorial-contents-number {
-  min-width: 32px;
-}
-.editorial-contents-rail-label {
-  display: block;
-  width: 34px;
-  overflow: hidden;
-  text-align: center;
-  font-size: calc(8px * var(--ui-scale));
-}
-.editorial-contents-footnote {
-  margin: 10px 2px 0;
-  border-top: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
-  padding: 10px 2px 0;
-  color: var(--color-ink-faint);
-  font-size: calc(9px * var(--ui-scale));
-  line-height: 1.65;
 }
 .legal-summary {
   background: color-mix(in oklab, var(--color-paper) 88%, #e9d7b9);

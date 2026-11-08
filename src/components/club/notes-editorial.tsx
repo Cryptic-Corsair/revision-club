@@ -248,69 +248,42 @@ function NotesEditorialBody({
         </section>
       </Reveal>
 
-      {/* ————— contents navigation + the clauses ————— */}
-      <div
-        className={`editorial-reading-layout mt-9 grid min-w-0 grid-cols-1 items-start gap-5 lg:gap-8 ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}
-      >
-        <aside className={`legal-index editorial-contents min-w-0 lg:sticky lg:top-28 ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}>
-          <div className="editorial-contents-heading">
-            <div className="min-w-0">
-              {contentsExpanded ? (
-                <>
-                  <p className="legal-meta">CONTENTS</p>
-                  <p className="editorial-contents-count">
-                    {doc.sections.length} sections <span aria-hidden>·</span> {firstSpec}–{lastSpec}
-                  </p>
-                </>
-              ) : (
-                <span className="legal-meta editorial-contents-rail-label" aria-hidden="true">SPEC</span>
-              )}
-            </div>
+      {/* ————— contents rail + the clauses ————— */}
+      <div className={`mt-9 grid min-w-0 grid-cols-1 items-start gap-5 lg:gap-8 ${contentsExpanded ? "lg:grid-cols-[250px_minmax(0,1fr)]" : "lg:grid-cols-[56px_minmax(0,1fr)]"}`}>
+        <aside className={`legal-index h-fit min-w-0 lg:sticky lg:top-28 ${contentsExpanded ? "lg:w-[250px]" : "lg:w-14"}`}>
+          <div className={`mb-3 flex items-center ${contentsExpanded ? "justify-between gap-2" : "justify-center"}`}>
+            {contentsExpanded && <p className="legal-meta">CONTENTS</p>}
             <button
               type="button"
               onClick={() => setContentsExpanded((open) => !open)}
-              aria-label={contentsExpanded ? "Collapse contents sidebar" : "Expand contents sidebar"}
+              aria-label={contentsExpanded ? "Collapse contents" : "Expand contents"}
               aria-expanded={contentsExpanded}
-              aria-controls="editorial-note-contents"
               title={contentsExpanded ? "Collapse contents" : "Expand contents"}
-              className="editorial-contents-toggle"
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-ink/10 text-ink-soft transition-colors hover:border-ink/25 hover:bg-ink/[0.05] hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
             >
-              <ChevronDown
-                className={`h-4 w-4 transition-transform duration-200 ${contentsExpanded ? "rotate-90" : "-rotate-90"}`}
-              />
+              <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${contentsExpanded ? "rotate-90" : "-rotate-90"}`} />
             </button>
           </div>
-          <nav
-            id="editorial-note-contents"
-            aria-label="Note contents"
-            className={`editorial-contents-nav ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}
-          >
-            {doc.sections.map((s, i) => {
-              const isActive = active === s.spec;
-              return (
-                <a
-                  key={s.spec}
-                  href={`#spec-${s.spec.replace(".", "-")}`}
-                  aria-current={isActive ? "location" : undefined}
-                  aria-label={`Go to specification ${s.spec}: ${s.title}`}
-                  title={!contentsExpanded ? s.title : undefined}
-                  className={`legal-index-link editorial-contents-link ${isActive ? "is-active" : ""} ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSpec(s.spec);
-                  }}
-                >
-                  <span className="editorial-contents-number">{s.spec}</span>
-                  {contentsExpanded && (
-                    <span className="editorial-contents-title">{s.title}</span>
-                  )}
-                </a>
-              );
-            })}
+          <nav aria-label="Note contents" className={`flex gap-2 overflow-x-auto pb-2 lg:overflow-visible lg:pb-0 ${contentsExpanded ? "lg:flex-col lg:gap-1" : "lg:flex-col lg:items-center lg:gap-1"}`}>
+            {doc.sections.map((s) => (
+              <a
+                key={s.spec}
+                href={`#spec-${s.spec.replace(".", "-")}`}
+                aria-current={active === s.spec ? "true" : undefined}
+                aria-label={contentsExpanded ? undefined : `Go to ${s.spec}: ${s.title}`}
+                title={contentsExpanded ? undefined : s.title}
+                className={`legal-index-link min-w-0 ${contentsExpanded ? "lg:w-full lg:max-w-full" : "justify-center lg:h-10 lg:w-10 lg:px-0"}`}
+                onClick={(e) => { e.preventDefault(); scrollToSpec(s.spec); }}
+              >
+                <span className="shrink-0">{s.spec}</span>
+                {contentsExpanded && <span className={`min-w-0 break-words [overflow-wrap:anywhere] ${active === s.spec ? "text-ink" : ""}`}>{s.title}</span>}
+              </a>
+            ))}
           </nav>
           {contentsExpanded && (
-            <p className="editorial-contents-footnote">
-              Select a section to jump directly to it. The contents follows your reading position and stays in sync with the Spec Map.
+            <p className="mt-4 hidden border-t border-ink/10 pt-4 text-[calc(11px*var(--ui-scale))] leading-[1.7] text-ink-faint lg:block">
+              {firstSpec} — {lastSpec} · {unit.code} · read in order or hop
+              from the contents; the map in the navbar tracks you either way.
             </p>
           )}
         </aside>
@@ -340,7 +313,7 @@ function NotesEditorialBody({
               hero carries the first; the exhibit carries the rest */}
           {exhibitPs.length > 0 && (
             <Reveal>
-              <div className="legal-card editorial-opening-card mt-6 w-full min-w-0 rounded-[calc(18px*var(--ui-scale))] px-5 py-4">
+              <div className="legal-card mt-6 max-w-[76ch] rounded-[calc(18px*var(--ui-scale))] px-5 py-4">
                 <EditorialLabel>How the note opens</EditorialLabel>
                 <div className="mt-2.5 flex flex-col gap-2">
                   {exhibitPs.map((b, i) =>
