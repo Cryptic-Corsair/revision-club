@@ -81,7 +81,7 @@ export function SpecIndex({
         </SoftButton>
       </PopIn>
 
-      <PopIn delay={0.05} className="mt-7">
+      <PopIn delay={0.05} className="rooms-spec-index-hero mt-7">
         <span
           className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
           style={{ background: "#FFD43B", color: readableInk("#FFD43B") }}
@@ -279,7 +279,7 @@ function TopicGroup({
     <Reveal delay={Math.min(index * 0.03, 0.1)} className="mt-8">
       <div className="rooms-spec-group rounded-[calc(26px*var(--ui-scale))] bg-paper p-4 puff sm:p-6">
         {/* topic header */}
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="rooms-spec-group-heading flex flex-wrap items-center gap-3">
           <span
             className="h-3.5 w-3.5 shrink-0 rounded-full"
             style={{ background: g.candy }}
