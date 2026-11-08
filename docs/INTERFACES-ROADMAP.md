@@ -322,6 +322,39 @@ Editorial:
 Night, Dune and Classic at desktop and mobile widths. Check accent contrast in
 Dune, long topic titles, full-note CTA wrapping, and previous/next navigation.
 
+
+### R9 — The Rooms field-atlas rebuild
+
+A full presentation rebuild of the Rooms learning surfaces, retaining the existing
+wave-and-room reading structure:
+
+1. **One Rooms design system** — scoped `.rooms-page` foundations and page-specific
+   variants bring unit, topic, note, pack, specification-index and progress views into
+   one field-atlas language: strong typography, mineral accents, restrained metadata,
+   precise framing and calm surfaces.
+2. **Specification content remains intact** — note prose, specification statements,
+   equations, figure data, block order, registry identities and navigation remain
+   untouched. The shared `SpecSectionView` still renders the same data in notes and
+   packs.
+3. **Wave invariant** — retain the leading `BandWave` and every transition after each
+   mapped specification section in both `NotesReader` and `PackView`, including the
+   final transition back to the page surface. Do not replace, hide or remove waves at
+   any theme or viewport.
+4. **Theme-aware treatment** — preserve the existing Light, Night, Dune and Classic
+   surface ladders; use the existing mineral accents outside Dune and the paired
+   warm-cream / sea-glass accents in Dune.
+5. **Strict ownership** — scope the new system to Rooms. Editorial, the homepage,
+   shared navigation chrome, preferences and persistence are not part of this pass.
+6. **Responsive reading** — keep chemistry prose, long tables, figures, topic titles,
+   note contents chips and controls legible on mobile without horizontal page overflow.
+
+**Files:** Rooms unit/topic/note readers, shared Rooms section/block renderer, Rooms
+pack, progress and spec index components, and scoped additions to `globals.css`.  
+**Gate:** type-check + lint + production build; inspect all Rooms surfaces in all four
+themes at desktop and mobile widths. Confirm the number and order of `BandWave`
+components remains one transition after every mapped spec section in the note reader
+and pack. Compare Editorial and homepage before/after to confirm no visual changes.
+
 ---
 
 ## 3 · Risk register
