@@ -21,7 +21,7 @@ import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { togglePick, usePacks } from "@/lib/spectra/packs";
 import { getNotes } from "@/lib/spectra/notes";
 import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
-import { Fmt } from "./format";
+import { Fmt, plural } from "./format";
 import {
   PopIn,
   Reveal,
@@ -192,9 +192,9 @@ function NotesReaderBody({
   const time = useTimeData();
   const spentHere = topicSeconds(time, `${unit.code}/${doc.topicId}`);
   const stats = [
-    `${doc.sections.length} spec sections`,
-    `${count("worked")} worked examples`,
-    `${count("figure")} diagrams`,
+    plural(doc.sections.length, "spec section"),
+    plural(count("worked"), "worked example"),
+    plural(count("figure"), "diagram"),
     ...(spentHere >= 60 ? [`${fmtClock(spentHere)} of your time here`] : []),
   ];
 

@@ -3,7 +3,13 @@ import type { ReactNode } from "react";
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · <Fmt/> — inline markup → typography
    **bold** · *em* · ==highlight== · ~subscript~ · ^superscript^
+
+   Plus plural() — the count-word helper the hero stat lines share
+   ("1 diagram", not "1 diagrams").
    ═══════════════════════════════════════════════════════════════ */
+
+/* "2 diagrams" / "1 diagram" — the plural supplies its own 's' */
+export const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
 
 const TOKEN = /(\*\*(.+?)\*\*|\*(.+?)\*|==(.+?)==|~(.+?)~|\^(.+?)\^)/;
 

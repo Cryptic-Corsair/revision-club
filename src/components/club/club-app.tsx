@@ -114,9 +114,6 @@ const PackEditorial = dynamic(
 const SearchPalette = dynamic(() => import("./search").then((m) => m.SearchPalette), {
   ssr: false,
 });
-const SampleNotes = dynamic(() => import("./sample-notes").then((m) => m.SampleNotes), {
-  loading: RoomLoading,
-});
 const CustomizePanel = dynamic(() => import("./customize").then((m) => m.CustomizePanel), {
   ssr: false,
 });
@@ -139,7 +136,6 @@ type View =
   | { kind: "spec" }
   | { kind: "pack" }
   | { kind: "sticker" }
-  | { kind: "sample" }
   | { kind: "legal" };
 
 /* ————— the brand mark —————
@@ -921,7 +917,6 @@ export default function ClubApp() {
       void import("./search");
       void import("./customize");
       void import("./legal");
-      void import("./sample-notes");
     };
     const ric = (
       window as Window & {
@@ -948,11 +943,9 @@ export default function ClubApp() {
               ? "pack"
               : view.kind === "sticker"
                 ? "sticker"
-                : view.kind === "sample"
-                  ? "sample"
-                  : view.kind === "legal"
-                    ? "legal"
-                    : "home";
+                : view.kind === "legal"
+                  ? "legal"
+                  : "home";
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
@@ -1116,7 +1109,6 @@ export default function ClubApp() {
   const openPack = useCallback(() => setView({ kind: "pack" }), []);
   const openSpec = useCallback(() => setView({ kind: "spec" }), []);
   const openLegal = useCallback(() => setView({ kind: "legal" }), []);
-  const openSample = useCallback(() => setView({ kind: "sample" }), []);
   const openSearch = useCallback(() => setSearchOpen(true), []);
   const openCustomize = useCallback(() => setCustomizeOpen(true), []);
   const closeCustomize = useCallback(() => setCustomizeOpen(false), []);
@@ -1317,10 +1309,6 @@ export default function ClubApp() {
                   );
                 })()}
   
-                {view.kind === "sample" && (
-                  <SampleNotes onBack={goHome} onOpenSpec={openSpec} />
-                )}
-
                 {view.kind === "legal" && <Legal onBack={goHome} />}
               </m.div>
             </AnimatePresence>

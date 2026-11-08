@@ -28,13 +28,13 @@ import type { SpecSection } from "@/lib/spectra/notes-types";
    five-point rule, and the note's blocks re-set editorially by
    SampleBlockView.
 
-   Served to every editorial notes surface: the real notes reader,
-   the sample room, and whatever rooms follow. One furniture set,
+   Served to every editorial notes surface — the real notes reader
+   and the pack's assembled clauses alike. One furniture set,
    so every page that wears the document room ages together.
    ═══════════════════════════════════════════════════════════════ */
 
-/* one friendly icon per clause, walked in order — the same shelf
-   the sample room introduced; any editorial page rotates through it */
+/* one friendly icon per clause, walked in order — the shared
+   shelf every editorial page rotates through */
 export const CLAUSE_ICONS = [
   Atom,
   Magnet,
@@ -71,8 +71,8 @@ export function EditorialSectionView({
   /** the small caps line beside the icon chip —
       "SPEC 2.6 · WCH11 TOPIC 3" */
   eyebrow?: string;
-  /** the DOM id prefix of this document's anchors — "spec-" for real
-      notes, "sample-" for the sample room */
+  /** the DOM id prefix of this document's anchors — "spec-" on the
+      real notes, matching each room's anchor prefix */
   anchorPrefix?: string;
   hideStatement?: boolean;
   /** the control riding the clause header — the pack tick, as in

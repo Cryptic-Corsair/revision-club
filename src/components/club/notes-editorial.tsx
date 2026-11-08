@@ -15,7 +15,7 @@ import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { togglePick, usePacks } from "@/lib/spectra/packs";
 import { getNotes } from "@/lib/spectra/notes";
 import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
-import { Fmt } from "./format";
+import { Fmt, plural } from "./format";
 import { PopIn, Reveal, SoftButton, readableInk, shade } from "./bits";
 import { accentOf } from "./bands";
 import { useSpecMapRegister } from "./spec-map";
@@ -34,7 +34,7 @@ import { EditorialLabel, SampleBlockView } from "./sample-blocks";
    ═══════════════════════════════════════════════════════════════ */
 
 /* what every note on the site gives you — the summary card's lines,
-   as true for a real topic note as for the sample */
+   as true for the newest note as for the very first */
 const SUMMARY = [
   "One section per specification point, in syllabus order, with the official statement quoted above the teaching.",
   "Key definitions boxed for recall — the terms the specification itself uses.",
@@ -170,9 +170,9 @@ function NotesEditorialBody({
   const time = useTimeData();
   const spentHere = topicSeconds(time, `${unit.code}/${doc.topicId}`);
   const stats = [
-    `${doc.sections.length} spec sections`,
-    `${count("worked")} worked examples`,
-    `${count("figure")} diagrams`,
+    plural(doc.sections.length, "spec section"),
+    plural(count("worked"), "worked example"),
+    plural(count("figure"), "diagram"),
     ...(spentHere >= 60 ? [`${fmtClock(spentHere)} of your time here`] : []),
   ];
 

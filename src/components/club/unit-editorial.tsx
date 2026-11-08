@@ -173,7 +173,7 @@ export function UnitEditorial({
                       {t.title}
                     </span>
                     <span className="mt-1.5 block max-w-[64ch] text-[calc(13.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
-                      {t.summary}
+                      <Fmt text={t.summary} />
                     </span>
                   </span>
                 </m.button>

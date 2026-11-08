@@ -99,7 +99,7 @@ export function TopicView({
             {topic.title}
           </h1>
           <p className="mt-3.5 max-w-[60ch] text-[calc(16.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
-            {topic.summary}
+            <Fmt text={topic.summary} />
           </p>
         </PopIn>
 

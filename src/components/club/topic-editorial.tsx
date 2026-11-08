@@ -104,7 +104,7 @@ export function TopicEditorial({
               <span className="legal-heading-accent">.</span>
             </h1>
             <p className="mt-5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-soft">
-              {topic.summary}
+              <Fmt text={topic.summary} />
             </p>
           </div>
         </section>

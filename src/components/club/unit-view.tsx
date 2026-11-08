@@ -201,7 +201,7 @@ export function UnitView({
                         {t.title}
                       </h3>
                       <p className="mt-1.5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.7] text-ink-soft">
-                        {t.summary}
+                        <Fmt text={t.summary} />
                       </p>
                     </m.button>
                   </div>

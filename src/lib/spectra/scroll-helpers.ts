@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · verified hops & the scroll spy
-   Shared by every notes surface — the classic reader, the sample
-   room, and whatever interface comes next. Lifted verbatim from
+   Shared by every notes surface — the classic reader and the
+   editorial document dress alike. Lifted verbatim from
    notes-reader.tsx (where the recipe was hand-measured and
    debugged) so all skins land on the same ground.
 
@@ -18,7 +18,7 @@ export const specAnchorId = (prefix: string, spec: string) =>
 
 export interface HopOptions {
   /** the DOM id prefix of the section anchors — "spec-" for real
-      notes, "sample-" for the sample room */
+      notes, matching each room's anchor prefix */
   prefix?: string;
   /** fixed clearance kept above the anchor — the pill nav's
       standing room, in px */
