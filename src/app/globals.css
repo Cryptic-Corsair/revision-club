@@ -2640,12 +2640,7 @@ html.dune .rooms-page {
   color: var(--rooms-accent);
   transform: none !important;
 }
-.rooms-progress-page > div.rounded-\[calc\(32px\*var\(--ui-scale\)\)\] {
-  border: 1px solid var(--rooms-line);
-  border-radius: 16px !important;
-  background: var(--color-paper) !important;
-  box-shadow: var(--rooms-shadow);
-}
+.rooms-progress-page .rooms-time-ledger { border: 1px solid var(--rooms-line); border-radius: 16px !important; background: var(--color-paper) !important; box-shadow: var(--rooms-shadow); }
 .rooms-progress-page .rooms-mascot { display: none; }
 .rooms-progress-page .rooms-lede { border-radius: 4px 12px 12px 4px; }
 .rooms-progress-page section { margin-top: calc(2.8rem * var(--ui-scale)) !important; }
