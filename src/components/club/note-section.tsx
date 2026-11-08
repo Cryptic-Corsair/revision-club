@@ -200,7 +200,7 @@ export function SpecSectionView({
           />
           {bannerAction}
         </div>
-        <h2 className="mt-3.5 font-display text-[calc(clamp(1.55rem,3.4vw,1.95rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
+        <h2 className="mt-3.5 font-display text-[calc(clamp(1.7rem,3.6vw,2.15rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
           {section.title}
         </h2>
         {!hideStatement && (
