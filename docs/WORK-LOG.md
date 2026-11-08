@@ -69,3 +69,17 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified; no application code changed.
 - **Commit(s):** see the commit that adds this journal entry in the repository history.
 - **Follow-up / known limitations:** future meaningful work must append a completed entry to this journal. Keep the index and root README links current.
+
+
+### 2026-11-08 — Verify documentation reorganisation
+
+- **Contributor:** AI agent.
+- **Request / objective:** complete post-commit verification of the documentation folder and journal setup.
+- **Investigation:** fetched the repository root listing, the complete `docs/` directory listing and the structural commit details from GitHub.
+- **Changes made:** no additional application or documentation content changes; this entry records verification of the preceding reorganisation.
+- **Preserved invariants:** all three existing guides were moved with their original blob contents unchanged; application source, chemistry material, preferences and saved user data were not modified.
+- **Decisions and rationale:** the root `AGENTS.md` remains a minimal discovery pointer so coding agents are directed to the central documentation folder before editing.
+- **Verification:** confirmed `docs/DEVELOPMENT.md`, `docs/INTERFACES-ROADMAP.md`, `docs/SITE-HANDBOOK.md`, `docs/README.md` and `docs/WORK-LOG.md` exist on main; confirmed the three original root-level guide paths are absent; confirmed root `README.md` and `AGENTS.md` exist and link to the new documentation structure. Lint/build and visual checks were not run because only documentation and repository paths changed.
+- **Deployment:** not verified; no application code changed.
+- **Commit(s):** structural reorganisation: `d855e6010c644b7e1788301def68e874296660e5`. This verification entry is recorded in the following commit.
+- **Follow-up / known limitations:** future contributors must continue appending journal entries for meaningful work. No known path-verification issues.
