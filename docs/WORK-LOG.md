@@ -167,3 +167,15 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified.
 - **Commit(s):** progress component `5283e65f`; CSS `a5931dd6`; handbook `a02d1d7cd86e2a7e3416ed2a2e2b360686308df7`; roadmap `c78a5c91693b375c078793915b65eaab4fccbfcb`.
 - **Follow-up / known limitations:** desktop/mobile visual inspection and all four theme checks remain outstanding.
+
+
+### 2026-11-08 — Refine and unify the Rooms field-atlas system
+
+- **Contributor:** AI agent.
+- **Request / objective:** continue the Rooms rebuild with a consistency and finish pass across progress, revision packs, the specification index and shared reading surfaces.
+- **Changes made:** introduced a paired primary/secondary Rooms accent contract with theme-specific readable foregrounds; retained Dune warm cream `#FDF6E3` and sea-glass `#9DB9B0`, and adjusted Classic's mineral primary for readable white-on-accent contrast. Reworked progress stat pillars, weekly goal controls, progress fills, pack metadata, selected/read controls, toolbar states, empty/completed pack states and spec-index actions to use the shared pair. Added semantic class hooks to replace brittle positional selectors in the pack and progress layouts; tightened the progress stats into a compact three-column mobile layout. Corrected the Rooms callout accent token and added an optional `className` prop to `SectionTag` so the progress tag can be scoped without affecting other callers.
+- **Preserved invariants:** chemistry source text, official specification statements, equations, figures, section order, IDs, navigation, revision state, storage keys and preference schemas remain unchanged. The `BandWave` helper and paths were not edited; the note reader and pack each retain their leading transition and one wave after every mapped section. Editorial and homepage components remain untouched.
+- **Verification:** re-fetched all changed source files; confirmed JSX hook classes, the corrected stat markup, balanced CSS braces, and two `BandWave` call sites in each reader. Confirmed `bands.tsx` is unchanged. The latest Vercel status reports a build-rate-limit failure (the linked status target explicitly identifies the account build-rate limit), so it did not provide a successful compile/build result. No browser/visual inspection was available.
+- **Deployment:** no successful deployment is claimed; Vercel is currently blocked by its build-rate limit.
+- **Commit(s):** refinement commits include `c227f17a`, `631e3eda`, `f7f4ee6b`, `b67e4edb`, `5daf9ae1`, `71c634a3`, `c8763cfc`, `2986fb80`, `58bd8f95`, `4f0b0d61`, `3676d915`, `0ee652a0`, `f62d96ba`, `109763b4`, and `e480a374`.
+- **Follow-up / known limitations:** rerun TypeScript/ESLint/production build when Vercel's build quota permits; visually inspect desktop/mobile in Light, Night, Dune and Classic, especially the three-column progress stats, long pack toolbars, figure/table widths, contrast and wave joins.

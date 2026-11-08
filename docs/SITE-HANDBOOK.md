@@ -334,7 +334,14 @@ See INTERFACES-ROADMAP.md for the detailed interface contract and planned bounda
 
 The Rooms interface now uses a scoped **field-atlas** presentation: mineral accents,
 precise typographic hierarchy, restrained metadata, framed learning surfaces and
-theme-aware reading panels. Its component and CSS scope is identified by
+theme-aware reading panels. The palette is driven by the paired `--rooms-accent` and
+`--rooms-accent-2` tokens, with corresponding readable foreground and soft-surface
+tokens. Dune uses warm cream `#FDF6E3` as its primary accent and sea-glass `#9DB9B0`
+as its secondary accent; the other themes use their own tuned mineral/sea-glass pair.
+Primary accents identify key actions and specification markers; secondary accents
+identify progress, completion and selected reading states. Topic/unit identity colours
+may remain as local metadata, but should not become a competing global control palette.
+Its component and CSS scope is identified by
 `.rooms-page` and the page-specific `.rooms-*-page` classes. Editorial and the
 homepage do not inherit this system.
 
