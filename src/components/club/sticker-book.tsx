@@ -254,9 +254,9 @@ export function StickerBook({
       {/* ————— mascot line ————— */}
       <PopIn delay={0.15} className="mt-6 flex items-end gap-2 sm:gap-3">
         <div className="rooms-mascot shrink-0 pb-1">
-          <Mascot main="#12B886" mood={goalMet || pct >= 0.5 ? "cheer" : "idle"} size={88} bubbles={false} />
+          <Mascot main="var(--rooms-accent-2)" mood={goalMet || pct >= 0.5 ? "cheer" : "idle"} size={88} bubbles={false} />
         </div>
-        <SpeechBubble bg={tint("#12B886", 10)} className="min-w-0 flex-1" tailClass="left-[-9px] rotate-[135deg]">
+        <SpeechBubble bg="var(--rooms-accent-2-soft)" className="rooms-progress-lede min-w-0 flex-1" tailClass="left-[-9px] rotate-[135deg]">
           <p className="text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink">{timeLine}</p>
         </SpeechBubble>
       </PopIn>
