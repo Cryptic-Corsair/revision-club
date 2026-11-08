@@ -75,7 +75,7 @@ export const inkMix = (main: string, pct = 45) =>
 /* Rooms use one restrained mineral accent. The six selected accents
    remain intact for the wider app, but no longer colour every note
    section; the reader's hierarchy comes from type, spacing and tone. */
-export const accentOf = (_i: number) => "#80684F";
+export const accentOf = (_i: number) => "#B8874B";
 /* bands mix their candy over --tint-base at --band-mix (10% by day)
    — the daylight walk of the hue wheel. After dark both steps are
    overridden by --note-band-a/b (see html.dark in globals.css):
