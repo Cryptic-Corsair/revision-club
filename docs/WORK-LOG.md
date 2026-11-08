@@ -189,3 +189,14 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified.
 - **Commit(s):** see this implementation commit.
 - **Follow-up / known limitations:** inspect expanded and collapsed states at desktop and mobile widths, especially long titles and high section counts; verify keyboard navigation and active-item visibility while scrolling.
+
+### 2026-11-09 — Normalize Editorial content surface widths
+
+- **Contributor:** AI agent.
+- **Request / objective:** ensure content components remain visually coherent when the Editorial contents rail is collapsed.
+- **Investigation:** found that the opening exhibit card and each specification statement card had independent character-based maximum widths, while the summary, clause body and closing panel filled the available reading column. This caused surfaces to stop at different horizontal positions as the sidebar changed width.
+- **Changes made:** standardized the major reading surfaces to fill one shared reading-column width in both sidebar states. Removed independent max-width constraints from the opening and specification cards; retained a readable text measure inside their paragraphs. Added min-width safeguards to prevent intrinsic content from forcing uneven sizing.
+- **Preserved invariants:** contents navigation behavior, active-section tracking, note content, section anchors, typography, mobile contents treatment and theme colors.
+- **Verification:** source-level width constraints inspected and updated. No lint, production build, browser visual inspection or deployment verification was run.
+- **Deployment:** not verified.
+- **Commit(s):** see this implementation commit.

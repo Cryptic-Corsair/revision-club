@@ -106,7 +106,7 @@ export function EditorialSectionView({
         </h3>
         {!hideStatement && (
           <div
-            className="mt-4 max-w-[72ch] rounded-[calc(18px*var(--ui-scale))] bg-paper/90 px-5 py-4"
+            className="editorial-specification-card mt-4 w-full min-w-0 rounded-[calc(18px*var(--ui-scale))] bg-paper/90 px-5 py-4"
             style={{ borderLeft: `5px solid ${tint(accent, 45)}` }}
           >
             <div className="font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">

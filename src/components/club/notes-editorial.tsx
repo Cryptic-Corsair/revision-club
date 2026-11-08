@@ -340,7 +340,7 @@ function NotesEditorialBody({
               hero carries the first; the exhibit carries the rest */}
           {exhibitPs.length > 0 && (
             <Reveal>
-              <div className="legal-card mt-6 max-w-[76ch] rounded-[calc(18px*var(--ui-scale))] px-5 py-4">
+              <div className="legal-card editorial-opening-card mt-6 w-full min-w-0 rounded-[calc(18px*var(--ui-scale))] px-5 py-4">
                 <EditorialLabel>How the note opens</EditorialLabel>
                 <div className="mt-2.5 flex flex-col gap-2">
                   {exhibitPs.map((b, i) =>

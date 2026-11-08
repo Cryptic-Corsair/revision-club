@@ -1541,6 +1541,31 @@ html.dune .legal-room mark {
 .legal-mark-dot-one { top: 14%; right: 23%; }
 .legal-mark-dot-two { bottom: 18%; left: 18%; width: 7px; background: #e47b61; }
 .legal-index { min-width: 0; }
+/* Keep editorial reading surfaces on one shared width track.
+   Text measure stays controlled inside each surface; the surface
+   itself always fills the reading column as the contents rail changes. */
+.editorial-reading-layout > .min-w-0 {
+  width: 100%;
+  min-width: 0;
+}
+.editorial-reading-layout .legal-summary,
+.editorial-reading-layout .editorial-opening-card,
+.editorial-reading-layout .legal-clause,
+.editorial-reading-layout .editorial-specification-card,
+.editorial-reading-layout .legal-closing {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+.editorial-reading-layout .legal-clause-content {
+  min-width: 0;
+  width: 100%;
+}
+.editorial-reading-layout .editorial-opening-card p,
+.editorial-reading-layout .editorial-specification-card p,
+.editorial-reading-layout .legal-closing > p {
+  max-width: 76ch;
+}
 .editorial-reading-layout {
   grid-template-columns: minmax(0, 1fr);
 }
