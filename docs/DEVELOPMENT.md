@@ -169,6 +169,8 @@ replace the files in `src/app/fonts/`, and keep the `weight` ranges in
 - `html.dune` → **dune** lab (the chocolate room) — always paired with
   `html.dark` (both classes on `<html>`): the dark class carries every
   `dark:` utility, dune re-tints the tokens on top. No mood rotation.
+  Rooms uses warm cream (`#FDF6E3`) and muted sea-glass (`#9DB9B0`) as its
+  two alternating Dune accents; the chocolate surface palette remains unchanged.
 - `html.classic` → **classic** lab (the default): daylight cream `#fdf6e3`
   rooms with espresso `#2c2013` ink — this is the theme new visitors see
 
