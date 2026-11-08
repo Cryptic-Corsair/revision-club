@@ -2644,9 +2644,6 @@ html.dune .rooms-page {
 .rooms-progress-page .rooms-mascot { display: none; }
 .rooms-progress-page .rooms-lede { border-radius: 4px 12px 12px 4px; }
 .rooms-progress-page section { margin-top: calc(2.8rem * var(--ui-scale)) !important; }
-.rooms-progress-page section > div > div {
-  border-radius: 12px !important;
-}
 .rooms-progress-page .bg-paper.puff {
   border: 1px solid var(--rooms-line);
   box-shadow: none !important;
@@ -3032,5 +3029,25 @@ html.dune .rooms-page {
   .rooms-pack-page .rooms-picked-chip {
     transition: none !important;
   }
+}
+
+
+
+.rooms-progress-page .rooms-progress-lede {
+  border: 1px solid var(--rooms-line);
+  border-left: 3px solid var(--rooms-accent-2);
+  border-radius: 4px 12px 12px 4px;
+  background: var(--rooms-accent-2-soft) !important;
+  box-shadow: none !important;
+}
+.rooms-pack-empty .rooms-empty-pack-cta {
+  border: 1px solid var(--rooms-accent-line);
+  border-radius: 9px !important;
+  background: var(--rooms-accent) !important;
+  color: var(--rooms-accent-ink) !important;
+  box-shadow: none !important;
+}
+.rooms-pack-page .rooms-pack-end-progress {
+  background: linear-gradient(90deg, var(--rooms-accent-2), var(--rooms-accent)) !important;
 }
 
