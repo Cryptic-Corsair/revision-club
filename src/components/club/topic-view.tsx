@@ -8,6 +8,7 @@ import { toggleRevised, useRevised } from "@/lib/spectra/progress";
 import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { TopicBlocks } from "./blocks";
 import { Fmt } from "./format";
+import { accentOf } from "./bands";
 import {
   Chip,
   Confetti,
@@ -16,6 +17,7 @@ import {
   SoftButton,
   Squiggle,
   shade,
+  readableInk,
 } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -158,7 +160,7 @@ export function TopicView({
               isRevised
                 ? {
                     background: main,
-                    color: "#fff",
+                    color: readableInk(main),
                     boxShadow: `0 3px 0 ${shade(main)}`,
                   }
                 : {
@@ -251,7 +253,7 @@ export function TopicView({
                 Back to {unit.code}
               </span>
             </span>
-            <PartyPopper className="h-5 w-5 shrink-0" />
+            <PartyPopper className="h-5 w-5 shrink-0" style={{ color: main }} />
           </m.button>
         )}
       </nav>
