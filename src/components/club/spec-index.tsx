@@ -83,8 +83,7 @@ export function SpecIndex({
 
       <PopIn delay={0.05} className="rooms-spec-index-hero mt-7">
         <span
-          className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
-          style={{ background: "#FFD43B", color: readableInk("#FFD43B") }}
+          className="rooms-spec-index-kicker inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
         >
           <Target className="h-3.5 w-3.5" /> Spec index
         </span>
@@ -115,20 +114,19 @@ export function SpecIndex({
       {/* ————— your pack strip ————— */}
       <Reveal delay={0.16} className="mt-6">
         <div
-          className="flex flex-col gap-3.5 rounded-[calc(26px*var(--ui-scale))] px-5 py-4 puff sm:flex-row sm:items-center"
-          style={{ background: honeyWash("#FFD43B", 16) }}
+          className="rooms-pack-summary flex flex-col gap-3.5 rounded-[calc(26px*var(--ui-scale))] px-5 py-4 puff sm:flex-row sm:items-center"
         >
           <div className="flex min-w-0 items-center gap-3">
             <span
               className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-ink/[0.08] bg-paper"
             >
-              <ClipboardList className="h-5 w-5" style={{ color: "var(--color-lemon)" }} />
+              <ClipboardList className="h-5 w-5" />
             </span>
             <p className="min-w-0 flex-1 text-[calc(14px*var(--ui-scale))] font-semibold leading-snug text-ink">
               {picks.length > 0 ? (
                 <>
                   Your pack holds{" "}
-                  <span style={{ color: "var(--color-lemon)" }}>
+                  <span className="rooms-pack-summary-count">
                     {picks.length} spec point{picks.length === 1 ? "" : "s"}
                   </span>{" "}
                   — the notes behind them are waiting.
@@ -143,8 +141,7 @@ export function SpecIndex({
             onClick={onOpenPack}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.96 }}
-            className="inline-flex min-h-[calc(44px*var(--ui-scale))] w-full cursor-pointer items-center justify-center gap-2 rounded-full px-4 py-2.5 font-display text-[calc(13px*var(--ui-scale))] font-semibold text-white sm:w-auto sm:shrink-0"
-            style={{ background: "#FF922B", boxShadow: `0 3px 0 ${shade("#FF922B")}` }}
+            className="rooms-open-pack inline-flex min-h-[calc(44px*var(--ui-scale))] w-full cursor-pointer items-center justify-center gap-2 rounded-full px-4 py-2.5 font-display text-[calc(13px*var(--ui-scale))] font-semibold sm:w-auto sm:shrink-0"
           >
             <ClipboardList className="h-4.5 w-4.5" />
             Open your pack
