@@ -67,6 +67,11 @@ const NotesReader = dynamic(() => import("./notes-reader").then((m) => m.NotesRe
   ssr: false,
   loading: RoomLoading,
 });
+/* the notes reader's editorial twin — same props, the document dress */
+const NotesEditorial = dynamic(
+  () => import("./notes-editorial").then((m) => m.NotesEditorial),
+  { ssr: false, loading: RoomLoading },
+);
 const StickerBook = dynamic(() => import("./sticker-book").then((m) => m.StickerBook), {
   ssr: false,
   loading: RoomLoading,
@@ -876,6 +881,7 @@ export default function ClubApp() {
   useEffect(() => {
     const warm = () => {
       void import("./notes-reader");
+      void import("./notes-editorial");
       void import("./spec-index");
       void import("./pack-view");
       void import("./sticker-book");
@@ -1085,15 +1091,22 @@ export default function ClubApp() {
                   />
                 )}
   
-                {view.kind === "notes" && unit && notesMeta && (
-                  <NotesReader
-                    key={view.docId}
-                    docId={view.docId}
-                    unit={unit}
-                    onBack={() => openUnit(unit.code)}
-                    jumpToSpec={view.spec}
-                  />
-                )}
+                {view.kind === "notes" && unit && notesMeta && (() => {
+                  /* the interface swap — the editorial twin wears the
+                     same props contract, so the shell changes nothing
+                     but the component picked */
+                  const Reader =
+                    prefs.iface === "editorial" ? NotesEditorial : NotesReader;
+                  return (
+                    <Reader
+                      key={view.docId}
+                      docId={view.docId}
+                      unit={unit}
+                      onBack={() => openUnit(unit.code)}
+                      jumpToSpec={view.spec}
+                    />
+                  );
+                })()}
   
                 {view.kind === "spec" && (
                   <SpecIndex

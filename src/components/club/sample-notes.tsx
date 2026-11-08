@@ -3,30 +3,21 @@
 import {
   useCallback,
   useMemo,
-  type CSSProperties,
 } from "react";
 import {
   ArrowLeft,
   Atom,
   BookOpenCheck,
-  Droplets,
-  FlaskConical,
-  Gauge,
-  Magnet,
-  PieChart,
-  Sparkles,
-  Target,
-  TestTubes,
-  Zap,
 } from "./icons";
-import { PopIn, Reveal, SoftButton, tint } from "./bits";
+import { PopIn, Reveal, SoftButton } from "./bits";
 import { accentOf } from "./bands";
-import { EditorialLabel, SampleBlockView } from "./sample-blocks";
+import { EditorialLabel } from "./sample-blocks";
 import { useSpecMapRegister } from "./spec-map";
 import { Fmt } from "./format";
 import { getNotes } from "@/lib/spectra/notes";
 import { getUnit } from "@/lib/spectra/units";
 import { scrollToSpec, specAnchorId, useSpecSpy } from "@/lib/spectra/scroll-helpers";
+import { EditorialSectionView, figOffsetsOf } from "./spec-section-editorial";
 import type { NotesDoc } from "@/lib/spectra/notes-types";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -43,21 +34,6 @@ import type { NotesDoc } from "@/lib/spectra/notes-types";
    ═══════════════════════════════════════════════════════════════ */
 
 const DOC_ID = "wch11-t03";
-
-/* one friendly icon per clause, walked in order */
-const SECTION_ICONS = [
-  Atom,
-  Magnet,
-  Droplets,
-  FlaskConical,
-  Zap,
-  Gauge,
-  Target,
-  TestTubes,
-  PieChart,
-  Sparkles,
-  BookOpenCheck,
-];
 
 const SUMMARY = [
   "One section per specification point, in syllabus order, with the official statement quoted above the teaching.",
@@ -134,17 +110,9 @@ function SampleNotesBody({
   }, [doc]);
 
   /* every diagram is numbered as a plate, in reading order —
-     key “section index : block index” → figure number */
-  const figNo = useMemo(() => {
-    const m = new Map<string, number>();
-    let n = 0;
-    doc.sections.forEach((s, si) =>
-      s.blocks.forEach((b, bi) => {
-        if (b.k === "figure") m.set(`${si}:${bi}`, ++n);
-      }),
-    );
-    return m;
-  }, [doc]);
+     the shared renderer numbers each clause's exhibits from the
+     running offset, exactly as the reader does */
+  const figOffsets = useMemo(() => figOffsetsOf(doc.sections), [doc]);
 
   const firstSpec = doc.sections[0]?.spec ?? "";
   const lastSpec = doc.sections[doc.sections.length - 1]?.spec ?? "";
@@ -264,54 +232,19 @@ function SampleNotesBody({
             </Reveal>
 
             <div className="legal-clauses">
-              {doc.sections.map((section, i) => {
-                const accent = accentOf(i);
-                const Icon = SECTION_ICONS[i % SECTION_ICONS.length];
-                return (
-                  <Reveal key={section.spec} delay={Math.min(i * 0.03, 0.16)}>
-                    <section id={elId(section.spec)} className="legal-clause scroll-mt-28">
-                      <div className="legal-clause-rail">
-                        <span className="legal-clause-number">{String(i + 1).padStart(2, "0")}</span>
-                        {i < doc.sections.length - 1 && <span className="legal-clause-line" />}
-                      </div>
-                      <div className="legal-clause-content">
-                        <div className="flex flex-wrap items-center gap-3">
-                          <span className="legal-clause-icon" style={{ "--legal-accent": accent } as CSSProperties}>
-                            <Icon className="h-5 w-5" strokeWidth={1.9} />
-                          </span>
-                          <span className="legal-meta">SPEC {section.spec} · WCH11 TOPIC 3</span>
-                        </div>
-                        <h3 className="mt-4 font-display text-[calc(21px*var(--ui-scale))] font-semibold tracking-tight text-ink sm:text-[calc(24px*var(--ui-scale))]">
-                          {section.title}
-                        </h3>
-                        <div
-                          className="mt-4 max-w-[72ch] rounded-[calc(18px*var(--ui-scale))] bg-paper/90 px-5 py-4"
-                          style={{ borderLeft: `5px solid ${tint(accent, 45)}` }}
-                        >
-                          <div
-                            className="font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]"
-                          >
-                            From the specification
-                          </div>
-                          <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.75] text-ink italic">
-                            <Fmt text={section.statement} />
-                          </p>
-                        </div>
-                        <div className="mt-6 flex flex-col gap-5">
-                          {section.blocks.map((b, j) => (
-                            <SampleBlockView
-                              key={j}
-                              block={b}
-                              accent={accent}
-                              fig={figNo.get(`${i}:${j}`)}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </section>
-                  </Reveal>
-                );
-              })}
+              {doc.sections.map((section, i) => (
+                <Reveal key={section.spec} delay={Math.min(i * 0.03, 0.16)}>
+                  <EditorialSectionView
+                    section={section}
+                    index={i}
+                    total={doc.sections.length}
+                    accent={accentOf(i)}
+                    eyebrow={`SPEC ${section.spec} · WCH11 TOPIC 3`}
+                    anchorPrefix="sample-"
+                    figOffset={figOffsets[i]}
+                  />
+                </Reveal>
+              ))}
             </div>
           </div>
 
