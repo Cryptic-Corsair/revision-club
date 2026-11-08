@@ -83,3 +83,17 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified; no application code changed.
 - **Commit(s):** structural reorganisation: `d855e6010c644b7e1788301def68e874296660e5`. This verification entry is recorded in the following commit.
 - **Follow-up / known limitations:** future contributors must continue appending journal entries for meaningful work. No known path-verification issues.
+
+
+### 2026-11-08 — Restore pre-accent-reconstruction state
+
+- **Contributor:** AI agent.
+- **Request / objective:** return the repository to the state represented by commits `4e411de` and `d855e60`, immediately before the accent reconstruction work.
+- **Investigation:** confirmed `4e411de` is the documentation-verification commit directly following `d855e60`; used its exact Git tree as the restoration target.
+- **Changes made:** restored the complete repository tree to `4e411de`, removing all subsequent accent-reconstruction and neutralisation changes. Recorded this rollback in the work journal.
+- **Preserved invariants:** all source files, documentation, chemistry content, preferences and configuration match the requested pre-reconstruction snapshot, except for this journal entry.
+- **Decisions and rationale:** used a new forward-moving restore commit rather than rewriting branch history. This preserves the intervening commits for audit while restoring their pre-change file state.
+- **Verification:** confirmed the restored branch points to a commit using the exact tree from `4e411de`; no build, lint or visual checks were run.
+- **Deployment:** not verified.
+- **Commit(s):** restoration commit and journal entry follow.
+- **Follow-up / known limitations:** none known.
