@@ -1983,8 +1983,8 @@ html.dark:not(.dune) .legal-room { --legal-rust: #e0c4eb; }
   border: 1px solid color-mix(in oklab, var(--room-accent) 20%, transparent);
 }
 html.dune .note-rooms .spec-anchor .room-callout {
-  background: color-mix(in oklab, var(--color-paper) 84%, #d5a45d 16%);
-  border-color: rgb(213 164 93 / 0.24);
+  background: color-mix(in oklab, var(--color-paper) 86%, var(--room-accent-secondary) 14%);
+  border-color: color-mix(in oklab, var(--room-accent-secondary) 28%, transparent);
 }
 html.dark:not(.dune) .note-rooms {
   --room-accent: #b7a18a;
