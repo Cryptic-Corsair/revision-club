@@ -1583,13 +1583,31 @@ html.dune .legal-room mark {
   min-width: 0;
 }
 .etoc-head.is-collapsed { justify-content: center; }
+/* the print flourish — CONTENTS, then a hairline out to the toggle */
+.etoc-head.is-expanded .legal-meta {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+.etoc-head.is-expanded .legal-meta::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-ink) 11%, transparent);
+}
 .etoc-count {
-  margin-left: 8px;
-  color: var(--legal-rust);
+  color: var(--color-ink-faint);
   font-family: var(--font-display), sans-serif;
-  font-weight: 800;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   font-variant-numeric: tabular-nums;
+}
+.etoc-count b {
+  color: var(--legal-rust);
+  font-weight: 800;
 }
 .etoc-toggle {
   display: inline-flex;
@@ -1600,15 +1618,17 @@ html.dune .legal-room mark {
   justify-content: center;
   border: 1px solid color-mix(in oklab, var(--color-ink) 12%, transparent);
   border-radius: calc(10px * var(--ui-scale));
+  box-shadow: 0 1.5px 0 var(--edge);
   color: var(--color-ink-soft);
   cursor: pointer;
-  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 120ms ease;
 }
 .etoc-toggle:hover {
   color: var(--color-ink);
   border-color: color-mix(in oklab, var(--color-ink) 26%, transparent);
   background: color-mix(in oklab, var(--color-ink) 6%, transparent);
 }
+.etoc-toggle:active { transform: scale(0.92); }
 .etoc-toggle:focus-visible,
 .etoc-link:focus-visible {
   outline: 2px solid var(--legal-rust);
@@ -1618,14 +1638,28 @@ html.dune .legal-room mark {
   height: 2px;
   border-radius: 999px;
   background: color-mix(in oklab, var(--color-ink) 10%, transparent);
-  overflow: hidden;
+  overflow: visible;
   margin-bottom: 10px;
 }
 .etoc-track-fill {
+  position: relative;
   height: 100%;
   border-radius: 999px;
   background: var(--legal-rust);
   transition: width 320ms cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+/* the reading bead — a small rust pearl riding the fill's edge */
+.etoc-track-fill::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  translate: 50% -50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--legal-rust);
+  box-shadow: 0 0 0 3px var(--color-paper);
 }
 .etoc-wrap { position: relative; min-width: 0; }
 .etoc-nav {
@@ -1640,7 +1674,7 @@ html.dune .legal-room mark {
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
 }
-.etoc-nav::-webkit-scrollbar { display: none; }
+.etoc-nav::-webkit-scrollbar { width: 4px; display: none; }
 .etoc-link {
   position: relative;
   display: flex;
@@ -1653,8 +1687,9 @@ html.dune .legal-room mark {
   font-size: calc(11px * var(--ui-scale));
   line-height: 1.45;
   text-decoration: none;
-  transition: background-color 160ms ease, color 160ms ease;
+  transition: background-color 160ms ease, color 160ms ease, transform 120ms ease;
 }
+.etoc-link:active { transform: scale(0.985); }
 .etoc-num {
   flex: 0 0 auto;
   min-width: 2.6em;
@@ -1678,22 +1713,22 @@ html.dune .legal-room mark {
   background: color-mix(in oklab, var(--color-ink) 6%, var(--color-paper));
   color: var(--color-ink);
 }
+.etoc-link:hover .etoc-num {
+  color: color-mix(in oklab, var(--legal-rust) 55%, var(--color-ink-faint));
+}
 .etoc-link.is-active {
-  background: color-mix(in oklab, var(--legal-rust) 9%, transparent);
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--legal-rust) 11%, transparent),
+    color-mix(in oklab, var(--legal-rust) 4%, transparent) 78%,
+    transparent
+  );
   color: var(--color-ink);
 }
 .etoc-link.is-active .etoc-num { color: var(--legal-rust); }
-.etoc-link.is-active::before {
-  content: "";
-  position: absolute;
-  left: -1px;
-  top: 50%;
-  translate: 0 -50%;
-  width: 3px;
-  height: 55%;
-  border-radius: 999px;
-  background: var(--legal-rust);
-}
+/* the sliding cursor — one rust bar for the whole rail, gliding to
+   the crowned clause (desktop expanded only; placed by JS) */
+.etoc-cursor { display: none; }
 /* mobile chips: single line, hairline pill, rust fill when active */
 @media (max-width: 63.98rem) {
   .etoc-link {
@@ -1715,11 +1750,11 @@ html.dune .legal-room mark {
     background: var(--legal-rust);
     border-color: transparent;
     color: var(--color-paper);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
   }
   .etoc-link.is-active .etoc-num {
     color: color-mix(in oklab, var(--color-paper) 82%, var(--legal-rust));
   }
-  .etoc-link.is-active::before { display: none; }
 }
 /* desktop: vertical rail that scrolls inside itself when a note runs
    long, so the sticky spine can never push its tail off-screen */
@@ -1733,16 +1768,40 @@ html.dune .legal-room mark {
     max-height: calc(100dvh - 14rem);
     padding: 3px;
     margin: -3px;
+    /* the spine's scrollbar only shows itself when reached for */
     scrollbar-width: thin;
-    scrollbar-color: color-mix(in oklab, var(--color-ink) 18%, transparent) transparent;
+    scrollbar-color: transparent transparent;
     overscroll-behavior: contain;
   }
-  .etoc-nav::-webkit-scrollbar { width: 4px; }
+  .etoc-nav:hover {
+    scrollbar-color: color-mix(in oklab, var(--color-ink) 18%, transparent) transparent;
+  }
+  .etoc-nav::-webkit-scrollbar { width: 4px; display: block; }
   .etoc-nav::-webkit-scrollbar-thumb {
-    background: color-mix(in oklab, var(--color-ink) 18%, transparent);
+    background: transparent;
     border-radius: 999px;
   }
-  /* collapsed: a spine of numbers; the active one rusted solid */
+  .etoc-nav:hover::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--color-ink) 18%, transparent);
+  }
+  /* the cursor: a single rust bar gliding between clauses */
+  .etoc-nav.is-expanded .etoc-cursor {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    border-radius: 999px;
+    background: var(--legal-rust);
+    opacity: 0;
+    transition:
+      transform 300ms cubic-bezier(0.3, 0.7, 0.25, 1),
+      height 300ms cubic-bezier(0.3, 0.7, 0.25, 1),
+      opacity 220ms ease;
+    will-change: transform, height;
+  }
+  /* collapsed: a spine of numbers; the active one rusted solid,
+     given a paper-cleared halo so it reads as a bead, not a block */
   .etoc-link.is-collapsed {
     justify-content: center;
     margin: 0 auto;
@@ -1757,9 +1816,11 @@ html.dune .legal-room mark {
   .etoc-link.is-collapsed.is-active {
     background: var(--legal-rust);
     color: var(--color-paper);
+    box-shadow:
+      0 1px 0 var(--edge),
+      0 0 0 3px color-mix(in oklab, var(--legal-rust) 16%, transparent);
   }
   .etoc-link.is-collapsed.is-active .etoc-num { color: var(--color-paper); }
-  .etoc-link.is-collapsed.is-active::before { display: none; }
 }
 .legal-summary {
   background: color-mix(in oklab, var(--color-paper) 88%, #e9d7b9);
@@ -1929,7 +1990,8 @@ html.dune .legal-clause-line {
   .etoc-track-fill,
   .etoc-toggle,
   .etoc-link,
-  .etoc-num { transition: none; }
+  .etoc-num,
+  .etoc-cursor { transition: none; }
 }
 
 

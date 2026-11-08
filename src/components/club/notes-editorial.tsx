@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { m, useScroll, useSpring } from "framer-motion";
 import {
   ArrowLeft,
@@ -162,6 +162,35 @@ function NotesEditorialBody({
     0,
     doc.sections.findIndex((s) => s.spec === active),
   );
+  const pad2 = (n: number) => String(n).padStart(2, "0");
+
+  /* the sliding cursor — one rust bar shared by the whole rail that
+     glides to whichever clause the spy crowns, measured straight off
+     the laid-out links so a reflow or font settle can never leave it
+     stranded. Placed in a layout effect so first paint is exact. */
+  const tocCursorRef = useRef<HTMLSpanElement | null>(null);
+  useLayoutEffect(() => {
+    const nav = tocNavRef.current;
+    const cursor = tocCursorRef.current;
+    if (!nav || !cursor) return;
+    const place = () => {
+      const link = nav.querySelector<HTMLElement>("[data-toc-active='true']");
+      if (!link) {
+        cursor.style.opacity = "0";
+        return;
+      }
+      cursor.style.opacity = "1";
+      cursor.style.transform = `translateY(${link.offsetTop}px)`;
+      cursor.style.height = `${link.offsetHeight}px`;
+    };
+    place();
+    const settle = window.setTimeout(place, 420); /* once fonts have settled */
+    window.addEventListener("resize", place);
+    return () => {
+      window.clearTimeout(settle);
+      window.removeEventListener("resize", place);
+    };
+  }, [active, contentsExpanded, doc.sections]);
 
   /* the rail keeps your place in view: when the spy moves, the active
      link is eased to the edge of its own scroller — never the page.
@@ -332,7 +361,7 @@ function NotesEditorialBody({
               <p className="legal-meta">
                 CONTENTS
                 <span className="etoc-count" aria-hidden>
-                  {activeIndex + 1}/{doc.sections.length}
+                  <b>{pad2(activeIndex + 1)}</b>/{pad2(doc.sections.length)}
                 </span>
               </p>
             )}
@@ -364,6 +393,7 @@ function NotesEditorialBody({
               aria-label="Note contents"
               className={`etoc-nav ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}
             >
+              <span ref={tocCursorRef} className="etoc-cursor" aria-hidden />
               {doc.sections.map((s) => {
                 const isActive = active === s.spec;
                 return (
