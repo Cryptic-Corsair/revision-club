@@ -621,7 +621,6 @@ function StatPillar({
       className={`rooms-stat-pillar rooms-stat-pillar--${tone} flex flex-col items-center rounded-[calc(26px*var(--ui-scale))] px-3 py-5 text-center`}
     >
       <span className="rooms-stat-icon grid h-10 w-10 place-items-center rounded-full">
-      >
         <Icon className="h-5 w-5" strokeWidth={2.2} />
       </span>
       <span className="mt-2 font-display text-[calc(clamp(1.35rem,3.2vw,1.8rem)*(1+(var(--ui-scale)-1)*0.5))] leading-none font-semibold text-ink">
