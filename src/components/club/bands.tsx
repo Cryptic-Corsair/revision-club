@@ -11,7 +11,7 @@ import { m, type HTMLMotionProps, type Variants } from "framer-motion";
 import { Footprints } from "./icons";
 import type { SpecSection } from "@/lib/spectra/notes-types";
 import { readableInk, shade } from "./bits";
-import { ACCENTS, ACCENT_IDS, currentAccents, currentLab } from "@/lib/spectra/prefs";
+import { ACCENTS, currentLab } from "@/lib/spectra/prefs";
 
 /* the full candy wheel, hue-wheel order: red → orange → sun →
    green → purple → amber, so adjacent bands always differ. This is
@@ -90,11 +90,8 @@ export const bgOf = (i: number) =>
     ? `var(--note-band-b, ${bandOf(i)})`
     : `var(--note-band-a, ${bandOf(i)})`;
 
-/* home's ladder keeps its own four stops on the full wheel
-   (tangerine → sun → grape → coral) so the default daylight walk
-   stays exactly as designed; a narrowed wheel rotates consecutively
-   instead, so even two picks still alternate step over step */
-const HOME_STOPS = [1, 2, 4, 0];
+/* The homepage keeps its existing independent mineral treatment;
+   Dune's paired note accents belong only to Rooms. */
 export const homeBandOf = (_pos: number) =>
   `color-mix(in oklab, #B8874B var(--band-mix, 10%), var(--tint-base))`;
 
