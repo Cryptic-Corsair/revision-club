@@ -1542,11 +1542,28 @@ html.dune .legal-room mark {
 .legal-mark-dot-two { bottom: 18%; left: 18%; width: 7px; background: #e47b61; }
 .legal-index { min-width: 0; }
 .editorial-reading-layout {
-  grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
-  transition: grid-template-columns 220ms cubic-bezier(.2,.75,.25,1);
+  grid-template-columns: minmax(0, 1fr);
 }
-.editorial-reading-layout.is-collapsed {
-  grid-template-columns: 64px minmax(0, 1fr);
+@media (min-width: 1024px) {
+  .editorial-reading-layout {
+    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+    transition: grid-template-columns 220ms cubic-bezier(.2,.75,.25,1);
+  }
+  .editorial-reading-layout.is-collapsed {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+}
+@media (max-width: 1023px) {
+  .editorial-contents-nav {
+    max-height: none;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 7px;
+  }
+  .editorial-contents-link {
+    flex: 0 0 auto;
+  }
 }
 .editorial-contents {
   min-width: 0;
