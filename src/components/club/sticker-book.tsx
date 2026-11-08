@@ -311,7 +311,7 @@ export function StickerBook({
       <section className="mt-14">
         <Reveal>
           <Kicker className="mb-5">
-            <Timer className="h-4 w-4" style={{ color: "var(--color-tangerine)" }} /> where your minutes go · tap a topic to read
+            <Timer className="h-4 w-4" style={{ color: "var(--rooms-accent)" }} /> where your minutes go · tap a topic to read
           </Kicker>
         </Reveal>
 
@@ -416,7 +416,7 @@ export function StickerBook({
       <section className="mt-14">
         <Reveal>
           <Kicker className="mb-4">
-            <Award className="h-4 w-4" style={{ color: "var(--color-lemon)" }} /> badges · {achievements.filter((a) => a.earned).length}/{achievements.length}
+            <Award className="h-4 w-4" style={{ color: "var(--rooms-accent-2)" }} /> badges · {achievements.filter((a) => a.earned).length}/{achievements.length}
           </Kicker>
         </Reveal>
         <div className="grid grid-cols-3 gap-4 sm:grid-cols-6 sm:gap-3">
@@ -471,7 +471,7 @@ export function StickerBook({
       <section className="mt-14 flex flex-col gap-8">
         <Reveal>
           <Kicker>
-            <Trophy className="h-4 w-4" style={{ color: "var(--color-tangerine)" }} /> all topics · tap one to mark or unmark it
+            <Trophy className="h-4 w-4" style={{ color: "var(--rooms-accent)" }} /> all topics · tap one to mark or unmark it
           </Kicker>
         </Reveal>
 
