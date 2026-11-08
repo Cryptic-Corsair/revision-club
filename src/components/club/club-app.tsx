@@ -1187,7 +1187,7 @@ export default function ClubApp() {
             />
           )}
           {(customizeOpen || customizeMounted) && (
-            <CustomizePanel open={customizeOpen} onClose={closeCustomize} onHome={goHome} onOpenSpec={openSpec} onOpenPack={openPack} onOpenProgress={openSticker} onOpenLegal={openLegal} onOpenSample={openSample} fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
+            <CustomizePanel open={customizeOpen} onClose={closeCustomize} onHome={goHome} onOpenSpec={openSpec} onOpenPack={openPack} onOpenProgress={openSticker} onOpenLegal={openLegal} fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
           )}
   
           <main className="relative flex-1">

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 /* Fonts are self-hosted (src/app/fonts/, latin woff2, variable where
    available) instead of next/font/google: the Turbopack google-font
    resolver kept corrupting its import map between dev-server restarts
@@ -117,6 +118,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-cream font-body text-ink antialiased">
         <Script id="rc-prefs" strategy="beforeInteractive">{prefsInit}</Script>
         {children}
+        <Analytics />
       </body>
     </html>
   );
