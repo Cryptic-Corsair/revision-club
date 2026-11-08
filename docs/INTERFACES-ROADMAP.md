@@ -317,7 +317,7 @@ Editorial:
    preferences, the homepage and Editorial are not changed.
 
 **Files:** `unit-view.tsx`, `topic-view.tsx`, `notes-reader.tsx`,
-`blocks.tsx`.  
+`note-section.tsx`, `blocks.tsx`.  
 **Gate:** production build, lint, then visual inspection of Rooms in Light,
 Night, Dune and Classic at desktop and mobile widths. Check accent contrast in
 Dune, long topic titles, full-note CTA wrapping, and previous/next navigation.
