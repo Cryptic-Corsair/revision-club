@@ -1461,6 +1461,156 @@ html.dark .legal-room mark {
 html.dune .legal-room mark {
   color: var(--color-ink);
 }
+/* Notes masthead — a typographic document opening, distinct from the
+   shared legal/pack hero. The topic folio carries the visual weight. */
+.notes-hero {
+  isolation: isolate;
+  background:
+    linear-gradient(118deg,
+      color-mix(in oklab, var(--color-paper) 96%, var(--legal-rust) 4%),
+      var(--color-paper) 58%,
+      color-mix(in oklab, var(--color-paper) 91%, var(--legal-rust) 9%));
+  border: 1px solid color-mix(in oklab, var(--color-ink) 11%, transparent);
+  box-shadow: 0 2px 0 var(--edge), 0 22px 48px -42px rgb(35 25 17 / .3);
+}
+.notes-hero-top,
+.notes-hero-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 15px clamp(18px, 3.2vw, 34px);
+}
+.notes-hero-top { border-bottom: 1px solid color-mix(in oklab, var(--color-ink) 11%, transparent); }
+.notes-hero-label,
+.notes-hero-meta,
+.notes-hero-edition,
+.notes-hero-overline,
+.notes-hero-folio-label,
+.notes-hero-folio-range,
+.notes-hero-folio-unit,
+.notes-hero-footer-label,
+.notes-hero-stats {
+  font-family: var(--font-display), sans-serif;
+  font-size: calc(9px * var(--ui-scale));
+  font-weight: 800;
+  letter-spacing: .14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.notes-hero-label { display: inline-flex; align-items: center; gap: 8px; color: var(--legal-rust); }
+.notes-hero-meta,
+.notes-hero-edition,
+.notes-hero-folio-unit { color: var(--color-ink-faint); }
+.notes-hero-edition { white-space: nowrap; }
+.notes-hero-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(145px, 205px);
+  align-items: stretch;
+  gap: clamp(22px, 4vw, 48px);
+  padding: clamp(26px, 4.5vw, 48px) clamp(20px, 3.2vw, 36px) clamp(24px, 3.6vw, 38px);
+}
+.notes-hero-copy { min-width: 0; align-self: center; }
+.notes-hero-overline { color: var(--legal-rust); }
+.notes-hero-title {
+  max-width: 17ch;
+  margin-top: 15px;
+  color: var(--color-ink);
+  font-family: var(--font-display), sans-serif;
+  font-size: calc(clamp(2.6rem, 6.6vw, 5.35rem) * (1 + (var(--ui-scale) - 1) * .5));
+  font-weight: 700;
+  letter-spacing: -.065em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+.notes-hero-title span { color: var(--legal-rust); }
+.notes-hero-description {
+  max-width: 62ch;
+  margin-top: 18px;
+  color: var(--color-ink-soft);
+  font-size: calc(14.5px * var(--ui-scale));
+  line-height: 1.85;
+}
+.notes-hero-folio {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-left: 1px solid color-mix(in oklab, var(--color-ink) 14%, transparent);
+  padding-left: clamp(18px, 2.5vw, 30px);
+}
+.notes-hero-folio-label { color: var(--color-ink-faint); }
+.notes-hero-folio-number {
+  margin: 2px 0 0 -5px;
+  color: color-mix(in oklab, var(--legal-rust) 84%, var(--color-ink));
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(5.3rem, 10vw, 8.5rem);
+  font-weight: 700;
+  letter-spacing: -.095em;
+  line-height: .95;
+  font-variant-numeric: lining-nums;
+}
+.notes-hero-folio-range {
+  margin-top: 12px;
+  color: var(--color-ink);
+  letter-spacing: .08em;
+}
+.notes-hero-folio-unit {
+  margin-top: 5px;
+  font-size: calc(8px * var(--ui-scale));
+  letter-spacing: .12em;
+}
+.notes-hero-footer {
+  align-items: flex-start;
+  border-top: 1px solid color-mix(in oklab, var(--color-ink) 11%, transparent);
+  background: color-mix(in oklab, var(--color-ink) 2.5%, transparent);
+}
+.notes-hero-footer-label { flex: 0 0 auto; padding-top: 1px; color: var(--legal-rust); }
+.notes-hero-stats {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px 22px;
+  color: var(--color-ink-soft);
+  font-size: calc(9px * var(--ui-scale));
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+.notes-hero-stats span { white-space: nowrap; }
+.notes-hero-stats span + span::before {
+  content: "·";
+  margin-right: 22px;
+  color: var(--legal-rust);
+}
+@media (max-width: 639px) {
+  .notes-hero { border-radius: 20px; }
+  .notes-hero-top { padding: 13px 17px; }
+  .notes-hero-body {
+    grid-template-columns: minmax(0, 1fr) 82px;
+    gap: 13px;
+    padding: 25px 17px 22px;
+  }
+  .notes-hero-overline { font-size: calc(8px * var(--ui-scale)); letter-spacing: .1em; }
+  .notes-hero-title {
+    margin-top: 12px;
+    font-size: calc(clamp(2.15rem, 10vw, 3.35rem) * (1 + (var(--ui-scale) - 1) * .45));
+    letter-spacing: -.06em;
+  }
+  .notes-hero-description { margin-top: 13px; font-size: calc(13px * var(--ui-scale)); line-height: 1.75; }
+  .notes-hero-folio { padding-left: 12px; }
+  .notes-hero-folio-number { margin-left: -3px; font-size: clamp(3.8rem, 16vw, 5.1rem); }
+  .notes-hero-folio-range { font-size: calc(8px * var(--ui-scale)); letter-spacing: .03em; }
+  .notes-hero-folio-unit { font-size: calc(7px * var(--ui-scale)); letter-spacing: .05em; }
+  .notes-hero-footer { flex-direction: column; gap: 9px; padding: 12px 17px 14px; }
+  .notes-hero-stats { justify-content: flex-start; gap: 6px 13px; font-size: calc(8px * var(--ui-scale)); }
+  .notes-hero-stats span + span::before { margin-right: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .notes-hero { scroll-behavior: auto; }
+}
+
 .legal-hero {
   isolation: isolate;
   background:
