@@ -76,6 +76,11 @@ const StickerBook = dynamic(() => import("./sticker-book").then((m) => m.Sticker
   ssr: false,
   loading: RoomLoading,
 });
+/* the progress room's editorial twin — same props, the document dress */
+const ProgressEditorial = dynamic(
+  () => import("./progress-editorial").then((m) => m.ProgressEditorial),
+  { ssr: false, loading: RoomLoading },
+);
 const SpecIndex = dynamic(() => import("./spec-index").then((m) => m.SpecIndex), {
   ssr: false,
   loading: RoomLoading,
@@ -891,6 +896,7 @@ export default function ClubApp() {
       void import("./pack-view");
       void import("./pack-editorial");
       void import("./sticker-book");
+      void import("./progress-editorial");
       void import("./topic-view");
       void import("./search");
       void import("./customize");
@@ -1134,14 +1140,18 @@ export default function ClubApp() {
                   );
                 })()}
   
-                {view.kind === "sticker" && (
-                  <StickerBook
-                    units={UNITS}
-                    onBack={goHome}
-                    onOpenUnit={openUnit}
-                    onOpenTopic={openTopic}
-                  />
-                )}
+                {view.kind === "sticker" && (() => {
+                  const Progress =
+                    prefs.iface === "editorial" ? ProgressEditorial : StickerBook;
+                  return (
+                    <Progress
+                      units={UNITS}
+                      onBack={goHome}
+                      onOpenUnit={openUnit}
+                      onOpenTopic={openTopic}
+                    />
+                  );
+                })()}
   
                 {view.kind === "sample" && (
                   <SampleNotes onBack={goHome} onOpenSpec={openSpec} />
