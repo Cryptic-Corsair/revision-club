@@ -126,7 +126,7 @@ export function PackView({
           </SoftButton>
         </PopIn>
         <Reveal delay={0.08} className="mt-14 flex flex-col items-center text-center">
-          <Mascot main="#FFD43B" size={150} bubbles={false} />
+          <Mascot main="var(--rooms-accent-2)" size={150} bubbles={false} />
           <h1 className="mt-6 font-display text-[calc(clamp(1.9rem,4.6vw,2.7rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
             The pack is empty.
           </h1>
@@ -141,8 +141,7 @@ export function PackView({
               onClick={onOpenSpec}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.96 }}
-              className="inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-3 font-display text-[calc(14.5px*var(--ui-scale))] font-semibold text-white"
-              style={{ background: "#FF922B", boxShadow: `0 3px 0 ${shade("#FF922B")}` }}
+              className="rooms-empty-pack-cta inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-3 font-display text-[calc(14.5px*var(--ui-scale))] font-semibold"
             >
               <Target className="h-5 w-5" /> Browse the spec index
             </m.button>
@@ -397,8 +396,7 @@ export function PackView({
             <>
               <span
                 aria-hidden
-                className="h-3 w-40 rounded-full"
-                style={{ background: "linear-gradient(90deg, #FFD43B, #12B886)" }}
+                className="rooms-pack-end-progress h-3 w-40 rounded-full"
               />
               <p className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">
                 That&apos;s your pack — {points.length} point{points.length === 1 ? "" : "s"}, read at your pace.
