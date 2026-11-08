@@ -386,7 +386,7 @@ Dune uses the dark-mode foundation plus Dune-specific token overrides. Do not as
 ### 9.2 CSS ownership rules
 
 - Shared foundations and global theme tokens belong in the global theme/token layer.
-- Rooms-specific rules must be scoped to .note-rooms and relevant theme-qualified selectors.
+- Rooms-specific rules must be scoped to `.rooms-page`, `.note-rooms` and relevant theme-qualified selectors. The field-atlas page shells use `.rooms-page`; the note/pack band palette remains scoped to `.note-rooms`.
 - Editorial-specific rules belong to the .legal-* / editorial styling system and appropriate interface scope (for example html[data-iface="editorial"] where needed).
 - Do not let a Rooms selector leak into Editorial or vice versa.
 - Avoid broad element selectors for local visual changes.
