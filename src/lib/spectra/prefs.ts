@@ -321,6 +321,11 @@ export function currentAccents(): AccentId[] {
   return state.accents;
 }
 
+/** The active lab for render-time, interface-scoped colour decisions. */
+export function currentLab(): Lab {
+  return state.theme;
+}
+
 /* ————— store plumbing ————— */
 
 function subscribe(cb: () => void) {
