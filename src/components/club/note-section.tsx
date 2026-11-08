@@ -15,7 +15,7 @@ import {
 } from "./icons";
 import type { NotesBlock, SpecSection } from "@/lib/spectra/notes-types";
 import { Fmt } from "./format";
-import { honeyWash, Kicker, liftWash, Reveal, ScrollFade, readableInk, shade, sunkWash, tint } from "./bits";
+import { Kicker, liftWash, Reveal, ScrollFade, readableInk, shade, sunkWash, tint } from "./bits";
 import { inkMix } from "./bands";
 import {
   FigAtom,
