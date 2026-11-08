@@ -159,9 +159,11 @@ treatment. Both are still responding to the same global Dune selection.
 
 ### Accent ownership
 
-- Rooms currently uses a restrained mineral accent in its note renderer; the wider
-  application still has the user-configurable accent wheel. Do not silently reintroduce
-  the rotating candy accents into Rooms.
+- Rooms uses a restrained, interface-owned accent system. Dune specifically alternates
+  warm cream (`#FDF6E3`) and muted sea-glass (`#9DB9B0`) in its note details; its
+  supporting callout token is warm cream. Other Rooms labs retain the mineral accent.
+  The wider application still has the user-configurable accent wheel. Do not silently
+  reintroduce the rotating candy accents into Rooms.
 - Editorial owns its editorial accent treatment through its legal/editorial styling.
 - Shared accent helpers or components (including Spec Map/Contents chips) must be checked
   for every consumer before changing their output. A change made for Rooms must not
