@@ -265,14 +265,16 @@ export function SectionTag({
   children,
   main = "#FF6B6B",
   tilt = -2,
+  className,
 }: {
   children: ReactNode;
   main?: string;
   tilt?: number;
+  className?: string;
 }) {
   return (
     <span
-      className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.16em] uppercase select-none"
+      className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.16em] uppercase select-none ${className ?? ""}`}
       style={{ background: main, color: readableInk(main), transform: `rotate(${tilt}deg)` }}
     >
       {children}
