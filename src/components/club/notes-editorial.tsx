@@ -209,39 +209,51 @@ function NotesEditorialBody({
         </SoftButton>
       </PopIn>
 
-      {/* ————— hero ————— */}
+      {/* ————— note masthead ————— */}
       <Reveal>
-        <section className="legal-hero relative mt-5 overflow-hidden rounded-[30px] px-6 py-8 sm:px-9 sm:py-10">
-          <div className="legal-hero-grain" />
-          <div className="relative">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="legal-kicker">
-                <BookOpen className="h-3.5 w-3.5" /> REVISION NOTE
+        <section className="notes-hero relative mt-5 overflow-hidden rounded-[26px]">
+          <div className="notes-hero-top">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span className="notes-hero-label">
+                <BookOpen className="h-3.5 w-3.5" /> REVISION NOTES
               </span>
-              <span className="legal-meta">IAL CHEM · {unit.code} · TOPIC {topicNo}</span>
+              <span className="notes-hero-meta">IAL CHEM / {unit.code}</span>
             </div>
-            <h1 className="mt-5 max-w-[16ch] font-display text-[calc(clamp(2.65rem,7vw,5.6rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.04] font-bold tracking-[-.065em] text-ink">
-              {doc.title}<span className="legal-heading-accent">.</span>
-            </h1>
-            {heroPara && (
-              <p className="mt-5 max-w-[58ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-soft">
-                <Fmt text={heroPara} />
+            <span className="notes-hero-edition">TOPIC {String(topicNo).padStart(2, "0")}</span>
+          </div>
+
+          <div className="notes-hero-body">
+            <div className="notes-hero-copy">
+              <p className="notes-hero-overline">
+                {unit.code} / TOPIC {topicNo} · SPECIFICATION GUIDE
               </p>
-            )}
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-ink/10 pt-4">
+              <h1 className="notes-hero-title">
+                {doc.title}<span>.</span>
+              </h1>
+              {heroPara && (
+                <p className="notes-hero-description">
+                  <Fmt text={heroPara} />
+                </p>
+              )}
+            </div>
+
+            <aside className="notes-hero-folio" aria-label={`Topic ${topicNo}, specification points ${firstSpec} to ${lastSpec}`}>
+              <span className="notes-hero-folio-label">TOPIC</span>
+              <span className="notes-hero-folio-number" aria-hidden="true">
+                {String(topicNo).padStart(2, "0")}
+              </span>
+              <span className="notes-hero-folio-range">{firstSpec} — {lastSpec}</span>
+              <span className="notes-hero-folio-unit">{unit.code} / IAL CHEM</span>
+            </aside>
+          </div>
+
+          <div className="notes-hero-footer">
+            <span className="notes-hero-footer-label">AT A GLANCE</span>
+            <div className="notes-hero-stats">
               {stats.map((s) => (
-                <span key={s} className="legal-meta">{s}</span>
+                <span key={s}>{s}</span>
               ))}
             </div>
-          </div>
-          <div className="legal-hero-mark" aria-hidden>
-            <div className="legal-orbit legal-orbit-one" />
-            <div className="legal-orbit legal-orbit-two" />
-            <div className="legal-mark-core">
-              <BookOpenCheck className="h-9 w-9" strokeWidth={1.6} />
-            </div>
-            <div className="legal-mark-dot legal-mark-dot-one" />
-            <div className="legal-mark-dot legal-mark-dot-two" />
           </div>
         </section>
       </Reveal>
