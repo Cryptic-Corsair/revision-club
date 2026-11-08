@@ -143,8 +143,9 @@ treatment. Both are still responding to the same global Dune selection.
 
 ### CSS and token boundaries
 
-1. Keep Rooms-only palette rules under an explicit Rooms scope, currently
-   `.note-rooms` and its theme-qualified variants in `src/app/globals.css`.
+1. Keep Rooms-only rules under explicit Rooms scopes: `.rooms-page` for
+   field-atlas page surfaces and `.note-rooms` (plus theme-qualified variants)
+   for the note/pack band palette in `src/app/globals.css`.
 2. Keep Editorial-only palette rules under explicit Editorial/legal scopes (for example
    `.legal-*` components and `html[data-iface="editorial"]` where the rule genuinely
    belongs to the interface). Theme variants may qualify those selectors, but must not
