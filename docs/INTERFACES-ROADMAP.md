@@ -380,3 +380,8 @@ and pack. Compare Editorial and homepage before/after to confirm no visual chang
 1. **Names** — internal `rooms` / `editorial`. Display options: **"Rooms" & "Editorial"** (recommended, honest) · "The Club" & "The Archive" · "Standard" & "Manuscript".
 2. **Switcher placement** — customize panel section (recommended for v1) vs a FOCUS/STUDIO-style segmented pill in the nav (can add in R6).
 3. **v1 scope of R5** — unit/topic/spec in editorial from the start, or accepted as classic until R5 lands (recommended: the three named surfaces first).
+
+
+## 5 · Rooms presentation decision — 2026-11-08
+
+The user chose to stop iterating on the bespoke Rooms visual system and adopt Editorial as the presentation baseline across unit, topic, notes, specification index, revision packs and progress. The app shell reuses the Editorial components and their existing data/state contracts. The note reader must retain the wave seam between every specification section; the Editorial-derived reader now includes the opening transition and all section transitions. The existing interface preference is retained for compatibility but no longer switches these six views, so its UI/meaning should be reconciled deliberately in a future change.

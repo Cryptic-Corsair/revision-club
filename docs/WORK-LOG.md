@@ -179,3 +179,16 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** no successful deployment is claimed; Vercel is currently blocked by its build-rate limit.
 - **Commit(s):** refinement commits include `c227f17a`, `631e3eda`, `f7f4ee6b`, `b67e4edb`, `5daf9ae1`, `71c634a3`, `c8763cfc`, `2986fb80`, `58bd8f95`, `4f0b0d61`, `3676d915`, `0ee652a0`, `f62d96ba`, `109763b4`, and `e480a374`.
 - **Follow-up / known limitations:** rerun TypeScript/ESLint/production build when Vercel's build quota permits; visually inspect desktop/mobile in Light, Night, Dune and Classic, especially the three-column progress stats, long pack toolbars, figure/table widths, contrast and wave joins.
+
+
+### 2026-11-08 — Adopt Editorial presentation as the Rooms baseline
+
+- **Contributor:** AI agent.
+- **Objective:** user requested that Rooms simply copy Editorial after the iterative Rooms redesign had not reached the desired result.
+- **Implementation:** the app shell now selects the existing Editorial component family for unit, topic, note, specification index, revision pack and progress views. Removed unused dynamic declarations for the old Rooms-specific unit/topic/note/spec-index/pack/progress renderers from the shell. The Editorial note reader now uses the Rooms `BandWave` system before the first specification section and after every section, transitioning to the next section background or back to cream at the end.
+- **Preserved:** chemistry source material and ordering, shared state stores, progress/time/pack actions, navigation contracts, note anchors, wave path definitions and wave helper remain intact. Editorial components were reused rather than duplicating their styling into a second implementation.
+- **Important interface note:** `prefs.iface` remains in the preference model for compatibility and other surfaces, but no longer selects between the two renderer families for these six views. The appearance/interface settings should be reconciled in a later pass rather than silently deleting the persisted preference.
+- **Verification:** fetched the changed files after writes; confirmed all six shell selectors point to Editorial components, obsolete Rooms renderer references were removed from the shell, the note component imports `Fragment`, and the opening/per-section wave calls remain present. No TypeScript, lint, production build or browser visual inspection was run.
+- **Deployment:** not verified.
+- **Commit(s):** `0e0100459216c7dcab622c1541ce1fe18d5d0712`, `29dc0db99336e9ce8cc168b6d00a00be8e921b4b`, `02e75e24505ba9afc04e27abbefd5b168450c3e9`, `722049d264e5cfc8b73de2aab95f92e680443102`.
+- **Follow-up:** align the interface selector copy and behavior with the new single presentation baseline; verify the wave joins and responsive Editorial layouts across all four themes when a build/browser check is available.
