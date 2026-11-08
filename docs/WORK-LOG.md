@@ -211,3 +211,12 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** inspected and replaced the contents component styles and heading markup. No lint, production build, browser visual inspection or deployment verification was run.
 - **Deployment:** not verified.
 - **Commit(s):** see this implementation commit.
+
+### 2026-11-09 — Revert latest Editorial contents redesign
+
+- **Contributor:** AI agent.
+- **Request / objective:** restore the Editorial contents section to the state immediately before the latest visual redesign.
+- **Changes made:** reverted only the latest contents heading and styling changes in `notes-editorial.tsx` and `globals.css`; retained all earlier contents navigation, scrolling, responsive behavior, reading-column width normalization and build-version work.
+- **Verification:** restored the two files from the immediate parent commit of the redesign. No lint, production build, browser visual inspection or deployment verification was run.
+- **Deployment:** not verified.
+- **Commit(s):** see this revert commit.

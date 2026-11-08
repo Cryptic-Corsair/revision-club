@@ -257,11 +257,13 @@ function NotesEditorialBody({
             <div className="min-w-0">
               {contentsExpanded ? (
                 <>
-                  <p className="editorial-contents-titlebar">On this page</p>
-                  <p className="editorial-contents-count">{doc.sections.length} sections</p>
+                  <p className="legal-meta">CONTENTS</p>
+                  <p className="editorial-contents-count">
+                    {doc.sections.length} sections <span aria-hidden>·</span> {firstSpec}–{lastSpec}
+                  </p>
                 </>
               ) : (
-                <span className="editorial-contents-rail-label" aria-hidden="true">TOC</span>
+                <span className="legal-meta editorial-contents-rail-label" aria-hidden="true">SPEC</span>
               )}
             </div>
             <button
@@ -306,6 +308,11 @@ function NotesEditorialBody({
               );
             })}
           </nav>
+          {contentsExpanded && (
+            <p className="editorial-contents-footnote">
+              Select a section to jump directly to it. The contents follows your reading position and stays in sync with the Spec Map.
+            </p>
+          )}
         </aside>
         <div className="min-w-0">
           <Reveal>
