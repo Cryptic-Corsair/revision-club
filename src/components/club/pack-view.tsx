@@ -450,7 +450,7 @@ function TopicBanner({
   hideStatements: boolean;
 }) {
   return (
-    <div className="no-print mb-8">
+    <div className="rooms-topic-banner no-print mb-8">
       <div
         className="inline-flex max-w-full items-center gap-2.5 rounded-full py-2 pr-4 pl-2.5"
         style={{
