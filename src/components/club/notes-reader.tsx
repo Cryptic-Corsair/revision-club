@@ -153,7 +153,7 @@ function NotesReaderBody({
   /** deep link — land scrolled to this spec section */
   jumpToSpec?: string;
 }) {
-  const main = unit.candy.main;
+  const main = accentOf(0);
   const active = useSpecSpy(doc.sections);
 
   const { scrollYProgress } = useScroll();
@@ -208,7 +208,7 @@ function NotesReaderBody({
         style={{
           top: "var(--sa-top)",
           scaleX,
-          background: `linear-gradient(90deg, ${main}, #FFD43B)`,
+          background: main,
         }}
       />
 
