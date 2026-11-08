@@ -317,7 +317,7 @@ function BlockView({
     case "def":
       return (
         <div
-          className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
+          className="rooms-definition max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
           style={{
             borderLeft: `3px solid ${tint(accent, 55)}`,
             boxShadow: "0 2px 0 var(--edge)",
@@ -337,7 +337,7 @@ function BlockView({
          lozenges. Reads like a textbook, keeps the classic warmth. */
       return (
         <div
-          className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] border-y border-ink/[0.09] px-5 py-4"
+          className="rooms-equation max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] border-y border-ink/[0.09] px-5 py-4"
           style={{ background: liftWash(accent, 6) }}
         >
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5">
@@ -379,7 +379,7 @@ function BlockView({
     case "steps":
       return <StepsPanel caption={b.caption} items={b.items} accent={accent} />;
     case "figure":
-      return <Figure kind={b.kind} caption={b.caption} accent={accent} />;
+      return <div className="rooms-figure"><Figure kind={b.kind} caption={b.caption} accent={accent} /></div>;
     case "wow":
       return (
         <div
@@ -390,11 +390,11 @@ function BlockView({
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl border border-ink/[0.08] bg-paper">
               <Lightbulb
                 className="h-5 w-5"
-                style={{ color: inkMix("#9775FA", 72) }}
+                style={{ color: inkMix(accent, 72) }}
               />
             </span>
             <div>
-              <Kicker color={inkMix("#9775FA", 62)}>Key idea</Kicker>
+              <Kicker color={inkMix(accent, 62)}>Key idea</Kicker>
               <p className="mt-1.5 text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink">
                 <Fmt text={b.text} />
               </p>
