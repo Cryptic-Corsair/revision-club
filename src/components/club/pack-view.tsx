@@ -187,7 +187,7 @@ export function PackView({
         </PopIn>
 
         {/* picked chips — one swipeable line; tap one to let it go */}
-        <PopIn delay={0.1} className="mt-4">
+        <PopIn delay={0.1} className="rooms-pack-picked mt-4">
           <div className="flex items-center gap-3">
             <span className="shrink-0 font-display text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.14em] text-ink-faint uppercase">
               Picked
@@ -480,26 +480,14 @@ function ToolButton({
       whileTap={{ scale: 0.95 }}
       aria-label={label}
       title={label}
-      className={`inline-flex h-[calc(40px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[calc(12.5px*var(--ui-scale))] font-semibold tracking-[0.02em] transition-colors ${
-        !highlight && !danger
-          ? "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
-          : ""
-      }`}
-      style={
+      className={`rooms-tool-button inline-flex h-[calc(40px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[calc(12.5px*var(--ui-scale))] font-semibold tracking-[0.02em] transition-colors ${
         highlight
-          ? {
-              background: "#12B886",
-              color: readableInk("#12B886"),
-              boxShadow: `0 2px 0 ${shade("#12B886")}`,
-            }
+          ? "rooms-tool-button--highlight"
           : danger
-            ? {
-                background: "#FF6B6B",
-                color: "#fff",
-                boxShadow: `0 2px 0 ${shade("#FF6B6B")}`,
-              }
-            : undefined
-      }
+            ? "rooms-tool-button--danger"
+            : "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
+      }`}
+
     >
       {children}
       {typeof badge === "number" && badge > 0 && (
