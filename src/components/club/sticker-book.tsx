@@ -157,14 +157,14 @@ export function StickerBook({
       </PopIn>
 
       {/* ————— header ————— */}
-      <header className="mt-8">
+      <header className="rooms-page-hero rooms-progress-hero mt-8">
         <PopIn delay={0.05}>
           <SectionTag main="#12B886" tilt={-2}>
             progress
           </SectionTag>
         </PopIn>
         <PopIn delay={0.1}>
-          <h1 className="mt-5 font-display text-[calc(clamp(2.3rem,5vw,3.4rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
+          <h1 className="rooms-page-title mt-5 font-display text-[calc(clamp(2.3rem,5vw,3.4rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
             Your revision,{" "}
             <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-mint/15 px-[0.18em]">
               so far.
@@ -176,7 +176,7 @@ export function StickerBook({
       {/* ————— the time ledger ————— */}
       <Reveal className="relative mt-8">
         <div className="rounded-[calc(32px*var(--ui-scale))] bg-paper p-6 puff sm:p-8">
-          <div className="grid gap-5 sm:grid-cols-3">
+          <div className="rooms-stat-grid grid gap-5 sm:grid-cols-3">
             <StatPillar icon={Clock} label="today" value={fmtClock(today)} color="#FF922B" />
             <StatPillar icon={Timer} label="this week" value={fmtClock(week)} color="#12B886" />
             <StatPillar icon={Sparkles} label="all time" value={fmtClock(all)} color="#9775FA" />
