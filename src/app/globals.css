@@ -1951,9 +1951,6 @@ html.dark:not(.dune) .legal-room { --legal-rust: #e0c4eb; }
     0 1px 2px rgb(54 39 27 / 0.035),
     0 12px 28px -24px rgb(54 39 27 / 0.18);
 }
-.note-rooms .spec-anchor [style*="borderLeft"] {
-  border-left-width: 2px !important;
-}
 html.dark:not(.dune) .note-rooms {
   --note-band-a: #211b28;
   --note-band-b: #251f2d;
