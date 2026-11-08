@@ -280,6 +280,40 @@ export function SectionTag({
   );
 }
 
+/* ————— the kicker —————
+   ONE small-caps label for the tailored rooms: a short accent dash,
+   then the label. Before this there were five competing treatments
+   (0.14em / 0.16em / 0.18em / 0.2em tracking, various weights) —
+   every small-caps label in the classic interface now borrows this
+   one. Editorial keeps its own EditorialLabel; classic-only callers
+   import this so the shared surfaces never move. */
+
+export function Kicker({
+  children,
+  color,
+  className,
+}: {
+  children: ReactNode;
+  /** dash + text colour; defaults to the room's quiet ink */
+  color?: string;
+  className?: string;
+}) {
+  const ink = color ?? "var(--color-ink-faint)";
+  return (
+    <span
+      className={`inline-flex items-center gap-2 font-display text-[calc(10.5px*var(--ui-scale))] leading-none font-bold tracking-[0.16em] uppercase ${className ?? ""}`}
+      style={{ color: ink }}
+    >
+      <span
+        aria-hidden
+        className="h-[calc(3px*var(--ui-scale))] w-[calc(14px*var(--ui-scale))] shrink-0 rounded-full"
+        style={{ background: ink }}
+      />
+      {children}
+    </span>
+  );
+}
+
 /* ————— speech bubble (with a proper tail) ————— */
 
 export function SpeechBubble({

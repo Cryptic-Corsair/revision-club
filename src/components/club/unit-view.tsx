@@ -56,8 +56,8 @@ export function UnitView({
       <header className="mt-8">
         <PopIn delay={0.05} className="flex flex-wrap items-center gap-3">
           <span
-            className="inline-block rotate-[-2deg] rounded-2xl px-4 py-2 font-display text-[calc(17px*var(--ui-scale))] font-bold text-white"
-            style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
+            className="inline-block rounded-[calc(14px*var(--ui-scale))] px-4 py-2 font-display text-[calc(17px*var(--ui-scale))] font-bold"
+            style={{ background: tint(main, 16), color: shade(main, 62) }}
           >
             {unit.code}
           </span>
@@ -70,7 +70,7 @@ export function UnitView({
           <h1 className="mt-6 font-display text-[calc(clamp(2rem,4.6vw,3.1rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.06] font-semibold tracking-tight text-ink">
             {unit.title}
           </h1>
-          <p className="mt-2 max-w-3xl text-[calc(16.5px*var(--ui-scale))] leading-snug font-extrabold text-ink-soft">
+          <p className="mt-2 max-w-3xl text-[calc(16.5px*var(--ui-scale))] leading-snug font-semibold text-ink-soft">
             {unit.code} · {unit.topicRange} · {unit.paper.duration} · {unit.paper.marks} marks
           </p>
         </PopIn>
@@ -79,7 +79,7 @@ export function UnitView({
           <div className="shrink-0 pb-1">
             <Mascot main={main} size={84} bubbles={false} />
           </div>
-          <SpeechBubble bg={tint(main, 10)} className="min-w-0 flex-1">
+          <SpeechBubble bg={tint(main, 8)} className="min-w-0 flex-1">
             <p className="text-[calc(15.5px*var(--ui-scale))] leading-[1.75] text-ink">
               <Fmt text={unit.blurb} />
             </p>
@@ -97,7 +97,7 @@ export function UnitView({
         ].map((f) => (
           <span
             key={f.label}
-            className="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2.5 text-[calc(13.5px*var(--ui-scale))] font-extrabold text-ink puff"
+            className="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2.5 text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink puff"
           >
             <f.icon className="h-4 w-4" style={{ color: main }} strokeWidth={2.5} />
             {f.label}
@@ -162,12 +162,13 @@ export function UnitView({
               return (
                 <Reveal key={t.id} delay={Math.min(i * 0.05, 0.25)}>
                   <div className="flex items-start gap-4 sm:gap-6">
+                    {/* the trail stone — flat now, haloed by a ring of
+                        its own colour instead of a pedestal */}
                     <m.span
                       className="z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full font-display text-[calc(16px*var(--ui-scale))] font-bold text-white sm:h-14 sm:w-14 sm:text-[calc(18px*var(--ui-scale))]"
                       style={{
                         background: isDone ? "#12B886" : main,
-                        boxShadow: `0 4px 0 ${isDone ? "#0ca678" : shade(main)}`,
-                        transform: `rotate(${i % 2 ? 3 : -3}deg)`,
+                        boxShadow: `0 0 0 5px ${tint(isDone ? "#12B886" : main, 18)}`,
                       }}
                     >
                       {isDone ? <Check className="h-6 w-6" strokeWidth={3} /> : i + 1}
@@ -177,11 +178,10 @@ export function UnitView({
                       type="button"
                       onClick={() => onOpenTopic(t.id)}
                       aria-label={`Open ${t.label}: ${t.title}`}
-                      whileHover={{ y: -5, rotate: 0 }}
+                      whileHover={{ y: -4 }}
                       whileTap={{ scale: 0.98 }}
                       transition={{ type: "spring", stiffness: 300, damping: 18 }}
                       className="group min-w-0 flex-1 cursor-pointer rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 text-left puff sm:p-6"
-                      style={{ transform: `rotate(${i % 2 ? 0.6 : -0.6}deg)` }}
                     >
                       <div className="flex flex-wrap items-center gap-2">
                         <Chip main={main}>{t.label}</Chip>
@@ -192,12 +192,12 @@ export function UnitView({
                           {t.ao.join(" · ")}
                         </span>
                         {isDone && (
-                          <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-mint/15 px-2.5 py-1 text-[calc(11.5px*var(--ui-scale))] font-extrabold text-mint">
+                          <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-mint/15 px-2.5 py-1 text-[calc(11.5px*var(--ui-scale))] font-bold text-mint">
                             <Check className="h-3.5 w-3.5" strokeWidth={3} /> revised
                           </span>
                         )}
                       </div>
-                      <h3 className="mt-2.5 font-display text-[calc(21px*var(--ui-scale))] leading-snug font-semibold text-ink transition-colors group-hover:text-current">
+                      <h3 className="mt-2.5 font-display text-[calc(21px*var(--ui-scale))] leading-snug font-semibold text-ink">
                         {t.title}
                       </h3>
                       <p className="mt-1.5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.7] text-ink-soft">
@@ -226,7 +226,7 @@ export function UnitView({
               <ArrowLeft className="h-4.5 w-4.5" strokeWidth={2.5} />
             </span>
             <span className="min-w-0">
-              <span className="block text-[calc(11px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-ink-faint uppercase">
                 previous unit
               </span>
               <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold text-ink">
@@ -244,10 +244,10 @@ export function UnitView({
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.97 }}
             className="flex cursor-pointer items-center justify-end gap-3 rounded-full px-5 py-4 text-right text-white sm:col-start-2"
-            style={{ background: next.candy.main, boxShadow: `0 4px 0 ${shade(next.candy.main)}` }}
+            style={{ background: next.candy.main, boxShadow: `0 2px 0 ${shade(next.candy.main)}` }}
           >
             <span className="min-w-0">
-              <span className="block text-[calc(11px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-white/70 uppercase">
+              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-white/70 uppercase">
                 next unit
               </span>
               <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold">

@@ -106,7 +106,7 @@ export function Desk({
             </h1>
 
             {lead && (
-              <div className="mt-7 rounded-[calc(26px*var(--ui-scale))] bg-cream p-5 sm:p-6">
+              <div className="mt-7 rounded-[calc(26px*var(--ui-scale))] border border-ink/[0.06] bg-cream p-5 sm:p-6">
                 <div className="text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.18em] text-ink-faint uppercase">
                   {leadTag}
                 </div>
@@ -152,7 +152,7 @@ export function Desk({
           </div>
 
           {/* right: the week at a glance */}
-          <div className="rounded-[calc(26px*var(--ui-scale))] bg-cream p-5 sm:p-6">
+          <div className="rounded-[calc(26px*var(--ui-scale))] border border-ink/[0.06] bg-cream p-5 sm:p-6">
             <div className="flex items-center justify-between gap-2">
               <div className="text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.18em] text-ink-faint uppercase">
                 your week
@@ -362,7 +362,7 @@ export function Desk({
                 key={tool.label}
                 type="button"
                 onClick={tool.open}
-                className="flex cursor-pointer items-center gap-3.5 rounded-[calc(22px*var(--ui-scale))] bg-cream px-4 py-4 text-left transition-transform duration-200 hover:-translate-y-0.5"
+                className="flex cursor-pointer items-center gap-3.5 rounded-[calc(22px*var(--ui-scale))] border border-ink/[0.06] bg-cream px-4 py-4 text-left transition-transform duration-200 hover:-translate-y-0.5"
               >
                 <span
                   className="grid h-11 w-11 shrink-0 place-items-center rounded-[calc(15px*var(--ui-scale))]"

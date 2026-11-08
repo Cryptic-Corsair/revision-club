@@ -18,6 +18,7 @@ import {
 import type { Block } from "@/lib/spectra/types";
 import { Fmt } from "./format";
 import {
+  Kicker,
   Mascot,
   SpeechBubble,
   shade,
@@ -40,14 +41,14 @@ export function TopicBlocks({ blocks, main }: { blocks: Block[]; main: string })
     <div className="flex flex-col gap-8">
       {blocks.map((b, i) => (
         <Reveal key={i} delay={Math.min(i * 0.04, 0.24)} y={20}>
-          <BlockView block={b} main={main} flip={i % 2 === 1} />
+          <BlockView block={b} main={main} />
         </Reveal>
       ))}
     </div>
   );
 }
 
-function BlockView({ block: b, main, flip }: { block: Block; main: string; flip: boolean }) {
+function BlockView({ block: b, main }: { block: Block; main: string }) {
   switch (b.k) {
     case "p":
       return (
@@ -58,14 +59,10 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
 
     case "def":
       return (
-        <div
-          className={`puff-lift relative rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 pr-6 puff sm:p-6 ${
-            flip ? "rotate-[0.7deg]" : "rotate-[-0.7deg]"
-          }`}
-        >
+        <div className="puff-lift relative rounded-[calc(20px*var(--ui-scale))] bg-paper p-5 pr-6 puff sm:p-6">
           <div className="flex items-center gap-3">
             <span
-              className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl"
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-ink/[0.08]"
               style={{ background: chipWash(main, 16) }}
             >
               <BookMarked className="h-5 w-5" style={{ color: shade(main, 62) }} />
@@ -81,14 +78,16 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
       );
 
     case "eq":
+      /* the same print-style band the note reader wears: hairline
+         rules above and below, species as flat framed chips */
       return (
         <div
-          className="rounded-[calc(26px*var(--ui-scale))] p-5 sm:p-6"
-          style={{ background: liftWash(main, 10) }}
+          className="rounded-[calc(20px*var(--ui-scale))] border-y border-ink/[0.09] p-5 sm:p-6"
+          style={{ background: liftWash(main, 6) }}
         >
           {b.title && (
             <div
-              className="mb-3 inline-flex -rotate-1 items-center gap-2 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.14em] text-white uppercase"
+              className="mb-3 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.1em] text-white uppercase"
               style={{ background: main }}
             >
               <Lightbulb className="h-3.5 w-3.5" /> {b.title}
@@ -98,7 +97,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
             {b.eq.split(/\s{2,}/).map((part, i) => (
               <span
                 key={i}
-                className="rounded-2xl bg-paper px-4 py-2.5 font-mono text-[calc(15px*var(--ui-scale))] font-semibold text-ink shadow-[0_3px_0_rgb(61_43_31/0.06)]"
+                className="rounded-[calc(10px*var(--ui-scale))] border border-ink/[0.09] bg-paper px-4 py-2.5 font-mono text-[calc(15px*var(--ui-scale))] font-semibold text-ink"
               >
                 <Fmt text={part.trim()} />
               </span>
@@ -109,7 +108,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
               {b.ok.map((o, i) => (
                 <span
                   key={i}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-paper/70 px-3 py-1 text-[calc(12.5px*var(--ui-scale))] font-bold text-ink"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-paper/70 px-3 py-1 text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink"
                 >
                   <BadgeCheck className="h-4 w-4" style={{ color: main }} />
                   <Fmt text={o} />
@@ -138,13 +137,13 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
             <Mascot main={main} size={86} bubbles={false} />
           </div>
           <SpeechBubble
-            bg={liftWash("#FF922B", 12)}
+            bg={liftWash("#FF922B", 10)}
             className="min-w-0 flex-1"
             tailClass="left-[-9px] rotate-[135deg]"
           >
-            <div className="mb-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.18em] text-tangerine uppercase">
+            <Kicker color="var(--color-tangerine)" className="mb-2">
               Tips
-            </div>
+            </Kicker>
             <ul className="flex flex-col gap-1.5">
               {b.items.map((t, i) => (
                 <li key={i} className="flex items-start gap-2 text-[calc(14.5px*var(--ui-scale))] leading-[1.65] text-ink">
@@ -164,7 +163,7 @@ function BlockView({ block: b, main, flip }: { block: Block; main: string; flip:
 
     case "recap":
       return (
-        <div className="rotate-[-0.5deg] rounded-[calc(30px*var(--ui-scale))] bg-cocoa p-6 text-milk sm:p-7">
+        <div className="rounded-[calc(26px*var(--ui-scale))] bg-cocoa p-6 text-milk sm:p-7">
           <div className="mb-4 flex items-center gap-3">
             <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white/10">
               <Timer className="h-5 w-5 text-lemon" />
@@ -217,10 +216,10 @@ function WorkedExample({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="rounded-[calc(28px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
+    <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
       <div className="flex items-center gap-3">
         <span
-          className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl"
+          className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-ink/[0.08]"
           style={{ background: chipWash(main, 16) }}
         >
           <Footprints className="h-5 w-5" style={{ color: shade(main, 62) }} />
@@ -237,7 +236,7 @@ function WorkedExample({
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.95 }}
         className="mt-4 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(14px*var(--ui-scale))] font-semibold text-white"
-        style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
+        style={{ background: main, boxShadow: `0 2px 0 ${shade(main)}` }}
       >
         {open ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
         {open ? "Hide steps" : "Show steps"}
@@ -300,8 +299,11 @@ function WorkedExample({
                 damping: 16,
                 delay: 0.1 + steps.length * 0.06,
               }}
-              className="mt-4 flex items-start gap-2.5 rounded-full bg-paper px-4 py-3 text-[calc(15px*var(--ui-scale))] font-bold text-ink shadow-[0_4px_0_rgb(61_43_31/0.07)] sm:items-center"
-              style={{ borderLeft: `6px solid ${main}` }}
+              className="mt-4 flex items-start gap-2.5 rounded-[calc(16px*var(--ui-scale))] bg-paper px-4 py-3 text-[calc(15px*var(--ui-scale))] font-semibold text-ink sm:items-center"
+              style={{
+                borderLeft: `4px solid ${main}`,
+                boxShadow: "0 2px 0 var(--edge)",
+              }}
             >
               <PartyPopper className="h-5 w-5 shrink-0" style={{ color: main }} />
               <span>
@@ -342,7 +344,7 @@ function CandyTable({
           </div>
         </div>
       )}
-      <div className="overflow-hidden rounded-[calc(10px*var(--ui-scale))] rounded-tl-none bg-paper puff">
+      <div className="overflow-hidden rounded-[calc(14px*var(--ui-scale))] rounded-tl-none bg-paper puff">
         <ScrollFade>
           <table className="w-full min-w-[calc(520px*var(--ui-scale))] border-collapse text-left">
             <thead>
@@ -350,7 +352,7 @@ function CandyTable({
                 {head.map((h, i) => (
                   <th
                     key={i}
-                    className="px-4 py-3.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.06em] whitespace-nowrap text-ink uppercase sm:px-5"
+                    className="px-4 py-3 font-display text-[calc(11.5px*var(--ui-scale))] font-semibold tracking-[0.08em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
                   >
                     <Fmt text={h} />
                   </th>
@@ -361,11 +363,11 @@ function CandyTable({
               {rows.map((r, i) => (
                 <tr
                   key={i}
-                  className="border-t-[2.5px] border-dashed border-ink/10"
+                  className="border-t border-ink/[0.08]"
                   style={{
                     background:
                       i % 2 === 1
-                        ? `var(--zebra-fill, color-mix(in oklab, ${main} 4%, #ffffff))`
+                        ? `var(--zebra-fill, color-mix(in oklab, ${main} 4%, var(--tint-base)))`
                         : undefined,
                   }}
                 >
@@ -373,7 +375,7 @@ function CandyTable({
                     <td
                       key={j}
                       className={`px-4 py-3.5 align-top text-[calc(14px*var(--ui-scale))] leading-[1.65] sm:px-5 ${
-                        j === 0 ? "font-extrabold text-ink" : "text-ink-soft"
+                        j === 0 ? "font-semibold text-ink" : "text-ink-soft"
                       }`}
                     >
                       <Fmt text={c} />

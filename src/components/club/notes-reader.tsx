@@ -29,6 +29,7 @@ import {
   SpeechBubble,
   Squiggle,
   Mascot,
+  Kicker,
   readableInk,
   shade,
   tint,
@@ -95,7 +96,7 @@ function PackTick({ spec, accent }: { spec: string; accent: string }) {
               boxShadow: `0 2px 0 ${shade(accent)}`,
             }
           : {
-              border: "2.5px dashed color-mix(in oklab, var(--color-ink) 32%, transparent)",
+              border: "2px dashed color-mix(in oklab, var(--color-ink) 28%, transparent)",
               color: "var(--color-ink-faint)",
             }
       }
@@ -225,30 +226,27 @@ function NotesReaderBody({
 
         <PopIn delay={0.05} className="mt-7 flex flex-wrap items-center gap-2">
           <span
-            className="inline-flex -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] text-white uppercase"
+            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] text-white uppercase"
             style={{ background: main }}
           >
             <BookOpen className="h-3.5 w-3.5" /> Revision note
           </span>
-          <span className="inline-flex items-center rounded-full bg-ink/5 px-3.5 py-1.5 text-[calc(12.5px*var(--ui-scale))] font-bold capitalize text-ink-soft">
+          <span className="inline-flex items-center rounded-full bg-ink/5 px-3.5 py-1.5 text-[calc(12.5px*var(--ui-scale))] font-semibold capitalize text-ink-soft">
             {doc.source}
           </span>
         </PopIn>
         <PopIn delay={0.1}>
-          <p
-            className="mt-6 font-display text-[calc(15px*var(--ui-scale))] font-semibold tracking-[0.06em] uppercase"
-            style={{ color: inkMix(main, 52) }}
-          >
+          <Kicker color={inkMix(main, 62)} className="mt-7">
             {doc.kicker}
-          </p>
-          <h1 className="mt-2 font-display text-[calc(clamp(2.1rem,5vw,3.2rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
+          </Kicker>
+          <h1 className="mt-2.5 font-display text-[calc(clamp(2.1rem,5vw,3.2rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
             {doc.title}
           </h1>
         </PopIn>
 
         <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
           <div className="shrink-0">
-            <Mascot main={main} size={104} bubbles={false} />
+            <Mascot main={main} size={88} bubbles={false} />
           </div>
           <Reveal delay={0.15} className="min-w-0">
             <SpeechBubble tailClass="left-8 -top-[calc(7px*var(--ui-scale))] rotate-[225deg]">
@@ -269,7 +267,7 @@ function NotesReaderBody({
           {stats.map((s) => (
             <span
               key={s}
-              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[calc(12px*var(--ui-scale))] font-bold text-ink"
+              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[calc(12px*var(--ui-scale))] font-semibold text-ink"
               style={{ background: tint(main, 12) }}
             >
               <Sparkles className="h-3.5 w-3.5" style={{ color: main }} /> {s}
@@ -282,10 +280,10 @@ function NotesReaderBody({
 
       {/* ————— contents ————— */}
       <Reveal className="mx-auto max-w-3xl px-4 pt-4 sm:px-8">
-        <div className="rounded-[calc(30px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
+        <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
           <div className="flex items-center gap-3">
             <span
-              className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl"
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-ink/[0.08]"
               style={{ background: tint(main, 16) }}
             >
               <Target className="h-5 w-5" style={{ color: inkMix(main, 60) }} />
@@ -294,7 +292,7 @@ function NotesReaderBody({
               <h2 className="font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
                 Contents
               </h2>
-              <p className="text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-faint">
+              <p className="text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink-faint">
                 {doc.sections.length} sections · tap one to jump
               </p>
             </div>
@@ -364,7 +362,7 @@ function NotesReaderBody({
           <SoftButton onClick={onBack} ariaLabel={`Back to ${unit.code}`}>
             <ArrowLeft className="h-4.5 w-4.5" /> Back to {unit.code}
           </SoftButton>
-          <p className="mt-2 text-[calc(12px*var(--ui-scale))] leading-relaxed font-bold text-ink-soft">
+          <p className="mt-2 text-[calc(12px*var(--ui-scale))] leading-relaxed font-semibold text-ink-soft">
             <Fmt
               text={`==${unit.code}== · ${unit.title} · from ${doc.source}`}
             />

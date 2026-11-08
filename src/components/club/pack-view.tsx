@@ -142,7 +142,7 @@ export function PackView({
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.96 }}
               className="inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-3 font-display text-[calc(14.5px*var(--ui-scale))] font-semibold text-white"
-              style={{ background: "#FF922B", boxShadow: `0 4px 0 ${shade("#FF922B")}` }}
+              style={{ background: "#FF922B", boxShadow: `0 3px 0 ${shade("#FF922B")}` }}
             >
               <Target className="h-5 w-5" /> Browse the spec index
             </m.button>
@@ -171,8 +171,8 @@ export function PackView({
 
         <PopIn delay={0.05} className="mt-6">
           <span
-            className="inline-flex -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
-            style={{ background: "#FFD43B", color: "#5f4a00" }}
+            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
+            style={{ background: "#FFD43B", color: readableInk("#FFD43B") }}
           >
             <ClipboardList className="h-3.5 w-3.5" /> Your pack
           </span>
@@ -202,8 +202,8 @@ export function PackView({
                     onClick={() => removePoint(p.spec)}
                     aria-label={`Remove ${p.spec} from your pack`}
                     title={`Remove ${p.spec} — ${p.topicLabel}`}
-                    className="group inline-flex h-[calc(34px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-2 rounded-full bg-paper px-3 font-display text-[calc(12px*var(--ui-scale))] font-bold transition-transform hover:-translate-y-0.5"
-                    style={{ color: p.candy, boxShadow: "0 2px 0 var(--edge)" }}
+                    className="group inline-flex h-[calc(34px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-2 rounded-full border border-ink/[0.08] bg-paper px-3 font-display text-[calc(12px*var(--ui-scale))] font-semibold transition-transform hover:-translate-y-0.5"
+                    style={{ color: p.candy }}
                   >
                     <span
                       aria-hidden
@@ -234,7 +234,7 @@ export function PackView({
                 transition={{ type: "spring", stiffness: 120, damping: 20 }}
               />
             </div>
-            <span className="shrink-0 font-display text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-soft">
+            <span className="shrink-0 font-display text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink-soft">
               {readCount}/{points.length} read{allRead ? " ✓" : ""}
             </span>
           </div>
@@ -331,14 +331,14 @@ export function PackView({
                             type="button"
                             onClick={() => toggleRead(s.point.spec)}
                             aria-pressed={isRead}
-                            className={`inline-flex min-h-[calc(38px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-[calc(12px*var(--ui-scale))] font-bold transition-colors ${
+                            className={`inline-flex min-h-[calc(38px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-[calc(12px*var(--ui-scale))] font-semibold transition-colors ${
                               isRead ? "text-white" : "bg-paper text-ink-soft hover:text-ink"
                             }`}
                             style={
                               isRead
                                 ? {
                                     background: "#12B886",
-                                    boxShadow: `0 3px 0 ${shade("#12B886")}`,
+                                    boxShadow: `0 2px 0 ${shade("#12B886")}`,
                                   }
                                 : { boxShadow: "0 2px 0 var(--edge)" }
                             }
@@ -358,7 +358,7 @@ export function PackView({
                             <button
                               type="button"
                               onClick={() => onOpenNotes(s.point.entries[0].docId, s.point.spec)}
-                              className="inline-flex min-h-[calc(38px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-full bg-paper px-3.5 py-2 text-[calc(12px*var(--ui-scale))] font-bold text-ink-soft transition-colors hover:text-ink"
+                              className="inline-flex min-h-[calc(38px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-full bg-paper px-3.5 py-2 text-[calc(12px*var(--ui-scale))] font-semibold text-ink-soft transition-colors hover:text-ink"
                               style={{ boxShadow: "0 2px 0 var(--edge)" }}
                               aria-label={`Open ${s.point.entries[0].title} in the ${g.topicLabel} notes`}
                             >
@@ -401,7 +401,7 @@ export function PackView({
               <p className="font-display text-[calc(clamp(1.4rem,3.6vw,1.75rem)*(1+(var(--ui-scale)-1)*0.5))] leading-snug font-semibold text-ink">
                 Pack read — every point, marked off.
               </p>
-              <p className="-mt-2 max-w-[46ch] text-[calc(13.5px*var(--ui-scale))] leading-relaxed font-bold text-ink-soft">
+              <p className="-mt-2 max-w-[46ch] text-[calc(13.5px*var(--ui-scale))] leading-relaxed font-semibold text-ink-soft">
                 {points.length} spec point{points.length === 1 ? "" : "s"} of
                 revision, done. Tick the next batch, or load a saved set and
                 walk it again.
@@ -427,7 +427,7 @@ export function PackView({
               <Bookmark className="h-4.5 w-4.5" /> Saved sets{sets.length > 0 ? ` (${sets.length})` : ""}
             </SoftButton>
           </div>
-          <p className="mt-2 text-[calc(12px*var(--ui-scale))] leading-relaxed font-bold text-ink-soft">
+          <p className="mt-2 text-[calc(12px*var(--ui-scale))] leading-relaxed font-semibold text-ink-soft">
             Assembled from the revision notes · ticks live in your browser
           </p>
         </Reveal>
@@ -452,11 +452,10 @@ function TopicBanner({
   return (
     <div className="no-print mb-8">
       <div
-        className="inline-flex max-w-full -rotate-1 items-center gap-2.5 rounded-full py-2 pr-4 pl-2.5"
+        className="inline-flex max-w-full items-center gap-2.5 rounded-full py-2 pr-4 pl-2.5"
         style={{
           background: g.candy,
           color: readableInk(g.candy),
-          boxShadow: `0 3px 0 ${shade(g.candy)}`,
         }}
       >
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/25 font-display text-[calc(11px*var(--ui-scale))] font-bold">
@@ -466,7 +465,7 @@ function TopicBanner({
           {g.topicLabel} — {g.topicTitle}
         </span>
       </div>
-      <p className="mt-2.5 pl-1 text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.1em] text-ink-faint uppercase">
+      <p className="mt-2.5 pl-1 text-[calc(11.5px*var(--ui-scale))] font-semibold tracking-[0.1em] text-ink-faint uppercase">
         {sections} section{sections === 1 ? "" : "s"} from this topic
         {!hideStatements && " · statements quoted above each note"}
       </p>
@@ -499,7 +498,7 @@ function ToolButton({
       whileTap={{ scale: 0.95 }}
       aria-label={label}
       title={label}
-      className={`inline-flex h-[calc(40px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[calc(12.5px*var(--ui-scale))] font-bold tracking-[0.02em] transition-colors ${
+      className={`inline-flex h-[calc(40px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[calc(12.5px*var(--ui-scale))] font-semibold tracking-[0.02em] transition-colors ${
         !highlight && !danger
           ? "bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
           : ""
@@ -509,13 +508,13 @@ function ToolButton({
           ? {
               background: "#12B886",
               color: readableInk("#12B886"),
-              boxShadow: `0 3px 0 ${shade("#12B886")}`,
+              boxShadow: `0 2px 0 ${shade("#12B886")}`,
             }
           : danger
             ? {
                 background: "#FF6B6B",
                 color: "#fff",
-                boxShadow: `0 3px 0 ${shade("#FF6B6B")}`,
+                boxShadow: `0 2px 0 ${shade("#FF6B6B")}`,
               }
             : undefined
       }

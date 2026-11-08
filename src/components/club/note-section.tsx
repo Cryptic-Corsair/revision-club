@@ -15,7 +15,7 @@ import {
 } from "./icons";
 import type { NotesBlock, SpecSection } from "@/lib/spectra/notes-types";
 import { Fmt } from "./format";
-import { honeyWash, liftWash, Reveal, ScrollFade, readableInk, shade, sunkWash, tint } from "./bits";
+import { honeyWash, Kicker, liftWash, Reveal, ScrollFade, readableInk, shade, sunkWash, tint } from "./bits";
 import { inkMix } from "./bands";
 import {
   FigAtom,
@@ -179,41 +179,40 @@ export function SpecSectionView({
 }) {
   return (
     <div className="flex flex-col gap-7">
-      {/* spec banner — the official wording, stated above the section */}
+      {/* spec banner — the official wording, stated above the section.
+          Tailored: the pill stands square (no tilt, no pedestal) and
+          the rule beneath it thins to a whisper. */}
       <div>
         <div className="flex items-center gap-3">
           <span
-            className="inline-flex shrink-0 rotate-[-1.5deg] items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
             style={{
               background: accent,
               color: readableInk(accent),
-              boxShadow: `0 3px 0 ${shade(accent)}`,
             }}
           >
             <Target className="h-3.5 w-3.5" /> Spec {section.spec}
           </span>
           <span
             aria-hidden
-            className="h-[calc(3px*var(--ui-scale))] flex-1 rounded-full"
-            style={{ background: tint(accent, 32) }}
+            className="h-[calc(2px*var(--ui-scale))] flex-1 rounded-full"
+            style={{ background: tint(accent, 40) }}
           />
           {bannerAction}
         </div>
-        <h2 className="mt-3.5 font-display text-[calc(clamp(1.55rem,3.4vw,1.95rem)*(1+(var(--ui-scale)-1)*0.5))] font-bold tracking-tight text-ink">
+        <h2 className="mt-3.5 font-display text-[calc(clamp(1.55rem,3.4vw,1.95rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
           {section.title}
         </h2>
         {!hideStatement && (
           <div
-            className="mt-4 rounded-[calc(22px*var(--ui-scale))] bg-paper/85 px-5 py-4"
-            style={{ borderLeft: `5px solid ${tint(accent, 45)}` }}
+            className="mt-4 rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
+            style={{
+              borderLeft: `3px solid ${accent}`,
+              boxShadow: "0 2px 0 var(--edge)",
+            }}
           >
-            <div
-              className="font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase"
-              style={{ color: inkMix(accent, 62) }}
-            >
-              From the specification
-            </div>
-            <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.75] text-ink italic">
+            <Kicker color={inkMix(accent, 62)}>From the specification</Kicker>
+            <p className="mt-2 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft italic">
               <Fmt text={section.statement} />
             </p>
           </div>
@@ -281,7 +280,7 @@ function BlockView({
     case "note":
       return (
         <div
-          className="max-w-[72ch] rounded-[calc(20px*var(--ui-scale))] px-4 py-3.5"
+          className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] px-4 py-3.5"
           style={{ background: honeyWash("#FFD43B", 18) }}
         >
           <div className="flex items-start gap-3">
@@ -291,7 +290,7 @@ function BlockView({
             />
             <p className="text-[calc(14.5px*var(--ui-scale))] leading-[1.7] text-ink">
               <span
-                className="mr-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-extrabold tracking-[0.12em] uppercase"
+                className="mr-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
                 style={{ color: inkMix("#B08D00", 58) }}
               >
                 {b.label}:
@@ -304,8 +303,11 @@ function BlockView({
     case "def":
       return (
         <div
-          className="max-w-[72ch] rounded-[calc(20px*var(--ui-scale))] bg-paper px-5 py-4 puff"
-          style={{ borderLeft: `5px solid ${tint(accent, 40)}` }}
+          className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
+          style={{
+            borderLeft: `3px solid ${tint(accent, 55)}`,
+            boxShadow: "0 2px 0 var(--edge)",
+          }}
         >
           <h4 className="font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
             <Fmt text={b.term} />
@@ -316,23 +318,26 @@ function BlockView({
         </div>
       );
     case "eq":
+      /* the tailored re-set: a print-style band — hairline rules above
+         and below, species as flat framed chips instead of shadowed
+         lozenges. Reads like a textbook, keeps the classic warmth. */
       return (
         <div
-          className="max-w-[72ch] rounded-[calc(22px*var(--ui-scale))] p-5"
-          style={{ background: liftWash(accent, 9) }}
+          className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] border-y border-ink/[0.09] px-5 py-4"
+          style={{ background: liftWash(accent, 6) }}
         >
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5">
             {b.eq.split(/\s{2,}/).map((part, i) => (
               <span
                 key={i}
-                className="rounded-2xl bg-paper px-4 py-2.5 font-mono text-[calc(14.5px*var(--ui-scale))] font-semibold text-ink shadow-[0_3px_0_color-mix(in_oklab,var(--color-ink)_7%,transparent)]"
+                className="rounded-[calc(10px*var(--ui-scale))] border border-ink/[0.09] bg-paper px-3.5 py-2 font-mono text-[calc(14.5px*var(--ui-scale))] font-semibold text-ink"
               >
                 <Fmt text={part.trim()} />
               </span>
             ))}
           </div>
           {b.note && (
-            <p className="mt-3 text-[calc(13px*var(--ui-scale))] leading-relaxed font-bold text-ink-soft">
+            <p className="mt-3 text-[calc(13px*var(--ui-scale))] leading-relaxed font-semibold text-ink-soft">
               <Fmt text={b.note} />
             </p>
           )}
@@ -364,24 +369,19 @@ function BlockView({
     case "wow":
       return (
         <div
-          className="max-w-[72ch] rounded-[calc(22px*var(--ui-scale))] p-5 sm:p-6"
-          style={{ background: liftWash("#9775FA", 12) }}
+          className="max-w-[72ch] rounded-[calc(20px*var(--ui-scale))] p-5 sm:p-6"
+          style={{ background: liftWash("#9775FA", 10) }}
         >
           <div className="flex items-start gap-3">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-paper">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl border border-ink/[0.08] bg-paper">
               <Lightbulb
                 className="h-5 w-5"
                 style={{ color: inkMix("#9775FA", 72) }}
               />
             </span>
             <div>
-              <div
-                className="font-display text-[calc(11px*var(--ui-scale))] font-extrabold tracking-[0.18em] uppercase"
-                style={{ color: inkMix("#9775FA", 62) }}
-              >
-                Key idea
-              </div>
-              <p className="mt-1 text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink">
+              <Kicker color={inkMix("#9775FA", 62)}>Key idea</Kicker>
+              <p className="mt-1.5 text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink">
                 <Fmt text={b.text} />
               </p>
             </div>
@@ -420,7 +420,7 @@ function CandyTable({
           </div>
         </div>
       )}
-      <div className="overflow-hidden rounded-[calc(10px*var(--ui-scale))] rounded-tl-none bg-paper puff">
+      <div className="overflow-hidden rounded-[calc(14px*var(--ui-scale))] rounded-tl-none bg-paper puff">
         <ScrollFade>
           <table className="w-full min-w-[calc(480px*var(--ui-scale))] border-collapse text-left">
             <thead>
@@ -428,7 +428,7 @@ function CandyTable({
                 {head.map((h, i) => (
                   <th
                     key={i}
-                    className="px-4 py-3.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.06em] whitespace-nowrap text-ink uppercase sm:px-5"
+                    className="px-4 py-3 font-display text-[calc(11.5px*var(--ui-scale))] font-semibold tracking-[0.08em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
                   >
                     <Fmt text={h} />
                   </th>
@@ -439,18 +439,18 @@ function CandyTable({
               {rows.map((r, i) => (
                 <tr
                   key={i}
-                  className="border-t-[2.5px] border-dashed border-ink/10"
+                  className="border-t border-ink/[0.08]"
                   style={{
                     background:
                       i % 2 === 1
-                        ? `var(--zebra-fill, color-mix(in oklab, ${accent} 4%, #ffffff))`
+                        ? `var(--zebra-fill, color-mix(in oklab, ${accent} 4%, var(--tint-base)))`
                         : undefined,
                   }}
                 >
                   {r.map((c, j) => (
                     <td
                       key={j}
-                      className={`px-4 py-3.5 align-top text-[calc(14px*var(--ui-scale))] leading-[1.65] sm:px-5 ${j === 0 ? "font-extrabold text-ink" : "text-ink-soft"}`}
+                      className={`px-4 py-3.5 align-top text-[calc(14px*var(--ui-scale))] leading-[1.65] sm:px-5 ${j === 0 ? "font-semibold text-ink" : "text-ink-soft"}`}
                     >
                       <Fmt text={c} />
                     </td>
@@ -510,15 +510,15 @@ function Worked({
   const shown = open || printing;
 
   return (
-    <div className="rounded-[calc(28px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
+    <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
       <div className="flex flex-wrap items-center gap-3">
         <span
-          className="inline-flex min-w-0 max-w-full shrink-0 rotate-[-1.5deg] items-center rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] leading-snug font-bold tracking-[0.1em] uppercase"
+          className="inline-flex min-w-0 max-w-full shrink-0 items-center rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] leading-snug font-bold tracking-[0.1em] uppercase"
           style={{ background: accent, color: readableInk(accent) }}
         >
           <PenLine className="mr-1.5 h-3.5 w-3.5 shrink-0" /> <Fmt text={title} />
         </span>
-        <p className="min-w-[16rem] flex-1 text-[calc(15.5px*var(--ui-scale))] leading-[1.7] font-bold text-ink">
+        <p className="min-w-[16rem] flex-1 text-[calc(15.5px*var(--ui-scale))] leading-[1.7] font-semibold text-ink">
           <Fmt text={question} />
         </p>
       </div>
@@ -530,7 +530,7 @@ function Worked({
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.95 }}
         className="mt-4 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(14px*var(--ui-scale))] font-semibold text-white"
-        style={{ background: accent, boxShadow: `0 4px 0 ${shade(accent)}` }}
+        style={{ background: accent, boxShadow: `0 2px 0 ${shade(accent)}` }}
       >
         {open ? (
           <EyeOff className="h-4.5 w-4.5" />
@@ -600,8 +600,11 @@ function Worked({
                 damping: 18,
                 delay: printing ? 0 : 0.1 + steps.length * 0.06,
               }}
-              className="mt-4 flex items-start gap-2.5 rounded-[calc(20px*var(--ui-scale))] bg-paper px-4 py-3 text-[calc(15px*var(--ui-scale))] font-bold text-ink shadow-[0_4px_0_color-mix(in_oklab,var(--color-ink)_7%,transparent)]"
-              style={{ borderLeft: `6px solid ${accent}` }}
+              className="mt-4 flex items-start gap-2.5 rounded-[calc(16px*var(--ui-scale))] bg-paper px-4 py-3 text-[calc(15px*var(--ui-scale))] font-semibold text-ink"
+              style={{
+                borderLeft: `4px solid ${accent}`,
+                boxShadow: "0 2px 0 var(--edge)",
+              }}
             >
               <Check
                 className="mt-0.5 h-5 w-5 shrink-0"
@@ -656,11 +659,11 @@ function StepsPanel({
   return (
     <div
       className="rounded-[calc(26px*var(--ui-scale))] p-4 sm:p-5"
-      style={{ background: liftWash(accent, 9) }}
+      style={{ background: liftWash(accent, 7) }}
     >
       {caption && (
         <div className="mb-3.5 flex items-center gap-2.5">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-paper shadow-[0_2px_0_color-mix(in_oklab,var(--color-ink)_6%,transparent)]">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-ink/[0.08] bg-paper">
             <ListChecks
               className="h-4.5 w-4.5"
               style={{ color: inkMix(accent, 62) }}
@@ -679,7 +682,7 @@ function StepsPanel({
           return (
             <li
               key={i}
-              className="rounded-[calc(18px*var(--ui-scale))] bg-paper px-4 py-3.5 shadow-[0_3px_0_color-mix(in_oklab,var(--color-ink)_7%,transparent)]"
+              className="rounded-[calc(16px*var(--ui-scale))] border border-ink/[0.07] bg-paper px-4 py-3.5"
             >
               <div className="flex items-center gap-2">
                 <span

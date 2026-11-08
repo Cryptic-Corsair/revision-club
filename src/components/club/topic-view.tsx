@@ -112,10 +112,10 @@ export function TopicView({
           <m.button
             type="button"
             onClick={onOpenNotes}
-            whileHover={{ y: -4, rotate: -0.4 }}
+            whileHover={{ y: -3 }}
             whileTap={{ scale: 0.97 }}
-            className="group flex w-full cursor-pointer items-center gap-4 rounded-[calc(28px*var(--ui-scale))] p-5 text-left sm:p-6"
-            style={{ background: main, boxShadow: `0 6px 0 ${shade(main)}` }}
+            className="group flex w-full cursor-pointer items-center gap-4 rounded-[calc(22px*var(--ui-scale))] p-5 text-left sm:p-6"
+            style={{ background: main, boxShadow: `0 3px 0 ${shade(main)}` }}
           >
             <span className="grid h-14 w-14 shrink-0 place-items-center rounded-[calc(20px*var(--ui-scale))] bg-white/20">
               <BookOpen className="h-7 w-7 text-white" strokeWidth={2.2} />
@@ -159,13 +159,12 @@ export function TopicView({
                 ? {
                     background: main,
                     color: "#fff",
-                    boxShadow: `0 5px 0 ${shade(main)}`,
-                    transform: "rotate(-1.5deg)",
+                    boxShadow: `0 3px 0 ${shade(main)}`,
                   }
                 : {
                     background: "var(--color-paper)",
                     color: "var(--color-ink)",
-                    boxShadow: "0 5px 0 color-mix(in oklab, var(--color-ink) 10%, transparent)",
+                    boxShadow: "0 3px 0 color-mix(in oklab, var(--color-ink) 10%, transparent)",
                   }
             }
           >
@@ -185,7 +184,7 @@ export function TopicView({
           </m.button>
         </div>
       </Reveal>
-      <p className="mt-3 text-center text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-faint">
+      <p className="mt-3 text-center text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink-faint">
         {isRevised
           ? "Saved in this browser. Tap again to unmark it."
           : "One tap marks it done — progress is saved in this browser."}
@@ -205,7 +204,7 @@ export function TopicView({
               <ArrowLeft className="h-4.5 w-4.5" strokeWidth={2.5} />
             </span>
             <span className="min-w-0">
-              <span className="block text-[calc(11px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-ink-faint uppercase">
                 previous · {prev.label}
               </span>
               <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold text-ink">
@@ -223,10 +222,10 @@ export function TopicView({
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.97 }}
             className="flex cursor-pointer items-center justify-end gap-3 rounded-full px-5 py-4 text-right text-white sm:col-start-2"
-            style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
+            style={{ background: main, boxShadow: `0 2px 0 ${shade(main)}` }}
           >
             <span className="min-w-0">
-              <span className="block text-[calc(11px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-white/70 uppercase">
+              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-white/70 uppercase">
                 next · {next.label}
               </span>
               <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold">
@@ -244,10 +243,10 @@ export function TopicView({
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.97 }}
             className="flex cursor-pointer items-center justify-end gap-3 rounded-full px-5 py-4 text-right text-white sm:col-start-2"
-            style={{ background: main, boxShadow: `0 4px 0 ${shade(main)}` }}
+            style={{ background: main, boxShadow: `0 2px 0 ${shade(main)}` }}
           >
             <span className="min-w-0">
-              <span className="block text-[calc(11px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-white/70 uppercase">
+              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-white/70 uppercase">
                 end of unit
               </span>
               <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold">
@@ -259,7 +258,7 @@ export function TopicView({
         )}
       </nav>
 
-      <p className="mt-10 text-center text-[calc(12px*var(--ui-scale))] leading-relaxed font-bold text-ink-faint">
+      <p className="mt-10 text-center text-[calc(12px*var(--ui-scale))] leading-relaxed font-semibold text-ink-faint">
         <Fmt
           text={`==${unit.code}== · ${unit.title} · written to the 2018 specification`}
         />

@@ -797,7 +797,7 @@ function FontRow({
       }
     >
       <span
-        className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-paper text-[calc(19px*var(--ui-scale))] leading-none font-bold text-ink shadow-[0_2px_0_rgb(61_43_31/0.08)]"
+        className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-ink/[0.08] bg-paper text-[calc(19px*var(--ui-scale))] leading-none font-bold text-ink"
         style={{ fontFamily: stack }}
       >
         Aa
