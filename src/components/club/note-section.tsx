@@ -219,12 +219,26 @@ export function SpecSectionView({
         )}
       </div>
 
-      <div className="spec-body-rail ml-1 flex flex-col gap-7 border-l pl-4 sm:ml-2 sm:pl-7">
-        {section.blocks.map((b, i) => (
-          <Reveal key={i} delay={Math.min(i * 0.03, 0.12)} y={18}>
-            <BlockView block={b} accent={accent} />
-          </Reveal>
-        ))}
+      <div className="flex flex-col gap-6">
+        {section.blocks.map((b, i) => {
+          /* A quiet typographic staircase: subheads step in once,
+             their explanatory content steps in a little further.
+             Wide/structured blocks keep a shallower inset so tables,
+             figures and worked panels retain their own visual width. */
+          const inset =
+            b.k === "h"
+              ? "ml-2 sm:ml-4"
+              : b.k === "table" || b.k === "figure" || b.k === "worked" || b.k === "steps"
+                ? "ml-1 sm:ml-2"
+                : "ml-5 sm:ml-9";
+          return (
+            <Reveal key={i} delay={Math.min(i * 0.03, 0.12)} y={18}>
+              <div className={inset}>
+                <BlockView block={b} accent={accent} />
+              </div>
+            </Reveal>
+          );
+        })}
       </div>
     </div>
   );
