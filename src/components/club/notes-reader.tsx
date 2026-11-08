@@ -226,8 +226,8 @@ function NotesReaderBody({
 
         <PopIn delay={0.05} className="mt-7 flex flex-wrap items-center gap-2">
           <span
-            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] text-white uppercase"
-            style={{ background: main }}
+            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.14em] uppercase"
+            style={{ background: main, color: readableInk(main) }}
           >
             <BookOpen className="h-3.5 w-3.5" /> Revision note
           </span>
