@@ -108,10 +108,14 @@ unchanged. Reading time, scroll-spy and deep-links behave identically.
 
 ## 2 · Releases (each shippable, each revertible)
 
-> **Status: R0–R4 shipped.** The interface axis is live: notes, pack and progress
-> wear both dresses, the switch works live from the customize panel in both
-> directions, and classic parity holds at 28/28 screenshots within 2% across all
-> four labs. R5 (unit/topic/spec twins) and R6 (seamlessness polish) remain.
+> **Status: R0–R6 shipped — the two-interface site is complete.** The
+> interface axis is live everywhere except the homepage: notes, pack,
+> progress, unit walk, topic reader and spec index all wear both dresses,
+> the switch works live from the customize panel in both directions with
+> no reload, and a mid-note switch re-lands you on the same spec
+> statement. Classic parity holds (fresh 28-shot classic reference in
+> `.baselines-check/`, editorial matrix in `.baselines-editorial/`,
+> capture script in `scripts/baseline-capture.sh`).
 
 ### R0 — Groundwork (no visible change)
 1. Lift progress derivations → `progress-derive.ts`; lift `scrollToSpec`/scroll-spy → `scroll-helpers.ts` (classic views now import them — behaviour-identical refactor).

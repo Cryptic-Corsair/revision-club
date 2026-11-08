@@ -85,6 +85,23 @@ const SpecIndex = dynamic(() => import("./spec-index").then((m) => m.SpecIndex),
   ssr: false,
   loading: RoomLoading,
 });
+/* the spec index's editorial twin — same props, the document dress */
+const SpecEditorial = dynamic(
+  () => import("./spec-editorial").then((m) => m.SpecEditorial),
+  { ssr: false, loading: RoomLoading },
+);
+/* the topic reader's editorial twin — same props, the document dress */
+const TopicEditorial = dynamic(
+  () => import("./topic-editorial").then((m) => m.TopicEditorial),
+  { ssr: false, loading: RoomLoading },
+);
+/* the unit walk's editorial twin — same props, the document dress;
+   the classic unit view rides in the first-paint bundle, its twin
+   travels lazily like every other room */
+const UnitEditorial = dynamic(
+  () => import("./unit-editorial").then((m) => m.UnitEditorial),
+  { ssr: false, loading: RoomLoading },
+);
 const PackView = dynamic(() => import("./pack-view").then((m) => m.PackView), {
   ssr: false,
   loading: RoomLoading,
@@ -893,11 +910,14 @@ export default function ClubApp() {
       void import("./notes-reader");
       void import("./notes-editorial");
       void import("./spec-index");
+      void import("./spec-editorial");
       void import("./pack-view");
       void import("./pack-editorial");
       void import("./sticker-book");
       void import("./progress-editorial");
       void import("./topic-view");
+      void import("./topic-editorial");
+      void import("./unit-editorial");
       void import("./search");
       void import("./customize");
       void import("./legal");
@@ -942,6 +962,136 @@ export default function ClubApp() {
   useEffect(() => {
     applyPrefs(prefs);
   }, [prefs]);
+
+  /* ————— the bookmark between the two interfaces —————
+     While a notes or pack surface is open, keep a light side-audit
+     of which spec statement is on screen (throttled to ~200ms; the
+     rooms' own spies remain the source of truth for the nav's map).
+     When the interface flips, the twin mounts inside the same keyed
+     room — the scroll offset survives — but each dress sets its own
+     type, so the same offset can land a line or two off, and the
+     two dresses' heights differ besides. The captured statement is
+     the honest bookmark: once the swapped room's anchors exist, the
+     view lands on it again, instantly. Near the top of a page there
+     is nothing worth keeping — the swap just settles. */
+  const ifaceRef = useRef(prefs.iface);
+  const anchorRef = useRef<{ spec: string; y: number } | null>(null);
+  const specSurface = view.kind === "notes" || view.kind === "pack";
+  useEffect(() => {
+    if (!specSurface) {
+      anchorRef.current = null;
+      return;
+    }
+    let raf = 0;
+    let trail = 0;
+    let last = 0;
+    const pick = () => {
+      raf = 0;
+      const probe = window.scrollY + window.innerHeight * 0.35;
+      let current: string | null = null;
+      document.querySelectorAll<HTMLElement>('[id^="spec-"]').forEach((el) => {
+        if (el.getBoundingClientRect().top + window.scrollY <= probe)
+          current = el.id.replace(/^spec-/, "").replace("-", ".");
+      });
+      anchorRef.current = current
+        ? { spec: current, y: window.scrollY }
+        : null;
+    };
+    const onScroll = () => {
+      const now = performance.now();
+      if (now - last >= 200 && !raf) {
+        last = now;
+        raf = requestAnimationFrame(pick);
+      }
+      window.clearTimeout(trail);
+      trail = window.setTimeout(pick, 230);
+    };
+    pick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+      window.clearTimeout(trail);
+      anchorRef.current = null;
+    };
+  }, [specSurface]);
+
+  /* the re-land: on an interface flip over a spec surface, wait for
+     the swapped room's own anchor (its chunk may still be arriving),
+     then place the bookmarked statement back under the reading line
+     — one instant move, no glide, as if the page never moved. The
+     landing reuses the verified hop's two-phase recipe (rooms off-
+     screen are content-visibility estimates until they render): park
+     shy of the target, let the real layout materialise, then snap to
+     measured ground — and one verification beat snaps any drift. */
+  useEffect(() => {
+    if (ifaceRef.current === prefs.iface) return;
+    ifaceRef.current = prefs.iface;
+    const captured = anchorRef.current;
+    /* the guard reads the CAPTURED y, not the live one: the swap's
+       loading frame can collapse the page and clamp scrollY before
+       this effect runs — the captured value is where you actually
+       were when you flipped */
+    if (!captured || captured.y < 240) return;
+    if (view.kind !== "notes" && view.kind !== "pack") return;
+    /* a deep link still pending in the view (jumpToSpec) belongs to
+       the navigation that created it — a twin swap must not replay
+       it over the re-land. Clearing the prop re-renders the fresh
+       reader before its own 420ms hop timer fires, whose cleanup
+       then cancels the hop. */
+    if (view.kind === "notes" && view.spec) {
+      setView({ ...view, spec: undefined });
+    }
+    const id = `spec-${captured.spec.replace(".", "-")}`;
+    let trail = 0;
+    let tries = 0;
+    const topOf = (el: HTMLElement) => {
+      const saTop =
+        parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue("--sa-top"),
+        ) || 0;
+      return Math.max(
+        0,
+        el.getBoundingClientRect().top + window.scrollY - 100 - saTop,
+      );
+    };
+    const land = () => {
+      const el = document.getElementById(id);
+      if (!el) return false;
+      const estimate = topOf(el);
+      if (estimate > window.innerHeight * 2) {
+        /* the render pass: materialise the real layout around the
+           target, then snap to what is actually measured */
+        window.scrollTo({
+          top: estimate - window.innerHeight * 1.5,
+          behavior: "instant" as ScrollBehavior,
+        });
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => {
+            const top = topOf(el);
+            window.scrollTo({ top, behavior: "instant" as ScrollBehavior });
+            window.setTimeout(() => {
+              if (Math.abs(window.scrollY - topOf(el)) >= 2)
+                window.scrollTo({ top: topOf(el), behavior: "instant" as ScrollBehavior });
+            }, 450);
+          }),
+        );
+      } else {
+        window.scrollTo({ top: estimate, behavior: "instant" as ScrollBehavior });
+        window.setTimeout(() => {
+          if (Math.abs(window.scrollY - topOf(el)) >= 2)
+            window.scrollTo({ top: topOf(el), behavior: "instant" as ScrollBehavior });
+        }, 450);
+      }
+      return true;
+    };
+    const poll = () => {
+      if (land()) return;
+      if (++tries < 45) trail = window.setTimeout(poll, 70);
+    };
+    trail = window.setTimeout(poll, 100);
+    return () => window.clearTimeout(trail);
+  }, [prefs.iface, view.kind]);
 
   /* opening a unit or topic is the membership moment: the desk flag
      flips and the visit is remembered as the place to resume from */
@@ -1074,34 +1224,44 @@ export default function ClubApp() {
                     />
                   ))}
   
-                {view.kind === "unit" && unit && (
-                  <UnitView
-                    unit={unit}
-                    onOpenTopic={(id) => openTopic(unit.code, id)}
-                    onBack={goHome}
-                    onOpenUnit={openUnit}
-                  />
-                )}
+                {view.kind === "unit" && unit && (() => {
+                  const UnitWalk =
+                    prefs.iface === "editorial" ? UnitEditorial : UnitView;
+                  return (
+                    <UnitWalk
+                      key={unit.code}
+                      unit={unit}
+                      onOpenTopic={(id) => openTopic(unit.code, id)}
+                      onBack={goHome}
+                      onOpenUnit={openUnit}
+                    />
+                  );
+                })()}
   
-                {view.kind === "topic" && unit && topic && (
-                  <TopicView
-                    unit={unit}
-                    topic={topic}
-                    onBack={() => openUnit(unit.code)}
-                    onOpenTopic={(id) => openTopic(unit.code, id)}
-                    notesSpecRange={topicMeta?.specRange}
-                    onOpenNotes={
-                      topicMeta
-                        ? () =>
-                            setView({
-                              kind: "notes",
-                              code: unit.code,
-                              docId: topicMeta.id,
-                            })
-                        : undefined
-                    }
-                  />
-                )}
+                {view.kind === "topic" && unit && topic && (() => {
+                  const TopicReader =
+                    prefs.iface === "editorial" ? TopicEditorial : TopicView;
+                  return (
+                    <TopicReader
+                      key={`${unit.code}/${topic.id}`}
+                      unit={unit}
+                      topic={topic}
+                      onBack={() => openUnit(unit.code)}
+                      onOpenTopic={(id) => openTopic(unit.code, id)}
+                      notesSpecRange={topicMeta?.specRange}
+                      onOpenNotes={
+                        topicMeta
+                          ? () =>
+                              setView({
+                                kind: "notes",
+                                code: unit.code,
+                                docId: topicMeta.id,
+                              })
+                          : undefined
+                      }
+                    />
+                  );
+                })()}
   
                 {view.kind === "notes" && unit && notesMeta && (() => {
                   /* the interface swap — the editorial twin wears the
@@ -1120,13 +1280,17 @@ export default function ClubApp() {
                   );
                 })()}
   
-                {view.kind === "spec" && (
-                  <SpecIndex
-                    onHome={goHome}
-                    onOpenPack={openPack}
-                    onOpenNotes={openNotes}
-                  />
-                )}
+                {view.kind === "spec" && (() => {
+                  const SpecIdx =
+                    prefs.iface === "editorial" ? SpecEditorial : SpecIndex;
+                  return (
+                    <SpecIdx
+                      onHome={goHome}
+                      onOpenPack={openPack}
+                      onOpenNotes={openNotes}
+                    />
+                  );
+                })()}
   
                 {view.kind === "pack" && (() => {
                   const Pack =

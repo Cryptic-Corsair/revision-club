@@ -199,9 +199,10 @@ export function SampleBlockView({
    The site's table signature — the accent dash and 20px semibold
    title, flush with a flat top-left corner — exactly as the reader
    tunes it; the table itself is re-cut as print: hairline rules,
-   a tone-on-tone header band, no candy. */
+   a tone-on-tone header band, no candy. Exported so the topic
+   reader's twin sets its tables through the very same furniture. */
 
-function EditorialTable({
+export function EditorialTable({
   head,
   rows,
   caption,
