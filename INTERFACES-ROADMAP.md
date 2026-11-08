@@ -156,6 +156,50 @@ Scroll-anchor preservation across a switch (you stay on the same statement); idl
 preload of editorial chunks; reduced-motion & focus passes; final full matrix.
 **Gate:** the whole checklist, then push.
 
+### R7 — The tailored rooms (classic sophistication pass)
+
+With Editorial standing next to it, the classic interface read "old-fashioned":
+too many hard pedestal shadows, per-item zebra rotations, five competing
+small-caps label treatments, chunky dashed rules, extrabold body text. This
+release keeps every structure, colour and behaviour — it re-tailors the suit:
+
+1. **One pedestal rule** — hard `0 3–6px 0` shadows demoted everywhere except
+   true primary CTAs; cards ride `puff` + hairline `border-ink/[0.06–0.09]` or
+   `0 2px 0 var(--edge)`. Trail stones / unit tiles swap pedestals for soft
+   colour halos (`0 0 0 5px tint(main, 18)`).
+2. **Rotation discipline** — the only surviving tilts are the SectionTag and
+   the hero highlight. Topic cards, trail stones, def cards, recap, banner
+   pills, badge pills, worked pills, sticker tiles and badge-wall fans all
+   stand square.
+3. **The Kicker** (`bits.tsx`, classic-only) — one small-caps label: 10.5px,
+   bold, 0.16em tracking, accent dash. Replaces the 0.14/0.16/0.18/0.2em
+   mélange in notes-reader, pack, progress, spec-index, topic blocks.
+4. **Print-style equations** — note-section + blocks `eq` blocks re-set as
+   border-y hairline bands with flat framed mono chips (no more shadowed
+   lozenges). Statement/def cards: 3px accent left rule on paper, Kicker label,
+   italic ink-soft statement.
+5. **Tables** — hairline solid row rules (was 2.5px dashed), quiet 11.5px caps
+   headers in ink-soft, zebra fallback rides `--tint-base` (was hard `#ffffff` —
+   a dark-lab bug), radius 14.
+6. **Type weights** — body/meta `font-extrabold` → semibold across unit/topic/
+   notes/pack/progress/spec-index; kickers font-bold only.
+7. **Header unification** — unit code badge, "Revision note", "Your pack",
+   "Spec index" badges all stand square on one recipe (lemon badge now uses
+   `readableInk`, not the hard-coded `#5f4a00`).
+8. **Theme-bug fixes in shared surfaces** — customize Aa tile roast shadow →
+   hairline; goal chips / minutes rows / dashed ticks route through
+   `var(--color-ink)` mixes so dark, dune and espresso labs stay coherent;
+   reset button pairs coral with `shade()` (was `#e8590c`).
+9. **Desk** — cream cards gain hairline borders for definition on paper.
+
+**Files:** bits · note-section · blocks · unit-view · topic-view · notes-reader ·
+pack-view · sticker-book · spec-index · desk · customize. Homepage untouched;
+editorial twins untouched (verified by file diff); spec-map untouched.
+**Gate:** tsc → eslint → walkthrough (desk, unit, trail, notes incl. espresso
+rooms + tables + equations + worked examples, pack, spec index, progress,
+customize) × labs (classic/dune/night) × 1440+390 → zero console/page errors;
+editorial swap verified live mid-session.
+
 ---
 
 ## 3 · Risk register
