@@ -3051,3 +3051,34 @@ html.dune .rooms-page {
   background: linear-gradient(90deg, var(--rooms-accent-2), var(--rooms-accent)) !important;
 }
 
+
+
+.rooms-pack-empty .text-mint { color: var(--rooms-accent-2) !important; }
+@media (max-width: 640px) {
+  .rooms-progress-page .rooms-stat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .rooms-progress-page .rooms-stat-pillar {
+    min-height: calc(104px * var(--ui-scale));
+    padding: calc(9px * var(--ui-scale)) !important;
+  }
+  .rooms-progress-page .rooms-stat-pillar .rooms-stat-icon {
+    width: calc(30px * var(--ui-scale)) !important;
+    height: calc(30px * var(--ui-scale)) !important;
+  }
+  .rooms-progress-page .rooms-stat-pillar > span:nth-child(2) {
+    margin-top: calc(10px * var(--ui-scale)) !important;
+    font-size: calc(1.05rem * var(--ui-scale)) !important;
+    white-space: nowrap;
+  }
+  .rooms-progress-page .rooms-stat-pillar > span:nth-child(3) {
+    font-size: calc(8px * var(--ui-scale)) !important;
+    letter-spacing: 0.055em;
+  }
+}
+@media (max-width: 360px) {
+  .rooms-progress-page .rooms-stat-pillar > span:nth-child(2) {
+    font-size: calc(0.95rem * var(--ui-scale)) !important;
+  }
+}
+
