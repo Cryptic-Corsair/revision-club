@@ -155,3 +155,13 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not verified.
 - **Commit(s):** see the implementation commit containing this entry.
 - **Follow-up / known limitations:** verify the Vercel build injects `VERCEL_GIT_COMMIT_SHA` and inspect Dune Rooms at desktop and mobile widths. The footer uses `local` outside Vercel/GitHub Actions.
+
+### 2026-11-09 — Simplify footer build label
+
+- **Contributor:** AI agent.
+- **Request / objective:** make the displayed build version simpler.
+- **Changes made:** removed the redundant word “build” from the footer suffix; the existing seven-character commit identifier and its source remain unchanged.
+- **Preserved invariants:** build identification remains tied to the deployed source commit; no theme, layout, or build configuration changes.
+- **Verification:** confirmed the exact previous footer label before editing. No lint, production build, deployment or browser visual inspection was run.
+- **Deployment:** not verified.
+- **Commit(s):** see the implementation commit containing this entry.
