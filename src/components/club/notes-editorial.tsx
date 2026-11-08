@@ -17,7 +17,7 @@ import { getNotes } from "@/lib/spectra/notes";
 import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
 import { Fmt, plural } from "./format";
 import { PopIn, Reveal, SoftButton, readableInk, shade } from "./bits";
-import { accentOf } from "./bands";
+import { BandWave, accentOf, bgOf } from "./bands";
 import { useSpecMapRegister } from "./spec-map";
 import { EditorialSectionView, figOffsetsOf } from "./spec-section-editorial";
 import { EditorialLabel, SampleBlockView } from "./sample-blocks";
@@ -329,23 +329,33 @@ function NotesEditorialBody({
               </span>
             </div>
 
-            <div className="legal-clauses">
-              {doc.sections.map((section, i) => (
-                <Reveal key={section.spec} delay={Math.min(i * 0.03, 0.16)}>
-                  <EditorialSectionView
-                    section={section}
-                    index={i}
-                    total={doc.sections.length}
-                    accent={accentOf(i)}
-                    eyebrow={eyebrowFor(section.spec)}
-                    anchorPrefix="spec-"
-                    bannerAction={
-                      <EditorialPackTick spec={section.spec} accent={accentOf(i)} />
-                    }
-                    figOffset={figOffsets[i]}
-                  />
-                </Reveal>
-              ))}
+            <div className="legal-clauses rooms-wave-sections">
+              <BandWave from="var(--color-cream)" to={bgOf(0)} />
+              {doc.sections.map((section, i) => {
+                const last = i === doc.sections.length - 1;
+                return (
+                  <Fragment key={section.spec}>
+                    <Reveal delay={Math.min(i * 0.03, 0.16)}>
+                      <EditorialSectionView
+                        section={section}
+                        index={i}
+                        total={doc.sections.length}
+                        accent={accentOf(i)}
+                        eyebrow={eyebrowFor(section.spec)}
+                        anchorPrefix="spec-"
+                        bannerAction={
+                          <EditorialPackTick spec={section.spec} accent={accentOf(i)} />
+                        }
+                        figOffset={figOffsets[i]}
+                      />
+                    </Reveal>
+                    <BandWave
+                      from={bgOf(i)}
+                      to={last ? "var(--color-cream)" : bgOf(i + 1)}
+                    />
+                  </Fragment>
+                );
+              })}
             </div>
           </div>
 
