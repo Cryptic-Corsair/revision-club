@@ -1967,18 +1967,12 @@ html.dark:not(.dune) .legal-room { --legal-rust: #e0c4eb; }
 .note-rooms .spec-anchor .max-w-\[68ch\] {
   max-width: 68ch;
 }
-.note-rooms .spec-anchor > .flex.flex-col.gap-6 > * {
-  min-width: 0;
-}
 .note-rooms .spec-anchor .room-callout {
   border: 1px solid color-mix(in oklab, var(--room-accent) 20%, transparent);
 }
 html.dune .note-rooms .spec-anchor .room-callout {
   background: color-mix(in oklab, var(--color-paper) 84%, #d5a45d 16%);
   border-color: rgb(213 164 93 / 0.24);
-}
-.note-rooms .spec-anchor .spec-body-rail .room-callout {
-  background: color-mix(in oklab, var(--color-paper) 78%, var(--color-ink) 2%);
 }
 html.dark:not(.dune) .note-rooms {
   --room-accent: #b7a18a;
