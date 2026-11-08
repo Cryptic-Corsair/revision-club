@@ -104,6 +104,98 @@ box with the 5px accent border) → `EditorialSectionView` per spec section → 
 Figures ride inside `legal-card` exhibit frames. Pack ticks plug into `bannerAction`
 unchanged. Reading time, scroll-spy and deep-links behave identically.
 
+
+---
+
+## 1A · Theme and interface separation (design-system contract)
+
+This section is the source of truth for future theme, palette and interface work. Read it
+before changing theme tokens, interface selectors, accent helpers or the Customize panel.
+
+### The two axes are different
+
+- **Theme (global lab):** `light`, `dark`, `dune` or `classic`. This is one site-wide
+  preference. Changing it changes the underlying mood across the site, regardless of
+  which interface is active.
+- **Interface (presentation):** `rooms` or `editorial`. This selects the presentation
+  of supported content surfaces. It does not select or store a separate theme.
+
+The current product intentionally has **one global theme selection**, not a separate
+theme picker for Rooms and Editorial. Do not add per-interface theme preferences,
+duplicate theme selectors, or independent theme persistence unless that product decision
+is explicitly revisited.
+
+### What is shared, and what is allowed to differ
+
+| Layer | Contract |
+|---|---|
+| Theme preference and persistence | Shared globally: one `Prefs.theme`, one apply path, one saved value |
+| Interface preference and persistence | Separate axis: `Prefs.iface` chooses Rooms or Editorial |
+| Global foundations | Shared where appropriate: font families, scale, motion, base ink/surface tokens and theme state |
+| Rooms colour treatment | May have its own restrained palette and theme-specific overrides, scoped to Rooms |
+| Editorial colour treatment | May have its own editorial palette and theme-specific overrides, scoped to Editorial |
+| Content, progress and behaviour | Shared; a presentation change must not fork content or stores |
+
+A shared theme does **not** mean both interfaces must use identical colours. Each interface
+may interpret the active global theme differently. For example, Dune can remain a warm,
+restrained document palette in Editorial while Rooms uses its own Dune surface and accent
+treatment. Both are still responding to the same global Dune selection.
+
+### CSS and token boundaries
+
+1. Keep Rooms-only palette rules under an explicit Rooms scope, currently
+   `.note-rooms` and its theme-qualified variants in `src/app/globals.css`.
+2. Keep Editorial-only palette rules under explicit Editorial/legal scopes (for example
+   `.legal-*` components and `html[data-iface="editorial"]` where the rule genuinely
+   belongs to the interface). Theme variants may qualify those selectors, but must not
+   leak into Rooms.
+3. Global theme foundations belong in the global theme blocks in `globals.css`. Do not
+   move an interface-specific colour into a root token merely to make it convenient.
+4. A rule that intentionally applies to both interfaces must be visibly shared and
+   documented as such. Avoid broad selectors that accidentally restyle the other
+   interface.
+5. Do not assume that a token name implies ownership. Check where it is declared,
+   overridden and consumed before changing it.
+
+### Accent ownership
+
+- Rooms currently uses a restrained mineral accent in its note renderer; the wider
+  application still has the user-configurable accent wheel. Do not silently reintroduce
+  the rotating candy accents into Rooms.
+- Editorial owns its editorial accent treatment through its legal/editorial styling.
+- Shared accent helpers or components (including Spec Map/Contents chips) must be checked
+  for every consumer before changing their output. A change made for Rooms must not
+  unintentionally recolour Editorial, navigation, the homepage or shared navigation
+  surfaces.
+- If an accent must differ by interface, resolve it at the interface-specific boundary
+  rather than changing a global helper without auditing its call sites.
+
+### Required workflow for future visual changes
+
+Before editing:
+1. Identify whether the requested change concerns the global theme, one interface, or a
+   genuinely shared component.
+2. Trace the relevant CSS custom property from declaration to every consumer. Search for
+   the selector/token and inspect all call sites of any shared helper.
+3. Check all four global themes and both interfaces; include the combinations affected by
+   the change rather than validating only the currently selected view.
+4. Preserve the other interface unless the request explicitly includes it.
+
+After editing:
+1. Verify Rooms and Editorial independently in Light, Dark, Dune and Classic wherever
+   the changed surface exists.
+2. Check switching the interface while a theme is active, then changing the global theme
+   while each interface is selected. Neither action should cause a flash, stale palette,
+   or style leakage.
+3. Confirm the selected theme and interface still persist as separate fields in the
+   existing preferences object. Do not change storage keys or migrate saved preferences
+   for a styling-only task.
+4. Record any intentional exception here when the architecture or ownership rules change.
+
+**Review rule:** if a future change cannot clearly be classified as global-theme,
+Rooms-only, Editorial-only or shared, stop and resolve its ownership before writing CSS.
+Prefer explicit scoped overrides over broad selectors and duplicated theme state.
+
 ---
 
 ## 2 · Releases (each shippable, each revertible)
