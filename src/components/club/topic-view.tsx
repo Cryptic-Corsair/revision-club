@@ -119,8 +119,8 @@ export function TopicView({
             className="group flex w-full cursor-pointer items-center gap-4 rounded-[calc(22px*var(--ui-scale))] border border-ink/[0.08] bg-paper p-5 text-left puff sm:p-6"
             style={{ borderLeft: `4px solid ${main}` }}
           >
-            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-[calc(20px*var(--ui-scale))] bg-white/20">
-              <BookOpen className="h-7 w-7 text-white" strokeWidth={2.2} />
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-[calc(20px*var(--ui-scale))] bg-ink/[0.06]">
+              <BookOpen className="h-7 w-7" style={{ color: main }} strokeWidth={2.2} />
             </span>
             <span className="min-w-0 flex-1">
               <span className="block font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
@@ -132,8 +132,8 @@ export function TopicView({
                 each, and every calculation worked in full.
               </span>
             </span>
-            <span className="hidden h-11 w-11 shrink-0 place-items-center rounded-full bg-white/20 transition-transform group-hover:translate-x-1 sm:grid">
-              <ArrowRight className="h-5 w-5 text-white" strokeWidth={2.5} />
+            <span className="hidden h-11 w-11 shrink-0 place-items-center rounded-full bg-ink/[0.06] transition-transform group-hover:translate-x-1 sm:grid">
+              <ArrowRight className="h-5 w-5" style={{ color: main }} strokeWidth={2.5} />
             </span>
           </m.button>
         </Reveal>
@@ -233,8 +233,8 @@ export function TopicView({
                 {next.title}
               </span>
             </span>
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/20">
-              <ArrowRight className="h-4.5 w-4.5" strokeWidth={2.5} />
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink/[0.06]">
+              <ArrowRight className="h-4.5 w-4.5" style={{ color: main }} strokeWidth={2.5} />
             </span>
           </m.button>
         ) : (
