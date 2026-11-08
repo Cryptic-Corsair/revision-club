@@ -6,7 +6,7 @@ import { ArrowLeft, Check, ClipboardList, Search, Target } from "./icons";
 import { SPEC_POINTS, SPEC_STATS, SPEC_TOPIC_GROUPS } from "@/lib/spectra/registry";
 import { usePacks, togglePick } from "@/lib/spectra/packs";
 import { Fmt } from "./format";
-import { PopIn, Reveal, SoftButton, chipWash, honeyWash, tint, readableInk, shade, Squiggle } from "./bits";
+import { PopIn, Reveal, SoftButton, chipWash, tint, readableInk, shade, Squiggle } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · spec index — every assessment statement the
