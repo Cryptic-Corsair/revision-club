@@ -2,7 +2,7 @@
 
 import { useEffect, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
-import { Check, RotateCcw, Sparkles, Maximize, Minimize, Palette, Home, BookOpen, ClipboardList, Sticker, ShieldCheck, NotebookPen } from "./icons";
+import { Check, RotateCcw, Sparkles, Maximize, Minimize, Palette, Home, BookOpen, ClipboardList, Sticker, ShieldCheck, NotebookPen, X } from "./icons";
 import { readableInk, shade, tint } from "./bits";
 import { accentOf } from "./bands";
 import {
@@ -357,10 +357,21 @@ export function CustomizePanel({
                   <p className="font-display text-[12px] font-bold tracking-[0.16em] text-ink-faint uppercase">
                     Navigate
                   </p>
-                  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.12em] text-ink-faint">
-                    SWIPE
-                    <span aria-hidden className="text-[13px] leading-none">→</span>
-                  </span>
+                  <div className="inline-flex items-center gap-2">
+                    <span className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.12em] text-ink-faint">
+                      SWIPE
+                      <span aria-hidden className="text-[13px] leading-none">→</span>
+                    </span>
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      aria-label="Exit Control Panel"
+                      title="Exit Control Panel"
+                      className="md:hidden grid h-8 w-8 place-items-center rounded-full border border-ink/[0.1] bg-paper text-ink-soft shadow-sm transition-colors hover:bg-ink/[0.06] hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint"
+                    >
+                      <X className="h-4 w-4" strokeWidth={2.2} />
+                    </button>
+                  </div>
                 </div>
                 <div className="relative -mx-1">
                   <div className="no-scrollbar overflow-x-auto overscroll-x-contain px-1 pb-0.5">
