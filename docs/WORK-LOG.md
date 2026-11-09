@@ -458,3 +458,13 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Confirmed the new conditional mobile control in the updated component. No build, lint or browser visual test was run.
 - **Deployment:** Deployment status not checked.
 - **Commit(s):** `73c30d3` (implementation); this journal entry follows in the next commit.
+
+
+### 2026-11-09 — Restore the mobile Control Panel exit button
+
+- **Contributor:** AI agent.
+- **Request / objective:** Restore the exit button inside the mobile Control Panel, not the separate fullscreen control in the site navbar.
+- **Changes made:** Added a compact, circular close button with an X icon to the right side of the Navigate heading. It is visible on mobile breakpoints and calls the existing `onClose` handler to dismiss the Control Panel. The desktop layout and all navigation actions remain unchanged.
+- **Verification:** Re-fetched the updated component and confirmed the button is inside the Control Panel's Navigate header, uses the existing close callback, and is mobile-only. No build, lint or browser visual test was run.
+- **Deployment:** Deployment status not checked.
+- **Commit(s):** `b5c8470` (implementation); this journal entry follows in the next commit.
