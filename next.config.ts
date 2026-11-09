@@ -21,6 +21,12 @@ const nextConfig: NextConfig = {
   /* No X-Powered-By header. */
   poweredByHeader: false,
 
+  /* The workspace preview proxies the site through *.space-z.ai hosts.
+     Next's dev server warns (and in future versions will refuse) cross-
+     origin /_next/* asset requests from hosts it doesn't know, so the
+     preview family is whitelisted here. Dev-only; production is unaffected. */
+  allowedDevOrigins: ["*.space-z.ai"],
+
   reactStrictMode: false,
 };
 

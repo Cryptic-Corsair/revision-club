@@ -500,3 +500,15 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not attempted (no push — push only on explicit instruction).
 - **Commit(s):** see the implementation commit containing this entry.
 - **Follow-up / known limitations:** the 154KB shared content chunk is the remaining leviathan — shrinking it means changing how `notes.ts` is packaged (the file is exempt/read-only), so it stays; the framer features chunk (70KB) is already the `domAnimation` build via `LazyMotion` strict. If a future dress switch feels cold on slow networks, the switch handler could prefetch before the panels animate — measured unnecessary on localhost.
+
+### 2026-11-10 — The workspace preview becomes a known guest (allowedDevOrigins)
+
+- **Contributor:** AI agent.
+- **Request / objective:** "I can't preview it. Workspace isn't working" — the workspace preview failed for the user right after the optimization commit; diagnose and harden.
+- **Investigation:** every surface checked healthy end-to-end: dev server (3000) answered 200, the production standalone build (3100) answered 200 with its static assets intact, and the actual preview URL (`preview-chat-….space-z.ai`) opened in a real browser with a full render and zero console errors (screenshots taken at 1440). The dev log did carry Next's cross-origin notice — every `/_next/*` request arriving through the preview proxy comes from a `*.space-z.ai` host the dev server doesn't know, and Next 16 warns today but will refuse those requests in a future major version. Most likely cause of the user's broken window: the sandbox was asleep between messages, or the 18:00 production build briefly froze the dev server mid-answer.
+- **Changes made:** `next.config.ts` — added `allowedDevOrigins: ["*.space-z.ai"]`, whitelisting the preview proxy family so the dev server greets proxied `/_next/*` requests without the warning and stays future-proof against the planned refusal. Dev-only key; production builds are unaffected.
+- **Preserved invariants:** no source, content, prefs, etoc or styling files touched; every existing config key (`env`, `output: "standalone"`, `typescript.ignoreBuildErrors`, `poweredByHeader`, `reactStrictMode`) unchanged.
+- **Verification:** `bunx tsc --noEmit` and `bunx eslint next.config.ts` clean. After the session restart the dev server booted fresh onto the new config, and the user's preview visit produced zero cross-origin warnings in dev.log; the preview URL re-opened headlessly post-restart with a clean `agent-browser errors` and the user confirmed it works.
+- **Deployment:** not attempted (no push — push only on explicit instruction).
+- **Commit(s):** see the implementation commit containing this entry (the sandbox's session restart first auto-committed the config edit under a UUID message; amended into a proper message together with this journal entry).
+- **Follow-up / known limitations:** the production standalone server on :3100 dies with every sandbox recycle and is only relaunched on demand for prod measurements — the workspace preview proxies the dev server on :3000, which the driver boots automatically each session.
