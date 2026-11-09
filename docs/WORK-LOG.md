@@ -478,3 +478,13 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Re-fetched the component and confirmed both strings and hint props are absent. No build, lint or browser visual test was run.
 - **Deployment:** Deployment status not checked.
 - **Commit(s):** `3ac3f5d` (implementation); this journal entry follows in the next commit.
+
+### 2026-11-10 — Remove descriptions from interface and theme cards
+
+- **Contributor:** AI agent.
+- **Request / objective:** "Remove descriptions from interface and theme cards in control panel" — the two caption lines under the Rooms/Editorial interface cards and the four taglines under the Light/Night/Dune/Classic theme cards should go, leaving miniature + name + selection state.
+- **Changes made:** `src/components/club/customize.tsx` — removed the two visible caption spans (`IFACE_DESCRIPTION[f]` under the interface cards, `LAB_DESCRIPTION[l]` under the theme cards). The invisible `aria-label` on both card buttons still carries the description for screen readers, and the `IFACE_DESCRIPTION`/`LAB_DESCRIPTION` data in `src/lib/spectra/prefs.ts` is untouched — the navbar's theme dropdown keeps its taglines (the ask was scoped to the control panel cards).
+- **Verification:** `bunx tsc --noEmit` clean; `bunx eslint src/components/club/customize.tsx` clean. agent-browser walkthrough of the dev build: drawer at 1440 and 390 — all six cards read miniature + name + Check/Select only, page text no longer contains "Band-walked" / "Warm paper" / "Velvet dusk" / "Sandstone" / "Espresso", no horizontal overflow (390/390), `agent-browser errors` silent.
+- **Deployment:** not attempted (no push — push only on explicit instruction).
+- **Commit(s):** see the implementation commit containing this entry.
+- **Follow-up / known limitations:** none known.

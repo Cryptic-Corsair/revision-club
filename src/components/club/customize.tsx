@@ -440,7 +440,6 @@ export function CustomizePanel({
                             <span className="text-[9px] font-semibold tracking-wide text-ink-faint uppercase">Select</span>
                           )}
                         </span>
-                        <span className="text-[10.5px] leading-snug text-ink-faint">{IFACE_DESCRIPTION[f]}</span>
                       </button>
                     );
                   })}
@@ -482,7 +481,6 @@ export function CustomizePanel({
                             <span className="text-[9px] font-semibold tracking-wide text-ink-faint uppercase">Select</span>
                           )}
                         </span>
-                        <span className="text-[10.5px] leading-snug text-ink-faint">{LAB_DESCRIPTION[l]}</span>
                       </button>
                     );
                   })}
