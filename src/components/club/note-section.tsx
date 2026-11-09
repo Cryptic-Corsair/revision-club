@@ -158,9 +158,37 @@ import {
    the caller only chooses the accent (its place in the band walk)
    and whether the verbatim statement card shows.
 
+   Width is a two-tier system, identical in both layouts:
+   · every component — statement, note, definition, equation, wow,
+     worked plate, steps panel, figure, table — spans the full
+     column, flush with the spec banner and the subhead rules;
+   · running prose keeps a reading measure (68ch of its own size),
+     and long text INSIDE a plate settles at 62ch so a wide card
+     never drags its lines wide with it.
+
    Extracted verbatim from notes-reader.tsx when the pack arrived;
    nothing about how a section reads has changed.
    ═══════════════════════════════════════════════════════════════ */
+
+/* ————— the rooms gradient recipes —————
+   Two moves, shared by every component, so the light reads as the
+   document's own rather than sticker decor:
+
+   · the ambient wash — the section's colour breathing into one
+     corner of a plate at 6–8% and gone by mid-card. Every plate
+     wears it; that is what makes it ambience and not an effect.
+   · the accent fall — small filled things (the spec pill, the step
+     chips, the toggle's chevron well) sink from the accent toward
+     its shade, so the lift reads as light from above.
+
+   All mixes run through the lab-aware tokens, so each of the four
+   labs grades its own light from the same recipe. */
+
+const ambientWash = (accent: string, pct = 8) =>
+  `radial-gradient(120% 92% at 100% 0%, color-mix(in oklab, ${accent} ${pct}%, transparent), transparent 55%)`;
+
+const accentFall = (accent: string) =>
+  `linear-gradient(160deg, ${accent}, ${shade(accent)})`;
 
 /* ————— one specification section — a room with its own colour ————— */
 
@@ -182,16 +210,17 @@ export function SpecSectionView({
   return (
     <div className="flex flex-col gap-7">
       {/* spec banner — the official wording, stated above the section.
-          v3: the pill keeps its tilt and hard shadow, but the rule
-          beside it is a divided line now — an accent tick flowing
-          into a hairline — and a quiet clause rule parts the banner
-          from the body, the way a document sets its clause off. */}
+          v3: the pill keeps its tilt and hard shadow, the rule beside
+          it is a divided line, and a quiet clause rule parts the
+          banner from the body. v3.1: the pill's fill falls from the
+          accent toward its shade — light from above — and the tick
+          dissolves rightward instead of stopping dead. */}
       <div>
         <div className="flex items-center gap-3">
           <span
             className="inline-flex shrink-0 -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
             style={{
-              background: accent,
+              background: accentFall(accent),
               color: readableInk(accent),
               boxShadow: `0 3px 0 ${shade(accent)}`,
             }}
@@ -201,7 +230,9 @@ export function SpecSectionView({
           <span
             aria-hidden
             className="h-[calc(3px*var(--ui-scale))] w-7 shrink-0 rounded-full"
-            style={{ background: accent, opacity: 0.85 }}
+            style={{
+              background: `linear-gradient(90deg, ${accent}, ${tint(accent, 45)})`,
+            }}
           />
           <span
             aria-hidden
@@ -215,14 +246,15 @@ export function SpecSectionView({
         </h2>
         {!hideStatement && (
           <div
-            className="mt-4 max-w-[68ch] rounded-[calc(12px*var(--ui-scale))] border bg-paper px-5 py-4"
+            className="mt-4 rounded-[calc(12px*var(--ui-scale))] border bg-paper px-5 py-4"
             style={{
               borderColor: "var(--rooms-hairline)",
               borderLeft: `3px solid ${accent}`,
+              background: `${ambientWash(accent)}, var(--color-paper)`,
             }}
           >
             <Kicker color={inkMix(accent, 62)}>From the specification</Kicker>
-            <p className="mt-2 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft italic">
+            <p className="mt-2 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft italic">
               <Fmt text={section.statement} />
             </p>
           </div>
@@ -269,14 +301,17 @@ function BlockView({
         </p>
       );
     case "h":
-      /* v3: the ruled subhead — an accent tick leads, the hairline
+      /* v3: the ruled subhead — an accent tick leads (dissolving
+         rightward now, the way a pen stroke lifts), the hairline
          trails to the column's edge; the document's section rule */
       return (
         <div className="flex items-center gap-3 pt-2">
           <span
             aria-hidden
             className="h-[calc(3px*var(--ui-scale))] w-6 shrink-0 rounded-full"
-            style={{ background: accent }}
+            style={{
+              background: `linear-gradient(90deg, ${accent}, ${tint(accent, 72)})`,
+            }}
           />
           <h3 className="min-w-0 font-display text-[calc(18px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             <Fmt text={b.text} />
@@ -289,8 +324,11 @@ function BlockView({
         </div>
       );
     case "bullets":
+      /* the list sits at the same measure as the paragraph — the
+         cap is ch-relative, so the ul carries the paragraph's size
+         to make its ch match exactly */
       return (
-        <ul className="flex max-w-[68ch] flex-col gap-2.5">
+        <ul className="flex max-w-[68ch] flex-col gap-2.5 text-[calc(14.5px*var(--ui-scale))]">
           {b.items.map((t, i) => (
             <li
               key={i}
@@ -310,10 +348,10 @@ function BlockView({
     case "note":
       return (
         <div
-          className="max-w-[68ch] rounded-[calc(12px*var(--ui-scale))] border px-4 py-3.5"
+          className="rounded-[calc(12px*var(--ui-scale))] border px-4 py-3.5"
           style={{
             borderColor: "var(--rooms-hairline-soft)",
-            background: `color-mix(in oklab, var(--color-paper) 92%, ${accent} 8%)`,
+            background: `${ambientWash(accent, 7)}, color-mix(in oklab, var(--color-paper) 92%, ${accent} 8%)`,
           }}
         >
           <div className="flex items-start gap-3">
@@ -335,19 +373,22 @@ function BlockView({
       );
     case "def":
       /* v3: the ruled definition — a hairline card with the accent
-         kept as a left edge, no sticker chrome; the term carries it */
+         kept as a left edge, no sticker chrome; the term carries it.
+         v3.1: full column like every plate, the text settling at the
+         inner measure, the corner wearing the ambient wash. */
       return (
         <div
-          className="max-w-[68ch] rounded-[calc(12px*var(--ui-scale))] border bg-paper px-5 py-4"
+          className="rounded-[calc(12px*var(--ui-scale))] border bg-paper px-5 py-4"
           style={{
             borderColor: "var(--rooms-hairline)",
             borderLeft: `3px solid ${tint(accent, 60)}`,
+            background: `${ambientWash(accent, 6)}, var(--color-paper)`,
           }}
         >
           <h4 className="font-display text-[calc(16.5px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             <Fmt text={b.term} />
           </h4>
-          <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+          <p className="mt-1.5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
             <Fmt text={b.text} />
           </p>
         </div>
@@ -355,12 +396,13 @@ function BlockView({
     case "eq":
       /* v3: the ruled equation band — a whisper of the accent over
          paper, closed top and bottom by hairlines; the species keep
-         their paper chips and hard mini-shadows (the candy moment) */
+         their paper chips and hard mini-shadows (the candy moment).
+         v3.1: full column, the ambient wash breathing in the corner. */
       return (
         <div
-          className="max-w-[68ch] rounded-[calc(12px*var(--ui-scale))] px-5 py-4"
+          className="rounded-[calc(12px*var(--ui-scale))] px-5 py-4"
           style={{
-            background: `color-mix(in oklab, var(--color-paper) 93%, ${accent} 7%)`,
+            background: `${ambientWash(accent, 7)}, color-mix(in oklab, var(--color-paper) 93%, ${accent} 7%)`,
             borderTop: "1px solid var(--rooms-hairline)",
             borderBottom: "1px solid var(--rooms-hairline)",
           }}
@@ -409,10 +451,12 @@ function BlockView({
     case "wow":
       /* v3: the ruled pull-quote — hairlines above and below, the
          key idea set larger in italic ink; the grape lightbulb and
-         kicker keep their voice, the card chrome is gone */
+         kicker keep their voice, the card chrome is gone. v3.1: the
+         rules run the full column (level with the subhead rules)
+         while the quote itself keeps the inner measure. */
       return (
         <div
-          className="max-w-[68ch] py-5"
+          className="py-5"
           style={{
             borderTop: "1px solid var(--rooms-hairline)",
             borderBottom: "1px solid var(--rooms-hairline)",
@@ -425,7 +469,7 @@ function BlockView({
             />
             <div className="min-w-0">
               <Kicker color={inkMix("#9775FA", 62)}>Key idea</Kicker>
-              <p className="mt-1.5 text-[calc(15px*var(--ui-scale))] leading-[1.8] text-ink italic">
+              <p className="mt-1.5 max-w-[62ch] text-[calc(15px*var(--ui-scale))] leading-[1.8] text-ink italic">
                 <Fmt text={b.text} />
               </p>
             </div>
@@ -466,12 +510,19 @@ function CandyTable({
       )}
       <div
         className="overflow-hidden rounded-[calc(12px*var(--ui-scale))] rounded-tl-none bg-paper puff"
-        style={{ border: "1px solid var(--rooms-hairline-soft)" }}
+        style={{
+          border: "1px solid var(--rooms-hairline-soft)",
+          background: `${ambientWash(accent, 6)}, var(--color-paper)`,
+        }}
       >
         <ScrollFade>
           <table className="w-full min-w-[calc(480px*var(--ui-scale))] border-collapse text-left">
             <thead>
-              <tr style={{ background: sunkWash(accent, 15) }}>
+              <tr
+                style={{
+                  background: `linear-gradient(90deg, ${sunkWash(accent, 15)}, transparent 92%)`,
+                }}
+              >
                 {head.map((h, i) => (
                   <th
                     key={i}
@@ -577,7 +628,7 @@ function Worked({
       style={{
         border: "1px solid var(--rooms-hairline)",
         borderTop: `2px solid ${tint(accent, 65)}`,
-        background: `radial-gradient(120% 92% at 100% 0%, color-mix(in oklab, ${accent} 9%, transparent), transparent 55%), var(--color-paper)`,
+        background: `${ambientWash(accent)}, var(--color-paper)`,
       }}
     >
       <div className="p-5 sm:p-6">
@@ -636,7 +687,10 @@ function Worked({
             animate={{ rotate: open ? 180 : 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="grid h-[calc(24px*var(--ui-scale))] w-[calc(24px*var(--ui-scale))] shrink-0 place-items-center rounded-full"
-            style={{ background: tint(accent, 82), color: inkMix(accent, 90) }}
+            style={{
+              background: `linear-gradient(160deg, ${tint(accent, 88)}, ${tint(accent, 62)})`,
+              color: inkMix(accent, 90),
+            }}
           >
             <ChevronDown className="h-3.5 w-3.5" />
           </m.span>
@@ -708,7 +762,7 @@ function Worked({
                 }
                 className="mt-4 rounded-[calc(14px*var(--ui-scale))] px-5 py-4"
                 style={{
-                  background: liftWash(accent, 8),
+                  background: `linear-gradient(135deg, ${fade(accent, 10)}, transparent 65%), ${liftWash(accent, 8)}`,
                   border: "1px solid var(--rooms-hairline-soft)",
                 }}
               >
@@ -775,7 +829,7 @@ function StepsPanel({
     <div
       className="rounded-[calc(18px*var(--ui-scale))] p-4 sm:p-5"
       style={{
-        background: liftWash(accent, 7),
+        background: `${ambientWash(accent, 7)}, ${liftWash(accent, 7)}`,
         border: "1px solid var(--rooms-hairline-soft)",
       }}
     >
@@ -805,7 +859,7 @@ function StepsPanel({
               <div className="flex items-center gap-2">
                 <span
                   className="grid h-[calc(22px*var(--ui-scale))] w-[calc(22px*var(--ui-scale))] shrink-0 place-items-center rounded-full font-display text-[calc(11px*var(--ui-scale))] font-bold"
-                  style={{ background: accent, color: readableInk(accent) }}
+                  style={{ background: accentFall(accent), color: readableInk(accent) }}
                 >
                   {i + 1}
                 </span>
@@ -1335,7 +1389,10 @@ function Figure({
   return (
     <div
       className="rounded-[calc(20px*var(--ui-scale))] bg-paper p-4 puff sm:p-6"
-      style={{ border: "1px solid var(--rooms-hairline-soft)" }}
+      style={{
+        border: "1px solid var(--rooms-hairline-soft)",
+        background: `${ambientWash(accent, 6)}, var(--color-paper)`,
+      }}
     >
       {wide ? (
         <ScrollFade>
