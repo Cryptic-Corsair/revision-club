@@ -447,3 +447,14 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Re-fetched the implementation and checked the targeted class changes. No build, lint or browser visual test was run.
 - **Deployment:** Deployment status not checked.
 - **Commit(s):** `d523082` (implementation); this journal entry follows in the next commit.
+
+
+### 2026-11-09 — Restore the mobile full-screen exit control
+
+- **Contributor:** AI agent.
+- **Request / objective:** Bring back the exit button on mobile screens.
+- **Changes made:** Added a compact Minimize control to the mobile navbar while the document is in fullscreen mode. It invokes the existing fullscreen toggle and is hidden outside fullscreen; the existing desktop fullscreen toggle remains unchanged.
+- **Preserved invariants:** No other navbar items, breakpoints, fullscreen behaviour, or navigation actions were changed.
+- **Verification:** Confirmed the new conditional mobile control in the updated component. No build, lint or browser visual test was run.
+- **Deployment:** Deployment status not checked.
+- **Commit(s):** `73c30d3` (implementation); this journal entry follows in the next commit.
