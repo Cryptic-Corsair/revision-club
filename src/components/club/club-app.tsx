@@ -444,6 +444,19 @@ function TopBar({
             {fullscreen ? <Minimize className="h-4 w-4 md:h-[17px] md:w-[17px] lg:h-[18px] lg:w-[18px]" strokeWidth={2.1} /> : <Maximize className="h-4 w-4 md:h-[17px] md:w-[17px] lg:h-[18px] lg:w-[18px]" strokeWidth={2.1} />}
           </m.button>
 
+          {fullscreen && (
+            <m.button
+              type="button"
+              onClick={onToggleFullscreen}
+              whileTap={{ scale: 0.88 }}
+              className={`grid md:hidden ${tool(false)}`}
+              title="Exit full screen"
+              aria-label="Exit full screen mode"
+            >
+              <Minimize className="h-4 w-4" strokeWidth={2.1} />
+            </m.button>
+          )}
+
           <m.button
             type="button"
             onClick={onOpenCustomize}
