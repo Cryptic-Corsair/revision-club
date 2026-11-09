@@ -357,3 +357,15 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Inspected the edited drawer markup. No build, lint or browser visual test was run.
 - **Deployment:** Deployment status not checked.
 - **Commit(s):** `828edd2` (background texture removal); this journal entry follows in the next commit.
+
+
+### 2026-11-09 — Streamline Control Panel header and navigation
+
+- **Contributor:** AI agent.
+- **Request / objective:** Remove the Customize title/header strip so the settings move upward into the freed space, and place every navigation destination in one horizontally scrollable row.
+- **Investigation:** Inspected the current Customize drawer on `main`. The header contained the settings icon, Customize title and close button; Navigate contained six existing destinations in a three-column grid.
+- **Changes made:** Removed the entire title/header strip. Moved the scrollable settings content to the top of the drawer while retaining top safe-area spacing for notched devices. Rebuilt Navigate as one horizontal, touch-scrollable row with all six existing icon-circle links: Home, Specification, Revision pack, Progress, Disclaimer and Full screen. Added horizontal scroll snapping and retained each original action and close-after-navigation behaviour.
+- **Preserved invariants:** The drawer backdrop, ambient colour glows, paper surface, all preference controls, navigation callbacks and preference storage remain unchanged. No destinations were removed.
+- **Verification:** Re-fetched the updated component from GitHub and confirmed the header markup is absent, the six navigation actions remain present, and the horizontal scroll container is in place. No build, lint or browser visual test was run.
+- **Deployment:** Deployment status not checked.
+- **Commit(s):** `879d470` (implementation); this journal entry follows in the next commit.
