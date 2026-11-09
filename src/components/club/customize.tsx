@@ -333,18 +333,8 @@ export function CustomizePanel({
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
             className="customize-drawer fixed inset-y-0 right-0 z-[95] flex w-[min(460px,94vw)] flex-col overflow-hidden rounded-l-[28px] border-l border-ink/10 bg-paper shadow-[-24px_0_70px_-38px_rgb(0_0_0/0.42)]"
           >
-            {/* ————— the ambience inside the frost —————
-                two quiet lamps and a grain of dots, so the blur has
-                something warm to hold. Static; never animates. */}
+            {/* ————— soft ambient colour, without the dot texture ————— */}
             <div aria-hidden className="pointer-events-none absolute inset-0">
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(color-mix(in oklab, var(--color-ink) 7%, transparent) 1.6px, transparent 1.7px)",
-                  backgroundSize: "26px 26px",
-                }}
-              />
               <div
                 className="absolute -top-24 -right-20 h-80 w-80 rounded-full"
                 style={{ background: "radial-gradient(circle, rgb(255 146 43 / 0.17), transparent 70%)" }}
