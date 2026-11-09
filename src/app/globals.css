@@ -414,6 +414,41 @@ html.classic .room {
   --arc-ink: 70%;
 }
 
+/* ————— the rooms ink ladder (.rooms) —————
+   Every rooms view root carries this marker; inside it the shared
+   ink tiers re-point to the family's warm study ladder — deeper
+   cocoa headings, a body tier with a full step more presence than
+   the site's soft ink, a quiet meta tier — plus the hairline pair
+   that feeds the divided lines (banner rules, subhead rules, ruled
+   pull-quotes, table rows, clause rules). The desk, the home
+   introduction and the editorial family never wear the marker, so
+   they keep the site tokens byte-for-byte. Note & pack sections go
+   one step further inside .note-rooms (end of this file), which
+   re-points the same ladder over its own parchment grounds; the
+   classic lab's espresso rooms sit deeper still and win by
+   proximity, so the walk keeps its flip. */
+.rooms {
+  --color-ink: #342418;
+  --color-ink-soft: #6b5645;
+  --color-ink-faint: #8a7663;
+  --rooms-hairline: color-mix(in oklab, var(--color-ink) 16%, transparent);
+  --rooms-hairline-soft: color-mix(in oklab, var(--color-ink) 8%, transparent);
+}
+html.dark:not(.dune) .rooms {
+  --color-ink: #f5eff7;
+  --color-ink-soft: #cfc2d8;
+  --color-ink-faint: #a99aae;
+  --rooms-hairline: rgb(245 239 247 / 0.16);
+  --rooms-hairline-soft: rgb(245 239 247 / 0.09);
+}
+html.dune .rooms {
+  --color-ink: #f6f0e6;
+  --color-ink-soft: #d3c9b8;
+  --color-ink-faint: #aca293;
+  --rooms-hairline: rgb(246 240 230 / 0.15);
+  --rooms-hairline-soft: rgb(246 240 230 / 0.08);
+}
+
 
 
 @keyframes float {
@@ -2366,113 +2401,108 @@ html.dark:not(.dune) .legal-room { --legal-rust: #e0c4eb; }
   }
 }
 
-/* ═════════ Rooms · rebuilt tonal system ═════════
-   Rooms now reads as one composed study document in each theme.
-   Six user accents remain available elsewhere; the note itself uses
-   a single mineral accent and theme-specific neutral surface ladders.
-*/
+/* ═════════ Rooms · the ruled bench (v3 tonal system) ═════════
+   The reading surfaces wear one warm study dress per lab while the
+   accents stay each section's own candy. The old mineral recolour
+   is retired: light rooms sit on warm parchment steps, dark and
+   dune rooms are re-aligned to their lab's own plum and roast
+   grounds, and the inks come from the same ladder .rooms uses —
+   one family, four rooms. Hierarchy is carried by divided lines
+   (--rooms-hairline / --rooms-hairline-soft feed the banner rules,
+   subhead rules, clause rules, ruled pull-quotes and table rows)
+   and by the ink tiers — never by indentation. The previous
+   system's escaped-class component remaps live in the components
+   now; only genuine surface work stays here. */
+
 .note-rooms {
-  --room-accent: #80684f;
-  --color-cream: #f1eee7;
-  --color-paper: #faf8f3;
-  --color-ink: #292c2d;
-  --color-ink-soft: #606360;
-  --color-ink-faint: #85877f;
-  --color-cocoa: #292c2d;
+  /* the light lab's quiet study: warm parchment steps under a
+     candy-accented document */
+  --color-cream: #f7f0e3;
+  --color-paper: #fdfaf2;
+  --color-ink: #342418;
+  --color-ink-soft: #6b5645;
+  --color-ink-faint: #8a7663;
+  --color-cocoa: #342418;
   --tint-base: #ffffff;
-  --note-band-a: #f1eee7;
-  --note-band-b: #ece8df;
-  --edge: rgb(44 40 34 / 0.08);
+  --note-band-a: #f7f0e3;
+  --note-band-b: #f0e7d5;
   --band-mix: 0%;
-  --sunk-share: 4%;
-  --sunk-base: #e8e4dc;
-  --lift-share: 5%;
-  --lift-base: #ffffff;
-  --honey-share: 5%;
-  --honey-base: #eee9df;
+  --edge: rgb(52 36 24 / 0.1);
+  --sunk-share: 5%;
+  --sunk-base: #efe7d7;
+  --lift-share: 6%;
+  --lift-base: #fffdf8;
+  --honey-share: 6%;
+  --honey-base: #f3ebdb;
+  --rooms-hairline: color-mix(in oklab, var(--color-ink) 16%, transparent);
+  --rooms-hairline-soft: color-mix(in oklab, var(--color-ink) 8%, transparent);
 }
+
 .note-rooms .spec-anchor {
   transition: background-color 220ms ease;
 }
 .note-rooms .spec-anchor .puff {
-  box-shadow: 0 1px 2px rgb(35 31 25 / 0.035), 0 14px 34px -28px rgb(35 31 25 / 0.2);
+  box-shadow:
+    0 1px 2px rgb(35 31 25 / 0.035),
+    0 14px 34px -28px rgb(35 31 25 / 0.2);
 }
-.note-rooms .spec-anchor .bg-paper {
-  border: 1px solid color-mix(in oklab, var(--color-ink) 8%, transparent);
-  box-shadow: 0 1px 2px color-mix(in oklab, var(--color-ink) 4%, transparent);
-}
-.note-rooms .spec-anchor .rounded-\[calc\(16px\*var\(--ui-scale\)\)\] {
-  border-radius: calc(10px * var(--ui-scale));
-}
-.note-rooms .spec-anchor .border-ink\/\[0\.09\] {
-  border-color: color-mix(in oklab, var(--color-ink) 12%, transparent);
-}
-.note-rooms .spec-anchor .max-w-\[72ch\] {
-  max-width: 68ch;
-}
-.note-rooms .spec-anchor .max-w-\[70ch\],
-.note-rooms .spec-anchor .max-w-\[68ch\] {
-  max-width: 68ch;
-}
-.note-rooms .spec-anchor .room-callout {
-  border: 1px solid color-mix(in oklab, var(--room-accent) 20%, transparent);
-}
-html.dune .note-rooms .spec-anchor .room-callout {
-  background: color-mix(in oklab, var(--color-paper) 86%, var(--room-accent-secondary) 14%);
-  border-color: color-mix(in oklab, var(--room-accent-secondary) 28%, transparent);
-}
+
+/* the after-dark lab: the note returns to the plum family — the
+   same grounds the lab paints everywhere, with the rooms ladder
+   re-read over them (soft ink a half-step brighter for long runs). */
 html.dark:not(.dune) .note-rooms {
-  --room-accent: #b7a18a;
-  --color-cream: #191b1f;
-  --color-paper: #25282d;
-  --color-ink: #eeeae2;
-  --color-ink-soft: #c0bdb5;
-  --color-ink-faint: #9b9b95;
-  --color-cocoa: #121418;
-  --tint-base: #2a2d33;
-  --note-band-a: #1d2024;
-  --note-band-b: #22252a;
-  --edge: rgb(0 0 0 / 0.34);
-  --sunk-base: #202329;
-  --lift-base: #1d2024;
-  --honey-base: #191b1f;
-}
-/* Dune Rooms: warm mineral light against a quieter, more neutral
-   chocolate ground. Brass is the clear primary accent; sea-glass is
-   reserved for secondary cues and callouts. The bands step far enough
-   apart to read as intentional sections without turning orange. */
-html.dune .note-rooms {
-  --room-accent: #e0b66f;
-  --room-accent-secondary: #a8c9bd;
-  --color-cream: #211f1b;
-  --color-paper: #332e26;
-  --color-ink: #f4eee3;
-  --color-ink-soft: #d0c7b8;
-  --color-ink-faint: #b1a797;
-  --color-cocoa: #15130f;
-  --tint-base: #3b352b;
-  --note-band-a: #25221d;
-  --note-band-b: #2c2821;
-  --edge: rgb(0 0 0 / 0.36);
-  --sunk-base: #2a261f;
-  --lift-base: #29251f;
-  --honey-base: #211e19;
-  --sunk-share: 12%;
-  --lift-share: 18%;
+  --color-cream: #17131d;
+  --color-paper: #30263d;
+  --color-ink: #f5eff7;
+  --color-ink-soft: #cfc2d8;
+  --color-ink-faint: #a99aae;
+  --color-cocoa: #0f0b15;
+  --tint-base: #40344f;
+  --shade-ink: #17131d;
+  --note-band-a: #1e1826;
+  --note-band-b: #251d30;
+  --sunk-share: 14%;
+  --sunk-base: #261e32;
+  --lift-share: 20%;
+  --lift-base: #2a2037;
   --honey-share: 14%;
+  --honey-base: #100c15;
+  --edge: rgb(0 0 0 / 0.56);
+  --rooms-hairline: rgb(245 239 247 / 0.16);
+  --rooms-hairline-soft: rgb(245 239 247 / 0.09);
 }
-html.dune .note-rooms .spec-anchor .room-callout {
-  background: color-mix(in oklab, var(--color-paper) 88%, var(--room-accent-secondary) 12%);
-  border-color: color-mix(in oklab, var(--room-accent-secondary) 42%, transparent);
-  box-shadow: inset 3px 0 0 color-mix(in oklab, var(--room-accent-secondary) 78%, transparent);
+
+/* dune: the roast family — lab grounds, sand inks, hairlines to
+   match. The callout's old sea-glass secondary is retired; the
+   section's own candy accent dresses it inline now. */
+html.dune .note-rooms {
+  --color-cream: #1e1b16;
+  --color-paper: #2e2820;
+  --color-ink: #f6f0e6;
+  --color-ink-soft: #d3c9b8;
+  --color-ink-faint: #aca293;
+  --color-cocoa: #121009;
+  --tint-base: #38322a;
+  --shade-ink: #1e1b16;
+  --note-band-a: #231e15;
+  --note-band-b: #2c2415;
+  --sunk-share: 14%;
+  --sunk-base: #292520;
+  --lift-share: 20%;
+  --lift-base: #292419;
+  --honey-share: 16%;
+  --honey-base: #16130d;
+  --edge: rgb(0 0 0 / 0.5);
+  --rooms-hairline: rgb(246 240 230 / 0.15);
+  --rooms-hairline-soft: rgb(246 240 230 / 0.08);
 }
+
+/* the classic walk keeps its signature pair — deep espresso rooms
+   alternating with warm cream rooms — and the espresso rooms flip
+   every ink and surface inside, hairlines included. */
 html.classic .note-rooms {
-  --room-accent: #9b8060;
-  --color-ink: #2c2924;
-  --color-ink-soft: #625c52;
-  --color-ink-faint: #82796c;
-  --note-band-a: #292620;
-  --note-band-b: #f2eee5;
+  --note-band-a: #2c2013;
+  --note-band-b: #fdf6e3;
 }
 html.classic .note-rooms .room {
   --color-ink: #f0eadf;
@@ -2483,7 +2513,36 @@ html.classic .note-rooms .room {
   --sunk-base: #302b24;
   --lift-base: #292620;
   --honey-base: #211e19;
+  --rooms-hairline: rgb(240 234 223 / 0.17);
+  --rooms-hairline-soft: rgb(240 234 223 / 0.09);
 }
+
+/* the pack prints as a worksheet: daylight ink no matter which lab
+   is on. The root .pack-sheet dress is joined by the sections'
+   own ladder here, which would otherwise out-rank it — and the
+   espresso rooms' flip is re-pointed too, so classic packs print
+   dark-on-white instead of cream-on-white. */
+@media print {
+  .note-rooms {
+    --color-cream: #ffffff;
+    --color-paper: #ffffff;
+    --color-ink: #201509;
+    --color-ink-soft: #4b3d2e;
+    --color-ink-faint: #8a7d69;
+    --note-band-a: #ffffff;
+    --note-band-b: #ffffff;
+    --rooms-hairline: rgb(32 21 9 / 0.22);
+    --rooms-hairline-soft: rgb(32 21 9 / 0.13);
+  }
+  html.classic .note-rooms .room {
+    --color-ink: #201509;
+    --color-ink-soft: #4b3d2e;
+    --color-ink-faint: #8a7d69;
+    --rooms-hairline: rgb(32 21 9 / 0.22);
+    --rooms-hairline-soft: rgb(32 21 9 / 0.13);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .note-rooms .spec-anchor { transition: none; }
 }

@@ -200,7 +200,7 @@ function NotesReaderBody({
   ];
 
   return (
-    <div className="notes-flow relative">
+    <div className="notes-flow rooms relative">
       {/* reading progress */}
       <m.div
         aria-hidden
@@ -280,7 +280,7 @@ function NotesReaderBody({
 
       {/* ————— contents ————— */}
       <Reveal className="mx-auto max-w-3xl px-4 pt-4 sm:px-8">
-        <div className="sticker rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 sm:p-6">
+        <div className="sticker rounded-[calc(18px*var(--ui-scale))] bg-paper p-5 sm:p-6">
           <div className="flex items-center gap-3">
             <span
               className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl"

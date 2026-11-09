@@ -73,7 +73,7 @@ export function SpecIndex({
   ];
 
   return (
-    <div className="mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] pb-24 sm:px-8">
+    <div className="rooms mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] pb-24 sm:px-8">
       {/* ————— header ————— */}
       <PopIn>
         <SoftButton onClick={onHome} className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]" ariaLabel="Back home">

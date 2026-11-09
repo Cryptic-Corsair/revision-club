@@ -119,7 +119,7 @@ export function PackView({
   /* ————— the empty pack ————— */
   if (points.length === 0) {
     return (
-      <div className="mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] pb-24 sm:px-8">
+      <div className="rooms mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] pb-24 sm:px-8">
         <PopIn>
           <SoftButton onClick={onHome} className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]" ariaLabel="Back home">
             <ArrowLeft className="h-4 w-4" /> Back home
@@ -160,7 +160,7 @@ export function PackView({
 
   /* ————— the assembled pack ————— */
   return (
-    <div className="pack-sheet relative">
+    <div className="pack-sheet rooms relative">
       {/* ————— header card + toolbar ————— */}
       <header className="mx-auto max-w-3xl px-4 pt-[calc(6rem+var(--sa-top))] sm:px-8">
         <PopIn>

@@ -180,9 +180,10 @@ export function SpecSectionView({
   return (
     <div className="flex flex-col gap-7">
       {/* spec banner — the official wording, stated above the section.
-          v2: the pill tilts like a sticker and sits on a hard shadow,
-          and the rule beside it is a perforated candy line — the
-          "cut here" edge every room hangs its spec on. */}
+          v3: the pill keeps its tilt and hard shadow, but the rule
+          beside it is a divided line now — an accent tick flowing
+          into a hairline — and a quiet clause rule parts the banner
+          from the body, the way a document sets its clause off. */}
       <div>
         <div className="flex items-center gap-3">
           <span
@@ -197,23 +198,26 @@ export function SpecSectionView({
           </span>
           <span
             aria-hidden
-            className="h-[calc(3px*var(--ui-scale))] flex-1"
-            style={{
-              backgroundImage: `radial-gradient(circle, ${tint(accent, 42)} 2.2px, transparent 2.4px)`,
-              backgroundSize: "12px 4px",
-              backgroundRepeat: "repeat-x",
-              backgroundPosition: "0 center",
-            }}
+            className="h-[calc(3px*var(--ui-scale))] w-7 shrink-0 rounded-full"
+            style={{ background: accent, opacity: 0.85 }}
+          />
+          <span
+            aria-hidden
+            className="h-px min-w-6 flex-1"
+            style={{ background: "var(--rooms-hairline)" }}
           />
           {bannerAction}
         </div>
-        <h2 className="mt-3.5 font-display text-[calc(21px*var(--ui-scale))] font-semibold tracking-tight text-ink sm:text-[calc(24px*var(--ui-scale))]">
+        <h2 className="mt-3.5 font-display text-[calc(24px*var(--ui-scale))] font-semibold tracking-tight text-ink">
           {section.title}
         </h2>
         {!hideStatement && (
           <div
-            className="sticker mt-4 rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
-            style={{ borderLeft: `4px solid ${accent}` }}
+            className="mt-4 max-w-[68ch] rounded-[calc(12px*var(--ui-scale))] border bg-paper px-5 py-4"
+            style={{
+              borderColor: "var(--rooms-hairline)",
+              borderLeft: `3px solid ${accent}`,
+            }}
           >
             <Kicker color={inkMix(accent, 62)}>From the specification</Kicker>
             <p className="mt-2 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft italic">
@@ -223,23 +227,24 @@ export function SpecSectionView({
         )}
       </div>
 
+      {/* the clause rule — one quiet hairline between the banner and
+          the body; the document's way of drawing breath */}
+      <div
+        aria-hidden
+        className="h-px w-full"
+        style={{ background: "var(--rooms-hairline-soft)" }}
+      />
+
+      {/* the body — every block flush on the column's left edge.
+          Hierarchy lives in the type and the rules now, not in
+          indents: subheads carry a leading accent tick and a trailing
+          hairline, and nothing else steps in. */}
       <div className="flex flex-col gap-6">
-        {section.blocks.map((b, i) => {
-          /* Indentation is a text hierarchy, not a blanket offset.
-             Subheads step in once; body paragraphs step in further.
-             Every structured block — list, note, definition, equation,
-             table, figure, worked panel — sits flush on the section's
-             left edge, level with the spec card above. */
-          const inset =
-            b.k === "h" ? "ml-2 sm:ml-4" : b.k === "p" ? "ml-5 sm:ml-9" : undefined;
-          return (
-            <Reveal key={i} delay={Math.min(i * 0.03, 0.12)} y={18}>
-              <div className={inset}>
-                <BlockView block={b} accent={accent} />
-              </div>
-            </Reveal>
-          );
-        })}
+        {section.blocks.map((b, i) => (
+          <Reveal key={i} delay={Math.min(i * 0.03, 0.12)} y={18}>
+            <BlockView block={b} accent={accent} />
+          </Reveal>
+        ))}
       </div>
     </div>
   );
@@ -262,20 +267,28 @@ function BlockView({
         </p>
       );
     case "h":
+      /* v3: the ruled subhead — an accent tick leads, the hairline
+         trails to the column's edge; the document's section rule */
       return (
-        <div className="flex items-center gap-2.5 pt-2">
+        <div className="flex items-center gap-3 pt-2">
           <span
-            className="h-2.5 w-2.5 shrink-0 rounded-full"
+            aria-hidden
+            className="h-[calc(3px*var(--ui-scale))] w-6 shrink-0 rounded-full"
             style={{ background: accent }}
           />
-          <h3 className="font-display text-[calc(18px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h3 className="min-w-0 font-display text-[calc(18px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             <Fmt text={b.text} />
           </h3>
+          <span
+            aria-hidden
+            className="h-px min-w-4 flex-1"
+            style={{ background: "var(--rooms-hairline-soft)" }}
+          />
         </div>
       );
     case "bullets":
       return (
-        <ul className="flex max-w-[70ch] flex-col gap-2.5">
+        <ul className="flex max-w-[68ch] flex-col gap-2.5">
           {b.items.map((t, i) => (
             <li
               key={i}
@@ -295,8 +308,11 @@ function BlockView({
     case "note":
       return (
         <div
-          className="room-callout tape relative max-w-[72ch] -rotate-[0.35deg] rounded-[calc(12px*var(--ui-scale))] px-4 py-4"
-          style={{ background: "color-mix(in oklab, var(--color-paper) 86%, var(--room-accent) 14%)", boxShadow: "0 3px 0 var(--edge)" }}
+          className="max-w-[68ch] rounded-[calc(12px*var(--ui-scale))] border px-4 py-3.5"
+          style={{
+            borderColor: "var(--rooms-hairline-soft)",
+            background: `color-mix(in oklab, var(--color-paper) 92%, ${accent} 8%)`,
+          }}
         >
           <div className="flex items-start gap-3">
             <StickyNote
@@ -316,12 +332,17 @@ function BlockView({
         </div>
       );
     case "def":
+      /* v3: the ruled definition — a hairline card with the accent
+         kept as a left edge, no sticker chrome; the term carries it */
       return (
         <div
-          className="sticker max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
-          style={{ borderLeft: `4px solid ${tint(accent, 55)}` }}
+          className="max-w-[68ch] rounded-[calc(12px*var(--ui-scale))] border bg-paper px-5 py-4"
+          style={{
+            borderColor: "var(--rooms-hairline)",
+            borderLeft: `3px solid ${tint(accent, 60)}`,
+          }}
         >
-          <h4 className="font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h4 className="font-display text-[calc(16.5px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             <Fmt text={b.term} />
           </h4>
           <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
@@ -330,13 +351,17 @@ function BlockView({
         </div>
       );
     case "eq":
-      /* v2: the reaction strip — a candy-washed band with the species
-         as paper chips, each wearing a whisper of the accent. Reads
-         like a textbook that learned to have fun. */
+      /* v3: the ruled equation band — a whisper of the accent over
+         paper, closed top and bottom by hairlines; the species keep
+         their paper chips and hard mini-shadows (the candy moment) */
       return (
         <div
-          className="max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] border-y-2 border-ink/[0.09] px-5 py-4"
-          style={{ background: liftWash(accent, 8) }}
+          className="max-w-[68ch] rounded-[calc(12px*var(--ui-scale))] px-5 py-4"
+          style={{
+            background: `color-mix(in oklab, var(--color-paper) 93%, ${accent} 7%)`,
+            borderTop: "1px solid var(--rooms-hairline)",
+            borderBottom: "1px solid var(--rooms-hairline)",
+          }}
         >
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5">
             {b.eq.split(/\s{2,}/).map((part, i) => (
@@ -380,21 +405,25 @@ function BlockView({
     case "figure":
       return <Figure kind={b.kind} caption={b.caption} accent={accent} />;
     case "wow":
+      /* v3: the ruled pull-quote — hairlines above and below, the
+         key idea set larger in italic ink; the grape lightbulb and
+         kicker keep their voice, the card chrome is gone */
       return (
         <div
-          className="tape relative max-w-[72ch] -rotate-[0.4deg] rounded-[calc(20px*var(--ui-scale))] p-5 sm:p-6"
-          style={{ background: "color-mix(in oklab, var(--color-paper) 90%, var(--room-accent) 10%)", boxShadow: "0 3px 0 var(--edge)" }}
+          className="max-w-[68ch] py-5"
+          style={{
+            borderTop: "1px solid var(--rooms-hairline)",
+            borderBottom: "1px solid var(--rooms-hairline)",
+          }}
         >
           <div className="flex items-start gap-3">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl border border-ink/[0.08] bg-paper">
-              <Lightbulb
-                className="h-5 w-5"
-                style={{ color: inkMix("#9775FA", 72) }}
-              />
-            </span>
-            <div>
+            <Lightbulb
+              className="mt-1 h-5 w-5 shrink-0"
+              style={{ color: inkMix("#9775FA", 72) }}
+            />
+            <div className="min-w-0">
               <Kicker color={inkMix("#9775FA", 62)}>Key idea</Kicker>
-              <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink italic">
+              <p className="mt-1.5 text-[calc(15px*var(--ui-scale))] leading-[1.8] text-ink italic">
                 <Fmt text={b.text} />
               </p>
             </div>
@@ -428,12 +457,15 @@ function CandyTable({
             className="mt-[calc(12px*var(--ui-scale))] h-[calc(4px*var(--ui-scale))] w-[calc(22px*var(--ui-scale))] shrink-0 rounded-full"
             style={{ background: accent }}
           />
-          <div className="min-w-0 font-display text-[calc(20px*var(--ui-scale))] leading-snug font-semibold text-ink">
+          <div className="min-w-0 font-display text-[calc(18px*var(--ui-scale))] leading-snug font-semibold text-ink">
             <Fmt text={caption} />
           </div>
         </div>
       )}
-      <div className="overflow-hidden rounded-[calc(14px*var(--ui-scale))] rounded-tl-none bg-paper puff">
+      <div
+        className="overflow-hidden rounded-[calc(12px*var(--ui-scale))] rounded-tl-none bg-paper puff"
+        style={{ border: "1px solid var(--rooms-hairline-soft)" }}
+      >
         <ScrollFade>
           <table className="w-full min-w-[calc(480px*var(--ui-scale))] border-collapse text-left">
             <thead>
@@ -526,7 +558,7 @@ function Worked({
   const [fire, setFire] = useState(0);
 
   return (
-    <div className="sticker rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 sm:p-6">
+    <div className="sticker rounded-[calc(20px*var(--ui-scale))] bg-paper p-5 sm:p-6">
       <div className="flex flex-wrap items-center gap-3">
         <span
           className="inline-flex min-w-0 max-w-full shrink-0 -rotate-1 items-center rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] leading-snug font-bold tracking-[0.1em] uppercase"
@@ -683,8 +715,11 @@ function StepsPanel({
 
   return (
     <div
-      className="rounded-[calc(26px*var(--ui-scale))] p-4 sm:p-5"
-      style={{ background: liftWash(accent, 7) }}
+      className="rounded-[calc(18px*var(--ui-scale))] p-4 sm:p-5"
+      style={{
+        background: liftWash(accent, 7),
+        border: "1px solid var(--rooms-hairline-soft)",
+      }}
     >
       {caption && (
         <div className="mb-3.5 flex items-center gap-2.5">
@@ -1240,7 +1275,10 @@ function Figure({
   if (!node) return null;
   const wide = isWideFigure(kind);
   return (
-    <div className="rounded-[calc(28px*var(--ui-scale))] bg-paper p-4 puff sm:p-6">
+    <div
+      className="rounded-[calc(20px*var(--ui-scale))] bg-paper p-4 puff sm:p-6"
+      style={{ border: "1px solid var(--rooms-hairline-soft)" }}
+    >
       {wide ? (
         <ScrollFade>
           <div className="min-w-[calc(620px*var(--ui-scale))]">{node}</div>
@@ -1251,9 +1289,17 @@ function Figure({
         </div>
       )}
       {caption && (
-        <p className="mx-auto mt-3 max-w-[58ch] text-center text-[calc(12.5px*var(--ui-scale))] leading-[1.65] text-ink-faint">
-          <Fmt text={caption} />
-        </p>
+        <div className="mx-auto mt-4 max-w-[58ch]">
+          {/* the caption's own divided line — a small centred rule */}
+          <span
+            aria-hidden
+            className="mx-auto block h-px w-10"
+            style={{ background: "var(--rooms-hairline)" }}
+          />
+          <p className="mt-2.5 text-center text-[calc(12.5px*var(--ui-scale))] leading-[1.65] text-ink-faint">
+            <Fmt text={caption} />
+          </p>
+        </div>
       )}
     </div>
   );

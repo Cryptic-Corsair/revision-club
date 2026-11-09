@@ -65,7 +65,7 @@ export function TopicView({
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
+    <div className="rooms mx-auto max-w-3xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
       {/* reading progress — a candy strip filling up top */}
       <m.div
         aria-hidden

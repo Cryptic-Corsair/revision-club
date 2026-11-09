@@ -54,7 +54,7 @@ export function UnitView({
   const main = unit.candy.main;
 
   return (
-    <div className="mx-auto max-w-5xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
+    <div className="rooms mx-auto max-w-5xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
       {/* back */}
       <PopIn>
         <StickerButton onClick={onBack} className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]">

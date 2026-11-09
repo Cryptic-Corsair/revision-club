@@ -148,7 +148,7 @@ export function StickerBook({
       : "The beaker fills with every minute you spend reading. Open a topic to start the clock.";
 
   return (
-    <div className="mx-auto max-w-4xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
+    <div className="rooms mx-auto max-w-4xl px-5 pb-20 sm:px-8" style={{ paddingTop: "calc(6rem + var(--sa-top))" }}>
       {/* back */}
       <PopIn>
         <SoftButton onClick={onBack} className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]">
