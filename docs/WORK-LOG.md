@@ -381,3 +381,15 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Re-fetched the implementation and confirmed the six links are in the requested order in one horizontal flex row. No build, lint or browser visual test was run.
 - **Deployment:** Deployment status not checked.
 - **Commit(s):** `7dec956` (implementation); this journal entry follows in the next commit.
+
+
+### 2026-11-09 — Add a scroll cue to Control Panel navigation
+
+- **Contributor:** AI agent.
+- **Request / objective:** Make the horizontal navigation's scrollability more apparent and assess whether a blurred/glass background is appropriate.
+- **Changes made:** Replaced the generic QUICK LINKS label with a restrained SWIPE → cue and added a subtle right-edge fade over the scroll viewport to suggest that more destinations continue off-screen. Kept the navigation pills crisp and the existing lightly tinted section surface; no backdrop blur was introduced.
+- **Design rationale:** The clipped row, directional cue and edge fade communicate horizontal overflow without adding a scrollbar or a large instruction. The controls remain legible and tactile; a blur layer behind these small controls would add visual noise without improving hierarchy.
+- **Preserved invariants:** All six links, their order, horizontal touch scrolling, snap behaviour and callbacks remain unchanged.
+- **Verification:** Re-fetched the updated component and checked the new cue and fade markup. No build, lint or browser visual test was run.
+- **Deployment:** Deployment status not checked.
+- **Commit(s):** `92b6175` (implementation); this journal entry follows in the next commit.
