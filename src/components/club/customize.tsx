@@ -343,6 +343,11 @@ export function CustomizePanel({
               />
             </div>
 
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute left-0 top-1/2 z-20 h-9 w-[3px] -translate-y-1/2 rounded-r-full bg-white/80 shadow-[0_0_8px_rgb(255_255_255/0.18)]"
+            />
+
             <div
               className="no-scrollbar relative flex flex-1 flex-col gap-6 overflow-y-auto px-6 pt-0"
               style={{ paddingTop: "calc(1.25rem + var(--sa-top))", paddingBottom: "calc(2rem + var(--sa-bottom))" }}
