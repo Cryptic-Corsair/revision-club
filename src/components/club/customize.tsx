@@ -2,9 +2,7 @@
 
 import { useEffect, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
-import { Check, RotateCcw, Sparkles, Settings,
-  Maximize,
-  Minimize, X, Palette, Home, BookOpen, ClipboardList, Sticker, ShieldCheck, ArrowRight, NotebookPen } from "./icons";
+import { Check, RotateCcw, Sparkles, Maximize, Minimize, Palette, Home, BookOpen, ClipboardList, Sticker, ShieldCheck, NotebookPen } from "./icons";
 import { readableInk, shade, tint } from "./bits";
 import { accentOf } from "./bands";
 import {
@@ -345,42 +343,18 @@ export function CustomizePanel({
               />
             </div>
 
-            {/* header — rides below the notch when the phone has one */}
             <div
-              className="relative flex items-center gap-3 border-b border-ink/[0.06] px-6 pb-4"
-              style={{ paddingTop: "calc(1.5rem + var(--sa-top))" }}
-            >
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-lemon/25 shadow-[inset_0_1px_0_rgb(255_255_255/0.5)]">
-                <Settings className="h-5.5 w-5.5 text-lemon" strokeWidth={1.9} />
-              </span>
-              <div className="min-w-0 flex-1">
-                <h2 className="font-display text-[20px] leading-tight font-semibold text-ink">
-                  Customize
-                </h2>
-              </div>
-              <m.button
-                type="button"
-                onClick={onClose}
-                whileTap={{ scale: 0.88 }}
-                aria-label="Close"
-                className="grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full bg-ink/[0.06] text-ink-soft hover:bg-ink/[0.11] hover:text-ink"
-              >
-                <X className="h-5 w-5" strokeWidth={2.2} />
-              </m.button>
-            </div>
-
-            <div
-              className="no-scrollbar relative flex flex-1 flex-col gap-6 overflow-y-auto px-6 pt-5"
-              style={{ paddingBottom: "calc(2rem + var(--sa-bottom))" }}
+              className="no-scrollbar relative flex flex-1 flex-col gap-6 overflow-y-auto px-6 pt-0"
+              style={{ paddingTop: "calc(1.25rem + var(--sa-top))", paddingBottom: "calc(2rem + var(--sa-bottom))" }}
             >
               <section className="rounded-[22px] border border-ink/[0.08] bg-ink/[0.025] p-4">
-                <div className="mb-3 flex items-center justify-between">
+                <div className="mb-3">
                   <p className="font-display text-[13px] font-bold tracking-[0.12em] text-ink-faint uppercase">
                     Navigate
                   </p>
-                  <ArrowRight className="h-4 w-4 text-ink-faint" />
                 </div>
-                <div className="grid grid-cols-3 gap-x-2 gap-y-1">
+                <div className="no-scrollbar -mx-1 overflow-x-auto overscroll-x-contain px-1">
+                  <div className="flex w-max min-w-full snap-x snap-mandatory gap-2">
                   {[
                     { label: "Home", icon: Home, action: onHome },
                     { label: "Specification", icon: BookOpen, action: onOpenSpec },
@@ -398,7 +372,7 @@ export function CustomizePanel({
                       type="button"
                       onClick={() => { item.action(); onClose(); }}
                       aria-label={item.label}
-                      className="group flex min-h-[82px] min-w-0 flex-col items-center justify-center gap-1.5 rounded-[14px] px-1.5 py-2 text-center transition-colors hover:bg-paper/75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint"
+                      className="group flex w-[76px] shrink-0 snap-start flex-col items-center justify-center gap-1.5 rounded-[14px] px-1 py-2 text-center transition-colors hover:bg-paper/75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint"
                     >
                       <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink/[0.08] bg-paper text-ink-soft shadow-[0_1px_2px_rgb(0_0_0/0.035)] transition-all duration-200 group-hover:border-mint/30 group-hover:bg-mint/12 group-hover:text-ink group-hover:shadow-[0_3px_10px_rgb(18_184_134/0.09)]">
                         <item.icon className="h-[19px] w-[19px]" strokeWidth={1.9} />
@@ -408,6 +382,7 @@ export function CustomizePanel({
                       </span>
                     </button>
                   ))}
+                  </div>
                 </div>
               </section>
 
