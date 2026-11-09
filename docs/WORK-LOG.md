@@ -426,3 +426,14 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Confirmed the new handle styling in the updated component. No build, lint or browser visual test was run.
 - **Deployment:** Deployment status not checked.
 - **Commit(s):** `9b62a7e` (implementation); this journal entry follows in the next commit.
+
+
+### 2026-11-09 — Match drawer grip to the supplied reference
+
+- **Contributor:** AI agent.
+- **Request / objective:** Match the supplied rounded horizontal grip reference, making it longer.
+- **Changes made:** Replaced the vertical edge mark with a 72px-wide, 4px-high rounded horizontal grip, anchored to the drawer's left edge and vertically centred. Used a restrained translucent white fill without gradient or glow to match the reference's simple treatment.
+- **Preserved invariants:** The grip is decorative and pointer-events-disabled. Drawer gestures, close interactions, animation, layout and content are unchanged.
+- **Verification:** Confirmed the new grip markup in the updated component. No build, lint or browser visual test was run.
+- **Deployment:** Deployment status not checked.
+- **Commit(s):** `367539b` (implementation); this journal entry follows in the next commit.
