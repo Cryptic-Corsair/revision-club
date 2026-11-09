@@ -385,50 +385,40 @@ export function CustomizePanel({
             >
               <section className="rounded-[22px] border border-ink/[0.08] bg-ink/[0.025] p-4">
                 <div className="mb-3 flex items-center justify-between">
-                  <div>
-                    <p className="font-display text-[13px] font-bold tracking-[0.12em] text-ink-faint uppercase">Navigate</p>
-                    <p className="mt-1 text-[12px] text-ink-soft">Go directly to a section of IAL CHEM</p>
-                  </div>
+                  <p className="font-display text-[13px] font-bold tracking-[0.12em] text-ink-faint uppercase">
+                    Navigate
+                  </p>
                   <ArrowRight className="h-4 w-4 text-ink-faint" />
                 </div>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-3 gap-x-2 gap-y-1">
                   {[
-                    { label: "Home", detail: "Study dashboard", icon: Home, action: onHome },
-                    { label: "Specification", detail: "Browse units & topics", icon: BookOpen, action: onOpenSpec },
-                    { label: "Revision pack", detail: "Saved spec points", icon: ClipboardList, action: onOpenPack },
-                    { label: "Progress", detail: "Time & study goals", icon: Sticker, action: onOpenProgress },
-                    { label: "Disclaimer", detail: "Site information", icon: ShieldCheck, action: onOpenLegal },
+                    { label: "Home", icon: Home, action: onHome },
+                    { label: "Specification", icon: BookOpen, action: onOpenSpec },
+                    { label: "Revision pack", icon: ClipboardList, action: onOpenPack },
+                    { label: "Progress", icon: Sticker, action: onOpenProgress },
+                    { label: "Disclaimer", icon: ShieldCheck, action: onOpenLegal },
+                    {
+                      label: fullscreen ? "Exit full screen" : "Full screen",
+                      icon: fullscreen ? Minimize : Maximize,
+                      action: onToggleFullscreen,
+                    },
                   ].map((item) => (
                     <button
                       key={item.label}
                       type="button"
                       onClick={() => { item.action(); onClose(); }}
-                      className="group flex min-w-0 items-center gap-2.5 rounded-[15px] border border-ink/[0.07] bg-paper px-3 py-3 text-left transition-colors hover:border-ink/20 hover:bg-ink/[0.035]"
+                      aria-label={item.label}
+                      className="group flex min-h-[82px] min-w-0 flex-col items-center justify-center gap-1.5 rounded-[14px] px-1.5 py-2 text-center transition-colors hover:bg-paper/75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint"
                     >
-                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ink/[0.055] text-ink-soft transition-colors group-hover:bg-mint/15 group-hover:text-ink">
-                        <item.icon className="h-[17px] w-[17px]" strokeWidth={2} />
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink/[0.08] bg-paper text-ink-soft shadow-[0_1px_2px_rgb(0_0_0/0.035)] transition-all duration-200 group-hover:border-mint/30 group-hover:bg-mint/12 group-hover:text-ink group-hover:shadow-[0_3px_10px_rgb(18_184_134/0.09)]">
+                        <item.icon className="h-[19px] w-[19px]" strokeWidth={1.9} />
                       </span>
-                      <span className="min-w-0">
-                        <span className="block truncate font-display text-[13px] font-semibold text-ink">{item.label}</span>
-                        <span className="mt-0.5 block truncate text-[10.5px] leading-snug text-ink-faint">{item.detail}</span>
+                      <span className="max-w-full text-[11px] leading-tight font-semibold text-ink-soft group-hover:text-ink">
+                        {item.label}
                       </span>
                     </button>
                   ))}
                 </div>
-                <button
-                  type="button"
-                  onClick={() => { onToggleFullscreen(); onClose(); }}
-                  className="mt-2 flex w-full items-center gap-3 rounded-[15px] border border-ink/[0.07] bg-paper px-3 py-3 text-left transition-colors hover:border-ink/20 hover:bg-ink/[0.035]"
-                  aria-label={fullscreen ? "Exit full screen mode" : "Enter full screen mode"}
-                >
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ink/[0.055] text-ink-soft">
-                    {fullscreen ? <Minimize className="h-[17px] w-[17px]" /> : <Maximize className="h-[17px] w-[17px]" />}
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block font-display text-[13px] font-semibold text-ink">{fullscreen ? "Exit full screen" : "Full screen mode"}</span>
-                    <span className="mt-0.5 block text-[10.5px] leading-snug text-ink-faint">Use the full display for a more focused workspace</span>
-                  </span>
-                </button>
               </section>
 
               <Section
