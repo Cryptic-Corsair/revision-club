@@ -415,3 +415,14 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Confirmed the handle markup is positioned inside the drawer and does not capture pointer input. No build, lint or browser visual test was run.
 - **Deployment:** Deployment status not checked.
 - **Commit(s):** `891fc0f` (implementation); this journal entry follows in the next commit.
+
+
+### 2026-11-09 — Refine the Control Panel edge handle
+
+- **Contributor:** AI agent.
+- **Request / objective:** Make the left-edge drawer handle longer and more sophisticated.
+- **Changes made:** Increased its height from 36px to 56px and refined the white treatment with a softly graduated vertical fade and restrained layered glow. Kept the 3px width and vertically centred placement.
+- **Preserved invariants:** The handle remains decorative and pointer-events-disabled; drawer gestures, close interactions, layout and content are unchanged.
+- **Verification:** Confirmed the new handle styling in the updated component. No build, lint or browser visual test was run.
+- **Deployment:** Deployment status not checked.
+- **Commit(s):** `9b62a7e` (implementation); this journal entry follows in the next commit.
