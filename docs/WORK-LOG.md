@@ -468,3 +468,13 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Re-fetched the updated component and confirmed the button is inside the Control Panel's Navigate header, uses the existing close callback, and is mobile-only. No build, lint or browser visual test was run.
 - **Deployment:** Deployment status not checked.
 - **Commit(s):** `b5c8470` (implementation); this journal entry follows in the next commit.
+
+
+### 2026-11-09 — Remove explanatory copy from Control Panel sections
+
+- **Contributor:** AI agent.
+- **Request / objective:** Remove the explanatory sentences beneath the Interface and Appearance section headings.
+- **Changes made:** Removed only the two section hint strings and their associated hint props. Section headings, controls, spacing, and all preference behaviour remain unchanged.
+- **Verification:** Re-fetched the component and confirmed both strings and hint props are absent. No build, lint or browser visual test was run.
+- **Deployment:** Deployment status not checked.
+- **Commit(s):** `3ac3f5d` (implementation); this journal entry follows in the next commit.
