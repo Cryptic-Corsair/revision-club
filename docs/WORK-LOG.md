@@ -369,3 +369,15 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Re-fetched the updated component from GitHub and confirmed the header markup is absent, the six navigation actions remain present, and the horizontal scroll container is in place. No build, lint or browser visual test was run.
 - **Deployment:** Deployment status not checked.
 - **Commit(s):** `879d470` (implementation); this journal entry follows in the next commit.
+
+
+### 2026-11-09 — Redesign Control Panel navigation as horizontal action pills
+
+- **Contributor:** AI agent.
+- **Request / objective:** Redesign the Navigate section while keeping all links in one horizontal row, and move Full screen to the beginning.
+- **Investigation:** Reviewed the latest navigation implementation on `main`: six vertically stacked icon-and-label controls in a horizontally scrolling strip.
+- **Changes made:** Replaced the stacked controls with compact, single-line pill links. Each pill pairs a small circular icon well with its label, giving the row a more compact toolbar-like rhythm. Reordered the destinations so Full screen / Exit full screen comes first, followed by Home, Specification, Revision pack, Progress and Disclaimer. Kept horizontal scrolling, touch overscroll, snap points, keyboard focus treatment and existing callbacks.
+- **Preserved invariants:** All six destinations remain available; navigation actions and close-after-action behaviour are unchanged. No other Control Panel sections or preference behaviour changed.
+- **Verification:** Re-fetched the implementation and confirmed the six links are in the requested order in one horizontal flex row. No build, lint or browser visual test was run.
+- **Deployment:** Deployment status not checked.
+- **Commit(s):** `7dec956` (implementation); this journal entry follows in the next commit.
