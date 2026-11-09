@@ -333,3 +333,15 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not attempted (no push — token deleted, per user).
 - **Commit(s):** see the implementation commit containing this entry.
 - **Follow-up / known limitations:** the prose measure still rides `ch` (it must, to scale with `--ui-scale`), so if a future editor changes the paragraph size without moving the ul's size along, the two prose caps drift apart again — the ul now carries the size explicitly, next to a comment saying why. The clause rule and subhead trailing rules stay solid hairlines on purpose: gradients on the divided lines themselves would blur exactly the structure they exist to draw.
+
+
+### 2026-11-09 — Control Panel navigation, compact icon circles
+
+- **Contributor:** AI agent.
+- **Request / objective:** Replace the text-heavy navigation links in the Customize panel with circular icon links to reduce the section's footprint.
+- **Investigation:** Inspected the current `CustomizePanel` in `src/components/club/customize.tsx`. The Navigate area used two-column text cards with descriptions and a separate full-width full-screen control.
+- **Changes made:** Replaced the cards with a compact three-column grid of six icon-circle links: Home, Specification, Revision pack, Progress, Disclaimer and Full screen. Each link uses a circular icon well with a concise label beneath it; hover and keyboard-focus states remain visible. Full-screen behaviour remains the same and still closes the panel after activation. No navigation destinations or preference behaviour changed.
+- **Preserved invariants:** Changes are limited to the Navigate section in the Customize panel. Other Control Panel sections, Rooms, Editorial, navigation callbacks and preference storage are untouched.
+- **Verification:** Reviewed the edited JSX and confirmed all six existing actions remain wired to their original callbacks. No build, lint or browser visual test was run.
+- **Deployment:** GitHub `main` updated; deployment status not checked.
+- **Commit(s):** `4aa5549` (navigation redesign); this journal entry follows in the next commit.
