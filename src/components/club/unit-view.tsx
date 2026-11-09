@@ -77,12 +77,12 @@ export function UnitView({
         </PopIn>
 
         <PopIn delay={0.1}>
-          <h1 className="mt-6 font-display text-[calc(clamp(2rem,4.6vw,3.1rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.06] font-semibold tracking-tight text-ink">
+          {/* editorial's display voice: the giant bold tread with the
+              unit's own candy as the full-stop accent */}
+          <h1 className="mt-6 max-w-[24ch] font-display text-[calc(clamp(2.4rem,6vw,4.6rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.06] font-bold tracking-[-.05em] text-ink">
             {unit.title}
+            <span style={{ color: main }}>.</span>
           </h1>
-          <p className="mt-2 max-w-3xl text-[calc(16.5px*var(--ui-scale))] leading-snug font-semibold text-ink-soft">
-            {unit.code} · {unit.topicRange} · {unit.paper.duration} · {unit.paper.marks} marks
-          </p>
         </PopIn>
 
         <PopIn delay={0.16} className="mt-6 flex items-end gap-2 sm:gap-3">
@@ -90,7 +90,7 @@ export function UnitView({
             <Mascot main={main} size={92} bubbles={false} />
           </div>
           <SpeechBubble bg={tint(main, 8)} className="min-w-0 flex-1">
-            <p className="text-[calc(15.5px*var(--ui-scale))] leading-[1.75] text-ink">
+            <p className="text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-soft">
               <Fmt text={unit.blurb} />
             </p>
           </SpeechBubble>
@@ -126,10 +126,10 @@ export function UnitView({
             <BeakerMeter pct={pct} main={main} size={92} />
           </div>
           <div className="min-w-0">
-            <h3 className="font-display text-[calc(21px*var(--ui-scale))] font-semibold text-ink">
+            <h3 className="font-display text-[calc(20px*var(--ui-scale))] font-semibold tracking-tight text-ink">
               Progress
             </h3>
-            <p className="mt-1 text-[calc(14.5px*var(--ui-scale))] leading-relaxed text-ink-soft">
+            <p className="mt-1 max-w-[64ch] text-[calc(13.5px*var(--ui-scale))] leading-[1.75] text-ink-soft">
               {done === 0
                 ? "Nothing marked yet — mark a topic as revised when you finish it."
                 : done === unit.topics.length
@@ -155,7 +155,7 @@ export function UnitView({
           <SectionTag main={main} tilt={-2}>
             topics
           </SectionTag>
-          <h2 className="mt-4 mb-8 font-display text-[calc(clamp(1.7rem,3.4vw,2.4rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold text-ink">
+          <h2 className="mt-4 mb-8 font-display text-[calc(25px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             {unit.code === "WCH13" || unit.code === "WCH16"
               ? "Practical skills, in order"
               : "Topics in this unit"}
@@ -209,10 +209,10 @@ export function UnitView({
                           </span>
                         )}
                       </div>
-                      <h3 className="mt-2.5 font-display text-[calc(21px*var(--ui-scale))] leading-snug font-semibold text-ink">
+                      <h3 className="mt-2.5 font-display text-[calc(20px*var(--ui-scale))] leading-snug font-semibold tracking-tight text-ink">
                         {t.title}
                       </h3>
-                      <p className="mt-1.5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.7] text-ink-soft">
+                      <p className="mt-1.5 max-w-[64ch] text-[calc(13.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
                         <Fmt text={t.summary} />
                       </p>
                     </m.button>
@@ -246,10 +246,10 @@ export function UnitView({
               <ArrowLeft className="h-4.5 w-4.5" strokeWidth={2.5} />
             </span>
             <span className="min-w-0">
-              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-ink-faint uppercase">
+              <span className="legal-meta">
                 previous unit
               </span>
-              <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold text-ink">
+              <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold tracking-tight text-ink">
                 {prev.code} · {prev.shortTitle}
               </span>
             </span>
@@ -266,10 +266,10 @@ export function UnitView({
             className="sticker flex cursor-pointer items-center justify-end gap-3 rounded-full bg-paper px-5 py-4 text-right text-ink sm:col-start-2"
           >
             <span className="min-w-0">
-              <span className="block text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] text-ink-faint uppercase">
+              <span className="legal-meta">
                 next unit
               </span>
-              <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold">
+              <span className="block truncate font-display text-[calc(15px*var(--ui-scale))] font-semibold tracking-tight">
                 {next.code} · {next.shortTitle}
               </span>
             </span>

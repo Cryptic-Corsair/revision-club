@@ -52,7 +52,7 @@ function BlockView({ block: b, main }: { block: Block; main: string }) {
   switch (b.k) {
     case "p":
       return (
-        <p className="max-w-[68ch] text-[calc(16.5px*var(--ui-scale))] leading-[1.85] text-ink/90">
+        <p className="max-w-[68ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.9] text-ink-soft">
           <Fmt text={b.text} />
         </p>
       );
@@ -67,11 +67,11 @@ function BlockView({ block: b, main }: { block: Block; main: string }) {
             >
               <BookMarked className="h-5 w-5" style={{ color: shade(main, 62) }} />
             </span>
-            <h4 className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">
+            <h4 className="font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight text-ink">
               <Fmt text={b.term} />
             </h4>
           </div>
-          <p className="mt-3 text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink-soft">
+          <p className="mt-3 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
             <Fmt text={b.text} />
           </p>
         </div>
@@ -97,7 +97,7 @@ function BlockView({ block: b, main }: { block: Block; main: string }) {
             {b.eq.split(/\s{2,}/).map((part, i) => (
               <span
                 key={i}
-                className="rounded-[calc(10px*var(--ui-scale))] border border-ink/[0.09] bg-paper px-4 py-2.5 font-mono text-[calc(15px*var(--ui-scale))] font-semibold text-ink"
+                className="rounded-[calc(10px*var(--ui-scale))] border border-ink/[0.09] bg-paper px-4 py-2.5 font-display text-[calc(16px*var(--ui-scale))] font-semibold tracking-tight text-ink"
               >
                 <Fmt text={part.trim()} />
               </span>
@@ -117,7 +117,7 @@ function BlockView({ block: b, main }: { block: Block; main: string }) {
             </div>
           )}
           {b.note && (
-            <p className="mt-3 flex items-start gap-2 text-[calc(13.5px*var(--ui-scale))] leading-relaxed text-ink-soft">
+            <p className="mt-3 flex items-start gap-2 text-[calc(13px*var(--ui-scale))] leading-[1.7] italic text-ink-soft">
               <Info className="mt-0.5 h-4 w-4 shrink-0" style={{ color: shade(main, 62) }} />
               <span>
                 <Fmt text={b.note} />
@@ -146,7 +146,7 @@ function BlockView({ block: b, main }: { block: Block; main: string }) {
             </Kicker>
             <ul className="flex flex-col gap-1.5">
               {b.items.map((t, i) => (
-                <li key={i} className="flex items-start gap-2 text-[calc(14.5px*var(--ui-scale))] leading-[1.65] text-ink">
+                <li key={i} className="flex items-start gap-2 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink">
                   <Sparkles className="mt-1 h-4 w-4 shrink-0 text-tangerine" />
                   <span>
                     <Fmt text={t} />
@@ -168,7 +168,7 @@ function BlockView({ block: b, main }: { block: Block; main: string }) {
             <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white/10">
               <Timer className="h-5 w-5 text-lemon" />
             </span>
-            <h4 className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-milk">
+            <h4 className="font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight text-milk">
               Quick recap
             </h4>
           </div>
@@ -183,7 +183,7 @@ function BlockView({ block: b, main }: { block: Block; main: string }) {
                   >
                     {i + 1}
                   </span>
-                  <p className="text-[calc(15px*var(--ui-scale))] leading-[1.7] text-milk/90">
+                  <p className="text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-milk/90">
                     <Fmt text={t} />
                   </p>
                 </li>
@@ -224,7 +224,7 @@ function WorkedExample({
         >
           <Footprints className="h-5 w-5" style={{ color: shade(main, 62) }} />
         </span>
-        <h4 className="min-w-0 flex-1 font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">
+        <h4 className="min-w-0 flex-1 font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight text-ink">
           <Fmt text={title} />
         </h4>
       </div>
@@ -273,7 +273,7 @@ function WorkedExample({
                 >
                   {i > 0 && <div className="dot-line mb-1 ml-6 h-4" aria-hidden />}
                   <div
-                    className="inline-flex max-w-full items-start gap-2.5 rounded-[calc(18px*var(--ui-scale))] px-4 py-2.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.6] text-ink"
+                    className="inline-flex max-w-full items-start gap-2.5 rounded-[calc(18px*var(--ui-scale))] px-4 py-2.5 text-[calc(14px*var(--ui-scale))] leading-[1.8] text-ink-soft"
                     style={{ background: sunkWash(main, 9) }}
                   >
                     <span
@@ -299,7 +299,7 @@ function WorkedExample({
                 damping: 16,
                 delay: 0.1 + steps.length * 0.06,
               }}
-              className="mt-4 flex items-start gap-2.5 rounded-[calc(16px*var(--ui-scale))] bg-paper px-4 py-3 text-[calc(15px*var(--ui-scale))] font-semibold text-ink sm:items-center"
+              className="mt-4 flex items-start gap-2.5 rounded-[calc(16px*var(--ui-scale))] bg-paper px-4 py-3 text-[calc(14.5px*var(--ui-scale))] leading-[1.75] font-semibold text-ink sm:items-center"
               style={{
                 borderLeft: `4px solid ${main}`,
                 boxShadow: "0 2px 0 var(--edge)",
@@ -352,7 +352,7 @@ function CandyTable({
                 {head.map((h, i) => (
                   <th
                     key={i}
-                    className="px-4 py-3 font-display text-[calc(11.5px*var(--ui-scale))] font-semibold tracking-[0.08em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
+                    className="px-4 py-3 font-display text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
                   >
                     <Fmt text={h} />
                   </th>
@@ -374,7 +374,7 @@ function CandyTable({
                   {r.map((c, j) => (
                     <td
                       key={j}
-                      className={`px-4 py-3.5 align-top text-[calc(14px*var(--ui-scale))] leading-[1.65] sm:px-5 ${
+                      className={`px-4 py-3.5 align-top text-[calc(13.5px*var(--ui-scale))] leading-[1.65] sm:px-5 ${
                         j === 0 ? "font-semibold text-ink" : "text-ink-soft"
                       }`}
                     >

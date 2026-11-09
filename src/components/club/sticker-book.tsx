@@ -164,7 +164,9 @@ export function StickerBook({
           </SectionTag>
         </PopIn>
         <PopIn delay={0.1}>
-          <h1 className="mt-5 font-display text-[calc(clamp(2.3rem,5vw,3.4rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
+          {/* editorial's display voice — the mint highlight keeps the
+              rooms' accent, the tread is the document room's */}
+          <h1 className="mt-5 max-w-[18ch] font-display text-[calc(clamp(2.65rem,6vw,4.6rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.04] font-bold tracking-[-.065em] text-ink">
             Your revision,{" "}
             <span className="relative inline-block -rotate-2 rounded-[0.35em] bg-mint/15 px-[0.18em]">
               so far.
@@ -192,7 +194,7 @@ export function StickerBook({
             </Float>
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-baseline gap-x-2.5">
-                <span className="font-display text-[calc(17px*var(--ui-scale))] font-semibold text-ink">weekly goal</span>
+                <span className="font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight text-ink">weekly goal</span>
                 <span className="text-[calc(13px*var(--ui-scale))] font-semibold text-ink-soft">
                   {fmtClock(week)} of {goalChipLabel(time.goalMin)} {goalMet ? "· goal met" : ""}
                 </span>
@@ -287,7 +289,7 @@ export function StickerBook({
                 <Kicker color={suggestion.unit.candy.main}>
                   <Target className="h-3.5 w-3.5" /> today&apos;s pick
                 </Kicker>
-                <p className="mt-1 line-clamp-2 font-display text-[calc(17px*var(--ui-scale))] leading-snug font-semibold text-ink">
+                <p className="mt-1 line-clamp-2 font-display text-[calc(17px*var(--ui-scale))] leading-snug font-semibold tracking-tight text-ink">
                   {suggestion.topic.label} · {suggestion.topic.title}
                 </p>
                 <p className="text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink-soft">
@@ -341,7 +343,7 @@ export function StickerBook({
                       {u.code.replace("WCH", "")}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate font-display text-[calc(16.5px*var(--ui-scale))] font-semibold text-ink group-hover:underline">
+                      <span className="block truncate font-display text-[calc(16.5px*var(--ui-scale))] font-semibold tracking-tight text-ink group-hover:underline">
                         {u.code} · {u.shortTitle}
                       </span>
                       <span className="block text-[calc(12px*var(--ui-scale))] font-semibold text-ink-soft">
@@ -411,7 +413,7 @@ export function StickerBook({
             );
           })}
         </div>
-        <p className="mt-3 text-[calc(12px*var(--ui-scale))] font-semibold text-ink-faint">
+        <p className="mt-3 text-[calc(12px*var(--ui-scale))] leading-[1.7] text-ink-faint">
           the clock runs while a topic page or revision note is open and the tab is in view —
           step away for five minutes and it pauses itself.
         </p>
@@ -502,7 +504,7 @@ export function StickerBook({
                     {u.code.replace("WCH", "")}
                   </span>
                   <span className="min-w-0">
-                    <span className="block font-display text-[calc(17px*var(--ui-scale))] font-semibold text-ink group-hover:underline">
+                    <span className="block font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight text-ink group-hover:underline">
                       {u.code} · {u.shortTitle}
                     </span>
                     <span className="block text-[calc(12px*var(--ui-scale))] font-semibold text-ink-soft">
@@ -552,7 +554,7 @@ export function StickerBook({
                           </span>
                         )}
                         <span
-                          className={`font-display text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.12em] uppercase ${
+                          className={`font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase ${
                             has ? "text-white/75" : ""
                           }`}
                         >
@@ -599,7 +601,7 @@ export function StickerBook({
           {confirmPour ? "tap again to confirm" : "Reset all progress"}
         </m.button>
       </Reveal>
-      <p className="mt-3 text-center text-[calc(12px*var(--ui-scale))] font-semibold text-ink-faint">
+      <p className="legal-meta mt-3 flex justify-center">
         {confirmPour
           ? "this clears every revised mark and the whole time ledger — there is no undo"
           : "progress and reading time are saved in this browser only"}
@@ -632,10 +634,10 @@ function StatPillar({
       >
         <Icon className="h-5 w-5" strokeWidth={2.2} />
       </span>
-      <span className="mt-2 font-display text-[calc(clamp(1.35rem,3.2vw,1.8rem)*(1+(var(--ui-scale)-1)*0.5))] leading-none font-semibold text-ink">
+      <span className="mt-2 font-display text-[calc(clamp(1.35rem,3.2vw,1.8rem)*(1+(var(--ui-scale)-1)*0.5))] leading-none font-bold tracking-tight text-ink">
         {value}
       </span>
-      <span className="mt-1.5 font-display text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint uppercase">
+      <span className="legal-meta mt-1.5">
         {label}
       </span>
     </div>

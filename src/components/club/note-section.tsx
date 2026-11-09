@@ -207,7 +207,7 @@ export function SpecSectionView({
           />
           {bannerAction}
         </div>
-        <h2 className="mt-3.5 font-display text-[calc(clamp(1.7rem,3.6vw,2.15rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
+        <h2 className="mt-3.5 font-display text-[calc(21px*var(--ui-scale))] font-semibold tracking-tight text-ink sm:text-[calc(24px*var(--ui-scale))]">
           {section.title}
         </h2>
         {!hideStatement && (
@@ -260,7 +260,7 @@ function BlockView({
   switch (b.k) {
     case "p":
       return (
-        <p className="max-w-[68ch] text-[calc(16.5px*var(--ui-scale))] leading-[1.8] text-ink/90">
+        <p className="max-w-[68ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.9] text-ink-soft">
           <Fmt text={b.text} />
         </p>
       );
@@ -271,7 +271,7 @@ function BlockView({
             className="h-2.5 w-2.5 shrink-0 rounded-full"
             style={{ background: accent }}
           />
-          <h3 className="font-display text-[calc(22px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h3 className="font-display text-[calc(18px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             <Fmt text={b.text} />
           </h3>
         </div>
@@ -282,7 +282,7 @@ function BlockView({
           {b.items.map((t, i) => (
             <li
               key={i}
-              className="flex items-start gap-3 text-[calc(16px*var(--ui-scale))] leading-[1.8] text-ink/90"
+              className="flex items-start gap-3 text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-soft"
             >
               <span
                 className="mt-[calc(11px*var(--ui-scale))] h-2 w-2 shrink-0 rounded-full"
@@ -306,9 +306,9 @@ function BlockView({
               className="mt-0.5 h-4.5 w-4.5 shrink-0"
               style={{ color: inkMix(accent, 70) }}
             />
-            <p className="text-[calc(14.5px*var(--ui-scale))] leading-[1.7] text-ink">
+            <p className="text-[calc(13.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
               <span
-                className="mr-1.5 font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
+                className="mr-1.5 font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase"
                 style={{ color: inkMix(accent, 70) }}
               >
                 {b.label}:
@@ -324,10 +324,10 @@ function BlockView({
           className="sticker max-w-[72ch] rounded-[calc(16px*var(--ui-scale))] bg-paper px-5 py-4"
           style={{ borderLeft: `4px solid ${tint(accent, 55)}` }}
         >
-          <h4 className="font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
+          <h4 className="font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             <Fmt text={b.term} />
           </h4>
-          <p className="mt-1.5 text-[calc(15.5px*var(--ui-scale))] leading-[1.75] text-ink-soft">
+          <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
             <Fmt text={b.text} />
           </p>
         </div>
@@ -345,7 +345,7 @@ function BlockView({
             {b.eq.split(/\s{2,}/).map((part, i) => (
               <span
                 key={i}
-                className="rounded-[calc(10px*var(--ui-scale))] bg-paper px-3.5 py-2 font-mono text-[calc(14.5px*var(--ui-scale))] font-semibold text-ink"
+                className="rounded-[calc(10px*var(--ui-scale))] bg-paper px-3.5 py-2 font-display text-[calc(16px*var(--ui-scale))] font-semibold tracking-tight text-ink"
                 style={{ boxShadow: "0 2px 0 var(--edge)" }}
               >
                 <Fmt text={part.trim()} />
@@ -353,7 +353,7 @@ function BlockView({
             ))}
           </div>
           {b.note && (
-            <p className="mt-3 text-[calc(13px*var(--ui-scale))] leading-relaxed font-semibold text-ink-soft">
+            <p className="mt-3 text-[calc(13px*var(--ui-scale))] leading-[1.7] italic text-ink-soft">
               <Fmt text={b.note} />
             </p>
           )}
@@ -397,7 +397,7 @@ function BlockView({
             </span>
             <div>
               <Kicker color={inkMix("#9775FA", 62)}>Key idea</Kicker>
-              <p className="mt-1.5 text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink">
+              <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink italic">
                 <Fmt text={b.text} />
               </p>
             </div>
@@ -444,7 +444,7 @@ function CandyTable({
                 {head.map((h, i) => (
                   <th
                     key={i}
-                    className="px-4 py-3 font-display text-[calc(11.5px*var(--ui-scale))] font-semibold tracking-[0.08em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
+                    className="px-4 py-3 font-display text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
                   >
                     <Fmt text={h} />
                   </th>
@@ -466,7 +466,7 @@ function CandyTable({
                   {r.map((c, j) => (
                     <td
                       key={j}
-                      className={`px-4 py-3.5 align-top text-[calc(14px*var(--ui-scale))] leading-[1.65] sm:px-5 ${j === 0 ? "font-semibold text-ink" : "text-ink-soft"}`}
+                      className={`px-4 py-3.5 align-top text-[calc(13.5px*var(--ui-scale))] leading-[1.65] sm:px-5 ${j === 0 ? "font-semibold text-ink" : "text-ink-soft"}`}
                     >
                       <Fmt text={c} />
                     </td>
@@ -537,7 +537,7 @@ function Worked({
         >
           <PenLine className="mr-1.5 h-3.5 w-3.5 shrink-0" /> <Fmt text={title} />
         </span>
-        <p className="min-w-[16rem] flex-1 text-[calc(15.5px*var(--ui-scale))] leading-[1.7] font-semibold text-ink">
+        <p className="min-w-[16rem] flex-1 text-[calc(14.5px*var(--ui-scale))] leading-[1.75] font-semibold text-ink">
           <Fmt text={question} />
         </p>
       </div>
@@ -603,7 +603,7 @@ function Worked({
                     <div className="dot-line mb-1 ml-6 h-4" aria-hidden />
                   )}
                   <div
-                    className="inline-flex max-w-full items-start gap-2.5 rounded-[calc(18px*var(--ui-scale))] px-4 py-2.5 text-[calc(15px*var(--ui-scale))] leading-[1.7] text-ink"
+                    className="inline-flex max-w-full items-start gap-2.5 rounded-[calc(18px*var(--ui-scale))] px-4 py-2.5 text-[calc(14px*var(--ui-scale))] leading-[1.8] text-ink-soft"
                     style={{ background: liftWash(accent, 9), boxShadow: "0 2px 0 var(--edge)" }}
                   >
                     <span
@@ -628,7 +628,7 @@ function Worked({
                 damping: 18,
                 delay: printing ? 0 : 0.1 + steps.length * 0.06,
               }}
-              className="mt-4 flex items-start gap-2.5 rounded-[calc(16px*var(--ui-scale))] bg-paper px-4 py-3 text-[calc(15px*var(--ui-scale))] font-semibold text-ink"
+              className="mt-4 flex items-start gap-2.5 rounded-[calc(16px*var(--ui-scale))] bg-paper px-4 py-3 text-[calc(14.5px*var(--ui-scale))] leading-[1.75] font-semibold text-ink"
               style={{
                 borderLeft: `4px solid ${accent}`,
                 boxShadow: "0 2px 0 var(--edge)",
@@ -698,7 +698,7 @@ function StepsPanel({
               strokeWidth={2.2}
             />
           </span>
-          <h4 className="font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h4 className="font-display text-[calc(16px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             <Fmt text={caption} />
           </h4>
         </div>
@@ -719,11 +719,11 @@ function StepsPanel({
                 >
                   {i + 1}
                 </span>
-                <span className="font-display text-[calc(15px*var(--ui-scale))] font-semibold text-ink">
+                <span className="font-display text-[calc(14.5px*var(--ui-scale))] font-semibold text-ink">
                   <Fmt text={bare} />
                 </span>
               </div>
-              <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.7] text-ink-soft">
+              <p className="mt-1.5 text-[calc(13.5px*var(--ui-scale))] leading-[1.7] text-ink-soft">
                 <Fmt text={it.text} />
               </p>
             </li>
@@ -1254,7 +1254,7 @@ function Figure({
         </div>
       )}
       {caption && (
-        <p className="mx-auto mt-3 max-w-[58ch] text-center text-[calc(12.5px*var(--ui-scale))] leading-[1.65] font-semibold text-ink-faint">
+        <p className="mx-auto mt-3 max-w-[58ch] text-center text-[calc(12.5px*var(--ui-scale))] leading-[1.65] text-ink-faint">
           <Fmt text={caption} />
         </p>
       )}

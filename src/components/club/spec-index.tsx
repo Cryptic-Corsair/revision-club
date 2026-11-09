@@ -88,12 +88,12 @@ export function SpecIndex({
         >
           <Target className="h-3.5 w-3.5" /> Spec index
         </span>
-        <h1 className="mt-5 font-display text-[calc(clamp(2.1rem,5vw,3.2rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
+        <h1 className="mt-5 font-display text-[calc(clamp(2.4rem,6vw,4.6rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.06] font-bold tracking-[-.05em] text-ink">
           Tick the spec points.
           <br />
-          Get one revision pack.
+          Get one revision pack<span style={{ color: "var(--color-lemon)" }}>.</span>
         </h1>
-        <p className="mt-4 max-w-[56ch] text-[calc(16px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+        <p className="mt-4 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-soft">
           Every statement below is quoted from the specification and mapped to
           the note sections that teach it — nothing hand-maintained, the index
           grows as the notes grow. Tick what you&apos;re revising and the pack
@@ -101,12 +101,9 @@ export function SpecIndex({
         </p>
       </PopIn>
 
-      <PopIn delay={0.12} className="mt-5 flex flex-wrap gap-2">
+      <PopIn delay={0.12} className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-ink/10 pt-4">
         {stats.map((s) => (
-          <span
-            key={s}
-            className="inline-flex items-center rounded-full bg-ink/[0.05] px-3 py-1.5 text-[calc(12px*var(--ui-scale))] font-semibold text-ink-soft"
-          >
+          <span key={s} className="legal-meta">
             {s}
           </span>
         ))}
@@ -205,10 +202,10 @@ export function SpecIndex({
       {/* ————— the index ————— */}
       {visible.length === 0 ? (
         <Reveal className="mt-10 text-center">
-          <p className="font-display text-[calc(17px*var(--ui-scale))] font-semibold text-ink">
+          <p className="font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
             Nothing matches “{query}”.
           </p>
-          <p className="mt-2 text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink-faint">
+          <p className="mt-2 text-[calc(13.5px*var(--ui-scale))] font-bold text-ink-faint">
             Try a shorter word — or clear the filters.
           </p>
           <SoftButton
@@ -237,7 +234,7 @@ export function SpecIndex({
       {/* ————— footer nudge ————— */}
       <Reveal className="mt-12 flex flex-col items-center gap-3 text-center">
         <Squiggle color="#FFD43B" className="h-3 w-40 opacity-80" />
-        <p className="max-w-[46ch] text-[calc(13.5px*var(--ui-scale))] leading-relaxed font-semibold text-ink-soft">
+        <p className="max-w-[46ch] text-[calc(14px*var(--ui-scale))] leading-[1.9] text-ink-soft">
           Ticks live in your browser and follow you everywhere — the pack page
           turns them into one continuous read.
         </p>
@@ -284,7 +281,7 @@ function TopicGroup({
             className="h-3.5 w-3.5 shrink-0 rounded-full"
             style={{ background: g.candy }}
           />
-          <h2 className="font-display text-[calc(19px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h2 className="font-display text-[calc(20px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             {g.topicLabel} — {g.topicTitle}
           </h2>
           <span
@@ -393,7 +390,7 @@ function PointRow({
               )}
             </span>
             <span
-              className={`mt-1 block text-[calc(14px*var(--ui-scale))] leading-[1.65] ${picked ? "font-semibold text-ink" : "text-ink-soft"}`}
+              className={`mt-1 block text-[calc(13.5px*var(--ui-scale))] leading-[1.7] ${picked ? "font-semibold text-ink" : "text-ink-soft"}`}
             >
               <Fmt text={p.statement} />
             </span>

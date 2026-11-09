@@ -355,7 +355,10 @@ export function SectionTag({
    (0.14em / 0.16em / 0.18em / 0.2em tracking, various weights) —
    every small-caps label in the classic interface now borrows this
    one. Editorial keeps its own EditorialLabel; classic-only callers
-   import this so the shared surfaces never move. */
+   import this so the shared surfaces never move. The type itself now
+   speaks editorial's label voice — the same 0.2em / extrabold step
+   the document room's labels use — so both interfaces whisper in
+   unison while the dash keeps the rooms' own accent. */
 
 export function Kicker({
   children,
@@ -370,7 +373,7 @@ export function Kicker({
   const ink = color ?? "var(--color-ink-faint)";
   return (
     <span
-      className={`inline-flex items-center gap-2 font-display text-[calc(10.5px*var(--ui-scale))] leading-none font-bold tracking-[0.16em] uppercase ${className ?? ""}`}
+      className={`inline-flex items-center gap-2 font-display text-[calc(10.5px*var(--ui-scale))] leading-none font-extrabold tracking-[0.2em] uppercase ${className ?? ""}`}
       style={{ color: ink }}
     >
       <span

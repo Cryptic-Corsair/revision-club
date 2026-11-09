@@ -130,7 +130,7 @@ export function PackView({
           <h1 className="mt-6 font-display text-[calc(clamp(1.9rem,4.6vw,2.7rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
             The pack is empty.
           </h1>
-          <p className="mt-3 max-w-[46ch] text-[calc(15.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+          <p className="mt-3 max-w-[52ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-soft">
             Head to the spec index and tick, say, <strong>2.1</strong> and{" "}
             <strong>3.6</strong> — the notes covering those statements assemble
             here automatically, in syllabus order.
@@ -176,10 +176,10 @@ export function PackView({
           >
             <ClipboardList className="h-3.5 w-3.5" /> Your pack
           </span>
-          <h1 className="mt-5 font-display text-[calc(clamp(2.1rem,5vw,3.1rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
-            One pack. Your spec points.
+          <h1 className="mt-5 max-w-[18ch] font-display text-[calc(clamp(2.65rem,6vw,4.6rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.04] font-bold tracking-[-.065em] text-ink">
+            One pack. Your spec points<span style={{ color: "var(--color-lemon)" }}>.</span>
           </h1>
-          <p className="mt-3 text-[calc(15px*var(--ui-scale))] leading-[1.75] text-ink-soft">
+          <p className="mt-3 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-soft">
             {points.length} spec point{points.length === 1 ? "" : "s"} ·{" "}
             {sectionCount} section{sectionCount === 1 ? "" : "s"} of notes,
             pulled together in syllabus order. Every section below is your
@@ -190,7 +190,7 @@ export function PackView({
         {/* picked chips — one swipeable line; tap one to let it go */}
         <PopIn delay={0.1} className="mt-4">
           <div className="flex items-center gap-3">
-            <span className="shrink-0 font-display text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.14em] text-ink-faint uppercase">
+            <span className="legal-meta shrink-0">
               Picked
             </span>
             <ScrollFade className="min-w-0 flex-1">
@@ -234,7 +234,7 @@ export function PackView({
                 transition={{ type: "spring", stiffness: 120, damping: 20 }}
               />
             </div>
-            <span className="shrink-0 font-display text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink-soft">
+            <span className="legal-meta shrink-0">
               {readCount}/{points.length} read{allRead ? " ✓" : ""}
             </span>
           </div>
@@ -427,7 +427,7 @@ export function PackView({
               <Bookmark className="h-4.5 w-4.5" /> Saved sets{sets.length > 0 ? ` (${sets.length})` : ""}
             </SoftButton>
           </div>
-          <p className="mt-2 text-[calc(12px*var(--ui-scale))] leading-relaxed font-semibold text-ink-soft">
+          <p className="legal-meta mt-2">
             Assembled from the revision notes · ticks live in your browser
           </p>
         </Reveal>
@@ -466,7 +466,7 @@ function TopicBanner({
           {g.topicLabel} — {g.topicTitle}
         </span>
       </div>
-      <p className="mt-2.5 pl-1 text-[calc(11.5px*var(--ui-scale))] font-semibold tracking-[0.1em] text-ink-faint uppercase">
+      <p className="legal-meta mt-2.5 pl-1">
         {sections} section{sections === 1 ? "" : "s"} from this topic
         {!hideStatements && " · statements quoted above each note"}
       </p>

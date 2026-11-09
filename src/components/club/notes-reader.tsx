@@ -239,8 +239,9 @@ function NotesReaderBody({
           <Kicker color={inkMix(main, 62)} className="mt-7">
             {doc.kicker}
           </Kicker>
-          <h1 className="mt-2.5 font-display text-[calc(clamp(2.1rem,5vw,3.2rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.05] font-semibold tracking-tight text-ink">
+          <h1 className="mt-2.5 max-w-[16ch] font-display text-[calc(clamp(2.65rem,6vw,4.6rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.04] font-bold tracking-[-.065em] text-ink">
             {doc.title}
+            <span style={{ color: main }}>.</span>
           </h1>
         </PopIn>
 
@@ -288,10 +289,10 @@ function NotesReaderBody({
               <Target className="h-5 w-5" style={{ color: inkMix(main, 60) }} />
             </span>
             <div>
-              <h2 className="font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
+              <h2 className="font-display text-[calc(20px*var(--ui-scale))] font-semibold tracking-tight text-ink">
                 Contents
               </h2>
-              <p className="text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink-faint">
+              <p className="legal-meta">
                 {doc.sections.length} sections · tap one to jump
               </p>
             </div>
@@ -358,13 +359,13 @@ function NotesReaderBody({
             <Mascot main={main} mood="cheer" size={110} bubbles={false} />
           </div>
           <Squiggle color={main} className="h-3 w-40 opacity-70" />
-          <p className="font-display text-[calc(19px*var(--ui-scale))] font-semibold text-ink">
+          <p className="font-display text-[calc(20px*var(--ui-scale))] font-semibold tracking-tight text-ink">
             That&apos;s the whole note — every spec point of the topic.
           </p>
           <StickerButton onClick={onBack} ariaLabel={`Back to ${unit.code}`}>
             <ArrowLeft className="h-4.5 w-4.5" /> Back to {unit.code}
           </StickerButton>
-          <p className="mt-2 text-[calc(12px*var(--ui-scale))] leading-relaxed font-semibold text-ink-soft">
+          <p className="legal-meta mt-2">
             <Fmt
               text={`==${unit.code}== · ${unit.title} · from ${doc.source}`}
             />
