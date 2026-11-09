@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { LazyMotion, domAnimation, AnimatePresence, m } from "framer-motion";
+import { LazyMotion, MotionConfig, domAnimation, AnimatePresence, m } from "framer-motion";
 import {
   Home as HomeIcon,
   Search,
@@ -1175,6 +1175,12 @@ export default function ClubApp() {
 
   return (
     <LazyMotion features={domAnimation} strict>
+      {/* motion prefs, honoured end to end: "user" defers to the OS
+          reduce-motion setting, and the customize panel's own motion
+          switch (data-motion) now also silences the JS-driven springs
+          — until now it only froze the CSS keyframes. Opacity still
+          eases either way, so nothing pops in blind. */}
+      <MotionConfig reducedMotion={prefs.motion ? "user" : "always"}>
       <SpecMapProvider>
         <div className="flex min-h-dvh flex-col">
           <TopBar
@@ -1348,6 +1354,7 @@ export default function ClubApp() {
           </main>
         </div>
       </SpecMapProvider>
+      </MotionConfig>
     </LazyMotion>
   );
 }

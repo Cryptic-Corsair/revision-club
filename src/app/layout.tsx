@@ -11,6 +11,15 @@ import localFont from "next/font/local";
 import { DARK_MOOD_COUNT } from "@/lib/spectra/dark-mood";
 import "./globals.css";
 
+/* ————— preload strategy —————
+   next/font preloads every family by default, which used to put all
+   192 KB of woff2 on the critical path — including the three swap
+   families the factory theme never renders (Baloo 2, Patrick Hand
+   and Nunito are only downloaded once the customize panel re-points
+   --font-display / --font-body) and the mono trio, whose first use
+   sits in lazily-loaded rooms (spec map, worked plates). Only the
+   first-paint pair — Fredoka (display) + Quicksand (body) — keeps
+   its preload head start; everything else loads on first use. */
 const fredoka = localFont({
   variable: "--font-fredoka",
   src: "./fonts/fredoka-var.woff2",
@@ -23,6 +32,7 @@ const baloo = localFont({
   src: "./fonts/baloo2-var.woff2",
   weight: "400 800",
   display: "swap",
+  preload: false,
 });
 
 const patrick = localFont({
@@ -30,6 +40,7 @@ const patrick = localFont({
   src: "./fonts/patrick-hand-400.woff2",
   weight: "400",
   display: "swap",
+  preload: false,
 });
 
 /* no 900 — the heaviest class anywhere is font-extrabold (800) */
@@ -38,6 +49,7 @@ const nunito = localFont({
   src: "./fonts/nunito-var.woff2",
   weight: "400 800",
   display: "swap",
+  preload: false,
 });
 
 const quicksand = localFont({
@@ -55,6 +67,7 @@ const plex = localFont({
     { path: "./fonts/plex-700.woff2", weight: "700" },
   ],
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
