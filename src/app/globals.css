@@ -2447,6 +2447,21 @@ html.dark:not(.dune) .legal-room { --legal-rust: #e0c4eb; }
     0 14px 34px -28px rgb(35 31 25 / 0.2);
 }
 
+/* ————— the worked plate's ghost toggle —————
+   The worked example's "Show steps" control: a hairline pill whose
+   accent wash breathes in on hover. The colours ride on --wt-rest /
+   --wt-hover custom properties set inline (each section's own
+   accent dresses it), so one class serves every lab. */
+.worked-toggle {
+  background: var(--wt-rest, transparent);
+  transition:
+    background-color 240ms ease,
+    border-color 240ms ease;
+}
+.worked-toggle:hover {
+  background: var(--wt-hover, transparent);
+}
+
 /* the after-dark lab: the note returns to the plum family — the
    same grounds the lab paints everywhere, with the rooms ladder
    re-read over them (soft ink a half-step brighter for long runs). */

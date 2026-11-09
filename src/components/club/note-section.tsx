@@ -1,21 +1,23 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import {
+  useEffect,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import { AnimatePresence, m } from "framer-motion";
 import {
   Check,
   ChevronDown,
-  EyeOff,
-  Footprints,
   Lightbulb,
   ListChecks,
-  PenLine,
   StickyNote,
   Target,
 } from "./icons";
 import type { NotesBlock, SpecSection } from "@/lib/spectra/notes-types";
 import { Fmt } from "./format";
-import { Confetti, Kicker, liftWash, Reveal, ScrollFade, readableInk, shade, sunkWash, tint } from "./bits";
+import { fade, Kicker, liftWash, Reveal, ScrollFade, readableInk, shade, sunkWash, tint } from "./bits";
 import { inkMix } from "./bands";
 import {
   FigAtom,
@@ -532,10 +534,15 @@ function usePrinting() {
   return printing;
 }
 
-/* ————— worked example — a drop-down that guards its space —————
-   Collapsed: just the title pill, the question and one button.
-   "Show steps" unfurls the staircase and the answer; "Hide steps"
-   folds it all away again. The only drop-down on the site. */
+/* ————— worked example — the folio plate —————
+   The candy staircase retires. The worked example now reads as the
+   document's gallery plate: a hairline card under one soft accent
+   edge, the section's colour breathing as an ambient wash in the
+   corner, the question set large, and the method ruled out line by
+   line — mono numerals in the margin, hairlines carrying the order,
+   the answer sealed in a quiet wash of its own. The only drop-down
+   on the site keeps guarding its space, through a hairline ghost
+   toggle now; print still unfolds the whole plate. */
 
 function Worked({
   title,
@@ -553,128 +560,179 @@ function Worked({
   const [open, setOpen] = useState(false);
   const printing = usePrinting();
   const shown = open || printing;
-  /* the reveal pays out: unfurling a worked example throws a small
-     burst from the button — never on print, never when folding */
-  const [fire, setFire] = useState(0);
+
+  /* the card carries its own WORKED EXAMPLE label, so the title
+     hands that role over: "Worked example · rate = 1/time" leaves
+     only its matter as the heading; a bare "Worked example 2"
+     leaves nothing and the question speaks alone; titles that never
+     wore the label keep every word of theirs */
+  const heading = title.replace(
+    /^worked example(?:\s+\d+)?\s*(?:·|—)?\s*/i,
+    "",
+  );
 
   return (
-    <div className="sticker rounded-[calc(20px*var(--ui-scale))] bg-paper p-5 sm:p-6">
-      <div className="flex flex-wrap items-center gap-3">
-        <span
-          className="inline-flex min-w-0 max-w-full shrink-0 -rotate-1 items-center rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] leading-snug font-bold tracking-[0.1em] uppercase"
-          style={{ background: accent, color: readableInk(accent), boxShadow: `0 2px 0 ${shade(accent)}` }}
-        >
-          <PenLine className="mr-1.5 h-3.5 w-3.5 shrink-0" /> <Fmt text={title} />
-        </span>
-        <p className="min-w-[16rem] flex-1 text-[calc(14.5px*var(--ui-scale))] leading-[1.75] font-semibold text-ink">
+    <div
+      className="rounded-[calc(18px*var(--ui-scale))] bg-paper puff"
+      style={{
+        border: "1px solid var(--rooms-hairline)",
+        borderTop: `2px solid ${tint(accent, 65)}`,
+        background: `radial-gradient(120% 92% at 100% 0%, color-mix(in oklab, ${accent} 9%, transparent), transparent 55%), var(--color-paper)`,
+      }}
+    >
+      <div className="p-5 sm:p-6">
+        {/* the plate head — role label, rule, step count */}
+        <div className="flex items-center gap-3">
+          <Kicker color={inkMix(accent, 70)}>Worked example</Kicker>
+          <span
+            aria-hidden
+            className="h-px min-w-4 flex-1"
+            style={{ background: "var(--rooms-hairline-soft)" }}
+          />
+          <span
+            className="shrink-0 text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.18em] uppercase"
+            style={{
+              fontFamily: "var(--font-mono)",
+              color: "var(--color-ink-faint)",
+              fontVariantNumeric: "tabular-nums",
+            }}
+          >
+            {steps.length} {steps.length === 1 ? "step" : "steps"}
+          </span>
+        </div>
+
+        {heading && (
+          <h4 className="mt-3 font-display text-[calc(19px*var(--ui-scale))] leading-snug font-semibold tracking-tight text-ink">
+            <Fmt text={heading} />
+          </h4>
+        )}
+        <p className="mt-2.5 max-w-[62ch] text-[calc(15px*var(--ui-scale))] leading-[1.75] font-medium text-ink">
           <Fmt text={question} />
         </p>
-      </div>
 
-      <div className="relative mt-4 inline-block">
-        <Confetti fire={fire} className="-translate-y-2" />
+        {/* the toggle — a hairline ghost pill; the accent wash
+            breathes in on hover (see .worked-toggle in globals) */}
         <m.button
           type="button"
-          onClick={() => {
-            if (!open) setFire((f) => f + 1);
-            setOpen((o) => !o);
-          }}
+          onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(14px*var(--ui-scale))] font-semibold text-white"
-          style={{ background: accent, boxShadow: `0 3px 0 ${shade(accent)}` }}
+          whileTap={{ scale: 0.98 }}
+          className="worked-toggle mt-5 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2.5 rounded-full border px-5 font-display text-[calc(13px*var(--ui-scale))] font-semibold tracking-[0.02em] print:hidden"
+          style={
+            {
+              /* fixed translucent washes, not the token-share lift
+                 recipe — the hover needs a real delta in every lab,
+                 and the glow recipe reads right over the plate's
+                 ambient corner in all four */
+              "--wt-rest": open ? fade(accent, 8) : "transparent",
+              "--wt-hover": fade(accent, 13),
+              color: inkMix(accent, 80),
+              borderColor: open ? tint(accent, 45) : "var(--rooms-hairline)",
+            } as CSSProperties
+          }
         >
-          {open ? (
-            <EyeOff className="h-4.5 w-4.5" />
-          ) : (
-            <Footprints className="h-4.5 w-4.5" />
-          )}
           {open ? "Hide steps" : "Show steps"}
           <m.span
             animate={{ rotate: open ? 180 : 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="grid h-[calc(24px*var(--ui-scale))] w-[calc(24px*var(--ui-scale))] shrink-0 place-items-center rounded-full"
+            style={{ background: tint(accent, 82), color: inkMix(accent, 90) }}
           >
-            <ChevronDown className="h-4 w-4" />
+            <ChevronDown className="h-3.5 w-3.5" />
           </m.span>
         </m.button>
-      </div>
 
-      <AnimatePresence initial={false}>
-        {shown && (
-          <m.div
-            initial={printing ? false : { opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={
-              printing ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 26 }
-            }
-            className="overflow-hidden"
-          >
-            <div className="mt-4 flex flex-col">
-              {steps.map((s, i) => (
-                <m.div
-                  key={i}
-                  initial={printing ? false : { opacity: 0, y: 14, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 22,
-                    delay: printing ? 0 : 0.05 + i * 0.06,
-                  }}
-                  style={{
-                    marginLeft: `min(${i * 14}px, 56px)`,
-                    rotate: `${i % 2 ? 0.35 : -0.35}deg`,
-                  }}
-                >
-                  {i > 0 && (
-                    <div className="dot-line mb-1 ml-6 h-4" aria-hidden />
-                  )}
-                  <div
-                    className="inline-flex max-w-full items-start gap-2.5 rounded-[calc(18px*var(--ui-scale))] px-4 py-2.5 text-[calc(14px*var(--ui-scale))] leading-[1.8] text-ink-soft"
-                    style={{ background: liftWash(accent, 9), boxShadow: "0 2px 0 var(--edge)" }}
+        <AnimatePresence initial={false}>
+          {shown && (
+            <m.div
+              initial={printing ? false : { opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={
+                printing
+                  ? { duration: 0 }
+                  : { type: "spring", stiffness: 280, damping: 30 }
+              }
+              className="overflow-hidden"
+            >
+              {/* the method — ruled out line by line, the divided
+                  lines carrying the order the staircase used to */}
+              <ol className="mt-5">
+                {steps.map((s, i) => (
+                  <m.li
+                    key={i}
+                    initial={printing ? false : { opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={
+                      printing
+                        ? { duration: 0 }
+                        : {
+                            duration: 0.45,
+                            ease: [0.22, 1, 0.36, 1],
+                            delay: 0.04 + i * 0.05,
+                          }
+                    }
+                    className="flex items-baseline gap-4 border-t py-3.5"
+                    style={{ borderColor: "var(--rooms-hairline-soft)" }}
                   >
                     <span
-                      className="mt-0.5 grid h-[calc(22px*var(--ui-scale))] w-[calc(22px*var(--ui-scale))] shrink-0 place-items-center rounded-full font-display text-[calc(11px*var(--ui-scale))] font-bold"
-                      style={{ background: accent, color: readableInk(accent) }}
+                      aria-hidden
+                      className="w-[calc(26px*var(--ui-scale))] shrink-0 text-[calc(11.5px*var(--ui-scale))] font-semibold tracking-[0.08em]"
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        color: inkMix(accent, 76),
+                        fontVariantNumeric: "tabular-nums",
+                      }}
                     >
-                      {i + 1}
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span>
+                    <span className="min-w-0 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
                       <Fmt text={s} />
                     </span>
-                  </div>
-                </m.div>
-              ))}
-            </div>
-            <m.div
-              initial={printing ? false : { opacity: 0, scale: 0.94, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 320,
-                damping: 18,
-                delay: printing ? 0 : 0.1 + steps.length * 0.06,
-              }}
-              className="mt-4 flex items-start gap-2.5 rounded-[calc(16px*var(--ui-scale))] bg-paper px-4 py-3 text-[calc(14.5px*var(--ui-scale))] leading-[1.75] font-semibold text-ink"
-              style={{
-                borderLeft: `4px solid ${accent}`,
-                boxShadow: "0 2px 0 var(--edge)",
-              }}
-            >
-              <Check
-                className="mt-0.5 h-5 w-5 shrink-0"
-                style={{ color: accent }}
-                strokeWidth={3}
-              />
-              <span>
-                <Fmt text={answer} />
-              </span>
+                  </m.li>
+                ))}
+              </ol>
+
+              {/* the answer — sealed in a quiet wash of the accent */}
+              <m.div
+                initial={printing ? false : { opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={
+                  printing
+                    ? { duration: 0 }
+                    : {
+                        duration: 0.45,
+                        ease: [0.22, 1, 0.36, 1],
+                        delay: 0.08 + steps.length * 0.05,
+                      }
+                }
+                className="mt-4 rounded-[calc(14px*var(--ui-scale))] px-5 py-4"
+                style={{
+                  background: liftWash(accent, 8),
+                  border: "1px solid var(--rooms-hairline-soft)",
+                }}
+              >
+                <div className="flex items-center gap-2">
+                  <Check
+                    className="h-4 w-4 shrink-0"
+                    strokeWidth={2.5}
+                    style={{ color: inkMix(accent, 85) }}
+                  />
+                  <span
+                    className="font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase"
+                    style={{ color: inkMix(accent, 70) }}
+                  >
+                    Answer
+                  </span>
+                </div>
+                <p className="mt-2 font-display text-[calc(16px*var(--ui-scale))] leading-[1.65] font-semibold tracking-tight text-ink">
+                  <Fmt text={answer} />
+                </p>
+              </m.div>
             </m.div>
-          </m.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
