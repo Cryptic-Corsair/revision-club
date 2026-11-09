@@ -347,41 +347,44 @@ export function CustomizePanel({
               className="no-scrollbar relative flex flex-1 flex-col gap-6 overflow-y-auto px-6 pt-0"
               style={{ paddingTop: "calc(1.25rem + var(--sa-top))", paddingBottom: "calc(2rem + var(--sa-bottom))" }}
             >
-              <section className="rounded-[22px] border border-ink/[0.08] bg-ink/[0.025] p-4">
-                <div className="mb-3">
-                  <p className="font-display text-[13px] font-bold tracking-[0.12em] text-ink-faint uppercase">
+              <section className="rounded-[22px] border border-ink/[0.08] bg-ink/[0.025] p-3.5">
+                <div className="mb-3 flex items-center justify-between px-0.5">
+                  <p className="font-display text-[12px] font-bold tracking-[0.16em] text-ink-faint uppercase">
                     Navigate
                   </p>
+                  <span className="text-[10px] font-semibold tracking-wide text-ink-faint">
+                    QUICK LINKS
+                  </span>
                 </div>
-                <div className="no-scrollbar -mx-1 overflow-x-auto overscroll-x-contain px-1">
-                  <div className="flex w-max min-w-full snap-x snap-mandatory gap-2">
-                  {[
-                    { label: "Home", icon: Home, action: onHome },
-                    { label: "Specification", icon: BookOpen, action: onOpenSpec },
-                    { label: "Revision pack", icon: ClipboardList, action: onOpenPack },
-                    { label: "Progress", icon: Sticker, action: onOpenProgress },
-                    { label: "Disclaimer", icon: ShieldCheck, action: onOpenLegal },
-                    {
-                      label: fullscreen ? "Exit full screen" : "Full screen",
-                      icon: fullscreen ? Minimize : Maximize,
-                      action: onToggleFullscreen,
-                    },
-                  ].map((item) => (
-                    <button
-                      key={item.label}
-                      type="button"
-                      onClick={() => { item.action(); onClose(); }}
-                      aria-label={item.label}
-                      className="group flex w-[76px] shrink-0 snap-start flex-col items-center justify-center gap-1.5 rounded-[14px] px-1 py-2 text-center transition-colors hover:bg-paper/75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint"
-                    >
-                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink/[0.08] bg-paper text-ink-soft shadow-[0_1px_2px_rgb(0_0_0/0.035)] transition-all duration-200 group-hover:border-mint/30 group-hover:bg-mint/12 group-hover:text-ink group-hover:shadow-[0_3px_10px_rgb(18_184_134/0.09)]">
-                        <item.icon className="h-[19px] w-[19px]" strokeWidth={1.9} />
-                      </span>
-                      <span className="max-w-full text-[11px] leading-tight font-semibold text-ink-soft group-hover:text-ink">
-                        {item.label}
-                      </span>
-                    </button>
-                  ))}
+                <div className="no-scrollbar -mx-1 overflow-x-auto overscroll-x-contain px-1 pb-0.5">
+                  <div className="flex w-max min-w-full snap-x snap-mandatory items-center gap-2">
+                    {[
+                      {
+                        label: fullscreen ? "Exit full screen" : "Full screen",
+                        icon: fullscreen ? Minimize : Maximize,
+                        action: onToggleFullscreen,
+                      },
+                      { label: "Home", icon: Home, action: onHome },
+                      { label: "Specification", icon: BookOpen, action: onOpenSpec },
+                      { label: "Revision pack", icon: ClipboardList, action: onOpenPack },
+                      { label: "Progress", icon: Sticker, action: onOpenProgress },
+                      { label: "Disclaimer", icon: ShieldCheck, action: onOpenLegal },
+                    ].map((item, index) => (
+                      <button
+                        key={item.label}
+                        type="button"
+                        onClick={() => { item.action(); onClose(); }}
+                        aria-label={item.label}
+                        className="group inline-flex h-10 shrink-0 snap-start items-center gap-2 rounded-full border border-ink/[0.09] bg-paper/80 py-1 pl-1 pr-3 text-left text-ink-soft shadow-[0_1px_2px_rgb(0_0_0/0.025)] transition-all duration-200 hover:border-mint/35 hover:bg-paper hover:text-ink hover:shadow-[0_3px_10px_rgb(18_184_134/0.08)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint"
+                      >
+                        <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-ink/[0.055] text-ink-soft transition-colors group-hover:bg-mint/12 group-hover:text-ink">
+                          <item.icon className="h-[15px] w-[15px]" strokeWidth={2} />
+                        </span>
+                        <span className="whitespace-nowrap text-[11px] font-semibold">
+                          {item.label}
+                        </span>
+                      </button>
+                    ))}
                   </div>
                 </div>
               </section>
