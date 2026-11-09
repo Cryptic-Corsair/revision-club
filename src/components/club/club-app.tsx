@@ -35,6 +35,7 @@ import {
   setPrefs,
   THEME_CHIP,
   usePrefs,
+  type Iface,
   type Lab,
 } from "@/lib/spectra/prefs";
 import { Home } from "./home";
@@ -238,6 +239,44 @@ function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
    using the same swatch announces each switch. Titles say the next
    stop, nothing more. The mobile browser chrome is re-painted to
    the lab's cream so the address bar never fights the page. */
+
+/* ————— the lazy rooms and how they warm —————
+   Every deferred view is a literal import — a bundler can't split a
+   dynamic path, so the map is literal on purpose. Queued by
+   likelihood: the CURRENT dress's doors first, then the shared odds
+   and ends. The inactive dress's pages are not warmed at all — a
+   visit that never leaves one dress never downloads the other's
+   pages; flipping the dress re-runs the queue with the new dress
+   first, so its rooms are warm before anyone knocks. */
+const WARM_CHUNKS = {
+  notesRooms: () => import("./notes-reader"),
+  topicRooms: () => import("./topic-view"),
+  specRooms: () => import("./spec-index"),
+  packRooms: () => import("./pack-view"),
+  stickerRooms: () => import("./sticker-book"),
+  notesEditorial: () => import("./notes-editorial"),
+  topicEditorial: () => import("./topic-editorial"),
+  unitEditorial: () => import("./unit-editorial"),
+  specEditorial: () => import("./spec-editorial"),
+  packEditorial: () => import("./pack-editorial"),
+  progressEditorial: () => import("./progress-editorial"),
+  search: () => import("./search"),
+  customize: () => import("./customize"),
+  legal: () => import("./legal"),
+};
+
+const WARM_BY_IFACE: Record<Iface, (keyof typeof WARM_CHUNKS)[]> = {
+  rooms: ["notesRooms", "topicRooms", "specRooms", "packRooms", "stickerRooms"],
+  editorial: [
+    "notesEditorial",
+    "topicEditorial",
+    "unitEditorial",
+    "specEditorial",
+    "packEditorial",
+    "progressEditorial",
+  ],
+};
+const WARM_SHARED: (keyof typeof WARM_CHUNKS)[] = ["search", "customize", "legal"];
 
 /* the glyph for the current chip — the moon on every theme; the
    chip's background names the room. Classic takes the split moon:
@@ -926,39 +965,49 @@ export default function ClubApp() {
     };
   }, []);
 
+  const prefs = usePrefs();
+
   /* ————— warm the lazy rooms —————
-     Once the first paint has settled, fetch every deferred chunk in
-     the background, so the first tap into notes / packs / search
-     feels instant instead of waiting on a download. */
+     Once the first paint has settled, fetch the deferred chunks in
+     the background so the first tap into notes / packs / search
+     feels instant instead of waiting on a download. The queue
+     TRICKLES — one import per idle slice — so the warm never
+     competes with a real interaction the way a fourteen-chunk burst
+     would, and the inactive dress's pages wait for the dress switch
+     itself to call for them. */
+  const warmedRef = useRef<Set<keyof typeof WARM_CHUNKS>>(new Set());
   useEffect(() => {
-    const warm = () => {
-      void import("./notes-reader");
-      void import("./notes-editorial");
-      void import("./spec-index");
-      void import("./spec-editorial");
-      void import("./pack-view");
-      void import("./pack-editorial");
-      void import("./sticker-book");
-      void import("./progress-editorial");
-      void import("./topic-view");
-      void import("./topic-editorial");
-      void import("./unit-editorial");
-      void import("./search");
-      void import("./customize");
-      void import("./legal");
-    };
+    const queue = [...WARM_BY_IFACE[prefs.iface], ...WARM_SHARED].filter(
+      (k) => !warmedRef.current.has(k),
+    );
+    if (!queue.length) return;
+    let cancelled = false;
+    let fallback: ReturnType<typeof setTimeout> | undefined;
     const ric = (
       window as Window & {
         requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void;
       }
     ).requestIdleCallback;
-    if (ric) ric(warm, { timeout: 4000 });
-    else {
-      const t = setTimeout(warm, 2500);
-      return () => clearTimeout(t);
-    }
-  }, []);
-  const prefs = usePrefs();
+    const drain = () => {
+      if (cancelled) return;
+      const key = queue.shift();
+      if (!key) return;
+      warmedRef.current.add(key);
+      void WARM_CHUNKS[key]();
+      const schedule = () => {
+        if (cancelled) return;
+        if (ric) ric(drain, { timeout: 1500 });
+        else fallback = setTimeout(drain, 50);
+      };
+      schedule();
+    };
+    if (ric) ric(drain, { timeout: 4000 });
+    else fallback = setTimeout(drain, 2500);
+    return () => {
+      cancelled = true;
+      if (fallback) clearTimeout(fallback);
+    };
+  }, [prefs.iface]);
   const viewKey =
     view.kind === "topic"
       ? `topic-${view.code}-${view.topicId}`
