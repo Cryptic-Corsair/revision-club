@@ -393,3 +393,14 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Re-fetched the updated component and checked the new cue and fade markup. No build, lint or browser visual test was run.
 - **Deployment:** Deployment status not checked.
 - **Commit(s):** `92b6175` (implementation); this journal entry follows in the next commit.
+
+
+### 2026-11-09 — Remove navigation edge fade
+
+- **Contributor:** AI agent.
+- **Request / objective:** Remove the subtle gradient fade from the horizontally scrollable Navigate row.
+- **Changes made:** Removed only the right-edge gradient overlay. Kept the SWIPE → cue and the existing horizontal scroll container and pill links.
+- **Preserved invariants:** Navigation order, all six actions, horizontal touch scrolling, snap points, and the rest of the Control Panel remain unchanged.
+- **Verification:** Confirmed the overlay was present in the latest component before removing it. No build, lint or browser visual test was run.
+- **Deployment:** Deployment status not checked.
+- **Commit(s):** `3e8bde6` (implementation); this journal entry follows in the next commit.
