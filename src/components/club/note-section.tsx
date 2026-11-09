@@ -225,16 +225,13 @@ export function SpecSectionView({
 
       <div className="flex flex-col gap-6">
         {section.blocks.map((b, i) => {
-          /* A quiet typographic staircase: subheads step in once,
-             their explanatory content steps in a little further.
-             Wide/structured blocks keep a shallower inset so tables,
-             figures and worked panels retain their own visual width. */
+          /* Indentation is a text hierarchy, not a blanket offset.
+             Subheads step in once; body paragraphs step in further.
+             Every structured block — list, note, definition, equation,
+             table, figure, worked panel — sits flush on the section's
+             left edge, level with the spec card above. */
           const inset =
-            b.k === "h"
-              ? "ml-2 sm:ml-4"
-              : b.k === "table" || b.k === "figure" || b.k === "worked" || b.k === "steps"
-                ? "ml-1 sm:ml-2"
-                : "ml-5 sm:ml-9";
+            b.k === "h" ? "ml-2 sm:ml-4" : b.k === "p" ? "ml-5 sm:ml-9" : undefined;
           return (
             <Reveal key={i} delay={Math.min(i * 0.03, 0.12)} y={18}>
               <div className={inset}>
