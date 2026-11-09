@@ -352,12 +352,14 @@ export function CustomizePanel({
                   <p className="font-display text-[12px] font-bold tracking-[0.16em] text-ink-faint uppercase">
                     Navigate
                   </p>
-                  <span className="text-[10px] font-semibold tracking-wide text-ink-faint">
-                    QUICK LINKS
+                  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.12em] text-ink-faint">
+                    SWIPE
+                    <span aria-hidden className="text-[13px] leading-none">→</span>
                   </span>
                 </div>
-                <div className="no-scrollbar -mx-1 overflow-x-auto overscroll-x-contain px-1 pb-0.5">
-                  <div className="flex w-max min-w-full snap-x snap-mandatory items-center gap-2">
+                <div className="relative -mx-1">
+                  <div className="no-scrollbar overflow-x-auto overscroll-x-contain px-1 pb-0.5">
+                    <div className="flex w-max min-w-full snap-x snap-mandatory items-center gap-2">
                     {[
                       {
                         label: fullscreen ? "Exit full screen" : "Full screen",
@@ -385,7 +387,15 @@ export function CustomizePanel({
                         </span>
                       </button>
                     ))}
+                    </div>
                   </div>
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-y-0 right-0 w-7"
+                    style={{
+                      background: "linear-gradient(90deg, transparent, color-mix(in oklab, var(--color-ink) 2.5%, var(--color-paper)))",
+                    }}
+                  />
                 </div>
               </section>
 
