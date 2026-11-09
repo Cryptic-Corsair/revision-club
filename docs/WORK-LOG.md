@@ -345,3 +345,15 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Reviewed the edited JSX and confirmed all six existing actions remain wired to their original callbacks. No build, lint or browser visual test was run.
 - **Deployment:** GitHub `main` updated; deployment status not checked.
 - **Commit(s):** `4aa5549` (navigation redesign); this journal entry follows in the next commit.
+
+
+### 2026-11-09 — Remove Control Panel dot texture
+
+- **Contributor:** AI agent.
+- **Request / objective:** Remove the polka-dot pattern from the Control Panel background.
+- **Investigation:** Located the texture in the static ambience layer of the Customize drawer in `src/components/club/customize.tsx`.
+- **Changes made:** Removed only the radial-gradient dot layer and updated the adjacent comment. Preserved the two subtle ambient colour glows and the drawer's existing paper surface.
+- **Preserved invariants:** No global background styles, theme settings, or the separate Details > Dots preference were changed.
+- **Verification:** Inspected the edited drawer markup. No build, lint or browser visual test was run.
+- **Deployment:** Deployment status not checked.
+- **Commit(s):** `828edd2` (background texture removal); this journal entry follows in the next commit.
