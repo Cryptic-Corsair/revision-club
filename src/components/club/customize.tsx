@@ -410,7 +410,6 @@ export function CustomizePanel({
 
               <Section
                 title="Interface"
-                hint="Two dresses for the same site — your notes, progress and pack stay exactly as they are."
                 dot="#8D82B8"
               >
                 <div className="grid grid-cols-2 gap-2.5">
@@ -450,7 +449,6 @@ export function CustomizePanel({
 
               <Section
                 title="Appearance"
-                hint="Choose a theme. Changes are applied immediately and saved automatically."
                 dot="#12B886"
               >
                 <div className="grid grid-cols-2 gap-2.5">
