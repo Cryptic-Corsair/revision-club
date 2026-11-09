@@ -437,3 +437,13 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Confirmed the new grip markup in the updated component. No build, lint or browser visual test was run.
 - **Deployment:** Deployment status not checked.
 - **Commit(s):** `367539b` (implementation); this journal entry follows in the next commit.
+
+
+### 2026-11-09 — Restore vertical Customize drawer grip and refine mobile sizing
+
+- **Contributor:** AI agent.
+- **Request / objective:** Restore the drawer's edge grip to a vertical orientation and resize the Control Panel for mobile screens.
+- **Changes made:** Changed the left-edge grip from a 72px-wide horizontal bar to a 72px-tall, 4px-wide vertical bar. On screens below 640px, capped the drawer at 92vw / 420px, reduced its left corner radius, and reduced the content's horizontal padding from 24px to 16px. Desktop width, drawer animation, backdrop, scrolling, safe-area padding, and all panel controls remain unchanged.
+- **Verification:** Re-fetched the implementation and checked the targeted class changes. No build, lint or browser visual test was run.
+- **Deployment:** Deployment status not checked.
+- **Commit(s):** `d523082` (implementation); this journal entry follows in the next commit.
