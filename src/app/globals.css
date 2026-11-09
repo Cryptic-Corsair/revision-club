@@ -1540,6 +1540,82 @@ html.dune .nav-tool-button.is-active {
   --legal-rust: color-mix(in oklab, #b66c4e 80%, var(--color-ink));
   --legal-rust-soft: color-mix(in oklab, var(--legal-rust) 50%, transparent);
 }
+
+/* ————— classic on editorial · the walk —————
+   In the rooms the classic lab wears its espresso/cream walk as
+   painted bands with waved seams; the editorial clause stream sits
+   straight on the page ground, so there NOTHING is painted — the
+   ground itself walks. `notes-editorial` watches the same 35%-viewport
+   spy line the wayfinder reads and sets one attribute on <body>:
+   data-note-ground="espresso" once you are past a clause that starts
+   an espresso room (the rooms' own parity — even clauses espresso,
+   odd daylight), "cream" otherwise. Only the classic lab answers —
+   every other theme's ground never moves.
+
+   The scene eases as one piece: the page's cream and dot grains
+   cross-fade into espresso, and every colour the document room wears
+   travels with them (the :where() wrapper keeps the ease at zero
+   specificity, so the rail's own quicker hover transitions survive).
+   Inside an espresso scene the room inverts with the same recipe the
+   espresso rooms wear (html.classic .room), so cards, chips and the
+   wayfinder turn with the page — nothing daylight is caught sitting
+   on the dark ground. --legal-rust mixes itself against the flipped
+   ink, so the wayfinder's rust brightens for the night scene on its
+   own. */
+@media screen {
+  :where(html.classic body[data-note-ground]) {
+    transition: background-color 560ms ease;
+  }
+  html.classic body[data-note-ground="espresso"] {
+    background-color: #2c2013;
+    --dot-ink: rgb(253 246 227 / 0.05);
+  }
+  :where(html.classic body[data-note-ground]) .edoc,
+  :where(html.classic body[data-note-ground]) .edoc * {
+    transition:
+      color 560ms ease,
+      background-color 560ms ease,
+      border-color 560ms ease,
+      fill 560ms ease,
+      stroke 560ms ease;
+  }
+  html.classic body[data-note-ground="espresso"] .edoc {
+    --color-ink: #f0eadf;
+    --color-ink-soft: #c9c1b4;
+    --color-ink-faint: #a79d8e;
+    --color-paper: #353129;
+    --tint-base: #403a30;
+    --sunk-base: #302b24;
+    --lift-base: #292620;
+    --honey-base: #211e19;
+    --edge: rgb(0 0 0 / 0.34);
+  }
+  html.classic body[data-note-ground="espresso"] .edoc mark {
+    background: color-mix(in oklab, #ffd43b 15%, transparent);
+  }
+  /* the motion knob stills the walk — the scene steps, never glides */
+  html[data-motion="off"] body[data-note-ground],
+  html[data-motion="off"] body[data-note-ground] .edoc,
+  html[data-motion="off"] body[data-note-ground] .edoc * {
+    transition: none !important;
+  }
+}
+/* on paper the walk is invisible: the espresso ground never prints,
+   and the note wears the print dress the editorial pack already has */
+@media print {
+  html.classic body[data-note-ground="espresso"] {
+    background: none;
+  }
+  html.classic body[data-note-ground="espresso"] .edoc {
+    --color-ink: #201509;
+    --color-ink-soft: #4b3d2e;
+    --color-ink-faint: #8a7d69;
+    --color-paper: #ffffff;
+    --tint-base: #ffffff;
+    --legal-rust: #7a5433;
+  }
+}
+
 /* in the document room the highlighter becomes a pencil: a flat,
    low-amber wash instead of the marker swipe */
 .legal-room mark {
