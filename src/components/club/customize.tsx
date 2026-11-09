@@ -345,7 +345,7 @@ export function CustomizePanel({
 
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute left-0 top-1/2 z-20 h-9 w-[3px] -translate-y-1/2 rounded-r-full bg-white/80 shadow-[0_0_8px_rgb(255_255_255/0.18)]"
+              className="pointer-events-none absolute left-0 top-1/2 z-20 h-14 w-[3px] -translate-y-1/2 rounded-r-full bg-gradient-to-b from-white/20 via-white/95 to-white/20 shadow-[0_0_5px_rgb(255_255_255/0.22),0_0_13px_rgb(255_255_255/0.10)]"
             />
 
             <div
