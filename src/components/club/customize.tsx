@@ -329,7 +329,7 @@ export function CustomizePanel({
             animate={{ x: 0 }}
             exit={{ x: "110%" }}
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
-            className="customize-drawer fixed inset-y-0 right-0 z-[95] flex w-[min(460px,94vw)] flex-col overflow-hidden rounded-l-[28px] border-l border-ink/10 bg-paper shadow-[-24px_0_70px_-38px_rgb(0_0_0/0.42)]"
+            className="customize-drawer fixed inset-y-0 right-0 z-[95] flex w-[min(460px,94vw)] max-[639px]:w-[min(420px,92vw)] flex-col overflow-hidden rounded-l-[28px] max-[639px]:rounded-l-[24px] border-l border-ink/10 bg-paper shadow-[-24px_0_70px_-38px_rgb(0_0_0/0.42)]"
           >
             {/* ————— soft ambient colour, without the dot texture ————— */}
             <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -345,11 +345,11 @@ export function CustomizePanel({
 
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute left-0 top-1/2 z-20 h-[4px] w-[72px] -translate-y-1/2 rounded-full bg-white/65"
+              className="pointer-events-none absolute left-0 top-1/2 z-20 h-[72px] w-[4px] -translate-y-1/2 rounded-full bg-white/65"
             />
 
             <div
-              className="no-scrollbar relative flex flex-1 flex-col gap-6 overflow-y-auto px-6 pt-0"
+              className="no-scrollbar relative flex flex-1 flex-col gap-6 overflow-y-auto px-6 max-[639px]:px-4 pt-0"
               style={{ paddingTop: "calc(1.25rem + var(--sa-top))", paddingBottom: "calc(2rem + var(--sa-bottom))" }}
             >
               <section className="rounded-[22px] border border-ink/[0.08] bg-ink/[0.025] p-3.5">
