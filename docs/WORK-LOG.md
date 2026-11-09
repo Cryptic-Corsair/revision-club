@@ -404,3 +404,14 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Confirmed the overlay was present in the latest component before removing it. No build, lint or browser visual test was run.
 - **Deployment:** Deployment status not checked.
 - **Commit(s):** `3e8bde6` (implementation); this journal entry follows in the next commit.
+
+
+### 2026-11-09 — Add a subtle Control Panel edge handle
+
+- **Contributor:** AI agent.
+- **Request / objective:** Add a small white line at the left edge of the right-side Customize drawer as a visual affordance for closing or dragging the panel.
+- **Changes made:** Added a short, narrow, softly lit white vertical handle at the drawer's left edge, vertically centered. It is decorative and pointer-events-disabled, so it does not interfere with the existing close interactions or scrolling.
+- **Preserved invariants:** Drawer width, animation, backdrop, content, scroll behaviour and close callbacks are unchanged. This is a visual affordance only; no drag gesture was added.
+- **Verification:** Confirmed the handle markup is positioned inside the drawer and does not capture pointer input. No build, lint or browser visual test was run.
+- **Deployment:** Deployment status not checked.
+- **Commit(s):** `891fc0f` (implementation); this journal entry follows in the next commit.
