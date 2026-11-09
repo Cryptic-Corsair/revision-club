@@ -389,13 +389,6 @@ export function CustomizePanel({
                     ))}
                     </div>
                   </div>
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-y-0 right-0 w-7"
-                    style={{
-                      background: "linear-gradient(90deg, transparent, color-mix(in oklab, var(--color-ink) 2.5%, var(--color-paper)))",
-                    }}
-                  />
                 </div>
               </section>
 
