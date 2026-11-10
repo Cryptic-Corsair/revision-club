@@ -19,21 +19,34 @@ export type Lab = "light" | "dark" | "dune" | "classic";
 export type HeadFont = "fredoka" | "baloo" | "patrick";
 export type BodyFont = "nunito" | "quicksand";
 
-/* the site's two interfaces — same rooms, same notes, two dresses.
+/* the site's interfaces — same rooms, same notes, three dresses.
    "rooms" is the classic band-walked dress; "editorial" is the
    document room the disclaimer page wears (hero, rails, numbered
-   clauses). The axis is independent of the labs: every lab re-tints
-   both interfaces, and the homepage keeps its own dress always. */
-export type Iface = "rooms" | "editorial";
+   clauses); "gallery" is the white-wall dress — quiet grounds, one
+   accent, oversized numerals. The axis is independent of the labs:
+   every lab re-tints all three interfaces, and the homepage keeps
+   its own dress always. */
+export type Iface = "rooms" | "editorial" | "gallery";
 export const IFACE_LABEL: Record<Iface, string> = {
   rooms: "Rooms",
   editorial: "Editorial",
+  gallery: "Gallery",
 };
 export const IFACE_DESCRIPTION: Record<Iface, string> = {
   rooms: "Band-walked rooms, waves & the mascot",
   editorial: "The document room — rails, clauses & exhibits",
+  gallery: "White walls, wide light, one accent — Topic 9 today",
 };
-export const IFACE_ORDER: Iface[] = ["rooms", "editorial"];
+export const IFACE_ORDER: Iface[] = ["rooms", "editorial", "gallery"];
+
+/* ————— the gallery's rollout ledger —————
+   The gallery dress is cut one note at a time: a doc id here means
+   the gallery reader exists for it, and the shell may serve it.
+   Topic 9 (wch12-t09) is the pilot; the shelf widens as the dress
+   proves itself. A gallery visitor who opens anything else lands
+   on the classic rooms reader — the dress, not the library, is
+   what's rolling out. */
+export const GALLERY_DOCS: ReadonlySet<string> = new Set(["wch12-t09"]);
 
 /* the candy wheel the site's sections take turns wearing. The full
    shelf by default; the customize panel narrows it to your picks —
@@ -104,7 +117,8 @@ export const SPEC_H_MAX = 0.98;
 
 export interface Prefs {
   theme: Lab;
-  /** which interface dresses the rooms — "rooms" | "editorial" */
+  /** which interface dresses the rooms — "rooms" | "editorial" |
+      "gallery" (gallery pilot: served on its rollout docs only) */
   iface: Iface;
   /** the accent wheel — which candies the sections rotate through */
   accents: AccentId[];
@@ -164,7 +178,12 @@ function sanitize(p: StoredPrefs): Prefs {
   else if (p.theme === "hybrid")
     /* the retired third lab rides on as classic — its heir */
     out.theme = "classic";
-  if (p.iface === "editorial" || p.iface === "rooms") out.iface = p.iface;
+  if (
+    p.iface === "editorial" ||
+    p.iface === "rooms" ||
+    p.iface === "gallery"
+  )
+    out.iface = p.iface;
   if (p.scale && SCALES.includes(p.scale)) out.scale = p.scale;
   else if (typeof p.zoom === "number") {
     /* the retired page-zoom pref rides on as scale — see LEGACY_ZOOM

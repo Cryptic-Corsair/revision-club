@@ -156,6 +156,16 @@ export function ArrowUp(p: IcoProps) {
   );
 }
 
+/* the hop — the gallery index's quiet "go there" affordance */
+export function ArrowUpRight(p: IcoProps) {
+  return (
+    <Ico {...p}>
+      <path d="M6.6 17.4 L17.2 6.8" />
+      <path d="M8.4 6.8 h8.8 v8.8" />
+    </Ico>
+  );
+}
+
 export function ChevronDown(p: IcoProps) {
   return (
     <Ico {...p}>

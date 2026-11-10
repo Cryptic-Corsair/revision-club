@@ -1070,6 +1070,55 @@ html[data-iface="editorial"] ::-webkit-scrollbar-thumb:hover {
   background: color-mix(in oklab, var(--color-ink) 46%, transparent);
 }
 
+/* ————— the gallery interface's quiet chrome —————
+   The white-wall dress reaches past its rooms through one
+   attribute: html[data-iface="gallery"] (mirrored pre-paint in
+   layout.tsx), the same one-attribute handshake the editorial
+   dress uses. It carries two things and nothing more:
+   · --iface-accent  — the dress's ONE accent, refined per lab
+     (daylight bronze · night champagne · dune sand · classic
+     espresso bronze). The gallery speaks no candy wheel: labels,
+     numerals, rules and active states all take this single ink,
+     which is what keeps the walls quiet.
+   · --iface-accent-ink — the ink that reads ON the accent, for
+     the flooded states (the pack tick, the active index row).
+   Plus the same transient touches the editorial room wears — the
+   text selection and the scrollbar — so the shared shell keeps
+   its single implementation. */
+html[data-iface="gallery"] {
+  --iface-accent: color-mix(in oklab, #b3762f 72%, var(--color-ink));
+  --iface-accent-ink: #fffdf7;
+  scrollbar-color: color-mix(in oklab, var(--color-ink) 32%, transparent)
+    var(--color-cream);
+}
+html[data-iface="gallery"].dark:not(.dune) {
+  --iface-accent: #e5c78e;
+  --iface-accent-ink: #2e2016;
+}
+html[data-iface="gallery"].dune {
+  --iface-accent: #e6b77e;
+  --iface-accent-ink: #4e3417;
+}
+html[data-iface="gallery"].classic {
+  --iface-accent: color-mix(in oklab, #8a5a2b 62%, var(--color-ink));
+  --iface-accent-ink: #fffdf7;
+}
+html[data-iface="gallery"] ::selection {
+  background: color-mix(in oklab, var(--iface-accent) 30%, transparent);
+  color: var(--color-ink);
+}
+html[data-iface="gallery"] ::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+html[data-iface="gallery"] ::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--color-ink) 32%, transparent);
+  border-radius: 999px;
+  border: 3px solid var(--color-cream);
+}
+html[data-iface="gallery"] ::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklab, var(--color-ink) 46%, transparent);
+}
+
 /* ————— spec anchors —————
    Every spec section (note reader and revision pack) clears the
    fixed navbar when jumped to. A real class, not a Tailwind

@@ -61,9 +61,12 @@ const BODY_FONTS: { id: BodyFont; label: string; stack: string }[] = [
 
 const SCALE_PX = [12, 14, 16, 19];
 
-/* the interface cards' live miniatures — two abstract rooms. The
+/* the interface cards' live miniatures — three abstract rooms. The
    rooms dress shows its band walk; the editorial dress shows the
-   document room: kicker pill, headline rule, numbered clause rails. */
+   document room: kicker pill, headline rule, numbered clause rails;
+   the gallery dress shows the white-wall room: accent dash, big
+   quiet headline, a hairline ledger of accent numerals — plus its
+   little T9 plaque, the rollout tag (Topic 9 today). */
 function IfaceStage({ id }: { id: Iface }) {
   if (id === "rooms") {
     return (
@@ -73,6 +76,34 @@ function IfaceStage({ id }: { id: Iface }) {
           <span className="absolute right-2 bottom-1.5 h-[13px] w-[13px] rounded-full" style={{ background: "color-mix(in oklab, #FF6B6B 55%, var(--tint-base))" }} />
         </span>
         <span className="block h-[30px] w-full" style={{ background: "color-mix(in oklab, #12B886 16%, var(--tint-base))" }} />
+      </span>
+    );
+  }
+  if (id === "gallery") {
+    return (
+      <span aria-hidden className="relative block rounded-[12px] border border-ink/[0.08] bg-paper px-2.5 py-2.5">
+        <span
+          className="absolute top-2 right-2 rounded-full px-1.5 py-[2px] font-display text-[7px] leading-none font-bold tracking-[0.08em]"
+          style={{ background: "#b3762f", color: "#fffdf7" }}
+        >
+          T9
+        </span>
+        <span className="block h-[2px] w-[14px] rounded-full" style={{ background: "#b3762f" }} />
+        <span className="mt-2 block h-[7px] w-3/4 rounded-full bg-ink/40" />
+        <span className="mt-1.5 block h-[7px] w-1/2 rounded-full bg-ink/15" />
+        <span className="mt-2.5 block h-px w-full bg-ink/10" />
+        <span className="mt-2 flex items-center gap-1.5">
+          <span className="font-display text-[11px] leading-none font-semibold tabular-nums" style={{ color: "#b3762f" }}>
+            01
+          </span>
+          <span className="block h-[5px] flex-1 rounded-full bg-ink/15" />
+        </span>
+        <span className="mt-1.5 flex items-center gap-1.5">
+          <span className="font-display text-[11px] leading-none font-semibold tabular-nums" style={{ color: "#b3762f" }}>
+            02
+          </span>
+          <span className="block h-[5px] flex-1 rounded-full bg-ink/15" />
+        </span>
       </span>
     );
   }

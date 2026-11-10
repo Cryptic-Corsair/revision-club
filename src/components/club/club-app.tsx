@@ -29,6 +29,7 @@ import { usePacks } from "@/lib/spectra/packs";
 import { useDesk, markUnit, markTopic } from "@/lib/spectra/desk";
 import {
   applyPrefs,
+  GALLERY_DOCS,
   LAB_DESCRIPTION,
   LAB_LABEL,
   LAB_ORDER,
@@ -74,6 +75,14 @@ const NotesReader = dynamic(() => import("./notes-reader").then((m) => m.NotesRe
 /* the notes reader's editorial twin — same props, the document dress */
 const NotesEditorial = dynamic(
   () => import("./notes-editorial").then((m) => m.NotesEditorial),
+  { ssr: false, loading: RoomLoading },
+);
+/* the notes reader's gallery twin — same props, the white-wall dress.
+   The dress is rolling out one note at a time (GALLERY_DOCS in
+   prefs.ts); the shell only calls for it on a rollout doc, and a
+   gallery visitor on any other page lands on the rooms reader. */
+const NotesGallery = dynamic(
+  () => import("./notes-gallery").then((m) => m.NotesGallery),
   { ssr: false, loading: RoomLoading },
 );
 const StickerBook = dynamic(() => import("./sticker-book").then((m) => m.StickerBook), {
@@ -260,6 +269,7 @@ const WARM_CHUNKS = {
   specEditorial: () => import("./spec-editorial"),
   packEditorial: () => import("./pack-editorial"),
   progressEditorial: () => import("./progress-editorial"),
+  notesGallery: () => import("./notes-gallery"),
   search: () => import("./search"),
   customize: () => import("./customize"),
   legal: () => import("./legal"),
@@ -274,6 +284,16 @@ const WARM_BY_IFACE: Record<Iface, (keyof typeof WARM_CHUNKS)[]> = {
     "specEditorial",
     "packEditorial",
     "progressEditorial",
+  ],
+  /* the gallery is a one-note dress today: its own reader, plus the
+     rooms pages it falls back to everywhere else */
+  gallery: [
+    "notesGallery",
+    "notesRooms",
+    "topicRooms",
+    "specRooms",
+    "packRooms",
+    "stickerRooms",
   ],
 };
 const WARM_SHARED: (keyof typeof WARM_CHUNKS)[] = ["search", "customize", "legal"];
@@ -1340,11 +1360,18 @@ export default function ClubApp() {
                 })()}
   
                 {view.kind === "notes" && unit && notesMeta && (() => {
-                  /* the interface swap — the editorial twin wears the
-                     same props contract, so the shell changes nothing
-                     but the component picked */
+                  /* the interface swap — the twins wear the same props
+                     contract, so the shell changes nothing but the
+                     component picked. The gallery is the youngest twin
+                     and the shyest: it serves only its rollout docs
+                     (Topic 9 today), everything else keeps the dress
+                     it already wears. */
                   const Reader =
-                    prefs.iface === "editorial" ? NotesEditorial : NotesReader;
+                    prefs.iface === "gallery" && GALLERY_DOCS.has(view.docId)
+                      ? NotesGallery
+                      : prefs.iface === "editorial"
+                        ? NotesEditorial
+                        : NotesReader;
                   return (
                     <Reader
                       key={view.docId}
