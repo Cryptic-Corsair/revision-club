@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useRef } from "react";
 import { m, useScroll, useSpring } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, Check } from "./icons";
 import type { NotesBlock, NotesDoc } from "@/lib/spectra/notes-types";
@@ -11,6 +11,7 @@ import { getNotes } from "@/lib/spectra/notes";
 import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
 import { Fmt, plural } from "./format";
 import { PopIn, Reveal } from "./bits";
+import { BandWave } from "./bands";
 import { useSpecMapRegister } from "./spec-map";
 import {
   GalleryLabel,
@@ -23,11 +24,14 @@ import {
    IAL CHEM · the notes reader, in the gallery dress.
    The same note — same doc, same sections, same diagrams, same
    spec map registration, same pack ticks — hung on white walls
-   instead of walked as bands or set as a document: a quiet hero,
-   a ledger-style contents index, and the spec sections as a
-   catalog of hairline-separated rooms, each opened by an
-   oversized numeral in the room's single accent. The classic and
-   editorial readers' youngest twin; the props contract is
+   instead of set as a document: a quiet hero, a ledger-style
+   contents index, and the spec sections as a string of rooms
+   parted by the rooms wave kit's own seams (BandWave, read
+   only) — the page steps off the wall through one calm swell,
+   each room hangs on a quiet dilution of the dress's single
+   accent, and every room hands you to the next through the same
+   seam, each opened by an oversized numeral in that accent. The
+   classic and editorial readers' youngest twin; the props contract is
    identical, so the shell swaps them without knowing the
    difference. Rolling out one note at a time — Topic 9 today
    (see GALLERY_DOCS in prefs.ts); every other page keeps its
@@ -37,6 +41,23 @@ import {
 const hair = (pct: number) =>
   `color-mix(in oklab, var(--color-ink) ${pct}%, transparent)`;
 const pad2 = (n: number) => String(n).padStart(2, "0");
+
+/* ————— the rooms' grounds —————
+   The gallery speaks ONE accent, so the walk around the rooms is
+   tonal, not a hue wheel: the rooms alternate two quiet dilutions
+   of the accent mixed into the page's own cream — a half-step and
+   a full step — so no two neighbours ever dress alike and every
+   seam is a real two-tone swell, the way the rooms kit intends.
+   The walk starts on the wash (never the bare wall), which keeps
+   the lead-in and the lead-out waves visible for a room count of
+   any parity. Both steps are pure tokens, so each lab re-inks
+   the whole walk in one hop — bronze over cream by day, a
+   champagne glow over the dark grounds after nightfall, sand
+   over the dune parchment, espresso bronze in the classic room. */
+const galRoom = (i: number) =>
+  `color-mix(in oklab, var(--iface-accent) ${
+    i % 2 === 0 ? 10 : 20
+  }%, var(--color-cream))`;
 
 /* ————— the gallery's verified hop —————
    The shared scrollToSpec recipe, plus an honest re-measure. The
@@ -439,30 +460,59 @@ function NotesGalleryBody({
         </Reveal>
       </section>
 
-      {/* ————— the catalog —————
-          one hairline between rooms, generous air around each —
-          the sections hang like plates in a gallery */}
-      <div className="mt-4">
-        {doc.sections.map((section, i) => (
-          <Reveal
-            key={section.spec}
-            y={18}
-            className="mt-14 border-t pt-14 first:mt-0 first:border-t-0 first:pt-0"
-          >
-            <GallerySectionView
-              section={section}
-              index={i}
-              figOffset={figOffsets[i]}
-              bannerAction={<GalleryPackTick spec={section.spec} />}
-            />
-          </Reveal>
-        ))}
+      {/* ————— the catalog — the string of rooms —————
+          the rooms reader's own wave walk, spoken in the gallery's
+          one accent: the page steps off the white wall through the
+          kit's calm swell, every spec room hangs on a ground of the
+          accent (two quiet dilutions, alternating, so no two
+          neighbours dress alike) and hands you to the next through
+          the same seam. BandWave is the shared wave kit — read
+          only; the rooms' shelf and the exempt paths stay
+          byte-untouched. */}
+      <div className="mt-12 sm:mt-16">
+        <div
+          aria-hidden
+          className="relative left-1/2 w-[100vw] -translate-x-1/2"
+        >
+          <BandWave from="var(--color-cream)" to={galRoom(0)} />
+        </div>
+        {doc.sections.map((section, i) => {
+          const last = i === doc.sections.length - 1;
+          return (
+            <Fragment key={section.spec}>
+              <div
+                className="relative left-1/2 w-[100vw] -translate-x-1/2"
+                style={{ background: galRoom(i) }}
+              >
+                <div className="mx-auto max-w-4xl px-5 py-14 sm:px-8 sm:py-16">
+                  <Reveal y={18}>
+                    <GallerySectionView
+                      section={section}
+                      index={i}
+                      figOffset={figOffsets[i]}
+                      bannerAction={<GalleryPackTick spec={section.spec} />}
+                    />
+                  </Reveal>
+                </div>
+              </div>
+              <div
+                aria-hidden
+                className="relative left-1/2 w-[100vw] -translate-x-1/2"
+              >
+                <BandWave
+                  from={galRoom(i)}
+                  to={last ? "var(--color-cream)" : galRoom(i + 1)}
+                />
+              </div>
+            </Fragment>
+          );
+        })}
       </div>
 
       {/* ————— end of the note ————— */}
       <Reveal>
         <section
-          className="mt-16 border-t pt-10"
+          className="mt-10 border-t pt-10"
           style={{ borderColor: hair(10) }}
         >
           <GalleryLabel>End of the note</GalleryLabel>
