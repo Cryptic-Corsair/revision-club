@@ -2797,59 +2797,56 @@ html.classic .note-rooms .room {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   THE FILM — the homepage as a scroll-driven WebGL story.
-   A near-black stage, one particle sky, Syne titles, Space Grotesk
-   prose, Plex mono for the instrumentation. Everything here either
-   animates transform/opacity or doesn't animate at all.
+   THE LAB — the homepage as a six-act chemical world.
+   One fixed WebGL canvas carries six different scenes; Syne plays
+   the titles, Space Grotesk the prose, Plex Mono the instruments.
+   Everything either animates transform/opacity or sits perfectly
+   still — and the canvas sleeps the moment a reader opens.
    ═══════════════════════════════════════════════════════════════ */
 
-.film-root {
+.lab-root {
   background: #050507;
   color: #f2f1ee;
   font-family: var(--font-grotesk), system-ui, sans-serif;
   scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
   scrollbar-width: thin;
 }
-.film-root ::-webkit-scrollbar { width: 6px; }
-.film-root ::-webkit-scrollbar-thumb {
+/* GSAP pins reshuffle layout as they engage — Chrome's scroll
+   anchoring "helpfully" compensates and throws the scroll metres
+   off. The lab pins five sections; anchoring goes off. */
+html { overflow-anchor: none; }
+.lab-root ::-webkit-scrollbar { width: 6px; }
+.lab-root ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.18);
   border-radius: 99px;
 }
 
-/* the sky — one fixed canvas under the whole film */
-.film-canvas {
+/* the stage — one fixed canvas under every act. Interactive DOM
+   is punched through with pointer-events, everything else lets
+   drags and hovers fall to the worlds below */
+.lab-stage {
   position: fixed;
   inset: 0;
   z-index: 0;
-  display: block;
+}
+.lab-stage-fallback {
+  position: fixed;
+  inset: 0;
+  background: #050507;
+}
+.lab-shell main {
+  position: relative;
+  z-index: 10;
   pointer-events: none;
 }
-
-/* film typography */
-.f-display { font-family: var(--font-syne), system-ui, sans-serif; }
-.f-mono {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-}
-.f-outline {
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(242, 241, 238, 0.34);
-}
-.f-outline-thin {
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(242, 241, 238, 0.22);
+.lab-shell main a,
+.lab-shell main button,
+.lab-shell main [data-cursor] {
+  pointer-events: auto;
 }
 
-/* split characters — GSAP moves these; transforms only */
-.f-char {
-  display: inline-block;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-}
-
-/* the stage fog — a radial lift so type sits on darkness, not noise */
-.f-vignette {
+/* the room's atmosphere */
+.lab-vignette {
   position: fixed;
   inset: 0;
   z-index: 1;
@@ -2858,110 +2855,324 @@ html.classic .note-rooms .room {
     radial-gradient(120% 90% at 50% 42%, transparent 38%, rgba(5, 5, 7, 0.55) 100%),
     linear-gradient(to bottom, rgba(5, 5, 7, 0.5), transparent 18%, transparent 78%, rgba(5, 5, 7, 0.65));
 }
-
-/* the load-in veil */
-.film-veil {
+.lab-grain {
   position: fixed;
   inset: 0;
-  z-index: 90;
-  background: #050507;
-  display: grid;
-  place-items: center;
-}
-.film-veil .veil-line {
-  height: 1px;
-  width: 0;
-  background: linear-gradient(90deg, transparent, rgba(242, 241, 238, 0.75), transparent);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
 }
 
-/* fixed chrome rides above the canvas, difference-blended */
-.film-chrome {
-  mix-blend-mode: difference;
-  color: #fff;
+/* lab typography — the same shelf the film drew from */
+.f-display { font-family: var(--font-syne), system-ui, sans-serif; }
+.f-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
 }
-.film-chrome a, .film-chrome button { mix-blend-mode: difference; }
 
-/* chapter rail — the left-edge instrumentation */
-.film-rail { z-index: 30; }
-.film-rail .rail-tick {
+/* split characters — GSAP slides these; transforms only */
+.l-word { display: inline-block; white-space: nowrap; }
+.l-cell {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+.l-char {
+  display: inline-block;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+.l-outline .l-char {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(242, 241, 238, 0.34);
+}
+
+/* the acts */
+.lab-act {
   position: relative;
-  width: 30px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.28);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.35s;
-  transform-origin: left center;
+  height: 100svh;
+  pointer-events: none;
 }
-.film-rail .rail-tick:hover { transform: scaleX(1.5); background: rgba(255, 255, 255, 0.65); }
-.film-rail .rail-tick[data-on="true"] {
-  background: #fff;
-  transform: scaleX(1.9);
+.lab-pin {
+  position: relative;
+  height: 100svh;
+  width: 100%;
 }
-.film-rail .rail-num {
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.3s, transform 0.3s;
+.lab-kicker {
+  font-size: 10px;
+  color: rgba(242, 241, 238, 0.62);
 }
-.film-rail li:hover .rail-num,
-.film-rail li[data-on="true"] .rail-num { opacity: 1; transform: translateX(0); }
+.lab-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 2.4rem;
+  height: 1px;
+  background: rgba(242, 241, 238, 0.4);
+  margin-right: 0.85rem;
+  vertical-align: middle;
+}
+.lab-head {
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.01;
+  letter-spacing: -0.015em;
+  font-size: clamp(2.5rem, 7.2vw, 6.6rem);
+}
+.lab-lede {
+  font-size: clamp(0.98rem, 1.35vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(242, 241, 238, 0.66);
+}
 
-/* the scroll cue — a line the light travels down */
-.f-cue-line {
+/* the hero's scroll cue */
+.lab-cue {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  color: rgba(242, 241, 238, 0.5);
+}
+.lab-cue-line {
   position: relative;
   width: 1px;
-  height: 64px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.14);
   overflow: hidden;
-  background: rgba(242, 241, 238, 0.16);
 }
-.f-cue-line::after {
+.lab-cue-line::after {
   content: "";
   position: absolute;
   left: 0;
-  top: -40%;
+  top: -100%;
   width: 100%;
-  height: 40%;
-  background: linear-gradient(to bottom, transparent, #f2f1ee);
-  animation: cue-travel 2.1s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.85));
+  animation: lab-cue-drop 2.1s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
-@keyframes cue-travel {
-  0% { top: -40%; }
-  62%, 100% { top: 105%; }
+@keyframes lab-cue-drop {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(200%); }
 }
 
-/* chips — the tiny data plates under each chapter lede */
-.f-chip {
+/* act-specific composition — the wall sits right of the copy, the
+   price sits right of the embers, and both keep their words legible */
+.cast .lab-head { font-size: clamp(2.2rem, 5.2vw, 4.8rem); }
+.price .lab-head { font-size: clamp(2rem, 4.8vw, 4.4rem); }
+.price-copy { max-width: 620px; }
+.price-num {
+  font-size: clamp(2.4rem, 6vw, 5.2rem);
+}
+.lab-act.cast .lab-pin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(5, 5, 7, 0.82) 0%,
+    rgba(5, 5, 7, 0.55) 30%,
+    transparent 58%
+  );
+  pointer-events: none;
+}
+.lab-act.price .lab-pin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to left,
+    rgba(5, 5, 7, 0.72) 0%,
+    rgba(5, 5, 7, 0.4) 34%,
+    transparent 62%
+  );
+  pointer-events: none;
+}
+
+/* the equation plates */
+.lab-plate {
   border: 1px solid rgba(242, 241, 238, 0.16);
-  border-radius: 999px;
-  padding: 0.55rem 1.1rem;
-  background: rgba(242, 241, 238, 0.03);
+  background: rgba(5, 5, 7, 0.45);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+  border-radius: 4px;
+  padding: 1.1rem 1.4rem;
+  pointer-events: auto;
+}
+.lab-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid rgba(242, 241, 238, 0.22);
+  border-radius: 3px;
+  padding: 0.7rem 1.05rem;
+  font-family: var(--font-syne), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.7vw, 1.35rem);
+  color: #f2f1ee;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.lab-chip small {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 400;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242, 241, 238, 0.45);
+}
+.lab-chip:hover {
+  border-color: rgba(255, 201, 77, 0.65);
+  box-shadow: 0 0 24px rgba(255, 170, 77, 0.12);
+}
+.lab-chip-hot {
+  border-color: rgba(255, 201, 77, 0.55);
+  box-shadow: 0 0 34px rgba(255, 170, 77, 0.14);
 }
 
-/* the atlas — stations on one line */
-.atlas-path {
-  stroke-dasharray: var(--dash, 5200);
-  stroke-dashoffset: var(--dash, 5200);
+/* the element tooltip — follows the pointer, never steals it */
+.lab-tip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  pointer-events: none;
+  border: 1px solid rgba(242, 241, 238, 0.18);
+  background: rgba(5, 5, 7, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 4px;
+  padding: 0.75rem 1rem 0.7rem;
+  min-width: 148px;
+  animation: lab-tip-in 0.22s ease-out;
 }
-.atlas-station { cursor: pointer; transform-box: fill-box; transform-origin: center; }
-.atlas-station .st-halo {
+@keyframes lab-tip-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* fixed chrome */
+.lab-chrome { z-index: 40; }
+.lab-rail { z-index: 30; }
+.lab-rail .rail-tick {
+  width: 22px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.28);
+  transition: transform 0.25s, background 0.25s;
+}
+.lab-rail .rail-tick:hover { transform: scaleX(1.5); background: rgba(255, 255, 255, 0.65); }
+.lab-rail .rail-tick[data-on="true"] {
+  transform: scaleX(1.45);
+  background: #f2f1ee;
+}
+.lab-rail .rail-num {
+  opacity: 0.32;
+  transform: translateX(-6px);
+  transition: opacity 0.25s, transform 0.25s;
+}
+.lab-rail li:hover .rail-num,
+.lab-rail li[data-on="true"] .rail-num { opacity: 1; transform: translateX(0); }
+
+/* the veil */
+.lab-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #050507;
+}
+.veil-line {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.28);
+  transform-origin: left;
+}
+
+/* the custom pointer */
+.lab-cursor { display: none; }
+html.cursor-on .lab-cursor { display: block; }
+html.cursor-on,
+html.cursor-on * { cursor: none !important; }
+.lab-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  width: 5px;
+  height: 5px;
+  border-radius: 99px;
+  background: #f2f1ee;
+  pointer-events: none;
+}
+.lab-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 89;
+  width: 34px;
+  height: 34px;
+  border-radius: 99px;
+  border: 1px solid rgba(242, 241, 238, 0.4);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lab-cursor-grip {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 6px;
+  letter-spacing: 0.22em;
+  color: rgba(242, 241, 238, 0.75);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+@media (pointer: coarse) {
+  .lab-cursor { display: none !important; }
+}
+
+/* the atlas — the syllabus as a metro line */
+.atlas-path {
+  stroke-dasharray: var(--dash, 4200);
+}
+.atl-station { cursor: pointer; }
+.atl-station:focus-visible {
+  outline: 1px dashed rgba(255, 255, 255, 0.5);
+  outline-offset: 6px;
+}
+.atl-station .st-core {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-box: fill-box;
   transform-origin: center;
-  animation: st-pulse 3.2s ease-in-out infinite;
 }
-@keyframes st-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.22; }
-  50% { transform: scale(1.5); opacity: 0.05; }
+.atl-station:hover .st-core,
+.atl-station:focus-visible .st-core { transform: scale(1.7); }
+.atl-station .st-label { opacity: 0.55; transition: opacity 0.3s; }
+.atl-station:hover .st-label,
+.atl-station:focus-visible .st-label { opacity: 1; }
+.atlas-scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
-.atlas-station .st-core { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); transform-box: fill-box; transform-origin: center; }
-.atlas-station:hover .st-core,
-.atlas-station:focus-visible .st-core { transform: scale(1.7); }
-.atlas-station .st-label { opacity: 0.55; transition: opacity 0.3s; }
-.atlas-station:hover .st-label,
-.atlas-station:focus-visible .st-label { opacity: 1; }
+.atlas-scroll::-webkit-scrollbar { display: none; }
 
-/* reader mode — the film steps aside entirely, the library takes
+.lab-foot {
+  pointer-events: none;
+}
+
+/* reader mode — the lab steps aside entirely, the library takes
    the room (the whole root hides: canvas, chrome and all) */
-.film-reading .film-root { display: none; }
+.lab-reading .lab-root { display: none; }
 
 /* reader top bar */
 .reader-bar {
@@ -2976,39 +3187,54 @@ html.classic .note-rooms .room {
   -webkit-backdrop-filter: blur(14px);
 }
 
-/* motion gate — the saved knob or the OS preference freezes the CSS
-   loops; the WebGL ticker and the scrub timelines hold their own
-   gates in JS */
+/* motion gate — the OS preference freezes the CSS loop; the WebGL
+   ticker and the scrub timelines hold their own gates in JS */
 @media (prefers-reduced-motion: reduce) {
-  .f-cue-line::after { animation: none; }
-  .atlas-station .st-halo { animation: none; opacity: 0.14; }
+  .lab-cue-line::after { animation: none; }
 }
-html[data-motion="off"] .f-cue-line::after { animation: none; }
-html[data-motion="off"] .atlas-station .st-halo { animation: none; opacity: 0.14; }
+html[data-lab-motion="off"] .lab-cue-line::after { animation: none; }
 
-/* the atlas swipes sideways on phones — styled to disappear */
-.atlas-scroll {
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-.atlas-scroll::-webkit-scrollbar { display: none; }
-
-/* on phones the formation sits behind the copy — give the words a
-   pool of darkness so the story stays legible over the glow */
-@media (max-width: 640px) {
-  .f-ch-copy::before {
+/* on phones the copy pools darkness so the words stay legible
+   over the glow, and the wall centers itself behind them */
+@media (max-width: 820px) {
+  .lab-act .lab-head,
+  .atl-head {
+    font-size: clamp(1.35rem, 6.2vw, 1.9rem);
+  }
+  .price-num { font-size: clamp(2rem, 10vw, 3rem); }
+  .lab-plate {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.9rem;
+    max-width: calc(100vw - 48px);
+    padding: 0.9rem 1rem;
+  }
+  .lab-chip { padding: 0.55rem 0.75rem; }
+  .lab-chip small { font-size: 7px; }
+  .lab-lede { max-width: 100%; }
+  .lab-act.cast .lab-pin,
+  .lab-act.price .lab-pin {
+    align-items: flex-end;
+  }
+  .lab-act.cast .cast-copy,
+  .lab-act.price .price-copy {
+    position: relative;
+    padding-bottom: 14svh;
+  }
+  .lab-act.cast .cast-copy::before,
+  .lab-act.price .price-copy::before {
     content: "";
     position: absolute;
-    inset: -3rem -1.75rem;
+    inset: -3rem 0 -4rem;
     background: radial-gradient(
-      78% 62% at 34% 50%,
+      80% 70% at 50% 78%,
       rgba(5, 5, 7, 0.88),
-      rgba(5, 5, 7, 0.45) 64%,
-      transparent 82%
+      rgba(5, 5, 7, 0.42) 62%,
+      transparent 84%
     );
     z-index: -1;
     pointer-events: none;
   }
+  .lab-act.price .price-copy { text-align: left; }
+  .lab-act.price .price-copy .lab-lede { margin-left: 0; }
 }

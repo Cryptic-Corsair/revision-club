@@ -7,13 +7,12 @@ import { UNITS } from "@/lib/spectra/units";
 import { NOTES_META } from "@/lib/spectra/notes-meta";
 
 /* ═══════════════════════════════════════════════════════════════
-   THE FILM · the reader — a station of the atlas, opened
+   THE LAB · the reader — a station of the atlas, opened
 
-   The film steps aside (the shell hides itself) and the library's
-   own gallery reader takes the room: same doc, same diagrams, same
-   pack ticks, same progress — the whole reading experience the club
-   already had, hung on the end of the film. The reader chunk is
-   heavy (half a megabyte of note source), so it rides in lazily.
+   The lab steps aside (the shell hides itself) and the library's
+   own gallery reader takes the room: same doc, same diagrams,
+   same pack ticks, same progress. The reader chunk is heavy, so
+   it rides in lazily.
    ═══════════════════════════════════════════════════════════════ */
 
 const NotesGallery = dynamic(
@@ -40,7 +39,7 @@ export default function Reader({
   const meta = NOTES_META.find((m) => m.id === docId);
   const unit = UNITS.find((u) => u.code === meta?.unitCode);
 
-  /* ESC returns to the film */
+  /* ESC returns to the lab */
   useEffect(() => {
     const h = (e: KeyboardEvent) => {
       if (e.key === "Escape") onBack();
@@ -50,18 +49,15 @@ export default function Reader({
   }, [onBack]);
 
   return (
-    <div
-      className="min-h-screen"
-      style={{ background: "var(--color-cream)" }}
-    >
+    <div className="min-h-screen" style={{ background: "var(--color-cream)" }}>
       <div className="reader-bar">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <button
             type="button"
             onClick={onBack}
-            className="font-display cursor-pointer text-[13px] font-semibold text-ink transition-opacity hover:opacity-70"
+            className="cursor-pointer font-display text-[13px] font-semibold text-ink transition-opacity hover:opacity-70"
           >
-            ← Back to the film
+            ← Back to the lab
           </button>
           <span className="f-mono truncate text-[9px] text-ink-faint">
             {unit?.code} · {meta?.title}

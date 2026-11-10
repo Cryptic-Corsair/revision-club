@@ -1,5 +1,5 @@
-import Film from "@/components/film/film";
+import Lab from "@/components/lab/lab";
 
 export default function Page() {
-  return <Film />;
+  return <Lab />;
 }
