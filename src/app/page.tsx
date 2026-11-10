@@ -1,5 +1,5 @@
-import ClubApp from "@/components/club/club-app";
+import Film from "@/components/film/film";
 
 export default function Page() {
-  return <ClubApp />;
+  return <Film />;
 }

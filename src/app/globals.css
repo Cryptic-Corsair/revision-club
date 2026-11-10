@@ -2795,3 +2795,220 @@ html.classic .note-rooms .room {
 .mol-stage.dragging {
   cursor: grabbing;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   THE FILM — the homepage as a scroll-driven WebGL story.
+   A near-black stage, one particle sky, Syne titles, Space Grotesk
+   prose, Plex mono for the instrumentation. Everything here either
+   animates transform/opacity or doesn't animate at all.
+   ═══════════════════════════════════════════════════════════════ */
+
+.film-root {
+  background: #050507;
+  color: #f2f1ee;
+  font-family: var(--font-grotesk), system-ui, sans-serif;
+  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+  scrollbar-width: thin;
+}
+.film-root ::-webkit-scrollbar { width: 6px; }
+.film-root ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 99px;
+}
+
+/* the sky — one fixed canvas under the whole film */
+.film-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+}
+
+/* film typography */
+.f-display { font-family: var(--font-syne), system-ui, sans-serif; }
+.f-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+.f-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(242, 241, 238, 0.34);
+}
+.f-outline-thin {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(242, 241, 238, 0.22);
+}
+
+/* split characters — GSAP moves these; transforms only */
+.f-char {
+  display: inline-block;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* the stage fog — a radial lift so type sits on darkness, not noise */
+.f-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 42%, transparent 38%, rgba(5, 5, 7, 0.55) 100%),
+    linear-gradient(to bottom, rgba(5, 5, 7, 0.5), transparent 18%, transparent 78%, rgba(5, 5, 7, 0.65));
+}
+
+/* the load-in veil */
+.film-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: #050507;
+  display: grid;
+  place-items: center;
+}
+.film-veil .veil-line {
+  height: 1px;
+  width: 0;
+  background: linear-gradient(90deg, transparent, rgba(242, 241, 238, 0.75), transparent);
+}
+
+/* fixed chrome rides above the canvas, difference-blended */
+.film-chrome {
+  mix-blend-mode: difference;
+  color: #fff;
+}
+.film-chrome a, .film-chrome button { mix-blend-mode: difference; }
+
+/* chapter rail — the left-edge instrumentation */
+.film-rail { z-index: 30; }
+.film-rail .rail-tick {
+  position: relative;
+  width: 30px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.28);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.35s;
+  transform-origin: left center;
+}
+.film-rail .rail-tick:hover { transform: scaleX(1.5); background: rgba(255, 255, 255, 0.65); }
+.film-rail .rail-tick[data-on="true"] {
+  background: #fff;
+  transform: scaleX(1.9);
+}
+.film-rail .rail-num {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.film-rail li:hover .rail-num,
+.film-rail li[data-on="true"] .rail-num { opacity: 1; transform: translateX(0); }
+
+/* the scroll cue — a line the light travels down */
+.f-cue-line {
+  position: relative;
+  width: 1px;
+  height: 64px;
+  overflow: hidden;
+  background: rgba(242, 241, 238, 0.16);
+}
+.f-cue-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -40%;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, #f2f1ee);
+  animation: cue-travel 2.1s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes cue-travel {
+  0% { top: -40%; }
+  62%, 100% { top: 105%; }
+}
+
+/* chips — the tiny data plates under each chapter lede */
+.f-chip {
+  border: 1px solid rgba(242, 241, 238, 0.16);
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  background: rgba(242, 241, 238, 0.03);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* the atlas — stations on one line */
+.atlas-path {
+  stroke-dasharray: var(--dash, 5200);
+  stroke-dashoffset: var(--dash, 5200);
+}
+.atlas-station { cursor: pointer; transform-box: fill-box; transform-origin: center; }
+.atlas-station .st-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: st-pulse 3.2s ease-in-out infinite;
+}
+@keyframes st-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.22; }
+  50% { transform: scale(1.5); opacity: 0.05; }
+}
+.atlas-station .st-core { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); transform-box: fill-box; transform-origin: center; }
+.atlas-station:hover .st-core,
+.atlas-station:focus-visible .st-core { transform: scale(1.7); }
+.atlas-station .st-label { opacity: 0.55; transition: opacity 0.3s; }
+.atlas-station:hover .st-label,
+.atlas-station:focus-visible .st-label { opacity: 1; }
+
+/* reader mode — the film steps aside entirely, the library takes
+   the room (the whole root hides: canvas, chrome and all) */
+.film-reading .film-root { display: none; }
+
+/* reader top bar */
+.reader-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  border-bottom: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
+  background: color-mix(in oklab, var(--color-cream) 82%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* motion gate — the saved knob or the OS preference freezes the CSS
+   loops; the WebGL ticker and the scrub timelines hold their own
+   gates in JS */
+@media (prefers-reduced-motion: reduce) {
+  .f-cue-line::after { animation: none; }
+  .atlas-station .st-halo { animation: none; opacity: 0.14; }
+}
+html[data-motion="off"] .f-cue-line::after { animation: none; }
+html[data-motion="off"] .atlas-station .st-halo { animation: none; opacity: 0.14; }
+
+/* the atlas swipes sideways on phones — styled to disappear */
+.atlas-scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.atlas-scroll::-webkit-scrollbar { display: none; }
+
+/* on phones the formation sits behind the copy — give the words a
+   pool of darkness so the story stays legible over the glow */
+@media (max-width: 640px) {
+  .f-ch-copy::before {
+    content: "";
+    position: absolute;
+    inset: -3rem -1.75rem;
+    background: radial-gradient(
+      78% 62% at 34% 50%,
+      rgba(5, 5, 7, 0.88),
+      rgba(5, 5, 7, 0.45) 64%,
+      transparent 82%
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
+}
