@@ -254,11 +254,6 @@ function NotesGalleryBody({
   onBack: () => void;
   jumpToSpec?: string;
 }) {
-  /* the accent the dress speaks is one token per lab — but the
-     navbar's Spec Map window is shared chrome that needs a real
-     hex (readableInk/shade math), so it keeps the unit's candy
-     identity, exactly as the other two readers hand it over */
-  const main = unit.candy.main;
   const active = useSpecSpy(doc.sections);
 
   const { scrollYProgress } = useScroll();
@@ -268,15 +263,21 @@ function NotesGalleryBody({
     mass: 0.4,
   });
 
-  /* the nav's Spec Map — the same registration both sibling
-     readers make, same id, so the drawer tracks and hops this note
-     no matter which dress it wears. The hop is the gallery's own
-     verified recipe (see useGalleryHop). */
+  /* the nav's Spec Map — the same registration every reader makes,
+     same id, so the drawer tracks and hops this note no matter which
+     dress it wears. The hop is the gallery's own verified recipe
+     (see useGalleryHop). */
   const hop = useGalleryHop();
   useSpecMapRegister(
     useMemo(
-      () => ({ id: doc.id, sections: doc.sections, main, active, jump: hop }),
-      [doc.id, doc.sections, main, active, hop],
+      () => ({
+        id: doc.id,
+        label: `${unit.code} · TOPIC ${Number(doc.topicId.slice(1))}`,
+        sections: doc.sections,
+        active,
+        jump: hop,
+      }),
+      [doc.id, unit.code, doc.topicId, doc.sections, active, hop],
     ),
   );
 

@@ -3,7 +3,7 @@
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · Spec Map — the note's contents, living inside the
    nav itself. The reader registers its sections + current stop with
-   the provider; the nav then wears one candy "you are here" stop,
+   the provider; the nav then wears one quiet "you are here" stop,
    same 40px rhythm as every other nav button. A tap pulls the map
    up as a DRAWER — the Firefox-menu / Gemini-tray pattern, built
    from scratch after every floating-window variant earned its
@@ -14,16 +14,28 @@
    screen set from the customize panel (Peek / Tall / Full) or by
    dragging the grabber to any height — both remembered, both
    absolute numbers that ignore text size and page zoom (--spec-h;
-   see prefs.ts and globals.css). Inside: a rainbow progress track,
-   a live search over the stops, the same band-coloured chips as the
-   note's own contents card at the reader's chosen density
-   (--spec-chip), and prev/next hops for reading without lifting
-   your eyes. The body always fills the tray and scrolls inside — it
-   never shrink-wraps, so it can never read as a card again. And
-   because every number is a fraction of what the eye actually sees
-   (visualViewport), there is no positioning left to get wrong on
-   any device, page size or zoom level. Escape, the scrim or the ✕
-   all fold it away.
+   see prefs.ts and globals.css). Inside: a one-ink progress ruler,
+   a live search over the stops, hairline index tiles at the
+   reader's chosen density (--spec-chip), and prev/next hops for
+   reading without lifting your eyes. The body always fills the tray
+   and scrolls inside — it never shrink-wraps, so it can never read
+   as a card again. And because every number is a fraction of what
+   the eye actually sees (visualViewport), there is no positioning
+   left to get wrong on any device, page size or zoom level.
+   Escape, the scrim or the ✕ all fold it away.
+
+   THE SHARED DRESS — one instrument, both interfaces. The drawer
+   and its nav stop are the site's shared chrome, so they speak the
+   ACTIVE interface's own ink instead of picking a side: the whole
+   tray reads var(--spec-accent), resolved per interface in
+   globals.css — the gallery's single accent wherever the white-wall
+   dress is on, the document room's rust otherwise. Every lab
+   re-inks that token in one hop, so the map stays native in all
+   eight dressings without a second implementation. The structure
+   itself is the quiet-catalog vocabulary both interfaces share:
+   a dash-caps kicker masthead, a hairline ruler of stops, framed
+   index tiles whose numeral carries the accent, and a ledger footer
+   — no candy wheel, no pedestals, no tilt.
    ═══════════════════════════════════════════════════════════════ */
 
 import {
@@ -40,11 +52,9 @@ import {
   type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, m } from "framer-motion";
+import { AnimatePresence, m, type Variants } from "framer-motion";
 import { ArrowLeft, ArrowRight, ListChecks, Search, X } from "./icons";
 import type { SpecSection } from "@/lib/spectra/notes-types";
-import { Mascot, readableInk, shade } from "./bits";
-import { accentOf, chipV, SpecChip } from "./bands";
 import {
   SPEC_H_MAX,
   SPEC_H_MIN,
@@ -54,8 +64,8 @@ import {
 
 export type SpecMapData = {
   id: string; /* the note's id — the map folds only when this changes */
+  label: string; /* the masthead line — which note's map this is */
   sections: SpecSection[];
-  main: string; /* the unit's candy colour */
   active: string; /* spec currently on screen */
   jump: (spec: string) => void;
 };
@@ -120,6 +130,22 @@ export function useSpecMapRegister(data: SpecMapData | null) {
    browsers. */
 type Geo = { top: number; left: number; w: number; h: number };
 
+/* the tiles rise in, one after the next — a catalogue being set on
+   a table, not stickers being thrown at a wall: no spin, no tilt,
+   just a quiet lift */
+const TILE_V: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 320, damping: 26 },
+  },
+};
+
+/* the hairline ink a rest tile draws its frame with — a shared
+   literal so the frame and its hover both speak one line */
+const TILE_LINE = "color-mix(in oklab, var(--color-ink) 12%, transparent)";
+
 export function SpecMapTrigger() {
   const { data, open, setOpen } = useContext(SpecMapCtx);
   /* the tray's own height — the reader's saved fraction, or the
@@ -149,18 +175,18 @@ export function SpecMapTrigger() {
     /* the drawer IS a fraction of what the eye actually sees —
        visualViewport, offsets included. 100% of the visible width
        (both edges flush — there is no horizontal maths left at all)
-       and a fixed 94% of the visible height, docked flush to the
-       visible bottom edge; the note peeks over the top the way
-       Gemini's tray leaves the chat visible. Tablets running browser
-       page zoom (accessibility zoom, a remembered pinch) keep the
-       layout viewport wide while the visible one shrinks — and
-       innerWidth maths pushed earlier versions clean past the right
-       edge — but a fraction of the visible rect cannot miss, on any
-       device, any page size, any zoom. The min() belt covers exotic
-       zoomed-out states. No px floors, no px caps: shrink-wrapping
-       to its content is exactly what made every earlier version
-       read as a floating card, so the body is always this tall and
-       scrolls inside instead. */
+       and the reader's own fraction of the visible height, docked
+       flush to the visible bottom edge; the note peeks over the top
+       the way Gemini's tray leaves the chat visible. Tablets running
+       browser page zoom (accessibility zoom, a remembered pinch)
+       keep the layout viewport wide while the visible one shrinks —
+       and innerWidth maths pushed earlier versions clean past the
+       right edge — but a fraction of the visible rect cannot miss,
+       on any device, any page size, any zoom. The min() belt covers
+       exotic zoomed-out states. No px floors, no px caps: shrink-
+       wrapping to its content is exactly what made every earlier
+       version read as a floating card, so the body is always this
+       tall and scrolls inside instead. */
     const vv = window.visualViewport;
     const offX = Math.round(vv?.offsetLeft ?? 0);
     const offY = Math.round(vv?.offsetTop ?? 0);
@@ -243,7 +269,7 @@ export function SpecMapTrigger() {
     if (open) panelRef.current?.focus({ preventScroll: true });
   }, [open]);
 
-  /* walk the "you are here" chip into view — on open (instantly, so
+  /* walk the "you are here" tile into view — on open (instantly, so
      the list never visibly glides while the drawer itself is still
      springing up) and after every prev/next hop (smoothly, so the
      map follows the walk). offsetTop maths instead of rects: the
@@ -327,18 +353,18 @@ export function SpecMapTrigger() {
 
   /* hooks above — the trigger only exists once a note registers */
   if (!data) return null;
-  const { sections, main, active, jump } = data;
+  const { sections, label, active, jump } = data;
   const idx = Math.max(
     0,
     sections.findIndex((s) => s.spec === active),
   );
   const close = () => setOpen(false);
   /* the finder — a query filters the stops live while keeping each
-     chip's ORIGINAL index, so the band colours stay anchored to the
-     same stops the note's contents card shows */
+     tile's ORIGINAL index, so the ruler stays anchored to the
+     same stops the reader walks */
   const q = query.trim().toLowerCase();
   const shown = sections
-    .map((s, i) => ({ s, i }))
+    .map((s) => ({ s, here: s.spec === active }))
     .filter(
       ({ s }) =>
         q === "" ||
@@ -359,20 +385,24 @@ export function SpecMapTrigger() {
           if (!open) setQuery("");
           setOpen(!open);
         }}
-        whileTap={{ scale: 0.88 }}
+        whileTap={{ scale: 0.9 }}
         animate={{ y: open ? 1 : 0 }}
         transition={{ type: "spring", stiffness: 400, damping: 26 }}
         aria-label="Spec map — jump between sections"
         aria-expanded={open}
         aria-haspopup="dialog"
         title="Spec map — jump between sections"
-        className="nav-tool grid h-[46px] w-[46px] shrink-0 cursor-pointer place-items-center rounded-full md:h-10 md:w-10 lg:h-[42px] lg:w-[42px] 2xl:h-11 2xl:w-11"
+        className="spec-stop nav-tool grid h-[46px] w-[46px] shrink-0 cursor-pointer place-items-center rounded-full border md:h-10 md:w-10 lg:h-[42px] lg:w-[42px] 2xl:h-11 2xl:w-11"
         style={{
-          background: main,
-          color: readableInk(main),
-          /* the same pedestal language as every candy button — it
-             presses down while the map is open */
-          boxShadow: open ? `0 1px 0 ${shade(main)}` : `0 2px 0 ${shade(main)}`,
+          borderColor: open
+            ? "color-mix(in oklab, var(--spec-accent) 60%, transparent)"
+            : TILE_LINE,
+          background: open
+            ? "color-mix(in oklab, var(--spec-accent) 14%, var(--color-paper))"
+            : "var(--color-paper)",
+          /* the nav pill's pedestal rhythm, at whisper volume — the
+             stop presses down while the map is open */
+          boxShadow: "0 2px 0 var(--edge)",
         }}
       >
         {/* the stop wears the spec you're on — and trades the number
@@ -387,9 +417,13 @@ export function SpecMapTrigger() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -8, opacity: 0 }}
             transition={{ duration: 0.14 }}
-            className="grid place-items-center font-display text-[calc(10.5px*var(--ui-scale))] font-bold tracking-tight"
+            className="grid place-items-center font-display text-[calc(10.5px*var(--ui-scale))] font-bold tracking-tight text-[color:var(--spec-accent)] tabular-nums"
           >
-            {open ? <ListChecks className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" /> : active}
+            {open ? (
+              <ListChecks className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" />
+            ) : (
+              active
+            )}
           </m.span>
         </AnimatePresence>
       </m.button>
@@ -406,7 +440,7 @@ export function SpecMapTrigger() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.18 }}
                 onClick={close}
-                className="fixed inset-0 z-[59] bg-cocoa/30 backdrop-blur-[2px]"
+                className="fixed inset-0 z-[59] bg-ink/35 backdrop-blur-[2px]"
                 style={{ touchAction: "none" }}
               />
               <m.div
@@ -419,7 +453,7 @@ export function SpecMapTrigger() {
                 animate={{ y: 0 }}
                 exit={{ y: "104%" }}
                 transition={{ type: "spring", stiffness: 340, damping: 34 }}
-                className={`spec-map fixed z-[60] flex flex-col overflow-hidden rounded-t-[calc(28px*var(--ui-scale))] bg-paper outline-none ${
+                className={`spec-map fixed z-[60] flex flex-col overflow-hidden rounded-t-[calc(22px*var(--ui-scale))] border-x border-t border-ink/[0.1] bg-paper outline-none ${
                   dragging ? "select-none" : ""
                 }`}
                 style={{
@@ -435,11 +469,11 @@ export function SpecMapTrigger() {
                      notched phones — env() is far older than dvh, so
                      this survives on every classroom tablet */
                   paddingBottom: "env(safe-area-inset-bottom, 0px)",
-                  /* a crisp top edge like the nav pill's pedestal, and
-                     a soft shadow rising off the drawer into the
-                     page */
+                  /* a soft shadow rising off the drawer into the
+                     page — the tray floats, the hairline edge draws
+                     the line */
                   boxShadow:
-                    "0 -4px 0 var(--edge), 0 -30px 60px -24px rgb(0 0 0 / 0.4)",
+                    "0 -24px 70px -30px rgb(0 0 0 / 0.42)",
                 }}
               >
                 {/* the grabber — Firefox-menu language: you are holding
@@ -467,46 +501,56 @@ export function SpecMapTrigger() {
                 >
                   <span
                     aria-hidden
-                    className={`h-1.5 rounded-full bg-ink/[0.16] transition-all duration-200 ${
-                      dragging ? "w-20 bg-ink/[0.30]" : "w-12"
+                    className={`h-1.5 rounded-full bg-ink/[0.14] transition-all duration-200 ${
+                      dragging ? "w-20 bg-ink/[0.28]" : "w-12"
                     }`}
                   />
                 </div>
 
                 {/* the content column — full-bleed on phones and
                     tablets, centred on desktops where the drawer is
-                    wider than a page of chips needs */}
+                    wider than a page of tiles needs */}
                 <div className="mx-auto flex min-h-0 w-full max-w-[calc(760px*var(--ui-scale))] flex-1 flex-col">
-                  {/* header — the tilted badge, where you are, and the
-                      way out */}
-                  <div className="flex items-center gap-3 px-5 pt-3 sm:px-6">
-                    <span
-                      className="inline-flex shrink-0 -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
-                      style={{
-                        background: main,
-                        color: readableInk(main),
-                        boxShadow: `0 3px 0 ${shade(main)}`,
-                      }}
-                    >
-                      <ListChecks className="h-3.5 w-3.5" /> Spec map
-                    </span>
-                    <p className="min-w-0 flex-1 truncate text-[calc(12.5px*var(--ui-scale))] font-bold text-ink-faint">
-                      {q !== ""
-                        ? `${shown.length} of ${sections.length} match — tap one to hop`
-                        : `Stop ${idx + 1} of ${sections.length} — tap one to hop`}
-                    </p>
+                  {/* the masthead — the dress's dash and small caps
+                      name the map, the ledger line says where you
+                      are, and the way out sits across */}
+                  <div className="flex items-start gap-3 px-5 pt-3.5 sm:px-6">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex min-w-0 items-center gap-2">
+                        <span
+                          aria-hidden
+                          className="h-[2.5px] w-4 shrink-0 rounded-full"
+                          style={{ background: "var(--spec-accent)" }}
+                        />
+                        <span
+                          className="shrink-0 font-display text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.16em] uppercase"
+                          style={{ color: "var(--spec-accent)" }}
+                        >
+                          Spec map
+                        </span>
+                        <span className="min-w-0 truncate font-display text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.1em] uppercase text-ink-faint">
+                          {label}
+                        </span>
+                      </div>
+                      <p className="mt-1.5 truncate text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink-soft">
+                        {q !== ""
+                          ? `${shown.length} of ${sections.length} match — tap one to hop`
+                          : `Stop ${idx + 1} of ${sections.length} — tap one to hop`}
+                      </p>
+                    </div>
                     <button
                       type="button"
                       onClick={close}
                       aria-label="Close spec map"
-                      className="grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full bg-ink/[0.06] text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
+                      className="mt-0.5 grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full border border-ink/[0.12] bg-paper text-ink-soft transition-colors hover:border-ink/25 hover:text-ink"
                     >
                       <X className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" strokeWidth={2.2} />
                     </button>
                   </div>
 
-                  {/* the journey so far — one segment per stop, in its
-                      own band colour; the current one stands taller */}
+                  {/* the journey so far — one hairline segment per
+                      stop in the dress's single ink; the current one
+                      stands taller. A ruler, not a rainbow. */}
                   <div
                     aria-hidden
                     className="mt-3 flex items-center gap-[calc(3px*var(--ui-scale))] px-5 sm:px-6"
@@ -515,10 +559,13 @@ export function SpecMapTrigger() {
                       <span
                         key={s.spec}
                         className={`flex-1 rounded-full transition-colors duration-300 ${
-                          i === idx ? "h-2.5" : "h-1.5"
+                          i === idx ? "h-[5px]" : "h-[3px]"
                         }`}
                         style={{
-                          background: i <= idx ? accentOf(i) : "var(--edge)",
+                          background:
+                            i <= idx
+                              ? "var(--spec-accent)"
+                              : "color-mix(in oklab, var(--color-ink) 13%, transparent)",
                         }}
                       />
                     ))}
@@ -527,7 +574,7 @@ export function SpecMapTrigger() {
                   {/* the finder — type a spec number or a word from a
                       title and the map filters live; it starts clean
                       every time the tray folds away */}
-                  <div className="px-4 pt-1.5 sm:px-5">
+                  <div className="px-4 pt-3 sm:px-5">
                     <div className="relative">
                       <Search className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-ink-faint" />
                       <input
@@ -535,14 +582,14 @@ export function SpecMapTrigger() {
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Find a stop — 8A, rate, equilibrium…"
                         aria-label="Filter stops by spec number or title"
-                        className="h-10 w-full rounded-full bg-ink/[0.06] pr-9 pl-10 text-[calc(13.5px*var(--ui-scale))] font-bold text-ink outline-none transition-colors placeholder:font-semibold placeholder:text-ink-faint focus:bg-ink/[0.09]"
+                        className="spec-find h-10 w-full rounded-[calc(12px*var(--ui-scale))] border border-ink/[0.13] bg-paper pr-9 pl-10 text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink outline-none transition-colors placeholder:font-semibold placeholder:text-ink-faint"
                       />
                       {query !== "" && (
                         <button
                           type="button"
                           onClick={() => setQuery("")}
                           aria-label="Clear the filter"
-                          className="absolute top-1/2 right-1.5 grid h-7 w-7 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-ink/[0.08] text-ink-soft transition-colors hover:bg-ink/[0.13] hover:text-ink"
+                          className="absolute top-1/2 right-1.5 grid h-7 w-7 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-ink/[0.07] text-ink-soft transition-colors hover:bg-ink/[0.13] hover:text-ink"
                         >
                           <X className="h-3.5 w-3.5" strokeWidth={2.4} />
                         </button>
@@ -550,10 +597,13 @@ export function SpecMapTrigger() {
                     </div>
                   </div>
 
-                  {/* the map itself — chips flow to fill whatever
-                      screen they're on, packed against the reader's
-                      chosen density (--spec-chip); the body scrolls,
-                      the drawer itself never shrinks */}
+                  {/* the map itself — framed index tiles flow to fill
+                      whatever screen they're on, packed against the
+                      reader's chosen density (--spec-chip); the body
+                      scrolls, the drawer itself never shrinks. Each
+                      tile leads with its numeral in the dress's ink;
+                      the stop you're standing on wears the accent
+                      wash and says so in small caps. */}
                   <div
                     ref={gridRef}
                     className="mt-1 min-h-0 flex-1 overflow-y-auto px-4 py-3 sm:px-5"
@@ -565,25 +615,64 @@ export function SpecMapTrigger() {
                       variants={{
                         show: {
                           transition: {
-                            staggerChildren: 0.024,
-                            delayChildren: 0.05,
+                            staggerChildren: 0.02,
+                            delayChildren: 0.04,
                           },
                         },
                       }}
                       className="grid gap-2 [grid-template-columns:repeat(auto-fill,minmax(var(--spec-chip),1fr))]"
                     >
-                      {shown.map(({ s, i }) => (
-                        <SpecChip
+                      {shown.map(({ s, here }) => (
+                        <m.button
                           key={s.spec}
-                          s={s}
-                          i={i}
-                          here={s.spec === active}
-                          variants={chipV}
+                          type="button"
+                          data-here={here ? "1" : undefined}
+                          aria-current={here ? "true" : undefined}
+                          variants={TILE_V}
+                          whileHover={here ? undefined : { y: -2 }}
+                          whileTap={{ scale: 0.98 }}
+                          transition={{ type: "spring", stiffness: 380, damping: 22 }}
                           onClick={() => {
                             jump(s.spec);
                             close();
                           }}
-                        />
+                          className={`flex cursor-pointer flex-col items-start gap-1.5 rounded-[calc(12px*var(--ui-scale))] border px-3 py-2.5 text-left transition-colors ${
+                            here ? "" : "hover:border-ink/25"
+                          }`}
+                          style={
+                            here
+                              ? {
+                                  borderColor:
+                                    "color-mix(in oklab, var(--spec-accent) 62%, transparent)",
+                                  background:
+                                    "color-mix(in oklab, var(--spec-accent) 12%, var(--color-paper))",
+                                }
+                              : {
+                                  borderColor: TILE_LINE,
+                                  background: "var(--color-paper)",
+                                }
+                          }
+                        >
+                          <span className="flex w-full items-baseline justify-between gap-2">
+                            <span
+                              className="font-display text-[calc(13px*var(--ui-scale))] leading-none font-bold tracking-tight tabular-nums"
+                              style={{ color: "var(--spec-accent)" }}
+                            >
+                              {s.spec}
+                            </span>
+                            {here && (
+                              <span
+                                className="shrink-0 font-display text-[calc(8.5px*var(--ui-scale))] leading-none font-bold tracking-[0.18em] uppercase"
+                                style={{ color: "var(--spec-accent)" }}
+                              >
+                                In view
+                              </span>
+                            )}
+                          </span>
+                          <span className="line-clamp-2 text-[calc(12px*var(--ui-scale))] leading-[1.4] font-semibold text-ink">
+                            {s.title}
+                          </span>
+                        </m.button>
                       ))}
                     </m.div>
                     {q !== "" && shown.length === 0 && (
@@ -599,9 +688,10 @@ export function SpecMapTrigger() {
                     )}
                   </div>
 
-                  {/* footer — walk the note without opening the map
-                      again */}
-                  <div className="mt-auto flex items-center justify-between gap-2 border-t-2 border-dashed border-ink/10 px-4 py-3 sm:px-5">
+                  {/* the ledger footer — walk the note without opening
+                      the map again; the running count holds the middle
+                      like a folio number */}
+                  <div className="mt-auto flex items-center justify-between gap-2 border-t border-ink/[0.1] px-4 py-3 sm:px-5">
                     <button
                       type="button"
                       onClick={() => idx > 0 && hop(sections[idx - 1].spec)}
@@ -611,22 +701,25 @@ export function SpecMapTrigger() {
                           ? `Previous stop — ${sections[idx - 1].spec} ${sections[idx - 1].title}`
                           : "No previous stop"
                       }
-                      className="flex h-10 min-w-0 cursor-pointer items-center gap-1.5 rounded-full bg-ink/[0.06] px-3.5 text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink disabled:cursor-default disabled:opacity-35 disabled:hover:bg-ink/[0.06]"
+                      className="flex h-10 min-w-0 cursor-pointer items-center gap-2 rounded-full border border-ink/[0.13] bg-paper px-3.5 text-ink-soft transition-colors hover:border-ink/25 hover:text-ink disabled:cursor-default disabled:opacity-35 disabled:hover:border-ink/[0.13] disabled:hover:text-ink-soft"
                     >
                       <ArrowLeft className="h-4 w-4 shrink-0" strokeWidth={2.2} />
-                      <span className="font-display text-[calc(12.5px*var(--ui-scale))] font-bold">
+                      <span
+                        className="font-display text-[calc(12.5px*var(--ui-scale))] font-bold tabular-nums"
+                        style={{ color: "var(--spec-accent)" }}
+                      >
                         {idx > 0 ? sections[idx - 1].spec : "—"}
                       </span>
-                      <span className="hidden max-w-[calc(130px*var(--ui-scale))] truncate text-[calc(12px*var(--ui-scale))] font-bold sm:inline">
+                      <span className="hidden max-w-[calc(150px*var(--ui-scale))] truncate text-[calc(12px*var(--ui-scale))] font-semibold sm:inline">
                         {idx > 0 ? sections[idx - 1].title : ""}
                       </span>
                     </button>
-                    <Mascot
-                      main={main}
-                      size={40}
-                      bubbles={false}
-                      className="hidden h-9 w-9 shrink-0 sm:block"
-                    />
+                    <span
+                      aria-hidden
+                      className="hidden shrink-0 font-display text-[calc(10px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint tabular-nums md:block"
+                    >
+                      {idx + 1} / {sections.length}
+                    </span>
                     <button
                       type="button"
                       onClick={() =>
@@ -638,12 +731,15 @@ export function SpecMapTrigger() {
                           ? `Next stop — ${sections[idx + 1].spec} ${sections[idx + 1].title}`
                           : "No next stop"
                       }
-                      className="flex h-10 min-w-0 cursor-pointer items-center gap-1.5 rounded-full bg-ink/[0.06] px-3.5 text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink disabled:cursor-default disabled:opacity-35 disabled:hover:bg-ink/[0.06]"
+                      className="flex h-10 min-w-0 cursor-pointer items-center gap-2 rounded-full border border-ink/[0.13] bg-paper px-3.5 text-ink-soft transition-colors hover:border-ink/25 hover:text-ink disabled:cursor-default disabled:opacity-35 disabled:hover:border-ink/[0.13] disabled:hover:text-ink-soft"
                     >
-                      <span className="hidden max-w-[calc(130px*var(--ui-scale))] truncate text-[calc(12px*var(--ui-scale))] font-bold sm:inline">
+                      <span className="hidden max-w-[calc(150px*var(--ui-scale))] truncate text-[calc(12px*var(--ui-scale))] font-semibold sm:inline">
                         {idx < sections.length - 1 ? sections[idx + 1].title : ""}
                       </span>
-                      <span className="font-display text-[calc(12.5px*var(--ui-scale))] font-bold">
+                      <span
+                        className="font-display text-[calc(12.5px*var(--ui-scale))] font-bold tabular-nums"
+                        style={{ color: "var(--spec-accent)" }}
+                      >
                         {idx < sections.length - 1 ? sections[idx + 1].spec : "—"}
                       </span>
                       <ArrowRight

@@ -101,7 +101,12 @@ r.dataset.motion=p.motion===false?"off":"on";
 var fb="M";try{if(!localStorage.getItem("reaction-club-prefs-v1")&&window.matchMedia("(min-width:1024px)").matches)fb="L"}catch(e){}
 var s=p.scale==="S"||p.scale==="M"||p.scale==="L"||p.scale==="XL"?p.scale:(p.zoom===0.9?"S":p.zoom===1.15?"L":p.zoom===1.3?"XL":fb);
 r.dataset.scale=s;
+/* the interface axis: editorial | gallery. The retired "rooms" dress
+   (and any unrecognisable value) reads as the gallery — the site's
+   front door — so even a legacy save first-paints in the right dress
+   and never re-flows after hydration. */
 if(p.iface==="editorial"||p.iface==="gallery")r.dataset.iface=p.iface;
+else r.dataset.iface="gallery";
 }catch(e){}})();`;
 
 export const viewport: Viewport = {

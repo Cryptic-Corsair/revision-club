@@ -41,7 +41,6 @@ import {
 } from "@/lib/spectra/prefs";
 import { Home } from "./home";
 import { Desk } from "./desk";
-import { UnitView } from "./unit-view";
 import { Mascot } from "./bits";
 import { SpecMapProvider, SpecMapTrigger } from "./spec-map";
 
@@ -50,13 +49,12 @@ const BUILD_VERSION = (process.env.NEXT_PUBLIC_BUILD_VERSION ?? "local").slice(0
 /* ————— the lazy rooms —————
    Only the shell, the home page and the unit walk load up front;
    every other room — the notes reader with its whole figure
-   sketchbook, the spec index, the pack bench, the sticker book,
-   the topic fallback, the search bubble and the customize drawer —
-   travels in its own chunk, fetched the moment it's first called
-   for (and quietly warmed during idle time, see the warm effect in
-   ClubApp). The shell knows *that* a note exists from
-   notes-meta.ts, a few hundred bytes — the note itself never
-   enters the first-paint bundle. */
+   sketchbook, the spec index, the pack bench, the search bubble and
+   the customize drawer — travels in its own chunk, fetched the
+   moment it's first called for (and quietly warmed during idle time,
+   see the warm effect in ClubApp). The shell knows *that* a note
+   exists from notes-meta.ts, a few hundred bytes — the note itself
+   never enters the first-paint bundle. */
 
 const RoomLoading = () => (
   <div aria-busy="true" className="flex min-h-[55dvh] items-center justify-center">
@@ -64,15 +62,9 @@ const RoomLoading = () => (
   </div>
 );
 
-const TopicView = dynamic(() => import("./topic-view").then((m) => m.TopicView), {
-  ssr: false,
-  loading: RoomLoading,
-});
-const NotesReader = dynamic(() => import("./notes-reader").then((m) => m.NotesReader), {
-  ssr: false,
-  loading: RoomLoading,
-});
-/* the notes reader's editorial twin — same props, the document dress */
+/* the notes reader's editorial twin — same props, the document dress.
+   With the rooms dress retired, the editorial reader is the floor
+   every note stands on: both interfaces serve it. */
 const NotesEditorial = dynamic(
   () => import("./notes-editorial").then((m) => m.NotesEditorial),
   { ssr: false, loading: RoomLoading },
@@ -80,24 +72,16 @@ const NotesEditorial = dynamic(
 /* the notes reader's gallery twin — same props, the white-wall dress.
    The dress is rolling out one note at a time (GALLERY_DOCS in
    prefs.ts); the shell only calls for it on a rollout doc, and a
-   gallery visitor on any other page lands on the rooms reader. */
+   gallery visitor on any other page lands on the editorial reader. */
 const NotesGallery = dynamic(
   () => import("./notes-gallery").then((m) => m.NotesGallery),
   { ssr: false, loading: RoomLoading },
 );
-const StickerBook = dynamic(() => import("./sticker-book").then((m) => m.StickerBook), {
-  ssr: false,
-  loading: RoomLoading,
-});
 /* the progress room's editorial twin — same props, the document dress */
 const ProgressEditorial = dynamic(
   () => import("./progress-editorial").then((m) => m.ProgressEditorial),
   { ssr: false, loading: RoomLoading },
 );
-const SpecIndex = dynamic(() => import("./spec-index").then((m) => m.SpecIndex), {
-  ssr: false,
-  loading: RoomLoading,
-});
 /* the spec index's editorial twin — same props, the document dress */
 const SpecEditorial = dynamic(
   () => import("./spec-editorial").then((m) => m.SpecEditorial),
@@ -109,16 +93,12 @@ const TopicEditorial = dynamic(
   { ssr: false, loading: RoomLoading },
 );
 /* the unit walk's editorial twin — same props, the document dress;
-   the classic unit view rides in the first-paint bundle, its twin
-   travels lazily like every other room */
+   the unit walk rides in the first-paint bundle in its rooms-era
+   cut, its twin travels lazily like every other room */
 const UnitEditorial = dynamic(
   () => import("./unit-editorial").then((m) => m.UnitEditorial),
   { ssr: false, loading: RoomLoading },
 );
-const PackView = dynamic(() => import("./pack-view").then((m) => m.PackView), {
-  ssr: false,
-  loading: RoomLoading,
-});
 /* the pack's editorial twin — same props, the document dress */
 const PackEditorial = dynamic(
   () => import("./pack-editorial").then((m) => m.PackEditorial),
@@ -258,11 +238,6 @@ function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
    pages; flipping the dress re-runs the queue with the new dress
    first, so its rooms are warm before anyone knocks. */
 const WARM_CHUNKS = {
-  notesRooms: () => import("./notes-reader"),
-  topicRooms: () => import("./topic-view"),
-  specRooms: () => import("./spec-index"),
-  packRooms: () => import("./pack-view"),
-  stickerRooms: () => import("./sticker-book"),
   notesEditorial: () => import("./notes-editorial"),
   topicEditorial: () => import("./topic-editorial"),
   unitEditorial: () => import("./unit-editorial"),
@@ -275,26 +250,21 @@ const WARM_CHUNKS = {
   legal: () => import("./legal"),
 };
 
+const EDITORIAL_PAGES: (keyof typeof WARM_CHUNKS)[] = [
+  "notesEditorial",
+  "topicEditorial",
+  "unitEditorial",
+  "specEditorial",
+  "packEditorial",
+  "progressEditorial",
+];
+
 const WARM_BY_IFACE: Record<Iface, (keyof typeof WARM_CHUNKS)[]> = {
-  rooms: ["notesRooms", "topicRooms", "specRooms", "packRooms", "stickerRooms"],
-  editorial: [
-    "notesEditorial",
-    "topicEditorial",
-    "unitEditorial",
-    "specEditorial",
-    "packEditorial",
-    "progressEditorial",
-  ],
+  /* the editorial dress serves every page itself */
+  editorial: EDITORIAL_PAGES,
   /* the gallery is a one-note dress today: its own reader, plus the
-     rooms pages it falls back to everywhere else */
-  gallery: [
-    "notesGallery",
-    "notesRooms",
-    "topicRooms",
-    "specRooms",
-    "packRooms",
-    "stickerRooms",
-  ],
+     editorial pages it falls back to everywhere else */
+  gallery: ["notesGallery", ...EDITORIAL_PAGES],
 };
 const WARM_SHARED: (keyof typeof WARM_CHUNKS)[] = ["search", "customize", "legal"];
 
@@ -1320,58 +1290,48 @@ export default function ClubApp() {
                     />
                   ))}
   
-                {view.kind === "unit" && unit && (() => {
-                  const UnitWalk =
-                    prefs.iface === "editorial" ? UnitEditorial : UnitView;
-                  return (
-                    <UnitWalk
-                      key={unit.code}
-                      unit={unit}
-                      onOpenTopic={(id) => openTopic(unit.code, id)}
-                      onBack={goHome}
-                      onOpenUnit={openUnit}
-                    />
-                  );
-                })()}
-  
-                {view.kind === "topic" && unit && topic && (() => {
-                  const TopicReader =
-                    prefs.iface === "editorial" ? TopicEditorial : TopicView;
-                  return (
-                    <TopicReader
-                      key={`${unit.code}/${topic.id}`}
-                      unit={unit}
-                      topic={topic}
-                      onBack={() => openUnit(unit.code)}
-                      onOpenTopic={(id) => openTopic(unit.code, id)}
-                      notesSpecRange={topicMeta?.specRange}
-                      onOpenNotes={
-                        topicMeta
-                          ? () =>
-                              setView({
-                                kind: "notes",
-                                code: unit.code,
-                                docId: topicMeta.id,
-                              })
-                          : undefined
-                      }
-                    />
-                  );
-                })()}
-  
+                {view.kind === "unit" && unit && (
+                  <UnitEditorial
+                    key={unit.code}
+                    unit={unit}
+                    onOpenTopic={(id) => openTopic(unit.code, id)}
+                    onBack={goHome}
+                    onOpenUnit={openUnit}
+                  />
+                )}
+
+                {view.kind === "topic" && unit && topic && (
+                  <TopicEditorial
+                    key={`${unit.code}/${topic.id}`}
+                    unit={unit}
+                    topic={topic}
+                    onBack={() => openUnit(unit.code)}
+                    onOpenTopic={(id) => openTopic(unit.code, id)}
+                    notesSpecRange={topicMeta?.specRange}
+                    onOpenNotes={
+                      topicMeta
+                        ? () =>
+                            setView({
+                              kind: "notes",
+                              code: unit.code,
+                              docId: topicMeta.id,
+                            })
+                        : undefined
+                    }
+                  />
+                )}
+
                 {view.kind === "notes" && unit && notesMeta && (() => {
                   /* the interface swap — the twins wear the same props
                      contract, so the shell changes nothing but the
                      component picked. The gallery is the youngest twin
                      and the shyest: it serves only its rollout docs
-                     (Topic 9 today), everything else keeps the dress
-                     it already wears. */
+                     (Topic 9 today), everything else stands on the
+                     editorial reader. */
                   const Reader =
                     prefs.iface === "gallery" && GALLERY_DOCS.has(view.docId)
                       ? NotesGallery
-                      : prefs.iface === "editorial"
-                        ? NotesEditorial
-                        : NotesReader;
+                      : NotesEditorial;
                   return (
                     <Reader
                       key={view.docId}
@@ -1382,43 +1342,31 @@ export default function ClubApp() {
                     />
                   );
                 })()}
-  
-                {view.kind === "spec" && (() => {
-                  const SpecIdx =
-                    prefs.iface === "editorial" ? SpecEditorial : SpecIndex;
-                  return (
-                    <SpecIdx
-                      onHome={goHome}
-                      onOpenPack={openPack}
-                      onOpenNotes={openNotes}
-                    />
-                  );
-                })()}
-  
-                {view.kind === "pack" && (() => {
-                  const Pack =
-                    prefs.iface === "editorial" ? PackEditorial : PackView;
-                  return (
-                    <Pack
-                      onHome={goHome}
-                      onOpenSpec={openSpec}
-                      onOpenNotes={openNotes}
-                    />
-                  );
-                })()}
-  
-                {view.kind === "sticker" && (() => {
-                  const Progress =
-                    prefs.iface === "editorial" ? ProgressEditorial : StickerBook;
-                  return (
-                    <Progress
-                      units={UNITS}
-                      onBack={goHome}
-                      onOpenUnit={openUnit}
-                      onOpenTopic={openTopic}
-                    />
-                  );
-                })()}
+
+                {view.kind === "spec" && (
+                  <SpecEditorial
+                    onHome={goHome}
+                    onOpenPack={openPack}
+                    onOpenNotes={openNotes}
+                  />
+                )}
+
+                {view.kind === "pack" && (
+                  <PackEditorial
+                    onHome={goHome}
+                    onOpenSpec={openSpec}
+                    onOpenNotes={openNotes}
+                  />
+                )}
+
+                {view.kind === "sticker" && (
+                  <ProgressEditorial
+                    units={UNITS}
+                    onBack={goHome}
+                    onOpenUnit={openUnit}
+                    onOpenTopic={openTopic}
+                  />
+                )}
   
                 {view.kind === "legal" && <Legal onBack={goHome} />}
               </m.div>

@@ -19,32 +19,32 @@ export type Lab = "light" | "dark" | "dune" | "classic";
 export type HeadFont = "fredoka" | "baloo" | "patrick";
 export type BodyFont = "nunito" | "quicksand";
 
-/* the site's interfaces — same rooms, same notes, three dresses.
-   "rooms" is the classic band-walked dress; "editorial" is the
-   document room the disclaimer page wears (hero, rails, numbered
-   clauses); "gallery" is the white-wall dress — quiet grounds, one
-   accent, oversized numerals. The axis is independent of the labs:
-   every lab re-tints all three interfaces, and the homepage keeps
+/* the site's interfaces — same notes, two dresses.
+   "gallery" is the white-wall dress — quiet grounds, one accent,
+   oversized numerals — and the site's front door: every fresh visit
+   lands here. "editorial" is the document room the disclaimer page
+   wears (hero, rails, numbered clauses). The band-walked rooms dress
+   they both grew out of has been retired outright — a saved "rooms"
+   reads as the gallery, its heir. The axis is independent of the
+   labs: every lab re-tints both interfaces, and the homepage keeps
    its own dress always. */
-export type Iface = "rooms" | "editorial" | "gallery";
+export type Iface = "editorial" | "gallery";
 export const IFACE_LABEL: Record<Iface, string> = {
-  rooms: "Rooms",
-  editorial: "Editorial",
   gallery: "Gallery",
+  editorial: "Editorial",
 };
 export const IFACE_DESCRIPTION: Record<Iface, string> = {
-  rooms: "Band-walked rooms, waves & the mascot",
-  editorial: "The document room — rails, clauses & exhibits",
   gallery: "White walls, wide light, one accent — Topic 9 today",
+  editorial: "The document room — rails, clauses & exhibits",
 };
-export const IFACE_ORDER: Iface[] = ["rooms", "editorial", "gallery"];
+export const IFACE_ORDER: Iface[] = ["gallery", "editorial"];
 
 /* ————— the gallery's rollout ledger —————
    The gallery dress is cut one note at a time: a doc id here means
    the gallery reader exists for it, and the shell may serve it.
    Topic 9 (wch12-t09) is the pilot; the shelf widens as the dress
    proves itself. A gallery visitor who opens anything else lands
-   on the classic rooms reader — the dress, not the library, is
+   on the editorial reader — the dress, not the library, is
    what's rolling out. */
 export const GALLERY_DOCS: ReadonlySet<string> = new Set(["wch12-t09"]);
 
@@ -117,8 +117,8 @@ export const SPEC_H_MAX = 0.98;
 
 export interface Prefs {
   theme: Lab;
-  /** which interface dresses the rooms — "rooms" | "editorial" |
-      "gallery" (gallery pilot: served on its rollout docs only) */
+  /** which interface dresses the reader pages — "gallery" (the
+      default, served on its rollout docs) | "editorial" */
   iface: Iface;
   /** the accent wheel — which candies the sections rotate through */
   accents: AccentId[];
@@ -138,11 +138,12 @@ export interface Prefs {
 }
 
 export const DEFAULT_PREFS: Prefs = {
-  /* v2 of the rooms lands new visitors in the daylight lab — the
-     sunny candy walk is the site's front door. Anyone who has picked
-     a lab keeps theirs; this is only the factory setting. */
+  /* the factory setting lands new visitors in the daylight lab and
+     the white-wall dress — the gallery is the site's front door.
+     Anyone who has picked a lab or a dress keeps theirs; this is
+     only the factory setting. */
   theme: "light",
-  iface: "rooms",
+  iface: "gallery",
   accents: [...ACCENT_IDS],
   /* the scale default is Medium here; load() lifts a FIRST RUN on a
      big screen to Large — the factory setting is screen-aware, the
@@ -178,12 +179,10 @@ function sanitize(p: StoredPrefs): Prefs {
   else if (p.theme === "hybrid")
     /* the retired third lab rides on as classic — its heir */
     out.theme = "classic";
-  if (
-    p.iface === "editorial" ||
-    p.iface === "rooms" ||
-    p.iface === "gallery"
-  )
-    out.iface = p.iface;
+  if (p.iface === "editorial" || p.iface === "gallery") out.iface = p.iface;
+  /* the retired rooms dress rides on as the gallery — a saved
+     "rooms" (or anything unrecognisable) falls to the default,
+     which is the gallery itself */
   if (p.scale && SCALES.includes(p.scale)) out.scale = p.scale;
   else if (typeof p.zoom === "number") {
     /* the retired page-zoom pref rides on as scale — see LEGACY_ZOOM

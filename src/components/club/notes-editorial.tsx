@@ -142,7 +142,6 @@ function NotesEditorialBody({
   onBack: () => void;
   jumpToSpec?: string;
 }) {
-  const main = unit.candy.main;
   const active = useSpecSpy(doc.sections);
   const [contentsExpanded, setContentsExpanded] = useState(readTocPosture);
 
@@ -292,14 +291,20 @@ function NotesEditorialBody({
     mass: 0.4,
   });
 
-  /* the nav's Spec Map — the same registration the classic reader
-     makes, same id, so the drawer tracks and hops this note no
-     matter which dress it wears */
+  /* the nav's Spec Map — the same registration every reader makes,
+     same id, so the drawer tracks and hops this note no matter which
+     dress it wears */
   const jump = useCallback((spec: string) => scrollToSpec(spec), []);
   useSpecMapRegister(
     useMemo(
-      () => ({ id: doc.id, sections: doc.sections, main, active, jump }),
-      [doc.id, doc.sections, main, active, jump],
+      () => ({
+        id: doc.id,
+        label: `${unit.code} · TOPIC ${Number(doc.topicId.slice(1))}`,
+        sections: doc.sections,
+        active,
+        jump,
+      }),
+      [doc.id, unit.code, doc.topicId, doc.sections, active, jump],
     ),
   );
 

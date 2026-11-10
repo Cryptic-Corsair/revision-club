@@ -185,16 +185,33 @@ html[data-scale="XL"] {
 
 /* the two frozen surfaces. --ui-scale inherits, so pinning it back
    to 1 on a subtree makes every descendant — however deeply shared
-   (the spec map renders the same SpecChips the Contents cards use) —
-   measure against 1 again, whatever the page-wide knob is doing.
-   The nav pill promised this in the zoom era and keeps it; the spec
-   map earned it the hard way: its drawer is cut from fractions of
-   the visible viewport, and any scaling inside it would misalign
-   the chips against the real sections they jump to. The customize
-   panel deliberately does NOT freeze — it is content. */
+   (the spec map's tiles ride the same freeze) — measure against 1
+   again, whatever the page-wide knob is doing. The nav pill promised
+   this in the zoom era and keeps it; the spec map earned it the hard
+   way: its drawer is cut from fractions of the visible viewport, and
+   any scaling inside it would misalign the tiles against the real
+   sections they jump to. The customize panel deliberately does NOT
+   freeze — it is content. */
 .site-header,
 .spec-map {
   --ui-scale: 1;
+}
+
+/* ————— the spec map's shared dress —————
+   The drawer and its nav stop are chrome both interfaces lean on,
+   so they speak the ACTIVE interface's own ink instead of picking
+   a side: one token, resolved per dress. The gallery's single
+   accent wherever the white-wall dress is on, the document room's
+   rust otherwise — and because the var chain resolves lazily, every
+   lab's re-ink of the parent token re-inks the map in one hop. */
+.spec-map,
+.spec-stop {
+  --spec-accent: var(--iface-accent, var(--iface-rust));
+}
+/* the finder's focus — the field leans into the dress's ink */
+.spec-map .spec-find:focus {
+  border-color: color-mix(in oklab, var(--spec-accent) 55%, transparent);
+  background: color-mix(in oklab, var(--spec-accent) 4%, var(--color-paper));
 }
 
 /* ————— the spec tray's OWN size knobs —————
