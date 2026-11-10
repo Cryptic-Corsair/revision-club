@@ -11,7 +11,7 @@ import { getNotes } from "@/lib/spectra/notes";
 import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
 import { Fmt, plural } from "./format";
 import { PopIn, Reveal } from "./bits";
-import { BandWave } from "./bands";
+import { BandWave, WAVES } from "./bands";
 import { useSpecMapRegister } from "./spec-map";
 import {
   GalleryLabel,
@@ -28,9 +28,13 @@ import {
    contents index, and the spec sections as a string of rooms
    parted by the rooms wave kit's own seams (BandWave, read
    only) — the page steps off the wall through one calm swell,
-   each room hangs on a quiet dilution of the dress's single
-   accent, and every room hands you to the next through the same
-   seam, each opened by an oversized numeral in that accent. The
+   every room hangs on a ground the lab tunes (the two
+   --gal-room-a/b tokens in globals.css: a tonal walk in the
+   dress's accent by day, wider glows after dark, and the classic
+   lab's own espresso/cream signature pair), and every room hands
+   you to the next through a seam that never repeats the previous
+   curve — the wave kit's shelf, rotated the way home rotates it.
+   Each room is opened by an oversized numeral in the accent. The
    classic and editorial readers' youngest twin; the props contract is
    identical, so the shell swaps them without knowing the
    difference. Rolling out one note at a time — Topic 9 today
@@ -43,21 +47,28 @@ const hair = (pct: number) =>
 const pad2 = (n: number) => String(n).padStart(2, "0");
 
 /* ————— the rooms' grounds —————
-   The gallery speaks ONE accent, so the walk around the rooms is
-   tonal, not a hue wheel: the rooms alternate two quiet dilutions
-   of the accent mixed into the page's own cream — a half-step and
-   a full step — so no two neighbours ever dress alike and every
-   seam is a real two-tone swell, the way the rooms kit intends.
-   The walk starts on the wash (never the bare wall), which keeps
-   the lead-in and the lead-out waves visible for a room count of
-   any parity. Both steps are pure tokens, so each lab re-inks
-   the whole walk in one hop — bronze over cream by day, a
-   champagne glow over the dark grounds after nightfall, sand
-   over the dune parchment, espresso bronze in the classic room. */
+   The walk alternates two lab-tuned grounds — the --gal-room-a/b
+   tokens set per lab in globals.css. Daylight mixes the dress's
+   one accent over the page's own cream (a half-step and a full
+   step); night and dune widen the steps until the glows read on
+   their dark grounds; classic stands the mixing down and walks
+   its signature espresso/cream pair, the even rooms carrying the
+   shared .room class so the classic wardrobe flips ink and
+   surfaces inside — no two neighbours ever dress alike, and any
+   room count keeps both end waves visible. */
 const galRoom = (i: number) =>
-  `color-mix(in oklab, var(--iface-accent) ${
-    i % 2 === 0 ? 10 : 20
-  }%, var(--color-cream))`;
+  i % 2 === 0 ? "var(--gal-room-a)" : "var(--gal-room-b)";
+
+/* ————— the seams —————
+   The wave kit hangs a shelf of five hand-drawn curves so a page
+   can put a differently-shaped wave at every boundary and never
+   repeat itself twice in a row (the home page already walks the
+   shelf that way). The gallery does the same: the lead-in uses
+   the original reader curve, then each room hands you onwards
+   around the shelf. The seams run taller than the kit's default
+   — catalog proportions, a calm wide swell rather than a ripple. */
+const galWaveH =
+  "h-[calc(52px*var(--ui-scale))] sm:h-[calc(80px*var(--ui-scale))]";
 
 /* ————— the gallery's verified hop —————
    The shared scrollToSpec recipe, plus an honest re-measure. The
@@ -462,29 +473,39 @@ function NotesGalleryBody({
 
       {/* ————— the catalog — the string of rooms —————
           the rooms reader's own wave walk, spoken in the gallery's
-          one accent: the page steps off the white wall through the
-          kit's calm swell, every spec room hangs on a ground of the
-          accent (two quiet dilutions, alternating, so no two
-          neighbours dress alike) and hands you to the next through
-          the same seam. BandWave is the shared wave kit — read
-          only; the rooms' shelf and the exempt paths stay
-          byte-untouched. */}
+          register: the page steps off the wall through the kit's
+          calm swell, every spec room hangs on a lab-tuned ground
+          (the --gal-room-a/b tokens — tonal accent steps by day,
+          wider glows after dark, classic's espresso/cream pair in
+          that lab, whose even rooms also wear the shared .room
+          class so its wardrobe flips ink and surfaces inside) and
+          hands you to the next through a seam that never repeats
+          the previous curve. BandWave is the shared wave kit —
+          read only; the rooms' shelf and the exempt paths stay
+          byte-untouched. */
+      }
       <div className="mt-12 sm:mt-16">
         <div
           aria-hidden
           className="relative left-1/2 w-[100vw] -translate-x-1/2"
         >
-          <BandWave from="var(--color-cream)" to={galRoom(0)} />
+          <BandWave
+            from="var(--color-cream)"
+            to={galRoom(0)}
+            className={galWaveH}
+          />
         </div>
         {doc.sections.map((section, i) => {
           const last = i === doc.sections.length - 1;
           return (
             <Fragment key={section.spec}>
               <div
-                className="relative left-1/2 w-[100vw] -translate-x-1/2"
+                className={`relative left-1/2 w-[100vw] -translate-x-1/2${
+                  i % 2 === 0 ? " room" : ""
+                }`}
                 style={{ background: galRoom(i) }}
               >
-                <div className="mx-auto max-w-4xl px-5 py-14 sm:px-8 sm:py-16">
+                <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8 sm:py-20">
                   <Reveal y={18}>
                     <GallerySectionView
                       section={section}
@@ -502,6 +523,8 @@ function NotesGalleryBody({
                 <BandWave
                   from={galRoom(i)}
                   to={last ? "var(--color-cream)" : galRoom(i + 1)}
+                  wave={(i + 1) % WAVES.length}
+                  className={galWaveH}
                 />
               </div>
             </Fragment>

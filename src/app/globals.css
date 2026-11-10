@@ -1082,26 +1082,61 @@ html[data-iface="editorial"] ::-webkit-scrollbar-thumb:hover {
      which is what keeps the walls quiet.
    · --iface-accent-ink — the ink that reads ON the accent, for
      the flooded states (the pack tick, the active index row).
+   · --gal-room-a / --gal-room-b — the two room grounds the wave
+     walk alternates, tuned PER LAB: a flat token formula cannot
+     serve every lab at once (bronze 10% over daylight cream reads,
+     champagne 10% over the plum night vanishes), so each lab sets
+     its own two steps of presence. Light and classic keep the
+     tonal catalog walk; after dark the steps widen until the glows
+     actually read on the dark grounds; classic trades the tonal
+     walk for its signature pair — deep espresso rooms alternating
+     warm cream rooms — with the espresso rooms flipping ink and
+     surfaces through the shared .room wardrobe (html.classic
+     .room) and the accent re-pointed to a caramel that reads on
+     cocoa (below).
    Plus the same transient touches the editorial room wears — the
    text selection and the scrollbar — so the shared shell keeps
    its single implementation. */
 html[data-iface="gallery"] {
   --iface-accent: color-mix(in oklab, #b3762f 72%, var(--color-ink));
   --iface-accent-ink: #fffdf7;
+  --gal-room-a: color-mix(in oklab, var(--iface-accent) 12%, var(--color-cream));
+  --gal-room-b: color-mix(in oklab, var(--iface-accent) 22%, var(--color-cream));
   scrollbar-color: color-mix(in oklab, var(--color-ink) 32%, transparent)
     var(--color-cream);
 }
 html[data-iface="gallery"].dark:not(.dune) {
   --iface-accent: #e5c78e;
   --iface-accent-ink: #2e2016;
+  /* champagne must GLOW on the plum night — the daylight steps
+     disappear on near-black grounds, so the night walk widens */
+  --gal-room-a: color-mix(in oklab, #e5c78e 15%, var(--color-cream));
+  --gal-room-b: color-mix(in oklab, #e5c78e 28%, var(--color-cream));
 }
 html[data-iface="gallery"].dune {
   --iface-accent: #e6b77e;
   --iface-accent-ink: #4e3417;
+  /* sand on roasted chocolate — same story as the night lab: the
+     steps widen until the warmth reads on the dark grounds */
+  --gal-room-a: color-mix(in oklab, #e6b77e 13%, var(--color-cream));
+  --gal-room-b: color-mix(in oklab, #e6b77e 25%, var(--color-cream));
 }
 html[data-iface="gallery"].classic {
   --iface-accent: color-mix(in oklab, #8a5a2b 62%, var(--color-ink));
   --iface-accent-ink: #fffdf7;
+  /* the classic lab's signature pair, verbatim — the same two
+     grounds html.classic .note-rooms walks; the tonal mix steps
+     stand down entirely */
+  --gal-room-a: #2c2013;
+  --gal-room-b: #fdf6e3;
+}
+/* inside a classic espresso room the dress's one accent is re-
+   pointed to a caramel that reads on cocoa — numerals, labels,
+   rules and the pack tick all follow the token in one hop — and
+   the on-accent ink flips back to the espresso ground */
+html[data-iface="gallery"].classic .room {
+  --iface-accent: color-mix(in oklab, #e6b77e 72%, var(--color-milk));
+  --iface-accent-ink: #2c2013;
 }
 html[data-iface="gallery"] ::selection {
   background: color-mix(in oklab, var(--iface-accent) 30%, transparent);
