@@ -1093,7 +1093,9 @@ html[data-iface="editorial"] ::-webkit-scrollbar-thumb:hover {
      warm cream rooms — with the espresso rooms flipping ink and
      surfaces through the shared .room wardrobe (html.classic
      .room) and the accent re-pointed to a caramel that reads on
-     cocoa (below).
+     cocoa (below). The night lab additionally grounds its rooms
+     in the mood's own plum (champagne washed over the near-black
+     cream reads brown, not dusk — see the night block below).
    Plus the same transient touches the editorial room wears — the
    text selection and the scrollbar — so the shared shell keeps
    its single implementation. */
@@ -1108,10 +1110,28 @@ html[data-iface="gallery"] {
 html[data-iface="gallery"].dark:not(.dune) {
   --iface-accent: #e5c78e;
   --iface-accent-ink: #2e2016;
-  /* champagne must GLOW on the plum night — the daylight steps
-     disappear on near-black grounds, so the night walk widens */
-  --gal-room-a: color-mix(in oklab, #e5c78e 15%, var(--color-cream));
-  --gal-room-b: color-mix(in oklab, #e5c78e 28%, var(--color-cream));
+  /* champagne must GLOW on the plum night, but a champagne FIELD
+     does not: washed straight over the near-black cream it turns
+     brown — a dune colour wearing the night lab's clothes, clashing
+     with the plum paper every plaque inside the room is cut from.
+     So after dark the rooms are grounded in the mood's OWN plum —
+     mixed from paper and cream, so all four night moods dress
+     their rooms without being told — and the champagne comes in
+     only as a lamplight whisper (5% / 9%). The ladder is measured,
+     not eyeballed, for every mood: cream → A ≈ +0.055..0.059 L,
+     A → B ≈ +0.067..0.075 L, and the paper plaques read on both
+     grounds (+0.028..0.038 L). Champagne keeps the accent; the
+     walls stay plum. */
+  --gal-room-a: color-mix(
+    in oklab,
+    #e5c78e 5%,
+    color-mix(in oklab, var(--color-paper) 30%, var(--color-cream))
+  );
+  --gal-room-b: color-mix(
+    in oklab,
+    #e5c78e 9%,
+    color-mix(in oklab, var(--color-paper) 85%, var(--color-cream))
+  );
 }
 html[data-iface="gallery"].dune {
   --iface-accent: #e6b77e;

@@ -31,7 +31,7 @@ import {
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the customize panel
-   A slide-over workshop with two dresses, one per interface:
+   A slide-over workshop with three dresses, one per interface:
 
    · rooms — frosted glass: the theme picker shows a live miniature
      of each room, the accent wheel previews its own rotation, and
@@ -42,6 +42,12 @@ import {
      running hairlines, exhibit trays, the etoc toggle, the rust
      cursor) re-dresses every knob, and the rust reads --iface-rust
      so it travels the labs exactly as the document room does.
+   · gallery — the same workshop hung as a leaflet: the white-wall
+     room's own furniture (dash-caps labels, accent numerals,
+     hairline-ruled tables, the reader's pack tick as the on/off
+     knob) re-dresses every knob, and the accent reads
+     --iface-accent so it travels the labs exactly as the reader
+     does — plum-grounded after dark, lamplit by champagne.
 
    Every knob lands in prefs.ts and re-skins the site from <html>
    outward; switching interface inside the panel swaps the dress
@@ -483,6 +489,7 @@ export function CustomizePanel({
   /* which dress the panel itself wears — flipping interface inside
      the panel re-dresses it live; the prefs contract never changes */
   const ed = prefs.iface === "editorial";
+  const gal = prefs.iface === "gallery";
 
   /* Esc closes · the page behind holds still while the panel is out */
   useEffect(() => {
@@ -557,10 +564,14 @@ export function CustomizePanel({
             transition={{ type: "spring", stiffness: 320, damping: 32 }}
             className={`customize-drawer fixed inset-y-0 right-0 z-[95] flex w-[min(460px,94vw)] max-[639px]:w-[min(420px,92vw)] flex-col overflow-hidden border-l border-ink/10 bg-paper shadow-[-24px_0_70px_-38px_rgb(0_0_0/0.42)] ${
               /* the rooms drawer is a rounder, frostier object; the
-                 editorial drawer sits print-sharp on the page ground */
-              ed
-                ? "rounded-l-[20px] max-[639px]:rounded-l-[16px]"
-                : "rounded-l-[28px] max-[639px]:rounded-l-[24px]"
+                 editorial drawer sits print-sharp on the page ground;
+                 the gallery drawer hangs like a mounted plate — the
+                 sharpest hairline edge of the three */
+              gal
+                ? "rounded-l-[14px] max-[639px]:rounded-l-[12px]"
+                : ed
+                  ? "rounded-l-[20px] max-[639px]:rounded-l-[16px]"
+                  : "rounded-l-[28px] max-[639px]:rounded-l-[24px]"
             }`}
             style={
               ed
@@ -571,7 +582,7 @@ export function CustomizePanel({
                 : undefined
             }
           >
-            {!ed && (
+            {!ed && !gal && (
               <>
                 {/* ————— soft ambient colour, without the dot texture ————— */}
                 <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -609,12 +620,31 @@ export function CustomizePanel({
                 />
               </>
             )}
+            {gal && (
+              <>
+                {/* the gallery ground: one whisper of the accent off
+                    the masthead's corner — wide light, no candy — and
+                    the room's label dash standing as the drawer grip,
+                    a hairline the reader would stamp a plaque with */}
+                <div aria-hidden className="pointer-events-none absolute inset-0">
+                  <div
+                    className="absolute -top-14 right-0 h-52 w-72"
+                    style={{ background: "radial-gradient(ellipse at 85% 0%, color-mix(in oklab, var(--iface-accent) 8%, transparent), transparent 62%)" }}
+                  />
+                </div>
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-0 top-1/2 z-20 h-[46px] w-[2px] -translate-y-1/2 rounded-full"
+                  style={{ background: "var(--iface-accent)", opacity: 0.9 }}
+                />
+              </>
+            )}
 
             <div
               className="no-scrollbar relative flex flex-1 flex-col gap-6 overflow-y-auto px-6 max-[639px]:px-4 pt-0"
               style={{ paddingTop: "calc(1.25rem + var(--sa-top))", paddingBottom: "calc(2rem + var(--sa-bottom))" }}
             >
-              {!ed && (
+              {!ed && !gal && (
                 <>
               <section className="rounded-[22px] border border-ink/[0.08] bg-ink/[0.025] p-3.5">
                 <div className="mb-3 flex items-center justify-between px-0.5">
@@ -1003,6 +1033,23 @@ export function CustomizePanel({
               )}
               {ed && (
                 <EditorialDress
+                  prefs={prefs}
+                  onClose={onClose}
+                  onHome={onHome}
+                  onOpenSpec={onOpenSpec}
+                  onOpenPack={onOpenPack}
+                  onOpenProgress={onOpenProgress}
+                  onOpenLegal={onOpenLegal}
+                  fullscreen={fullscreen}
+                  onToggleFullscreen={onToggleFullscreen}
+                  pickLab={pickLab}
+                  toggleAccent={toggleAccent}
+                  rotationCaption={rotationCaption}
+                  heightOnPreset={heightOnPreset}
+                />
+              )}
+              {gal && (
+                <GalleryDress
                   prefs={prefs}
                   onClose={onClose}
                   onHome={onHome}
@@ -1498,6 +1545,707 @@ function EditorialDress({
           <RotateCcw className="h-3.5 w-3.5" /> Reset everything
         </button>
         <p className="legal-meta">Saved on this device</p>
+      </div>
+    </>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   The gallery dress — the same workshop, hung as a leaflet.
+   When the site wears the gallery interface the drawer re-sets
+   itself in the white-wall room's own language: the dash-caps
+   label, the accent numeral, hairline-ruled tables, framed plates,
+   the reader's pack tick re-cut as the on/off knob — and a
+   colophon that closes like the reader's end matter. Every knob
+   writes the same prefs; only the furniture changes. The accent
+   reads var(--iface-accent) — the token html[data-iface="gallery"]
+   already travels with — so it follows the labs on its own:
+   daylight bronze, night champagne, dune sand, classic espresso.
+   ═══════════════════════════════════════════════════════════════ */
+
+const GAL_A = "var(--iface-accent)";
+
+/* the reader's own hairline recipe, re-cut for the leaflet */
+const galHair = (pct: number) =>
+  `color-mix(in oklab, var(--color-ink) ${pct}%, transparent)`;
+const galWash = (pct: number) =>
+  `color-mix(in oklab, var(--iface-accent) ${pct}%, transparent)`;
+const galPad2 = (n: number) => String(n).padStart(2, "0");
+
+/* the state mark — the editorial IN USE stamp, spoken in the
+   gallery's register: no pill, just small caps in the accent */
+function GalStamp({ on }: { on: boolean }) {
+  return (
+    <span
+      className="shrink-0 font-display text-[calc(9px*var(--ui-scale))] leading-none font-semibold tracking-[0.16em] uppercase"
+      style={
+        on
+          ? { color: GAL_A }
+          : { color: "var(--color-ink-faint)", opacity: 0.75 }
+      }
+    >
+      {on ? "In use" : "Select"}
+    </span>
+  );
+}
+
+/* a catalog entry header — the reader's section opener at leaflet
+   scale: accent numeral, caps title, the hairline running out to
+   the drawer's edge */
+function GalSection({
+  n,
+  title,
+  meta,
+  children,
+}: {
+  n: number;
+  title: string;
+  meta?: string;
+  children: ReactNode;
+}) {
+  return (
+    <section className="border-t pt-5" style={{ borderColor: galHair(9) }}>
+      <div className="flex items-baseline gap-3">
+        <span
+          aria-hidden
+          className="w-[26px] shrink-0 font-display text-[calc(16px*var(--ui-scale))] leading-none font-medium tracking-[-0.02em] tabular-nums"
+          style={{ color: GAL_A }}
+        >
+          {galPad2(n)}
+        </span>
+        <span className="min-w-0 font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase text-ink-faint">
+          {title}
+        </span>
+        <span
+          aria-hidden
+          className="h-px min-w-4 flex-1 self-center"
+          style={{ background: galHair(8) }}
+        />
+        {meta && (
+          <span className="shrink-0 font-display text-[calc(9.5px*var(--ui-scale))] font-semibold tracking-[0.18em] uppercase tabular-nums text-ink-faint">
+            {meta}
+          </span>
+        )}
+      </div>
+      <div className="mt-4">{children}</div>
+    </section>
+  );
+}
+
+/* the on/off knob, gallery-style — the reader's pack tick: a
+   hairline square that floods with the room's accent when it's on */
+function GalTickRow({
+  on,
+  onChange,
+  label,
+  hint,
+}: {
+  on: boolean;
+  onChange: (v: boolean) => void;
+  label: string;
+  hint: string;
+}) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={on}
+      aria-label={label}
+      onClick={() => onChange(!on)}
+      className="flex w-full cursor-pointer items-center gap-3.5 border-t py-4 text-left transition-colors first:border-t-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--iface-accent)]"
+      style={{ borderColor: galHair(8) }}
+    >
+      <span
+        aria-hidden
+        className="grid h-[26px] w-[26px] shrink-0 place-items-center rounded-[9px] transition-colors"
+        style={
+          on
+            ? { background: GAL_A, color: "var(--iface-accent-ink)" }
+            : {
+                border: `1.5px solid ${galHair(18)}`,
+                color: "var(--color-ink-faint)",
+              }
+        }
+      >
+        {on && <Check className="h-3.5 w-3.5" strokeWidth={2.8} />}
+      </span>
+      <span className="min-w-0">
+        <span className="block font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">
+          {label}
+        </span>
+        <span className="block text-[calc(11px*var(--ui-scale))] leading-snug text-ink-faint">
+          {hint}
+        </span>
+      </span>
+    </button>
+  );
+}
+
+/* a hairline-ruled rung table — the gallery's plate frame for the
+   segmented picks (text size, spec-map height & density): the
+   chosen rung wears the accent wash and speaks in the accent */
+function GalRungs({
+  items,
+  activeIndex,
+  onPick,
+  ariaPrefix,
+}: {
+  items: { key: string; aria: string; main: ReactNode; sub?: string }[];
+  activeIndex: number;
+  onPick: (i: number) => void;
+  ariaPrefix: string;
+}) {
+  return (
+    <div
+      className="grid overflow-hidden rounded-[14px] border"
+      style={{
+        borderColor: galHair(12),
+        gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))`,
+      }}
+    >
+      {items.map((it, i) => {
+        const active = i === activeIndex;
+        return (
+          <m.button
+            key={it.key}
+            type="button"
+            onClick={() => onPick(i)}
+            whileTap={{ scale: 0.96 }}
+            aria-pressed={active}
+            aria-label={`${ariaPrefix} ${it.aria}`}
+            className={`flex cursor-pointer flex-col items-center py-2.5 transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[var(--iface-accent)] ${
+              i > 0 ? "border-l" : ""
+            } ${active ? "" : "hover:bg-ink/[0.04]"}`}
+            style={{
+              borderColor: galHair(8),
+              background: active ? galWash(10) : undefined,
+              color: active ? GAL_A : "var(--color-ink-soft)",
+            }}
+          >
+            {it.main}
+            {it.sub && (
+              <span
+                className="mt-1 font-display text-[calc(9px*var(--ui-scale))] font-semibold tracking-[0.08em]"
+                style={active ? undefined : { color: "var(--color-ink-faint)" }}
+              >
+                {it.sub}
+              </span>
+            )}
+          </m.button>
+        );
+      })}
+    </div>
+  );
+}
+
+/* the typeface rows — a hairline-ruled list with each family set
+   in its own hand; the chosen one wears the wash and the pack tick */
+function GalFontTable<T extends { id: string; label: string; stack: string }>({
+  rows,
+  activeId,
+  onPick,
+  ariaPrefix,
+}: {
+  rows: T[];
+  activeId: string;
+  onPick: (id: T["id"]) => void;
+  ariaPrefix: string;
+}) {
+  return (
+    <div
+      className="overflow-hidden rounded-[14px] border"
+      style={{ borderColor: galHair(12) }}
+    >
+      {rows.map((f, i) => {
+        const active = activeId === f.id;
+        return (
+          <button
+            key={f.id}
+            type="button"
+            onClick={() => onPick(f.id)}
+            aria-pressed={active}
+            aria-label={`${ariaPrefix} ${f.label}`}
+            className={`flex w-full cursor-pointer items-center gap-3.5 px-3.5 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[var(--iface-accent)] ${
+              i > 0 ? "border-t" : ""
+            }`}
+            style={{
+              borderColor: galHair(8),
+              background: active ? galWash(7) : undefined,
+            }}
+          >
+            <span
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-[10px] border text-[calc(17px*var(--ui-scale))] leading-none font-semibold text-ink"
+              style={{ fontFamily: f.stack, borderColor: galHair(12) }}
+            >
+              Aa
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-display text-[calc(13px*var(--ui-scale))] font-semibold text-ink">
+                {f.label}
+              </span>
+              <span
+                className="block truncate text-[calc(11.5px*var(--ui-scale))] text-ink-faint"
+                style={{ fontFamily: f.stack }}
+              >
+                The quick brown fox
+              </span>
+            </span>
+            <span
+              aria-hidden
+              className="grid h-[22px] w-[22px] shrink-0 place-items-center rounded-[7px] transition-colors"
+              style={
+                active
+                  ? { background: GAL_A, color: "var(--iface-accent-ink)" }
+                  : { border: `1.5px solid ${galHair(16)}` }
+              }
+            >
+              {active && <Check className="h-3 w-3" strokeWidth={3} />}
+            </span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function GalleryDress({
+  prefs,
+  onClose,
+  onHome,
+  onOpenSpec,
+  onOpenPack,
+  onOpenProgress,
+  onOpenLegal,
+  fullscreen,
+  onToggleFullscreen,
+  pickLab,
+  toggleAccent,
+  rotationCaption,
+  heightOnPreset,
+}: {
+  prefs: Prefs;
+  onClose: () => void;
+  onHome: () => void;
+  onOpenSpec: () => void;
+  onOpenPack: () => void;
+  onOpenProgress: () => void;
+  onOpenLegal: () => void;
+  fullscreen: boolean;
+  onToggleFullscreen: () => void;
+  pickLab: (lab: Lab) => void;
+  toggleAccent: (id: AccentId) => void;
+  rotationCaption: string;
+  heightOnPreset: boolean;
+}) {
+  return (
+    <>
+      {/* ————— the masthead ————— */}
+      <header className="relative flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2.5">
+            <span
+              aria-hidden
+              className="h-[2px] w-[14px] shrink-0 rounded-full"
+              style={{ background: GAL_A }}
+            />
+            <span
+              className="font-display text-[calc(10px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase"
+              style={{ color: GAL_A }}
+            >
+              The white-wall workshop
+            </span>
+          </div>
+          <h2 className="mt-3.5 font-display text-[calc(25px*var(--ui-scale))] leading-[1.06] font-medium tracking-[-0.03em] text-ink">
+            Set the room<span aria-hidden style={{ color: GAL_A }}>.</span>
+          </h2>
+          <p className="mt-3 font-display text-[calc(10px*var(--ui-scale))] font-semibold tracking-[0.18em] uppercase text-ink-faint">
+            Every knob re-skins the site at once
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Exit Control Panel"
+          title="Exit Control Panel"
+          className="mt-0.5 grid h-8 w-8 shrink-0 cursor-pointer place-items-center rounded-[10px] border transition-colors hover:bg-ink/[0.05] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--iface-accent)]"
+          style={{ borderColor: galHair(16), color: "var(--color-ink-soft)" }}
+        >
+          <X className="h-4 w-4" strokeWidth={2.2} />
+        </button>
+      </header>
+
+      {/* 01 · contents — the navigate row as a two-column ledger */}
+      <GalSection n={1} title="Contents">
+        <div
+          className="grid gap-x-9 border-b sm:grid-cols-2"
+          style={{ borderColor: galHair(9) }}
+        >
+          {[
+            { label: fullscreen ? "Exit full screen" : "Full screen", action: onToggleFullscreen },
+            { label: "Home", action: onHome },
+            { label: "Specification", action: onOpenSpec },
+            { label: "Revision pack", action: onOpenPack },
+            { label: "Progress", action: onOpenProgress },
+            { label: "Disclaimer", action: onOpenLegal },
+          ].map((item, i) => (
+            <button
+              key={item.label}
+              type="button"
+              onClick={() => {
+                item.action();
+                onClose();
+              }}
+              aria-label={item.label}
+              className="group flex cursor-pointer items-baseline gap-3 border-t py-2.5 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--iface-accent)]"
+              style={{ borderColor: galHair(8) }}
+            >
+              <span
+                aria-hidden
+                className="w-[20px] shrink-0 font-display text-[calc(10.5px*var(--ui-scale))] leading-none font-medium tabular-nums"
+                style={{ color: GAL_A }}
+              >
+                {galPad2(i + 1)}
+              </span>
+              <span className="min-w-0 truncate text-[calc(13px*var(--ui-scale))] font-semibold text-ink-soft transition-colors group-hover:text-ink">
+                {item.label}
+              </span>
+            </button>
+          ))}
+        </div>
+      </GalSection>
+
+      {/* 02 · interface — the three dresses as catalog plates */}
+      <GalSection n={2} title="Interface">
+        <div className="flex flex-col gap-2.5">
+          {IFACE_ORDER.map((f, i) => {
+            const active = prefs.iface === f;
+            return (
+              <button
+                key={f}
+                type="button"
+                onClick={() => setPrefs({ iface: f })}
+                aria-pressed={active}
+                aria-label={`${IFACE_LABEL[f]} interface — ${IFACE_DESCRIPTION[f]}`}
+                className="flex w-full cursor-pointer items-center gap-3.5 rounded-[16px] border py-2.5 pl-2.5 pr-4 text-left transition-shadow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--iface-accent)]"
+                style={{
+                  borderColor: galHair(10),
+                  background: active ? galWash(6) : "transparent",
+                  boxShadow: active ? `0 0 0 1.5px ${GAL_A}` : undefined,
+                }}
+              >
+                <span className="w-[124px] shrink-0">
+                  <IfaceStage id={f} />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-baseline gap-2">
+                    <span
+                      aria-hidden
+                      className="font-display text-[calc(10.5px*var(--ui-scale))] leading-none font-medium tabular-nums"
+                      style={{ color: GAL_A }}
+                    >
+                      {galPad2(i + 1)}
+                    </span>
+                    <span className="truncate font-display text-[calc(13px*var(--ui-scale))] font-semibold text-ink">
+                      {IFACE_LABEL[f]}
+                    </span>
+                  </span>
+                  <span className="mt-1 block truncate text-[calc(11px*var(--ui-scale))] leading-snug text-ink-faint">
+                    {IFACE_DESCRIPTION[f]}
+                  </span>
+                </span>
+                <GalStamp on={active} />
+              </button>
+            );
+          })}
+        </div>
+      </GalSection>
+
+      {/* 03 · appearance — the four labs as framed plates */}
+      <GalSection n={3} title="Appearance">
+        <div className="grid grid-cols-2 gap-2.5">
+          {LAB_ORDER.map((l) => {
+            const active = prefs.theme === l;
+            return (
+              <button
+                key={l}
+                type="button"
+                onClick={() => pickLab(l)}
+                aria-pressed={active}
+                aria-label={`${LAB_LABEL[l]} theme — ${LAB_DESCRIPTION[l]}`}
+                className="flex min-w-0 cursor-pointer flex-col gap-2 rounded-[16px] border p-2.5 text-left transition-shadow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--iface-accent)]"
+                style={{
+                  borderColor: galHair(10),
+                  background: active ? galWash(6) : "transparent",
+                  boxShadow: active ? `0 0 0 1.5px ${GAL_A}` : undefined,
+                }}
+              >
+                <LabStage id={l} />
+                <span className="flex w-full items-center justify-between gap-2">
+                  <span className="flex min-w-0 items-center gap-2">
+                    <LabChip id={l} />
+                    <span className="truncate font-display text-[calc(12px*var(--ui-scale))] font-semibold text-ink">
+                      {LAB_LABEL[l]}
+                    </span>
+                  </span>
+                  <GalStamp on={active} />
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </GalSection>
+
+      {/* 04 · colours — the candy wheel, catalogued */}
+      <GalSection n={4} title="Colours" meta={`${prefs.accents.length} OF 6`}>
+        <div
+          className="rounded-[16px] border p-3.5"
+          style={{ borderColor: galHair(10) }}
+        >
+          <div className="flex items-center gap-2.5">
+            <span
+              aria-hidden
+              className="h-[2px] w-[14px] shrink-0 rounded-full"
+              style={{ background: GAL_A }}
+            />
+            <span className="font-display text-[calc(10px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase text-ink-faint">
+              The accent palette
+            </span>
+          </div>
+          <div className="mt-3.5 grid grid-cols-4 gap-2">
+            {ACCENTS.map((a) => {
+              const on = prefs.accents.includes(a.id);
+              const lastOne = on && prefs.accents.length === 1;
+              return (
+                <m.button
+                  key={a.id}
+                  type="button"
+                  onClick={() => toggleAccent(a.id)}
+                  whileTap={lastOne ? undefined : { scale: 0.94 }}
+                  aria-pressed={on}
+                  aria-disabled={lastOne || undefined}
+                  aria-label={`${a.label} — ${
+                    lastOne
+                      ? "the wheel keeps one colour on"
+                      : on
+                        ? "selected, tap to remove"
+                        : "not selected, tap to add"
+                  }`}
+                  className="group flex min-w-0 cursor-pointer flex-col items-center gap-2 rounded-[12px] px-1 py-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--iface-accent)]"
+                  style={{ background: on ? galWash(5) : "transparent" }}
+                >
+                  <span
+                    aria-hidden
+                    className="relative grid h-9 w-9 place-items-center rounded-full"
+                    style={{
+                      background: a.hex,
+                      /* chosen: a paper gap and a ring in the swatch's
+                         own ink — the catalog's plate pin; waiting: the
+                         pedestal edge the hairline frame carries */
+                      boxShadow: on
+                        ? `0 0 0 2px var(--color-paper), 0 0 0 3.5px ${a.hex}`
+                        : `0 1.5px 0 ${galHair(14)}`,
+                      opacity: on ? 1 : 0.82,
+                    }}
+                  >
+                    {on && (
+                      <Check
+                        className="h-4 w-4"
+                        strokeWidth={3.2}
+                        style={{ color: readableInk(a.hex) }}
+                      />
+                    )}
+                  </span>
+                  <span
+                    className={`max-w-full truncate font-display text-[calc(10px*var(--ui-scale))] font-semibold ${
+                      on ? "text-ink" : "text-ink-faint"
+                    }`}
+                  >
+                    {a.label}
+                  </span>
+                </m.button>
+              );
+            })}
+          </div>
+          <div className="mt-3 border-t pt-3" style={{ borderColor: galHair(8) }}>
+            <p className="font-display text-[calc(9.5px*var(--ui-scale))] font-semibold tracking-[0.18em] uppercase text-ink-faint">
+              The wheel, in order
+            </p>
+            {/* the sequence as a squared strip, parted by the paper */}
+            <div
+              aria-hidden
+              className="mt-2 flex h-2.5 overflow-hidden rounded-[3px] border"
+              style={{ borderColor: galHair(10) }}
+            >
+              {Array.from({ length: 8 }, (_, k) => (
+                <span
+                  key={k}
+                  className="min-w-0 flex-1"
+                  style={{
+                    background: accentOf(k),
+                    borderRight: k < 7 ? "1px solid var(--color-paper)" : undefined,
+                  }}
+                />
+              ))}
+            </div>
+            <p className="mt-2 text-[calc(11px*var(--ui-scale))] leading-snug text-ink-soft">
+              {rotationCaption}
+            </p>
+          </div>
+        </div>
+      </GalSection>
+
+      {/* 05 · text size — the rungs as a ruled table */}
+      <GalSection n={5} title="Text size">
+        <GalRungs
+          ariaPrefix="Text size"
+          activeIndex={SCALES.indexOf(prefs.scale)}
+          onPick={(i) => setPrefs({ scale: SCALES[i] })}
+          items={SCALES.map((s, i) => ({
+            key: s,
+            aria: s,
+            main: (
+              <span
+                className="font-display leading-none font-bold"
+                style={{
+                  fontSize: `calc(${SCALE_PX[i]}px * var(--ui-scale))`,
+                }}
+              >
+                Aa
+              </span>
+            ),
+            sub: s,
+          }))}
+        />
+      </GalSection>
+
+      {/* 06 · fonts — the families in hairline rows */}
+      <GalSection n={6} title="Fonts">
+        <div className="flex flex-col gap-4">
+          <div>
+            <div className="flex items-center gap-2.5">
+              <span
+                aria-hidden
+                className="h-[2px] w-[14px] shrink-0 rounded-full"
+                style={{ background: galWash(70) }}
+              />
+              <span className="font-display text-[calc(10px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase text-ink-faint">
+                Headings
+              </span>
+            </div>
+            <div className="mt-2.5">
+              <GalFontTable
+                rows={HEAD_FONTS}
+                activeId={prefs.headFont}
+                onPick={(id) => setPrefs({ headFont: id })}
+                ariaPrefix="Heading font"
+              />
+            </div>
+          </div>
+          <div>
+            <div className="flex items-center gap-2.5">
+              <span
+                aria-hidden
+                className="h-[2px] w-[14px] shrink-0 rounded-full"
+                style={{ background: galWash(70) }}
+              />
+              <span className="font-display text-[calc(10px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase text-ink-faint">
+                Body
+              </span>
+            </div>
+            <div className="mt-2.5">
+              <GalFontTable
+                rows={BODY_FONTS}
+                activeId={prefs.bodyFont}
+                onPick={(id) => setPrefs({ bodyFont: id })}
+                ariaPrefix="Body font"
+              />
+            </div>
+          </div>
+        </div>
+      </GalSection>
+
+      {/* 07 · spec map — the tray's own knobs as ruled tables */}
+      <GalSection
+        n={7}
+        title="Spec map"
+        meta={heightOnPreset ? undefined : `CUSTOM ${Math.round(prefs.specHeight * 100)}%`}
+      >
+        <div className="flex flex-col gap-2.5">
+          <GalRungs
+            ariaPrefix="Spec map height"
+            activeIndex={SPEC_HEIGHTS.findIndex(
+              (h) => Math.abs(prefs.specHeight - h.fraction) < 0.025,
+            )}
+            onPick={(i) => setPrefs({ specHeight: SPEC_HEIGHTS[i].fraction })}
+            items={SPEC_HEIGHTS.map((h) => ({
+              key: h.id,
+              aria: h.label,
+              main: (
+                <span className="font-display text-[calc(14px*var(--ui-scale))] leading-none font-bold">
+                  {Math.round(h.fraction * 100)}
+                  <span className="text-[calc(9.5px*var(--ui-scale))]">%</span>
+                </span>
+              ),
+              sub: h.label,
+            }))}
+          />
+          <GalRungs
+            ariaPrefix="Spec map density"
+            activeIndex={SPEC_DENSITIES.findIndex((d) => d.id === prefs.specDensity)}
+            onPick={(i) => setPrefs({ specDensity: SPEC_DENSITIES[i].id })}
+            items={SPEC_DENSITIES.map((d) => ({
+              key: d.id,
+              aria: d.label,
+              main: (
+                <span className="font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.04em]">
+                  {d.label}
+                </span>
+              ),
+            }))}
+          />
+        </div>
+      </GalSection>
+
+      {/* 08 · details — the quiet knobs as pack ticks */}
+      <GalSection n={8} title="Details">
+        <div className="flex flex-col">
+          <GalTickRow
+            on={prefs.dots}
+            onChange={(v) => setPrefs({ dots: v })}
+            label="Dots"
+            hint="The polka-dot paper grain"
+          />
+          <GalTickRow
+            on={prefs.motion}
+            onChange={(v) => setPrefs({ motion: v })}
+            label="Motion"
+            hint="Floating blobs, marquees & wiggles"
+          />
+        </div>
+      </GalSection>
+
+      {/* the colophon — the reader's end matter, quiet */}
+      <div
+        className="flex flex-col items-center gap-3 border-t pt-5"
+        style={{ borderColor: galHair(9) }}
+      >
+        <button
+          type="button"
+          onClick={() => {
+            setPrefs(DEFAULT_PREFS);
+          }}
+          className="group inline-flex cursor-pointer items-center gap-2.5 font-display text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.18em] uppercase text-ink-faint transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--iface-accent)]"
+        >
+          <span
+            aria-hidden
+            className="h-[2px] w-[14px] rounded-full transition-colors group-hover:bg-ink"
+            style={{ background: GAL_A }}
+          />
+          Reset everything
+        </button>
+        <p className="font-display text-[calc(9.5px*var(--ui-scale))] font-semibold tracking-[0.18em] uppercase text-ink-faint">
+          Saved on this device
+        </p>
       </div>
     </>
   );
