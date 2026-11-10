@@ -34,8 +34,8 @@ export const IFACE_LABEL: Record<Iface, string> = {
   editorial: "Editorial",
 };
 export const IFACE_DESCRIPTION: Record<Iface, string> = {
-  gallery: "White walls, wide light, one accent — every note, spec by spec",
-  editorial: "The document room — rails, clauses & exhibits",
+  gallery: "Catalog-style reader — every note, spec by spec",
+  editorial: "Document-style reader — numbered sections & rails",
 };
 export const IFACE_ORDER: Iface[] = ["gallery", "editorial"];
 

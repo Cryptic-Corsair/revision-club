@@ -29,17 +29,21 @@
    ACTIVE interface's own ink instead of picking a side: the whole
    tray reads var(--spec-accent), resolved per interface in
    globals.css — the gallery's single accent wherever the white-wall
-   dress is on, the document room's rust otherwise. Every lab
+   dress is on, the document room's rust otherwise (with
+   --spec-accent-ink as the ink that reads ON it). Every lab
    re-inks that token in one hop, so the map stays native in all
    eight dressings without a second implementation. The structure
-   itself is the quiet-catalog vocabulary both interfaces share:
-   a dash-caps kicker masthead, a hairline ruler of stops, framed
-   index tiles whose numeral carries the accent, and a ledger footer
-   — no candy wheel, no pedestals, no tilt.
+   itself answers the reader's three questions in one glance —
+   where am I, what's here, how far is left: a journey line of
+   stations whose current stop is a labeled marker (the nav stop
+   wears the same journey as a thin arc), index tiles whose active
+   one floods with the accent, and a ledger footer of prev/next
+   hops — no candy wheel, no pedestals, no tilt.
    ═══════════════════════════════════════════════════════════════ */
 
 import {
   createContext,
+  Fragment,
   useCallback,
   useContext,
   useEffect,
@@ -376,6 +380,12 @@ export function SpecMapTrigger() {
     followHere(80);
   }; /* hop = smooth — the drawer is settled by then */
 
+  /* the journey line's geometry — roomy while the stops fit, compact
+     when a long note would crowd the line off a phone screen */
+  const many = sections.length > 11;
+  const st = many ? 14 : 18; /* the station box, current stop included */
+  const dot = many ? 6 : 8; /* the plain walked/ahead dots */
+
   return (
     <>
       <m.button
@@ -392,7 +402,7 @@ export function SpecMapTrigger() {
         aria-expanded={open}
         aria-haspopup="dialog"
         title="Spec map — jump between sections"
-        className="spec-stop nav-tool grid h-[46px] w-[46px] shrink-0 cursor-pointer place-items-center rounded-full border md:h-10 md:w-10 lg:h-[42px] lg:w-[42px] 2xl:h-11 2xl:w-11"
+        className="spec-stop nav-tool relative grid h-[46px] w-[46px] shrink-0 cursor-pointer place-items-center rounded-full border md:h-10 md:w-10 lg:h-[42px] lg:w-[42px] 2xl:h-11 2xl:w-11"
         style={{
           borderColor: open
             ? "color-mix(in oklab, var(--spec-accent) 60%, transparent)"
@@ -405,6 +415,22 @@ export function SpecMapTrigger() {
           boxShadow: "0 2px 0 var(--edge)",
         }}
       >
+        {/* the note's journey as one thin arc around the number —
+            how far into this note you are, readable from the corner
+            of the eye without opening anything. The arc rides the
+            dress's ink; the road not yet walked stays hairline. */}
+        {sections.length > 1 && (
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-[3px] rounded-full"
+            style={{
+              background: `conic-gradient(var(--spec-accent) ${((idx + 1) / sections.length) * 360}deg, ${TILE_LINE} 0)`,
+              WebkitMask:
+                "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px))",
+              mask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px))",
+            }}
+          />
+        )}
         {/* the stop wears the spec you're on — and trades the number
             for a map glyph while the drawer is open. The key rides on
             the open state alone, so the number updates in place as you
@@ -528,7 +554,7 @@ export function SpecMapTrigger() {
                         >
                           Spec map
                         </span>
-                        <span className="min-w-0 truncate font-display text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.1em] uppercase text-ink-faint">
+                        <span className="min-w-0 truncate font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase text-ink">
                           {label}
                         </span>
                       </div>
@@ -548,26 +574,65 @@ export function SpecMapTrigger() {
                     </button>
                   </div>
 
-                  {/* the journey so far — one hairline segment per
-                      stop in the dress's single ink; the current one
-                      stands taller. A ruler, not a rainbow. */}
+                  {/* the journey so far — stations on a line. Walked
+                      stops fill with the dress's ink, the stop you're
+                      standing on is a labeled marker riding a halo,
+                      and the road ahead stays hairline: where you
+                      are and how far is left, readable in one glance
+                      from across the room. A map, not a meter. */}
                   <div
                     aria-hidden
-                    className="mt-3 flex items-center gap-[calc(3px*var(--ui-scale))] px-5 sm:px-6"
+                    className="mt-3.5 flex items-center px-5 sm:px-6"
                   >
                     {sections.map((s, i) => (
-                      <span
-                        key={s.spec}
-                        className={`flex-1 rounded-full transition-colors duration-300 ${
-                          i === idx ? "h-[5px]" : "h-[3px]"
-                        }`}
-                        style={{
-                          background:
-                            i <= idx
-                              ? "var(--spec-accent)"
-                              : "color-mix(in oklab, var(--color-ink) 13%, transparent)",
-                        }}
-                      />
+                      <Fragment key={s.spec}>
+                        {i > 0 && (
+                          <span
+                            className="h-[3px] min-w-[2px] flex-1 rounded-full transition-colors duration-300"
+                            style={{
+                              background:
+                                i <= idx
+                                  ? "var(--spec-accent)"
+                                  : "color-mix(in oklab, var(--color-ink) 13%, transparent)",
+                            }}
+                          />
+                        )}
+                        <span
+                          className="grid shrink-0 place-items-center"
+                          style={{ width: st, height: st }}
+                        >
+                          {i === idx ? (
+                            <span
+                              className="grid place-items-center rounded-full font-display font-bold tabular-nums"
+                              style={{
+                                width: st,
+                                height: st,
+                                fontSize: many ? 8 : 9,
+                                background: "var(--spec-accent)",
+                                color: "var(--spec-accent-ink)",
+                                boxShadow:
+                                  "0 0 0 3.5px color-mix(in oklab, var(--spec-accent) 16%, transparent)",
+                              }}
+                            >
+                              {i + 1}
+                            </span>
+                          ) : (
+                            <span
+                              className="rounded-full transition-colors duration-300"
+                              style={
+                                i < idx
+                                  ? { width: dot, height: dot, background: "var(--spec-accent)" }
+                                  : {
+                                      width: dot,
+                                      height: dot,
+                                      background: "var(--color-paper)",
+                                      boxShadow: `inset 0 0 0 1.5px ${TILE_LINE}`,
+                                    }
+                              }
+                            />
+                          )}
+                        </span>
+                      </Fragment>
                     ))}
                   </div>
 
@@ -642,10 +707,15 @@ export function SpecMapTrigger() {
                           style={
                             here
                               ? {
-                                  borderColor:
-                                    "color-mix(in oklab, var(--spec-accent) 62%, transparent)",
-                                  background:
-                                    "color-mix(in oklab, var(--spec-accent) 12%, var(--color-paper))",
+                                  /* you are here — the one tile flooded
+                                     with the dress's ink, so the map
+                                     answers "which one am I on?" from
+                                     across the room */
+                                  borderColor: "var(--spec-accent)",
+                                  background: "var(--spec-accent)",
+                                  color: "var(--spec-accent-ink)",
+                                  boxShadow:
+                                    "0 8px 22px -10px color-mix(in oklab, var(--spec-accent) 55%, transparent)",
                                 }
                               : {
                                   borderColor: TILE_LINE,
@@ -656,20 +726,32 @@ export function SpecMapTrigger() {
                           <span className="flex w-full items-baseline justify-between gap-2">
                             <span
                               className="font-display text-[calc(13px*var(--ui-scale))] leading-none font-bold tracking-tight tabular-nums"
-                              style={{ color: "var(--spec-accent)" }}
+                              style={{
+                                color: here
+                                  ? "var(--spec-accent-ink)"
+                                  : "var(--spec-accent)",
+                              }}
                             >
                               {s.spec}
                             </span>
                             {here && (
                               <span
                                 className="shrink-0 font-display text-[calc(8.5px*var(--ui-scale))] leading-none font-bold tracking-[0.18em] uppercase"
-                                style={{ color: "var(--spec-accent)" }}
+                                style={{
+                                  color: "var(--spec-accent-ink)",
+                                  opacity: 0.85,
+                                }}
                               >
                                 In view
                               </span>
                             )}
                           </span>
-                          <span className="line-clamp-2 text-[calc(12px*var(--ui-scale))] leading-[1.4] font-semibold text-ink">
+                          <span
+                            className="line-clamp-2 text-[calc(12px*var(--ui-scale))] leading-[1.4] font-semibold text-ink"
+                            style={
+                              here ? { color: "var(--spec-accent-ink)" } : undefined
+                            }
+                          >
                             {s.title}
                           </span>
                         </m.button>

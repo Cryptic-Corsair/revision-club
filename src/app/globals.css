@@ -207,6 +207,22 @@ html[data-scale="XL"] {
 .spec-map,
 .spec-stop {
   --spec-accent: var(--iface-accent, var(--iface-rust));
+  /* the ink that reads ON the accent — the flooded states (the
+     "in view" tile, the journey's here-marker) need a partner the
+     way the gallery's pack tick does; the editorial dress has no
+     such token, so its paper plays the part */
+  --spec-accent-ink: var(--iface-accent-ink, var(--color-paper));
+}
+
+/* ————— the customize drawer's shared dress —————
+   One panel serves both interfaces, so like the spec map it speaks
+   the ACTIVE interface's own ink: one token pair, resolved per
+   dress — the gallery's single accent wherever the white-wall dress
+   is on, the document room's rust otherwise — and every lab's
+   re-ink of the parent token re-inks the panel in one hop. */
+.customize-drawer {
+  --panel-accent: var(--iface-accent, var(--iface-rust));
+  --panel-accent-ink: var(--iface-accent-ink, var(--color-paper));
 }
 /* the finder's focus — the field leans into the dress's ink */
 .spec-map .spec-find:focus {
