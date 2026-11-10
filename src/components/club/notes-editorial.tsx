@@ -295,16 +295,25 @@ function NotesEditorialBody({
      same id, so the drawer tracks and hops this note no matter which
      dress it wears */
   const jump = useCallback((spec: string) => scrollToSpec(spec), []);
+  /* the note's own name for itself — "Topic 9" on the class notes,
+     "Practical 1" on WCH13, straight from the unit's topic list (the
+     same label the unit page and the desk serve). The number is only
+     the fallback for a doc whose topic never joined. The gallery
+     reader derives the identical line. */
+  const topicNo = Number(doc.topicId.slice(1));
+  const topicLabel =
+    unit.topics.find((t) => t.id === doc.topicId)?.label ??
+    `Topic ${topicNo}`;
   useSpecMapRegister(
     useMemo(
       () => ({
         id: doc.id,
-        label: `${unit.code} · TOPIC ${Number(doc.topicId.slice(1))}`,
+        label: `${unit.code} · ${topicLabel.toUpperCase()}`,
         sections: doc.sections,
         active,
         jump,
       }),
-      [doc.id, unit.code, doc.topicId, doc.sections, active, jump],
+      [doc.id, unit.code, topicLabel, doc.sections, active, jump],
     ),
   );
 
@@ -337,9 +346,8 @@ function NotesEditorialBody({
   const figOffsets = useMemo(() => figOffsetsOf(doc.sections), [doc]);
   const firstSpec = doc.sections[0]?.spec ?? "";
   const lastSpec = doc.sections[doc.sections.length - 1]?.spec ?? "";
-  const topicNo = Number(doc.topicId.slice(1));
   const eyebrowFor = (spec: string) =>
-    `SPEC ${spec} · ${unit.code} TOPIC ${topicNo}`;
+    `SPEC ${spec} · ${unit.code} ${topicLabel.toUpperCase()}`;
   const introPs = doc.intro.filter((b) => b.k === "p");
   const heroPara = introPs[0]?.k === "p" ? introPs[0].text : null;
   const exhibitPs = introPs.slice(1);
@@ -376,7 +384,7 @@ function NotesEditorialBody({
               <span className="legal-kicker">
                 <BookOpen className="h-3.5 w-3.5" /> REVISION NOTE
               </span>
-              <span className="legal-meta">IAL CHEM · {unit.code} · TOPIC {topicNo}</span>
+              <span className="legal-meta">IAL CHEM · {unit.code} · {topicLabel.toUpperCase()}</span>
             </div>
             <h1 className="mt-5 max-w-[16ch] font-display text-[calc(clamp(2.65rem,7vw,5.6rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.04] font-bold tracking-[-.065em] text-ink">
               {doc.title}<span className="legal-heading-accent">.</span>

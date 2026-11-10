@@ -37,9 +37,10 @@ import {
    Each room is opened by an oversized numeral in the accent. The
    classic and editorial readers' youngest twin; the props contract is
    identical, so the shell swaps them without knowing the
-   difference. Rolling out one note at a time — Topic 9 today
-   (see GALLERY_DOCS in prefs.ts); every other page keeps its
-   current dress.
+   difference. The rollout is complete: every note in the library
+   (GALLERY_DOCS in prefs.ts) reads in the gallery — the class
+   notes and the practicals alike, the practicals named by their
+   own label (Practical 1, not Topic 1).
    ═══════════════════════════════════════════════════════════════ */
 
 const hair = (pct: number) =>
@@ -268,16 +269,25 @@ function NotesGalleryBody({
      dress it wears. The hop is the gallery's own verified recipe
      (see useGalleryHop). */
   const hop = useGalleryHop();
+  /* the note's own name for itself — "Topic 9" on the class notes,
+     "Practical 1" on WCH13, straight from the unit's topic list
+     (the same label the unit page and the desk serve). The number
+     is only the fallback for a doc whose topic never joined. The
+     editorial reader derives the identical line. */
+  const topicNo = Number(doc.topicId.slice(1));
+  const topicLabel =
+    unit.topics.find((t) => t.id === doc.topicId)?.label ??
+    `Topic ${topicNo}`;
   useSpecMapRegister(
     useMemo(
       () => ({
         id: doc.id,
-        label: `${unit.code} · TOPIC ${Number(doc.topicId.slice(1))}`,
+        label: `${unit.code} · ${topicLabel.toUpperCase()}`,
         sections: doc.sections,
         active,
         jump: hop,
       }),
-      [doc.id, unit.code, doc.topicId, doc.sections, active, hop],
+      [doc.id, unit.code, topicLabel, doc.sections, active, hop],
     ),
   );
 
@@ -310,7 +320,6 @@ function NotesGalleryBody({
   const figOffsets = useMemo(() => figOffsetsOf(doc.sections), [doc.sections]);
   const firstSpec = doc.sections[0]?.spec ?? "";
   const lastSpec = doc.sections[doc.sections.length - 1]?.spec ?? "";
-  const topicNo = Number(doc.topicId.slice(1));
   const introPs = doc.intro.filter((b) => b.k === "p");
   const lede = introPs[0]?.k === "p" ? introPs[0].text : null;
   const overture = introPs[1]?.k === "p" ? introPs[1].text : null;
@@ -356,7 +365,7 @@ function NotesGalleryBody({
               style={{ background: GAL_ACCENT }}
             />
             <span className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.24em] uppercase text-ink-faint">
-              IAL CHEM · {unit.code} · Topic {topicNo}
+              IAL CHEM · {unit.code} · {topicLabel}
             </span>
           </div>
           <h1 className="mt-5 max-w-[15ch] font-display text-[calc(clamp(2.7rem,6.4vw,4.9rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.03] font-medium tracking-[-0.045em] text-ink">
@@ -541,11 +550,11 @@ function NotesGalleryBody({
         >
           <GalleryLabel>End of the note</GalleryLabel>
           <p className="mt-5 max-w-[60ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.9] text-ink-soft">
-            Every spec point of Topic {topicNo}, walked once. Tick spec
+            Every spec point of {topicLabel}, walked once. Tick spec
             points along the way — the quiet square beside each section
             adds them to your revision pack, assembled in syllabus order
-            and ready to print. Mark the topic as revised from its unit
-            page when you can answer the statements unaided.
+            and ready to print. Mark {topicLabel} as revised from its
+            unit page when you can answer the statements unaided.
           </p>
           <button
             type="button"

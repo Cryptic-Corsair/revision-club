@@ -64,21 +64,15 @@ const BODY_FONTS: { id: BodyFont; label: string; stack: string }[] = [
 const SCALE_PX = [12, 14, 16, 19];
 
 /* the interface cards' live miniatures — two abstract rooms. The
-   gallery dress shows the white-wall room: accent dash, big
-   quiet headline, a hairline ledger of accent numerals — plus its
-   little T9 plaque, the rollout tag (Topic 9 today); the editorial
-   dress shows the document room: kicker pill, headline rule,
-   numbered clause rails. */
+   gallery dress shows the white-wall room: accent dash, big quiet
+   headline, a hairline ledger of accent numerals (the rollout
+   plaque — little T9, "Topic 9 today" — retired now the dress
+   serves every note); the editorial dress shows the document
+   room: kicker pill, headline rule, numbered clause rails. */
 function IfaceStage({ id }: { id: Iface }) {
   if (id === "gallery") {
     return (
       <span aria-hidden className="relative block rounded-[12px] border border-ink/[0.08] bg-paper px-2.5 py-2.5">
-        <span
-          className="absolute top-2 right-2 rounded-full px-1.5 py-[2px] font-display text-[7px] leading-none font-bold tracking-[0.08em]"
-          style={{ background: "#b3762f", color: "#fffdf7" }}
-        >
-          T9
-        </span>
         <span className="block h-[2px] w-[14px] rounded-full" style={{ background: "#b3762f" }} />
         <span className="mt-2 block h-[7px] w-3/4 rounded-full bg-ink/40" />
         <span className="mt-1.5 block h-[7px] w-1/2 rounded-full bg-ink/15" />

@@ -34,19 +34,43 @@ export const IFACE_LABEL: Record<Iface, string> = {
   editorial: "Editorial",
 };
 export const IFACE_DESCRIPTION: Record<Iface, string> = {
-  gallery: "White walls, wide light, one accent — Topic 9 today",
+  gallery: "White walls, wide light, one accent — every note, spec by spec",
   editorial: "The document room — rails, clauses & exhibits",
 };
 export const IFACE_ORDER: Iface[] = ["gallery", "editorial"];
 
 /* ————— the gallery's rollout ledger —————
-   The gallery dress is cut one note at a time: a doc id here means
-   the gallery reader exists for it, and the shell may serve it.
-   Topic 9 (wch12-t09) is the pilot; the shelf widens as the dress
-   proves itself. A gallery visitor who opens anything else lands
-   on the editorial reader — the dress, not the library, is
-   what's rolling out. */
-export const GALLERY_DOCS: ReadonlySet<string> = new Set(["wch12-t09"]);
+   A doc id here means the gallery reader may serve it. The dress
+   walked the library one note at a time — Topic 9 (wch12-t09) was
+   the pilot, the proof ran doc by doc, and the ledger now carries
+   the whole shelf: every class note and every practical note reads
+   in the gallery. The gate stays (explicitly, not a wildcard) so a
+   future doc — Topic 3's ionic half among them — lands on the
+   editorial floor first and joins the gallery only when it is cut
+   for the dress. */
+export const GALLERY_DOCS: ReadonlySet<string> = new Set([
+  /* Unit 1 · WCH11 — the class notes */
+  "wch11-t01",
+  "wch11-t02",
+  "wch11-t03",
+  "wch11-t04",
+  "wch11-t05",
+  /* Unit 2 · WCH12 — the class notes */
+  "wch12-t06",
+  "wch12-t07",
+  "wch12-t08",
+  "wch12-t09",
+  "wch12-t10",
+  /* Unit 3 · WCH13 — the practical notes */
+  "wch13-p01",
+  "wch13-p02",
+  "wch13-p04",
+  "wch13-p05",
+  "wch13-p06",
+  "wch13-p07",
+  "wch13-p08",
+  "wch13-p09",
+]);
 
 /* the candy wheel the site's sections take turns wearing. The full
    shelf by default; the customize panel narrows it to your picks —

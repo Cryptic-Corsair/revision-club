@@ -70,9 +70,9 @@ const NotesEditorial = dynamic(
   { ssr: false, loading: RoomLoading },
 );
 /* the notes reader's gallery twin — same props, the white-wall dress.
-   The dress is rolling out one note at a time (GALLERY_DOCS in
-   prefs.ts); the shell only calls for it on a rollout doc, and a
-   gallery visitor on any other page lands on the editorial reader. */
+   The rollout is complete: every doc in GALLERY_DOCS (the whole
+   library) is served this dress; only a future doc not yet cut for
+   the gallery falls back to the editorial reader. */
 const NotesGallery = dynamic(
   () => import("./notes-gallery").then((m) => m.NotesGallery),
   { ssr: false, loading: RoomLoading },
@@ -1324,10 +1324,9 @@ export default function ClubApp() {
                 {view.kind === "notes" && unit && notesMeta && (() => {
                   /* the interface swap — the twins wear the same props
                      contract, so the shell changes nothing but the
-                     component picked. The gallery is the youngest twin
-                     and the shyest: it serves only its rollout docs
-                     (Topic 9 today), everything else stands on the
-                     editorial reader. */
+                     component picked. The gallery's rollout is
+                     complete: every note in GALLERY_DOCS (the whole
+                     library) stands on the white-wall dress. */
                   const Reader =
                     prefs.iface === "gallery" && GALLERY_DOCS.has(view.docId)
                       ? NotesGallery
