@@ -77,11 +77,12 @@ const NotesGallery = dynamic(
   () => import("./notes-gallery").then((m) => m.NotesGallery),
   { ssr: false, loading: RoomLoading },
 );
-/* the progress room's editorial twin — same props, the document dress */
-const ProgressEditorial = dynamic(
-  () => import("./progress-editorial").then((m) => m.ProgressEditorial),
-  { ssr: false, loading: RoomLoading },
-);
+/* the progress room — the original sticker book, back on the surface
+   it held before the editorial twin was ever cut. Same props. */
+const StickerBook = dynamic(() => import("./sticker-book").then((m) => m.StickerBook), {
+  ssr: false,
+  loading: RoomLoading,
+});
 /* the spec index's editorial twin — same props, the document dress */
 const SpecEditorial = dynamic(
   () => import("./spec-editorial").then((m) => m.SpecEditorial),
@@ -242,7 +243,7 @@ const WARM_CHUNKS = {
   unitEditorial: () => import("./unit-editorial"),
   specEditorial: () => import("./spec-editorial"),
   packEditorial: () => import("./pack-editorial"),
-  progressEditorial: () => import("./progress-editorial"),
+  stickerBook: () => import("./sticker-book"),
   notesGallery: () => import("./notes-gallery"),
   search: () => import("./search"),
   customize: () => import("./customize"),
@@ -255,7 +256,7 @@ const EDITORIAL_PAGES: (keyof typeof WARM_CHUNKS)[] = [
   "unitEditorial",
   "specEditorial",
   "packEditorial",
-  "progressEditorial",
+  "stickerBook",
 ];
 
 const WARM_BY_IFACE: Record<Iface, (keyof typeof WARM_CHUNKS)[]> = {
@@ -1358,7 +1359,7 @@ export default function ClubApp() {
                 )}
 
                 {view.kind === "sticker" && (
-                  <ProgressEditorial
+                  <StickerBook
                     units={UNITS}
                     onBack={goHome}
                     onOpenUnit={openUnit}
