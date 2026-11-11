@@ -7,6 +7,17 @@ import { ArrowRight, Search, X } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { SEARCH_INDEX, searchTopics, type SearchRow } from "@/lib/spectra/search-index";
 
+/* ═══════════════════════════════════════════════════════════════
+   IAL CHEM · the course search — one palette, both interfaces.
+   The palette is shared chrome like the spec map and the customize
+   panel, so it speaks the ACTIVE interface's own ink: the whole
+   sheet reads var(--search-accent), resolved per dress in
+   globals.css (the gallery's bronze wherever the white-wall dress
+   is on, the document room's rust otherwise). One design, no
+   per-dress twin: the masthead and the hairline finder speak the
+   spec map's language, the rows speak the spec index's ledger, and
+   every lab re-inks the token in one hop.
+   ═══════════════════════════════════════════════════════════════ */
 
 export function SearchPalette({
   open,
@@ -89,7 +100,7 @@ export function SearchPalette({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18 }}
             onClick={onClose}
-            className="fixed inset-0 z-[89] cursor-default bg-cocoa/30 backdrop-blur-[2px]"
+            className="search-palette fixed inset-0 z-[89] cursor-default bg-cocoa/30 backdrop-blur-[2px]"
           />
           <m.section
             key="search-drawer"
@@ -102,7 +113,7 @@ export function SearchPalette({
             animate={{ y: 0 }}
             exit={{ y: "102%" }}
             transition={{ type: "spring", stiffness: 340, damping: 34 }}
-            className="fixed inset-x-0 bottom-0 z-[90] flex h-[min(86dvh,780px)] flex-col overflow-hidden rounded-t-[28px] border-t-2 border-[var(--edge)] bg-paper text-ink shadow-[0_-30px_60px_-24px_rgb(0_0_0/0.4)] outline-none"
+            className="search-palette fixed inset-x-0 bottom-0 z-[90] flex h-[min(86dvh,780px)] flex-col overflow-hidden rounded-t-[24px] border-t-2 border-[var(--edge)] bg-paper text-ink shadow-[0_-30px_60px_-24px_rgb(0_0_0/0.4)] outline-none"
             style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
           >
             <div className="flex shrink-0 justify-center py-2.5" aria-hidden>
@@ -110,30 +121,51 @@ export function SearchPalette({
             </div>
 
             <div className="mx-auto flex min-h-0 w-full max-w-[920px] flex-1 flex-col">
-              <header className="flex shrink-0 items-center gap-3 px-4 pb-3 sm:px-6">
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-ink/[0.055] text-grape">
-                  <Search className="h-[18px] w-[18px]" />
-                </div>
+              {/* the masthead — the spec map's language: the dress's
+                  dash and small caps name the room, the ledger line
+                  underneath says what the shelf holds right now */}
+              <header className="flex shrink-0 items-start gap-3 px-4 pb-3 sm:px-6">
                 <div className="min-w-0 flex-1">
-                  <p className="truncate font-display text-[14px] font-bold text-ink">Course search</p>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-ink-faint">IAL CHEM / PEARSON EDEXCEL</p>
+                  <div className="flex min-w-0 items-center gap-2">
+                    <span
+                      aria-hidden
+                      className="h-[2.5px] w-4 shrink-0 rounded-full"
+                      style={{ background: "var(--search-accent)" }}
+                    />
+                    <span
+                      className="shrink-0 font-display text-[11px] font-bold uppercase tracking-[0.16em]"
+                      style={{ color: "var(--search-accent)" }}
+                    >
+                      Course search
+                    </span>
+                    <span className="min-w-0 truncate font-display text-[12px] font-bold uppercase tracking-[0.08em] text-ink">
+                      IAL CHEM · PEARSON EDEXCEL
+                    </span>
+                  </div>
+                  <p className="mt-1.5 truncate text-[12.5px] font-semibold text-ink-soft">
+                    {q.trim() !== ""
+                      ? `${results.length} of ${SEARCH_INDEX.length} topics match — Enter opens the highlighted one`
+                      : `${SEARCH_INDEX.length} topics across 6 units — type to cut the shelf down`}
+                  </p>
                 </div>
-                <span className="hidden font-mono text-[10px] text-ink-faint sm:inline">ESC TO CLOSE</span>
+                <span className="mt-1 hidden font-mono text-[10px] text-ink-faint sm:inline">
+                  ESC TO CLOSE
+                </span>
                 <button
                   type="button"
                   onClick={onClose}
                   aria-label="Close search"
-                  className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ink/[0.06] text-ink-soft transition-colors hover:bg-ink/[0.11] hover:text-ink"
+                  className="mt-0.5 grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full border border-ink/[0.12] bg-paper text-ink-soft transition-colors hover:border-ink/25 hover:text-ink"
                 >
-                  <X className="h-[18px] w-[18px]" />
+                  <X className="h-[18px] w-[18px]" strokeWidth={2.2} />
                 </button>
               </header>
 
+              {/* the finder — the spec map's hairline field, not a
+                  filled pill; focus leans into the dress's ink */}
               <div className="shrink-0 px-4 pb-2 sm:px-6">
-                <div className="group flex h-[54px] items-center gap-3 rounded-full border border-ink/[0.09] bg-ink/[0.055] px-3 pl-3.5 transition-colors focus-within:border-grape/35 focus-within:bg-ink/[0.075]">
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-paper text-grape shadow-[0_1px_3px_rgb(0_0_0/0.08)]">
-                    <Search className="h-[15px] w-[15px]" strokeWidth={2.3} />
-                  </span>
+                <div className="search-field flex h-[52px] items-center gap-3 rounded-[14px] border border-ink/[0.13] bg-paper px-3.5 transition-colors">
+                  <Search className="h-[17px] w-[17px] shrink-0 text-ink-faint" strokeWidth={2.2} />
                   <input
                     ref={inputRef}
                     value={q}
@@ -144,7 +176,7 @@ export function SearchPalette({
                     aria-controls="search-results"
                     aria-activedescendant={results[sel] ? `search-result-${sel}` : undefined}
                     autoComplete="off"
-                    className="min-w-0 flex-1 bg-transparent font-display text-[14px] font-semibold tracking-[-0.01em] text-ink placeholder:font-medium placeholder:text-ink-faint focus:outline-none sm:text-[15px]"
+                    className="min-w-0 flex-1 bg-transparent text-[14.5px] font-semibold tracking-[-0.01em] text-ink placeholder:font-medium placeholder:text-ink-faint focus:outline-none sm:text-[15px]"
                   />
                   {q ? (
                     <button
@@ -159,19 +191,17 @@ export function SearchPalette({
                     <kbd className="hidden shrink-0 rounded-full border border-ink/10 bg-paper/75 px-2.5 py-1 font-mono text-[9px] font-semibold tracking-wide text-ink-faint sm:inline">⌘ K</kbd>
                   )}
                 </div>
-
-
               </div>
 
               <div
                 id="search-results"
                 ref={listRef}
-                className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 py-3 sm:px-6"
+                className="min-h-0 flex-1 space-y-5 overflow-y-auto px-4 py-3 sm:px-6"
                 aria-label="Course topics"
                 style={{ overscrollBehavior: "contain" }}
               >
                 {results.length === 0 ? (
-                  <div className="mx-auto max-w-md rounded-[24px] border border-dashed border-ink/15 bg-ink/[0.025] px-6 py-12 text-center">
+                  <div className="mx-auto max-w-md rounded-[22px] border border-dashed border-ink/15 bg-ink/[0.025] px-6 py-12 text-center">
                     <span className="mx-auto grid h-11 w-11 place-items-center rounded-2xl bg-ink/[0.06] text-ink-faint">
                       <Search className="h-5 w-5" />
                     </span>
@@ -180,14 +210,18 @@ export function SearchPalette({
                     <button type="button" onClick={() => setQ("")} className="mt-5 rounded-full bg-ink px-4 py-2.5 text-[11px] font-bold text-paper transition-opacity hover:opacity-85">Clear search</button>
                   </div>
                 ) : Object.entries(groups).map(([unit, rows]) => (
-                  <section key={unit} className="space-y-1">
-                    <div className="flex items-center gap-2.5 px-1 pb-1 pt-2">
+                  <section key={unit} className="space-y-1.5">
+                    <div className="flex items-center gap-2.5 px-1 pb-0.5 pt-1">
                       <span className="h-4 w-[3px] rounded-full" style={{ background: rows[0].unitMain }} />
                       <h3 className="font-display text-[11px] font-bold uppercase tracking-[0.12em] text-ink-soft">{unit}</h3>
                       <span className="font-mono text-[9px] tabular-nums text-ink-faint">{rows.length}</span>
                       <span className="h-px flex-1 bg-ink/[0.08]" />
                     </div>
-                    <div className="divide-y divide-ink/[0.07]">
+                    {/* the ledger — one framed card per unit, its rows
+                        divided like the spec index's statements; the
+                        highlighted row floods with the dress's ink
+                        (.search-row[data-active] in globals.css) */}
+                    <div className="overflow-hidden rounded-[16px] border border-ink/[0.08] bg-paper">
                       {rows.map((row) => {
                         const index = ++rowIndex;
                         const active = index === sel;
@@ -196,19 +230,29 @@ export function SearchPalette({
                             key={`${row.unit}/${row.topicId}`}
                             id={`search-result-${index}`}
                             data-idx={index}
+                            data-active={active ? "true" : undefined}
                             type="button"
                             aria-current={active ? "true" : undefined}
                             onMouseEnter={() => setSel(index)}
                             onClick={() => pick(row)}
-                            className={`group flex min-h-[58px] w-full min-w-0 items-center gap-3 rounded-lg px-2.5 py-2 text-left transition-colors ${active ? "bg-grape/[0.075]" : "hover:bg-ink/[0.035]"}`}
+                            className="search-row group flex w-full min-w-0 cursor-pointer items-center gap-3.5 border-b border-ink/[0.07] px-4 py-3 text-left transition-colors last:border-b-0 hover:bg-ink/[0.03]"
                           >
                             <span className="min-w-0 flex-1">
-                              <span className="block font-mono text-[9px] font-semibold tracking-wide text-ink-faint">{row.label}</span>
-                              <span className="mt-0.5 block text-[12px] font-semibold leading-snug text-ink sm:text-[13px]">{row.title}</span>
+                              <span className="block font-display text-[9.5px] font-bold uppercase tracking-[0.14em] text-ink-faint">
+                                {row.label}
+                              </span>
+                              <span className="mt-0.5 block truncate text-[13px] font-semibold leading-snug text-ink sm:text-[13.5px]">
+                                {row.title}
+                              </span>
+                              <span className="mt-0.5 hidden truncate text-[11px] leading-snug text-ink-faint sm:block">
+                                {row.summary}
+                              </span>
                             </span>
-                            <span className="flex shrink-0 items-center gap-2 text-[9px] font-medium tabular-nums text-ink-faint">
-                              <span>{row.minutes} min</span>
-                              <ArrowRight className={`h-3.5 w-3.5 ${active ? "text-grape" : "text-ink-faint/50"}`} />
+                            <span className="flex shrink-0 items-center gap-2.5 text-[10px] font-semibold tabular-nums text-ink-faint">
+                              <span className="rounded-full bg-ink/[0.05] px-2 py-0.5">
+                                {row.minutes} min
+                              </span>
+                              <ArrowRight className="search-row-goto h-3.5 w-3.5 text-ink-faint/50" />
                             </span>
                           </button>
                         );
@@ -219,7 +263,7 @@ export function SearchPalette({
               </div>
 
               <footer className="flex shrink-0 items-center justify-between gap-3 border-t border-ink/10 px-4 py-2.5 text-[10px] font-medium text-ink-faint sm:px-6">
-                <span>6 units · 33 topics · WCH11–WCH16</span>
+                <span>6 units · {SEARCH_INDEX.length} topics · WCH11–WCH16</span>
                 <span className="hidden sm:inline">↑ ↓ navigate · Enter open · Esc close</span>
               </footer>
             </div>

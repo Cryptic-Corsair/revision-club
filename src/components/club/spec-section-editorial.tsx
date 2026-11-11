@@ -84,10 +84,15 @@ export function EditorialSectionView({
 }) {
   const Icon = CLAUSE_ICONS[index % CLAUSE_ICONS.length];
   let figCount = 0;
+  /* the clause's own ground — the classic lab paints its two
+     signature rooms (deep espresso, warm cream) straight onto the
+     clause panels at the rooms' parity; every other lab ignores the
+     class and keeps the flat document stream */
+  const band = index % 2 === 0 ? "is-band-espresso" : "is-band-cream";
   return (
     <section
       id={specAnchorId(anchorPrefix, section.spec)}
-      className="legal-clause spec-anchor"
+      className={`legal-clause spec-anchor ${band}`}
     >
       <div className="legal-clause-rail">
         <span className="legal-clause-number">{String(index + 1).padStart(2, "0")}</span>
@@ -105,17 +110,20 @@ export function EditorialSectionView({
           {section.title}
         </h3>
         {!hideStatement && (
-          <div
-            className="mt-4 max-w-[72ch] rounded-[calc(18px*var(--ui-scale))] bg-paper/90 px-5 py-4"
-            style={{ borderLeft: `5px solid ${tint(accent, 45)}` }}
-          >
-            <div className="font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
-              From the specification
-            </div>
-            <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.75] text-ink italic">
+          <figure className="legal-quote mt-5 max-w-[72ch]">
+            <figcaption className="legal-quote-head">
+              <span
+                aria-hidden
+                className="legal-quote-tick"
+                style={{ background: tint(accent, 40) }}
+              />
+              <span className="legal-quote-kicker">From the specification</span>
+              <span aria-hidden className="legal-quote-rule" />
+            </figcaption>
+            <blockquote className="legal-quote-text">
               <Fmt text={section.statement} />
-            </p>
-          </div>
+            </blockquote>
+          </figure>
         )}
         <div className="mt-6 flex flex-col gap-5">
           {section.blocks.map((b, j) => {

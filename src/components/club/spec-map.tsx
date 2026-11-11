@@ -132,7 +132,15 @@ export function useSpecMapRegister(data: SpecMapData | null) {
    height (--spec-h), flush to the bottom edge. No px caps anywhere —
    a fraction can't lose its meaning the way a dvh cap does on older
    browsers. */
-type Geo = { top: number; left: number; w: number; h: number };
+type Geo = {
+  top: number;
+  left: number;
+  w: number;
+  h: number;
+  /* false on phones — the full-bleed docked sheet; true on tablets
+     and PCs — the centred floating tray */
+  float: boolean;
+};
 
 /* the tiles rise in, one after the next — a catalogue being set on
    a table, not stickers being thrown at a wall: no spin, no tilt,
@@ -199,10 +207,24 @@ export function SpecMapTrigger() {
       vv?.height ?? window.innerHeight,
       window.innerHeight,
     );
-    const w = vw;
+    /* phones keep the full-bleed docked sheet — there, edge-to-edge
+       IS the right shape for a tray. Tablets and PCs float it: the
+       drawer keeps its height fraction but is cut to a tray width
+       (capped, side-margined, centred) and lifted a little off the
+       bottom edge, rounded all round — on a wide screen it reads as
+       an instrument laid over the page, not a phone sheet stretched
+       across the room. All numbers stay fractions/caps of what the
+       eye actually sees, so pinch zoom and browser zoom still miss
+       nothing. */
+    const pc = vw >= 1280;
+    const float = vw >= 768;
+    const margin = pc ? 36 : 22;
+    const cap = pc ? 1080 : 720;
+    const w = float ? Math.min(vw - margin * 2, cap) : vw;
+    const inset = float ? (pc ? 22 : 14) : 0;
     const h = Math.round(vh * hFracRef.current);
-    const top = Math.round(offY + (vh - h));
-    const left = offX;
+    const top = Math.round(offY + (vh - h - inset));
+    const left = Math.round(offX + (vw - w) / 2);
     /* keep the old object when nothing moved, so opening doesn't
        ripple re-renders through the panel — every field is compared
        against its own final value, TOP AND LEFT INCLUDED: a docked
@@ -214,9 +236,10 @@ export function SpecMapTrigger() {
       Math.abs(g.top - top) < 1 &&
       Math.abs(g.left - left) < 1 &&
       g.w === w &&
-      g.h === h
+      g.h === h &&
+      g.float === float
         ? g
-        : { top, left, w, h },
+        : { top, left, w, h, float },
     );
   }, []);
 
@@ -363,6 +386,9 @@ export function SpecMapTrigger() {
     sections.findIndex((s) => s.spec === active),
   );
   const close = () => setOpen(false);
+  /* the tray's roominess — the floating tray on a wide screen gets
+     the roomier journey line, tiles and ledger titles */
+  const roomy = geo !== null && geo.float && geo.w >= 860;
   /* the finder — a query filters the stops live while keeping each
      tile's ORIGINAL index, so the ruler stays anchored to the
      same stops the reader walks */
@@ -381,10 +407,11 @@ export function SpecMapTrigger() {
   }; /* hop = smooth — the drawer is settled by then */
 
   /* the journey line's geometry — roomy while the stops fit, compact
-     when a long note would crowd the line off a phone screen */
-  const many = sections.length > 11;
-  const st = many ? 14 : 18; /* the station box, current stop included */
-  const dot = many ? 6 : 8; /* the plain walked/ahead dots */
+     when a long note would crowd the line off a phone screen; the
+     wide floating tray raises the crowding threshold and the sizes */
+  const many = sections.length > (roomy ? 17 : 11);
+  const st = many ? 14 : roomy ? 20 : 18; /* the station box, current stop included */
+  const dot = many ? 6 : roomy ? 9 : 8; /* the plain walked/ahead dots */
 
   return (
     <>
@@ -479,7 +506,11 @@ export function SpecMapTrigger() {
                 animate={{ y: 0 }}
                 exit={{ y: "104%" }}
                 transition={{ type: "spring", stiffness: 340, damping: 34 }}
-                className={`spec-map fixed z-[60] flex flex-col overflow-hidden rounded-t-[calc(22px*var(--ui-scale))] border-x border-t border-ink/[0.1] bg-paper outline-none ${
+                className={`spec-map fixed z-[60] flex flex-col overflow-hidden bg-paper outline-none ${
+                  geo.float
+                    ? "rounded-[calc(22px*var(--ui-scale))] border border-ink/[0.12]"
+                    : "rounded-t-[calc(22px*var(--ui-scale))] border-x border-t border-ink/[0.1]"
+                } ${
                   dragging ? "select-none" : ""
                 }`}
                 style={{
@@ -535,8 +566,12 @@ export function SpecMapTrigger() {
 
                 {/* the content column — full-bleed on phones and
                     tablets, centred on desktops where the drawer is
-                    wider than a page of tiles needs */}
-                <div className="mx-auto flex min-h-0 w-full max-w-[calc(760px*var(--ui-scale))] flex-1 flex-col">
+                    wider than a page of tiles needs; the floating
+                    tray gives the column the tray's spare width */}
+                <div
+                  className="mx-auto flex min-h-0 w-full max-w-[calc(760px*var(--ui-scale))] flex-1 flex-col"
+                  style={geo.float ? { maxWidth: Math.min(geo.w - 64, 940) } : undefined}
+                >
                   {/* the masthead — the dress's dash and small caps
                       name the map, the ledger line says where you
                       are, and the way out sits across */}
@@ -685,7 +720,9 @@ export function SpecMapTrigger() {
                           },
                         },
                       }}
-                      className="grid gap-2 [grid-template-columns:repeat(auto-fill,minmax(var(--spec-chip),1fr))]"
+                      className={`grid [grid-template-columns:repeat(auto-fill,minmax(var(--spec-chip),1fr))] ${
+                        roomy ? "gap-2.5" : "gap-2"
+                      }`}
                     >
                       {shown.map(({ s, here }) => (
                         <m.button
@@ -701,9 +738,9 @@ export function SpecMapTrigger() {
                             jump(s.spec);
                             close();
                           }}
-                          className={`flex cursor-pointer flex-col items-start gap-1.5 rounded-[calc(12px*var(--ui-scale))] border px-3 py-2.5 text-left transition-colors ${
-                            here ? "" : "hover:border-ink/25"
-                          }`}
+                          className={`flex cursor-pointer flex-col items-start gap-1.5 rounded-[calc(12px*var(--ui-scale))] border text-left transition-colors ${
+                            roomy ? "px-3.5 py-3" : "px-3 py-2.5"
+                          } ${here ? "" : "hover:border-ink/25"}`}
                           style={
                             here
                               ? {
@@ -792,7 +829,10 @@ export function SpecMapTrigger() {
                       >
                         {idx > 0 ? sections[idx - 1].spec : "—"}
                       </span>
-                      <span className="hidden max-w-[calc(150px*var(--ui-scale))] truncate text-[calc(12px*var(--ui-scale))] font-semibold sm:inline">
+                      <span
+                        className="hidden max-w-[calc(150px*var(--ui-scale))] truncate text-[calc(12px*var(--ui-scale))] font-semibold sm:inline"
+                        style={roomy ? { maxWidth: 260 } : undefined}
+                      >
                         {idx > 0 ? sections[idx - 1].title : ""}
                       </span>
                     </button>
@@ -815,7 +855,10 @@ export function SpecMapTrigger() {
                       }
                       className="flex h-10 min-w-0 cursor-pointer items-center gap-2 rounded-full border border-ink/[0.13] bg-paper px-3.5 text-ink-soft transition-colors hover:border-ink/25 hover:text-ink disabled:cursor-default disabled:opacity-35 disabled:hover:border-ink/[0.13] disabled:hover:text-ink-soft"
                     >
-                      <span className="hidden max-w-[calc(150px*var(--ui-scale))] truncate text-[calc(12px*var(--ui-scale))] font-semibold sm:inline">
+                      <span
+                        className="hidden max-w-[calc(150px*var(--ui-scale))] truncate text-[calc(12px*var(--ui-scale))] font-semibold sm:inline"
+                        style={roomy ? { maxWidth: 260 } : undefined}
+                      >
                         {idx < sections.length - 1 ? sections[idx + 1].title : ""}
                       </span>
                       <span

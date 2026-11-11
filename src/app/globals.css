@@ -224,6 +224,35 @@ html[data-scale="XL"] {
   --panel-accent: var(--iface-accent, var(--iface-rust));
   --panel-accent-ink: var(--iface-accent-ink, var(--color-paper));
 }
+/* ————— the search palette's shared dress —————
+   One search serves both interfaces, so like the spec map and the
+   customize panel it speaks the ACTIVE interface's own ink: the
+   gallery's single accent wherever the white-wall dress is on, the
+   document room's rust otherwise — one token pair, resolved per
+   dress, re-inked per lab in one hop. */
+.search-palette {
+  --search-accent: var(--iface-accent, var(--iface-rust));
+  --search-accent-ink: var(--iface-accent-ink, var(--color-paper));
+}
+.search-palette .search-field:focus-within {
+  border-color: color-mix(in oklab, var(--search-accent) 45%, transparent);
+  background: color-mix(in oklab, var(--search-accent) 4%, var(--color-paper));
+}
+.search-palette .search-row[data-active="true"] {
+  background: color-mix(in oklab, var(--search-accent) 9%, transparent);
+}
+.search-palette .search-row[data-active="true"] .search-row-goto {
+  color: var(--search-accent);
+}
+/* the sheet catches focus on open (keyboard users land on the
+   dialog itself), and the scrim plus the grabber pill already
+   frame it — so the global dashed marker ring would just draw a
+   second border around the whole sheet, exactly what the spec map
+   suppresses for the same reason */
+.search-palette:focus-visible {
+  outline: none;
+}
+
 /* the finder's focus — the field leans into the dress's ink */
 .spec-map .spec-find:focus {
   border-color: color-mix(in oklab, var(--spec-accent) 55%, transparent);
@@ -655,13 +684,13 @@ html.dune ::selection {
   border-radius: 12px;
 }
 
-/* the ⌘K palette input — the dialog already frames it, so trade the
-   dashed marker ring for a quiet violet halo (unlayered: it must
-   beat the utility layer's focus:outline-none) */
+/* the palette input's own focus — a halo in the dress's ink, not
+   the dashed marker ring (unlayered: it must beat the utility
+   layer's focus:outline-none) */
 .search-field:focus-visible {
-  outline: 3px solid color-mix(in oklab, #9775fa 40%, transparent);
+  outline: 3px solid color-mix(in oklab, var(--search-accent, var(--iface-rust)) 38%, transparent);
   outline-offset: 1px;
-  border-radius: 999px;
+  border-radius: 14px;
 }
 
 /* the floating Spec Map — the scrim plus the pressed bubble already
@@ -1710,78 +1739,68 @@ html.dune .nav-tool-button.is-active {
   --legal-rust-soft: color-mix(in oklab, var(--legal-rust) 50%, transparent);
 }
 
-/* ————— classic on editorial · the walk —————
-   In the rooms the classic lab wears its espresso/cream walk as
-   painted bands with waved seams; the editorial clause stream sits
-   straight on the page ground, so there NOTHING is painted — the
-   ground itself walks. `notes-editorial` watches the same 35%-viewport
-   spy line the wayfinder reads and sets one attribute on <body>:
-   data-note-ground="espresso" once you are past a clause that starts
-   an espresso room (the rooms' own parity — even clauses espresso,
-   odd daylight), "cream" otherwise. Only the classic lab answers —
-   every other theme's ground never moves.
-
-   The scene eases as one piece: the page's cream and dot grains
-   cross-fade into espresso, and every colour the document room wears
-   travels with them (the :where() wrapper keeps the ease at zero
-   specificity, so the rail's own quicker hover transitions survive).
-   Inside an espresso scene the room inverts with the same recipe the
-   espresso rooms wear (html.classic .room), so cards, chips and the
-   wayfinder turn with the page — nothing daylight is caught sitting
-   on the dark ground. --legal-rust mixes itself against the flipped
-   ink, so the wayfinder's rust brightens for the night scene on its
-   own. */
-@media screen {
-  :where(html.classic body[data-note-ground]) {
-    transition: background-color 560ms ease;
-  }
-  html.classic body[data-note-ground="espresso"] {
-    background-color: #2c2013;
-    --dot-ink: rgb(253 246 227 / 0.05);
-  }
-  :where(html.classic body[data-note-ground]) .edoc,
-  :where(html.classic body[data-note-ground]) .edoc * {
-    transition:
-      color 560ms ease,
-      background-color 560ms ease,
-      border-color 560ms ease,
-      fill 560ms ease,
-      stroke 560ms ease;
-  }
-  html.classic body[data-note-ground="espresso"] .edoc {
-    --color-ink: #f0eadf;
-    --color-ink-soft: #c9c1b4;
-    --color-ink-faint: #a79d8e;
-    --color-paper: #353129;
-    --tint-base: #403a30;
-    --sunk-base: #302b24;
-    --lift-base: #292620;
-    --honey-base: #211e19;
-    --edge: rgb(0 0 0 / 0.34);
-  }
-  html.classic body[data-note-ground="espresso"] .edoc mark {
-    background: color-mix(in oklab, #ffd43b 15%, transparent);
-  }
-  /* the motion knob stills the walk — the scene steps, never glides */
-  html[data-motion="off"] body[data-note-ground],
-  html[data-motion="off"] body[data-note-ground] .edoc,
-  html[data-motion="off"] body[data-note-ground] .edoc * {
-    transition: none !important;
+/* ————— classic on editorial · the painted clauses —————
+   The classic lab's signature pair — deep espresso rooms
+   alternating warm cream — comes to the document room the
+   traditional way: painted on. Each clause is cut as a static
+   panel wearing its own ground at the rooms' own parity (even
+   clauses espresso, odd cream — the band class is set by the
+   section renderer from the section's index), so nothing switches
+   while you read; the grounds are simply coloured in. The espresso
+   panel flips ink and surfaces with the same recipe the rooms wear
+   (html.classic .room), scoped to the panel; --legal-rust is
+   re-mixed against the flipped ink so kickers and numerals read on
+   cocoa. Every other lab ignores the band classes and keeps the
+   flat document stream. */
+html.classic .legal-clauses {
+  gap: 14px;
+}
+html.classic .legal-clause.is-band-espresso,
+html.classic .legal-clause.is-band-cream {
+  border-bottom: none;
+  border-radius: 22px;
+  padding: 20px 22px 26px;
+}
+html.classic .legal-clause.is-band-cream {
+  background: #fdf6e3;
+  border: 1px solid color-mix(in oklab, var(--color-ink) 14%, transparent);
+}
+html.classic .legal-clause.is-band-espresso {
+  background: #2c2013;
+  --color-ink: var(--color-milk);
+  --color-ink-soft: color-mix(in oklab, var(--color-milk) 78%, var(--color-cocoa));
+  --color-ink-faint: color-mix(in oklab, var(--color-milk) 56%, var(--color-cocoa));
+  --color-paper: color-mix(in oklab, var(--color-milk) 13%, var(--color-cocoa));
+  --tint-base: color-mix(in oklab, var(--color-milk) 20%, var(--color-cocoa));
+  --legal-rust: color-mix(in oklab, #d9a05f 78%, var(--color-milk));
+  --edge: rgb(0 0 0 / 0.34);
+}
+html.classic .legal-clause.is-band-espresso mark {
+  background: color-mix(in oklab, #ffd43b 15%, transparent);
+}
+@media (max-width: 639px) {
+  html.classic .legal-clause.is-band-espresso,
+  html.classic .legal-clause.is-band-cream {
+    border-radius: 18px;
+    padding: 15px 15px 20px;
   }
 }
-/* on paper the walk is invisible: the espresso ground never prints,
-   and the note wears the print dress the editorial pack already has */
+/* on paper the panels print plain: the espresso ground never
+   prints, and the note wears the print dress the editorial pack
+   already has */
 @media print {
-  html.classic body[data-note-ground="espresso"] {
+  html.classic .legal-clause.is-band-espresso {
     background: none;
-  }
-  html.classic body[data-note-ground="espresso"] .edoc {
     --color-ink: #201509;
     --color-ink-soft: #4b3d2e;
     --color-ink-faint: #8a7d69;
     --color-paper: #ffffff;
     --tint-base: #ffffff;
     --legal-rust: #7a5433;
+  }
+  html.classic .legal-clause.is-band-cream {
+    background: none;
+    border-color: #d8cbb8;
   }
 }
 
@@ -2257,6 +2276,59 @@ html.dune .legal-room mark {
 }
 html.dark .legal-card, html.dune .legal-card {
   background: color-mix(in oklab, var(--color-paper) 95%, white 5%);
+}
+/* the quotation plate — the official statement set the way the
+   document room sets a quote: a hairline rule led by a short rust
+   over-rule, the clause's candy tick, small caps, and the words
+   themselves in italic. No card — the page is the card; the plate
+   reads on any ground because every colour rides the tokens the
+   ground around it sets. */
+.legal-quote {
+  border-top: 1px solid color-mix(in oklab, var(--color-ink) 16%, transparent);
+  padding-top: 13px;
+  position: relative;
+}
+.legal-quote::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 46px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--legal-rust);
+}
+.legal-quote-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.legal-quote-tick {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 2.5px;
+}
+.legal-quote-kicker {
+  font-family: var(--font-display), sans-serif;
+  font-size: calc(10.5px * var(--ui-scale));
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--legal-rust);
+}
+.legal-quote-rule {
+  flex: 1;
+  min-width: 24px;
+  height: 1px;
+  background: color-mix(in oklab, var(--color-ink) 10%, transparent);
+}
+.legal-quote-text {
+  margin-top: 9px;
+  font-size: calc(15px * var(--ui-scale));
+  line-height: 1.8;
+  color: var(--color-ink);
+  font-style: italic;
 }
 .legal-back-link {
   display: inline-flex;
@@ -2795,27 +2867,16 @@ html.classic .note-rooms .room {
 
 
 /* ═════════ The dashboard system · M3 dress ═════════
-   The widgets in components/club/dashboard.tsx (and the progress
-   room that borrows them) follow one colour law: ONE flat candy
-   per element — a ring is one solid stroke, a bar one solid fill,
-   a chip one tonal tint — and structure comes from hairlines, big
-   radii and honest ink. No washes, no gradient strokes; the kit's
-   tints mix through bits.ts against var(--tint-base) so every lab
-   inks them correctly for free.
-
-   .dash-dots  — the house paper texture (the body's own dot grid,
-                 1.6px dots on a 26px field) as a card face. Rides
-                 --dot-ink so daylight, dune and the dark moods all
-                 dot true. The progress hero wears it.
+   The widgets in components/club/dashboard.tsx follow one colour
+   law: ONE flat candy per element — a ring is one solid stroke, a
+   bar one solid fill, a chip one tonal tint — and structure comes
+   from hairlines, big radii and honest ink. No washes, no gradient
+   strokes; the kit's tints mix through bits.ts against
+   var(--tint-base) so every lab inks them correctly for free.
 
    Press feedback (.m3-press) and the tonal card (.m3-tonal) round
    out the Material 3 vocabulary. None of it keyframe-animates, so
    the motion knob's blanket silence stands them all still. */
-
-.dash-dots {
-  background-image: radial-gradient(var(--dot-ink) 1.6px, transparent 1.7px);
-  background-size: 26px 26px;
-}
 
 .m3-press {
   transition: transform 0.16s cubic-bezier(0.2, 0, 0, 1);

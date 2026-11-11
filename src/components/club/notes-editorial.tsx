@@ -15,7 +15,7 @@ import type { Unit } from "@/lib/spectra/types";
 import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { togglePick, usePacks } from "@/lib/spectra/packs";
 import { getNotes } from "@/lib/spectra/notes";
-import { scrollToSpec, specAnchorId, useSpecSpy } from "@/lib/spectra/scroll-helpers";
+import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
 import { Fmt, plural } from "./format";
 import { PopIn, Reveal, SoftButton, readableInk, shade } from "./bits";
 import { accentOf } from "./bands";
@@ -144,57 +144,6 @@ function NotesEditorialBody({
 }) {
   const active = useSpecSpy(doc.sections);
   const [contentsExpanded, setContentsExpanded] = useState(readTocPosture);
-
-  /* ————— the walk: classic's ground changes itself —————
-      The rooms wear the classic lab's espresso/cream walk as painted
-      bands with waved seams; the editorial stream sits straight on
-      the page ground, so there nothing is painted — the GROUND walks
-      instead. Scroll past a clause and the page eases to that
-      clause's ground: even clauses espresso, odd daylight cream —
-      the rooms' own parity — and past the last clause's hem the day
-      returns, the way the rooms' final wave lands back on cream.
-      One attribute on <body> carries the state ("espresso" or
-      "cream"); the CSS answers only in the classic lab, so every
-      other theme's ground never moves. The spy line is the same
-      35%-viewport line the wayfinder reads, so the counter ticks
-      and the scene changes in the same breath. */
-  const groundRaf = useRef(0);
-  useEffect(() => {
-    const body = document.body;
-    const pick = () => {
-      const y = window.scrollY + window.innerHeight * 0.35;
-      let idx = -1;
-      doc.sections.forEach((s, i) => {
-        const el = document.getElementById(specAnchorId("spec-", s.spec));
-        if (el && el.getBoundingClientRect().top + window.scrollY <= y) idx = i;
-      });
-      if (idx === doc.sections.length - 1 && idx >= 0) {
-        const el = document.getElementById(
-          specAnchorId("spec-", doc.sections[idx].spec),
-        );
-        if (el && el.getBoundingClientRect().bottom + window.scrollY < y)
-          idx = -1;
-      }
-      const next = idx >= 0 && idx % 2 === 0 ? "espresso" : "cream";
-      if (body.dataset.noteGround !== next) body.dataset.noteGround = next;
-    };
-    const onScroll = () => {
-      cancelAnimationFrame(groundRaf.current);
-      groundRaf.current = requestAnimationFrame(pick);
-    };
-    pick();
-    const settle = window.setTimeout(pick, 350); /* once fonts have settled */
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      cancelAnimationFrame(groundRaf.current);
-      window.clearTimeout(settle);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      /* leaving the note returns the ground to the page's own dress */
-      delete body.dataset.noteGround;
-    };
-  }, [doc.sections]);
 
   /* remember the posture for the next note — one small key, guarded */
   useEffect(() => {
