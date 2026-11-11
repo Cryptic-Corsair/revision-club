@@ -368,7 +368,7 @@ function NotesEditorialBody({
           keeps a single rusted number so you never lose the thread.
           Expansion is remembered between notes. */}
       <div className={`etoc-layout mt-9 grid min-w-0 grid-cols-1 items-start gap-5 lg:gap-8 ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}>
-        <aside className={`legal-index h-fit min-w-0 lg:sticky lg:top-28 ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}>
+        <aside className={`legal-index h-fit min-w-0 ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}>
           <div className={`etoc-head mb-3 ${contentsExpanded ? "is-expanded" : "is-collapsed"}`}>
             {contentsExpanded && (
               <p className="legal-meta">

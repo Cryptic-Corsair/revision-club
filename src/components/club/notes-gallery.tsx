@@ -1,8 +1,15 @@
 "use client";
 
-import { Fragment, useCallback, useEffect, useMemo, useRef } from "react";
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { m, useScroll, useSpring } from "framer-motion";
-import { ArrowLeft, ArrowUpRight, Check } from "./icons";
+import { ArrowLeft, ArrowUpRight, Check, ChevronDown } from "./icons";
 import type { NotesBlock, NotesDoc } from "@/lib/spectra/notes-types";
 import type { Unit } from "@/lib/spectra/types";
 import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
@@ -46,6 +53,18 @@ import {
 const hair = (pct: number) =>
   `color-mix(in oklab, var(--color-ink) ${pct}%, transparent)`;
 const pad2 = (n: number) => String(n).padStart(2, "0");
+
+/* the contents ledger's remembered posture — the editorial rail's
+   own trick, under its own tiny key, deliberately outside the prefs
+   schema: purely presentational, safe to drop */
+const TOC_KEY = "gallery-contents-expanded";
+const readTocPosture = () => {
+  try {
+    return localStorage.getItem(TOC_KEY) !== "collapsed";
+  } catch {
+    return true;
+  }
+};
 
 /* ————— the rooms' grounds —————
    The walk alternates two lab-tuned grounds — the --gal-room-a/b
@@ -257,6 +276,46 @@ function NotesGalleryBody({
 }) {
   const active = useSpecSpy(doc.sections);
 
+  /* the contents ledger's posture — expanded by default, remembered
+     across notes the way the editorial rail's is */
+  const [contentsExpanded, setContentsExpanded] = useState(readTocPosture);
+  useEffect(() => {
+    try {
+      localStorage.setItem(
+        TOC_KEY,
+        contentsExpanded ? "expanded" : "collapsed",
+      );
+    } catch {
+      /* private mode etc. — the ledger simply forgets */
+    }
+  }, [contentsExpanded]);
+
+  /* the minimized rail keeps your place in view — the editorial
+     rail's keep-in-view recipe, spoken horizontally: when the spy
+     crowns a new room, the standing chip is eased to the strip's
+     edge. scrollLeft math rather than scrollIntoView, so the page
+     can never be dragged along by an over-eager ancestor. */
+  const tocChipsRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (contentsExpanded) return;
+    const nav = tocChipsRef.current;
+    if (!nav) return;
+    const chip = nav.querySelector<HTMLElement>("[data-active]");
+    if (!chip) return;
+    if (nav.scrollWidth <= nav.clientWidth + 1) return;
+    const margin = 12;
+    const lo = nav.scrollLeft;
+    const hi = nav.scrollLeft + nav.clientWidth;
+    const target =
+      chip.offsetLeft < lo
+        ? chip.offsetLeft - margin
+        : chip.offsetLeft + chip.offsetWidth > hi
+          ? chip.offsetLeft + chip.offsetWidth - nav.clientWidth + margin
+          : null;
+    if (target !== null)
+      nav.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
+  }, [active, contentsExpanded]);
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 140,
@@ -404,81 +463,141 @@ function NotesGalleryBody({
 
       {/* ————— the index —————
           a two-column ledger: accent numeral, title, spec number —
-          tap to hop; the section you're standing in wears the wash */}
-      <section aria-label="Contents" className="mt-12">
-        <Reveal>
-          <div className="flex items-baseline gap-3">
-            <span className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.24em] uppercase text-ink-faint">
-              Contents
-            </span>
-            <span
-              aria-hidden
-              className="h-px min-w-6 flex-1"
-              style={{ background: hair(10) }}
-            />
-            <span
-              className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.18em] uppercase tabular-nums"
-              style={{ color: GAL_ACCENT }}
+          tap to hop; the section you're standing in wears the wash.
+          The editorial rail's minimize, spoken in the gallery's own
+          register: the header's toggle swaps the ledger for one slim
+          chip rail of spec numbers — the standing room wears the
+          dress's bronze — and the posture is remembered between
+          notes, the way the editorial rail's is. */}
+      <section
+        aria-label="Contents"
+        className={`gal-toc mt-12 ${contentsExpanded ? "" : "gal-toc-min"}`}
+      >
+        {contentsExpanded ? (
+          <Reveal>
+            <div className="flex items-center gap-3">
+              <span className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.24em] uppercase text-ink-faint">
+                Contents
+              </span>
+              <span
+                aria-hidden
+                className="h-px min-w-6 flex-1"
+                style={{ background: hair(10) }}
+              />
+              <span
+                className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.18em] uppercase tabular-nums"
+                style={{ color: GAL_ACCENT }}
+              >
+                {firstSpec} — {lastSpec}
+              </span>
+              <button
+                type="button"
+                onClick={() => setContentsExpanded(false)}
+                aria-expanded={true}
+                aria-controls="gal-toc"
+                aria-label="Collapse contents"
+                title="Collapse contents"
+                className="etoc-toggle"
+              >
+                <ChevronDown className="h-4 w-4 rotate-90 transition-transform duration-200" />
+              </button>
+            </div>
+            <div
+              id="gal-toc"
+              className="mt-2 grid gap-x-10 border-b sm:grid-cols-2"
+              style={{ borderColor: hair(10) }}
             >
-              {firstSpec} — {lastSpec}
-            </span>
-          </div>
-          <div
-            className="mt-2 grid gap-x-10 border-b sm:grid-cols-2"
-            style={{ borderColor: hair(10) }}
-          >
-            {doc.sections.map((s, i) => {
-              const isActive = active === s.spec;
-              return (
-                <button
-                  key={s.spec}
-                  type="button"
-                  onClick={() => hop(s.spec)}
-                  aria-current={isActive ? "location" : undefined}
-                  aria-label={`Go to specification ${s.spec}: ${s.title}`}
-                  className="group -mx-3 flex min-w-0 cursor-pointer items-center gap-3 rounded-[10px] border-t px-3 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
-                  style={{
-                    borderColor: hair(10),
-                    background: isActive
-                      ? "color-mix(in oklab, var(--iface-accent) 8%, transparent)"
-                      : undefined,
-                  }}
-                >
-                  <span
-                    className="w-[26px] shrink-0 font-display text-[calc(12px*var(--ui-scale))] font-semibold tabular-nums"
+              {doc.sections.map((s, i) => {
+                const isActive = active === s.spec;
+                return (
+                  <button
+                    key={s.spec}
+                    type="button"
+                    onClick={() => hop(s.spec)}
+                    aria-current={isActive ? "location" : undefined}
+                    aria-label={`Go to specification ${s.spec}: ${s.title}`}
+                    className="group -mx-3 flex min-w-0 cursor-pointer items-center gap-3 rounded-[10px] border-t px-3 py-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
                     style={{
-                      color: isActive
-                        ? GAL_ACCENT
-                        : "var(--color-ink-faint)",
+                      borderColor: hair(10),
+                      background: isActive
+                        ? "color-mix(in oklab, var(--iface-accent) 8%, transparent)"
+                        : undefined,
                     }}
                   >
-                    {pad2(i + 1)}
-                  </span>
-                  <span
-                    className={`min-w-0 flex-1 truncate text-[calc(14px*var(--ui-scale))] font-semibold leading-snug transition-colors ${
-                      isActive
-                        ? "text-ink"
-                        : "text-ink-soft group-hover:text-ink"
-                    }`}
+                    <span
+                      className="w-[26px] shrink-0 font-display text-[calc(12px*var(--ui-scale))] font-semibold tabular-nums"
+                      style={{
+                        color: isActive
+                          ? GAL_ACCENT
+                          : "var(--color-ink-faint)",
+                      }}
+                    >
+                      {pad2(i + 1)}
+                    </span>
+                    <span
+                      className={`min-w-0 flex-1 truncate text-[calc(14px*var(--ui-scale))] font-semibold leading-snug transition-colors ${
+                        isActive
+                          ? "text-ink"
+                          : "text-ink-soft group-hover:text-ink"
+                      }`}
+                    >
+                      {s.title}
+                    </span>
+                    <span className="shrink-0 font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.08em] tabular-nums text-ink-faint">
+                      {s.spec}
+                    </span>
+                    <ArrowUpRight
+                      className={`h-3.5 w-3.5 shrink-0 transition-all duration-200 ${
+                        isActive
+                          ? ""
+                          : "-translate-x-0.5 opacity-0 group-hover:translate-x-0 group-hover:opacity-60"
+                      }`}
+                      style={{ color: GAL_ACCENT }}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          </Reveal>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={() => setContentsExpanded(true)}
+              aria-expanded={false}
+              aria-controls="gal-toc"
+              aria-label="Expand contents"
+              title="Expand contents"
+              className="etoc-toggle shrink-0"
+            >
+              <ChevronDown className="h-4 w-4 -rotate-90 transition-transform duration-200" />
+            </button>
+            <nav
+              id="gal-toc"
+              ref={tocChipsRef}
+              aria-label="Note contents"
+              className="gal-toc-chips"
+            >
+              {doc.sections.map((s) => {
+                const isActive = active === s.spec;
+                return (
+                  <button
+                    key={s.spec}
+                    type="button"
+                    onClick={() => hop(s.spec)}
+                    aria-current={isActive ? "location" : undefined}
+                    aria-label={`Go to specification ${s.spec}: ${s.title}`}
+                    title={s.title}
+                    data-active={isActive || undefined}
+                    className="gal-toc-chip"
                   >
-                    {s.title}
-                  </span>
-                  <span className="shrink-0 font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.08em] tabular-nums text-ink-faint">
                     {s.spec}
-                  </span>
-                  <ArrowUpRight
-                    className={`h-3.5 w-3.5 shrink-0 transition-all duration-200 ${
-                      isActive
-                        ? ""
-                        : "-translate-x-0.5 opacity-0 group-hover:translate-x-0 group-hover:opacity-60"
-                    }`}
-                    style={{ color: GAL_ACCENT }}
-                  />
-                </button>
-              );
-            })}
-          </div>
-        </Reveal>
+                  </button>
+                );
+              })}
+            </nav>
+          </>
+        )}
       </section>
 
       {/* ————— the catalog — the string of rooms —————
