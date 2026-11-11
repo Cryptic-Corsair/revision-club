@@ -59,6 +59,27 @@ const quicksand = localFont({
   display: "swap",
 });
 
+/* ————— the front's own two faces —————
+   The alternate front door casts its own type: Syne for the big
+   screen titles, Space Grotesk for everything spoken quietly
+   underneath it. They load on first use only — the default candy
+   front door never pays for them. */
+const syne = localFont({
+  variable: "--font-syne",
+  src: "./fonts/syne-var.woff2",
+  weight: "400 800",
+  display: "swap",
+  preload: false,
+});
+
+const grotesk = localFont({
+  variable: "--font-grotesk",
+  src: "./fonts/space-grotesk-var.woff2",
+  weight: "300 700",
+  display: "swap",
+  preload: false,
+});
+
 const plex = localFont({
   variable: "--font-plex",
   src: [
@@ -131,7 +152,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable}`}
+      className={`${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable} ${syne.variable} ${grotesk.variable}`}
     >
       <body className="min-h-screen bg-cream font-body text-ink antialiased">
         <Script id="rc-prefs" strategy="beforeInteractive">{prefsInit}</Script>
