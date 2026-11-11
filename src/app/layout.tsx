@@ -25,7 +25,6 @@ const fredoka = localFont({
   src: "./fonts/fredoka-var.woff2",
   weight: "300 700",
   display: "swap",
-  preload: false,
 });
 
 const baloo = localFont({
@@ -56,26 +55,6 @@ const nunito = localFont({
 const quicksand = localFont({
   variable: "--font-quicksand",
   src: "./fonts/quicksand-var.woff2",
-  weight: "300 700",
-  display: "swap",
-  preload: false,
-});
-
-/* ————— the film's own two faces —————
-   The homepage is a scroll film now, and it casts its own type:
-   Syne for the big screen titles, Space Grotesk for everything
-   spoken quietly underneath. The reader rooms keep the club's
-   Fredoka/Quicksand pair (preloaded again there on first use). */
-const syne = localFont({
-  variable: "--font-syne",
-  src: "./fonts/syne-var.woff2",
-  weight: "400 800",
-  display: "swap",
-});
-
-const grotesk = localFont({
-  variable: "--font-grotesk",
-  src: "./fonts/space-grotesk-var.woff2",
   weight: "300 700",
   display: "swap",
 });
@@ -152,7 +131,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable} ${syne.variable} ${grotesk.variable}`}
+      className={`${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable}`}
     >
       <body className="min-h-screen bg-cream font-body text-ink antialiased">
         <Script id="rc-prefs" strategy="beforeInteractive">{prefsInit}</Script>

@@ -1,5 +1,5 @@
-import Front from "@/components/front/front";
+import ClubApp from "@/components/club/club-app";
 
 export default function Page() {
-  return <Front />;
+  return <ClubApp />;
 }
