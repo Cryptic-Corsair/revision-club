@@ -2122,18 +2122,10 @@ html.dune .legal-room mark {
   }
 }
 /* desktop: vertical rail that scrolls inside itself when a note runs
-   long, so the sticky spine can never push its tail off-screen.
-   The expanded rail's width breathes with the text scale — a fixed
-   box left XL titles wrapping in a cramped column — and the rail's
-   stickiness lives here in the stylesheet, scoped per state, so the
-   minimized bar below PC can never inherit it. */
+   long, so the sticky spine can never push its tail off-screen */
 @media (min-width: 64rem) {
-  .etoc-layout.is-expanded {
-    grid-template-columns:
-      minmax(0, calc(250px * (1 + (var(--ui-scale) - 1) * 0.5)))
-      minmax(0, 1fr);
-  }
-  .etoc-layout.is-expanded .legal-index { position: sticky; top: 7rem; }
+  .etoc-layout.is-expanded { grid-template-columns: minmax(0, 250px) minmax(0, 1fr); }
+  .etoc-layout.is-collapsed { grid-template-columns: 56px minmax(0, 1fr); }
   .etoc-nav {
     flex-direction: column;
     overflow-x: hidden;
@@ -2173,17 +2165,6 @@ html.dune .legal-room mark {
       opacity 220ms ease;
     will-change: transform, height;
   }
-}
-/* PC (≥1280): the minimized rail keeps the desktop spine of numbers
-   — the same boundary the floating drawers call a PC — and its
-   column breathes with the text scale like the expanded rail's
-   width, so XL beads never brush the content column. */
-@media (min-width: 80rem) {
-  .etoc-layout.is-collapsed {
-    grid-template-columns:
-      calc(56px * (1 + (var(--ui-scale) - 1) * 0.5)) minmax(0, 1fr);
-  }
-  .etoc-layout.is-collapsed .legal-index { position: sticky; top: 7rem; }
   /* collapsed: a spine of numbers; the active one rusted solid,
      given a paper-cleared halo so it reads as a bead, not a block */
   .etoc-link.is-collapsed {
@@ -2205,75 +2186,6 @@ html.dune .legal-room mark {
       0 0 0 3px color-mix(in oklab, var(--legal-rust) 16%, transparent);
   }
   .etoc-link.is-collapsed.is-active .etoc-num { color: var(--color-paper); }
-}
-/* below PC — phones, portrait tablets and landscape tablets alike,
-   the same band the floating drawers call a tablet — the minimized
-   contents folds into ONE slim horizontal bar: the toggle steps
-   inline ahead of the number chips and the reading track runs as
-   the bar's baseline, so the minimized rail costs a single strip
-   of height instead of three stacked rows (or a spine that steals
-   width a landscape tablet would rather spend on the note). Every
-   metric rides --ui-scale, so S/M/L/XL grow the bar without
-   wrapping or misaligning it. */
-@media (max-width: 79.98rem) {
-  .etoc-layout.is-collapsed { display: block; }
-  .etoc-layout.is-collapsed .legal-index {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: calc(10px * var(--ui-scale));
-    padding: calc(8px * var(--ui-scale)) calc(10px * var(--ui-scale)) calc(14px * var(--ui-scale));
-    margin-bottom: calc(20px * var(--ui-scale));
-    border: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
-    border-radius: 999px;
-    box-shadow: 0 2px 0 var(--edge);
-  }
-  .etoc-layout.is-collapsed .etoc-head { margin-bottom: 0; }
-  .etoc-layout.is-collapsed .etoc-wrap {
-    position: relative;
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-  /* the desktop block's vertical nav is unscoped, so the bar
-     re-horizontalizes it here — later in the cascade and one knot
-     more specific, so the two can share the block above */
-  .etoc-layout.is-collapsed .etoc-nav {
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    max-height: none;
-    padding: 2px;
-    margin: 0;
-    scrollbar-width: none;
-  }
-  .etoc-layout.is-collapsed .etoc-nav::-webkit-scrollbar { display: none; }
-  /* the bar's chips: the phone chip rail's own pills, re-spoken so
-     they hold at landscape widths the phone block never reached */
-  .etoc-layout.is-collapsed .etoc-link {
-    flex: 0 0 auto;
-    white-space: nowrap;
-    border: 1px solid color-mix(in oklab, var(--color-ink) 9%, transparent);
-    border-radius: 999px;
-    padding: calc(9px * var(--ui-scale)) calc(12px * var(--ui-scale));
-  }
-  .etoc-layout.is-collapsed .etoc-link.is-active {
-    background: var(--legal-rust);
-    border-color: transparent;
-    color: var(--color-paper);
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
-  }
-  .etoc-layout.is-collapsed .etoc-link.is-active .etoc-num {
-    color: color-mix(in oklab, var(--color-paper) 82%, var(--legal-rust));
-  }
-  /* the reading track: the bar's baseline, hung off the aside so its
-     bead clears the chips above and the pill's foot at every scale */
-  .etoc-layout.is-collapsed .etoc-track {
-    position: absolute;
-    left: calc(12px * var(--ui-scale));
-    right: calc(12px * var(--ui-scale));
-    bottom: calc(5px * var(--ui-scale));
-    margin-bottom: 0;
-  }
 }
 /* ————— the gallery's minimized contents —————
    the ledger gains the editorial rail's minimize, spoken in the
