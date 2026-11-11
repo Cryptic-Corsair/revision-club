@@ -29,18 +29,17 @@ import {
 } from "@/lib/spectra/progress-derive";
 import { weekBarsOf, lastNDays, activeDaysOf } from "@/lib/spectra/dashboard";
 import { PopIn, Reveal, readableInk, shade, tint } from "./bits";
-import { DashCard, FilledButton, Heatmap, Ring, StatTile, WeekBars } from "./dashboard";
+import { FilledButton, Heatmap, Ring, StatTile, WeekBars } from "./dashboard";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the progress room, in the Material 3 dress.
    The same two ledgers — the topics marked as revised and the
    minutes the site has banked — read through progressSummary(),
    the shared derivation, then set as a Material You surface:
-   aurora hero cards that bloom the unit candies through paper,
-   gradient rings and bars, tonal chips, stat tiles, and the
-   honest ink on top. All the widgets come from the dashboard
-   system (dashboard.tsx), so this room and the desk's dashboard
-   are one kit wearing two rooms.
+   flat tonal cards on hairline borders, one solid candy per
+   chart, tonal chips, stat tiles, honest ink on top. All the
+   widgets come from the dashboard system (dashboard.tsx), so
+   this room and the desk's ledger are one kit wearing two rooms.
    The props contract is unchanged: units, onBack, onOpenUnit,
    onOpenTopic.
    ═══════════════════════════════════════════════════════════════ */
@@ -107,19 +106,13 @@ export function ProgressEditorial({
         </button>
       </PopIn>
 
-      {/* ————— the hero ————— */}
+      {/* ————— the hero — a flat cream plate with the house dots ————— */}
       <Reveal>
-        <DashCard
-          className="mt-5 rounded-[calc(32px*var(--ui-scale))] p-6 sm:p-9"
-          a1={C.mint}
-          a2={C.violet}
-          a3={C.coral}
-          a4={C.lemon}
-        >
-          <div className="relative z-10 grid items-center gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+        <div className="dash-dots mt-5 rounded-[calc(32px*var(--ui-scale))] border border-ink/[0.06] bg-cream p-6 sm:p-9">
+          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-paper/70 px-3 py-1.5 text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.16em] text-ink-soft uppercase backdrop-blur-sm">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.06] bg-paper px-3 py-1.5 text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.16em] text-ink-soft uppercase">
                   <Timer className="h-3.5 w-3.5" /> Progress · time &amp; marks
                 </span>
               </div>
@@ -131,26 +124,23 @@ export function ProgressEditorial({
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-2">
                 {s.streak > 0 && (
-                  <span
-                    className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[calc(11.5px*var(--ui-scale))] font-extrabold text-white"
-                    style={{ background: `linear-gradient(135deg, ${C.coral}, ${C.tangerine})` }}
-                  >
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-coral/15 px-3.5 py-2 text-[calc(11.5px*var(--ui-scale))] font-extrabold text-coral">
                     <Trophy className="h-3.5 w-3.5" strokeWidth={2.4} />
                     {s.streak}-day streak
                   </span>
                 )}
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-paper/70 px-3.5 py-2 text-[calc(11.5px*var(--ui-scale))] font-extrabold text-ink-soft backdrop-blur-sm">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.06] bg-paper px-3.5 py-2 text-[calc(11.5px*var(--ui-scale))] font-extrabold text-ink-soft">
                   <Target className="h-3.5 w-3.5 text-mint" strokeWidth={2.4} />
                   {s.goalMet ? "weekly goal met" : `goal ${goalChipLabel(time.goalMin)}`}
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-paper/70 px-3.5 py-2 text-[calc(11.5px*var(--ui-scale))] font-extrabold text-ink-soft backdrop-blur-sm">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.06] bg-paper px-3.5 py-2 text-[calc(11.5px*var(--ui-scale))] font-extrabold text-ink-soft">
                   <Gauge className="h-3.5 w-3.5 text-violet" strokeWidth={2.4} />
                   {Math.round(s.pct * 100)}% of the course
                 </span>
               </div>
             </div>
             <div className="flex flex-col items-center gap-4">
-              <Ring pct={s.pct} size={148} stroke={13} c1={C.mint} c2={C.violet} track="color-mix(in oklab, var(--color-ink) 10%, transparent)">
+              <Ring pct={s.pct} size={148} stroke={13} main={C.mint} track="color-mix(in oklab, var(--color-ink) 10%, transparent)">
                 <span className="font-display text-[calc(32px*var(--ui-scale))] leading-none font-bold text-ink tabular-nums">
                   {Math.round(s.pct * 100)}%
                 </span>
@@ -163,7 +153,7 @@ export function ProgressEditorial({
               </p>
             </div>
           </div>
-        </DashCard>
+        </div>
       </Reveal>
 
       {/* ————— the stat tiles ————— */}
@@ -185,10 +175,8 @@ export function ProgressEditorial({
       {/* ————— the week + the goal ————— */}
       <div className="mt-4 grid gap-4 lg:grid-cols-2">
         <Reveal className="min-w-0">
-          <div id="week" className="dash-aurora relative h-full overflow-hidden rounded-[calc(28px*var(--ui-scale))] p-6 sm:p-7"
-            style={{ "--a1": C.mint, "--a2": C.violet, "--a4": C.lemon } as React.CSSProperties}>
-            <div className="dash-grain" aria-hidden />
-            <div className="relative z-10">
+          <div id="week" className="h-full rounded-[calc(28px*var(--ui-scale))] border border-ink/[0.06] bg-paper p-6 sm:p-7">
+            <div>
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h2 className="font-display text-[calc(17px*var(--ui-scale))] font-semibold text-ink">
                   The week, day by day
@@ -198,7 +186,7 @@ export function ProgressEditorial({
                 </span>
               </div>
               <div className="mt-5">
-                <WeekBars bars={week} c1={C.mint} c2={C.violet} height={92} />
+                <WeekBars bars={week} main={C.mint} height={92} />
               </div>
               <div className="mt-4 border-t border-ink/[0.07] pt-4">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -210,7 +198,7 @@ export function ProgressEditorial({
                   </span>
                 </div>
                 <div className="mt-3">
-                  <WeekBars bars={fortnight} c1={C.violet} c2={C.coral} height={64} />
+                  <WeekBars bars={fortnight} main={C.violet} height={64} />
                 </div>
               </div>
             </div>
@@ -222,7 +210,7 @@ export function ProgressEditorial({
             <div className="flex h-full flex-col rounded-[calc(28px*var(--ui-scale))] border border-ink/[0.06] bg-paper p-6 sm:p-7">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <Ring pct={goalPct} size={72} stroke={8} c1={C.mint} c2={C.violet}>
+                  <Ring pct={goalPct} size={72} stroke={8} main={C.mint}>
                     <span className="text-[calc(11px*var(--ui-scale))] font-extrabold text-ink tabular-nums">
                       {Math.round(goalPct * 100)}%
                     </span>
@@ -240,7 +228,7 @@ export function ProgressEditorial({
                   className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[calc(10.5px*var(--ui-scale))] font-extrabold"
                   style={
                     s.goalMet
-                      ? { background: `linear-gradient(135deg, ${C.mint}, ${C.violet})`, color: "#fff" }
+                      ? { background: tint(C.mint, 16), color: shade(C.mint, 55) }
                       : { background: "color-mix(in oklab, var(--color-ink) 6%, transparent)", color: "var(--color-ink-soft)" }
                   }
                 >
@@ -249,11 +237,11 @@ export function ProgressEditorial({
                 </span>
               </div>
 
-              {/* the M3 linear progress — gradient fill on the hairline track */}
+              {/* the M3 linear progress — one solid candy on the hairline track */}
               <div className="mt-5 h-[calc(8px*var(--ui-scale))] w-full overflow-hidden rounded-full bg-ink/[0.08]">
                 <m.div
                   className="h-full rounded-full"
-                  style={{ background: `linear-gradient(90deg, ${C.mint}, ${C.violet})` }}
+                  style={{ background: C.mint }}
                   initial={{ width: 0 }}
                   animate={{ width: `${Math.max(goalPct * 100, s.week > 0 ? 3 : 0)}%` }}
                   transition={{ type: "spring", stiffness: 110, damping: 20 }}
@@ -276,7 +264,7 @@ export function ProgressEditorial({
                       className="m3-press cursor-pointer rounded-full border px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold transition-colors"
                       style={
                         active
-                          ? { background: `linear-gradient(135deg, ${C.mint}, ${C.violet})`, borderColor: "transparent", color: "#fff" }
+                          ? { background: C.mint, borderColor: "transparent", color: "#fff" }
                           : { borderColor: "color-mix(in oklab, var(--color-ink) 12%, transparent)", color: "var(--color-ink-soft)" }
                       }
                     >
@@ -330,7 +318,7 @@ export function ProgressEditorial({
                 <span
                   aria-hidden
                   className="h-[calc(4px*var(--ui-scale))] w-[calc(16px*var(--ui-scale))] shrink-0 rounded-full"
-                  style={{ background: `linear-gradient(135deg, ${s.suggestion.unit.candy.main}, ${shade(s.suggestion.unit.candy.main, 30)})` }}
+                  style={{ background: s.suggestion.unit.candy.main }}
                 />
                 <span
                   className="font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase"
@@ -347,8 +335,7 @@ export function ProgressEditorial({
               </p>
             </div>
             <FilledButton
-              c1={s.suggestion.unit.candy.main}
-              c2={shade(s.suggestion.unit.candy.main, 30)}
+              main={s.suggestion.unit.candy.main}
               onClick={() => onOpenTopic(s.suggestion!.unit.code, s.suggestion!.topic.id)}
               className="shrink-0"
             >
@@ -398,7 +385,7 @@ export function ProgressEditorial({
                       <span
                         className="grid h-9 w-9 place-items-center rounded-[calc(12px*var(--ui-scale))] font-display text-[calc(15px*var(--ui-scale))] font-bold"
                         style={{
-                          background: `linear-gradient(135deg, ${tint(u.candy.main, 22)}, ${tint(u.candy.main, 6)})`,
+                          background: tint(u.candy.main, 15),
                           color: shade(u.candy.main, 55),
                         }}
                       >
@@ -438,7 +425,7 @@ export function ProgressEditorial({
                               className="h-[calc(5px*var(--ui-scale))] w-[calc(5px*var(--ui-scale))] shrink-0 rounded-full"
                               style={{
                                 background: has
-                                  ? `linear-gradient(135deg, ${u.candy.main}, ${shade(u.candy.main, 30)})`
+                                  ? u.candy.main
                                   : "color-mix(in oklab, var(--color-ink) 18%, transparent)",
                               }}
                             />
@@ -455,7 +442,7 @@ export function ProgressEditorial({
                           <span className="mt-1.5 ml-[calc(17px*var(--ui-scale))] block h-[calc(4px*var(--ui-scale))] w-[calc(100%-17px*var(--ui-scale))] overflow-hidden rounded-full bg-ink/[0.06]">
                             <m.span
                               className="block h-full rounded-full"
-                              style={{ background: `linear-gradient(90deg, ${tint(u.candy.main, 15)}, ${u.candy.main})` }}
+                              style={{ background: u.candy.main }}
                               initial={{ width: 0 }}
                               animate={{ width: `${w}%` }}
                               transition={{ type: "spring", stiffness: 110, damping: 20 }}
@@ -513,7 +500,6 @@ export function ProgressEditorial({
           {ACHIEVEMENTS.map((a, i) => {
             const earned = achievementEarned(a.id, { units, revised, revisedCount: s.revisedCount, pct: s.pct, all: s.all, deepDive: s.deepDive });
             const c1 = [C.mint, C.violet, C.coral, C.lemon, C.pink, C.tangerine][i % 6];
-            const c2 = [C.violet, C.coral, C.tangerine, C.pink, C.lemon, C.mint][i % 6];
             return (
               <div
                 key={a.id}
@@ -523,9 +509,7 @@ export function ProgressEditorial({
                 }`}
                 style={
                   earned
-                    ? {
-                        background: `linear-gradient(135deg, color-mix(in oklab, ${c1} 12%, var(--color-paper)), color-mix(in oklab, ${c2} 12%, var(--color-paper)))`,
-                      }
+                    ? { background: `color-mix(in oklab, ${c1} 9%, var(--color-paper))` }
                     : undefined
                 }
               >
@@ -533,7 +517,7 @@ export function ProgressEditorial({
                   className="grid h-10 w-10 shrink-0 place-items-center rounded-[calc(13px*var(--ui-scale))]"
                   style={
                     earned
-                      ? { background: `linear-gradient(135deg, ${c1}, ${c2})`, color: "#fff" }
+                      ? { background: c1, color: readableInk(c1) }
                       : { color: "var(--color-ink-faint)" }
                   }
                 >
@@ -592,7 +576,7 @@ export function ProgressEditorial({
                     >
                       <span
                         className="h-[calc(6px*var(--ui-scale))] w-[calc(22px*var(--ui-scale))] rounded-full"
-                        style={{ background: `linear-gradient(135deg, ${u.candy.main}, ${shade(u.candy.main, 30)})` }}
+                        style={{ background: u.candy.main }}
                       />
                       <span className="font-display text-[calc(13px*var(--ui-scale))] font-bold text-ink">
                         {u.code} · {u.shortTitle}
@@ -626,7 +610,7 @@ export function ProgressEditorial({
                             style={
                               has
                                 ? {
-                                    background: `linear-gradient(135deg, ${u.candy.main}, ${shade(u.candy.main, 30)})`,
+                                    background: u.candy.main,
                                     color: readableInk(u.candy.main),
                                   }
                                 : {
@@ -669,7 +653,7 @@ export function ProgressEditorial({
             className="m3-press inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale))] font-bold transition-colors"
             style={
               confirmReset
-                ? { background: `linear-gradient(135deg, ${C.coral}, ${C.tangerine})`, color: "#fff" }
+                ? { background: C.coral, color: "#fff" }
                 : {
                     background: "color-mix(in oklab, var(--color-ink) 5%, transparent)",
                     color: "var(--color-ink-soft)",

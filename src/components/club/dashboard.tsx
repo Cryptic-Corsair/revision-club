@@ -1,33 +1,11 @@
 "use client";
 
-import { useId, useState, type CSSProperties, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { m } from "framer-motion";
-import {
-  Award,
-  Check,
-  Clock,
-  Flame,
-  Footprints,
-  Gauge,
-  Lock,
-  MoveRight,
-  PieChart,
-  Sparkles,
-  Target,
-  Timer,
-  Trophy,
-} from "./icons";
-import type { Unit, UnitCode } from "@/lib/spectra/types";
-import { TOTALS } from "@/lib/spectra/units";
-import { useRevised, useHydrated } from "@/lib/spectra/progress";
-import { fmtClock, fmtShort, useTimeData } from "@/lib/spectra/time";
-import {
-  ACHIEVEMENTS,
-  achievementEarned,
-  goalChipLabel,
-  progressSummary,
-  revisedLine,
-} from "@/lib/spectra/progress-derive";
+import { Check, Clock, Footprints, Gauge, MoveRight, Trophy } from "./icons";
+import { useHydrated } from "@/lib/spectra/progress";
+import { fmtClock, fmtShort, todaySeconds, useTimeData } from "@/lib/spectra/time";
+import { streakOf } from "@/lib/spectra/progress-derive";
 import {
   activeDaysOf,
   avgDayOf,
@@ -35,71 +13,35 @@ import {
   bestDayOf,
   heatWeeksOf,
   lastNDays,
-  recentTopicsOf,
-  unitStatOf,
-  weekBarsOf,
   type DayBar,
 } from "@/lib/spectra/dashboard";
-import { findTopic } from "@/lib/spectra/suggest";
 import { shade, tint } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the dashboard system
    A kit of Material-3-flavoured widgets dressed in the club's own
    candy: Rings, WeekBars, the Heatmap, Segmented controls, StatTiles
-   and DashCards — the aurora surfaces that carry the gradients.
-   Everything reads the shared ledgers through lib/spectra/dashboard.ts,
-   so the desk's dashboard and the progress room render the same
-   numbers from the same maths.
+   and the two buttons. Everything reads the shared ledgers through
+   lib/spectra/dashboard.ts, so the desk's ledger and the progress
+   room render the same numbers from the same maths.
 
-   The kit's look: big M3 radii, tonal candy washes instead of flat
-   greys, gradient strokes, honest ink. Gradients are built from the
-   unit candies and mixed against var(--color-paper), so every lab —
-   daylight, dune, the dark moods — inks them correctly for free.
+   The kit's one colour law: ONE flat candy per element. A ring is
+   one solid stroke, a bar one solid fill, a chip one tonal tint —
+   structure comes from hairlines, big radii and honest ink, never
+   from a wash. (The one gradient exception lives elsewhere: none
+   here.) Tints mix against var(--tint-base) so every lab — daylight,
+   dune, the dark moods — inks them correctly for free.
    ═══════════════════════════════════════════════════════════════ */
 
-/* ————— DashCard — the aurora surface —————
-   Four candy lights (CSS vars --a1…--a4) bloom through a paper base;
-   the CSS dress in globals.css does the layering and the grain. */
-
-export function DashCard({
-  a1 = "#12B886",
-  a2 = "#9775FA",
-  a3 = "#FF6B6B",
-  a4 = "#F59F00",
-  className,
-  children,
-  style,
-}: {
-  a1?: string;
-  a2?: string;
-  a3?: string;
-  a4?: string;
-  className?: string;
-  children: ReactNode;
-  style?: CSSProperties;
-}) {
-  return (
-    <div
-      className={`dash-aurora relative overflow-hidden ${className ?? ""}`}
-      style={{ "--a1": a1, "--a2": a2, "--a3": a3, "--a4": a4, ...style } as CSSProperties}
-    >
-      <div className="dash-grain" aria-hidden />
-      {children}
-    </div>
-  );
-}
-
 /* ————— Ring — the M3 circular progress —————
-   Gradient stroke along the sweep, candy c1 → c2, rounded caps,
-   anything can sit in the middle. */
+   One solid candy stroke along the sweep, rounded caps, anything
+   can sit in the middle. */
 
 export function Ring({
   pct,
   size = 96,
   stroke = 10,
-  c1 = "#12B886",
-  c2 = "#9775FA",
+  main = "#12B886",
   track = "color-mix(in oklab, var(--color-ink) 9%, transparent)",
   children,
   className,
@@ -107,14 +49,11 @@ export function Ring({
   pct: number;
   size?: number;
   stroke?: number;
-  c1?: string;
-  c2?: string;
+  main?: string;
   track?: string;
   children?: ReactNode;
   className?: string;
 }) {
-  const raw = useId().replace(/[^a-zA-Z0-9]/g, "");
-  const gid = `ring-grad-${raw}`;
   const p = Math.max(0, Math.min(1, pct));
   const r = (100 - stroke) / 2;
   const c = 2 * Math.PI * r;
@@ -125,19 +64,13 @@ export function Ring({
       style={{ width: `calc(${size}px*var(--ui-scale))`, height: `calc(${size}px*var(--ui-scale))` }}
     >
       <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full -rotate-90" aria-hidden>
-        <defs>
-          <linearGradient id={gid} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor={c1} />
-            <stop offset="100%" stopColor={c2} />
-          </linearGradient>
-        </defs>
         <circle cx="50" cy="50" r={r} fill="none" stroke={track} strokeWidth={stroke} />
         <m.circle
           cx="50"
           cy="50"
           r={r}
           fill="none"
-          stroke={`url(#${gid})`}
+          stroke={main}
           strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={c}
@@ -152,19 +85,17 @@ export function Ring({
 }
 
 /* ————— WeekBars — the week as a bar chart —————
-   One rounded column per day; today's bar wears the full candy
-   gradient and a dot, the past weeks wear it faded, the days that
-   haven't happened yet sit as hollow slots. */
+   One rounded column per day; today's bar wears the full candy,
+   the past days a tint of the same candy, the days that haven't
+   happened yet sit as hollow slots. */
 
 export function WeekBars({
   bars,
-  c1 = "#12B886",
-  c2 = "#9775FA",
+  main = "#12B886",
   height = 96,
 }: {
   bars: DayBar[];
-  c1?: string;
-  c2?: string;
+  main?: string;
   height?: number;
 }) {
   const max = barMaxOf(bars);
@@ -184,10 +115,8 @@ export function WeekBars({
                 <m.div
                   className="w-full rounded-t-full rounded-b-[3px]"
                   style={{
-                    background: b.today
-                      ? `linear-gradient(180deg, ${c2}, ${c1})`
-                      : `linear-gradient(180deg, ${tint(c2, 30)}, ${tint(c1, 25)})`,
-                    opacity: b.future ? 0 : b.today ? 1 : 0.66,
+                    background: b.today ? main : tint(main, 30),
+                    opacity: b.future ? 0 : b.today ? 1 : 0.85,
                   }}
                   initial={{ height: 0 }}
                   animate={{ height: `${h}%` }}
@@ -221,12 +150,7 @@ export function WeekBars({
             >
               {b.day.slice(0, 1)}
             </span>
-            {b.today && (
-              <span
-                className="h-1 w-1 rounded-full"
-                style={{ background: `linear-gradient(135deg, ${c2}, ${c1})` }}
-              />
-            )}
+            {b.today && <span className="h-1 w-1 rounded-full" style={{ background: main }} />}
           </div>
         ))}
       </div>
@@ -319,10 +243,7 @@ export function Segmented<T extends string>({
             }`}
             style={
               active
-                ? {
-                    background: `linear-gradient(135deg, ${tint(main, 18)}, ${tint(main, 4)})`,
-                    color: shade(main, 55),
-                  }
+                ? { background: tint(main, 16), color: shade(main, 55) }
                 : undefined
             }
           >
@@ -389,22 +310,20 @@ export function StatTile({
 export function FilledButton({
   children,
   onClick,
-  c1 = "#12B886",
-  c2 = "#9775FA",
+  main = "#12B886",
   className,
 }: {
   children: ReactNode;
   onClick?: () => void;
-  c1?: string;
-  c2?: string;
+  main?: string;
   className?: string;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`m3-press inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale))] font-bold text-white shadow-[0_8px_20px_-8px_color-mix(in_oklab,${c1}_55%,transparent)] transition-transform duration-200 hover:-translate-y-0.5 ${className ?? ""}`}
-      style={{ background: `linear-gradient(135deg, ${c1}, ${c2})` }}
+      className={`m3-press inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale))] font-bold text-white shadow-[0_8px_20px_-8px_color-mix(in_oklab,${main}_55%,transparent)] transition-transform duration-200 hover:-translate-y-0.5 ${className ?? ""}`}
+      style={{ background: main }}
     >
       {children}
     </button>
@@ -435,337 +354,129 @@ export function TonalButton({
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   THE DESK DASHBOARD — the assembled system in the desk.
-   Three tabs on a segmented control: Bench (the clock), Course
-   (the six units), Activity (the grid, the streaks, the badges).
+   THE DESK LEDGER — the dashboard system's spot in the desk.
+   One quiet strip, no tabs: the fortnight as bars, the small
+   records, and the activity grid. The header's week card carries
+   the goal and the streak; this strip carries the shape of the
+   days around them. The progress room wears the same kit whole.
    ═══════════════════════════════════════════════════════════════ */
 
-type TabId = "bench" | "course" | "activity";
+const MINT = "#12B886";
 
-export function DeskDashboard({
-  units,
-  onOpenUnit,
-  onOpenTopic,
-  onOpenSticker,
-}: {
-  units: Unit[];
-  onOpenUnit: (code: string) => void;
-  onOpenTopic: (code: UnitCode, topicId: string) => void;
-  onOpenSticker: () => void;
-}) {
+export function DeskDashboard({ onOpenSticker }: { onOpenSticker: () => void }) {
   const hydrated = useHydrated();
-  const revised = useRevised();
   const time = useTimeData();
-  const [tab, setTab] = useState<TabId>("bench");
-  const s = progressSummary(units, revised, time);
-  const mint = "#12B886";
+  const today = todaySeconds(time);
+  const streak = streakOf(time.days);
 
   const days14 = lastNDays(time, 14);
-  const week = weekBarsOf(time);
-  const best = bestDayOf(time);
   const avg = avgDayOf(time, 14);
   const active = activeDaysOf(days14);
-  const recents = recentTopicsOf(time, 4);
+  const best = bestDayOf(time);
 
-  const TABS = [
-    { id: "bench" as const, label: "Bench", icon: Timer },
-    { id: "course" as const, label: "Course", icon: PieChart },
-    { id: "activity" as const, label: "Activity", icon: Flame },
-  ];
+  const recordRow =
+    "flex items-center gap-3.5 py-3 [&+&]:border-t [&+&]:border-ink/[0.07]";
 
   return (
-    <section aria-label="Your dashboard" className="mx-auto max-w-6xl px-5 pb-14 sm:px-8">
-      <div className="flex flex-wrap items-center justify-between gap-3 px-1">
-        <div>
-          <p className="text-[calc(11px*var(--ui-scale))] font-extrabold tracking-[0.18em] text-ink-faint uppercase">
-            {hydrated ? "live from your ledger" : "your ledger"}
-          </p>
-          <h2 className="mt-1 font-display text-[calc(24px*var(--ui-scale))] font-semibold tracking-tight text-ink sm:text-[calc(26px*var(--ui-scale))]">
-            Your dashboard
-          </h2>
-        </div>
-        <Segmented value={tab} onChange={setTab} options={TABS} main={mint} />
+    <div className="bg-cream">
+      <section aria-label="Your ledger" className="mx-auto max-w-6xl px-5 pt-3 pb-16 sm:px-8">
+      <div className="flex flex-wrap items-baseline justify-between gap-2 px-1">
+        <h2 className="font-display text-[calc(22px*var(--ui-scale))] font-semibold tracking-tight text-ink sm:text-[calc(24px*var(--ui-scale))]">
+          The ledger
+        </h2>
+        <button
+          type="button"
+          onClick={onOpenSticker}
+          className="group inline-flex cursor-pointer items-center gap-1.5 text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink-faint transition-colors hover:text-ink"
+        >
+          time &amp; goals
+          <MoveRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" strokeWidth={2.4} />
+        </button>
       </div>
 
-      {/* ————— BENCH — the clock ————— */}
-      {tab === "bench" && (
-        <m.div
-          key="bench"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 26 }}
-          className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]"
-        >
-          <DashCard className="rounded-[calc(28px*var(--ui-scale))] p-6 sm:p-7" a1="#12B886" a2="#9775FA" a4="#F59F00">
-            <div className="relative z-10 flex flex-wrap items-center gap-6">
-              <Ring pct={s.weekPct} size={104} stroke={11} c1="#12B886" c2="#9775FA">
-                <span className="font-display text-[calc(20px*var(--ui-scale))] font-bold text-ink tabular-nums">
-                  {Math.round(s.weekPct * 100)}%
-                </span>
-                <span className="mt-0.5 text-[calc(9px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
-                  of goal
-                </span>
-              </Ring>
-              <div className="min-w-0 flex-1">
-                <p className="text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.18em] text-ink-faint uppercase">
-                  this week on the bench
-                </p>
-                <p className="mt-1 font-display text-[calc(30px*var(--ui-scale))] leading-none font-bold text-ink tabular-nums">
-                  {fmtClock(s.week)}
-                </p>
-                <p className="mt-1.5 text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink-soft">
-                  goal {goalChipLabel(s.goalMin)} · {s.today > 0 ? `${fmtClock(s.today)} today` : "today still at zero"}
-                </p>
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                  {s.streak >= 2 && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[calc(11px*var(--ui-scale))] font-extrabold text-white"
-                      style={{ background: "linear-gradient(135deg, #FF6B6B, #FF922B)" }}>
-                      <Flame className="h-3.5 w-3.5" strokeWidth={2.4} /> {s.streak}-day streak
-                    </span>
-                  )}
-                  {s.goalMet && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-mint/15 px-3 py-1.5 text-[calc(11px*var(--ui-scale))] font-extrabold text-mint">
-                      <Check className="h-3.5 w-3.5" strokeWidth={3} /> weekly goal met
-                    </span>
-                  )}
-                  <FilledButton
-                    c1="#12B886"
-                    c2="#9775FA"
-                    onClick={onOpenSticker}
-                    className="!min-h-[calc(36px*var(--ui-scale))] !px-4 !py-1.5 !text-[calc(11.5px*var(--ui-scale))]"
-                  >
-                    Time &amp; goals <MoveRight className="h-4 w-4" />
-                  </FilledButton>
-                </div>
-              </div>
-            </div>
-          </DashCard>
-
-          <div className="rounded-[calc(28px*var(--ui-scale))] border border-ink/[0.06] bg-paper p-5 sm:p-6">
-            <div className="flex items-baseline justify-between gap-2">
-              <p className="text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.18em] text-ink-faint uppercase">
-                the last fortnight
-              </p>
-              <span className="text-[calc(10.5px*var(--ui-scale))] font-bold text-ink-faint">{active}/14 active days</span>
-            </div>
-            <div className="mt-4">
-              <WeekBars bars={days14} c1="#12B886" c2="#9775FA" height={86} />
-            </div>
+      <div className="mt-5 grid gap-4 lg:grid-cols-3">
+        {/* the last fortnight */}
+        <div className="rounded-[calc(24px*var(--ui-scale))] border border-ink/[0.06] bg-paper p-5 sm:p-6">
+          <div className="flex items-baseline justify-between gap-2">
+            <p className="text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.18em] text-ink-faint uppercase">
+              the last fortnight
+            </p>
+            <span className="text-[calc(10.5px*var(--ui-scale))] font-bold text-ink-faint tabular-nums">
+              {active}/14 active days
+            </span>
           </div>
-
-          <div className="grid gap-3 sm:grid-cols-3 lg:col-span-2">
-            <StatTile icon={Clock} main="#12B886" value={fmtClock(s.today)} label="today" hint="banked so far" />
-            <StatTile
-              icon={Trophy}
-              main="#F59F00"
-              value={best ? fmtClock(best.total) : "0 min"}
-              label="best day"
-              hint={hydrated && best ? new Date(`${best.key}T12:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "short" }) : "—"}
-            />
-            <StatTile icon={Gauge} main="#9775FA" value={fmtClock(avg)} label="daily average" hint="last 14 days" />
+          <div className="mt-4">
+            <WeekBars bars={days14} main={MINT} height={96} />
           </div>
-        </m.div>
-      )}
+        </div>
 
-      {/* ————— COURSE — the six units ————— */}
-      {tab === "course" && (
-        <m.div
-          key="course"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 26 }}
-          className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)]"
-        >
-          <DashCard className="rounded-[calc(28px*var(--ui-scale))] p-6 sm:p-7" a1="#FF6B6B" a2="#F59F00" a3="#9775FA" a4="#12B886">
-            <div className="relative z-10 flex flex-col items-center gap-4 text-center">
-              <Ring pct={s.pct} size={124} stroke={12} c1="#FF6B6B" c2="#F59F00">
-                <span className="font-display text-[calc(26px*var(--ui-scale))] font-bold text-ink tabular-nums">
-                  {Math.round(s.pct * 100)}%
-                </span>
-                <span className="mt-0.5 text-[calc(9px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
-                  revised
-                </span>
-              </Ring>
-              <p className="font-display text-[calc(17px*var(--ui-scale))] leading-snug font-semibold text-ink">
-                {s.revisedCount} of {TOTALS.topics} topics
-              </p>
-              <p className="-mt-2 text-[calc(12.5px*var(--ui-scale))] font-semibold text-ink-soft">{revisedLine(s.pct, s.revisedCount)}</p>
-              <FilledButton
-                c1="#FF6B6B"
-                c2="#F59F00"
-                onClick={onOpenSticker}
-                className="!min-h-[calc(36px*var(--ui-scale))] !px-4 !py-1.5 !text-[calc(11.5px*var(--ui-scale))]"
-              >
-                Mark topics <MoveRight className="h-4 w-4" />
-              </FilledButton>
-            </div>
-          </DashCard>
-
-          <div className="flex flex-col gap-2.5">
-            {units.map((u) => {
-              const stat = unitStatOf(u, revised, time);
-              return (
-                <button
-                  key={u.code}
-                  type="button"
-                  onClick={() => onOpenUnit(u.code)}
-                  className="m3-press group flex cursor-pointer items-center gap-3.5 rounded-[calc(20px*var(--ui-scale))] border border-ink/[0.06] bg-paper px-4 py-3 text-left transition-transform duration-200 hover:-translate-y-0.5"
-                >
-                  <Ring pct={stat.pct} size={40} stroke={5} c1={u.candy.main} c2={shade(u.candy.main, 25)}>
-                    <span className="text-[calc(8.5px*var(--ui-scale))] font-extrabold text-ink-soft tabular-nums">
-                      {Math.round(stat.pct * 100)}
-                    </span>
-                  </Ring>
-                  <span className="min-w-0 flex-1">
-                    <span className="flex items-center gap-2">
-                      <span className="font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.14em]" style={{ color: u.candy.main }}>
-                        {u.code}
-                      </span>
-                      <span className="text-[calc(10px*var(--ui-scale))] font-bold text-ink-faint">{stat.done}/{stat.topics} revised</span>
-                    </span>
-                    <span className="block truncate font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">
-                      {u.shortTitle}
-                    </span>
-                    <span className="mt-1.5 block h-[calc(5px*var(--ui-scale))] w-full overflow-hidden rounded-full bg-ink/[0.06]">
-                      <m.span
-                        className="block h-full rounded-full"
-                        style={{ background: `linear-gradient(90deg, ${u.candy.main}, ${shade(u.candy.main, 30)})` }}
-                        initial={{ width: 0 }}
-                        animate={{ width: `${Math.max(stat.pct * 100, stat.done > 0 ? 4 : 0)}%` }}
-                        transition={{ type: "spring", stiffness: 120, damping: 22 }}
-                      />
-                    </span>
+        {/* the record */}
+        <div className="rounded-[calc(24px*var(--ui-scale))] border border-ink/[0.06] bg-paper px-5 py-2 sm:px-6">
+          <div className={recordRow}>
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[calc(12px*var(--ui-scale))]" style={{ background: tint(MINT, 16), color: shade(MINT, 55) }}>
+              <Clock className="h-[18px] w-[18px]" strokeWidth={2.3} />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-display text-[calc(17px*var(--ui-scale))] leading-tight font-bold text-ink tabular-nums">
+                {fmtClock(today)}
+              </span>
+              <span className="block text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+                today
+              </span>
+            </span>
+          </div>
+          <div className={recordRow}>
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[calc(12px*var(--ui-scale))]" style={{ background: tint("#F59F00", 16), color: shade("#F59F00", 55) }}>
+              <Trophy className="h-[18px] w-[18px]" strokeWidth={2.3} />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-display text-[calc(17px*var(--ui-scale))] leading-tight font-bold text-ink tabular-nums">
+                {best ? fmtClock(best.total) : "0 min"}
+              </span>
+              <span className="block text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+                best day
+                {hydrated && best && (
+                  <span className="ml-1.5 normal-case tracking-[0.02em] text-ink-soft">
+                    {new Date(`${best.key}T12:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
                   </span>
-                  <span className="hidden shrink-0 items-center gap-1 text-[calc(11px*var(--ui-scale))] font-bold text-ink-faint tabular-nums sm:flex">
-                    <Clock className="h-3.5 w-3.5" /> {fmtShort(stat.seconds)}
-                  </span>
-                  <MoveRight className="h-4 w-4 shrink-0 text-ink-faint transition-transform duration-200 group-hover:translate-x-0.5" strokeWidth={2.4} />
-                </button>
-              );
-            })}
+                )}
+              </span>
+            </span>
           </div>
-        </m.div>
-      )}
+          <div className={recordRow}>
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[calc(12px*var(--ui-scale))]" style={{ background: tint("#9775FA", 16), color: shade("#9775FA", 55) }}>
+              <Gauge className="h-[18px] w-[18px]" strokeWidth={2.3} />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-display text-[calc(17px*var(--ui-scale))] leading-tight font-bold text-ink tabular-nums">
+                {fmtClock(avg)}
+              </span>
+              <span className="block text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+                daily average
+              </span>
+            </span>
+          </div>
+        </div>
 
-      {/* ————— ACTIVITY — the grid, streaks, badges ————— */}
-      {tab === "activity" && (
-        <m.div
-          key="activity"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 26 }}
-          className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]"
-        >
-          <div className="flex flex-col gap-4">
-            <div className="rounded-[calc(28px*var(--ui-scale))] border border-ink/[0.06] bg-paper p-5 sm:p-6">
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <p className="text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.18em] text-ink-faint uppercase">
-                  the activity grid
-                </p>
-                <span className="inline-flex items-center gap-1.5 text-[calc(11px*var(--ui-scale))] font-bold text-ink-soft">
-                  <Footprints className="h-3.5 w-3.5 text-coral" /> {s.streak}-day streak
-                </span>
-              </div>
-              <div className="mt-4">
-                <Heatmap main="#12B886" weeks={20} />
-              </div>
-            </div>
-
-            {recents.length > 0 && (
-              <div className="rounded-[calc(28px*var(--ui-scale))] border border-ink/[0.06] bg-paper p-5 sm:p-6">
-                <p className="text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.18em] text-ink-faint uppercase">
-                  recent sessions
-                </p>
-                <div className="mt-3 flex flex-col">
-                  {recents.map((r) => {
-                    const [code, topicId] = r.key.split("/");
-                    const t = findTopic(units, code as UnitCode, topicId);
-                    if (!t) return null;
-                    return (
-                      <button
-                        key={`${r.key}-${r.when}`}
-                        type="button"
-                        onClick={() => onOpenTopic(code as UnitCode, topicId)}
-                        className="m3-press -mx-2 flex cursor-pointer items-center gap-3 rounded-2xl px-2 py-2.5 text-left transition-colors hover:bg-ink/[0.035]"
-                      >
-                        <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: t.unit.candy.main }} />
-                        <span className="min-w-0 flex-1">
-                          <span className="block truncate text-[calc(13px*var(--ui-scale))] font-semibold text-ink">
-                            {t.topic.label} · {t.topic.title}
-                          </span>
-                          <span className="text-[calc(10.5px*var(--ui-scale))] font-bold text-ink-faint">{r.when}</span>
-                        </span>
-                        <span className="shrink-0 text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-soft tabular-nums">
-                          {fmtShort(r.seconds)}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
+        {/* the activity grid */}
+        <div className="rounded-[calc(24px*var(--ui-scale))] border border-ink/[0.06] bg-paper p-5 sm:p-6">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <p className="text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.18em] text-ink-faint uppercase">
+              the activity grid
+            </p>
+            {streak >= 2 && (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-coral/15 px-2.5 py-1 text-[calc(10.5px*var(--ui-scale))] font-extrabold text-coral">
+                <Footprints className="h-3.5 w-3.5" strokeWidth={2.4} />
+                {streak}-day streak
+              </span>
             )}
           </div>
-
-          <div className="rounded-[calc(28px*var(--ui-scale))] border border-ink/[0.06] bg-paper p-5 sm:p-6">
-            <div className="flex items-baseline justify-between gap-2">
-              <p className="text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.18em] text-ink-faint uppercase">
-                badges
-              </p>
-              <span className="text-[calc(11px*var(--ui-scale))] font-bold text-ink-faint">
-                {ACHIEVEMENTS.filter((a) => achievementEarned(a.id, { units, revised, revisedCount: s.revisedCount, pct: s.pct, all: s.all, deepDive: s.deepDive })).length}/{ACHIEVEMENTS.length}
-              </span>
-            </div>
-            <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-              {ACHIEVEMENTS.map((a) => {
-                const earned = achievementEarned(a.id, { units, revised, revisedCount: s.revisedCount, pct: s.pct, all: s.all, deepDive: s.deepDive });
-                return (
-                  <div
-                    key={a.id}
-                    title={a.hint}
-                    className={`flex min-w-0 items-center gap-3 rounded-[calc(16px*var(--ui-scale))] border px-3.5 py-3 ${
-                      earned ? "border-transparent" : "border-dashed border-ink/[0.12]"
-                    }`}
-                    style={
-                      earned
-                        ? { background: "linear-gradient(135deg, color-mix(in oklab, #12B886 10%, var(--color-paper)), color-mix(in oklab, #9775FA 10%, var(--color-paper)))" }
-                        : undefined
-                    }
-                  >
-                    <span
-                      className="grid h-8 w-8 shrink-0 place-items-center rounded-[calc(10px*var(--ui-scale))]"
-                      style={
-                        earned
-                          ? { background: "linear-gradient(135deg, #12B886, #9775FA)", color: "#fff" }
-                          : { color: "var(--color-ink-faint)" }
-                      }
-                    >
-                      {earned ? <BadgeIcon id={a.id} /> : <Lock className="h-4 w-4" strokeWidth={2.2} />}
-                    </span>
-                    <span className="min-w-0">
-                      <span className={`block font-display text-[calc(12.5px*var(--ui-scale))] leading-tight font-bold ${earned ? "text-ink" : "text-ink-faint"}`}>
-                        {a.label}
-                      </span>
-                      <span className="block truncate text-[calc(10px*var(--ui-scale))] font-semibold text-ink-faint">{a.hint}</span>
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+          <div className="mt-4">
+            <Heatmap main={MINT} weeks={12} />
           </div>
-        </m.div>
-      )}
-    </section>
+        </div>
+      </div>
+      </section>
+    </div>
   );
-}
-
-function BadgeIcon({ id }: { id: string }) {
-  const cls = "h-4 w-4";
-  switch (id) {
-    case "first-topic": return <Sparkles className={cls} strokeWidth={2.4} />;
-    case "unit-complete": return <Check className={cls} strokeWidth={2.8} />;
-    case "halfway": return <Gauge className={cls} strokeWidth={2.4} />;
-    case "first-hour": return <Timer className={cls} strokeWidth={2.4} />;
-    case "deep-dive": return <Target className={cls} strokeWidth={2.4} />;
-    default: return <Award className={cls} strokeWidth={2.4} />;
-  }
 }
