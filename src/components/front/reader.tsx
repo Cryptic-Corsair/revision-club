@@ -7,9 +7,9 @@ import { UNITS } from "@/lib/spectra/units";
 import { NOTES_META } from "@/lib/spectra/notes-meta";
 
 /* ═══════════════════════════════════════════════════════════════
-   THE LAB · the reader — a station of the atlas, opened
+   THE FRONT · the reader — a station of the atlas, opened
 
-   The lab steps aside (the shell hides itself) and the library's
+   The front steps aside (the shell hides itself) and the library's
    own gallery reader takes the room: same doc, same diagrams,
    same pack ticks, same progress. The reader chunk is heavy, so
    it rides in lazily.
@@ -39,7 +39,7 @@ export default function Reader({
   const meta = NOTES_META.find((m) => m.id === docId);
   const unit = UNITS.find((u) => u.code === meta?.unitCode);
 
-  /* ESC returns to the lab */
+  /* ESC returns to the front */
   useEffect(() => {
     const h = (e: KeyboardEvent) => {
       if (e.key === "Escape") onBack();
@@ -57,7 +57,7 @@ export default function Reader({
             onClick={onBack}
             className="cursor-pointer font-display text-[13px] font-semibold text-ink transition-opacity hover:opacity-70"
           >
-            ← Back to the lab
+            ← Back to the front
           </button>
           <span className="f-mono truncate text-[9px] text-ink-faint">
             {unit?.code} · {meta?.title}

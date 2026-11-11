@@ -1,5 +1,5 @@
-import Lab from "@/components/lab/lab";
+import Front from "@/components/front/front";
 
 export default function Page() {
-  return <Lab />;
+  return <Front />;
 }
