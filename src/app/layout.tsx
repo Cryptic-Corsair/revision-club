@@ -91,6 +91,20 @@ const plex = localFont({
   preload: false,
 });
 
+/* ————— the plate's own face —————
+   Instrument Serif (roman + italic) dresses the editorial Bohr plate
+   in the loop act: the one serif the printed figure speaks in.
+   Loads on first use only, like the rest of the swap shelf. */
+const instrument = localFont({
+  variable: "--font-instrument",
+  src: [
+    { path: "./fonts/instrument-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/instrument-400-italic.woff2", weight: "400", style: "italic" },
+  ],
+  display: "swap",
+  preload: false,
+});
+
 export const metadata: Metadata = {
   title: "IAL CHEM — Edexcel IAL Chemistry revision notes",
   description:
@@ -152,7 +166,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable} ${syne.variable} ${grotesk.variable}`}
+      className={`${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable} ${syne.variable} ${grotesk.variable} ${instrument.variable}`}
     >
       <body className="min-h-screen bg-cream font-body text-ink antialiased">
         <Script id="rc-prefs" strategy="beforeInteractive">{prefsInit}</Script>

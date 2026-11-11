@@ -2,25 +2,27 @@
 
 import gsap from "gsap";
 import { useRef } from "react";
-import { SplitText } from "gsap/SplitText";
-import { bubbleField, useActAnim } from "../kit";
 import AtomRig from "../../atom-rig";
+import { useActAnim } from "../kit";
 
 /* ═══════════════════════════════════════════════════════════════
-   THE FRONT · 04 — the loop
+   THE FRONT · 04 — the plate
 
-   A mint tonal band holding the AtomRig — the self-contained
-   Bohr atom from components/atom-rig.tsx — at full size. The act
-   adds only what belongs to the room: climbing bubbles, scroll
-   that breathes through the rig (drift, scale, tilt), a pointer
-   lean on fine-pointer screens (the atom tilts to meet the hand,
-   the orbit planes counter-sliding for depth), and one equation
-   that rises character by character, then lets its arrow pulse
-   forever. Nothing else said. Nothing ever stops.
+   The loop act, typeset as an editorial journal figure. Paper,
+   black ink, one red. A running head draws its hairline, the
+   serif headline lands word by word, and the AtomRig — the Bohr
+   atom from components/atom-rig.tsx, printed in two inks — sits
+   in the figure field annotating itself: fixed leaders for
+   nucleus and orbit, one live hairline that chases an electron
+   forever. A micro legend reads proton · neutron · electron;
+   the reaction sets in the serif, its arrow drawn once and then
+   breathing forever; the attribution closes the caption. Scroll
+   breathes through the plate (drift, scale, tilt), a pointer
+   lean on fine-pointer screens meets the hand. Nothing said
+   twice. Nothing ever stops.
    ═══════════════════════════════════════════════════════════════ */
 
 export default function Loop({ motion }: { motion: boolean }) {
-  const bubRef = useRef<HTMLDivElement>(null);
   const root = useActAnim<HTMLElement>(motion, run);
 
   function run() {
@@ -28,71 +30,136 @@ export default function Loop({ motion }: { motion: boolean }) {
     if (!el) return;
     const q = gsap.utils.selector(el);
 
-    if (bubRef.current) bubbleField(bubRef.current, 8, "rgba(7,58,43,0.13)");
+    /* — the plate arrives: hairlines draw, type lands — */
+    gsap.from(q(".ed-rule"), {
+      scaleX: 0,
+      transformOrigin: "left center",
+      duration: 1.1,
+      ease: "m3-dec",
+      stagger: 0.14,
+      scrollTrigger: { trigger: el, start: "top 58%", once: true },
+    });
+    gsap.from(q(".ed-head > *"), {
+      autoAlpha: 0,
+      y: 8,
+      duration: 0.6,
+      ease: "m3-dec",
+      stagger: 0.08,
+      scrollTrigger: { trigger: el, start: "top 58%", once: true },
+    });
+    gsap.from(q(".ed-title .ed-w"), {
+      autoAlpha: 0,
+      y: 26,
+      duration: 0.8,
+      ease: "m3-dec",
+      stagger: 0.09,
+      scrollTrigger: { trigger: el, start: "top 52%", once: true },
+    });
+    gsap.from(q(".ed-legend .ed-lg"), {
+      autoAlpha: 0,
+      y: 10,
+      duration: 0.55,
+      ease: "m3-dec",
+      stagger: 0.09,
+      scrollTrigger: { trigger: el, start: "top 40%", once: true },
+    });
+    gsap.from(q(".ed-after"), {
+      autoAlpha: 0,
+      duration: 1,
+      ease: "m3-dec",
+      scrollTrigger: { trigger: el, start: "top 30%", once: true },
+    });
 
-    /* scroll breathes through the rig: it arrives small and low,
-       leaves large and lifted, tilting as it goes */
+    /* — the figure's own annotations draw themselves in, the way a
+         plate's labels are inked last — */
+    const lines = q(".ed-notes .ed-note-line") as unknown as SVGLineElement[];
+    lines.forEach((line, i) => {
+      const L = line.getTotalLength();
+      gsap.set(line, { strokeDasharray: `${L} ${L}`, strokeDashoffset: L });
+      gsap.to(line, {
+        strokeDashoffset: 0,
+        duration: 0.7,
+        delay: 0.5 + i * 0.22,
+        ease: "power1.inOut",
+        scrollTrigger: { trigger: el, start: "top 55%", once: true },
+      });
+    });
+    gsap.from(q(".ed-notes .ed-note-text, .ed-notes .ed-note-dot"), {
+      autoAlpha: 0,
+      duration: 0.6,
+      delay: 0.55,
+      ease: "m3-dec",
+      stagger: 0.1,
+      scrollTrigger: { trigger: el, start: "top 55%", once: true },
+    });
+
+    /* — scroll breathes through the figure: it arrives small and
+         low, leaves large and lifted, tilting as it goes — */
     gsap.fromTo(
-      q(".m3-rig"),
-      { scale: 0.82, rotation: -6, yPercent: 7 },
+      q(".ed-rig"),
+      { scale: 0.9, rotation: -3.5, yPercent: 5 },
       {
-        scale: 1.06,
-        rotation: 6,
-        yPercent: -7,
+        scale: 1.04,
+        rotation: 3.5,
+        yPercent: -5,
         ease: "none",
         scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
       },
     );
 
-    /* the equation rises once, then its arrow breathes forever */
-    const eq = q(".m3-eq")[0] as HTMLElement | undefined;
-    if (eq) {
-      const line = eq.querySelector(".m3-eq-line") as HTMLElement | null;
-      if (line) {
-        const split = new SplitText(line, { type: "chars" });
-        const arrow = split.chars.find((c) => (c.textContent ?? "").includes("→"));
-        gsap.from(split.chars, {
-          autoAlpha: 0,
-          y: 16,
-          duration: 0.55,
-          ease: "m3-dec",
-          stagger: 0.025,
-          scrollTrigger: { trigger: el, start: "top 62%", once: true },
-          /* the arrow only breathes once it has actually arrived —
-             starting it earlier would lock in the pre-reveal opacity */
-          onComplete: () => {
-            if (arrow) {
-              gsap.to(arrow, {
-                opacity: 0.4,
-                scale: 1.24,
-                duration: 0.8,
-                yoyo: true,
-                repeat: -1,
-                repeatDelay: 4.2,
-                ease: "sine.inOut",
-                transformOrigin: "center",
-              });
-            }
-          },
-        });
-      }
-      /* the equation drifts on its own slower layer */
-      gsap.fromTo(
-        eq,
-        { y: 26 },
-        {
-          y: -26,
-          ease: "none",
-          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
-        },
-      );
+    /* — the caption drifts on its own slower layer — */
+    gsap.fromTo(
+      q(".ed-foot"),
+      { y: 18 },
+      {
+        y: -18,
+        ease: "none",
+        scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
+      },
+    );
+
+    /* — the equation rises once, then its arrow breathes forever — */
+    gsap.from(q(".ed-eq-part"), {
+      autoAlpha: 0,
+      y: 18,
+      duration: 0.7,
+      ease: "m3-dec",
+      stagger: 0.16,
+      scrollTrigger: { trigger: el, start: "top 38%", once: true },
+      onComplete: () => {
+        const arrow = q(".ed-eq-arrow")[0] as HTMLElement | undefined;
+        if (arrow) {
+          gsap.to(arrow, {
+            scale: 1.1,
+            opacity: 0.55,
+            duration: 0.9,
+            yoyo: true,
+            repeat: -1,
+            repeatDelay: 3.4,
+            ease: "sine.inOut",
+            transformOrigin: "left center",
+          });
+        }
+      },
+    });
+    const draw = q(".ed-eq-arrow-draw")[0] as unknown as SVGPathElement | undefined;
+    if (draw) {
+      const L = draw.getTotalLength();
+      gsap.set(draw, { strokeDasharray: `${L} ${L}`, strokeDashoffset: L });
+      gsap.to(draw, {
+        strokeDashoffset: 0,
+        duration: 0.6,
+        delay: 0.4,
+        ease: "power1.inOut",
+        scrollTrigger: { trigger: el, start: "top 38%", once: true },
+      });
     }
 
-    /* the pointer lean — the atom tilts to meet the hand and the
-       orbit planes counter-slide, a depth trick in two layers */
+    /* — the pointer lean — the plate tilts to meet the hand and the
+         figure counter-slides, a depth trick in two layers — */
     if (window.matchMedia("(pointer: fine)").matches && window.innerWidth > 820) {
-      const tilt = q(".m3-rig-tilt")[0] as HTMLElement | undefined;
-      const svg = q(".m3-rig-svg")[0] as HTMLElement | undefined;
+      const tilt = q(".ed-tilt")[0] as HTMLElement | undefined;
+      const svg = q(".ed-svg")[0] as HTMLElement | undefined;
       if (tilt && svg) {
         const rx = gsap.quickTo(tilt, "rotationX", { duration: 0.7, ease: "power3" });
         const ry = gsap.quickTo(tilt, "rotationY", { duration: 0.7, ease: "power3" });
@@ -102,10 +169,10 @@ export default function Loop({ motion }: { motion: boolean }) {
           const r = el.getBoundingClientRect();
           const nx = (e.clientX - r.left) / r.width - 0.5;
           const ny = (e.clientY - r.top) / r.height - 0.5;
-          ry(nx * 13);
-          rx(-ny * 10);
-          sx(-nx * 11);
-          sy(-ny * 9);
+          ry(nx * 11);
+          rx(-ny * 8);
+          sx(-nx * 9);
+          sy(-ny * 7);
         };
         const leave = () => {
           rx(0);
@@ -125,17 +192,58 @@ export default function Loop({ motion }: { motion: boolean }) {
 
   return (
     <section id="m3-loop" ref={root} className="m3-loop">
-      <div className="m3-bubbles" ref={bubRef} aria-hidden />
-      <div className="m3-rig" aria-hidden>
-        <div className="m3-rig-tilt">
-          <AtomRig motion={motion} className="m3-rig-atom" />
+      <div className="ed-plate">
+        <span className="ed-crop ed-crop-tl" aria-hidden />
+        <span className="ed-crop ed-crop-tr" aria-hidden />
+        <span className="ed-crop ed-crop-bl" aria-hidden />
+        <span className="ed-crop ed-crop-br" aria-hidden />
+
+        <header className="ed-head">
+          <span className="ed-head-no">Fig. 04 · The shell model</span>
+          <span className="ed-head-tag">IAL CHEM</span>
+        </header>
+        <span className="ed-rule" aria-hidden />
+
+        <h2 className="ed-title">
+          <span className="ed-w">The</span> <span className="ed-w">atom</span>{" "}
+          <em className="ed-w">never</em> <em className="ed-w">rests</em>
+          <span className="ed-fs">.</span>
+        </h2>
+
+        <div className="ed-rig" aria-hidden>
+          <div className="ed-tilt">
+            <AtomRig motion={motion} className="ed-atom" />
+          </div>
         </div>
+
+        <p className="ed-legend" aria-hidden>
+          <span className="ed-lg">
+            <i className="ed-sw ed-sw-p" /> proton
+          </span>
+          <span className="ed-lg">
+            <i className="ed-sw ed-sw-n" /> neutron
+          </span>
+          <span className="ed-lg">
+            <i className="ed-sw ed-sw-e" /> electron
+          </span>
+        </p>
+
+        <footer className="ed-foot">
+          <span className="ed-rule" aria-hidden />
+          <p className="ed-eq">
+            <span className="ed-eq-part">2Na + Cl<sub>2</sub></span>
+            <svg className="ed-eq-arrow" viewBox="0 0 34 14" aria-hidden>
+              <path
+                className="ed-eq-arrow-draw"
+                d="M1 7 H29 M29 7 L23 2.8 M29 7 L23 11.2"
+                fill="none"
+              />
+            </svg>
+            <span className="ed-eq-part">2NaCl</span>
+          </p>
+          <p className="ed-after">after N. Bohr, 1913</p>
+        </footer>
       </div>
-      <p className="m3-eq">
-        <span className="m3-eq-line">
-          2Na + Cl<sub>2</sub> → 2NaCl
-        </span>
-      </p>
     </section>
   );
 }

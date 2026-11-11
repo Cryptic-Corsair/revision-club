@@ -605,46 +605,117 @@
   pointer-events: none;
 }
 
-/* ————— 04 · the loop —————
-   The AtomRig (components/atom-rig.tsx) dresses itself entirely
-   from these classes; every color carries a fallback so the rig
-   can be dropped into any page that lacks the --m3 tokens. */
+/* ————— 04 · the plate —————
+   The loop act, typeset as an editorial journal figure: paper,
+   black ink, one red. The AtomRig (components/atom-rig.tsx) is
+   printed entirely from these .ed-* classes; every color carries
+   a fallback so the rig can be dropped into any page that lacks
+   the --ed tokens. Instrument Serif speaks the figure, Plex mono
+   whispers the furniture. */
 
 .m3-loop {
+  --ed-paper: #f6f0e2;
+  --ed-ink: #221b12;
+  --ed-accent: var(--m3-primary, #c22b4a);
+  --ed-f-serif: var(--font-instrument), Georgia, "Times New Roman", serif;
+  --ed-f-mono: var(--font-plex), ui-monospace, monospace;
+
   position: relative;
   min-height: 100svh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: clip;
-  padding: 100px 20px 110px;
-  background: var(--m3-sc, #c9eedb);
-  color: var(--m3-on-sc, #073a2b);
+  padding: clamp(96px, 12vh, 150px) 20px;
+  background: var(--ed-paper);
+  color: var(--ed-ink);
+  border-top: 1px solid color-mix(in oklab, var(--ed-ink) 16%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--ed-ink) 16%, transparent);
   perspective: 1200px;
 }
 
-.m3-rig {
+.ed-plate {
   position: relative;
-  width: clamp(270px, 46vmin, 520px);
+  width: min(1180px, 100%);
+  padding: 30px clamp(22px, 4.5vw, 60px) 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* the printer's corner ticks */
+.ed-crop {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  pointer-events: none;
+  border: 0 solid color-mix(in oklab, var(--ed-ink) 42%, transparent);
+}
+.ed-crop-tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.ed-crop-tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.ed-crop-bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.ed-crop-br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+
+.ed-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  font-family: var(--ed-f-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--ed-ink) 72%, transparent);
+}
+
+.ed-rule {
+  display: block;
+  height: 1px;
+  margin-top: 13px;
+  background: color-mix(in oklab, var(--ed-ink) 26%, transparent);
+  will-change: transform;
+}
+
+.ed-title {
+  margin-top: clamp(24px, 4.2vh, 44px);
+  text-align: center;
+  font-family: var(--ed-f-serif);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 7vw, 5.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.ed-title em {
+  font-style: italic;
+}
+
+.ed-title .ed-fs {
+  color: var(--ed-accent);
+}
+
+.ed-rig {
+  position: relative;
+  width: clamp(290px, 52vmin, 560px);
   aspect-ratio: 1;
+  margin: clamp(8px, 1.8vh, 24px) auto 0;
   perspective: 1100px;
   will-change: transform;
 }
 
-.m3-rig-tilt {
+.ed-tilt {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
   will-change: transform;
 }
 
-.m3-rig-atom {
+.ed-atom {
   position: absolute;
   inset: 0;
 }
 
-.m3-rig-svg {
+.ed-svg {
   display: block;
   width: 100%;
   height: 100%;
@@ -652,125 +723,205 @@
   will-change: transform;
 }
 
-.m3-orbit {
+/* — the plate rig: two inks on paper —
+   structure prints in black ink, energy prints in red */
+
+.ed-orbit {
   fill: none;
-  stroke: color-mix(in oklab, var(--m3-on-sc, #073a2b) 32%, transparent);
-  stroke-width: 1;
-  stroke-dasharray: 2.5 5;
+  stroke: color-mix(in oklab, var(--ed-ink, #221b12) 40%, transparent);
+  stroke-width: 0.7;
 }
 
-.m3-rig-ring {
+.ed-ring {
   fill: none;
-  stroke: color-mix(in oklab, var(--m3-on-sc, #073a2b) 55%, transparent);
-  stroke-width: 1;
+  stroke: color-mix(in oklab, var(--ed-ink, #221b12) 52%, transparent);
+  stroke-width: 0.9;
   stroke-dasharray: 4 7;
 }
 
-/* the nucleus — a glass cookie shell over the nucleon cluster */
-
-.m3-rig-cookie {
-  fill: color-mix(in oklab, var(--m3-tc, #ffe7b3) 26%, transparent);
-  stroke: color-mix(in oklab, var(--m3-on-sc, #073a2b) 50%, transparent);
-  stroke-width: 1.4;
+.ed-shell {
+  fill: color-mix(in oklab, var(--ed-paper, #f6f0e2) 30%, transparent);
+  stroke: color-mix(in oklab, var(--ed-ink, #221b12) 58%, transparent);
+  stroke-width: 1.2;
 }
 
-.m3-nucleon-p {
-  fill: var(--m3-primary, #c22b4a);
+.ed-nucleon-p {
+  fill: var(--ed-ink, #221b12);
 }
 
-.m3-nucleon-n {
-  fill: color-mix(in oklab, var(--m3-on-sc, #073a2b) 62%, transparent);
+.ed-nucleon-n {
+  fill: var(--ed-paper, #f6f0e2);
+  stroke: color-mix(in oklab, var(--ed-ink, #221b12) 72%, transparent);
+  stroke-width: 0.9;
 }
 
-.m3-rig-flash {
-  fill: var(--m3-on-primary, #fff6ee);
+.ed-flash {
+  fill: #fffdf6;
   opacity: 0;
 }
 
-.m3-rig-shock {
+.ed-shock {
   fill: none;
-  stroke: var(--m3-primary, #c22b4a);
-  stroke-width: 1.6;
-  opacity: 0;
-}
-
-.m3-rig-pulse {
-  fill: none;
-  stroke: var(--m3-primary, #c22b4a);
+  stroke: var(--ed-accent, #c22b4a);
   stroke-width: 1.5;
-  opacity: 0.45;
+  opacity: 0;
 }
 
-/* the comet trails — one per electron, phase-locked by gsap */
-
-.m3-trail {
+.ed-pulse {
   fill: none;
-  stroke: var(--m3-primary, #c22b4a);
-  stroke-width: 2.4;
+  stroke: var(--ed-accent, #c22b4a);
+  stroke-width: 1.1;
+  opacity: 0.4;
+}
+
+.ed-trail {
+  fill: none;
+  stroke: var(--ed-accent, #c22b4a);
+  stroke-width: 1.7;
   stroke-linecap: round;
   opacity: 0;
 }
 
-.m3-tr-ink {
-  stroke: color-mix(in oklab, var(--m3-on-sc, #073a2b) 70%, transparent);
+.ed-tr-ink {
+  stroke: color-mix(in oklab, var(--ed-ink, #221b12) 62%, transparent);
 }
 
-.m3-tr-amber {
-  stroke: color-mix(in oklab, var(--m3-on-tc, #4e3600) 72%, transparent);
+.ed-tr-soft {
+  stroke: color-mix(in oklab, var(--ed-accent, #c22b4a) 55%, transparent);
 }
 
-.m3-tr-soft {
-  stroke: color-mix(in oklab, var(--m3-primary, #c22b4a) 55%, transparent);
+.ed-electron {
+  fill: var(--ed-accent, #c22b4a);
 }
 
-/* the electrons — each a glow riding with a dot */
-
-.m3-electron {
-  fill: var(--m3-primary, #c22b4a);
-}
-
-.m3-dot-a2 {
-  fill: var(--m3-on-sc, #073a2b);
+.ed-el-wash {
   opacity: 0.8;
 }
 
-.m3-dot-b {
-  fill: var(--m3-on-tc, #4e3600);
-}
-
-.m3-dot-c {
-  fill: var(--m3-primary, #c22b4a);
-  opacity: 0.88;
-}
-
-.m3-el-glow {
-  opacity: 0.85;
-}
-
-.m3-el-glow-dim {
+.ed-el-wash-dim {
   opacity: 0.4;
 }
 
-.m3-el-fly {
+.ed-el-fly {
   opacity: 0;
 }
 
-.m3-spark {
-  fill: var(--m3-primary, #c22b4a);
-  opacity: 0.18;
+.ed-spark {
+  fill: var(--ed-ink, #221b12);
+  opacity: 0.16;
 }
 
-.m3-eq {
-  margin-top: 52px;
-  font-family: var(--m3-f-mono);
-  font-size: clamp(14px, 1.7vw, 18px);
+/* — the figure's own annotations — */
+
+.ed-note-text {
+  font-family: var(--ed-f-serif, Georgia, serif);
+  font-style: italic;
+  font-size: 6.8px;
+  letter-spacing: 0.02em;
+  fill: color-mix(in oklab, var(--ed-ink, #221b12) 80%, transparent);
+}
+
+.ed-note-text-end {
+  text-anchor: end;
+}
+
+.ed-note-line {
+  stroke: color-mix(in oklab, var(--ed-ink, #221b12) 48%, transparent);
+  stroke-width: 0.55;
+}
+
+.ed-note-dot {
+  fill: color-mix(in oklab, var(--ed-ink, #221b12) 66%, transparent);
+}
+
+/* — the furniture under the figure — */
+
+.ed-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px clamp(18px, 3vw, 36px);
+  margin-top: clamp(8px, 1.6vh, 18px);
+  font-family: var(--ed-f-mono);
+  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--ed-ink) 62%, transparent);
 }
 
-.m3-eq sub {
-  font-size: 0.62em;
+.ed-lg {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ed-sw {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.ed-sw-p {
+  background: var(--ed-ink, #221b12);
+}
+
+.ed-sw-n {
+  background: var(--ed-paper, #f6f0e2);
+  border: 1.2px solid color-mix(in oklab, var(--ed-ink, #221b12) 72%, transparent);
+}
+
+.ed-sw-e {
+  background: var(--ed-accent, #c22b4a);
+}
+
+.ed-foot {
+  margin-top: clamp(20px, 3.6vh, 38px);
+}
+
+.ed-foot .ed-rule {
+  margin-top: 0;
+}
+
+.ed-eq {
+  margin-top: clamp(18px, 3vh, 30px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2vw, 22px);
+  font-family: var(--ed-f-serif);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 3.6vw, 2.9rem);
+  line-height: 1;
+}
+
+.ed-eq sub {
+  font-size: 0.58em;
   line-height: 0;
+}
+
+.ed-eq-arrow {
+  width: clamp(30px, 3.4vw, 46px);
+  height: auto;
+  overflow: visible;
+  will-change: transform, opacity;
+}
+
+.ed-eq-arrow-draw {
+  stroke: var(--ed-accent, #c22b4a);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ed-after {
+  margin-top: clamp(14px, 2.4vh, 24px);
+  text-align: center;
+  font-family: var(--ed-f-serif);
+  font-style: italic;
+  font-size: clamp(15px, 1.6vw, 19px);
+  color: color-mix(in oklab, var(--ed-ink) 58%, transparent);
 }
 
 /* ————— 05 · the facts ————— */
@@ -946,6 +1097,17 @@
   }
   .m3-bar-tag {
     display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .ed-head {
+    gap: 10px;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+  .ed-head > span {
+    white-space: nowrap;
   }
 }
 
