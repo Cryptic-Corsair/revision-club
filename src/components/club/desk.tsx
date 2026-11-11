@@ -6,28 +6,24 @@ import {
   Clock,
   Command,
   Check,
-  Footprints,
   MoveRight,
   Target,
   Timer,
 } from "./icons";
 import type { Unit, UnitCode } from "@/lib/spectra/types";
-import { TOTALS } from "@/lib/spectra/units";
 import { useRevised, useHydrated } from "@/lib/spectra/progress";
 import { usePacks } from "@/lib/spectra/packs";
 import {
   fmtClock,
   fmtShort,
-  todaySeconds,
   topicSeconds,
   useTimeData,
-  weekSeconds,
 } from "@/lib/spectra/time";
 import { findTopic, pickSuggestion } from "@/lib/spectra/suggest";
-import { streakOf } from "@/lib/spectra/progress-derive";
 import type { DeskState } from "@/lib/spectra/desk";
-import { BeakerMeter, CandyButton, readableInk, SectionTag, shade, tint } from "./bits";
+import { BeakerMeter, CandyButton, SectionTag, shade, tint } from "./bits";
 import { BandWave } from "./bands";
+import { DeskDashboard } from "./dashboard";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the desk — the homepage for members (no account,
@@ -79,10 +75,6 @@ export function Desk({
   const lastDone = lastKey ? revised.includes(lastKey) : false;
   const lead = last && !lastDone ? last : suggestion ? { unit: suggestion.unit, topic: suggestion.topic } : null;
   const leadTag = last && !lastDone ? "pick up where you left off" : "start here";
-  const today = todaySeconds(time);
-  const week = weekSeconds(time);
-  const streak = streakOf(time.days);
-  const goalPct = time.goalMin > 0 ? Math.min(1, week / (time.goalMin * 60)) : 0;
 
   const todayLine = hydrated
     ? new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "short" }).format(new Date())
@@ -92,129 +84,71 @@ export function Desk({
     <div>
       {/* ————— header + continue ————— */}
       <section className="bg-paper" style={{ paddingTop: "calc(5.25rem + var(--sa-top))" }}>
-        <div className="mx-auto grid max-w-6xl items-start gap-8 px-5 pb-12 pt-2 sm:px-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] lg:gap-6">
-          {/* left: greeting + the continue card */}
-          <div>
-            <SectionTag main="#12B886" tilt={-1.5}>
-              welcome back{todayLine ? ` · ${todayLine}` : ""}
-            </SectionTag>
-            <h1 className="mt-5 font-display text-[calc(clamp(2.1rem,4.5vw,3.1rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.08] font-semibold tracking-tight text-ink">
-              Back to{" "}
-              <span className="hero-glow relative inline-block -rotate-2 rounded-[0.35em] px-[0.18em]">
-                the bench.
-              </span>
-            </h1>
+        <div className="mx-auto max-w-6xl px-5 pb-10 pt-2 sm:px-8">
+          <SectionTag main="#12B886" tilt={-1.5}>
+            welcome back{todayLine ? ` · ${todayLine}` : ""}
+          </SectionTag>
+          <h1 className="mt-5 font-display text-[calc(clamp(2.1rem,4.5vw,3.1rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.08] font-semibold tracking-tight text-ink">
+            Back to{" "}
+            <span className="hero-glow relative inline-block -rotate-2 rounded-[0.35em] px-[0.18em]">
+              the bench.
+            </span>
+          </h1>
 
-            {lead && (
-              <div className="mt-7 rounded-[calc(26px*var(--ui-scale))] border border-ink/[0.06] bg-cream p-5 sm:p-6">
-                <div className="text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.18em] text-ink-faint uppercase">
-                  {leadTag}
-                </div>
-                <div className="mt-2.5 flex items-center gap-2.5">
-                  <span
-                    className="h-2.5 w-2.5 shrink-0 rounded-full"
-                    style={{ background: lead.unit.candy.main }}
-                  />
-                  <h2 className="font-display text-[calc(18px*var(--ui-scale))] leading-snug font-semibold text-ink sm:text-[calc(20px*var(--ui-scale))]">
-                    {lead.topic.label} · {lead.topic.title}
-                  </h2>
-                </div>
-                <p className="mt-2 text-[calc(13.5px*var(--ui-scale))] leading-relaxed text-ink-soft">
-                  {last && !lastDone
-                    ? topicSeconds(time, lastKey as string) > 0
-                      ? `You've spent ${fmtClock(topicSeconds(time, lastKey as string))} here — the full read is about ${lead.topic.minutes} min.`
-                      : `Fresh read — about ${lead.topic.minutes} min all in.`
-                    : suggestion
-                      ? `${suggestion.reason} — about ${lead.topic.minutes} min of reading.`
-                      : ""}
-                </p>
-                <div className="mt-4 flex flex-wrap items-center gap-3">
-                  <CandyButton
-                    main={lead.unit.candy.main}
-                    onClick={() => onOpenTopic(lead.unit.code, lead.topic.id)}
-                  >
-                    {last && !lastDone ? "Resume reading" : "Start reading"}{" "}
-                    <MoveRight className="h-5 w-5" />
-                  </CandyButton>
-                  {last && !lastDone && suggestion && suggestion.key !== lastKey && (
-                    <button
-                      type="button"
-                      onClick={() => onOpenTopic(suggestion.unit.code, suggestion.topic.id)}
-                      className="inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink-soft transition-colors hover:text-ink"
-                    >
-                      instead: {suggestion.topic.label} — {suggestion.topic.title}
-                      <MoveRight className="h-4 w-4" />
-                    </button>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* right: the week at a glance */}
-          <div className="rounded-[calc(26px*var(--ui-scale))] border border-ink/[0.06] bg-cream p-5 sm:p-6">
-            <div className="flex items-center justify-between gap-2">
+          {lead && (
+            <div className="mt-7 rounded-[calc(26px*var(--ui-scale))] border border-ink/[0.06] bg-cream p-5 sm:p-6">
               <div className="text-[calc(11px*var(--ui-scale))] font-bold tracking-[0.18em] text-ink-faint uppercase">
-                your week
+                {leadTag}
               </div>
-              {streak >= 2 && (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-coral/15 px-2.5 py-1 text-[calc(11px*var(--ui-scale))] font-extrabold text-coral">
-                  <Footprints className="h-3.5 w-3.5" strokeWidth={2.4} />
-                  {streak}-day streak
-                </span>
-              )}
-            </div>
-
-            <div className="mt-4 flex items-center gap-5">
-              <BeakerMeter pct={goalPct} main="#12B886" size={62} />
-              <div className="min-w-0">
-                <div className="font-display text-[calc(19px*var(--ui-scale))] leading-tight font-bold text-ink">
-                  {fmtClock(week)}
-                </div>
-                <div className="mt-0.5 text-[calc(12px*var(--ui-scale))] font-semibold text-ink-soft">
-                  of your {Math.round(time.goalMin / 60)} h weekly goal
-                </div>
-                <div className="mt-1 text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-faint">
-                  {today > 0 ? `${fmtClock(today)} today` : "today's clock is still at zero"}
-                </div>
+              <div className="mt-2.5 flex items-center gap-2.5">
+                <span
+                  className="h-2.5 w-2.5 shrink-0 rounded-full"
+                  style={{ background: lead.unit.candy.main }}
+                />
+                <h2 className="font-display text-[calc(18px*var(--ui-scale))] leading-snug font-semibold text-ink sm:text-[calc(20px*var(--ui-scale))]">
+                  {lead.topic.label} · {lead.topic.title}
+                </h2>
+              </div>
+              <p className="mt-2 text-[calc(13.5px*var(--ui-scale))] leading-relaxed text-ink-soft">
+                {last && !lastDone
+                  ? topicSeconds(time, lastKey as string) > 0
+                    ? `You've spent ${fmtClock(topicSeconds(time, lastKey as string))} here — the full read is about ${lead.topic.minutes} min.`
+                    : `Fresh read — about ${lead.topic.minutes} min all in.`
+                  : suggestion
+                    ? `${suggestion.reason} — about ${lead.topic.minutes} min of reading.`
+                    : ""}
+              </p>
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <CandyButton
+                  main={lead.unit.candy.main}
+                  onClick={() => onOpenTopic(lead.unit.code, lead.topic.id)}
+                >
+                  {last && !lastDone ? "Resume reading" : "Start reading"}{" "}
+                  <MoveRight className="h-5 w-5" />
+                </CandyButton>
+                {last && !lastDone && suggestion && suggestion.key !== lastKey && (
+                  <button
+                    type="button"
+                    onClick={() => onOpenTopic(suggestion.unit.code, suggestion.topic.id)}
+                    className="inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-full px-3 font-display text-[calc(13.5px*var(--ui-scale))] font-semibold text-ink-soft transition-colors hover:text-ink"
+                  >
+                    instead: {suggestion.topic.label} — {suggestion.topic.title}
+                    <MoveRight className="h-4 w-4" />
+                  </button>
+                )}
               </div>
             </div>
-
-            <div className="mt-5 grid grid-cols-2 gap-2 border-t border-ink/[0.08] pt-4">
-              <button
-                type="button"
-                onClick={onOpenSticker}
-                className="flex cursor-pointer items-center gap-2.5 rounded-2xl px-2 py-2 text-left transition-colors hover:bg-ink/[0.035]"
-              >
-                <Check className="h-4 w-4 shrink-0 text-mint" strokeWidth={3} />
-                <span className="min-w-0">
-                  <span className="block font-display text-[calc(14.5px*var(--ui-scale))] leading-none font-bold text-ink">
-                    {revised.length}/{TOTALS.topics}
-                  </span>
-                  <span className="mt-1 block text-[calc(10.5px*var(--ui-scale))] font-bold text-ink-faint uppercase tracking-[0.08em]">
-                    revised
-                  </span>
-                </span>
-              </button>
-              <button
-                type="button"
-                onClick={onOpenPack}
-                className="flex cursor-pointer items-center gap-2.5 rounded-2xl px-2 py-2 text-left transition-colors hover:bg-ink/[0.035]"
-              >
-                <ClipboardList className="h-4 w-4 shrink-0 text-lemon" strokeWidth={2.4} />
-                <span className="min-w-0">
-                  <span className="block font-display text-[calc(14.5px*var(--ui-scale))] leading-none font-bold text-ink">
-                    {picks.length}
-                  </span>
-                  <span className="mt-1 block text-[calc(10.5px*var(--ui-scale))] font-bold text-ink-faint uppercase tracking-[0.08em]">
-                    points ticked
-                  </span>
-                </span>
-              </button>
-            </div>
-          </div>
+          )}
         </div>
       </section>
+
+      {/* ————— the dashboard — the ledger, dressed ————— */}
+      <DeskDashboard
+        units={units}
+        onOpenUnit={onOpenUnit}
+        onOpenTopic={onOpenTopic}
+        onOpenSticker={onOpenSticker}
+      />
 
       {/* ————— all topics, one tap away ————— */}
       <BandWave from="var(--color-paper)" to="var(--color-cream)" wave={1} />

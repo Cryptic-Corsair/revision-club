@@ -2793,3 +2793,52 @@ html.classic .note-rooms .room {
   cursor: grabbing;
 }
 
+
+/* ═════════ The dashboard system · M3 dress ═════════
+   The widgets in components/club/dashboard.tsx (and the progress
+   room that borrows them) sit on two shared surfaces:
+
+   .dash-aurora  — a paper base with four candy lights blooming
+                   through it. The candies ride in as --a1…--a4 so
+                   every caller picks its own sky; mixing against
+                   var(--color-paper) (not white) is what makes the
+                   same gradient land correctly in every lab —
+                   daylight cream, dune, and the dark moods.
+   .dash-grain   — a film-grain veil (one SVG turbulence tile, cut
+                   to 5% ink, soft-light blended) so the big colour
+                   fields read as printed matter, not screen slop.
+
+   Press feedback (.m3-press) and the tonal card (.m3-tonal) round
+   out the Material 3 vocabulary. None of it keyframe-animates, so
+   the motion knob's blanket silence stands them all still. */
+
+.dash-aurora {
+  background:
+    radial-gradient(120% 90% at 8% 10%, color-mix(in oklab, var(--a1, #12b886) 26%, transparent), transparent 62%),
+    radial-gradient(110% 85% at 94% 6%, color-mix(in oklab, var(--a2, #9775fa) 24%, transparent), transparent 56%),
+    radial-gradient(130% 105% at 80% 98%, color-mix(in oklab, var(--a3, #ff6b6b) 19%, transparent), transparent 60%),
+    radial-gradient(95% 95% at 10% 96%, color-mix(in oklab, var(--a4, #f59f00) 15%, transparent), transparent 52%),
+    var(--color-paper);
+  border: 1px solid color-mix(in oklab, var(--color-ink) 7%, transparent);
+}
+
+.dash-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+}
+
+.m3-press {
+  transition: transform 0.16s cubic-bezier(0.2, 0, 0, 1);
+}
+.m3-press:active {
+  transform: scale(0.97);
+}
+
+.m3-tonal {
+  background: color-mix(in oklab, var(--tone, var(--color-mint)) 8%, var(--color-paper));
+  border: 1px solid color-mix(in oklab, var(--tone, var(--color-mint)) 20%, transparent);
+}
