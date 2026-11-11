@@ -114,13 +114,6 @@ const Legal = dynamic(() => import("./legal").then((m) => m.Legal), {
   ssr: false,
   loading: RoomLoading,
 });
-/* the alternate front door — THE FRONT, the Material 3 motion
-   poster of the whole course. Heavy (gsap + lenis), so it rides in
-   on its own chunk, fetched only when the footer sends someone. */
-const FrontRoom = dynamic(() => import("@/components/front/front"), {
-  ssr: false,
-});
-
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · app shell — pill nav, views, footer
    The nav stays lean: home, then the tools. Units live on the
@@ -129,7 +122,6 @@ const FrontRoom = dynamic(() => import("@/components/front/front"), {
 
 type View =
   | { kind: "home" }
-  | { kind: "front" }
   | { kind: "unit"; code: string }
   | { kind: "topic"; code: string; topicId: string }
   | { kind: "notes"; code: string; docId: string; spec?: string }
@@ -648,7 +640,6 @@ function Footer({
   onOpenPack,
   onOpenSpec,
   onOpenLegal,
-  onOpenFront,
   onSearch,
   bandFrom = "var(--color-cream)",
 }: {
@@ -658,7 +649,6 @@ function Footer({
   onOpenPack: () => void;
   onOpenSpec: () => void;
   onOpenLegal: () => void;
-  onOpenFront: () => void;
   onSearch: () => void;
   bandFrom?: string;
 }) {
@@ -859,16 +849,6 @@ function Footer({
               <span className="ml-1 whitespace-nowrap text-milk/30">· rev 4 · Nov 2026 · {BUILD_VERSION}</span>
             </p>
             <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 self-start sm:self-auto">
-              <button
-                type="button"
-                onClick={onOpenFront}
-                className="footer-utility-link inline-flex items-center gap-1.5"
-                aria-label="Open the alternate front door — a Material 3 motion poster of the whole course"
-                title="The alternate front door — a Material 3 motion poster of the whole course"
-              >
-                The other front door
-                <Sparkles className="h-3.5 w-3.5" strokeWidth={2.2} />
-              </button>
               <button
                 type="button"
                 onClick={onOpenLegal}
@@ -1206,43 +1186,6 @@ export default function ClubApp() {
     setView({ kind: "notes", code: meta.unitCode, docId, spec });
   }, []);
 
-  /* ————— the alternate front door —————
-     THE FRONT runs as its own piece while mounted: entering saves
-     the visitor's exact view and scroll, exiting hands both back —
-     the double rAF lands after the shell has re-mounted and the
-     viewKey effect has done its own jump to the top. */
-  const frontReturn = useRef<{ view: View; y: number }>({
-    view: { kind: "home" },
-    y: 0,
-  });
-  const enterFront = useCallback(() => {
-    frontReturn.current = { view, y: window.scrollY };
-    setView({ kind: "front" });
-  }, [view]);
-  const exitFront = useCallback(() => {
-    const { view: v, y } = frontReturn.current;
-    setView(v);
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => {
-        /* instant, not smooth: the front's cleanup has handed the
-           club's html { scroll-behavior: smooth } back by now, and a
-           smooth glide from the top through the whole page is not a
-           homecoming — jump, then give the rule back */
-        const html = document.documentElement;
-        html.style.scrollBehavior = "auto";
-        window.scrollTo(0, y);
-        html.style.scrollBehavior = "";
-      }),
-    );
-  }, []);
-  /* the poster's unit cards are exits too: the front unmounts and
-     the requested unit takes over — the same membership moment as
-     openUnit, just arriving from another room */
-  const exitFrontToUnit = useCallback((code: string) => {
-    markUnit(code);
-    setView({ kind: "unit", code });
-  }, []);
-
   /* ⌘K / Ctrl+K (and "/") summon the search bubble */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -1290,9 +1233,6 @@ export default function ClubApp() {
           eases either way, so nothing pops in blind. */}
       <MotionConfig reducedMotion={prefs.motion ? "user" : "always"}>
       <SpecMapProvider>
-        {view.kind === "front" ? (
-          <FrontRoom onExit={exitFront} onOpenUnit={exitFrontToUnit} />
-        ) : (
         <div className="flex min-h-dvh flex-col">
           <TopBar
             view={view}
@@ -1437,7 +1377,6 @@ export default function ClubApp() {
               onOpenPack={openPack}
               onOpenSpec={() => setView({ kind: "spec" })}
               onOpenLegal={openLegal}
-              onOpenFront={enterFront}
               onSearch={openSearch}
               bandFrom={
                 /* the desk ends on cream, the introduction on its own
@@ -1449,7 +1388,6 @@ export default function ClubApp() {
             />
           </main>
         </div>
-        )}
       </SpecMapProvider>
       </MotionConfig>
     </LazyMotion>

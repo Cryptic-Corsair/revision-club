@@ -58,48 +58,12 @@ const quicksand = localFont({
   weight: "300 700",
   display: "swap",
 });
-
-/* ————— the front's own two faces —————
-   The alternate front door casts its own type: Syne for the big
-   screen titles, Space Grotesk for everything spoken quietly
-   underneath it. They load on first use only — the default candy
-   front door never pays for them. */
-const syne = localFont({
-  variable: "--font-syne",
-  src: "./fonts/syne-var.woff2",
-  weight: "400 800",
-  display: "swap",
-  preload: false,
-});
-
-const grotesk = localFont({
-  variable: "--font-grotesk",
-  src: "./fonts/space-grotesk-var.woff2",
-  weight: "300 700",
-  display: "swap",
-  preload: false,
-});
-
 const plex = localFont({
   variable: "--font-plex",
   src: [
     { path: "./fonts/plex-500.woff2", weight: "500" },
     { path: "./fonts/plex-600.woff2", weight: "600" },
     { path: "./fonts/plex-700.woff2", weight: "700" },
-  ],
-  display: "swap",
-  preload: false,
-});
-
-/* ————— the plate's own face —————
-   Instrument Serif (roman + italic) dresses the editorial Bohr plate
-   in the loop act: the one serif the printed figure speaks in.
-   Loads on first use only, like the rest of the swap shelf. */
-const instrument = localFont({
-  variable: "--font-instrument",
-  src: [
-    { path: "./fonts/instrument-400.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/instrument-400-italic.woff2", weight: "400", style: "italic" },
   ],
   display: "swap",
   preload: false,
@@ -166,7 +130,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable} ${syne.variable} ${grotesk.variable} ${instrument.variable}`}
+      className={`${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable}`}
     >
       <body className="min-h-screen bg-cream font-body text-ink antialiased">
         <Script id="rc-prefs" strategy="beforeInteractive">{prefsInit}</Script>
