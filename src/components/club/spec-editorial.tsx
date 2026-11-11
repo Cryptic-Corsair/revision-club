@@ -5,7 +5,7 @@ import { ArrowLeft, Check, Search, Target } from "./icons";
 import { SPEC_STATS, SPEC_TOPIC_GROUPS } from "@/lib/spectra/registry";
 import { usePacks, togglePick } from "@/lib/spectra/packs";
 import { Fmt } from "./format";
-import { PopIn, Reveal, SoftButton } from "./bits";
+import { PopIn, Reveal, SoftButton, Mascot } from "./bits";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the spec index, in the editorial dress.
@@ -196,7 +196,10 @@ export function SpecEditorial({
       {visible.length === 0 ? (
         <Reveal className="mt-10">
           <div className="legal-card mx-auto max-w-[56ch] rounded-[calc(18px*var(--ui-scale))] p-6 text-center sm:p-8">
-            <p className="font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
+            {/* Bubbles squints at the empty result — the candy lab's
+                one loan to the document room, in the room's own rust */}
+            <Mascot main="var(--legal-rust)" mood="wow" size={84} bubbles={false} className="mx-auto" />
+            <p className="mt-4 font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
               Nothing matches &ldquo;{query}&rdquo;.
             </p>
             <p className="mt-2 text-[calc(13.5px*var(--ui-scale))] font-bold text-ink-faint">

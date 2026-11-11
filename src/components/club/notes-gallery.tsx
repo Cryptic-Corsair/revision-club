@@ -10,7 +10,7 @@ import { togglePick, usePacks } from "@/lib/spectra/packs";
 import { getNotes } from "@/lib/spectra/notes";
 import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
 import { Fmt, plural } from "./format";
-import { PopIn, Reveal } from "./bits";
+import { PopIn, Reveal, Mascot } from "./bits";
 import { BandWave, WAVES } from "./bands";
 import { useSpecMapRegister } from "./spec-map";
 import {
@@ -549,13 +549,25 @@ function NotesGalleryBody({
           style={{ borderColor: hair(10) }}
         >
           <GalleryLabel>End of the note</GalleryLabel>
-          <p className="mt-5 max-w-[60ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.9] text-ink-soft">
-            Every spec point of {topicLabel}, walked once. Tick spec
-            points along the way — the quiet square beside each section
-            adds them to your revision pack, assembled in syllabus order
-            and ready to print. Mark {topicLabel} as revised from its
-            unit page when you can answer the statements unaided.
-          </p>
+          {/* Bubbles sees you out — the candy lab's one loan to the
+              white wall, in the dress's own bronze, standing at the
+              end of the note like a quiet exhibit label come alive */}
+          <div className="mt-5 flex items-end gap-4">
+            <p className="max-w-[60ch] flex-1 text-[calc(14.5px*var(--ui-scale))] leading-[1.9] text-ink-soft">
+              Every spec point of {topicLabel}, walked once. Tick spec
+              points along the way — the quiet square beside each section
+              adds them to your revision pack, assembled in syllabus order
+              and ready to print. Mark {topicLabel} as revised from its
+              unit page when you can answer the statements unaided.
+            </p>
+            <Mascot
+              main={GAL_ACCENT}
+              mood="idle"
+              size={64}
+              bubbles={false}
+              className="shrink-0"
+            />
+          </div>
           <button
             type="button"
             onClick={onBack}

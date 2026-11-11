@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react"
 import { createPortal } from "react-dom";
 import { AnimatePresence, m } from "framer-motion";
 import { ArrowRight, Search, X } from "./icons";
+import { Mascot } from "./bits";
 import type { UnitCode } from "@/lib/spectra/types";
 import { SEARCH_INDEX, searchTopics, type SearchRow } from "@/lib/spectra/search-index";
 
@@ -109,18 +110,18 @@ export function SearchPalette({
             aria-modal="true"
             aria-label="IAL CHEM course search"
             tabIndex={-1}
-            initial={{ y: "102%" }}
+            initial={{ y: "104%" }}
             animate={{ y: 0 }}
-            exit={{ y: "102%" }}
+            exit={{ y: "104%" }}
             transition={{ type: "spring", stiffness: 340, damping: 34 }}
-            className="search-palette fixed inset-x-0 bottom-0 z-[90] flex h-[min(86dvh,780px)] flex-col overflow-hidden rounded-t-[24px] border-t-2 border-[var(--edge)] bg-paper text-ink shadow-[0_-30px_60px_-24px_rgb(0_0_0/0.4)] outline-none"
+            className="search-palette fixed inset-x-0 bottom-0 z-[90] flex h-[min(86dvh,780px)] flex-col overflow-hidden rounded-t-[24px] border-t-2 border-[var(--edge)] bg-paper text-ink shadow-[0_-30px_60px_-24px_rgb(0_0_0/0.4)] outline-none md:bottom-[14px] md:mx-auto md:w-[min(calc(100vw-44px),720px)] md:rounded-[24px] md:border md:border-t md:border-ink/[0.12] md:shadow-[0_-24px_70px_-30px_rgb(0_0_0/0.42)] xl:bottom-[22px] xl:w-[min(calc(100vw-72px),1080px)]"
             style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
           >
             <div className="flex shrink-0 justify-center py-2.5" aria-hidden>
               <span className="h-1.5 w-12 rounded-full bg-ink/15" />
             </div>
 
-            <div className="mx-auto flex min-h-0 w-full max-w-[920px] flex-1 flex-col">
+            <div className="mx-auto flex min-h-0 w-full max-w-[920px] flex-1 flex-col md:max-w-none">
               {/* the masthead — the spec map's language: the dress's
                   dash and small caps name the room, the ledger line
                   underneath says what the shelf holds right now */}
@@ -202,9 +203,7 @@ export function SearchPalette({
               >
                 {results.length === 0 ? (
                   <div className="mx-auto max-w-md rounded-[22px] border border-dashed border-ink/15 bg-ink/[0.025] px-6 py-12 text-center">
-                    <span className="mx-auto grid h-11 w-11 place-items-center rounded-2xl bg-ink/[0.06] text-ink-faint">
-                      <Search className="h-5 w-5" />
-                    </span>
+                    <Mascot main="var(--search-accent)" mood="wow" size={64} bubbles={false} className="mx-auto" />
                     <p className="mt-4 font-display text-[16px] font-semibold text-ink">No topics found</p>
                     <p className="mt-1.5 text-[12px] leading-relaxed text-ink-faint">Try another term, a shorter phrase or a unit code.</p>
                     <button type="button" onClick={() => setQ("")} className="mt-5 rounded-full bg-ink px-4 py-2.5 text-[11px] font-bold text-paper transition-opacity hover:opacity-85">Clear search</button>

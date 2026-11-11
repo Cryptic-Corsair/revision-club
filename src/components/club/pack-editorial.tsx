@@ -23,7 +23,7 @@ import { clearPicks, togglePick, toggleRead, usePacks } from "@/lib/spectra/pack
 import { accentOf } from "./bands";
 import { EditorialSectionView, figOffsetsOf } from "./spec-section-editorial";
 import { PackSetsDialog } from "./pack-sets";
-import { PopIn, Reveal, SoftButton } from "./bits";
+import { PopIn, Reveal, SoftButton, Mascot } from "./bits";
 import type { SpecSection } from "@/lib/spectra/notes-types";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -115,7 +115,10 @@ export function PackEditorial({
         </PopIn>
         <Reveal delay={0.08} className="mt-14">
           <div className="legal-card mx-auto max-w-[64ch] rounded-[26px] p-7 text-center sm:p-9">
-            <p className="legal-meta justify-center">REVISION PACK</p>
+            {/* Bubbles holds the empty shelf — the candy lab's one loan
+                to the document room, in the room's own rust */}
+            <Mascot main="var(--legal-rust)" mood="idle" size={104} bubbles={false} className="mx-auto" />
+            <p className="legal-meta mt-4 justify-center">REVISION PACK</p>
             <h1 className="mt-4 font-display text-[calc(clamp(1.9rem,4.6vw,2.7rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
               The pack is empty.
             </h1>
@@ -338,11 +341,22 @@ export function PackEditorial({
             <ClipboardList className="h-5 w-5" />
             <p className="legal-meta">YOUR TURN</p>
           </div>
-          <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ui-scale))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale))]">
-            {allRead
-              ? `Pack read — every point, marked off. ${points.length} spec point${points.length === 1 ? "" : "s"} of revision, done. Tick the next batch, or load a saved set and walk it again.`
-              : `That's your pack — ${points.length} point${points.length === 1 ? "" : "s"}, read at your pace. The checkbox beside each clause marks it read; the hairline at the top keeps the score.`}
-          </p>
+          {/* Bubbles reads along — idle at the halfway mark, cheering
+              the pack's last page in the room's own rust */}
+          <div className="mt-4 flex items-end gap-4">
+            <p className="max-w-[72ch] flex-1 text-[calc(14px*var(--ui-scale))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale))]">
+              {allRead
+                ? `Pack read — every point, marked off. ${points.length} spec point${points.length === 1 ? "" : "s"} of revision, done. Tick the next batch, or load a saved set and walk it again.`
+                : `That's your pack — ${points.length} point${points.length === 1 ? "" : "s"}, read at your pace. The checkbox beside each clause marks it read; the hairline at the top keeps the score.`}
+            </p>
+            <Mascot
+              main="var(--legal-rust)"
+              mood={allRead ? "cheer" : "idle"}
+              size={72}
+              bubbles={false}
+              className="shrink-0"
+            />
+          </div>
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-current/15 pt-4">
             <span className="legal-meta">END OF PACK · ASSEMBLED FROM THE REVISION NOTES</span>
             <div className="no-print flex flex-wrap items-center gap-x-5 gap-y-2">

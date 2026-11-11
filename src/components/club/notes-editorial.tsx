@@ -17,7 +17,7 @@ import { togglePick, usePacks } from "@/lib/spectra/packs";
 import { getNotes } from "@/lib/spectra/notes";
 import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
 import { Fmt, plural } from "./format";
-import { PopIn, Reveal, SoftButton, readableInk, shade } from "./bits";
+import { PopIn, Reveal, SoftButton, Mascot, readableInk, shade } from "./bits";
 import { accentOf } from "./bands";
 import { useSpecMapRegister } from "./spec-map";
 import { EditorialSectionView, figOffsetsOf } from "./spec-section-editorial";
@@ -517,12 +517,24 @@ function NotesEditorialBody({
                 <BookOpenCheck className="h-5 w-5" />
                 <p className="legal-meta">YOUR TURN</p>
               </div>
-              <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ui-scale))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale))]">
-                Tick spec points along the way — the plus beside each clause
-                adds them to your revision pack, assembled in syllabus order
-                and ready to print. Mark the topic as revised from its unit
-                page when you can answer the statements unaided.
-              </p>
+              {/* Bubbles sees you out — the candy lab's one loan to the
+                  document room, in the room's own rust, standing at
+                  the end of the note like a living full stop */}
+              <div className="mt-4 flex items-end gap-4">
+                <p className="max-w-[72ch] flex-1 text-[calc(14px*var(--ui-scale))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale))]">
+                  Tick spec points along the way — the plus beside each clause
+                  adds them to your revision pack, assembled in syllabus order
+                  and ready to print. Mark the topic as revised from its unit
+                  page when you can answer the statements unaided.
+                </p>
+                <Mascot
+                  main="var(--legal-rust)"
+                  mood="idle"
+                  size={64}
+                  bubbles={false}
+                  className="shrink-0"
+                />
+              </div>
               <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-current/15 pt-4">
                 <span className="legal-meta">END OF NOTE</span>
                 <button type="button" onClick={onBack} className="legal-back-link">

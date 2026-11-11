@@ -678,7 +678,15 @@ html.dune ::selection {
   color: #2a1c0e;
 }
 
-:focus-visible {
+/* the keyboard focus ring — dashed coral, softened corners. The
+   two self-focusing drawer roots (spec map, search sheet) and the
+   finder's own halo opt out: the roots catch focus on open, the
+   ring would draw a second border around the whole window, and
+   this rule's border-radius would quietly flatten their own
+   rounded corners for as long as they hold focus (unlayered beats
+   every utility). Their own rules below and their utility rounding
+   handle their shape. */
+:focus-visible:not(.spec-map):not([role="dialog"].search-palette):not(.search-field) {
   outline: 3px dashed var(--color-coral);
   outline-offset: 3px;
   border-radius: 12px;
