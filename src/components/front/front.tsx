@@ -1,104 +1,104 @@
 "use client";
 
+import "./front.css";
+
 import { useCallback, useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
-import { gsap } from "gsap";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
-import Cursor from "./cursor";
-import Reader from "./reader";
+import { ensureGsap, motionGate, scrollState } from "./kit";
 import Hero from "./acts/hero";
-import Cast from "./acts/cast";
-import Bond from "./acts/bond";
-import Price from "./acts/price";
-import Balance from "./acts/balance";
-import Atlas from "./acts/atlas";
-import Foot from "./acts/foot";
-import { motionGate, scrollState } from "./gate";
+import Marquee from "./acts/marquee";
+import Units from "./acts/units";
+import Loop from "./acts/loop";
+import Stats from "./acts/stats";
+import Finale from "./acts/finale";
 
 /* ═══════════════════════════════════════════════════════════════
-   THE FRONT · the front desk
+   THE FRONT · the alternate front door, Material 3 edition
 
-   The site's ALTERNATE front door — the club's candy shop stays
-   the default; this one is reached from the club footer and runs
-   as its own piece while mounted. Owns the four things it needs:
+   The site's second homepage — a word-minimal motion poster in
+   six movements. Reached from the club footer; runs as its own
+   piece while mounted and owns the four things it needs:
+
      · the motion gate (the saved knob, or prefers-reduced-motion)
-     · Lenis — smooth scroll on the wheel, native on touch — and
-       its marriage to ScrollTrigger, plus the velocity channel
-       the balance marquee drinks from
-     · the fixed chrome: progress hairline, header, the chapter
-       rail, the meters — and the load-in curtain
-     · the view swap: a station opens → the front hides, the reader
-       takes the document scroll → back → ScrollTrigger re-measures
-       and the front resumes exactly where it was — and Escape (or
-       the header pill, or the finale's second button) hands the
-       room back to the club shell, which restores the visitor's
-       exact view and scroll
+       — when it says still, no curtain, no Lenis, no GSAP: the
+       finished poster, at rest.
+     · Lenis — smooth scroll on the wheel, native on touch — married
+       to ScrollTrigger, with the velocity channel the ticker's
+       lean drinks from.
+     · the load-in curtain: three tonal panels lift, the poster
+       starts while the last one is still moving.
+     · the fixed chrome: progress hairline, floating app bar, the
+       wordless dot rail, the chapter meter — and Escape (or the
+       app bar's FAB, or the finale's button) hands the room back
+       to the club shell, which restores the visitor's exact view
+       and scroll.
    ═══════════════════════════════════════════════════════════════ */
 
 const CHAPTERS = [
-  { id: "fr-hero", n: "00", label: "Intro" },
-  { id: "fr-cast", n: "01", label: "The cast" },
-  { id: "fr-bond", n: "02", label: "The bond" },
-  { id: "fr-price", n: "03", label: "The price" },
-  { id: "fr-bal", n: "04", label: "The balance" },
-  { id: "fr-atlas", n: "✦", label: "The atlas" },
+  { id: "m3-hero", label: "Cover" },
+  { id: "m3-marquee", label: "Ticker" },
+  { id: "m3-units", label: "The course" },
+  { id: "m3-loop", label: "The loop" },
+  { id: "m3-stats", label: "The facts" },
+  { id: "m3-finale", label: "Begin" },
 ];
 
-export default function Front({ onExit }: { onExit?: () => void }) {
-  const [ready, setReady] = useState(false);
+export default function Front({
+  onExit,
+  onOpenUnit,
+}: {
+  onExit?: () => void;
+  onOpenUnit?: (code: string) => void;
+}) {
   const [motion, setMotion] = useState(true);
   const [veilOn, setVeilOn] = useState(true);
+  const [ready, setReady] = useState(false);
   const [active, setActive] = useState(0);
-  const [doc, setDoc] = useState<string | null>(null);
-  const savedY = useRef(0);
   const veilRef = useRef<HTMLDivElement>(null);
-  const pctRef = useRef<HTMLSpanElement>(null);
   const barRef = useRef<HTMLSpanElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
-  const cleanupRef = useRef<(() => void) | null>(null);
 
-  /* ————— boot: motion gate, Lenis, shared channels, curtain ————— */
+  /* ————— boot: gate, Lenis, ticker, curtain ————— */
   useEffect(() => {
-    /* one gate, read once — the acts read the same cached verdict */
     const gate = motionGate();
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-    /* ScrollTrigger must never save/restore scroll behind our back */
     ScrollTrigger.clearScrollMemory("manual");
     /* kill the club's smooth-behavior BEFORE the jump to the top:
        with html { scroll-behavior: smooth } still live, scrollTo(0,0)
        would ease its way there and Lenis — constructed a beat later —
-       would capture the old offset as its target and yank the room
-       straight back to wherever the footer stood. */
+       would capture the old offset as its target */
     document.documentElement.style.scrollBehavior = "auto";
     window.scrollTo(0, 0);
     document.documentElement.dataset.frontMotion = gate ? "on" : "off";
     queueMicrotask(() => setMotion(gate));
 
     let lenis: Lenis | null = null;
+    let unlisten: (() => void) | null = null;
     if (gate) {
+      ensureGsap();
       lenis = new Lenis({
         smoothWheel: window.innerWidth > 820,
         syncTouch: false,
         lerp: 0.09,
       });
-      /* the front always opens at the top — pin Lenis's own target
-         there too, whatever offset the club page was carried in on */
+      /* the poster always opens at the top — pin Lenis's own target
+         there, whatever offset the club page was carried in on */
       lenis.scrollTo(0, { immediate: true, force: true });
       lenisRef.current = lenis;
-      /* test seam — lets tooling drive deterministic scroll */
+      /* test seams — let tooling drive deterministic scroll */
       (window as unknown as Record<string, unknown>).__lenis = lenis;
       (window as unknown as Record<string, unknown>).__ST = ScrollTrigger;
       lenis.on("scroll", (e: { velocity: number }) => {
         scrollState.vel = e.velocity;
         ScrollTrigger.update();
       });
-      /* sticky stages and reveals reshuffle page height — Lenis's
-         internal limit must re-measure with every refresh */
+      /* reveals reshuffle page height — Lenis's internal limit must
+         re-measure with every ScrollTrigger refresh */
       const onSTRefresh = () => lenisRef.current?.resize();
       ScrollTrigger.addEventListener("refresh", onSTRefresh);
-      cleanupRef.current = () =>
-        ScrollTrigger.removeEventListener("refresh", onSTRefresh);
+      unlisten = () => ScrollTrigger.removeEventListener("refresh", onSTRefresh);
     }
 
     /* one shared ticker: feeds Lenis and decays the velocity channel */
@@ -111,6 +111,7 @@ export default function Front({ onExit }: { onExit?: () => void }) {
     gsap.ticker.lagSmoothing(0);
 
     let cancelled = false;
+    let veilTl: gsap.core.Timeline | null = null;
     if (!gate) {
       /* the knob says still: no curtain, everything at rest */
       queueMicrotask(() => {
@@ -134,37 +135,35 @@ export default function Front({ onExit }: { onExit?: () => void }) {
             setReady(true);
             return;
           }
-          gsap
+          /* the panels hold the door, then lift one after another —
+             the poster is already moving as the last one clears */
+          veilTl = gsap
             .timeline({ onComplete: () => setVeilOn(false) })
             .fromTo(
-              veil.querySelector(".fr-veil-brand"),
-              { opacity: 0, y: 14 },
-              { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-              0,
+              veil.querySelector(".m3-veil-brand"),
+              { opacity: 1 },
+              { opacity: 0, duration: 0.3, ease: "power1.in" },
+              0.45,
             )
-            .fromTo(
-              veil.querySelector(".fr-veil-line"),
-              { scaleX: 0 },
-              { scaleX: 1, duration: 0.7, ease: "power2.inOut" },
-              0.1,
+            .to(
+              veil.querySelectorAll(".m3-veil-panel"),
+              { yPercent: -101, duration: 0.85, ease: "expo.inOut", stagger: 0.07 },
+              0.55,
             )
-            .add(() => setReady(true), 0.45)
-            .to(veil, { yPercent: -100, duration: 0.8, ease: "expo.inOut" }, 0.75);
+            .add(() => setReady(true), 0.68);
         });
       })();
     }
     return () => {
       cancelled = true;
-      cleanupRef.current?.();
+      veilTl?.kill();
+      unlisten?.();
       gsap.ticker.remove(tick);
       lenis?.destroy();
       lenisRef.current = null;
-      /* hand the document back to the club exactly as it was found:
-         native scroll behavior, no front-motion stamp, no reading
-         class, the browser's own scroll restoration */
+      /* hand the document back to the club exactly as it was found */
       document.documentElement.style.scrollBehavior = "";
       delete document.documentElement.dataset.frontMotion;
-      document.documentElement.classList.remove("fr-reading");
       if ("scrollRestoration" in history) history.scrollRestoration = "auto";
       delete (window as unknown as Record<string, unknown>).__lenis;
       delete (window as unknown as Record<string, unknown>).__ST;
@@ -174,6 +173,7 @@ export default function Front({ onExit }: { onExit?: () => void }) {
   /* ————— the chapter trackers + the progress hairline ————— */
   useEffect(() => {
     if (!ready) return;
+    ensureGsap();
     const els = CHAPTERS.map((c) => document.getElementById(c.id)).filter(
       (el): el is HTMLElement => !!el,
     );
@@ -191,10 +191,6 @@ export default function Front({ onExit }: { onExit?: () => void }) {
       start: 0,
       end: "max",
       onUpdate: (self) => {
-        if (pctRef.current)
-          pctRef.current.textContent = String(
-            Math.round(self.progress * 100),
-          ).padStart(2, "0");
         if (barRef.current)
           barRef.current.style.transform = `scaleX(${self.progress})`;
       },
@@ -203,49 +199,17 @@ export default function Front({ onExit }: { onExit?: () => void }) {
       ts.forEach((t) => t.kill());
       meter.kill();
     };
-  }, [ready, doc]);
+  }, [ready]);
 
-  /* ————— the view swap: front ⇄ reader ————— */
-  useEffect(() => {
-    if (doc) {
-      document.documentElement.classList.add("fr-reading");
-      lenisRef.current?.stop();
-      window.scrollTo(0, 0);
-    } else {
-      document.documentElement.classList.remove("fr-reading");
-      lenisRef.current?.start();
-    }
-  }, [doc]);
-
-  const openDoc = useCallback((id: string) => {
-    savedY.current = window.scrollY;
-    setDoc(id);
-  }, []);
-
-  const closeDoc = useCallback(() => {
-    setDoc(null);
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => {
-        ScrollTrigger.refresh();
-        lenisRef.current?.resize();
-        const y = savedY.current;
-        if (lenisRef.current) lenisRef.current.scrollTo(y, { immediate: true });
-        else window.scrollTo(0, y);
-      }),
-    );
-  }, []);
-
-  /* ————— leaving the front —————
-     Escape (with no reader open) hands the room back to the club
-     shell, same as the header pill and the finale's second button. */
+  /* ————— leaving the poster ————— */
   useEffect(() => {
     if (!onExit) return;
     const h = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && !doc) onExit();
+      if (e.key === "Escape") onExit();
     };
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
-  }, [onExit, doc]);
+  }, [onExit]);
 
   /* ————— the rail's glide ————— */
   const goTo = useCallback((i: number) => {
@@ -258,7 +222,7 @@ export default function Front({ onExit }: { onExit?: () => void }) {
     else window.scrollTo(0, y);
   }, []);
 
-  /* the hero's CTA buttons ride the same glide */
+  /* any element with data-goto rides the same glide (the cover cue) */
   useEffect(() => {
     const h = (e: Event) => {
       const t = (e.target as HTMLElement).closest("[data-goto]");
@@ -272,103 +236,69 @@ export default function Front({ onExit }: { onExit?: () => void }) {
   return (
     <>
       {veilOn && (
-        <div ref={veilRef} className="fr-veil" aria-hidden>
-          <div className="flex flex-col items-center gap-4">
-            <span className="fr-veil-brand f-display text-[15px] font-bold tracking-[0.1em]">
-              IAL·CHEM
-            </span>
-            <span className="fr-veil-line w-44" />
-            <span className="f-mono text-[9px] text-ink-faint">
-              the front door is opening
-            </span>
+        <div ref={veilRef} className="m3-veil" aria-hidden>
+          <div className="m3-veil-panels">
+            <span className="m3-veil-panel m3-vp-a" />
+            <span className="m3-veil-panel m3-vp-b" />
+            <span className="m3-veil-panel m3-vp-c" />
           </div>
+          <span className="m3-veil-brand">IAL CHEM</span>
         </div>
       )}
 
-      <div className="fr-root min-h-screen">
+      <div className="m3-root">
         {/* ————— fixed chrome ————— */}
-        <span className="fr-progress" aria-hidden>
+        <span className="m3-progress" aria-hidden>
           <span ref={barRef} />
         </span>
 
-        <header className="fr-header">
-          <button
-            type="button"
-            data-cursor
-            onClick={() => goTo(0)}
-            className="f-display cursor-pointer text-[15px] font-bold tracking-[0.08em]"
-          >
-            IAL·CHEM
+        <header className="m3-bar">
+          <button type="button" className="m3-bar-brand" onClick={() => goTo(0)}>
+            IAL CHEM
           </button>
-          <span className="f-mono hidden text-[9px] text-ink-faint sm:block">
-            a revision club · the alternate front door
-          </span>
-          <span className="flex items-center gap-2">
-            {onExit && (
-              <button
-                type="button"
-                data-cursor
-                onClick={onExit}
-                className="f-mono fr-pill"
-                title="Back to the club (Escape)"
-              >
-                The club ↗
-              </button>
-            )}
+          <span className="m3-bar-tag">WCH11 — WCH16</span>
+          {onExit && (
             <button
               type="button"
-              data-cursor
-              onClick={() => goTo(5)}
-              className="f-mono fr-pill"
+              className="m3-fab"
+              onClick={onExit}
+              aria-label="Back to the club"
+              title="Back to the club (Escape)"
             >
-              The atlas · 18 stations
+              <svg viewBox="0 0 24 24" aria-hidden>
+                <path d="M20 12H4m6-6-6 6 6 6" />
+              </svg>
             </button>
-          </span>
+          )}
         </header>
 
-        <nav aria-label="Chapters" className="fr-rail" data-hide={active === 0}>
-          <ul>
-            {CHAPTERS.map((c, i) => (
-              <li key={c.id} data-on={active === i}>
-                <button
-                  type="button"
-                  data-cursor
-                  onClick={() => goTo(i)}
-                  aria-label={`Go to ${c.label}`}
-                  className="fr-rail-tick cursor-pointer"
-                />
-                <span className="f-mono">
-                  {c.n} · {c.label}
-                </span>
-              </li>
-            ))}
-          </ul>
+        <nav aria-label="Sections" className="m3-rail">
+          {CHAPTERS.map((c, i) => (
+            <button
+              key={c.id}
+              type="button"
+              className="m3-rail-dot"
+              data-on={active === i}
+              onClick={() => goTo(i)}
+              aria-label={c.label}
+            />
+          ))}
         </nav>
 
-        <div className="fr-meter">
-          <span className="f-mono block text-[10px]">
-            {CHAPTERS[active]?.n} · {CHAPTERS[active]?.label.toUpperCase()}
-          </span>
-          <span className="f-mono text-[9px] text-ink-faint">
-            <span ref={pctRef}>00</span> / 100
-          </span>
-        </div>
+        <span className="m3-meter" aria-hidden>
+          {String(active).padStart(2, "0")} / 05
+        </span>
 
-        {/* ————— the chapters ————— */}
+        {/* ————— the movements ————— */}
         <main>
-          <Hero motion={motion} ready={ready} sleeping={!!doc} />
-          <Cast />
-          <Bond />
-          <Price />
-          <Balance />
-          <Atlas onOpenDoc={openDoc} />
-          <Foot onOpenDoc={openDoc} onExit={onExit} />
+          <Hero motion={motion} ready={ready} />
+          <Marquee motion={motion} />
+          <Units motion={motion} onOpenUnit={onOpenUnit} />
+          <Loop motion={motion} />
+          <Stats motion={motion} />
+          <Finale motion={motion} onExit={onExit} />
         </main>
-
-        <Cursor motion={motion} />
       </div>
-
-      {doc && <Reader docId={doc} onBack={closeDoc} />}
     </>
   );
 }

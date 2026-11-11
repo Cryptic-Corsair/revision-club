@@ -1,172 +1,164 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitLine } from "../chars";
-import CanvasField from "../canvas-field";
-
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+import gsap from "gsap";
+import { useRef } from "react";
+import { SplitText } from "gsap/SplitText";
+import { bubbleField, smoothBlob, useActAnim } from "../kit";
 
 /* ═══════════════════════════════════════════════════════════════
-   THE FRONT · chapter 00 — the hero
+   THE FRONT · 01 — the cover
 
-   Bikebear's device, distilled: one phrase looping over four rows —
-   "EVERYTHING IS / PARTICLES." — solid and outline alternating,
-   each row scrubbing its own way, every row spanning the viewport
-   so the crop at the edges is a decision, not an accident. Behind
-   the type, a shallow field of ink particles drifts (the
-   particulate nature of matter, quietly).
+   One brand, one range of codes, one word of instruction. The
+   Material 3 shape field (arch, disc, pill, ring, cookie) sits in
+   its own parallax layers — each wrap carries a scrubbed scroll
+   speed, the shape itself carries an endless drift — and the title
+   rises through SplitText masks, then breathes character by
+   character forever. Bubbles climb the whole time. Nothing stops.
    ═══════════════════════════════════════════════════════════════ */
 
-const ROWS: {
-  text: string;
-  size: string;
-  outline: boolean;
-  dir: number;
-}[] = [
-  { text: "EVERYTHING IS", size: "fr-row-a", outline: false, dir: -1 },
-  { text: "PARTICLES.", size: "fr-row-b", outline: true, dir: 1 },
-  { text: "EVERYTHING IS", size: "fr-row-a", outline: true, dir: -1 },
-  { text: "PARTICLES.", size: "fr-row-b", outline: false, dir: 1 },
-];
+export default function Hero({ motion, ready }: { motion: boolean; ready: boolean }) {
+  const bubRef = useRef<HTMLDivElement>(null);
+  const root = useActAnim<HTMLElement>(motion, run, [ready]);
 
-export default function Hero({
-  motion,
-  ready,
-  sleeping,
-}: {
-  motion: boolean;
-  ready: boolean;
-  sleeping: boolean;
-}) {
-  const root = useRef<HTMLElement>(null);
-
-  /* ————— pre-hide the cast on mount, condense on ready ————— */
-  useEffect(() => {
-    if (!motion) return;
+  function run() {
+    /* the cover waits for the curtain: ready flips true as the first
+       panel lifts, and only then does the whole setup run — once */
+    if (!ready) return;
     const el = root.current;
     if (!el) return;
-    const ctx = gsap.context(() => {
-      const chars = el.querySelectorAll(".l-char");
-      gsap.set(chars, { yPercent: 112 });
-      gsap.set([".fr-hero-kicker", ".fr-hero-side", ".fr-hero-cue"], {
-        y: 18,
-        opacity: 0,
-      });
-      if (!ready) return; /* the veil is still up — hold the cast */
-      gsap
-        .timeline({ defaults: { ease: "expo.out" } })
-        .to(".fr-hero-kicker", { y: 0, opacity: 1, duration: 0.7 }, 0)
-        .to(chars, {
-          yPercent: 0,
-          duration: 1.15,
-          stagger: { each: 0.014, from: 0 },
-        }, 0.08)
-        .to(".fr-hero-side", { y: 0, opacity: 1, duration: 0.9 }, 0.55)
-        .to(".fr-hero-cue", { opacity: 1, duration: 0.7 }, 0.9);
-    }, el);
-    return () => ctx.revert();
-  }, [motion, ready]);
+    const q = gsap.utils.selector(el);
 
-  /* ————— the rows drift apart as you scroll away ————— */
-  useEffect(() => {
-    if (!motion) return;
-    const el = root.current;
-    if (!el) return;
-    const ctx = gsap.context(() => {
-      const rows = el.querySelectorAll<HTMLElement>(".fr-row-inner");
-      rows.forEach((row, i) => {
-        const dir = ROWS[i]?.dir ?? 1;
-        gsap.fromTo(
-          row,
-          { xPercent: 0 },
-          {
-            xPercent: dir * 6,
-            ease: "none",
-            scrollTrigger: {
-              trigger: el,
-              start: "top top",
-              end: "bottom top",
-              scrub: 0.6,
-            },
-          },
-        );
+    /* the field pops in, then every shape drifts forever */
+    gsap.from(q(".m3-shape"), {
+      scale: 0,
+      duration: 0.9,
+      ease: "back.out(1.5)",
+      stagger: { each: 0.06, from: "random" },
+      delay: 0.1,
+    });
+    (q(".m3-shape") as HTMLElement[]).forEach((s) => {
+      gsap.to(s, {
+        x: () => gsap.utils.random(-26, 26),
+        y: () => gsap.utils.random(-22, 22),
+        rotation: () => gsap.utils.random(-14, 14),
+        duration: () => gsap.utils.random(3.5, 6.5),
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut",
       });
-    }, el);
-    return () => ctx.revert();
-  }, [motion]);
+    });
+
+    /* the title: masked rise, then a per-character float that never ends */
+    const title = q(".m3-hero-title")[0] as HTMLElement | undefined;
+    if (title) {
+      const split = new SplitText(title, { type: "chars", mask: "chars" });
+      gsap.from(split.chars, {
+        yPercent: 118,
+        duration: 1.05,
+        ease: "m3-dec",
+        stagger: 0.05,
+        delay: 0.25,
+      });
+      gsap.to(split.chars, {
+        y: "+=5",
+        rotation: "+=1.3",
+        duration: () => gsap.utils.random(2.2, 3.6),
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut",
+        stagger: { each: 0.1, from: "random" },
+        delay: 1.5,
+      });
+    }
+
+    /* the code range scrambles into place */
+    const kicker = q(".m3-kicker")[0] as HTMLElement | undefined;
+    if (kicker) {
+      const text = kicker.textContent ?? "";
+      gsap.fromTo(
+        kicker,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.25, delay: 0.7 },
+      );
+      gsap.to(kicker, {
+        duration: 1.1,
+        delay: 0.75,
+        scrambleText: { text, chars: "upperCase", speed: 1.2 },
+      });
+    }
+
+    if (bubRef.current) bubbleField(bubRef.current, 9, "rgba(194,43,74,0.15)");
+
+    /* the cue's dot drops forever */
+    gsap.fromTo(
+      q(".m3-cue-dot"),
+      { y: 0, opacity: 1 },
+      { y: 12, opacity: 0, duration: 1.1, repeat: -1, ease: "power1.in", delay: 2 },
+    );
+
+    /* the parallax handoff: the core leaves faster than the field */
+    gsap.to(q(".m3-hero-core"), {
+      yPercent: -24,
+      ease: "none",
+      scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: true },
+    });
+    (q("[data-par]") as HTMLElement[]).forEach((wrap) => {
+      const speed = parseFloat(wrap.dataset.par || "0.2");
+      gsap.fromTo(
+        wrap,
+        { y: 0 },
+        {
+          y: () => -speed * window.innerHeight,
+          ease: "none",
+          scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: true },
+        },
+      );
+    });
+  }
 
   return (
-    <section ref={root} className="fr-hero" data-act="0" id="fr-hero">
-      <CanvasField motion={motion} sleeping={sleeping} />
-
-      <div className="fr-hero-body">
-        <p className="fr-hero-kicker f-mono">
-          IAL CHEM — a revision club for Edexcel IAL chemistry
-        </p>
-
-        <h1 className="fr-hero-stack" aria-label="Everything is particles.">
-          {ROWS.map((r, i) => (
-            <span key={i} className="fr-row">
-              <span
-                className={`fr-row-inner ${r.size} ${r.outline ? "l-outline" : ""}`}
-              >
-                <SplitLine text={r.text} />
-              </span>
-            </span>
-          ))}
-        </h1>
-
-        <div className="fr-hero-side">
-          <p className="fr-hero-lede">
-            Five ideas, eighteen stations, the whole WCH11&nbsp;→&nbsp;WCH16
-            spec written as class notes — and a front door that does the
-            chemistry as you scroll.
-          </p>
-          <div className="fr-hero-ctas">
-            <button
-              type="button"
-              data-cursor
-              className="fr-btn fr-btn-solid"
-              data-goto="1"
-            >
-              The five ideas
-              <svg viewBox="0 0 12 12" aria-hidden>
-                <path d="M6 1v10M2 7l4 4 4-4" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              data-cursor
-              className="fr-btn fr-btn-line"
-              data-goto="5"
-            >
-              The 18 stations
-            </button>
-          </div>
-        </div>
+    <section id="m3-hero" ref={root} className="m3-hero">
+      <div className="m3-hero-field" aria-hidden>
+        <span className="m3-sh-wrap m3-shw-arch" data-par="0.16">
+          <span className="m3-shape m3-sh-arch" />
+        </span>
+        <span className="m3-sh-wrap m3-shw-circle" data-par="0.3">
+          <span className="m3-shape m3-sh-circle" />
+        </span>
+        <span className="m3-sh-wrap m3-shw-pill" data-par="0.1">
+          <span className="m3-shape m3-sh-pill" />
+        </span>
+        <span className="m3-sh-wrap m3-shw-ring" data-par="0.24">
+          <span className="m3-shape m3-sh-ring" />
+        </span>
+        <span className="m3-sh-wrap m3-shw-cookie" data-par="0.38">
+          <span className="m3-shape m3-sh-cookie">
+            <svg viewBox="0 0 100 100">
+              <path d={smoothBlob(50, 50, 44, 9, 0.13)} />
+            </svg>
+          </span>
+        </span>
+        <span className="m3-sh-wrap m3-shw-dot-a" data-par="0.2">
+          <span className="m3-shape m3-sh-dot m3-dot-a" />
+        </span>
+        <span className="m3-sh-wrap m3-shw-dot-b" data-par="0.34">
+          <span className="m3-shape m3-sh-dot m3-dot-b" />
+        </span>
+        <span className="m3-sh-wrap m3-shw-dot-c" data-par="0.14">
+          <span className="m3-shape m3-sh-dot m3-dot-c" />
+        </span>
+        <div className="m3-bubbles" ref={bubRef} />
       </div>
 
-      <div className="fr-hero-cue" aria-hidden>
-        <span className="f-mono">scroll — the page reacts</span>
-        <span className="fr-cue-line" />
+      <div className="m3-hero-core">
+        <p className="m3-kicker">WCH11 — WCH16</p>
+        <h1 className="m3-hero-title">IAL CHEM</h1>
       </div>
 
-      <div className="fr-hero-strip" aria-hidden>
-        <div className="fr-marquee-track fr-strip-track">
-          {[0, 1].map((k) => (
-            <span key={k} className="fr-strip-seq f-mono">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <span key={i}>
-                  EDEXCEL IAL&nbsp;·&nbsp;WCH11&nbsp;→&nbsp;WCH16&nbsp;·&nbsp;THE
-                  2018 SPEC&nbsp;·&nbsp;READ IT ONCE, OWN IT&nbsp;·&nbsp;
-                </span>
-              ))}
-            </span>
-          ))}
-        </div>
-      </div>
+      <button type="button" className="m3-cue" data-goto="2" aria-label="Scroll to the course">
+        <span>scroll</span>
+        <span className="m3-cue-dot" />
+      </button>
     </section>
   );
 }

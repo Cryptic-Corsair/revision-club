@@ -114,8 +114,8 @@ const Legal = dynamic(() => import("./legal").then((m) => m.Legal), {
   ssr: false,
   loading: RoomLoading,
 });
-/* the alternate front door — THE FRONT, the typographic scroll
-   through the whole course. Heavy (gsap + lenis), so it rides in
+/* the alternate front door — THE FRONT, the Material 3 motion
+   poster of the whole course. Heavy (gsap + lenis), so it rides in
    on its own chunk, fetched only when the footer sends someone. */
 const FrontRoom = dynamic(() => import("@/components/front/front"), {
   ssr: false,
@@ -863,8 +863,8 @@ function Footer({
                 type="button"
                 onClick={onOpenFront}
                 className="footer-utility-link inline-flex items-center gap-1.5"
-                aria-label="Open the alternate front door — a typographic scroll through the whole course"
-                title="The alternate front door — a typographic scroll through the whole course"
+                aria-label="Open the alternate front door — a Material 3 motion poster of the whole course"
+                title="The alternate front door — a Material 3 motion poster of the whole course"
               >
                 The other front door
                 <Sparkles className="h-3.5 w-3.5" strokeWidth={2.2} />
@@ -1235,6 +1235,13 @@ export default function ClubApp() {
       }),
     );
   }, []);
+  /* the poster's unit cards are exits too: the front unmounts and
+     the requested unit takes over — the same membership moment as
+     openUnit, just arriving from another room */
+  const exitFrontToUnit = useCallback((code: string) => {
+    markUnit(code);
+    setView({ kind: "unit", code });
+  }, []);
 
   /* ⌘K / Ctrl+K (and "/") summon the search bubble */
   useEffect(() => {
@@ -1284,7 +1291,7 @@ export default function ClubApp() {
       <MotionConfig reducedMotion={prefs.motion ? "user" : "always"}>
       <SpecMapProvider>
         {view.kind === "front" ? (
-          <FrontRoom onExit={exitFront} />
+          <FrontRoom onExit={exitFront} onOpenUnit={exitFrontToUnit} />
         ) : (
         <div className="flex min-h-dvh flex-col">
           <TopBar
