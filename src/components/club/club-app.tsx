@@ -26,7 +26,7 @@ import { UNITS, getUnit, getTopic, TOTALS } from "@/lib/spectra/units";
 import { getNotesMeta, getNotesMetaForTopic } from "@/lib/spectra/notes-meta";
 import { useTimeScope } from "@/lib/spectra/time";
 import { usePacks } from "@/lib/spectra/packs";
-import { useDesk, markUnit, markTopic } from "@/lib/spectra/desk";
+import { useDesk, markUnit, markTopic, markLandingSeen, markDeskEntered } from "@/lib/spectra/desk";
 import {
   applyPrefs,
   GALLERY_DOCS,
@@ -886,12 +886,20 @@ export default function ClubApp() {
      keeps playing on every close */
   const [searchMounted, setSearchMounted] = useState(false);
   const [customizeMounted, setCustomizeMounted] = useState(false);
-  /* the desk remembers its member: once a unit or topic has been
-     opened, home renders the desk instead of the introduction —
-     unless they asked for the introduction again (landing) */
+  /* The introduction is a one-time first-visit experience. Its
+     appearance is remembered separately from opening a unit, so even
+     a visitor who leaves without studying lands on the desk next time. */
   const desk = useDesk();
   const [landing, setLanding] = useState(false);
-  const deskActive = desk.engaged && !landing;
+  const visitHandled = useRef(false);
+  const deskActive = (desk.seenLanding || desk.engaged) && !landing;
+
+  useEffect(() => {
+    if (visitHandled.current) return;
+    visitHandled.current = true;
+    const returning = markLandingSeen();
+    setLanding(!returning);
+  }, []);
 
   useEffect(() => {
     const syncFullscreen = () => setFullscreen(Boolean(document.fullscreenElement));
@@ -1175,6 +1183,10 @@ export default function ClubApp() {
     setLanding(false);
     setView({ kind: "home" });
   };
+  const startRevision = useCallback(() => {
+    markDeskEntered();
+    setLanding(false);
+  }, []);
   const openSticker = useCallback(() => setView({ kind: "sticker" }), []);
   const openPack = useCallback(() => setView({ kind: "pack" }), []);
   const openSpec = useCallback(() => setView({ kind: "spec" }), []);
@@ -1278,7 +1290,7 @@ export default function ClubApp() {
                       onOpenPack={openPack}
                       onOpenSpec={openSpec}
                       onSearch={openSearch}
-                      onShowLanding={() => setLanding(true)}
+                      onShowLanding={() => { markDeskEntered(); setLanding(true); }}
                     />
                   ) : (
                     <Home
@@ -1289,6 +1301,7 @@ export default function ClubApp() {
                       onOpenPack={openPack}
                       onOpenSpec={openSpec}
                       onBackToDesk={desk.engaged ? () => setLanding(false) : undefined}
+                      onStartRevision={startRevision}
                     />
                   ))}
   
