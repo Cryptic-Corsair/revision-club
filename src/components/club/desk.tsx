@@ -28,7 +28,8 @@ import { goalChipLabel, streakOf } from "@/lib/spectra/progress-derive";
 import type { DeskState } from "@/lib/spectra/desk";
 import { BeakerMeter, CandyButton, SectionTag, shade, tint } from "./bits";
 import { BandWave } from "./bands";
-import { DeskDashboard } from "./dashboard";
+import { WeekBars } from "./dashboard";
+import { activeDaysOf, lastNDays } from "@/lib/spectra/dashboard";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the desk — the homepage for members (no account,
@@ -37,7 +38,9 @@ import { DeskDashboard } from "./dashboard";
    week at a glance, and every topic of the course one quiet tap
    away — rows, not brochures. Nothing here animates: a returning
    visitor wants the bench, not a show. Paints once, answers with
-   CSS hovers, saves every tap.
+   CSS hovers, saves every tap. The one spring in the room is the
+   week card's bars, inherited from the dashboard kit they came
+   from.
    ═══════════════════════════════════════════════════════════════ */
 
 /** the streak maths lives in progress-derive.ts — shared with the
@@ -84,6 +87,10 @@ export function Desk({
   const week = weekSeconds(time);
   const streak = streakOf(time.days);
   const goalPct = time.goalMin > 0 ? Math.min(1, week / (time.goalMin * 60)) : 0;
+  /* the shape of the week, absorbed from the ledger: seven bars,
+     the active count for its caption */
+  const days7 = lastNDays(time, 7);
+  const active7 = activeDaysOf(days7);
 
   const todayLine = hydrated
     ? new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "short" }).format(new Date())
@@ -181,7 +188,21 @@ export function Desk({
               </div>
             </div>
 
-            <div className="mt-5 grid grid-cols-2 gap-2 border-t border-ink/[0.08] pt-4">
+            <div className="mt-5 border-t border-ink/[0.08] pt-4">
+              <div className="flex items-baseline justify-between gap-2">
+                <span className="text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+                  the last seven days
+                </span>
+                <span className="text-[calc(10.5px*var(--ui-scale))] font-bold text-ink-faint tabular-nums">
+                  {active7}/7 active
+                </span>
+              </div>
+              <div className="mt-3">
+                <WeekBars bars={days7} main="#12B886" height={40} />
+              </div>
+            </div>
+
+            <div className="mt-4 grid grid-cols-2 gap-2 border-t border-ink/[0.08] pt-4">
               <button
                 type="button"
                 onClick={onOpenSticker}
@@ -217,9 +238,10 @@ export function Desk({
         </div>
       </section>
 
-      {/* ————— the ledger — the dashboard system's quiet strip ————— */}
+      {/* ————— the ledger is gone; the week card above carries
+          its numbers now — the wave hands the header's paper to
+          the topics' cream ————— */}
       <BandWave from="var(--color-paper)" to="var(--color-cream)" wave={3} />
-      <DeskDashboard onOpenSticker={onOpenSticker} />
 
       {/* ————— all topics, one tap away ————— */}
       <div className="bg-cream">
