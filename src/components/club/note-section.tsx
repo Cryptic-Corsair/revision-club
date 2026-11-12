@@ -29,6 +29,7 @@ import {
   FigCarbocation,
   FigCoolingCurve,
   FigDipoles,
+  FigDipolesPermanent,
   FigDotCross,
   FigElecAdd,
   FigEz,
@@ -133,6 +134,7 @@ import {
   FigHxCarbocation,
   FigHxReflux,
   FigHxScheme,
+  FigHxSn1,
   FigHxHydrolysis,
   FigHxSn2Oh,
   FigHxSn2Nh3,
@@ -895,6 +897,7 @@ const WIDE_FIGS = new Set([
   "carbon-lattices",
   "shapes",
   "dipoles",
+  "dipoles-permanent",
   "formula-types",
   "naming",
   "frac-col",
@@ -960,6 +963,7 @@ const WIDE_FIGS = new Set([
   "hx-classes",
   "hx-carbocation",
   "hx-scheme",
+  "hx-sn1",
   "hx-hydrolysis",
   "hx-sn2-oh",
   "hx-sn2-nh3",
@@ -1101,6 +1105,9 @@ export function figureArt(kind: string, accent: string): ReactNode {
       break;
     case "dipoles":
       node = <FigDipoles accent={accent} />;
+      break;
+    case "dipoles-permanent":
+      node = <FigDipolesPermanent accent={accent} />;
       break;
     case "formula-types":
       node = <FigFormulaTypes accent={accent} />;
@@ -1320,6 +1327,9 @@ export function figureArt(kind: string, accent: string): ReactNode {
       break;
     case "hx-carbocation":
       node = <FigHxCarbocation accent={accent} />;
+      break;
+    case "hx-sn1":
+      node = <FigHxSn1 accent={accent} />;
       break;
     case "hx-reflux":
       node = <FigHxReflux accent={accent} />;

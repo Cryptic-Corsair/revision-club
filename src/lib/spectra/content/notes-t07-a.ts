@@ -108,6 +108,12 @@ export const SECTIONS_T07_A: SpecSection[] = [
           "As a result, when averaged out, the interaction between permanent dipoles is usually less than the interaction between instantaneous and induced dipoles. **The London force is usually more significant interaction between molecules.**",
         ],
       },
+      {
+        k: "figure",
+        kind: "dipoles-permanent",
+        caption:
+          "The aligned encounter drawn out: the δ− end of one polar molecule pulls the δ+ end of the next — but the liquid keeps tumbling, most encounters align nothing, and averaged out the pull is usually weaker than the London force.",
+      },
       { k: "h", text: "Relative strengths of intermolecular forces" },
       {
         k: "bullets",

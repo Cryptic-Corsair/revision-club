@@ -191,6 +191,12 @@ export const SECTIONS_T10_A: SpecSection[] = [
           "The class note's stability chain, redrawn structure by structure: every extra alkyl group pushing electron density towards the positive carbon steadies the carbocation — so the tertiary ion leads and methyl trails.",
       },
       {
+        k: "figure",
+        kind: "hx-sn1",
+        caption:
+          "The tertiary route, drawn as two steps: the C–Br pair leaves first and a planar carbocation is left standing — propped up by its alkyl groups — and the hydroxide then attacks either face. The slow ionisation decides the rate, which is why the rate order follows the carbocation's stability.",
+      },
+      {
         k: "wow",
         text: "The class decides the pace for the same reason the halogen does: what happens after the bond breaks. A tertiary halogenoalkane has three alkyl groups ready to prop up the positive carbon the moment the halogen departs, so that route costs the least energy — and the fastest reaction is the one whose halfway house is the most comfortable.",
       },

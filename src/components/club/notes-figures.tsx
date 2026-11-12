@@ -2809,6 +2809,67 @@ export function FigContact({ accent = "#FF6B6B" }: { accent?: string }) {
   );
 }
 
+/* ————— 7.2 · permanent dipole–dipole, aligned vs tumbled ————— */
+
+export function FigDipolesPermanent({ accent = "#FF6B6B" }: { accent?: string }) {
+  /* one polar molecule: Hδ+ bonded to Clδ−, with the dipole arrow
+     above the bond — the cross tick marks the positive end. flipped
+     swaps the ends WITHOUT a group rotation, so the text stays upright. */
+  const hcl = (x: number, y: number, flipped: boolean, k: string) => {
+    const hx = flipped ? x + 30 : x - 30;
+    const cx = flipped ? x - 30 : x + 30;
+    const arrowX1 = flipped ? x + 14 : x - 14;
+    const arrowX2 = flipped ? x - 16 : x + 16;
+    return (
+      <g key={k}>
+        <line x1={x - 30} y1={y} x2={x + 30} y2={y} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+        <circle cx={hx} cy={y} r={11} fill={PAPER} stroke={INK} strokeWidth={2.2} />
+        <text x={hx} y={y + 4.5} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>
+        <circle cx={cx} cy={y} r={17} fill={tint(accent, 30)} stroke={INK} strokeWidth={2.2} />
+        <text x={cx} y={y + 5} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cl</text>
+        {/* the dipole arrow — tail crossed at H, head at Cl */}
+        {t3Arrow(arrowX1, y - 24, arrowX2, y - 24, INK, 2.2)}
+        <line x1={arrowX1 - 4} y1={y - 28} x2={arrowX1 + 4} y2={y - 20} stroke={INK} strokeWidth={1.8} strokeLinecap="round" />
+        <line x1={arrowX1 - 4} y1={y - 20} x2={arrowX1 + 4} y2={y - 28} stroke={INK} strokeWidth={1.8} strokeLinecap="round" />
+        <text x={hx + (flipped ? 8 : -8)} y={y - 30} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ+</text>
+        <text x={cx + (flipped ? -8 : 8)} y={y - 30} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      </g>
+    );
+  };
+  return (
+    <svg viewBox="0 0 920 400" className="w-full" role="img" aria-label="Permanent dipole–dipole interactions, drawn between two hydrogen chloride molecules. Aligned: the chlorine end of one molecule attracts the hydrogen end of the next, a dashed line marking the pull. Tumbled: the same two molecules meet positive end to positive end, so no favourable pull forms — in the liquid the molecules tumble, and averaged out the permanent-dipole pull is usually weaker than the London force.">
+      <text x={460} y={32} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        permanent dipole – dipole — molecules that can never hydrogen bond
+      </text>
+      <text x={460} y={52} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        HCl · HBr · propanone — the separation of charge is built in, always present
+      </text>
+
+      {/* the aligned encounter — Cl of one faces H of the next */}
+      {hcl(190, 130, false, "a")}
+      {hcl(500, 130, false, "b")}
+      <line x1={222} y1={130} x2={448} y2={130} stroke={accent} strokeWidth={3} strokeLinecap="round" strokeDasharray="7 6" />
+      <text x={335} y={108} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">the aligned encounter</text>
+      <text x={335} y={182} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the δ− end of one pulls the δ+ end of the next</text>
+
+      {/* most encounters — tumbled, positive facing positive */}
+      <text x={335} y={238} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">most encounters — tumbled, unaligned</text>
+      {hcl(190, 288, true, "c")}
+      {hcl(500, 288, false, "d")}
+      <line x1={222} y1={288} x2={448} y2={288} stroke={FAINT} strokeWidth={2.4} strokeDasharray="4 7" />
+      <circle cx={335} cy={288} r={9} fill="none" stroke={SOFT} strokeWidth={2} />
+      <line x1={329} y1={282} x2={341} y2={294} stroke={SOFT} strokeWidth={2} strokeLinecap="round" />
+      <line x1={341} y1={282} x2={329} y2={294} stroke={SOFT} strokeWidth={2} strokeLinecap="round" />
+      <text x={335} y={336} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">δ+ faces δ+ — no favourable pull forms</text>
+
+      <rect x={150} y={360} width={620} height={34} rx={17} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={460} y={382} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        always there, but averaged over the tumbling liquid the pull is usually weaker than the London force
+      </text>
+    </svg>
+  );
+}
+
 /* ————— 7.2 · hydrogen bonding in water ————— */
 
 export function FigHbondWater({ accent = "#FF6B6B" }: { accent?: string }) {
@@ -3357,18 +3418,18 @@ export function FigAgents({ accent = "#FF6B6B" }: { accent?: string }) {
       <rect x={141} y={192} width={178} height={24} rx={12} fill={tint(accent, 26)} />
       <text x={230} y={209} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">electron acceptor · gains 2e⁻</text>
       <text x={230} y={238} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cl: 0 → −1 — a decrease, reduced</text>
-      <text x={230} y={260} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">so it oxidizes the KBr</text>
+      <text x={230} y={260} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">so it oxidises the KBr</text>
 
       {/* right card — the species that donates them */}
       <rect x={516} y={146} width={348} height={126} rx={24} fill={tint("var(--color-ink)", 7)} stroke={FAINT} strokeWidth={2} />
       <text x={690} y={178} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Br⁻ in KBr — the reducing agent</text>
       <rect x={591} y={192} width={198} height={24} rx={12} fill={tint("var(--color-ink)", 12)} />
       <text x={690} y={209} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">electron donor · loses 2e⁻</text>
-      <text x={690} y={238} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Br: −1 → 0 — an increase, oxidized</text>
+      <text x={690} y={238} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Br: −1 → 0 — an increase, oxidised</text>
       <text x={690} y={260} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">so it reduces the Cl₂</text>
 
       {/* bottom rule */}
-      <text x={460} y={318} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the oxidising agent is reduced · the reducing agent is oxidized — at the same time</text>
+      <text x={460} y={318} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the oxidising agent is reduced · the reducing agent is oxidised — at the same time</text>
     </svg>
   );
 }
@@ -3426,7 +3487,7 @@ export function FigDisprop({ accent = "#FF6B6B" }: { accent?: string }) {
 
       {/* bottom line */}
       <rect x={185} y={344} width={550} height={42} rx={21} fill="none" stroke={FAINT} strokeWidth={2} />
-      <text x={460} y={371} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the same element is oxidized and reduced simultaneously</text>
+      <text x={460} y={371} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the same element is oxidised and reduced simultaneously</text>
     </svg>
   );
 }
@@ -3554,7 +3615,7 @@ export function FigPolarise({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={713} y={323} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">more energy needed to break it — stable to heat</text>
 
       <rect x={205} y={352} width={510} height={36} rx={18} fill="none" stroke={FAINT} strokeWidth={2} />
-      <text x={460} y={375} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">small + high charge → high polarizing power → less thermally stable</text>
+      <text x={460} y={375} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">small + high charge → high polarising power → less thermally stable</text>
     </svg>
   );
 }
@@ -5592,6 +5653,79 @@ export function FigHxCarbocation({ accent = "#FF6B6B" }: { accent?: string }) {
   );
 }
 
+/* ————— 10.12 · the SN1 route — leave first, attack second ————— */
+
+export function FigHxSn1({ accent = "#FF6B6B" }: { accent?: string }) {
+  /* the tertiary carbon: three methyls around a centre circle —
+     four bonds at the reactant, three at the planar cation */
+  const c3 = (cx: number, centre: string, top: string, left: string, bottom: string, right: string) => {
+    const bonds = (
+      <g stroke={INK} strokeWidth={2.4} strokeLinecap="round">
+        <line x1={cx} y1={173} x2={cx} y2={145} />
+        <line x1={cx - 17} y1={190} x2={cx - 40} y2={190} />
+        <line x1={cx} y1={207} x2={cx} y2={235} />
+        {right && <line x1={cx + 17} y1={190} x2={cx + 40} y2={190} />}
+      </g>
+    );
+    return (
+      <g>
+        {bonds}
+        <circle cx={cx} cy={190} r={17} fill={tint(accent, 25)} stroke={INK} strokeWidth={2.2} />
+        <text x={cx} y={195} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{centre}</text>
+        <text x={cx} y={132} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{top}</text>
+        <text x={cx - 48} y={195} textAnchor="end" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{left}</text>
+        <text x={cx} y={254} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{bottom}</text>
+        {right && <text x={cx + 48} y={195} textAnchor="start" fontSize="14" fontWeight="800" fill={right === "OH" ? accent : INK} fontFamily="var(--font-body)">{right}</text>}
+      </g>
+    );
+  };
+  return (
+    <svg viewBox="0 0 880 440" className="w-full" role="img" aria-label="The SN1 mechanism for a tertiary halogenoalkane with aqueous hydroxide, in two steps. Step one, slow: the carbon–bromine bonding pair moves out onto the bromine, which leaves as a bromide ion and a planar tertiary carbocation is left standing, propped up by its three methyl groups. Step two, fast: the hydroxide ion donates its lone pair to the planar carbocation, attacking from either face, and the tertiary alcohol forms.">
+      <text x={440} y={34} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        SN1 — the tertiary route: the halogen leaves first, the nucleophile attacks second
+      </text>
+      <text x={440} y={56} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        tertiary halogenoalkane + aqueous OH⁻ · the slow ionisation is the rate-determining step
+      </text>
+
+      {/* ————— step 1 · ionisation ————— */}
+      <text x={210} y={92} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">step 1 · the ionisation — slow</text>
+      {c3(140, "C", "CH₃", "CH₃", "CH₃", "Br")}
+      <text x={112} y={162} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">δ+</text>
+      <text x={210} y={162} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
+      {curlyPair(182, 184, 24, -22, INK)}
+      <text x={196} y={140} textAnchor="start" fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the C–Br pair</text>
+      <text x={196} y={152} textAnchor="start" fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">leaves with Br</text>
+      {t3Arrow(230, 190, 278, 190, accent, 3.2)}
+      <text x={268} y={252} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">+ :Br⁻</text>
+
+      {/* ————— the planar carbocation ————— */}
+      {c3(370, "C⁺", "CH₃", "CH₃", "CH₃", "")}
+      <text x={370} y={310} textAnchor="middle" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">the planar carbocation —</text>
+      <text x={370} y={326} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">propped up by three alkyl groups</text>
+      {/* hydroxide attacking either face */}
+      <text x={455} y={118} textAnchor="middle" fontSize="14" fontWeight="800" fill={INK} fontFamily="var(--font-body)">HO⁻</text>
+      {curlyPair(450, 134, -16, 26, accent)}
+      <text x={455} y={286} textAnchor="middle" fontSize="14" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">HO⁻</text>
+      {curlyPair(450, 268, -16, -26, FAINT)}
+      <text x={505} y={200} textAnchor="middle" fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">attacks from</text>
+      <text x={505} y={214} textAnchor="middle" fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">either face</text>
+
+      {/* ————— step 2 · attack ————— */}
+      <text x={690} y={92} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">step 2 · the attack — fast</text>
+      {t3Arrow(548, 190, 596, 190, accent, 3.2)}
+      {c3(690, "C", "CH₃", "CH₃", "CH₃", "OH")}
+      <text x={690} y={310} textAnchor="middle" fontSize="11" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the tertiary alcohol</text>
+      <text x={690} y={326} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">a racemic mixture if the carbon is chiral</text>
+
+      <rect x={140} y={376} width={600} height={36} rx={18} fill="none" stroke={FAINT} strokeWidth={2} />
+      <text x={440} y={399} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+        the rate is decided by the slow ionisation — so the rate order follows the carbocation: 3° &gt; 2° &gt; 1° &gt; methyl
+      </text>
+    </svg>
+  );
+}
+
 /* ————— 10.8 · heating under reflux ————— */
 
 export function FigHxReflux({ accent = "#FF6B6B" }: { accent?: string }) {
@@ -5830,7 +5964,7 @@ export function FigHxSn2Nh3({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={722} y={195} textAnchor="end" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">CH₃CH₂</text>
       <text x={828} y={195} textAnchor="start" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">NH₂</text>
       <text x={850} y={300} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">+ NH₄Br</text>
-      <text x={775} y={330} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Amino propane</text>
+      <text x={775} y={330} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Propylamine</text>
       {/* stage labels */}
       <text x={240} y={64} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">step 1 · attack</text>
       <text x={505} y={64} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">step 2 · deprotonation</text>
@@ -6088,7 +6222,7 @@ export function FigAlcOxFlow({ accent = "#FF6B6B" }: { accent?: string }) {
       {t3Arrow(236, 275, 350, 275, accent, 3)}
       {box(356, 252, 130, "Ketones", true)}
       {t3Arrow(492, 275, 606, 275, INK, 3)}
-      <text x={622} y={281} textAnchor="start" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">cannot be oxidized</text>
+      <text x={622} y={281} textAnchor="start" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">cannot be oxidised</text>
       {/* ————— tertiary band ————— */}
       {box(40, 344, 170, "Tertiary alcohols")}
       {t3Arrow(216, 367, 330, 367, INK, 3)}
@@ -6496,7 +6630,7 @@ export function FigMsEthaneFrags() {
       <g>
         <rect x={438} y={226} width={200} height={64} rx={14} fill={tint("#9775FA", 14)} stroke={INK} strokeWidth="2.4" />
         <text x={538} y={251} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">[CH₃]⁺  +  •CH₃</text>
-        <text x={538} y={274} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">m/z = 15 · (not detected by MS)</text>
+        <text x={538} y={274} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">m/z = 15 · the ion is detected</text>
       </g>
       {/* leader from molecule to the molecular-ion box */}
       <line x1={430} y1={140} x2={438} y2={70} stroke={SOFT} strokeWidth="2" strokeDasharray="5 5" />
@@ -6528,8 +6662,8 @@ export function FigMsIsoC() {
   };
   return (
     <svg viewBox="0 0 660 212" className="w-full" role="img" aria-label="M and M+1 peaks for one, two and ten carbon atoms">
-      <Mini x={10} label="CH₄ · 1 carbon" m={100} mz="16" m1={3} mz1="17" />
-      <Mini x={230} label="C₂H₆ · 2 carbons" m={100} mz="30" m1={6} mz1="31" />
+      <Mini x={10} label="CH₄ · 1 carbon" m={100} mz="16" m1={1} mz1="17" />
+      <Mini x={230} label="C₂H₆ · 2 carbons" m={100} mz="30" m1={2} mz1="31" />
       <Mini x={450} label="C₁₀H₂₂ · 10 carbons" m={100} mz="142" m1={10} mz1="143" />
     </svg>
   );
