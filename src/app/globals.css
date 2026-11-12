@@ -447,18 +447,6 @@ html.classic {
   color-scheme: light;
 }
 
-/* The member desk opens on the same espresso ground as the classic
-   reader's dark rooms. Keep the change scoped to its first section;
-   the rest of the desk retains its parchment-and-candy palette. */
-html.classic .desk-classic-dark {
-  --color-paper: #2c2013;
-  --color-cream: #3a2b1d;
-  --color-ink: #fff6ea;
-  --color-ink-soft: #d9c9b3;
-  --color-ink-faint: #b6a28a;
-  --color-milk: #fff6ea;
-  background-color: #2c2013;
-}
 html.classic .note-rooms {
   --note-band-a: #2c2013;
   --note-band-b: #fdf6e3;
