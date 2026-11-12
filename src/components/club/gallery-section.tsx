@@ -26,6 +26,10 @@ import type { NotesBlock, SpecSection } from "@/lib/spectra/notes-types";
      · a 2px left rule          for quoted matter (statement, note, wow)
      · hairline top/bottom      for displayed equations
      · dash markers             for lists
+   And one shared measure: every block in the body — prose, cards,
+   worked examples, steps, equations, tables, figures, the spec
+   statement — ends at the SAME wall (--gal-measure), so the column
+   reads as one column at every viewport and every text size.
    ═══════════════════════════════════════════════════════════════ */
 
 /* the room's accent and its on-accent ink — tokens that travel
@@ -76,7 +80,7 @@ export function GalleryBlockView({
   switch (b.k) {
     case "p":
       return (
-        <p className="max-w-[66ch] text-[calc(15px*var(--ui-scale))] leading-[1.9] text-ink-soft">
+        <p className="max-w-[var(--gal-measure)] text-[calc(15px*var(--ui-scale))] leading-[1.9] text-ink-soft">
           <Fmt text={b.text} />
         </p>
       );
@@ -84,7 +88,7 @@ export function GalleryBlockView({
     /* a run-in sub-heading — short accent tick, quiet display type */
     case "h":
       return (
-        <div className="flex items-center gap-3 pt-1">
+        <div className="flex max-w-[var(--gal-measure)] items-center gap-3 pt-1">
           <span
             aria-hidden
             className="h-[2px] w-[18px] shrink-0 rounded-full"
@@ -99,7 +103,7 @@ export function GalleryBlockView({
     /* lists read as fine print between en-dashes */
     case "bullets":
       return (
-        <ul className="flex max-w-[66ch] flex-col gap-3">
+        <ul className="flex max-w-[var(--gal-measure)] flex-col gap-3">
           {b.items.map((t, i) => (
             <li
               key={i}
@@ -122,7 +126,7 @@ export function GalleryBlockView({
     case "note":
       return (
         <aside
-          className="max-w-[66ch] rounded-r-[14px] border-l-2 bg-ink/[0.03] py-3.5 pl-4 pr-4 sm:pl-5"
+          className="max-w-[var(--gal-measure)] rounded-r-[14px] border-l-2 bg-ink/[0.03] py-3.5 pl-4 pr-4 sm:pl-5"
           style={{ borderColor: GAL_ACCENT }}
         >
           <GalleryLabel>{b.label}</GalleryLabel>
@@ -137,7 +141,7 @@ export function GalleryBlockView({
     case "def":
       return (
         <div
-          className="max-w-[66ch] overflow-hidden rounded-[16px] border"
+          className="max-w-[var(--gal-measure)] overflow-hidden rounded-[16px] border"
           style={{ borderColor: hair(10) }}
         >
           <div
@@ -164,7 +168,7 @@ export function GalleryBlockView({
     case "eq":
       return (
         <div
-          className="max-w-[66ch] border-y py-6"
+          className="max-w-[var(--gal-measure)] border-y py-6"
           style={{ borderColor: hair(10) }}
         >
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-display text-[calc(16.5px*var(--ui-scale))] font-semibold tracking-[-0.01em] text-ink">
@@ -206,7 +210,7 @@ export function GalleryBlockView({
     case "wow":
       return (
         <aside
-          className="max-w-[66ch] border-l-2 py-0.5 pl-4 sm:pl-5"
+          className="max-w-[var(--gal-measure)] border-l-2 py-0.5 pl-4 sm:pl-5"
           style={{ borderColor: GAL_ACCENT }}
         >
           <GalleryLabel>Key idea</GalleryLabel>
@@ -236,7 +240,7 @@ function GalleryTable({
   caption?: string;
 }) {
   return (
-    <div className="max-w-full">
+    <div className="max-w-[var(--gal-measure)]">
       {caption && (
         <div className="mb-3 flex items-center gap-2.5">
           <span
@@ -325,7 +329,7 @@ function GalleryWorked({
   const bare = title.replace(/^Worked example\s*·\s*/i, "");
   return (
     <div
-      className="max-w-[66ch] overflow-hidden rounded-[16px] border bg-paper"
+      className="max-w-[var(--gal-measure)] overflow-hidden rounded-[16px] border bg-paper"
       style={{ borderColor: hair(10) }}
     >
       <div className="p-5 sm:p-6">
@@ -392,7 +396,7 @@ function GallerySteps({
   const paired =
     items.length >= 2 && items.every((it) => it.text.length <= 140);
   return (
-    <div className="max-w-[66ch]">
+    <div className="max-w-[var(--gal-measure)]">
       {caption && (
         <div className="flex items-center gap-3">
           <span
@@ -463,7 +467,7 @@ function GalleryFigure({
   const wide = isWideFigure(kind);
   return (
     <figure
-      className="max-w-full overflow-hidden rounded-[16px] border bg-paper"
+      className="max-w-[var(--gal-measure)] overflow-hidden rounded-[16px] border bg-paper"
       style={{ borderColor: hair(10) }}
     >
       <div className="flex items-center gap-3 px-4 pt-3.5 sm:px-5">
@@ -547,7 +551,7 @@ export function GallerySectionView({
       </div>
 
       <div
-        className="mt-6 max-w-[70ch] border-l-2 py-0.5 pl-4 sm:pl-5"
+        className="mt-6 max-w-[var(--gal-measure)] border-l-2 py-0.5 pl-4 sm:pl-5"
         style={{ borderColor: GAL_ACCENT }}
       >
         <span

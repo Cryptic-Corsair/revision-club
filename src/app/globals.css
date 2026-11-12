@@ -2187,6 +2187,20 @@ html.dune .legal-room mark {
   }
   .etoc-link.is-collapsed.is-active .etoc-num { color: var(--color-paper); }
 }
+/* ————— the gallery's one content measure —————
+   every block in the note body ends at the same wall: prose, the
+   run-in headings, lists, notes, key-term cards, equations, key
+   ideas, worked examples, method steps, the spec statement,
+   tables and figures alike — one shared measure so the column
+   reads as one column at every viewport and every text size.
+   The value is the prose block's own 66ch at the 15px body text
+   (measured 580px at M), spoken in px and multiplied by
+   --ui-scale so an element's inherited font-size can never bend
+   the wall the way per-element ch units did (66ch resolved to
+   580px on 15px prose but 619px on 16px cards). */
+.gal-section {
+  --gal-measure: calc(580px * var(--ui-scale));
+}
 /* ————— the gallery's minimized contents —————
    the ledger gains the editorial rail's minimize, spoken in the
    gallery's register: the header's toggle swaps the two-column
