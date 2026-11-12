@@ -23,6 +23,7 @@ const KEY = "reaction-club-desk-v1";
 
 export interface DeskState {
   engaged: boolean;
+  seenLanding: boolean;
   lastUnit: string | null;
   lastTopic: string | null;
   lastAt: number | null;
@@ -30,6 +31,7 @@ export interface DeskState {
 
 const EMPTY: DeskState = {
   engaged: false,
+  seenLanding: false,
   lastUnit: null,
   lastTopic: null,
   lastAt: null,
@@ -48,6 +50,8 @@ function load() {
     if (parsed && typeof parsed === "object") {
       state = {
         engaged: parsed.engaged === true,
+        /* Old saves with an engaged member have already passed the landing. */
+        seenLanding: parsed.seenLanding === true || parsed.engaged === true,
         lastUnit:
           typeof parsed.lastUnit === "string" ? parsed.lastUnit : null,
         lastTopic:
@@ -78,16 +82,31 @@ function set(next: DeskState) {
   emit();
 }
 
+/** Mark the introduction as seen for this browser. Returns true when this
+    visitor had already seen it before the current site visit. */
+export function markLandingSeen(): boolean {
+  load();
+  const returning = state.seenLanding || state.engaged;
+  if (!returning) set({ ...state, seenLanding: true });
+  return returning;
+}
+
+/** The visitor has chosen to enter the study workspace. */
+export function markDeskEntered() {
+  load();
+  set({ ...state, engaged: true, seenLanding: true });
+}
+
 /** the member moment: a unit page was opened */
 export function markUnit(code: string) {
   load();
-  set({ ...state, engaged: true, lastUnit: code, lastTopic: null, lastAt: Date.now() });
+  set({ ...state, engaged: true, seenLanding: true, lastUnit: code, lastTopic: null, lastAt: Date.now() });
 }
 
 /** a topic (or its note) was opened — the strongest "continue here" signal */
 export function markTopic(code: string, topicId: string) {
   load();
-  set({ ...state, engaged: true, lastUnit: code, lastTopic: topicId, lastAt: Date.now() });
+  set({ ...state, engaged: true, seenLanding: true, lastUnit: code, lastTopic: topicId, lastAt: Date.now() });
 }
 
 function subscribe(cb: () => void) {
