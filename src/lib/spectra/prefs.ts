@@ -25,9 +25,11 @@ export type BodyFont = "nunito" | "quicksand";
    lands here. "editorial" is the document room the disclaimer page
    wears (hero, rails, numbered clauses). The band-walked rooms dress
    they both grew out of has been retired outright — a saved "rooms"
-   reads as the gallery, its heir. The axis is independent of the
-   labs: every lab re-tints both interfaces, and the homepage keeps
-   its own dress always. */
+   reads as the gallery, its heir. The axis is almost independent of
+   the labs: every lab re-tints both interfaces — except classic,
+   the gallery's house lab, which the document room doesn't offer
+   (see labOrderFor and sanitize) — and the homepage keeps its own
+   dress always. */
 export type Iface = "editorial" | "gallery";
 export const IFACE_LABEL: Record<Iface, string> = {
   gallery: "Cards",
@@ -205,6 +207,14 @@ function sanitize(p: StoredPrefs): Prefs {
     /* the retired third lab rides on as classic — its heir */
     out.theme = "classic";
   if (p.iface === "editorial" || p.iface === "gallery") out.iface = p.iface;
+  /* classic is the gallery's house lab — the document room doesn't
+     wear it. A saved editorial+classic (or a Classic visitor who
+     switches to the Document reader) reads as Light, the nearest
+     daylight lab. The pre-paint script in layout.tsx applies the
+     same coercion — the two must agree or the first paint re-flows
+     after hydration. Switching back to Cards leaves you on Light;
+     picking Classic again is one tap. */
+  if (out.iface === "editorial" && out.theme === "classic") out.theme = "light";
   /* the retired rooms dress rides on as the gallery — a saved
      "rooms" (or anything unrecognisable) falls to the default,
      which is the gallery itself */
@@ -413,6 +423,16 @@ export const LAB_LABEL: Record<Lab, string> = {
 };
 
 export const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic"];
+
+/* the labs a given interface offers. Classic is the Cards reader's
+   house lab — espresso rooms cut for the white-wall dress — so the
+   Document reader doesn't offer it: its theme cards list Light,
+   Night and Dune only, and sanitize() lands any saved Document+
+   classic on Light. Both theme pickers (the navbar dropdown and
+   the customize panel) read their order from here. */
+export function labOrderFor(iface: Iface): Lab[] {
+  return iface === "editorial" ? LAB_ORDER.filter((l) => l !== "classic") : LAB_ORDER;
+}
 
 export const LAB_DESCRIPTION: Record<Lab, string> = {
   light: "Warm paper & daylight",

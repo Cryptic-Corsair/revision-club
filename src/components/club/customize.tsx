@@ -9,7 +9,7 @@ import {
   IFACE_LABEL,
   IFACE_ORDER,
   LAB_LABEL,
-  LAB_ORDER,
+  labOrderFor,
   SCALES,
   SPEC_DENSITIES,
   SPEC_HEIGHTS,
@@ -435,6 +435,9 @@ export function CustomizePanel({
   onToggleFullscreen: () => void;
 }) {
   const prefs = usePrefs();
+  /* the labs this interface offers — the Document reader doesn't
+     offer classic, the Cards reader's house lab */
+  const labOptions = labOrderFor(prefs.iface);
 
   /* Esc closes · the page behind holds still while the panel is out */
   useEffect(() => {
@@ -593,10 +596,10 @@ export function CustomizePanel({
                 </div>
               </PanelSection>
 
-              {/* 3 · appearance — the four labs as cards */}
+              {/* 3 · appearance — this interface's labs as cards */}
               <PanelSection title="Appearance">
                 <div className="grid grid-cols-2 gap-2.5">
-                  {LAB_ORDER.map((l) => {
+                  {labOptions.map((l) => {
                     const active = prefs.theme === l;
                     return (
                       <button

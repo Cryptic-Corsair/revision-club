@@ -32,7 +32,7 @@ import {
   GALLERY_DOCS,
   LAB_DESCRIPTION,
   LAB_LABEL,
-  LAB_ORDER,
+  labOrderFor,
   setPrefs,
   THEME_CHIP,
   usePrefs,
@@ -298,6 +298,9 @@ function TopBar({
 }) {
   const prefs = usePrefs();
   const lab = prefs.theme;
+  /* the labs this interface offers — the Document reader doesn't
+     offer classic, the Cards reader's house lab */
+  const labOptions = labOrderFor(prefs.iface);
   const { picks } = usePacks();
   const [announce, setAnnounce] = useState<Lab | null>(null);
   const [themeOpen, setThemeOpen] = useState(false);
@@ -553,7 +556,7 @@ function TopBar({
                     <span className="rounded-full bg-ink/[0.06] px-2.5 py-1 font-mono text-[calc(9px*var(--ui-scale))] tracking-wider text-ink-soft">THEME</span>
                   </div>
                   <div role="group" aria-label="Appearance themes" className="grid grid-cols-2 gap-2">
-                    {LAB_ORDER.map((option) => {
+                    {labOptions.map((option) => {
                       const selected = lab === option;
                       return (
                         <button

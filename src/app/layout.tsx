@@ -78,9 +78,13 @@ export const metadata: Metadata = {
 
 /* Puts the saved preferences on <html> before the first paint — no
    flash of the wrong lab, font size, scale or family. The factory
-   lab is classic (espresso & parchment). Only the night lab picks
-   tonight's mood (html[data-mood]); dune and classic are fixed
-   signatures, so they need no mood.
+   lab is classic (espresso & parchment) — the Cards reader's house
+   lab, so a saved Document (editorial) visitor who last stood in
+   classic first-paints Light here, the same coercion sanitize()
+   applies in prefs.ts; the two must agree or the first paint
+   re-flows after hydration. Only the night lab picks tonight's
+   mood (html[data-mood]); dune and classic are fixed signatures,
+   so they need no mood.
    A FIRST RUN on a big screen (≥1024px) starts on Large — mirroring
    load() in prefs.ts exactly, or the first paint would re-flow after
    hydration. beforeInteractive keeps it out of React's hydration
@@ -91,6 +95,9 @@ var r=document.documentElement,p=null;
 try{p=JSON.parse(localStorage.getItem("reaction-club-prefs-v1")||"null")}catch(e){}
 if(!p){var t=localStorage.getItem("rc-theme");p={theme:t==="dark"?"dark":"classic"}}
 var th=p.theme==="light"?"light":p.theme==="dark"?"dark":p.theme==="dune"?"dune":"classic";
+/* classic is the Cards reader's house lab — a saved Document visitor
+   reads as Light (mirrors sanitize() in prefs.ts) */
+if(p.iface==="editorial"&&th==="classic")th="light";
 if(th==="dark"){r.classList.add("dark");r.dataset.mood=String(Math.floor(Date.now()/864e5)%${DARK_MOOD_COUNT})}
 else if(th==="dune"){r.classList.add("dark","dune")}
 else if(th==="classic"){r.classList.add("classic")}
