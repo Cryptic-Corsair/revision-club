@@ -15,7 +15,6 @@ import type { Unit, UnitCode } from "@/lib/spectra/types";
 import { TOTALS } from "@/lib/spectra/units";
 import { useRevised, useHydrated } from "@/lib/spectra/progress";
 import { usePacks } from "@/lib/spectra/packs";
-import { usePrefs } from "@/lib/spectra/prefs";
 import {
   fmtClock,
   fmtShort,
@@ -68,7 +67,6 @@ export function Desk({
   onSearch: () => void;
   onShowLanding: () => void;
 }) {
-  const prefs = usePrefs();
   const hydrated = useHydrated();
   const revised = useRevised();
   const { picks } = usePacks();
@@ -101,7 +99,7 @@ export function Desk({
   return (
     <div>
       {/* ————— header + continue + the week ————— */}
-      <section className={`bg-paper ${prefs.theme === "classic" ? "desk-classic-dark" : ""}`} style={{ paddingTop: "calc(5.25rem + var(--sa-top))" }}>
+      <section className="bg-paper" style={{ paddingTop: "calc(5.25rem + var(--sa-top))" }}>
         <div className="mx-auto grid max-w-6xl items-start gap-6 px-5 pb-12 pt-2 sm:px-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)]">
           {/* left: greeting + the continue card */}
           <div>
