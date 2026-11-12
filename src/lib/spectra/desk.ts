@@ -14,10 +14,11 @@ import { useSyncExternalStore } from "react";
    alongside the revised marks and the reading clock.
 
    localStorage · key "reaction-club-desk-v1"
-   { engaged: boolean            — has opened a unit or topic
-     lastUnit: string | null     — last unit code tapped
-     lastTopic: string | null    — last topic id tapped
-     lastAt: number | null }     — when that happened (epoch ms)
+   { seenLanding: boolean       — the introduction has been shown once
+     engaged: boolean           — has entered the desk or opened a unit/topic
+     lastUnit: string | null    — last unit code tapped
+     lastTopic: string | null   — last topic id tapped
+     lastAt: number | null }    — when that happened (epoch ms)
    ═══════════════════════════════════════════════════════════════ */
 
 const KEY = "reaction-club-desk-v1";
