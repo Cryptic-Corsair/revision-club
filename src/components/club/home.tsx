@@ -147,7 +147,7 @@ function Ticker({ units }: { units: Unit[] }) {
   );
 }
 
-export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack, onOpenSpec, onBackToDesk }: { units: Unit[]; onOpenUnit: (code: string) => void; onOpenSticker: () => void; onOpenTopic: (code: UnitCode, topicId: string) => void; onOpenPack: () => void; onOpenSpec: () => void; onBackToDesk?: () => void }) {
+export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack, onOpenSpec, onBackToDesk, onStartRevision }: { units: Unit[]; onOpenUnit: (code: string) => void; onOpenSticker: () => void; onOpenTopic: (code: UnitCode, topicId: string) => void; onOpenPack: () => void; onOpenSpec: () => void; onBackToDesk?: () => void; onStartRevision: () => void }) {
   const hours = Math.round(TOTALS.minutes / 60);
   const revised = useRevised();
   const { picks } = usePacks();
@@ -249,8 +249,8 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               </PopIn>
 
               <PopIn delay={0.24} className="mt-8 flex flex-wrap items-center gap-3.5">
-                <CandyButton main="#FF6B6B" onClick={() => scrollTo("units")}>
-                  Browse the units <MoveRight className="h-5 w-5" />
+                <CandyButton main="#FF6B6B" onClick={onStartRevision}>
+                  Let&apos;s Revise <MoveRight className="h-5 w-5" />
                 </CandyButton>
                 <StickerButton onClick={() => scrollTo("how")}>
                   <NotebookPen className="h-4 w-4 text-grape" /> How it works
@@ -810,8 +810,8 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 Begin with Unit 1, or jump straight to the topic you are revising.
               </p>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3.5">
-                <CandyBtn main="#FFD43B" onClick={() => scrollTo("units")}>
-                  Browse the units <MoveRight className="h-5 w-5" />
+                <CandyBtn main="#FFD43B" onClick={onStartRevision}>
+                  Let&apos;s Revise <MoveRight className="h-5 w-5" />
                 </CandyBtn>
                 <button
                   type="button"
