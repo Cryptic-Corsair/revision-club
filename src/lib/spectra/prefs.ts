@@ -30,11 +30,11 @@ export type BodyFont = "nunito" | "quicksand";
    its own dress always. */
 export type Iface = "editorial" | "gallery";
 export const IFACE_LABEL: Record<Iface, string> = {
-  gallery: "Gallery",
-  editorial: "Editorial",
+  gallery: "Cards",
+  editorial: "Document",
 };
 export const IFACE_DESCRIPTION: Record<Iface, string> = {
-  gallery: "Catalog-style reader — every note, spec by spec",
+  gallery: "Card-style reader — every note, spec by spec",
   editorial: "Document-style reader — numbered sections & rails",
 };
 export const IFACE_ORDER: Iface[] = ["gallery", "editorial"];
@@ -162,11 +162,12 @@ export interface Prefs {
 }
 
 export const DEFAULT_PREFS: Prefs = {
-  /* the factory setting lands new visitors in the daylight lab and
-     the white-wall dress — the gallery is the site's front door.
-     Anyone who has picked a lab or a dress keeps theirs; this is
-     only the factory setting. */
-  theme: "light",
+  /* the factory setting lands new visitors in the espresso-and-
+     parchment lab and the white-wall dress — classic is the house
+     look, the gallery (Cards) the site's front door. Anyone who has
+     picked a lab or a dress keeps theirs; this is only the factory
+     setting. */
+  theme: "classic",
   iface: "gallery",
   accents: [...ACCENT_IDS],
   /* the scale default is Medium here; load() lifts a FIRST RUN on a
