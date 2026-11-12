@@ -2193,13 +2193,16 @@ html.dune .legal-room mark {
    ideas, worked examples, method steps, the spec statement,
    tables and figures alike — one shared measure so the column
    reads as one column at every viewport and every text size.
-   The value is the prose block's own 66ch at the 15px body text
-   (measured 580px at M), spoken in px and multiplied by
-   --ui-scale so an element's inherited font-size can never bend
-   the wall the way per-element ch units did (66ch resolved to
-   580px on 15px prose but 619px on 16px cards). */
+   The value began as the prose block's own 66ch at the 15px body
+   text (580px at M); the user asked for a wider column — at 580
+   the right side of the page sat awkwardly empty on tablets — so
+   it now reads 680px at M, still one shared wall, still spoken
+   in px and multiplied by --ui-scale so an element's inherited
+   font-size can never bend the wall the way per-element ch units
+   did (66ch resolved to 580px on 15px prose but 619px on 16px
+   cards). */
 .gal-section {
-  --gal-measure: calc(580px * var(--ui-scale));
+  --gal-measure: calc(680px * var(--ui-scale));
 }
 /* ————— the gallery's minimized contents —————
    the ledger gains the editorial rail's minimize, spoken in the
