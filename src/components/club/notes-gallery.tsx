@@ -384,7 +384,7 @@ function NotesGalleryBody({
   const overture = introPs[1]?.k === "p" ? introPs[1].text : null;
 
   return (
-    <main className="notes-flow gal relative mx-auto max-w-4xl px-5 pt-[calc(6.5rem+var(--sa-top))] pb-28 sm:px-8">
+    <main className="notes-flow gal relative mx-auto max-w-[calc(var(--gal-measure)_+_calc(var(--spacing)_*_16))] px-5 pt-[calc(6.5rem+var(--sa-top))] pb-28 sm:px-8">
       {/* reading progress — the room's own hairline, in the accent */}
       <m.div
         aria-hidden
@@ -634,7 +634,7 @@ function NotesGalleryBody({
                 }`}
                 style={{ background: galRoom(i) }}
               >
-                <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8 sm:py-20">
+                <div className="mx-auto max-w-[calc(var(--gal-measure)_+_calc(var(--spacing)_*_16))] px-5 py-16 sm:px-8 sm:py-20">
                   <Reveal y={18}>
                     <GallerySectionView
                       section={section}

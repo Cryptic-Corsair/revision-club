@@ -2200,8 +2200,15 @@ html.dune .legal-room mark {
    in px and multiplied by --ui-scale so an element's inherited
    font-size can never bend the wall the way per-element ch units
    did (66ch resolved to 580px on 15px prose but 619px on 16px
-   cards). */
-.gal-section {
+   cards).
+   The token lives on the reader's main so the page can dress by
+   it too: the hero, the contents and every spec room's wrapper
+   cap themselves at the measure plus their own sm padding, which
+   centers the whole column — the user asked for equal empty
+   space on the left and right in landscape, and a column that
+   IS the measure gives the same air on both sides at every
+   width and every text size. */
+main.gal {
   --gal-measure: calc(680px * var(--ui-scale));
 }
 /* ————— the gallery's minimized contents —————
