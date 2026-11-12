@@ -850,7 +850,6 @@ function Footer({
           <div className="flex flex-col gap-4 py-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-2xl text-[calc(10.5px*var(--ui-scale))] leading-relaxed font-semibold text-milk/40">
               © 2026 IAL CHEM · Notes for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. Not affiliated with or endorsed by Pearson Education Ltd.
-              <span className="ml-1 whitespace-nowrap text-milk/30">· rev 4 · Nov 2026 · {BUILD_VERSION}</span>
             </p>
             <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 self-start sm:self-auto">
               <button
