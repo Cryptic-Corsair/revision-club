@@ -4,13 +4,14 @@ import { useSyncExternalStore } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the desk
-   The site remembers whether you've actually started studying.
-   First visit lands on the introduction; the first tap into a
-   unit or topic flips a flag, and every visit after that opens
-   the desk — the simplified homepage built around your progress.
+   The browser remembers whether the introduction has been seen.
+   The first site visit shows it and records that visit immediately;
+   every later visit opens the desk. A separate engagement flag
+   records entry into the desk or the opening of a unit or topic,
+   keeping the return-to-desk path distinct from first-visit history.
 
-   No account, no sign-in: the "membership" is a localStorage
-   flag, exactly like the revised marks and the reading clock.
+   No account, no sign-in: these markers live in localStorage,
+   alongside the revised marks and the reading clock.
 
    localStorage · key "reaction-club-desk-v1"
    { engaged: boolean            — has opened a unit or topic
