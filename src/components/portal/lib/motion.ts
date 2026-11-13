@@ -29,8 +29,20 @@ export function clampDeltaTime(deltaSeconds: number): number {
 
 export function getCappedPixelRatio(viewportWidth: number, devicePixelRatio: number): number {
   const safeDpr = Number.isFinite(devicePixelRatio) && devicePixelRatio > 0 ? devicePixelRatio : 1;
-  const maxDpr = viewportWidth < 768 ? 1.5 : 2;
+  // High-DPR touch devices can multiply a full-bleed canvas' pixel workload
+  // several times over. Keep the artwork crisp while setting a safer GPU ceiling.
+  const coarsePointer =
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(pointer: coarse)').matches;
+  const maxDpr = coarsePointer ? 1.35 : viewportWidth < 768 ? 1.5 : 2;
   return Math.min(safeDpr, maxDpr);
+}
+
+/** A slightly lighter drawing cadence for ambient canvases on touch-first hardware. */
+export function getCanvasFrameIntervalSeconds(): number {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return 0;
+  return window.matchMedia('(pointer: coarse)').matches ? 1 / 40 : 0;
 }
 
 /**
