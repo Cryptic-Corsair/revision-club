@@ -204,6 +204,7 @@ function MarqueeRow({
 
 export function LabVignettes({ reducedMotion, coarsePointer }: LabVignettesProps) {
   const { ref, live } = useLive<HTMLElement>(240);
+  const staticDecorativeMotion = reducedMotion || coarsePointer;
   return (
     <section
       id="lab"
@@ -213,12 +214,12 @@ export function LabVignettes({ reducedMotion, coarsePointer }: LabVignettesProps
       data-live={live}
     >
       {/* the hero's ring language, tuned for this room */}
-      <SectionBackdrop variant="lab" reducedMotion={reducedMotion} />
+      <SectionBackdrop variant="lab" reducedMotion={staticDecorativeMotion} />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <StillProvider live={live}>
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0, y: 14 }}
+            initial={staticDecorativeMotion ? false : { opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_ONCE}
             transition={{ duration: 0.6, ease: EASE_EXPO }}
