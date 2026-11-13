@@ -1175,3 +1175,17 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** Vercel PR preview ready; merge to production not yet recorded in this entry.
 - **Commit(s):** implementation and original work record: `d599d196a032973a9f03dafdd4cf5bdf17f4d98b`; this follow-up record is committed separately on `perf/homepage-rendering-pass`.
 - **Follow-up / known limitations:** the canvas layers use a ~40fps cadence on coarse-pointer devices, while visible SVG/Framer Motion loops remain animated. Measure actual frame pacing on the target tablet after deployment; a passing preview does not establish physical-device smoothness.
+
+
+### 2026-11-14 — tune canvas cadence for 60Hz tablet smoothness
+
+- **Contributor:** OpenAI coding agent.
+- **Request / objective:** avoid a low or uneven-looking frame cadence while retaining the canvas workload reductions from the homepage optimization.
+- **Investigation:** reviewed the initial touch-device 40fps canvas cap against common 60Hz and high-refresh display cadences. A 40fps target cannot be evenly represented on a 60Hz display and may appear less smooth despite reducing draw count.
+- **Changes made:** changed the coarse-pointer canvas draw ceiling from 40fps to 60fps. High-refresh touch devices still avoid drawing on every refresh callback, while a standard 60Hz tablet can use its native rAF cadence. Updated the hero shader's source comment to match the new cap. The touch-device DPR ceiling, visibility pausing, cached canvas theme colours, shortened SVG prewarm margins and reduced glass blur remain unchanged.
+- **Preserved invariants:** no motion graphics were disabled; operating-system reduced-motion preference remains the only reduced-motion switch; desktop cadence and pixel ratio remain unchanged; no study content or workspace code changed.
+- **Decisions and rationale:** prefer a 60fps ceiling over 40fps to avoid deliberately introducing uneven frame cadence on common 60Hz panels. Actual cadence remains constrained by the display and device rendering capacity.
+- **Verification:** fetched the updated helper and hero source from main and confirmed the 60fps value/comment. The full homepage optimization was merged as `168be7c7390cd8b5b30437faff3dd0109cac68b0`; the cadence adjustment is `f8ddae40c9a20464c9cf6a9316e4239330d5dbbc`; the source-comment correction is `6bb05e8df32e7fd696d328331639277719981220`. The Vercel deployment for merge commit `168be7c7390cd8b5b30437faff3dd0109cac68b0` reported success. The deployments for the two follow-up commits and on-device frame pacing remain to be checked. `bun run lint`, `bun run build` and physical tablet profiling were not run in this session.
+- **Deployment:** initial merged homepage optimization deployed successfully; follow-up cadence refinement triggers a new deployment.
+- **Commit(s):** merge `168be7c7390cd8b5b30437faff3dd0109cac68b0`; cadence update `f8ddae40c9a20464c9cf6a9316e4239330d5dbbc`; hero comment `6bb05e8df32e7fd696d328331639277719981220`; this journal entry is committed separately.
+- **Follow-up / known limitations:** inspect the final deployment and measure real tablet frame pacing in both portrait and landscape. A preview/build success alone cannot establish physical-device smoothness.
