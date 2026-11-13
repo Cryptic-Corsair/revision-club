@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { HAIRLINE, HAIRLINE_FAINT } from './LabGraphics';
+import { useStill } from '../../lib/still';
 
 /* ————— the unit motifs —————
    Six miniature motion graphics, one per syllabus unit, cut from
@@ -24,6 +25,7 @@ type MotifProps = { reducedMotion: boolean };
 
 /* ————— atom — two tilted shells, two electrons ————— */
 function AtomMotif({ reducedMotion }: MotifProps) {
+  const still = useStill(reducedMotion);
   const shells = [
     { tilt: -18, rx: 46, ry: 16, dur: 4.6, electron: 'var(--accent)' },
     { tilt: 30, rx: 62, ry: 21, dur: 8, electron: 'var(--accent-warm)' },
@@ -35,8 +37,8 @@ function AtomMotif({ reducedMotion }: MotifProps) {
         cy={70}
         r={11}
         style={{ fill: 'var(--accent)' }}
-        animate={reducedMotion ? undefined : { opacity: [0.1, 0.22, 0.1] }}
-        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+        animate={still ? undefined : { opacity: [0.1, 0.22, 0.1] }}
+        transition={still ? undefined : { duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
       />
       <circle cx={180} cy={70} r={6} style={{ fill: 'var(--accent)' }} />
       {shells.map((shell) => (
@@ -52,11 +54,15 @@ function AtomMotif({ reducedMotion }: MotifProps) {
           />
           <motion.g
             animate={
-              reducedMotion
+              still
                 ? undefined
                 : { rotate: shell.dur > 7 ? -360 : 360 }
             }
-            transition={{ duration: shell.dur, repeat: Infinity, ease: 'linear' }}
+            transition={
+              still
+                ? undefined
+                : { duration: shell.dur, repeat: Infinity, ease: 'linear' }
+            }
             style={{ transformBox: 'view-box', transformOrigin: '180px 70px' }}
           >
             <circle cx={180 + shell.rx} cy={70} r={2.8} style={{ fill: shell.electron }} />
@@ -73,6 +79,7 @@ const MINI_HILL =
   'M 40 96 C 84 96, 118 46, 160 46 C 202 46, 224 108, 272 108 L 312 108';
 
 function HillMotif({ reducedMotion }: MotifProps) {
+  const still = useStill(reducedMotion);
   const ride = {
     duration: 3.4,
     repeat: Infinity,
@@ -95,15 +102,15 @@ function HillMotif({ reducedMotion }: MotifProps) {
         style={{ stroke: 'var(--accent)' }}
         strokeWidth={1.8}
         strokeLinecap="round"
-        initial={reducedMotion ? false : { pathLength: 0 }}
-        animate={reducedMotion ? undefined : { pathLength: [0, 1] }}
-        transition={ride}
+        initial={still ? false : { pathLength: 0 }}
+        animate={still ? undefined : { pathLength: [0, 1] }}
+        transition={still ? undefined : ride}
       />
       <motion.circle
         r={5}
         style={{ fill: 'var(--accent)' }}
         animate={
-          reducedMotion
+          still
             ? { cx: 40, cy: 96, opacity: 0.4 }
             : {
                 cx: [40, 100, 160, 216, 272],
@@ -111,7 +118,7 @@ function HillMotif({ reducedMotion }: MotifProps) {
                 opacity: [0, 1, 1, 1, 0.85],
               }
         }
-        transition={{ ...ride, times: [0, 0.25, 0.5, 0.72, 1] }}
+        transition={still ? undefined : { ...ride, times: [0, 0.25, 0.5, 0.72, 1] }}
       />
       <path d="M 300 96 V 108" style={{ stroke: 'var(--accent-warm)' }} strokeWidth={1.2} />
     </svg>
@@ -120,6 +127,7 @@ function HillMotif({ reducedMotion }: MotifProps) {
 
 /* ————— drop — the burette metronome ————— */
 function DropMotif({ reducedMotion }: MotifProps) {
+  const still = useStill(reducedMotion);
   return (
     <svg viewBox="0 0 360 140" className="block h-auto w-full" aria-hidden="true">
       <defs>
@@ -134,11 +142,11 @@ function DropMotif({ reducedMotion }: MotifProps) {
           width={16}
           style={{ fill: 'var(--accent)', opacity: 0.26 }}
           animate={
-            reducedMotion
+            still
               ? { y: 22, height: 42 }
               : { y: [22, 52, 22], height: [42, 12, 42] }
           }
-          transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}
+          transition={still ? undefined : { duration: 9, repeat: Infinity, ease: 'linear' }}
         />
       </g>
       {[28, 40, 52].map((y) => (
@@ -160,12 +168,12 @@ function DropMotif({ reducedMotion }: MotifProps) {
           cy={86}
           style={{ fill: 'var(--accent)' }}
           animate={
-            reducedMotion
+            still
               ? { cy: 104, opacity: 0.5 }
               : { cy: [86, 104, 108, 108], opacity: [0, 0.9, 0.9, 0] }
           }
           transition={
-            reducedMotion
+            still
               ? { duration: 0.5, delay: i * 0.25 }
               : { duration: 1.3, repeat: Infinity, ease: 'easeIn', delay, times: [0, 0.5, 0.9, 1] }
           }
@@ -188,12 +196,12 @@ function DropMotif({ reducedMotion }: MotifProps) {
           ry={1}
           style={{ fill: 'none', stroke: 'var(--accent)', strokeWidth: 1.1 }}
           animate={
-            reducedMotion
+            still
               ? { rx: 6, opacity: 0.2 }
               : { rx: [2, 13], opacity: [0.45, 0] }
           }
           transition={
-            reducedMotion
+            still
               ? { duration: 0.4, delay: i * 0.2 }
               : { duration: 1.3, repeat: Infinity, ease: 'easeOut', delay }
           }
@@ -205,6 +213,7 @@ function DropMotif({ reducedMotion }: MotifProps) {
 
 /* ————— equilibrate — two populations exchanging ————— */
 function EquilibrateMotif({ reducedMotion }: MotifProps) {
+  const still = useStill(reducedMotion);
   const forward = [
     { dur: 3.4, delay: 0 },
     { dur: 3.9, delay: 1.4 },
@@ -252,12 +261,12 @@ function EquilibrateMotif({ reducedMotion }: MotifProps) {
           r={2.6}
           style={{ fill: 'var(--accent)' }}
           animate={
-            reducedMotion
+            still
               ? { cx: 180, opacity: 0.5 }
               : { cx: [118, 158, 202, 242], opacity: [0, 0.9, 0.9, 0] }
           }
           transition={
-            reducedMotion
+            still
               ? { duration: 0.4, delay: i * 0.15 }
               : { duration: run.dur, repeat: Infinity, ease: 'easeInOut', delay: run.delay, times: [0, 0.15, 0.85, 1] }
           }
@@ -270,12 +279,12 @@ function EquilibrateMotif({ reducedMotion }: MotifProps) {
           r={2.6}
           style={{ fill: 'var(--accent-warm)' }}
           animate={
-            reducedMotion
+            still
               ? { cx: 180, opacity: 0.5 }
               : { cx: [242, 202, 158, 118], opacity: [0, 0.9, 0.9, 0] }
           }
           transition={
-            reducedMotion
+            still
               ? { duration: 0.4, delay: i * 0.15 }
               : { duration: run.dur, repeat: Infinity, ease: 'easeInOut', delay: run.delay, times: [0, 0.15, 0.85, 1] }
           }
@@ -295,8 +304,12 @@ function EquilibrateMotif({ reducedMotion }: MotifProps) {
           cy={dot.y}
           r={2.2}
           style={{ fill: 'var(--ink-muted)' }}
-          animate={reducedMotion ? { opacity: 0.6 } : { opacity: [0.35, 0.8, 0.35] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: i * 0.4 }}
+          animate={still ? { opacity: 0.6 } : { opacity: [0.35, 0.8, 0.35] }}
+          transition={
+            still
+              ? undefined
+              : { duration: 3, repeat: Infinity, ease: 'easeInOut', delay: i * 0.4 }
+          }
         />
       ))}
     </svg>
@@ -305,6 +318,7 @@ function EquilibrateMotif({ reducedMotion }: MotifProps) {
 
 /* ————— complex — a ligand shell, one slowly orbiting ————— */
 function ComplexMotif({ reducedMotion }: MotifProps) {
+  const still = useStill(reducedMotion);
   const ligands = Array.from({ length: 6 }, (_, i) => {
     const angle = (Math.PI / 180) * (60 * i);
     return { x: 180 + 30 * Math.cos(angle), y: 70 + 30 * Math.sin(angle) };
@@ -313,8 +327,8 @@ function ComplexMotif({ reducedMotion }: MotifProps) {
     <svg viewBox="0 0 360 140" className="block h-auto w-full" aria-hidden="true">
       <circle cx={180} cy={70} r={30} fill="none" style={{ stroke: HAIRLINE_FAINT }} strokeWidth={1} />
       <motion.g
-        animate={reducedMotion ? undefined : { rotate: 360 }}
-        transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+        animate={still ? undefined : { rotate: 360 }}
+        transition={still ? undefined : { duration: 18, repeat: Infinity, ease: 'linear' }}
         style={{ transformBox: 'view-box', transformOrigin: '180px 70px' }}
       >
         {ligands.map((ligand, i) => (
@@ -344,7 +358,7 @@ function ComplexMotif({ reducedMotion }: MotifProps) {
         r={3}
         style={{ fill: 'var(--accent)' }}
         animate={
-          reducedMotion
+          still
             ? { cx: 232, cy: 40, opacity: 0.4 }
             : {
                 cx: [232, 218, 210, 210],
@@ -352,7 +366,11 @@ function ComplexMotif({ reducedMotion }: MotifProps) {
                 opacity: [0.15, 0.7, 0.9, 0.15],
               }
         }
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', times: [0, 0.4, 0.75, 1] }}
+        transition={
+          still
+            ? undefined
+            : { duration: 5, repeat: Infinity, ease: 'easeInOut', times: [0, 0.4, 0.75, 1] }
+        }
       />
     </svg>
   );
@@ -360,6 +378,7 @@ function ComplexMotif({ reducedMotion }: MotifProps) {
 
 /* ————— distill — the column handing vapour to a receiver ————— */
 function DistillMotif({ reducedMotion }: MotifProps) {
+  const still = useStill(reducedMotion);
   return (
     <svg viewBox="0 0 360 140" className="block h-auto w-full" aria-hidden="true">
       <defs>
@@ -398,12 +417,12 @@ function DistillMotif({ reducedMotion }: MotifProps) {
           cy={88}
           style={{ fill: 'var(--accent-warm)' }}
           animate={
-            reducedMotion
+            still
               ? { cy: 60, opacity: 0.4 }
               : { cy: [88, 62, 50, 50], opacity: [0, 0.8, 0.8, 0] }
           }
           transition={
-            reducedMotion
+            still
               ? { duration: 0.4, delay: i * 0.15 }
               : { duration: vap.dur, repeat: Infinity, ease: 'easeOut', delay: vap.delay, times: [0, 0.25, 0.875, 1] }
           }
@@ -427,12 +446,12 @@ function DistillMotif({ reducedMotion }: MotifProps) {
           cy={74}
           style={{ fill: 'var(--accent)' }}
           animate={
-            reducedMotion
+            still
               ? { cy: 100, opacity: 0.5 }
               : { cy: [74, 100, 106, 106], opacity: [0, 1, 1, 0] }
           }
           transition={
-            reducedMotion
+            still
               ? { duration: 0.4, delay: i * 0.2 }
               : { duration: 1, repeat: Infinity, ease: 'easeIn', delay, times: [0, 0.1, 0.9, 1] }
           }
@@ -445,11 +464,11 @@ function DistillMotif({ reducedMotion }: MotifProps) {
           width={46}
           style={{ fill: 'var(--accent)', opacity: 0.2 }}
           animate={
-            reducedMotion
+            still
               ? { y: 100, height: 12 }
               : { y: [104, 94, 104], height: [8, 18, 8] }
           }
-          transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+          transition={still ? undefined : { duration: 10, repeat: Infinity, ease: 'linear' }}
         />
       </g>
       <path

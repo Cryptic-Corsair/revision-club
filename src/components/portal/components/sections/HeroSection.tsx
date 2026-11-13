@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   motion,
+  useInView,
   useScroll,
   useTransform,
 } from 'framer-motion';
@@ -184,14 +185,20 @@ export function HeroSection({
   }, [theme, userInteracted]);
 
   // The auto-cycle reads the note for the visitor — clause by clause,
-  // across the shelf — until they take the wheel themselves.
+  // across the shelf — until they take the wheel themselves. It only
+  // turns while the hero is on or near the screen: scrolled away, the
+  // interval stops instead of re-rendering the stage for nobody.
+  const heroLive = useInView(heroRef, {
+    margin: '400px 0px 400px 0px',
+    initial: false,
+  });
   useEffect(() => {
-    if (reducedMotion || userInteracted) return;
+    if (reducedMotion || userInteracted || !heroLive) return;
     const id = window.setInterval(() => {
       setStepIdx((prev) => (prev + 1) % PREVIEW_STEPS.length);
     }, 3800);
     return () => window.clearInterval(id);
-  }, [reducedMotion, userInteracted]);
+  }, [reducedMotion, userInteracted, heroLive]);
 
   const previewTokens = PREVIEW_THEMES[previewThemeId];
   const step = PREVIEW_STEPS[stepIdx];

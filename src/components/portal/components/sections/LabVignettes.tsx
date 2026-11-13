@@ -13,6 +13,7 @@ import {
   IonsVignette,
 } from '../motion/LabGraphicsExtra';
 import { EASE_EXPO, VIEWPORT_ONCE } from '../../lib/motion';
+import { StillProvider, useLive } from '../../lib/still';
 import { SectionBackdrop } from '../motion/SectionBackdrop';
 
 interface LabVignettesProps {
@@ -30,7 +31,10 @@ interface LabVignettesProps {
    and a fractional distillation. Cards carry no descriptions —
    the piece and its number are all the room says. Hovering a row
    pauses it; under reduced motion the rows freeze into an honest,
-   scrollable shelf of stills. */
+   scrollable shelf of stills. The whole room keeps itself honest
+   about being seen: when it drifts more than a screen away from
+   the viewport, the rows and the pieces stop running (useLive /
+   StillProvider) and pick up again on approach. */
 
 interface LabTile {
   id: string;
@@ -144,12 +148,14 @@ function MarqueeRow({
   duration,
   reducedMotion,
   rowId,
+  paused,
 }: {
   tiles: readonly LabTile[];
   direction: 'left' | 'right';
   duration: string;
   reducedMotion: boolean;
   rowId: string;
+  paused: boolean;
 }) {
   return (
     <div
@@ -160,7 +166,10 @@ function MarqueeRow({
       <div
         className="portal-marquee-track"
         data-direction={direction}
-        style={{ animationDuration: duration }}
+        style={{
+          animationDuration: duration,
+          animationPlayState: paused && !reducedMotion ? 'paused' : undefined,
+        }}
       >
         {[...tiles, ...tiles].map((tile, i) => (
           <LabCard
@@ -176,34 +185,45 @@ function MarqueeRow({
 }
 
 export function LabVignettes({ reducedMotion }: LabVignettesProps) {
+  const { ref, live } = useLive<HTMLElement>();
   return (
-    <section id="lab" className="relative py-20 sm:py-28" data-testid="lab-vignettes">
+    <section
+      id="lab"
+      ref={ref}
+      className="relative py-20 sm:py-28"
+      data-testid="lab-vignettes"
+      data-live={live}
+    >
       {/* the hero's ring language, tuned for this room */}
       <SectionBackdrop variant="lab" reducedMotion={reducedMotion} />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={reducedMotion ? false : { opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VIEWPORT_ONCE}
-          transition={{ duration: 0.6, ease: EASE_EXPO }}
-          className="space-y-6"
-        >
-          <MarqueeRow
-            rowId="lab-row-1"
-            tiles={ROW_ONE}
-            direction="left"
-            duration="56s"
-            reducedMotion={reducedMotion}
-          />
-          <MarqueeRow
-            rowId="lab-row-2"
-            tiles={ROW_TWO}
-            direction="right"
-            duration="72s"
-            reducedMotion={reducedMotion}
-          />
-        </motion.div>
+        <StillProvider live={live}>
+          <motion.div
+            initial={reducedMotion ? false : { opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_ONCE}
+            transition={{ duration: 0.6, ease: EASE_EXPO }}
+            className="space-y-6"
+          >
+            <MarqueeRow
+              rowId="lab-row-1"
+              tiles={ROW_ONE}
+              direction="left"
+              duration="56s"
+              reducedMotion={reducedMotion}
+              paused={!live}
+            />
+            <MarqueeRow
+              rowId="lab-row-2"
+              tiles={ROW_TWO}
+              direction="right"
+              duration="72s"
+              reducedMotion={reducedMotion}
+              paused={!live}
+            />
+          </motion.div>
+        </StillProvider>
       </div>
     </section>
   );

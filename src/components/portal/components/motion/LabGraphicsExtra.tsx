@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { HAIRLINE, HAIRLINE_FAINT, liquidSurface } from './LabGraphics';
+import { useStill } from '../../lib/still';
 
 /* ————— the living laboratory's later pieces —————
    Four more loops of the subject itself, in the same line-art
@@ -20,6 +21,7 @@ const BEAKER_INTERIOR =
   'M 132 148 L 268 148 L 268 206 Q 268 216 258 216 L 142 216 Q 132 216 132 206 Z';
 
 export function DropVignette({ reducedMotion }: { reducedMotion: boolean }) {
+  const still = useStill(reducedMotion);
   return (
     <svg viewBox="0 0 400 260" className="block h-auto w-full" aria-hidden="true">
       <defs>
@@ -38,11 +40,11 @@ export function DropVignette({ reducedMotion }: { reducedMotion: boolean }) {
           width={16}
           style={{ fill: 'var(--accent)', opacity: 0.26 }}
           animate={
-            reducedMotion
+            still
               ? { y: 40, height: 58 }
               : { y: [40, 90, 40], height: [58, 8, 58] }
           }
-          transition={{ duration: 14, repeat: Infinity, ease: 'linear' }}
+          transition={still ? undefined : { duration: 14, repeat: Infinity, ease: 'linear' }}
         />
       </g>
       {/* graduations */}
@@ -67,12 +69,12 @@ export function DropVignette({ reducedMotion }: { reducedMotion: boolean }) {
           cy={128}
           style={{ fill: 'var(--accent)' }}
           animate={
-            reducedMotion
+            still
               ? { cy: 168, opacity: 0.5 }
               : { cy: [128, 148, 174, 176], opacity: [0, 0.9, 0.9, 0] }
           }
           transition={
-            reducedMotion
+            still
               ? { duration: 0.6, delay: i * 0.3 }
               : {
                   duration: 1.5,
@@ -88,14 +90,14 @@ export function DropVignette({ reducedMotion }: { reducedMotion: boolean }) {
       {/* the pool in the beaker, lapping and slowly turning over */}
       <g clipPath="url(#lab-beaker-clip)">
         <motion.g
-          animate={reducedMotion ? undefined : { x: [0, -50] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+          animate={still ? undefined : { x: [0, -50] }}
+          transition={still ? undefined : { duration: 8, repeat: Infinity, ease: 'linear' }}
         >
           <path d={liquidSurface(176, 2.6)} style={{ fill: 'var(--accent)', opacity: 0.22 }} />
         </motion.g>
         <motion.g
-          animate={reducedMotion ? undefined : { x: [0, 50] }}
-          transition={{ duration: 11, repeat: Infinity, ease: 'linear' }}
+          animate={still ? undefined : { x: [0, 50] }}
+          transition={still ? undefined : { duration: 11, repeat: Infinity, ease: 'linear' }}
         >
           <path d={liquidSurface(180, 2)} style={{ fill: 'var(--accent)', opacity: 0.14 }} />
         </motion.g>
@@ -106,11 +108,11 @@ export function DropVignette({ reducedMotion }: { reducedMotion: boolean }) {
           height={70}
           style={{ fill: 'var(--accent-warm)' }}
           animate={
-            reducedMotion
+            still
               ? { opacity: 0.1 }
               : { opacity: [0.04, 0.24, 0.04] }
           }
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+          transition={still ? undefined : { duration: 7, repeat: Infinity, ease: 'easeInOut' }}
         />
 
         {/* impact rings where the drops land */}
@@ -122,12 +124,12 @@ export function DropVignette({ reducedMotion }: { reducedMotion: boolean }) {
             ry={1}
             style={{ fill: 'none', stroke: 'var(--accent)', strokeWidth: 1.3 }}
             animate={
-              reducedMotion
+              still
                 ? { rx: 8, opacity: 0.2 }
                 : { rx: [2, 20], opacity: [0.5, 0] }
             }
             transition={
-              reducedMotion
+              still
                 ? { duration: 0.4, delay: i * 0.2 }
                 : { duration: 1.5, repeat: Infinity, ease: 'easeOut', delay }
             }
@@ -144,7 +146,7 @@ export function DropVignette({ reducedMotion }: { reducedMotion: boolean }) {
             r={1.8}
             style={{ fill: 'var(--accent)' }}
             animate={
-              reducedMotion
+              still
                 ? { cx: 200 + fleck.dx * 6, cy: 170, opacity: 0.3 }
                 : {
                     cx: [200, 200 + fleck.dx * 3.5, 200 + fleck.dx * 7],
@@ -153,7 +155,7 @@ export function DropVignette({ reducedMotion }: { reducedMotion: boolean }) {
                   }
             }
             transition={
-              reducedMotion
+              still
                 ? { duration: 0.3 }
                 : {
                     duration: 0.6,
@@ -161,7 +163,7 @@ export function DropVignette({ reducedMotion }: { reducedMotion: boolean }) {
                     repeatDelay: 2.4,
                     ease: 'easeOut',
                     delay: fleck.delay,
-                    times: reducedMotion ? undefined : [0, 0.6, 1],
+                    times: still ? undefined : [0, 0.6, 1],
                   }
             }
           />
@@ -198,6 +200,7 @@ const ANIONS = [
 ];
 
 export function IonsVignette({ reducedMotion }: { reducedMotion: boolean }) {
+  const still = useStill(reducedMotion);
   return (
     <svg viewBox="0 0 400 260" className="block h-auto w-full" aria-hidden="true">
       <defs>
@@ -226,8 +229,8 @@ export function IonsVignette({ reducedMotion }: { reducedMotion: boolean }) {
           style={{ stroke: 'var(--accent-warm)', strokeDasharray: '2 7' }}
           strokeWidth={1.4}
           strokeLinecap="round"
-          animate={reducedMotion ? undefined : { strokeDashoffset: [0, -18] }}
-          transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
+          animate={still ? undefined : { strokeDashoffset: [0, -18] }}
+          transition={still ? undefined : { duration: 1.2, repeat: Infinity, ease: 'linear' }}
         />
       ))}
       {/* polarity */}
@@ -272,12 +275,12 @@ export function IonsVignette({ reducedMotion }: { reducedMotion: boolean }) {
               r={3.2}
               style={{ fill: 'var(--accent)' }}
               animate={
-                reducedMotion
+                still
                   ? { cx: ion.x0, opacity: 0.5 }
                   : { cx: [ion.x0, m1, m2, 160], opacity: [0, 0.9, 0.9, 0] }
               }
               transition={
-                reducedMotion
+                still
                   ? { duration: 0.4, delay: i * 0.15 }
                   : {
                       duration: ion.dur,
@@ -301,12 +304,12 @@ export function IonsVignette({ reducedMotion }: { reducedMotion: boolean }) {
               r={3.2}
               style={{ fill: 'var(--accent-warm)' }}
               animate={
-                reducedMotion
+                still
                   ? { cx: ion.x0, opacity: 0.5 }
                   : { cx: [ion.x0, m1, m2, 242], opacity: [0, 0.9, 0.9, 0] }
               }
               transition={
-                reducedMotion
+                still
                   ? { duration: 0.4, delay: i * 0.15 }
                   : {
                       duration: ion.dur,
@@ -329,16 +332,20 @@ export function IonsVignette({ reducedMotion }: { reducedMotion: boolean }) {
             r={1.8}
             style={{ fill: 'var(--accent)' }}
             animate={
-              reducedMotion
+              still
                 ? { opacity: 0.7 }
                 : { opacity: [0.25, 0.85, 0.25] }
             }
-            transition={{
-              duration: 2.4,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: i * 0.3,
-            }}
+            transition={
+              still
+                ? undefined
+                : {
+                    duration: 2.4,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: i * 0.3,
+                  }
+            }
           />
         ))}
 
@@ -351,12 +358,12 @@ export function IonsVignette({ reducedMotion }: { reducedMotion: boolean }) {
             cy={172}
             style={{ fill: 'var(--accent-warm)' }}
             animate={
-              reducedMotion
+              still
                 ? { cy: 140, opacity: 0.4 }
                 : { cy: [172, 150, 132], opacity: [0, 0.7, 0] }
             }
             transition={
-              reducedMotion
+              still
                 ? { duration: 0.5, delay: i * 0.2 }
                 : {
                     duration: 2.6,
@@ -431,6 +438,7 @@ const REVERSE = [
 ];
 
 export function EquilibriumVignette({ reducedMotion }: { reducedMotion: boolean }) {
+  const still = useStill(reducedMotion);
   return (
     <svg viewBox="0 0 400 260" className="block h-auto w-full" aria-hidden="true">
       {/* the two rooms */}
@@ -492,12 +500,12 @@ export function EquilibriumVignette({ reducedMotion }: { reducedMotion: boolean 
           r={3}
           style={{ fill: 'var(--accent)' }}
           animate={
-            reducedMotion
+            still
               ? { cx: 200, opacity: 0.5 }
               : { cx: [154, 190, 220, 246], opacity: [0, 0.9, 0.9, 0] }
           }
           transition={
-            reducedMotion
+            still
               ? { duration: 0.4, delay: i * 0.15 }
               : {
                   duration: run.dur,
@@ -517,12 +525,12 @@ export function EquilibriumVignette({ reducedMotion }: { reducedMotion: boolean 
           r={3}
           style={{ fill: 'var(--accent-warm)' }}
           animate={
-            reducedMotion
+            still
               ? { cx: 200, opacity: 0.5 }
               : { cx: [246, 210, 180, 154], opacity: [0, 0.9, 0.9, 0] }
           }
           transition={
-            reducedMotion
+            still
               ? { duration: 0.4, delay: i * 0.15 }
               : {
                   duration: run.dur,
@@ -544,16 +552,20 @@ export function EquilibriumVignette({ reducedMotion }: { reducedMotion: boolean 
           r={2.6}
           style={{ fill: 'var(--ink-muted)' }}
           animate={
-            reducedMotion
+            still
               ? { opacity: 0.6 }
               : { opacity: [0.35, 0.8, 0.35] }
           }
-          transition={{
-            duration: 3.2,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: i * 0.4,
-          }}
+          transition={
+            still
+              ? undefined
+              : {
+                  duration: 3.2,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: i * 0.4,
+                }
+          }
         />
       ))}
 
@@ -615,6 +627,7 @@ const RECEIVER_INTERIOR =
   'M 170 128 L 226 128 L 226 196 Q 226 204 218 204 L 178 204 Q 170 204 170 196 Z';
 
 export function DistillVignette({ reducedMotion }: { reducedMotion: boolean }) {
+  const still = useStill(reducedMotion);
   return (
     <svg viewBox="0 0 400 260" className="block h-auto w-full" aria-hidden="true">
       <defs>
@@ -666,12 +679,12 @@ export function DistillVignette({ reducedMotion }: { reducedMotion: boolean }) {
           cy={170}
           style={{ fill: 'var(--accent-warm)' }}
           animate={
-            reducedMotion
+            still
               ? { cy: 110, opacity: 0.4 }
               : { cy: [170, 140, 112, 96], opacity: [0, 0.8, 0.8, 0] }
           }
           transition={
-            reducedMotion
+            still
               ? { duration: 0.5, delay: i * 0.15 }
               : {
                   duration: vap.dur,
@@ -703,12 +716,12 @@ export function DistillVignette({ reducedMotion }: { reducedMotion: boolean }) {
           cy={124}
           style={{ fill: 'var(--accent)' }}
           animate={
-            reducedMotion
+            still
               ? { cy: 170, opacity: 0.5 }
               : { cy: [124, 150, 182, 188], opacity: [0, 1, 1, 0] }
           }
           transition={
-            reducedMotion
+            still
               ? { duration: 0.5, delay: i * 0.25 }
               : {
                   duration: 1.1,
@@ -728,11 +741,11 @@ export function DistillVignette({ reducedMotion }: { reducedMotion: boolean }) {
           width={56}
           style={{ fill: 'var(--accent)', opacity: 0.2 }}
           animate={
-            reducedMotion
+            still
               ? { y: 188, height: 16 }
               : { y: [194, 178, 194], height: [10, 26, 10] }
           }
-          transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+          transition={still ? undefined : { duration: 12, repeat: Infinity, ease: 'linear' }}
         />
         {[0.95, 1.5].map((delay, i) => (
           <motion.ellipse
@@ -742,12 +755,12 @@ export function DistillVignette({ reducedMotion }: { reducedMotion: boolean }) {
             ry={1}
             style={{ fill: 'none', stroke: 'var(--accent)', strokeWidth: 1.2 }}
             animate={
-              reducedMotion
+              still
                 ? { rx: 6, opacity: 0.2 }
                 : { rx: [2, 13], opacity: [0.4, 0] }
             }
             transition={
-              reducedMotion
+              still
                 ? { duration: 0.4, delay: i * 0.2 }
                 : { duration: 1.1, repeat: Infinity, ease: 'easeOut', delay }
             }

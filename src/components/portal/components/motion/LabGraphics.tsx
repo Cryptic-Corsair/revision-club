@@ -1,5 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
+import { useStill } from '../../lib/still';
 
 /* ————— the living laboratory's graphics shelf —————
    The four founding pieces of the subject, running on loop —
@@ -23,6 +24,7 @@ const SHELLS = [
 ];
 
 export function ShellsVignette({ reducedMotion }: { reducedMotion: boolean }) {
+  const still = useStill(reducedMotion);
   return (
     <svg viewBox="0 0 400 260" className="block h-auto w-full" aria-hidden="true">
       {/* the nucleus — a soft pulse under a solid core */}
@@ -31,8 +33,8 @@ export function ShellsVignette({ reducedMotion }: { reducedMotion: boolean }) {
         cy={130}
         r={17}
         style={{ fill: 'var(--accent)' }}
-        animate={reducedMotion ? undefined : { opacity: [0.08, 0.2, 0.08] }}
-        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+        animate={still ? undefined : { opacity: [0.08, 0.2, 0.08] }}
+        transition={still ? undefined : { duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
       />
       <circle cx={200} cy={130} r={9} style={{ fill: 'var(--accent)' }} />
 
@@ -52,15 +54,19 @@ export function ShellsVignette({ reducedMotion }: { reducedMotion: boolean }) {
           />
           <motion.g
             animate={
-              reducedMotion
+              still
                 ? undefined
                 : { rotate: shell.dur > 7 ? -360 : 360 }
             }
-            transition={{
-              duration: shell.dur,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
+            transition={
+              still
+                ? undefined
+                : {
+                    duration: shell.dur,
+                    repeat: Infinity,
+                    ease: 'linear',
+                  }
+            }
             style={{
               transformBox: 'view-box',
               transformOrigin: '200px 130px',
@@ -98,11 +104,12 @@ export const ringPoints = (cx: number, cy: number, r: number) =>
   }).join(' ');
 
 export function RingVignette({ reducedMotion }: { reducedMotion: boolean }) {
+  const still = useStill(reducedMotion);
   return (
     <svg viewBox="0 0 400 260" className="block h-auto w-full" aria-hidden="true">
       <motion.g
-        animate={reducedMotion ? undefined : { rotate: 360 }}
-        transition={{ duration: 46, repeat: Infinity, ease: 'linear' }}
+        animate={still ? undefined : { rotate: 360 }}
+        transition={still ? undefined : { duration: 46, repeat: Infinity, ease: 'linear' }}
         style={{ transformBox: 'view-box', transformOrigin: '200px 130px' }}
       >
         <polygon
@@ -123,9 +130,9 @@ export function RingVignette({ reducedMotion }: { reducedMotion: boolean }) {
           strokeLinecap="round"
           style={{ stroke: 'var(--accent)', strokeDasharray: '3 8' }}
           animate={
-            reducedMotion ? undefined : { strokeDashoffset: [0, -88] }
+            still ? undefined : { strokeDashoffset: [0, -88] }
           }
-          transition={{ duration: 3.4, repeat: Infinity, ease: 'linear' }}
+          transition={still ? undefined : { duration: 3.4, repeat: Infinity, ease: 'linear' }}
         />
 
         {/* six carbons, breathing one after another */}
@@ -141,16 +148,20 @@ export function RingVignette({ reducedMotion }: { reducedMotion: boolean }) {
               r={5.5}
               style={{ fill: 'var(--surface-elevated)', stroke: HAIRLINE, strokeWidth: 1.2 }}
               animate={
-                reducedMotion
+                still
                   ? undefined
                   : { opacity: [1, 0.55, 1] }
               }
-              transition={{
-                duration: 3.8,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: i * 0.55,
-              }}
+              transition={
+                still
+                  ? undefined
+                  : {
+                      duration: 3.8,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: i * 0.55,
+                    }
+              }
             />
           );
         })}
@@ -185,6 +196,7 @@ const BUBBLES = [
 ];
 
 export function FlaskVignette({ reducedMotion }: { reducedMotion: boolean }) {
+  const still = useStill(reducedMotion);
   return (
     <svg viewBox="0 0 400 260" className="block h-auto w-full" aria-hidden="true">
       <defs>
@@ -196,14 +208,14 @@ export function FlaskVignette({ reducedMotion }: { reducedMotion: boolean }) {
       {/* the liquid, clipped to the flask interior */}
       <g clipPath="url(#lab-flask-clip)">
         <motion.g
-          animate={reducedMotion ? undefined : { x: [0, -50] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'linear' }}
+          animate={still ? undefined : { x: [0, -50] }}
+          transition={still ? undefined : { duration: 7, repeat: Infinity, ease: 'linear' }}
         >
           <path d={liquidSurface(152, 3.2)} style={{ fill: 'var(--accent)', opacity: 0.24 }} />
         </motion.g>
         <motion.g
-          animate={reducedMotion ? undefined : { x: [0, 50] }}
-          transition={{ duration: 9.5, repeat: Infinity, ease: 'linear' }}
+          animate={still ? undefined : { x: [0, 50] }}
+          transition={still ? undefined : { duration: 9.5, repeat: Infinity, ease: 'linear' }}
         >
           <path d={liquidSurface(156, 2.2)} style={{ fill: 'var(--accent)', opacity: 0.16 }} />
         </motion.g>
@@ -217,17 +229,21 @@ export function FlaskVignette({ reducedMotion }: { reducedMotion: boolean }) {
             cy={207}
             style={{ fill: 'var(--accent-warm)' }}
             animate={
-              reducedMotion
+              still
                 ? { cy: 185, opacity: 0.4 }
                 : { cy: [207, 207, 148, 146], opacity: [0, 0.85, 0.7, 0] }
             }
-            transition={{
-              duration: b.dur,
-              repeat: Infinity,
-              ease: 'easeOut',
-              delay: reducedMotion ? i * 0.12 : b.delay,
-              times: reducedMotion ? undefined : [0, 0.12, 0.9, 1],
-            }}
+            transition={
+              still
+                ? undefined
+                : {
+                    duration: b.dur,
+                    repeat: Infinity,
+                    ease: 'easeOut',
+                    delay: still ? i * 0.12 : b.delay,
+                    times: still ? undefined : [0, 0.12, 0.9, 1],
+                  }
+            }
           />
         ))}
       </g>
@@ -257,6 +273,7 @@ export const HILL_PROFILE =
   'M 56 172 C 104 172, 148 82, 200 82 C 252 82, 268 192, 322 192 L 352 192';
 
 export function HillVignette({ reducedMotion }: { reducedMotion: boolean }) {
+  const still = useStill(reducedMotion);
   const ride = {
     duration: 3.6,
     repeat: Infinity,
@@ -313,9 +330,9 @@ export function HillVignette({ reducedMotion }: { reducedMotion: boolean }) {
         style={{ stroke: 'var(--accent)' }}
         strokeWidth={2}
         strokeLinecap="round"
-        initial={reducedMotion ? false : { pathLength: 0 }}
-        animate={reducedMotion ? undefined : { pathLength: [0, 1] }}
-        transition={ride}
+        initial={still ? false : { pathLength: 0 }}
+        animate={still ? undefined : { pathLength: [0, 1] }}
+        transition={still ? undefined : ride}
       />
 
       {/* the reacting parcel riding the profile */}
@@ -323,7 +340,7 @@ export function HillVignette({ reducedMotion }: { reducedMotion: boolean }) {
         r={9}
         style={{ fill: 'var(--accent)' }}
         animate={
-          reducedMotion
+          still
             ? undefined
             : {
                 cx: [56, 132, 200, 258, 322],
@@ -331,13 +348,13 @@ export function HillVignette({ reducedMotion }: { reducedMotion: boolean }) {
                 opacity: [0, 1, 1, 1, 0.9],
               }
         }
-        transition={{ ...ride, times: [0, 0.25, 0.5, 0.72, 1] }}
+        transition={still ? undefined : { ...ride, times: [0, 0.25, 0.5, 0.72, 1] }}
       />
       <motion.circle
         r={16}
         style={{ fill: 'var(--accent)' }}
         animate={
-          reducedMotion
+          still
             ? { cx: 56, cy: 172, opacity: 0.15 }
             : {
                 cx: [56, 132, 200, 258, 322],
@@ -345,7 +362,7 @@ export function HillVignette({ reducedMotion }: { reducedMotion: boolean }) {
                 opacity: [0, 0.22, 0.22, 0.22, 0.1],
               }
         }
-        transition={{ ...ride, times: [0, 0.25, 0.5, 0.72, 1] }}
+        transition={still ? undefined : { ...ride, times: [0, 0.25, 0.5, 0.72, 1] }}
       />
 
       {/* the measures: Ea up to the hump, ΔH down to the trough */}

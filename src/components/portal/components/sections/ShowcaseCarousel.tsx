@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { KeystrokeMachine } from '../showcase/KeystrokeMachine';
@@ -59,21 +59,16 @@ const SHOWCASE_CARDS = [
 export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  // button states ride the track's real scroll bounds, not the slide
+  // index: on wide screens the four cards barely overflow, and the
+  // last slides' flush-left positions live beyond the track's max
+  // scroll — unclamped scrollTo calls would jam the track halfway
+  // between cards (the visible glitch), so every target is clamped
+  // and the buttons disable on the honest edges instead.
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
 
-  const scrollToSlide = (index: number) => {
-    const clamped = Math.max(0, Math.min(SHOWCASE_CARDS.length - 1, index));
-    setActiveSlide(clamped);
-    const track = trackRef.current;
-    if (!track) return;
-    const targetChild = track.children[clamped] as HTMLElement | undefined;
-    if (!targetChild) return;
-    track.scrollTo({
-      left: targetChild.offsetLeft,
-      behavior: reducedMotion ? 'auto' : 'smooth',
-    });
-  };
-
-  const handleTrackScroll = () => {
+  const syncScrollState = () => {
     const track = trackRef.current;
     if (!track) return;
     const children = Array.from(track.children) as HTMLElement[];
@@ -89,9 +84,37 @@ export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
         closestIndex = idx;
       }
     });
-    if (closestIndex !== activeSlide) {
-      setActiveSlide(closestIndex);
+    // functional update: React bails out when the index hasn't moved,
+    // so a smooth scroll across one card re-renders at most once
+    setActiveSlide((prev) => (prev === closestIndex ? prev : closestIndex));
+
+    const max = track.scrollWidth - track.clientWidth;
+    setCanPrev(currentScroll > 2);
+    setCanNext(currentScroll < max - 2);
+  };
+
+  useEffect(() => {
+    syncScrollState();
+    window.addEventListener('resize', syncScrollState);
+    return () => window.removeEventListener('resize', syncScrollState);
+  }, []);
+
+  const scrollToSlide = (index: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const clamped = Math.max(0, Math.min(SHOWCASE_CARDS.length - 1, index));
+    const targetChild = track.children[clamped] as HTMLElement | undefined;
+    if (!targetChild) return;
+    const max = track.scrollWidth - track.clientWidth;
+    const left = Math.min(targetChild.offsetLeft, max);
+    if (Math.abs(left - track.scrollLeft) < 4) {
+      syncScrollState();
+      return;
     }
+    track.scrollTo({
+      left,
+      behavior: reducedMotion ? 'auto' : 'smooth',
+    });
   };
 
   return (
@@ -130,7 +153,7 @@ export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
                 type="button"
                 aria-label="Previous showcase card"
                 onClick={() => scrollToSlide(activeSlide - 1)}
-                disabled={activeSlide === 0}
+                disabled={!canPrev}
                 className="inline-flex h-10 w-10 items-center justify-center rounded-full transition-all hover:-translate-y-0.5 disabled:opacity-35"
                 style={{
                   backgroundColor: 'var(--surface)',
@@ -144,7 +167,7 @@ export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
                 type="button"
                 aria-label="Next showcase card"
                 onClick={() => scrollToSlide(activeSlide + 1)}
-                disabled={activeSlide === SHOWCASE_CARDS.length - 1}
+                disabled={!canNext}
                 className="inline-flex h-10 w-10 items-center justify-center rounded-full transition-all hover:-translate-y-0.5 disabled:opacity-35"
                 style={{
                   backgroundColor: 'var(--surface)',
@@ -161,7 +184,7 @@ export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
         {/* Horizontal Scrollable Card Track */}
         <div
           ref={trackRef}
-          onScroll={handleTrackScroll}
+          onScroll={syncScrollState}
           className="relative mt-10 flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory no-scrollbar"
         >
           {SHOWCASE_CARDS.map((card, i) => (

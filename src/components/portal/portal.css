@@ -303,10 +303,15 @@ body:has(.portal-root[data-theme="light"]) {
    Two rows of motion graphics cards, each its own sequence played
    twice and translated exactly half its width, so the loop is
    seamless: row one drifts left, row two drifts right. Hovering a
-   row pauses it (focus included); under reduced motion the track's
-   animation is switched off and the row becomes an honest,
-   scrollable shelf of stills. The mask fades the cards out at the
-   container edges so they drift in and out of the room. */
+   row pauses it (focus included, hover-capable devices only — a
+   touch tap would otherwise stick the pause on); under reduced
+   motion the track's animation is switched off and the row becomes
+   an honest, scrollable shelf of stills; and when the room is
+   offscreen the rows are paused from React (data-live). The mask
+   fades the cards out at the container edges so they drift in and
+   out of the room. The track promotes itself to its own compositor
+   layer (will-change), so the drift never touches the main thread
+   and the mask never re-rasterises it frame by frame. */
 @keyframes portal-marquee-left {
   from {
     transform: translateX(0);
@@ -327,7 +332,6 @@ body:has(.portal-root[data-theme="light"]) {
   position: relative;
   overflow: hidden;
   padding-block: 4px;
-  scroll-snap-type: x proximity;
   -webkit-mask-image: linear-gradient(
     to right,
     transparent,
@@ -350,13 +354,11 @@ body:has(.portal-root[data-theme="light"]) {
 .portal-marquee-row[data-static='true']::-webkit-scrollbar {
   display: none;
 }
-.portal-marquee-row article {
-  scroll-snap-align: start;
-}
 .portal-marquee-track {
   display: flex;
   width: max-content;
   animation: portal-marquee-left 56s linear infinite;
+  will-change: transform;
 }
 .portal-marquee-track[data-direction='right'] {
   animation-name: portal-marquee-right;
@@ -364,9 +366,11 @@ body:has(.portal-root[data-theme="light"]) {
 .portal-marquee-row[data-static='true'] .portal-marquee-track {
   animation: none;
 }
-.portal-marquee-row:hover .portal-marquee-track,
-.portal-marquee-row:focus-within .portal-marquee-track {
-  animation-play-state: paused;
+@media (hover: hover) {
+  .portal-marquee-row:hover .portal-marquee-track,
+  .portal-marquee-row:focus-within .portal-marquee-track {
+    animation-play-state: paused;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .portal-marquee-track {

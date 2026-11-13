@@ -20,7 +20,9 @@ export function Navbar({ onOpenNotes }: NavbarProps) {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 24);
+      const next = window.scrollY > 24;
+      // bail out without a re-render when the threshold state hasn't moved
+      setScrolled((prev) => (prev === next ? prev : next));
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
