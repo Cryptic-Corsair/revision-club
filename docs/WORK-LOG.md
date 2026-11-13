@@ -1057,3 +1057,30 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Commit(s):** this commit (see git log for SHA).
 - **Revert path:** one commit — `git revert <this commit>` restores the always-running loops and the index-disabled carousel buttons.
 - **Follow-up / known limitations:** at wide viewports the showcase's four cards only overflow by ~206px, so Next is a small nudge and the counter reads 02/04 at the right edge — truthful to the geometry; the prewarm margin means a room's loops start ~600px before it is visible (by design, so nothing snaps on arrival); the lab keeps ~18k attr writes/3s while on screen — that is the exhibit doing its job, and the drift itself no longer touches the main thread.
+
+## 2026-11-14 — homepage navbar refined into an editorial masthead
+
+- **Contributor:** OpenAI coding agent.
+- **Request / objective:** redesign the homepage's top navigation with a premium, restrained visual language.
+- **Investigation:** inspected the homepage app shell, current navbar, portal theme tokens, section anchors and repository design/verification rules.
+- **Changes made:** replaced the compact floating pill with a full-width translucent masthead; added a typographic brand lockup, anchor links to Method, The details and Syllabus, and a square-cornered Open notes action. Added a route-scoped stylesheet and responsive/reduced-motion treatments.
+- **Preserved invariants:** workspace navigation and styles, homepage theme tokens, FlaskMark identity, section IDs, Open Notes deep link and all study/content data remain unchanged.
+- **Decisions and rationale:** kept the existing two-theme palette and typography; used a quiet hairline, measured spacing and restrained hover treatment rather than adding new visual effects or dependencies.
+- **Verification:** not run in a local environment. Source-level inspection only; responsive rendering, lint and production build remain to be checked.
+- **Deployment:** not attempted; changes are on a dedicated branch.
+- **Commit(s):** recorded in this branch commit.
+- **Follow-up / known limitations:** visual inspection at phone, tablet and desktop widths remains outstanding.
+
+## 2026-11-14 — floating glass navbar, second art direction
+
+- **Contributor:** OpenAI coding agent.
+- **Request / objective:** replace the first, overly conventional masthead with a distinctive premium floating glass navbar.
+- **Investigation:** revisited the homepage's existing two-theme glass tokens, FlaskMark, hero palette, navigation anchors and the prior implementation.
+- **Changes made:** rebuilt the nav as a floating, centered glass instrument with layered blur/sheen, a framed flask emblem, editorial IAL CHEM wordmark, edition marker, numbered inset navigation rail and sculpted accent action. Added a two-row mobile composition and a restrained scroll-state compression.
+- **Preserved invariants:** homepage-only scope, workspace header, theme switching, existing anchor IDs, FlaskMark, Open Notes route, accessibility focus treatment and reduced-motion support.
+- **Decisions and rationale:** used the portal's own DUNE/daylight tokens so glass, edge light and CTA adapt to both themes; no new dependencies or unrelated page changes.
+- **Verification:** not run in a local environment. Source-level review only; build, lint and browser screenshots remain outstanding.
+- **Deployment:** not attempted; changes remain on the existing design branch.
+- **Commit(s):** recorded in this branch commit.
+- **Follow-up / known limitations:** inspect desktop and narrow mobile layouts in a browser before merging.
+

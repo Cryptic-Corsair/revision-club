@@ -1,85 +1,89 @@
 'use client';
+
 import { useEffect, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { FlaskMark } from '../FlaskMark';
 
 interface NavbarProps {
   onOpenNotes: () => void;
 }
 
-/* The homepage's own glass bar: one compact rectangular pill centred at
-   the top — shorter and narrower than the workspace nav it grew out of,
-   wearing the room's accent as a lit edge instead of the club's neutral
-   chrome (the .portal-nav recipe) — the flask mark and wordmark on the
-   left, a single button on the right. Every other control (the room
-   chips, the ⌘K search, the lab toggle, the mobile drawer) has left the
-   navbar: the page walks itself, and the only thing this bar ever did
-   that mattered was open the notes. */
+const DESTINATIONS = [
+  { number: '01', label: 'Method', href: '#workflow' },
+  { number: '02', label: 'The collection', href: '#showcase' },
+  { number: '03', label: 'Syllabus', href: '#units' },
+];
+
 export function Navbar({ onOpenNotes }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
-      const next = window.scrollY > 24;
-      // bail out without a re-render when the threshold state hasn't moved
-      setScrolled((prev) => (prev === next ? prev : next));
+      const next = window.scrollY > 36;
+      setScrolled((previous) => (previous === next ? previous : next));
     };
+
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
-    <header
-      className="fixed inset-x-0 top-0 z-50 px-3 pt-2.5 sm:px-5 sm:pt-3"
-      style={{ pointerEvents: 'none' }}
-    >
+    <header className="portal-nav-frame fixed inset-x-0 top-0 z-50">
       <div
-        className="portal-nav mx-auto flex h-11 max-w-2xl items-center justify-between gap-2.5 rounded-2xl px-2.5 transition-opacity duration-300 sm:h-12 sm:px-3.5"
-        style={{
-          pointerEvents: 'auto',
-          opacity: scrolled ? 1 : 0.94,
-        }}
+        className="portal-nav-shell"
+        data-scrolled={scrolled}
         data-testid="portal-navbar"
       >
-        {/* Left: the club's flask + wordmark */}
         <a
           href="#top"
-          onClick={(e) => {
-            e.preventDefault();
+          className="portal-nav-brand"
+          aria-label="IAL CHEM — back to the top"
+          onClick={(event) => {
+            event.preventDefault();
             window.scrollTo({ top: 0, behavior: 'auto' });
           }}
-          className="flex items-center gap-2 whitespace-nowrap shrink-0 rounded-lg pl-1 pr-1.5 focus-visible:outline-2 focus-visible:outline-offset-4"
-          style={{ color: 'var(--accent)' }}
-          aria-label="IAL CHEM — back to the top of the showcase"
         >
-          <FlaskMark size={22} />
-          <span className="font-display text-xs font-bold tracking-[0.12em] uppercase">
-            IAL CHEM
+          <span className="portal-nav-emblem" aria-hidden="true">
+            <FlaskMark size={27} />
           </span>
-          <span
-            aria-hidden="true"
-            className="hidden sm:inline-block h-3.5 w-px"
-            style={{ backgroundColor: 'var(--border-strong)' }}
-          />
-          <span
-            className="hidden sm:inline-block font-mono text-[9px] font-medium tracking-[0.12em] uppercase"
-            style={{ color: 'var(--ink-muted)' }}
-          >
-            2018 SPEC
+          <span className="portal-nav-brand-copy">
+            <span className="portal-nav-wordmark">IAL <i>CHEM</i></span>
+            <span className="portal-nav-caption">THE REVISION COLLECTION</span>
+          </span>
+          <span className="portal-nav-edition" aria-label="2018 specification">
+            <span className="portal-nav-edition-dot" />
+            WCH11 <span>/</span> 2018
           </span>
         </a>
 
-        {/* Right: the one button — Open Notes */}
-        <button
-          type="button"
-          onClick={onOpenNotes}
-          data-testid="navbar-open-notes"
-          className="portal-candy-btn inline-flex h-8 items-center gap-1.5 rounded-full px-3.5 font-display text-xs font-semibold whitespace-nowrap shrink-0"
-        >
-          <span>Open Notes</span>
-          <ArrowRight className="h-3 w-3" aria-hidden="true" />
-        </button>
+        <nav className="portal-nav-links" aria-label="Main navigation">
+          {DESTINATIONS.map((destination) => (
+            <a
+              className="portal-nav-link"
+              href={destination.href}
+              key={destination.href}
+            >
+              <span className="portal-nav-link-number">{destination.number}</span>
+              <span>{destination.label}</span>
+            </a>
+          ))}
+        </nav>
+
+        <div className="portal-nav-action-wrap">
+          <span className="portal-nav-action-note">YOUR DESK AWAITS</span>
+          <button
+            type="button"
+            onClick={onOpenNotes}
+            data-testid="navbar-open-notes"
+            className="portal-nav-cta"
+          >
+            <span>Open notes</span>
+            <span className="portal-nav-cta-icon">
+              <ArrowUpRight size={15} strokeWidth={1.8} aria-hidden="true" />
+            </span>
+          </button>
+        </div>
       </div>
     </header>
   );
