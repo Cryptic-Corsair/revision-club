@@ -1123,3 +1123,15 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** Source-level checks confirmed every carousel clip-path reference is instance-scoped, the old forced `will-change` and moving mask are absent, card visibility begins false, and both marquee rows receive the touch profile. Lint, TypeScript, production build and real tablet browser testing were **not run** in this connector session; no physical tablet/browser session was available.
 - **Deployment:** Changes are staged on `fix/tablet-motion-stability` for squash-merge to `main`. The Vercel branch-preview status reported failure, but the build log was not accessible through the available connector; production status must be checked after merge.
 - **Follow-up / known limitations:** Touch-first devices intentionally show still line-art inside the moving marquee cards to protect frame stability; the cards themselves continue drifting. Confirm the feel on the target tablet after deployment, especially at its native pixel ratio and in both orientations.
+
+
+### 2026-11-14 — fix the tablet motion pass TypeScript ref mismatch
+
+- **Contributor:** OpenAI coding agent.
+- **Request / objective:** Resolve the production build failure reported by Vercel after the tablet carousel stability changes.
+- **Investigation:** The build compiled successfully and failed during TypeScript checking at `UnitMotifs.tsx:510`. The visibility hook's `RefObject<HTMLElement | null>` was assigned to a `div`, whose ref expects `HTMLDivElement`.
+- **Changes made:** Changed the generic on the `useLive` call in `UnitMotif` from `HTMLElement` to `HTMLDivElement`. No runtime behaviour or styling changed.
+- **Preserved invariants:** Per-motif visibility gating and the still-when-unseen contract remain unchanged.
+- **Verification:** The source now uses the element-specific ref type identified by the compiler. A fresh Vercel build is pending; no local TypeScript/build command was available through the connected repository tools.
+- **Deployment:** Committed directly to `main`; Vercel should build this new commit.
+- **Follow-up / known limitations:** Check the next deployment status and resolve any subsequent compiler or build errors if reported.
