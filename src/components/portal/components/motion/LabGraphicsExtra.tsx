@@ -1,5 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
+import { useId } from 'react';
 import { HAIRLINE, HAIRLINE_FAINT, liquidSurface } from './LabGraphics';
 import { useStill } from '../../lib/still';
 
@@ -22,19 +23,22 @@ const BEAKER_INTERIOR =
 
 export function DropVignette({ reducedMotion }: { reducedMotion: boolean }) {
   const still = useStill(reducedMotion);
+  const id = useId().replace(/:/g, '');
+  const buretteClipId = `lab-burette-clip-${id}`;
+  const beakerClipId = `lab-beaker-clip-${id}`;
   return (
     <svg viewBox="0 0 400 260" className="block h-auto w-full" aria-hidden="true">
       <defs>
-        <clipPath id="lab-burette-clip">
+        <clipPath id={buretteClipId}>
           <path d={BURETTE_INTERIOR} />
         </clipPath>
-        <clipPath id="lab-beaker-clip">
+        <clipPath id={beakerClipId}>
           <path d={BEAKER_INTERIOR} />
         </clipPath>
       </defs>
 
       {/* the burette's charge, draining through the graduations */}
-      <g clipPath="url(#lab-burette-clip)">
+      <g clipPath={`url(#${buretteClipId})`}>
         <motion.rect
           x={192}
           width={16}
@@ -88,7 +92,7 @@ export function DropVignette({ reducedMotion }: { reducedMotion: boolean }) {
       ))}
 
       {/* the pool in the beaker, lapping and slowly turning over */}
-      <g clipPath="url(#lab-beaker-clip)">
+      <g clipPath={`url(#${beakerClipId})`}>
         <motion.g
           animate={still ? undefined : { x: [0, -50] }}
           transition={still ? undefined : { duration: 8, repeat: Infinity, ease: 'linear' }}
@@ -201,10 +205,11 @@ const ANIONS = [
 
 export function IonsVignette({ reducedMotion }: { reducedMotion: boolean }) {
   const still = useStill(reducedMotion);
+  const clipId = `lab-cell-clip-${useId().replace(/:/g, '')}`;
   return (
     <svg viewBox="0 0 400 260" className="block h-auto w-full" aria-hidden="true">
       <defs>
-        <clipPath id="lab-cell-clip">
+        <clipPath id={clipId}>
           <rect x={93} y={97} width={214} height={102} rx={11} />
         </clipPath>
       </defs>
@@ -260,7 +265,7 @@ export function IonsVignette({ reducedMotion }: { reducedMotion: boolean }) {
       </text>
 
       {/* the solution */}
-      <g clipPath="url(#lab-cell-clip)">
+      <g clipPath={`url(#${clipId})`}>
         <rect x={93} y={120} width={214} height={80} style={{ fill: 'var(--accent)', opacity: 0.07 }} />
         <path d="M 93 120 H 307" style={{ stroke: HAIRLINE_FAINT }} strokeWidth={1.1} />
 
@@ -628,19 +633,22 @@ const RECEIVER_INTERIOR =
 
 export function DistillVignette({ reducedMotion }: { reducedMotion: boolean }) {
   const still = useStill(reducedMotion);
+  const id = useId().replace(/:/g, '');
+  const flaskClipId = `lab-still-flask-clip-${id}`;
+  const receiverClipId = `lab-receiver-clip-${id}`;
   return (
     <svg viewBox="0 0 400 260" className="block h-auto w-full" aria-hidden="true">
       <defs>
-        <clipPath id="lab-still-flask-clip">
+        <clipPath id={flaskClipId}>
           <circle cx={128} cy={196} r={23} />
         </clipPath>
-        <clipPath id="lab-receiver-clip">
+        <clipPath id={receiverClipId}>
           <path d={RECEIVER_INTERIOR} />
         </clipPath>
       </defs>
 
       {/* the boiling flask */}
-      <g clipPath="url(#lab-still-flask-clip)">
+      <g clipPath={`url(#${flaskClipId})`}>
         <rect x={104} y={188} width={48} height={34} style={{ fill: 'var(--accent)', opacity: 0.22 }} />
       </g>
       <circle
@@ -735,7 +743,7 @@ export function DistillVignette({ reducedMotion }: { reducedMotion: boolean }) {
       ))}
 
       {/* the receiver, its collected level quietly rising */}
-      <g clipPath="url(#lab-receiver-clip)">
+      <g clipPath={`url(#${receiverClipId})`}>
         <motion.rect
           x={170}
           width={56}
