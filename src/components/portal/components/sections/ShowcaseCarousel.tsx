@@ -36,7 +36,7 @@ const SHOWCASE_CARDS = [
     index: '03',
     title: 'Adaptive Themes',
     description:
-      'Switch seamlessly between Obsidian, Cream, Dune, and Classic.',
+      'Switch seamlessly between Night, Light, Dune, and Classic.',
     renderMachine: (reducedMotion: boolean) => (
       <PrismSweepMachine reducedMotion={reducedMotion} />
     ),
@@ -108,11 +108,11 @@ export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
               MOTION &amp; CRAFT
             </p>
             <h2
-              className="mt-2.5 text-balance font-semibold tracking-[-0.03em] leading-[1.08]"
-              style={{ fontSize: 'clamp(1.75rem, 3.4vw, 2.75rem)' }}
+              className="mt-2.5 text-balance font-display font-bold leading-[1.1]"
+              style={{ fontSize: 'clamp(1.75rem, 3.4vw, 2.5rem)' }}
             >
               Every interaction feels{' '}
-              <span className="font-serif italic font-normal">effortless.</span>
+              <span style={{ color: 'var(--accent)' }}>effortless.</span>
             </h2>
           </div>
 
@@ -130,11 +130,11 @@ export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
                 aria-label="Previous showcase card"
                 onClick={() => scrollToSlide(activeSlide - 1)}
                 disabled={activeSlide === 0}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border transition-opacity disabled:opacity-35"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full transition-all hover:-translate-y-0.5 disabled:opacity-35"
                 style={{
-                  borderColor: 'var(--border-strong)',
                   backgroundColor: 'var(--surface)',
                   color: 'var(--ink)',
+                  boxShadow: 'var(--card-shadow)',
                 }}
               >
                 <ArrowLeft className="h-4 w-4" aria-hidden="true" />
@@ -144,11 +144,11 @@ export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
                 aria-label="Next showcase card"
                 onClick={() => scrollToSlide(activeSlide + 1)}
                 disabled={activeSlide === SHOWCASE_CARDS.length - 1}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border transition-opacity disabled:opacity-35"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full transition-all hover:-translate-y-0.5 disabled:opacity-35"
                 style={{
-                  borderColor: 'var(--border-strong)',
                   backgroundColor: 'var(--surface)',
                   color: 'var(--ink)',
+                  boxShadow: 'var(--card-shadow)',
                 }}
               >
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -166,17 +166,17 @@ export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
           {SHOWCASE_CARDS.map((card) => (
             <article
               key={card.id}
-              className="flex w-[86vw] sm:w-[340px] lg:w-[360px] shrink-0 snap-start flex-col justify-between rounded-2xl border p-4 sm:p-5"
+              className="flex w-[86vw] sm:w-[340px] lg:w-[360px] shrink-0 snap-start flex-col justify-between rounded-3xl p-4 sm:p-5"
               style={{
                 backgroundColor: 'var(--surface-elevated)',
-                borderColor: 'var(--border)',
+                boxShadow: 'var(--card-shadow)',
               }}
             >
               {card.renderMachine(reducedMotion)}
 
               <div className="mt-5 space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-base font-semibold tracking-tight">
+                  <h3 className="font-display text-base font-bold tracking-tight">
                     {card.title}
                   </h3>
                   <span

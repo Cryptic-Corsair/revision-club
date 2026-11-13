@@ -26,7 +26,7 @@ const FRAGMENT_SHADER = /* glsl */ `
   uniform vec2 uResolution;
   uniform vec2 uPointer;
   uniform float uPointerActive;
-  uniform float uThemeMix; // 0.0 = obsidian dark, 1.0 = daylight cream
+  uniform float uThemeMix; // 0.0 = night plum, 1.0 = daylight cream
 
   // Smooth procedural value noise for liquid optical caustics
   float hash(vec2 p) {
@@ -91,14 +91,16 @@ const FRAGMENT_SHADER = /* glsl */ `
       1.0
     );
 
-    // Palette tokens: Obsidian Dark vs Daylight Cream
-    vec3 darkBg = vec3(0.043, 0.039, 0.055);          // #0B0A0E
-    vec3 darkViolet = vec3(0.769, 0.710, 0.992);      // #C4B5FD
-    vec3 darkWarm = vec3(0.949, 0.776, 0.553);        // #F2C68D
+    // Palette tokens — the club's two rooms, straight from globals.css:
+    // night is the plum-charcoal dusk lit by lilac + mint caustics,
+    // daylight the cream page lit by coral + tangerine.
+    vec3 darkBg = vec3(0.090, 0.075, 0.114);           // #17131d — night page
+    vec3 darkViolet = vec3(0.843, 0.710, 0.906);       // #d7b5e7 — the night lab's lilac
+    vec3 darkWarm = vec3(0.071, 0.722, 0.525);         // #12b886 — mint off the candy shelf
 
-    vec3 creamBg = vec3(0.980, 0.969, 0.949);         // #FAF7F2
-    vec3 creamCobalt = vec3(0.310, 0.275, 0.898);     // #4F46E5
-    vec3 creamWarm = vec3(0.706, 0.325, 0.035);       // #B45309
+    vec3 creamBg = vec3(1.0, 0.965, 0.918);            // #fff6ea — the cream page
+    vec3 creamCobalt = vec3(1.0, 0.420, 0.420);        // #ff6b6b — coral
+    vec3 creamWarm = vec3(1.0, 0.573, 0.169);          // #ff922b — tangerine
 
     vec3 baseBg = mix(darkBg, creamBg, uThemeMix);
     vec3 primaryGlow = mix(darkViolet, creamCobalt, uThemeMix);
@@ -120,7 +122,7 @@ const FRAGMENT_SHADER = /* glsl */ `
 
     // Crisp hairline grid modulated by caustic intensity
     float gridAlpha = (gridLine * 0.55 + majorStep * 0.85) * gridStrength * (0.35 + 0.75 * causticBand + ptrInfluence * 0.8);
-    vec3 gridColor = mix(vec3(1.0, 0.965, 0.918), vec3(0.118, 0.102, 0.149), uThemeMix);
+    vec3 gridColor = mix(vec3(1.0, 0.965, 0.918), vec3(0.239, 0.169, 0.122), uThemeMix);
     col = mix(col, gridColor, clamp(gridAlpha, 0.0, 0.16));
 
     // Seamless bottom & edge fade directly into --bg so there is never a harsh seam
@@ -200,7 +202,7 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
     const pointerCurrent = new THREE.Vector2(0.5, 0.56);
     let pointerActiveTarget = 0.0;
     let pointerActiveCurrent = 0.0;
-    let themeMixCurrent = themeRef.current === 'cream' ? 1.0 : 0.0;
+    let themeMixCurrent = themeRef.current === 'light' ? 1.0 : 0.0;
 
     const uniforms = {
       uTime: { value: 1.6 },
@@ -271,7 +273,7 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
       pointerActiveCurrent += (pointerActiveTarget - pointerActiveCurrent) * damp;
       uniforms.uPointerActive.value = pointerActiveCurrent;
 
-      const themeTarget = themeRef.current === 'cream' ? 1.0 : 0.0;
+      const themeTarget = themeRef.current === 'light' ? 1.0 : 0.0;
       themeMixCurrent += (themeTarget - themeMixCurrent) * (1 - Math.exp(-9 * dt));
       uniforms.uThemeMix.value = themeMixCurrent;
 

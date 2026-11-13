@@ -65,7 +65,7 @@ export function KineticInterlude({ theme, reducedMotion }: KineticInterludeProps
               fontSize: 'clamp(1.85rem, 5.1vw, 4.65rem)',
               color: 'var(--ink)',
             }}
-            className="text-balance font-semibold tracking-[-0.04em] leading-[1.08] sm:whitespace-nowrap"
+            className="text-balance font-display font-bold leading-[1.12] sm:whitespace-nowrap"
           >
             Six units. Thirty-three topics.
           </motion.p>
@@ -90,9 +90,12 @@ export function KineticInterlude({ theme, reducedMotion }: KineticInterludeProps
               fontSize: 'clamp(1.6rem, 4.15vw, 3.85rem)',
               color: 'var(--ink)',
             }}
-            className="text-balance font-serif italic font-normal tracking-[-0.02em] leading-[1.12] sm:whitespace-nowrap"
+            className="text-balance font-display font-bold leading-[1.14] sm:whitespace-nowrap"
           >
-            Zero clutter between you and the mark scheme.
+            <span style={{ color: 'var(--accent)' }}>
+              Zero clutter
+            </span>{' '}
+            between you and the mark scheme.
           </motion.p>
         </div>
       </div>

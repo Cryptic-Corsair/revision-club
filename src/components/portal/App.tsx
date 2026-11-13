@@ -18,12 +18,13 @@ export default function App() {
   const prefersReduced = useReducedMotion();
   const reducedMotion = Boolean(prefersReduced);
 
-  const [theme, setTheme] = useState<SiteTheme>('obsidian');
+  const [theme, setTheme] = useState<SiteTheme>('night');
   const [commandOpen, setCommandOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState('');
   const lenisRef = useRef<Lenis | null>(null);
 
-  // The portal theme lives on the wrapper element (declaratively below),
+  // The portal's two dresses are the club's own labs (night / light);
+  // the dress lives on the wrapper element (declaratively below),
   // never on <html> — the workspace's own labs own the root element.
 
   // Root Lenis smooth scroll with wheel inertia, paused/disabled for reduced motion
@@ -85,7 +86,7 @@ export default function App() {
   }, [router]);
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => (prev === 'obsidian' ? 'cream' : 'obsidian'));
+    setTheme((prev) => (prev === 'night' ? 'light' : 'night'));
   }, []);
 
   const openSearch = useCallback((initialQuery = '') => {

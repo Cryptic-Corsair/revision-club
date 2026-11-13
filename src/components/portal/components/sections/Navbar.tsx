@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, Menu, Moon, Search, Sun, X } from 'lucide-react';
 import type { SiteTheme } from '../../data/ialData';
 import { EASE_EXPO } from '../../lib/motion';
+import { FlaskMark } from '../FlaskMark';
 
 interface NavbarProps {
   theme: SiteTheme;
@@ -19,6 +20,10 @@ const NAV_LINKS = [
   { label: 'Units', href: '#units' },
 ] as const;
 
+/* The workspace's floating pill nav, ported: one glass pill centred at
+   the top (the .portal-nav recipe mirrors .site-header nav), the club's
+   flask mark and wordmark on the left, the room's chips in the middle
+   and the candy CTA on the right. Same four rooms, same voices. */
 export function Navbar({
   theme,
   onToggleTheme,
@@ -45,62 +50,47 @@ export function Navbar({
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-300"
-      style={{
-        height: '64px',
-        backgroundColor: scrolled || mobileOpen ? 'var(--nav-backdrop)' : 'transparent',
-        borderColor: scrolled || mobileOpen ? 'var(--border)' : 'transparent',
-      }}
+      className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4"
+      style={{ pointerEvents: 'none' }}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        {/* Left: Brand mark + subtle orbital dot emblem + 2018 SPEC mono */}
+      <div
+        className="portal-nav mx-auto flex h-14 max-w-3xl items-center justify-between gap-3 rounded-full px-3 transition-opacity duration-300 sm:h-16 sm:px-4"
+        style={{
+          pointerEvents: 'auto',
+          opacity: scrolled || mobileOpen ? 1 : 0.94,
+        }}
+        data-testid="portal-navbar"
+      >
+        {/* Left: the club's flask + wordmark */}
         <a
           href="#top"
           onClick={(e) => {
             e.preventDefault();
             onNavigate('#top');
           }}
-          className="flex items-center gap-2.5 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4"
+          className="flex items-center gap-2.5 whitespace-nowrap shrink-0 rounded-full pl-1 pr-2 focus-visible:outline-2 focus-visible:outline-offset-4"
           style={{ color: 'var(--ink)' }}
+          aria-label="IAL CHEM — back to the top of the showcase"
         >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            aria-hidden="true"
-            className="shrink-0"
-          >
-            <circle cx="10" cy="10" r="7.5" stroke="var(--border-strong)" strokeWidth="1.2" />
-            <ellipse
-              cx="10"
-              cy="10"
-              rx="8.2"
-              ry="3.4"
-              transform="rotate(-28 10 10)"
-              stroke="var(--ink-muted)"
-              strokeWidth="1"
-            />
-            <circle cx="10" cy="10" r="2.2" fill="var(--accent)" />
-          </svg>
-          <span className="text-sm font-semibold tracking-[0.16em] uppercase">
+          <FlaskMark size={28} />
+          <span className="font-display text-sm font-bold tracking-[0.14em] uppercase">
             IAL CHEM
           </span>
           <span
             aria-hidden="true"
-            className="hidden sm:inline-block h-3 w-px"
+            className="hidden sm:inline-block h-3.5 w-px"
             style={{ backgroundColor: 'var(--border-strong)' }}
           />
           <span
-            className="hidden sm:inline-block font-mono text-[10px] tracking-[0.14em] uppercase"
+            className="hidden sm:inline-block font-mono text-[10px] font-medium tracking-[0.14em] uppercase"
             style={{ color: 'var(--ink-muted)' }}
           >
             2018 SPEC
           </span>
         </a>
 
-        {/* Center Navigation Links (Desktop) */}
-        <nav aria-label="Primary" className="hidden md:flex items-center gap-8">
+        {/* Center Navigation Chips (Desktop) */}
+        <nav aria-label="Primary" className="hidden md:flex items-center gap-1.5">
           {NAV_LINKS.map((item) => (
             <a
               key={item.href}
@@ -109,33 +99,21 @@ export function Navbar({
                 e.preventDefault();
                 handleLinkClick(item.href);
               }}
-              className="text-sm font-medium transition-colors duration-200 hover:opacity-100 whitespace-nowrap shrink-0"
-              style={{ color: 'var(--ink-muted)' }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--ink)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--ink-muted)';
-              }}
+              className="portal-nav-chip inline-flex h-9 items-center rounded-full px-4 font-display text-[13px] font-semibold whitespace-nowrap shrink-0"
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        {/* Right Controls: Search ⌘K + Obsidian/Cream Theme Toggle + Open Notes */}
-        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        {/* Right Controls: Search ⌘K + Night/Light toggle + Open Notes */}
+        <div className="flex items-center gap-2 shrink-0">
           <button
             type="button"
             data-testid="navbar-search-btn"
             onClick={onOpenSearch}
             aria-label="Search units and specification topics"
-            className="inline-flex h-9 items-center gap-2 rounded-full border px-3 text-xs font-medium transition-colors hover:opacity-90 whitespace-nowrap shrink-0"
-            style={{
-              backgroundColor: 'var(--surface)',
-              borderColor: 'var(--border-strong)',
-              color: 'var(--ink-muted)',
-            }}
+            className="portal-nav-chip inline-flex h-9 items-center gap-1.5 rounded-full px-3 text-xs font-semibold whitespace-nowrap shrink-0"
           >
             <Search className="h-3.5 w-3.5" aria-hidden="true" />
             <span className="hidden sm:inline" style={{ color: 'var(--ink)' }}>
@@ -157,26 +135,21 @@ export function Navbar({
             data-testid="theme-toggle-btn"
             onClick={onToggleTheme}
             aria-label={
-              theme === 'obsidian'
-                ? 'Switch to Daylight Cream theme'
-                : 'Switch to Obsidian Dark theme'
+              theme === 'night'
+                ? 'Switch to the Light lab'
+                : 'Switch to the Night lab'
             }
-            className="inline-flex h-9 items-center gap-1.5 rounded-full border px-3 text-xs font-medium transition-colors hover:opacity-90 whitespace-nowrap shrink-0"
-            style={{
-              backgroundColor: 'var(--surface)',
-              borderColor: 'var(--border-strong)',
-              color: 'var(--ink)',
-            }}
+            className="portal-nav-chip inline-flex h-9 items-center gap-1.5 rounded-full px-3 text-xs font-semibold whitespace-nowrap shrink-0"
           >
-            {theme === 'obsidian' ? (
+            {theme === 'night' ? (
               <>
                 <Sun className="h-3.5 w-3.5" aria-hidden="true" />
-                <span className="hidden lg:inline">Cream</span>
+                <span className="hidden lg:inline">Light</span>
               </>
             ) : (
               <>
                 <Moon className="h-3.5 w-3.5" aria-hidden="true" />
-                <span className="hidden lg:inline">Obsidian</span>
+                <span className="hidden lg:inline">Night</span>
               </>
             )}
           </button>
@@ -184,11 +157,7 @@ export function Navbar({
           <button
             type="button"
             onClick={onOpenNotes}
-            className="hidden sm:inline-flex h-9 items-center gap-1.5 rounded-full px-4 text-xs font-semibold transition-transform duration-200 hover:-translate-y-px whitespace-nowrap shrink-0"
-            style={{
-              backgroundColor: 'var(--ink)',
-              color: 'var(--bg)',
-            }}
+            className="portal-candy-btn hidden sm:inline-flex h-9 items-center gap-1.5 rounded-full px-4 font-display text-[13px] font-semibold whitespace-nowrap shrink-0"
           >
             <span>Open Notes</span>
             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -199,19 +168,15 @@ export function Navbar({
             aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border md:hidden shrink-0"
-            style={{
-              borderColor: 'var(--border-strong)',
-              backgroundColor: 'var(--surface)',
-              color: 'var(--ink)',
-            }}
+            className="portal-nav-chip inline-flex h-9 w-9 items-center justify-center rounded-full md:hidden shrink-0"
+            style={{ color: 'var(--ink)' }}
           >
             {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
       </div>
 
-      {/* Clean Mobile Drawer */}
+      {/* Mobile drawer — a paper card, like the workspace's sheets */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -219,13 +184,14 @@ export function Navbar({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: EASE_EXPO }}
-            className="border-b px-4 py-4 md:hidden"
+            className="mx-auto mt-2 max-w-3xl rounded-3xl px-4 py-4 md:hidden"
             style={{
+              pointerEvents: 'auto',
               backgroundColor: 'var(--surface)',
-              borderColor: 'var(--border)',
+              boxShadow: 'var(--card-shadow)',
             }}
           >
-            <nav aria-label="Mobile Navigation" className="flex flex-col gap-3">
+            <nav aria-label="Mobile Navigation" className="flex flex-col gap-2.5">
               {NAV_LINKS.map((item) => (
                 <a
                   key={item.href}
@@ -234,7 +200,7 @@ export function Navbar({
                     e.preventDefault();
                     handleLinkClick(item.href);
                   }}
-                  className="py-1.5 text-sm font-medium"
+                  className="rounded-2xl px-3 py-2.5 font-display text-sm font-semibold"
                   style={{ color: 'var(--ink)' }}
                 >
                   {item.label}
@@ -246,14 +212,10 @@ export function Navbar({
                   setMobileOpen(false);
                   onOpenNotes();
                 }}
-                className="mt-1 inline-flex h-10 w-full items-center justify-center gap-2 rounded-full text-xs font-semibold"
-                style={{
-                  backgroundColor: 'var(--ink)',
-                  color: 'var(--bg)',
-                }}
+                className="portal-candy-btn mt-1 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full font-display text-sm font-semibold"
               >
                 <span>Open Notes</span>
-                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </button>
             </nav>
           </motion.div>

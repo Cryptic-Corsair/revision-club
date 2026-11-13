@@ -1,44 +1,20 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import PortalApp from "@/components/portal/App";
 import "./portal.css";
 
-/* ————— the portal's own typeset, self-hosted like the rest of the app —————
-   next/font/google is broken under Turbopack in this workspace (see the
-   note in src/app/layout.tsx), so the three families the showcase landing
-   was designed with arrive as local woff2 files: Plus Jakarta Sans (body),
-   Instrument Serif (the italic display voice) and JetBrains Mono (the
-   labelling voice). */
-const jakarta = localFont({
-  variable: "--font-pjs",
-  src: "../fonts/portal-pjs-var.woff2",
-  weight: "200 800",
-  display: "swap",
-});
-
-const instrument = localFont({
-  variable: "--font-instrument",
-  src: [
-    { path: "../fonts/portal-instrument-400.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/portal-instrument-italic-400.woff2", weight: "400", style: "italic" },
-  ],
-  display: "swap",
-});
-
-const jbmono = localFont({
-  variable: "--font-jbmono",
-  src: "../fonts/portal-jbmono-var.woff2",
-  weight: "100 800",
-  display: "swap",
-  preload: false,
-});
+/* The portal wears the club's own typeset: the root layout's font
+   loaders put --font-display / --font-body / --font-plex on <html>,
+   and portal.css re-points the three Tailwind tokens at them, so the
+   showcase reads Fredoka + Quicksand + IBM Plex Mono (or whatever the
+   customize panel swapped in) exactly like every workspace page. It
+   declares no faces of its own. */
 
 /* The alternative front door: a showcase landing that sells the workspace
-   before it hands the visitor over. It is its own product — own theme
-   tokens (scoped to .portal-root in portal.css), own typeset, own Lenis
-   smooth scroll — so nothing here can leak into the workspace routes.
-   Deliberately kept out of the indexes: the workspace home at / is the
-   canonical homepage. */
+   before it hands the visitor over. It is its own room — theme tokens
+   scoped to .portal-root in portal.css (the club's night and daylight
+   palettes, re-pointed per toggle), its own Lenis smooth scroll — so
+   nothing here can leak into the workspace routes. Deliberately kept out
+   of the indexes: the workspace home at / is the canonical homepage. */
 export const metadata: Metadata = {
   title: "IAL CHEM — revision notes, built like software",
   description:
@@ -47,9 +23,5 @@ export const metadata: Metadata = {
 };
 
 export default function PortalPage() {
-  return (
-    <div className={`${jakarta.variable} ${instrument.variable} ${jbmono.variable}`}>
-      <PortalApp />
-    </div>
-  );
+  return <PortalApp />;
 }

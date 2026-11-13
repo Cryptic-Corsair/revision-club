@@ -8,7 +8,7 @@ interface PrismSweepMachineProps {
   reducedMotion: boolean;
 }
 
-const ORDER: PreviewThemeId[] = ['dark', 'cream', 'dune', 'classic'];
+const ORDER: PreviewThemeId[] = ['night', 'light', 'dune', 'classic'];
 
 export function PrismSweepMachine({ reducedMotion }: PrismSweepMachineProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -139,11 +139,7 @@ export function PrismSweepMachine({ reducedMotion }: PrismSweepMachineProps) {
               <span style={{ color: activeTheme.accent }}>WCH14</span>
               <span style={{ color: activeTheme.inkMuted }}>{activeTheme.label}</span>
             </div>
-            <p
-              className={`mt-1 text-base leading-snug ${
-                activeTheme.useSerifHeading ? 'font-serif italic text-lg' : 'font-semibold tracking-tight'
-              }`}
-            >
+            <p className="mt-1 font-display text-base font-bold leading-snug tracking-tight">
               Rates &amp; Equilibria
             </p>
           </div>

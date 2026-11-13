@@ -102,7 +102,7 @@ export function CommandPaletteModal({
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.22, ease: EASE_EXPO }}
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-2xl overflow-hidden rounded-2xl border shadow-2xl"
+            className="w-full max-w-2xl overflow-hidden rounded-3xl shadow-2xl"
             style={{
               backgroundColor: 'var(--surface)',
               borderColor: 'var(--border-strong)',
@@ -162,7 +162,7 @@ export function CommandPaletteModal({
                       <span aria-hidden="true">·</span>
                       <span>{previewUnit.shortLabel}</span>
                     </div>
-                    <h3 className="text-lg font-semibold tracking-tight">
+                    <h3 className="font-display text-lg font-bold tracking-tight">
                       {activePreview.title}
                     </h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--ink-muted)' }}>

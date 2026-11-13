@@ -6,6 +6,7 @@ import {
   IAL_UNITS,
   SPEC_CHIPS,
   WORKFLOW_CHAPTERS,
+  unitCandy,
   type WorkflowChapter,
 } from '../../data/ialData';
 import {
@@ -66,11 +67,11 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
             REVISION ARCHITECTURE
           </p>
           <h2
-            className="mt-2.5 text-balance font-semibold tracking-[-0.03em] leading-[1.08]"
-            style={{ fontSize: 'clamp(1.75rem, 3.4vw, 2.75rem)' }}
+            className="mt-2.5 text-balance font-display font-bold leading-[1.1]"
+            style={{ fontSize: 'clamp(1.75rem, 3.4vw, 2.5rem)' }}
           >
             Focused flow from{' '}
-            <span className="font-serif italic font-normal">index to recall.</span>
+            <span style={{ color: 'var(--accent)' }}>index to recall.</span>
           </h2>
         </div>
 
@@ -80,10 +81,10 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_ONCE}
           transition={{ duration: 0.55, ease: EASE_EXPO }}
-          className="mt-10 grid grid-cols-1 overflow-hidden rounded-2xl border lg:grid-cols-12"
+          className="mt-10 grid grid-cols-1 overflow-hidden rounded-3xl lg:grid-cols-12"
           style={{
-            borderColor: 'var(--border)',
             backgroundColor: 'var(--surface)',
+            boxShadow: 'var(--card-shadow)',
           }}
         >
           {/* Left Column: 3 Interactive Chapters with Sliding layoutId Indicator */}
@@ -135,7 +136,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                     </span>
                   </div>
                   <p
-                    className="text-base font-semibold tracking-tight sm:text-lg"
+                    className="font-display text-base font-bold tracking-tight sm:text-lg"
                     style={{ color: 'var(--ink)' }}
                   >
                     {chapter.summary}
@@ -171,7 +172,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                       <span>01 · SPECIFICATION INDEX</span>
                       <span className="tabular-nums">WCH11–WCH16</span>
                     </div>
-                    <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                    <h3 className="mt-2 font-display text-lg font-bold tracking-tight">
                       Direct jump by specification statement
                     </h3>
                   </div>
@@ -182,19 +183,23 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                         key={unit.code}
                         type="button"
                         onClick={() => onOpenSearch(unit.code)}
-                        className="group flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left transition-colors"
+                        className="group flex w-full items-center justify-between rounded-2xl px-4 py-3 text-left transition-colors"
                         style={{
-                          borderColor: 'var(--border)',
-                          backgroundColor: 'var(--surface)',
+                          backgroundColor: 'var(--surface-elevated)',
                         }}
                       >
                         <div className="min-w-0 pr-4">
                           <div className="flex items-center gap-2 font-mono text-xs tabular-nums">
-                            <span style={{ color: 'var(--accent)' }}>{unit.code}</span>
+                            <span
+                              aria-hidden="true"
+                              className="h-2.5 w-2.5 shrink-0 rounded-full"
+                              style={{ backgroundColor: unitCandy(unit.code) }}
+                            />
+                            <span style={{ color: 'var(--ink)' }}>{unit.code}</span>
                             <span style={{ color: 'var(--ink-muted)' }}>·</span>
                             <span style={{ color: 'var(--ink-muted)' }}>{unit.levelTag}</span>
                           </div>
-                          <p className="mt-0.5 truncate text-sm font-medium">
+                          <p className="mt-0.5 truncate text-sm font-semibold">
                             {unit.title}
                           </p>
                         </div>
@@ -216,12 +221,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                     <button
                       type="button"
                       onClick={() => onOpenSearch('')}
-                      className="inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 font-mono text-xs whitespace-nowrap shrink-0"
-                      style={{
-                        borderColor: 'var(--border-strong)',
-                        backgroundColor: 'var(--surface)',
-                        color: 'var(--ink)',
-                      }}
+                      className="portal-candy-btn inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 font-mono text-xs whitespace-nowrap shrink-0"
                     >
                       <Search className="h-3 w-3" aria-hidden="true" />
                       <span>Open Index ⌘K</span>
@@ -245,7 +245,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                       <span>02 · INTERACTIVE PACK BUILDER</span>
                       <span className="tabular-nums">{packMetrics.count} / 4 SELECTED</span>
                     </div>
-                    <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                    <h3 className="mt-2 font-display text-lg font-bold tracking-tight">
                       Toggle specification statements to compile
                     </h3>
                   </div>
@@ -333,11 +333,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                       type="button"
                       disabled={packMetrics.count === 0}
                       onClick={() => onOpenSearch(packMetrics.unitCodes[0] ?? 'WCH11')}
-                      className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-opacity disabled:opacity-40 whitespace-nowrap shrink-0"
-                      style={{
-                        backgroundColor: 'var(--ink)',
-                        color: 'var(--bg)',
-                      }}
+                      className="portal-candy-btn inline-flex items-center gap-1.5 rounded-full px-4 py-2 font-display text-xs font-semibold disabled:opacity-40 whitespace-nowrap shrink-0"
                     >
                       <span>Preview Pack</span>
                       <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -360,7 +356,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                       <span>03 · PRIVATE LOCAL PROGRESS</span>
                       <span className="tabular-nums">ZERO ACCOUNT WALL</span>
                     </div>
-                    <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                    <h3 className="mt-2 font-display text-lg font-bold tracking-tight">
                       Keep reading momentum visible per unit
                     </h3>
                   </div>

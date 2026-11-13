@@ -2,7 +2,7 @@
 import { useState, type MouseEvent } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { IAL_UNITS, type IalUnit } from '../../data/ialData';
+import { IAL_UNITS, unitCandy, type IalUnit } from '../../data/ialData';
 import { EASE_EXPO, VIEWPORT_ONCE } from '../../lib/motion';
 import { UnitEmblem } from '../motion/UnitEmblems';
 
@@ -44,11 +44,11 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
             SYLLABUS COVERAGE
           </p>
           <h2
-            className="mt-2.5 text-balance font-semibold tracking-[-0.03em] leading-[1.08]"
-            style={{ fontSize: 'clamp(1.75rem, 3.4vw, 2.75rem)' }}
+            className="mt-2.5 text-balance font-display font-bold leading-[1.1]"
+            style={{ fontSize: 'clamp(1.75rem, 3.4vw, 2.5rem)' }}
           >
             Every unit, structured in{' '}
-            <span className="font-serif italic font-normal">
+            <span style={{ color: 'var(--accent)' }}>
               specification order.
             </span>
           </h2>
@@ -62,10 +62,10 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
           transition={{ duration: 0.55, ease: EASE_EXPO }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="relative mt-10 overflow-hidden rounded-2xl border"
+          className="relative mt-10 overflow-hidden rounded-3xl"
           style={{
-            borderColor: 'var(--border)',
             backgroundColor: 'var(--border)',
+            boxShadow: 'var(--card-shadow)',
           }}
         >
           {/* Subtle Metallic Cursor Spotlight Overlay */}
@@ -102,18 +102,32 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
                   <div>
                     {/* Top Row: Code + Level Metadata on Left, Procedural SVG Emblem on Right */}
                     <div className="flex items-start justify-between gap-4">
-                      <div className="space-y-1">
+                      <div className="flex items-center gap-2.5">
+                        {/* The club's candy chip — the same coloured number
+                            tin the workspace footer gives each unit */}
                         <span
-                          className="block font-mono text-xs font-semibold tracking-[0.12em] tabular-nums"
-                          style={{ color: active ? 'var(--accent)' : 'var(--ink)' }}
+                          className="grid h-9 w-9 shrink-0 place-items-center rounded-xl font-display text-[14px] font-bold"
+                          style={{
+                            background: unitCandy(unit.code),
+                            color: '#fff6ea',
+                            boxShadow: `0 2px 0 color-mix(in oklab, ${unitCandy(unit.code)} 72%, var(--band))`,
+                          }}
                         >
-                          {unit.code}
+                          {unit.code.replace('WCH', '')}
                         </span>
-                        <span
-                          className="block font-mono text-[11px]"
-                          style={{ color: 'var(--ink-muted)' }}
-                        >
-                          {unit.shortLabel}
+                        <span className="space-y-0.5">
+                          <span
+                            className="block font-mono text-xs font-semibold tracking-[0.12em] tabular-nums"
+                            style={{ color: 'var(--ink)' }}
+                          >
+                            {unit.code}
+                          </span>
+                          <span
+                            className="block font-mono text-[11px]"
+                            style={{ color: 'var(--ink-muted)' }}
+                          >
+                            {unit.shortLabel}
+                          </span>
                         </span>
                       </div>
 
@@ -125,7 +139,7 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
                     </div>
 
                     {/* Middle: Concise Unit Title + Scope */}
-                    <h3 className="mt-6 text-base font-semibold leading-snug tracking-tight sm:text-lg">
+                    <h3 className="mt-6 font-display text-base font-bold leading-snug tracking-tight sm:text-lg">
                       {unit.title}
                     </h3>
                     <p

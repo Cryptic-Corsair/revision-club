@@ -54,10 +54,10 @@ export function KineticInterludeCanvas({
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
 
-      const isCream = themeRef.current === 'cream';
-      const inkRgb = isCream ? '30, 26, 38' : '255, 246, 234';
-      const accentRgb = isCream ? '79, 70, 229' : '196, 181, 253';
-      const warmRgb = isCream ? '180, 83, 9' : '242, 198, 141';
+      const isLight = themeRef.current === 'light';
+      const inkRgb = isLight ? '61, 43, 31' : '245, 239, 247';
+      const accentRgb = isLight ? '255, 107, 107' : '215, 181, 231';
+      const warmRgb = isLight ? '255, 146, 43' : '18, 184, 134';
 
       const vel = reducedMotionRef.current ? 0 : velocitySmooth.get();
       const velocityBoost = Math.min(1.6, Math.abs(vel) / 1400);
@@ -67,7 +67,7 @@ export function KineticInterludeCanvas({
       const baseRadius = Math.min(width, height) * 0.34;
 
       // Subtle architectural calibration lattice crosshairs
-      ctx.strokeStyle = `rgba(${inkRgb}, ${isCream ? 0.055 : 0.045})`;
+      ctx.strokeStyle = `rgba(${inkRgb}, ${isLight ? 0.055 : 0.045})`;
       ctx.lineWidth = 1;
       const cols = width < 640 ? 6 : 12;
       const colStep = width / cols;
@@ -91,7 +91,7 @@ export function KineticInterludeCanvas({
         ctx.arc(cx, cy, radius, startAngle, startAngle + arcSpan);
         ctx.strokeStyle =
           r === 2
-            ? `rgba(${accentRgb}, ${isCream ? 0.26 : 0.30})`
+            ? `rgba(${accentRgb}, ${isLight ? 0.26 : 0.30})`
             : `rgba(${inkRgb}, ${0.09 + (r === 4 ? 0.05 : 0)})`;
         ctx.lineWidth = r === 2 ? 1.25 : 1;
         ctx.stroke();
@@ -126,9 +126,9 @@ export function KineticInterludeCanvas({
         }
 
         if (w === 0) {
-          ctx.strokeStyle = `rgba(${accentRgb}, ${isCream ? 0.32 : 0.36})`;
+          ctx.strokeStyle = `rgba(${accentRgb}, ${isLight ? 0.32 : 0.36})`;
         } else if (w === 1) {
-          ctx.strokeStyle = `rgba(${warmRgb}, ${isCream ? 0.22 : 0.26})`;
+          ctx.strokeStyle = `rgba(${warmRgb}, ${isLight ? 0.22 : 0.26})`;
         } else {
           ctx.strokeStyle = `rgba(${inkRgb}, ${0.12 - w * 0.02})`;
         }

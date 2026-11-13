@@ -1,5 +1,13 @@
-export type SiteTheme = 'obsidian' | 'cream';
-export type PreviewThemeId = 'dark' | 'cream' | 'dune' | 'classic';
+/* The portal's two dresses are the club's own labs, renamed honestly:
+   'night' is the workspace's night lab (html.dark in globals.css) and
+   'light' is the daylight cream lab. The toggle in the portal navbar
+   re-dresses the page between the two rooms the workspace itself wears. */
+import { UNITS as CLUB_UNITS } from '@/lib/spectra/units';
+
+export type SiteTheme = 'night' | 'light';
+/* The hero's workbench preview dots try the club's four labs on the
+   stage — same ids as the workspace's lab names, same palettes. */
+export type PreviewThemeId = 'night' | 'light' | 'dune' | 'classic';
 
 export interface GlobalMetrics {
   units: number;
@@ -29,6 +37,13 @@ export interface SpecChip {
   pages: number;
 }
 
+/* The code-to-colour pairing is the club's signature and lives in the
+   workspace's units.ts and nowhere else — so the portal looks the unit
+   colours up there instead of carrying a second copy of the pairing. */
+export function unitCandy(code: string): string {
+  return CLUB_UNITS.find((u) => u.code === code)?.candy.main ?? '#ff6b6b';
+}
+
 export interface SearchEntry {
   id: string;
   kind: 'unit' | 'topic';
@@ -52,7 +67,6 @@ export interface PreviewThemeTokens {
   inkMuted: string;
   border: string;
   accent: string;
-  useSerifHeading: boolean;
 }
 
 export interface HeroTabData {
@@ -372,54 +386,54 @@ export const SEARCH_ITEMS: readonly SearchEntry[] = [
   },
 ];
 
+/* The workbench preview tries the club's four labs on its stage — the
+   palettes are the workspace's own token values (globals.css), not an
+   homage: Night is the plum-charcoal dusk, Light the daylight cream,
+   Dune the chocolate room, Classic the espresso-room signature. */
 export const PREVIEW_THEMES: Record<PreviewThemeId, PreviewThemeTokens> = {
-  dark: {
-    id: 'dark',
-    label: 'Dark',
-    bg: '#0E0C12',
-    surface: '#16131D',
-    surfaceElevated: '#1F1B29',
-    ink: '#FFF6EA',
-    inkMuted: '#9D94B8',
-    border: 'rgba(255, 246, 234, 0.11)',
-    accent: '#C4B5FD',
-    useSerifHeading: false,
+  night: {
+    id: 'night',
+    label: 'Night',
+    bg: '#17131d',
+    surface: '#30263d',
+    surfaceElevated: '#40344f',
+    ink: '#f5eff7',
+    inkMuted: '#c7bacd',
+    border: 'rgba(245, 239, 247, 0.14)',
+    accent: '#d7b5e7',
   },
-  cream: {
-    id: 'cream',
-    label: 'Cream',
-    bg: '#FAF7F2',
-    surface: '#FFFDF9',
-    surfaceElevated: '#F3EDE2',
-    ink: '#1E1A26',
-    inkMuted: '#635B73',
-    border: 'rgba(30, 26, 38, 0.12)',
-    accent: '#4F46E5',
-    useSerifHeading: false,
+  light: {
+    id: 'light',
+    label: 'Light',
+    bg: '#fff6ea',
+    surface: '#fffdf7',
+    surfaceElevated: '#fdf3e0',
+    ink: '#3d2b1f',
+    inkMuted: '#7c6454',
+    border: 'rgba(61, 43, 31, 0.14)',
+    accent: '#ff6b6b',
   },
   dune: {
     id: 'dune',
     label: 'Dune',
-    bg: '#E8DEC9',
-    surface: '#EFE6D5',
-    surfaceElevated: '#E2D6BE',
-    ink: '#2A2218',
-    inkMuted: '#6A5D4D',
-    border: 'rgba(42, 34, 24, 0.14)',
-    accent: '#C26D3D',
-    useSerifHeading: false,
+    bg: '#1e1b16',
+    surface: '#2e2820',
+    surfaceElevated: '#38322a',
+    ink: '#f6f0e6',
+    inkMuted: '#c9bfb0',
+    border: 'rgba(246, 240, 230, 0.16)',
+    accent: '#d9a05e',
   },
   classic: {
     id: 'classic',
     label: 'Classic',
-    bg: '#F7ECE0',
-    surface: '#FFF6EA',
-    surfaceElevated: '#EFE3D3',
-    ink: '#1E1A26',
-    inkMuted: '#5B5368',
-    border: 'rgba(46, 41, 58, 0.22)',
-    accent: '#2E293A',
-    useSerifHeading: true,
+    bg: '#2c2013',
+    surface: '#4a3c2b',
+    surfaceElevated: '#574834',
+    ink: '#fff6ea',
+    inkMuted: '#cdb894',
+    border: 'rgba(255, 246, 234, 0.2)',
+    accent: '#f59f00',
   },
 };
 

@@ -23,7 +23,7 @@ interface HeroSectionProps {
   onBuildPack: () => void;
 }
 
-const THEME_DOT_ORDER: PreviewThemeId[] = ['dark', 'cream', 'dune', 'classic'];
+const THEME_DOT_ORDER: PreviewThemeId[] = ['night', 'light', 'dune', 'classic'];
 
 export function HeroSection({
   theme,
@@ -32,7 +32,7 @@ export function HeroSection({
   onBuildPack,
 }: HeroSectionProps) {
   const heroRef = useRef<HTMLElement | null>(null);
-  const [previewThemeId, setPreviewThemeId] = useState<PreviewThemeId>('dark');
+  const [previewThemeId, setPreviewThemeId] = useState<PreviewThemeId>('night');
   const [activeTabId, setActiveTabId] = useState<'definitions' | 'equations' | 'worked'>(
     'definitions',
   );
@@ -62,7 +62,7 @@ export function HeroSection({
   // Sync default preview window starting palette smoothly if user toggles global navbar theme before interacting
   useEffect(() => {
     if (!userInteracted) {
-      setPreviewThemeId(theme === 'cream' ? 'cream' : 'dark');
+      setPreviewThemeId(theme === 'light' ? 'light' : 'night');
     }
   }, [theme, userInteracted]);
 
@@ -99,7 +99,12 @@ export function HeroSection({
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Upper Hero Typography */}
         <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-5 inline-flex items-center gap-2 border-b pb-1.5" style={{ borderColor: 'var(--border-strong)' }}>
+          <div className="mb-5 inline-flex items-center gap-2.5">
+            <span
+              aria-hidden="true"
+              className="h-2 w-2 rounded-full"
+              style={{ backgroundColor: 'var(--accent)' }}
+            />
             <span
               className="font-mono text-[11px] tracking-[0.18em] uppercase tabular-nums"
               style={{ color: 'var(--ink-muted)' }}
@@ -109,9 +114,9 @@ export function HeroSection({
           </div>
 
           <h1
-            className="text-balance font-semibold tracking-[-0.035em] leading-[1.03]"
+            className="text-balance font-display font-bold leading-[1.06]"
             style={{
-              fontSize: 'clamp(2.5rem, 5.6vw, 4.75rem)',
+              fontSize: 'clamp(2.5rem, 5.6vw, 4.5rem)',
               color: 'var(--ink)',
             }}
           >
@@ -133,7 +138,7 @@ export function HeroSection({
                 className="block"
               >
                 like{' '}
-                <span className="font-serif italic font-normal tracking-[-0.02em]">
+                <span style={{ color: 'var(--accent)' }}>
                   software.
                 </span>
               </motion.span>
@@ -161,11 +166,7 @@ export function HeroSection({
             <button
               type="button"
               onClick={onStartRevising}
-              className="group inline-flex h-11 items-center gap-2 rounded-full px-6 text-sm font-semibold transition-transform duration-200 hover:-translate-y-px whitespace-nowrap shrink-0"
-              style={{
-                backgroundColor: 'var(--ink)',
-                color: 'var(--bg)',
-              }}
+              className="portal-candy-btn group inline-flex h-12 items-center gap-2 rounded-full px-6 font-display text-sm font-semibold transition-transform duration-200 whitespace-nowrap shrink-0"
             >
               <span>Start Revising</span>
               <ArrowRight
@@ -177,24 +178,30 @@ export function HeroSection({
             <button
               type="button"
               onClick={onBuildPack}
-              className="inline-flex h-11 items-center rounded-full border px-6 text-sm font-medium transition-colors duration-200 whitespace-nowrap shrink-0"
+              className="inline-flex h-12 items-center rounded-full px-6 font-display text-sm font-semibold transition-transform duration-200 hover:-translate-y-px whitespace-nowrap shrink-0"
               style={{
-                borderColor: 'var(--border-strong)',
                 color: 'var(--ink)',
                 backgroundColor: 'var(--surface)',
+                boxShadow: 'var(--card-shadow)',
               }}
             >
               Build a Pack
             </button>
           </motion.div>
 
-          {/* Tabular-Nums Spec Summary Strip (Zero pills, clean typographic separators) */}
+          {/* Tabular-Nums Spec Summary Strip — candy dots as separators,
+              the club ticker's trick */}
           <p
-            className="mx-auto mt-7 max-w-xs sm:max-w-none text-balance font-mono text-xs tracking-[0.04em] tabular-nums"
+            className="mx-auto mt-7 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 font-mono text-xs tracking-[0.04em] tabular-nums"
             style={{ color: 'var(--ink-muted)' }}
           >
-            0{GLOBAL_METRICS.units}&nbsp;Units · {GLOBAL_METRICS.topics}&nbsp;Topics ·{' '}
-            ~13&nbsp;Hours · {GLOBAL_METRICS.workedExamples}&nbsp;Worked&nbsp;Examples
+            <span>0{GLOBAL_METRICS.units}&nbsp;Units</span>
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: 'var(--color-coral)' }} />
+            <span>{GLOBAL_METRICS.topics}&nbsp;Topics</span>
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: 'var(--color-mint)' }} />
+            <span>~13&nbsp;Hours</span>
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: 'var(--color-grape)' }} />
+            <span>{GLOBAL_METRICS.workedExamples}&nbsp;Worked&nbsp;Examples</span>
           </p>
         </div>
 
@@ -214,8 +221,9 @@ export function HeroSection({
               backgroundColor: previewTokens.surface,
               color: previewTokens.ink,
               borderColor: previewTokens.border,
+              boxShadow: 'var(--card-shadow)',
             }}
-            className="mx-auto max-w-5xl overflow-hidden rounded-2xl border transition-colors duration-300"
+            className="mx-auto max-w-5xl overflow-hidden rounded-3xl transition-colors duration-300"
           >
             {/* Preview Window Chrome + Live Theme Dots */}
             <div
@@ -394,13 +402,7 @@ export function HeroSection({
                     </span>
                   </div>
 
-                  <h2
-                    className={`mt-2.5 text-xl sm:text-2xl tracking-tight ${
-                      previewTokens.useSerifHeading
-                        ? 'font-serif italic text-2xl sm:text-3xl font-normal'
-                        : 'font-semibold'
-                    }`}
-                  >
+                  <h2 className="mt-2.5 font-display font-bold text-xl sm:text-2xl tracking-tight">
                     {activeTab.title}
                   </h2>
 
