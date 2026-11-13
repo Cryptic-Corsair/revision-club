@@ -17,6 +17,7 @@ interface NavbarProps {
 const NAV_LINKS = [
   { label: 'Showcase', href: '#showcase' },
   { label: 'Workflow', href: '#workflow' },
+  { label: 'The lab', href: '#lab' },
   { label: 'Units', href: '#units' },
 ] as const;
 
@@ -99,7 +100,7 @@ export function Navbar({
                 e.preventDefault();
                 handleLinkClick(item.href);
               }}
-              className="portal-nav-chip inline-flex h-9 items-center rounded-full px-4 font-display text-[13px] font-semibold whitespace-nowrap shrink-0"
+              className="portal-nav-chip inline-flex h-9 items-center rounded-full px-3.5 font-display text-[13px] font-semibold whitespace-nowrap shrink-0"
             >
               {item.label}
             </a>

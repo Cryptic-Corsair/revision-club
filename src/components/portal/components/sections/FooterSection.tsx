@@ -30,8 +30,13 @@ export function FooterSection({
 }: FooterSectionProps) {
   return (
     <footer className="relative mt-auto">
-      {/* Closing CTA stage — the band's candy buttons + display voice */}
-      <div className="relative py-20 sm:py-28">
+      {/* Closing CTA stage — the band's candy buttons + display voice.
+          It stands on the units room's ground: the descent's last step,
+          so the one surviving wave pours that ground into the band. */}
+      <div
+        className="relative py-20 sm:py-28"
+        style={{ backgroundColor: 'var(--room-units)' }}
+      >
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 bottom-0 h-72"
@@ -99,11 +104,12 @@ export function FooterSection({
           </span>
         </span>
 
-      {/* The wave — the club footer's exact path, draining into the band */}
+      {/* The wave — the club footer's exact path, draining the units
+          room's ground into the cocoa band. The page's one wave. */}
       <div
         aria-hidden="true"
         className="relative h-[calc(54px*var(--ui-scale))] sm:h-[calc(74px*var(--ui-scale))]"
-        style={{ background: 'var(--bg)' }}
+        style={{ background: 'var(--room-units)' }}
       >
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-full w-full">
           <path
@@ -239,6 +245,7 @@ export function FooterSection({
                   { label: 'Back to the top', act: () => onNavigate('#top') },
                   { label: 'The showcase machines', act: () => onNavigate('#showcase') },
                   { label: 'Revision pack builder', act: () => onNavigate('#workflow') },
+                  { label: 'The living laboratory', act: () => onNavigate('#lab') },
                   { label: 'Units matrix', act: () => onNavigate('#units') },
                   { label: 'Search (⌘K)', act: onOpenSpecIndex },
                 ].map((row) => (

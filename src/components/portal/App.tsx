@@ -3,7 +3,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Lenis from 'lenis';
 import { MotionConfig, useReducedMotion } from 'framer-motion';
-import { BandWave } from '@/components/club/bands';
 import type { IalUnit, SiteTheme } from './data/ialData';
 import { FilmGrainOverlay } from './components/FilmGrainOverlay';
 import { Navbar } from './components/sections/Navbar';
@@ -12,8 +11,38 @@ import { HeroSection } from './components/sections/HeroSection';
 import { ShowcaseCarousel } from './components/sections/ShowcaseCarousel';
 import { WorkflowSplit } from './components/sections/WorkflowSplit';
 import { KineticInterlude } from './components/sections/KineticInterlude';
+import { LabVignettes } from './components/sections/LabVignettes';
 import { UnitMatrix } from './components/sections/UnitMatrix';
 import { FooterSection } from './components/sections/FooterSection';
+
+/* One room of the descent: a darker ground (each room sinks below
+   the last, all the way to the cocoa band) and an optional soft
+   spotlight breathing across one corner so the deep ground never
+   reads flat. The spotlight re-inks through --spotlight per dress. */
+function Room({
+  ground,
+  glow,
+  children,
+}: {
+  ground: string;
+  glow?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="relative overflow-x-clip" style={{ background: ground }}>
+      {glow && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background: `radial-gradient(ellipse ${glow}, var(--spotlight) 0%, transparent 72%)`,
+          }}
+        />
+      )}
+      {children}
+    </div>
+  );
+}
 
 export default function App() {
   const prefersReduced = useReducedMotion();
@@ -146,44 +175,41 @@ export default function App() {
             onBuildPack={() => navigateTo('#workflow')}
           />
 
-          {/* ————— the seam walk —————
-              The club home's one structure: the page is a walk across
-              two seam grounds (--band-a / --band-b) and every boundary
-              is a BandWave from the shared five-curve shelf — no two
-              neighbouring seams repeat a curve. The hero stands on the
-              page ground; the showcase, the pack builder, the
-              interlude and the units matrix each get their own room,
-              and the first three rooms wear the hero's ring-and-wave
-              backdrop language; the last seam hands the page back so
-              the footer's closing stage and its wave into the cocoa
-              band read clean. */}
-          <BandWave from="var(--bg)" to="var(--band-a)" wave={1} />
-          <div style={{ background: 'var(--band-a)' }}>
+          {/* ————— the descent —————
+              No seams between the rooms any more: the hero stands on
+              the page ground and every room below it steps darker
+              than the last — showcase, workflow, interlude, the lab,
+              units — sinking room by room until the footer's one
+              surviving wave pours the last ground into the cocoa
+              band. The darkness is the seam; a soft room spotlight
+              (a different corner each time) keeps the deep grounds
+              from reading flat, and the rooms keep the hero's ring
+              language in their backdrops. */}
+          <Room ground="var(--room-showcase)" glow="28% 42% at 82% 6%">
             <ShowcaseCarousel reducedMotion={reducedMotion} />
-          </div>
+          </Room>
 
-          <BandWave from="var(--band-a)" to="var(--band-b)" wave={2} />
-          <div style={{ background: 'var(--band-b)' }}>
+          <Room ground="var(--room-workflow)" glow="34% 38% at 12% 92%">
             <WorkflowSplit
               reducedMotion={reducedMotion}
               onOpenSearch={(q = '') => openSearch(q)}
             />
-          </div>
+          </Room>
 
-          <BandWave from="var(--band-b)" to="var(--band-a)" wave={3} />
-          <div style={{ background: 'var(--band-a)' }}>
+          <Room ground="var(--room-interlude)">
             <KineticInterlude theme={theme} reducedMotion={reducedMotion} />
-          </div>
+          </Room>
 
-          <BandWave from="var(--band-a)" to="var(--band-b)" wave={4} />
-          <div style={{ background: 'var(--band-b)' }}>
+          <Room ground="var(--room-lab)" glow="46% 34% at 50% 0%">
+            <LabVignettes reducedMotion={reducedMotion} />
+          </Room>
+
+          <Room ground="var(--room-units)" glow="40% 36% at 50% 100%">
             <UnitMatrix
               reducedMotion={reducedMotion}
               onSelectUnit={openUnitInspector}
             />
-          </div>
-
-          <BandWave from="var(--band-b)" to="var(--bg)" wave={0} />
+          </Room>
         </main>
 
         <FooterSection

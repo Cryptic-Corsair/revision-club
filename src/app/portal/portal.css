@@ -13,11 +13,14 @@
    tangerine on the warm line). Flip the toggle in the navbar and the
    portal re-dresses into the other room.
 
-   The section walk rides the same seam grounds the labs use at home
-   (--band-a/--band-b — in dune the lab's own home-band pair #1a1610 /
-   #211c12; in daylight the mineral-amber washes homeBandOf mixes at
-   10% / 18% into white, computed: #f8f3ed / #f3e9de) — BandWave seams
-   pour one ground into the next down the page.
+   The section walk is the descent: no seams between rooms — every
+   room below the hero steps darker than the last, sinking toward
+   the cocoa anchor (--room-showcase/-workflow/-interlude/-lab/-units,
+   OKLab mixes of the dress's own ground into its cocoa band: dune
+   #1b1813 → #191610 → #17150e → #15130c → #13110a; daylight the
+   cream deepening into sand #faf0e0 → #f6e9d6 → #f1e3cc → #ecdcc2 →
+   #e8d6b8). Only the footer's one wave survives, pouring the last
+   ground into the band.
 
    The club bits (tint/shade/Chip/sticker) mix against their own token
    names, so each dress also aliases --color-ink/-soft/paper/cocoa/
@@ -60,9 +63,13 @@
   --nav-backdrop: rgba(30, 27, 22, 0.74);
   --spotlight: rgba(217, 166, 95, 0.1);
 
-  /* the section-walk seam grounds — the dune lab's home-band pair */
-  --band-a: #1a1610;
-  --band-b: #211c12;
+  /* the descent — each room steps darker than the last, all the way
+     down to the cocoa band (OKLab mixes of #1e1b16 into #121009) */
+  --room-showcase: #1b1813;
+  --room-workflow: #191610;
+  --room-interlude: #17150e;
+  --room-lab: #15130c;
+  --room-units: #13110a;
 
   /* the footer band — the dune lab's cocoa anchor */
   --band: #121009;
@@ -118,10 +125,13 @@
   --nav-backdrop: rgba(255, 246, 234, 0.76);
   --spotlight: rgba(255, 107, 107, 0.09);
 
-  /* the section walk by day — homeBandOf's mineral-amber washes:
-     10% / 18% of #b8874b into white, computed in OKLab */
-  --band-a: #f8f3ed;
-  --band-b: #f3e9de;
+  /* the descent by day — the cream deepening into warm sand
+     (OKLab mixes of #fff6ea into sand #e2ceab) */
+  --room-showcase: #faf0e0;
+  --room-workflow: #f6e9d6;
+  --room-interlude: #f1e3cc;
+  --room-lab: #ecdcc2;
+  --room-units: #e8d6b8;
 
   --band: #2e2016; /* the cocoa footer, daylight tuning */
   --band-ink: #fff6ea;
@@ -253,21 +263,16 @@ body:has(.portal-root[data-theme="light"]) {
   box-shadow: 0 1px 0 color-mix(in oklab, var(--accent) 72%, var(--band));
 }
 
-/* ————— section backdrops: the hero's ring-and-wave language —————
-   Strokes ride the room's own inks at low alpha; the accent pair
-   keeps its posts. Defined as classes so both dresses re-ink them
-   through the tokens above with no per-variant colour maths. */
+/* ————— section backdrops: the hero's ring language —————
+   Thin concentric rings bloom behind the content (and in the units
+   room, the faint vertical columns the hero's architectural grid
+   draws). Defined as classes so both dresses re-ink them through
+   the tokens above with no per-variant colour maths. */
 .portal-root .portal-bd-line {
   stroke: color-mix(in oklab, var(--ink) 13%, transparent);
 }
 .portal-root .portal-bd-faint {
   stroke: color-mix(in oklab, var(--ink) 6%, transparent);
-}
-.portal-root .portal-bd-accent {
-  stroke: color-mix(in oklab, var(--accent) 30%, transparent);
-}
-.portal-root .portal-bd-warm {
-  stroke: color-mix(in oklab, var(--accent-warm) 26%, transparent);
 }
 
 /* ————— the editorial room (the syllabus coverage document) —————
