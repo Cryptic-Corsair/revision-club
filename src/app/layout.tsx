@@ -69,17 +69,6 @@ const plex = localFont({
   preload: false,
 });
 
-/* Cormorant Garamond — the maison voice. Self-hosted latin variable
-   woff2, brought in for the showcase navbar's engraved serif lockup;
-   the rest of the app never touches it, so it rides on first use. */
-const cormorant = localFont({
-  variable: "--font-cormorant",
-  src: "./fonts/cormorant-var.woff2",
-  weight: "300 700",
-  display: "swap",
-  preload: false,
-});
-
 export const metadata: Metadata = {
   title: "IAL CHEM — Edexcel IAL Chemistry revision notes",
   description:
@@ -149,7 +138,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable} ${cormorant.variable}`}
+      className={`${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable}`}
     >
       <body className="min-h-screen bg-cream font-body text-ink antialiased">
         <Script id="rc-prefs" strategy="beforeInteractive">{prefsInit}</Script>
