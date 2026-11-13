@@ -95,13 +95,13 @@ const FRAGMENT_SHADER = /* glsl */ `
     // dune is the chocolate room lit by the amber roast + sea-glass
     // caustics (the lab's own low lamp burns underneath), daylight the
     // cream page lit by coral + tangerine.
-    vec3 duneBg = vec3(0.118, 0.106, 0.086);           // #1e1b16 — the dune page
-    vec3 duneAmber = vec3(0.851, 0.651, 0.373);        // #d9a65f — the amber roast
-    vec3 duneSea = vec3(0.616, 0.725, 0.690);          // #9db9b0 — sea-glass
+    vec3 duneBg = vec3(0.106, 0.110, 0.090);           // #1b1c17 — olive-charcoal
+    vec3 duneAmber = vec3(0.784, 0.647, 0.427);        // #c8a56d — aged brass
+    vec3 duneSea = vec3(0.620, 0.686, 0.635);          // #9eafa2 — mineral sage
 
-    vec3 creamBg = vec3(1.0, 0.965, 0.918);            // #fff6ea — the cream page
-    vec3 creamCobalt = vec3(1.0, 0.420, 0.420);        // #ff6b6b — coral
-    vec3 creamWarm = vec3(1.0, 0.573, 0.169);          // #ff922b — tangerine
+    vec3 creamBg = vec3(0.957, 0.941, 0.906);          // #f4f0e7 — warm porcelain
+    vec3 creamCobalt = vec3(0.725, 0.435, 0.365);      // #b96f5d — fired clay
+    vec3 creamWarm = vec3(0.608, 0.537, 0.420);        // #9b896b — olive bronze
 
     vec3 baseBg = mix(duneBg, creamBg, uThemeMix);
     vec3 primaryGlow = mix(duneAmber, creamCobalt, uThemeMix);
@@ -128,7 +128,7 @@ const FRAGMENT_SHADER = /* glsl */ `
 
     // Crisp hairline grid modulated by caustic intensity
     float gridAlpha = (gridLine * 0.55 + majorStep * 0.85) * gridStrength * (0.35 + 0.75 * causticBand + ptrInfluence * 0.8);
-    vec3 gridColor = mix(vec3(0.965, 0.941, 0.902), vec3(0.239, 0.169, 0.122), uThemeMix);
+    vec3 gridColor = mix(vec3(0.91, 0.89, 0.83), vec3(0.20, 0.20, 0.16), uThemeMix);
     col = mix(col, gridColor, clamp(gridAlpha, 0.0, 0.16));
 
     // Seamless bottom & edge fade directly into --bg so there is never a harsh seam
