@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 import type { MotionValue } from 'framer-motion';
 import type { SiteTheme } from '../../data/ialData';
-import { clampDeltaTime, getCappedPixelRatio } from '../../lib/motion';
+import { clampDeltaTime, getCappedPixelRatio, getCanvasFrameIntervalSeconds } from '../../lib/motion';
 
 interface KineticInterludeCanvasProps {
   theme: SiteTheme;
@@ -37,9 +37,12 @@ export function KineticInterludeCanvas({
     let height = 0;
     let dpr = 1;
     let time = 0;
-    let isVisible = true;
+    let isVisible = false;
+    let pageVisible = !document.hidden;
     let rafId = 0;
     let lastTs = performance.now();
+    let frameAccumulator = 0;
+    const frameIntervalSeconds = getCanvasFrameIntervalSeconds();
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -141,27 +144,51 @@ export function KineticInterludeCanvas({
     };
 
     const tick = () => {
-      if (!isVisible) return;
+      if (!isVisible || !pageVisible || reducedMotionRef.current) return;
       const now = performance.now();
       const dt = clampDeltaTime((now - lastTs) / 1000);
       lastTs = now;
+      frameAccumulator += dt;
 
-      if (!reducedMotionRef.current) {
+      if (frameIntervalSeconds === 0 || frameAccumulator >= frameIntervalSeconds) {
+        const elapsed = frameIntervalSeconds > 0 ? frameAccumulator : dt;
+        frameAccumulator = frameIntervalSeconds > 0
+          ? frameAccumulator % frameIntervalSeconds
+          : 0;
         const vel = Math.min(1.8, Math.abs(velocitySmooth.get()) / 1200);
-        time += dt * (1 + vel * 0.9);
+        time += elapsed * (1 + vel * 0.9);
+        drawFrame(time);
       }
 
-      drawFrame(time);
-      if (!reducedMotionRef.current) {
+      rafId = window.requestAnimationFrame(tick);
+    };
+
+    const stopLoop = () => window.cancelAnimationFrame(rafId);
+    const startLoop = () => {
+      stopLoop();
+      lastTs = performance.now();
+      frameAccumulator = 0;
+      if (isVisible && pageVisible && !reducedMotionRef.current) {
         rafId = window.requestAnimationFrame(tick);
+      }
+    };
+
+    const onVisibilityChange = () => {
+      pageVisible = !document.hidden;
+      if (pageVisible && isVisible) {
+        drawFrame(time);
+        startLoop();
+      } else {
+        stopLoop();
       }
     };
 
     const resizeObserver = new ResizeObserver(() => {
       resize();
-      drawFrame(time);
+      if (pageVisible && isVisible) drawFrame(time);
     });
     resizeObserver.observe(canvas);
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     const intersectionObserver = new IntersectionObserver(
       (entries) => {
@@ -171,13 +198,10 @@ export function KineticInterludeCanvas({
           isVisible = true;
           lastTs = performance.now();
           drawFrame(time);
-          if (!reducedMotionRef.current) {
-            window.cancelAnimationFrame(rafId);
-            rafId = window.requestAnimationFrame(tick);
-          }
+          startLoop();
         } else {
           isVisible = false;
-          window.cancelAnimationFrame(rafId);
+          stopLoop();
         }
       },
       { threshold: 0.02 },
@@ -186,12 +210,9 @@ export function KineticInterludeCanvas({
 
     resize();
     drawFrame(0.8);
-    if (!reducedMotionRef.current) {
-      rafId = window.requestAnimationFrame(tick);
-    }
-
     return () => {
-      window.cancelAnimationFrame(rafId);
+      stopLoop();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
     };
