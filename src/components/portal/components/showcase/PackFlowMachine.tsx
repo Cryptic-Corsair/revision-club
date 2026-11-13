@@ -19,7 +19,7 @@ export function PackFlowMachine({ reducedMotion }: PackFlowMachineProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(false);
   const [compileCycle, setCompileCycle] = useState(0);
-  const [compiledMinutes, setCompiledMinutes] = useState(reducedMotion ? 38 : 14);
+  const [compiledMinutes, setCompiledMinutes] = useState(38);
 
   useEffect(() => {
     const el = containerRef.current;
