@@ -10,17 +10,23 @@
    liquid) and sea-glass #9db9b0 on the warm line, the cocoa band
    #121009 underfoot. The "light" dress is the daylight cream lab
    verbatim (cream #fff6ea, paper cards, cocoa ink, coral accent,
-   tangerine on the warm line). Flip the toggle in the navbar and the
-   portal re-dresses into the other room.
+   tangerine on the warm line). Flip the toggle in the footer and
+   the portal re-dresses into the other room.
 
-   The section walk is the descent: no seams between rooms — every
-   room below the hero steps darker than the last, sinking toward
-   the cocoa anchor (--room-showcase/-workflow/-interlude/-lab/-units,
-   OKLab mixes of the dress's own ground into its cocoa band: dune
-   #1b1813 → #191610 → #17150e → #15130c → #13110a; daylight the
-   cream deepening into sand #faf0e0 → #f6e9d6 → #f1e3cc → #ecdcc2 →
-   #e8d6b8). Only the footer's one wave survives, pouring the last
-   ground into the band.
+   The section walk is the descent, in reading order: workflow,
+   showcase, units, the living laboratory, the interlude — every
+   room below the hero takes the next step down toward the cocoa
+   anchor. The steps are positional tokens (--room-step-1 …
+   --room-step-5, OKLab mixes of the dress's own ground into its
+   cocoa band: dune #1b1813 → #191610 → #17150e → #15130c →
+   #13110a; daylight the cream deepening into sand #faf0e0 →
+   #f6e9d6 → #f1e3cc → #ecdcc2 → #e8d6b8) so the staircase survives
+   any future reorder — whichever room stands in slot N wears step
+   N. And no junction is a hard edge any more: each room's ground
+   fades in from the previous room's ground over its first 240px
+   (the App's Room wrapper draws the blend), so the darkness falls
+   smoothly all the way to the band. Only the footer's one wave
+   survives, pouring the last ground into the band.
 
    The club bits (tint/shade/Chip/sticker) mix against their own token
    names, so each dress also aliases --color-ink/-soft/paper/cocoa/
@@ -63,13 +69,14 @@
   --nav-backdrop: rgba(30, 27, 22, 0.74);
   --spotlight: rgba(217, 166, 95, 0.1);
 
-  /* the descent — each room steps darker than the last, all the way
-     down to the cocoa band (OKLab mixes of #1e1b16 into #121009) */
-  --room-showcase: #1b1813;
-  --room-workflow: #191610;
-  --room-interlude: #17150e;
-  --room-lab: #15130c;
-  --room-units: #13110a;
+  /* the descent — positional steps, not named rooms: slot N takes
+     step N, all the way down to the cocoa band (OKLab mixes of
+     #1e1b16 into #121009) */
+  --room-step-1: #1b1813;
+  --room-step-2: #191610;
+  --room-step-3: #17150e;
+  --room-step-4: #15130c;
+  --room-step-5: #13110a;
 
   /* the footer band — the dune lab's cocoa anchor */
   --band: #121009;
@@ -127,11 +134,11 @@
 
   /* the descent by day — the cream deepening into warm sand
      (OKLab mixes of #fff6ea into sand #e2ceab) */
-  --room-showcase: #faf0e0;
-  --room-workflow: #f6e9d6;
-  --room-interlude: #f1e3cc;
-  --room-lab: #ecdcc2;
-  --room-units: #e8d6b8;
+  --room-step-1: #faf0e0;
+  --room-step-2: #f6e9d6;
+  --room-step-3: #f1e3cc;
+  --room-step-4: #ecdcc2;
+  --room-step-5: #e8d6b8;
 
   --band: #2e2016; /* the cocoa footer, daylight tuning */
   --band-ink: #fff6ea;

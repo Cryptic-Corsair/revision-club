@@ -2,8 +2,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Lenis from 'lenis';
-import { MotionConfig, useReducedMotion } from 'framer-motion';
+import { MotionConfig, motion, useReducedMotion } from 'framer-motion';
 import type { IalUnit, SiteTheme } from './data/ialData';
+import { EASE_EXPO } from './lib/motion';
 import { FilmGrainOverlay } from './components/FilmGrainOverlay';
 import { Navbar } from './components/sections/Navbar';
 import { CommandPaletteModal } from './components/sections/CommandPaletteModal';
@@ -15,31 +16,57 @@ import { LabVignettes } from './components/sections/LabVignettes';
 import { UnitMatrix } from './components/sections/UnitMatrix';
 import { FooterSection } from './components/sections/FooterSection';
 
-/* One room of the descent: a darker ground (each room sinks below
-   the last, all the way to the cocoa band) and an optional soft
-   spotlight breathing across one corner so the deep ground never
-   reads flat. The spotlight re-inks through --spotlight per dress. */
+/* One room of the descent. The rooms are ordered steps now, not
+   named grounds — each takes the next colour down the staircase
+   (--room-step-1 … --room-step-5), and the seam itself is a blend:
+   the room's ground fades in from the previous room's ground over
+   the first 240px, so no junction anywhere is a hard edge. The
+   corner spotlight fades out before it reaches either seam (the
+   same 200px dissolve, vertically), so its glow can never be cut
+   off by a room boundary. The whole room rises gently into view
+   the first time it is scrolled to. */
+const GLOW_FADE =
+  'linear-gradient(to bottom, transparent 0px, #000 200px, #000 calc(100% - 200px), transparent 100%)';
+
 function Room({
   ground,
+  from,
   glow,
+  reducedMotion,
   children,
 }: {
   ground: string;
+  from: string;
   glow?: string;
+  reducedMotion: boolean;
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative overflow-x-clip" style={{ background: ground }}>
+    <div
+      className="relative overflow-x-clip"
+      style={{
+        background: `linear-gradient(180deg, ${from} 0px, ${ground} 240px)`,
+      }}
+    >
       {glow && (
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
           style={{
             background: `radial-gradient(ellipse ${glow}, var(--spotlight) 0%, transparent 72%)`,
+            maskImage: GLOW_FADE,
+            WebkitMaskImage: GLOW_FADE,
           }}
         />
       )}
-      {children}
+      <motion.div
+        initial={reducedMotion ? false : { opacity: 0, y: 26 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.08 }}
+        transition={{ duration: 0.7, ease: EASE_EXPO }}
+      >
+        {children}
+      </motion.div>
     </div>
   );
 }
@@ -159,13 +186,7 @@ export default function App() {
       >
         <FilmGrainOverlay />
 
-        <Navbar
-          theme={theme}
-          onToggleTheme={toggleTheme}
-          onOpenSearch={() => openSearch('')}
-          onOpenNotes={enterWorkspace}
-          onNavigate={navigateTo}
-        />
+        <Navbar onOpenNotes={enterWorkspace} />
 
         <main>
           <HeroSection
@@ -175,40 +196,69 @@ export default function App() {
             onBuildPack={() => navigateTo('#workflow')}
           />
 
-          {/* ————— the descent —————
-              No seams between the rooms any more: the hero stands on
-              the page ground and every room below it steps darker
-              than the last — showcase, workflow, interlude, the lab,
-              units — sinking room by room until the footer's one
-              surviving wave pours the last ground into the cocoa
-              band. The darkness is the seam; a soft room spotlight
-              (a different corner each time) keeps the deep grounds
-              from reading flat, and the rooms keep the hero's ring
-              language in their backdrops. */}
-          <Room ground="var(--room-showcase)" glow="28% 42% at 82% 6%">
-            <ShowcaseCarousel reducedMotion={reducedMotion} />
-          </Room>
-
-          <Room ground="var(--room-workflow)" glow="34% 38% at 12% 92%">
+          {/* ————— the descent, in reading order —————
+              The page now tells its story in one pass: the hero hands
+              over to the workflow (how the method works), the workflow
+              to the showcase machines (what the craft feels like), the
+              machines to the syllabus coverage (what's inside), the
+              coverage to the living laboratory (the subject itself,
+              running), and the laboratory exhales into the kinetic
+              interlude before the footer's one surviving wave pours
+              the last ground into the cocoa band. The rooms keep
+              their ids, so every anchor — Build a Pack, the palette's
+              jumps, the footer's look-around — still lands true.
+              No seams anywhere: each room's ground blends down from
+              the previous one over a 240px gradient, the darkness
+              itself smoothed into a fall, and each room rises gently
+              into view the first time it is scrolled to. */}
+          <Room
+            ground="var(--room-step-1)"
+            from="var(--bg)"
+            glow="34% 38% at 12% 84%"
+            reducedMotion={reducedMotion}
+          >
             <WorkflowSplit
               reducedMotion={reducedMotion}
               onOpenSearch={(q = '') => openSearch(q)}
             />
           </Room>
 
-          <Room ground="var(--room-interlude)">
-            <KineticInterlude theme={theme} reducedMotion={reducedMotion} />
+          <Room
+            ground="var(--room-step-2)"
+            from="var(--room-step-1)"
+            glow="28% 42% at 84% 12%"
+            reducedMotion={reducedMotion}
+          >
+            <ShowcaseCarousel reducedMotion={reducedMotion} />
           </Room>
 
-          <Room ground="var(--room-lab)" glow="46% 34% at 50% 0%">
-            <LabVignettes reducedMotion={reducedMotion} />
-          </Room>
-
-          <Room ground="var(--room-units)" glow="40% 36% at 50% 100%">
+          <Room
+            ground="var(--room-step-3)"
+            from="var(--room-step-2)"
+            glow="40% 36% at 50% 88%"
+            reducedMotion={reducedMotion}
+          >
             <UnitMatrix
               reducedMotion={reducedMotion}
               onSelectUnit={openUnitInspector}
             />
+          </Room>
+
+          <Room
+            ground="var(--room-step-4)"
+            from="var(--room-step-3)"
+            glow="46% 34% at 50% 10%"
+            reducedMotion={reducedMotion}
+          >
+            <LabVignettes reducedMotion={reducedMotion} />
+          </Room>
+
+          <Room
+            ground="var(--room-step-5)"
+            from="var(--room-step-4)"
+            reducedMotion={reducedMotion}
+          >
+            <KineticInterlude theme={theme} reducedMotion={reducedMotion} />
           </Room>
         </main>
 

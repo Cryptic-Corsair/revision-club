@@ -69,15 +69,42 @@ export interface PreviewThemeTokens {
   accent: string;
 }
 
-export interface HeroTabData {
-  id: 'definitions' | 'equations' | 'worked';
-  indexLabel: string;
-  label: string;
-  commandQuery: string;
-  unitLabel: string;
+/* ————— the hero's notes-reader preview —————
+   The workbench stage no longer shows an invented app mock: it
+   reproduces the real notes reader, clause by clause, with the
+   club's actual revision notes — real spec numbers, the official
+   statements verbatim, and the notes' own key definitions,
+   displayed equations and worked examples. Inline markup rides the
+   club's Fmt dialect (**bold** · ==highlight== · ~sub~ · ^sup^);
+   the hero renders it with a tiny local formatter. */
+export type NotePreviewBlock =
+  | { kind: 'def'; term: string; text: string }
+  | { kind: 'eq'; eq: string }
+  | {
+      kind: 'worked';
+      title: string;
+      question: string;
+      steps: number;
+      answer: string;
+    };
+
+export interface NotePreviewClause {
+  spec: string;
   title: string;
-  meta: string;
-  lines: Array<{ key: string; detail: string; metric: string }>;
+  /** the official statement, verbatim */
+  statement: string;
+  blocks: NotePreviewBlock[];
+}
+
+export interface NotePreviewDoc {
+  id: string;
+  unitCode: IalUnit['code'];
+  topicLabel: string;
+  title: string;
+  specRange: string;
+  sectionsTotal: number;
+  readMinutes: number;
+  clauses: NotePreviewClause[];
 }
 
 export interface WorkflowChapter {
@@ -437,47 +464,199 @@ export const PREVIEW_THEMES: Record<PreviewThemeId, PreviewThemeTokens> = {
   },
 };
 
-export const HERO_PREVIEW_TABS: readonly HeroTabData[] = [
+/* Three real notes from the workspace's own corpus (NOTES_META in
+   src/lib/spectra/notes-meta.ts — same ids, same titles, same spec
+   ranges, the real per-topic reading minutes), each cut down to a
+   handful of its actual specification sections. Every statement,
+   definition, equation and worked example below is lifted verbatim
+   from the notes docs in src/lib/spectra/notes.ts. */
+export const NOTE_PREVIEW_DOCS: readonly NotePreviewDoc[] = [
   {
-    id: 'definitions',
-    indexLabel: '01',
-    label: '01 Definitions',
-    commandQuery: 'spec:1.4c ionisation',
-    unitLabel: 'WCH11 · Topic 2 · Spec 1.4c',
-    title: 'Indexed specification language',
-    meta: '14 min read · 4 mark-scheme checks',
-    lines: [
-      { key: 'Statement 1.4c', detail: 'First-principles phrasing matched to Pearson mark schemes', metric: '2 marks' },
-      { key: 'Examiner boundary', detail: 'Mandatory state symbols and per-mole conditions highlighted', metric: 'Verified' },
-      { key: 'Quick jump', detail: 'Cross-linked directly to Topic 8 & Topic 12 comparisons', metric: '⌘K' },
+    id: 'wch11-t02',
+    unitCode: 'WCH11',
+    topicLabel: 'Topic 2',
+    title: 'Atomic structure & the periodic table',
+    specRange: '2.1 → 2.18',
+    sectionsTotal: 18,
+    readMinutes: 26,
+    clauses: [
+      {
+        spec: '2.3',
+        title: 'Atomic number and mass number',
+        statement:
+          'know what is meant by the terms ‘atomic (proton) number’ and ‘mass number’',
+        blocks: [
+          {
+            kind: 'def',
+            term: 'Atomic (proton) number, Z',
+            text: 'The number of ==protons== in the nucleus. The Periodic Table is arranged in order of it.',
+          },
+          {
+            kind: 'eq',
+            eq: 'number of neutrons = A − Z    protons = Z    electrons = Z − charge',
+          },
+        ],
+      },
+      {
+        spec: '2.4',
+        title: 'Counting subatomic particles',
+        statement:
+          'be able to use the atomic number and the mass number to determine the number of each type of subatomic particle in an atom or ion',
+        blocks: [
+          {
+            kind: 'worked',
+            title: 'Worked example · the aluminium ion',
+            question:
+              'Determine the number of protons, neutrons and electrons in ^27^~13~Al^3+^.',
+            steps: 3,
+            answer: '^27^~13~Al^3+^: **13 protons, 14 neutrons, 10 electrons**.',
+          },
+        ],
+      },
+      {
+        spec: '2.5',
+        title: 'Isotopes',
+        statement: 'understand the term ‘isotope’',
+        blocks: [
+          {
+            kind: 'def',
+            term: 'Isotopes',
+            text: 'Isotopes are atoms of the ==same element== having the ==same number of protons== but ==different number of neutrons==.',
+          },
+        ],
+      },
     ],
   },
   {
-    id: 'equations',
-    indexLabel: '02',
-    label: '02 Equations',
-    commandQuery: 'spec:4.3b equilibria',
-    unitLabel: 'WCH14 · Topic 14 · Spec 4.3b',
-    title: 'Structured calculation templates',
-    meta: '16 min read · 6 worked prompts',
-    lines: [
-      { key: 'Step sequence', detail: 'Balanced molar ratios isolated before substitution', metric: '3 steps' },
-      { key: 'Unit consistency', detail: 'dm³ conversions and significant-figure checkpoints inline', metric: '3 sig fig' },
-      { key: 'Pack export', detail: 'Include directly inside custom single-sheet revision packs', metric: 'Ready' },
+    id: 'wch12-t06',
+    unitCode: 'WCH12',
+    topicLabel: 'Topic 6',
+    title: 'Energetics',
+    specRange: '6.1 → 6.11',
+    sectionsTotal: 11,
+    readMinutes: 24,
+    clauses: [
+      {
+        spec: '6.2',
+        title: 'Exothermic and endothermic reactions',
+        statement:
+          'know that, by convention, exothermic reactions have a negative enthalpy change and endothermic reactions have a positive enthalpy change',
+        blocks: [
+          {
+            kind: 'def',
+            term: 'Exothermic reactions',
+            text: 'Reactions which ==liberate heat energy== to the surrounding. Enthalpy of reactants ==> enthalpy of products==. The sign on ΔH = ==− ve==.',
+          },
+          {
+            kind: 'def',
+            term: 'Endothermic reactions',
+            text: 'Reactions which ==absorb heat energy== from the surrounding. Enthalpy of reactants ==< enthalpy of products==. The sign on ΔH = ==+ ve==.',
+          },
+        ],
+      },
+      {
+        spec: '6.5',
+        title: 'Measuring enthalpy changes',
+        statement:
+          'be able to use experimental data to calculate: i energy transferred in a reaction recalling and using the expression: energy transferred (J) = mass (g) × specific heat capacity (J g−1 °C−1) × temperature change (°C)…',
+        blocks: [
+          { kind: 'eq', eq: 'Q = m × c × ΔT' },
+          {
+            kind: 'worked',
+            title: 'Worked example · calculating enthalpy change of combustion',
+            question:
+              'From the results above, calculate the enthalpy change of combustion of ethanol, Δ~c~H^θ^, in kJ mol^−1^. The specific heat capacity of water is 4.18 J g^−1^ °C^−1^.',
+            steps: 3,
+            answer:
+              'Δ~c~H^θ^ of ethanol = ==−1213.7 kJ mol^−1^== — [negative sign because it is exothermic].',
+          },
+        ],
+      },
+      {
+        spec: '6.6',
+        title: "Hess's law",
+        statement:
+          'know Hess’s Law and be able to apply it to: i constructing enthalpy cycles ii calculating enthalpy changes of reaction using data provided, or data selected from a table or obtained from experiments',
+        blocks: [
+          {
+            kind: 'def',
+            term: "Hess's Law",
+            text: 'The enthalpy change of a chemical reaction is independent of the path taken in converting reactants into products, provided the initial and final conditions are the same.',
+          },
+        ],
+      },
+      {
+        spec: '6.7',
+        title: 'Core Practical 2',
+        statement:
+          'CORE PRACTICAL 2 — determination of the enthalpy change of a reaction using Hess’s Law',
+        blocks: [
+          {
+            kind: 'worked',
+            title: 'Worked example · the thermal decomposition of calcium carbonate',
+            question:
+              'Calculate Δ~r~H^θ^ for the thermal decomposition of calcium carbonate into calcium oxide and carbon dioxide given the following data. CaCO~3~(s) + 2HCl(aq) → CaCl~2~(aq) + H~2~O(l) + CO~2~(g), Δ~r~H^θ^ = −17 kJ/mol. CaO(s) + 2HCl(aq) → CaCl~2~(aq) + H~2~O(l), Δ~r~H^θ^ = −195 kJ/mol.',
+            steps: 4,
+            answer:
+              'Δ~r~H^θ^ = ==+178 kJ mol^−1^== — endothermic, as a decomposition that needs heating should be.',
+          },
+        ],
+      },
     ],
   },
   {
-    id: 'worked',
-    indexLabel: '03',
-    label: '03 Worked Example',
-    commandQuery: 'spec:5.2e synthesis',
-    unitLabel: 'WCH15 · Topic 21 · Spec 5.2e',
-    title: 'Step-by-step mark allocation',
-    meta: '14 min read · Worked sequence 19/30',
-    lines: [
-      { key: 'Mark 1 · Reagent', detail: 'Reagent & condition pair isolated in high-contrast callout', metric: 'M1' },
-      { key: 'Mark 2 · Intermediate', detail: 'Intermediate route checkpoint verified prior to final step', metric: 'M2' },
-      { key: 'Mark 3 · Evaluation', detail: 'Common deduction traps flagged before exam submission', metric: 'M3' },
+    id: 'wch12-t10',
+    unitCode: 'WCH12',
+    topicLabel: 'Topic 10',
+    title: 'Halogenoalkanes, alcohols and spectra',
+    specRange: '10.6 → 10.22',
+    sectionsTotal: 14,
+    readMinutes: 30,
+    clauses: [
+      {
+        spec: '10.7',
+        title: 'Primary, secondary or tertiary',
+        statement:
+          'understand the distinction between primary, secondary and tertiary halogenoalkanes',
+        blocks: [],
+      },
+      {
+        spec: '10.10',
+        title: 'Comparing the rates of hydrolysis',
+        statement:
+          'understand that experimental observations and data can be used to compare the relative rates of hydrolysis of: i primary, secondary and tertiary structural isomers of a halogenoalkane ii primary chloro-, bromo- and iodoalkanes using aqueous silver nitrate in ethanol',
+        blocks: [
+          {
+            kind: 'def',
+            term: 'Hydrolysis',
+            text: 'Hydrolysis reaction is a reaction in which water or hydroxide ions ==replace an atom in a molecule with an -OH group==.',
+          },
+          { kind: 'eq', eq: 'RX + H~2~O → ROH + HX' },
+        ],
+      },
+      {
+        spec: '10.13',
+        title: 'The nature of the halogen',
+        statement:
+          'understand, in terms of bond enthalpy, the trend in reactivity of chloro-, bromo- and iodoalkanes',
+        blocks: [],
+      },
+      {
+        spec: '10.21',
+        title: 'Mass spectra — the molecular ion and its fragments',
+        statement:
+          'be able to interpret data from mass spectra to suggest possible structures of simple organic compounds using the m/z of the molecular ion and fragmentation patterns',
+        blocks: [
+          {
+            kind: 'worked',
+            title: 'Worked example · the M+1 height',
+            question:
+              'The relative height of the M peak for benzoic acid (contains 7 carbon atoms) is 85%. Find the height of its M+1 peak.',
+            steps: 3,
+            answer: 'M+1 is 7% of 85 = 5.95',
+          },
+        ],
+      },
     ],
   },
 ];

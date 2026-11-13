@@ -18,8 +18,11 @@ const hours = Math.round(GLOBAL_METRICS.totalMinutes / 60);
 /* The workspace's own footer, re-cut for the showcase: the same cocoa
    band under the same wave (the club footer's exact path), Bubbles
    perched on the crest, the stat grid, candy-numbered unit links and
-   the eyebrow sections. Above the wave the closing CTA stage keeps the
-   portal's exit ramps — Launch IAL CHEM hands the visitor over. */
+   the eyebrow sections. Above the wave the closing CTA stage keeps
+   the portal's exit ramps — Launch IAL CHEM hands the visitor over.
+   The stage stands on the descent's last step (--room-step-5, now the
+   interlude's ground), so the one surviving wave pours that ground
+   into the band. */
 export function FooterSection({
   theme,
   onLaunchWorkspace,
@@ -31,11 +34,11 @@ export function FooterSection({
   return (
     <footer className="relative mt-auto">
       {/* Closing CTA stage — the band's candy buttons + display voice.
-          It stands on the units room's ground: the descent's last step,
-          so the one surviving wave pours that ground into the band. */}
+          It stands on the descent's last step: the wave below pours
+          that ground into the band. */}
       <div
         className="relative py-20 sm:py-28"
-        style={{ backgroundColor: 'var(--room-units)' }}
+        style={{ backgroundColor: 'var(--room-step-5)' }}
       >
         <div
           aria-hidden="true"
@@ -104,12 +107,12 @@ export function FooterSection({
           </span>
         </span>
 
-      {/* The wave — the club footer's exact path, draining the units
+      {/* The wave — the club footer's exact path, draining the last
           room's ground into the cocoa band. The page's one wave. */}
       <div
         aria-hidden="true"
         className="relative h-[calc(54px*var(--ui-scale))] sm:h-[calc(74px*var(--ui-scale))]"
-        style={{ background: 'var(--room-units)' }}
+        style={{ background: 'var(--room-step-5)' }}
       >
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-full w-full">
           <path
@@ -243,10 +246,10 @@ export function FooterSection({
               <div className="mt-3 flex flex-col">
                 {[
                   { label: 'Back to the top', act: () => onNavigate('#top') },
-                  { label: 'The showcase machines', act: () => onNavigate('#showcase') },
                   { label: 'Revision pack builder', act: () => onNavigate('#workflow') },
-                  { label: 'The living laboratory', act: () => onNavigate('#lab') },
+                  { label: 'The showcase machines', act: () => onNavigate('#showcase') },
                   { label: 'Units matrix', act: () => onNavigate('#units') },
+                  { label: 'The living laboratory', act: () => onNavigate('#lab') },
                   { label: 'Search (⌘K)', act: onOpenSpecIndex },
                 ].map((row) => (
                   <button
