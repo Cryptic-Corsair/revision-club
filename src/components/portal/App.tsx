@@ -89,7 +89,7 @@ export default function App() {
   // the dress lives on the wrapper element (declaratively below),
   // never on <html> — the workspace's labs own the root element.
 
-  // Root Lenis smooth scroll with wheel inertia, paused/disabled for reduced motion
+  // Keep wheel smoothing for desktop; touch-first devices retain native scrolling.
   useEffect(() => {
     if (reducedMotion) {
       lenisRef.current = null;
