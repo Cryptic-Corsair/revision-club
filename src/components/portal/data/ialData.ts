@@ -1,10 +1,10 @@
 /* The portal's two dresses are the club's own labs, renamed honestly:
-   'night' is the workspace's night lab (html.dark in globals.css) and
-   'light' is the daylight cream lab. The toggle in the portal navbar
-   re-dresses the page between the two rooms the workspace itself wears. */
+   'dune' is the workspace's chocolate room (html.dune in globals.css —
+   the factory dress) and 'light' is the daylight cream lab. The toggle
+   in the portal navbar re-dresses the page between the two rooms. */
 import { UNITS as CLUB_UNITS } from '@/lib/spectra/units';
 
-export type SiteTheme = 'night' | 'light';
+export type SiteTheme = 'dune' | 'light';
 /* The hero's workbench preview dots try the club's four labs on the
    stage — same ids as the workspace's lab names, same palettes. */
 export type PreviewThemeId = 'night' | 'light' | 'dune' | 'classic';

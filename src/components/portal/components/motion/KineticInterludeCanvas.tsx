@@ -54,10 +54,13 @@ export function KineticInterludeCanvas({
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
 
+      // The club's two rooms: daylight cocoa ink lit by coral +
+      // tangerine, the dune chocolate room lit by the amber roast +
+      // sea-glass (the same pair the hero's caustics wear).
       const isLight = themeRef.current === 'light';
-      const inkRgb = isLight ? '61, 43, 31' : '245, 239, 247';
-      const accentRgb = isLight ? '255, 107, 107' : '215, 181, 231';
-      const warmRgb = isLight ? '255, 146, 43' : '18, 184, 134';
+      const inkRgb = isLight ? '61, 43, 31' : '246, 240, 230';
+      const accentRgb = isLight ? '255, 107, 107' : '217, 166, 95';
+      const warmRgb = isLight ? '255, 146, 43' : '157, 185, 176';
 
       const vel = reducedMotionRef.current ? 0 : velocitySmooth.get();
       const velocityBoost = Math.min(1.6, Math.abs(vel) / 1400);

@@ -11,8 +11,9 @@ import "./portal.css";
 
 /* The alternative front door: a showcase landing that sells the workspace
    before it hands the visitor over. It is its own room — theme tokens
-   scoped to .portal-root in portal.css (the club's night and daylight
-   palettes, re-pointed per toggle), its own Lenis smooth scroll — so
+   scoped to .portal-root in portal.css (the club's dune lab is the
+   factory dress, the daylight cream lab one toggle away), the club's
+   wave seam walk between sections, its own Lenis smooth scroll — so
    nothing here can leak into the workspace routes. Deliberately kept out
    of the indexes: the workspace home at / is the canonical homepage. */
 export const metadata: Metadata = {

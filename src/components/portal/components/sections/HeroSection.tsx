@@ -62,7 +62,7 @@ export function HeroSection({
   // Sync default preview window starting palette smoothly if user toggles global navbar theme before interacting
   useEffect(() => {
     if (!userInteracted) {
-      setPreviewThemeId(theme === 'light' ? 'light' : 'night');
+      setPreviewThemeId(theme === 'light' ? 'light' : 'dune');
     }
   }, [theme, userInteracted]);
 

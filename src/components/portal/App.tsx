@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Lenis from 'lenis';
 import { MotionConfig, useReducedMotion } from 'framer-motion';
+import { BandWave } from '@/components/club/bands';
 import type { IalUnit, SiteTheme } from './data/ialData';
 import { FilmGrainOverlay } from './components/FilmGrainOverlay';
 import { Navbar } from './components/sections/Navbar';
@@ -18,14 +19,14 @@ export default function App() {
   const prefersReduced = useReducedMotion();
   const reducedMotion = Boolean(prefersReduced);
 
-  const [theme, setTheme] = useState<SiteTheme>('night');
+  const [theme, setTheme] = useState<SiteTheme>('dune');
   const [commandOpen, setCommandOpen] = useState(false);
   const [commandQuery, setCommandQuery] = useState('');
   const lenisRef = useRef<Lenis | null>(null);
 
-  // The portal's two dresses are the club's own labs (night / light);
+  // The portal's two dresses are the club's own labs (dune / light);
   // the dress lives on the wrapper element (declaratively below),
-  // never on <html> — the workspace's own labs own the root element.
+  // never on <html> — the workspace's labs own the root element.
 
   // Root Lenis smooth scroll with wheel inertia, paused/disabled for reduced motion
   useEffect(() => {
@@ -86,7 +87,7 @@ export default function App() {
   }, [router]);
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => (prev === 'night' ? 'light' : 'night'));
+    setTheme((prev) => (prev === 'dune' ? 'light' : 'dune'));
   }, []);
 
   const openSearch = useCallback((initialQuery = '') => {
@@ -145,19 +146,42 @@ export default function App() {
             onBuildPack={() => navigateTo('#workflow')}
           />
 
-          <ShowcaseCarousel reducedMotion={reducedMotion} />
+          {/* ————— the seam walk —————
+              The club home's one structure: the page is a walk across
+              two seam grounds (--band-a / --band-b) and every boundary
+              is a BandWave from the shared five-curve shelf — no two
+              neighbouring seams repeat a curve. The hero stands on the
+              page ground; the showcase, the pack builder, the
+              interlude and the units matrix each get their own room;
+              the last seam hands the page back so the footer's closing
+              stage and its wave into the cocoa band read clean. */}
+          <BandWave from="var(--bg)" to="var(--band-a)" wave={1} />
+          <div style={{ background: 'var(--band-a)' }}>
+            <ShowcaseCarousel reducedMotion={reducedMotion} />
+          </div>
 
-          <WorkflowSplit
-            reducedMotion={reducedMotion}
-            onOpenSearch={(q = '') => openSearch(q)}
-          />
+          <BandWave from="var(--band-a)" to="var(--band-b)" wave={2} />
+          <div style={{ background: 'var(--band-b)' }}>
+            <WorkflowSplit
+              reducedMotion={reducedMotion}
+              onOpenSearch={(q = '') => openSearch(q)}
+            />
+          </div>
 
-          <KineticInterlude theme={theme} reducedMotion={reducedMotion} />
+          <BandWave from="var(--band-b)" to="var(--band-a)" wave={3} />
+          <div style={{ background: 'var(--band-a)' }}>
+            <KineticInterlude theme={theme} reducedMotion={reducedMotion} />
+          </div>
 
-          <UnitMatrix
-            reducedMotion={reducedMotion}
-            onSelectUnit={openUnitInspector}
-          />
+          <BandWave from="var(--band-a)" to="var(--band-b)" wave={4} />
+          <div style={{ background: 'var(--band-b)' }}>
+            <UnitMatrix
+              reducedMotion={reducedMotion}
+              onSelectUnit={openUnitInspector}
+            />
+          </div>
+
+          <BandWave from="var(--band-b)" to="var(--bg)" wave={0} />
         </main>
 
         <FooterSection

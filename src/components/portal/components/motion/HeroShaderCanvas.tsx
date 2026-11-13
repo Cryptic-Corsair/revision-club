@@ -26,7 +26,7 @@ const FRAGMENT_SHADER = /* glsl */ `
   uniform vec2 uResolution;
   uniform vec2 uPointer;
   uniform float uPointerActive;
-  uniform float uThemeMix; // 0.0 = night plum, 1.0 = daylight cream
+  uniform float uThemeMix; // 0.0 = dune chocolate, 1.0 = daylight cream
 
   // Smooth procedural value noise for liquid optical caustics
   float hash(vec2 p) {
@@ -92,37 +92,43 @@ const FRAGMENT_SHADER = /* glsl */ `
     );
 
     // Palette tokens — the club's two rooms, straight from globals.css:
-    // night is the plum-charcoal dusk lit by lilac + mint caustics,
-    // daylight the cream page lit by coral + tangerine.
-    vec3 darkBg = vec3(0.090, 0.075, 0.114);           // #17131d — night page
-    vec3 darkViolet = vec3(0.843, 0.710, 0.906);       // #d7b5e7 — the night lab's lilac
-    vec3 darkWarm = vec3(0.071, 0.722, 0.525);         // #12b886 — mint off the candy shelf
+    // dune is the chocolate room lit by the amber roast + sea-glass
+    // caustics (the lab's own low lamp burns underneath), daylight the
+    // cream page lit by coral + tangerine.
+    vec3 duneBg = vec3(0.118, 0.106, 0.086);           // #1e1b16 — the dune page
+    vec3 duneAmber = vec3(0.851, 0.651, 0.373);        // #d9a65f — the amber roast
+    vec3 duneSea = vec3(0.616, 0.725, 0.690);          // #9db9b0 — sea-glass
 
     vec3 creamBg = vec3(1.0, 0.965, 0.918);            // #fff6ea — the cream page
     vec3 creamCobalt = vec3(1.0, 0.420, 0.420);        // #ff6b6b — coral
     vec3 creamWarm = vec3(1.0, 0.573, 0.169);          // #ff922b — tangerine
 
-    vec3 baseBg = mix(darkBg, creamBg, uThemeMix);
-    vec3 primaryGlow = mix(darkViolet, creamCobalt, uThemeMix);
-    vec3 secondaryGlow = mix(darkWarm, creamWarm, uThemeMix);
+    vec3 baseBg = mix(duneBg, creamBg, uThemeMix);
+    vec3 primaryGlow = mix(duneAmber, creamCobalt, uThemeMix);
+    vec3 secondaryGlow = mix(duneSea, creamWarm, uThemeMix);
 
     // Light envelope centered near the upper-middle hero rim
     float horizonEnvelope = exp(-pow((uv.y - 0.58) * 2.15, 2.0));
     float radialFocus = exp(-dot(p - vec2(0.0, 0.08), p - vec2(0.0, 0.08)) * 1.15);
 
     vec3 lightTint = mix(primaryGlow, secondaryGlow, smoothstep(-0.4, 0.6, p.x + q.x * 0.35));
-    float causticStrength = mix(0.24, 0.095, uThemeMix);
-    float flareStrength = mix(0.16, 0.065, uThemeMix);
-    float gridStrength = mix(0.075, 0.048, uThemeMix);
+    float causticStrength = mix(0.22, 0.095, uThemeMix);
+    float flareStrength = mix(0.14, 0.065, uThemeMix);
+    float gridStrength = mix(0.068, 0.048, uThemeMix);
 
     vec3 col = baseBg;
     col = mix(col, lightTint, causticBand * causticStrength * (0.45 + 0.55 * radialFocus));
     col += lightTint * rimFlare * flareStrength * (0.5 + 0.5 * horizonEnvelope);
-    col += primaryGlow * ptrInfluence * mix(0.09, 0.045, uThemeMix);
+    col += primaryGlow * ptrInfluence * mix(0.085, 0.045, uThemeMix);
+
+    // The dune lab's ambient lamp — a low amber bloom burning beneath
+    // the caustics, breathing slowly; it steps out entirely by day.
+    float lamp = exp(-dot(p - vec2(-0.44, -0.36), p - vec2(-0.44, -0.36)) * 2.3);
+    col += duneAmber * lamp * (0.055 + 0.018 * sin(uTime * 0.5)) * (1.0 - uThemeMix);
 
     // Crisp hairline grid modulated by caustic intensity
     float gridAlpha = (gridLine * 0.55 + majorStep * 0.85) * gridStrength * (0.35 + 0.75 * causticBand + ptrInfluence * 0.8);
-    vec3 gridColor = mix(vec3(1.0, 0.965, 0.918), vec3(0.239, 0.169, 0.122), uThemeMix);
+    vec3 gridColor = mix(vec3(0.965, 0.941, 0.902), vec3(0.239, 0.169, 0.122), uThemeMix);
     col = mix(col, gridColor, clamp(gridAlpha, 0.0, 0.16));
 
     // Seamless bottom & edge fade directly into --bg so there is never a harsh seam

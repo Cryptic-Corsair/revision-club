@@ -55,8 +55,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
   return (
     <section
       id="workflow"
-      className="relative border-t py-20 sm:py-28"
-      style={{ borderColor: 'var(--border)' }}
+      className="relative py-20 sm:py-28"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-xl">

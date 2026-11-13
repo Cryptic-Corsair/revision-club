@@ -135,13 +135,13 @@ export function Navbar({
             data-testid="theme-toggle-btn"
             onClick={onToggleTheme}
             aria-label={
-              theme === 'night'
+              theme === 'dune'
                 ? 'Switch to the Light lab'
-                : 'Switch to the Night lab'
+                : 'Switch to the Dune lab'
             }
             className="portal-nav-chip inline-flex h-9 items-center gap-1.5 rounded-full px-3 text-xs font-semibold whitespace-nowrap shrink-0"
           >
-            {theme === 'night' ? (
+            {theme === 'dune' ? (
               <>
                 <Sun className="h-3.5 w-3.5" aria-hidden="true" />
                 <span className="hidden lg:inline">Light</span>
@@ -149,7 +149,7 @@ export function Navbar({
             ) : (
               <>
                 <Moon className="h-3.5 w-3.5" aria-hidden="true" />
-                <span className="hidden lg:inline">Night</span>
+                <span className="hidden lg:inline">Dune</span>
               </>
             )}
           </button>

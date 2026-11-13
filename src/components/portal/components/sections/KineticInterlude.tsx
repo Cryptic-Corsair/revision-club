@@ -44,11 +44,7 @@ export function KineticInterlude({ theme, reducedMotion }: KineticInterludeProps
     <section
       ref={sectionRef}
       aria-label="Specification scope interlude"
-      className="relative flex min-h-[68vh] sm:min-h-[72vh] w-full flex-col items-center justify-center overflow-hidden border-y py-16"
-      style={{
-        borderColor: 'var(--border)',
-        backgroundColor: 'var(--bg)',
-      }}
+      className="relative flex min-h-[68vh] sm:min-h-[72vh] w-full flex-col items-center justify-center overflow-hidden py-16"
     >
       <KineticInterludeCanvas
         theme={theme}

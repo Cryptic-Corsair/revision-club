@@ -94,8 +94,7 @@ export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
   return (
     <section
       id="showcase"
-      className="relative border-t py-20 sm:py-28"
-      style={{ borderColor: 'var(--border)' }}
+      className="relative py-20 sm:py-28"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header with Prev/Next and Slide Counter */}

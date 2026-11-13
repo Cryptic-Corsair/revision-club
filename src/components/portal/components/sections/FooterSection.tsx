@@ -262,7 +262,7 @@ export function FooterSection({
                 className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/[0.14] bg-white/[0.05] px-3 py-1.5 text-[11px] font-bold transition-colors hover:border-white/[0.3] hover:bg-white/[0.1]"
                 style={{ color: 'var(--band-ink)' }}
               >
-                {theme === 'night' ? 'Night lab' : 'Light lab'}
+                {theme === 'dune' ? 'Dune lab' : 'Light lab'}
               </button>
             </section>
           </div>
