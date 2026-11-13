@@ -17,7 +17,7 @@ const NODE_COORDS = [
 
 export function PackFlowMachine({ reducedMotion }: PackFlowMachineProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [inView, setInView] = useState(true);
+  const [inView, setInView] = useState(false);
   const [compileCycle, setCompileCycle] = useState(0);
   const [compiledMinutes, setCompiledMinutes] = useState(reducedMotion ? 38 : 14);
 
