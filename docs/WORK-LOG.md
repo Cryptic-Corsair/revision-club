@@ -1161,3 +1161,17 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** branch preview not yet verified.
 - **Commit(s):** implementation commits are on `perf/homepage-rendering-pass`; final commit and preview result to be recorded after verification.
 - **Follow-up / known limitations:** the 40fps budget applies to canvas layers only; Framer Motion SVG/DOM loops remain native and continue animating while visible. If on-device profiling identifies remaining SVG-related pressure, optimize those loops individually rather than freezing all motion.
+
+
+### 2026-11-14 — verification record for the homepage rendering optimization
+
+- **Contributor:** OpenAI coding agent.
+- **Request / objective:** complete the implementation record for the full homepage performance pass and record the preview build result.
+- **Investigation:** reviewed the final pull-request diff and the three canvas lifecycle implementations after the changes. Rechecked the lab/unit visibility gates and the preserved touch-device marquee motion. The automated PR review flagged only this journal's incomplete verification metadata; it reported no source-code finding.
+- **Changes made:** added this verification record without rewriting the earlier append-only entry. The implementation commits are `07f46deadd8d8fef6026e74b2acc9caf1a7040e2`, `34da50b94d2af5ad2c2d76ef7f87d4b4c75eafa2`, `6ccb277d02aba548c29a64f830ea182e6d210e9c`, `c3b1c2169738f86e67ce4d5b5b40f4404d420c11`, `5ed6b37269de7531df327ac9d210ae936e7e5781`, `44fc5433d6b6a342ee39a57b4bef6c23ed25a441`, `a6444733593f40858f4270160c6605e112770e1a`, `52f66b1dce1361ece5db5db5ab7bc801768b9b91` and `5b71e0ef81e56eaa51cce989fbc01fa9033a0170`. The implementation plus first journal entry is `d599d196a032973a9f03dafdd4cf5bdf17f4d98b`.
+- **Preserved invariants:** homepage motion remains enabled when visible; touch hardware is not treated as reduced-motion; the operating-system preference, content, navigation, saved data, themes, desktop animation cadence and workspace route are unchanged.
+- **Decisions and rationale:** use the PR preview as the build gate, but do not mistake a successful build for proof of smoothness on a physical tablet.
+- **Verification:** Vercel reports the PR preview for `d599d196a032973a9f03dafdd4cf5bdf17f4d98b` as **Ready** (`https://vercel.com/eldritchs-projects-9cce69ce/ial-chemistry1/DFjtRGMaLjSzQnPgf1ioqnEBPzo4`; preview URL `https://ial-chemistry1-git-perf-home-580fe3-eldritchs-projects-9cce69ce.vercel.app`). Source-level diff review and visibility/lifecycle checks completed. `bun run lint`, `bun run build` and physical tablet/browser profiling were **not run** in this session.
+- **Deployment:** Vercel PR preview ready; merge to production not yet recorded in this entry.
+- **Commit(s):** implementation and original work record: `d599d196a032973a9f03dafdd4cf5bdf17f4d98b`; this follow-up record is committed separately on `perf/homepage-rendering-pass`.
+- **Follow-up / known limitations:** the canvas layers use a ~40fps cadence on coarse-pointer devices, while visible SVG/Framer Motion loops remain animated. Measure actual frame pacing on the target tablet after deployment; a passing preview does not establish physical-device smoothness.
