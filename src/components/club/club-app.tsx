@@ -13,6 +13,7 @@ import {
   ClipboardList,
   ArrowUp,
   ArrowRight,
+  ArrowUpRight,
   Command,
   ShieldCheck,
   BookMarked,
@@ -852,6 +853,18 @@ function Footer({
               © 2026 IAL CHEM · Notes for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. Not affiliated with or endorsed by Pearson Education Ltd.
             </p>
             <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 self-start sm:self-auto">
+              {/* The alternative homepage — the showcase landing ported
+                  from the landingiaL- clone lives at /portal with its own
+                  ground and fonts, so it gets a plain anchor: a full-page
+                  hand-off keeps both wrappers' scroll/theme state honest. */}
+              <a
+                href="/portal"
+                aria-label="View the alternative homepage — the showcase landing"
+                className="footer-portal-link inline-flex items-center gap-1.5 rounded-full border border-white/[0.16] bg-white/[0.05] px-3 py-1.5 text-[calc(11px*var(--ui-scale))] font-bold text-milk/70 transition-colors hover:border-white/[0.3] hover:bg-white/[0.1] hover:text-milk"
+              >
+                Alternative home
+                <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.2} />
+              </a>
               <button
                 type="button"
                 onClick={onOpenLegal}
