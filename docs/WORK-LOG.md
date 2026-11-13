@@ -1067,3 +1067,12 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Commit(s):** this commit (see git log for SHA).
 - **Revert path:** one commit — `git revert <this commit>` restores the h-11/h-12 bar.
 - **Follow-up / known limitations:** none — a pure geometry tweak; the glass recipe's proportions were tuned at h-11/h-12 and still read correctly at the new height.
+
+## 2026-11-13 — the maison bar is rolled back: the navbar returns to the compact candy-pill glass bar
+
+- **Scope:** user request — revert the navbar redesign and bring the old navbar back, then push.
+- **What happened:** `git revert 585a501's parent 1e14a2d` in one commit — the maison bar's serif lockup, double gilded hairline frame, hairline plate button, the Cormorant Garamond registration (layout.tsx, globals.css `--font-luxe`, `cormorant-var.woff2`) and the gilding token set all left; the compact rectangular glassy pill returned exactly as it stood after the h-12/h-13 height bump (that bump was its own request and stays). The maison bar's WORK-LOG entry travelled with its commit and left with the revert; this entry records the rollback.
+- **Verification:** bun run lint clean; bunx tsc --noEmit clean. agent-browser at 1440×900 dune: bar 806×62, radius 19.2px, amber glass edge rgba(217,166,95,.28), blur(18px) saturate(1.6), candy button class and amber wordmark back, no `cormorant` variable on the html element; 390×844: bar 361×58, 14px side margins, overflow-x 0; fresh-load console: only the pre-existing lenis/scroll-behavior and analytics warnings.
+- **Commit(s):** the revert commit (585a501) plus this log entry's commit.
+- **Revert path:** re-apply 1e14a2d (`git revert 585a501`) to bring the maison bar back — it is preserved in history with its font file and measurements.
+- **Follow-up / known limitations:** none; the old recipe's tokens (`--nav-pill-edge`, `--nav-glass`, `--nav-sheen`) are restored and nothing else referenced the gilding set.
