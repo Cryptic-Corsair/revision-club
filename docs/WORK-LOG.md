@@ -1135,3 +1135,15 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** The source now uses the element-specific ref type identified by the compiler. A fresh Vercel build is pending; no local TypeScript/build command was available through the connected repository tools.
 - **Deployment:** Committed directly to `main`; Vercel should build this new commit.
 - **Follow-up / known limitations:** Check the next deployment status and resolve any subsequent compiler or build errors if reported.
+
+
+### 2026-11-14 — restore tablet motion graphics while retaining performance controls
+
+- **Contributor:** OpenAI coding agent.
+- **Request / objective:** Correct the previous tablet optimization, which incorrectly treated every coarse-pointer device as a reduced-motion device and suppressed the animated artwork.
+- **Investigation:** Traced the coarse-pointer flag through the homepage app shell and laboratory. The flag had been OR-ed into the global reduced-motion value, disabling animation paths in the hero, workflow, showcase, unit motifs and kinetic interlude. The lab additionally blocked each card's SVG loop and its decorative/entrance motion on coarse-pointer devices.
+- **Changes made:** The reduced-motion state now follows only the operating-system preference. Coarse-pointer devices still use native scrolling (Lenis remains desktop-only), but no longer get the still-graphics profile. The lab's SVG loops now run whenever their individual card and parent section are in view; only offscreen cards or an explicit OS reduced-motion preference freeze them. The slower tablet marquee timing and per-card visibility gates remain in place.
+- **Preserved invariants:** OS-level reduced-motion behaviour, offscreen pause/resume, independent per-card visibility, slower touch marquee pacing, native touch scrolling, unique SVG clip-path IDs and all content/layout remain intact.
+- **Verification:** Source-level inspection confirms touch input no longer sets reduced motion, and the lab's visible SVG loops are no longer gated by coarse pointer. No local lint, TypeScript, production build, or physical tablet/browser test was available in this connector session.
+- **Deployment:** Committed directly to main; deployment/build status must be checked.
+- **Follow-up / known limitations:** Tablet frame stability still needs a real-device check. If it stutters, optimize the active animation workload and rendering path rather than disabling the artwork.
