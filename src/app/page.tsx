@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import PortalApp from "@/components/portal/App";
 import "@/components/portal/portal.css";
-import "@/components/portal/navbar.css";
 
 /* The portal wears the club's own typeset: the root layout's font
    loaders put --font-display / --font-body / --font-plex on <html>,
