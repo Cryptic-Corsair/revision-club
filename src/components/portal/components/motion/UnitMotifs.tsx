@@ -505,7 +505,7 @@ export function UnitMotif({
   reducedMotion: boolean;
 }) {
   const Render = MOTIFS[motif];
-  const { ref, live } = useLive<HTMLDivElement>(120);
+  const { ref, live } = useLive<HTMLDivElement>(48);
   return (
     <div ref={ref} className="block w-full">
       <StillProvider live={live}>

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import type { SiteTheme } from '../../data/ialData';
-import { clampDeltaTime, getCappedPixelRatio } from '../../lib/motion';
+import { clampDeltaTime, getCappedPixelRatio, getCanvasFrameIntervalSeconds } from '../../lib/motion';
 
 interface HeroShaderCanvasProps {
   theme: SiteTheme;
@@ -191,6 +191,7 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
     const initialDpr = isSoftwareGl
       ? 1
       : getCappedPixelRatio(window.innerWidth, window.devicePixelRatio || 1);
+    const frameIntervalSeconds = getCanvasFrameIntervalSeconds();
     renderer.setPixelRatio(initialDpr);
 
     const width = Math.max(container.clientWidth, 1);
@@ -235,10 +236,13 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
     }
 
     let isVisible = true;
+    let pageVisible = !document.hidden;
     let contextLost = false;
     let rafId = 0;
     let timeoutId = 0;
     let lastTs = performance.now();
+    let lastTickTs = lastTs;
+    let frameAccumulator = 0;
 
     const scheduleAfterDraw = (cb: () => void) => {
       const gl = renderer.getContext() as WebGL2RenderingContext;
@@ -287,7 +291,22 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
     };
 
     const tick = () => {
-      if (!isVisible || contextLost) return;
+      if (!isVisible || !pageVisible || contextLost) return;
+
+      // Keep the shader's continuous movement, but avoid asking a touch GPU
+      // to shade every high-refresh display callback. The remainder preserves
+      // a stable ~40fps cadence on 60/90/120Hz panels.
+      if (frameIntervalSeconds > 0) {
+        const now = performance.now();
+        frameAccumulator += clampDeltaTime((now - lastTickTs) / 1000);
+        lastTickTs = now;
+        if (frameAccumulator < frameIntervalSeconds) {
+          rafId = window.requestAnimationFrame(tick);
+          return;
+        }
+        frameAccumulator %= frameIntervalSeconds;
+      }
+
       renderFrame(true);
       if (reducedMotionRef.current) return;
       if (isSoftwareGl) {
@@ -301,8 +320,10 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
       window.cancelAnimationFrame(rafId);
       window.clearTimeout(timeoutId);
       lastTs = performance.now();
-      renderFrame(false);
-      if (!reducedMotionRef.current && isVisible && !contextLost) {
+      lastTickTs = lastTs;
+      frameAccumulator = 0;
+      if (pageVisible) renderFrame(false);
+      if (!reducedMotionRef.current && isVisible && pageVisible && !contextLost) {
         if (isSoftwareGl) {
           scheduleAfterDraw(tick);
         } else {
@@ -312,6 +333,7 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
     };
 
     const onPointerMove = (e: PointerEvent) => {
+      if (e.pointerType === 'touch') return;
       const rect = container.getBoundingClientRect();
       if (rect.width <= 0 || rect.height <= 0) return;
       const nx = THREE.MathUtils.clamp((e.clientX - rect.left) / rect.width, 0, 1);
@@ -335,7 +357,7 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
       renderer.setPixelRatio(dpr);
       renderer.setSize(w, h, false);
       uniforms.uResolution.value.set(w * dpr, h * dpr);
-      if (reducedMotionRef.current || !isVisible) {
+      if (pageVisible && (reducedMotionRef.current || !isVisible)) {
         renderFrame(false);
       }
     });
@@ -359,6 +381,16 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
     );
     intersectionObserver.observe(container);
 
+    const onVisibilityChange = () => {
+      pageVisible = !document.hidden;
+      if (pageVisible && isVisible) {
+        startLoop();
+      } else {
+        window.cancelAnimationFrame(rafId);
+        window.clearTimeout(timeoutId);
+      }
+    };
+
     const onContextLost = (e: Event) => {
       e.preventDefault();
       contextLost = true;
@@ -373,6 +405,7 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
 
     renderer.domElement.addEventListener('webglcontextlost', onContextLost);
     renderer.domElement.addEventListener('webglcontextrestored', onContextRestored);
+    document.addEventListener('visibilitychange', onVisibilityChange);
     window.addEventListener('pointermove', onPointerMove, { passive: true });
     window.addEventListener('pointerleave', onPointerLeave, { passive: true });
 
@@ -385,6 +418,7 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
       intersectionObserver.disconnect();
       renderer.domElement.removeEventListener('webglcontextlost', onContextLost);
       renderer.domElement.removeEventListener('webglcontextrestored', onContextRestored);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerleave', onPointerLeave);
       geometry.dispose();

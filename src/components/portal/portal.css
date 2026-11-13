@@ -307,7 +307,7 @@ body:has(.portal-root[data-theme="light"]) {
    oversized will-change layer: high-DPR tablets can otherwise ask
    the compositor for a texture wider than its comfortable budget.
    Cards gate their own SVG loops by visibility; touch-first devices
-   keep the slow CSS drift but hold the detailed drawings still. */
+   preserve those loops while the canvas layers use a lighter pixel and frame budget. */
 @keyframes portal-marquee-left {
   from {
     transform: translate3d(0, 0, 0);
@@ -683,4 +683,20 @@ html.lenis body {
 
 .lenis.lenis-stopped {
   overflow: clip;
+}
+
+
+/* Keep the glass language on touch hardware, but make the backdrop
+   sampling area cheaper to composite during scroll. */
+@media (pointer: coarse) {
+  .portal-nav,
+  .portal-glass-capsule {
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
+    backdrop-filter: blur(10px) saturate(1.2);
+  }
+
+  .portal-capsule-pill {
+    -webkit-backdrop-filter: blur(6px) saturate(1.1);
+    backdrop-filter: blur(6px) saturate(1.1);
+  }
 }
