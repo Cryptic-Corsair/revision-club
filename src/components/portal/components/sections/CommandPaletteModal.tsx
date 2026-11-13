@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, CornerDownLeft, Search, X } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, CornerDownLeft, Search, X } from 'lucide-react';
 import {
   IAL_UNITS,
   SEARCH_ITEMS,
@@ -15,6 +15,10 @@ interface CommandPaletteModalProps {
   initialQuery?: string;
   onClose: () => void;
   onJumpToAnchor: (anchor: string) => void;
+  /* the graduate action: carry the inspected entry into the real
+     workspace — a unit lands in its unit walk, a topic lands in the
+     spec index where the point lives */
+  onOpenInWorkspace: (entry: SearchEntry) => void;
 }
 
 export function CommandPaletteModal({
@@ -22,6 +26,7 @@ export function CommandPaletteModal({
   initialQuery = '',
   onClose,
   onJumpToAnchor,
+  onOpenInWorkspace,
 }: CommandPaletteModalProps) {
   const [query, setQuery] = useState(initialQuery);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -240,6 +245,23 @@ export function CommandPaletteModal({
                   >
                     <span>View {previewUnit.code} in Matrix</span>
                     <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </button>
+                  {/* The exit that makes the palette more than a demo:
+                      the inspected entry walks into the real workspace.
+                      Units land in their unit walk; topics land in the
+                      spec index, where the point lives. */}
+                  <button
+                    type="button"
+                    data-testid="palette-open-in-workspace"
+                    onClick={() => onOpenInWorkspace(activePreview)}
+                    className="portal-candy-btn inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold whitespace-nowrap"
+                  >
+                    <span>
+                      {activePreview.kind === 'unit'
+                        ? `Open ${activePreview.unitCode} in the workspace`
+                        : 'Open in the workspace'}
+                    </span>
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                   </button>
                 </div>
               </div>

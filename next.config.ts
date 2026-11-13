@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  /* The showcase landing lived at /portal before it was promoted to
+     the homepage; every old link — bookmarks, the club's history,
+     anything external — now redirects to /. Permanent, so crawlers
+     fold the old address into the new one. */
+  async redirects() {
+    return [{ source: "/portal", destination: "/", permanent: true }];
+  },
   /* Expose the exact source revision used by Vercel (or CI) so the
      footer can identify the deployed build. Local builds say "local". */
   env: {

@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Lenis from 'lenis';
 import { MotionConfig, motion, useReducedMotion } from 'framer-motion';
-import type { IalUnit, SiteTheme } from './data/ialData';
+import type { IalUnit, SearchEntry, SiteTheme } from './data/ialData';
 import { EASE_EXPO } from './lib/motion';
 import { FilmGrainOverlay } from './components/FilmGrainOverlay';
 import { Navbar } from './components/sections/Navbar';
@@ -134,13 +134,42 @@ export default function App() {
 
   const router = useRouter();
 
-  // Exit ramps into the real workspace: the navbar's Open Notes and the
-  // footer's Launch CTA hand the visitor to the revision app itself;
-  // every other control stays inside the showcase (palette demo,
-  // anchor scrolling).
+  // Exit ramps into the shelved workspace at /club. The homepage IS
+  // the showcase now, so every exit is a real deep link, not a drop
+  // at the desk: the navbar's Open Notes walks into the notes reader
+  // on the note the hero's shelf opens with; the hero's workbench
+  // hands over the exact note-and-clause on stage; the palette's
+  // graduate button lands a unit in its unit walk or a topic in the
+  // spec index; and the footer's Launch CTA delivers the workspace
+  // itself. Every target reads ?v=… in club-app.tsx on mount.
   const enterWorkspace = useCallback(() => {
-    router.push('/');
+    router.push('/club');
   }, [router]);
+
+  // The first note on the preview shelf — the one the visitor has
+  // already been reading in the stage below.
+  const openNotes = useCallback(() => {
+    router.push('/club?v=notes&doc=wch11-t02');
+  }, [router]);
+
+  const openNoteInWorkspace = useCallback(
+    (docId: string, spec: string) => {
+      const params = new URLSearchParams({ v: 'notes', doc: docId, spec });
+      router.push(`/club?${params.toString()}`);
+    },
+    [router],
+  );
+
+  const openEntryInWorkspace = useCallback(
+    (entry: SearchEntry) => {
+      if (entry.kind === 'unit') {
+        router.push(`/club?v=${entry.unitCode.toLowerCase()}`);
+      } else {
+        router.push('/club?v=spec');
+      }
+    },
+    [router],
+  );
 
   const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === 'dune' ? 'light' : 'dune'));
@@ -186,7 +215,7 @@ export default function App() {
       >
         <FilmGrainOverlay />
 
-        <Navbar onOpenNotes={enterWorkspace} />
+        <Navbar onOpenNotes={openNotes} />
 
         <main>
           <HeroSection
@@ -194,6 +223,7 @@ export default function App() {
             reducedMotion={reducedMotion}
             onStartRevising={() => openSearch('WCH11')}
             onBuildPack={() => navigateTo('#workflow')}
+            onOpenNote={openNoteInWorkspace}
           />
 
           {/* ————— the descent, in reading order —————
@@ -276,6 +306,7 @@ export default function App() {
           initialQuery={commandQuery}
           onClose={() => setCommandOpen(false)}
           onJumpToAnchor={navigateTo}
+          onOpenInWorkspace={openEntryInWorkspace}
         />
       </div>
     </MotionConfig>

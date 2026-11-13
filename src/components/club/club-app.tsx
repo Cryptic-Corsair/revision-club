@@ -24,7 +24,11 @@ import {
 } from "./icons";
 import type { UnitCode } from "@/lib/spectra/types";
 import { UNITS, getUnit, getTopic, TOTALS } from "@/lib/spectra/units";
-import { getNotesMeta, getNotesMetaForTopic } from "@/lib/spectra/notes-meta";
+import {
+  getNotesMeta,
+  getNotesMetaForTopic,
+  NOTES_META,
+} from "@/lib/spectra/notes-meta";
 import { useTimeScope } from "@/lib/spectra/time";
 import { usePacks } from "@/lib/spectra/packs";
 import { useDesk, markUnit, markTopic, markLandingSeen, markDeskEntered } from "@/lib/spectra/desk";
@@ -131,6 +135,45 @@ type View =
   | { kind: "pack" }
   | { kind: "sticker" }
   | { kind: "legal" };
+
+/* ————— deep links into the shelved workspace —————
+   The showcase homepage at / is the front door now, and its buttons
+   land straight in the room they name instead of dropping the
+   visitor at the desk:
+
+   ?v=notes&doc=wch11-t02&spec=2.3   — the notes reader, optionally
+                                     opened at one clause
+   ?v=spec | ?v=pack | ?v=sticker    — the spec index, pack bench,
+                                     sticker book
+   ?v=WCH12 … ?v=WCH16               — a unit walk
+
+   Unknown values (and an unknown doc id) fall through to null and
+   the ordinary first-visit flow plays: the introduction, then the
+   desk. The doc default is the library's first note, so even a bare
+   ?v=notes lands somewhere real. */
+function deepViewOf(
+  v: string,
+  doc: string | null,
+  spec: string | null,
+): View | null {
+  const key = v.trim().toLowerCase();
+  if (!key) return null;
+  if (key === "notes") {
+    const meta = (doc ? getNotesMeta(doc) : undefined) ?? NOTES_META[0];
+    if (!meta) return null;
+    return {
+      kind: "notes",
+      code: meta.unitCode,
+      docId: meta.id,
+      spec: spec?.trim() || undefined,
+    };
+  }
+  if (key === "spec") return { kind: "spec" };
+  if (key === "pack") return { kind: "pack" };
+  if (key === "sticker") return { kind: "sticker" };
+  const unit = UNITS.find((u) => u.code.toLowerCase() === key);
+  return unit ? { kind: "unit", code: unit.code } : null;
+}
 
 /* ————— the brand mark —————
    The site's own object, drawn at logo size: the beaker itself —
@@ -853,16 +896,17 @@ function Footer({
               © 2026 IAL CHEM · Notes for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. Not affiliated with or endorsed by Pearson Education Ltd.
             </p>
             <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 self-start sm:self-auto">
-              {/* The alternative homepage — the showcase landing ported
-                  from the landingiaL- clone lives at /portal with its own
-                  ground and fonts, so it gets a plain anchor: a full-page
-                  hand-off keeps both wrappers' scroll/theme state honest. */}
+              {/* The front door. The showcase landing was promoted from
+                  /portal to the homepage itself, and this workspace was
+                  shelved at /club — so the pill points at / and a full-
+                  page hand-off keeps both wrappers' scroll/theme state
+                  honest. */}
               <a
-                href="/portal"
-                aria-label="View the alternative homepage — the showcase landing"
+                href="/"
+                aria-label="View the showcase homepage — the site's front door"
                 className="footer-portal-link inline-flex items-center gap-1.5 rounded-full border border-white/[0.16] bg-white/[0.05] px-3 py-1.5 text-[calc(11px*var(--ui-scale))] font-bold text-milk/70 transition-colors hover:border-white/[0.3] hover:bg-white/[0.1] hover:text-milk"
               >
-                Alternative home
+                Showcase home
                 <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.2} />
               </a>
               <button
@@ -912,6 +956,20 @@ export default function ClubApp() {
     visitHandled.current = true;
     const returning = markLandingSeen();
     setLanding(!returning);
+    /* A deep link (?v=…) skips the introduction entirely — someone
+       who followed a button from the front page is already through
+       the door — and banks the visit as engagement so the next
+       direct visit opens the desk. */
+    const params = new URLSearchParams(window.location.search);
+    const deep = deepViewOf(
+      params.get("v") ?? "",
+      params.get("doc"),
+      params.get("spec"),
+    );
+    if (!deep) return;
+    markDeskEntered();
+    setLanding(false);
+    setView(deep);
   }, []);
 
   useEffect(() => {

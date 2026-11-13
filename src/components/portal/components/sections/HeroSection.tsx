@@ -5,7 +5,7 @@ import {
   useScroll,
   useTransform,
 } from 'framer-motion';
-import { ArrowRight, Check, Plus } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Check, Plus } from 'lucide-react';
 import {
   GLOBAL_METRICS,
   NOTE_PREVIEW_DOCS,
@@ -22,6 +22,9 @@ interface HeroSectionProps {
   reducedMotion: boolean;
   onStartRevising: () => void;
   onBuildPack: () => void;
+  /* the workbench's one true exit: hand the visitor the real reader
+     — this note, this clause — in the shelved workspace */
+  onOpenNote: (docId: string, spec: string) => void;
 }
 
 const THEME_DOT_ORDER: PreviewThemeId[] = ['night', 'light', 'dune', 'classic'];
@@ -140,6 +143,7 @@ export function HeroSection({
   reducedMotion,
   onStartRevising,
   onBuildPack,
+  onOpenNote,
 }: HeroSectionProps) {
   const heroRef = useRef<HTMLElement | null>(null);
   const [previewThemeId, setPreviewThemeId] = useState<PreviewThemeId>('night');
@@ -609,6 +613,30 @@ export function HeroSection({
                     );
                   })}
                 </div>
+
+                {/* The one true exit. Everything above rehearses the
+                    reader; this button stops rehearsing and hands the
+                    visitor the actual notes page — the note on stage,
+                    opened at the very clause under the reading line —
+                    in the workspace. The workspace's own deep-link
+                    (?v=notes&doc=…&spec=…) lands it scrolled to that
+                    clause. */}
+                <button
+                  type="button"
+                  data-testid="preview-open-in-workspace"
+                  onClick={() => onOpenNote(doc.id, clause.spec)}
+                  className="group mt-4 flex w-full items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-xs font-semibold transition-all duration-200 hover:-translate-y-px"
+                  style={{
+                    borderColor: previewTokens.accent,
+                    color: previewTokens.accent,
+                  }}
+                >
+                  <span>Open this note in the workspace</span>
+                  <ArrowUpRight
+                    className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
+                </button>
               </div>
 
               {/* Right reader pane — the clause, the way the notes set it */}
