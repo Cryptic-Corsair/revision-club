@@ -5,6 +5,7 @@ import { KeystrokeMachine } from '../showcase/KeystrokeMachine';
 import { PackFlowMachine } from '../showcase/PackFlowMachine';
 import { PrismSweepMachine } from '../showcase/PrismSweepMachine';
 import { ChronoWaveMachine } from '../showcase/ChronoWaveMachine';
+import { SectionBackdrop } from '../motion/SectionBackdrop';
 
 interface ShowcaseCarouselProps {
   reducedMotion: boolean;
@@ -96,7 +97,10 @@ export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
       id="showcase"
       className="relative py-20 sm:py-28"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      {/* The hero's ring-and-wave backdrop, tuned for this room */}
+      <SectionBackdrop variant="showcase" reducedMotion={reducedMotion} />
+
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header with Prev/Next and Slide Counter */}
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-xl">

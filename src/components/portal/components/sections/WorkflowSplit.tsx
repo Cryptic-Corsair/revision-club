@@ -15,6 +15,7 @@ import {
   VIEWPORT_ONCE,
   computeSelectedPackMetrics,
 } from '../../lib/motion';
+import { SectionBackdrop } from '../motion/SectionBackdrop';
 
 interface WorkflowSplitProps {
   reducedMotion: boolean;
@@ -57,7 +58,10 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
       id="workflow"
       className="relative py-20 sm:py-28"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      {/* The hero's ring-and-wave backdrop, tuned for this room */}
+      <SectionBackdrop variant="workflow" reducedMotion={reducedMotion} />
+
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-xl">
           <p
             className="font-mono text-[11px] tracking-[0.16em] uppercase"

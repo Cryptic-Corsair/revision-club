@@ -152,9 +152,11 @@ export default function App() {
               is a BandWave from the shared five-curve shelf — no two
               neighbouring seams repeat a curve. The hero stands on the
               page ground; the showcase, the pack builder, the
-              interlude and the units matrix each get their own room;
-              the last seam hands the page back so the footer's closing
-              stage and its wave into the cocoa band read clean. */}
+              interlude and the units matrix each get their own room,
+              and the first three rooms wear the hero's ring-and-wave
+              backdrop language; the last seam hands the page back so
+              the footer's closing stage and its wave into the cocoa
+              band read clean. */}
           <BandWave from="var(--bg)" to="var(--band-a)" wave={1} />
           <div style={{ background: 'var(--band-a)' }}>
             <ShowcaseCarousel reducedMotion={reducedMotion} />

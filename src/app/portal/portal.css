@@ -56,6 +56,7 @@
   --accent: #d9a65f; /* the amber roast — the flask mark's own liquid */
   --accent-ink: #2a1f12; /* roast ink on the amber (7.3:1) */
   --accent-warm: #9db9b0; /* sea-glass — the dune pair's second voice */
+  --portal-rust: #d9a65f; /* the editorial room's body accent — the amber roast by night */
   --nav-backdrop: rgba(30, 27, 22, 0.74);
   --spotlight: rgba(217, 166, 95, 0.1);
 
@@ -113,6 +114,7 @@
   --accent: #ff6b6b; /* coral */
   --accent-ink: #fffdf7;
   --accent-warm: #ff922b; /* tangerine */
+  --portal-rust: #b66c4e; /* the document room's rust by daylight */
   --nav-backdrop: rgba(255, 246, 234, 0.76);
   --spotlight: rgba(255, 107, 107, 0.09);
 
@@ -249,6 +251,228 @@ body:has(.portal-root[data-theme="light"]) {
 .portal-candy-btn:active {
   transform: translateY(2px);
   box-shadow: 0 1px 0 color-mix(in oklab, var(--accent) 72%, var(--band));
+}
+
+/* ————— section backdrops: the hero's ring-and-wave language —————
+   Strokes ride the room's own inks at low alpha; the accent pair
+   keeps its posts. Defined as classes so both dresses re-ink them
+   through the tokens above with no per-variant colour maths. */
+.portal-root .portal-bd-line {
+  stroke: color-mix(in oklab, var(--ink) 13%, transparent);
+}
+.portal-root .portal-bd-faint {
+  stroke: color-mix(in oklab, var(--ink) 6%, transparent);
+}
+.portal-root .portal-bd-accent {
+  stroke: color-mix(in oklab, var(--accent) 30%, transparent);
+}
+.portal-root .portal-bd-warm {
+  stroke: color-mix(in oklab, var(--accent-warm) 26%, transparent);
+}
+
+/* ————— the editorial room (the syllabus coverage document) —————
+   The workspace's editorial dress, re-cut for the portal's two
+   rooms: an uppercase kicker pill on the band ground, hairline
+   clause rows led by rust numerals and a falling rail line, and
+   the meta labels set in the Plex voice. Every colour rides the
+   token pair, so the document reads on chocolate and cream alike. */
+.portal-ed-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--band-ink);
+  background: var(--band);
+  box-shadow: 0 2px 0 var(--edge);
+}
+.portal-ed-heading-accent {
+  color: var(--portal-rust);
+}
+.portal-ed-meta {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+.portal-ed-clauses {
+  display: flex;
+  flex-direction: column;
+}
+.portal-ed-clause {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 16px;
+  width: 100%;
+  padding: 24px 0 26px;
+  border-bottom: 1px solid color-mix(in oklab, var(--ink) 11%, transparent);
+  text-align: left;
+  cursor: pointer;
+}
+.portal-ed-clause:first-child {
+  padding-top: 4px;
+}
+.portal-ed-num {
+  padding-top: 3px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--portal-rust);
+}
+.portal-ed-rail-line {
+  width: 1px;
+  flex: 1;
+  min-height: 46px;
+  margin-top: 12px;
+  background: color-mix(in oklab, var(--ink) 12%, transparent);
+}
+.portal-ed-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap-x: 12px;
+  gap-y: 3px;
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+.portal-ed-meta-row [aria-hidden] {
+  color: color-mix(in oklab, var(--color-ink-faint) 55%, transparent);
+}
+.portal-ed-title {
+  display: block;
+  margin-top: 9px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--ink);
+}
+.portal-ed-scope {
+  display: block;
+  margin-top: 6px;
+  max-width: 64ch;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--ink-muted);
+}
+.portal-ed-share {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.portal-ed-share-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.portal-ed-share-bar {
+  height: 2px;
+  flex: 1;
+  min-width: 48px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--ink) 9%, transparent);
+  overflow: hidden;
+}
+.portal-ed-share-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--portal-rust);
+}
+
+/* ————— the stage capsule: glass morphism —————
+   The AS / A2 switch wears the navbar's own liquid-glass recipe: a
+   translucent layered pill with fine top-edge reflection and a
+   sliding glass segment, blurred over whatever the section backdrop
+   puts behind it. */
+.portal-glass-capsule {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  padding: 5px;
+  border-radius: 999px;
+  border: 1px solid var(--nav-edge);
+  background:
+    linear-gradient(
+      155deg,
+      var(--nav-inset),
+      transparent 58%,
+      color-mix(in oklab, var(--nav-inset) 45%, transparent)
+    ),
+    color-mix(in oklab, var(--surface) 55%, transparent);
+  box-shadow:
+    inset 0 1px 0 var(--nav-inset),
+    0 10px 26px -16px rgb(0 0 0 / 0.5),
+    0 2px 6px -4px rgb(0 0 0 / 0.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  backdrop-filter: blur(18px) saturate(1.5);
+}
+.portal-capsule-tab {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--ink-muted);
+  transition: color 180ms ease;
+}
+.portal-capsule-tab:hover {
+  color: var(--ink);
+}
+.portal-capsule-tab[data-active="true"] {
+  color: var(--ink);
+}
+.portal-capsule-big {
+  position: relative;
+  z-index: 10;
+  font-family: var(--font-display), sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+.portal-capsule-sub {
+  position: relative;
+  z-index: 10;
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  opacity: 0.78;
+  font-variant-numeric: tabular-nums;
+}
+.portal-capsule-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--ink) 10%, transparent);
+  border: 1px solid var(--nav-edge);
+  box-shadow:
+    inset 0 1px 0 var(--nav-inset),
+    0 4px 12px -8px rgb(0 0 0 / 0.4);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4);
+  backdrop-filter: blur(10px) saturate(1.4);
 }
 
 /* ————— Lenis smooth scroll base styling ————— */
