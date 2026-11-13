@@ -300,18 +300,14 @@ body:has(.portal-root[data-theme="light"]) {
 }
 
 /* ————— the living laboratory's endless rows —————
-   Two rows of motion graphics cards, each its own sequence played
-   twice and translated exactly half its width, so the loop is
-   seamless: row one drifts left, row two drifts right. Hovering a
-   row pauses it (focus included, hover-capable devices only — a
-   touch tap would otherwise stick the pause on); under reduced
-   motion the track's animation is switched off and the row becomes
-   an honest, scrollable shelf of stills; and when the room is
-   offscreen the rows are paused from React (data-live). The mask
-   fades the cards out at the container edges so they drift in and
-   out of the room. The track promotes itself to its own compositor
-   layer (will-change), so the drift never touches the main thread
-   and the mask never re-rasterises it frame by frame. */
+   Each row repeats its own four-card sequence and travels exactly
+   half the track width for a seamless loop. The edge fade is drawn
+   with fixed overlays rather than a mask on the moving surface — a
+   simpler path for mobile GPUs. We deliberately avoid forcing an
+   oversized will-change layer: high-DPR tablets can otherwise ask
+   the compositor for a texture wider than its comfortable budget.
+   Cards gate their own SVG loops by visibility; touch-first devices
+   keep the slow CSS drift but hold the detailed drawings still. */
 @keyframes portal-marquee-left {
   from {
     transform: translate3d(0, 0, 0);
