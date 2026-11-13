@@ -684,3 +684,19 @@ html.lenis body {
 .lenis.lenis-stopped {
   overflow: clip;
 }
+
+
+/* Keep the glass language on touch hardware, but make the backdrop
+   sampling area cheaper to composite during scroll. */
+@media (pointer: coarse) {
+  .portal-nav,
+  .portal-glass-capsule {
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
+    backdrop-filter: blur(10px) saturate(1.2);
+  }
+
+  .portal-capsule-pill {
+    -webkit-backdrop-filter: blur(6px) saturate(1.1);
+    backdrop-filter: blur(6px) saturate(1.1);
+  }
+}
