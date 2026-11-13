@@ -115,7 +115,7 @@ function LabCard({
   sectionLive: boolean;
   coarsePointer: boolean;
 }) {
-  const { ref, live: cardLive } = useLive<HTMLElement>(120);
+  const { ref, live: cardLive } = useLive<HTMLElement>(48);
   // Touch input is not a reduced-motion preference. Keep the SVG loop alive
   // whenever its card is visible; visibility gating controls the workload.
   const animateGraphic = sectionLive && cardLive && !reducedMotion;
