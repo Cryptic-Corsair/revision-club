@@ -5,6 +5,7 @@ import Lenis from 'lenis';
 import { MotionConfig, motion, useReducedMotion } from 'framer-motion';
 import type { IalUnit, SearchEntry, SiteTheme } from './data/ialData';
 import { EASE_EXPO } from './lib/motion';
+import { useCoarsePointer } from './lib/still';
 import { FilmGrainOverlay } from './components/FilmGrainOverlay';
 import { Navbar } from './components/sections/Navbar';
 import { CommandPaletteModal } from './components/sections/CommandPaletteModal';
@@ -73,7 +74,11 @@ function Room({
 
 export default function App() {
   const prefersReduced = useReducedMotion();
-  const reducedMotion = Boolean(prefersReduced);
+  const coarsePointer = useCoarsePointer();
+  const osReducedMotion = Boolean(prefersReduced);
+  // Touch-first tablets use native document scrolling and still graphics;
+  // the laboratory's CSS marquee remains in motion independently.
+  const reducedMotion = osReducedMotion || coarsePointer;
 
   const [theme, setTheme] = useState<SiteTheme>('dune');
   const [commandOpen, setCommandOpen] = useState(false);
@@ -285,7 +290,7 @@ export default function App() {
             glow="46% 34% at 50% 10%"
             reducedMotion={reducedMotion}
           >
-            <LabVignettes reducedMotion={reducedMotion} />
+            <LabVignettes reducedMotion={osReducedMotion} coarsePointer={coarsePointer} />
           </Room>
 
           <Room
