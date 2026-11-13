@@ -47,7 +47,16 @@ const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
     "no-useless-escape": "off",
   },
 }, {
-  ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts", "examples/**", ".attic/**", "skills"]
+  /* the /portal showcase (ported from landingiaL-) resets its demo
+     machines through effects — intentional external-system sync with
+     framer-motion's inView, audited verbatim from the source repo.
+     Scoped to the ported folder only; the workspace keeps the rule. */
+  files: ["src/components/portal/**"],
+  rules: {
+    "react-hooks/set-state-in-effect": "off",
+  },
+}, {
+  ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts", "examples/**", ".attic/**", "skills", ".external/**"]
 }];
 
 export default eslintConfig;

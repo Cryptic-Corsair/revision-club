@@ -87,6 +87,7 @@ The product includes a home/desk experience, unit and topic navigation, specific
 | Authentication | None |
 | Deployment target | Vercel |
 | Main route | Single app route rendered through the client-side app shell |
+| Second route | `/portal` — a self-contained showcase landing (the "alternative homepage"), kept outside the app shell, noindexed, with its own scoped styles, typeset and theme state |
 
 There is no server-side user account, cloud profile or database synchronising study activity. Preferences, progress, reading time, desk state and revision-pack state are stored in the visitor's browser.
 
@@ -463,6 +464,8 @@ Do not implement a preference in only one of these places. Theme/interface/scale
 club-app.tsx is the app shell. It owns current view state, navigation transitions, top navigation, shared footer/chrome, global drawers and selection of Rooms/Editorial twins.
 
 The site is a single-route app with internal view state. Do not introduce new Next.js routes for internal views unless the user explicitly asks for route-level URLs and the architecture is deliberately revised.
+
+The one deliberate exception is `/portal` (src/app/portal/, src/components/portal/): a verbatim port of the landingiaL- showcase repo, requested by the user as an alternative homepage. It renders outside club-app.tsx, carries its own theme tokens scoped under `.portal-root` (plus its own fonts — Plus Jakarta Sans, Instrument Serif, JetBrains Mono — self-hosted as portal-*.woff2), persists nothing, and hands visitors back to the workspace through explicit CTAs that push to `/`. It must stay a leaf: do not wire it into prefs, progress or the shell's navigation state.
 
 Many larger surfaces are loaded through next/dynamic with client-side rendering and a common loading fallback. This keeps the first-load bundle smaller. Preserve this lazy-loading boundary; do not pull the full notes reader, large SVG figure library or all tools into the initial shell without a measured reason.
 

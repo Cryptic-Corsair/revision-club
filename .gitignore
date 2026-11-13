@@ -68,3 +68,6 @@ prompt
 # baseline screenshots (regression references, not deliverables)
 /.baselines/
 dev.log
+
+# external repo staging (cloned for reference during ports; never shipped)
+/.external/
