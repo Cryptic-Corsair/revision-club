@@ -39,10 +39,10 @@ export function getCappedPixelRatio(viewportWidth: number, devicePixelRatio: num
   return Math.min(safeDpr, maxDpr);
 }
 
-/** A slightly lighter drawing cadence for ambient canvases on touch-first hardware. */
+/** Cap ambient canvas draws at 60fps on touch-first hardware; native rAF cadence handles panel refresh. */
 export function getCanvasFrameIntervalSeconds(): number {
   if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return 0;
-  return window.matchMedia('(pointer: coarse)').matches ? 1 / 40 : 0;
+  return window.matchMedia('(pointer: coarse)').matches ? 1 / 60 : 0;
 }
 
 /**
