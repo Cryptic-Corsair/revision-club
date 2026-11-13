@@ -1071,3 +1071,16 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Commit(s):** recorded in this branch commit.
 - **Follow-up / known limitations:** visual inspection at phone, tablet and desktop widths remains outstanding.
 
+## 2026-11-14 — floating glass navbar, second art direction
+
+- **Contributor:** OpenAI coding agent.
+- **Request / objective:** replace the first, overly conventional masthead with a distinctive premium floating glass navbar.
+- **Investigation:** revisited the homepage's existing two-theme glass tokens, FlaskMark, hero palette, navigation anchors and the prior implementation.
+- **Changes made:** rebuilt the nav as a floating, centered glass instrument with layered blur/sheen, a framed flask emblem, editorial IAL CHEM wordmark, edition marker, numbered inset navigation rail and sculpted accent action. Added a two-row mobile composition and a restrained scroll-state compression.
+- **Preserved invariants:** homepage-only scope, workspace header, theme switching, existing anchor IDs, FlaskMark, Open Notes route, accessibility focus treatment and reduced-motion support.
+- **Decisions and rationale:** used the portal's own DUNE/daylight tokens so glass, edge light and CTA adapt to both themes; no new dependencies or unrelated page changes.
+- **Verification:** not run in a local environment. Source-level review only; build, lint and browser screenshots remain outstanding.
+- **Deployment:** not attempted; changes remain on the existing design branch.
+- **Commit(s):** recorded in this branch commit.
+- **Follow-up / known limitations:** inspect desktop and narrow mobile layouts in a browser before merging.
+
