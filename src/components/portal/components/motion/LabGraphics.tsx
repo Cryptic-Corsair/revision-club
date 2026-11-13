@@ -1,5 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
+import { useId } from 'react';
 import { useStill } from '../../lib/still';
 
 /* ————— the living laboratory's graphics shelf —————
@@ -197,16 +198,17 @@ const BUBBLES = [
 
 export function FlaskVignette({ reducedMotion }: { reducedMotion: boolean }) {
   const still = useStill(reducedMotion);
+  const clipId = `lab-flask-clip-${useId().replace(/:/g, '')}`;
   return (
     <svg viewBox="0 0 400 260" className="block h-auto w-full" aria-hidden="true">
       <defs>
-        <clipPath id="lab-flask-clip">
+        <clipPath id={clipId}>
           <path d={FLASK_INTERIOR} />
         </clipPath>
       </defs>
 
       {/* the liquid, clipped to the flask interior */}
-      <g clipPath="url(#lab-flask-clip)">
+      <g clipPath={`url(#${clipId})`}>
         <motion.g
           animate={still ? undefined : { x: [0, -50] }}
           transition={still ? undefined : { duration: 7, repeat: Infinity, ease: 'linear' }}
