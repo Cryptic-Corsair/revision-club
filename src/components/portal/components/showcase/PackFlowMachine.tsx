@@ -71,7 +71,7 @@ export function PackFlowMachine({ reducedMotion }: PackFlowMachineProps) {
           className="font-mono text-[10px] tracking-[0.14em] uppercase"
           style={{ color: 'var(--ink-muted)' }}
         >
-          PACK COMPILER
+          THE PACK BENCH
         </span>
         <button
           type="button"
@@ -83,7 +83,7 @@ export function PackFlowMachine({ reducedMotion }: PackFlowMachineProps) {
             backgroundColor: 'var(--surface-elevated)',
           }}
         >
-          Simulate Compile
+          Run it again
         </button>
       </div>
 
@@ -168,7 +168,7 @@ export function PackFlowMachine({ reducedMotion }: PackFlowMachineProps) {
               className="block font-mono text-[9px] tracking-[0.12em] uppercase"
               style={{ color: 'var(--accent)' }}
             >
-              COMPILED
+              YOUR PACK
             </span>
             <p className="text-[11px] font-semibold leading-tight" style={{ color: 'var(--ink)' }}>
               3 Spec Notes

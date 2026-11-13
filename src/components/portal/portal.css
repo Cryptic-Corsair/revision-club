@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   /portal — the alternative homepage (the showcase landing).
+   the homepage — the showcase landing (promoted from /portal to /).
 
    Everything here is scoped under .portal-root so the workspace design
    system in globals.css stays untouched — but the portal no longer
@@ -351,6 +351,92 @@ body:has(.portal-root[data-theme="light"]) {
   .portal-marquee-track {
     animation: none;
   }
+}
+
+/* ————— the footer band's column labels ————— */
+.portal-band-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--band-ink-muted);
+}
+
+/* ————— the footer band's link rows ————— */
+.portal-band-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 11px;
+  border-bottom: 1px solid rgb(255 255 255 / 0.09);
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--band-ink);
+  transition: color 160ms ease;
+}
+.portal-band-row:last-child {
+  border-bottom: 0;
+}
+.portal-band-row:hover {
+  color: #fff;
+}
+.portal-band-row svg {
+  opacity: 0.3;
+  transition: opacity 160ms ease;
+  flex: none;
+}
+.portal-band-row:hover svg {
+  opacity: 0.7;
+}
+
+/* ————— the section header kit —————
+   One voice for every room's opening: a mono kicker with a short
+   accent dash before it, a display heading with real optical
+   tracking and a balanced measure, and a lede that carries one
+   honest sentence. Sections that centre their header get the same
+   kit with text-align:center — the dash rides along. */
+.portal-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+.portal-kicker::before {
+  content: '';
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--accent);
+  flex: none;
+}
+.portal-h2 {
+  margin-top: 14px;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.95rem, 3.7vw, 2.9rem);
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.07;
+  text-wrap: balance;
+  color: var(--ink);
+}
+.portal-h2 .accent {
+  color: var(--accent);
+}
+.portal-lede {
+  margin-top: 16px;
+  max-width: 54ch;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-muted);
 }
 
 /* ————— the editorial room (the syllabus coverage cards) —————

@@ -67,8 +67,8 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
           <p
             className="portal-ed-meta mx-auto mt-4 max-w-[60ch] leading-[1.9]"
           >
-            Tap a card to inspect its unit — the palette opens filtered
-            to the code, exactly like the workspace's own quick switcher.
+            Tap a unit to browse its spec points in the index — each card
+            shows how much of the course it takes.
           </p>
         </div>
 

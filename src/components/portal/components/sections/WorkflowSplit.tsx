@@ -20,6 +20,9 @@ import { SectionBackdrop } from '../motion/SectionBackdrop';
 interface WorkflowSplitProps {
   reducedMotion: boolean;
   onOpenSearch: (initialQuery?: string) => void;
+  /* stage 02's honest exit: the compiled pack summary hands the
+     visitor the workspace's own pack bench */
+  onOpenPackBench: () => void;
 }
 
 const PROGRESS_ROWS = [
@@ -28,7 +31,7 @@ const PROGRESS_ROWS = [
   { code: 'WCH14', title: 'Rates & Further Organic', pct: 67, minutes: 95 },
 ];
 
-export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProps) {
+export function WorkflowSplit({ reducedMotion, onOpenSearch, onOpenPackBench }: WorkflowSplitProps) {
   const [activeId, setActiveId] = useState<WorkflowChapter['id']>('pinpoint');
   const [selectedChipIds, setSelectedChipIds] = useState<string[]>([
     'spec-1.4c',
@@ -62,20 +65,17 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
       <SectionBackdrop variant="workflow" reducedMotion={reducedMotion} />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-xl">
-          <p
-            className="font-mono text-[11px] tracking-[0.16em] uppercase"
-            style={{ color: 'var(--ink-muted)' }}
-          >
-            REVISION ARCHITECTURE
-          </p>
-          <h2
-            className="mt-2.5 text-balance font-display font-bold leading-[1.1]"
-            style={{ fontSize: 'clamp(1.75rem, 3.4vw, 2.5rem)' }}
-          >
-            Focused flow from{' '}
-            <span style={{ color: 'var(--accent)' }}>index to recall.</span>
+        <div className="max-w-2xl">
+          <p className="portal-kicker">How it works</p>
+          <h2 className="portal-h2">
+            Pick your spec points.{' '}
+            <span className="accent">Read them in one go.</span>
           </h2>
+          <p className="portal-lede">
+            Search the spec by statement number or topic name, tick what
+            you're revising, and the workspace turns the ticks into a
+            single timed pack — not six separate documents.
+          </p>
         </div>
 
         {/* 50 / 50 Architectural Split */}
@@ -172,11 +172,11 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                 >
                   <div>
                     <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: 'var(--ink-muted)' }}>
-                      <span>01 · SPECIFICATION INDEX</span>
+                      <span>01 · THE SPEC INDEX</span>
                       <span className="tabular-nums">WCH11–WCH16</span>
                     </div>
                     <h3 className="mt-2 font-display text-lg font-bold tracking-tight">
-                      Direct jump by specification statement
+                      Go straight to the statement
                     </h3>
                   </div>
 
@@ -219,7 +219,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
 
                   <div className="flex items-center justify-between border-t pt-4" style={{ borderColor: 'var(--border)' }}>
                     <span className="text-xs" style={{ color: 'var(--ink-muted)' }}>
-                      Filter all 33 topics with keyboard navigation
+                      All 33 topics, and arrow keys work too
                     </span>
                     <button
                       type="button"
@@ -227,7 +227,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                       className="portal-candy-btn inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 font-mono text-xs whitespace-nowrap shrink-0"
                     >
                       <Search className="h-3 w-3" aria-hidden="true" />
-                      <span>Open Index ⌘K</span>
+                      <span>Open the index ⌘K</span>
                     </button>
                   </div>
                 </motion.div>
@@ -245,11 +245,11 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                 >
                   <div>
                     <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: 'var(--ink-muted)' }}>
-                      <span>02 · INTERACTIVE PACK BUILDER</span>
-                      <span className="tabular-nums">{packMetrics.count} / 4 SELECTED</span>
+                      <span>02 · PACK BUILDER</span>
+                      <span className="tabular-nums">{packMetrics.count} / 4 TICKED</span>
                     </div>
                     <h3 className="mt-2 font-display text-lg font-bold tracking-tight">
-                      Toggle specification statements to compile
+                      Tick the statements you're revising
                     </h3>
                   </div>
 
@@ -318,7 +318,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                         className="font-mono text-[10px] tracking-[0.14em] uppercase"
                         style={{ color: 'var(--accent)' }}
                       >
-                        COMPILED REVISION PACK
+                        YOUR PACK SO FAR
                       </p>
                       <p className="mt-1 text-sm font-semibold tabular-nums">
                         {packMetrics.count}{' '}
@@ -328,17 +328,17 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                       <p className="mt-0.5 font-mono text-[11px]" style={{ color: 'var(--ink-muted)' }}>
                         {packMetrics.unitCodes.length > 0
                           ? `Units: ${packMetrics.unitCodes.join(', ')}`
-                          : 'Select at least one statement above'}
+                          : 'Tick at least one statement above'}
                       </p>
                     </div>
 
                     <button
                       type="button"
                       disabled={packMetrics.count === 0}
-                      onClick={() => onOpenSearch(packMetrics.unitCodes[0] ?? 'WCH11')}
+                      onClick={onOpenPackBench}
                       className="portal-candy-btn inline-flex items-center gap-1.5 rounded-full px-4 py-2 font-display text-xs font-semibold disabled:opacity-40 whitespace-nowrap shrink-0"
                     >
-                      <span>Preview Pack</span>
+                      <span>Open the pack bench</span>
                       <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                     </button>
                   </div>
@@ -356,11 +356,11 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                 >
                   <div>
                     <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: 'var(--ink-muted)' }}>
-                      <span>03 · PRIVATE LOCAL PROGRESS</span>
-                      <span className="tabular-nums">ZERO ACCOUNT WALL</span>
+                      <span>03 · YOUR PROGRESS</span>
+                      <span className="tabular-nums">NO ACCOUNT NEEDED</span>
                     </div>
                     <h3 className="mt-2 font-display text-lg font-bold tracking-tight">
-                      Keep reading momentum visible per unit
+                      See how far you've got
                     </h3>
                   </div>
 
@@ -415,7 +415,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch }: WorkflowSplitProp
                   </div>
 
                   <div className="flex items-center justify-between border-t pt-4 font-mono text-xs tabular-nums" style={{ borderColor: 'var(--border)', color: 'var(--ink-muted)' }}>
-                    <span>Stored strictly in browser storage</span>
+                    <span>Kept in this browser — nowhere else</span>
                     <span>319 / 756 min logged</span>
                   </div>
                 </motion.div>

@@ -229,7 +229,7 @@ export function CommandPaletteModal({
                       color: 'var(--ink)',
                     }}
                   >
-                    <span>Assemble in Pack Builder</span>
+                    <span>Build a pack from these</span>
                   </button>
                   <button
                     type="button"
@@ -243,7 +243,7 @@ export function CommandPaletteModal({
                       color: 'var(--bg)',
                     }}
                   >
-                    <span>View {previewUnit.code} in Matrix</span>
+                    <span>Show {previewUnit.code} in the unit list</span>
                     <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                   </button>
                   {/* The exit that makes the palette more than a demo:
@@ -347,7 +347,7 @@ export function CommandPaletteModal({
                 backgroundColor: 'var(--bg)',
               }}
             >
-              <span>↑↓ Navigate · Enter Inspect</span>
+              <span>↑↓ to move · Enter to open</span>
               <span className="tabular-nums">{filtered.length} indexed entries · Esc</span>
             </div>
           </motion.div>

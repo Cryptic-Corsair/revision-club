@@ -137,19 +137,23 @@ export default function App() {
   // Exit ramps into the shelved workspace at /club. The homepage IS
   // the showcase now, so every exit is a real deep link, not a drop
   // at the desk: the navbar's Open Notes walks into the notes reader
-  // on the note the hero's shelf opens with; the hero's workbench
-  // hands over the exact note-and-clause on stage; the palette's
-  // graduate button lands a unit in its unit walk or a topic in the
-  // spec index; and the footer's Launch CTA delivers the workspace
-  // itself. Every target reads ?v=… in club-app.tsx on mount.
-  const enterWorkspace = useCallback(() => {
-    router.push('/club');
-  }, [router]);
-
-  // The first note on the preview shelf — the one the visitor has
-  // already been reading in the stage below.
+  // on the note the hero's shelf opens with; the hero's and the
+  // closing room's "Start reading" deliver the course's first topic;
+  // the workflow's pack stage and the palette's graduate button land
+  // in the pack bench, the unit walks and the spec index. Every
+  // target reads ?v=… in club-app.tsx on mount.
   const openNotes = useCallback(() => {
     router.push('/club?v=notes&doc=wch11-t02');
+  }, [router]);
+
+  // Topic one — the course's own first note, where "Start reading"
+  // lands from the hero and the closing room.
+  const startReading = useCallback(() => {
+    router.push('/club?v=notes&doc=wch11-t01');
+  }, [router]);
+
+  const openPackBench = useCallback(() => {
+    router.push('/club?v=pack');
   }, [router]);
 
   const openNoteInWorkspace = useCallback(
@@ -221,8 +225,8 @@ export default function App() {
           <HeroSection
             theme={theme}
             reducedMotion={reducedMotion}
-            onStartRevising={() => openSearch('WCH11')}
-            onBuildPack={() => navigateTo('#workflow')}
+            onStartReading={startReading}
+            onFindTopic={() => openSearch('WCH11')}
             onOpenNote={openNoteInWorkspace}
           />
 
@@ -250,6 +254,7 @@ export default function App() {
             <WorkflowSplit
               reducedMotion={reducedMotion}
               onOpenSearch={(q = '') => openSearch(q)}
+              onOpenPackBench={openPackBench}
             />
           </Room>
 
@@ -288,16 +293,19 @@ export default function App() {
             from="var(--room-step-4)"
             reducedMotion={reducedMotion}
           >
-            <KineticInterlude theme={theme} reducedMotion={reducedMotion} />
+            <KineticInterlude
+              theme={theme}
+              reducedMotion={reducedMotion}
+              onStartReading={startReading}
+              onOpenSpecIndex={() => openSearch('')}
+            />
           </Room>
         </main>
 
         <FooterSection
           theme={theme}
-          onLaunchWorkspace={enterWorkspace}
-          onOpenSpecIndex={() => openSearch('')}
-          onOpenUnit={openUnitInspector}
           onNavigate={navigateTo}
+          onOpenSearch={() => openSearch('')}
           onToggleTheme={toggleTheme}
         />
 

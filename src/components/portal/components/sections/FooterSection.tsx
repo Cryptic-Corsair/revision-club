@@ -1,98 +1,57 @@
 'use client';
 import { ArrowUp, ArrowUpRight } from 'lucide-react';
 import { Mascot } from '@/components/club/bits';
-import { GLOBAL_METRICS, IAL_UNITS, unitCandy, type IalUnit, type SiteTheme } from '../../data/ialData';
+import { GLOBAL_METRICS, IAL_UNITS, unitCandy, type SiteTheme } from '../../data/ialData';
 import { FlaskMark } from '../FlaskMark';
 
 interface FooterSectionProps {
   theme: SiteTheme;
-  onLaunchWorkspace: () => void;
-  onOpenSpecIndex: () => void;
-  onOpenUnit: (unitCode: IalUnit['code']) => void;
   onNavigate: (anchor: string) => void;
+  onOpenSearch: () => void;
   onToggleTheme: () => void;
 }
 
 const hours = Math.round(GLOBAL_METRICS.totalMinutes / 60);
 
-/* The workspace's own footer, re-cut for the showcase: the same cocoa
-   band under the same wave (the club footer's exact path), Bubbles
-   perched on the crest, the stat grid, candy-numbered unit links and
-   the eyebrow sections. Above the wave the closing CTA stage keeps
-   the portal's exit ramps — Launch IAL CHEM hands the visitor over.
-   The stage stands on the descent's last step (--room-step-5, now the
-   interlude's ground), so the one surviving wave pours that ground
-   into the band. */
+/* The closing band. The page's final word and its buttons live in the
+   interlude above; this band is the quiet colophon under the one
+   surviving wave: the flask, the course's vital statistics, the six
+   units and the workspace's rooms as real deep links (plain anchors —
+   a full-page hand-off keeps both wrappers' scroll and theme state
+   honest), a look-around column for the homepage's own rooms, and the
+   small print. Bubbles perches on the wave's crest, as she does on
+   every IAL CHEM page. */
 export function FooterSection({
   theme,
-  onLaunchWorkspace,
-  onOpenSpecIndex,
-  onOpenUnit,
   onNavigate,
+  onOpenSearch,
   onToggleTheme,
 }: FooterSectionProps) {
+  const stats = [
+    { value: String(GLOBAL_METRICS.units), label: 'Units' },
+    { value: String(GLOBAL_METRICS.topics), label: 'Topics' },
+    { value: `≈${hours} h`, label: 'Reading' },
+  ];
+
+  const aroundRows: Array<{ label: string; onClick: () => void }> = [
+    { label: 'Back to the top', onClick: () => onNavigate('#top') },
+    { label: 'How packs work', onClick: () => onNavigate('#workflow') },
+    { label: 'The machines', onClick: () => onNavigate('#showcase') },
+    { label: 'Syllabus coverage', onClick: () => onNavigate('#units') },
+    { label: 'The living laboratory', onClick: () => onNavigate('#lab') },
+    { label: 'Search ⌘K', onClick: onOpenSearch },
+  ];
+
+  const workspaceRows: Array<{ label: string; href: string }> = [
+    { label: 'Open the notes', href: '/club?v=notes&doc=wch11-t01' },
+    { label: 'The spec index', href: '/club?v=spec' },
+    { label: 'The pack bench', href: '/club?v=pack' },
+    { label: 'Your progress', href: '/club?v=sticker' },
+    { label: 'The desk', href: '/club' },
+  ];
+
   return (
     <footer className="relative mt-auto">
-      {/* Closing CTA stage — the band's candy buttons + display voice.
-          It stands on the descent's last step: the wave below pours
-          that ground into the band. */}
-      <div
-        className="relative py-20 sm:py-28"
-        style={{ backgroundColor: 'var(--room-step-5)' }}
-      >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-72"
-          style={{
-            background:
-              'radial-gradient(ellipse 68% 58% at 50% 100%, var(--spotlight) 0%, transparent 72%)',
-          }}
-        />
-
-        <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <p
-            className="font-mono text-[11px] tracking-[0.16em] uppercase"
-            style={{ color: 'var(--ink-muted)' }}
-          >
-            READY TO REVISE
-          </p>
-          <h2
-            className="mx-auto mt-3 max-w-2xl text-balance font-display font-bold leading-[1.1]"
-            style={{ fontSize: 'clamp(2rem, 4.4vw, 3.25rem)' }}
-          >
-            Open the bench. Start your{' '}
-            <span style={{ color: 'var(--accent)' }}>first topic.</span>
-          </h2>
-
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <button
-              type="button"
-              onClick={onLaunchWorkspace}
-              className="portal-candy-btn group inline-flex h-12 items-center gap-2 rounded-full px-6 font-display text-sm font-semibold whitespace-nowrap shrink-0"
-            >
-              <span>Launch IAL CHEM</span>
-              <ArrowUpRight
-                className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-hidden="true"
-              />
-            </button>
-
-            <button
-              type="button"
-              onClick={onOpenSpecIndex}
-              className="inline-flex h-12 items-center rounded-full px-6 font-display text-sm font-semibold transition-transform duration-200 hover:-translate-y-px whitespace-nowrap shrink-0"
-              style={{
-                backgroundColor: 'var(--surface)',
-                color: 'var(--ink)',
-                boxShadow: 'var(--card-shadow)',
-              }}
-            >
-              Open Spec Index
-            </button>
-          </div>
-        </div>
-      </div>
-
       {/* The wave, Bubbles and the band share one positioning root — the
           same trick the club footer uses: she anchors to the root above
           the wave with z-10, because the wave and the band would
@@ -107,196 +66,166 @@ export function FooterSection({
           </span>
         </span>
 
-      {/* The wave — the club footer's exact path, draining the last
-          room's ground into the cocoa band. The page's one wave. */}
-      <div
-        aria-hidden="true"
-        className="relative h-[calc(54px*var(--ui-scale))] sm:h-[calc(74px*var(--ui-scale))]"
-        style={{ background: 'var(--room-step-5)' }}
-      >
-        <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-full w-full">
-          <path
-            d="M0 48 C190 80 350 12 555 31 C760 50 900 88 1105 65 C1265 47 1375 27 1440 39 L1440 90 L0 90 Z"
-            fill="var(--band)"
-          />
-        </svg>
-      </div>
+        {/* The wave — the club footer's exact path, draining the last
+            room's ground into the cocoa band. The page's one wave. */}
+        <div
+          aria-hidden="true"
+          className="relative h-[calc(54px*var(--ui-scale))] sm:h-[calc(74px*var(--ui-scale))]"
+          style={{ background: 'var(--room-step-5)' }}
+        >
+          <svg viewBox="0 0 1440 90" preserveAspectRatio="none" className="block h-full w-full">
+            <path
+              d="M0 48 C190 80 350 12 555 31 C760 50 900 88 1105 65 C1265 47 1375 27 1440 39 L1440 90 L0 90 Z"
+              fill="var(--band)"
+            />
+          </svg>
+        </div>
 
-      {/* The cocoa band */}
-      <div style={{ backgroundColor: 'var(--band)', color: 'var(--band-ink)' }}>
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          {/* Intro row: brand + the course's vital statistics */}
-          <div className="flex flex-col gap-6 border-b border-white/[0.11] py-8 sm:py-10 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex items-center gap-4">
-              <FlaskMark size={44} />
-              <div className="min-w-0">
-                <div className="font-display text-xl font-bold leading-none tracking-tight">
-                  IAL CHEM
+        {/* The cocoa band */}
+        <div style={{ backgroundColor: 'var(--band)', color: 'var(--band-ink)' }}>
+          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+            {/* Row 1 — the flask, the course in one sentence, the vital
+                statistics as plain numerals with hairline dividers */}
+            <div className="flex flex-col gap-8 border-b border-white/[0.11] py-9 sm:py-11 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-md">
+                <div className="flex items-center gap-3.5">
+                  <FlaskMark size={42} />
+                  <span className="font-display text-xl font-bold leading-none tracking-tight">
+                    IAL CHEM
+                  </span>
                 </div>
                 <p
-                  className="mt-2 text-[11px] font-bold uppercase tracking-[0.16em]"
+                  className="mt-4 text-[13px] font-semibold leading-[1.75]"
                   style={{ color: 'var(--band-ink-muted)' }}
                 >
-                  Pearson Edexcel · International A Level Chemistry
+                  Revision notes for the Pearson Edexcel International A
+                  Level Chemistry (2018) specification — written the way
+                  they're taught.
                 </p>
               </div>
-            </div>
 
-            <div className="grid grid-cols-3 divide-x divide-white/[0.12] rounded-2xl border border-white/[0.1] bg-white/[0.035] px-1 py-3 sm:min-w-[390px] sm:px-3">
-              {[
-                { value: String(GLOBAL_METRICS.units), label: 'Units' },
-                { value: String(GLOBAL_METRICS.topics), label: 'Topics' },
-                { value: '≈' + hours + ' h', label: 'Reading time' },
-              ].map((stat) => (
-                <div key={stat.label} className="flex flex-col items-center justify-center px-2">
-                  <span className="font-display text-xl font-bold leading-none tabular-nums">
-                    {stat.value}
-                  </span>
-                  <span
-                    className="mt-1.5 text-[10px] font-bold uppercase tracking-[0.12em]"
-                    style={{ color: 'var(--band-ink-muted)' }}
+              <div className="flex items-center">
+                {stats.map((stat, i) => (
+                  <div
+                    key={stat.label}
+                    className={i === 0 ? 'pr-8 sm:pr-10' : 'border-l border-white/[0.12] pl-8 sm:pl-10'}
                   >
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Columns: the course + the showcase */}
-          <div className="grid gap-10 py-8 sm:py-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(260px,0.75fr)] lg:gap-14">
-            <section aria-labelledby="portal-footer-course-heading">
-              <div className="mb-4 flex items-end justify-between gap-4">
-                <div>
-                  <p
-                    className="text-[10px] font-bold uppercase tracking-[0.18em]"
-                    style={{ color: 'var(--band-ink-muted)' }}
-                  >
-                    The course
-                  </p>
-                  <h2
-                    id="portal-footer-course-heading"
-                    className="mt-1 font-display text-lg font-semibold tracking-tight"
-                  >
-                    Explore by unit
-                  </h2>
-                </div>
-                <span
-                  className="pb-1 font-mono text-[10px] tracking-[0.12em]"
-                  style={{ color: 'var(--band-ink-muted)' }}
-                >
-                  WCH11 — WCH16
-                </span>
-              </div>
-
-              <div className="grid gap-2 sm:grid-cols-2">
-                {IAL_UNITS.map((unit) => {
-                  const candy = unitCandy(unit.code);
-                  return (
-                    <button
-                      key={unit.code}
-                      type="button"
-                      onClick={() => onOpenUnit(unit.code)}
-                      className="group flex min-w-0 items-center gap-3 rounded-xl px-3 py-3 text-left transition-colors hover:bg-white/[0.05]"
+                    <span className="block font-display text-[26px] font-bold leading-none tabular-nums">
+                      {stat.value}
+                    </span>
+                    <span
+                      className="mt-2 block font-mono text-[10px] uppercase tracking-[0.16em]"
+                      style={{ color: 'var(--band-ink-muted)' }}
                     >
-                      <span
-                        className="grid h-9 w-9 shrink-0 place-items-center rounded-xl font-display text-[14px] font-bold"
-                        style={{
-                          background: candy,
-                          color: '#fff6ea',
-                          boxShadow: `0 2px 0 color-mix(in oklab, ${candy} 72%, var(--band))`,
-                        }}
-                      >
-                        {unit.code.replace('WCH', '')}
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span
-                          className="block truncate text-[12.5px] font-bold transition-colors group-hover:text-white"
-                          style={{ color: 'var(--band-ink)' }}
-                        >
-                          {unit.shortLabel.split(' · ')[0]}
-                        </span>
-                        <span
-                          className="mt-1 block text-[9.5px] font-bold uppercase tracking-[0.14em]"
-                          style={{ color: 'var(--band-ink-muted)' }}
-                        >
-                          {unit.code}
-                        </span>
-                      </span>
-                      <ArrowUpRight className="h-4 w-4 shrink-0 opacity-25 transition-all group-hover:opacity-70" />
-                    </button>
-                  );
-                })}
-              </div>
-            </section>
-
-            <section aria-labelledby="portal-footer-tools-heading">
-              <p
-                className="text-[10px] font-bold uppercase tracking-[0.18em]"
-                style={{ color: 'var(--band-ink-muted)' }}
-              >
-                The showcase
-              </p>
-              <h2
-                id="portal-footer-tools-heading"
-                className="mt-1 font-display text-lg font-semibold tracking-tight"
-              >
-                Look around
-              </h2>
-              <div className="mt-3 flex flex-col">
-                {[
-                  { label: 'Back to the top', act: () => onNavigate('#top') },
-                  { label: 'Revision pack builder', act: () => onNavigate('#workflow') },
-                  { label: 'The showcase machines', act: () => onNavigate('#showcase') },
-                  { label: 'Units matrix', act: () => onNavigate('#units') },
-                  { label: 'The living laboratory', act: () => onNavigate('#lab') },
-                  { label: 'Search (⌘K)', act: onOpenSpecIndex },
-                ].map((row) => (
-                  <button
-                    key={row.label}
-                    type="button"
-                    onClick={row.act}
-                    className="flex items-center justify-between border-b border-white/[0.09] py-3 text-left text-[13px] font-bold transition-colors last:border-b-0 hover:text-white"
-                    style={{ color: 'var(--band-ink)' }}
-                  >
-                    {row.label}
-                    <ArrowUpRight className="h-3.5 w-3.5 opacity-30" />
-                  </button>
+                      {stat.label}
+                    </span>
+                  </div>
                 ))}
               </div>
+            </div>
 
-              {/* The room knob, footer-grade — same toggle as the navbar */}
-              <button
-                type="button"
-                onClick={onToggleTheme}
-                className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/[0.14] bg-white/[0.05] px-3 py-1.5 text-[11px] font-bold transition-colors hover:border-white/[0.3] hover:bg-white/[0.1]"
-                style={{ color: 'var(--band-ink)' }}
+            {/* Row 2 — three quiet columns: the units, this page, the
+                workspace. Every workspace row is a real deep link. */}
+            <div className="grid gap-x-10 gap-y-11 py-10 sm:py-11 md:grid-cols-3">
+              <nav aria-label="The six units">
+                <p className="portal-band-label">The units</p>
+                <div className="mt-4 flex flex-col">
+                  {IAL_UNITS.map((unit) => {
+                    const candy = unitCandy(unit.code);
+                    return (
+                      <a
+                        key={unit.code}
+                        href={`/club?v=${unit.code.toLowerCase()}`}
+                        className="group -mx-2 flex items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-white/[0.05]"
+                      >
+                        <span
+                          className="grid h-8 w-8 shrink-0 place-items-center rounded-lg font-display text-[13px] font-bold"
+                          style={{
+                            background: candy,
+                            color: '#fff6ea',
+                            boxShadow: `0 2px 0 color-mix(in oklab, ${candy} 72%, var(--band))`,
+                          }}
+                        >
+                          {unit.code.replace('WCH', '')}
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-[13px] font-bold transition-colors group-hover:text-white">
+                            {unit.title}
+                          </span>
+                          <span
+                            className="mt-1 block font-mono text-[9.5px] uppercase tracking-[0.14em] tabular-nums"
+                            style={{ color: 'var(--band-ink-muted)' }}
+                          >
+                            {unit.code} · {unit.topicsCount} topics · {unit.minutes} min
+                          </span>
+                        </span>
+                        <ArrowUpRight className="h-4 w-4 shrink-0 opacity-25 transition-opacity group-hover:opacity-70" />
+                      </a>
+                    );
+                  })}
+                </div>
+              </nav>
+
+              <nav aria-label="Around this page">
+                <p className="portal-band-label">This page</p>
+                <div className="mt-3 flex flex-col">
+                  {aroundRows.map((row) => (
+                    <button
+                      key={row.label}
+                      type="button"
+                      onClick={row.onClick}
+                      className="portal-band-row"
+                    >
+                      <span>{row.label}</span>
+                      <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </button>
+                  ))}
+                </div>
+              </nav>
+
+              <nav aria-label="The workspace">
+                <p className="portal-band-label">The workspace</p>
+                <div className="mt-3 flex flex-col">
+                  {workspaceRows.map((row) => (
+                    <a key={row.label} href={row.href} className="portal-band-row">
+                      <span>{row.label}</span>
+                      <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </a>
+                  ))}
+                </div>
+              </nav>
+            </div>
+
+            {/* Row 3 — the small print and the room knob */}
+            <div className="flex flex-col gap-4 border-t border-white/[0.1] py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:flex-row sm:items-center sm:justify-between">
+              <p
+                className="max-w-2xl text-[10.5px] font-semibold leading-relaxed"
+                style={{ color: 'var(--band-ink-muted)' }}
               >
-                {theme === 'dune' ? 'Dune lab' : 'Light lab'}
-              </button>
-            </section>
-          </div>
-
-          {/* Bottom line — the club's own small print */}
-          <div className="flex flex-col gap-3 border-t border-white/[0.1] py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:flex-row sm:items-center sm:justify-between">
-            <p
-              className="max-w-2xl text-[10.5px] leading-relaxed font-semibold"
-              style={{ color: 'var(--band-ink-muted)' }}
-            >
-              © 2026 IAL CHEM · Notes for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. Not affiliated with or endorsed by Pearson Education Ltd.
-            </p>
-            <button
-              type="button"
-              onClick={() => onNavigate('#top')}
-              className="inline-flex w-fit items-center gap-1.5 text-[11px] font-bold transition-colors"
-              style={{ color: 'var(--band-ink-muted)' }}
-            >
-              Back to top
-              <ArrowUp className="h-3.5 w-3.5" strokeWidth={2.2} />
-            </button>
+                © 2026 IAL CHEM · Notes for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. Not affiliated with or endorsed by Pearson Education Ltd.
+              </p>
+              <div className="flex shrink-0 items-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={onToggleTheme}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/[0.14] bg-white/[0.05] px-3 py-1.5 text-[11px] font-bold transition-colors hover:border-white/[0.3] hover:bg-white/[0.1]"
+                  style={{ color: 'var(--band-ink)' }}
+                >
+                  {theme === 'dune' ? 'Daylight mode' : 'Dune mode'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('#top')}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.14] bg-white/[0.05] px-3 py-1.5 text-[11px] font-bold transition-colors hover:border-white/[0.3] hover:bg-white/[0.1]"
+                  style={{ color: 'var(--band-ink)' }}
+                >
+                  Back to top
+                  <ArrowUp className="h-3.5 w-3.5" strokeWidth={2.2} />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </footer>
   );

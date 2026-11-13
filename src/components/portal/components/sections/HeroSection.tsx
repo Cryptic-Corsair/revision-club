@@ -20,8 +20,10 @@ import { HeroShaderCanvas } from '../motion/HeroShaderCanvas';
 interface HeroSectionProps {
   theme: SiteTheme;
   reducedMotion: boolean;
-  onStartRevising: () => void;
-  onBuildPack: () => void;
+  /* the primary exit hands the visitor the course's first real note;
+     the secondary opens the in-page index */
+  onStartReading: () => void;
+  onFindTopic: () => void;
   /* the workbench's one true exit: hand the visitor the real reader
      — this note, this clause — in the shelved workspace */
   onOpenNote: (docId: string, spec: string) => void;
@@ -141,8 +143,8 @@ function PackTick({
 export function HeroSection({
   theme,
   reducedMotion,
-  onStartRevising,
-  onBuildPack,
+  onStartReading,
+  onFindTopic,
   onOpenNote,
 }: HeroSectionProps) {
   const heroRef = useRef<HTMLElement | null>(null);
@@ -251,6 +253,7 @@ export function HeroSection({
             className="text-balance font-display font-bold leading-[1.06]"
             style={{
               fontSize: 'clamp(2.5rem, 5.6vw, 4.5rem)',
+              letterSpacing: '-0.02em',
               color: 'var(--ink)',
             }}
           >
@@ -261,7 +264,7 @@ export function HeroSection({
                 transition={{ duration: 0.65, ease: EASE_EXPO }}
                 className="block"
               >
-                Revision notes, built
+                Revision notes, written
               </motion.span>
             </span>
             <span className="block overflow-hidden">
@@ -271,9 +274,9 @@ export function HeroSection({
                 transition={{ duration: 0.65, delay: 0.08, ease: EASE_EXPO }}
                 className="block"
               >
-                like{' '}
+                the way they're{' '}
                 <span style={{ color: 'var(--accent)' }}>
-                  software.
+                  taught.
                 </span>
               </motion.span>
             </span>
@@ -283,11 +286,12 @@ export function HeroSection({
             initial={reducedMotion ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.16, ease: EASE_EXPO }}
-            className="mx-auto mt-5 max-w-2xl text-base leading-relaxed sm:text-lg"
+            className="mx-auto mt-6 max-w-[54ch] text-[15.5px] leading-[1.8] sm:text-[17px]"
             style={{ color: 'var(--ink-muted)' }}
           >
-            Six units. Thirty-three topics. Custom revision packs—engineered for
-            uninterrupted focus.
+            Complete class notes for every topic in the Edexcel IAL
+            Chemistry spec — read them in order, or tick the spec points
+            you need and take just those.
           </motion.p>
 
           {/* Dual Clean CTAs */}
@@ -299,10 +303,10 @@ export function HeroSection({
           >
             <button
               type="button"
-              onClick={onStartRevising}
+              onClick={onStartReading}
               className="portal-candy-btn group inline-flex h-12 items-center gap-2 rounded-full px-6 font-display text-sm font-semibold transition-transform duration-200 whitespace-nowrap shrink-0"
             >
-              <span>Start Revising</span>
+              <span>Start reading</span>
               <ArrowRight
                 className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
                 aria-hidden="true"
@@ -311,7 +315,7 @@ export function HeroSection({
 
             <button
               type="button"
-              onClick={onBuildPack}
+              onClick={onFindTopic}
               className="inline-flex h-12 items-center rounded-full px-6 font-display text-sm font-semibold transition-transform duration-200 hover:-translate-y-px whitespace-nowrap shrink-0"
               style={{
                 color: 'var(--ink)',
@@ -319,7 +323,7 @@ export function HeroSection({
                 boxShadow: 'var(--card-shadow)',
               }}
             >
-              Build a Pack
+              Find a topic
             </button>
           </motion.div>
 

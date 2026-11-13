@@ -20,9 +20,9 @@ import "@/components/portal/portal.css";
    canonical homepage and is indexed. Old /portal links redirect
    here (next.config.ts). */
 export const metadata: Metadata = {
-  title: "IAL CHEM — revision notes, built like software",
+  title: "IAL CHEM — revision notes, written the way they're taught",
   description:
-    "Six units. Thirty-three topics. Custom revision packs for Edexcel International A Level Chemistry (WCH11–WCH16), engineered for uninterrupted focus.",
+    "Complete class notes for every topic in the Pearson Edexcel International A Level Chemistry spec (WCH11–WCH16) — six units, thirty-three topics, thirty worked examples, and revision packs built from the spec points you tick.",
 };
 
 export default function HomePage() {

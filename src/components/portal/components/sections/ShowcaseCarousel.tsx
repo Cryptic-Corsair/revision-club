@@ -17,9 +17,9 @@ const SHOWCASE_CARDS = [
   {
     id: 'command',
     index: '01',
-    title: '⌘K Navigation',
+    title: 'Search that starts at ⌘K',
     description:
-      'Jump across any unit, spec point, or definition in milliseconds.',
+      'Type a statement number, a topic, a word from a definition — enter opens it.',
     renderMachine: (reducedMotion: boolean) => (
       <KeystrokeMachine reducedMotion={reducedMotion} />
     ),
@@ -27,9 +27,9 @@ const SHOWCASE_CARDS = [
   {
     id: 'compiler',
     index: '02',
-    title: 'Custom Revision Packs',
+    title: 'Packs instead of chapters',
     description:
-      'Select exact specification statements and assemble one printable pack.',
+      'Tick the spec points you\u2019re revising; read one continuous pack, not six documents.',
     renderMachine: (reducedMotion: boolean) => (
       <PackFlowMachine reducedMotion={reducedMotion} />
     ),
@@ -37,9 +37,9 @@ const SHOWCASE_CARDS = [
   {
     id: 'themes',
     index: '03',
-    title: 'Adaptive Themes',
+    title: 'Four rooms to work in',
     description:
-      'Switch seamlessly between Night, Light, Dune, and Classic.',
+      'Night, Light, Dune and Classic — whichever is easiest on your eyes tonight.',
     renderMachine: (reducedMotion: boolean) => (
       <PrismSweepMachine reducedMotion={reducedMotion} />
     ),
@@ -47,9 +47,9 @@ const SHOWCASE_CARDS = [
   {
     id: 'progress',
     index: '04',
-    title: 'Local Progress Tracking',
+    title: 'Progress that stays private',
     description:
-      'Reading time, completed topics, and daily picks stored privately.',
+      'Reading time and finished topics, saved in your browser. No account anywhere.',
     renderMachine: (reducedMotion: boolean) => (
       <ChronoWaveMachine reducedMotion={reducedMotion} />
     ),
@@ -105,20 +105,16 @@ export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header with Prev/Next and Slide Counter */}
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-xl">
-            <p
-              className="font-mono text-[11px] tracking-[0.16em] uppercase"
-              style={{ color: 'var(--ink-muted)' }}
-            >
-              MOTION &amp; CRAFT
-            </p>
-            <h2
-              className="mt-2.5 text-balance font-display font-bold leading-[1.1]"
-              style={{ fontSize: 'clamp(1.75rem, 3.4vw, 2.5rem)' }}
-            >
-              Every interaction feels{' '}
-              <span style={{ color: 'var(--accent)' }}>effortless.</span>
+          <div className="max-w-2xl">
+            <p className="portal-kicker">The details</p>
+            <h2 className="portal-h2">
+              The parts you'll touch{' '}
+              <span className="accent">every day.</span>
             </h2>
+            <p className="portal-lede">
+              Four things you'll use every session — search, packs,
+              themes and your progress — each thought through properly.
+            </p>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
