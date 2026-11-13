@@ -7,14 +7,14 @@ interface NavbarProps {
   onOpenNotes: () => void;
 }
 
-/* The homepage's own glass bar: one compact rectangular pill centred at
-   the top — shorter and narrower than the workspace nav it grew out of,
-   wearing the room's accent as a lit edge instead of the club's neutral
-   chrome (the .portal-nav recipe) — the flask mark and wordmark on the
-   left, a single button on the right. Every other control (the room
-   chips, the ⌘K search, the lab toggle, the mobile drawer) has left the
-   navbar: the page walks itself, and the only thing this bar ever did
-   that mattered was open the notes. */
+/* The homepage navbar, redesigned as a maison bar: one tall glass slab
+   centred at the top, framed in a double hairline — the outer edge
+   gilded in the dress's metal, a second engraved line set just inside
+   it. The brand is an engraved lockup (the flask, a hairline, then the
+   serif house name over a mono establishment line); the one button is
+   a quiet hairline plate that fills as you reach for it. Everything
+   loud has left: no candy pill, no accent-shouted wordmark — the room
+   below does the colour, and the bar above just holds the light. */
 export function Navbar({ onOpenNotes }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
 
@@ -35,50 +35,52 @@ export function Navbar({ onOpenNotes }: NavbarProps) {
       style={{ pointerEvents: 'none' }}
     >
       <div
-        className="portal-nav mx-auto flex h-12 max-w-2xl items-center justify-between gap-2.5 rounded-2xl px-3 transition-opacity duration-300 sm:h-13 sm:px-4"
+        className="portal-nav relative mx-auto flex h-13 max-w-3xl items-center justify-between gap-3 rounded-xl px-4 transition-opacity duration-300 sm:h-14 sm:px-6"
         style={{
           pointerEvents: 'auto',
           opacity: scrolled ? 1 : 0.94,
         }}
         data-testid="portal-navbar"
       >
-        {/* Left: the club's flask + wordmark */}
+        {/* Left: the flask, a hairline, and the engraved lockup */}
         <a
           href="#top"
           onClick={(e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'auto' });
           }}
-          className="flex items-center gap-2 whitespace-nowrap shrink-0 rounded-lg pl-1 pr-1.5 focus-visible:outline-2 focus-visible:outline-offset-4"
-          style={{ color: 'var(--accent)' }}
+          className="flex items-center gap-2.5 whitespace-nowrap rounded-lg py-2 pl-0.5 pr-1.5 focus-visible:outline-2 focus-visible:outline-offset-4 sm:gap-3"
           aria-label="IAL CHEM — back to the top of the showcase"
         >
-          <FlaskMark size={22} />
-          <span className="font-display text-xs font-bold tracking-[0.12em] uppercase">
-            IAL CHEM
-          </span>
+          <FlaskMark size={24} />
           <span
             aria-hidden="true"
-            className="hidden sm:inline-block h-3.5 w-px"
-            style={{ backgroundColor: 'var(--border-strong)' }}
+            className="hidden h-7 w-px shrink-0 sm:block"
+            style={{ backgroundColor: 'var(--nav-gild)' }}
           />
-          <span
-            className="hidden sm:inline-block font-mono text-[9px] font-medium tracking-[0.12em] uppercase"
-            style={{ color: 'var(--ink-muted)' }}
-          >
-            2018 SPEC
+          <span className="flex flex-col justify-center gap-[5px]">
+            <span className="portal-nav-wordmark text-[15px] leading-none">
+              IAL CHEM
+            </span>
+            <span className="portal-nav-caption hidden text-[8px] leading-none sm:block">
+              Edexcel IAL &middot; 2018 Spec
+            </span>
           </span>
         </a>
 
-        {/* Right: the one button — Open Notes */}
+        {/* Right: the hairline plate — the one button */}
         <button
           type="button"
           onClick={onOpenNotes}
           data-testid="navbar-open-notes"
-          className="portal-candy-btn inline-flex h-8 items-center gap-1.5 rounded-full px-3.5 font-display text-xs font-semibold whitespace-nowrap shrink-0"
+          className="portal-nav-plate inline-flex h-9 shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-4 font-mono text-[10px] font-semibold uppercase sm:px-5"
         >
           <span>Open Notes</span>
-          <ArrowRight className="h-3 w-3" aria-hidden="true" />
+          <ArrowRight
+            className="h-3 w-3"
+            strokeWidth={1.75}
+            aria-hidden="true"
+          />
         </button>
       </div>
     </header>

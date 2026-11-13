@@ -57,6 +57,9 @@
   --font-display: var(--font-fredoka), "Trebuchet MS", sans-serif;
   --font-body: var(--font-quicksand), "Trebuchet MS", sans-serif;
   --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, monospace;
+  /* the maison voice — Cormorant Garamond, the showcase navbar's
+     engraved serif; falls back to the display face if unread */
+  --font-luxe: var(--font-cormorant), var(--font-fredoka), serif;
 
   --animate-float: float 7s ease-in-out infinite;
   --animate-float-slow: float 11s ease-in-out infinite;
