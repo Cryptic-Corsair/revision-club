@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { EASE_EXPO } from '../../lib/motion';
-import { clampDeltaTime, getCappedPixelRatio } from '../../lib/motion';
+import { clampDeltaTime, getCappedPixelRatio, getCanvasFrameIntervalSeconds } from '../../lib/motion';
 
 interface ChronoWaveMachineProps {
   reducedMotion: boolean;
@@ -27,8 +27,22 @@ export function ChronoWaveMachine({ reducedMotion }: ChronoWaveMachineProps) {
     let dpr = 1;
     let phase = 0;
     let isVisible = false;
+    let pageVisible = !document.hidden;
     let rafId = 0;
     let lastTs = performance.now();
+    let frameAccumulator = 0;
+    const frameIntervalSeconds = getCanvasFrameIntervalSeconds();
+    const themeRoot = canvas.closest<HTMLElement>('.portal-root') ?? document.documentElement;
+    let colors = { accent: '#C4B5FD', warm: '#F2C68D', muted: '#9D94B8' };
+
+    const refreshColors = () => {
+      const styles = getComputedStyle(themeRoot);
+      colors = {
+        accent: styles.getPropertyValue('--accent').trim() || '#C4B5FD',
+        warm: styles.getPropertyValue('--accent-warm').trim() || '#F2C68D',
+        muted: styles.getPropertyValue('--ink-muted').trim() || '#9D94B8',
+      };
+    };
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -43,10 +57,7 @@ export function ChronoWaveMachine({ reducedMotion }: ChronoWaveMachineProps) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
 
-      const styles = getComputedStyle(document.documentElement);
-      const accent = styles.getPropertyValue('--accent').trim() || '#C4B5FD';
-      const warm = styles.getPropertyValue('--accent-warm').trim() || '#F2C68D';
-      const muted = styles.getPropertyValue('--ink-muted').trim() || '#9D94B8';
+      const { accent, warm, muted } = colors;
 
       const midY = height * 0.56;
       const samples = 72;
@@ -78,24 +89,47 @@ export function ChronoWaveMachine({ reducedMotion }: ChronoWaveMachineProps) {
     };
 
     const tick = () => {
-      if (!isVisible) return;
+      if (!isVisible || !pageVisible || reducedMotionRef.current) return;
       const now = performance.now();
       const dt = clampDeltaTime((now - lastTs) / 1000);
       lastTs = now;
+      frameAccumulator += dt;
 
-      if (!reducedMotionRef.current) {
-        phase += dt * 1.4;
+      if (frameIntervalSeconds === 0 || frameAccumulator >= frameIntervalSeconds) {
+        const elapsed = frameIntervalSeconds > 0 ? frameAccumulator : dt;
+        frameAccumulator = frameIntervalSeconds > 0
+          ? frameAccumulator % frameIntervalSeconds
+          : 0;
+        phase += elapsed * 1.4;
+        drawWaves(phase);
       }
 
-      drawWaves(phase);
-      if (!reducedMotionRef.current) {
+      rafId = window.requestAnimationFrame(tick);
+    };
+
+    const stopLoop = () => window.cancelAnimationFrame(rafId);
+    const startLoop = () => {
+      stopLoop();
+      lastTs = performance.now();
+      frameAccumulator = 0;
+      if (isVisible && pageVisible && !reducedMotionRef.current) {
         rafId = window.requestAnimationFrame(tick);
+      }
+    };
+
+    const onVisibilityChange = () => {
+      pageVisible = !document.hidden;
+      if (pageVisible && isVisible) {
+        drawWaves(phase);
+        startLoop();
+      } else {
+        stopLoop();
       }
     };
 
     const ro = new ResizeObserver(() => {
       resize();
-      drawWaves(phase);
+      if (pageVisible && isVisible) drawWaves(phase);
     });
     ro.observe(canvas);
 
@@ -105,30 +139,32 @@ export function ChronoWaveMachine({ reducedMotion }: ChronoWaveMachineProps) {
         if (!entry) return;
         isVisible = entry.isIntersecting;
         if (isVisible) {
-          lastTs = performance.now();
           drawWaves(phase);
-          if (!reducedMotionRef.current) {
-            window.cancelAnimationFrame(rafId);
-            rafId = window.requestAnimationFrame(tick);
-          }
+          startLoop();
         } else {
-          window.cancelAnimationFrame(rafId);
+          stopLoop();
         }
       },
       { threshold: 0.05 },
     );
     io.observe(canvas);
 
+    const themeObserver = new MutationObserver(() => {
+      refreshColors();
+      if (pageVisible && isVisible) drawWaves(phase);
+    });
+    themeObserver.observe(themeRoot, { attributes: true, attributeFilter: ['data-theme'] });
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    refreshColors();
     resize();
     drawWaves(0.7);
-    if (!reducedMotionRef.current) {
-      rafId = window.requestAnimationFrame(tick);
-    }
-
     return () => {
-      window.cancelAnimationFrame(rafId);
+      stopLoop();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       ro.disconnect();
       io.disconnect();
+      themeObserver.disconnect();
     };
   }, []);
 
