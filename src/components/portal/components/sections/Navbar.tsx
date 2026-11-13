@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { FlaskMark } from '../FlaskMark';
@@ -7,79 +8,63 @@ interface NavbarProps {
   onOpenNotes: () => void;
 }
 
-/* The homepage's own glass bar: one compact rectangular pill centred at
-   the top — shorter and narrower than the workspace nav it grew out of,
-   wearing the room's accent as a lit edge instead of the club's neutral
-   chrome (the .portal-nav recipe) — the flask mark and wordmark on the
-   left, a single button on the right. Every other control (the room
-   chips, the ⌘K search, the lab toggle, the mobile drawer) has left the
-   navbar: the page walks itself, and the only thing this bar ever did
-   that mattered was open the notes. */
+/* A quiet editorial masthead: the course identity, three useful
+   destinations, and one clear route into the notes. */
 export function Navbar({ onOpenNotes }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
       const next = window.scrollY > 24;
-      // bail out without a re-render when the threshold state hasn't moved
       setScrolled((prev) => (prev === next ? prev : next));
     };
+
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
-    <header
-      className="fixed inset-x-0 top-0 z-50 px-3 pt-2.5 sm:px-5 sm:pt-3"
-      style={{ pointerEvents: 'none' }}
-    >
+    <header className="portal-nav-frame fixed inset-x-0 top-0 z-50">
       <div
-        className="portal-nav mx-auto flex h-11 max-w-2xl items-center justify-between gap-2.5 rounded-2xl px-2.5 transition-opacity duration-300 sm:h-12 sm:px-3.5"
-        style={{
-          pointerEvents: 'auto',
-          opacity: scrolled ? 1 : 0.94,
-        }}
+        className="portal-nav-inner"
+        data-scrolled={scrolled}
         data-testid="portal-navbar"
       >
-        {/* Left: the club's flask + wordmark */}
         <a
           href="#top"
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={(event) => {
+            event.preventDefault();
             window.scrollTo({ top: 0, behavior: 'auto' });
           }}
-          className="flex items-center gap-2 whitespace-nowrap shrink-0 rounded-lg pl-1 pr-1.5 focus-visible:outline-2 focus-visible:outline-offset-4"
-          style={{ color: 'var(--accent)' }}
+          className="portal-nav-brand"
           aria-label="IAL CHEM — back to the top of the showcase"
         >
-          <FlaskMark size={22} />
-          <span className="font-display text-xs font-bold tracking-[0.12em] uppercase">
-            IAL CHEM
+          <span className="portal-nav-mark" aria-hidden="true">
+            <FlaskMark size={22} />
           </span>
-          <span
-            aria-hidden="true"
-            className="hidden sm:inline-block h-3.5 w-px"
-            style={{ backgroundColor: 'var(--border-strong)' }}
-          />
-          <span
-            className="hidden sm:inline-block font-mono text-[9px] font-medium tracking-[0.12em] uppercase"
-            style={{ color: 'var(--ink-muted)' }}
-          >
-            2018 SPEC
-          </span>
+          <span className="portal-nav-wordmark">IAL CHEM</span>
+          <span className="portal-nav-divider" aria-hidden="true" />
+          <span className="portal-nav-spec">2018 SPECIFICATION</span>
         </a>
 
-        {/* Right: the one button — Open Notes */}
-        <button
-          type="button"
-          onClick={onOpenNotes}
-          data-testid="navbar-open-notes"
-          className="portal-candy-btn inline-flex h-8 items-center gap-1.5 rounded-full px-3.5 font-display text-xs font-semibold whitespace-nowrap shrink-0"
-        >
-          <span>Open Notes</span>
-          <ArrowRight className="h-3 w-3" aria-hidden="true" />
-        </button>
+        <nav className="portal-nav-links" aria-label="Main navigation">
+          <a className="portal-nav-link" href="#workflow">Method</a>
+          <a className="portal-nav-link" href="#showcase">The details</a>
+          <a className="portal-nav-link" href="#units">Syllabus</a>
+        </nav>
+
+        <div className="portal-nav-actions">
+          <button
+            type="button"
+            onClick={onOpenNotes}
+            data-testid="navbar-open-notes"
+            className="portal-nav-cta"
+          >
+            <span>Open notes</span>
+            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </button>
+        </div>
       </div>
     </header>
   );
