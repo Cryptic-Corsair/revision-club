@@ -12,7 +12,7 @@ const ORDER: PreviewThemeId[] = ['night', 'light', 'dune', 'classic'];
 
 export function PrismSweepMachine({ reducedMotion }: PrismSweepMachineProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [inView, setInView] = useState(true);
+  const [inView, setInView] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
