@@ -264,23 +264,96 @@ body:has(.portal-root[data-theme="light"]) {
 }
 
 /* ————— section backdrops: the hero's ring language —————
-   Thin concentric rings bloom behind the content (and in the units
-   room, the faint vertical columns the hero's architectural grid
-   draws). Defined as classes so both dresses re-ink them through
-   the tokens above with no per-variant colour maths. */
+   Thin concentric rings bloom behind the content. Defined as
+   classes so both dresses re-ink them through the tokens above
+   with no per-variant colour maths. */
 .portal-root .portal-bd-line {
   stroke: color-mix(in oklab, var(--ink) 13%, transparent);
 }
-.portal-root .portal-bd-faint {
-  stroke: color-mix(in oklab, var(--ink) 6%, transparent);
+
+/* ————— the living laboratory's endless rows —————
+   Two rows of motion graphics cards, each its own sequence played
+   twice and translated exactly half its width, so the loop is
+   seamless: row one drifts left, row two drifts right. Hovering a
+   row pauses it (focus included); under reduced motion the track's
+   animation is switched off and the row becomes an honest,
+   scrollable shelf of stills. The mask fades the cards out at the
+   container edges so they drift in and out of the room. */
+@keyframes portal-marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes portal-marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.portal-marquee-row {
+  position: relative;
+  overflow: hidden;
+  padding-block: 4px;
+  scroll-snap-type: x proximity;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+.portal-marquee-row[data-static='true'] {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.portal-marquee-row[data-static='true']::-webkit-scrollbar {
+  display: none;
+}
+.portal-marquee-row article {
+  scroll-snap-align: start;
+}
+.portal-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: portal-marquee-left 56s linear infinite;
+}
+.portal-marquee-track[data-direction='right'] {
+  animation-name: portal-marquee-right;
+}
+.portal-marquee-row[data-static='true'] .portal-marquee-track {
+  animation: none;
+}
+.portal-marquee-row:hover .portal-marquee-track,
+.portal-marquee-row:focus-within .portal-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .portal-marquee-track {
+    animation: none;
+  }
 }
 
-/* ————— the editorial room (the syllabus coverage document) —————
-   The workspace's editorial dress, re-cut for the portal's two
-   rooms: an uppercase kicker pill on the band ground, hairline
-   clause rows led by rust numerals and a falling rail line, and
-   the meta labels set in the Plex voice. Every colour rides the
-   token pair, so the document reads on chocolate and cream alike. */
+/* ————— the editorial room (the syllabus coverage cards) —————
+   The workspace's editorial voice, re-cut for the portal's two
+   rooms: an uppercase kicker pill on the band ground and the meta
+   labels set in the Plex voice. The clause rows have retired —
+   the six units now sit on motion graphics cards — but the card
+   typography still rides these classes: meta row, title, scope
+   and the honest coverage rail. Every colour rides the token
+   pair, so the cards read on chocolate and cream alike. */
 .portal-ed-kicker {
   display: inline-flex;
   align-items: center;
@@ -306,38 +379,6 @@ body:has(.portal-root[data-theme="light"]) {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-ink-faint);
-}
-.portal-ed-clauses {
-  display: flex;
-  flex-direction: column;
-}
-.portal-ed-clause {
-  display: grid;
-  grid-template-columns: 46px minmax(0, 1fr);
-  gap: 16px;
-  width: 100%;
-  padding: 24px 0 26px;
-  border-bottom: 1px solid color-mix(in oklab, var(--ink) 11%, transparent);
-  text-align: left;
-  cursor: pointer;
-}
-.portal-ed-clause:first-child {
-  padding-top: 4px;
-}
-.portal-ed-num {
-  padding-top: 3px;
-  font-family: var(--font-display), sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1;
-  color: var(--portal-rust);
-}
-.portal-ed-rail-line {
-  width: 1px;
-  flex: 1;
-  min-height: 46px;
-  margin-top: 12px;
-  background: color-mix(in oklab, var(--ink) 12%, transparent);
 }
 .portal-ed-meta-row {
   display: flex;
@@ -375,7 +416,9 @@ body:has(.portal-root[data-theme="light"]) {
 .portal-ed-share {
   margin-top: 15px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  row-gap: 6px;
   gap: 12px;
 }
 .portal-ed-share-label {

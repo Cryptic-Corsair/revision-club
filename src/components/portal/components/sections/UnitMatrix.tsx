@@ -3,26 +3,37 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { GLOBAL_METRICS, IAL_UNITS, type IalUnit } from '../../data/ialData';
 import { EASE_EXPO } from '../../lib/motion';
-import { SectionBackdrop } from '../motion/SectionBackdrop';
+import { UnitMotif, type UnitMotifId } from '../motion/UnitMotifs';
 
 interface UnitMatrixProps {
   reducedMotion: boolean;
   onSelectUnit: (unitCode: IalUnit['code']) => void;
 }
 
-/* The syllabus coverage, re-set as an editorial document:
-   the workspace's document-room voice (uppercase kicker on the band
-   ground, hairline clause rows led by rust numerals and a falling
-   rail line, meta labels in the Plex voice) carrying the portal's
-   honest coverage facts — each unit's share of the 756 reading
-   minutes on a hairline rail. The six clauses are grouped into the
-   course's two stages behind a glass-morphism capsule: AS slides
-   the document to units 1–3 (WCH11–WCH13), A2 to units 4–6
-   (WCH14–WCH16). Tapping a clause still opens the command palette
-   filtered to the unit's code. The hero's own decorative language —
-   rings, waves, the faint columns — blooms behind the document. */
+/* The syllabus coverage, dressed as motion graphics cards: each of
+   the six units carries its own miniature loop from the same shelf
+   the living laboratory draws from — an atom, the activation hill,
+   the falling drop, two populations exchanging, a ligand shell, a
+   distillation column — sitting on a card of the lab tiles' chrome
+   (rounded surface, the card shadow, an inner stage on the page
+   ground). The honest coverage facts stay: each unit's share of
+   the 756 reading minutes on a hairline rail. The room's backdrop
+   patterns are gone — the cards float on the bare, deepening
+   ground. The stages still group behind the glass-morphism
+   capsule: AS slides to units 1–3 (WCH11–WCH13), A2 to units 4–6
+   (WCH14–WCH16). Tapping a card opens the command palette filtered
+   to the unit's code. */
 
 type CourseStage = 'as' | 'a2';
+
+const MOTIF_BY_CODE: Record<IalUnit['code'], UnitMotifId> = {
+  WCH11: 'atom',
+  WCH12: 'hill',
+  WCH13: 'drop',
+  WCH14: 'equilibrate',
+  WCH15: 'complex',
+  WCH16: 'distill',
+};
 
 const STAGES: Array<{
   id: CourseStage;
@@ -40,9 +51,6 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
 
   return (
     <section id="units" className="relative py-20 sm:py-28">
-      {/* The hero's ring-and-wave backdrop, tuned for this room */}
-      <SectionBackdrop variant="units" reducedMotion={reducedMotion} />
-
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Editorial header — kicker, document heading, meta line */}
         <div className="text-center">
@@ -59,7 +67,7 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
           <p
             className="portal-ed-meta mx-auto mt-4 max-w-[60ch] leading-[1.9]"
           >
-            Tap a clause to inspect its unit — the palette opens filtered
+            Tap a card to inspect its unit — the palette opens filtered
             to the code, exactly like the workspace's own quick switcher.
           </p>
         </div>
@@ -104,21 +112,21 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
           </div>
         </div>
 
-        {/* The document stream — clause rows, swapped by stage */}
-        <div className="mx-auto mt-6 max-w-4xl">
+        {/* The motion graphics cards — swapped by stage */}
+        <div className="mx-auto mt-8 max-w-5xl">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={stage}
               id="units-document"
               role="tabpanel"
               aria-label={`${stageSpec.big} units — ${stageSpec.sub}`}
-              className="portal-ed-clauses"
+              className="grid grid-cols-1 gap-5 sm:grid-cols-3"
               initial={reducedMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               exit={reducedMotion ? undefined : { opacity: 0, y: -10 }}
               transition={{ duration: 0.32, ease: EASE_EXPO }}
             >
-              {stageSpec.units.map((unit) => {
+              {stageSpec.units.map((unit, i) => {
                 const absoluteIndex = IAL_UNITS.indexOf(unit);
                 const sharePct = Math.round(
                   (unit.minutes / GLOBAL_METRICS.totalMinutes) * 100,
@@ -129,23 +137,30 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
                     type="button"
                     onClick={() => onSelectUnit(unit.code)}
                     aria-label={`Open ${unit.code} — ${unit.title} in the palette`}
-                    initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+                    initial={reducedMotion ? false : { opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.42, ease: EASE_EXPO, delay: reducedMotion ? 0 : (absoluteIndex % 3) * 0.06 }}
-                    whileHover={reducedMotion ? undefined : { x: 4 }}
-                    whileTap={reducedMotion ? undefined : { scale: 0.995 }}
-                    className="portal-ed-clause group"
-                    data-testid={`unit-clause-${unit.code}`}
+                    transition={{ duration: 0.45, ease: EASE_EXPO, delay: reducedMotion ? 0 : i * 0.07 }}
+                    whileHover={reducedMotion ? undefined : { y: -4 }}
+                    whileTap={reducedMotion ? undefined : { scale: 0.99 }}
+                    className="rounded-3xl p-4 text-left"
+                    style={{
+                      backgroundColor: 'var(--surface)',
+                      boxShadow: 'var(--card-shadow)',
+                    }}
+                    data-testid={`unit-card-${unit.code}`}
                   >
-                    {/* The rust numeral and its falling rail */}
-                    <span className="flex flex-col items-center">
-                      <span className="portal-ed-num tabular-nums">
-                        {String(absoluteIndex + 1).padStart(2, '0')}
-                      </span>
-                      <span aria-hidden="true" className="portal-ed-rail-line" />
-                    </span>
+                    {/* the unit's own loop, on the stage ground */}
+                    <div
+                      className="overflow-hidden rounded-2xl"
+                      style={{ backgroundColor: 'var(--bg)' }}
+                    >
+                      <UnitMotif
+                        motif={MOTIF_BY_CODE[unit.code]}
+                        reducedMotion={reducedMotion}
+                      />
+                    </div>
 
-                    <span className="min-w-0">
+                    <span className="mt-4 block px-1">
                       <span className="portal-ed-meta-row">
                         <span>{unit.code}</span>
                         <span aria-hidden="true">·</span>
@@ -156,8 +171,12 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
                         <span>{unit.minutes} min</span>
                       </span>
 
-                      <span className="portal-ed-title">{unit.title}</span>
-                      <span className="portal-ed-scope">{unit.scope}</span>
+                      <span className="portal-ed-title" style={{ fontSize: '17px' }}>
+                        {unit.title}
+                      </span>
+                      <span className="portal-ed-scope" style={{ fontSize: '12.5px', lineHeight: 1.65 }}>
+                        {unit.scope}
+                      </span>
 
                       {/* The coverage rail — the unit's factual share
                           of the course's 756 reading minutes */}

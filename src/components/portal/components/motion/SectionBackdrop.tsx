@@ -2,18 +2,18 @@
 import { motion } from 'framer-motion';
 
 interface SectionBackdropProps {
-  variant: 'showcase' | 'workflow' | 'lab' | 'units';
+  variant: 'showcase' | 'workflow' | 'lab';
   reducedMotion: boolean;
 }
 
 /* ————— the section backdrops —————
    The hero's own decorative language, carried into the rooms below:
-   thin concentric rings blooming behind the content and (in the
-   units room) the faint vertical columns the hero's architectural
-   grid draws. The hairline waves are gone — the page's one wave is
-   the footer's — so the rings carry the rooms alone, re-inked
-   through .portal-bd-* classes: pale sand on the chocolate ground
-   by night, cocoa on cream by day. */
+   thin concentric rings blooming behind the content. The hairline
+   waves are gone — the page's one wave is the footer's — and the
+   units room has put its backdrop away entirely, its motion
+   graphics cards floating on the bare ground. The rings that
+   remain are re-inked through .portal-bd-* classes: pale sand on
+   the chocolate ground by night, cocoa on cream by day. */
 
 interface RingSpec {
   cx: number;
@@ -27,10 +27,7 @@ const RINGS: Record<SectionBackdropProps['variant'], RingSpec> = {
   showcase: { cx: 1150, cy: 150, start: 90, step: 70, count: 6 },
   workflow: { cx: 190, cy: 560, start: 80, step: 78, count: 5 },
   lab: { cx: 720, cy: 620, start: 84, step: 74, count: 6 },
-  units: { cx: 720, cy: 130, start: 72, step: 66, count: 7 },
 };
-
-const COLUMN_XS = [120, 240, 360, 480, 600, 720, 840, 960, 1080, 1200, 1320];
 
 export function SectionBackdrop({ variant }: SectionBackdropProps) {
   const ring = RINGS[variant];
@@ -48,14 +45,6 @@ export function SectionBackdrop({ variant }: SectionBackdropProps) {
         fill="none"
         role="presentation"
       >
-        {variant === 'units' && (
-          <g className="portal-bd-faint" strokeWidth={1}>
-            {COLUMN_XS.map((x) => (
-              <line key={x} x1={x} y1={-20} x2={x} y2={780} />
-            ))}
-          </g>
-        )}
-
         <g strokeWidth={1.2}>
           {Array.from({ length: ring.count }, (_, i) => (
             <circle
