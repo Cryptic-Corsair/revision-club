@@ -35,7 +35,7 @@ export function Navbar({ onOpenNotes }: NavbarProps) {
       style={{ pointerEvents: 'none' }}
     >
       <div
-        className="portal-nav mx-auto flex h-11 max-w-2xl items-center justify-between gap-2.5 rounded-2xl px-2.5 transition-opacity duration-300 sm:h-12 sm:px-3.5"
+        className="portal-nav mx-auto flex h-12 max-w-2xl items-center justify-between gap-2.5 rounded-2xl px-3 transition-opacity duration-300 sm:h-13 sm:px-4"
         style={{
           pointerEvents: 'auto',
           opacity: scrolled ? 1 : 0.94,

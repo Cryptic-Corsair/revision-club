@@ -1057,3 +1057,13 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Commit(s):** this commit (see git log for SHA).
 - **Revert path:** one commit — `git revert <this commit>` restores the always-running loops and the index-disabled carousel buttons.
 - **Follow-up / known limitations:** at wide viewports the showcase's four cards only overflow by ~206px, so Next is a small nudge and the counter reads 02/04 at the right edge — truthful to the geometry; the prewarm margin means a room's loops start ~600px before it is visible (by design, so nothing snaps on arrival); the lab keeps ~18k attr writes/3s while on screen — that is the exhibit doing its job, and the drift itself no longer touches the main thread.
+
+## 2026-11-14 — the homepage navbar breathes a little taller
+
+- **Scope:** user request — make the homepage top navbar a bit bigger, specifically a little more in height. Width, colour, shape and contents unchanged.
+- **The change (Navbar.tsx):** the bar grows one step in both dresses' breakpoints — h-11→h-12 by phone, h-12→h-13 on sm+ (with the club's `--ui-scale` 1.2 riding the rem tokens, the measured heights go 53→58px at 390 wide and 58→62px at 1440 — about 9% taller, a noticeable breath rather than a resize). The horizontal padding eases with it (px-2.5/sm:px-3.5 → px-3/sm:px-4) so the contents don't feel pinched in the taller glass; the flask mark, wordmark, "2018 SPEC" label, candy button and the rounded-2xl rectangular glass recipe are all untouched.
+- **Preserved invariants:** single-button layout, per-dress `--nav-glass`/`--nav-pill-edge`/`--nav-sheen` tokens, max-w-2xl, top offsets (pt-2.5/sm:pt-3), scrolled-opacity behaviour and the Open Notes deep link all as they were.
+- **Verification:** bun run lint clean; bunx tsc --noEmit clean. agent-browser at 1440×900 dune: computed geometry 806×62 at top 14, radius 19.2px intact, contents vertically centred, scrolled state opacity 1; 390×844: bar 361×58 with 14px side margins, overflow-x 0; Open Notes click re-lands `/club?v=notes&doc=wch11-t02`; console shows only the pre-existing lenis/scroll-behavior and analytics warnings.
+- **Commit(s):** this commit (see git log for SHA).
+- **Revert path:** one commit — `git revert <this commit>` restores the h-11/h-12 bar.
+- **Follow-up / known limitations:** none — a pure geometry tweak; the glass recipe's proportions were tuned at h-11/h-12 and still read correctly at the new height.
