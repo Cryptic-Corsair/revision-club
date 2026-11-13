@@ -26,7 +26,7 @@ export function ChronoWaveMachine({ reducedMotion }: ChronoWaveMachineProps) {
     let height = 0;
     let dpr = 1;
     let phase = 0;
-    let isVisible = true;
+    let isVisible = false;
     let rafId = 0;
     let lastTs = performance.now();
 

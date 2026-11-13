@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useRef, type ReactNode, type RefObject } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode, type RefObject } from 'react';
 import { useInView } from 'framer-motion';
 
 /* ————— the still-when-unseen contract —————
@@ -18,13 +18,34 @@ import { useInView } from 'framer-motion';
    the pause happens ~600px before the room is even visible, so the
    restart is never seen. */
 
+/** Detect touch-first hardware so decorative JS/Canvas motion can step aside
+    without disabling the CSS marquee that remains smooth on the compositor. */
+export function useCoarsePointer(): boolean {
+  const [coarsePointer, setCoarsePointer] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia('(pointer: coarse)');
+    const sync = () => setCoarsePointer(query.matches);
+    sync();
+
+    if (typeof query.addEventListener === 'function') {
+      query.addEventListener('change', sync);
+      return () => query.removeEventListener('change', sync);
+    }
+
+    query.addListener(sync);
+    return () => query.removeListener(sync);
+  }, []);
+
+  return coarsePointer;
+}
+
 const LiveContext = createContext(true);
 
 /** Observe a section root: live is true while any part of it sits
-    within `prewarm` px of the viewport (default 600 — roughly one
-    screen of lead so loops are already turning when the room
-    scrolls in). */
-export function useLive<T extends HTMLElement>(prewarm = 600): {
+    within `prewarm` px of the viewport (default 240 — enough lead for
+    lightweight entrance without waking several rooms at once). */
+export function useLive<T extends HTMLElement>(prewarm = 240): {
   ref: RefObject<T | null>;
   live: boolean;
 } {

@@ -59,12 +59,9 @@ const SHOWCASE_CARDS = [
 export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [activeSlide, setActiveSlide] = useState(0);
-  // button states ride the track's real scroll bounds, not the slide
-  // index: on wide screens the four cards barely overflow, and the
-  // last slides' flush-left positions live beyond the track's max
-  // scroll — unclamped scrollTo calls would jam the track halfway
-  // between cards (the visible glitch), so every target is clamped
-  // and the buttons disable on the honest edges instead.
+  // The track reserves a trailing card-width runway, so every card can
+  // reach a true flush-left snap point at every viewport size. Button
+  // state follows the actual scroll bounds, never an unreachable target.
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(false);
 
@@ -185,7 +182,7 @@ export function ShowcaseCarousel({ reducedMotion }: ShowcaseCarouselProps) {
         <div
           ref={trackRef}
           onScroll={syncScrollState}
-          className="relative mt-10 flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory no-scrollbar"
+          className="portal-showcase-track relative mt-10 flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory no-scrollbar"
         >
           {SHOWCASE_CARDS.map((card, i) => (
             <motion.article

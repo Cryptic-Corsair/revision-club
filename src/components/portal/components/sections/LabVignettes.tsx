@@ -18,6 +18,7 @@ import { SectionBackdrop } from '../motion/SectionBackdrop';
 
 interface LabVignettesProps {
   reducedMotion: boolean;
+  coarsePointer: boolean;
 }
 
 /* ————— the living laboratory —————
@@ -105,13 +106,21 @@ function LabCard({
   tile,
   reducedMotion,
   hidden,
+  sectionLive,
+  coarsePointer,
 }: {
   tile: LabTile;
   reducedMotion: boolean;
   hidden?: boolean;
+  sectionLive: boolean;
+  coarsePointer: boolean;
 }) {
+  const { ref, live: cardLive } = useLive<HTMLElement>(120);
+  const animateGraphic = sectionLive && cardLive && !coarsePointer && !reducedMotion;
+
   return (
     <article
+      ref={ref}
       aria-hidden={hidden || undefined}
       className="mr-5 w-[300px] shrink-0 rounded-3xl p-4 sm:w-[352px] sm:p-5"
       style={{
@@ -124,7 +133,9 @@ function LabCard({
         className="overflow-hidden rounded-2xl"
         style={{ backgroundColor: 'var(--bg)' }}
       >
-        {tile.render(reducedMotion)}
+        <StillProvider live={animateGraphic}>
+          {tile.render(reducedMotion)}
+        </StillProvider>
       </div>
 
       <div className="mt-3.5 flex items-baseline justify-between gap-4 px-1">
@@ -149,6 +160,7 @@ function MarqueeRow({
   reducedMotion,
   rowId,
   paused,
+  coarsePointer,
 }: {
   tiles: readonly LabTile[];
   direction: 'left' | 'right';
@@ -156,6 +168,7 @@ function MarqueeRow({
   reducedMotion: boolean;
   rowId: string;
   paused: boolean;
+  coarsePointer: boolean;
 }) {
   return (
     <div
@@ -166,8 +179,11 @@ function MarqueeRow({
       <div
         className="portal-marquee-track"
         data-direction={direction}
+        data-touch={coarsePointer || undefined}
         style={{
-          animationDuration: duration,
+          animationDuration: coarsePointer
+            ? direction === 'left' ? '76s' : '88s'
+            : duration,
           animationPlayState: paused && !reducedMotion ? 'paused' : undefined,
         }}
       >
@@ -177,6 +193,8 @@ function MarqueeRow({
             tile={tile}
             reducedMotion={reducedMotion}
             hidden={i >= tiles.length}
+            sectionLive={!paused}
+            coarsePointer={coarsePointer}
           />
         ))}
       </div>
@@ -184,8 +202,9 @@ function MarqueeRow({
   );
 }
 
-export function LabVignettes({ reducedMotion }: LabVignettesProps) {
-  const { ref, live } = useLive<HTMLElement>();
+export function LabVignettes({ reducedMotion, coarsePointer }: LabVignettesProps) {
+  const { ref, live } = useLive<HTMLElement>(240);
+  const staticDecorativeMotion = reducedMotion || coarsePointer;
   return (
     <section
       id="lab"
@@ -195,12 +214,12 @@ export function LabVignettes({ reducedMotion }: LabVignettesProps) {
       data-live={live}
     >
       {/* the hero's ring language, tuned for this room */}
-      <SectionBackdrop variant="lab" reducedMotion={reducedMotion} />
+      <SectionBackdrop variant="lab" reducedMotion={staticDecorativeMotion} />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <StillProvider live={live}>
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0, y: 14 }}
+            initial={staticDecorativeMotion ? false : { opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_ONCE}
             transition={{ duration: 0.6, ease: EASE_EXPO }}
@@ -213,6 +232,7 @@ export function LabVignettes({ reducedMotion }: LabVignettesProps) {
               duration="56s"
               reducedMotion={reducedMotion}
               paused={!live}
+              coarsePointer={coarsePointer}
             />
             <MarqueeRow
               rowId="lab-row-2"
@@ -221,6 +241,7 @@ export function LabVignettes({ reducedMotion }: LabVignettesProps) {
               duration="72s"
               reducedMotion={reducedMotion}
               paused={!live}
+              coarsePointer={coarsePointer}
             />
           </motion.div>
         </StillProvider>

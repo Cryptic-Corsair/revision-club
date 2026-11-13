@@ -1,7 +1,8 @@
 'use client';
 import { motion } from 'framer-motion';
+import { useId } from 'react';
 import { HAIRLINE, HAIRLINE_FAINT } from './LabGraphics';
-import { useStill } from '../../lib/still';
+import { StillProvider, useLive, useStill } from '../../lib/still';
 
 /* ————— the unit motifs —————
    Six miniature motion graphics, one per syllabus unit, cut from
@@ -128,15 +129,16 @@ function HillMotif({ reducedMotion }: MotifProps) {
 /* ————— drop — the burette metronome ————— */
 function DropMotif({ reducedMotion }: MotifProps) {
   const still = useStill(reducedMotion);
+  const clipId = `unit-burette-clip-${useId().replace(/:/g, '')}`;
   return (
     <svg viewBox="0 0 360 140" className="block h-auto w-full" aria-hidden="true">
       <defs>
-        <clipPath id="unit-burette-clip">
+        <clipPath id={clipId}>
           <rect x={172} y={14} width={16} height={50} />
         </clipPath>
       </defs>
       {/* the charge, draining */}
-      <g clipPath="url(#unit-burette-clip)">
+      <g clipPath={`url(#${clipId})`}>
         <motion.rect
           x={172}
           width={16}
@@ -379,18 +381,21 @@ function ComplexMotif({ reducedMotion }: MotifProps) {
 /* ————— distill — the column handing vapour to a receiver ————— */
 function DistillMotif({ reducedMotion }: MotifProps) {
   const still = useStill(reducedMotion);
+  const id = useId().replace(/:/g, '');
+  const flaskClipId = `unit-still-flask-clip-${id}`;
+  const receiverClipId = `unit-receiver-clip-${id}`;
   return (
     <svg viewBox="0 0 360 140" className="block h-auto w-full" aria-hidden="true">
       <defs>
-        <clipPath id="unit-still-flask-clip">
+        <clipPath id={flaskClipId}>
           <circle cx={88} cy={106} r={17} />
         </clipPath>
-        <clipPath id="unit-receiver-clip">
+        <clipPath id={receiverClipId}>
           <path d="M 178 62 L 224 62 L 224 108 Q 224 113 219 113 L 183 113 Q 178 113 178 108 Z" />
         </clipPath>
       </defs>
       {/* the boiling flask */}
-      <g clipPath="url(#unit-still-flask-clip)">
+      <g clipPath={`url(#${flaskClipId})`}>
         <rect x={71} y={100} width={34} height={24} style={{ fill: 'var(--accent)', opacity: 0.22 }} />
       </g>
       <circle cx={88} cy={106} r={18} fill="none" style={{ stroke: HAIRLINE }} strokeWidth={1.4} />
@@ -458,7 +463,7 @@ function DistillMotif({ reducedMotion }: MotifProps) {
         />
       ))}
       {/* the receiver, its level rising */}
-      <g clipPath="url(#unit-receiver-clip)">
+      <g clipPath={`url(#${receiverClipId})`}>
         <motion.rect
           x={178}
           width={46}
@@ -500,5 +505,12 @@ export function UnitMotif({
   reducedMotion: boolean;
 }) {
   const Render = MOTIFS[motif];
-  return <Render reducedMotion={reducedMotion} />;
+  const { ref, live } = useLive<HTMLElement>(120);
+  return (
+    <div ref={ref} className="block w-full">
+      <StillProvider live={live}>
+        <Render reducedMotion={reducedMotion} />
+      </StillProvider>
+    </div>
+  );
 }

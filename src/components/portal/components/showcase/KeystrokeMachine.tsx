@@ -15,11 +15,9 @@ const MINI_COMMANDS = [
 
 export function KeystrokeMachine({ reducedMotion }: KeystrokeMachineProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [inView, setInView] = useState(true);
+  const [inView, setInView] = useState(false);
   const [pulseId, setPulseId] = useState(0);
-  const [phase, setPhase] = useState<'idle' | 'cmd' | 'key' | 'open'>(
-    reducedMotion ? 'open' : 'idle',
-  );
+  const [phase, setPhase] = useState<'idle' | 'cmd' | 'key' | 'open'>('open');
 
   useEffect(() => {
     const el = containerRef.current;

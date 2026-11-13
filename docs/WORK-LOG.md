@@ -1102,3 +1102,24 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** not attempted; changes remain on the existing design branch.
 - **Commit(s):** recorded in this branch commit.
 - **Follow-up / known limitations:** inspect desktop and narrow mobile layouts in a browser before merging.
+
+
+### 2026-11-14 — tablet carousel stability and complete card paging
+
+- **Contributor:** OpenAI coding agent.
+- **Request / objective:** Fix the homepage's motion-graphics carousel after the stutter remained reproducible on a tablet.
+- **Investigation:** Re-read the current carousel, SVG graphics, showcase machines, motion-liveness provider and page scroll setup. The previous pass paused whole sections but still allowed every duplicated marquee card to animate while offscreen; the duplicated strip also carried a large masked transform layer. The showcase track had no trailing runway, so at wider widths its last card could not reach a flush-left snap point. The four showcase machines also started with visibility set to true before their observers reported an actual intersection.
+- **Changes made:**
+  - `lib/still.tsx` adds a coarse-pointer profile and reduces the default section prewarm distance from 600px to 240px.
+  - `App.tsx` uses native document scrolling on touch-first devices by disabling Lenis there; the hero, workflow, showcase machines, syllabus motifs and interlude use their still/reduced-motion paths on touch-first hardware.
+  - `LabVignettes.tsx` gates each SVG illustration independently to a 120px viewport margin. The two-row marquee remains moving on touch devices, but at a slower pace; offscreen cards stop their inner loops.
+  - `UnitMotifs.tsx` gives each syllabus motif the same per-card visibility gate.
+  - `LabGraphics.tsx`, `LabGraphicsExtra.tsx` and `UnitMotifs.tsx` use instance-scoped React IDs for SVG clip paths, preventing repeated carousel cards from sharing document-global IDs.
+  - `portal.css` removes the moving track's full-width mask and forced `will-change` layer, replacing the edge mask with stationary gradient overlays and a 3D transform track.
+  - `ShowcaseCarousel.tsx` and `portal.css` add a viewport-minus-card-width trailing runway so every card can snap fully into place at phone, tablet and desktop widths.
+  - The showcase machines now begin in the not-visible state and start only after IntersectionObserver confirms visibility.
+- **Preserved invariants:** Desktop retains the full animated illustrations and the two-row opposite-direction marquee. The marquee still moves on touch-first devices; operating-system reduced-motion preferences still produce a manually scrollable still shelf. Study content, themes, anchors, workspace routes and the club app are untouched.
+- **Decisions and rationale:** Prefer per-card visibility over section-wide activation so duplicated and horizontally offscreen items do not burn frames. Keep the lightweight CSS marquee on tablets while staticizing the heavier SVG/Canvas/Framer sequences and returning vertical scrolling to the browser.
+- **Verification:** Source-level checks confirmed every carousel clip-path reference is instance-scoped, the old forced `will-change` and moving mask are absent, card visibility begins false, and both marquee rows receive the touch profile. Lint, TypeScript, production build and real tablet browser testing were **not run** in this connector session; no physical tablet/browser session was available.
+- **Deployment:** Changes are staged on `fix/tablet-motion-stability` for squash-merge to `main`. The Vercel branch-preview status reported failure, but the build log was not accessible through the available connector; production status must be checked after merge.
+- **Follow-up / known limitations:** Touch-first devices intentionally show still line-art inside the moving marquee cards to protect frame stability; the cards themselves continue drifting. Confirm the feel on the target tablet after deployment, especially at its native pixel ratio and in both orientations.
