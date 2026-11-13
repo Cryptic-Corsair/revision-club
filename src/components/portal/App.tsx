@@ -76,9 +76,9 @@ export default function App() {
   const prefersReduced = useReducedMotion();
   const coarsePointer = useCoarsePointer();
   const osReducedMotion = Boolean(prefersReduced);
-  // Touch-first tablets use native document scrolling and still graphics;
-  // the laboratory's CSS marquee remains in motion independently.
-  const reducedMotion = osReducedMotion || coarsePointer;
+  // Touch-first devices keep native scrolling, but retain the full motion design.
+  // Only the operating-system preference selects the reduced-motion experience.
+  const reducedMotion = osReducedMotion;
 
   const [theme, setTheme] = useState<SiteTheme>('dune');
   const [commandOpen, setCommandOpen] = useState(false);
@@ -91,7 +91,7 @@ export default function App() {
 
   // Keep wheel smoothing for desktop; touch-first devices retain native scrolling.
   useEffect(() => {
-    if (reducedMotion) {
+    if (coarsePointer) {
       lenisRef.current = null;
       return;
     }
@@ -122,7 +122,7 @@ export default function App() {
       lenis.destroy();
       lenisRef.current = null;
     };
-  }, [reducedMotion]);
+  }, [coarsePointer]);
 
   // Global Cmd+K / Ctrl+K shortcut to toggle Command Palette
   useEffect(() => {
@@ -197,7 +197,7 @@ export default function App() {
   const navigateTo = useCallback(
     (anchor: string) => {
       if (anchor === '#top') {
-        if (lenisRef.current && !reducedMotion) {
+        if (lenisRef.current) {
           lenisRef.current.scrollTo(0);
         } else {
           window.scrollTo({ top: 0, behavior: 'auto' });
@@ -206,13 +206,13 @@ export default function App() {
       }
       const target = document.querySelector(anchor);
       if (!(target instanceof HTMLElement)) return;
-      if (lenisRef.current && !reducedMotion) {
+      if (lenisRef.current) {
         lenisRef.current.scrollTo(target, { offset: -64 });
       } else {
         target.scrollIntoView({ behavior: 'auto' });
       }
     },
-    [reducedMotion],
+    [],
   );
 
   return (
