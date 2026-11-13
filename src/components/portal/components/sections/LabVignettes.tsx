@@ -116,7 +116,9 @@ function LabCard({
   coarsePointer: boolean;
 }) {
   const { ref, live: cardLive } = useLive<HTMLElement>(120);
-  const animateGraphic = sectionLive && cardLive && !coarsePointer && !reducedMotion;
+  // Touch input is not a reduced-motion preference. Keep the SVG loop alive
+  // whenever its card is visible; visibility gating controls the workload.
+  const animateGraphic = sectionLive && cardLive && !reducedMotion;
 
   return (
     <article
@@ -204,7 +206,7 @@ function MarqueeRow({
 
 export function LabVignettes({ reducedMotion, coarsePointer }: LabVignettesProps) {
   const { ref, live } = useLive<HTMLElement>(240);
-  const staticDecorativeMotion = reducedMotion || coarsePointer;
+  const staticDecorativeMotion = reducedMotion;
   return (
     <section
       id="lab"
