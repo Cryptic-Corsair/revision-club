@@ -294,8 +294,8 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
       if (!isVisible || !pageVisible || contextLost) return;
 
       // Keep the shader's continuous movement, but avoid asking a touch GPU
-      // to shade every high-refresh display callback. The remainder preserves
-      // a stable ~40fps cadence on 60/90/120Hz panels.
+      // to shade every high-refresh display callback. The remainder caps
+      // draws at 60fps while following the panel's native rAF cadence.
       if (frameIntervalSeconds > 0) {
         const now = performance.now();
         frameAccumulator += clampDeltaTime((now - lastTickTs) / 1000);
