@@ -58,7 +58,7 @@ export function GalleryLabel({ children }: { children: ReactNode }) {
         style={{ background: GAL_ACCENT }}
       />
       <span
-        className="font-display text-[calc(10px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase"
+        className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase"
         style={{ color: GAL_ACCENT }}
       >
         {children}
@@ -368,7 +368,7 @@ function GalleryWorked({
           style={{ borderColor: hair(10) }}
         >
           <span
-            className="shrink-0 pt-[calc(4px*var(--ui-scale))] font-display text-[calc(10px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase"
+            className="shrink-0 pt-[calc(4px*var(--ui-scale))] font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase"
             style={{ color: GAL_ACCENT }}
           >
             Answer
@@ -472,7 +472,7 @@ function GalleryFigure({
     >
       <div className="flex items-center gap-3 px-4 pt-3.5 sm:px-5">
         <span
-          className="font-display text-[calc(10px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase"
+          className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase"
           style={{ color: GAL_ACCENT }}
         >
           Fig. {pad2(fig)}
@@ -540,7 +540,7 @@ export function GallerySectionView({
           {pad2(index + 1)}
         </span>
         <div className="min-w-0 flex-1">
-          <span className="font-display text-[calc(10px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase text-ink-faint">
+          <span className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase text-ink-faint">
             Spec {section.spec}
           </span>
           <h3 className="mt-1.5 font-display text-[calc(22px*var(--ui-scale))] leading-[1.2] font-semibold tracking-[-0.02em] text-ink sm:text-[calc(25px*var(--ui-scale))]">
@@ -555,7 +555,7 @@ export function GallerySectionView({
         style={{ borderColor: GAL_ACCENT }}
       >
         <span
-          className="font-display text-[calc(10px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase"
+          className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.22em] uppercase"
           style={{ color: GAL_ACCENT }}
         >
           From the specification

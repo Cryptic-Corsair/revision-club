@@ -203,7 +203,7 @@ function PanelSection({
         </span>
         <span aria-hidden className="h-px min-w-4 flex-1" style={{ background: hair(8) }} />
         {meta && (
-          <span className="shrink-0 font-display text-[calc(9.5px*var(--ui-scale))] font-semibold tracking-[0.16em] uppercase tabular-nums text-ink-faint">
+          <span className="shrink-0 font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.16em] uppercase tabular-nums text-ink-faint">
             {meta}
           </span>
         )}
@@ -402,7 +402,7 @@ function GroupLabel({ children }: { children: ReactNode }) {
   return (
     <div className="flex items-center gap-2.5">
       <span aria-hidden className="h-[2px] w-[14px] shrink-0 rounded-full" style={{ background: A, opacity: 0.7 }} />
-      <span className="font-display text-[calc(10px*var(--ui-scale))] font-semibold tracking-[0.2em] uppercase text-ink-faint">
+      <span className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.2em] uppercase text-ink-faint">
         {children}
       </span>
     </div>
@@ -701,7 +701,7 @@ export function CustomizePanel({
                       main: (
                         <span className="font-display text-[calc(14px*var(--ui-scale))] leading-none font-bold">
                           {Math.round(h.fraction * 100)}
-                          <span className="text-[calc(9.5px*var(--ui-scale))]">%</span>
+                          <span className="text-[calc(10.5px*var(--ui-scale))]">%</span>
                         </span>
                       ),
                       sub: h.label,
@@ -755,7 +755,7 @@ export function CustomizePanel({
                   <RotateCcw className="h-3.5 w-3.5" />
                   Reset everything
                 </button>
-                <p className="font-display text-[calc(9.5px*var(--ui-scale))] font-semibold tracking-[0.16em] uppercase text-ink-faint">
+                <p className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.16em] uppercase text-ink-faint">
                   Saved on this device
                 </p>
               </div>

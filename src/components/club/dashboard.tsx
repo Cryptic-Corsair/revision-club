@@ -130,7 +130,7 @@ export function WeekBars({
                 />
               )}
               {/* the hover read-out */}
-              <span className="pointer-events-none absolute -top-1 left-1/2 z-10 -translate-x-1/2 -translate-y-full rounded-lg bg-ink px-2 py-1 text-[calc(10px*var(--ui-scale))] font-bold tabular-nums text-paper opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
+              <span className="pointer-events-none absolute -top-1 left-1/2 z-10 -translate-x-1/2 -translate-y-full rounded-lg bg-ink px-2 py-1 text-[calc(10.5px*var(--ui-scale))] font-bold tabular-nums text-paper opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
                 {b.day} {b.date} · {fmtShort(b.total)}
               </span>
             </div>
@@ -144,7 +144,7 @@ export function WeekBars({
             className="flex min-w-0 flex-1 flex-col items-center gap-0.5"
           >
             <span
-              className={`font-display text-[calc(9.5px*var(--ui-scale))] leading-none font-bold ${
+              className={`font-display text-[calc(10.5px*var(--ui-scale))] leading-none font-bold ${
                 b.today ? "text-ink" : "text-ink-faint"
               }`}
             >

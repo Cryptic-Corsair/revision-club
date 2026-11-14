@@ -343,7 +343,7 @@ function SetRow({
             </span>
             {loaded && (
               <span
-                className="shrink-0 rounded-full px-2 py-0.5 font-display text-[calc(9.5px*var(--ui-scale))] font-bold tracking-[0.1em] text-white uppercase"
+                className="shrink-0 rounded-full px-2 py-0.5 font-display text-[calc(10.5px*var(--ui-scale))] font-bold tracking-[0.1em] text-white uppercase"
                 style={{ background: "#12B886" }}
               >
                 Loaded

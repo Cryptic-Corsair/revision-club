@@ -838,7 +838,7 @@ export function SpecMapTrigger() {
                     </button>
                     <span
                       aria-hidden
-                      className="hidden shrink-0 font-display text-[calc(10px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint tabular-nums md:block"
+                      className="hidden shrink-0 font-display text-[calc(10.5px*var(--ui-scale))] font-bold tracking-[0.16em] text-ink-faint tabular-nums md:block"
                     >
                       {idx + 1} / {sections.length}
                     </span>

@@ -309,7 +309,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   className="hero-float-card sticker w-[calc(150px*var(--ui-scale))] -rotate-[4deg] rounded-[calc(22px*var(--ui-scale))] bg-paper px-4 py-3.5 sm:w-[calc(178px*var(--ui-scale))]"
                 >
                   <span
-                    className="rounded-full px-2.5 py-1 font-display text-[calc(10px*var(--ui-scale))] font-bold tracking-[0.08em] text-white uppercase"
+                    className="rounded-full px-2.5 py-1 font-display text-[calc(10.5px*var(--ui-scale))] font-bold tracking-[0.08em] text-white uppercase"
                     style={{ background: "#12B886", boxShadow: "0 2px 0 #0B7A57" }}
                   >
                     definition
@@ -332,7 +332,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   className="hero-float-card sticker rotate-[3deg] rounded-[calc(22px*var(--ui-scale))] bg-paper px-5 py-4 sm:px-6"
                 >
                   <span
-                    className="rounded-full px-2.5 py-1 font-display text-[calc(10px*var(--ui-scale))] font-bold tracking-[0.08em] text-white uppercase"
+                    className="rounded-full px-2.5 py-1 font-display text-[calc(10.5px*var(--ui-scale))] font-bold tracking-[0.08em] text-white uppercase"
                     style={{ background: "#FF922B", boxShadow: "0 2px 0 #D46A08" }}
                   >
                     equation

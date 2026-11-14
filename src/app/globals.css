@@ -80,7 +80,7 @@
    This MUST be an `inline` theme block: a plain @theme token would
    live on :root, where var(--ui-scale) resolves ONCE — the computed
    length would then inherit into every subtree already scaled, and
-   the .site-header / .spec-map freeze pins below could never undo
+   the .spec-map freeze pin below could never undo
    it. Inlined, each utility emits the whole calc expression and
    resolves --ui-scale AT ITSELF, so a pin on any ancestor re-freezes
    everything inside it — named utilities and px utilities alike.
@@ -107,8 +107,8 @@
    win. Each carries the whole calc expression, so --ui-scale
    resolves AT THE ELEMENT (the same semantics as the inlined
    spacing utilities above): the reading column and the page frame
-   widen with the knob, and the .site-header / .spec-map pins
-   re-freeze them by inheritance. width:auto and the screen itself
+   widen with the knob, and the .spec-map pin re-freezes them by
+   inheritance. width:auto and the screen itself
    remain the final caps — widening only shows where there is room,
    and a phone just wraps more, never clips. */
 @layer utilities {
@@ -166,33 +166,61 @@ html[data-body="nunito"] {
    squeezing the spec map and every fixed surface. The scale knob now
    feeds one custom property: --ui-scale. Sizes opt in by multiplying
    with it (Tailwind tokens and the px utilities alike), so the
-   cascade can freeze a subtree — the navbar pill and the spec map
-   pin --ui-scale back to 1 and stay pixel-identical — while the
-   root font size never moves, so rem-based media queries and dvh
-   drawers cannot drift either. M needs no rule: 1 is the default. */
+   cascade can freeze a subtree — the spec map pin --ui-scale back to
+   1 and stay pixel-identical — while the root font size never moves,
+   so rem-based media queries and dvh drawers cannot drift either.
+
+   --ui-scale composes two factors: the customize panel's knob
+   (--ui-knob, S/M/L/XL — the visitor's explicit choice) times a
+   viewport-driven default growth (--ui-grow). The growth exists
+   because the type ladder was tuned arm's-length on tablets; on a
+   laptop or desk monitor the same px values sit further from the eye
+   and read small — the standing complaint this block answers. The
+   growth is a DEFAULT, not a second knob: the panel's rungs keep
+   their meaning on every screen (S on a desktop ≈ today's M), and
+   phones and tablets see exactly the sizes they always did. */
 :root {
-  --ui-scale: 1;
+  --ui-knob: 1;
+  --ui-grow: 1;
+  --ui-scale: calc(var(--ui-knob) * var(--ui-grow));
+}
+/* laptop ≥1024: the growth starts at exactly the rung the retired
+   first-run lift used to hand big screens (1.2), then keeps climbing
+   so a default visitor's text is always at least as large as before
+   and grows with the monitor. */
+@media (min-width: 1024px) {
+  :root { --ui-grow: 1.2; }
+}
+@media (min-width: 1280px) {
+  :root { --ui-grow: 1.26; }
+}
+@media (min-width: 1536px) {
+  :root { --ui-grow: 1.32; }
+}
+@media (min-width: 1920px) {
+  :root { --ui-grow: 1.38; }
 }
 html[data-scale="S"] {
-  --ui-scale: 0.9;
+  --ui-knob: 0.9;
 }
 html[data-scale="L"] {
-  --ui-scale: 1.2;
+  --ui-knob: 1.2;
 }
 html[data-scale="XL"] {
-  --ui-scale: 1.4;
+  --ui-knob: 1.4;
 }
 
-/* the two frozen surfaces. --ui-scale inherits, so pinning it back
-   to 1 on a subtree makes every descendant — however deeply shared
-   (the spec map's tiles ride the same freeze) — measure against 1
-   again, whatever the page-wide knob is doing. The nav pill promised
-   this in the zoom era and keeps it; the spec map earned it the hard
-   way: its drawer is cut from fractions of the visible viewport, and
-   any scaling inside it would misalign the tiles against the real
-   sections they jump to. The customize panel deliberately does NOT
-   freeze — it is content. */
-.site-header,
+/* the frozen surface. --ui-scale inherits, so pinning it back to 1
+   on a subtree makes every descendant — however deeply shared (the
+   spec map's tiles ride the same freeze) — measure against 1 again,
+   whatever the page-wide knob is doing. The spec map earned the pin
+   the hard way: its drawer is cut from fractions of the visible
+   viewport, and any scaling inside it would misalign the tiles
+   against the real sections they jump to — it stays frozen under the
+   viewport growth too. The nav pill used to share the pin; since the
+   growth it rides the scale like every other chrome run, so its
+   labels stop being the smallest text on a big monitor. The
+   customize panel deliberately does NOT freeze — it is content. */
 .spec-map {
   --ui-scale: 1;
 }

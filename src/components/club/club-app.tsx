@@ -631,7 +631,7 @@ function TopBar({
                             <span className="font-display text-[calc(12px*var(--ui-scale))] font-semibold text-ink">{LAB_LABEL[option]}</span>
                             {selected && <Check className="h-4 w-4 shrink-0 text-mint" strokeWidth={2.8} />}
                           </span>
-                          <span className="mt-0.5 text-[calc(9.5px*var(--ui-scale))] leading-snug text-ink-soft">{LAB_DESCRIPTION[option]}</span>
+                          <span className="mt-0.5 text-[calc(10.5px*var(--ui-scale))] leading-snug text-ink-soft">{LAB_DESCRIPTION[option]}</span>
                         </button>
                       );
                     })}
@@ -788,7 +788,7 @@ function Footer({
                   <span className="font-display text-[calc(20px*var(--ui-scale))] font-bold leading-none tabular-nums">
                     {stat.value}
                   </span>
-                  <span className="mt-1.5 text-[calc(10px*var(--ui-scale))] font-bold uppercase tracking-[0.12em] text-milk/45">
+                  <span className="mt-1.5 text-[calc(10.5px*var(--ui-scale))] font-bold uppercase tracking-[0.12em] text-milk/45">
                     {stat.label}
                   </span>
                 </div>
@@ -805,7 +805,7 @@ function Footer({
                     Explore by unit
                   </h2>
                 </div>
-                <span className="pb-1 font-mono text-[calc(10px*var(--ui-scale))] tracking-[0.12em] text-milk/35">
+                <span className="pb-1 font-mono text-[calc(10.5px*var(--ui-scale))] tracking-[0.12em] text-milk/35">
                   WCH11 — WCH16
                 </span>
               </div>
@@ -832,7 +832,7 @@ function Footer({
                       <span className="block truncate text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85 transition-colors group-hover:text-milk">
                         {u.shortTitle}
                       </span>
-                      <span className="mt-1 block text-[calc(9.5px*var(--ui-scale))] font-bold uppercase tracking-[0.14em] text-milk/35">
+                      <span className="mt-1 block text-[calc(10.5px*var(--ui-scale))] font-bold uppercase tracking-[0.14em] text-milk/35">
                         {u.code}
                       </span>
                     </span>

@@ -103,9 +103,11 @@ export const metadata: Metadata = {
    re-flows after hydration. Only the night lab picks tonight's
    mood (html[data-mood]); dune and classic are fixed signatures,
    so they need no mood.
-   A FIRST RUN on a big screen (≥1024px) starts on Large — mirroring
-   load() in prefs.ts exactly, or the first paint would re-flow after
-   hydration. beforeInteractive keeps it out of React's hydration
+   A FIRST RUN used to start on Large on big screens; the viewport
+   growth in globals.css (--ui-grow) now does that job progressively
+   for every rung, so the factory default is Medium everywhere and
+   the fallback below is a flat "M".
+   beforeInteractive keeps it out of React's hydration
    tree. The React side (prefs.ts) re-applies the same values once it
    hydrates, then owns every change. */
 const prefsInit = `(function(){try{
@@ -123,7 +125,9 @@ if(p.headFont)r.dataset.head=String(p.headFont);
 if(p.bodyFont)r.dataset.body=String(p.bodyFont);
 r.dataset.dots=p.dots===false?"off":"on";
 r.dataset.motion=p.motion===false?"off":"on";
-var fb="M";try{if(!localStorage.getItem("reaction-club-prefs-v1")&&window.matchMedia("(min-width:1024px)").matches)fb="L"}catch(e){}
+/* the scale fallback is Medium everywhere — big screens grow via
+   --ui-grow in globals.css, not via a bigger factory rung */
+var fb="M";
 var s=p.scale==="S"||p.scale==="M"||p.scale==="L"||p.scale==="XL"?p.scale:(p.zoom===0.9?"S":p.zoom===1.15?"L":p.zoom===1.3?"XL":fb);
 r.dataset.scale=s;
 /* the interface axis: editorial | gallery. The retired "rooms" dress

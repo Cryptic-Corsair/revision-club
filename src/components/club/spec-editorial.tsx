@@ -395,12 +395,12 @@ function PointRow({
             {p.spec}
           </span>
           {!hasNotes && (
-            <span className="legal-meta text-[calc(9.5px*var(--ui-scale))]">
+            <span className="legal-meta text-[calc(10.5px*var(--ui-scale))]">
               NOTES COMING LATER
             </span>
           )}
           {picked && (
-            <span className="legal-meta text-[calc(9.5px*var(--ui-scale))]">
+            <span className="legal-meta text-[calc(10.5px*var(--ui-scale))]">
               IN YOUR PACK
             </span>
           )}

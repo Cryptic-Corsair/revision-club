@@ -95,9 +95,14 @@ export const ACCENT_IDS: AccentId[] = ACCENTS.map((a) => a.id);
 /* content scale — S/M/L/XL. NOT page zoom: the retired html zoom
    property scaled the whole coordinate system (layout viewport
    included), which is what kept squeezing the spec map and every
-   fixed surface. Scale instead feeds --ui-scale (see globals.css):
-   component sizes multiply with it, while the navbar pill and the
-   spec map pin the variable back to 1 and stay pixel-identical. */
+   fixed surface. Scale instead feeds --ui-knob (see globals.css),
+   which composes with a viewport-driven --ui-grow into --ui-scale:
+   component sizes multiply with the product, phones and tablets see
+   exactly the historical sizes, and laptops/desktops grow the whole
+   ladder by default so type stops reading small at arm's length.
+   The spec map pins the product back to 1 and stays pixel-identical;
+   every other surface — nav pill included — rides it. These rungs
+   keep their meaning on every screen: S on a desktop ≈ the old M. */
 export const SCALES = ["S", "M", "L", "XL"] as const;
 export type ScaleId = (typeof SCALES)[number];
 export const SCALE_VALUE: Record<ScaleId, number> = {
@@ -172,9 +177,8 @@ export const DEFAULT_PREFS: Prefs = {
   theme: "classic",
   iface: "gallery",
   accents: [...ACCENT_IDS],
-  /* the scale default is Medium here; load() lifts a FIRST RUN on a
-     big screen to Large — the factory setting is screen-aware, the
-     saved one is whatever you picked. */
+  /* the scale default is Medium everywhere: big screens grow through
+     --ui-grow (globals.css) instead of a bigger factory rung */
   scale: "M",
   specHeight: 0.8,
   specDensity: "roomy",
@@ -265,18 +269,10 @@ function load() {
          its direct heir; everything else starts on the default. */
       const legacy = window.localStorage.getItem("rc-theme");
       if (legacy === "dark") state = { ...state, theme: "dark" };
-      /* first run on a big screen starts on Large — a desktop has the
-         room, so the extra size goes into the words instead of the
-         margins. Phones and tablets keep Medium. Only a factory
-         setting: the first size you pick yourself is kept for keeps
-         (and mirrors the pre-paint script in layout.tsx — the two
-         must agree or the first paint re-flows after hydration). */
-      try {
-        if (window.matchMedia("(min-width: 1024px)").matches)
-          state = { ...state, scale: "L" };
-      } catch {
-        /* no matchMedia — keep Medium */
-      }
+      /* The old first-run lift to Large on ≥1024px screens is
+         retired: --ui-grow grows the whole ladder on those screens
+         for every rung, and stacking Large on top of it read far
+         too big (1.2 × 1.16 ≈ 1.39 on a laptop). */
     }
   } catch {
     /* private mode / corrupt data — defaults */
