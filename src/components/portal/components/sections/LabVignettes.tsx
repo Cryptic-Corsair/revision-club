@@ -139,7 +139,7 @@ function LabCard({
       </div>
 
       <div className="mt-3.5 flex items-baseline justify-between gap-4 px-1">
-        <h3 className="font-display text-base font-bold tracking-tight">
+        <h3 className="font-display text-base font-semibold tracking-tight">
           {tile.title}
         </h3>
         <span

@@ -84,7 +84,7 @@ export function KineticInterlude({
               fontSize: 'clamp(1.85rem, 5.1vw, 4.65rem)',
               color: 'var(--ink)',
             }}
-            className="text-balance font-display font-bold leading-[1.12] sm:whitespace-nowrap"
+            className="text-balance font-display font-semibold leading-[1.12] sm:whitespace-nowrap"
           >
             Six units. Thirty-three topics.
           </motion.p>
@@ -109,7 +109,7 @@ export function KineticInterlude({
               fontSize: 'clamp(1.6rem, 4.15vw, 3.85rem)',
               color: 'var(--ink)',
             }}
-            className="text-balance font-display font-bold leading-[1.14] sm:whitespace-nowrap"
+            className="text-balance font-display font-semibold leading-[1.14] sm:whitespace-nowrap"
           >
             More{' '}
             <span style={{ color: 'var(--accent)' }}>

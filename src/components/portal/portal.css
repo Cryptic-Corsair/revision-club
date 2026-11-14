@@ -49,9 +49,19 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 .portal-root {
-  /* the club's voices — inherited from <html>, re-pointed per profile */
+  /* the portal's own house voices — Fraunces (display) and Figtree
+     (body), self-hosted in src/app/fonts. The front door speaks an
+     editorial serif over a warm grotesque: rigorous subject matter,
+     publication-grade headings, none of the toy rounding. The reader
+     workspace keeps its customize-panel faces (Fredoka / Quicksand
+     and the swap shelf) — this scope re-points --font-display and
+     --font-body for the portal only, so a saved font preference on
+     <html> still governs the documents but never the homepage. The
+     club's candy helpers and the club ticker stay untouched. */
+  --font-display: var(--font-fraunces), "Trebuchet MS", serif;
+  --font-body: var(--font-figtree), "Trebuchet MS", sans-serif;
   --font-sans: var(--font-body), "Trebuchet MS", sans-serif;
-  --font-serif: var(--font-display), "Trebuchet MS", sans-serif;
+  --font-serif: var(--font-display), "Trebuchet MS", serif;
   --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* DUNE — the chocolate room (globals.css, html.dune) */
@@ -505,18 +515,26 @@ body:has(.portal-root[data-theme="light"]) {
 .portal-ed-kicker {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  border-radius: 999px;
-  padding: 8px 14px;
-  font-family: var(--font-display), sans-serif;
+  gap: 10px;
+  font-family: var(--font-mono), monospace;
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   line-height: 1.5;
   text-transform: uppercase;
-  color: var(--band-ink);
-  background: var(--band);
-  box-shadow: 0 2px 0 var(--edge);
+  color: var(--ink-muted);
+}
+.portal-ed-kicker::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--portal-rust);
+}
+/* Fraunces reads tighter than Fredoka at display sizes — a serif
+   wants barely-negative tracking, not the rounded font's squarish fit */
+.portal-root h1,
+.portal-root h2 {
+  letter-spacing: -0.015em;
 }
 .portal-ed-heading-accent {
   color: var(--portal-rust);

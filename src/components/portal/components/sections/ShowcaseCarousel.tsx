@@ -87,7 +87,7 @@ const ShowcaseCards = memo(function ShowcaseCards({
 
           <div className="mt-5 space-y-1.5">
             <div className="flex items-center justify-between">
-              <h3 className="font-display text-base font-bold tracking-tight">
+              <h3 className="font-display text-base font-semibold tracking-tight">
                 {card.title}
               </h3>
               <span

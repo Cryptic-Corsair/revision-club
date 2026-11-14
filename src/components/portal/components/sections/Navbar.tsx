@@ -76,7 +76,7 @@ export function Navbar({ onOpenNotes }: NavbarProps) {
           type="button"
           onClick={onOpenNotes}
           data-testid="navbar-open-notes"
-          className="portal-candy-btn inline-flex h-8 items-center gap-1.5 rounded-full px-3.5 font-display text-xs font-semibold whitespace-nowrap shrink-0"
+          className="portal-candy-btn inline-flex h-8 items-center gap-1.5 rounded-full px-3.5 font-body text-xs font-semibold whitespace-nowrap shrink-0"
         >
           <span>Open Notes</span>
           <ArrowRight className="h-3 w-3" aria-hidden="true" />

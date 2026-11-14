@@ -167,7 +167,7 @@ export function CommandPaletteModal({
                       <span aria-hidden="true">·</span>
                       <span>{previewUnit.shortLabel}</span>
                     </div>
-                    <h3 className="font-display text-lg font-bold tracking-tight">
+                    <h3 className="font-display text-lg font-semibold tracking-tight">
                       {activePreview.title}
                     </h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--ink-muted)' }}>

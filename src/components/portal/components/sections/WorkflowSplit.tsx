@@ -139,7 +139,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch, onOpenPackBench }: 
                     </span>
                   </div>
                   <p
-                    className="font-display text-base font-bold tracking-tight sm:text-lg"
+                    className="font-display text-base font-semibold tracking-tight sm:text-lg"
                     style={{ color: 'var(--ink)' }}
                   >
                     {chapter.summary}
@@ -175,7 +175,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch, onOpenPackBench }: 
                       <span>01 · THE SPEC INDEX</span>
                       <span className="tabular-nums">WCH11–WCH16</span>
                     </div>
-                    <h3 className="mt-2 font-display text-lg font-bold tracking-tight">
+                    <h3 className="mt-2 font-display text-lg font-semibold tracking-tight">
                       Go straight to the statement
                     </h3>
                   </div>
@@ -248,7 +248,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch, onOpenPackBench }: 
                       <span>02 · PACK BUILDER</span>
                       <span className="tabular-nums">{packMetrics.count} / 4 TICKED</span>
                     </div>
-                    <h3 className="mt-2 font-display text-lg font-bold tracking-tight">
+                    <h3 className="mt-2 font-display text-lg font-semibold tracking-tight">
                       Tick the statements you're revising
                     </h3>
                   </div>
@@ -359,7 +359,7 @@ export function WorkflowSplit({ reducedMotion, onOpenSearch, onOpenPackBench }: 
                       <span>03 · YOUR PROGRESS</span>
                       <span className="tabular-nums">NO ACCOUNT NEEDED</span>
                     </div>
-                    <h3 className="mt-2 font-display text-lg font-bold tracking-tight">
+                    <h3 className="mt-2 font-display text-lg font-semibold tracking-tight">
                       See how far you've got
                     </h3>
                   </div>

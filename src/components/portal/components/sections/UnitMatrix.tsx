@@ -110,7 +110,7 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
                 'Syllabus coverage'
               ) : i === 1 ? (
                 <h2
-                  className="font-display font-bold leading-[1.12]"
+                  className="font-display font-semibold leading-[1.12]"
                   style={{ fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)' }}
                 >
                   The six units, in{' '}

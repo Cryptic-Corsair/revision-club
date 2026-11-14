@@ -17,14 +17,31 @@ import "./globals.css";
    families the factory theme never renders (Baloo 2, Patrick Hand
    and Nunito are only downloaded once the customize panel re-points
    --font-display / --font-body) and the mono trio, whose first use
-   sits in lazily-loaded rooms (spec map, worked plates). Only the
-   first-paint pair — Fredoka (display) + Quicksand (body) — keeps
-   its preload head start; everything else loads on first use. */
+   sits in lazily-loaded rooms (spec map, worked plates). The first
+   paint now belongs to the portal's house voices — Fraunces (display)
+   + Figtree (body) — which keep their preload head start; Fredoka and
+   Quicksand are the workspace reader's pair and load on first use,
+   alongside the rest of the swap shelf. */
+const fraunces = localFont({
+  variable: "--font-fraunces",
+  src: "./fonts/fraunces-var.woff2",
+  weight: "300 700",
+  display: "swap",
+});
+
+const figtree = localFont({
+  variable: "--font-figtree",
+  src: "./fonts/figtree-var.woff2",
+  weight: "300 800",
+  display: "swap",
+});
+
 const fredoka = localFont({
   variable: "--font-fredoka",
   src: "./fonts/fredoka-var.woff2",
   weight: "300 700",
   display: "swap",
+  preload: false,
 });
 
 const baloo = localFont({
@@ -57,6 +74,7 @@ const quicksand = localFont({
   src: "./fonts/quicksand-var.woff2",
   weight: "300 700",
   display: "swap",
+  preload: false,
 });
 const plex = localFont({
   variable: "--font-plex",
@@ -138,7 +156,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable}`}
+      className={`${fraunces.variable} ${figtree.variable} ${fredoka.variable} ${baloo.variable} ${patrick.variable} ${nunito.variable} ${quicksand.variable} ${plex.variable}`}
     >
       <body className="min-h-screen bg-cream font-body text-ink antialiased">
         <Script id="rc-prefs" strategy="beforeInteractive">{prefsInit}</Script>

@@ -90,7 +90,7 @@ export function FooterSection({
               <div className="max-w-md">
                 <div className="flex items-center gap-3.5">
                   <FlaskMark size={42} />
-                  <span className="font-display text-xl font-bold leading-none tracking-tight">
+                  <span className="font-display text-xl font-semibold leading-none tracking-tight">
                     IAL CHEM
                   </span>
                 </div>

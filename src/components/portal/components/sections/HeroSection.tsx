@@ -256,10 +256,10 @@ export function HeroSection({
           </div>
 
           <h1
-            className="text-balance font-display font-bold leading-[1.06]"
+            className="text-balance font-display font-semibold leading-[1.06]"
             style={{
-              fontSize: 'clamp(2.5rem, 5.6vw, 4.5rem)',
-              letterSpacing: '-0.02em',
+              fontSize: 'clamp(2.5rem, 5.3vw, 4.25rem)',
+              letterSpacing: '-0.01em',
               color: 'var(--ink)',
             }}
           >
@@ -310,7 +310,7 @@ export function HeroSection({
             <button
               type="button"
               onClick={onStartReading}
-              className="portal-candy-btn group inline-flex h-12 items-center gap-2 rounded-full px-6 font-display text-sm font-semibold transition-transform duration-200 whitespace-nowrap shrink-0"
+              className="portal-candy-btn group inline-flex h-12 items-center gap-2 rounded-full px-6 font-body text-sm font-semibold transition-transform duration-200 whitespace-nowrap shrink-0"
             >
               <span>Start reading</span>
               <ArrowRight
@@ -322,7 +322,7 @@ export function HeroSection({
             <button
               type="button"
               onClick={onFindTopic}
-              className="inline-flex h-12 items-center rounded-full px-6 font-display text-sm font-semibold transition-transform duration-200 hover:-translate-y-px whitespace-nowrap shrink-0"
+              className="inline-flex h-12 items-center rounded-full px-6 font-body text-sm font-semibold transition-transform duration-200 hover:-translate-y-px whitespace-nowrap shrink-0"
               style={{
                 color: 'var(--ink)',
                 backgroundColor: 'var(--surface)',
@@ -333,18 +333,18 @@ export function HeroSection({
             </button>
           </motion.div>
 
-          {/* Tabular-Nums Spec Summary Strip — candy dots as separators,
-              the club ticker's trick */}
+          {/* Tabular-Nums Spec Summary Strip — roast-palette ticks as
+              separators, the ticker's trick in the site's own accents */}
           <p
             className="mx-auto mt-7 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 font-mono text-xs tracking-[0.04em] tabular-nums"
             style={{ color: 'var(--ink-muted)' }}
           >
             <span>0{GLOBAL_METRICS.units}&nbsp;Units</span>
-            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: 'var(--color-coral)' }} />
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
             <span>{GLOBAL_METRICS.topics}&nbsp;Topics</span>
-            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: 'var(--color-mint)' }} />
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: 'var(--portal-rust)' }} />
             <span>~13&nbsp;Hours</span>
-            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: 'var(--color-grape)' }} />
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: 'var(--accent-warm)' }} />
             <span>{GLOBAL_METRICS.workedExamples}&nbsp;Worked&nbsp;Examples</span>
           </p>
         </div>
@@ -676,7 +676,7 @@ export function HeroSection({
                   </div>
 
                   <h3
-                    className="mt-2.5 font-display text-lg font-bold tracking-tight sm:text-xl"
+                    className="mt-2.5 font-display text-lg font-semibold tracking-tight sm:text-xl"
                     style={{ color: previewTokens.ink }}
                   >
                     {clause.title}
