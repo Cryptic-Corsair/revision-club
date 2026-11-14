@@ -1323,3 +1323,10 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** tsc clean; fresh build; at the tablet's CSS viewport (960×641) the track drifts at a constant −25.8 px/s **through two forced verdict flips** (no pause, no jump), inline play-state absent; motion audit **ALL CHECKS PASSED** (lab budget 13345/16000 — SVG gating intact).
 - **Deployment:** push follows; live re-verification in the follow-up entry.
 - **Commit:** this commit (see git log for SHA).
+
+## 2026-11-14 (14) — marquee fix deployed; live site seamless through verdict flips
+
+- **Follow-up to (13):** pushed `bc61bf7`; Vercel auto-deployed; re-verified on `ial-chem.vercel.app` at the tablet's CSS viewport (960×641): no inline `animation-play-state` on the track, and through two forced room-verdict flips the row's drift rate never deviated more than 3.2 px/s from the designed −26.6 px/s — **seamless through flips** on the live site.
+- **Environment state:** dev restarted alone (prod 3001 stopped), HTTP 200.
+- **Deployment:** commit ready locally; push follows this entry.
+- **Commit:** this commit (see git log for SHA).
