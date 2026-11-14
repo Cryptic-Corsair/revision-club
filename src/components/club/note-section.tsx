@@ -227,7 +227,7 @@ export function SpecSectionView({
               boxShadow: `0 3px 0 ${shade(accent)}`,
             }}
           >
-            <Target className="h-3.5 w-3.5" /> Spec {section.spec}
+            Spec {section.spec}
           </span>
           <span
             aria-hidden
