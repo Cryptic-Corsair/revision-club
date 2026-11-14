@@ -898,11 +898,16 @@ function Footer({
             <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 self-start sm:self-auto">
               {/* The front door. The showcase landing was promoted from
                   /portal to the homepage itself, and this workspace was
-                  shelved at /club — so the pill points at / and a full-
-                  page hand-off keeps both wrappers' scroll/theme state
+                  shelved at /club. The homepage now opens only on a
+                  visitor's first visit (src/middleware.ts redirects
+                  returning visitors to this desk), so the pill points
+                  at /?front — the explicit escape hatch that always
+                  serves the landing page, keeping a deliberate visit
+                  from bouncing straight back here. A full-page
+                  hand-off keeps both wrappers' scroll/theme state
                   honest. */}
               <a
-                href="/"
+                href="/?front"
                 aria-label="View the showcase homepage — the site's front door"
                 className="footer-portal-link inline-flex items-center gap-1.5 rounded-full border border-white/[0.16] bg-white/[0.05] px-3 py-1.5 text-[calc(11px*var(--ui-scale))] font-bold text-milk/70 transition-colors hover:border-white/[0.3] hover:bg-white/[0.1] hover:text-milk"
               >

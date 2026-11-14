@@ -1347,3 +1347,11 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Environment state:** dev restarted alone (prod 3001 stopped), HTTP 200.
 - **Deployment:** commit ready locally; push follows this entry.
 - **Commit:** this commit (see git log for SHA).
+
+## 2026-11-14 (17) — front-door policy: homepage on first visit only; the desk is the main page from visit two
+
+- **Request:** the showcase homepage should appear only on a visitor's first visit; afterwards `/club` (the desk) becomes the page visitors land on.
+- **Design:** server-side, no flash — `src/middleware.ts` (matcher `/` only) redirects cookie-bearing requests for `/` to `/club` with a 307, and drops a year-long `ial_front_door_seen` cookie while serving the homepage to a fresh visitor. The visitor's progress keys (localStorage) are untouched. Two deliberate exceptions keep the door reachable and the site indexed: `/`**`?front`** always serves the landing page (the club footer's "Showcase home" pill now points there — `club-app.tsx` — so a deliberate visit never bounces straight back to the desk), and crawler user-agents are never redirected (`/` stays the canonical indexed page; `/club` is deliberately noindex, so a bot with a persistent cookie jar must not be walked into a noindex route). The redirect is 307 on purpose: the policy is behaviour, not a permanent address change.
+- **Verification:** tsc clean, fresh build. `curl` matrix: fresh visit 200 + `set-cookie` (Max-Age 1 y); returning visit 307 → `/club`; `/?front` 200; Googlebot UA 200; `/club` direct 200. New `scripts/front-door-check.mjs` (Playwright, realistic Pixel-Tablet UA): all four visitor profiles PASS (first visit `/` + cookie dropped; returning `/club`; `?front` `/`; crawler `/`). One false alarm decoded during verification: agent-browser's headless Chrome UA matches the crawler exemption, so it never redirects — real browsers do. Full motion audit re-run against the built site: **ALL CHECKS PASSED** (first two runs failed hero frame timing — root-caused to CPU contention from a leftover agent-browser Chrome still animating the portal, not the code; closed and re-run clean).
+- **Deployment:** push follows; live verification in the follow-up entry.
+- **Commit:** this commit (see git log for SHA).
