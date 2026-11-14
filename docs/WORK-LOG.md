@@ -1296,3 +1296,12 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Environment state:** prod on 3001 stopped, dev restarted alone (shared-`.next` trap protocol), HTTP 200 confirmed.
 - **Deployment:** commit ready locally; push follows this entry.
 - **Commit:** this commit (see git log for SHA).
+
+## 2026-11-14 (11) — calm scale: slower machine cadence on big screens
+
+- **Scope:** "Still not fixed … slow down the animations for bigger screens a little bit. Only the cards that appear on screen animate. The other cards … pause animating."
+- **Measurement first:** at 1536×982 the track fits three machines at full cadence plus a fourth at 75% visibility (narrow preview fit only two) — the wide-screen case the user described. A fully clipped card already pauses on the deployed build (0 style mutations in 2s with card 1 scrolled out — IntersectionObserver clipping does the per-card gating; the hysteresis hook from (9) keeps it flap-free), so the remaining work was cadence.
+- **Fix (the calm scale):** `getCalmScale(viewportWidth)` in `lib/motion.ts` — 1 below 1024px, 1.3 to 1535px, 1.5 above — with a reactive `useCalmScale()` hook in `lib/still.tsx`. Every showcase machine now stretches its own rhythm by the scale: Keystroke timeouts (180/380/2600/3600 ms) and ripple/palette durations, PackFlow timeouts (420/860/4200 ms), PrismSweep interval (2.4 s) and sweep duration (1.8 s), ChronoWave's `phase += elapsed * 1.4` (divided by the scale, cached on the canvas resize path), and the cards' entrance duration/stagger. Pure function of width so the canvas loop and the React hooks agree without plumbing.
+- **Verification:** tsc clean; fresh build; A/B at 1536 vs the old deployment: style-writes 1776 → 1584 per 10 s and all state cadences 1.3–1.5× slower; fold-flap harness still **0 resets**. First audit run FAILED `hero frame avg 28.4 > 25` — reproduced as environment noise from the instrumenting browser pages competing for CPU (hero is untouched by this change); with the browser idle the audit passes **ALL CHECKS** (hero avg 20.4 ms), units 2742/3000, lab 15138/16000.
+- **Deployment:** push follows; live re-verification in the follow-up entry.
+- **Commit:** this commit (see git log for SHA).

@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { EASE_EXPO } from '../../lib/motion';
-import { clampDeltaTime, getCappedPixelRatio, getCanvasFrameIntervalSeconds } from '../../lib/motion';
+import { clampDeltaTime, getCalmScale, getCappedPixelRatio, getCanvasFrameIntervalSeconds } from '../../lib/motion';
 
 interface ChronoWaveMachineProps {
   reducedMotion: boolean;
@@ -25,6 +25,7 @@ export function ChronoWaveMachine({ reducedMotion }: ChronoWaveMachineProps) {
     let width = 0;
     let height = 0;
     let dpr = 1;
+    let calm = 1;
     let phase = 0;
     let isVisible = false;
     let pageVisible = !document.hidden;
@@ -49,6 +50,7 @@ export function ChronoWaveMachine({ reducedMotion }: ChronoWaveMachineProps) {
       width = Math.max(rect.width, 1);
       height = Math.max(rect.height, 1);
       dpr = getCappedPixelRatio(window.innerWidth, window.devicePixelRatio || 1);
+      calm = getCalmScale(window.innerWidth);
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
     };
@@ -100,7 +102,8 @@ export function ChronoWaveMachine({ reducedMotion }: ChronoWaveMachineProps) {
         frameAccumulator = frameIntervalSeconds > 0
           ? frameAccumulator % frameIntervalSeconds
           : 0;
-        phase += elapsed * 1.4;
+        /* the calm scale stretches the wave rhythm on desktop (see lib/motion) */
+        phase += (elapsed * 1.4) / calm;
         drawWaves(phase);
       }
 

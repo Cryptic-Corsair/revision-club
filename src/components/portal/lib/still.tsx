@@ -1,6 +1,7 @@
 'use client';
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode, type RefObject } from 'react';
 import { useInView } from 'framer-motion';
+import { getCalmScale } from './motion';
 
 /* ————— the still-when-unseen contract (v2: exactly one room lives) —————
    The homepage's decorative loops — the hero's caustic shader and
@@ -21,6 +22,30 @@ import { useInView } from 'framer-motion';
    asked for quiet" to "nobody is looking — and only one room is".
    Resuming a loop picks it up from its first keyframe; the room at
    the centre is fully on screen, so the restart is never seen. */
+
+/** The calm scale as a reactive hook: 1 on small screens, 1.3 from
+    1024px, 1.5 from 1536px — the machine cadence multiplier decided by
+    {@link getCalmScale} in lib/motion. Machines multiply their own
+    rhythm by it; a breakpoint crossing re-runs their loop once, which
+    the hysteresis gate and the designed stills make invisible. */
+export function useCalmScale(): number {
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const q1024 = window.matchMedia('(min-width: 1024px)');
+    const q1536 = window.matchMedia('(min-width: 1536px)');
+    const sync = () => setScale(getCalmScale(window.innerWidth));
+    sync();
+    q1024.addEventListener('change', sync);
+    q1536.addEventListener('change', sync);
+    return () => {
+      q1024.removeEventListener('change', sync);
+      q1536.removeEventListener('change', sync);
+    };
+  }, []);
+
+  return scale;
+}
 
 /** Detect touch-first hardware so decorative JS/Canvas motion can step aside
     without disabling the CSS marquee that remains smooth on the compositor. */

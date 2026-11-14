@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { PREVIEW_THEMES, type PreviewThemeId } from '../../data/ialData';
 import { EASE_EXPO } from '../../lib/motion';
-import { useStableInView } from '../../lib/still';
+import { useCalmScale, useStableInView } from '../../lib/still';
 
 interface PrismSweepMachineProps {
   reducedMotion: boolean;
@@ -13,13 +13,14 @@ const ORDER: PreviewThemeId[] = ['night', 'light', 'dune', 'classic'];
 
 export function PrismSweepMachine({ reducedMotion }: PrismSweepMachineProps) {
   const { ref: containerRef, inView } = useStableInView<HTMLDivElement>(0.15, 0.02);
+  const calm = useCalmScale();
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     if (reducedMotion || !inView) return;
     const id = window.setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % ORDER.length);
-    }, 2400);
+    }, 2400 * calm);
     return () => window.clearInterval(id);
   }, [reducedMotion, inView]);
 
@@ -103,7 +104,7 @@ export function PrismSweepMachine({ reducedMotion }: PrismSweepMachineProps) {
             animate={{
               x: [`${activeIndex * 66 - 10}px`, `${activeIndex * 66 + 24}px`],
             }}
-            transition={{ duration: 1.8, ease: EASE_EXPO }}
+            transition={{ duration: 1.8 * calm, ease: EASE_EXPO }}
             style={{
               transform: 'skewX(-18deg)',
               background:

@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { EASE_EXPO, SPRING_SNAPPY } from '../../lib/motion';
-import { useStableInView } from '../../lib/still';
+import { useCalmScale, useStableInView } from '../../lib/still';
 
 interface KeystrokeMachineProps {
   reducedMotion: boolean;
@@ -16,6 +16,7 @@ const MINI_COMMANDS = [
 
 export function KeystrokeMachine({ reducedMotion }: KeystrokeMachineProps) {
   const { ref: containerRef, inView } = useStableInView<HTMLDivElement>(0.15, 0.02);
+  const calm = useCalmScale();
   const [pulseId, setPulseId] = useState(0);
   const [phase, setPhase] = useState<'idle' | 'cmd' | 'key' | 'open'>('open');
 
@@ -35,10 +36,10 @@ export function KeystrokeMachine({ reducedMotion }: KeystrokeMachineProps) {
     let t4 = 0;
 
     setPhase('cmd');
-    t1 = window.setTimeout(() => setPhase('key'), 180);
-    t2 = window.setTimeout(() => setPhase('open'), 380);
-    t3 = window.setTimeout(() => setPhase('idle'), 2600);
-    t4 = window.setTimeout(() => setPulseId((n) => n + 1), 3600);
+    t1 = window.setTimeout(() => setPhase('key'), 180 * calm);
+    t2 = window.setTimeout(() => setPhase('open'), 380 * calm);
+    t3 = window.setTimeout(() => setPhase('idle'), 2600 * calm);
+    t4 = window.setTimeout(() => setPulseId((n) => n + 1), 3600 * calm);
 
     return () => {
       window.clearTimeout(t1);
@@ -89,7 +90,7 @@ export function KeystrokeMachine({ reducedMotion }: KeystrokeMachineProps) {
             strokeWidth="1.2"
             initial={{ r: 10, opacity: 0.55 }}
             animate={{ r: 135, opacity: 0 }}
-            transition={{ duration: 1.4, delay: 0.28, ease: EASE_EXPO }}
+            transition={{ duration: 1.4 * calm, delay: 0.28 * calm, ease: EASE_EXPO }}
           />
         )}
       </svg>
@@ -183,8 +184,8 @@ export function KeystrokeMachine({ reducedMotion }: KeystrokeMachineProps) {
                 y: paletteOpen ? 0 : 3,
               }}
               transition={{
-                duration: 0.35,
-                delay: paletteOpen ? idx * 0.06 : 0,
+                duration: 0.35 * calm,
+                delay: paletteOpen ? idx * 0.06 * calm : 0,
                 ease: EASE_EXPO,
               }}
               className="flex items-center justify-between rounded px-2 py-1 text-[11px]"

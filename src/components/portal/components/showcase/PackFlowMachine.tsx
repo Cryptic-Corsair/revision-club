@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { SPEC_CHIPS } from '../../data/ialData';
 import { EASE_EXPO } from '../../lib/motion';
-import { useStableInView } from '../../lib/still';
+import { useCalmScale, useStableInView } from '../../lib/still';
 
 interface PackFlowMachineProps {
   reducedMotion: boolean;
@@ -18,6 +18,7 @@ const NODE_COORDS = [
 
 export function PackFlowMachine({ reducedMotion }: PackFlowMachineProps) {
   const { ref: containerRef, inView } = useStableInView<HTMLDivElement>(0.15, 0.02);
+  const calm = useCalmScale();
   const [compileCycle, setCompileCycle] = useState(0);
   const [compiledMinutes, setCompiledMinutes] = useState(38);
 
@@ -32,9 +33,9 @@ export function PackFlowMachine({ reducedMotion }: PackFlowMachineProps) {
     }
 
     setCompiledMinutes(14);
-    const t1 = window.setTimeout(() => setCompiledMinutes(26), 420);
-    const t2 = window.setTimeout(() => setCompiledMinutes(38), 860);
-    const tLoop = window.setTimeout(() => setCompileCycle((c) => c + 1), 4200);
+    const t1 = window.setTimeout(() => setCompiledMinutes(26), 420 * calm);
+    const t2 = window.setTimeout(() => setCompiledMinutes(38), 860 * calm);
+    const tLoop = window.setTimeout(() => setCompileCycle((c) => c + 1), 4200 * calm);
 
     return () => {
       window.clearTimeout(t1);

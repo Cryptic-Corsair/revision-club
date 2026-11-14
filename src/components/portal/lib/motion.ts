@@ -39,6 +39,20 @@ export function getCappedPixelRatio(viewportWidth: number, devicePixelRatio: num
   return Math.min(safeDpr, maxDpr);
 }
 
+/* ————— the calm scale —————
+   On big screens three or more showcase machines fit the track at once,
+   and the four of them looping at their small-screen cadence reads as
+   busy churn rather than detail. The scale stretches every machine's
+   own rhythm — timeouts, loop intervals, sweep durations, the wave
+   phase — by a modest factor on desktop, so the section keeps its life
+   but breathes at desktop pace. A pure function of viewport width so
+   the canvas loop and the React hooks agree without extra plumbing. */
+export function getCalmScale(viewportWidth: number): number {
+  if (!Number.isFinite(viewportWidth) || viewportWidth < 1024) return 1;
+  if (viewportWidth < 1536) return 1.3;
+  return 1.5;
+}
+
 /** Cap ambient canvas draws at 60fps on touch-first hardware; native rAF cadence handles panel refresh. */
 export function getCanvasFrameIntervalSeconds(): number {
   if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return 0;

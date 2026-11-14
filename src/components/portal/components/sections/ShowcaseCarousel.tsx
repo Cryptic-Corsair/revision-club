@@ -8,7 +8,7 @@ import { PrismSweepMachine } from '../showcase/PrismSweepMachine';
 import { ChronoWaveMachine } from '../showcase/ChronoWaveMachine';
 import { SectionBackdrop } from '../motion/SectionBackdrop';
 import { EASE_EXPO, VIEWPORT_ONCE } from '../../lib/motion';
-import { useRoomLive } from '../../lib/still';
+import { useCalmScale, useRoomLive } from '../../lib/still';
 
 interface ShowcaseCarouselProps {
   reducedMotion: boolean;
@@ -68,6 +68,7 @@ const ShowcaseCards = memo(function ShowcaseCards({
 }: {
   reducedMotion: boolean;
 }) {
+  const calm = useCalmScale();
   return (
     <>
       {SHOWCASE_CARDS.map((card, i) => (
@@ -76,7 +77,11 @@ const ShowcaseCards = memo(function ShowcaseCards({
           initial={reducedMotion ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_ONCE}
-          transition={{ duration: 0.55, ease: EASE_EXPO, delay: reducedMotion ? 0 : i * 0.07 }}
+          transition={{
+            duration: 0.55 * calm,
+            ease: EASE_EXPO,
+            delay: reducedMotion ? 0 : i * 0.07 * calm,
+          }}
           className="flex w-[86vw] sm:w-[340px] lg:w-[360px] shrink-0 snap-start flex-col justify-between rounded-3xl p-4 sm:p-5"
           style={{
             backgroundColor: 'var(--surface-elevated)',
