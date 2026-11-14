@@ -91,11 +91,28 @@ export function useInheritedLive(): boolean {
    going dark — the old dead band froze every machine mid-frame while
    still on screen and snapped them back on re-entry, which read as
    the page glitching while scrolling between sections. Exactly one
-   room is live at any scroll position, as before. */
+   room is live at any scroll position, as before.
+   v2.2: fling hardening, from a tablet recording of the freeze:
+   on a touch fling the compositor applies the final resting position
+   AFTER the last scroll event's rAF has run, so the verdict was
+   computed mid-flight and nothing re-evaluated — the page landed at
+   the hero with the hero dead and sat frozen until the next gesture
+   (measured: ~2 s of zero motion on screen). Three layers fix it:
+   a winner change is only committed once a later evaluation agrees
+   (≥90 ms apart — no live/dead flashing while flying past sections),
+   every event burst is followed by one trailing evaluation once
+   scrolling has truly settled, and scrollend / pageshow /
+   visibilitychange each re-evaluate directly. */
 
 type RoomNotify = (live: boolean) => void;
 const rooms = new Map<HTMLElement, RoomNotify>();
 let evaluateScheduled = false;
+let trailingTimer: number | undefined;
+let currentWinner: HTMLElement | null = null;
+let candidateWinner: HTMLElement | null = null;
+let candidateAt = 0;
+const WINNER_CONFIRM_MS = 90;
+const SETTLE_REEVAL_MS = 150;
 
 function evaluateRooms(): void {
   evaluateScheduled = false;
@@ -122,20 +139,64 @@ function evaluateRooms(): void {
     }
   }
 
+  /* commit only a confirmed winner: an immediate commit for the very
+     first election, otherwise the same winner must be computed again
+     WINNER_CONFIRM_MS later. A fling passing through a room in under
+     that window never flips the verdict, so sections no longer flash
+     dark mid-flight; the trailing settle evaluation confirms the room
+     the fling actually landed in. */
+  const now = performance.now();
+  const changed = winner !== currentWinner;
+  if (changed) {
+    const confirmed =
+      currentWinner === null ||
+      (candidateWinner === winner && now - candidateAt >= WINNER_CONFIRM_MS);
+    if (confirmed) {
+      currentWinner = winner;
+      candidateWinner = null;
+    } else if (candidateWinner !== winner) {
+      candidateWinner = winner;
+      candidateAt = now;
+    }
+  } else {
+    candidateWinner = null;
+  }
+
   for (const [el, notify] of rooms) {
-    notify(el === winner);
+    notify(el === currentWinner);
   }
 }
 
 function scheduleEvaluate(): void {
-  if (evaluateScheduled) return;
-  evaluateScheduled = true;
-  requestAnimationFrame(evaluateRooms);
+  if (!evaluateScheduled) {
+    evaluateScheduled = true;
+    requestAnimationFrame(evaluateRooms);
+  }
+  /* the fling race: the last scroll event can fire while the
+     compositor still owes us the final position/URL-bar geometry.
+     Once the burst goes quiet, evaluate once more against the
+     settled truth. */
+  if (trailingTimer !== undefined) window.clearTimeout(trailingTimer);
+  trailingTimer = window.setTimeout(() => {
+    trailingTimer = undefined;
+    evaluateRooms();
+  }, SETTLE_REEVAL_MS);
 }
 
 if (typeof window !== 'undefined') {
   window.addEventListener('scroll', scheduleEvaluate, { passive: true });
   window.addEventListener('resize', scheduleEvaluate, { passive: true });
+  /* Chrome/Android fire scrollend exactly when scrolling settles —
+     the authoritative answer to "did the last rAF see the truth?" */
+  if ('onscrollend' in window) {
+    window.addEventListener('scrollend', evaluateRooms, { passive: true });
+  }
+  /* returning from a background tab or the bfcache can restore an
+     outdated verdict; re-run the election on the way back in. */
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) evaluateRooms();
+  });
+  window.addEventListener('pageshow', evaluateRooms);
 }
 
 /** Register a section as a motion room. Exactly one registered room
