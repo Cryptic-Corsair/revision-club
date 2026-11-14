@@ -557,6 +557,19 @@ A figure change requires visual inspection at realistic reading size, in all fou
 - Respect reduced-motion preferences.
 - Avoid making a shared primitive feature-specific. If a component is genuinely unique to one interface, keep it scoped there.
 
+### The motion performance contract (homepage rooms)
+
+This contract exists because the homepage has already regressed once: decorative loops ran forever for nobody, the hero once wrote **13,974 SVG attributes in 3 seconds** while offscreen, and the showcase carousel re-rendered its machines on every scroll event of a glide. Do not reintroduce any of these.
+
+- **Exactly one room animates** — the room under the viewport's centre line, decided by the referee in `src/components/portal/lib/still.tsx` (`useRoomLive`). Everything else freezes, including in boundary bands where two sections are both partly visible. Between rooms (workflow, footer) nothing animates at all.
+- A section joins the referee by attaching `useRoomLive()`'s ref to its root and wrapping its content in `StillProvider`; descendants gate their loops with `useStill()` and may compose the room's verdict with their own visibility via `useInheritedLive()` + `useLive()` (margin 0 — a card-level trim, never a new liveness policy).
+- **No loop may run ungated.** Any `repeat: Infinity` framer transition must key its `animate` on `useStill()`; any canvas needs a visibility observer AND the room's live verdict, a pixel-ratio cap, and a frame cap (`getCanvasFrameIntervalSeconds` or an explicit accumulator).
+- Ambient canvases draw at reduced budgets: the hero shader caps at 30 draws/s and DPR 1.5 on hardware (DPR 0.5 on software GL), because it is a slow field, not a game.
+- Scroll handlers that drive React state must be rAF-latched, and anything re-rendered by scroll state (cards, machines) must sit behind a memo boundary.
+- Never fight user scrolling with `snap-mandatory` on a track that barely overflows; use `snap-proximity`.
+
+**Regression audit:** run `node scripts/portal-motion-audit.mjs [base_url]` against a production build before merging any homepage change (Playwright; falls back to the sandbox's global install). It checks the referee verdicts at every room, per-section attribute-write budgets, hero frame cadence, a locked-cadence carousel glide, and horizontal overflow at 1440 and 390. All checks must pass; budgets are calibrated in the script's header and must not be loosened to make a change pass — tighten the change instead. (An earlier shell variant drove the agent-browser CLI, whose eval intermittently answers `{}`; the Playwright form is canonical.)
+
 ---
 
 ## 18. Accessibility, interaction and responsive quality

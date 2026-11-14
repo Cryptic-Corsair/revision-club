@@ -233,6 +233,7 @@ export function HeroSection({
       id="top"
       ref={heroRef}
       className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-24"
+      data-live={heroLive}
     >
       {/* Full-bleed GLSL Caustic Refraction & Architectural Grid Background */}
       <HeroShaderCanvas theme={theme} reducedMotion={reducedMotion} live={heroLive} />

@@ -124,7 +124,7 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
               id="units-document"
               role="tabpanel"
               aria-label={`${stageSpec.big} units — ${stageSpec.sub}`}
-              className="grid grid-cols-1 gap-5 sm:grid-cols-3"
+              className="grid grid-cols-1 gap-5 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3"
               initial={reducedMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               exit={reducedMotion ? undefined : { opacity: 0, y: -10 }}
@@ -135,6 +135,10 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
                 const sharePct = Math.round(
                   (unit.minutes / GLOBAL_METRICS.totalMinutes) * 100,
                 );
+                // Tablet portrait carries two cards per row; the odd
+                // third spans the full width so the row reads as a
+                // deliberate editorial close, not a stranded card.
+                const last = i === stageSpec.units.length - 1;
                 return (
                   <motion.button
                     key={unit.code}
@@ -146,16 +150,18 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
                     transition={{ duration: 0.45, ease: EASE_EXPO, delay: reducedMotion ? 0 : i * 0.07 }}
                     whileHover={reducedMotion ? undefined : { y: -4 }}
                     whileTap={reducedMotion ? undefined : { scale: 0.99 }}
-                    className="rounded-3xl p-4 text-left"
+                    className={`rounded-3xl p-4 text-left ${last ? 'md:col-span-2 lg:col-span-1' : ''}`}
                     style={{
                       backgroundColor: 'var(--surface)',
                       boxShadow: 'var(--card-shadow)',
                     }}
                     data-testid={`unit-card-${unit.code}`}
                   >
-                    {/* the unit's own loop, on the stage ground */}
+                    {/* the unit's own loop, on the stage ground — the
+                        wide (spans-both-columns) card keeps its motif
+                        at card scale instead of stretching full width */}
                     <div
-                      className="overflow-hidden rounded-2xl"
+                      className={`overflow-hidden rounded-2xl ${last ? 'mx-auto w-full max-w-[440px]' : ''}`}
                       style={{ backgroundColor: 'var(--bg)' }}
                     >
                       <UnitMotif
@@ -168,8 +174,6 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
                       <span className="portal-ed-meta-row">
                         <span>{unit.code}</span>
                         <span aria-hidden="true">·</span>
-                        <span>{unit.levelTag}</span>
-                        <span aria-hidden="true">·</span>
                         <span>{unit.topicsCount} topics</span>
                         <span aria-hidden="true">·</span>
                         <span>{unit.minutes} min</span>
@@ -178,16 +182,11 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
                       <span className="portal-ed-title" style={{ fontSize: '17px' }}>
                         {unit.title}
                       </span>
-                      <span className="portal-ed-scope" style={{ fontSize: '12.5px', lineHeight: 1.65 }}>
-                        {unit.scope}
-                      </span>
 
                       {/* The coverage rail — the unit's factual share
-                          of the course's 756 reading minutes */}
+                          of the course's 756 reading minutes, one
+                          quiet label instead of two */}
                       <span className="portal-ed-share">
-                        <span className="portal-ed-share-label tabular-nums">
-                          {sharePct}% of the course
-                        </span>
                         <span className="portal-ed-share-bar">
                           <motion.span
                             className="portal-ed-share-fill"
@@ -197,7 +196,7 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
                           />
                         </span>
                         <span className="portal-ed-share-label tabular-nums">
-                          {unit.minutes} / {GLOBAL_METRICS.totalMinutes} min
+                          {sharePct}% · {unit.minutes} min
                         </span>
                       </span>
                     </span>
