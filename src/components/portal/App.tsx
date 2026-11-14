@@ -141,14 +141,16 @@ export default function App() {
 
   // Exit ramps into the shelved workspace at /club. The homepage IS
   // the showcase now, so every exit is a real deep link, not a drop
-  // at the desk: the navbar's Open Notes walks into the notes reader
-  // on the note the hero's shelf opens with; the hero's and the
-  // closing room's "Start reading" deliver the course's first topic;
-  // the workflow's pack stage and the palette's graduate button land
-  // in the pack bench, the unit walks and the spec index. Every
-  // target reads ?v=… in club-app.tsx on mount.
+  // at the desk: the navbar's Open Notes leads to the desk itself —
+  // a bare /club, which club-app.tsx serves as the desk for members
+  // (last topic up front, shelf, pack bench) — not a dive into a
+  // specific note; the hero's and the closing room's "Start reading"
+  // deliver the course's first topic; the workflow's pack stage and
+  // the palette's graduate button land in the pack bench, the unit
+  // walks and the spec index. Every target reads ?v=… in
+  // club-app.tsx on mount; the bare route is the desk's own entry.
   const openNotes = useCallback(() => {
-    router.push('/club?v=notes&doc=wch11-t02');
+    router.push('/club');
   }, [router]);
 
   // Topic one — the course's own first note, where "Start reading"

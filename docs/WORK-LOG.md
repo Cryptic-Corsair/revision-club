@@ -1255,3 +1255,11 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** commit ready locally; push still blocked pending a fresh token.
 - **Revert path:** single commit reverting `layout.tsx`, `portal.css` and the section files; the two font files are additive and harmless if left.
 - **Commit:** this commit (see git log for SHA).
+
+## 2026-11-14 (6) — Open Notes leads to the desk
+
+- **Scope:** "Open notes button should lead to the desk." The navbar's Open Notes deep-linked into the notes reader on a specific note (`/club?v=notes&doc=wch11-t02`), which skipped the desk entirely.
+- **Change:** `openNotes` in `src/components/portal/App.tsx` now pushes a bare `/club`. Per club-app.tsx's routing contract (`?v=…` dives into a room; the bare route is the desk's own entry — `markDeskEntered()` on direct visit), this lands members on the desk with their last topic up front; first-time visitors see the welcome page, which is the desk's designed front porch. Hero/closing "Start reading" and the workflow/palette targets are untouched — they keep their deep links by design.
+- **Verification:** clicked the button in the live portal (agent-browser): navigation to `/club` confirmed, welcome copy ("Every spec point, made to stick.") served.
+- **Deployment:** commit ready locally; push still blocked pending a fresh token.
+- **Commit:** this commit (see git log for SHA).
