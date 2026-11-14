@@ -33,6 +33,11 @@
 //     disk — the page then never hydrates and every check fails
 //     against a ghost. Kill the listener by PID (`ss -tlnp`), and
 //     confirm one referenced chunk URL returns 200 before auditing.
+//   - Never run `next start` against a directory a dev server is
+//     also writing to: dev and prod share `.next` in this repo, so a
+//     hot-recompiling dev server clobbers the chunks the prod server
+//     references (500s on static files, dead hydration). Stop dev,
+//     build, start prod, audit; bring dev back afterwards.
 //   scripts/probe-hydration.mjs and scripts/probe-hero-frames.mjs
 //   are the two diagnostic probes that caught each of these.
 import { createRequire } from 'node:module';

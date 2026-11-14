@@ -1236,3 +1236,7 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Deployment:** commit ready locally; push still blocked pending a fresh token.
 - **Revert path:** single commit reverting `UnitMatrix.tsx` + `portal.css`; audit hardening and probes are additive and safe to keep.
 - **Commit:** this commit (see git log for SHA).
+
+## 2026-11-14 (4) — audit header gains the shared-`.next` trap; dev restarted clean
+
+- Follow-up to (3): after the audit passed, the dev server's Turbopack cache panicked (`.sst` files missing) because it had been started against a `.next` that a prod build had since rewritten, and dev + prod share `.next` in this repo — the third environment trap that can falsify or break a session. Killed both servers by PID, `rm -rf .next`, restarted dev alone (HTTP 200 on two consecutive fetches). Prod stays stopped outside audits; the audit header now documents the rule (stop dev → build → start prod → audit → bring dev back). Commit `6ebf436` was verified intact before this note; this entry and the header edit ride in a follow-up commit.
