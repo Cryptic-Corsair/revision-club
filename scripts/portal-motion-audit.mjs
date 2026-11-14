@@ -149,7 +149,7 @@ try {
   // — 1. the referee: exactly one room on stage, none between rooms —
   const rooms = [
     ['[id="top"]', 'top', 'referee@hero (one live room: top)'],
-    ['[id="workflow"]', '', 'referee@workflow (all rooms still)'],
+    ['[id="workflow"]', 'showcase', 'referee@workflow (gap: nearest room lives)'],
     ['[id="showcase"]', 'showcase', 'referee@showcase (one live room: showcase)'],
     ['[id="units"]', 'units', 'referee@units (one live room: units)'],
     ['[id="lab"]', 'lab', 'referee@lab (one live room: lab)'],

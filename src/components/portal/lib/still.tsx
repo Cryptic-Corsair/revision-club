@@ -60,7 +60,13 @@ export function useInheritedLive(): boolean {
    thrash), picks the single room whose bounds contain the viewport's
    centre line, and notifies every room of its verdict. State updates
    that don't change the verdict are bail-outs in React, so a scroll
-   past a long room costs one rAF of reads and zero re-renders. */
+   past a long room costs one rAF of reads and zero re-renders.
+   v2.1: when the centre line falls in a gap between rooms (footer,
+   section spacing), the NEAREST room stays live instead of all rooms
+   going dark — the old dead band froze every machine mid-frame while
+   still on screen and snapped them back on re-entry, which read as
+   the page glitching while scrolling between sections. Exactly one
+   room is live at any scroll position, as before. */
 
 type RoomNotify = (live: boolean) => void;
 const rooms = new Map<HTMLElement, RoomNotify>();
@@ -73,6 +79,7 @@ function evaluateRooms(): void {
   const viewportH = Math.max(window.innerHeight, 1);
   const centerY = viewportH / 2;
   let winner: HTMLElement | null = null;
+  let nearestDist = Infinity;
 
   for (const [el] of rooms) {
     const rect = el.getBoundingClientRect();
@@ -80,6 +87,13 @@ function evaluateRooms(): void {
     if (rect.top <= centerY && rect.bottom >= centerY) {
       winner = el;
       break;
+    }
+    /* distance from the centre line to the room's nearest edge */
+    const dist =
+      rect.top > centerY ? rect.top - centerY : centerY - rect.bottom;
+    if (dist < nearestDist) {
+      nearestDist = dist;
+      winner = el;
     }
   }
 
@@ -100,8 +114,9 @@ if (typeof window !== 'undefined') {
 }
 
 /** Register a section as a motion room. Exactly one registered room
-    is live at a time — the one under the viewport's centre line; when
-    the centre falls between rooms (the footer, a gap), no room lives.
+    is live at a time — the one under the viewport's centre line, or
+    the nearest room when the centre falls in a gap (footer, section
+    spacing) — so scrolling never passes through an all-frozen band.
     Pass an existing ref to share one element with useScroll etc. */
 export function useRoomLive<T extends HTMLElement>(
   externalRef?: RefObject<T | null>,
@@ -125,6 +140,43 @@ export function useRoomLive<T extends HTMLElement>(
   }, [ref]);
 
   return { ref, live };
+}
+
+/** Hysteresis visibility gate for the state-tick machines (showcase
+    cards and friends). A naked `threshold: 0.1` observer flaps when a
+    card rests near the viewport edge — scroll settle, URL-bar resize,
+    rubber-banding — and every flap hard-resets the machine's loop
+    (the KeystrokeMachine replays from 'cmd', the PackFlow restarts
+    its counter), which reads on screen as the card blinking. This
+    hook turns a machine on only once it is genuinely in view
+    (ratio >= on) and off only once it is genuinely gone (ratio < off);
+    between the two bands the previous verdict holds, so boundary
+    hover can never toggle the loop. */
+export function useStableInView<T extends HTMLElement>(
+  on = 0.15,
+  off = 0.02,
+): { ref: RefObject<T | null>; inView: boolean } {
+  const ref = useRef<T | null>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry) return;
+        const ratio = entry.intersectionRatio;
+        if (ratio >= on) setInView(true);
+        else if (ratio < off) setInView(false);
+        /* between the bands: hold the previous verdict */
+      },
+      { threshold: [off, on] },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [on, off]);
+
+  return { ref, inView };
 }
 
 /** Self-visibility inside a room: true while this element intersects

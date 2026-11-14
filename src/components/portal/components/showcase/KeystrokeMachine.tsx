@@ -1,7 +1,8 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { EASE_EXPO, SPRING_SNAPPY } from '../../lib/motion';
+import { useStableInView } from '../../lib/still';
 
 interface KeystrokeMachineProps {
   reducedMotion: boolean;
@@ -14,23 +15,9 @@ const MINI_COMMANDS = [
 ];
 
 export function KeystrokeMachine({ reducedMotion }: KeystrokeMachineProps) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [inView, setInView] = useState(false);
+  const { ref: containerRef, inView } = useStableInView<HTMLDivElement>(0.15, 0.02);
   const [pulseId, setPulseId] = useState(0);
   const [phase, setPhase] = useState<'idle' | 'cmd' | 'key' | 'open'>('open');
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry) setInView(entry.isIntersecting);
-      },
-      { threshold: 0.1 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
 
   const triggerSequence = () => {
     setPulseId((n) => n + 1);

@@ -137,7 +137,13 @@ export function ChronoWaveMachine({ reducedMotion }: ChronoWaveMachineProps) {
       (entries) => {
         const entry = entries[0];
         if (!entry) return;
-        isVisible = entry.isIntersecting;
+        /* hysteresis, not a naked threshold: a canvas resting at the
+           viewport edge must not flap start/stopLoop every scroll
+           settle — on only once genuinely in view, off only once
+           genuinely gone, previous verdict held between the bands */
+        const ratio = entry.intersectionRatio;
+        if (ratio >= 0.1) isVisible = true;
+        else if (ratio < 0.02) isVisible = false;
         if (isVisible) {
           drawWaves(phase);
           startLoop();
@@ -145,7 +151,7 @@ export function ChronoWaveMachine({ reducedMotion }: ChronoWaveMachineProps) {
           stopLoop();
         }
       },
-      { threshold: 0.05 },
+      { threshold: [0.02, 0.1] },
     );
     io.observe(canvas);
 

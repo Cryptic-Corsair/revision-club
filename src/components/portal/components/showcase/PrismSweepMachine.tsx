@@ -1,8 +1,9 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { PREVIEW_THEMES, type PreviewThemeId } from '../../data/ialData';
 import { EASE_EXPO } from '../../lib/motion';
+import { useStableInView } from '../../lib/still';
 
 interface PrismSweepMachineProps {
   reducedMotion: boolean;
@@ -11,22 +12,8 @@ interface PrismSweepMachineProps {
 const ORDER: PreviewThemeId[] = ['night', 'light', 'dune', 'classic'];
 
 export function PrismSweepMachine({ reducedMotion }: PrismSweepMachineProps) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [inView, setInView] = useState(false);
+  const { ref: containerRef, inView } = useStableInView<HTMLDivElement>(0.15, 0.02);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry) setInView(entry.isIntersecting);
-      },
-      { threshold: 0.1 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
 
   useEffect(() => {
     if (reducedMotion || !inView) return;

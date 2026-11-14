@@ -1,8 +1,9 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { SPEC_CHIPS } from '../../data/ialData';
 import { EASE_EXPO } from '../../lib/motion';
+import { useStableInView } from '../../lib/still';
 
 interface PackFlowMachineProps {
   reducedMotion: boolean;
@@ -16,23 +17,9 @@ const NODE_COORDS = [
 ];
 
 export function PackFlowMachine({ reducedMotion }: PackFlowMachineProps) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [inView, setInView] = useState(false);
+  const { ref: containerRef, inView } = useStableInView<HTMLDivElement>(0.15, 0.02);
   const [compileCycle, setCompileCycle] = useState(0);
   const [compiledMinutes, setCompiledMinutes] = useState(38);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry) setInView(entry.isIntersecting);
-      },
-      { threshold: 0.1 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
 
   const replayCompile = () => {
     setCompileCycle((c) => c + 1);
