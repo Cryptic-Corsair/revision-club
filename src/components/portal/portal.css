@@ -93,6 +93,10 @@
   --nav-edge: rgba(255, 255, 255, 0.13);
   --card-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.55);
 
+  /* the shared UI easing — a strong ease-out with punch; matches
+     the portal's EASE_EXPO so CSS and framer speak one language */
+  --ease-ui-out: cubic-bezier(0.22, 1, 0.36, 1);
+
   /* the homepage navbar's own glass — a cocoa bar darker than the page
      ground, edged and lit in the amber roast */
   --nav-glass: rgba(21, 18, 11, 0.7);
@@ -495,9 +499,9 @@ body:has(.portal-root[data-theme="light"]) {
    rooms: an uppercase kicker pill on the band ground and the meta
    labels set in the Plex voice. The clause rows have retired —
    the six units now sit on motion graphics cards — but the card
-   typography still rides these classes: meta row, title, scope
-   and the honest coverage rail. Every colour rides the token
-   pair, so the cards read on chocolate and cream alike. */
+   typography still rides these classes: meta row, title and the
+   honest coverage rail. Every colour rides the token pair, so the
+   cards read on chocolate and cream alike. */
 .portal-ed-kicker {
   display: inline-flex;
   align-items: center;
@@ -589,6 +593,85 @@ body:has(.portal-root[data-theme="light"]) {
   background: var(--portal-rust);
 }
 
+/* ————— the unit cards, specimen chrome —————
+   The plate details around each unit's loop: a mono ordinal pinned
+   to the motif stage (01–06, the course's own order), a deep-shadow
+   veil that fades up beneath the lifting card, and an index arrow
+   that slides into the meta row under a fine pointer. Every moving
+   part rides opacity or transform only — the shadow veil pre-renders
+   its shadow and animates opacity, so nothing repaints per frame —
+   and hover is gated to fine pointers so touch never gets sticky
+   states. */
+.portal-unit-card {
+  position: relative;
+  isolation: isolate;
+}
+.portal-unit-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    0 30px 64px -24px rgb(0 0 0 / 0.6),
+    0 10px 24px -14px rgb(0 0 0 / 0.42);
+  opacity: 0;
+  transition: opacity 260ms ease;
+  pointer-events: none;
+  z-index: -1;
+}
+.portal-unit-stage {
+  position: relative;
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ink) 7%, transparent);
+  transition: box-shadow 220ms ease;
+}
+.portal-unit-ordinal {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  z-index: 5;
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  color: color-mix(in oklab, var(--color-ink-faint) 80%, transparent);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  transition: color 200ms ease;
+}
+.portal-unit-arrow {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  color: var(--portal-rust);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition:
+    opacity 220ms var(--ease-ui-out),
+    transform 220ms var(--ease-ui-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .portal-unit-card:hover::after {
+    opacity: 1;
+  }
+  .portal-unit-card:hover .portal-unit-ordinal {
+    color: var(--portal-rust);
+  }
+  .portal-unit-card:hover .portal-unit-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+.portal-unit-card:focus-visible {
+  outline: 2px solid var(--portal-rust);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .portal-unit-card::after,
+  .portal-unit-arrow {
+    transition: none;
+  }
+}
+
 /* ————— the stage capsule: glass morphism —————
    The AS / A2 switch wears the navbar's own liquid-glass recipe: a
    translucent layered pill with fine top-edge reflection and a
@@ -626,7 +709,16 @@ body:has(.portal-root[data-theme="light"]) {
   border-radius: 999px;
   cursor: pointer;
   color: var(--ink-muted);
-  transition: color 180ms ease;
+  transition:
+    color 180ms ease,
+    transform 160ms var(--ease-ui-out);
+}
+.portal-capsule-tab:active {
+  transform: scale(0.97);
+}
+.portal-capsule-tab:focus-visible {
+  outline: 2px solid var(--portal-rust);
+  outline-offset: 2px;
 }
 .portal-capsule-tab:hover {
   color: var(--ink);

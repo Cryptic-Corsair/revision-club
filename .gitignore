@@ -71,3 +71,8 @@ dev.log
 
 # external repo staging (cloned for reference during ports; never shipped)
 /.external/
+
+# skills tooling artifacts (emilkowalski/skills install; guidance, not app code)
+/.agents/
+/agent/
+skills-lock.json
