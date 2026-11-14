@@ -1272,3 +1272,10 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Decision:** no code change. Replacing `useId` with hand-rolled IDs would trade a non-bug for duplicate-ID risks in the marquee's deliberately duplicated tiles.
 - **Deployment:** WORK-LOG-only commit; push still blocked pending a fresh token.
 - **Commit:** this commit (see git log for SHA).
+
+## 2026-11-14 (8) — final verification gate + first push
+
+- **Scope:** "Optimize and push" with a fresh access token supplied in-session. The queued plan's items were already all complete in prior entries: the hydration-mismatch report was diagnosed dev-only (7), Open Notes → desk shipped (6), the carousel regression guard exists as audit section 4 (glide cadence lock, frame-time budget, counter advance — shipped in `b2eb039`), and the design optimization pass is the Fraunces + Figtree typeset (`a012ba6`). No new code changes were made in this entry.
+- **Verification:** fresh build from a clean `.next` (dev stopped per the shared-`.next` trap protocol): compiled clean, 4 static pages, no warnings. Prod on 3001, chunk URL pre-verified 200, motion audit **ALL CHECKS PASSED 18/18**. Dev restarted alone afterwards, HTTP 200.
+- **Deployment:** pushed `main` — the six session commits from `6ebf436` through this one — to `github.com/Cryptic-Corsair/revision-club`. The token was used transiently for this push only and is not stored in the remote URL, git config, or any file. The "push blocked pending token" limitation recorded in entries (2)–(7) is resolved as of this push.
+- **Commit:** this commit (see git log for SHA).
