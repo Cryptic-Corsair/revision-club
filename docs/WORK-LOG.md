@@ -1355,3 +1355,9 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** tsc clean, fresh build. `curl` matrix: fresh visit 200 + `set-cookie` (Max-Age 1 y); returning visit 307 → `/club`; `/?front` 200; Googlebot UA 200; `/club` direct 200. New `scripts/front-door-check.mjs` (Playwright, realistic Pixel-Tablet UA): all four visitor profiles PASS (first visit `/` + cookie dropped; returning `/club`; `?front` `/`; crawler `/`). One false alarm decoded during verification: agent-browser's headless Chrome UA matches the crawler exemption, so it never redirects — real browsers do. Full motion audit re-run against the built site: **ALL CHECKS PASSED** (first two runs failed hero frame timing — root-caused to CPU contention from a leftover agent-browser Chrome still animating the portal, not the code; closed and re-run clean).
 - **Deployment:** push follows; live verification in the follow-up entry.
 - **Commit:** this commit (see git log for SHA).
+
+## 2026-11-14 (18) — front-door policy deployed; live behaviour verified
+
+- **Follow-up to (17):** pushed `4e5845f`; Vercel auto-deployed. Verified on `ial-chem.vercel.app` with a real-browser UA: fresh visit serves the homepage and drops `ial_front_door_seen` (Max-Age 1 y, SameSite lax); the same UA with the cookie gets 307 → `/club`; `/?front` serves the landing page regardless; `/club` direct always 200.
+- **Environment state:** dev restored alone (prod 3001 stopped), HTTP 200.
+- **Commit:** this commit (see git log for SHA).
