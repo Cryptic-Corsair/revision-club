@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { useId } from 'react';
 import { HAIRLINE, HAIRLINE_FAINT } from './LabGraphics';
-import { StillProvider, useLive, useStill } from '../../lib/still';
+import { StillProvider, useInheritedLive, useLive, useStill } from '../../lib/still';
 
 /* ————— the unit motifs —————
    Six miniature motion graphics, one per syllabus unit, cut from
@@ -505,10 +505,14 @@ export function UnitMotif({
   reducedMotion: boolean;
 }) {
   const Render = MOTIFS[motif];
-  const { ref, live } = useLive<HTMLDivElement>(48);
+  // the room referee decides whether the units section is on stage;
+  // this motif additionally must sit in the viewport itself (on
+  // mobile the six cards stack, and the ones below the fold freeze)
+  const roomLive = useInheritedLive();
+  const { ref, live: selfLive } = useLive<HTMLDivElement>();
   return (
     <div ref={ref} className="block w-full">
-      <StillProvider live={live}>
+      <StillProvider live={roomLive && selfLive}>
         <Render reducedMotion={reducedMotion} />
       </StillProvider>
     </div>

@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   motion,
-  useInView,
   useScroll,
   useTransform,
 } from 'framer-motion';
@@ -16,6 +15,7 @@ import {
   type SiteTheme,
 } from '../../data/ialData';
 import { EASE_EXPO } from '../../lib/motion';
+import { useRoomLive } from '../../lib/still';
 import { HeroShaderCanvas } from '../motion/HeroShaderCanvas';
 
 interface HeroSectionProps {
@@ -186,12 +186,10 @@ export function HeroSection({
 
   // The auto-cycle reads the note for the visitor — clause by clause,
   // across the shelf — until they take the wheel themselves. It only
-  // turns while the hero is on or near the screen: scrolled away, the
-  // interval stops instead of re-rendering the stage for nobody.
-  const heroLive = useInView(heroRef, {
-    margin: '400px 0px 400px 0px',
-    initial: false,
-  });
+  // turns while the hero is the room on stage (the referee's verdict,
+  // shared with the caustic shader below): scrolled away, the interval
+  // stops instead of re-rendering the stage for nobody.
+  const { live: heroLive } = useRoomLive(heroRef);
   useEffect(() => {
     if (reducedMotion || userInteracted || !heroLive) return;
     const id = window.setInterval(() => {
@@ -237,7 +235,7 @@ export function HeroSection({
       className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-24"
     >
       {/* Full-bleed GLSL Caustic Refraction & Architectural Grid Background */}
-      <HeroShaderCanvas theme={theme} reducedMotion={reducedMotion} />
+      <HeroShaderCanvas theme={theme} reducedMotion={reducedMotion} live={heroLive} />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Upper Hero Typography */}

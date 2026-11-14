@@ -13,7 +13,7 @@ import {
   IonsVignette,
 } from '../motion/LabGraphicsExtra';
 import { EASE_EXPO, VIEWPORT_ONCE } from '../../lib/motion';
-import { StillProvider, useLive } from '../../lib/still';
+import { StillProvider, useLive, useRoomLive } from '../../lib/still';
 import { SectionBackdrop } from '../motion/SectionBackdrop';
 
 interface LabVignettesProps {
@@ -113,7 +113,7 @@ function LabCard({
   hidden?: boolean;
   sectionLive: boolean;
 }) {
-  const { ref, live: cardLive } = useLive<HTMLElement>(48);
+  const { ref, live: cardLive } = useLive<HTMLElement>();
   // Touch input is not a reduced-motion preference. Keep the SVG loop alive
   // whenever its card is visible; visibility gating controls the workload.
   const animateGraphic = sectionLive && cardLive && !reducedMotion;
@@ -202,7 +202,7 @@ function MarqueeRow({
 }
 
 export function LabVignettes({ reducedMotion, coarsePointer }: LabVignettesProps) {
-  const { ref, live } = useLive<HTMLElement>(240);
+  const { ref, live } = useRoomLive<HTMLElement>();
   const staticDecorativeMotion = reducedMotion;
   return (
     <section

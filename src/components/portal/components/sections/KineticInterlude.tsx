@@ -9,6 +9,7 @@ import {
 } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import type { SiteTheme } from '../../data/ialData';
+import { useRoomLive } from '../../lib/still';
 import { KineticInterludeCanvas } from '../motion/KineticInterludeCanvas';
 
 interface KineticInterludeProps {
@@ -34,6 +35,9 @@ export function KineticInterlude({
   onOpenSpecIndex,
 }: KineticInterludeProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
+  // the closing room is a motion room too: its lattice breathes only
+  // while the referee has this room on stage
+  const { live: roomLive } = useRoomLive(sectionRef);
   const { scrollY, scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
@@ -62,11 +66,13 @@ export function KineticInterlude({
       ref={sectionRef}
       aria-label="In closing"
       className="relative w-full overflow-hidden py-16 sm:py-24"
+      data-live={roomLive}
     >
       <KineticInterludeCanvas
         theme={theme}
         velocitySmooth={smoothVelocity}
         reducedMotion={reducedMotion}
+        live={roomLive}
       />
 
       {/* Top & Bottom Opposite-Sliding Editorial Tracks */}

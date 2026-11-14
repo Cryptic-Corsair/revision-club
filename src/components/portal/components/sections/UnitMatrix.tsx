@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { GLOBAL_METRICS, IAL_UNITS, type IalUnit } from '../../data/ialData';
 import { EASE_EXPO } from '../../lib/motion';
-import { StillProvider, useLive } from '../../lib/still';
+import { StillProvider, useRoomLive } from '../../lib/still';
 import { UnitMotif, type UnitMotifId } from '../motion/UnitMotifs';
 
 interface UnitMatrixProps {
@@ -49,11 +49,11 @@ const STAGES: Array<{
 export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
   const [stage, setStage] = useState<CourseStage>('as');
   const stageSpec = STAGES.find((s) => s.id === stage) ?? STAGES[0];
-  // the six motifs pause when the room drifts a screen away
-  const { ref, live } = useLive<HTMLElement>();
+  // the six motifs run only while the units room is the one on stage
+  const { ref, live } = useRoomLive<HTMLElement>();
 
   return (
-    <section id="units" ref={ref} className="relative py-20 sm:py-28">
+    <section id="units" ref={ref} className="relative py-20 sm:py-28" data-live={live}>
       <StillProvider live={live}>
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Editorial header — kicker, document heading, meta line */}

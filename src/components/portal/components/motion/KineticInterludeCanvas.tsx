@@ -8,16 +8,22 @@ interface KineticInterludeCanvasProps {
   theme: SiteTheme;
   velocitySmooth: MotionValue<number>;
   reducedMotion: boolean;
+  /** the room referee's verdict — the lattice only breathes while the
+      closing room is the one on stage */
+  live?: boolean;
 }
 
 export function KineticInterludeCanvas({
   theme,
   velocitySmooth,
   reducedMotion,
+  live = true,
 }: KineticInterludeCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const themeRef = useRef<SiteTheme>(theme);
   const reducedMotionRef = useRef<boolean>(reducedMotion);
+  const roomLiveRef = useRef<boolean>(live);
+  const loopControlRef = useRef<{ start: () => void; stop: () => void } | null>(null);
 
   useEffect(() => {
     themeRef.current = theme;
@@ -26,6 +32,21 @@ export function KineticInterludeCanvas({
   useEffect(() => {
     reducedMotionRef.current = reducedMotion;
   }, [reducedMotion]);
+
+  useEffect(() => {
+    roomLiveRef.current = live;
+  }, [live]);
+
+  // the referee flips: freeze on the last frame or pick the loop back up
+  useEffect(() => {
+    const control = loopControlRef.current;
+    if (!control) return;
+    if (live) {
+      control.start();
+    } else {
+      control.stop();
+    }
+  }, [live]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -144,7 +165,7 @@ export function KineticInterludeCanvas({
     };
 
     const tick = () => {
-      if (!isVisible || !pageVisible || reducedMotionRef.current) return;
+      if (!isVisible || !pageVisible || !roomLiveRef.current || reducedMotionRef.current) return;
       const now = performance.now();
       const dt = clampDeltaTime((now - lastTs) / 1000);
       lastTs = now;
@@ -168,10 +189,13 @@ export function KineticInterludeCanvas({
       stopLoop();
       lastTs = performance.now();
       frameAccumulator = 0;
-      if (isVisible && pageVisible && !reducedMotionRef.current) {
+      if (isVisible && pageVisible && !reducedMotionRef.current && roomLiveRef.current) {
         rafId = window.requestAnimationFrame(tick);
       }
     };
+
+    // the referee's live prop reaches into this closure
+    loopControlRef.current = { start: startLoop, stop: stopLoop };
 
     const onVisibilityChange = () => {
       pageVisible = !document.hidden;
@@ -212,6 +236,7 @@ export function KineticInterludeCanvas({
     drawFrame(0.8);
     return () => {
       stopLoop();
+      loopControlRef.current = null;
       document.removeEventListener('visibilitychange', onVisibilityChange);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();

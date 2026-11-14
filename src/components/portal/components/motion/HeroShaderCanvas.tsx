@@ -2,11 +2,15 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import type { SiteTheme } from '../../data/ialData';
-import { clampDeltaTime, getCappedPixelRatio, getCanvasFrameIntervalSeconds } from '../../lib/motion';
+import { clampDeltaTime, getCappedPixelRatio } from '../../lib/motion';
 
 interface HeroShaderCanvasProps {
   theme: SiteTheme;
   reducedMotion: boolean;
+  /** the room referee's verdict — the shader only shades while the
+      hero is the one room on stage (its own visibility observer
+      still applies as a second gate) */
+  live?: boolean;
 }
 
 const VERTEX_SHADER = /* glsl */ `
@@ -156,10 +160,12 @@ function detectSoftwareWebGL(): boolean {
   }
 }
 
-export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps) {
+export function HeroShaderCanvas({ theme, reducedMotion, live = true }: HeroShaderCanvasProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const themeRef = useRef<SiteTheme>(theme);
   const reducedMotionRef = useRef<boolean>(reducedMotion);
+  const roomLiveRef = useRef<boolean>(live);
+  const loopControlRef = useRef<{ start: () => void; stop: () => void } | null>(null);
   const [webglUnavailable, setWebglUnavailable] = useState(false);
 
   useEffect(() => {
@@ -169,6 +175,21 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
   useEffect(() => {
     reducedMotionRef.current = reducedMotion;
   }, [reducedMotion]);
+
+  useEffect(() => {
+    roomLiveRef.current = live;
+  }, [live]);
+
+  // the referee flips: freeze on the last frame or pick the loop back up
+  useEffect(() => {
+    const control = loopControlRef.current;
+    if (!control) return;
+    if (live) {
+      control.start();
+    } else {
+      control.stop();
+    }
+  }, [live]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -188,10 +209,19 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
     }
 
     renderer.outputColorSpace = THREE.SRGBColorSpace;
-    const initialDpr = isSoftwareGl
-      ? 1
-      : getCappedPixelRatio(window.innerWidth, window.devicePixelRatio || 1);
-    const frameIntervalSeconds = getCanvasFrameIntervalSeconds();
+    // The caustics are soft, blurred fields — a lower-resolution buffer is
+    // visually identical and cuts the fill cost hard. Software GL renders
+    // on the CPU and blocks the main thread on every draw, so it gets a
+    // quarter-size buffer; hardware GL is capped at 1.5 DPR so a retina
+    // panel never asks the GPU to shade 2× pixels at 60fps.
+    const resolveDpr = () =>
+      isSoftwareGl
+        ? 0.5
+        : Math.min(getCappedPixelRatio(window.innerWidth, window.devicePixelRatio || 1), 1.5);
+    const initialDpr = resolveDpr();
+    // Slow ambient field — 30 draws/s is past the threshold of perception
+    // for drift this gentle, and halves the GPU (and thermals) for it.
+    const frameIntervalSeconds = 1 / 30;
     renderer.setPixelRatio(initialDpr);
 
     const width = Math.max(container.clientWidth, 1);
@@ -244,29 +274,12 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
     let lastTickTs = lastTs;
     let frameAccumulator = 0;
 
-    const scheduleAfterDraw = (cb: () => void) => {
-      const gl = renderer.getContext() as WebGL2RenderingContext;
-      if (!gl || typeof gl.fenceSync !== 'function') {
-        timeoutId = window.setTimeout(cb, 80);
-        return;
-      }
-      const sync = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
-      gl.flush();
-      const poll = () => {
-        if (!sync) {
-          timeoutId = window.setTimeout(cb, 80);
-          return;
-        }
-        const status = gl.getSyncParameter(sync, gl.SYNC_STATUS);
-        if (status === gl.UNSIGNALED) {
-          timeoutId = window.setTimeout(poll, 5);
-        } else {
-          gl.deleteSync(sync);
-          timeoutId = window.setTimeout(cb, 80);
-        }
-      };
-      timeoutId = window.setTimeout(poll, 5);
-    };
+    /* Software GL used to fence-sync after every draw and poll the fence
+       from a 5ms timer — each poll round-trips the GL command stream, so
+       the page's own rAF starved and the whole hero stuttered. SwiftShader
+       draws synchronously inside renderer.render, so a plain timeout is
+       enough: one draw, one wait, no queue to drain. */
+    const SOFTWARE_DRAW_GAP_MS = 90;
 
     const renderFrame = (advanceTime: boolean) => {
       if (contextLost) return;
@@ -291,11 +304,11 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
     };
 
     const tick = () => {
-      if (!isVisible || !pageVisible || contextLost) return;
+      if (!isVisible || !pageVisible || contextLost || !roomLiveRef.current) return;
 
-      // Keep the shader's continuous movement, but avoid asking a touch GPU
-      // to shade every high-refresh display callback. The remainder caps
-      // draws at 60fps while following the panel's native rAF cadence.
+      // Keep the shader's continuous movement, but avoid asking any GPU to
+      // shade every high-refresh display callback. The remainder caps
+      // draws at 30fps while following the panel's native rAF cadence.
       if (frameIntervalSeconds > 0) {
         const now = performance.now();
         frameAccumulator += clampDeltaTime((now - lastTickTs) / 1000);
@@ -310,7 +323,7 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
       renderFrame(true);
       if (reducedMotionRef.current) return;
       if (isSoftwareGl) {
-        scheduleAfterDraw(tick);
+        timeoutId = window.setTimeout(tick, SOFTWARE_DRAW_GAP_MS);
       } else {
         rafId = window.requestAnimationFrame(tick);
       }
@@ -322,14 +335,29 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
       lastTs = performance.now();
       lastTickTs = lastTs;
       frameAccumulator = 0;
-      if (pageVisible) renderFrame(false);
-      if (!reducedMotionRef.current && isVisible && pageVisible && !contextLost) {
+      if (pageVisible && roomLiveRef.current) renderFrame(false);
+      if (
+        !reducedMotionRef.current &&
+        isVisible &&
+        pageVisible &&
+        !contextLost &&
+        roomLiveRef.current
+      ) {
         if (isSoftwareGl) {
-          scheduleAfterDraw(tick);
+          timeoutId = window.setTimeout(tick, SOFTWARE_DRAW_GAP_MS);
         } else {
           rafId = window.requestAnimationFrame(tick);
         }
       }
+    };
+
+    // the referee's live prop reaches into this closure
+    loopControlRef.current = {
+      start: startLoop,
+      stop: () => {
+        window.cancelAnimationFrame(rafId);
+        window.clearTimeout(timeoutId);
+      },
     };
 
     const onPointerMove = (e: PointerEvent) => {
@@ -351,9 +379,7 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
       if (!entry) return;
       const w = Math.max(entry.contentRect.width, 1);
       const h = Math.max(entry.contentRect.height, 1);
-      const dpr = isSoftwareGl
-        ? 1
-        : getCappedPixelRatio(window.innerWidth, window.devicePixelRatio || 1);
+      const dpr = resolveDpr();
       renderer.setPixelRatio(dpr);
       renderer.setSize(w, h, false);
       uniforms.uResolution.value.set(w * dpr, h * dpr);
@@ -414,6 +440,7 @@ export function HeroShaderCanvas({ theme, reducedMotion }: HeroShaderCanvasProps
     return () => {
       window.cancelAnimationFrame(rafId);
       window.clearTimeout(timeoutId);
+      loopControlRef.current = null;
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
       renderer.domElement.removeEventListener('webglcontextlost', onContextLost);
