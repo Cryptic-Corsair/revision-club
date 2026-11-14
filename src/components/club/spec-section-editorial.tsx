@@ -1,19 +1,6 @@
 "use client";
 
-import type { CSSProperties, ReactNode } from "react";
-import {
-  Atom,
-  BookOpenCheck,
-  Droplets,
-  FlaskConical,
-  Gauge,
-  Magnet,
-  PieChart,
-  Sparkles,
-  Target,
-  TestTubes,
-  Zap,
-} from "./icons";
+import type { ReactNode } from "react";
 import { tint } from "./bits";
 import { Fmt } from "./format";
 import { SampleBlockView } from "./sample-blocks";
@@ -22,32 +9,10 @@ import type { SpecSection } from "@/lib/spectra/notes-types";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the editorial section — the document room's one true
-   way a spec section looks. The sibling of SpecSectionView: same
-   idea, same data, the disclaimer page's dress — a numbered clause
-   rail, the accent icon chip, the official statement under its
-   five-point rule, and the note's blocks re-set editorially by
-   SampleBlockView.
-
-   Served to every editorial notes surface — the real notes reader
-   and the pack's assembled clauses alike. One furniture set,
-   so every page that wears the document room ages together.
+   way a spec section looks. Specification clauses stay text-led:
+   the clause number, eyebrow, title and official statement carry
+   the hierarchy without decorative icons beside the spec point.
    ═══════════════════════════════════════════════════════════════ */
-
-/* one friendly icon per clause, walked in order — the shared
-   shelf every editorial page rotates through */
-export const CLAUSE_ICONS = [
-  Atom,
-  Magnet,
-  Droplets,
-  FlaskConical,
-  Zap,
-  Gauge,
-  Target,
-  TestTubes,
-  PieChart,
-  Sparkles,
-  BookOpenCheck,
-];
 
 export function EditorialSectionView({
   section,
@@ -65,10 +30,10 @@ export function EditorialSectionView({
       clause numeral and the rail connector */
   index: number;
   total: number;
-  /** the band-walk accent — speaks through the icon chip and the
-      statement rule only; the body speaks the room's rust */
+  /** the band-walk accent — speaks through the statement rule and
+      document figures; specification headers remain text-only */
   accent: string;
-  /** the small caps line beside the icon chip —
+  /** the small caps line above the clause title —
       "SPEC 2.6 · WCH11 TOPIC 3" */
   eyebrow?: string;
   /** the DOM id prefix of this document's anchors — "spec-" on the
@@ -82,7 +47,6 @@ export function EditorialSectionView({
       plate numbering */
   figOffset?: number;
 }) {
-  const Icon = CLAUSE_ICONS[index % CLAUSE_ICONS.length];
   let figCount = 0;
   /* the clause's own ground — the classic lab paints its two
      signature rooms (deep espresso, warm cream) straight onto the
@@ -100,9 +64,6 @@ export function EditorialSectionView({
       </div>
       <div className="legal-clause-content">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="legal-clause-icon" style={{ "--legal-accent": accent } as CSSProperties}>
-            <Icon className="h-5 w-5" strokeWidth={1.9} />
-          </span>
           {eyebrow && <span className="legal-meta">{eyebrow}</span>}
           {bannerAction && <span className="ml-auto">{bannerAction}</span>}
         </div>
