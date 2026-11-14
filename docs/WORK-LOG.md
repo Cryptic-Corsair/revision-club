@@ -1289,3 +1289,10 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** `bunx tsc --noEmit` clean; fresh build from clean `.next`; fold-flap A/B 21 → 0; motion audit **ALL CHECKS PASSED** (18/18) against the fixed prod build on 3001.
 - **Deployment:** push follows; Vercel auto-deploy will be re-verified on the live site (same fold-flap harness + audit vs `ial-chem.vercel.app`) before this entry's follow-up.
 - **Commit:** this commit (see git log for SHA).
+
+## 2026-11-14 (10) — flicker fix deployed and re-verified on the live site
+
+- **Follow-up to (9):** pushed `ffe160a`; Vercel auto-deployed; the live deployment `ial-chem.vercel.app` was re-tested with the same fold-flap harness: **0 machine resets in 7 seconds of ±30px fold wobbles** (21 before the fix), and the workflow gap now keeps exactly one room live (`top` at the probe's scroll geometry — the audit's own geometry sees `showcase`; either way, never zero rooms). The flicker the user saw on the deployment is fixed at the source.
+- **Environment state:** prod on 3001 stopped, dev restarted alone (shared-`.next` trap protocol), HTTP 200 confirmed.
+- **Deployment:** commit ready locally; push follows this entry.
+- **Commit:** this commit (see git log for SHA).
