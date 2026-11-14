@@ -32,10 +32,12 @@ interface LabVignettesProps {
    and a fractional distillation. Cards carry no descriptions —
    the piece and its number are all the room says. Hovering a row
    pauses it; under reduced motion the rows freeze into an honest,
-   scrollable shelf of stills. The whole room keeps itself honest
-   about being seen: when it drifts more than a screen away from
-   the viewport, the rows and the pieces stop running (useLive /
-   StillProvider) and pick up again on approach. */
+   scrollable shelf of stills. The drift itself never pauses — it is
+   a compositor-only transform and toggling it teleports the rows on
+   Android Chrome (see MarqueeRow). The pieces inside the cards keep
+   themselves honest about being seen: when a room or card is away
+   from the viewport, its SVG loop stops (useLive / StillProvider)
+   and picks up again on approach. */
 
 interface LabTile {
   id: string;
@@ -159,17 +161,28 @@ function MarqueeRow({
   duration,
   reducedMotion,
   rowId,
-  paused,
   coarsePointer,
+  live,
 }: {
   tiles: readonly LabTile[];
   direction: 'left' | 'right';
   duration: string;
   reducedMotion: boolean;
   rowId: string;
-  paused: boolean;
   coarsePointer: boolean;
+  live: boolean;
 }) {
+  /* The drift itself is NEVER paused by the room referee. An early
+     version toggled `animation-play-state` inline on every room flip;
+     on Android Chrome each toggle re-commits the composited transform
+     animation and snaps its phase — and on a touch device scrolling
+     collapses/expands the URL bar, which resizes the viewport, which
+     re-evaluates the referee, which flips the verdict every few
+     seconds: the rows visibly teleport. The drift is a pure
+     compositor transform (a few layers, no main-thread cost), so it
+     runs from mount to unmount; only the SVG loops inside the tiles
+     gate on visibility. Desktop hover-pausing stays a stylesheet
+     concern, which desktop Chromium handles phase-clean. */
   return (
     <div
       className="portal-marquee-row"
@@ -184,7 +197,6 @@ function MarqueeRow({
           animationDuration: coarsePointer
             ? direction === 'left' ? '76s' : '88s'
             : duration,
-          animationPlayState: paused && !reducedMotion ? 'paused' : undefined,
         }}
       >
         {[...tiles, ...tiles].map((tile, i) => (
@@ -193,7 +205,7 @@ function MarqueeRow({
             tile={tile}
             reducedMotion={reducedMotion}
             hidden={i >= tiles.length}
-            sectionLive={!paused}
+            sectionLive={live}
           />
         ))}
       </div>
@@ -230,8 +242,8 @@ export function LabVignettes({ reducedMotion, coarsePointer }: LabVignettesProps
               direction="left"
               duration="56s"
               reducedMotion={reducedMotion}
-              paused={!live}
               coarsePointer={coarsePointer}
+              live={live}
             />
             <MarqueeRow
               rowId="lab-row-2"
@@ -239,8 +251,8 @@ export function LabVignettes({ reducedMotion, coarsePointer }: LabVignettesProps
               direction="right"
               duration="72s"
               reducedMotion={reducedMotion}
-              paused={!live}
               coarsePointer={coarsePointer}
+              live={live}
             />
           </motion.div>
         </StillProvider>

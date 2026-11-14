@@ -1314,3 +1314,12 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Environment state:** prod on 3001 stopped, dev restarted alone, HTTP 200.
 - **Deployment:** commit ready locally; push follows this entry.
 - **Commit:** this commit (see git log for SHA).
+
+## 2026-11-14 (13) — the REAL carousel identified from the user's screen recording: lab marquee teleport fixed
+
+- **The user uploaded a device recording** (`upload/Screenrecorder-2026-11-14-17-47-45-57.mp4`, Android tablet landscape, `ial-chem.vercel.app`). Watching it frame by frame settled what "the carousel section" actually is: **the lab room's drifting card rows** (bubbling reaction / falling drop / exchange at equilibrium…), not the showcase card track this investigation had been fixing since entry (9). The recording shows the rows moving backward and leaping, with double-image ghosting and irregular gaps.
+- **Root cause (measured, not guessed):** `MarqueeRow` set `animation-play-state: paused/''` inline on every room-verdict flip (`paused={!live}`). On desktop Chromium the toggle is phase-clean (measured: paused at x=-227.1, resumed at exactly -227.1 — entry (9)'s referee dead-zone fix also masks flips, which is why desktop and the preview never showed it). On the Android device, each inline toggle re-commits the composited transform animation and snaps its phase — and on a touch device scrolling collapses/expands the URL bar, which resizes the viewport, which re-runs the referee, which flips the verdict every few seconds of normal reading: repeated phase snaps = the backward motion, ghosting and gaps in the recording.
+- **Fix:** the drift no longer touches the room verdict at all. `MarqueeRow` dropped the `paused` prop and the inline `animationPlayState` — the CSS marquee runs from mount to unmount (it is a compositor-only transform on two layers, no main-thread cost); only the expensive part (the SVG vignette loops) keeps the room/card visibility gating (`sectionLive={live}` unchanged in semantics). Reduced-motion still swaps the rows for the scrollable shelf; desktop hover-pause stays a stylesheet rule (phase-clean per measurement).
+- **Verification:** tsc clean; fresh build; at the tablet's CSS viewport (960×641) the track drifts at a constant −25.8 px/s **through two forced verdict flips** (no pause, no jump), inline play-state absent; motion audit **ALL CHECKS PASSED** (lab budget 13345/16000 — SVG gating intact).
+- **Deployment:** push follows; live re-verification in the follow-up entry.
+- **Commit:** this commit (see git log for SHA).
