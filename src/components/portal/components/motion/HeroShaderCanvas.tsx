@@ -13,6 +13,11 @@ interface HeroShaderCanvasProps {
   live?: boolean;
 }
 
+/* the software-GL buffer budget in device pixels (~770×360 at the
+   clamp floor) — the per-draw main-thread block stays flat no matter
+   how big the current type rung paints the hero's CSS box */
+const SOFTWARE_PIXEL_BUDGET = 280_000;
+
 const VERTEX_SHADER = /* glsl */ `
   varying vec2 vUv;
   void main() {
@@ -211,13 +216,24 @@ export function HeroShaderCanvas({ theme, reducedMotion, live = true }: HeroShad
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     // The caustics are soft, blurred fields — a lower-resolution buffer is
     // visually identical and cuts the fill cost hard. Software GL renders
-    // on the CPU and blocks the main thread on every draw, so it gets a
-    // quarter-size buffer; hardware GL is capped at 1.5 DPR so a retina
-    // panel never asks the GPU to shade 2× pixels at 60fps.
-    const resolveDpr = () =>
-      isSoftwareGl
-        ? 0.5
-        : Math.min(getCappedPixelRatio(window.innerWidth, window.devicePixelRatio || 1), 1.5);
+    // on the CPU and blocks the main thread on every draw, so its buffer
+    // is PIXEL-BUDGETED below; hardware GL is capped at 1.5 DPR so a
+    // retina panel never asks the GPU to shade 2× pixels at 60fps.
+    const resolveDpr = () => {
+      if (isSoftwareGl) {
+        // SwiftShader's per-draw cost is the buffer's pixel count, and the
+        // hero's CSS box now grows with the type scale (--ui-scale) — a
+        // fixed DPR would make every bigger rung block the main thread
+        // longer per draw and eat the page's frame budget. Budget absolute
+        // pixels instead: the same per-draw cost at every scale (at the
+        // historical hero size this resolves to the old flat 0.5 DPR).
+        const w = Math.max(container.clientWidth, 1);
+        const h = Math.max(container.clientHeight, 1);
+        const fit = Math.sqrt(SOFTWARE_PIXEL_BUDGET / (w * h));
+        return Math.min(0.5, Math.max(0.25, fit));
+      }
+      return Math.min(getCappedPixelRatio(window.innerWidth, window.devicePixelRatio || 1), 1.5);
+    };
     const initialDpr = resolveDpr();
     // Slow ambient field — 30 draws/s is past the threshold of perception
     // for drift this gentle, and halves the GPU (and thermals) for it.

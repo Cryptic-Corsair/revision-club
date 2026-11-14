@@ -171,34 +171,31 @@ html[data-body="nunito"] {
    so rem-based media queries and dvh drawers cannot drift either.
 
    --ui-scale composes two factors: the customize panel's knob
-   (--ui-knob, S/M/L/XL — the visitor's explicit choice) times a
-   viewport-driven default growth (--ui-grow). The growth exists
-   because the type ladder was tuned arm's-length on tablets; on a
-   laptop or desk monitor the same px values sit further from the eye
-   and read small — the standing complaint this block answers. The
-   growth is a DEFAULT, not a second knob: the panel's rungs keep
-   their meaning on every screen (S on a desktop ≈ today's M), and
-   phones and tablets see exactly the sizes they always did. */
+   (--ui-knob, S/M/L/XL — the visitor's explicit choice, and on a
+   first run the SCREEN-AWARE factory default: M on phones, L on
+   small tablets ≥640px, XL on tablets ≥768px and everything bigger)
+   times a gentle viewport growth (--ui-grow, ≥1280px only) that
+   keeps the biggest desks a step ahead. The factory default lives in
+   load() in prefs.ts and the pre-paint script in layout.tsx — the
+   two must agree or the first paint re-flows. The growth is a
+   refinement, not a second knob: the panel's rungs keep their
+   meaning on every screen. */
 :root {
   --ui-knob: 1;
   --ui-grow: 1;
   --ui-scale: calc(var(--ui-knob) * var(--ui-grow));
 }
-/* laptop ≥1024: the growth starts at exactly the rung the retired
-   first-run lift used to hand big screens (1.2), then keeps climbing
-   so a default visitor's text is always at least as large as before
-   and grows with the monitor. */
-@media (min-width: 1024px) {
-  :root { --ui-grow: 1.2; }
-}
+/* desk refinement: laptops/tablet-landscape ride the XL default
+   alone; wider monitors climb gently so a 1920+ desk reads a step
+   larger than a 1280 laptop without exploding the panel's rungs. */
 @media (min-width: 1280px) {
-  :root { --ui-grow: 1.26; }
+  :root { --ui-grow: 1.05; }
 }
 @media (min-width: 1536px) {
-  :root { --ui-grow: 1.32; }
+  :root { --ui-grow: 1.1; }
 }
 @media (min-width: 1920px) {
-  :root { --ui-grow: 1.38; }
+  :root { --ui-grow: 1.15; }
 }
 html[data-scale="S"] {
   --ui-knob: 0.9;
@@ -207,7 +204,7 @@ html[data-scale="L"] {
   --ui-knob: 1.2;
 }
 html[data-scale="XL"] {
-  --ui-knob: 1.4;
+  --ui-knob: 1.5;
 }
 
 /* the frozen surface. --ui-scale inherits, so pinning it back to 1
@@ -849,6 +846,11 @@ html.dune .sticker {
 }
 .bobble {
   animation: bobble 3.6s ease-in-out infinite;
+  /* transform-only infinite loops ride a compositor layer: the layer
+     rasterizes once and the GPU moves it, so the per-frame cost stays
+     off the main thread no matter how big the current type rung
+     paints the element */
+  will-change: transform;
 }
 
 /* washi tape — a little strip pinned across the top of a sticky
@@ -881,6 +883,8 @@ html.dune .sticker {
   width: max-content;
   gap: 0;
   animation: ticker-scroll 30s linear infinite;
+  /* compositor-layer promotion — see .bobble above */
+  will-change: transform;
 }
 .ticker:hover .ticker-track {
   animation-play-state: paused;
@@ -2918,6 +2922,8 @@ html.classic .note-rooms .room {
   display: flex;
   width: max-content;
   animation: river-scroll 72s linear infinite;
+  /* compositor-layer promotion — see .bobble above */
+  will-change: transform;
 }
 .river-row[data-dir="rtl"] .river-track {
   animation-direction: reverse;
@@ -2945,6 +2951,8 @@ html.classic .note-rooms .room {
 }
 .cue-bob {
   animation: cue-bob 2.3s ease-in-out infinite;
+  /* compositor-layer promotion — see .bobble above */
+  will-change: transform;
 }
 
 /* ————— the molecule's orbit rings —————
@@ -2955,9 +2963,12 @@ html.classic .note-rooms .room {
 }
 .orbit-a {
   animation: orbit 26s linear infinite;
+  /* compositor-layer promotion — see .bobble above */
+  will-change: transform;
 }
 .orbit-b {
   animation: orbit 38s linear infinite reverse;
+  will-change: transform;
 }
 
 /* ————— the flask's bubbles ————— */

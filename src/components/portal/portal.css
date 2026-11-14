@@ -374,6 +374,10 @@ body:has(.portal-root[data-theme="light"]) {
   width: max-content;
   animation: portal-marquee-left 56s linear infinite;
   backface-visibility: hidden;
+  /* compositor-layer promotion: the marquee rasterizes once and the
+     GPU slides it, so the per-frame cost stays off the main thread
+     no matter how big the current type rung paints the strip */
+  will-change: transform;
 }
 .portal-marquee-track[data-direction='right'] {
   animation-name: portal-marquee-right;

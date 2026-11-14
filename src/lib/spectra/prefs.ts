@@ -96,20 +96,21 @@ export const ACCENT_IDS: AccentId[] = ACCENTS.map((a) => a.id);
    property scaled the whole coordinate system (layout viewport
    included), which is what kept squeezing the spec map and every
    fixed surface. Scale instead feeds --ui-knob (see globals.css),
-   which composes with a viewport-driven --ui-grow into --ui-scale:
-   component sizes multiply with the product, phones and tablets see
-   exactly the historical sizes, and laptops/desktops grow the whole
-   ladder by default so type stops reading small at arm's length.
-   The spec map pins the product back to 1 and stays pixel-identical;
-   every other surface — nav pill included — rides it. These rungs
-   keep their meaning on every screen: S on a desktop ≈ the old M. */
+   which composes with a gentle viewport --ui-grow into --ui-scale:
+   component sizes multiply with the product. The FACTORY default is
+   screen-aware — M on phones, L on small tablets (≥640px), XL on
+   tablets (≥768px) and every laptop/desktop — set in load() below
+   and mirrored by the pre-paint script in layout.tsx (the two must
+   agree or the first paint re-flows). A saved rung always wins over
+   the factory default. The spec map pins the product back to 1 and
+   stays pixel-identical; every other surface rides it. */
 export const SCALES = ["S", "M", "L", "XL"] as const;
 export type ScaleId = (typeof SCALES)[number];
 export const SCALE_VALUE: Record<ScaleId, number> = {
   S: 0.9,
   M: 1,
   L: 1.2,
-  XL: 1.4,
+  XL: 1.5,
 };
 
 /* the retired page-zoom pref saved raw numbers. They map onto rungs
@@ -177,8 +178,9 @@ export const DEFAULT_PREFS: Prefs = {
   theme: "classic",
   iface: "gallery",
   accents: [...ACCENT_IDS],
-  /* the scale default is Medium everywhere: big screens grow through
-     --ui-grow (globals.css) instead of a bigger factory rung */
+  /* the module default is Medium; load() lifts a FIRST RUN to the
+     screen-aware factory rung (M phone / L small tablet / XL tablet
+     and up) — see the first-run branch below */
   scale: "M",
   specHeight: 0.8,
   specDensity: "roomy",
@@ -269,10 +271,19 @@ function load() {
          its direct heir; everything else starts on the default. */
       const legacy = window.localStorage.getItem("rc-theme");
       if (legacy === "dark") state = { ...state, theme: "dark" };
-      /* The old first-run lift to Large on ≥1024px screens is
-         retired: --ui-grow grows the whole ladder on those screens
-         for every rung, and stacking Large on top of it read far
-         too big (1.2 × 1.16 ≈ 1.39 on a laptop). */
+      /* the screen-aware factory rung: phones keep Medium, small
+         tablets (≥640px CSS) start on Large, tablets (≥768px) and
+         every laptop/desktop start on XL — reading distance, not
+         device class, is what the type ladder answers to. Only a
+         factory setting: the first rung you pick yourself is kept
+         for keeps. Mirrored by the pre-paint script in layout.tsx —
+         the two must agree or the first paint re-flows. */
+      try {
+        if (window.innerWidth >= 768) state = { ...state, scale: "XL" };
+        else if (window.innerWidth >= 640) state = { ...state, scale: "L" };
+      } catch {
+        /* no innerWidth — keep Medium */
+      }
     }
   } catch {
     /* private mode / corrupt data — defaults */
