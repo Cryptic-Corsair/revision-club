@@ -1263,3 +1263,12 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** clicked the button in the live portal (agent-browser): navigation to `/club` confirmed, welcome copy ("Every spec point, made to stick.") served.
 - **Deployment:** commit ready locally; push still blocked pending a fresh token.
 - **Commit:** this commit (see git log for SHA).
+
+## 2026-11-14 (7) — hydration-mismatch report: dev-only Fast Refresh artifact, no code change
+
+- **Scope:** user reported a React hydration console error on the homepage — SVG `clipPath` IDs from `useId()` differed between server HTML (`unit-burette-clip-_R_2drul3inelb_`) and client render (`unit-burette-clip-_R_jevl8qnelb_`) across the unit motifs and lab vignettes.
+- **Investigation:** the only `useId` callers are the four motion-graphics files (`UnitMotifs`, `LabGraphics`, `LabGraphicsExtra`), all top-level and unconditional. Fresh hard load verified end-to-end: the SSR HTML and the hydrated DOM carry identical IDs (`_R_2drul3inelb_` on both sides), and a full scroll through every lazily-mounted section produced zero hydration errors in the console — only benign analytics/HMR logs and one pre-existing, unrelated scroll-container position warning. The same components had already hydrated cleanly in the prod-build motion audit (18/18).
+- **Diagnosis:** the user's tab had the page open across the root-layout font edit; the console capture itself shows four `[Fast Refresh] rebuilding` passes. Turbopack re-rendered with the new module graph while the on-screen server HTML came from the old generation, so the lazily-mounted units/lab sections hydrated with a different `useId` encoding — a dev-only stale-bundle artifact of hot-refreshing a root layout, not a code bug. A hard reload resolves it and was verified clean.
+- **Decision:** no code change. Replacing `useId` with hand-rolled IDs would trade a non-bug for duplicate-ID risks in the marquee's deliberately duplicated tiles.
+- **Deployment:** WORK-LOG-only commit; push still blocked pending a fresh token.
+- **Commit:** this commit (see git log for SHA).
