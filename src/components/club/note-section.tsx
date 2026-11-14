@@ -13,7 +13,6 @@ import {
   Lightbulb,
   ListChecks,
   StickyNote,
-  Target,
 } from "./icons";
 import type { NotesBlock, SpecSection } from "@/lib/spectra/notes-types";
 import { Fmt } from "./format";
