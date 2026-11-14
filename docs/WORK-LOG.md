@@ -1340,3 +1340,10 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verification:** tsc clean, fresh build. Confirm-hold observed live: instant jump hero→units holds `top` at +30 ms (no flash) and commits `units` by +600 ms. New `scripts/fling-freeze-harness.mjs` (real touch-event flings + geometric truth vs `data-live` comparison, implementing the referee's own nearest-room gap rule): verdicts correct on deployment and fixed build in all runs (race not reproducible headless — recorded honestly). Motion audit: all six referee checks PASS, **ALL CHECKS PASSED** (lab budget 13345/16000). Fold-flap harness: **0 resets**.
 - **Deployment:** push follows; live re-verification in the follow-up entry.
 - **Commit:** this commit (see git log for SHA).
+
+## 2026-11-14 (16) — referee v2.2 deployed; live behavior verified
+
+- **Follow-up to (15):** pushed `459cb82`; Vercel auto-deployed; verified on `ial-chem.vercel.app`: the confirm-hold is live (instant jump hero→units holds `top` at +30 ms, commits `units` by +600 ms) and the verdict stays correct after a synthetic scroll burst followed by silence (trailing settle evaluation fired).
+- **Environment state:** dev restarted alone (prod 3001 stopped), HTTP 200.
+- **Deployment:** commit ready locally; push follows this entry.
+- **Commit:** this commit (see git log for SHA).
