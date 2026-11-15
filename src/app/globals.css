@@ -156,8 +156,17 @@ html[data-head="baloo"] {
 html[data-head="patrick"] {
   --font-display: var(--font-patrick), "Trebuchet MS", sans-serif;
 }
+html[data-head="fraunces"] {
+  --font-display: var(--font-fraunces), Georgia, serif;
+}
+html[data-head="figtree"] {
+  --font-display: var(--font-figtree), "Trebuchet MS", sans-serif;
+}
 html[data-body="nunito"] {
   --font-body: var(--font-nunito), "Trebuchet MS", sans-serif;
+}
+html[data-body="figtree"] {
+  --font-body: var(--font-figtree), "Trebuchet MS", sans-serif;
 }
 
 /* ————— content scale —————

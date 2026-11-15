@@ -402,7 +402,7 @@ Use local transitions for the control itself, not a whole-page theme animation. 
 
 ## 10. Typography and content scale
 
-Fonts are self-hosted under src/app/fonts/ and loaded in layout.tsx using next/font/local. Current families include Fredoka, Baloo 2, Nunito, Quicksand, Patrick Hand and IBM Plex Mono. The default pair is Fredoka for headings and Quicksand for body text.
+Fonts are self-hosted under src/app/fonts/ and loaded in layout.tsx using next/font/local. Current families include Fredoka, Baloo 2, Nunito, Quicksand, Patrick Hand, IBM Plex Mono, Fraunces and Figtree. The default pair is Fredoka for headings and Quicksand for body text. Fraunces and Figtree (the portal's display/body pair) are also selectable in the club's customize panel: headings offer Fredoka, Baloo 2, Patrick Hand, Fraunces and Figtree; body offers Quicksand, Nunito and Figtree.
 
 **Do not replace local fonts with next/font/google.** This was deliberately avoided because the Google font resolver caused repeated Turbopack import-map failures and page errors. Keep font assets local and declared weight ranges consistent with the files.
 

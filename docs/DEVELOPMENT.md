@@ -137,13 +137,22 @@ four labs in the reader (contents chips clamp, spec rail, highlights).
 
 ## 6. Fonts — self-hosted, do NOT revert
 
-All six families (Fredoka, Baloo 2, Nunito, Quicksand, Patrick Hand,
-IBM Plex Mono) are **local woff2 files** in `src/app/fonts/`, loaded with
-`next/font/local` in `layout.tsx`, exposed as CSS variables
-`--font-fredoka`, `--font-baloo`, `--font-patrick`, `--font-nunito`,
-`--font-quicksand`, `--font-plex`. The factory pair is **Fredoka + Quicksand**
+All eight families (Fredoka, Baloo 2, Nunito, Quicksand, Patrick Hand,
+IBM Plex Mono, Fraunces, Figtree) are **local woff2 files** in
+`src/app/fonts/`, loaded with `next/font/local` in `layout.tsx`, exposed
+as CSS variables `--font-fredoka`, `--font-baloo`, `--font-patrick`,
+`--font-nunito`, `--font-quicksand`, `--font-plex`, `--font-fraunces`,
+`--font-figtree`. The factory pair is **Fredoka + Quicksand**
 (the `@theme` tokens in `globals.css` carry it; `html[data-head]` /
 `html[data-body]` rules only re-point them).
+
+The customize panel's pickable sets: **headings** — Fredoka, Baloo 2,
+Patrick Hand, Fraunces (the portal's display serif), Figtree; **body** —
+Quicksand, Nunito, Figtree. Fraunces and Figtree are also the portal's
+house pair (`portal.css` `--font-display` / `--font-body`), so offering
+them in the club costs no extra bytes — they are already on every page.
+Fraunces tops out at weight 700 (like Fredoka): display runs must not
+ask it for extrabold. IBM Plex Mono is a role font (code), not pickable.
 
 **Why not `next/font/google`:** its Turbopack resolver repeatedly corrupted
 its own import map between dev-server restarts

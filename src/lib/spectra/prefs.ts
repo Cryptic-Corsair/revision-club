@@ -16,8 +16,8 @@ import { DARK_MOOD_COUNT, pickDarkMood } from "./dark-mood";
    ═══════════════════════════════════════════════════════════════ */
 
 export type Lab = "light" | "dark" | "dune" | "classic";
-export type HeadFont = "fredoka" | "baloo" | "patrick";
-export type BodyFont = "nunito" | "quicksand";
+export type HeadFont = "fredoka" | "baloo" | "patrick" | "fraunces" | "figtree";
+export type BodyFont = "nunito" | "quicksand" | "figtree";
 
 /* the site's interfaces — same notes, two dresses.
    "gallery" is the white-wall dress — quiet grounds, one accent,
@@ -402,9 +402,16 @@ function sanitize(p: StoredPrefs): Prefs {
     p.specDensity === "roomy"
   )
     out.specDensity = p.specDensity;
-  if (p.headFont === "fredoka" || p.headFont === "baloo" || p.headFont === "patrick")
+  if (
+    p.headFont === "fredoka" ||
+    p.headFont === "baloo" ||
+    p.headFont === "patrick" ||
+    p.headFont === "fraunces" ||
+    p.headFont === "figtree"
+  )
     out.headFont = p.headFont;
-  if (p.bodyFont === "nunito" || p.bodyFont === "quicksand") out.bodyFont = p.bodyFont;
+  if (p.bodyFont === "nunito" || p.bodyFont === "quicksand" || p.bodyFont === "figtree")
+    out.bodyFont = p.bodyFont;
   if (typeof p.dots === "boolean") out.dots = p.dots;
   if (typeof p.motion === "boolean") out.motion = p.motion;
   /* the cached night mood — clamped into the wardrobe range; junk

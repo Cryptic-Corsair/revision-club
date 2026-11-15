@@ -55,11 +55,14 @@ const HEAD_FONTS: { id: HeadFont; label: string; stack: string }[] = [
   { id: "fredoka", label: "Fredoka", stack: "var(--font-fredoka), 'Trebuchet MS', sans-serif" },
   { id: "baloo", label: "Baloo 2", stack: "var(--font-baloo), 'Trebuchet MS', sans-serif" },
   { id: "patrick", label: "Patrick Hand", stack: "var(--font-patrick), 'Comic Sans MS', cursive" },
+  { id: "fraunces", label: "Fraunces", stack: "var(--font-fraunces), Georgia, serif" },
+  { id: "figtree", label: "Figtree", stack: "var(--font-figtree), 'Trebuchet MS', sans-serif" },
 ];
 
 const BODY_FONTS: { id: BodyFont; label: string; stack: string }[] = [
   { id: "quicksand", label: "Quicksand", stack: "var(--font-quicksand), 'Trebuchet MS', sans-serif" },
   { id: "nunito", label: "Nunito", stack: "var(--font-nunito), 'Trebuchet MS', sans-serif" },
+  { id: "figtree", label: "Figtree", stack: "var(--font-figtree), 'Trebuchet MS', sans-serif" },
 ];
 
 const SCALE_PX = [12, 14, 16, 19];
