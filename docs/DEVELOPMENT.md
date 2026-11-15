@@ -86,7 +86,7 @@ src/
    ├─ search-index.ts / suggest.ts      Search
    ├─ prefs.ts          User preferences (theme, scale, fonts, motion, dots)
    ├─ progress.ts       Reading progress / marks
-   ├─ dark-mood.ts      DARK_MOOD_COUNT — daily "roast" variants for dark lab
+   ├─ dark-mood.ts      DARK_MOOD_COUNT — night-lab mood wardrobe (cached in prefs)
    └─ time.ts           Reading-time estimates
 ```
 
@@ -164,8 +164,14 @@ replace the files in `src/app/fonts/`, and keep the `weight` ranges in
 
 - `:root` → **light** lab
 - `html.dark` → **night** lab (violet-ink charcoal); plus
-  `html.dark[data-mood="N"]` daily mood variants (`DARK_MOOD_COUNT` in
-  `dark-mood.ts`; mood = days-since-epoch mod count, set pre-hydration)
+  `html.dark[data-mood="N"]` mood variants (`DARK_MOOD_COUNT` in
+  `dark-mood.ts`). The mood is CACHED, not calendared: it is stamped
+  into the save as `prefs.mood` when the visitor picks Night (and
+  one-time at load for older saves), then never moves on its own —
+  `pickDarkMood()` (days-since-epoch mod count) is only the stamp's
+  ink, used for first contact and as the fallback for saves that
+  predate the field. Pre-paint mirrors the same cached-then-fallback
+  read, so first paint and hydration agree.
 - `html.dune` → **dune** lab (the chocolate room) — always paired with
   `html.dark` (both classes on `<html>`): the dark class carries every
   `dark:` utility, dune re-tints the tokens on top. No mood rotation.
@@ -175,15 +181,32 @@ replace the files in `src/app/fonts/`, and keep the `weight` ranges in
   rooms with espresso `#2c2013` ink — this is the theme new visitors see
 
 User prefs (`prefs.ts`, default in parentheses): `theme` (`"classic"`),
-`headFont` (`"fredoka"`), `bodyFont` (`"quicksand"`), `scale` (`"M"`, but a
-FIRST RUN on a screen ≥1024px starts on `"L"` — mirrored in the pre-paint
-script in `layout.tsx`, so the two must be changed together; a picked size
-always wins; legacy saved `zoom` values 0.9/1/1.15/1.3 migrate onto the
-matching step), `specHeight` (`0.8` — the spec-map drawer's viewport
-fraction; set by the panel's Peek/Tall/Full presets and by dragging the
-drawer's grabber, which persists any fraction in between), `specDensity`
-(`"roomy"`; compact/comfy/roomy — the chip min-width the drawer's grid
-packs against), `dots` (on), `motion` (on).
+`iface` (`"gallery"`), `accents` (the full candy wheel), `type` (all five
+role factors `1` — the M vector), `headFont` (`"fredoka"`), `bodyFont`
+(`"quicksand"`), `scale` (`"M"`, but a FIRST RUN lifts the rung to the
+screen-aware factory — M on phones, L on small tablets (≥640px), XL on
+tablets (≥768px) and every laptop/desktop — mirrored boundary for
+boundary in the pre-paint script in `layout.tsx`, so the two must be
+changed together; a picked size always wins; legacy saved `zoom` values
+0.9/1/1.15/1.3 migrate onto the matching step), `specHeight` (`0.8` — the
+spec-map drawer's viewport fraction; set by the panel's Peek/Tall/Full
+presets and by dragging the drawer's grabber, which persists any fraction
+in between), `specDensity` (`"roomy"`; compact/comfy/roomy — the chip
+min-width the drawer's grid packs against), `dots` (on), `motion` (on),
+`mood` (unset until a Night pick stamps it).
+
+**Theme persistence rules** (the contract): the lab a visitor picked is
+theirs until they pick a different one. Concretely: (1) the night mood is
+cached (see above) — no calendar rotation rewrites the sky behind their
+back; (2) classic is the Cards reader's house lab and the Document reader
+doesn't offer it — a saved editorial+classic **displays** as Light via
+`effectiveLab()` (mirrored by pre-paint) while the save keeps classic, so
+switching back to Cards restores Classic with no re-pick. Nothing but an
+explicit theme pick may rewrite the stored `theme` (or `mood`); every
+colour decision that follows the active lab (accent helpers, THEME_CHIP
+states, picker selected states, `LogoMark`'s fallback edition) reads
+`effectiveLab()`/`currentLab()`, never the raw pref, so the chrome always
+agrees with the classes on `<html>`.
 
 ### Theme chips (THEME_CHIP)
 

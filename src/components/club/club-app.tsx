@@ -38,6 +38,8 @@ import {
   LAB_DESCRIPTION,
   LAB_LABEL,
   labOrderFor,
+  currentLab,
+  effectiveLab,
   setPrefs,
   THEME_CHIP,
   usePrefs,
@@ -197,8 +199,12 @@ function deepViewOf(
    The footer sits on the same cocoa ground in every lab, so it pins
    the daylight edition and never re-dresses. */
 function LogoMark({ size = 38, lab }: { size?: number; lab?: Lab }) {
-  const prefs = usePrefs();
-  const room = lab ?? prefs.theme;
+  /* the store subscription keeps the mark re-dressing on theme
+     changes; the room comes from the DISPLAY lab (currentLab), so
+     a saved Document+classic paints the daylight mark the page
+     actually wears */
+  usePrefs();
+  const room = lab ?? currentLab();
   const ink =
     room === "classic" ? "#3B2A1B" :
     room === "dune" ? "#FFE9C7" :
@@ -341,7 +347,11 @@ function TopBar({
   onToggleFullscreen: () => void;
 }) {
   const prefs = usePrefs();
-  const lab = prefs.theme;
+  /* the lab the page WEARS — a saved Document+classic wears Light
+     here (the reader doesn't offer classic) while the save keeps
+     Classic for the Cards reader; the chip and the picked state
+     follow the display lab, not the stored one */
+  const lab = effectiveLab(prefs);
   /* the labs this interface offers — the Document reader doesn't
      offer classic, the Cards reader's house lab */
   const labOptions = labOrderFor(prefs.iface);

@@ -98,11 +98,15 @@ export const metadata: Metadata = {
    flash of the wrong lab, font size, scale or family. The factory
    lab is classic (espresso & parchment) — the Cards reader's house
    lab, so a saved Document (editorial) visitor who last stood in
-   classic first-paints Light here, the same coercion sanitize()
-   applies in prefs.ts; the two must agree or the first paint
-   re-flows after hydration. Only the night lab picks tonight's
-   mood (html[data-mood]); dune and classic are fixed signatures,
-   so they need no mood.
+   classic first-paints Light here, the same display coercion
+   effectiveLab() applies in prefs.ts; the two must agree or the
+   first paint re-flows after hydration. The SAVE keeps classic —
+   this is display-only, so switching back to Cards restores it.
+   Only the night lab wears its CACHED mood (html[data-mood]): the
+   palette stamped at the visitor's last Night pick, falling back
+   to today's rotation pick for saves that predate the field —
+   exactly what applyPrefs() paints. Dune and classic are fixed
+   signatures, so they need no mood.
    A FIRST RUN starts on the screen-aware factory rung — Medium on
    phones, Large on small tablets (≥640px), XL on tablets (≥768px)
    and every laptop/desktop — mirroring load() in prefs.ts exactly
@@ -117,9 +121,10 @@ try{p=JSON.parse(localStorage.getItem("reaction-club-prefs-v1")||"null")}catch(e
 if(!p){var t=localStorage.getItem("rc-theme");p={theme:t==="dark"?"dark":"classic"}}
 var th=p.theme==="light"?"light":p.theme==="dark"?"dark":p.theme==="dune"?"dune":"classic";
 /* classic is the Cards reader's house lab — a saved Document visitor
-   reads as Light (mirrors sanitize() in prefs.ts) */
+   DISPLAYS as Light (mirrors effectiveLab() in prefs.ts); the save
+   keeps classic so the Cards reader puts it straight back */
 if(p.iface==="editorial"&&th==="classic")th="light";
-if(th==="dark"){r.classList.add("dark");r.dataset.mood=String(Math.floor(Date.now()/864e5)%${DARK_MOOD_COUNT})}
+if(th==="dark"){r.classList.add("dark");var C=${DARK_MOOD_COUNT};var dm=(typeof p.mood==="number"&&isFinite(p.mood))?((Math.floor(p.mood)%C)+C)%C:(Math.floor(Date.now()/864e5)%C);r.dataset.mood=String(dm)}
 else if(th==="dune"){r.classList.add("dark","dune")}
 else if(th==="classic"){r.classList.add("classic")}
 if(p.headFont)r.dataset.head=String(p.headFont);

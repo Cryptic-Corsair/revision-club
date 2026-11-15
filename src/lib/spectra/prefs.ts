@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { pickDarkMood } from "./dark-mood";
+import { DARK_MOOD_COUNT, pickDarkMood } from "./dark-mood";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · site preferences
@@ -277,6 +277,16 @@ export interface Prefs {
   dots: boolean;
   /** floating blobs, marquees, wiggles */
   motion: boolean;
+  /** the night lab's palette index (0–3) — CACHED, not calendared.
+      Stamped into the save when the visitor picks Night (and at
+      load() for older saves that predate the field), then it never
+      moves on its own: the sky they last saw is the sky that keeps
+      rendering until they change the theme again — a re-selection
+      of Night stamps a fresh mood. Absent on brand-new saves until
+      a dark pick stamps it; consumers fall back to today's pick so
+      a save from before this field renders the same shade it
+      always did on its stamping day. */
+  mood?: number;
 }
 
 export const DEFAULT_PREFS: Prefs = {
@@ -323,6 +333,12 @@ type StoredPrefs = Partial<Prefs> & { zoom?: unknown; v?: unknown };
    script in layout.tsx in the same commit. */
 const PREFS_VERSION = 3;
 
+/* the night wardrobe's range guard — any finite number lands on a
+   valid mood index (0–DARK_MOOD_COUNT-1) */
+function clampMood(m: number): number {
+  return ((Math.floor(m) % DARK_MOOD_COUNT) + DARK_MOOD_COUNT) % DARK_MOOD_COUNT;
+}
+
 function sanitize(p: StoredPrefs): Prefs {
   const out: Prefs = { ...DEFAULT_PREFS };
   if (
@@ -337,13 +353,15 @@ function sanitize(p: StoredPrefs): Prefs {
     out.theme = "classic";
   if (p.iface === "editorial" || p.iface === "gallery") out.iface = p.iface;
   /* classic is the gallery's house lab — the document room doesn't
-     wear it. A saved editorial+classic (or a Classic visitor who
-     switches to the Document reader) reads as Light, the nearest
-     daylight lab. The pre-paint script in layout.tsx applies the
-     same coercion — the two must agree or the first paint re-flows
-     after hydration. Switching back to Cards leaves you on Light;
-     picking Classic again is one tap. */
-  if (out.iface === "editorial" && out.theme === "classic") out.theme = "light";
+     wear it. A saved editorial+classic DISPLAYS as Light (the
+     nearest daylight lab) through effectiveLab(), but the stored
+     theme is never rewritten: the lab a visitor picked is theirs
+     until they pick a different one. The pre-paint script in
+     layout.tsx applies the same display coercion — the two must
+     agree or the first paint re-flows after hydration. Switching
+     back to Cards puts their Classic straight back on, no re-pick
+     needed. (This used to coerce the SAVE itself — opening the
+     Document reader silently deleted a Classic pick.) */
   /* the retired rooms dress rides on as the gallery — a saved
      "rooms" (or anything unrecognisable) falls to the default,
      which is the gallery itself */
@@ -389,6 +407,10 @@ function sanitize(p: StoredPrefs): Prefs {
   if (p.bodyFont === "nunito" || p.bodyFont === "quicksand") out.bodyFont = p.bodyFont;
   if (typeof p.dots === "boolean") out.dots = p.dots;
   if (typeof p.motion === "boolean") out.motion = p.motion;
+  /* the cached night mood — clamped into the wardrobe range; junk
+     reads as "not stamped yet" and today's pick applies instead */
+  if (typeof p.mood === "number" && Number.isFinite(p.mood))
+    out.mood = clampMood(p.mood);
   if (Array.isArray(p.accents)) {
     const picked = new Set<AccentId>();
     for (const a of p.accents) if (ACCENT_IDS.includes(a)) picked.add(a);
@@ -425,12 +447,22 @@ function load() {
     const raw = window.localStorage.getItem(KEY);
     if (raw) {
       state = sanitize(JSON.parse(raw));
+      /* the mood cache's migration stamp — a Night visitor whose
+         save predates the field gets today's pick written in, so
+         the sky they are looking at right now is the one that
+         keeps rendering from here on. One write, on the first load
+         that notices; every later load reads the cached mood. */
+      if (state.theme === "dark" && typeof state.mood !== "number") {
+        state = { ...state, mood: pickDarkMood() };
+        persist();
+      }
     } else {
       /* first run — honour the old theme key if it's there.
          A stored "hybrid" (the retired third lab) reads as classic,
          its direct heir; everything else starts on the default. */
       const legacy = window.localStorage.getItem("rc-theme");
-      if (legacy === "dark") state = { ...state, theme: "dark" };
+      if (legacy === "dark")
+        state = { ...state, theme: "dark", mood: pickDarkMood() };
       /* the screen-aware factory rung AND its type vector — the
          sliders read the preset the visitor starts on. Only a
          factory setting: the first rung you pick yourself is kept
@@ -476,19 +508,29 @@ function paintChrome(root: HTMLElement) {
 export function applyPrefs(p: Prefs) {
   if (typeof document === "undefined") return;
   const root = document.documentElement;
-  /* the two night rooms both wear .dark — every dark: utility in the
-     wardrobe keys off it — and the dune lab re-tints the tokens on
-     top with .dune */
-  root.classList.toggle("dark", p.theme === "dark" || p.theme === "dune");
-  root.classList.toggle("dune", p.theme === "dune");
-  root.classList.toggle("classic", p.theme === "classic");
+  /* the lab the page wears — the display lab (a saved editorial+
+     classic wears light here while the save keeps classic; see
+     effectiveLab). The two night rooms both wear .dark — every
+     dark: utility in the wardrobe keys off it — and the dune lab
+     re-tints the tokens on top with .dune */
+  const lab = effectiveLab(p);
+  root.classList.toggle("dark", lab === "dark" || lab === "dune");
+  root.classList.toggle("dune", lab === "dune");
+  root.classList.toggle("classic", lab === "classic");
   /* the interface axis — CSS may micro-dress chrome off
      html[data-iface="editorial"]; the component twins read the pref
      from the store, not the dataset */
   root.dataset.iface = p.iface;
-  /* only the night lab wears today's roast; dune's chocolate room is
-     a fixed signature, and light & classic keep their daylight tokens */
-  if (p.theme === "dark") root.dataset.mood = String(pickDarkMood());
+  /* only the night lab wears the CACHED mood — the palette the
+     visitor last saw, stamped at their last Night pick; not
+     stamped yet (brand-new save) it falls back to today's pick,
+     which load()/setPrefs() then write in. Dune's chocolate room
+     is a fixed signature, and light & classic keep their daylight
+     tokens. */
+  if (lab === "dark")
+    root.dataset.mood = String(
+      typeof p.mood === "number" ? p.mood : pickDarkMood(),
+    );
   else delete root.dataset.mood;
   root.dataset.head = p.headFont;
   root.dataset.body = p.bodyFont;
@@ -524,6 +566,12 @@ export function setPrefs(patch: Partial<Prefs>) {
      only load()'s raw storage read can take the legacy migration */
   const next = sanitize({ ...state, ...patch, v: PREFS_VERSION });
   const themeFlip = next.theme !== state.theme;
+  /* the mood stamp — picking Night writes the sky they just chose
+     into the save; re-picking Night is a fresh pick, so it stamps
+     a fresh mood. An already-stamped save keeps its mood no matter
+     what else changes (the calendar never rotates it). */
+  if (next.theme === "dark" && (themeFlip || typeof next.mood !== "number"))
+    next.mood = pickDarkMood();
   state = next;
   persist();
   applyPrefs(state);
@@ -557,28 +605,54 @@ export function currentAccents(): AccentId[] {
   return state.accents;
 }
 
+/** The lab the page actually WEARS. Classic is the Cards reader's
+    house lab — the Document reader doesn't offer it — so a saved
+    editorial+classic displays as Light, the nearest daylight lab.
+    The stored theme is untouched: this is a display coercion only,
+    mirrored by the pre-paint script in layout.tsx (the two must
+    agree or the first paint re-flows). Everything that colours a
+    decision from the active lab — accent helpers, theme chips, the
+    pickers' selected state — reads THIS, not the raw pref, so the
+    chrome always agrees with the classes on <html>. */
+export function effectiveLab(p: Pick<Prefs, "theme" | "iface">): Lab {
+  return p.iface === "editorial" && p.theme === "classic" ? "light" : p.theme;
+}
+
 /** The active lab for render-time, interface-scoped colour decisions. */
 export function currentLab(): Lab {
-  return state.theme;
+  return effectiveLab(state);
 }
 
 /* ————— store plumbing ————— */
 
+let storageBound = false;
+
+function onStorage(e: StorageEvent) {
+  if (e.key !== KEY && e.key !== null) return;
+  state = DEFAULT_PREFS;
+  hydrated = false;
+  load();
+  applyPrefs(state);
+  emit();
+}
+
 function subscribe(cb: () => void) {
   load();
   listeners.add(cb);
-  const onStorage = (e: StorageEvent) => {
-    if (e.key !== KEY && e.key !== null) return;
-    state = DEFAULT_PREFS;
-    hydrated = false;
-    load();
-    applyPrefs(state);
-    emit();
-  };
-  window.addEventListener("storage", onStorage);
+  /* ONE module-level storage listener behind the subscriber count —
+     every usePrefs() consumer used to bind its own copy, so a
+     cross-tab event ran the same reload+apply once per hook on the
+     page. Same semantics, one pass. */
+  if (!storageBound) {
+    window.addEventListener("storage", onStorage);
+    storageBound = true;
+  }
   return () => {
     listeners.delete(cb);
-    window.removeEventListener("storage", onStorage);
+    if (storageBound && listeners.size === 0) {
+      window.removeEventListener("storage", onStorage);
+      storageBound = false;
+    }
   };
 }
 
@@ -607,9 +681,10 @@ export const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic"];
 /* the labs a given interface offers. Classic is the Cards reader's
    house lab — espresso rooms cut for the white-wall dress — so the
    Document reader doesn't offer it: its theme cards list Light,
-   Night and Dune only, and sanitize() lands any saved Document+
-   classic on Light. Both theme pickers (the navbar dropdown and
-   the customize panel) read their order from here. */
+   Night and Dune only, and effectiveLab() displays a saved
+   Document+classic as Light while the save keeps Classic for the
+   Cards reader. Both theme pickers (the navbar dropdown and the
+   customize panel) read their order from here. */
 export function labOrderFor(iface: Iface): Lab[] {
   return iface === "editorial" ? LAB_ORDER.filter((l) => l !== "classic") : LAB_ORDER;
 }

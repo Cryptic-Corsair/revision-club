@@ -15,6 +15,7 @@ import {
   SCALES,
   SPEC_DENSITIES,
   SPEC_HEIGHTS,
+  effectiveLab,
   matchPreset,
   setPrefs,
   uniformVector,
@@ -535,7 +536,10 @@ export function CustomizePanel({
   }, [open, onClose]);
 
   const pickLab = (lab: Lab) => {
-    if (lab === prefs.theme) return;
+    /* the picker reads the lab the page WEARS (a saved Document+
+       classic wears Light) — tapping the worn lab is a no-op, not a
+       rewrite of the stored pick */
+    if (lab === effectiveLab(prefs)) return;
     setPrefs({ theme: lab });
   };
 
@@ -558,8 +562,11 @@ export function CustomizePanel({
   const advTuned = matchedScale === null;
   const advCount = ADV_ROLES.filter((r) => Math.abs(prefs.type[r.key] - refK) > PRESET_EPSILON).length;
   useEffect(() => {
+    /* deliberately [open] only — the disclosure opens folded→out on
+       open when the mix is custom; advTuned changing mid-session is
+       handled by the sliders' own handlers */
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (advTuned) setAdvOpen(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   return (
@@ -699,7 +706,7 @@ export function CustomizePanel({
               <PanelSection title="Appearance">
                 <div className="grid grid-cols-2 gap-2.5">
                   {labOptions.map((l) => {
-                    const active = prefs.theme === l;
+                    const active = effectiveLab(prefs) === l;
                     return (
                       <button
                         key={l}
