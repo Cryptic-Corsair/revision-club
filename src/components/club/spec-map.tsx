@@ -470,7 +470,7 @@ export function SpecMapTrigger() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -8, opacity: 0 }}
             transition={{ duration: 0.14 }}
-            className="grid place-items-center font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-bold tracking-tight text-[color:var(--spec-accent)] tabular-nums"
+            className="grid place-items-center font-display text-[calc(10.5px*var(--ts-other))] font-bold tracking-tight text-[color:var(--spec-accent)] tabular-nums"
           >
             {open ? (
               <ListChecks className="h-[calc(18px*var(--ui-scale))] w-[calc(18px*var(--ui-scale))]" />
@@ -584,16 +584,16 @@ export function SpecMapTrigger() {
                           style={{ background: "var(--spec-accent)" }}
                         />
                         <span
-                          className="shrink-0 font-display text-[calc(11px*var(--ui-scale)*var(--type-other))] font-bold tracking-[0.16em] uppercase"
+                          className="shrink-0 font-display text-[calc(11px*var(--ts-other))] font-bold tracking-[0.16em] uppercase"
                           style={{ color: "var(--spec-accent)" }}
                         >
                           Spec map
                         </span>
-                        <span className="min-w-0 truncate font-display text-[calc(12px*var(--ui-scale)*var(--type-other))] font-bold tracking-[0.08em] uppercase text-ink">
+                        <span className="min-w-0 truncate font-display text-[calc(12px*var(--ts-other))] font-bold tracking-[0.08em] uppercase text-ink">
                           {label}
                         </span>
                       </div>
-                      <p className="mt-1.5 truncate text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-semibold text-ink-soft">
+                      <p className="mt-1.5 truncate text-[calc(12.5px*var(--ts-other))] font-semibold text-ink-soft">
                         {q !== ""
                           ? `${shown.length} of ${sections.length} match — tap one to hop`
                           : `Stop ${idx + 1} of ${sections.length} — tap one to hop`}
@@ -682,7 +682,7 @@ export function SpecMapTrigger() {
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Find a stop — 8A, rate, equilibrium…"
                         aria-label="Filter stops by spec number or title"
-                        className="spec-find h-10 w-full rounded-[calc(12px*var(--ui-scale))] border border-ink/[0.13] bg-paper pr-9 pl-10 text-[calc(13.5px*var(--ui-scale)*var(--type-body))] font-semibold text-ink outline-none transition-colors placeholder:font-semibold placeholder:text-ink-faint"
+                        className="spec-find h-10 w-full rounded-[calc(12px*var(--ui-scale))] border border-ink/[0.13] bg-paper pr-9 pl-10 text-[calc(13.5px*var(--ts-body))] font-semibold text-ink outline-none transition-colors placeholder:font-semibold placeholder:text-ink-faint"
                       />
                       {query !== "" && (
                         <button
@@ -762,7 +762,7 @@ export function SpecMapTrigger() {
                         >
                           <span className="flex w-full items-baseline justify-between gap-2">
                             <span
-                              className="font-display text-[calc(13px*var(--ui-scale)*var(--type-body))] leading-none font-bold tracking-tight tabular-nums"
+                              className="font-display text-[calc(13px*var(--ts-body))] leading-none font-bold tracking-tight tabular-nums"
                               style={{
                                 color: here
                                   ? "var(--spec-accent-ink)"
@@ -773,7 +773,7 @@ export function SpecMapTrigger() {
                             </span>
                             {here && (
                               <span
-                                className="shrink-0 font-display text-[calc(8.5px*var(--ui-scale)*var(--type-other))] leading-none font-bold tracking-[0.18em] uppercase"
+                                className="shrink-0 font-display text-[calc(8.5px*var(--ts-other))] leading-none font-bold tracking-[0.18em] uppercase"
                                 style={{
                                   color: "var(--spec-accent-ink)",
                                   opacity: 0.85,
@@ -784,7 +784,7 @@ export function SpecMapTrigger() {
                             )}
                           </span>
                           <span
-                            className="line-clamp-2 text-[calc(12px*var(--ui-scale)*var(--type-other))] leading-[1.4] font-semibold text-ink"
+                            className="line-clamp-2 text-[calc(12px*var(--ts-other))] leading-[1.4] font-semibold text-ink"
                             style={
                               here ? { color: "var(--spec-accent-ink)" } : undefined
                             }
@@ -796,10 +796,10 @@ export function SpecMapTrigger() {
                     </m.div>
                     {q !== "" && shown.length === 0 && (
                       <div className="px-6 py-10 text-center">
-                        <p className="font-display text-[calc(15px*var(--ui-scale)*var(--type-body))] font-semibold text-ink">
+                        <p className="font-display text-[calc(15px*var(--ts-body))] font-semibold text-ink">
                           No stop matches “{query.trim()}”
                         </p>
-                        <p className="mt-1 text-[calc(12px*var(--ui-scale)*var(--type-other))] font-bold text-ink-faint">
+                        <p className="mt-1 text-[calc(12px*var(--ts-other))] font-bold text-ink-faint">
                           Try a spec number like 8A, or a word from a
                           section title.
                         </p>
@@ -824,13 +824,13 @@ export function SpecMapTrigger() {
                     >
                       <ArrowLeft className="h-4 w-4 shrink-0" strokeWidth={2.2} />
                       <span
-                        className="font-display text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-bold tabular-nums"
+                        className="font-display text-[calc(12.5px*var(--ts-other))] font-bold tabular-nums"
                         style={{ color: "var(--spec-accent)" }}
                       >
                         {idx > 0 ? sections[idx - 1].spec : "—"}
                       </span>
                       <span
-                        className="hidden max-w-[calc(150px*var(--ui-scale))] truncate text-[calc(12px*var(--ui-scale)*var(--type-other))] font-semibold sm:inline"
+                        className="hidden max-w-[calc(150px*var(--ui-scale))] truncate text-[calc(12px*var(--ts-other))] font-semibold sm:inline"
                         style={roomy ? { maxWidth: 260 } : undefined}
                       >
                         {idx > 0 ? sections[idx - 1].title : ""}
@@ -838,7 +838,7 @@ export function SpecMapTrigger() {
                     </button>
                     <span
                       aria-hidden
-                      className="hidden shrink-0 font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-bold tracking-[0.16em] text-ink-faint tabular-nums md:block"
+                      className="hidden shrink-0 font-display text-[calc(10.5px*var(--ts-other))] font-bold tracking-[0.16em] text-ink-faint tabular-nums md:block"
                     >
                       {idx + 1} / {sections.length}
                     </span>
@@ -856,13 +856,13 @@ export function SpecMapTrigger() {
                       className="flex h-10 min-w-0 cursor-pointer items-center gap-2 rounded-full border border-ink/[0.13] bg-paper px-3.5 text-ink-soft transition-colors hover:border-ink/25 hover:text-ink disabled:cursor-default disabled:opacity-35 disabled:hover:border-ink/[0.13] disabled:hover:text-ink-soft"
                     >
                       <span
-                        className="hidden max-w-[calc(150px*var(--ui-scale))] truncate text-[calc(12px*var(--ui-scale)*var(--type-other))] font-semibold sm:inline"
+                        className="hidden max-w-[calc(150px*var(--ui-scale))] truncate text-[calc(12px*var(--ts-other))] font-semibold sm:inline"
                         style={roomy ? { maxWidth: 260 } : undefined}
                       >
                         {idx < sections.length - 1 ? sections[idx + 1].title : ""}
                       </span>
                       <span
-                        className="font-display text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-bold tabular-nums"
+                        className="font-display text-[calc(12.5px*var(--ts-other))] font-bold tabular-nums"
                         style={{ color: "var(--spec-accent)" }}
                       >
                         {idx < sections.length - 1 ? sections[idx + 1].spec : "—"}

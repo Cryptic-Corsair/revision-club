@@ -366,21 +366,21 @@ export function FigFillDemo({ accent = "#FF6B6B" }: { accent?: string }) {
             <div key={box} className="flex flex-col items-center gap-2">
               <m.div
                 layout
-                className="grid h-16 w-16 place-items-center rounded-[calc(18px*var(--ui-scale))] bg-paper font-display text-[calc(30px*var(--ui-scale)*var(--type-heading))] font-bold"
+                className="grid h-16 w-16 place-items-center rounded-[calc(18px*var(--ui-scale))] bg-paper font-display text-[calc(30px*var(--ts-heading))] font-bold"
                 style={{ boxShadow: "inset 0 0 0 3px color-mix(in oklab, var(--color-ink) 10%, transparent), 0 4px 0 color-mix(in oklab, var(--color-ink) 7%, transparent)" }}
                 animate={up && down ? { rotate: [0, -3, 3, 0] } : {}}
               >
-                {up && <span className="text-[calc(26px*var(--ui-scale)*var(--type-heading))]" style={{ color: shade(accent) }}>↑</span>}
-                {up && down && <span className="ml-0.5 text-[calc(26px*var(--ui-scale)*var(--type-heading))]" style={{ color: "#12B886" }}>↓</span>}
+                {up && <span className="text-[calc(26px*var(--ts-heading))]" style={{ color: shade(accent) }}>↑</span>}
+                {up && down && <span className="ml-0.5 text-[calc(26px*var(--ts-heading))]" style={{ color: "#12B886" }}>↓</span>}
               </m.div>
-              {box === 0 && <span className="font-display text-[calc(12px*var(--ui-scale)*var(--type-other))] font-bold tracking-wide text-ink-faint">2p</span>}
+              {box === 0 && <span className="font-display text-[calc(12px*var(--ts-other))] font-bold tracking-wide text-ink-faint">2p</span>}
             </div>
           );
         })}
       </div>
       <div className="mt-5 flex flex-col items-center gap-3">
-        <p className="text-center text-[calc(14.5px*var(--ui-scale)*var(--type-body))] font-bold text-ink">{status}</p>
-        <p className="text-center text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-bold text-ink-faint">{count}/6 electrons placed</p>
+        <p className="text-center text-[calc(14.5px*var(--ts-body))] font-bold text-ink">{status}</p>
+        <p className="text-center text-[calc(12.5px*var(--ts-other))] font-bold text-ink-faint">{count}/6 electrons placed</p>
         <div className="flex gap-2.5">
           {!full ? (
             <m.button
@@ -388,7 +388,7 @@ export function FigFillDemo({ accent = "#FF6B6B" }: { accent?: string }) {
               onClick={() => setCount((c) => Math.min(6, c + 1))}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(14px*var(--ui-scale)*var(--type-body))] font-semibold text-white"
+              className="inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(14px*var(--ts-body))] font-semibold text-white"
               style={{ background: accent, boxShadow: `0 4px 0 ${shade(accent)}` }}
             >
               +1 electron
@@ -399,7 +399,7 @@ export function FigFillDemo({ accent = "#FF6B6B" }: { accent?: string }) {
               onClick={() => setCount(0)}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full bg-ink/5 px-5 py-2.5 font-display text-[calc(14px*var(--ui-scale)*var(--type-body))] font-semibold text-ink-soft"
+              className="inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full bg-ink/5 px-5 py-2.5 font-display text-[calc(14px*var(--ts-body))] font-semibold text-ink-soft"
             >
               <RotateCcw className="h-4 w-4" /> Empty the sub-shell
             </m.button>
@@ -487,7 +487,7 @@ export function BoxNotation({
                 </div>
               ))}
             </div>
-            <span className="font-mono text-[calc(11.5px*var(--ui-scale)*var(--type-other))] font-bold text-ink-soft">
+            <span className="font-mono text-[calc(11.5px*var(--ts-other))] font-bold text-ink-soft">
               {p.sub}
               {p.e}
             </span>
@@ -502,7 +502,7 @@ export function FigBoxesC({ accent = "#FF6B6B" }: { accent?: string }) {
   const parts = buildConfig(6);
   return (
     <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
-      <div className="mb-3 font-display text-[calc(15px*var(--ui-scale)*var(--type-body))] font-semibold text-ink">
+      <div className="mb-3 font-display text-[calc(15px*var(--ts-body))] font-semibold text-ink">
         Carbon (Z = 6): <span className="font-mono">1s² 2s² 2p²</span>
       </div>
       <BoxNotation parts={parts} accent={accent} />
@@ -514,7 +514,7 @@ export function FigBoxesS({ accent = "#FF6B6B" }: { accent?: string }) {
   const parts = buildConfig(16);
   return (
     <div className="rounded-[calc(26px*var(--ui-scale))] bg-paper p-5 puff sm:p-6">
-      <div className="mb-3 font-display text-[calc(15px*var(--ui-scale)*var(--type-body))] font-semibold text-ink">
+      <div className="mb-3 font-display text-[calc(15px*var(--ts-body))] font-semibold text-ink">
         Sulfur (Z = 16): <span className="font-mono">1s² 2s² 2p⁶ 3s² 3p⁴</span>
       </div>
       <BoxNotation parts={parts} accent={accent} />

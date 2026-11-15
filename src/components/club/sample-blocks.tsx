@@ -33,7 +33,7 @@ export function EditorialLabel({ children }: { children: ReactNode }) {
         className="h-[calc(3px*var(--ui-scale))] w-[calc(14px*var(--ui-scale))] shrink-0 rounded-full"
         style={{ background: "var(--legal-rust-soft)" }}
       />
-      <span className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
+      <span className="font-display text-[calc(10.5px*var(--ts-other))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
         {children}
       </span>
     </div>
@@ -53,7 +53,7 @@ export function SampleBlockView({
   switch (b.k) {
     case "p":
       return (
-        <p className="max-w-[68ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.9] text-ink-soft">
+        <p className="max-w-[68ch] text-[calc(14.5px*var(--ts-body))] leading-[1.9] text-ink-soft">
           <Fmt text={b.text} />
         </p>
       );
@@ -66,7 +66,7 @@ export function SampleBlockView({
             className="h-[calc(3px*var(--ui-scale))] w-[calc(14px*var(--ui-scale))] shrink-0 rounded-full"
             style={{ background: "var(--legal-rust-soft)" }}
           />
-          <h4 className="font-display text-[calc(18px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
+          <h4 className="font-display text-[calc(18px*var(--ts-sub))] font-semibold tracking-tight text-ink">
             <Fmt text={b.text} />
           </h4>
         </div>
@@ -78,7 +78,7 @@ export function SampleBlockView({
           {b.items.map((t, i) => (
             <li
               key={i}
-              className="flex items-start gap-3 text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.85] text-ink-soft"
+              className="flex items-start gap-3 text-[calc(14.5px*var(--ts-body))] leading-[1.85] text-ink-soft"
             >
               <span
                 aria-hidden
@@ -100,10 +100,10 @@ export function SampleBlockView({
           className="max-w-[68ch] border-l-2 pl-4 sm:pl-5"
           style={{ borderColor: "var(--legal-rust-soft)" }}
         >
-          <span className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
+          <span className="font-display text-[calc(10.5px*var(--ts-other))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
             {b.label}
           </span>
-          <p className="mt-1.5 text-[calc(13.5px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
+          <p className="mt-1.5 text-[calc(13.5px*var(--ts-body))] leading-[1.8] text-ink-soft">
             <Fmt text={b.text} />
           </p>
         </aside>
@@ -113,10 +113,10 @@ export function SampleBlockView({
       return (
         <div className="legal-card max-w-[68ch] rounded-[calc(18px*var(--ui-scale))] px-5 py-4">
           <EditorialLabel>Key term</EditorialLabel>
-          <h4 className="mt-2 font-display text-[calc(17px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
+          <h4 className="mt-2 font-display text-[calc(17px*var(--ts-sub))] font-semibold tracking-tight text-ink">
             <Fmt text={b.term} />
           </h4>
-          <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
+          <p className="mt-1.5 text-[calc(14.5px*var(--ts-body))] leading-[1.8] text-ink-soft">
             <Fmt text={b.text} />
           </p>
         </div>
@@ -126,7 +126,7 @@ export function SampleBlockView({
     case "eq":
       return (
         <div className="max-w-[68ch] border-y border-ink/10 py-5">
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-display text-[calc(16px*var(--ui-scale)*var(--type-body))] font-semibold tracking-tight text-ink">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-display text-[calc(16px*var(--ts-body))] font-semibold tracking-tight text-ink">
             {b.eq.split(/\s{2,}/).map((part, i) => (
               <span key={i}>
                 <Fmt text={part.trim()} />
@@ -134,7 +134,7 @@ export function SampleBlockView({
             ))}
           </div>
           {b.note && (
-            <p className="mt-2.5 text-center text-[calc(13px*var(--ui-scale)*var(--type-body))] italic leading-[1.7] text-ink-soft">
+            <p className="mt-2.5 text-center text-[calc(13px*var(--ts-body))] italic leading-[1.7] text-ink-soft">
               <Fmt text={b.note} />
             </p>
           )}
@@ -180,11 +180,11 @@ export function SampleBlockView({
         <aside className="max-w-[68ch] border-y border-ink/10 py-4">
           <div className="flex items-center gap-2.5">
             <Sparkles className="h-3.5 w-3.5 shrink-0 text-[var(--legal-rust)]" />
-            <span className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
+            <span className="font-display text-[calc(10.5px*var(--ts-other))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
               Key idea
             </span>
           </div>
-          <p className="mt-2 text-[calc(14.5px*var(--ui-scale)*var(--type-body))] italic leading-[1.8] text-ink">
+          <p className="mt-2 text-[calc(14.5px*var(--ts-body))] italic leading-[1.8] text-ink">
             <Fmt text={b.text} />
           </p>
         </aside>
@@ -222,7 +222,7 @@ export function EditorialTable({
             className="mt-[calc(12px*var(--ui-scale))] h-[calc(4px*var(--ui-scale))] w-[calc(22px*var(--ui-scale))] shrink-0 rounded-full"
             style={{ background: accent }}
           />
-          <div className="min-w-0 font-display text-[calc(20px*var(--ui-scale)*var(--type-sub))] leading-snug font-semibold text-ink">
+          <div className="min-w-0 font-display text-[calc(20px*var(--ts-sub))] leading-snug font-semibold text-ink">
             <Fmt text={caption} />
           </div>
         </div>
@@ -241,7 +241,7 @@ export function EditorialTable({
                 {head.map((h, i) => (
                   <th
                     key={i}
-                    className="px-4 py-3 font-display text-[calc(11px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.12em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
+                    className="px-4 py-3 font-display text-[calc(11px*var(--ts-other))] font-semibold tracking-[0.12em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
                   >
                     <Fmt text={h} />
                   </th>
@@ -265,7 +265,7 @@ export function EditorialTable({
                   {r.map((c, j) => (
                     <td
                       key={j}
-                      className={`px-4 py-3 align-top text-[calc(13.5px*var(--ui-scale)*var(--type-body))] leading-[1.65] sm:px-5 ${j === 0 ? "font-semibold text-ink" : "text-ink-soft"}`}
+                      className={`px-4 py-3 align-top text-[calc(13.5px*var(--ts-body))] leading-[1.65] sm:px-5 ${j === 0 ? "font-semibold text-ink" : "text-ink-soft"}`}
                     >
                       <Fmt text={c} />
                     </td>
@@ -301,21 +301,21 @@ function EditorialWorked({
   return (
     <div className="legal-card max-w-[68ch] rounded-[calc(18px*var(--ui-scale))] p-5 sm:p-6">
       <EditorialLabel>Worked example</EditorialLabel>
-      <h4 className="mt-2 font-display text-[calc(17px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
+      <h4 className="mt-2 font-display text-[calc(17px*var(--ts-sub))] font-semibold tracking-tight text-ink">
         <Fmt text={bare} />
       </h4>
-      <p className="mt-2 text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink">
+      <p className="mt-2 text-[calc(14.5px*var(--ts-body))] leading-[1.8] text-ink">
         <Fmt text={question} />
       </p>
       <ol className="mt-4 flex flex-col gap-2 border-t border-ink/10 pt-4">
         {steps.map((s, i) => (
           <li
             key={i}
-            className="flex items-start gap-3 text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft"
+            className="flex items-start gap-3 text-[calc(14px*var(--ts-body))] leading-[1.8] text-ink-soft"
           >
             <span
               aria-hidden
-              className="w-[calc(18px*var(--ui-scale))] shrink-0 pt-[calc(3px*var(--ui-scale))] font-display text-[calc(11px*var(--ui-scale)*var(--type-other))] font-bold text-[var(--legal-rust)]"
+              className="w-[calc(18px*var(--ui-scale))] shrink-0 pt-[calc(3px*var(--ui-scale))] font-display text-[calc(11px*var(--ts-other))] font-bold text-[var(--legal-rust)]"
             >
               {String(i + 1).padStart(2, "0")}
             </span>
@@ -326,10 +326,10 @@ function EditorialWorked({
         ))}
       </ol>
       <div className="mt-4 flex items-start gap-3.5 border-t border-ink/10 pt-4">
-        <span className="shrink-0 pt-[calc(4px*var(--ui-scale))] font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
+        <span className="shrink-0 pt-[calc(4px*var(--ui-scale))] font-display text-[calc(10.5px*var(--ts-other))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
           Answer
         </span>
-        <p className="text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.75] font-semibold text-ink">
+        <p className="text-[calc(14.5px*var(--ts-body))] leading-[1.75] font-semibold text-ink">
           <Fmt text={answer} />
         </p>
       </div>
@@ -361,7 +361,7 @@ function EditorialSteps({
             className="h-[calc(3px*var(--ui-scale))] w-[calc(14px*var(--ui-scale))] shrink-0 rounded-full"
             style={{ background: "var(--legal-rust-soft)" }}
           />
-          <h4 className="font-display text-[calc(16px*var(--ui-scale)*var(--type-body))] font-semibold tracking-tight text-ink">
+          <h4 className="font-display text-[calc(16px*var(--ts-body))] font-semibold tracking-tight text-ink">
             <Fmt text={caption} />
           </h4>
         </div>
@@ -383,15 +383,15 @@ function EditorialSteps({
             >
               <span
                 aria-hidden
-                className="w-[calc(18px*var(--ui-scale))] shrink-0 pt-[calc(2px*var(--ui-scale))] font-display text-[calc(11px*var(--ui-scale)*var(--type-other))] font-bold text-[var(--legal-rust)]"
+                className="w-[calc(18px*var(--ui-scale))] shrink-0 pt-[calc(2px*var(--ui-scale))] font-display text-[calc(11px*var(--ts-other))] font-bold text-[var(--legal-rust)]"
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className="min-w-0">
-                <p className="font-display text-[calc(14.5px*var(--ui-scale)*var(--type-body))] font-semibold text-ink">
+                <p className="font-display text-[calc(14.5px*var(--ts-body))] font-semibold text-ink">
                   <Fmt text={bare} />
                 </p>
-                <p className="mt-1 text-[calc(13.5px*var(--ui-scale)*var(--type-body))] leading-[1.7] text-ink-soft">
+                <p className="mt-1 text-[calc(13.5px*var(--ts-body))] leading-[1.7] text-ink-soft">
                   <Fmt text={it.text} />
                 </p>
               </div>
@@ -436,7 +436,7 @@ function EditorialFigure({
         </div>
       )}
       {caption && (
-        <figcaption className="mx-auto mt-3 max-w-[58ch] text-center text-[calc(12.5px*var(--ui-scale)*var(--type-other))] leading-[1.65] text-ink-faint">
+        <figcaption className="mx-auto mt-3 max-w-[58ch] text-center text-[calc(12.5px*var(--ts-other))] leading-[1.65] text-ink-faint">
           <Fmt text={caption} />
         </figcaption>
       )}

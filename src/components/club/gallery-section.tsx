@@ -58,7 +58,7 @@ export function GalleryLabel({ children }: { children: ReactNode }) {
         style={{ background: GAL_ACCENT }}
       />
       <span
-        className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.22em] uppercase"
+        className="font-display text-[calc(10.5px*var(--ts-other))] font-semibold tracking-[0.22em] uppercase"
         style={{ color: GAL_ACCENT }}
       >
         {children}
@@ -80,7 +80,7 @@ export function GalleryBlockView({
   switch (b.k) {
     case "p":
       return (
-        <p className="max-w-[var(--gal-measure)] text-[calc(15px*var(--ui-scale)*var(--type-body))] leading-[1.9] text-ink-soft">
+        <p className="max-w-[var(--gal-measure)] text-[calc(15px*var(--ts-body))] leading-[1.9] text-ink-soft">
           <Fmt text={b.text} />
         </p>
       );
@@ -94,7 +94,7 @@ export function GalleryBlockView({
             className="h-[2px] w-[18px] shrink-0 rounded-full"
             style={{ background: accentSoft(75) }}
           />
-          <h4 className="font-display text-[calc(17.5px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-[-0.01em] text-ink">
+          <h4 className="font-display text-[calc(17.5px*var(--ts-sub))] font-semibold tracking-[-0.01em] text-ink">
             <Fmt text={b.text} />
           </h4>
         </div>
@@ -107,7 +107,7 @@ export function GalleryBlockView({
           {b.items.map((t, i) => (
             <li
               key={i}
-              className="flex items-start gap-3.5 text-[calc(15px*var(--ui-scale)*var(--type-body))] leading-[1.85] text-ink-soft"
+              className="flex items-start gap-3.5 text-[calc(15px*var(--ts-body))] leading-[1.85] text-ink-soft"
             >
               <span
                 aria-hidden
@@ -130,7 +130,7 @@ export function GalleryBlockView({
           style={{ borderColor: GAL_ACCENT }}
         >
           <GalleryLabel>{b.label}</GalleryLabel>
-          <p className="mt-2 text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
+          <p className="mt-2 text-[calc(14px*var(--ts-body))] leading-[1.8] text-ink-soft">
             <Fmt text={b.text} />
           </p>
         </aside>
@@ -153,10 +153,10 @@ export function GalleryBlockView({
           />
           <div className="bg-paper px-5 py-4 sm:px-6 sm:py-5">
             <GalleryLabel>Key term</GalleryLabel>
-            <h4 className="mt-2.5 font-display text-[calc(18px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-[-0.01em] text-ink">
+            <h4 className="mt-2.5 font-display text-[calc(18px*var(--ts-sub))] font-semibold tracking-[-0.01em] text-ink">
               <Fmt text={b.term} />
             </h4>
-            <p className="mt-1.5 text-[calc(15px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
+            <p className="mt-1.5 text-[calc(15px*var(--ts-body))] leading-[1.8] text-ink-soft">
               <Fmt text={b.text} />
             </p>
           </div>
@@ -171,7 +171,7 @@ export function GalleryBlockView({
           className="max-w-[var(--gal-measure)] border-y py-6"
           style={{ borderColor: hair(10) }}
         >
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-display text-[calc(16.5px*var(--ui-scale)*var(--type-body))] font-semibold tracking-[-0.01em] text-ink">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-display text-[calc(16.5px*var(--ts-body))] font-semibold tracking-[-0.01em] text-ink">
             {b.eq.split(/\s{2,}/).map((part, i) => (
               <span key={i}>
                 <Fmt text={part.trim()} />
@@ -179,7 +179,7 @@ export function GalleryBlockView({
             ))}
           </div>
           {b.note && (
-            <p className="mt-3 text-center text-[calc(13px*var(--ui-scale)*var(--type-body))] leading-[1.7] text-ink-faint">
+            <p className="mt-3 text-center text-[calc(13px*var(--ts-body))] leading-[1.7] text-ink-faint">
               <Fmt text={b.note} />
             </p>
           )}
@@ -214,7 +214,7 @@ export function GalleryBlockView({
           style={{ borderColor: GAL_ACCENT }}
         >
           <GalleryLabel>Key idea</GalleryLabel>
-          <p className="mt-2 font-display text-[calc(18px*var(--ui-scale)*var(--type-sub))] font-medium leading-[1.6] tracking-[-0.01em] text-ink">
+          <p className="mt-2 font-display text-[calc(18px*var(--ts-sub))] font-medium leading-[1.6] tracking-[-0.01em] text-ink">
             <Fmt text={b.text} />
           </p>
         </aside>
@@ -248,7 +248,7 @@ function GalleryTable({
             className="h-[2px] w-[14px] shrink-0 rounded-full"
             style={{ background: GAL_ACCENT }}
           />
-          <div className="min-w-0 font-display text-[calc(16px*var(--ui-scale)*var(--type-body))] font-semibold tracking-[-0.01em] text-ink">
+          <div className="min-w-0 font-display text-[calc(16px*var(--ts-body))] font-semibold tracking-[-0.01em] text-ink">
             <Fmt text={caption} />
           </div>
         </div>
@@ -271,7 +271,7 @@ function GalleryTable({
                 {head.map((h, i) => (
                   <th
                     key={i}
-                    className="px-4 py-3 font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.14em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
+                    className="px-4 py-3 font-display text-[calc(10.5px*var(--ts-other))] font-semibold tracking-[0.14em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
                   >
                     <Fmt text={h} />
                   </th>
@@ -294,7 +294,7 @@ function GalleryTable({
                   {r.map((c, j) => (
                     <td
                       key={j}
-                      className={`px-4 py-3 align-top text-[calc(13.5px*var(--ui-scale)*var(--type-body))] leading-[1.65] sm:px-5 ${j === 0 ? "font-semibold text-ink" : "text-ink-soft"}`}
+                      className={`px-4 py-3 align-top text-[calc(13.5px*var(--ts-body))] leading-[1.65] sm:px-5 ${j === 0 ? "font-semibold text-ink" : "text-ink-soft"}`}
                     >
                       <Fmt text={c} />
                     </td>
@@ -334,10 +334,10 @@ function GalleryWorked({
     >
       <div className="p-5 sm:p-6">
         <GalleryLabel>Worked example</GalleryLabel>
-        <h4 className="mt-2.5 font-display text-[calc(17.5px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-[-0.01em] text-ink">
+        <h4 className="mt-2.5 font-display text-[calc(17.5px*var(--ts-sub))] font-semibold tracking-[-0.01em] text-ink">
           <Fmt text={bare} />
         </h4>
-        <p className="mt-2 text-[calc(15px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink">
+        <p className="mt-2 text-[calc(15px*var(--ts-body))] leading-[1.8] text-ink">
           <Fmt text={question} />
         </p>
         <ol
@@ -352,12 +352,12 @@ function GalleryWorked({
             >
               <span
                 aria-hidden
-                className="w-[22px] shrink-0 pt-[calc(3px*var(--ui-scale))] font-display text-[calc(11px*var(--ui-scale)*var(--type-other))] font-semibold tabular-nums"
+                className="w-[22px] shrink-0 pt-[calc(3px*var(--ui-scale))] font-display text-[calc(11px*var(--ts-other))] font-semibold tabular-nums"
                 style={{ color: GAL_ACCENT }}
               >
                 {pad2(i + 1)}
               </span>
-              <span className="min-w-0 text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
+              <span className="min-w-0 text-[calc(14px*var(--ts-body))] leading-[1.8] text-ink-soft">
                 <Fmt text={s} />
               </span>
             </li>
@@ -368,12 +368,12 @@ function GalleryWorked({
           style={{ borderColor: hair(10) }}
         >
           <span
-            className="shrink-0 pt-[calc(4px*var(--ui-scale))] font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.22em] uppercase"
+            className="shrink-0 pt-[calc(4px*var(--ui-scale))] font-display text-[calc(10.5px*var(--ts-other))] font-semibold tracking-[0.22em] uppercase"
             style={{ color: GAL_ACCENT }}
           >
             Answer
           </span>
-          <p className="text-[calc(15px*var(--ui-scale)*var(--type-body))] leading-[1.75] font-semibold text-ink">
+          <p className="text-[calc(15px*var(--ts-body))] leading-[1.75] font-semibold text-ink">
             <Fmt text={answer} />
           </p>
         </div>
@@ -404,7 +404,7 @@ function GallerySteps({
             className="h-[2px] w-[18px] shrink-0 rounded-full"
             style={{ background: accentSoft(75) }}
           />
-          <h4 className="font-display text-[calc(16px*var(--ui-scale)*var(--type-body))] font-semibold tracking-[-0.01em] text-ink">
+          <h4 className="font-display text-[calc(16px*var(--ts-body))] font-semibold tracking-[-0.01em] text-ink">
             <Fmt text={caption} />
           </h4>
         </div>
@@ -427,16 +427,16 @@ function GallerySteps({
             >
               <span
                 aria-hidden
-                className="w-[22px] shrink-0 pt-[calc(2px*var(--ui-scale))] font-display text-[calc(11px*var(--ui-scale)*var(--type-other))] font-semibold tabular-nums"
+                className="w-[22px] shrink-0 pt-[calc(2px*var(--ui-scale))] font-display text-[calc(11px*var(--ts-other))] font-semibold tabular-nums"
                 style={{ color: GAL_ACCENT }}
               >
                 {pad2(i + 1)}
               </span>
               <div className="min-w-0">
-                <p className="font-display text-[calc(14.5px*var(--ui-scale)*var(--type-body))] font-semibold text-ink">
+                <p className="font-display text-[calc(14.5px*var(--ts-body))] font-semibold text-ink">
                   <Fmt text={bare} />
                 </p>
-                <p className="mt-1 text-[calc(13.5px*var(--ui-scale)*var(--type-body))] leading-[1.7] text-ink-soft">
+                <p className="mt-1 text-[calc(13.5px*var(--ts-body))] leading-[1.7] text-ink-soft">
                   <Fmt text={it.text} />
                 </p>
               </div>
@@ -472,7 +472,7 @@ function GalleryFigure({
     >
       <div className="flex items-center gap-3 px-4 pt-3.5 sm:px-5">
         <span
-          className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.22em] uppercase"
+          className="font-display text-[calc(10.5px*var(--ts-other))] font-semibold tracking-[0.22em] uppercase"
           style={{ color: GAL_ACCENT }}
         >
           Fig. {pad2(fig)}
@@ -494,7 +494,7 @@ function GalleryFigure({
           </div>
         )}
         {caption && (
-          <figcaption className="mx-auto mt-3.5 max-w-[58ch] text-center text-[calc(12.5px*var(--ui-scale)*var(--type-other))] leading-[1.65] text-ink-faint">
+          <figcaption className="mx-auto mt-3.5 max-w-[58ch] text-center text-[calc(12.5px*var(--ts-other))] leading-[1.65] text-ink-faint">
             <Fmt text={caption} />
           </figcaption>
         )}
@@ -534,16 +534,16 @@ export function GallerySectionView({
       <div className="flex items-start gap-4 sm:gap-6">
         <span
           aria-hidden
-          className="w-[calc(52px*var(--ui-scale))] shrink-0 font-display text-[calc(32px*var(--ui-scale)*var(--type-heading))] leading-[0.95] font-medium tracking-[-0.03em] tabular-nums select-none sm:text-[calc(40px*var(--ui-scale)*var(--type-heading))]"
+          className="w-[calc(52px*var(--ui-scale))] shrink-0 font-display text-[calc(32px*var(--ts-heading))] leading-[0.95] font-medium tracking-[-0.03em] tabular-nums select-none sm:text-[calc(40px*var(--ts-heading))]"
           style={{ color: accentSoft(85) }}
         >
           {pad2(index + 1)}
         </span>
         <div className="min-w-0 flex-1">
-          <span className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.22em] uppercase text-ink-faint">
+          <span className="font-display text-[calc(10.5px*var(--ts-other))] font-semibold tracking-[0.22em] uppercase text-ink-faint">
             Spec {section.spec}
           </span>
-          <h3 className="mt-1.5 font-display text-[calc(22px*var(--ui-scale)*var(--type-sub))] leading-[1.2] font-semibold tracking-[-0.02em] text-ink sm:text-[calc(25px*var(--ui-scale)*var(--type-sub))]">
+          <h3 className="mt-1.5 font-display text-[calc(22px*var(--ts-sub))] leading-[1.2] font-semibold tracking-[-0.02em] text-ink sm:text-[calc(25px*var(--ts-sub))]">
             {section.title}
           </h3>
         </div>
@@ -555,12 +555,12 @@ export function GallerySectionView({
         style={{ borderColor: GAL_ACCENT }}
       >
         <span
-          className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.22em] uppercase"
+          className="font-display text-[calc(10.5px*var(--ts-other))] font-semibold tracking-[0.22em] uppercase"
           style={{ color: GAL_ACCENT }}
         >
           From the specification
         </span>
-        <p className="mt-1.5 text-[calc(15.5px*var(--ui-scale)*var(--type-body))] leading-[1.75] text-ink italic">
+        <p className="mt-1.5 text-[calc(15.5px*var(--ts-body))] leading-[1.75] text-ink italic">
           <Fmt text={section.statement} />
         </p>
       </div>

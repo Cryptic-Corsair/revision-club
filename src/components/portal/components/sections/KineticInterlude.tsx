@@ -81,7 +81,7 @@ export function KineticInterlude({
           <motion.p
             style={{
               x: topTrackX,
-              fontSize: 'calc(clamp(1.85rem, 5.1vw, 4.65rem) * var(--type-heading))',
+              fontSize: 'calc(clamp(1.85rem, 5.1vw, 4.65rem) * var(--tch))',
               color: 'var(--ink)',
             }}
             className="text-balance font-display font-semibold leading-[1.12] sm:whitespace-nowrap"
@@ -106,7 +106,7 @@ export function KineticInterlude({
           <motion.p
             style={{
               x: bottomTrackX,
-              fontSize: 'calc(clamp(1.6rem, 4.15vw, 3.85rem) * var(--type-heading))',
+              fontSize: 'calc(clamp(1.6rem, 4.15vw, 3.85rem) * var(--tch))',
               color: 'var(--ink)',
             }}
             className="text-balance font-display font-semibold leading-[1.14] sm:whitespace-nowrap"
@@ -124,7 +124,7 @@ export function KineticInterlude({
           room and the footer, standing in the room where they belong */}
       <div className="relative z-10 mx-auto mt-14 max-w-2xl px-6 text-center sm:mt-20">
         <p className="portal-kicker justify-center">When you're ready</p>
-        <h2 className="portal-h2" style={{ fontSize: 'calc(clamp(1.8rem, 3.4vw, 2.6rem) * var(--type-heading))' }}>
+        <h2 className="portal-h2" style={{ fontSize: 'calc(clamp(1.8rem, 3.4vw, 2.6rem) * var(--tch))' }}>
           Start at <span className="accent">topic one.</span>
         </h2>
         <p className="portal-lede mx-auto">

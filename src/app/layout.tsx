@@ -131,18 +131,23 @@ r.dataset.motion=p.motion===false?"off":"on";
 var fb="M";try{var w=window.innerWidth||document.documentElement.clientWidth;if(w>=768)fb="XL";else if(w>=640)fb="L"}catch(e){}
 var s=p.scale==="S"||p.scale==="M"||p.scale==="L"||p.scale==="XL"?p.scale:(p.zoom===0.9?"S":p.zoom===1.15?"L":p.zoom===1.3?"XL":fb);
 r.dataset.scale=s;
-/* the advanced type roles — mirrors sanitizeType() in prefs.ts clamp
-   for clamp (roles .85-1.2, width .8-1.2, junk or absent → 1), so a
-   saved slider set first-paints settled instead of re-flowing after
-   hydration */
+/* the advanced type roles — mirrors applyPrefs() in prefs.ts string
+   for string and sanitizeType() clamp for clamp (roles .8-1.3, junk
+   or absent → 1): at 100% a role rides the rung (var(--ui-scale)),
+   when tuned it goes standalone (calc(var(--ui-grow) * v) — same px
+   on every rung), so a saved slider set first-paints settled instead
+   of re-flowing after hydration */
 var tp=p.type&&typeof p.type==="object"?p.type:{};
 var rc=function(v,lo,hi){return typeof v==="number"&&isFinite(v)?Math.min(hi,Math.max(lo,v)):1};
+var th=rc(tp.headings,.8,1.3);
 var rs=document.documentElement.style;
-rs.setProperty("--type-heading",String(rc(tp.headings,.85,1.2)));
-rs.setProperty("--type-sub",String(rc(tp.sub,.85,1.2)));
-rs.setProperty("--type-body",String(rc(tp.body,.85,1.2)));
-rs.setProperty("--type-other",String(rc(tp.other,.85,1.2)));
-rs.setProperty("--type-width",String(rc(tp.width,.8,1.2)));
+rs.setProperty("--ts-heading",th===1?"var(--ui-scale)":"calc(var(--ui-grow) * "+th+")");
+rs.setProperty("--ts-sub",rc(tp.sub,.8,1.3)===1?"var(--ui-scale)":"calc(var(--ui-grow) * "+rc(tp.sub,.8,1.3)+")");
+rs.setProperty("--ts-body",rc(tp.body,.8,1.3)===1?"var(--ui-scale)":"calc(var(--ui-grow) * "+rc(tp.body,.8,1.3)+")");
+rs.setProperty("--ts-other",rc(tp.other,.8,1.3)===1?"var(--ui-scale)":"calc(var(--ui-grow) * "+rc(tp.other,.8,1.3)+")");
+rs.setProperty("--ts-width",rc(tp.width,.8,1.3)===1?"var(--ui-scale)":"calc(var(--ui-grow) * "+rc(tp.width,.8,1.3)+")");
+rs.setProperty("--tch",String(th));
+rs.setProperty("--tch-ed",th===1?"calc(1 + (var(--ui-scale) - 1) * 0.5)":String(th));
 /* the interface axis: editorial | gallery. The retired "rooms" dress
    (and any unrecognisable value) reads as the gallery — the site's
    front door — so even a legacy save first-paints in the right dress

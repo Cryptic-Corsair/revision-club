@@ -75,7 +75,7 @@ function StickerBtn({
       type="button"
       aria-label={ariaLabel}
       onClick={onClick}
-      className={`sticker sticker-pop inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale)*var(--type-body))] font-semibold text-ink select-none ${className ?? ""}`}
+      className={`sticker sticker-pop inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-6 py-3 font-display text-[calc(15.5px*var(--ts-body))] font-semibold text-ink select-none ${className ?? ""}`}
     >
       {children}
     </button>
@@ -100,7 +100,7 @@ function CandyBtn({
       type="button"
       aria-label={ariaLabel}
       onClick={onClick}
-      className={`candy inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale)*var(--type-body))] font-semibold tracking-wide select-none ${className ?? ""}`}
+      className={`candy inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[calc(15.5px*var(--ts-body))] font-semibold tracking-wide select-none ${className ?? ""}`}
       style={{ "--candy-bg": main, "--candy-side": shade(main), color: readableInk(main) } as CSSProperties}
     >
       {children}
@@ -126,7 +126,7 @@ function Ticker({ units }: { units: Unit[] }) {
     <div aria-hidden={hidden || undefined} className="flex shrink-0 items-center">
       {facts.map((f, i) => (
         <span key={i} className="flex items-center">
-          <span className="px-6 font-display text-[calc(13px*var(--ui-scale)*var(--type-body))] font-bold tracking-[0.14em] whitespace-nowrap uppercase">
+          <span className="px-6 font-display text-[calc(13px*var(--ts-body))] font-bold tracking-[0.14em] whitespace-nowrap uppercase">
             {f}
           </span>
           <DoodleSparkle className="h-3.5 w-3.5 shrink-0 opacity-70" />
@@ -240,7 +240,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               </PopIn>
 
               <PopIn delay={0.16}>
-                <p className="mt-6 max-w-[50ch] text-[calc(15.5px*var(--ui-scale)*var(--type-body))] leading-[1.78] text-ink-soft sm:text-[calc(16.5px*var(--ui-scale)*var(--type-body))] sm:leading-[1.8]">
+                <p className="mt-6 max-w-[50ch] text-[calc(15.5px*var(--ts-body))] leading-[1.78] text-ink-soft sm:text-[calc(16.5px*var(--ts-body))] sm:leading-[1.8]">
                   Welcome to <strong className="font-extrabold text-ink">IAL CHEM</strong> —
                   revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16). Every unit runs
                   the 2018 spec in order: definitions, equations and fully worked examples. Your
@@ -256,7 +256,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   <NotebookPen className="h-4 w-4 text-grape" /> How it works
                 </StickerButton>
                 {onBackToDesk && (
-                  <StickerButton onClick={onBackToDesk} className="min-h-[calc(44px*var(--ui-scale))] px-5 py-2.5 text-[calc(14px*var(--ui-scale)*var(--type-body))]">
+                  <StickerButton onClick={onBackToDesk} className="min-h-[calc(44px*var(--ui-scale))] px-5 py-2.5 text-[calc(14px*var(--ts-body))]">
                     Back to your desk
                   </StickerButton>
                 )}
@@ -275,10 +275,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                       <div key={s.label} className="flex items-center gap-2">
                         <s.icon className="h-4 w-4 shrink-0 text-coral" strokeWidth={2.5} />
                         <div className="min-w-0">
-                          <div className="font-display text-[calc(19px*var(--ui-scale)*var(--type-sub))] leading-none font-bold text-ink">
+                          <div className="font-display text-[calc(19px*var(--ts-sub))] leading-none font-bold text-ink">
                             {s.value}
                           </div>
-                          <div className="mt-1 truncate text-[calc(11px*var(--ui-scale)*var(--type-other))] font-bold text-ink-faint">
+                          <div className="mt-1 truncate text-[calc(11px*var(--ts-other))] font-bold text-ink-faint">
                             {s.label}
                           </div>
                         </div>
@@ -309,12 +309,12 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   className="hero-float-card sticker w-[calc(150px*var(--ui-scale))] -rotate-[4deg] rounded-[calc(22px*var(--ui-scale))] bg-paper px-4 py-3.5 sm:w-[calc(178px*var(--ui-scale))]"
                 >
                   <span
-                    className="rounded-full px-2.5 py-1 font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-bold tracking-[0.08em] text-white uppercase"
+                    className="rounded-full px-2.5 py-1 font-display text-[calc(10.5px*var(--ts-other))] font-bold tracking-[0.08em] text-white uppercase"
                     style={{ background: "#12B886", boxShadow: "0 2px 0 #0B7A57" }}
                   >
                     definition
                   </span>
-                  <div className="mt-2 font-display text-[calc(13.5px*var(--ui-scale)*var(--type-body))] font-bold text-ink">
+                  <div className="mt-2 font-display text-[calc(13.5px*var(--ts-body))] font-bold text-ink">
                     Enthalpy change
                   </div>
                   <div className="mt-2 space-y-1.5">
@@ -332,12 +332,12 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   className="hero-float-card sticker rotate-[3deg] rounded-[calc(22px*var(--ui-scale))] bg-paper px-5 py-4 sm:px-6"
                 >
                   <span
-                    className="rounded-full px-2.5 py-1 font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-bold tracking-[0.08em] text-white uppercase"
+                    className="rounded-full px-2.5 py-1 font-display text-[calc(10.5px*var(--ts-other))] font-bold tracking-[0.08em] text-white uppercase"
                     style={{ background: "#FF922B", boxShadow: "0 2px 0 #D46A08" }}
                   >
                     equation
                   </span>
-                  <div className="mt-1.5 font-display text-[calc(20px*var(--ui-scale)*var(--type-sub))] font-bold tracking-tight text-ink sm:text-[calc(22px*var(--ui-scale)*var(--type-sub))]">
+                  <div className="mt-1.5 font-display text-[calc(20px*var(--ts-sub))] font-bold tracking-tight text-ink sm:text-[calc(22px*var(--ts-sub))]">
                     pV = nRT
                   </div>
                 </div>
@@ -361,13 +361,13 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               </Float>
 
               <Float delay={0.8} className="absolute top-[1%] right-[1%] z-30">
-                <span className="hero-sticker sticker inline-block rotate-[-7deg] rounded-full bg-paper px-4 py-2 font-display text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-bold whitespace-nowrap text-ink">
+                <span className="hero-sticker sticker inline-block rotate-[-7deg] rounded-full bg-paper px-4 py-2 font-display text-[calc(12.5px*var(--ts-other))] font-bold whitespace-nowrap text-ink">
                   read → practise → done
                 </span>
               </Float>
               <Float delay={1.6} slow className="absolute bottom-[1%] left-[3%] z-30">
                 <span
-                  className="hero-sticker sticker inline-block rotate-[6deg] rounded-full px-4 py-2 font-display text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-bold text-white"
+                  className="hero-sticker sticker inline-block rotate-[6deg] rounded-full px-4 py-2 font-display text-[calc(12.5px*var(--ts-other))] font-bold text-white"
                   style={{ background: "#9775FA", boxShadow: "0 3px 0 #7048E8" }}
                 >
                   WCH11–WCH16
@@ -410,7 +410,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
           <h2 className="mt-5 font-display text-[calc(clamp(1.9rem,4vw,2.8rem)*(1+(var(--ui-scale)-1)*0.5))] leading-tight font-semibold text-ink">
             The six units
           </h2>
-          <p className="mx-auto mt-3 max-w-[52ch] text-[calc(15.5px*var(--ui-scale)*var(--type-body))] leading-relaxed text-ink-soft">
+          <p className="mx-auto mt-3 max-w-[52ch] text-[calc(15.5px*var(--ts-body))] leading-relaxed text-ink-soft">
             Tap a unit to see its topics in specification order. Topics you mark as revised
             are saved in your browser.
           </p>
@@ -433,14 +433,14 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 >
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute -top-4 right-3 font-display text-[calc(88px*var(--ui-scale)*var(--type-heading))] leading-none font-bold text-ink/[0.06] select-none"
+                    className="pointer-events-none absolute -top-4 right-3 font-display text-[calc(88px*var(--ts-heading))] leading-none font-bold text-ink/[0.06] select-none"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
                   <div className="flex items-center gap-3">
                     <span
-                      className="grid h-12 w-12 place-items-center rounded-[calc(16px*var(--ui-scale))] font-display text-[calc(20px*var(--ui-scale)*var(--type-sub))] font-bold"
+                      className="grid h-12 w-12 place-items-center rounded-[calc(16px*var(--ui-scale))] font-display text-[calc(20px*var(--ts-sub))] font-bold"
                       style={{
                         background: u.candy.main,
                         color: readableInk(u.candy.main),
@@ -451,12 +451,12 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                     </span>
                     <div>
                       <div
-                        className="font-display text-[calc(13px*var(--ui-scale)*var(--type-body))] font-bold tracking-[0.14em]"
+                        className="font-display text-[calc(13px*var(--ts-body))] font-bold tracking-[0.14em]"
                         style={{ color: shade(u.candy.main, 68) }}
                       >
                         {u.code}
                       </div>
-                      <div className="flex items-center gap-1.5 text-[calc(11.5px*var(--ui-scale)*var(--type-other))] font-bold text-ink-faint">
+                      <div className="flex items-center gap-1.5 text-[calc(11.5px*var(--ts-other))] font-bold text-ink-faint">
                         <span
                           className="h-2 w-2 rounded-full"
                           style={{ background: u.candy.main }}
@@ -466,13 +466,13 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                     </div>
                   </div>
 
-                  <h3 className="mt-4 font-display text-[calc(21px*var(--ui-scale)*var(--type-sub))] leading-tight font-semibold text-ink">
+                  <h3 className="mt-4 font-display text-[calc(21px*var(--ts-sub))] leading-tight font-semibold text-ink">
                     {u.title}
                   </h3>
-                  <p className="mt-1 text-[calc(13.5px*var(--ui-scale)*var(--type-body))] leading-snug font-extrabold text-ink-soft">
+                  <p className="mt-1 text-[calc(13.5px*var(--ts-body))] leading-snug font-extrabold text-ink-soft">
                     {u.topicRange}
                   </p>
-                  <p className="mt-2.5 line-clamp-3 text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-relaxed text-ink-soft">
+                  <p className="mt-2.5 line-clamp-3 text-[calc(14px*var(--ts-body))] leading-relaxed text-ink-soft">
                     {u.blurb}
                   </p>
 
@@ -526,7 +526,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                     Get one pack.
                   </span>
                 </h2>
-                <p className="mt-3 max-w-[54ch] text-[calc(15.5px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
+                <p className="mt-3 max-w-[54ch] text-[calc(15.5px*var(--ts-body))] leading-[1.8] text-ink-soft">
                   The spec index lists every statement the notes cover. Tick what
                   you&apos;re revising — before a class test, a mock, the real
                   thing — and the notes behind those points assemble into one
@@ -562,10 +562,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                     <ClipboardList className="h-7 w-7" style={{ color: "#E8A100" }} />
                   </span>
                   <div>
-                    <div className="font-display text-[calc(26px*var(--ui-scale)*var(--type-heading))] font-bold leading-none text-ink">
+                    <div className="font-display text-[calc(26px*var(--ts-heading))] font-bold leading-none text-ink">
                       {picks.length}
                     </div>
-                    <div className="mt-1 text-[calc(11.5px*var(--ui-scale)*var(--type-other))] font-bold tracking-[0.1em] text-ink-faint uppercase">
+                    <div className="mt-1 text-[calc(11.5px*var(--ts-other))] font-bold tracking-[0.1em] text-ink-faint uppercase">
                       points ticked
                     </div>
                   </div>
@@ -624,7 +624,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 >
                   <div className="flex items-center gap-3.5">
                     <span
-                      className="grid h-12 w-12 shrink-0 place-items-center rounded-full font-display text-[calc(19px*var(--ui-scale)*var(--type-sub))] font-bold"
+                      className="grid h-12 w-12 shrink-0 place-items-center rounded-full font-display text-[calc(19px*var(--ts-sub))] font-bold"
                       style={{ background: s.color, color: "#fff", boxShadow: `0 4px 0 ${shade(s.color)}` }}
                     >
                       {s.n}
@@ -636,10 +636,10 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                       <s.icon className="h-5.5 w-5.5" style={{ color: shade(s.color, 62) }} strokeWidth={2.2} />
                     </span>
                   </div>
-                  <h3 className="mt-4 font-display text-[calc(20px*var(--ui-scale)*var(--type-sub))] font-semibold text-ink">
+                  <h3 className="mt-4 font-display text-[calc(20px*var(--ts-sub))] font-semibold text-ink">
                     {s.title}
                   </h3>
-                  <p className="mt-2 text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.75] text-ink-soft">{s.body}</p>
+                  <p className="mt-2 text-[calc(14.5px*var(--ts-body))] leading-[1.75] text-ink-soft">{s.body}</p>
                 </div>
               </div>
               {i < 2 && (
@@ -689,22 +689,22 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 >
                   <Timer className="h-7 w-7" strokeWidth={2.2} />
                 </span>
-                <h3 className="mt-5 font-display text-[calc(26px*var(--ui-scale)*var(--type-heading))] font-semibold text-ink">
+                <h3 className="mt-5 font-display text-[calc(26px*var(--ts-heading))] font-semibold text-ink">
                   Time &amp; goals
                 </h3>
-                <p className="mt-2 max-w-[46ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.75] text-ink-soft">
+                <p className="mt-2 max-w-[46ch] text-[calc(14.5px*var(--ts-body))] leading-[1.75] text-ink-soft">
                   The site quietly clocks your reading — today, this week and topic by topic.
                   Set a weekly goal, then watch the beaker fill. Currently{" "}
                   {revised.length}/{TOTALS.topics} topics marked as revised.
                 </p>
                 <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
-                  <span className="sticker rounded-full bg-paper/85 px-3.5 py-1.5 text-[calc(12px*var(--ui-scale)*var(--type-other))] font-extrabold text-ink">
+                  <span className="sticker rounded-full bg-paper/85 px-3.5 py-1.5 text-[calc(12px*var(--ts-other))] font-extrabold text-ink">
                     weekly goals
                   </span>
-                  <span className="sticker rounded-full bg-paper/85 px-3.5 py-1.5 text-[calc(12px*var(--ui-scale)*var(--type-other))] font-extrabold text-ink">
+                  <span className="sticker rounded-full bg-paper/85 px-3.5 py-1.5 text-[calc(12px*var(--ts-other))] font-extrabold text-ink">
                     minutes per topic
                   </span>
-                  <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[calc(14px*var(--ui-scale)*var(--type-body))] font-bold text-mint">
+                  <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[calc(14px*var(--ts-body))] font-bold text-mint">
                     open <MoveRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
                   </span>
                 </div>
@@ -739,20 +739,20 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                   >
                     <Target className="h-7 w-7" strokeWidth={2.2} />
                   </span>
-                  <h3 className="mt-5 font-display text-[calc(26px*var(--ui-scale)*var(--type-heading))] font-semibold text-ink">
+                  <h3 className="mt-5 font-display text-[calc(26px*var(--ts-heading))] font-semibold text-ink">
                     Today&apos;s pick
                   </h3>
-                  <p className="mt-2 font-display text-[calc(15px*var(--ui-scale)*var(--type-body))] font-semibold text-ink">
+                  <p className="mt-2 font-display text-[calc(15px*var(--ts-body))] font-semibold text-ink">
                     {suggestion.topic.label} · {suggestion.topic.title}
                   </p>
-                  <p className="mt-1 max-w-[46ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.75] text-ink-soft">
+                  <p className="mt-1 max-w-[46ch] text-[calc(14.5px*var(--ts-body))] leading-[1.75] text-ink-soft">
                     {suggestion.reason} — about {suggestion.topic.minutes} minutes of reading.
                   </p>
                   <div className="mt-5 flex flex-wrap items-center gap-2 pt-1">
-                    <span className="sticker rounded-full bg-paper/85 px-3.5 py-1.5 text-[calc(12px*var(--ui-scale)*var(--type-other))] font-extrabold text-ink">
+                    <span className="sticker rounded-full bg-paper/85 px-3.5 py-1.5 text-[calc(12px*var(--ts-other))] font-extrabold text-ink">
                       picked fresh daily
                     </span>
-                    <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[calc(14px*var(--ui-scale)*var(--type-body))] font-bold" style={{ color: suggestion.unit.candy.main }}>
+                    <span className="ml-auto inline-flex items-center gap-1.5 font-display text-[calc(14px*var(--ts-body))] font-bold" style={{ color: suggestion.unit.candy.main }}>
                       read it <MoveRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
                     </span>
                   </div>
@@ -767,8 +767,8 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 className="sticker sticker-pop block h-full w-full cursor-pointer rounded-[calc(32px*var(--ui-scale))] p-7 text-left sm:p-8"
                 style={{ background: tint("#12B886", 10), transform: "rotate(0.8deg)" }}
               >
-                <h3 className="font-display text-[calc(26px*var(--ui-scale)*var(--type-heading))] font-semibold text-ink">All done</h3>
-                <p className="mt-2 text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.75] text-ink-soft">
+                <h3 className="font-display text-[calc(26px*var(--ts-heading))] font-semibold text-ink">All done</h3>
+                <p className="mt-2 text-[calc(14.5px*var(--ts-body))] leading-[1.75] text-ink-soft">
                   Every topic is marked as revised. Respect.
                 </p>
               </button>
@@ -806,7 +806,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               <h2 className="mt-2 font-display text-[calc(clamp(1.8rem,3.6vw,2.6rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold text-milk">
                 Pick a unit and dive in.
               </h2>
-              <p className="mt-3 text-[calc(15.5px*var(--ui-scale)*var(--type-body))] leading-relaxed text-milk/75">
+              <p className="mt-3 text-[calc(15.5px*var(--ts-body))] leading-relaxed text-milk/75">
                 Begin with Unit 1, or jump straight to the topic you are revising.
               </p>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3.5">
@@ -816,7 +816,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
                 <button
                   type="button"
                   onClick={() => onOpenUnit("WCH11")}
-                  className="sticker inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale)*var(--type-body))] font-semibold select-none"
+                  className="sticker inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[calc(15.5px*var(--ts-body))] font-semibold select-none"
                   style={{ background: "rgb(255 255 255 / 0.94)", color: "#4a2f18", boxShadow: "0 4px 0 rgb(0 0 0 / 0.32)" }}
                 >
                   Open Unit 1 <DoodleSparkle className="h-4 w-4 text-lemon" />

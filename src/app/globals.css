@@ -184,17 +184,27 @@ html[data-body="nunito"] {
   --ui-knob: 1;
   --ui-grow: 1;
   --ui-scale: calc(var(--ui-knob) * var(--ui-grow));
-  /* the advanced type roles — per-reading-role multipliers on top of
-     --ui-scale, driven by the customize panel's Advanced sliders
-     (prefs.type) and mirrored by the pre-paint script in layout.tsx.
-     Every font-size declaration declares which role it answers to;
-     1 = ride the main scale untouched. The spec map pins all five
-     back to 1 with its --ui-scale freeze above. */
-  --type-heading: 1;
-  --type-sub: 1;
-  --type-body: 1;
-  --type-other: 1;
-  --type-width: 1;
+  /* the advanced type roles — the customize panel's Advanced sliders
+     (prefs.type), mirrored by the pre-paint script in layout.tsx.
+     Each font-size declaration answers to ONE composed var: --ts-*.
+     At 100% the JS writes var(--ui-scale) into it, so an untouched
+     role rides the rung exactly as before; the moment a role is
+     tuned, the JS swaps in calc(var(--ui-grow) * v) — the slider
+     sets that role's size DIRECTLY (100% = the M-rung baseline),
+     knob excluded, so 120% body is the same px on XL and L. The
+     viewport growth stays: it's the site's screen refinement, not a
+     user choice. The clamp-based display headings never multiplied
+     the rung, so they get their own vars: --tch (portal clamps,
+     default 1) and --tch-ed (the editorial h1, whose designed base
+     is the half-strength knob formula). The spec map pins all seven
+     back to their ride-along defaults with its --ui-scale freeze. */
+  --ts-heading: var(--ui-scale);
+  --ts-sub: var(--ui-scale);
+  --ts-body: var(--ui-scale);
+  --ts-other: var(--ui-scale);
+  --ts-width: var(--ui-scale);
+  --tch: 1;
+  --tch-ed: calc(1 + (var(--ui-scale) - 1) * 0.5);
 }
 /* desk refinement: laptops/tablet-landscape ride the XL default
    alone; wider monitors climb gently so a 1920+ desk reads a step
@@ -233,12 +243,16 @@ html[data-scale="XL"] {
   --ui-scale: 1;
   /* the advanced type roles freeze with the scale: the map is a
      precise spatial instrument — its drawer, tiles and chip labels
-     stay pixel-identical whatever the reading sliders do elsewhere */
-  --type-heading: 1;
-  --type-sub: 1;
-  --type-body: 1;
-  --type-other: 1;
-  --type-width: 1;
+     stay pixel-identical whatever the reading sliders do elsewhere.
+     Each role var returns to its ride-along default, which resolves
+     to 1 under the pinned --ui-scale above. */
+  --ts-heading: var(--ui-scale);
+  --ts-sub: var(--ui-scale);
+  --ts-body: var(--ui-scale);
+  --ts-other: var(--ui-scale);
+  --ts-width: var(--ui-scale);
+  --tch: 1;
+  --tch-ed: calc(1 + (var(--ui-scale) - 1) * 0.5);
 }
 
 /* ————— the spec map's shared dress —————
@@ -702,7 +716,7 @@ body {
   background-size: 26px 26px;
   color: var(--color-ink);
   /* content scale: unclassed text scales with the knob too */
-  font-size: calc(16px * var(--ui-scale) * var(--type-body));
+  font-size: calc(16px * var(--ts-body));
   text-rendering: optimizeLegibility;
   /* hidden stops touch panning but still lets script scrolls drift the
      page sideways (scrollIntoView) — clip forbids
@@ -1539,7 +1553,7 @@ html.dune .nav-tool-button.is-active {
 .footer-eyebrow {
   color: color-mix(in oklab, var(--color-milk) 42%, transparent);
   font-family: var(--font-mono);
-  font-size: calc(10px * var(--ui-scale) * var(--type-other));
+  font-size: calc(10px * var(--ts-other));
   font-weight: 700;
   letter-spacing: 0.17em;
   line-height: 1.2;
@@ -1574,7 +1588,7 @@ html.dune .nav-tool-button.is-active {
 }
 .footer-utility-link {
   color: color-mix(in oklab, var(--color-milk) 60%, transparent);
-  font-size: calc(11px * var(--ui-scale) * var(--type-other));
+  font-size: calc(11px * var(--ts-other));
   font-weight: 700;
   transition: color 160ms ease;
 }
@@ -1950,7 +1964,7 @@ html.dune .legal-room mark {
   align-items: center;
   gap: 7px;
   font-family: var(--font-display), sans-serif;
-  font-size: calc(9px * var(--ui-scale) * var(--type-other));
+  font-size: calc(9px * var(--ts-other));
   font-weight: 800;
   letter-spacing: .15em;
   line-height: 1.5;
@@ -2015,7 +2029,7 @@ html.dune .legal-room mark {
   border-radius: 12px;
   padding: 9px 10px;
   color: var(--color-ink-soft);
-  font-size: calc(11px * var(--ui-scale) * var(--type-other));
+  font-size: calc(11px * var(--ts-other));
   transition: background-color 160ms ease, color 160ms ease;
 }
 .legal-index-link > span:last-child {
@@ -2025,7 +2039,7 @@ html.dune .legal-room mark {
 .legal-index-link span:first-child {
   color: var(--color-ink-faint);
   font-family: var(--font-display), sans-serif;
-  font-size: calc(9px * var(--ui-scale) * var(--type-other));
+  font-size: calc(9px * var(--ts-other));
   font-weight: 800;
 }
 .legal-index-link:hover {
@@ -2150,7 +2164,7 @@ html.dune .legal-room mark {
   border-radius: calc(11px * var(--ui-scale));
   padding: calc(8px * var(--ui-scale)) calc(10px * var(--ui-scale));
   color: var(--color-ink-soft);
-  font-size: calc(11px * var(--ui-scale) * var(--type-other));
+  font-size: calc(11px * var(--ts-other));
   line-height: 1.45;
   text-decoration: none;
   transition: background-color 160ms ease, color 160ms ease, transform 120ms ease;
@@ -2161,7 +2175,7 @@ html.dune .legal-room mark {
   min-width: 2.6em;
   color: var(--color-ink-faint);
   font-family: var(--font-display), sans-serif;
-  font-size: calc(9px * var(--ui-scale) * var(--type-other));
+  font-size: calc(9px * var(--ts-other));
   font-weight: 800;
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
@@ -2277,7 +2291,7 @@ html.dune .legal-room mark {
   }
   .etoc-link.is-collapsed .etoc-num {
     min-width: 0;
-    font-size: calc(10px * var(--ui-scale) * var(--type-other));
+    font-size: calc(10px * var(--ts-other));
   }
   .etoc-link.is-collapsed.is-active {
     background: var(--legal-rust);
@@ -2310,7 +2324,7 @@ html.dune .legal-room mark {
    IS the measure gives the same air on both sides at every
    width and every text size. */
 main.gal {
-  --gal-measure: calc(680px * var(--ui-scale) * var(--type-width));
+  --gal-measure: calc(680px * var(--ts-width));
 }
 /* ————— the gallery's minimized contents —————
    the ledger gains the editorial rail's minimize, spoken in the
@@ -2348,7 +2362,7 @@ main.gal {
   padding: calc(9px * var(--ui-scale)) calc(12px * var(--ui-scale));
   color: var(--color-ink-soft);
   font-family: var(--font-display), sans-serif;
-  font-size: calc(10px * var(--ui-scale) * var(--type-other));
+  font-size: calc(10px * var(--ts-other));
   font-weight: 800;
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
@@ -2391,7 +2405,7 @@ main.gal {
   color: var(--color-ink-soft);
   background: color-mix(in oklab, var(--color-ink) 6%, var(--color-paper));
   font-family: var(--font-display), sans-serif;
-  font-size: calc(8px * var(--ui-scale) * var(--type-other));
+  font-size: calc(8px * var(--ts-other));
   font-weight: 800;
   letter-spacing: .1em;
 }
@@ -2406,12 +2420,12 @@ main.gal {
   padding-top: 2px;
   color: var(--legal-rust);
   font-family: var(--font-display), sans-serif;
-  font-size: calc(10px * var(--ui-scale) * var(--type-other));
+  font-size: calc(10px * var(--ts-other));
   font-weight: 800;
 }
 .legal-summary-line p {
   color: var(--color-ink-soft);
-  font-size: calc(12px * var(--ui-scale) * var(--type-other));
+  font-size: calc(12px * var(--ts-other));
   line-height: 1.65;
 }
 .legal-clauses { display: flex; flex-direction: column; }
@@ -2437,7 +2451,7 @@ main.gal {
   border-radius: 50%;
   color: var(--color-ink-soft);
   font-family: var(--font-display), sans-serif;
-  font-size: calc(9px * var(--ui-scale) * var(--type-other));
+  font-size: calc(9px * var(--ts-other));
   font-weight: 800;
 }
 .legal-clause-line {
@@ -2509,7 +2523,7 @@ html.dark .legal-card, html.dune .legal-card {
 }
 .legal-quote-kicker {
   font-family: var(--font-display), sans-serif;
-  font-size: calc(10.5px * var(--ui-scale) * var(--type-other));
+  font-size: calc(10.5px * var(--ts-other));
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -2523,7 +2537,7 @@ html.dark .legal-card, html.dune .legal-card {
 }
 .legal-quote-text {
   margin-top: 9px;
-  font-size: calc(15px * var(--ui-scale) * var(--type-body));
+  font-size: calc(15px * var(--ts-body));
   line-height: 1.8;
   color: var(--color-ink);
   font-style: italic;
@@ -2533,7 +2547,7 @@ html.dark .legal-card, html.dune .legal-card {
   align-items: center;
   gap: 8px;
   color: var(--color-ink);
-  font-size: calc(12px * var(--ui-scale) * var(--type-other));
+  font-size: calc(12px * var(--ts-other));
   font-weight: 700;
 }
 .legal-back-link:hover { text-decoration: underline; text-underline-offset: 4px; }

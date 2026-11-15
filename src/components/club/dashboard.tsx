@@ -130,7 +130,7 @@ export function WeekBars({
                 />
               )}
               {/* the hover read-out */}
-              <span className="pointer-events-none absolute -top-1 left-1/2 z-10 -translate-x-1/2 -translate-y-full rounded-lg bg-ink px-2 py-1 text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-bold tabular-nums text-paper opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
+              <span className="pointer-events-none absolute -top-1 left-1/2 z-10 -translate-x-1/2 -translate-y-full rounded-lg bg-ink px-2 py-1 text-[calc(10.5px*var(--ts-other))] font-bold tabular-nums text-paper opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
                 {b.day} {b.date} · {fmtShort(b.total)}
               </span>
             </div>
@@ -144,7 +144,7 @@ export function WeekBars({
             className="flex min-w-0 flex-1 flex-col items-center gap-0.5"
           >
             <span
-              className={`font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] leading-none font-bold ${
+              className={`font-display text-[calc(10.5px*var(--ts-other))] leading-none font-bold ${
                 b.today ? "text-ink" : "text-ink-faint"
               }`}
             >
@@ -190,7 +190,7 @@ export function Heatmap({ main = "#12B886", weeks = 20 }: { main?: string; weeks
           ))}
         </div>
       </div>
-      <div className="mt-3 flex items-center gap-2 text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-bold text-ink-faint">
+      <div className="mt-3 flex items-center gap-2 text-[calc(10.5px*var(--ts-other))] font-bold text-ink-faint">
         <span>less</span>
         {HEAT_MIX.map((mix, i) => (
           <span
@@ -238,7 +238,7 @@ export function Segmented<T extends string>({
             role="tab"
             aria-selected={active}
             onClick={() => onChange(o.id)}
-            className={`m3-press flex min-h-[calc(38px*var(--ui-scale))] cursor-pointer items-center justify-center gap-1.5 rounded-full px-3 font-display text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-bold transition-colors ${
+            className={`m3-press flex min-h-[calc(38px*var(--ui-scale))] cursor-pointer items-center justify-center gap-1.5 rounded-full px-3 font-display text-[calc(12.5px*var(--ts-other))] font-bold transition-colors ${
               active ? "" : "text-ink-soft hover:text-ink"
             }`}
             style={
@@ -284,13 +284,13 @@ export function StatTile({
         <Icon className="h-[18px] w-[18px]" strokeWidth={2.3} />
       </span>
       <span className="min-w-0">
-        <span className="block font-display text-[calc(17px*var(--ui-scale)*var(--type-sub))] leading-tight font-bold text-ink tabular-nums">
+        <span className="block font-display text-[calc(17px*var(--ts-sub))] leading-tight font-bold text-ink tabular-nums">
           {value}
         </span>
-        <span className="block text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+        <span className="block text-[calc(10.5px*var(--ts-other))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
           {label}
         </span>
-        {hint && <span className="mt-0.5 block truncate text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold text-ink-soft">{hint}</span>}
+        {hint && <span className="mt-0.5 block truncate text-[calc(10.5px*var(--ts-other))] font-semibold text-ink-soft">{hint}</span>}
       </span>
     </>
   );
@@ -322,7 +322,7 @@ export function FilledButton({
     <button
       type="button"
       onClick={onClick}
-      className={`m3-press inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale)*var(--type-body))] font-bold text-white shadow-[0_8px_20px_-8px_color-mix(in_oklab,${main}_55%,transparent)] transition-transform duration-200 hover:-translate-y-0.5 ${className ?? ""}`}
+      className={`m3-press inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(13.5px*var(--ts-body))] font-bold text-white shadow-[0_8px_20px_-8px_color-mix(in_oklab,${main}_55%,transparent)] transition-transform duration-200 hover:-translate-y-0.5 ${className ?? ""}`}
       style={{ background: main }}
     >
       {children}
@@ -345,7 +345,7 @@ export function TonalButton({
     <button
       type="button"
       onClick={onClick}
-      className={`m3-press inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(13.5px*var(--ui-scale)*var(--type-body))] font-bold transition-transform duration-200 hover:-translate-y-0.5 ${className ?? ""}`}
+      className={`m3-press inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 font-display text-[calc(13.5px*var(--ts-body))] font-bold transition-transform duration-200 hover:-translate-y-0.5 ${className ?? ""}`}
       style={{ background: tint(main, 15), color: shade(main, 55) }}
     >
       {children}
@@ -381,13 +381,13 @@ export function DeskDashboard({ onOpenSticker }: { onOpenSticker: () => void }) 
     <div className="bg-cream">
       <section aria-label="Your ledger" className="mx-auto max-w-6xl px-5 pt-3 pb-16 sm:px-8">
       <div className="flex flex-wrap items-baseline justify-between gap-2 px-1">
-        <h2 className="font-display text-[calc(22px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink sm:text-[calc(24px*var(--ui-scale)*var(--type-sub))]">
+        <h2 className="font-display text-[calc(22px*var(--ts-sub))] font-semibold tracking-tight text-ink sm:text-[calc(24px*var(--ts-sub))]">
           The ledger
         </h2>
         <button
           type="button"
           onClick={onOpenSticker}
-          className="group inline-flex cursor-pointer items-center gap-1.5 text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-semibold text-ink-faint transition-colors hover:text-ink"
+          className="group inline-flex cursor-pointer items-center gap-1.5 text-[calc(12.5px*var(--ts-other))] font-semibold text-ink-faint transition-colors hover:text-ink"
         >
           time &amp; goals
           <MoveRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" strokeWidth={2.4} />
@@ -398,10 +398,10 @@ export function DeskDashboard({ onOpenSticker }: { onOpenSticker: () => void }) 
         {/* the last fortnight */}
         <div className="rounded-[calc(24px*var(--ui-scale))] border border-ink/[0.06] bg-paper p-5 sm:p-6">
           <div className="flex items-baseline justify-between gap-2">
-            <p className="text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.18em] text-ink-faint uppercase">
+            <p className="text-[calc(10.5px*var(--ts-other))] font-extrabold tracking-[0.18em] text-ink-faint uppercase">
               the last fortnight
             </p>
-            <span className="text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-bold text-ink-faint tabular-nums">
+            <span className="text-[calc(10.5px*var(--ts-other))] font-bold text-ink-faint tabular-nums">
               {active}/14 active days
             </span>
           </div>
@@ -417,10 +417,10 @@ export function DeskDashboard({ onOpenSticker }: { onOpenSticker: () => void }) 
               <Clock className="h-[18px] w-[18px]" strokeWidth={2.3} />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block font-display text-[calc(17px*var(--ui-scale)*var(--type-sub))] leading-tight font-bold text-ink tabular-nums">
+              <span className="block font-display text-[calc(17px*var(--ts-sub))] leading-tight font-bold text-ink tabular-nums">
                 {fmtClock(today)}
               </span>
-              <span className="block text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+              <span className="block text-[calc(10.5px*var(--ts-other))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
                 today
               </span>
             </span>
@@ -430,10 +430,10 @@ export function DeskDashboard({ onOpenSticker }: { onOpenSticker: () => void }) 
               <Trophy className="h-[18px] w-[18px]" strokeWidth={2.3} />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block font-display text-[calc(17px*var(--ui-scale)*var(--type-sub))] leading-tight font-bold text-ink tabular-nums">
+              <span className="block font-display text-[calc(17px*var(--ts-sub))] leading-tight font-bold text-ink tabular-nums">
                 {best ? fmtClock(best.total) : "0 min"}
               </span>
-              <span className="block text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+              <span className="block text-[calc(10.5px*var(--ts-other))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
                 best day
                 {hydrated && best && (
                   <span className="ml-1.5 normal-case tracking-[0.02em] text-ink-soft">
@@ -448,10 +448,10 @@ export function DeskDashboard({ onOpenSticker }: { onOpenSticker: () => void }) 
               <Gauge className="h-[18px] w-[18px]" strokeWidth={2.3} />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block font-display text-[calc(17px*var(--ui-scale)*var(--type-sub))] leading-tight font-bold text-ink tabular-nums">
+              <span className="block font-display text-[calc(17px*var(--ts-sub))] leading-tight font-bold text-ink tabular-nums">
                 {fmtClock(avg)}
               </span>
-              <span className="block text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
+              <span className="block text-[calc(10.5px*var(--ts-other))] font-extrabold tracking-[0.14em] text-ink-faint uppercase">
                 daily average
               </span>
             </span>
@@ -461,11 +461,11 @@ export function DeskDashboard({ onOpenSticker }: { onOpenSticker: () => void }) 
         {/* the activity grid */}
         <div className="rounded-[calc(24px*var(--ui-scale))] border border-ink/[0.06] bg-paper p-5 sm:p-6">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <p className="text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.18em] text-ink-faint uppercase">
+            <p className="text-[calc(10.5px*var(--ts-other))] font-extrabold tracking-[0.18em] text-ink-faint uppercase">
               the activity grid
             </p>
             {streak >= 2 && (
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-coral/15 px-2.5 py-1 text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold text-coral">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-coral/15 px-2.5 py-1 text-[calc(10.5px*var(--ts-other))] font-extrabold text-coral">
                 <Footprints className="h-3.5 w-3.5" strokeWidth={2.4} />
                 {streak}-day streak
               </span>

@@ -88,7 +88,7 @@ export function Legal({ onBack }: { onBack: () => void }) {
       <PopIn>
         <SoftButton
           onClick={onBack}
-          className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale)*var(--type-body))]"
+          className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ts-body))]"
           ariaLabel="Back home"
         >
           <ArrowLeft className="h-4 w-4" /> Back home
@@ -107,7 +107,7 @@ export function Legal({ onBack }: { onBack: () => void }) {
             <br />
             <span className="legal-heading-accent">terms of use.</span>
           </h1>
-          <p className="mt-6 max-w-[570px] text-[calc(15px*var(--ui-scale)*var(--type-body))] leading-[1.85] text-ink-soft sm:text-[calc(16px*var(--ui-scale)*var(--type-body))]">
+          <p className="mt-6 max-w-[570px] text-[calc(15px*var(--ts-body))] leading-[1.85] text-ink-soft sm:text-[calc(16px*var(--ts-body))]">
             Please read the following information before using IAL CHEM. It explains the scope of this resource, permitted use of its content, and how information saved by the site is stored.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-ink/10 pt-5">
@@ -137,7 +137,7 @@ export function Legal({ onBack }: { onBack: () => void }) {
             ))}
           </nav>
           <div className="mt-7 hidden border-t border-ink/10 pt-5 lg:block">
-            <p className="text-[calc(12px*var(--ui-scale)*var(--type-other))] leading-[1.7] text-ink-soft">
+            <p className="text-[calc(12px*var(--ts-other))] leading-[1.7] text-ink-soft">
               The summary is provided for convenience. The sections below contain the full disclaimer.
             </p>
           </div>
@@ -149,7 +149,7 @@ export function Legal({ onBack }: { onBack: () => void }) {
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <p className="legal-meta">SUMMARY</p>
-                  <h2 className="mt-2 font-display text-[calc(23px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">Summary</h2>
+                  <h2 className="mt-2 font-display text-[calc(23px*var(--ts-sub))] font-semibold tracking-tight text-ink">Summary</h2>
                 </div>
                 <span className="legal-summary-stamp"><BadgeCheck className="h-4 w-4" /> KEY POINTS</span>
               </div>
@@ -168,7 +168,7 @@ export function Legal({ onBack }: { onBack: () => void }) {
             <div className="mb-5 flex items-end justify-between gap-4">
               <div>
                 <p className="legal-meta">DISCLAIMER</p>
-                <h2 className="mt-1 font-display text-[calc(25px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">Full terms</h2>
+                <h2 className="mt-1 font-display text-[calc(25px*var(--ts-sub))] font-semibold tracking-tight text-ink">Full terms</h2>
               </div>
               <span className="legal-meta hidden sm:block">01 — 06</span>
             </div>
@@ -188,12 +188,12 @@ export function Legal({ onBack }: { onBack: () => void }) {
                         </span>
                         <span className="legal-meta">{section.eyebrow}</span>
                       </div>
-                      <h3 className="mt-4 font-display text-[calc(21px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink sm:text-[calc(24px*var(--ui-scale)*var(--type-sub))]">
+                      <h3 className="mt-4 font-display text-[calc(21px*var(--ts-sub))] font-semibold tracking-tight text-ink sm:text-[calc(24px*var(--ts-sub))]">
                         {section.title}
                       </h3>
                       <div className="mt-3 flex max-w-[68ch] flex-col gap-3">
                         {section.body.map((paragraph, j) => (
-                          <p key={j} className="text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.9] text-ink-soft sm:text-[calc(14.5px*var(--ui-scale)*var(--type-body))]">
+                          <p key={j} className="text-[calc(14px*var(--ts-body))] leading-[1.9] text-ink-soft sm:text-[calc(14.5px*var(--ts-body))]">
                             {paragraph}
                           </p>
                         ))}
@@ -211,7 +211,7 @@ export function Legal({ onBack }: { onBack: () => void }) {
                 <ShieldCheck className="h-5 w-5" />
                 <p className="legal-meta">IMPORTANT</p>
               </div>
-              <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale)*var(--type-body))]">
+              <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ts-body))] leading-[1.9] sm:text-[calc(14.5px*var(--ts-body))]">
                 IAL CHEM is an independent study companion, not an official Pearson or Edexcel resource. Its original notes are provided as is for personal revision. No account is needed, and your saved progress remains in your browser. Use the site as a helpful supplement, and check important information against the official specification and your teachers' guidance.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-current/15 pt-4">

@@ -97,7 +97,7 @@ function EditorialPackTick({ spec, accent }: { spec: string; accent: string }) {
       ) : (
         <span
           aria-hidden
-          className="font-display text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-none font-bold"
+          className="font-display text-[calc(14px*var(--ts-body))] leading-none font-bold"
         >
           +
         </span>
@@ -317,7 +317,7 @@ function NotesEditorialBody({
       <PopIn>
         <SoftButton
           onClick={onBack}
-          className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale)*var(--type-body))]"
+          className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ts-body))]"
           ariaLabel={`Back to ${unit.code}`}
         >
           <ArrowLeft className="h-4 w-4" /> Back to {unit.code}
@@ -339,7 +339,7 @@ function NotesEditorialBody({
               {doc.title}<span className="legal-heading-accent">.</span>
             </h1>
             {heroPara && (
-              <p className="mt-5 max-w-[58ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.85] text-ink-soft">
+              <p className="mt-5 max-w-[58ch] text-[calc(14.5px*var(--ts-body))] leading-[1.85] text-ink-soft">
                 <Fmt text={heroPara} />
               </p>
             )}
@@ -431,7 +431,7 @@ function NotesEditorialBody({
           </div>
 
           {contentsExpanded && (
-            <p className="etoc-foot mt-4 hidden border-t border-ink/10 pt-4 text-[calc(11px*var(--ui-scale)*var(--type-other))] leading-[1.7] text-ink-faint lg:block">
+            <p className="etoc-foot mt-4 hidden border-t border-ink/10 pt-4 text-[calc(11px*var(--ts-other))] leading-[1.7] text-ink-faint lg:block">
               {firstSpec} — {lastSpec} · read in order or hop — the map in
               the navbar tracks you either way.
             </p>
@@ -441,7 +441,7 @@ function NotesEditorialBody({
           <Reveal>
             <section className="legal-summary rounded-[26px] p-5 sm:p-7">
               <div className="flex items-center justify-between gap-3">
-                <h2 className="font-display text-[calc(20px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
+                <h2 className="font-display text-[calc(20px*var(--ts-sub))] font-semibold tracking-tight text-ink">
                   What every note gives you
                 </h2>
                 <span className="legal-summary-stamp">
@@ -468,7 +468,7 @@ function NotesEditorialBody({
                 <div className="mt-2.5 flex flex-col gap-2">
                   {exhibitPs.map((b, i) =>
                     b.k === "p" ? (
-                      <p key={i} className="text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.9] text-ink-soft">
+                      <p key={i} className="text-[calc(14.5px*var(--ts-body))] leading-[1.9] text-ink-soft">
                         <Fmt text={b.text} />
                       </p>
                     ) : null,
@@ -482,7 +482,7 @@ function NotesEditorialBody({
             <div className="mb-5 flex items-end justify-between gap-4">
               <div>
                 <p className="legal-meta">THE NOTE ITSELF</p>
-                <h2 className="mt-1 font-display text-[calc(25px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
+                <h2 className="mt-1 font-display text-[calc(25px*var(--ts-sub))] font-semibold tracking-tight text-ink">
                   Spec by spec
                 </h2>
               </div>
@@ -521,7 +521,7 @@ function NotesEditorialBody({
                   document room, in the room's own rust, standing at
                   the end of the note like a living full stop */}
               <div className="mt-4 flex items-end gap-4">
-                <p className="max-w-[72ch] flex-1 text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale)*var(--type-body))]">
+                <p className="max-w-[72ch] flex-1 text-[calc(14px*var(--ts-body))] leading-[1.9] sm:text-[calc(14.5px*var(--ts-body))]">
                   Tick spec points along the way — the plus beside each clause
                   adds them to your revision pack, assembled in syllabus order
                   and ready to print. Mark the topic as revised from its unit

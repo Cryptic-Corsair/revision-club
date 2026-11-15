@@ -67,7 +67,7 @@ export function EditorialSectionView({
           {eyebrow && <span className="legal-meta">{eyebrow}</span>}
           {bannerAction && <span className="ml-auto">{bannerAction}</span>}
         </div>
-        <h3 className="mt-4 font-display text-[calc(21px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink sm:text-[calc(24px*var(--ui-scale)*var(--type-sub))]">
+        <h3 className="mt-4 font-display text-[calc(21px*var(--ts-sub))] font-semibold tracking-tight text-ink sm:text-[calc(24px*var(--ts-sub))]">
           {section.title}
         </h3>
         {!hideStatement && (

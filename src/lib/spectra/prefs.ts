@@ -113,17 +113,19 @@ export const SCALE_VALUE: Record<ScaleId, number> = {
   XL: 1.5,
 };
 
-/* advanced type roles — the panel's per-reading-role multipliers that
-   stack on top of the scale rung. Each font-size declaration in the
-   codebase declares the role it answers to via a --type-* var (see
-   globals.css): headings (section titles, display words), sub
-   (card titles, h3/h4), body (paragraphs, notes text), other (micro,
-   kickers, chips, labels) and width (the reading measure — the
-   gallery's content column and the editorial prose). A factor of 1
-   rides the main scale untouched; the roles are refinements for
-   readers who want, say, bigger body text without ballooning the
-   chrome. Values are clamped on the way in — and mirrored by the
-   pre-paint script in layout.tsx, which must agree with these
+/* advanced type roles — the panel's per-reading-role sizes, STANDALONE
+   of the scale rung. Each font-size declaration answers to one
+   composed var (--ts-*, see globals.css): at 100% the role rides the
+   rung exactly as before, but the moment a role is tuned the slider
+   sets that role's size DIRECTLY — 100% is the M-rung baseline, the
+   knob is excluded, so 120% body is the same px whether the visitor
+   sits on XL or L (only the site's viewport growth remains, since
+   that's screen adaptation, not a user choice). Roles: headings
+   (section titles, display words), sub (card titles, h3/h4), body
+   (paragraphs, notes text), other (micro, kickers, chips, labels) and
+   width (the reading measure — the gallery's content column and the
+   editorial prose). Values are clamped on the way in — and mirrored
+   by the pre-paint script in layout.tsx, which must agree with these
    limits or the first paint re-flows. */
 export interface TypePrefs {
   headings: number;
@@ -142,19 +144,24 @@ export const DEFAULT_TYPE_PREFS: TypePrefs = {
 };
 
 const TYPE_LIMITS: Record<keyof TypePrefs, [number, number]> = {
-  headings: [0.85, 1.2],
-  sub: [0.85, 1.2],
-  body: [0.85, 1.2],
-  other: [0.85, 1.2],
-  width: [0.8, 1.2],
+  headings: [0.8, 1.3],
+  sub: [0.8, 1.3],
+  body: [0.8, 1.3],
+  other: [0.8, 1.3],
+  width: [0.8, 1.3],
 };
 
+/* the composed CSS var each role answers to (see globals.css):
+   applyPrefs writes var(--ui-scale) into it at 100% — ride the rung —
+   and calc(var(--ui-grow) * v) when tuned — the slider sets the size
+   DIRECTLY, so a given % is the same px on every rung. The two
+   clamp-heading vars are written alongside (see below). */
 export const TYPE_ROLE_VARS: Record<keyof TypePrefs, string> = {
-  headings: "--type-heading",
-  sub: "--type-sub",
-  body: "--type-body",
-  other: "--type-other",
-  width: "--type-width",
+  headings: "--ts-heading",
+  sub: "--ts-sub",
+  body: "--ts-body",
+  other: "--ts-other",
+  width: "--ts-width",
 };
 
 function sanitizeType(v: unknown): TypePrefs {
@@ -215,9 +222,10 @@ export interface Prefs {
   accents: AccentId[];
   /** content scale — S/M/L/XL (multiplies --ui-scale) */
   scale: ScaleId;
-  /** the advanced type roles — per-reading-role multipliers on top of
-      the scale (see TypePrefs above); driven by the panel's Advanced
-      sliders, clamped by sanitizeType, applied as --type-* vars */
+  /** the advanced type roles — standalone per-reading-role sizes (see
+      TypePrefs above); driven by the panel's Advanced sliders,
+      clamped by sanitizeType, applied as --ts-* vars. 100% rides the
+      rung; any tuned % sets that role's size directly, knob-independent. */
   type: TypePrefs;
   /** the spec-map drawer's height, as a fraction of the visible
       screen — set by the panel presets and by dragging the grabber */
@@ -406,11 +414,30 @@ export function applyPrefs(p: Prefs) {
   root.dataset.scale = p.scale;
   /* the advanced type roles ride as inline vars the same way --spec-h
      does — continuous fractions can't sit on a data-attribute ladder.
-     Defaults are 1, so an untouched set writes the same values the
-     stylesheet's :root already holds. */
+     Each composed var gets an explicit STRING: at 100% the role rides
+     the rung (var(--ui-scale), so knob and grow apply exactly as
+     before); when tuned the role goes STANDALONE — calc(var(--ui-grow)
+     * v) sets its size directly off the M-rung baseline, knob
+     excluded, so a given % is the same px on every rung. The values
+     are always written (never removed) so switching a role back to
+     100% cleanly restores the ride-along. */
   for (const [key, cssVar] of Object.entries(TYPE_ROLE_VARS)) {
-    root.style.setProperty(cssVar, String(p.type[key as keyof TypePrefs]));
+    const v = p.type[key as keyof TypePrefs];
+    root.style.setProperty(
+      cssVar,
+      v === 1 ? "var(--ui-scale)" : `calc(var(--ui-grow) * ${v})`,
+    );
   }
+  /* the clamp-based display headings: their base never multiplied the
+     rung, so tuned headings scale them straight (portal clamps) and
+     replace the editorial h1's half-strength knob formula entirely */
+  root.style.setProperty("--tch", String(p.type.headings));
+  root.style.setProperty(
+    "--tch-ed",
+    p.type.headings === 1
+      ? "calc(1 + (var(--ui-scale) - 1) * 0.5)"
+      : String(p.type.headings),
+  );
   /* the spec tray's private knobs — --spec-h is an inline style
      because a continuous drag fraction can't ride a data-attribute
      ladder; density maps onto a chip width in globals.css */
