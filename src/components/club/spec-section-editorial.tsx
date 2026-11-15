@@ -9,9 +9,17 @@ import type { SpecSection } from "@/lib/spectra/notes-types";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the editorial section — the document room's one true
-   way a spec section looks. Specification clauses stay text-led:
-   the clause number, eyebrow, title and official statement carry
-   the hierarchy without decorative icons beside the spec point.
+   way a spec section looks. The sibling of SpecSectionView: same
+   idea, same data, the disclaimer page's dress — a numbered clause
+   rail, the official statement under its five-point rule, and the
+   note's blocks re-set editorially by SampleBlockView.
+   Specification clauses stay text-led: the clause number, eyebrow,
+   title and official statement carry the hierarchy without
+   decorative icons beside the spec point.
+
+   Served to every editorial notes surface — the real notes reader
+   and the pack's assembled clauses alike. One furniture set,
+   so every page that wears the document room ages together.
    ═══════════════════════════════════════════════════════════════ */
 
 export function EditorialSectionView({
