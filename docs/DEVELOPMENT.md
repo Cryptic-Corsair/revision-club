@@ -55,7 +55,13 @@ Port **3000** matters: the workspace preview chain proxies to it (see §10).
 src/
 ├─ app/
 │  ├─ layout.tsx        Root layout: fonts, metadata, pre-hydration prefs script
-│  ├─ page.tsx          Renders <ClubApp/>
+│  ├─ page.tsx          The showcase portal (canonical homepage, indexed)
+│  ├─ club/
+│  │  └─ [[...room]]/   Optional catch-all serving the workspace shell at
+│  │     page.tsx       /club and every /club/… path (noindexed; the shell
+│  │                    owns the address bar — see club-app.tsx's URL bridge)
+│  ├─ robots.txt        Generated route (allow-all + Sitemap line, §10)
+│  ├─ sitemap.xml       Generated route (the indexed surface, §10)
 │  ├─ globals.css       ALL theming (four labs, fonts, highlights, seams)
 │  └─ fonts/            Self-hosted woff2 (see §6 — do NOT revert to Google)
 ├─ components/club/

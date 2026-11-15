@@ -141,18 +141,30 @@ type View =
 /* ————— deep links into the shelved workspace —————
    The showcase homepage at / is the front door now, and its buttons
    land straight in the room they name instead of dropping the
-   visitor at the desk:
+   visitor at the desk. Two address forms reach the same rooms:
 
-   ?v=notes&doc=wch11-t02&spec=2.3   — the notes reader, optionally
-                                     opened at one clause
-   ?v=spec | ?v=pack | ?v=sticker    — the spec index, pack bench,
-                                     sticker book
-   ?v=WCH12 … ?v=WCH16               — a unit walk
+   PATHS (the canonical form — the URL tracks the room, so every
+   room has an address worth keeping):
 
-   Unknown values (and an unknown doc id) fall through to null and
-   the ordinary first-visit flow plays: the introduction, then the
-   desk. The doc default is the library's first note, so even a bare
-   ?v=notes lands somewhere real. */
+     /club/notes/wch11-t02/2.3   — the notes reader, opened at one
+                                   doc, optionally one clause
+     /club/notes/wch11-t02       — the notes reader, one doc
+     /club/notes                 — the notes reader, first doc
+     /club/spec | /club/pack     — the spec index / pack bench
+     /club/sticker | /club/legal — the sticker book / colophon
+     /club/topic/wch11/t03       — a topic with no note doc behind it
+     /club/wch12 … /club/wch16   — a unit walk
+     /club                       — the desk (and the introduction)
+
+   QUERY (the legacy form, still honoured): ?v=notes&doc=wch11-t02
+   &spec=2.3, ?v=spec | pack | sticker | legal | WCH12…WCH16 — parsed
+   first, then upgraded to its path form in the address bar with
+   history.replaceState, so old bookmarks and the front door's
+   buttons keep working while new shares carry clean paths.
+
+   Unknown doc ids fall back to the library's first note; unknown
+   paths and unknown query values fall through to null and the
+   ordinary first-visit flow plays: the introduction, then the desk. */
 function deepViewOf(
   v: string,
   doc: string | null,
@@ -173,8 +185,91 @@ function deepViewOf(
   if (key === "spec") return { kind: "spec" };
   if (key === "pack") return { kind: "pack" };
   if (key === "sticker") return { kind: "sticker" };
+  if (key === "legal") return { kind: "legal" };
   const unit = UNITS.find((u) => u.code.toLowerCase() === key);
   return unit ? { kind: "unit", code: unit.code } : null;
+}
+
+/* ————— the URL↔room bridge —————
+   viewToPath writes the room's address; viewFromPath reads one back
+   (case-insensitive, trailing slashes tolerated, segments after
+   /club). viewFromLocation prefers the legacy query — an upgrade must
+   never lose to a path — then falls back to the path itself.
+   viewIdentity is what the sync effect classifies deltas by: same
+   identity = the same room, so a clause jump REPLACES the address
+   (document-style, no history flood); a different identity is a room
+   change and PUSHES, so back/forward walks rooms like pages. */
+function viewToPath(view: View): string {
+  switch (view.kind) {
+    case "home":
+      return "/club";
+    case "unit":
+      return `/club/${view.code.toLowerCase()}`;
+    case "topic":
+      return `/club/topic/${view.code.toLowerCase()}/${view.topicId.toLowerCase()}`;
+    case "notes":
+      return `/club/notes/${view.docId}${view.spec ? `/${view.spec}` : ""}`;
+    case "spec":
+      return "/club/spec";
+    case "pack":
+      return "/club/pack";
+    case "sticker":
+      return "/club/sticker";
+    case "legal":
+      return "/club/legal";
+  }
+}
+
+function viewFromPath(pathname: string): View | null {
+  const segs = pathname.replace(/\/+$/, "").split("/").slice(2);
+  if (segs.length === 0) return { kind: "home" };
+  const [a, b, c] = segs;
+  const key = (a ?? "").toLowerCase();
+  if (key === "notes") {
+    const meta =
+      (b ? getNotesMeta(b.toLowerCase()) : undefined) ?? NOTES_META[0];
+    if (!meta) return null;
+    return {
+      kind: "notes",
+      code: meta.unitCode,
+      docId: meta.id,
+      spec: c?.trim() || undefined,
+    };
+  }
+  if (segs.length === 1) {
+    if (key === "spec") return { kind: "spec" };
+    if (key === "pack") return { kind: "pack" };
+    if (key === "sticker") return { kind: "sticker" };
+    if (key === "legal") return { kind: "legal" };
+    const unit = UNITS.find((u) => u.code.toLowerCase() === key);
+    return unit ? { kind: "unit", code: unit.code } : null;
+  }
+  if (key === "topic" && b && c && /^t\d{2}$/i.test(c)) {
+    const unit = UNITS.find((u) => u.code.toLowerCase() === b.toLowerCase());
+    if (unit)
+      return { kind: "topic", code: unit.code, topicId: c.toLowerCase() };
+  }
+  return null;
+}
+
+function viewFromLocation(): View | null {
+  const params = new URLSearchParams(window.location.search);
+  const v = params.get("v");
+  if (v) return deepViewOf(v, params.get("doc"), params.get("spec"));
+  return viewFromPath(window.location.pathname);
+}
+
+function viewIdentity(view: View): string {
+  switch (view.kind) {
+    case "notes":
+      return `notes:${view.docId}`;
+    case "unit":
+      return `unit:${view.code}`;
+    case "topic":
+      return `topic:${view.code}/${view.topicId}`;
+    default:
+      return view.kind;
+  }
 }
 
 /* ————— the brand mark —————
@@ -971,20 +1066,70 @@ export default function ClubApp() {
     visitHandled.current = true;
     const returning = markLandingSeen();
     setLanding(!returning);
-    /* A deep link (?v=…) skips the introduction entirely — someone
-       who followed a button from the front page is already through
-       the door — and banks the visit as engagement so the next
-       direct visit opens the desk. */
-    const params = new URLSearchParams(window.location.search);
-    const deep = deepViewOf(
-      params.get("v") ?? "",
-      params.get("doc"),
-      params.get("spec"),
-    );
-    if (!deep) return;
+    /* A deep link — legacy ?v=… or a clean /club/… path — skips the
+       introduction entirely: someone who followed a button from the
+       front page is already through the door. It also banks the visit
+       as engagement so the next direct visit opens the desk. */
+    const deep = viewFromLocation();
+    if (!deep) {
+      /* an unknown address (/club/nonsense) renders the desk but must
+         not leave junk in the address bar — normalize in place, no
+         history entry */
+      if (window.location.pathname !== "/club")
+        window.history.replaceState(null, "", "/club");
+      return;
+    }
     markDeskEntered();
     setLanding(false);
     setView(deep);
+  }, []);
+
+  /* ————— the URL tracks the room —————
+     Every room change writes its path: room changes PUSH (back walks
+     rooms like pages), clause-level changes inside one doc REPLACE
+     (no history flood). The first run is skipped — the mount effect
+     above may still be about to setView with the deep link, and the
+     deep-link render is the one that owns the first URL write
+     (replace-not-push when the address must upgrade from its legacy
+     ?v= form; no-op when a clean path already matches). popstate —
+     back/forward — re-derives the room from the path, and the
+     pathname guard below keeps that render from re-pushing. */
+  const urlSynced = useRef(false);
+  const urlIdentity = useRef<string | null>(null);
+  useEffect(() => {
+    const id = viewIdentity(view);
+    if (!urlSynced.current) {
+      urlSynced.current = true;
+      urlIdentity.current = id;
+      return;
+    }
+    const path = viewToPath(view);
+    if (window.location.pathname === path) {
+      urlIdentity.current = id;
+      return;
+    }
+    if (id === urlIdentity.current)
+      window.history.replaceState(null, "", path);
+    else window.history.pushState(null, "", path);
+    urlIdentity.current = id;
+  }, [view]);
+
+  /* back/forward: the room follows the address (and an unknown pop —
+     a hand-edited entry, a stale share — normalizes to the desk) */
+  useEffect(() => {
+    const onPop = () => {
+      const v = viewFromPath(window.location.pathname);
+      if (v) {
+        setView(v);
+        urlIdentity.current = viewIdentity(v);
+      } else {
+        window.history.replaceState(null, "", "/club");
+        setView({ kind: "home" });
+        urlIdentity.current = "home";
+      }
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
   }, []);
 
   useEffect(() => {
@@ -1360,6 +1505,7 @@ export default function ClubApp() {
             <AnimatePresence mode="wait">
               <m.div
                 key={viewKey}
+                data-view={viewKey}
                 initial={{ opacity: 0, y: 22, scale: 0.995 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -14, scale: 0.995 }}
