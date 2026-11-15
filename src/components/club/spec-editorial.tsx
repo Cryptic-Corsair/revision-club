@@ -91,7 +91,7 @@ export function SpecEditorial({
                 {SPEC_STATS.topics} TOPICS
               </span>
             </div>
-            <h1 className="mt-5 max-w-[18ch] font-display text-[calc(clamp(2.4rem,6vw,4.6rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.06] font-bold tracking-[-.05em] text-ink">
+            <h1 className="mt-5 max-w-[18ch] font-display text-[calc(clamp(2.4rem,6vw,4.6rem)*var(--tch-ed))] leading-[1.06] font-bold tracking-[-.05em] text-ink">
               Tick the spec points. Get one revision pack
               <span className="legal-heading-accent">.</span>
             </h1>

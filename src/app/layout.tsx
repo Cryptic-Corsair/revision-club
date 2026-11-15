@@ -130,24 +130,33 @@ r.dataset.motion=p.motion===false?"off":"on";
    in prefs.ts boundary for boundary (≥640 L, ≥768 XL, else M) */
 var fb="M";try{var w=window.innerWidth||document.documentElement.clientWidth;if(w>=768)fb="XL";else if(w>=640)fb="L"}catch(e){}
 var s=p.scale==="S"||p.scale==="M"||p.scale==="L"||p.scale==="XL"?p.scale:(p.zoom===0.9?"S":p.zoom===1.15?"L":p.zoom===1.3?"XL":fb);
+/* the advanced type roles — canonical absolute factors, mirrored from
+   sanitize() in prefs.ts clamp for clamp (roles .8-1.6, junk or
+   absent → the rung's own factor for v3 saves, 1→rung for legacy)
+   and migration for migration: v3 saves carry the factors as-is;
+   older saves marked untuned roles with 1 meaning "ride the rung",
+   so those take the rung's factor; a save with no type field rides
+   entirely. The vector is then matched against the preset vectors
+   (S .9 / M 1 / L 1.2 / XL 1.5) — an exact match relights that
+   rung's dataset.scale, so the first paint and hydration agree.
+   --preset-k carries the rung's factor for the CSS ratios. */
+var KV={S:.9,M:1,L:1.2,XL:1.5};
+var k=KV[s];
+var tp=p.type&&typeof p.type==="object"?p.type:null;
+var rc=function(v,lo,hi,d){return typeof v==="number"&&isFinite(v)?Math.min(hi,Math.max(lo,v)):d};
+var fbv=p.v===3?k:1;
+var tf=tp?{h:rc(tp.headings,.8,1.6,fbv),s:rc(tp.sub,.8,1.6,fbv),b:rc(tp.body,.8,1.6,fbv),o:rc(tp.other,.8,1.6,fbv),w:rc(tp.width,.8,1.6,fbv)}:{h:k,s:k,b:k,o:k,w:k};
+if(tp&&p.v!==3){if(Math.abs(tf.h-1)<=.005)tf.h=k;if(Math.abs(tf.s-1)<=.005)tf.s=k;if(Math.abs(tf.b-1)<=.005)tf.b=k;if(Math.abs(tf.o-1)<=.005)tf.o=k;if(Math.abs(tf.w-1)<=.005)tf.w=k}
+var MS=["S","M","L","XL"];
+for(var mi=0;mi<4;mi++){var mv=KV[MS[mi]];if(Math.abs(tf.h-mv)<=.005&&Math.abs(tf.s-mv)<=.005&&Math.abs(tf.b-mv)<=.005&&Math.abs(tf.o-mv)<=.005&&Math.abs(tf.w-mv)<=.005){s=MS[mi];k=mv;break}}
 r.dataset.scale=s;
-/* the advanced type roles — mirrors applyPrefs() in prefs.ts string
-   for string and sanitizeType() clamp for clamp (roles .8-1.3, junk
-   or absent → 1): at 100% a role rides the rung (var(--ui-scale)),
-   when tuned it goes standalone (calc(var(--ui-grow) * v) — same px
-   on every rung), so a saved slider set first-paints settled instead
-   of re-flowing after hydration */
-var tp=p.type&&typeof p.type==="object"?p.type:{};
-var rc=function(v,lo,hi){return typeof v==="number"&&isFinite(v)?Math.min(hi,Math.max(lo,v)):1};
-var th=rc(tp.headings,.8,1.3);
 var rs=document.documentElement.style;
-rs.setProperty("--ts-heading",th===1?"var(--ui-scale)":"calc(var(--ui-grow) * "+th+")");
-rs.setProperty("--ts-sub",rc(tp.sub,.8,1.3)===1?"var(--ui-scale)":"calc(var(--ui-grow) * "+rc(tp.sub,.8,1.3)+")");
-rs.setProperty("--ts-body",rc(tp.body,.8,1.3)===1?"var(--ui-scale)":"calc(var(--ui-grow) * "+rc(tp.body,.8,1.3)+")");
-rs.setProperty("--ts-other",rc(tp.other,.8,1.3)===1?"var(--ui-scale)":"calc(var(--ui-grow) * "+rc(tp.other,.8,1.3)+")");
-rs.setProperty("--ts-width",rc(tp.width,.8,1.3)===1?"var(--ui-scale)":"calc(var(--ui-grow) * "+rc(tp.width,.8,1.3)+")");
-rs.setProperty("--tch",String(th));
-rs.setProperty("--tch-ed",th===1?"calc(1 + (var(--ui-scale) - 1) * 0.5)":String(th));
+rs.setProperty("--type-heading",String(tf.h));
+rs.setProperty("--type-sub",String(tf.s));
+rs.setProperty("--type-body",String(tf.b));
+rs.setProperty("--type-other",String(tf.o));
+rs.setProperty("--type-width",String(tf.w));
+rs.setProperty("--preset-k",String(k));
 /* the interface axis: editorial | gallery. The retired "rooms" dress
    (and any unrecognisable value) reads as the gallery — the site's
    front door — so even a legacy save first-paints in the right dress

@@ -184,27 +184,37 @@ html[data-body="nunito"] {
   --ui-knob: 1;
   --ui-grow: 1;
   --ui-scale: calc(var(--ui-knob) * var(--ui-grow));
-  /* the advanced type roles — the customize panel's Advanced sliders
-     (prefs.type), mirrored by the pre-paint script in layout.tsx.
-     Each font-size declaration answers to ONE composed var: --ts-*.
-     At 100% the JS writes var(--ui-scale) into it, so an untouched
-     role rides the rung exactly as before; the moment a role is
-     tuned, the JS swaps in calc(var(--ui-grow) * v) — the slider
-     sets that role's size DIRECTLY (100% = the M-rung baseline),
-     knob excluded, so 120% body is the same px on XL and L. The
-     viewport growth stays: it's the site's screen refinement, not a
-     user choice. The clamp-based display headings never multiplied
-     the rung, so they get their own vars: --tch (portal clamps,
-     default 1) and --tch-ed (the editorial h1, whose designed base
-     is the half-strength knob formula). The spec map pins all seven
-     back to their ride-along defaults with its --ui-scale freeze. */
-  --ts-heading: var(--ui-scale);
-  --ts-sub: var(--ui-scale);
-  --ts-body: var(--ui-scale);
-  --ts-other: var(--ui-scale);
-  --ts-width: var(--ui-scale);
-  --tch: 1;
-  --tch-ed: calc(1 + (var(--ui-scale) - 1) * 0.5);
+  /* the advanced type roles — the CANONICAL text state. prefs.type
+     holds five absolute factors (× the M-rung baseline); the panel's
+     Text-size rung is a PRESET WRITER — picking a rung replaces all
+     five factors with its vector — and the Advanced sliders edit
+     single factors. Two editors, one state, so the controls can never
+     disagree: switching L→XL visibly moves the sliders to 150%, and a
+     hand-tuned mix relights the rung row as Custom. applyPrefs + the
+     pre-paint script write the five RAW factors plus --preset-k (the
+     active rung's factor); everything below composes from them.
+     --ts-X feeds every font-size declaration (= grow × factor — the
+     viewport growth is the site's screen refinement, not a user
+     choice). The display headings never took the full rung jump, so
+     they answer to the OFF-PRESET RATIO: --tch (portal vw-clamps,
+     flat at every preset) and --tch-ed (the editorial h1's designed
+     half-strength response, D = 1 + (scale−1)×0.5). At any preset
+     both ratios resolve to the designed values; tuning moves the
+     whole headings system proportionally. The spec map pins the
+     composed vars back to 1 below. */
+  --type-heading: 1;
+  --type-sub: 1;
+  --type-body: 1;
+  --type-other: 1;
+  --type-width: 1;
+  --preset-k: 1;
+  --ts-heading: calc(var(--ui-grow) * var(--type-heading));
+  --ts-sub: calc(var(--ui-grow) * var(--type-sub));
+  --ts-body: calc(var(--ui-grow) * var(--type-body));
+  --ts-other: calc(var(--ui-grow) * var(--type-other));
+  --ts-width: calc(var(--ui-grow) * var(--type-width));
+  --tch: calc(var(--type-heading) / var(--preset-k));
+  --tch-ed: calc((1 + (var(--ui-scale) - 1) * 0.5) * var(--type-heading) / var(--preset-k));
 }
 /* desk refinement: laptops/tablet-landscape ride the XL default
    alone; wider monitors climb gently so a 1920+ desk reads a step
@@ -243,16 +253,16 @@ html[data-scale="XL"] {
   --ui-scale: 1;
   /* the advanced type roles freeze with the scale: the map is a
      precise spatial instrument — its drawer, tiles and chip labels
-     stay pixel-identical whatever the reading sliders do elsewhere.
-     Each role var returns to its ride-along default, which resolves
-     to 1 under the pinned --ui-scale above. */
-  --ts-heading: var(--ui-scale);
-  --ts-sub: var(--ui-scale);
-  --ts-body: var(--ui-scale);
-  --ts-other: var(--ui-scale);
-  --ts-width: var(--ui-scale);
+     stay pixel-identical whatever the reading state does elsewhere.
+     The COMPOSED vars pin straight to 1 — pinning the outputs (not
+     the raw inputs) is the bulletproof freeze. */
+  --ts-heading: 1;
+  --ts-sub: 1;
+  --ts-body: 1;
+  --ts-other: 1;
+  --ts-width: 1;
   --tch: 1;
-  --tch-ed: calc(1 + (var(--ui-scale) - 1) * 0.5);
+  --tch-ed: 1;
 }
 
 /* ————— the spec map's shared dress —————

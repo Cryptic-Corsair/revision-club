@@ -97,13 +97,17 @@ export const ACCENT_IDS: AccentId[] = ACCENTS.map((a) => a.id);
    included), which is what kept squeezing the spec map and every
    fixed surface. Scale instead feeds --ui-knob (see globals.css),
    which composes with a gentle viewport --ui-grow into --ui-scale:
-   component sizes multiply with the product. The FACTORY default is
-   screen-aware — M on phones, L on small tablets (≥640px), XL on
-   tablets (≥768px) and every laptop/desktop — set in load() below
-   and mirrored by the pre-paint script in layout.tsx (the two must
-   agree or the first paint re-flows). A saved rung always wins over
-   the factory default. The spec map pins the product back to 1 and
-   stays pixel-identical; every other surface rides it. */
+   the interface CHROME — spacing, chips, component sizes — multiplies
+   with the product. The rung's effect on TEXT runs through the
+   canonical type state below: picking a rung is a PRESET WRITE (it
+   replaces all five role factors with its vector), not a multiplier.
+   The FACTORY default is screen-aware — M on phones, L on small
+   tablets (≥640px), XL on tablets (≥768px) and every laptop/desktop —
+   set in load() below and mirrored by the pre-paint script in
+   layout.tsx (the two must agree or the first paint re-flows). A
+   saved rung always wins over the factory default. The spec map pins
+   the composed text vars back to 1 and stays pixel-identical; every
+   other surface rides it. */
 export const SCALES = ["S", "M", "L", "XL"] as const;
 export type ScaleId = (typeof SCALES)[number];
 export const SCALE_VALUE: Record<ScaleId, number> = {
@@ -113,20 +117,26 @@ export const SCALE_VALUE: Record<ScaleId, number> = {
   XL: 1.5,
 };
 
-/* advanced type roles — the panel's per-reading-role sizes, STANDALONE
-   of the scale rung. Each font-size declaration answers to one
-   composed var (--ts-*, see globals.css): at 100% the role rides the
-   rung exactly as before, but the moment a role is tuned the slider
-   sets that role's size DIRECTLY — 100% is the M-rung baseline, the
-   knob is excluded, so 120% body is the same px whether the visitor
-   sits on XL or L (only the site's viewport growth remains, since
-   that's screen adaptation, not a user choice). Roles: headings
-   (section titles, display words), sub (card titles, h3/h4), body
-   (paragraphs, notes text), other (micro, kickers, chips, labels) and
-   width (the reading measure — the gallery's content column and the
-   editorial prose). Values are clamped on the way in — and mirrored
-   by the pre-paint script in layout.tsx, which must agree with these
-   limits or the first paint re-flows. */
+/* advanced type roles — the CANONICAL text state. prefs.type holds
+   five absolute factors: each role's size as a multiple of the
+   M-rung baseline (body 100% = 16.5px × the viewport grow). The
+   customize panel has TWO EDITORS over this one state: the Text-size
+   rung, whose pick REPLACES all five factors with its preset vector
+   (so switching L→XL visibly moves the sliders to 150% — that is the
+   synchronization), and the Advanced sliders, which edit single
+   factors. sanitize() keeps the rung label in step with the state:
+   a vector matching a preset relights that rung, anything else reads
+   as a Custom mix. Rendering composes in CSS (globals.css): every
+   font-size declaration answers to --ts-X = grow × factor — the
+   viewport growth is the site's screen refinement, not a user
+   choice — and the display headings answer to off-preset ratios
+   (--tch / --tch-ed) so presets render exactly the designed values.
+   Roles: headings (section titles, display words), sub (card titles,
+   h3/h4), body (paragraphs, notes text), other (micro, kickers,
+   chips, labels) and width (the reading measure — the gallery's
+   content column and the editorial prose). Values are clamped on the
+   way in — and mirrored by the pre-paint script in layout.tsx, which
+   must agree with these limits or the first paint re-flows. */
 export interface TypePrefs {
   headings: number;
   sub: number;
@@ -135,6 +145,8 @@ export interface TypePrefs {
   width: number;
 }
 
+/* the M preset vector — also the "standard text" the Advanced
+   section's reset chip returns to */
 export const DEFAULT_TYPE_PREFS: TypePrefs = {
   headings: 1,
   sub: 1,
@@ -143,29 +155,55 @@ export const DEFAULT_TYPE_PREFS: TypePrefs = {
   width: 1,
 };
 
+/* the preset vectors — a rung pick writes its factor into all five
+   roles at once (uniformVector), and matchPreset reads the state back
+   to light the rung row (or Custom). Epsilon absorbs slider-step
+   noise: the sliders land on a 0.05 grid, presets are 0.9/1/1.2/1.5,
+   all on it. */
+export const PRESET_EPSILON = 0.005;
+
+export const uniformVector = (k: number): TypePrefs => ({
+  headings: k,
+  sub: k,
+  body: k,
+  other: k,
+  width: k,
+});
+
+export function matchPreset(t: TypePrefs): ScaleId | null {
+  const roles = Object.keys(DEFAULT_TYPE_PREFS) as (keyof TypePrefs)[];
+  for (const s of SCALES) {
+    const k = SCALE_VALUE[s];
+    if (roles.every((r) => Math.abs(t[r] - k) <= PRESET_EPSILON)) return s;
+  }
+  return null;
+}
+
+/* the ceiling must hold every preset vector (XL writes 1.5) plus
+   headroom above it: 80–160% is the slider's range, XL's own vector
+   included. The overflow battery keeps the headroom honest. */
 const TYPE_LIMITS: Record<keyof TypePrefs, [number, number]> = {
-  headings: [0.8, 1.3],
-  sub: [0.8, 1.3],
-  body: [0.8, 1.3],
-  other: [0.8, 1.3],
-  width: [0.8, 1.3],
+  headings: [0.8, 1.6],
+  sub: [0.8, 1.6],
+  body: [0.8, 1.6],
+  other: [0.8, 1.6],
+  width: [0.8, 1.6],
 };
 
-/* the composed CSS var each role answers to (see globals.css):
-   applyPrefs writes var(--ui-scale) into it at 100% — ride the rung —
-   and calc(var(--ui-grow) * v) when tuned — the slider sets the size
-   DIRECTLY, so a given % is the same px on every rung. The two
-   clamp-heading vars are written alongside (see below). */
+/* the RAW CSS vars the factors land on (globals.css composes them
+   into --ts-* and the --tch / --tch-ed ratios): applyPrefs and the
+   pre-paint script write plain numbers — no conditionals anywhere,
+   presets and custom mixes render through the same formula. */
 export const TYPE_ROLE_VARS: Record<keyof TypePrefs, string> = {
-  headings: "--ts-heading",
-  sub: "--ts-sub",
-  body: "--ts-body",
-  other: "--ts-other",
-  width: "--ts-width",
+  headings: "--type-heading",
+  sub: "--type-sub",
+  body: "--type-body",
+  other: "--type-other",
+  width: "--type-width",
 };
 
-function sanitizeType(v: unknown): TypePrefs {
-  const out = { ...DEFAULT_TYPE_PREFS };
+function sanitizeType(v: unknown, fallback: TypePrefs): TypePrefs {
+  const out = { ...fallback };
   if (v && typeof v === "object") {
     const rec = v as Record<string, unknown>;
     for (const k of Object.keys(DEFAULT_TYPE_PREFS) as (keyof TypePrefs)[]) {
@@ -222,10 +260,11 @@ export interface Prefs {
   accents: AccentId[];
   /** content scale — S/M/L/XL (multiplies --ui-scale) */
   scale: ScaleId;
-  /** the advanced type roles — standalone per-reading-role sizes (see
-      TypePrefs above); driven by the panel's Advanced sliders,
-      clamped by sanitizeType, applied as --ts-* vars. 100% rides the
-      rung; any tuned % sets that role's size directly, knob-independent. */
+  /** the canonical text state — five absolute per-role factors (see
+      TypePrefs above). The Text-size rung writes preset vectors into
+      it; the Advanced sliders edit single factors; sanitize() keeps
+      the rung label in sync with the vector. Applied as raw --type-*
+      vars plus --preset-k; CSS composes the rest. */
   type: TypePrefs;
   /** the spec-map drawer's height, as a fraction of the visible
       screen — set by the panel presets and by dragging the grabber */
@@ -269,8 +308,20 @@ let hydrated = false;
 const listeners = new Set<() => void>();
 
 /** what sanitize reads: today's prefs, plus the retired zoom number
-    that older saves carry (mapped onto scale below) */
-type StoredPrefs = Partial<Prefs> & { zoom?: unknown };
+    that older saves carry (mapped onto scale below), plus the storage
+    schema version. */
+type StoredPrefs = Partial<Prefs> & { zoom?: unknown; v?: unknown };
+
+/* storage schema version — v3 introduced the canonical type state
+   (absolute per-role factors + preset vectors). Saves without this
+   marker migrate through the legacy path in sanitize(): v1 had no
+   type field at all; v2 marked untuned roles with 1 meaning "ride
+   the rung". Both migrate so the rung the save was riding becomes
+   those roles' factor — a returning visitor's rendering is preserved
+   exactly (an XL ride-along save MUST become the 1.5 vector, not be
+   normalized down to M). Bumping this means updating the pre-paint
+   script in layout.tsx in the same commit. */
+const PREFS_VERSION = 3;
 
 function sanitize(p: StoredPrefs): Prefs {
   const out: Prefs = { ...DEFAULT_PREFS };
@@ -304,7 +355,27 @@ function sanitize(p: StoredPrefs): Prefs {
     const heir = LEGACY_ZOOM.find(([v]) => v === p.zoom);
     if (heir) out.scale = heir[1];
   }
-  out.type = sanitizeType(p.type);
+  /* the type roles — canonical absolute factors, versioned. v3 saves
+     carry them as-is (junk fields fall back to the rung's own
+     factor); older saves migrate (see PREFS_VERSION above): a factor
+     of 1 meant "ride the rung", so those roles take the rung's
+     factor; a save with no type field rides entirely. The result is
+     then matched against the preset vectors — an exact match
+     relights that rung, so the label follows the state, never the
+     other way round. */
+  const k = SCALE_VALUE[out.scale];
+  if (p.v === PREFS_VERSION) {
+    out.type = sanitizeType(p.type, uniformVector(k));
+  } else if (p.type && typeof p.type === "object") {
+    const legacy = sanitizeType(p.type, uniformVector(1));
+    for (const r of Object.keys(DEFAULT_TYPE_PREFS) as (keyof TypePrefs)[])
+      if (Math.abs(legacy[r] - 1) <= PRESET_EPSILON) legacy[r] = k;
+    out.type = legacy;
+  } else {
+    out.type = uniformVector(k);
+  }
+  const matched = matchPreset(out.type);
+  if (matched) out.scale = matched;
   if (typeof p.specHeight === "number" && Number.isFinite(p.specHeight))
     out.specHeight = Math.min(SPEC_H_MAX, Math.max(SPEC_H_MIN, p.specHeight));
   if (
@@ -331,6 +402,22 @@ function sanitize(p: StoredPrefs): Prefs {
   return out;
 }
 
+/** the screen-aware factory rung — phones keep Medium, small tablets
+    (≥640px CSS) start on Large, tablets (≥768px) and every
+    laptop/desktop start on XL — reading distance, not device class,
+    is what the type ladder answers to. Shared by load()'s first run
+    and resetPrefs(); mirrored by the pre-paint script in layout.tsx
+    boundary for boundary. */
+function factoryScale(): ScaleId {
+  try {
+    if (window.innerWidth >= 768) return "XL";
+    if (window.innerWidth >= 640) return "L";
+  } catch {
+    /* no innerWidth — keep Medium */
+  }
+  return "M";
+}
+
 function load() {
   if (hydrated || typeof window === "undefined") return;
   hydrated = true;
@@ -344,19 +431,13 @@ function load() {
          its direct heir; everything else starts on the default. */
       const legacy = window.localStorage.getItem("rc-theme");
       if (legacy === "dark") state = { ...state, theme: "dark" };
-      /* the screen-aware factory rung: phones keep Medium, small
-         tablets (≥640px CSS) start on Large, tablets (≥768px) and
-         every laptop/desktop start on XL — reading distance, not
-         device class, is what the type ladder answers to. Only a
+      /* the screen-aware factory rung AND its type vector — the
+         sliders read the preset the visitor starts on. Only a
          factory setting: the first rung you pick yourself is kept
          for keeps. Mirrored by the pre-paint script in layout.tsx —
          the two must agree or the first paint re-flows. */
-      try {
-        if (window.innerWidth >= 768) state = { ...state, scale: "XL" };
-        else if (window.innerWidth >= 640) state = { ...state, scale: "L" };
-      } catch {
-        /* no innerWidth — keep Medium */
-      }
+      const fs = factoryScale();
+      state = { ...state, scale: fs, type: uniformVector(SCALE_VALUE[fs]) };
     }
   } catch {
     /* private mode / corrupt data — defaults */
@@ -365,7 +446,9 @@ function load() {
 
 function persist() {
   try {
-    window.localStorage.setItem(KEY, JSON.stringify(state));
+    /* the schema version rides IN the payload — sanitize() routes on
+       it (v3 canonical vs the legacy migration path) */
+    window.localStorage.setItem(KEY, JSON.stringify({ ...state, v: PREFS_VERSION }));
   } catch {
     /* storage unavailable — prefs stay in memory for this tab */
   }
@@ -413,31 +496,17 @@ export function applyPrefs(p: Prefs) {
   root.dataset.motion = p.motion ? "on" : "off";
   root.dataset.scale = p.scale;
   /* the advanced type roles ride as inline vars the same way --spec-h
-     does — continuous fractions can't sit on a data-attribute ladder.
-     Each composed var gets an explicit STRING: at 100% the role rides
-     the rung (var(--ui-scale), so knob and grow apply exactly as
-     before); when tuned the role goes STANDALONE — calc(var(--ui-grow)
-     * v) sets its size directly off the M-rung baseline, knob
-     excluded, so a given % is the same px on every rung. The values
-     are always written (never removed) so switching a role back to
-     100% cleanly restores the ride-along. */
+     does — continuous factors can't sit on a data-attribute ladder.
+     Five RAW factors plus the preset scalar land on <html> as plain
+     numbers; globals.css composes --ts-X = grow × factor for every
+     font-size declaration, and the --tch / --tch-ed display-heading
+     ratios off the same inputs. No conditionals here: the rung preset
+     and the sliders are two editors over one state, and the CSS is
+     the same formula for both. */
   for (const [key, cssVar] of Object.entries(TYPE_ROLE_VARS)) {
-    const v = p.type[key as keyof TypePrefs];
-    root.style.setProperty(
-      cssVar,
-      v === 1 ? "var(--ui-scale)" : `calc(var(--ui-grow) * ${v})`,
-    );
+    root.style.setProperty(cssVar, String(p.type[key as keyof TypePrefs]));
   }
-  /* the clamp-based display headings: their base never multiplied the
-     rung, so tuned headings scale them straight (portal clamps) and
-     replace the editorial h1's half-strength knob formula entirely */
-  root.style.setProperty("--tch", String(p.type.headings));
-  root.style.setProperty(
-    "--tch-ed",
-    p.type.headings === 1
-      ? "calc(1 + (var(--ui-scale) - 1) * 0.5)"
-      : String(p.type.headings),
-  );
+  root.style.setProperty("--preset-k", String(SCALE_VALUE[p.scale]));
   /* the spec tray's private knobs — --spec-h is an inline style
      because a continuous drag fraction can't ride a data-attribute
      ladder; density maps onto a chip width in globals.css */
@@ -451,7 +520,9 @@ export function applyPrefs(p: Prefs) {
 
 export function setPrefs(patch: Partial<Prefs>) {
   load();
-  const next = sanitize({ ...state, ...patch });
+  /* the version marker routes THIS patch through the canonical path —
+     only load()'s raw storage read can take the legacy migration */
+  const next = sanitize({ ...state, ...patch, v: PREFS_VERSION });
   const themeFlip = next.theme !== state.theme;
   state = next;
   persist();
@@ -462,7 +533,10 @@ export function setPrefs(patch: Partial<Prefs>) {
 
 export function resetPrefs() {
   load();
-  state = DEFAULT_PREFS;
+  /* back to the screen-aware factory — what a fresh visitor on THIS
+     screen would see: the factory rung and its type vector */
+  const fs = factoryScale();
+  state = { ...DEFAULT_PREFS, scale: fs, type: uniformVector(SCALE_VALUE[fs]) };
   persist();
   applyPrefs(state);
   emit();

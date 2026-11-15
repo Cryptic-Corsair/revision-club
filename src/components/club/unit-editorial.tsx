@@ -68,7 +68,7 @@ export function UnitEditorial({
                 IAL CHEM · {unit.stage} · {unit.topicRange}
               </span>
             </div>
-            <h1 className="mt-5 max-w-[24ch] font-display text-[calc(clamp(2.4rem,6vw,4.6rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.06] font-bold tracking-[-.05em] text-ink">
+            <h1 className="mt-5 max-w-[24ch] font-display text-[calc(clamp(2.4rem,6vw,4.6rem)*var(--tch-ed))] leading-[1.06] font-bold tracking-[-.05em] text-ink">
               {unit.title}
               <span className="legal-heading-accent">.</span>
             </h1>

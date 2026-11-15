@@ -5,16 +5,19 @@ import { AnimatePresence, m } from "framer-motion";
 import { Check, Palette, RotateCcw, X } from "./icons";
 import {
   DEFAULT_PREFS,
-  DEFAULT_TYPE_PREFS,
   IFACE_DESCRIPTION,
   IFACE_LABEL,
   IFACE_ORDER,
   LAB_LABEL,
   labOrderFor,
+  PRESET_EPSILON,
+  SCALE_VALUE,
   SCALES,
   SPEC_DENSITIES,
   SPEC_HEIGHTS,
+  matchPreset,
   setPrefs,
+  uniformVector,
   THEME_CHIP,
   usePrefs,
   type BodyFont,
@@ -295,6 +298,7 @@ function PanelSlider({
   value,
   onChange,
   ariaLabel,
+  refValue = 1,
 }: {
   label: string;
   hint: string;
@@ -304,8 +308,11 @@ function PanelSlider({
   value: number;
   onChange: (v: number) => void;
   ariaLabel: string;
+  /** the value the readout's tuned colour keys off — the active
+      preset's factor, so an XL visitor at 150% reads as standard */
+  refValue?: number;
 }) {
-  const tuned = Math.abs(value - 1) > 0.001;
+  const tuned = Math.abs(value - refValue) > PRESET_EPSILON;
   return (
     <div className="border-t pt-3.5 first:border-t-0 first:pt-0" style={{ borderColor: hair(8) }}>
       <div className="flex items-baseline gap-3">
@@ -338,7 +345,8 @@ function PanelSlider({
 }
 
 /* the five advanced roles, in panel order — min/max/step mirror
-   TYPE_LIMITS in prefs.ts (sanitize clamps anything off-ladder) */
+   TYPE_LIMITS in prefs.ts (sanitize clamps anything off-ladder); the
+   ceiling holds XL's own preset vector (1.5) plus headroom to 160% */
 const ADV_ROLES: {
   key: keyof TypePrefs;
   label: string;
@@ -346,11 +354,11 @@ const ADV_ROLES: {
   min: number;
   max: number;
 }[] = [
-  { key: "headings", label: "Headings", hint: "Section titles & display words", min: 0.8, max: 1.3 },
-  { key: "sub", label: "Subheadings", hint: "Card titles & small headers", min: 0.8, max: 1.3 },
-  { key: "body", label: "Body text", hint: "Paragraphs & notes text", min: 0.8, max: 1.3 },
-  { key: "other", label: "Small text", hint: "Kickers, chips, labels", min: 0.8, max: 1.3 },
-  { key: "width", label: "Text width", hint: "The reading measure — prose columns", min: 0.8, max: 1.3 },
+  { key: "headings", label: "Headings", hint: "Section titles & display words", min: 0.8, max: 1.6 },
+  { key: "sub", label: "Subheadings", hint: "Card titles & small headers", min: 0.8, max: 1.6 },
+  { key: "body", label: "Body text", hint: "Paragraphs & notes text", min: 0.8, max: 1.6 },
+  { key: "other", label: "Small text", hint: "Kickers, chips, labels", min: 0.8, max: 1.6 },
+  { key: "width", label: "Text width", hint: "The reading measure — prose columns", min: 0.8, max: 1.6 },
 ];
 
 /* a hairline-ruled rung table — the segmented picks (text size,
@@ -539,11 +547,16 @@ export function CustomizePanel({
 
   /* the Advanced disclosure starts folded — the five role sliders are
      for readers who outgrow the rungs, not the first thing everyone
-     meets. It also opens itself if a saved pref has any role tuned,
-     so the panel always tells the truth about the current state. */
+     meets. "Tuned" means OFF THE ACTIVE PRESET now (not off 1): an XL
+     visitor sits at 150% everywhere and that is not "tuned" — drag
+     any slider away from the rung's vector and the mix is custom.
+     The disclosure also opens itself for a custom mix, so the panel
+     always tells the truth about the current state. */
   const [advOpen, setAdvOpen] = useState(false);
-  const advTuned = ADV_ROLES.some((r) => Math.abs(prefs.type[r.key] - 1) > 0.001);
-  const advCount = ADV_ROLES.filter((r) => Math.abs(prefs.type[r.key] - 1) > 0.001).length;
+  const matchedScale = matchPreset(prefs.type);
+  const refK = SCALE_VALUE[prefs.scale];
+  const advTuned = matchedScale === null;
+  const advCount = ADV_ROLES.filter((r) => Math.abs(prefs.type[r.key] - refK) > PRESET_EPSILON).length;
   useEffect(() => {
     if (advTuned) setAdvOpen(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -717,15 +730,22 @@ export function CustomizePanel({
                 </div>
               </PanelSection>
 
-              {/* 4 · text size */}
+              {/* 4 · text size — the rungs are PRESET WRITES: picking a
+                  rung replaces all five role factors with its vector,
+                  so the sliders below visibly move with it. The row's
+                  highlight is DERIVED from the state (matchPreset), so
+                  a hand-tuned mix lights the Custom chip instead of
+                  lying about a rung it no longer matches. */}
               <PanelSection title="Text size">
                 <PanelRungs
                   ariaPrefix="Text size"
-                  activeIndex={SCALES.indexOf(prefs.scale)}
-                  onPick={(i) => setPrefs({ scale: SCALES[i] })}
+                  activeIndex={matchedScale ? SCALES.indexOf(matchedScale) : -1}
+                  onPick={(i) =>
+                    setPrefs({ scale: SCALES[i], type: uniformVector(SCALE_VALUE[SCALES[i]]) })
+                  }
                   items={SCALES.map((s, i) => ({
                     key: s,
-                    aria: s,
+                    aria: `${s} — sets every role to ${Math.round(SCALE_VALUE[s] * 100)}%`,
                     main: (
                       <span
                         className="font-display leading-none font-bold"
@@ -736,9 +756,20 @@ export function CustomizePanel({
                         Aa
                       </span>
                     ),
-                    sub: s,
+                    sub: `${s} · ${Math.round(SCALE_VALUE[s] * 100)}%`,
                   }))}
                 />
+                {matchedScale === null && (
+                  <span
+                    className="mt-3 inline-flex cursor-default items-center self-start rounded-full px-3 py-1.5 font-display text-[calc(10.5px*var(--ts-other))] font-semibold uppercase tracking-[0.14em]"
+                    style={{
+                      border: `1px solid var(--panel-accent)`,
+                      color: "var(--panel-accent)",
+                    }}
+                  >
+                    Custom mix
+                  </span>
+                )}
               </PanelSection>
 
               {/* 4b · advanced type roles */}
@@ -750,8 +781,8 @@ export function CustomizePanel({
                   className="flex w-full cursor-pointer items-center gap-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--panel-accent)]"
                 >
                   <span className="min-w-0 flex-1 text-[calc(11.5px*var(--ts-other))] leading-snug text-ink-faint">
-                    Set each reading role's size directly — tuned roles
-                    ignore the Text size rung above; 100% rides it.
+                    The Text size rung moves all five sliders together —
+                    tune any role below and the mix becomes Custom.
                   </span>
                   <svg
                     aria-hidden
@@ -791,13 +822,16 @@ export function CustomizePanel({
                             step={0.05}
                             value={prefs.type[r.key]}
                             ariaLabel={`Advanced ${r.label.toLowerCase()} size`}
+                            refValue={refK}
                             onChange={(v) => setPrefs({ type: { ...prefs.type, [r.key]: v } })}
                           />
                         ))}
                         {advTuned && (
                           <button
                             type="button"
-                            onClick={() => setPrefs({ type: { ...DEFAULT_TYPE_PREFS } })}
+                            onClick={() =>
+                              setPrefs({ type: uniformVector(SCALE_VALUE[prefs.scale]) })
+                            }
                             className="mt-1 flex cursor-pointer items-center gap-2 self-start rounded-full px-3 py-1.5 font-display text-[calc(10.5px*var(--ts-other))] font-semibold uppercase tracking-[0.14em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--panel-accent)]"
                             style={{
                               border: `1px solid ${hair(14)}`,
@@ -805,7 +839,7 @@ export function CustomizePanel({
                             }}
                           >
                             <RotateCcw className="h-3 w-3" strokeWidth={2.4} />
-                            Reset to standard
+                            Back to the rung
                           </button>
                         )}
                       </div>

@@ -335,7 +335,7 @@ function NotesEditorialBody({
               </span>
               <span className="legal-meta">IAL CHEM · {unit.code} · {topicLabel.toUpperCase()}</span>
             </div>
-            <h1 className="mt-5 max-w-[16ch] font-display text-[calc(clamp(2.65rem,7vw,5.6rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.04] font-bold tracking-[-.065em] text-ink">
+            <h1 className="mt-5 max-w-[16ch] font-display text-[calc(clamp(2.65rem,7vw,5.6rem)*var(--tch-ed))] leading-[1.04] font-bold tracking-[-.065em] text-ink">
               {doc.title}<span className="legal-heading-accent">.</span>
             </h1>
             {heroPara && (

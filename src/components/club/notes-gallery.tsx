@@ -427,7 +427,7 @@ function NotesGalleryBody({
               IAL CHEM · {unit.code} · {topicLabel}
             </span>
           </div>
-          <h1 className="mt-5 max-w-[15ch] font-display text-[calc(clamp(2.7rem,6.4vw,4.9rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.03] font-medium tracking-[-0.045em] text-ink">
+          <h1 className="mt-5 max-w-[15ch] font-display text-[calc(clamp(2.7rem,6.4vw,4.9rem)*var(--tch-ed))] leading-[1.03] font-medium tracking-[-0.045em] text-ink">
             {doc.title}
             <span style={{ color: GAL_ACCENT }}>.</span>
           </h1>

@@ -119,7 +119,7 @@ export function PackEditorial({
                 to the document room, in the room's own rust */}
             <Mascot main="var(--legal-rust)" mood="idle" size={104} bubbles={false} className="mx-auto" />
             <p className="legal-meta mt-4 justify-center">REVISION PACK</p>
-            <h1 className="mt-4 font-display text-[calc(clamp(1.9rem,4.6vw,2.7rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
+            <h1 className="mt-4 font-display text-[calc(clamp(1.9rem,4.6vw,2.7rem)*var(--tch-ed))] font-semibold tracking-tight text-ink">
               The pack is empty.
             </h1>
             <p className="mx-auto mt-3 max-w-[46ch] text-[calc(14.5px*var(--ts-body))] leading-[1.8] text-ink-soft">
