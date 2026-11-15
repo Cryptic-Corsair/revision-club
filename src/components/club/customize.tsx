@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { Check, Palette, RotateCcw, X } from "./icons";
 import {
   DEFAULT_PREFS,
+  DEFAULT_TYPE_PREFS,
   IFACE_DESCRIPTION,
   IFACE_LABEL,
   IFACE_ORDER,
@@ -21,6 +22,7 @@ import {
   type Iface,
   type Lab,
   type Prefs,
+  type TypePrefs,
 } from "@/lib/spectra/prefs";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -198,12 +200,12 @@ function PanelSection({
   return (
     <section className="border-t pt-5" style={{ borderColor: hair(9) }}>
       <div className="flex items-center gap-3">
-        <span className="min-w-0 flex-1 font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.2em] uppercase text-ink-faint">
+        <span className="min-w-0 flex-1 font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.2em] uppercase text-ink-faint">
           {title}
         </span>
         <span aria-hidden className="h-px min-w-4 flex-1" style={{ background: hair(8) }} />
         {meta && (
-          <span className="shrink-0 font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.16em] uppercase tabular-nums text-ink-faint">
+          <span className="shrink-0 font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.16em] uppercase tabular-nums text-ink-faint">
             {meta}
           </span>
         )}
@@ -218,7 +220,7 @@ function PanelSection({
 function PanelStamp({ on }: { on: boolean }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center rounded-full px-2 py-[3px] font-display text-[calc(8.5px*var(--ui-scale))] leading-none font-extrabold tracking-[0.12em] uppercase"
+      className="inline-flex shrink-0 items-center rounded-full px-2 py-[3px] font-display text-[calc(8.5px*var(--ui-scale)*var(--type-other))] leading-none font-extrabold tracking-[0.12em] uppercase"
       style={
         on
           ? { background: A, color: A_INK }
@@ -268,16 +270,88 @@ function PanelTickRow({
         {on && <Check className="h-3.5 w-3.5" strokeWidth={2.8} />}
       </span>
       <span className="min-w-0">
-        <span className="block font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">
+        <span className="block font-display text-[calc(14px*var(--ui-scale)*var(--type-body))] font-semibold text-ink">
           {label}
         </span>
-        <span className="block text-[calc(11px*var(--ui-scale))] leading-snug text-ink-faint">
+        <span className="block text-[calc(11px*var(--ui-scale)*var(--type-other))] leading-snug text-ink-faint">
           {hint}
         </span>
       </span>
     </button>
   );
 }
+
+/* the advanced type-role slider — a hairline track with a round
+   accent thumb (styled once in globals.css as .adv-range). The
+   readout speaks in percent and re-inks with the panel's accent the
+   moment a role leaves its default, so a tuned panel announces
+   itself at a glance. */
+function PanelSlider({
+  label,
+  hint,
+  min,
+  max,
+  step,
+  value,
+  onChange,
+  ariaLabel,
+}: {
+  label: string;
+  hint: string;
+  min: number;
+  max: number;
+  step: number;
+  value: number;
+  onChange: (v: number) => void;
+  ariaLabel: string;
+}) {
+  const tuned = Math.abs(value - 1) > 0.001;
+  return (
+    <div className="border-t pt-3.5 first:border-t-0 first:pt-0" style={{ borderColor: hair(8) }}>
+      <div className="flex items-baseline gap-3">
+        <span className="min-w-0 flex-1 font-display text-[calc(13px*var(--ui-scale)*var(--type-body))] font-semibold text-ink">
+          {label}
+        </span>
+        <span
+          className="shrink-0 font-display text-[calc(11px*var(--ui-scale)*var(--type-other))] font-semibold tabular-nums tracking-[0.06em]"
+          style={{ color: tuned ? A : "var(--color-ink-faint)" }}
+        >
+          {Math.round(value * 100)}%
+        </span>
+      </div>
+      <input
+        type="range"
+        className="adv-range mt-2 w-full"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        aria-label={ariaLabel}
+        onChange={(e) => onChange(parseFloat(e.target.value))}
+        style={{ "--range-accent": A } as CSSProperties}
+      />
+      <span className="block text-[calc(10.5px*var(--ui-scale)*var(--type-other))] leading-snug text-ink-faint">
+        {hint}
+      </span>
+    </div>
+  );
+}
+
+/* the five advanced roles, in panel order — min/max/step mirror
+   TYPE_LIMITS in prefs.ts (sanitize clamps anything off-ladder) */
+const ADV_ROLES: {
+  key: keyof TypePrefs;
+  label: string;
+  hint: string;
+  min: number;
+  max: number;
+}[] = [
+  { key: "headings", label: "Headings", hint: "Section titles & display words", min: 0.85, max: 1.2 },
+  { key: "sub", label: "Subheadings", hint: "Card titles & small headers", min: 0.85, max: 1.2 },
+  { key: "body", label: "Body text", hint: "Paragraphs & notes text", min: 0.85, max: 1.2 },
+  { key: "other", label: "Small text", hint: "Kickers, chips, labels", min: 0.85, max: 1.2 },
+  { key: "width", label: "Text width", hint: "The reading measure — prose columns", min: 0.8, max: 1.2 },
+];
 
 /* a hairline-ruled rung table — the segmented picks (text size,
    spec-map height & density): the chosen rung floods with the
@@ -320,7 +394,7 @@ function PanelRungs({
             {it.main}
             {it.sub && (
               <span
-                className="mt-1 font-display text-[calc(9px*var(--ui-scale))] font-bold tracking-[0.08em]"
+                className="mt-1 font-display text-[calc(9px*var(--ui-scale)*var(--type-other))] font-bold tracking-[0.08em]"
                 style={active ? undefined : { color: "var(--color-ink-faint)" }}
               >
                 {it.sub}
@@ -363,17 +437,17 @@ function PanelFontTable<T extends { id: string; label: string; stack: string }>(
             style={{ borderColor: hair(8), background: active ? "color-mix(in oklab, var(--panel-accent) 7%, var(--color-paper))" : undefined }}
           >
             <span
-              className="grid h-10 w-10 shrink-0 place-items-center rounded-[10px] border text-[calc(17px*var(--ui-scale))] leading-none font-semibold text-ink"
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-[10px] border text-[calc(17px*var(--ui-scale)*var(--type-sub))] leading-none font-semibold text-ink"
               style={{ fontFamily: f.stack, borderColor: hair(12) }}
             >
               Aa
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block font-display text-[calc(13px*var(--ui-scale))] font-semibold text-ink">
+              <span className="block font-display text-[calc(13px*var(--ui-scale)*var(--type-body))] font-semibold text-ink">
                 {f.label}
               </span>
               <span
-                className="block truncate text-[calc(11.5px*var(--ui-scale))] text-ink-faint"
+                className="block truncate text-[calc(11.5px*var(--ui-scale)*var(--type-other))] text-ink-faint"
                 style={{ fontFamily: f.stack }}
               >
                 The quick brown fox
@@ -402,7 +476,7 @@ function GroupLabel({ children }: { children: ReactNode }) {
   return (
     <div className="flex items-center gap-2.5">
       <span aria-hidden className="h-[2px] w-[14px] shrink-0 rounded-full" style={{ background: A, opacity: 0.7 }} />
-      <span className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.2em] uppercase text-ink-faint">
+      <span className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.2em] uppercase text-ink-faint">
         {children}
       </span>
     </div>
@@ -463,6 +537,18 @@ export function CustomizePanel({
     (h) => Math.abs(prefs.specHeight - h.fraction) < 0.025,
   );
 
+  /* the Advanced disclosure starts folded — the five role sliders are
+     for readers who outgrow the rungs, not the first thing everyone
+     meets. It also opens itself if a saved pref has any role tuned,
+     so the panel always tells the truth about the current state. */
+  const [advOpen, setAdvOpen] = useState(false);
+  const advTuned = ADV_ROLES.some((r) => Math.abs(prefs.type[r.key] - 1) > 0.001);
+  const advCount = ADV_ROLES.filter((r) => Math.abs(prefs.type[r.key] - 1) > 0.001).length;
+  useEffect(() => {
+    if (advTuned) setAdvOpen(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
   return (
     <AnimatePresence>
       {open && (
@@ -513,7 +599,7 @@ export function CustomizePanel({
                     className="h-[2px] w-[14px] shrink-0 rounded-full"
                     style={{ background: A }}
                   />
-                  <h2 className="truncate font-display text-[calc(24px*var(--ui-scale))] leading-none font-bold tracking-[-0.02em] text-ink">
+                  <h2 className="truncate font-display text-[calc(24px*var(--ui-scale)*var(--type-sub))] leading-none font-bold tracking-[-0.02em] text-ink">
                     Customize
                   </h2>
                 </div>
@@ -556,7 +642,7 @@ export function CustomizePanel({
                         className="h-[2px] w-[10px] shrink-0 rounded-full transition-colors"
                         style={{ background: hair(24) }}
                       />
-                      <span className="min-w-0 flex-1 truncate text-[calc(13px*var(--ui-scale))] font-semibold text-ink-soft transition-colors group-hover:text-ink">
+                      <span className="min-w-0 flex-1 truncate text-[calc(13px*var(--ui-scale)*var(--type-body))] font-semibold text-ink-soft transition-colors group-hover:text-ink">
                         {item.label}
                       </span>
                     </button>
@@ -585,7 +671,7 @@ export function CustomizePanel({
                       >
                         <IfaceStage id={f} />
                         <span className="flex w-full items-center justify-between gap-2">
-                          <span className="truncate font-display text-[calc(12.5px*var(--ui-scale))] font-bold text-ink">
+                          <span className="truncate font-display text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-bold text-ink">
                             {IFACE_LABEL[f]}
                           </span>
                           <PanelStamp on={active} />
@@ -619,7 +705,7 @@ export function CustomizePanel({
                         <span className="flex w-full items-center justify-between gap-2">
                           <span className="flex min-w-0 items-center gap-2">
                             <LabChip id={l} />
-                            <span className="truncate font-display text-[calc(12px*var(--ui-scale))] font-semibold text-ink">
+                            <span className="truncate font-display text-[calc(12px*var(--ui-scale)*var(--type-other))] font-semibold text-ink">
                               {LAB_LABEL[l]}
                             </span>
                           </span>
@@ -653,6 +739,79 @@ export function CustomizePanel({
                     sub: s,
                   }))}
                 />
+              </PanelSection>
+
+              {/* 4b · advanced type roles */}
+              <PanelSection title="Advanced" meta={advTuned ? `${advCount} tuned` : "Optional"}>
+                <button
+                  type="button"
+                  aria-expanded={advOpen}
+                  onClick={() => setAdvOpen((v) => !v)}
+                  className="flex w-full cursor-pointer items-center gap-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--panel-accent)]"
+                >
+                  <span className="min-w-0 flex-1 text-[calc(11.5px*var(--ui-scale)*var(--type-other))] leading-snug text-ink-faint">
+                    Fine-tune each reading role on its own — sizes stack on
+                    the rung above.
+                  </span>
+                  <svg
+                    aria-hidden
+                    viewBox="0 0 12 12"
+                    className="h-3 w-3 shrink-0 transition-transform duration-200"
+                    style={{
+                      transform: advOpen ? "rotate(180deg)" : "none",
+                      color: "var(--color-ink-faint)",
+                    }}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M2.5 4.5 6 8l3.5-3.5" />
+                  </svg>
+                </button>
+                <AnimatePresence initial={false}>
+                  {advOpen && (
+                    <m.div
+                      key="adv-roles"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.24, ease: [0.32, 0.72, 0, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="flex flex-col gap-3.5 pt-3.5">
+                        {ADV_ROLES.map((r) => (
+                          <PanelSlider
+                            key={r.key}
+                            label={r.label}
+                            hint={r.hint}
+                            min={r.min}
+                            max={r.max}
+                            step={0.05}
+                            value={prefs.type[r.key]}
+                            ariaLabel={`Advanced ${r.label.toLowerCase()} size`}
+                            onChange={(v) => setPrefs({ type: { ...prefs.type, [r.key]: v } })}
+                          />
+                        ))}
+                        {advTuned && (
+                          <button
+                            type="button"
+                            onClick={() => setPrefs({ type: { ...DEFAULT_TYPE_PREFS } })}
+                            className="mt-1 flex cursor-pointer items-center gap-2 self-start rounded-full px-3 py-1.5 font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold uppercase tracking-[0.14em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--panel-accent)]"
+                            style={{
+                              border: `1px solid ${hair(14)}`,
+                              color: "var(--color-ink-faint)",
+                            }}
+                          >
+                            <RotateCcw className="h-3 w-3" strokeWidth={2.4} />
+                            Reset to standard
+                          </button>
+                        )}
+                      </div>
+                    </m.div>
+                  )}
+                </AnimatePresence>
               </PanelSection>
 
               {/* 5 · fonts */}
@@ -699,9 +858,9 @@ export function CustomizePanel({
                       key: h.id,
                       aria: h.label,
                       main: (
-                        <span className="font-display text-[calc(14px*var(--ui-scale))] leading-none font-bold">
+                        <span className="font-display text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-none font-bold">
                           {Math.round(h.fraction * 100)}
-                          <span className="text-[calc(10.5px*var(--ui-scale))]">%</span>
+                          <span className="text-[calc(10.5px*var(--ui-scale)*var(--type-other))]">%</span>
                         </span>
                       ),
                       sub: h.label,
@@ -715,7 +874,7 @@ export function CustomizePanel({
                       key: d.id,
                       aria: d.label,
                       main: (
-                        <span className="font-display text-[calc(11.5px*var(--ui-scale))] font-bold tracking-[0.04em]">
+                        <span className="font-display text-[calc(11.5px*var(--ui-scale)*var(--type-other))] font-bold tracking-[0.04em]">
                           {d.label}
                         </span>
                       ),
@@ -749,13 +908,13 @@ export function CustomizePanel({
                   onClick={() => {
                     setPrefs(DEFAULT_PREFS);
                   }}
-                  className="inline-flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 font-display text-[calc(11.5px*var(--ui-scale))] font-bold text-ink-soft transition-colors hover:border-ink/25 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--panel-accent)]"
+                  className="inline-flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 font-display text-[calc(11.5px*var(--ui-scale)*var(--type-other))] font-bold text-ink-soft transition-colors hover:border-ink/25 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--panel-accent)]"
                   style={{ borderColor: hair(14) }}
                 >
                   <RotateCcw className="h-3.5 w-3.5" />
                   Reset everything
                 </button>
-                <p className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.16em] uppercase text-ink-faint">
+                <p className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.16em] uppercase text-ink-faint">
                   Saved on this device
                 </p>
               </div>

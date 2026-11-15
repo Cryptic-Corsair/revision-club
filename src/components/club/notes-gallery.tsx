@@ -229,7 +229,7 @@ function GalleryPackTick({ spec }: { spec: string }) {
       ) : (
         <span
           aria-hidden
-          className="font-display text-[calc(15px*var(--ui-scale))] leading-none font-medium"
+          className="font-display text-[calc(15px*var(--ui-scale)*var(--type-body))] leading-none font-medium"
         >
           +
         </span>
@@ -402,7 +402,7 @@ function NotesGalleryBody({
           type="button"
           onClick={onBack}
           aria-label={`Back to ${unit.code}`}
-          className="group inline-flex min-h-[calc(42px*var(--ui-scale))] cursor-pointer items-center gap-2.5 rounded-full pr-2 pl-1 font-display text-[calc(13px*var(--ui-scale))] font-semibold text-ink-soft transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2"
+          className="group inline-flex min-h-[calc(42px*var(--ui-scale))] cursor-pointer items-center gap-2.5 rounded-full pr-2 pl-1 font-display text-[calc(13px*var(--ui-scale)*var(--type-body))] font-semibold text-ink-soft transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2"
         >
           <span
             className="grid h-[calc(30px*var(--ui-scale))] w-[calc(30px*var(--ui-scale))] place-items-center rounded-full border transition-colors group-hover:border-ink/30"
@@ -423,7 +423,7 @@ function NotesGalleryBody({
               className="h-[2px] w-[26px] rounded-full"
               style={{ background: GAL_ACCENT }}
             />
-            <span className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.24em] uppercase text-ink-faint">
+            <span className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.24em] uppercase text-ink-faint">
               IAL CHEM · {unit.code} · {topicLabel}
             </span>
           </div>
@@ -432,12 +432,12 @@ function NotesGalleryBody({
             <span style={{ color: GAL_ACCENT }}>.</span>
           </h1>
           {lede && (
-            <p className="mt-6 max-w-[62ch] text-[calc(16.5px*var(--ui-scale))] leading-[1.85] text-ink-soft">
+            <p className="mt-6 max-w-[62ch] text-[calc(16.5px*var(--ui-scale)*var(--type-body))] leading-[1.85] text-ink-soft">
               <Fmt text={lede} />
             </p>
           )}
           {overture && (
-            <p className="mt-4 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-faint">
+            <p className="mt-4 max-w-[62ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.85] text-ink-faint">
               <Fmt text={overture} />
             </p>
           )}
@@ -452,7 +452,7 @@ function NotesGalleryBody({
             {stats.map((s) => (
               <span
                 key={s}
-                className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.18em] uppercase text-ink-faint"
+                className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.18em] uppercase text-ink-faint"
               >
                 {s}
               </span>
@@ -476,7 +476,7 @@ function NotesGalleryBody({
         {contentsExpanded ? (
           <Reveal>
             <div className="flex items-center gap-3">
-              <span className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.24em] uppercase text-ink-faint">
+              <span className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.24em] uppercase text-ink-faint">
                 Contents
               </span>
               <span
@@ -485,7 +485,7 @@ function NotesGalleryBody({
                 style={{ background: hair(10) }}
               />
               <span
-                className="font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.18em] uppercase tabular-nums"
+                className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.18em] uppercase tabular-nums"
                 style={{ color: GAL_ACCENT }}
               >
                 {firstSpec} — {lastSpec}
@@ -525,7 +525,7 @@ function NotesGalleryBody({
                     }}
                   >
                     <span
-                      className="w-[26px] shrink-0 font-display text-[calc(12px*var(--ui-scale))] font-semibold tabular-nums"
+                      className="w-[26px] shrink-0 font-display text-[calc(12px*var(--ui-scale)*var(--type-other))] font-semibold tabular-nums"
                       style={{
                         color: isActive
                           ? GAL_ACCENT
@@ -535,7 +535,7 @@ function NotesGalleryBody({
                       {pad2(i + 1)}
                     </span>
                     <span
-                      className={`min-w-0 flex-1 truncate text-[calc(14px*var(--ui-scale))] font-semibold leading-snug transition-colors ${
+                      className={`min-w-0 flex-1 truncate text-[calc(14px*var(--ui-scale)*var(--type-body))] font-semibold leading-snug transition-colors ${
                         isActive
                           ? "text-ink"
                           : "text-ink-soft group-hover:text-ink"
@@ -543,7 +543,7 @@ function NotesGalleryBody({
                     >
                       {s.title}
                     </span>
-                    <span className="shrink-0 font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.08em] tabular-nums text-ink-faint">
+                    <span className="shrink-0 font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.08em] tabular-nums text-ink-faint">
                       {s.spec}
                     </span>
                     <ArrowUpRight
@@ -672,7 +672,7 @@ function NotesGalleryBody({
               white wall, in the dress's own bronze, standing at the
               end of the note like a quiet exhibit label come alive */}
           <div className="mt-5 flex items-end gap-4">
-            <p className="max-w-[60ch] flex-1 text-[calc(14.5px*var(--ui-scale))] leading-[1.9] text-ink-soft">
+            <p className="max-w-[60ch] flex-1 text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.9] text-ink-soft">
               Every spec point of {topicLabel}, walked once. Tick spec
               points along the way — the quiet square beside each section
               adds them to your revision pack, assembled in syllabus order
@@ -691,16 +691,16 @@ function NotesGalleryBody({
             type="button"
             onClick={onBack}
             aria-label={`Back to ${unit.code}`}
-            className="mt-7 inline-flex min-h-[calc(42px*var(--ui-scale))] cursor-pointer items-center gap-2.5 rounded-full border px-5 font-display text-[calc(13px*var(--ui-scale))] font-semibold text-ink transition-colors hover:border-ink/35 focus-visible:outline-2 focus-visible:outline-offset-2"
+            className="mt-7 inline-flex min-h-[calc(42px*var(--ui-scale))] cursor-pointer items-center gap-2.5 rounded-full border px-5 font-display text-[calc(13px*var(--ui-scale)*var(--type-body))] font-semibold text-ink transition-colors hover:border-ink/35 focus-visible:outline-2 focus-visible:outline-offset-2"
             style={{ borderColor: hair(16) }}
           >
             <ArrowLeft className="h-4 w-4" strokeWidth={2.1} /> Back to{" "}
             {unit.code}
           </button>
-          <p className="mt-9 font-display text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.18em] uppercase text-ink-faint">
+          <p className="mt-9 font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.18em] uppercase text-ink-faint">
             {unit.code} · {unit.title}
           </p>
-          <p className="mt-2 max-w-[70ch] text-[calc(12px*var(--ui-scale))] leading-[1.7] text-ink-faint">
+          <p className="mt-2 max-w-[70ch] text-[calc(12px*var(--ui-scale)*var(--type-other))] leading-[1.7] text-ink-faint">
             from {doc.source}
           </p>
         </section>

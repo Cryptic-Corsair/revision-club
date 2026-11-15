@@ -594,10 +594,10 @@ function TopBar({
                 >
                   <div className="flex items-center justify-between px-2 pb-3 pt-1">
                     <div>
-                      <p className="font-display text-[calc(14px*var(--ui-scale))] font-semibold text-ink">Appearance</p>
-                      <p className="mt-0.5 text-[calc(10.5px*var(--ui-scale))] text-ink-soft">Saved automatically on this device</p>
+                      <p className="font-display text-[calc(14px*var(--ui-scale)*var(--type-body))] font-semibold text-ink">Appearance</p>
+                      <p className="mt-0.5 text-[calc(10.5px*var(--ui-scale)*var(--type-other))] text-ink-soft">Saved automatically on this device</p>
                     </div>
-                    <span className="rounded-full bg-ink/[0.06] px-2.5 py-1 font-mono text-[calc(9px*var(--ui-scale))] tracking-wider text-ink-soft">THEME</span>
+                    <span className="rounded-full bg-ink/[0.06] px-2.5 py-1 font-mono text-[calc(9px*var(--ui-scale)*var(--type-other))] tracking-wider text-ink-soft">THEME</span>
                   </div>
                   <div role="group" aria-label="Appearance themes" className="grid grid-cols-2 gap-2">
                     {labOptions.map((option) => {
@@ -628,10 +628,10 @@ function TopBar({
                             <span className="h-5 w-5 rounded-full" style={{ background: THEME_CHIP[option].bg, boxShadow: "0 1px 4px rgb(0 0 0 / 0.18)" }} />
                           </span>
                           <span className="flex w-full items-center justify-between gap-1">
-                            <span className="font-display text-[calc(12px*var(--ui-scale))] font-semibold text-ink">{LAB_LABEL[option]}</span>
+                            <span className="font-display text-[calc(12px*var(--ui-scale)*var(--type-other))] font-semibold text-ink">{LAB_LABEL[option]}</span>
                             {selected && <Check className="h-4 w-4 shrink-0 text-mint" strokeWidth={2.8} />}
                           </span>
-                          <span className="mt-0.5 text-[calc(10.5px*var(--ui-scale))] leading-snug text-ink-soft">{LAB_DESCRIPTION[option]}</span>
+                          <span className="mt-0.5 text-[calc(10.5px*var(--ui-scale)*var(--type-other))] leading-snug text-ink-soft">{LAB_DESCRIPTION[option]}</span>
                         </button>
                       );
                     })}
@@ -769,10 +769,10 @@ function Footer({
             <div className="flex items-center gap-4">
               <LogoMark size={44} lab="light" />
               <div className="min-w-0">
-                <div className="font-display text-[calc(21px*var(--ui-scale))] font-bold leading-none tracking-tight">
+                <div className="font-display text-[calc(21px*var(--ui-scale)*var(--type-sub))] font-bold leading-none tracking-tight">
                   IAL CHEM
                 </div>
-                <p className="mt-2 text-[calc(11px*var(--ui-scale))] font-bold uppercase tracking-[0.16em] text-milk/45">
+                <p className="mt-2 text-[calc(11px*var(--ui-scale)*var(--type-other))] font-bold uppercase tracking-[0.16em] text-milk/45">
                   Pearson Edexcel · International A Level Chemistry
                 </p>
               </div>
@@ -785,10 +785,10 @@ function Footer({
                 { value: "≈" + hours + " h", label: "Reading time" },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col items-center justify-center px-2">
-                  <span className="font-display text-[calc(20px*var(--ui-scale))] font-bold leading-none tabular-nums">
+                  <span className="font-display text-[calc(20px*var(--ui-scale)*var(--type-sub))] font-bold leading-none tabular-nums">
                     {stat.value}
                   </span>
-                  <span className="mt-1.5 text-[calc(10.5px*var(--ui-scale))] font-bold uppercase tracking-[0.12em] text-milk/45">
+                  <span className="mt-1.5 text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-bold uppercase tracking-[0.12em] text-milk/45">
                     {stat.label}
                   </span>
                 </div>
@@ -801,11 +801,11 @@ function Footer({
               <div className="mb-4 flex items-end justify-between gap-4">
                 <div>
                   <p className="footer-eyebrow">The course</p>
-                  <h2 id="footer-course-heading" className="mt-1 font-display text-[calc(19px*var(--ui-scale))] font-semibold tracking-tight">
+                  <h2 id="footer-course-heading" className="mt-1 font-display text-[calc(19px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight">
                     Explore by unit
                   </h2>
                 </div>
-                <span className="pb-1 font-mono text-[calc(10.5px*var(--ui-scale))] tracking-[0.12em] text-milk/35">
+                <span className="pb-1 font-mono text-[calc(10.5px*var(--ui-scale)*var(--type-other))] tracking-[0.12em] text-milk/35">
                   WCH11 — WCH16
                 </span>
               </div>
@@ -819,7 +819,7 @@ function Footer({
                     className="footer-unit-link group flex min-w-0 items-center gap-3 rounded-xl px-3 py-3 text-left"
                   >
                     <span
-                      className="grid h-9 w-9 shrink-0 place-items-center rounded-xl font-display text-[calc(14px*var(--ui-scale))] font-bold"
+                      className="grid h-9 w-9 shrink-0 place-items-center rounded-xl font-display text-[calc(14px*var(--ui-scale)*var(--type-body))] font-bold"
                       style={{
                         background: "color-mix(in oklab, " + u.candy.main + " 20%, transparent)",
                         color: u.candy.main,
@@ -829,10 +829,10 @@ function Footer({
                       {String(u.index).padStart(2, "0")}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85 transition-colors group-hover:text-milk">
+                      <span className="block truncate text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-bold text-milk/85 transition-colors group-hover:text-milk">
                         {u.shortTitle}
                       </span>
-                      <span className="mt-1 block text-[calc(10.5px*var(--ui-scale))] font-bold uppercase tracking-[0.14em] text-milk/35">
+                      <span className="mt-1 block text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-bold uppercase tracking-[0.14em] text-milk/35">
                         {u.code}
                       </span>
                     </span>
@@ -844,7 +844,7 @@ function Footer({
 
             <section aria-labelledby="footer-tools-heading">
               <p className="footer-eyebrow">Your workspace</p>
-              <h2 id="footer-tools-heading" className="mt-1 font-display text-[calc(19px*var(--ui-scale))] font-semibold tracking-tight">
+              <h2 id="footer-tools-heading" className="mt-1 font-display text-[calc(19px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight">
                 Study tools
               </h2>
               <div className="mt-4 flex flex-col">
@@ -859,10 +859,10 @@ function Footer({
                       <tool.icon className="h-4 w-4" strokeWidth={2} />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block text-[calc(12.5px*var(--ui-scale))] font-bold text-milk/85 transition-colors group-hover:text-milk">
+                      <span className="block text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-bold text-milk/85 transition-colors group-hover:text-milk">
                         {tool.label}
                       </span>
-                      <span className="mt-0.5 block truncate text-[calc(10.5px*var(--ui-scale))] font-semibold text-milk/40">
+                      <span className="mt-0.5 block truncate text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold text-milk/40">
                         {tool.detail}
                       </span>
                     </span>
@@ -874,14 +874,14 @@ function Footer({
           </div>
 
           <div className="footer-note flex flex-col gap-3 border-y border-white/[0.1] py-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-2 text-[calc(11px*var(--ui-scale))] font-semibold text-milk/55">
+            <div className="flex items-center gap-2 text-[calc(11px*var(--ui-scale)*var(--type-other))] font-semibold text-milk/55">
               <ShieldCheck className="h-4 w-4 shrink-0 text-mint/80" strokeWidth={2} />
               Your revision progress is stored locally in this browser.
             </div>
             <button
               type="button"
               onClick={onSearch}
-              className="inline-flex w-fit items-center gap-2 text-[calc(11px*var(--ui-scale))] font-bold text-milk/55 transition-colors hover:text-milk"
+              className="inline-flex w-fit items-center gap-2 text-[calc(11px*var(--ui-scale)*var(--type-other))] font-bold text-milk/55 transition-colors hover:text-milk"
             >
               <Command className="h-3.5 w-3.5" />
               Search shortcut
@@ -892,7 +892,7 @@ function Footer({
           </div>
 
           <div className="flex flex-col gap-4 py-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-2xl text-[calc(10.5px*var(--ui-scale))] leading-relaxed font-semibold text-milk/40">
+            <p className="max-w-2xl text-[calc(10.5px*var(--ui-scale)*var(--type-other))] leading-relaxed font-semibold text-milk/40">
               © 2026 IAL CHEM · Notes for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. Not affiliated with or endorsed by Pearson Education Ltd.
             </p>
             <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 self-start sm:self-auto">
@@ -909,7 +909,7 @@ function Footer({
               <a
                 href="/?front"
                 aria-label="View the showcase homepage — the site's front door"
-                className="footer-portal-link inline-flex items-center gap-1.5 rounded-full border border-white/[0.16] bg-white/[0.05] px-3 py-1.5 text-[calc(11px*var(--ui-scale))] font-bold text-milk/70 transition-colors hover:border-white/[0.3] hover:bg-white/[0.1] hover:text-milk"
+                className="footer-portal-link inline-flex items-center gap-1.5 rounded-full border border-white/[0.16] bg-white/[0.05] px-3 py-1.5 text-[calc(11px*var(--ui-scale)*var(--type-other))] font-bold text-milk/70 transition-colors hover:border-white/[0.3] hover:bg-white/[0.1] hover:text-milk"
               >
                 Showcase home
                 <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.2} />

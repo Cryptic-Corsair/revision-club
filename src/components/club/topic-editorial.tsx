@@ -78,7 +78,7 @@ export function TopicEditorial({
       <PopIn>
         <SoftButton
           onClick={onBack}
-          className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]"
+          className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale)*var(--type-body))]"
           ariaLabel={`Back to ${unit.code}`}
         >
           <ArrowLeft className="h-4 w-4" /> Back to {unit.code}
@@ -103,7 +103,7 @@ export function TopicEditorial({
               {topic.title}
               <span className="legal-heading-accent">.</span>
             </h1>
-            <p className="mt-5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-soft">
+            <p className="mt-5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.85] text-ink-soft">
               <Fmt text={topic.summary} />
             </p>
           </div>
@@ -166,7 +166,7 @@ export function TopicEditorial({
               </button>
             )}
           </nav>
-          <p className="mt-4 hidden border-t border-ink/10 pt-4 text-[calc(11px*var(--ui-scale))] leading-[1.7] text-ink-faint lg:block">
+          <p className="mt-4 hidden border-t border-ink/10 pt-4 text-[calc(11px*var(--ui-scale)*var(--type-other))] leading-[1.7] text-ink-faint lg:block">
             {notesSpecRange
               ? `The full note covers ${notesSpecRange} of the specification.`
               : `Written to the 2018 specification — the full note covers it spec by spec.`}
@@ -185,10 +185,10 @@ export function TopicEditorial({
                   <EditorialLabel>The full revision note</EditorialLabel>
                   {notesSpecRange && <span className="legal-meta">{notesSpecRange}</span>}
                 </div>
-                <h2 className="mt-3 font-display text-[calc(20px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+                <h2 className="mt-3 font-display text-[calc(20px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
                   Spec by spec, the complete class note
                 </h2>
-                <p className="mt-2.5 max-w-[64ch] text-[calc(14px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+                <p className="mt-2.5 max-w-[64ch] text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
                   Cut into one section per specification point
                   {notesSpecRange ? ` (${notesSpecRange})` : ""} — the official
                   wording above each, and every calculation worked in full.
@@ -253,10 +253,10 @@ export function TopicEditorial({
                   )}
                 </m.button>
                 <div className="min-w-0 flex-1">
-                  <p className="font-display text-[calc(15.5px*var(--ui-scale))] font-semibold text-ink">
+                  <p className="font-display text-[calc(15.5px*var(--ui-scale)*var(--type-body))] font-semibold text-ink">
                     {isRevised ? "Marked as revised" : "Mark as revised"}
                   </p>
-                  <p className="mt-0.5 text-[calc(12.5px*var(--ui-scale))] leading-snug text-ink-faint">
+                  <p className="mt-0.5 text-[calc(12.5px*var(--ui-scale)*var(--type-other))] leading-snug text-ink-faint">
                     {isRevised
                       ? "Saved in this browser. Tap again to unmark it."
                       : "One tap marks it done — progress is saved in this browser."}
@@ -273,7 +273,7 @@ export function TopicEditorial({
                 <BookOpenCheck className="h-5 w-5" />
                 <p className="legal-meta">THE TRAIL EITHER SIDE</p>
               </div>
-              <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ui-scale))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale))]">
+              <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale)*var(--type-body))]">
                 {next
                   ? `Next along the trail: ${next.title.toLowerCase()}. Or step back and re-read ${prev ? prev.title.toLowerCase() : `the start of ${unit.code}`}.`
                   : prev
@@ -345,7 +345,7 @@ function TopicBlockView({
   switch (b.k) {
     case "p":
       return (
-        <p className="max-w-[68ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.9] text-ink-soft">
+        <p className="max-w-[68ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.9] text-ink-soft">
           <Fmt text={b.text} />
         </p>
       );
@@ -354,10 +354,10 @@ function TopicBlockView({
       return (
         <div className="legal-card max-w-[68ch] rounded-[calc(18px*var(--ui-scale))] px-5 py-4">
           <EditorialLabel>Key term</EditorialLabel>
-          <h4 className="mt-2 font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h4 className="mt-2 font-display text-[calc(17px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
             <Fmt text={b.term} />
           </h4>
-          <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+          <p className="mt-1.5 text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
             <Fmt text={b.text} />
           </p>
         </div>
@@ -375,7 +375,7 @@ function TopicBlockView({
             </div>
           )}
           <div className="border-y border-ink/10 py-5">
-            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-display text-[calc(16px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-display text-[calc(16px*var(--ui-scale)*var(--type-body))] font-semibold tracking-tight text-ink">
               {b.eq.split(/\s{2,}/).map((part, i) => (
                 <span key={i}>
                   <Fmt text={part.trim()} />
@@ -383,7 +383,7 @@ function TopicBlockView({
               ))}
             </div>
             {b.note && (
-              <p className="mt-2.5 text-center text-[calc(13px*var(--ui-scale))] italic leading-[1.7] text-ink-soft">
+              <p className="mt-2.5 text-center text-[calc(13px*var(--ui-scale)*var(--type-body))] italic leading-[1.7] text-ink-soft">
                 <Fmt text={b.note} />
               </p>
             )}
@@ -393,7 +393,7 @@ function TopicBlockView({
               {b.ok.map((o, i) => (
                 <li
                   key={i}
-                  className="flex items-center gap-2 text-[calc(12.5px*var(--ui-scale))] leading-[1.6] text-ink-soft"
+                  className="flex items-center gap-2 text-[calc(12.5px*var(--ui-scale)*var(--type-other))] leading-[1.6] text-ink-soft"
                 >
                   <Check className="h-3.5 w-3.5 shrink-0" strokeWidth={2.8} style={{ color: accent }} />
                   <Fmt text={o} />
@@ -410,18 +410,18 @@ function TopicBlockView({
       return (
         <div className="legal-card max-w-[68ch] rounded-[calc(18px*var(--ui-scale))] p-5 sm:p-6">
           <EditorialLabel>Worked example</EditorialLabel>
-          <h4 className="mt-2 font-display text-[calc(17px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h4 className="mt-2 font-display text-[calc(17px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
             <Fmt text={b.title} />
           </h4>
           <ol className="mt-4 flex flex-col gap-2 border-t border-ink/10 pt-4">
             {b.steps.map((s, i) => (
               <li
                 key={i}
-                className="flex items-start gap-3 text-[calc(14px*var(--ui-scale))] leading-[1.8] text-ink-soft"
+                className="flex items-start gap-3 text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft"
               >
                 <span
                   aria-hidden
-                  className="w-[calc(18px*var(--ui-scale))] shrink-0 pt-[calc(3px*var(--ui-scale))] font-display text-[calc(11px*var(--ui-scale))] font-bold text-[var(--legal-rust)]"
+                  className="w-[calc(18px*var(--ui-scale))] shrink-0 pt-[calc(3px*var(--ui-scale))] font-display text-[calc(11px*var(--ui-scale)*var(--type-other))] font-bold text-[var(--legal-rust)]"
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -432,10 +432,10 @@ function TopicBlockView({
             ))}
           </ol>
           <div className="mt-4 flex items-start gap-3.5 border-t border-ink/10 pt-4">
-            <span className="shrink-0 pt-[calc(4px*var(--ui-scale))] font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
+            <span className="shrink-0 pt-[calc(4px*var(--ui-scale))] font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
               Answer
             </span>
-            <p className="text-[calc(14.5px*var(--ui-scale))] leading-[1.75] font-semibold text-ink">
+            <p className="text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.75] font-semibold text-ink">
               <Fmt text={b.answer} />
             </p>
           </div>
@@ -450,14 +450,14 @@ function TopicBlockView({
           className="max-w-[68ch] border-l-2 pl-4 sm:pl-5"
           style={{ borderColor: "var(--legal-rust-soft)" }}
         >
-          <span className="font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
+          <span className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.2em] uppercase text-[var(--legal-rust)]">
             Tips
           </span>
           <ul className="mt-2 flex flex-col gap-2">
             {b.items.map((t, i) => (
               <li
                 key={i}
-                className="flex items-start gap-3 text-[calc(14px*var(--ui-scale))] leading-[1.8] text-ink-soft"
+                className="flex items-start gap-3 text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft"
               >
                 <Sparkles className="mt-[calc(4px*var(--ui-scale))] h-3.5 w-3.5 shrink-0 text-[var(--legal-rust)]" />
                 <span className="min-w-0">
@@ -487,11 +487,11 @@ function TopicBlockView({
               >
                 <span
                   aria-hidden
-                  className="w-[calc(18px*var(--ui-scale))] shrink-0 pt-[calc(3px*var(--ui-scale))] font-display text-[calc(11px*var(--ui-scale))] font-bold text-[var(--legal-rust)]"
+                  className="w-[calc(18px*var(--ui-scale))] shrink-0 pt-[calc(3px*var(--ui-scale))] font-display text-[calc(11px*var(--ui-scale)*var(--type-other))] font-bold text-[var(--legal-rust)]"
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="min-w-0 text-[calc(14px*var(--ui-scale))] leading-[1.75] text-ink-soft">
+                <p className="min-w-0 text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.75] text-ink-soft">
                   <Fmt text={t} />
                 </p>
               </li>

@@ -219,7 +219,7 @@ export function SpecSectionView({
       <div>
         <div className="flex items-center gap-3">
           <span
-            className="inline-flex shrink-0 -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.08em] uppercase"
+            className="inline-flex shrink-0 -rotate-1 items-center gap-1.5 rounded-full px-3.5 py-1.5 font-display text-[calc(12px*var(--ui-scale)*var(--type-other))] font-bold tracking-[0.08em] uppercase"
             style={{
               background: accentFall(accent),
               color: readableInk(accent),
@@ -242,7 +242,7 @@ export function SpecSectionView({
           />
           {bannerAction}
         </div>
-        <h2 className="mt-3.5 font-display text-[calc(24px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+        <h2 className="mt-3.5 font-display text-[calc(24px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
           {section.title}
         </h2>
         {!hideStatement && (
@@ -255,7 +255,7 @@ export function SpecSectionView({
             }}
           >
             <Kicker color={inkMix(accent, 62)}>From the specification</Kicker>
-            <p className="mt-2 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft italic">
+            <p className="mt-2 max-w-[62ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft italic">
               <Fmt text={section.statement} />
             </p>
           </div>
@@ -297,7 +297,7 @@ function BlockView({
   switch (b.k) {
     case "p":
       return (
-        <p className="max-w-[68ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.9] text-ink-soft">
+        <p className="max-w-[68ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.9] text-ink-soft">
           <Fmt text={b.text} />
         </p>
       );
@@ -314,7 +314,7 @@ function BlockView({
               background: `linear-gradient(90deg, ${accent}, ${tint(accent, 72)})`,
             }}
           />
-          <h3 className="min-w-0 font-display text-[calc(18px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h3 className="min-w-0 font-display text-[calc(18px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
             <Fmt text={b.text} />
           </h3>
           <span
@@ -329,11 +329,11 @@ function BlockView({
          cap is ch-relative, so the ul carries the paragraph's size
          to make its ch match exactly */
       return (
-        <ul className="flex max-w-[68ch] flex-col gap-2.5 text-[calc(14.5px*var(--ui-scale))]">
+        <ul className="flex max-w-[68ch] flex-col gap-2.5 text-[calc(14.5px*var(--ui-scale)*var(--type-body))]">
           {b.items.map((t, i) => (
             <li
               key={i}
-              className="flex items-start gap-3 text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-soft"
+              className="flex items-start gap-3 text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.85] text-ink-soft"
             >
               <span
                 className="mt-[calc(11px*var(--ui-scale))] h-2 w-2 shrink-0 rounded-full"
@@ -360,9 +360,9 @@ function BlockView({
               className="mt-0.5 h-4.5 w-4.5 shrink-0"
               style={{ color: inkMix(accent, 70) }}
             />
-            <p className="text-[calc(13.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+            <p className="text-[calc(13.5px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
               <span
-                className="mr-1.5 font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase"
+                className="mr-1.5 font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.2em] uppercase"
                 style={{ color: inkMix(accent, 70) }}
               >
                 {b.label}:
@@ -386,10 +386,10 @@ function BlockView({
             background: `${ambientWash(accent, 6)}, var(--color-paper)`,
           }}
         >
-          <h4 className="font-display text-[calc(16.5px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h4 className="font-display text-[calc(16.5px*var(--ui-scale)*var(--type-body))] font-semibold tracking-tight text-ink">
             <Fmt text={b.term} />
           </h4>
-          <p className="mt-1.5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+          <p className="mt-1.5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
             <Fmt text={b.text} />
           </p>
         </div>
@@ -412,7 +412,7 @@ function BlockView({
             {b.eq.split(/\s{2,}/).map((part, i) => (
               <span
                 key={i}
-                className="rounded-[calc(10px*var(--ui-scale))] bg-paper px-3.5 py-2 font-display text-[calc(16px*var(--ui-scale))] font-semibold tracking-tight text-ink"
+                className="rounded-[calc(10px*var(--ui-scale))] bg-paper px-3.5 py-2 font-display text-[calc(16px*var(--ui-scale)*var(--type-body))] font-semibold tracking-tight text-ink"
                 style={{ boxShadow: "0 2px 0 var(--edge)" }}
               >
                 <Fmt text={part.trim()} />
@@ -420,7 +420,7 @@ function BlockView({
             ))}
           </div>
           {b.note && (
-            <p className="mt-3 text-[calc(13px*var(--ui-scale))] leading-[1.7] italic text-ink-soft">
+            <p className="mt-3 text-[calc(13px*var(--ui-scale)*var(--type-body))] leading-[1.7] italic text-ink-soft">
               <Fmt text={b.note} />
             </p>
           )}
@@ -470,7 +470,7 @@ function BlockView({
             />
             <div className="min-w-0">
               <Kicker color={inkMix("#9775FA", 62)}>Key idea</Kicker>
-              <p className="mt-1.5 max-w-[62ch] text-[calc(15px*var(--ui-scale))] leading-[1.8] text-ink italic">
+              <p className="mt-1.5 max-w-[62ch] text-[calc(15px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink italic">
                 <Fmt text={b.text} />
               </p>
             </div>
@@ -504,7 +504,7 @@ function CandyTable({
             className="mt-[calc(12px*var(--ui-scale))] h-[calc(4px*var(--ui-scale))] w-[calc(22px*var(--ui-scale))] shrink-0 rounded-full"
             style={{ background: accent }}
           />
-          <div className="min-w-0 font-display text-[calc(18px*var(--ui-scale))] leading-snug font-semibold text-ink">
+          <div className="min-w-0 font-display text-[calc(18px*var(--ui-scale)*var(--type-sub))] leading-snug font-semibold text-ink">
             <Fmt text={caption} />
           </div>
         </div>
@@ -527,7 +527,7 @@ function CandyTable({
                 {head.map((h, i) => (
                   <th
                     key={i}
-                    className="px-4 py-3 font-display text-[calc(11px*var(--ui-scale))] font-semibold tracking-[0.12em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
+                    className="px-4 py-3 font-display text-[calc(11px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.12em] whitespace-nowrap text-ink-soft uppercase sm:px-5"
                   >
                     <Fmt text={h} />
                   </th>
@@ -549,7 +549,7 @@ function CandyTable({
                   {r.map((c, j) => (
                     <td
                       key={j}
-                      className={`px-4 py-3.5 align-top text-[calc(13.5px*var(--ui-scale))] leading-[1.65] sm:px-5 ${j === 0 ? "font-semibold text-ink" : "text-ink-soft"}`}
+                      className={`px-4 py-3.5 align-top text-[calc(13.5px*var(--ui-scale)*var(--type-body))] leading-[1.65] sm:px-5 ${j === 0 ? "font-semibold text-ink" : "text-ink-soft"}`}
                     >
                       <Fmt text={c} />
                     </td>
@@ -642,7 +642,7 @@ function Worked({
             style={{ background: "var(--rooms-hairline-soft)" }}
           />
           <span
-            className="shrink-0 text-[calc(10.5px*var(--ui-scale))] font-semibold tracking-[0.18em] uppercase"
+            className="shrink-0 text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.18em] uppercase"
             style={{
               fontFamily: "var(--font-mono)",
               color: "var(--color-ink-faint)",
@@ -654,11 +654,11 @@ function Worked({
         </div>
 
         {heading && (
-          <h4 className="mt-3 font-display text-[calc(19px*var(--ui-scale))] leading-snug font-semibold tracking-tight text-ink">
+          <h4 className="mt-3 font-display text-[calc(19px*var(--ui-scale)*var(--type-sub))] leading-snug font-semibold tracking-tight text-ink">
             <Fmt text={heading} />
           </h4>
         )}
-        <p className="mt-2.5 max-w-[62ch] text-[calc(15px*var(--ui-scale))] leading-[1.75] font-medium text-ink">
+        <p className="mt-2.5 max-w-[62ch] text-[calc(15px*var(--ui-scale)*var(--type-body))] leading-[1.75] font-medium text-ink">
           <Fmt text={question} />
         </p>
 
@@ -669,7 +669,7 @@ function Worked({
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
           whileTap={{ scale: 0.98 }}
-          className="worked-toggle mt-5 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2.5 rounded-full border px-5 font-display text-[calc(13px*var(--ui-scale))] font-semibold tracking-[0.02em] print:hidden"
+          className="worked-toggle mt-5 inline-flex min-h-[calc(44px*var(--ui-scale))] cursor-pointer items-center gap-2.5 rounded-full border px-5 font-display text-[calc(13px*var(--ui-scale)*var(--type-body))] font-semibold tracking-[0.02em] print:hidden"
           style={
             {
               /* fixed translucent washes, not the token-share lift
@@ -732,7 +732,7 @@ function Worked({
                   >
                     <span
                       aria-hidden
-                      className="w-[calc(26px*var(--ui-scale))] shrink-0 text-[calc(11.5px*var(--ui-scale))] font-semibold tracking-[0.08em]"
+                      className="w-[calc(26px*var(--ui-scale))] shrink-0 text-[calc(11.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.08em]"
                       style={{
                         fontFamily: "var(--font-mono)",
                         color: inkMix(accent, 76),
@@ -741,7 +741,7 @@ function Worked({
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="min-w-0 text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+                    <span className="min-w-0 text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
                       <Fmt text={s} />
                     </span>
                   </m.li>
@@ -774,13 +774,13 @@ function Worked({
                     style={{ color: inkMix(accent, 85) }}
                   />
                   <span
-                    className="font-display text-[calc(10.5px*var(--ui-scale))] font-extrabold tracking-[0.2em] uppercase"
+                    className="font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-extrabold tracking-[0.2em] uppercase"
                     style={{ color: inkMix(accent, 70) }}
                   >
                     Answer
                   </span>
                 </div>
-                <p className="mt-2 font-display text-[calc(16px*var(--ui-scale))] leading-[1.65] font-semibold tracking-tight text-ink">
+                <p className="mt-2 font-display text-[calc(16px*var(--ui-scale)*var(--type-body))] leading-[1.65] font-semibold tracking-tight text-ink">
                   <Fmt text={answer} />
                 </p>
               </m.div>
@@ -843,7 +843,7 @@ function StepsPanel({
               strokeWidth={2.2}
             />
           </span>
-          <h4 className="font-display text-[calc(16px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+          <h4 className="font-display text-[calc(16px*var(--ui-scale)*var(--type-body))] font-semibold tracking-tight text-ink">
             <Fmt text={caption} />
           </h4>
         </div>
@@ -859,16 +859,16 @@ function StepsPanel({
             >
               <div className="flex items-center gap-2">
                 <span
-                  className="grid h-[calc(22px*var(--ui-scale))] w-[calc(22px*var(--ui-scale))] shrink-0 place-items-center rounded-full font-display text-[calc(11px*var(--ui-scale))] font-bold"
+                  className="grid h-[calc(22px*var(--ui-scale))] w-[calc(22px*var(--ui-scale))] shrink-0 place-items-center rounded-full font-display text-[calc(11px*var(--ui-scale)*var(--type-other))] font-bold"
                   style={{ background: accentFall(accent), color: readableInk(accent) }}
                 >
                   {i + 1}
                 </span>
-                <span className="font-display text-[calc(14.5px*var(--ui-scale))] font-semibold text-ink">
+                <span className="font-display text-[calc(14.5px*var(--ui-scale)*var(--type-body))] font-semibold text-ink">
                   <Fmt text={bare} />
                 </span>
               </div>
-              <p className="mt-1.5 text-[calc(13.5px*var(--ui-scale))] leading-[1.7] text-ink-soft">
+              <p className="mt-1.5 text-[calc(13.5px*var(--ui-scale)*var(--type-body))] leading-[1.7] text-ink-soft">
                 <Fmt text={it.text} />
               </p>
             </li>
@@ -1420,7 +1420,7 @@ function Figure({
             className="mx-auto block h-px w-10"
             style={{ background: "var(--rooms-hairline)" }}
           />
-          <p className="mt-2.5 text-center text-[calc(12.5px*var(--ui-scale))] leading-[1.65] text-ink-faint">
+          <p className="mt-2.5 text-center text-[calc(12.5px*var(--ui-scale)*var(--type-other))] leading-[1.65] text-ink-faint">
             <Fmt text={caption} />
           </p>
         </div>

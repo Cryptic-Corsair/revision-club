@@ -109,7 +109,7 @@ export function PackEditorial({
     return (
       <main className="legal-room mx-auto max-w-6xl px-4 pt-[calc(6.25rem+var(--sa-top))] pb-24 sm:px-7 lg:px-10">
         <PopIn>
-          <SoftButton onClick={onHome} className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]" ariaLabel="Back home">
+          <SoftButton onClick={onHome} className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale)*var(--type-body))]" ariaLabel="Back home">
             <ArrowLeft className="h-4 w-4" /> Back home
           </SoftButton>
         </PopIn>
@@ -122,7 +122,7 @@ export function PackEditorial({
             <h1 className="mt-4 font-display text-[calc(clamp(1.9rem,4.6vw,2.7rem)*(1+(var(--ui-scale)-1)*0.5))] font-semibold tracking-tight text-ink">
               The pack is empty.
             </h1>
-            <p className="mx-auto mt-3 max-w-[46ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+            <p className="mx-auto mt-3 max-w-[46ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
               Head to the spec index and tick, say, <strong>2.1</strong> and{" "}
               <strong>3.6</strong> — the notes covering those statements assemble
               here automatically, in syllabus order.
@@ -160,10 +160,10 @@ export function PackEditorial({
                 {points.length} SPEC POINT{points.length === 1 ? "" : "S"} · {sectionCount} SECTION{sectionCount === 1 ? "" : "S"} OF NOTES
               </span>
             </div>
-            <h1 className="mt-5 max-w-[18ch] font-display text-[calc(clamp(2.65rem,7vw,5.6rem)*(1+(var(--ui-scale)-1)*0.5))] leading-[1.04] font-bold tracking-[-.065em] text-ink">
+            <h1 className="mt-5 max-w-[18ch] font-display text-[calc(clamp(2.65rem,7vw,5.6rem)*(1+(var(--ui-scale)-1)*0.5)*var(--type-heading))] leading-[1.04] font-bold tracking-[-.065em] text-ink">
               One pack. Your spec points<span className="legal-heading-accent">.</span>
             </h1>
-            <p className="mt-5 max-w-[58ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-soft">
+            <p className="mt-5 max-w-[58ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.85] text-ink-soft">
               Every section below is your normal note — assembled around what
               you ticked, in syllabus order. Mark each one read as you walk it.
             </p>
@@ -183,7 +183,7 @@ export function PackEditorial({
                 onClick={() => togglePick(p.spec)}
                 aria-label={`Remove ${p.spec} from your pack`}
                 title={`Remove ${p.spec} — ${p.topicLabel}`}
-                className="group inline-flex h-[calc(30px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-2 rounded-[calc(9px*var(--ui-scale))] border border-ink/12 bg-paper/80 px-2.5 font-display text-[calc(12px*var(--ui-scale))] font-bold text-ink-soft transition-colors hover:border-ink/25 hover:text-ink"
+                className="group inline-flex h-[calc(30px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-2 rounded-[calc(9px*var(--ui-scale))] border border-ink/12 bg-paper/80 px-2.5 font-display text-[calc(12px*var(--ui-scale)*var(--type-other))] font-bold text-ink-soft transition-colors hover:border-ink/25 hover:text-ink"
               >
                 {p.spec}
                 <X className="h-3 w-3 opacity-40 transition-opacity group-hover:opacity-90" strokeWidth={2.6} />
@@ -291,7 +291,7 @@ export function PackEditorial({
                               <button
                                 type="button"
                                 onClick={() => onOpenNotes(s.point.entries[0].docId, s.point.spec)}
-                                className="legal-back-link text-[calc(11.5px*var(--ui-scale))]"
+                                className="legal-back-link text-[calc(11.5px*var(--ui-scale)*var(--type-other))]"
                                 aria-label={`Open ${s.point.entries[0].title} in the ${g.topicLabel} notes`}
                               >
                                 {g.topicLabel} notes <span aria-hidden>→</span>
@@ -344,7 +344,7 @@ export function PackEditorial({
           {/* Bubbles reads along — idle at the halfway mark, cheering
               the pack's last page in the room's own rust */}
           <div className="mt-4 flex items-end gap-4">
-            <p className="max-w-[72ch] flex-1 text-[calc(14px*var(--ui-scale))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale))]">
+            <p className="max-w-[calc(72ch*var(--type-width))] flex-1 text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale)*var(--type-body))]">
               {allRead
                 ? `Pack read — every point, marked off. ${points.length} spec point${points.length === 1 ? "" : "s"} of revision, done. Tick the next batch, or load a saved set and walk it again.`
                 : `That's your pack — ${points.length} point${points.length === 1 ? "" : "s"}, read at your pace. The checkbox beside each clause marks it read; the hairline at the top keeps the score.`}
@@ -360,10 +360,10 @@ export function PackEditorial({
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-current/15 pt-4">
             <span className="legal-meta">END OF PACK · ASSEMBLED FROM THE REVISION NOTES</span>
             <div className="no-print flex flex-wrap items-center gap-x-5 gap-y-2">
-              <SoftButton onClick={onOpenSpec} ariaLabel="Edit the selection in the spec index" className="min-h-[calc(40px*var(--ui-scale))] px-4 py-2 text-[calc(13px*var(--ui-scale))]">
+              <SoftButton onClick={onOpenSpec} ariaLabel="Edit the selection in the spec index" className="min-h-[calc(40px*var(--ui-scale))] px-4 py-2 text-[calc(13px*var(--ui-scale)*var(--type-body))]">
                 <Target className="h-4 w-4" /> Edit the selection
               </SoftButton>
-              <SoftButton onClick={() => setSetsOpen(true)} ariaLabel="Open your saved revision sets" className="min-h-[calc(40px*var(--ui-scale))] px-4 py-2 text-[calc(13px*var(--ui-scale))]">
+              <SoftButton onClick={() => setSetsOpen(true)} ariaLabel="Open your saved revision sets" className="min-h-[calc(40px*var(--ui-scale))] px-4 py-2 text-[calc(13px*var(--ui-scale)*var(--type-body))]">
                 <Bookmark className="h-4 w-4" /> Saved sets{sets.length > 0 ? ` (${sets.length})` : ""}
               </SoftButton>
             </div>
@@ -399,7 +399,7 @@ function EditorialTool({
       onClick={onClick}
       aria-label={label}
       title={label}
-      className="inline-flex h-[calc(36px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-1.5 rounded-[calc(10px*var(--ui-scale))] px-3 font-display text-[calc(12.5px*var(--ui-scale))] font-bold tracking-[0.02em] transition-colors"
+      className="inline-flex h-[calc(36px*var(--ui-scale))] shrink-0 cursor-pointer items-center gap-1.5 rounded-[calc(10px*var(--ui-scale))] px-3 font-display text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-bold tracking-[0.02em] transition-colors"
       style={
         highlight
           ? {
@@ -419,7 +419,7 @@ function EditorialTool({
     >
       {children}
       {typeof badge === "number" && badge > 0 && (
-        <span className="grid h-[calc(18px*var(--ui-scale))] min-w-[calc(18px*var(--ui-scale))] place-items-center rounded-full bg-ink/10 px-1 text-[calc(10.5px*var(--ui-scale))] font-bold">
+        <span className="grid h-[calc(18px*var(--ui-scale))] min-w-[calc(18px*var(--ui-scale))] place-items-center rounded-full bg-ink/10 px-1 text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-bold">
           {badge}
         </span>
       )}

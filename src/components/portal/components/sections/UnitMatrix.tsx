@@ -111,7 +111,7 @@ export function UnitMatrix({ reducedMotion, onSelectUnit }: UnitMatrixProps) {
               ) : i === 1 ? (
                 <h2
                   className="font-display font-semibold leading-[1.12]"
-                  style={{ fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)' }}
+                  style={{ fontSize: 'calc(clamp(1.75rem, 3.4vw, 2.6rem) * var(--type-heading))' }}
                 >
                   The six units, in{' '}
                   <span className="portal-ed-heading-accent">

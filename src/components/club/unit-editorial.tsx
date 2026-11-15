@@ -48,7 +48,7 @@ export function UnitEditorial({
       <PopIn>
         <SoftButton
           onClick={onBack}
-          className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]"
+          className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale)*var(--type-body))]"
           ariaLabel="Back to all units"
         >
           <ArrowLeft className="h-4 w-4" /> Back to all units
@@ -72,7 +72,7 @@ export function UnitEditorial({
               {unit.title}
               <span className="legal-heading-accent">.</span>
             </h1>
-            <p className="mt-5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-soft">
+            <p className="mt-5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.85] text-ink-soft">
               <Fmt text={unit.blurb} />
             </p>
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-ink/10 pt-4">
@@ -88,7 +88,7 @@ export function UnitEditorial({
       <Reveal delay={0.06}>
         <section className="legal-summary mt-8 rounded-[26px] p-5 sm:p-7">
           <div className="flex flex-wrap items-baseline justify-between gap-3">
-            <h2 className="font-display text-[calc(20px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+            <h2 className="font-display text-[calc(20px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
               Revised so far
             </h2>
             <span className="legal-meta">
@@ -104,7 +104,7 @@ export function UnitEditorial({
               transition={{ type: "spring", stiffness: 120, damping: 20 }}
             />
           </div>
-          <p className="mt-3.5 max-w-[64ch] text-[calc(13.5px*var(--ui-scale))] leading-[1.75] text-ink-soft">
+          <p className="mt-3.5 max-w-[64ch] text-[calc(13.5px*var(--ui-scale)*var(--type-body))] leading-[1.75] text-ink-soft">
             {done === 0
               ? "Nothing marked yet — mark a topic as revised when you finish it."
               : done === unit.topics.length
@@ -120,7 +120,7 @@ export function UnitEditorial({
           <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="legal-meta">THE TOPICS</p>
-              <h2 className="mt-1 font-display text-[calc(25px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+              <h2 className="mt-1 font-display text-[calc(25px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
                 {unit.code === "WCH13" || unit.code === "WCH16"
                   ? "Practical skills, in order"
                   : "Topics in this unit"}
@@ -148,7 +148,7 @@ export function UnitEditorial({
                 >
                   <span
                     aria-hidden
-                    className="w-[calc(30px*var(--ui-scale))] shrink-0 pt-[calc(3px*var(--ui-scale))] font-display text-[calc(19px*var(--ui-scale))] leading-none font-bold text-[var(--legal-rust)]"
+                    className="w-[calc(30px*var(--ui-scale))] shrink-0 pt-[calc(3px*var(--ui-scale))] font-display text-[calc(19px*var(--ui-scale)*var(--type-sub))] leading-none font-bold text-[var(--legal-rust)]"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -169,10 +169,10 @@ export function UnitEditorial({
                         </span>
                       )}
                     </span>
-                    <span className="mt-2 block font-display text-[calc(20px*var(--ui-scale))] leading-snug font-semibold tracking-tight text-ink">
+                    <span className="mt-2 block font-display text-[calc(20px*var(--ui-scale)*var(--type-sub))] leading-snug font-semibold tracking-tight text-ink">
                       {t.title}
                     </span>
-                    <span className="mt-1.5 block max-w-[64ch] text-[calc(13.5px*var(--ui-scale))] leading-[1.8] text-ink-soft">
+                    <span className="mt-1.5 block max-w-[64ch] text-[calc(13.5px*var(--ui-scale)*var(--type-body))] leading-[1.8] text-ink-soft">
                       <Fmt text={t.summary} />
                     </span>
                   </span>
@@ -190,7 +190,7 @@ export function UnitEditorial({
             <ArrowRight className="h-5 w-5" />
             <p className="legal-meta">THE UNITS EITHER SIDE</p>
           </div>
-          <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ui-scale))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale))]">
+          <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale)*var(--type-body))]">
             {prev
               ? `${prev.code} walked you through ${prev.shortTitle.toLowerCase()} — step back to warm up, or carry on to ${next ? next.code : "the units ahead"}.`
               : "This is where the course opens. The next unit builds straight on these foundations."}

@@ -113,6 +113,65 @@ export const SCALE_VALUE: Record<ScaleId, number> = {
   XL: 1.5,
 };
 
+/* advanced type roles — the panel's per-reading-role multipliers that
+   stack on top of the scale rung. Each font-size declaration in the
+   codebase declares the role it answers to via a --type-* var (see
+   globals.css): headings (section titles, display words), sub
+   (card titles, h3/h4), body (paragraphs, notes text), other (micro,
+   kickers, chips, labels) and width (the reading measure — the
+   gallery's content column and the editorial prose). A factor of 1
+   rides the main scale untouched; the roles are refinements for
+   readers who want, say, bigger body text without ballooning the
+   chrome. Values are clamped on the way in — and mirrored by the
+   pre-paint script in layout.tsx, which must agree with these
+   limits or the first paint re-flows. */
+export interface TypePrefs {
+  headings: number;
+  sub: number;
+  body: number;
+  other: number;
+  width: number;
+}
+
+export const DEFAULT_TYPE_PREFS: TypePrefs = {
+  headings: 1,
+  sub: 1,
+  body: 1,
+  other: 1,
+  width: 1,
+};
+
+const TYPE_LIMITS: Record<keyof TypePrefs, [number, number]> = {
+  headings: [0.85, 1.2],
+  sub: [0.85, 1.2],
+  body: [0.85, 1.2],
+  other: [0.85, 1.2],
+  width: [0.8, 1.2],
+};
+
+export const TYPE_ROLE_VARS: Record<keyof TypePrefs, string> = {
+  headings: "--type-heading",
+  sub: "--type-sub",
+  body: "--type-body",
+  other: "--type-other",
+  width: "--type-width",
+};
+
+function sanitizeType(v: unknown): TypePrefs {
+  const out = { ...DEFAULT_TYPE_PREFS };
+  if (v && typeof v === "object") {
+    const rec = v as Record<string, unknown>;
+    for (const k of Object.keys(DEFAULT_TYPE_PREFS) as (keyof TypePrefs)[]) {
+      const n = rec[k];
+      if (typeof n === "number" && Number.isFinite(n)) {
+        const [lo, hi] = TYPE_LIMITS[k];
+        out[k] = Math.min(hi, Math.max(lo, n));
+      }
+    }
+  }
+  return out;
+}
+
 /* the retired page-zoom pref saved raw numbers. They map onto rungs
    by their OLD values — kept as an explicit list, NOT read back from
    SCALE_VALUE, so bumping a rung never orphans a save: a zoom of
@@ -156,6 +215,10 @@ export interface Prefs {
   accents: AccentId[];
   /** content scale — S/M/L/XL (multiplies --ui-scale) */
   scale: ScaleId;
+  /** the advanced type roles — per-reading-role multipliers on top of
+      the scale (see TypePrefs above); driven by the panel's Advanced
+      sliders, clamped by sanitizeType, applied as --type-* vars */
+  type: TypePrefs;
   /** the spec-map drawer's height, as a fraction of the visible
       screen — set by the panel presets and by dragging the grabber */
   specHeight: number;
@@ -182,6 +245,7 @@ export const DEFAULT_PREFS: Prefs = {
      screen-aware factory rung (M phone / L small tablet / XL tablet
      and up) — see the first-run branch below */
   scale: "M",
+  type: DEFAULT_TYPE_PREFS,
   specHeight: 0.8,
   specDensity: "roomy",
   headFont: "fredoka",
@@ -232,6 +296,7 @@ function sanitize(p: StoredPrefs): Prefs {
     const heir = LEGACY_ZOOM.find(([v]) => v === p.zoom);
     if (heir) out.scale = heir[1];
   }
+  out.type = sanitizeType(p.type);
   if (typeof p.specHeight === "number" && Number.isFinite(p.specHeight))
     out.specHeight = Math.min(SPEC_H_MAX, Math.max(SPEC_H_MIN, p.specHeight));
   if (
@@ -339,6 +404,13 @@ export function applyPrefs(p: Prefs) {
   root.dataset.dots = p.dots ? "on" : "off";
   root.dataset.motion = p.motion ? "on" : "off";
   root.dataset.scale = p.scale;
+  /* the advanced type roles ride as inline vars the same way --spec-h
+     does — continuous fractions can't sit on a data-attribute ladder.
+     Defaults are 1, so an untouched set writes the same values the
+     stylesheet's :root already holds. */
+  for (const [key, cssVar] of Object.entries(TYPE_ROLE_VARS)) {
+    root.style.setProperty(cssVar, String(p.type[key as keyof TypePrefs]));
+  }
   /* the spec tray's private knobs — --spec-h is an inline style
      because a continuous drag fraction can't ride a data-attribute
      ladder; density maps onto a chip width in globals.css */

@@ -258,7 +258,7 @@ export function HeroSection({
           <h1
             className="text-balance font-display font-semibold leading-[1.06]"
             style={{
-              fontSize: 'clamp(2.5rem, 5.3vw, 4.25rem)',
+              fontSize: 'calc(clamp(2.5rem, 5.3vw, 4.25rem) * var(--type-heading))',
               letterSpacing: '-0.01em',
               color: 'var(--ink)',
             }}

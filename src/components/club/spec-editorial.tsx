@@ -70,7 +70,7 @@ export function SpecEditorial({
       <PopIn>
         <SoftButton
           onClick={onHome}
-          className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale))]"
+          className="min-h-[calc(42px*var(--ui-scale))] px-4 py-2 text-[calc(13.5px*var(--ui-scale)*var(--type-body))]"
           ariaLabel="Back home"
         >
           <ArrowLeft className="h-4 w-4" /> Back home
@@ -95,7 +95,7 @@ export function SpecEditorial({
               Tick the spec points. Get one revision pack
               <span className="legal-heading-accent">.</span>
             </h1>
-            <p className="mt-5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale))] leading-[1.85] text-ink-soft">
+            <p className="mt-5 max-w-[62ch] text-[calc(14.5px*var(--ui-scale)*var(--type-body))] leading-[1.85] text-ink-soft">
               Every statement below is quoted from the specification and mapped
               to the note sections that teach it — nothing hand-maintained, the
               index grows as the notes grow. Tick what you&apos;re revising and
@@ -109,7 +109,7 @@ export function SpecEditorial({
       <Reveal delay={0.06}>
         <section className="legal-summary mt-8 rounded-[26px] p-5 sm:p-7">
           <div className="flex flex-wrap items-baseline justify-between gap-3">
-            <h2 className="font-display text-[calc(20px*var(--ui-scale))] font-semibold tracking-tight text-ink">
+            <h2 className="font-display text-[calc(20px*var(--ui-scale)*var(--type-sub))] font-semibold tracking-tight text-ink">
               Your pack
             </h2>
             <span className="legal-meta">
@@ -125,7 +125,7 @@ export function SpecEditorial({
               }}
             />
           </div>
-          <p className="mt-3.5 max-w-[64ch] text-[calc(13.5px*var(--ui-scale))] leading-[1.75] text-ink-soft">
+          <p className="mt-3.5 max-w-[64ch] text-[calc(13.5px*var(--ui-scale)*var(--type-body))] leading-[1.75] text-ink-soft">
             {picks.length > 0
               ? `Your pack holds ${picks.length} spec point${picks.length === 1 ? "" : "s"} — the notes behind them are waiting.`
               : "Nothing ticked yet — tap statements below to build your pack."}
@@ -148,14 +148,14 @@ export function SpecEditorial({
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search the statements — e.g. mole, halide, isomer…"
               aria-label="Search specification points"
-              className="min-w-0 flex-1 bg-transparent text-[calc(14px*var(--ui-scale))] font-semibold text-ink outline-none placeholder:text-ink-faint/70"
+              className="min-w-0 flex-1 bg-transparent text-[calc(14px*var(--ui-scale)*var(--type-body))] font-semibold text-ink outline-none placeholder:text-ink-faint/70"
             />
             {query && (
               <button
                 type="button"
                 onClick={() => setQuery("")}
                 aria-label="Clear search"
-                className="cursor-pointer text-[calc(12px*var(--ui-scale))] font-bold text-ink-faint hover:text-ink"
+                className="cursor-pointer text-[calc(12px*var(--ui-scale)*var(--type-other))] font-bold text-ink-faint hover:text-ink"
               >
                 clear
               </button>
@@ -174,7 +174,7 @@ export function SpecEditorial({
                   type="button"
                   onClick={() => setFilter(f.id)}
                   aria-pressed={on}
-                  className={`inline-flex min-h-[calc(34px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-[calc(6px*var(--ui-scale))] px-1 font-display text-[calc(12.5px*var(--ui-scale))] font-bold tracking-[0.04em] transition-colors ${
+                  className={`inline-flex min-h-[calc(34px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-[calc(6px*var(--ui-scale))] px-1 font-display text-[calc(12.5px*var(--ui-scale)*var(--type-other))] font-bold tracking-[0.04em] transition-colors ${
                     on
                       ? "text-[var(--legal-rust)]"
                       : "text-ink-faint hover:text-ink"
@@ -182,7 +182,7 @@ export function SpecEditorial({
                   style={on ? { boxShadow: "inset 0 -2px 0 var(--legal-rust)" } : undefined}
                 >
                   {f.label}
-                  <span className="text-[calc(10.5px*var(--ui-scale))] font-bold opacity-70">
+                  <span className="text-[calc(10.5px*var(--ui-scale)*var(--type-other))] font-bold opacity-70">
                     {f.count}
                   </span>
                 </button>
@@ -199,10 +199,10 @@ export function SpecEditorial({
             {/* Bubbles squints at the empty result — the candy lab's
                 one loan to the document room, in the room's own rust */}
             <Mascot main="var(--legal-rust)" mood="wow" size={84} bubbles={false} className="mx-auto" />
-            <p className="mt-4 font-display text-[calc(18px*var(--ui-scale))] font-semibold text-ink">
+            <p className="mt-4 font-display text-[calc(18px*var(--ui-scale)*var(--type-sub))] font-semibold text-ink">
               Nothing matches &ldquo;{query}&rdquo;.
             </p>
-            <p className="mt-2 text-[calc(13.5px*var(--ui-scale))] font-bold text-ink-faint">
+            <p className="mt-2 text-[calc(13.5px*var(--ui-scale)*var(--type-body))] font-bold text-ink-faint">
               Try a shorter word — or clear the filters.
             </p>
             <div className="mt-4 flex justify-center">
@@ -237,7 +237,7 @@ export function SpecEditorial({
             <Target className="h-5 w-5" />
             <p className="legal-meta">YOUR TURN</p>
           </div>
-          <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ui-scale))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale))]">
+          <p className="mt-4 max-w-[72ch] text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.9] sm:text-[calc(14.5px*var(--ui-scale)*var(--type-body))]">
             Ticks live in your browser and follow you everywhere — the pack
             page turns them into one continuous read.
           </p>
@@ -294,12 +294,12 @@ function TopicGroup({
                 ? `Clear all ${pickable.length} points of ${g.topicLabel}`
                 : `Select all ${pickable.length} points of ${g.topicLabel}`
             }
-            className="ml-auto inline-flex min-h-[calc(34px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-[calc(6px*var(--ui-scale))] px-1 font-display text-[calc(12px*var(--ui-scale))] font-bold tracking-[0.04em] text-ink-faint transition-colors hover:text-ink"
+            className="ml-auto inline-flex min-h-[calc(34px*var(--ui-scale))] cursor-pointer items-center gap-1.5 rounded-[calc(6px*var(--ui-scale))] px-1 font-display text-[calc(12px*var(--ui-scale)*var(--type-other))] font-bold tracking-[0.04em] text-ink-faint transition-colors hover:text-ink"
           >
             <Check className="h-3.5 w-3.5" strokeWidth={2.6} />
             {allPicked ? "Clear topic" : "Select topic"}
             {anyPicked && !allPicked && (
-              <span className="text-[calc(10.5px*var(--ui-scale))] text-[var(--legal-rust)]">
+              <span className="text-[calc(10.5px*var(--ui-scale)*var(--type-other))] text-[var(--legal-rust)]">
                 {pickable.filter((p) => pickedSet.has(p.spec)).length}/{pickable.length}
               </span>
             )}
@@ -381,7 +381,7 @@ function PointRow({
         ) : (
           <span
             aria-hidden
-            className="font-display text-[calc(13px*var(--ui-scale))] leading-none font-bold"
+            className="font-display text-[calc(13px*var(--ui-scale)*var(--type-body))] leading-none font-bold"
           >
             +
           </span>
@@ -391,22 +391,22 @@ function PointRow({
       {/* the statement */}
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <span className="font-display text-[calc(13px*var(--ui-scale))] font-bold tracking-[0.04em] text-[var(--legal-rust)]">
+          <span className="font-display text-[calc(13px*var(--ui-scale)*var(--type-body))] font-bold tracking-[0.04em] text-[var(--legal-rust)]">
             {p.spec}
           </span>
           {!hasNotes && (
-            <span className="legal-meta text-[calc(10.5px*var(--ui-scale))]">
+            <span className="legal-meta text-[calc(10.5px*var(--ui-scale)*var(--type-other))]">
               NOTES COMING LATER
             </span>
           )}
           {picked && (
-            <span className="legal-meta text-[calc(10.5px*var(--ui-scale))]">
+            <span className="legal-meta text-[calc(10.5px*var(--ui-scale)*var(--type-other))]">
               IN YOUR PACK
             </span>
           )}
         </div>
         <p
-          className={`mt-1 max-w-[76ch] text-[calc(14px*var(--ui-scale))] leading-[1.7] ${picked ? "font-semibold text-ink" : "text-ink-soft"}`}
+          className={`mt-1 max-w-[76ch] text-[calc(14px*var(--ui-scale)*var(--type-body))] leading-[1.7] ${picked ? "font-semibold text-ink" : "text-ink-soft"}`}
         >
           <Fmt text={p.statement} />
         </p>
@@ -419,7 +419,7 @@ function PointRow({
                 key={`${e.docId}#${e.spec}#${e.sectionIndex}`}
                 type="button"
                 onClick={() => onOpenNotes(e.docId, e.spec)}
-                className="legal-back-link text-[calc(11.5px*var(--ui-scale))]"
+                className="legal-back-link text-[calc(11.5px*var(--ui-scale)*var(--type-other))]"
                 aria-label={`Open section ${e.title} in the ${e.topicLabel} notes`}
               >
                 {e.title} <span aria-hidden>→</span>

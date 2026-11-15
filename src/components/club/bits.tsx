@@ -198,7 +198,7 @@ export function CandyButton({
       whileHover={{ y: -3, rotate: -1 }}
       whileTap={{ scale: 0.94, y: 2, rotate: 0 }}
       transition={{ type: "spring", stiffness: 420, damping: 14 }}
-      className={`candy inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale))] font-semibold tracking-wide select-none ${className ?? ""}`}
+      className={`candy inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale)*var(--type-body))] font-semibold tracking-wide select-none ${className ?? ""}`}
       style={{ "--candy-bg": main, "--candy-side": shade(main), color: readableInk(main) } as CSSProperties}
     >
       {children}
@@ -230,7 +230,7 @@ export function StickerButton({
       whileHover={{ y: -3, rotate: -0.8 }}
       whileTap={{ scale: 0.94, y: 1 }}
       transition={{ type: "spring", stiffness: 420, damping: 15 }}
-      className={`sticker inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale))] font-semibold text-ink select-none ${className ?? ""}`}
+      className={`sticker inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale)*var(--type-body))] font-semibold text-ink select-none ${className ?? ""}`}
     >
       {children}
     </m.button>
@@ -289,7 +289,7 @@ export function SoftButton({
       onClick={onClick}
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.95 }}
-      className={`inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale))] font-semibold text-ink puff select-none ${className ?? ""}`}
+      className={`inline-flex min-h-[calc(48px*var(--ui-scale))] cursor-pointer items-center justify-center gap-2 rounded-full bg-paper px-6 py-3 font-display text-[calc(15.5px*var(--ui-scale)*var(--type-body))] font-semibold text-ink puff select-none ${className ?? ""}`}
     >
       {children}
     </m.button>
@@ -310,7 +310,7 @@ export function Chip({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-display text-[calc(11.5px*var(--ui-scale))] font-semibold tracking-wide ${className ?? ""}`}
+      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-display text-[calc(11.5px*var(--ui-scale)*var(--type-other))] font-semibold tracking-wide ${className ?? ""}`}
       style={
         main
           ? { background: tint(main, 16), color: shade(main, 60) }
@@ -336,7 +336,7 @@ export function SectionTag({
 }) {
   return (
     <span
-      className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-display text-[calc(12px*var(--ui-scale))] font-semibold tracking-[0.16em] uppercase select-none"
+      className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-display text-[calc(12px*var(--ui-scale)*var(--type-other))] font-semibold tracking-[0.16em] uppercase select-none"
       style={{
         background: main,
         color: readableInk(main),
@@ -373,7 +373,7 @@ export function Kicker({
   const ink = color ?? "var(--color-ink-faint)";
   return (
     <span
-      className={`inline-flex items-center gap-2 font-display text-[calc(10.5px*var(--ui-scale))] leading-none font-extrabold tracking-[0.2em] uppercase ${className ?? ""}`}
+      className={`inline-flex items-center gap-2 font-display text-[calc(10.5px*var(--ui-scale)*var(--type-other))] leading-none font-extrabold tracking-[0.2em] uppercase ${className ?? ""}`}
       style={{ color: ink }}
     >
       <span
