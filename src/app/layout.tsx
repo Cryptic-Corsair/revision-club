@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/next";
    same CSS variables — nothing else in the app had to change. */
 import localFont from "next/font/local";
 import { DARK_MOOD_COUNT } from "@/lib/spectra/dark-mood";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 /* ————— preload strategy —————
@@ -88,10 +89,66 @@ const plex = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "IAL CHEM — Edexcel IAL Chemistry revision notes",
+  /* SITE_URL (src/lib/site.ts) is the one source of the site's
+     address — metadataBase makes every relative canonical/OG URL
+     absolute, on Vercel and off it. */
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "IAL CHEM — Edexcel IAL Chemistry revision notes",
+    template: "%s · IAL CHEM",
+  },
   description:
     "IAL CHEM provides revision notes for Edexcel IAL Chemistry (WCH11–WCH16), written to the 2018 specification. Definitions, equations and fully worked examples for every topic, with progress and reading time saved in your browser.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: "IAL CHEM",
+    url: "/",
+    locale: "en_GB",
+    title: "IAL CHEM — revision notes, written the way they're taught",
+    description:
+      "Complete class notes for every topic in the Pearson Edexcel International A Level Chemistry spec (WCH11–WCH16) — six units, thirty-three topics, thirty worked examples, and revision packs built from the spec points you tick.",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "IAL CHEM — Edexcel IAL Chemistry revision notes",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "IAL CHEM — revision notes, written the way they're taught",
+    description:
+      "Complete class notes for every topic in the Pearson Edexcel International A Level Chemistry spec (WCH11–WCH16).",
+    images: ["/og.png"],
+  },
   icons: { icon: "/favicon.svg" },
+};
+
+/* The whole-site structured data — who runs this address and what
+   site lives here. Kept truthful and small: the pages themselves are
+   the content, and /club's rooms render client-side behind a
+   deliberate noindex. */
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: "IAL CHEM",
+      url: SITE_URL,
+      inLanguage: "en",
+      description:
+        "Revision notes for Edexcel International A Level Chemistry (WCH11–WCH16), written to the 2018 specification.",
+    },
+    {
+      "@type": "Organization",
+      name: "IAL CHEM",
+      url: SITE_URL,
+      logo: `${SITE_URL}/logo.svg`,
+    },
+  ],
 };
 
 /* Puts the saved preferences on <html> before the first paint — no
@@ -196,6 +253,10 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-cream font-body text-ink antialiased">
         <Script id="rc-prefs" strategy="beforeInteractive">{prefsInit}</Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
+        />
         {children}
         <Analytics />
       </body>

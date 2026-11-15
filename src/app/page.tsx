@@ -20,7 +20,14 @@ import "@/components/portal/portal.css";
    canonical homepage and is indexed. Old /portal links redirect
    here (next.config.ts). */
 export const metadata: Metadata = {
-  title: "IAL CHEM — revision notes, written the way they're taught",
+  /* absolute — the root layout's title template is for new leaf
+     pages, not the front door's full brand line. No openGraph here:
+     a child openGraph replaces the layout's wholesale (Next merges
+     top-level fields only), which would drop og:image/og:type — the
+     layout's OG already carries the front-door copy and image. */
+  title: {
+    absolute: "IAL CHEM — revision notes, written the way they're taught",
+  },
   description:
     "Complete class notes for every topic in the Pearson Edexcel International A Level Chemistry spec (WCH11–WCH16) — six units, thirty-three topics, thirty worked examples, and revision packs built from the spec points you tick.",
 };
