@@ -22,12 +22,12 @@ import {
   GLOBAL_METRICS,
   IAL_UNITS,
 } from '../portal/data/ialData';
-import { WaterCanvas, type WaterParams } from './WaterCanvas';
+import { WaterCanvas, type WaterParams } from '../shared/WaterCanvas';
 import {
   WATER_ART_BACKDROP,
   WATER_ART_FOOTER,
   WATER_ART_FRAME,
-} from './water.frag';
+} from '../shared/water.frag';
 import { MonsoonRain } from './MonsoonRain';
 import { PondSculpture } from './PondSculpture';
 import { WaveArt } from './WaveArt';

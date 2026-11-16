@@ -42,6 +42,16 @@ export const WATER_FRAGMENT_SRC = `
   uniform float u_edges;
   uniform float u_caustic;
   uniform float u_waves;
+  /* the portal-hero extension: the club's two rooms blended in one
+     field (u_themeMix 0 = light pair / 1 = dusk pair) and an optional
+     bottom+top edge fade so the field dissolves into the page's own
+     --bg instead of ending on a seam. Both are inert elsewhere:
+     twilight binds the same texture to both units and passes 0. */
+  uniform vec3 u_colorBackDusk;
+  uniform vec3 u_colorHighlightDusk;
+  uniform sampler2D u_imageDusk;
+  uniform float u_themeMix;
+  uniform float u_fade;
 
   mat2 rotate2D(float r) {
     return mat2(cos(r), sin(r), -sin(r), cos(r));
@@ -145,16 +155,28 @@ export const WATER_FRAGMENT_SRC = `
       + u_caustic * (0.02 * causticNoise * edgesDistortion);
     sampleUV = clamp(sampleUV, 0.002, 0.998);
 
-    vec4 image = texture2D(u_image, sampleUV);
+    vec4 imageLight = texture2D(u_image, sampleUV);
+    vec4 imageDusk = texture2D(u_imageDusk, sampleUV);
+    vec4 image = mix(imageLight, imageDusk, u_themeMix);
 
-    vec3 color = mix(u_colorBack, image.rgb, image.a * frame);
+    vec3 backColor = mix(u_colorBack, u_colorBackDusk, u_themeMix);
+    vec3 highlightColor = mix(u_colorHighlight, u_colorHighlightDusk, u_themeMix);
+
+    vec3 color = mix(backColor, image.rgb, image.a * frame);
 
     float cn = max(-0.2, causticNoise);
     float highlight = 0.025 * u_highlights * cn;
-    color = mix(color, u_colorHighlight, 0.05 * u_highlights * cn);
+    color = mix(color, highlightColor, 0.05 * u_highlights * cn);
     color += highlight * (0.5 + 0.5 * wavesNoise);
 
-    gl_FragColor = vec4(clamp(color, 0.0, 1.0), 1.0);
+    /* the portal hero's seam dissolve — the old hero shader's own
+       bottom/top fade, now as output alpha (straight, the context is
+       created with premultipliedAlpha: false) */
+    float bottomFade = smoothstep(0.02, 0.42, v_uv.y);
+    float topFade = smoothstep(1.0, 0.84, v_uv.y) * 0.35 + 0.65;
+    float alpha = mix(1.0, bottomFade * topFade, u_fade);
+
+    gl_FragColor = vec4(clamp(color, 0.0, 1.0), alpha);
   }
 `;
 
@@ -183,3 +205,14 @@ export const hexToRgb = (hex: string): [number, number, number] => {
     parseInt(v.slice(4, 6), 16) / 255,
   ];
 };
+
+/* the portal hero's two room washes — the reference's backdrop
+   structure (base linear + two radial pockets + a pearl core), tinted
+   with the club's own validated hexes straight from globals.css
+   (cream #fff6ea / coral #ff6b6b / tangerine #ff922b for the daylight
+   page; chocolate #1e1b16 / amber roast #d9a65f / sea-glass #9db9b0
+   for the dune lab — the old hero shader's exact palette). */
+
+export const WATER_ART_PORTAL_LIGHT = svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900"><defs><linearGradient id="creamBase" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff6ea"/><stop offset="52%" stop-color="#ffeeda"/><stop offset="100%" stop-color="#ffe7cc"/></linearGradient><radialGradient id="tangerineDrift" cx="72%" cy="28%" r="56%"><stop offset="0%" stop-color="#ffcf96" stop-opacity="0.95"/><stop offset="34%" stop-color="#ff922b" stop-opacity="0.55"/><stop offset="68%" stop-color="#ffab7e" stop-opacity="0.22"/><stop offset="100%" stop-color="#fff6ea" stop-opacity="0"/></radialGradient><radialGradient id="coralCurrent" cx="28%" cy="66%" r="58%"><stop offset="0%" stop-color="#ff9f88" stop-opacity="0.62"/><stop offset="44%" stop-color="#ff6b6b" stop-opacity="0.3"/><stop offset="100%" stop-color="#ffe7cc" stop-opacity="0"/></radialGradient><radialGradient id="pearlCore" cx="50%" cy="46%" r="48%"><stop offset="0%" stop-color="#fff3e0" stop-opacity="0.5"/><stop offset="56%" stop-color="#ffdfc0" stop-opacity="0.24"/><stop offset="100%" stop-color="#ffe7cc" stop-opacity="0"/></radialGradient></defs><rect width="1440" height="900" fill="url(#creamBase)"/><rect width="1440" height="900" fill="url(#coralCurrent)"/><rect width="1440" height="900" fill="url(#tangerineDrift)"/><rect width="1440" height="900" fill="url(#pearlCore)"/></svg>`);
+
+export const WATER_ART_PORTAL_DUSK = svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900"><defs><linearGradient id="chocolateBase" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#241f18"/><stop offset="52%" stop-color="#1e1b16"/><stop offset="100%" stop-color="#17140f"/></linearGradient><radialGradient id="amberLamp" cx="72%" cy="28%" r="56%"><stop offset="0%" stop-color="#e8c186" stop-opacity="0.6"/><stop offset="34%" stop-color="#d9a65f" stop-opacity="0.34"/><stop offset="68%" stop-color="#6f6455" stop-opacity="0.14"/><stop offset="100%" stop-color="#1e1b16" stop-opacity="0"/></radialGradient><radialGradient id="seaGlass" cx="28%" cy="66%" r="58%"><stop offset="0%" stop-color="#9db9b0" stop-opacity="0.26"/><stop offset="44%" stop-color="#5f7a72" stop-opacity="0.14"/><stop offset="100%" stop-color="#17140f" stop-opacity="0"/></radialGradient><radialGradient id="pearlWashDusk" cx="50%" cy="46%" r="48%"><stop offset="0%" stop-color="#c8bda9" stop-opacity="0.14"/><stop offset="56%" stop-color="#4a4237" stop-opacity="0.12"/><stop offset="100%" stop-color="#17140f" stop-opacity="0"/></radialGradient></defs><rect width="1440" height="900" fill="url(#chocolateBase)"/><rect width="1440" height="900" fill="url(#seaGlass)"/><rect width="1440" height="900" fill="url(#amberLamp)"/><rect width="1440" height="900" fill="url(#pearlWashDusk)"/></svg>`);

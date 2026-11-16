@@ -16,7 +16,39 @@ import {
 } from '../../data/ialData';
 import { EASE_EXPO } from '../../lib/motion';
 import { useRoomLive } from '../../lib/still';
-import { HeroShaderCanvas } from '../motion/HeroShaderCanvas';
+import { WaterCanvas, type WaterParams } from '../../../shared/WaterCanvas';
+import {
+  WATER_ART_PORTAL_DUSK,
+  WATER_ART_PORTAL_LIGHT,
+} from '../../../shared/water.frag';
+
+/* the hero's water preset — the water reference's own global backdrop
+   table (layering .34 / caustic .38 / waves .34 / size .72 / speed
+   .24), with highlights at .62: on the cream room the field's veins
+   must out-shout a near-white base, and the reference's own footer
+   runs .85, so .62 is still the quiet end of its range. The field
+   dissolves into the page's own --bg at the bottom+top edges
+   (edgeFade), the way the old hero shader did. */
+const HERO_WATER: WaterParams = {
+  highlights: 0.62,
+  layering: 0.34,
+  edges: 0,
+  caustic: 0.38,
+  waves: 0.34,
+  size: 0.72,
+  speed: 0.24,
+};
+
+/* the reference's global-water budget — the software rung is set so a
+   CPU rasterizer (SwiftShader-class) finishes a 30 fps draw inside the
+   page's rAF budget: the field is a low-frequency caustic wash, so it
+   downscales gracefully (the audit's hero-cadence gate is calibrated
+   to this number; hardware keeps the reference's full budgets) */
+const HERO_WATER_BUDGET = {
+  software: 60_000,
+  mobile: 260_000,
+  desktop: 400_000,
+};
 
 interface HeroSectionProps {
   theme: SiteTheme;
@@ -235,8 +267,37 @@ export function HeroSection({
       className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-24"
       data-live={heroLive}
     >
-      {/* Full-bleed GLSL Caustic Refraction & Architectural Grid Background */}
-      <HeroShaderCanvas theme={theme} reducedMotion={reducedMotion} live={heroLive} />
+      {/* Full-bleed water caustics — the faithful port of the water
+          reference's program (shared/WaterCanvas), refracting the club's
+          two room washes and dissolving into --bg at the edges. The
+          referee's verdict gates its shader-time; the old wet-ink/silk/
+          torus GLSL backdrop was removed with this swap. */}
+      <WaterCanvas
+        art={WATER_ART_PORTAL_LIGHT}
+        artDusk={WATER_ART_PORTAL_DUSK}
+        imageAspect={1440 / 900}
+        colorBack="#fff6ea"
+        colorHighlight="#ff922b"
+        colorBackDusk="#1e1b16"
+        colorHighlightDusk="#d9a65f"
+        theme={theme === 'light' ? 'light' : 'dusk'}
+        edgeFade
+        params={HERO_WATER}
+        budget={HERO_WATER_BUDGET}
+        active={heroLive}
+        reducedMotion={reducedMotion}
+        testId="hero-water-canvas"
+        fallback={
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(ellipse 72% 52% at 50% 34%, var(--spotlight) 0%, transparent 72%)',
+            }}
+          />
+        }
+      />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Upper Hero Typography */}
