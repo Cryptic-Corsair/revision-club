@@ -1,51 +1,41 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   the twilight front door (/twilight) — scoped dress.
+   the twilight front door (/twilight) — scoped dress, rebuilt on the
+   reference (water-shafer.vercel.app).
 
    Everything lives under .twilight-root so the workspace design system
    in globals.css and the daylight portal's portal.css stay untouched.
-   The dress is the Shader-water-v2 UI type: deep twilight slate
-   (#1E2532 → #171C26 down the descent to the #10141C band), cream ink,
-   ONE amber accent (#DFBC91). The shaders render the same palette
-   (shader-engines.ts), so canvas and CSS never disagree.
+   The dress is the reference's: deep slate water (#1B222E / #1D2430 /
+   #232934), warm ivory ink #F6F4EF, ONE amber accent #DFBC91 — the
+   shader's own palette (water.frag.ts), so canvas and CSS agree.
 
-   Voices: Fraunces (display) / Figtree (body) / IBM Plex Mono — all
-   already loaded on <html> by the root layout for the daylight portal;
-   this scope re-points the three Tailwind font tokens at them, so the
-   twilight door costs no extra font bytes and speaks the same
-   publication-grade typeset.
+   Voices are the reference's own typeset, self-hosted in src/app/fonts
+   (declared in src/app/twilight/page.tsx): Cormorant (the big display
+   serif, italic for the poem lines), Plus Jakarta Sans (body), Syne
+   (the nav + buttons' small caps voice). Fraunces/Figtree stay on
+   <html> for the rest of the site; this scope re-points the Tailwind
+   tokens at the twilight trio.
 
-   Discipline (handbook §9.4): decoration stays behind scrims so the
-   serif always wins; transitions are local to the control; no infinite
-   CSS animations — the only ambient motion on the page is the referee-
-   gated shader canvas in each room.
+   Decoration discipline: the only CSS loops are compositor-safe
+   transform/opacity keyframes (the halo breathing + ring pulse — the
+   reference's 8.5 s / 3.6 s cycles); everything else is gated machines
+   or settling entrances.
    ═══════════════════════════════════════════════════════════════════════ */
 
 .twilight-root {
-  /* the house voices — the portal's own pair, already on <html> */
-  --font-display: var(--font-fraunces), "Trebuchet MS", serif;
-  --font-body: var(--font-figtree), "Trebuchet MS", sans-serif;
-  --font-sans: var(--font-body), "Trebuchet MS", sans-serif;
-  --font-serif: var(--font-display), "Trebuchet MS", serif;
+  /* the reference's trio, re-pointed through next/font variables */
+  --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-serif: var(--font-display), Georgia, serif;
   --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* the twilight dress */
-  --tx-bg: #1e2532;
-  --tx-step-1: #1b212d;
-  --tx-step-2: #171c26;
-  --tx-band: #10141c;
-  --tx-ink: #ede6d8;
-  --tx-ink-muted: rgba(237, 230, 216, 0.68);
-  --tx-ink-faint: rgba(237, 230, 216, 0.42);
+  /* the twilight palette (the reference's own hexes) */
   --tx-accent: #dfbc91;
-  --tx-accent-ink: #2a2114; /* roast ink on the amber — 8.2:1 */
-  --tx-border: rgba(237, 230, 216, 0.12);
-  --tx-border-strong: rgba(223, 188, 145, 0.34);
-  --tx-card: rgba(23, 28, 38, 0.6);
-  --tx-card-hover: rgba(28, 34, 46, 0.72);
+  --tx-ink: #f6f4ef;
 
   width: 100%;
   min-height: 100vh;
-  background-color: var(--tx-bg);
+  background-color: #1d2430;
   color: var(--tx-ink);
   font-family: var(--font-sans);
   color-scheme: dark;
@@ -53,7 +43,7 @@
 
 .twilight-root ::selection {
   background-color: var(--tx-accent);
-  color: var(--tx-accent-ink);
+  color: #232934;
 }
 
 .twilight-root :focus-visible {
@@ -62,78 +52,105 @@
   border-radius: 4px;
 }
 
-/* ————— the shader canvas + its CSS dress —————
-   The wrapper always wears the palette gradient: it is what shows
-   during the canvas' first paint, on software-GL, when WebGL is
-   unavailable, or if a shader fails to compile. The canvas paints
-   over it once running. */
-.twilight-shader {
-  background:
-    radial-gradient(72% 62% at 30% 30%, rgba(223, 188, 145, 0.08) 0%, transparent 64%),
-    linear-gradient(155deg, #1e2532 0%, #485569 58%, #8e827b 130%);
-}
-
-/* ————— the glass bar ————— */
+/* ————— the glass bar (the reference's pill nav) ————— */
 .twilight-nav {
-  background: rgba(16, 20, 28, 0.68);
+  background: rgba(246, 241, 231, 0.9);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  border: 1px solid var(--tx-border);
-  box-shadow:
-    inset 0 1px 0 rgba(237, 230, 216, 0.08),
-    0 14px 34px -18px rgba(8, 10, 15, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 18px 44px -20px rgba(12, 15, 21, 0.5);
+  /* the flask mark's three inks re-dressed for the ivory pill */
+  --flask-ink: #171a21;
+  --flask-glass: rgba(23, 26, 33, 0.08);
+  --flask-liquid: #dfbc91;
+}
+
+.twilight-nav-link {
+  color: #3d4654;
+  transition: color 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.twilight-nav-link:hover {
+  color: #171a21;
 }
 
 /* ————— buttons ————— */
 .twilight-btn {
-  background: rgba(237, 230, 216, 0.08);
-  border: 1px solid var(--tx-border);
-  color: var(--tx-ink);
+  background: rgba(246, 241, 231, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: #232934;
   transition:
     background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .twilight-btn:hover {
-  background: rgba(237, 230, 216, 0.14);
-  border-color: var(--tx-border-strong);
+  background: rgba(255, 253, 247, 0.98);
 }
 
 .twilight-btn:active {
   transform: translateY(1px);
 }
 
-.twilight-btn-primary {
-  background: var(--tx-accent);
-  border-color: var(--tx-accent);
-  color: var(--tx-accent-ink);
-  box-shadow: 0 12px 30px -14px rgba(223, 188, 145, 0.45);
-}
-
-.twilight-btn-primary:hover {
-  background: #e9c9a2;
-  border-color: #e9c9a2;
-}
-
-/* ————— cards —————
-   Translucent, NOT glass: no backdrop-filter per card (a grid of them
-   is real paint cost on mobile) — the shader's scrim already darkens
-   what's behind, so a flat translucent wash reads identically. */
-.twilight-card {
-  background: var(--tx-card);
-  border: 1px solid var(--tx-border);
-  box-shadow: 0 18px 44px -24px rgba(8, 10, 15, 0.6);
+/* the dark pill (the reference's primary) */
+.twilight-btn-dark {
+  background: #1f2731;
+  border: 1px solid rgba(246, 241, 231, 0.2);
+  color: #f6f4ef;
+  box-shadow: 0 14px 34px -16px rgba(10, 13, 18, 0.7);
   transition:
-    border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.twilight-card-hover:hover {
-  border-color: var(--tx-border-strong);
-  background: var(--tx-card-hover);
-  transform: translateY(-2px);
+.twilight-btn-dark:hover {
+  background: #2a333f;
+  border-color: rgba(223, 188, 145, 0.4);
+}
+
+.twilight-btn-dark:active {
+  transform: translateY(1px);
+}
+
+/* the footer's deeper glass pill */
+.twilight-btn-glass-dark {
+  background: rgba(18, 22, 29, 0.72);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(246, 241, 231, 0.22);
+  transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.twilight-btn-glass-dark:hover {
+  background: rgba(24, 29, 38, 0.85);
+}
+
+/* ————— the glass cards + pill ————— */
+.twilight-glass-card {
+  background: rgba(246, 241, 231, 0.1);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 28px 70px -30px rgba(10, 13, 18, 0.6);
+  transition: border-color 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.twilight-glass-card:hover {
+  border-color: rgba(223, 188, 145, 0.4);
+}
+
+.twilight-glass-pill {
+  background: rgba(18, 22, 29, 0.6);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(246, 241, 231, 0.16);
+}
+
+.twilight-portrait-frame {
+  background: rgba(90, 99, 114, 0.55);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 /* ————— links ————— */
@@ -149,7 +166,7 @@
 }
 
 .twilight-footer-link {
-  color: var(--tx-ink-muted);
+  color: rgba(246, 244, 239, 0.72);
   width: fit-content;
   transition: color 160ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -160,35 +177,164 @@
   text-underline-offset: 3px;
 }
 
+/* ————— typography helpers ————— */
+/* the reference's .display-luminous treatment: a soft dark halo keeps
+   the ivory serif legible over the brightest filaments */
+.twilight-root p,
+.twilight-root blockquote {
+  text-shadow: 0 1px 24px rgba(24, 28, 36, 0.28);
+}
+
 .twilight-eyebrow {
   color: var(--tx-accent);
-  opacity: 0.85;
+  opacity: 0.92;
 }
 
-/* the hero's pointer hint is a desktop line — touch pointers never
-   drive the ink (ShaderCanvas ignores them), so the promise would be
-   false on a phone */
-@media (pointer: coarse) {
-  .twilight-pointer-note {
-    display: none;
-  }
-}
-
-/* the display voice's optical tightening for the big serif runs */
-.twilight-display {
+.twilight-quote {
   font-family: var(--font-display);
   text-wrap: balance;
 }
 
+.twilight-rule {
+  background: linear-gradient(
+    90deg,
+    rgba(223, 188, 145, 0.85) 0%,
+    rgba(223, 188, 145, 0.24) 55%,
+    transparent 100%
+  );
+}
+
+.twilight-ghost {
+  color: rgba(246, 244, 239, 0.05);
+  font-style: italic;
+  z-index: 0;
+}
+
+/* ————— the compositor loops (the reference's breathing cycles) ————— */
+@keyframes twilight-halo-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.46;
+  }
+  50% {
+    transform: scale(1.025);
+    opacity: 0.58;
+  }
+}
+
+.twilight-halo {
+  animation: twilight-halo-breathe 8.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes twilight-ring-pulse {
+  0%,
+  100% {
+    transform: scale(0.78);
+    opacity: 0.48;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.12;
+  }
+}
+
+.twilight-ring-pulse {
+  border: 1px solid rgba(223, 188, 145, 0.42);
+  animation: twilight-ring-pulse 3.6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* ————— the spec marquee (compositor translateX) ————— */
+@keyframes twilight-marquee-slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.twilight-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+
+.twilight-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: twilight-marquee-slide 52s linear infinite;
+  will-change: transform;
+}
+
+.twilight-marquee-group {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.twilight-marquee-item {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.twilight-marquee-dot {
+  margin-left: 2.25rem;
+  margin-right: 2.25rem;
+  color: rgba(223, 188, 145, 0.8);
+}
+
+/* ————— the chronology thread nodes ————— */
+.twilight-thread-node {
+  background: #dfbc91;
+  box-shadow:
+    0 0 0 3px rgba(223, 188, 145, 0.18),
+    0 0 14px rgba(223, 188, 145, 0.55);
+  transition: box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.twilight-chrono-row {
+  transition: background-color 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.twilight-chrono-row:hover {
+  background-color: rgba(246, 244, 239, 0.05);
+}
+
+.twilight-chrono-row:hover .twilight-thread-node {
+  box-shadow:
+    0 0 0 4px rgba(223, 188, 145, 0.26),
+    0 0 18px rgba(223, 188, 145, 0.8);
+}
+
 /* ————— reduced motion: the page settles —————
-   The shader canvas handles the preference itself (one static frame);
-   these rules keep the CSS side equally quiet. */
+   The water and rain machines handle the preference themselves (one
+   static frame); these rules keep the CSS side equally quiet. */
 @media (prefers-reduced-motion: reduce) {
+  .twilight-halo,
+  .twilight-ring-pulse,
+  .twilight-marquee-track {
+    animation: none !important;
+  }
+
   .twilight-root *,
   .twilight-root *::before,
   .twilight-root *::after {
     transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
   }
 }
