@@ -1481,3 +1481,7 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Docs:** SITE-HANDBOOK §3 route table gains the /twilight row (leaf contract + lag contract summary).
 - **Commit:** this commit. Push still blocked (token from the earlier session was revoked; no fresh credential provided since).
 - **Remaining limitations:** /twilight has no inbound links (an alternate door discoverable by URL; the user may want it wired from the portal footer — not done unprompted, the portal must stay a leaf). No Lenis smooth scroll here (native scroll, deliberate — less JS on a decorative page). The interactive wet-ink pointer coupling is desktop-only by design. Shader engines' ambient cadence (~11-15 draws/s observed under headless software GL at the 90 ms software gap; 30 fps cap on hardware GL).
+
+## 2026-11-16 (32) — the reference clone leaves the tree (checkpoint hygiene)
+
+- `git status` after the twilight commit showed `D Shader-water-v2`: the platform's bare-UUID auto-checkpoint (c47a561) had swept the morning's reference clone into the tree — as a single gitlink entry, not loose files. The clone must not ship (site code only), and .gitignore line 72-73 already stages /.external/ as the never-shipped reference area, where the clone had been moved for the lint gate. Removal committed (e6c6e21, gitlink drop only — working-tree clone untouched and now genuinely ignored). No site code affected; no verification needed beyond `git status` clean and `git ls-files` no longer listing it.
