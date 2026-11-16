@@ -1,0 +1,194 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   the twilight front door (/twilight) — scoped dress.
+
+   Everything lives under .twilight-root so the workspace design system
+   in globals.css and the daylight portal's portal.css stay untouched.
+   The dress is the Shader-water-v2 UI type: deep twilight slate
+   (#1E2532 → #171C26 down the descent to the #10141C band), cream ink,
+   ONE amber accent (#DFBC91). The shaders render the same palette
+   (shader-engines.ts), so canvas and CSS never disagree.
+
+   Voices: Fraunces (display) / Figtree (body) / IBM Plex Mono — all
+   already loaded on <html> by the root layout for the daylight portal;
+   this scope re-points the three Tailwind font tokens at them, so the
+   twilight door costs no extra font bytes and speaks the same
+   publication-grade typeset.
+
+   Discipline (handbook §9.4): decoration stays behind scrims so the
+   serif always wins; transitions are local to the control; no infinite
+   CSS animations — the only ambient motion on the page is the referee-
+   gated shader canvas in each room.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.twilight-root {
+  /* the house voices — the portal's own pair, already on <html> */
+  --font-display: var(--font-fraunces), "Trebuchet MS", serif;
+  --font-body: var(--font-figtree), "Trebuchet MS", sans-serif;
+  --font-sans: var(--font-body), "Trebuchet MS", sans-serif;
+  --font-serif: var(--font-display), "Trebuchet MS", serif;
+  --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* the twilight dress */
+  --tx-bg: #1e2532;
+  --tx-step-1: #1b212d;
+  --tx-step-2: #171c26;
+  --tx-band: #10141c;
+  --tx-ink: #ede6d8;
+  --tx-ink-muted: rgba(237, 230, 216, 0.68);
+  --tx-ink-faint: rgba(237, 230, 216, 0.42);
+  --tx-accent: #dfbc91;
+  --tx-accent-ink: #2a2114; /* roast ink on the amber — 8.2:1 */
+  --tx-border: rgba(237, 230, 216, 0.12);
+  --tx-border-strong: rgba(223, 188, 145, 0.34);
+  --tx-card: rgba(23, 28, 38, 0.6);
+  --tx-card-hover: rgba(28, 34, 46, 0.72);
+
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--tx-bg);
+  color: var(--tx-ink);
+  font-family: var(--font-sans);
+  color-scheme: dark;
+}
+
+.twilight-root ::selection {
+  background-color: var(--tx-accent);
+  color: var(--tx-accent-ink);
+}
+
+.twilight-root :focus-visible {
+  outline: 2px solid var(--tx-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ————— the shader canvas + its CSS dress —————
+   The wrapper always wears the palette gradient: it is what shows
+   during the canvas' first paint, on software-GL, when WebGL is
+   unavailable, or if a shader fails to compile. The canvas paints
+   over it once running. */
+.twilight-shader {
+  background:
+    radial-gradient(72% 62% at 30% 30%, rgba(223, 188, 145, 0.08) 0%, transparent 64%),
+    linear-gradient(155deg, #1e2532 0%, #485569 58%, #8e827b 130%);
+}
+
+/* ————— the glass bar ————— */
+.twilight-nav {
+  background: rgba(16, 20, 28, 0.68);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--tx-border);
+  box-shadow:
+    inset 0 1px 0 rgba(237, 230, 216, 0.08),
+    0 14px 34px -18px rgba(8, 10, 15, 0.7);
+}
+
+/* ————— buttons ————— */
+.twilight-btn {
+  background: rgba(237, 230, 216, 0.08);
+  border: 1px solid var(--tx-border);
+  color: var(--tx-ink);
+  transition:
+    background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.twilight-btn:hover {
+  background: rgba(237, 230, 216, 0.14);
+  border-color: var(--tx-border-strong);
+}
+
+.twilight-btn:active {
+  transform: translateY(1px);
+}
+
+.twilight-btn-primary {
+  background: var(--tx-accent);
+  border-color: var(--tx-accent);
+  color: var(--tx-accent-ink);
+  box-shadow: 0 12px 30px -14px rgba(223, 188, 145, 0.45);
+}
+
+.twilight-btn-primary:hover {
+  background: #e9c9a2;
+  border-color: #e9c9a2;
+}
+
+/* ————— cards —————
+   Translucent, NOT glass: no backdrop-filter per card (a grid of them
+   is real paint cost on mobile) — the shader's scrim already darkens
+   what's behind, so a flat translucent wash reads identically. */
+.twilight-card {
+  background: var(--tx-card);
+  border: 1px solid var(--tx-border);
+  box-shadow: 0 18px 44px -24px rgba(8, 10, 15, 0.6);
+  transition:
+    border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.twilight-card-hover:hover {
+  border-color: var(--tx-border-strong);
+  background: var(--tx-card-hover);
+  transform: translateY(-2px);
+}
+
+/* ————— links ————— */
+.twilight-link {
+  color: var(--tx-accent);
+  transition: opacity 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.twilight-link:hover {
+  opacity: 0.82;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.twilight-footer-link {
+  color: var(--tx-ink-muted);
+  width: fit-content;
+  transition: color 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.twilight-footer-link:hover {
+  color: var(--tx-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.twilight-eyebrow {
+  color: var(--tx-accent);
+  opacity: 0.85;
+}
+
+/* the hero's pointer hint is a desktop line — touch pointers never
+   drive the ink (ShaderCanvas ignores them), so the promise would be
+   false on a phone */
+@media (pointer: coarse) {
+  .twilight-pointer-note {
+    display: none;
+  }
+}
+
+/* the display voice's optical tightening for the big serif runs */
+.twilight-display {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+/* ————— reduced motion: the page settles —————
+   The shader canvas handles the preference itself (one static frame);
+   these rules keep the CSS side equally quiet. */
+@media (prefers-reduced-motion: reduce) {
+  .twilight-root *,
+  .twilight-root *::before,
+  .twilight-root *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

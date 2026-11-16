@@ -89,6 +89,7 @@ The product includes a home/desk experience, unit and topic navigation, specific
 | Main route | `/` — the showcase portal (`src/components/portal/`), the canonical homepage, indexed, outside the app shell with its own scoped styles and Lenis scroll |
 | Second route | `/club` (+ `/club/…` paths) — the shelved workspace: the client-side app shell (club-app.tsx) served by an optional catch-all (`src/app/club/[[...room]]/page.tsx`), noindexed, every room owning a clean path (`/club/notes/wch11-t02/2.3`, `/club/spec`, `/club/wch12` …) written by the shell's URL↔room bridge; legacy `?v=` deep links still land and upgrade in place |
 | Legacy address | `/portal` — permanent redirect to `/`; the showcase's original address before it was promoted to the homepage |
+| Alternate front door | `/twilight` — an alternate landing page in the Shader-water-v2 UI type (twilight-slate dress, shader-backed rooms), a leaf like the portal: noindexed, self-canonical, not in the sitemap, scoped tokens under `.twilight-root`, persists nothing, exits into `/club` via the same `?v=` deep links. Its GLSL canvases live in `src/components/twilight/` and run under the §17 motion contract (one referee-elected room animates; 30 fps cap; pixel-budgeted DPR; lazy contexts) |
 
 There is no server-side user account, cloud profile or database synchronising study activity. Preferences, progress, reading time, desk state and revision-pack state are stored in the visitor's browser.
 
