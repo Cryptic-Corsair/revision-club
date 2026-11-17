@@ -165,6 +165,27 @@ function LabStage({ id }: { id: Lab }) {
       </span>
     );
   }
+  if (id === "water") {
+    return (
+      <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#fff6ea] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.08)]">
+        {/* the living wash's pockets, held still: the tangerine drift
+            up in the light, the coral current low and left */}
+        <span
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(48px 34px at 70% 14%, rgb(255 146 43 / 0.42), transparent 72%), radial-gradient(44px 32px at 22% 80%, rgb(255 107 107 / 0.32), transparent 70%)",
+          }}
+        />
+        <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#fffdf7]/90 shadow-[0_1.5px_0_rgb(61_43_31/0.1)]" />
+        <span className="absolute bottom-2 left-2 flex items-center gap-1">
+          <i className="h-1.5 w-1.5 rounded-full bg-[#ff922b]" />
+          <i className="h-1.5 w-1.5 rounded-full bg-[#ff6b6b]" />
+          <i className="h-1.5 w-1.5 rounded-full bg-[#12b886]" />
+        </span>
+      </span>
+    );
+  }
   return (
     <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[linear-gradient(115deg,#2c2013_49.5%,#fdf6e3_50.5%)] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.1)]">
       <span className="absolute top-3 left-2 h-5 w-7 rounded-md bg-[#fdf6e3]/90" />
@@ -509,6 +530,7 @@ export function CustomizePanel({
   onOpenLegal,
   fullscreen,
   onToggleFullscreen,
+  waterAvailable,
 }: {
   open: boolean;
   onClose: () => void;
@@ -519,11 +541,21 @@ export function CustomizePanel({
   onOpenLegal: () => void;
   fullscreen: boolean;
   onToggleFullscreen: () => void;
+  /** the water lab is offered while a ledgered doc is open in the
+      Cards dress — the shell computes it (waterServes); the panel
+      never sees the current view itself */
+  waterAvailable: boolean;
 }) {
   const prefs = usePrefs();
   /* the labs this interface offers — the Document reader doesn't
-     offer classic, the Cards reader's house lab */
-  const labOptions = labOrderFor(prefs.iface);
+     offer classic, the Cards reader's house lab; Water rides last
+     only while its rollout ledger has a doc on stage */
+  const labOptions = labOrderFor(prefs.iface, { water: waterAvailable });
+  /* the lab the page WEARS, water included: while the field is up
+     the page really is the water room, so the Water card lights
+     instead of Light (whose tokens the water room shares) */
+  const wornLab: Lab =
+    waterAvailable && prefs.theme === "water" ? "water" : effectiveLab(prefs);
 
   /* Esc closes · the page behind holds still while the panel is out */
   useEffect(() => {
@@ -540,9 +572,10 @@ export function CustomizePanel({
 
   const pickLab = (lab: Lab) => {
     /* the picker reads the lab the page WEARS (a saved Document+
-       classic wears Light) — tapping the worn lab is a no-op, not a
-       rewrite of the stored pick */
-    if (lab === effectiveLab(prefs)) return;
+       classic wears Light; a saved Water on a ledgered doc wears
+       Water) — tapping the worn lab is a no-op, not a rewrite of
+       the stored pick */
+    if (lab === wornLab) return;
     setPrefs({ theme: lab });
   };
 
@@ -709,7 +742,7 @@ export function CustomizePanel({
               <PanelSection title="Appearance">
                 <div className="grid grid-cols-2 gap-2.5">
                   {labOptions.map((l) => {
-                    const active = effectiveLab(prefs) === l;
+                    const active = wornLab === l;
                     return (
                       <button
                         key={l}

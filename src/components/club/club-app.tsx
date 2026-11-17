@@ -43,6 +43,7 @@ import {
   setPrefs,
   THEME_CHIP,
   usePrefs,
+  waterServes,
   type Iface,
   type Lab,
 } from "@/lib/spectra/prefs";
@@ -445,11 +446,18 @@ function TopBar({
   /* the lab the page WEARS — a saved Document+classic wears Light
      here (the reader doesn't offer classic) while the save keeps
      Classic for the Cards reader; the chip and the picked state
-     follow the display lab, not the stored one */
-  const lab = effectiveLab(prefs);
+     follow the display lab, not the stored one. Water is the same
+     story with one exception: while a ledgered doc is open in the
+     Cards dress and the save says Water, the field is actually up —
+     the page really is the water room, so the chip names it. */
+  const waterServing =
+    view.kind === "notes" && waterServes(prefs.iface, view.docId);
+  const lab: Lab =
+    waterServing && prefs.theme === "water" ? "water" : effectiveLab(prefs);
   /* the labs this interface offers — the Document reader doesn't
-     offer classic, the Cards reader's house lab */
-  const labOptions = labOrderFor(prefs.iface);
+     offer classic, the Cards reader's house lab; Water rides last
+     only while a ledgered doc is on stage (the rollout ledger) */
+  const labOptions = labOrderFor(prefs.iface, { water: waterServing });
   const { picks } = usePacks();
   const [announce, setAnnounce] = useState<Lab | null>(null);
   const [themeOpen, setThemeOpen] = useState(false);
@@ -726,7 +734,9 @@ function TopBar({
                                   ? "linear-gradient(135deg,#17131D 0%,#30263D 58%,#795B79 100%)"
                                   : option === "dune"
                                     ? "linear-gradient(135deg,#332316 0%,#80572E 58%,#D6A65F 100%)"
-                                      : "linear-gradient(135deg,#2C2013 0%,#2C2013 49%,#FDF6E3 50%,#FDF6E3 100%)",
+                                    : option === "classic"
+                                      ? "linear-gradient(135deg,#2C2013 0%,#2C2013 49%,#FDF6E3 50%,#FDF6E3 100%)"
+                                      : "linear-gradient(135deg,#FFF6EA 0%,#FFCF96 52%,#FF9F88 100%)",
                             }}
                           >
                             <span className="h-2 w-9 rounded-full bg-white/75" />
@@ -773,6 +783,8 @@ function TopBar({
                         ? "#493552"
                         : announce === "dune"
                           ? "#6B4A26"
+                          : announce === "water"
+                            ? "#FFCF96"
                             : "linear-gradient(90deg, #2c2013 50%, #fdf6e3 50%)",
                   boxShadow: "inset 0 0 0 2px rgb(61 43 31 / 0.12)",
                 }}
@@ -1198,6 +1210,12 @@ export default function ClubApp() {
 
   const prefs = usePrefs();
 
+  /* the water lab's offer at shell level — the customize panel's
+     theme cards need it (the panel never sees the current view);
+     the same formula the navbar chip and the reader run */
+  const waterServing =
+    view.kind === "notes" && waterServes(prefs.iface, view.docId);
+
   /* ————— warm the lazy rooms —————
      Once the first paint has settled, fetch the deferred chunks in
      the background so the first tap into notes / packs / search
@@ -1498,7 +1516,7 @@ export default function ClubApp() {
             />
           )}
           {(customizeOpen || customizeMounted) && (
-            <CustomizePanel open={customizeOpen} onClose={closeCustomize} onHome={goHome} onOpenSpec={openSpec} onOpenPack={openPack} onOpenProgress={openSticker} onOpenLegal={openLegal} fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
+            <CustomizePanel open={customizeOpen} onClose={closeCustomize} onHome={goHome} onOpenSpec={openSpec} onOpenPack={openPack} onOpenProgress={openSticker} onOpenLegal={openLegal} fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} waterAvailable={waterServing} />
           )}
   
           <main className="relative flex-1">

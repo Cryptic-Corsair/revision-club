@@ -337,12 +337,25 @@ See INTERFACES-ROADMAP.md for the detailed interface contract and planned bounda
 
 ## 9. Themes, tokens and CSS ownership
 
-There are four global themes (called labs internally):
+There are four settled global themes (called labs internally):
 
 - light
 - dark (Night)
 - dune
 - classic (current default)
+
+…plus a fifth lab **in rollout** — `water` (2026-11-17): a daylight room
+whose paper is the living caustic water field (the shared `WaterCanvas`),
+piloted on **Topic 1 only** (`wch11-t01`, the `WATER_DOCS` ledger in
+prefs.ts, walked one document at a time exactly like `GALLERY_DOCS`). The
+water room shares Light's tokens, so `effectiveLab()` displays a saved
+water as Light everywhere the field isn't mounted (pre-paint mirrored),
+the pickers offer it only where `waterServes()` says the field exists
+(gallery dress + ledgered doc), and the field itself (`club/water-backdrop.tsx`)
+runs the §17 contract: portal to `<body>` behind every surface, sleeps
+while the reader's room walk spans the viewport, one static frame under
+reduced motion, the reference's own device-pixel budgets and 30 fps
+accumulator. Widening the ledger widens the lab.
 
 The theme is global. Rooms and Editorial do **not** have independent theme selectors or separate theme persistence. Each interface interprets the active global theme through its own presentation system.
 

@@ -173,14 +173,14 @@ API (a fetch script exists at `scripts/fetch-fonts.sh`, untracked — the
 replace the files in `src/app/fonts/`, and keep the `weight` ranges in
 `layout.tsx` matching the file's variable axis (e.g. Fredoka `"300 700"`).
 
-## 7. Theming — four labs
+## 7. Theming — five labs (water is in rollout)
 
-`globals.css` defines four skins, selected by classes/attributes on `<html>`:
+`globals.css` defines the lab tokens, selected by classes/attributes on `<html>`:
 
 - `:root` → **light** lab
 - `html.dark` → **night** lab (violet-ink charcoal); plus
   `html.dark[data-mood="N"]` mood variants (`DARK_MOOD_COUNT` in
-  `dark-mood.ts`). The mood is CACHED, not calendared: it is stamped
+  dark-mood.ts). The mood is CACHED, not calendared: it is stamped
   into the save as `prefs.mood` when the visitor picks Night (and
   one-time at load for older saves), then never moves on its own —
   `pickDarkMood()` (days-since-epoch mod count) is only the stamp's
@@ -194,6 +194,21 @@ replace the files in `src/app/fonts/`, and keep the `weight` ranges in
   two alternating Dune accents; the chocolate surface palette remains unchanged.
 - `html.classic` → **classic** lab (the default): daylight cream `#fdf6e3`
   rooms with espresso `#2c2013` ink — this is the theme new visitors see
+- **`water`** → the fifth lab, IN ROLLOUT (one doc on the ledger): a
+  daylight room whose paper is the living caustic water field
+  (`shared/WaterCanvas` — the portal hero's program, the water
+  reference's own global-backdrop preset and budgets) mounted by the
+  gallery reader (`club/water-backdrop.tsx`, portaled to `<body>` at
+  z-index −1, behind every surface; it sleeps while the reader's room
+  walk spans the viewport and freezes under reduced motion or the
+  panel's motion switch). It needs NO root class and NO token block:
+  its tokens are Light's, so `effectiveLab()` displays a saved water
+  as Light everywhere the field isn't mounted (pre-paint maps
+  water→light — no first-paint re-flow), the save keeping Water. The
+  pickers offer it only where it is served: `waterServes(iface, docId)`
+  = the Cards dress + the doc on the `WATER_DOCS` ledger (prefs.ts,
+  next to `GALLERY_DOCS`) — Topic 1 (`wch11-t01`) is the pilot.
+  Widening the ledger widens the lab.
 
 User prefs (`prefs.ts`, default in parentheses): `theme` (`"classic"`),
 `iface` (`"gallery"`), `accents` (the full candy wheel), `type` (all five

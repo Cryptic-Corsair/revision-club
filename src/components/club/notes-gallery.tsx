@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import dynamic from "next/dynamic";
 import { m, useScroll, useSpring } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, Check, ChevronDown } from "./icons";
 import type { NotesBlock, NotesDoc } from "@/lib/spectra/notes-types";
@@ -16,6 +17,7 @@ import { fmtClock, topicSeconds, useTimeData } from "@/lib/spectra/time";
 import { togglePick, usePacks } from "@/lib/spectra/packs";
 import { getNotes } from "@/lib/spectra/notes";
 import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
+import { usePrefs, waterServes } from "@/lib/spectra/prefs";
 import { Fmt, plural } from "./format";
 import { PopIn, Reveal, Mascot } from "./bits";
 import { BandWave, WAVES } from "./bands";
@@ -26,6 +28,14 @@ import {
   GAL_ACCENT,
   figOffsetsOf,
 } from "./gallery-section";
+
+/* the water lab's page field — fetched only when a visitor actually
+   wears Water on a ledgered doc, so the WebGL module never joins the
+   reader's chunk for anyone else */
+const WaterBackdrop = dynamic(
+  () => import("./water-backdrop").then((m) => m.WaterBackdrop),
+  { ssr: false },
+);
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the notes reader, in the gallery dress.
@@ -276,6 +286,15 @@ function NotesGalleryBody({
 }) {
   const active = useSpecSpy(doc.sections);
 
+  /* ————— the water lab —————
+     Topic 1 is the pilot: while the visitor wears "water" and this
+     doc is on the lab's rollout ledger (waterServes), the daylight
+     room's paper is the living caustic field. The catalog walk's ref
+     below is the field's sleep gate — see water-backdrop.tsx. */
+  const prefs = usePrefs();
+  const waterOn = prefs.theme === "water" && waterServes(prefs.iface, doc.id);
+  const catalogRef = useRef<HTMLDivElement | null>(null);
+
   /* the contents ledger's posture — expanded by default, remembered
      across notes the way the editorial rail's is */
   const [contentsExpanded, setContentsExpanded] = useState(readTocPosture);
@@ -385,6 +404,10 @@ function NotesGalleryBody({
 
   return (
     <main className="notes-flow gal relative mx-auto max-w-[calc(var(--gal-measure)_+_calc(var(--spacing)_*_16))] px-5 pt-[calc(6.5rem+var(--sa-top))] pb-28 sm:px-8">
+      {/* the water field — portaled to <body> behind everything; the
+          catalog walk below is its sleep gate */}
+      {waterOn && <WaterBackdrop gate={catalogRef} />}
+
       {/* reading progress — the room's own hairline, in the accent */}
       <m.div
         aria-hidden
@@ -613,7 +636,7 @@ function NotesGalleryBody({
           read only; the rooms' shelf and the exempt paths stay
           byte-untouched. */
       }
-      <div className="mt-12 sm:mt-16">
+      <div ref={catalogRef} className="mt-12 sm:mt-16">
         <div
           aria-hidden
           className="relative left-1/2 w-[100vw] -translate-x-1/2"

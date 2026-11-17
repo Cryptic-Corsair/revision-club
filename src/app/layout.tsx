@@ -176,7 +176,12 @@ const prefsInit = `(function(){try{
 var r=document.documentElement,p=null;
 try{p=JSON.parse(localStorage.getItem("reaction-club-prefs-v1")||"null")}catch(e){}
 if(!p){var t=localStorage.getItem("rc-theme");p={theme:t==="dark"?"dark":"classic"}}
-var th=p.theme==="light"?"light":p.theme==="dark"?"dark":p.theme==="dune"?"dune":"classic";
+/* water is the fifth lab — a daylight room whose paper is the living
+   water field, mounted by the reader itself. Its tokens are Light's,
+   so first paint resolves it to light here (mirrors effectiveLab()
+   in prefs.ts); the field fades in when the reader chunk arrives —
+   no re-flow, no flash of the wrong lab. */
+var th=p.theme==="light"||p.theme==="water"?"light":p.theme==="dark"?"dark":p.theme==="dune"?"dune":"classic";
 /* classic is the Cards reader's house lab — a saved Document visitor
    DISPLAYS as Light (mirrors effectiveLab() in prefs.ts); the save
    keeps classic so the Cards reader puts it straight back */
