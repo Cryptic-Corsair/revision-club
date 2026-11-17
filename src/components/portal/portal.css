@@ -2,24 +2,25 @@
    the homepage — the showcase landing (promoted from /portal to /).
 
    Everything here is scoped under .portal-root so the workspace design
-   system in globals.css stays untouched — but the portal no longer
-   carries a private palette of its own: its two dresses ARE the club's
-   labs. The factory dress is the DUNE lab (globals.css html.dune): the
-   chocolate room — page #1e1b16 → paper #2e2820 → raised #38322a, pale
-   sand ink, the amber roast #d9a65f on the chrome (the flask mark's own
-   liquid) and sea-glass #9db9b0 on the warm line, the cocoa band
-   #121009 underfoot. The "light" dress is the daylight cream lab
-   verbatim (cream #fff6ea, paper cards, cocoa ink, coral accent,
-   tangerine on the warm line). Flip the toggle in the footer and
-   the portal re-dresses into the other room.
+   system in globals.css stays untouched. Since 2026-11-17 the factory
+   dress is the portal's own SEA room — the deep sea-slate that matches
+   the water interface's living field: page #141d2b → paper #1f2a3a →
+   raised #283650, milk ink #eaf3fa, the champagne #e6c99e on the chrome
+   (the hero water's own glint colour) and sea-glass #9db9b0 on the warm
+   line, the deep band #0a111c underfoot. The reader's dune lab keeps
+   its chocolate in globals.css — the portal simply stopped borrowing
+   it. The "light" dress is the daylight cream lab verbatim (cream
+   #fff6ea, paper cards, cocoa ink, coral accent, tangerine on the warm
+   line). Flip the toggle in the footer and the portal re-dresses into
+   the other room.
 
    The section walk is the descent, in reading order: workflow,
    showcase, units, the living laboratory, the interlude — every
-   room below the hero takes the next step down toward the cocoa
-   anchor. The steps are positional tokens (--room-step-1 …
+   room below the hero takes the next step down toward the deep
+   band. The steps are positional tokens (--room-step-1 …
    --room-step-5, OKLab mixes of the dress's own ground into its
-   cocoa band: dune #1b1813 → #191610 → #17150e → #15130c →
-   #13110a; daylight the cream deepening into sand #faf0e0 →
+   band: sea #121a27 → #101723 → #0e1520 → #0c131d → #0b1119;
+   daylight the cream deepening into sand #faf0e0 →
    #f6e9d6 → #f1e3cc → #ecdcc2 → #e8d6b8) so the staircase survives
    any future reorder — whichever room stands in slot N wears step
    N. And no junction is a hard edge any more: each room's ground
@@ -64,41 +65,42 @@
   --font-serif: var(--font-display), "Trebuchet MS", serif;
   --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* DUNE — the chocolate room (globals.css, html.dune) */
-  --bg: #1e1b16;
-  --surface: #2e2820;
-  --surface-elevated: #38322a;
-  --ink: #f6f0e6;
-  --ink-muted: #c9bfb0;
-  --border: rgba(246, 240, 230, 0.12);
-  --border-strong: rgba(246, 240, 230, 0.22);
-  --accent: #d9a65f; /* the amber roast — the flask mark's own liquid */
-  --accent-ink: #2a1f12; /* roast ink on the amber (7.3:1) */
-  --accent-warm: #9db9b0; /* sea-glass — the dune pair's second voice */
-  --portal-rust: #d9a65f; /* the editorial room's body accent — the amber roast by night */
-  --nav-backdrop: rgba(30, 27, 22, 0.74);
-  --spotlight: rgba(217, 166, 95, 0.1);
+  /* SEA — the portal's own deep sea-slate room (the water interface's
+     family: champagne on slate, sea-glass on the warm line) */
+  --bg: #141d2b;
+  --surface: #1f2a3a;
+  --surface-elevated: #283650;
+  --ink: #eaf3fa;
+  --ink-muted: #b6c8d8;
+  --border: rgba(234, 243, 250, 0.12);
+  --border-strong: rgba(234, 243, 250, 0.22);
+  --accent: #e6c99e; /* the champagne — the water field's glint colour */
+  --accent-ink: #1b2434; /* deep slate ink on the champagne (9.5:1) */
+  --accent-warm: #9db9b0; /* sea-glass — the dress's second voice */
+  --portal-rust: #dfbc91; /* the editorial room's body accent — deep champagne */
+  --nav-backdrop: rgba(20, 29, 43, 0.74);
+  --spotlight: rgba(230, 201, 158, 0.1);
 
   /* the descent — positional steps, not named rooms: slot N takes
-     step N, all the way down to the cocoa band (OKLab mixes of
-     #1e1b16 into #121009) */
-  --room-step-1: #1b1813;
-  --room-step-2: #191610;
-  --room-step-3: #17150e;
-  --room-step-4: #15130c;
-  --room-step-5: #13110a;
+     step N, all the way down to the deep band (OKLab mixes of
+     #141d2b into #0a111c) */
+  --room-step-1: #121a27;
+  --room-step-2: #101723;
+  --room-step-3: #0e1520;
+  --room-step-4: #0c131d;
+  --room-step-5: #0b1119;
 
-  /* the footer band — the dune lab's cocoa anchor */
-  --band: #121009;
-  --band-ink: #f6f0e6;
-  --band-ink-muted: rgba(246, 240, 230, 0.55);
+  /* the footer band — the sea room's deep anchor */
+  --band: #0a111c;
+  --band-ink: #eaf3fa;
+  --band-ink-muted: rgba(234, 243, 250, 0.55);
 
-  /* the flask mark, dressed for the chocolate room (line art) */
-  --flask-ink: #ffe9c7;
-  --flask-liquid: #d9a65f;
+  /* the flask mark, dressed for the sea room (line art) */
+  --flask-ink: #f2ddb9;
+  --flask-liquid: #e6c99e;
   --flask-glass: none;
 
-  /* glass chrome, dark tuning (mirrors html.dune .site-header nav) */
+  /* glass chrome, dark tuning (mirrors the dark labs' header glass) */
   --nav-inset: rgba(255, 255, 255, 0.16);
   --nav-edge: rgba(255, 255, 255, 0.13);
   --card-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.55);
@@ -107,22 +109,22 @@
      the portal's EASE_EXPO so CSS and framer speak one language */
   --ease-ui-out: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* the homepage navbar's own glass — a cocoa bar darker than the page
-     ground, edged and lit in the amber roast */
-  --nav-glass: rgba(21, 18, 11, 0.7);
-  --nav-pill-edge: rgba(217, 166, 95, 0.28);
-  --nav-sheen: rgba(255, 233, 199, 0.18);
+  /* the homepage navbar's own glass — a slate bar darker than the page
+     ground, edged and lit in the champagne */
+  --nav-glass: rgba(13, 19, 30, 0.72);
+  --nav-pill-edge: rgba(230, 201, 158, 0.3);
+  --nav-sheen: rgba(242, 221, 185, 0.18);
 
-  /* the club bits' mixing room — the dune lab's own values */
+  /* the club bits' mixing room — the sea room's own values */
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-muted);
-  --color-ink-faint: #a79c8c;
+  --color-ink-faint: #8ca4ba;
   --color-paper: var(--surface);
   --color-cocoa: var(--band);
   --color-cream: var(--bg);
   --color-milk: var(--ink);
-  --tint-base: #38322a;
-  --shade-ink: #1e1b16;
+  --tint-base: #283650;
+  --shade-ink: #141d2b;
   --edge: rgb(0 0 0 / 0.5);
 
   width: 100%;
@@ -202,7 +204,7 @@
    is mounted (:has is progressive; older browsers just keep the cream
    body behind a full-viewport wrapper). */
 body:has(.portal-root) {
-  background-color: #1e1b16;
+  background-color: #141d2b;
 }
 
 body:has(.portal-root[data-theme="light"]) {

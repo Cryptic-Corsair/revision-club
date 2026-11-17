@@ -43,6 +43,12 @@ export const SECTIONS_T01_A: SpecSection[] = [
         k: "p",
         text: "The mass of electrons are ==negligible==, hence the mass of the atoms are determined by the mass of **nucleons**.",
       },
+      {
+        k: "figure",
+        kind: "atom-3d",
+        caption:
+          "The atom in three dimensions: the nucleon cluster at the center, and the electrons travelling their shells. Drag to tilt the view.",
+      },
       { k: "p", text: "Atoms in an element are represented by using the following notation." },
       { k: "figure", kind: "notation", caption: "Mass number on top, atomic number underneath." },
       {
@@ -111,6 +117,12 @@ export const SECTIONS_T01_A: SpecSection[] = [
           "A **positive ion** has fewer electrons than protons. Example: Na^+^ ion has 11 protons and 10 electrons.",
           "A positive ion is obtained by **removing** electrons from a neutral atom.",
         ],
+      },
+      {
+        k: "figure",
+        kind: "ion-form",
+        caption:
+          "Sodium hands its single outer electron to chlorine: both outer shells become complete, and the charged ions form (Na^+^, Cl^−^).",
       },
       {
         k: "note",

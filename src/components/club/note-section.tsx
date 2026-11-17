@@ -20,6 +20,7 @@ import { fade, Kicker, liftWash, Reveal, ScrollFade, readableInk, shade, sunkWas
 import { inkMix } from "./bands";
 import {
   FigAtom,
+  FigAtom3D,
   FigBondH2O,
   FigBoxesC,
   FigBoxesS,
@@ -43,6 +44,7 @@ import {
   FigHessCo,
   FigHessGeneral,
   FigIeGraph,
+  FigIonForm,
   FigIsomers,
   FigLevels,
   FigMassSpec,
@@ -993,6 +995,12 @@ export function figureArt(kind: string, accent: string): ReactNode {
   switch (kind) {
     case "atom":
       node = <FigAtom accent={accent} />;
+      break;
+    case "atom-3d":
+      node = <FigAtom3D accent={accent} />;
+      break;
+    case "ion-form":
+      node = <FigIonForm accent={accent} />;
       break;
     case "notation":
       node = <FigNotation accent={accent} />;

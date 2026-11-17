@@ -279,8 +279,8 @@ export function HeroSection({
         imageAspect={1440 / 900}
         colorBack="#fff6ea"
         colorHighlight="#ff922b"
-        colorBackDusk="#1e1b16"
-        colorHighlightDusk="#d9a65f"
+        colorBackDusk="#1b2534"
+        colorHighlightDusk="#e6c99e"
         theme={theme === 'light' ? 'light' : 'dusk'}
         edgeFade
         params={HERO_WATER}

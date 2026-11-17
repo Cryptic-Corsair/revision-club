@@ -3162,3 +3162,171 @@ html.classic .note-rooms .room {
   background: color-mix(in oklab, var(--tone, var(--color-mint)) 8%, var(--color-paper));
   border: 1px solid color-mix(in oklab, var(--tone, var(--color-mint)) 20%, transparent);
 }
+
+/* ————— the 3-D atom figure (notes-figures FigAtom3D) —————
+   A pure-DOM chemistry diagram: preserve-3d orbits carrying
+   travelling electrons, a slow yaw, pointer drag to tilt. Every
+   animation is transform-only (compositor-safe, the §17 ambient
+   discipline) and freezes to a posed still under prefers-reduced-
+   motion or the panel's motion switch ([data-motion="off"]). The
+   pan-y touch-action keeps the reader's page scroll alive under
+   the drag gesture — a horizontal drag tilts, a vertical swipe
+   scrolls on. */
+
+.fig-atom3d {
+  max-width: 26rem;
+  margin-inline: auto;
+  user-select: none;
+}
+
+.fig-atom3d-perspective {
+  height: 320px;
+  perspective: 1150px;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.fig-atom3d-perspective:active {
+  cursor: grabbing;
+}
+
+.fig-atom3d-stage {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--fig-tilt-x, -16deg)) rotateY(var(--fig-tilt-y, 20deg));
+}
+
+.fig-atom3d-yaw {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: fig-atom3d-sway 9s ease-in-out infinite alternate;
+}
+@keyframes fig-atom3d-sway {
+  from {
+    transform: rotateY(-11deg);
+  }
+  to {
+    transform: rotateY(11deg);
+  }
+}
+
+.fig-atom3d-shell {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--fig-r) * 2);
+  height: calc(var(--fig-r) * 2);
+  margin: calc(var(--fig-r) * -1) 0 0 calc(var(--fig-r) * -1);
+  transform-style: preserve-3d;
+  transform: rotateZ(var(--fig-yaw)) rotateX(var(--fig-tilt));
+}
+
+.fig-atom3d-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2.5px solid color-mix(in oklab, var(--color-ink) 55%, transparent);
+}
+
+.fig-atom3d-spin {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: fig-atom3d-spin var(--fig-dur) linear infinite;
+}
+@keyframes fig-atom3d-spin {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+.fig-atom3d-electron {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 15px;
+  height: 15px;
+  margin: -7.5px 0 0 -7.5px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 32% 30%,
+    var(--color-paper) 0 18%,
+    var(--color-ink) 42%
+  );
+  transform: rotate(var(--fig-a)) translateX(var(--fig-r));
+  box-shadow: 0 0 6px color-mix(in oklab, var(--color-ink) 30%, transparent);
+}
+
+.fig-atom3d-nucleus {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.fig-atom3d-nucleon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  margin: -7.5px 0 0 -7.5px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in oklab, var(--color-ink) 72%, transparent);
+  background: radial-gradient(
+    circle at 34% 30%,
+    color-mix(in oklab, var(--fig-nucleon) 55%, #fff) 0 16%,
+    var(--fig-nucleon) 62%
+  );
+  transform: translate(var(--fig-dx), var(--fig-dy));
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.3);
+}
+
+.fig-atom3d-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 14px;
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-ink-soft);
+}
+.fig-atom3d-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.fig-atom3d-key i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  box-shadow: inset 0 -1px 1px rgb(0 0 0 / 0.2);
+}
+.fig-atom3d-hint {
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-ink-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fig-atom3d-yaw,
+  .fig-atom3d-spin {
+    animation: none;
+  }
+}
+.fig-atom3d[data-motion="off"] .fig-atom3d-yaw,
+.fig-atom3d[data-motion="off"] .fig-atom3d-spin {
+  animation: none;
+}

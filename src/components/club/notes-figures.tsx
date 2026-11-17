@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { m } from "framer-motion";
 import { RotateCcw } from "./icons";
 import { tint, shade, readableInk } from "./bits";
+import { usePrefs } from "@/lib/spectra/prefs";
 
 /* ═══════════════════════════════════════════════════════════════
    Reaction Club · notes figures — candy-styled SVG data pictures
@@ -7294,6 +7295,299 @@ export function FigIrAmines() {
       <Mini ox={440} title="3° amine · no bands" bands={[]} />
       <text x={330} y={232} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
         the N–H stretch region, wavenumber / cm⁻¹ — shaded windows carry the bands
+      </text>
+    </svg>
+  );
+}
+
+/* ————— 1.1 · the atom in three dimensions —————
+   A CSS-3D atom: the nucleon cluster at the center, and three
+   electron shells as tilted orbits carrying travelling electrons.
+   No canvas — pure DOM with preserve-3d, so it costs nothing at
+   rest and re-inks with the dress tokens. The stage slowly yaws;
+   a pointer drag tilts the view. The panel's motion switch (and
+   the OS reduced-motion setting) freeze it to a posed still. */
+
+const ATOM3D_SHELLS = [
+  { r: 62, electrons: [0, 180], dur: 6.5, tilt: 22, yaw: 0, dir: 1 },
+  { r: 100, electrons: [0, 60, 120, 240, 300], dur: 10.5, tilt: 34, yaw: 60, dir: -1 },
+  { r: 134, electrons: [20, 80, 140, 200, 260, 320], dur: 15, tilt: 48, yaw: 120, dir: 1 },
+] as const;
+
+const ATOM3D_NUCLEON: [number, number, number, "p" | "n"][] = [
+  [-12, -14, 0, "p"],
+  [13, -17, 0, "n"],
+  [-3, 16, 0, "p"],
+  [19, 8, 0, "n"],
+  [-24, 11, 0, "n"],
+  [5, -3, 0, "p"],
+  [-8, 2, 0, "n"],
+];
+
+export function FigAtom3D({ accent = "#FF6B6B" }: { accent?: string }) {
+  const prefs = usePrefs();
+  const motionOn = prefs.motion;
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const tilt = useRef({ x: -16, y: 20 });
+  const drag = useRef<{ px: number; py: number; sx: number; sy: number } | null>(
+    null,
+  );
+
+  const applyTilt = () => {
+    const el = stageRef.current;
+    if (!el) return;
+    el.style.setProperty("--fig-tilt-x", `${tilt.current.x}deg`);
+    el.style.setProperty("--fig-tilt-y", `${tilt.current.y}deg`);
+  };
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    drag.current = {
+      px: e.clientX,
+      py: e.clientY,
+      sx: tilt.current.x,
+      sy: tilt.current.y,
+    };
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const d = drag.current;
+    if (!d) return;
+    const dx = e.clientX - d.px;
+    const dy = e.clientY - d.py;
+    tilt.current = {
+      x: Math.max(-70, Math.min(50, d.sx + dy * 0.35)),
+      y: Math.max(-80, Math.min(80, d.sy + dx * 0.35)),
+    };
+    applyTilt();
+  };
+
+  const onPointerUp = () => {
+    drag.current = null;
+  };
+
+  return (
+    <div
+      className="fig-atom3d"
+      data-motion={motionOn ? "on" : "off"}
+      role="img"
+      aria-label="Three-dimensional model of the atom: a nucleus of protons and neutrons with electrons travelling around it in shells"
+    >
+      <div
+        className="fig-atom3d-perspective"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+      >
+        <div ref={stageRef} className="fig-atom3d-stage">
+          <div className="fig-atom3d-yaw">
+            {ATOM3D_SHELLS.map((s, i) => (
+              <div
+                key={i}
+                className="fig-atom3d-shell"
+                style={
+                  {
+                    "--fig-r": `${s.r}px`,
+                    "--fig-tilt": `${s.tilt}deg`,
+                    "--fig-yaw": `${s.yaw}deg`,
+                    "--fig-dur": `${s.dur}s`,
+                  } as React.CSSProperties
+                }
+              >
+                <div className="fig-atom3d-ring" />
+                <div
+                  className="fig-atom3d-spin"
+                  style={
+                    {
+                      animationDirection:
+                        s.dir === -1 ? "reverse" : "normal",
+                    } as React.CSSProperties
+                  }
+                >
+                  {s.electrons.map((a, j) => (
+                    <span
+                      key={j}
+                      className="fig-atom3d-electron"
+                      style={{ "--fig-a": `${a}deg` } as React.CSSProperties}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="fig-atom3d-nucleus">
+            {ATOM3D_NUCLEON.map(([dx, dy, , kind], i) => (
+              <span
+                key={i}
+                className={`fig-atom3d-nucleon is-${kind}`}
+                style={
+                  {
+                    "--fig-dx": `${dx}px`,
+                    "--fig-dy": `${dy}px`,
+                    "--fig-nucleon": kind === "p" ? accent : "var(--color-ink-faint)",
+                  } as React.CSSProperties
+                }
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="fig-atom3d-legend">
+        <span className="fig-atom3d-key">
+          <i style={{ background: accent }} /> proton +
+        </span>
+        <span className="fig-atom3d-key">
+          <i style={{ background: "var(--color-ink-faint)" }} /> neutron
+        </span>
+        <span className="fig-atom3d-key">
+          <i style={{ background: "var(--color-ink)" }} /> electron −
+        </span>
+        <span className="fig-atom3d-hint">drag to tilt the view</span>
+      </div>
+    </div>
+  );
+}
+
+/* ————— 1.1 · ion formation —————
+   The sodium → chlorine electron transfer, on a loop: the outer
+   electron flies across, both outer shells end up complete, and the
+   charged ions stand labelled. The RESTING state (motion switched
+   off, or prefers-reduced-motion) is the completed transfer — the
+   labelled ions with full shells — so the still image stays
+   educationally whole; only the journey needs the motion. */
+
+export function FigIonForm({ accent = "#FF6B6B" }: { accent?: string }) {
+  const prefs = usePrefs();
+  const motionOn = prefs.motion;
+  /* one shell of eight dots, drawn at even angles; `skip` is the gap
+     left for the transferred electron (degrees, SVG top = -90) */
+  const shellDots = (cx: number, cy: number, r: number, skip: number) =>
+    [0, 1, 2, 3, 4, 5, 6].map((i) => {
+      const a = ((-90 + 51.43 * (i + 1)) * Math.PI) / 180;
+      return {
+        x: cx + r * Math.cos(a),
+        y: cy + r * Math.sin(a),
+      };
+    }).filter((_, i) => i !== skip);
+
+  const naInner = shellDots(150, 150, 34, -1);
+  const clInner = shellDots(410, 150, 34, -1);
+  /* chlorine's outer shell: 7 dots with the top seat left open */
+  const clOuter = [0, 1, 2, 3, 4, 5, 6].map((i) => {
+    const a = ((-90 + 51.43 * (i + 1)) * Math.PI) / 180;
+    return { x: 410 + 52 * Math.cos(a), y: 150 + 52 * Math.sin(a) };
+  });
+
+  return (
+    <svg
+      viewBox="0 0 560 300"
+      className="w-full"
+      role="img"
+      aria-label="Sodium transferring its outer electron to chlorine: the ions Na+ and Cl− form with complete outer shells"
+      data-motion={motionOn ? "on" : "off"}
+    >
+      <style>{`
+        .fig-ion-fly { animation: fig-ion-fly 7s linear infinite; }
+        .fig-ion-arc { stroke-dasharray: 6 9; animation: fig-ion-dash 1.6s linear infinite; }
+        .fig-ion-pulse { animation: fig-ion-pulse 7s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+        @keyframes fig-ion-fly {
+          0%   { transform: translate(150px, 98px); opacity: 1; }
+          15%  { transform: translate(189px, 82px); }
+          30%  { transform: translate(228px, 71px); }
+          45%  { transform: translate(267px, 66px); }
+          60%  { transform: translate(306px, 67px); }
+          75%  { transform: translate(345px, 74px); }
+          88%  { transform: translate(384px, 86px); opacity: 1; }
+          93%  { transform: translate(410px, 98px); opacity: 0; }
+          100% { transform: translate(410px, 98px); opacity: 0; }
+        }
+        @keyframes fig-ion-dash { to { stroke-dashoffset: -30; } }
+        @keyframes fig-ion-pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.045); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .fig-ion-fly, .fig-ion-arc, .fig-ion-pulse { animation: none; }
+          .fig-ion-fly { display: none; }
+        }
+        [data-motion="off"] .fig-ion-fly,
+        [data-motion="off"] .fig-ion-arc,
+        [data-motion="off"] .fig-ion-pulse { animation: none; }
+        [data-motion="off"] .fig-ion-fly { display: none; }
+      `}</style>
+
+      {/* the transfer path, faint */}
+      <path
+        d="M150 98 Q 280 34 410 98"
+        fill="none"
+        stroke={accent}
+        strokeWidth="2"
+        opacity="0.4"
+        className="fig-ion-arc"
+      />
+
+      {/* ——— sodium ——— */}
+      <circle cx="150" cy="150" r="16" fill={tint(accent, 42)} stroke={INK} strokeWidth="2.5" />
+      <text x="150" y="155" textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Na</text>
+      <circle cx="150" cy="150" r="34" fill="none" stroke={tint(accent, 45)} strokeWidth="2.5" />
+      {naInner.map((p, i) => (
+        <g key={`ni-${i}`}>
+          <circle cx={p.x} cy={p.y} r="4.5" fill={INK} />
+          <circle cx={p.x - 1.2} cy={p.y - 1.4} r="1.3" fill={PAPER} />
+        </g>
+      ))}
+      <circle cx="150" cy="150" r="52" fill="none" stroke={tint(accent, 45)} strokeWidth="3" strokeDasharray="7 8" strokeLinecap="round" />
+
+      {/* ——— chlorine ——— */}
+      <circle cx="410" cy="150" r="18" fill={tint(accent, 42)} stroke={INK} strokeWidth="2.5" />
+      <text x="410" y="155" textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Cl</text>
+      <circle cx="410" cy="150" r="34" fill="none" stroke={tint(accent, 45)} strokeWidth="2.5" />
+      {clInner.map((p, i) => (
+        <g key={`ci-${i}`}>
+          <circle cx={p.x} cy={p.y} r="4.5" fill={INK} />
+          <circle cx={p.x - 1.2} cy={p.y - 1.4} r="1.3" fill={PAPER} />
+        </g>
+      ))}
+      <circle cx="410" cy="150" r="52" fill="none" stroke={tint(accent, 45)} strokeWidth="3" strokeDasharray="7 8" strokeLinecap="round" />
+      {clOuter.map((p, i) => (
+        <g key={`co-${i}`}>
+          <circle cx={p.x} cy={p.y} r="5.5" fill={INK} />
+          <circle cx={p.x - 1.4} cy={p.y - 1.7} r="1.5" fill={PAPER} />
+        </g>
+      ))}
+
+      {/* the transferred electron, seated at chlorine's top seat */}
+      <g className="fig-ion-pulse">
+        <circle cx="410" cy="98" r="7" fill={accent} stroke={INK} strokeWidth="2" />
+        <circle cx="408" cy="96" r="2" fill={PAPER} />
+      </g>
+
+      {/* the travelling electron (motion only) */}
+      <g className="fig-ion-fly">
+        <circle r="6.5" fill={accent} stroke={INK} strokeWidth="2" />
+        <circle r="2" cx="-1.6" cy="-2" fill={PAPER} />
+      </g>
+
+      {/* the ions, labelled — the resting state */}
+      <g className="fig-ion-pulse">
+        <text x="150" y="238" textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+          Na<tspan fontSize="12" dy="-5">+</tspan>
+        </text>
+        <text x="150" y="256" textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+          11 protons · 10 electrons
+        </text>
+      </g>
+      <g className="fig-ion-pulse">
+        <text x="410" y="238" textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
+          Cl<tspan fontSize="12" dy="-5">−</tspan>
+        </text>
+        <text x="410" y="256" textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+          17 protons · 18 electrons
+        </text>
+      </g>
+      <text x="280" y="288" textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
+        the outer electron transfers — both outer shells become complete
       </text>
     </svg>
   );

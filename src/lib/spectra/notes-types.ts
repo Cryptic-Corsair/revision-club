@@ -137,7 +137,9 @@ export type FigureKind =
   | "ir-propanoic"
   | "ir-propene"
   | "ir-halides"
-  | "ir-amines";
+  | "ir-amines"
+  | "atom-3d"
+  | "ion-form";
 
 export type NotesBlock =
   | { k: "p"; text: string }

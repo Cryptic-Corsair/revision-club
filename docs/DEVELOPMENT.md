@@ -119,7 +119,10 @@ Notes live in `src/lib/spectra/content/` as typed TS modules (no CMS, no MDX):
 Content model (`src/lib/spectra/notes-types.ts`): a topic is a `NotesDoc`
 containing `SpecSection`s; each section renders ordered `NotesBlock`s
 (paragraphs, lists, equations, callouts, figures…). `FigureKind` enumerates the
-SVG figure types rendered by `notes-figures.tsx`.
+SVG figure types rendered by `notes-figures.tsx`. Two kinds MOVE under the
+motion discipline (handbook §16): `atom-3d` is a pure-DOM CSS-3D composition
+(no canvas) and `ion-form` an SVG-keyframe loop — both freeze to posed stills
+on the motion switch or prefers-reduced-motion.
 
 **How to add/extend a topic:** copy the shape of an existing `notes-tNN-x.ts`,
 build the `NotesDoc`, register it in the unit's `wchNN.ts` topic list, run
