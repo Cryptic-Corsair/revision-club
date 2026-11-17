@@ -645,27 +645,27 @@ html.pistachio .rooms {
   --rooms-hairline-soft: color-mix(in oklab, var(--color-ink) 8%, transparent);
 }
 /* ————— the pistachio lab —————
-   The fifth lab: an orchard daylight room. Cream grounds carry the
-   chrome, ink keeps the text, and the signatures split the accent
-   work — pistachio dresses the deep rooms (every section sheet
-   flips to roasted-pistachio green with cream inks, the same
-   structure classic gives its espresso rooms) while plum anchors
-   the footer, the dark bands and the lamp bloom. Contrast measured
-   with scripts/pistachio-palette.py: ink 11.6:1 on cream, the
-   rooms' cream inks 10.3:1 on the pistachio ground, milk 13.4:1 on
-   the plum footer. The candy shelf is NOT re-tinted — every brand
-   value passes on the cream and orchard grounds. No mood rotation —
-   this pair is the theme's signature and never changes. */
+   The fifth lab: an orchard daylight room. Pistachio grounds carry
+   everything — the page, the cards, the light rooms — ink keeps the
+   text, and the deep rooms wear the roasted-pistachio green with
+   cream inks (the same structure classic gives its espresso rooms)
+   while plum anchors the footer, the dark bands and the lamp bloom.
+   Contrast measured with scripts/pistachio-palette.py: ink 10.8:1
+   on the pistachio page and 11.7:1 on cards, the rooms' cream inks
+   10.3:1 on the orchard ground, milk 13.2:1 on the plum footer, the
+   light rooms 10.3:1 under ink. The candy shelf is NOT re-tinted —
+   every brand value passes on the pistachio grounds. No mood
+   rotation — this pair is the theme's signature and never changes. */
 html.pistachio {
-  --color-cream: #f7f3e6; /* cream page */
-  --color-paper: #fcfaf0; /* cards, sheets, bubbles */
-  --color-milk: #fff8e6;
-  --color-ink: #35312b; /* 11.6:1 on the page, 12.4:1 on cards */
-  --color-ink-soft: #6e6757; /* 5.1:1 on the page */
-  --color-ink-faint: #85806f; /* 3.6:1 on the page */
+  --color-cream: #e9eddb; /* pistachio page */
+  --color-paper: #f2f5e3; /* pistachio cards, sheets, bubbles */
+  --color-milk: #f6f8e8;
+  --color-ink: #35312b; /* 10.8:1 on the page, 11.7:1 on cards */
+  --color-ink-soft: #655e4d; /* 5.4:1 on the page */
+  --color-ink-faint: #7e7967; /* 3.7:1 on the page */
   --color-cocoa: #3a2337; /* deep plum — footer, dark bands */
-  --tint-base: #fcfaf0;
-  --shade-ink: #f7f3e6; /* shade() mixes candy toward the room */
+  --tint-base: #f2f5e3;
+  --shade-ink: #e9eddb; /* shade() mixes candy toward the room */
   --dot-ink: rgb(76 89 46 / 0.07); /* pistachio polka dots */
   --lamp-ink: rgb(154 78 134 / 0.07); /* the plum lamp bloom */
   --edge: rgb(53 49 43 / 0.08);
@@ -682,14 +682,14 @@ html.pistachio .room {
   --color-ink: var(--color-milk);
   --color-ink-soft: color-mix(in oklab, var(--color-milk) 78%, var(--color-cocoa));
   --color-ink-faint: color-mix(in oklab, var(--color-milk) 56%, var(--color-cocoa));
-  --color-paper: #3b4423; /* the roasted-pistachio room — 10.3:1 under cream ink */
-  --tint-base: #4a5433;
+  --color-paper: #3b4423; /* the roasted-pistachio plate — 9.8:1 under cream ink */
+  --tint-base: #454f2c;
   --sunk-share: 16%;
-  --sunk-base: #343d1e;
+  --sunk-base: #313a1c;
   --lift-share: 22%;
-  --lift-base: #303818;
+  --lift-base: #2d3517;
   --honey-share: 18%;
-  --honey-base: #2a3115;
+  --honey-base: #272e12;
   --chip-base: var(--color-paper);
   --zebra-fill: color-mix(in oklab, var(--color-milk) 4%, transparent);
   --arc-ink: 70%;
@@ -1460,11 +1460,11 @@ html[data-iface="gallery"].pistachio {
   --iface-accent: #4e5a28;
   --iface-accent-ink: #fffdf7;
   /* the orchard's signature pair — deep pistachio rooms alternating
-     warm cream rooms, the same walk classic runs in espresso; the
-     husk-bronze accent reads 6.7:1 on cream and milk reads 7.3:1 on
-     it (measured with scripts/pistachio-palette.py) */
-  --gal-room-a: #3b4423;
-  --gal-room-b: #f8f4e6;
+     light pistachio rooms, the same walk classic runs in espresso;
+     no cream in the walk. Ink 10.3:1 on the light ground, the husk
+     accent 6.2:1 on the page (scripts/pistachio-palette.py) */
+  --gal-room-a: #38411f;
+  --gal-room-b: #e2e9c6;
 }
 /* inside a classic espresso room the dress's one accent is re-
    pointed to a caramel that reads on cocoa — numerals, labels,
@@ -2064,6 +2064,66 @@ html.classic .legal-clause.is-band-espresso mark {
     --legal-rust: #7a5433;
   }
   html.classic .legal-clause.is-band-cream {
+    background: none;
+    border-color: #d8cbb8;
+  }
+}
+
+/* ————— pistachio on editorial · the painted orchard clauses —————
+   The document room wears the orchard the way classic does: the
+   clause panels are painted at the rooms' own parity — even clauses
+   deep pistachio with the flipped ink recipe (plates mix off the
+   milk, the accent re-mixed to a kernel cream that reads on the
+   green), odd clauses the light pistachio ground. The flat stream's
+   one accent is re-pointed to the husk-bronze everywhere else. The
+   grounds never print — the pack keeps its worksheet dress. */
+html.pistachio .legal-room {
+  --legal-rust: #4e5a28;
+}
+html.pistachio .legal-clauses {
+  gap: 14px;
+}
+html.pistachio .legal-clause.is-band-espresso,
+html.pistachio .legal-clause.is-band-cream {
+  border-bottom: none;
+  border-radius: 22px;
+  padding: 20px 22px 26px;
+}
+html.pistachio .legal-clause.is-band-cream {
+  background: #e2e9c6;
+  border: 1px solid color-mix(in oklab, var(--color-ink) 14%, transparent);
+}
+html.pistachio .legal-clause.is-band-espresso {
+  background: #38411f;
+  --color-ink: var(--color-milk);
+  --color-ink-soft: color-mix(in oklab, var(--color-milk) 78%, var(--color-cocoa));
+  --color-ink-faint: color-mix(in oklab, var(--color-milk) 56%, var(--color-cocoa));
+  --color-paper: #3b4423;
+  --tint-base: #454f2c;
+  --legal-rust: color-mix(in oklab, #d9d383 78%, var(--color-milk));
+  --edge: rgb(0 0 0 / 0.34);
+}
+html.pistachio .legal-clause.is-band-espresso mark {
+  background: color-mix(in oklab, #ffd43b 15%, transparent);
+}
+@media (max-width: 639px) {
+  html.pistachio .legal-clause.is-band-espresso,
+  html.pistachio .legal-clause.is-band-cream {
+    border-radius: 18px;
+    padding: 15px 15px 20px;
+  }
+}
+@media print {
+  html.pistachio .legal-clause.is-band-espresso {
+    background: none;
+    --color-ink: #201509;
+    --color-ink-soft: #4b3d2e;
+    --color-ink-faint: #8a7d69;
+    --color-paper: #ffffff;
+    --tint-base: #ffffff;
+    --legal-rust: #7a5433;
+  }
+  html.pistachio .legal-clause.is-band-cream {
     background: none;
     border-color: #d8cbb8;
   }
@@ -3130,18 +3190,18 @@ html.classic .note-rooms .room {
 /* the pistachio walk keeps its signature — the deep orchard rooms
    flip every ink and surface inside, hairlines included. */
 html.pistachio .note-rooms {
-  --note-band-a: #3b4423;
-  --note-band-b: #f8f4e6;
+  --note-band-a: #38411f;
+  --note-band-b: #e2e9c6;
 }
 html.pistachio .note-rooms .room {
-  --color-ink: #faf7e8;
+  --color-ink: #fcfaee;
   --color-ink-soft: #d5d2b6;
   --color-ink-faint: #b0b295;
   --color-paper: #3b4423;
-  --tint-base: #4a5433;
-  --sunk-base: #343d1e;
-  --lift-base: #303818;
-  --honey-base: #2a3115;
+  --tint-base: #454f2c;
+  --sunk-base: #313a1c;
+  --lift-base: #2d3517;
+  --honey-base: #272e12;
   --rooms-hairline: rgb(250 247 232 / 0.17);
   --rooms-hairline-soft: rgb(250 247 232 / 0.09);
 }
