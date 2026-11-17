@@ -107,6 +107,12 @@ import {
   FigTitrationRig,
   FigStdSolution,
   FigTitreTargets,
+  FigGasSyringe,
+  FigMeniscusBand,
+  FigLimewaterTest,
+  FigIonicPpt,
+  FigMolePiles,
+  FigAtomBalance,
   FigG7Trends,
   FigHalogenColours,
   FigDisplacement,
@@ -946,6 +952,12 @@ const WIDE_FIGS = new Set([
   "titration-rig",
   "std-solution",
   "titre-targets",
+  "gas-syringe",
+  "meniscus-band",
+  "limewater-test",
+  "ionic-ppt",
+  "mole-piles",
+  "atom-balance",
   "g7-trends",
   "halogen-colours",
   "displacement",
@@ -1253,6 +1265,24 @@ export function figureArt(kind: string, accent: string): ReactNode {
       break;
     case "std-solution":
       node = <FigStdSolution accent={accent} />;
+      break;
+    case "gas-syringe":
+      node = <FigGasSyringe accent={accent} />;
+      break;
+    case "meniscus-band":
+      node = <FigMeniscusBand accent={accent} />;
+      break;
+    case "limewater-test":
+      node = <FigLimewaterTest accent={accent} />;
+      break;
+    case "ionic-ppt":
+      node = <FigIonicPpt accent={accent} />;
+      break;
+    case "mole-piles":
+      node = <FigMolePiles accent={accent} />;
+      break;
+    case "atom-balance":
+      node = <FigAtomBalance accent={accent} />;
       break;
     case "titre-targets":
       node = <FigTitreTargets accent={accent} />;

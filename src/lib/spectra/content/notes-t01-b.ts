@@ -102,6 +102,11 @@ export const SECTIONS_T01_B: SpecSection[] = [
         eq: "number of moles = mass in grams ÷ molar mass        number of moles of gas = volume of gas (dm^3^) ÷ molar volume (24 dm^3^)",
         note: "The molar-volume route is exercised in section 1.8.",
       },
+      {
+        k: "figure",
+        kind: "mole-piles",
+        caption: "One mole of magnesium, water and carbon dioxide: six particles on every pile — the same count, 6.02 × 10²³ — but 24 g, 18 g and 44 g. The count is the mole; the mass is the molar mass.",
+      },
     ],
   },
   {
@@ -113,6 +118,11 @@ export const SECTIONS_T01_B: SpecSection[] = [
       {
         k: "p",
         text: "Every reacting-mass question is the same three moves: convert the mass you know into moles, ride the equation's ==stoichiometry== across, and convert back with the molar mass of the species the question asks for.",
+      },
+      {
+        k: "figure",
+        kind: "atom-balance",
+        caption: "Mass is conserved because atoms are only rearranged: two magnesium atoms and two oxygen atoms on the left are exactly the two magnesium and two oxygen atoms locked into 2MgO on the right.",
       },
       {
         k: "worked",

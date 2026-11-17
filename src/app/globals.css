@@ -1118,6 +1118,53 @@ html.dark .hero-glow {
   width: 3px;
 }
 
+
+@keyframes fig-drift-x {
+  0% {
+    transform: translateX(-6px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(26px);
+    opacity: 0;
+  }
+}
+@keyframes fig-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fig-bar-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.fig-drift-x {
+  animation: fig-drift-x 2.4s ease-in infinite;
+  transform-box: fill-box;
+}
+.fig-appear {
+  animation: fig-appear 0.35s ease-out 1.25s both;
+}
+.fig-bar-l {
+  transform-box: fill-box;
+  transform-origin: 0 50%;
+  animation: fig-bar-x 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -3536,8 +3583,11 @@ html.classic .note-rooms .room {
   .fig-sway,
   .fig-draw,
   .fig-bar,
+  .fig-bar-l,
   .fig-bars rect,
-  .fig-bars line {
+  .fig-bars line,
+  .fig-drift-x,
+  .fig-appear {
     animation: none !important;
   }
 }
@@ -3555,8 +3605,11 @@ html.classic .note-rooms .room {
     .fig-sway,
     .fig-draw,
     .fig-bar,
+    .fig-bar-l,
     .fig-bars rect,
-    .fig-bars line
+    .fig-bars line,
+    .fig-drift-x,
+    .fig-appear
   ) {
   animation: none !important;
 }

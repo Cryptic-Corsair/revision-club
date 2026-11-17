@@ -98,6 +98,11 @@ export const SECTIONS_P05: SpecSection[] = [
         label: "The magnesium sulfate distinction",
         text: "Both ions fizz with acid, so the discriminator is magnesium sulfate: the carbonate throws its white precipitate down ==in the cold==, while the hydrogencarbonate only precipitates once the mixture is heated.",
       },
+      {
+        k: "figure",
+        kind: "limewater-test",
+        caption: "Heat the carbonate, run the CO₂ along the delivery tube, and watch the limewater turn milky — the white precipitate is calcium carbonate.",
+      },
     ],
   },
   {
@@ -211,6 +216,11 @@ export const SECTIONS_P05: SpecSection[] = [
       {
         k: "eq",
         eq: "Ba^2+^(aq) + SO~4~^2−^(aq) → BaSO~4~(s)",
+      },
+      {
+        k: "figure",
+        kind: "ionic-ppt",
+        caption: "The barium and sulfate ions drift together and latch into the white precipitate; the sodium and nitrate spectators never join it — they are the ions you cancel.",
       },
     ],
   },

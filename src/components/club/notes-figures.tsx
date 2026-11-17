@@ -1046,14 +1046,14 @@ export function FigShielding({ accent = "#FF6B6B" }: { accent?: string }) {
    ═══════════════════════════════════════════════════════════════ */
 
 /* small arrow with a solid head */
-function t3Arrow(x1: number, y1: number, x2: number, y2: number, c: string, w = 2.5) {
+function t3Arrow(x1: number, y1: number, x2: number, y2: number, c: string, w = 2.5, draw?: boolean) {
   const a = Math.atan2(y2 - y1, x2 - x1);
   const h = 7.5;
   const head = `${x2},${y2} ${x2 - h * Math.cos(a - 0.42)},${y2 - h * Math.sin(a - 0.42)} ${x2 - h * Math.cos(a + 0.42)},${y2 - h * Math.sin(a + 0.42)}`;
   return (
     <g>
-      <line x1={x1} y1={y1} x2={x2 - h * 0.55 * Math.cos(a)} y2={y2 - h * 0.55 * Math.sin(a)} stroke={c} strokeWidth={w} strokeLinecap="round" />
-      <polygon points={head} fill={c} />
+      <line x1={x1} y1={y1} x2={x2 - h * 0.55 * Math.cos(a)} y2={y2 - h * 0.55 * Math.sin(a)} stroke={c} strokeWidth={w} strokeLinecap="round" pathLength={draw ? 1 : undefined} className={draw ? "fig-draw" : undefined} />
+      <polygon points={head} fill={c} className={draw ? "fig-appear" : undefined} />
     </g>
   );
 }
@@ -2298,9 +2298,9 @@ export function FigLevels({ accent = "#FF6B6B" }: { accent?: string }) {
     <svg viewBox="0 0 880 340" className="w-full" role="img" aria-label="Energy level diagrams. Exothermic: reactants level above products level, delta H = negative. Endothermic: reactants level below products level, delta H = positive. Both axes are enthalpy H against progress of reaction.">
       {/* ————— exothermic ————— */}
       <MiniAxes ox={100} oy={272} w={280} up={210} yLabel="Enthalpy, H" />
-      <line x1={130} y1={116} x2={262} y2={116} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <line x1={130} y1={116} x2={262} y2={116} stroke={INK} strokeWidth={4} strokeLinecap="round" pathLength={1} className="fig-draw" />
       <text x={196} y={102} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Reactants</text>
-      <line x1={262} y1={230} x2={386} y2={230} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <line x1={262} y1={230} x2={386} y2={230} stroke={INK} strokeWidth={4} strokeLinecap="round" pathLength={1} className="fig-draw" />
       <text x={330} y={216} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
       {t3Arrow(262, 120, 262, 226, hot, 3.4)}
       <text x={276} y={178} fontSize="13" fontWeight="800" fill={hot} fontFamily="var(--font-body)">ΔH = − ve</text>
@@ -2308,9 +2308,9 @@ export function FigLevels({ accent = "#FF6B6B" }: { accent?: string }) {
 
       {/* ————— endothermic ————— */}
       <MiniAxes ox={520} oy={272} w={280} up={210} yLabel="Enthalpy, H" />
-      <line x1={550} y1={230} x2={682} y2={230} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <line x1={550} y1={230} x2={682} y2={230} stroke={INK} strokeWidth={4} strokeLinecap="round" pathLength={1} className="fig-draw" />
       <text x={616} y={252} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Reactants</text>
-      <line x1={682} y1={116} x2={806} y2={116} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <line x1={682} y1={116} x2={806} y2={116} stroke={INK} strokeWidth={4} strokeLinecap="round" pathLength={1} className="fig-draw" />
       <text x={748} y={102} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
       {t3Arrow(682, 226, 682, 120, cold, 3.4)}
       <text x={612} y={178} fontSize="13" fontWeight="800" fill={cold} fontFamily="var(--font-body)">ΔH = + ve</text>
@@ -2512,22 +2512,22 @@ export function FigHessGeneral({ accent = "#FF6B6B" }: { accent?: string }) {
       {/* ————— combustion route ————— */}
       <CycleBox x={30} y={86} w={150} lines={["Reactants + oxygen"]} />
       <CycleBox x={262} y={86} w={150} lines={["Products + oxygen"]} />
-      {t3Arrow(186, 101, 256, 101, INK, 3)}
+      {t3Arrow(186, 101, 256, 101, INK, 3, true)}
       <text x={221} y={82} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{dH("", "[reaction]")}</text>
       <CycleBox x={121} y={290} w={200} lines={["Combustion products"]} />
-      {t3Arrow(100, 122, 185, 284, INK, 2.8)}
-      {t3Arrow(342, 122, 257, 284, INK, 2.8)}
+      {t3Arrow(100, 122, 185, 284, INK, 2.8, true)}
+      {t3Arrow(342, 122, 257, 284, INK, 2.8, true)}
       <text x={88} y={216} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">{dH("com", " [reactants]")}</text>
       <text x={354} y={216} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">{dH("com", " [products]")}</text>
 
       {/* ————— formation route ————— */}
       <CycleBox x={502} y={86} w={116} lines={["Reactants"]} />
       <CycleBox x={716} y={86} w={116} lines={["Products"]} />
-      {t3Arrow(624, 101, 710, 101, INK, 3)}
+      {t3Arrow(624, 101, 710, 101, INK, 3, true)}
       <text x={667} y={82} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{dH("", "[reaction]")}</text>
       <CycleBox x={596} y={290} w={136} lines={["Elements"]} />
-      {t3Arrow(640, 284, 556, 122, INK, 2.8)}
-      {t3Arrow(688, 284, 778, 122, INK, 2.8)}
+      {t3Arrow(640, 284, 556, 122, INK, 2.8, true)}
+      {t3Arrow(688, 284, 778, 122, INK, 2.8, true)}
       <text x={512} y={216} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">{dH("f", " [reactants]")}</text>
       <text x={818} y={216} textAnchor="middle" fontSize="12" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">{dH("f", " [products]")}</text>
     </svg>
@@ -2547,11 +2547,11 @@ export function FigHessCo({ accent = "#FF6B6B" }: { accent?: string }) {
     <svg viewBox="0 0 720 330" className="w-full" role="img" aria-label="Hess cycle for carbon monoxide: C solid graphite plus half O2 gas forms CO gas along the top with delta f H theta; both the elements and CO burn to CO2 with minus 394 and minus 283 kJ per mol.">
       <CycleBox x={56} y={70} w={240} lines={["C(s, graphite) + ½O₂(g)"]} />
       <CycleBox x={478} y={70} w={120} lines={["CO(g)"]} />
-      {t3Arrow(302, 88, 472, 88, INK, 3)}
+      {t3Arrow(302, 88, 472, 88, INK, 3, true)}
       <text x={387} y={64} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{dfH}</text>
       <CycleBox x={268} y={240} w={136} lines={["CO₂(g)"]} />
-      {t3Arrow(148, 116, 300, 236, INK, 2.8)}
-      {t3Arrow(518, 116, 396, 236, INK, 2.8)}
+      {t3Arrow(148, 116, 300, 236, INK, 2.8, true)}
+      {t3Arrow(518, 116, 396, 236, INK, 2.8, true)}
       <text x={168} y={186} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−394</text>
       <text x={122} y={206} fontSize="11.5" fontWeight="700" fill={FAINT} fontFamily="var(--font-mono)">+ ½O₂(g)</text>
       <text x={486} y={186} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−283</text>
@@ -2573,12 +2573,12 @@ export function FigHessCh4({ accent = "#FF6B6B" }: { accent?: string }) {
     <svg viewBox="0 0 760 340" className="w-full" role="img" aria-label="Hess cycle for methane: C graphite plus 2 H2 gas forms CH4 gas along the top with delta f H theta; the elements burn with minus 394 and 2 times minus 286, and methane burns with minus 890, all reaching CO2 plus 2 H2O liquid.">
       <CycleBox x={56} y={70} w={234} lines={["C(graphite) + 2H₂(g)"]} />
       <CycleBox x={508} y={70} w={128} lines={["CH₄(g)"]} />
-      {t3Arrow(296, 88, 502, 88, INK, 3)}
+      {t3Arrow(296, 88, 502, 88, INK, 3, true)}
       <text x={399} y={64} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{dfH}</text>
       <CycleBox x={224} y={244} w={280} lines={["CO₂(g) + 2H₂O(l)"]} />
-      {t3Arrow(140, 116, 268, 240, INK, 2.8)}
-      {t3Arrow(230, 116, 350, 240, INK, 2.8)}
-      {t3Arrow(552, 116, 470, 240, INK, 2.8)}
+      {t3Arrow(140, 116, 268, 240, INK, 2.8, true)}
+      {t3Arrow(230, 116, 350, 240, INK, 2.8, true)}
+      {t3Arrow(552, 116, 470, 240, INK, 2.8, true)}
       <text x={132} y={186} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−394</text>
       <text x={252} y={196} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">2×−286</text>
       <text x={540} y={186} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−890</text>
@@ -2599,12 +2599,12 @@ export function FigHessCaco3({ accent = "#FF6B6B" }: { accent?: string }) {
     <svg viewBox="0 0 760 340" className="w-full" role="img" aria-label="Hess cycle for calcium carbonate decomposition: CaCO3 solid goes to CaO solid plus CO2 gas along the top with delta r H theta; the elements form CaCO3 with minus 1207 and the products with minus 635 and minus 394.">
       <CycleBox x={90} y={70} w={150} lines={["CaCO₃(s)"]} />
       <CycleBox x={470} y={70} w={230} lines={["CaO(s) + CO₂(g)"]} />
-      {t3Arrow(246, 88, 464, 88, INK, 3)}
+      {t3Arrow(246, 88, 464, 88, INK, 3, true)}
       <text x={355} y={64} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{drH}</text>
       <CycleBox x={292} y={244} w={150} lines={["Elements"]} />
-      {t3Arrow(330, 240, 196, 116, INK, 2.8)}
-      {t3Arrow(398, 240, 496, 116, INK, 2.8)}
-      {t3Arrow(442, 240, 606, 116, INK, 2.8)}
+      {t3Arrow(330, 240, 196, 116, INK, 2.8, true)}
+      {t3Arrow(398, 240, 496, 116, INK, 2.8, true)}
+      {t3Arrow(442, 240, 606, 116, INK, 2.8, true)}
       <text x={188} y={186} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−1207</text>
       <text x={440} y={200} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−635</text>
       <text x={600} y={190} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">−394</text>
@@ -2620,8 +2620,8 @@ export function FigHessButane({ accent = "#FF6B6B" }: { accent?: string }) {
     <svg viewBox="0 0 780 320" className="w-full" role="img" aria-label="The atomisation cycle for butane: C4H10 gas plus six and a half O2 gas going to 4 CO2 gas plus 5 H2O liquid along the top; both sides are pulled apart into 4 C gas, 10 H gas and 13 O gas atoms with plus 8410 and plus 11280 kJ per mol.">
       <CycleBox x={80} y={56} w={620} lines={["C₄H₁₀(g) + 6½O₂(g) → 4CO₂(g) + 5H₂O(l)"]} />
       <CycleBox x={228} y={228} w={320} lines={["4C(g) + 10H(g) + 13O(g)"]} />
-      {t3Arrow(268, 96, 348, 224, INK, 2.8)}
-      {t3Arrow(512, 96, 432, 224, INK, 2.8)}
+      {t3Arrow(268, 96, 348, 224, INK, 2.8, true)}
+      {t3Arrow(512, 96, 432, 224, INK, 2.8, true)}
       <text x={196} y={170} textAnchor="end" fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">+8410 kJ mol⁻¹</text>
       <text x={584} y={170} fontSize="13.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">+11280 kJ mol⁻¹</text>
     </svg>
@@ -3660,7 +3660,7 @@ export function FigG2Solubility({ accent = "#FF6B6B" }: { accent?: string }) {
       {rows.map((r, i) => (
         <g key={r.f}>
           <text x={px + 48} y={104 + i * 42} textAnchor="end" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{key === "oh" ? `${r.f}(OH)₂` : `${r.f}SO₄`}</text>
-          <rect x={px + 56} y={90 + i * 42} width={r[wKey]} height={20} rx={10} fill={tint(accent, 14 + i * 9)} />
+          <rect x={px + 56} y={90 + i * 42} width={r[wKey]} height={20} rx={10} fill={tint(accent, 14 + i * 9)} className="fig-bar-l" style={{ animationDelay: `${i * 0.12}s` }} />
           <text x={px + 56 + r[wKey] + 10} y={105 + i * 42} fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">{r[key]}</text>
         </g>
       ))}
@@ -3790,7 +3790,7 @@ export function FigFlameColours({ accent = "#FF6B6B" }: { accent?: string }) {
         const x = 24 + i * 126;
         const cx = x + 58;
         const flame = c.hex
-          ? <path d={`M ${cx} 176 C ${cx - 21} 156, ${cx - 16} 124, ${cx} 100 C ${cx + 16} 124, ${cx + 21} 156, ${cx} 176 Z`} fill={c.hex} />
+          ? <path d={`M ${cx} 176 C ${cx - 21} 156, ${cx - 16} 124, ${cx} 100 C ${cx + 16} 124, ${cx + 21} 156, ${cx} 176 Z`} fill={c.hex} className="fig-glow" />
           : <path d={`M ${cx} 176 C ${cx - 21} 156, ${cx - 16} 124, ${cx} 100 C ${cx + 16} 124, ${cx + 21} 156, ${cx} 176 Z`} fill="none" stroke={FAINT} strokeWidth={2.4} strokeDasharray="5 5" />;
         return (
           <g key={c.ion}>
@@ -3987,7 +3987,7 @@ export function FigStdSolution({ accent = "#FF6B6B" }: { accent?: string }) {
 export function FigTitreTargets({ accent = "#FF6B6B" }: { accent?: string }) {
   const hit = (cx: number, cy: number, i: number) => (
     <g key={i}>
-      <circle cx={cx} cy={cy} r={6.5} fill={INK} />
+      <circle cx={cx} cy={cy} r={6.5} fill={INK} className="fig-glow" />
       <circle cx={cx} cy={cy} r={2.2} fill={PAPER} />
     </g>
   );
@@ -3997,7 +3997,7 @@ export function FigTitreTargets({ accent = "#FF6B6B" }: { accent?: string }) {
       <circle cx={cx} cy={168} r={84} fill="none" stroke={FAINT} strokeWidth={2} />
       <circle cx={cx} cy={168} r={56} fill="none" stroke={SOFT} strokeWidth={2} />
       <circle cx={cx} cy={168} r={28} fill="none" stroke={SOFT} strokeWidth={2} />
-      <circle cx={cx} cy={168} r={7} fill={accent} />
+      <circle cx={cx} cy={168} r={7} fill={accent} className="fig-glow" />
       {hits.map(([hx, hy], i) => hit(cx + hx, 168 + hy, i))}
       <rect x={cx - 116} y={278} width={232} height={36} rx={18} fill={chipFill} />
       <text x={cx} y={301} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{verdict}</text>
@@ -4509,9 +4509,9 @@ export function FigH2so4Ladder({ accent = "#FF6B6B" }: { accent?: string }) {
       })}
 
       {/* the descent — each halide reduces the acid further */}
-      <path d="M 302 198 C 316 230 322 252 328 276" fill="none" stroke={accent} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="7 6" />
+      <path d="M 302 198 C 316 230 322 252 328 276" fill="none" stroke={accent} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="7 6" className="fig-flow" />
       <polygon points="336,284 320,276 328,266" fill={accent} />
-      <path d="M 592 298 C 606 330 612 352 618 376" fill="none" stroke={accent} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="7 6" />
+      <path d="M 592 298 C 606 330 612 352 618 376" fill="none" stroke={accent} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="7 6" className="fig-flow" />
       <polygon points="626,384 610,376 618,366" fill={accent} />
 
       <rect x={130} y={440} width={660} height={34} rx={17} fill="none" stroke={FAINT} strokeWidth={2} />
@@ -5884,22 +5884,22 @@ export function FigHxScheme({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={390} y={217} textAnchor="middle" fontSize="19" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C₄H₉Br</text>
       <text x={390} y={270} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the δ+ carbon draws nucleophiles in</text>
       {/* up-left — elimination to the alkene */}
-      {t3Arrow(320, 178, 188, 92, accent, 3.2)}
+      {t3Arrow(320, 178, 188, 92, accent, 3.2, true)}
       <text x={115} y={66} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C₄H₈</text>
       <text x={115} y={90} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">ethanolic KOH — reflux</text>
       <text x={115} y={108} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">elimination</text>
       {/* up-right — substitution to the nitrile */}
-      {t3Arrow(460, 178, 592, 92, accent, 3.2)}
+      {t3Arrow(460, 178, 592, 92, accent, 3.2, true)}
       <text x={665} y={66} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C₄H₉CN</text>
       <text x={665} y={90} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">KCN (aq/alc) — reflux</text>
       <text x={665} y={108} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">substitution — the chain grows by one C</text>
       {/* right — substitution to the alcohol */}
-      {t3Arrow(486, 210, 592, 210, accent, 3.2)}
+      {t3Arrow(486, 210, 592, 210, accent, 3.2, true)}
       <text x={676} y={216} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C₄H₉OH</text>
       <text x={676} y={186} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">substitution</text>
       <text x={676} y={242} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">aqueous KOH or NaOH — reflux</text>
       {/* down-left — substitution to the amine */}
-      {t3Arrow(320, 242, 188, 328, accent, 3.2)}
+      {t3Arrow(320, 242, 188, 328, accent, 3.2, true)}
       <text x={115} y={356} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C₄H₉NH₂</text>
       <text x={115} y={380} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">alcoholic NH₃ — pressure, sealed tube</text>
       <text x={115} y={332} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">substitution</text>
@@ -7591,6 +7591,204 @@ export function FigIonForm({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x="280" y="288" textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
         the outer electron transfers — both outer shells become complete
       </text>
+    </svg>
+  );
+}
+
+/* ————— pack figures, born moving: gas syringe (P1.2), the
+   uncertainty band (P1.3), limewater (P5.3), ionic precipitation
+   (P5.6), the mole's piles (1.6) and the atom balance (1.7) — every
+   one built on the §16 toolkit classes so the motion switch freezes
+   them to posed stills ————— */
+
+export function FigGasSyringe({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 780 380" className="w-full" role="img" aria-label="Gas syringe measuring the volume of gas made in a reaction flask: bubbles rise through the liquid and gas particles drift along the delivery tube into the syringe barrel, pushing the plunger out so the volume can be read on the scale.">
+      <text x={390} y={16} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">measuring a gas volume — the syringe reads it straight off the scale</text>
+      {/* reaction flask */}
+      <path d="M 108 74 L 108 132 L 66 240 Q 60 258 80 258 L 160 258 Q 180 258 174 240 L 132 132 L 132 74" fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <path d="M 88 206 L 152 206 L 168 242 Q 172 252 158 252 L 82 252 Q 68 252 72 242 Z" fill={tint(accent, 18)} />
+      <circle cx={104} cy={188} r={3.6} fill={accent} className="fig-drift-up" />
+      <circle cx={122} cy={176} r={3.6} fill={accent} className="fig-drift-up" style={{ animationDelay: "0.55s" }} />
+      <circle cx={138} cy={190} r={3.6} fill={accent} className="fig-drift-up" style={{ animationDelay: "1.1s" }} />
+      <rect x={96} y={56} width={48} height={16} rx={5} fill={PAPER} stroke={INK} strokeWidth={2.2} />
+      <text x={120} y={296} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">gas is made here</text>
+      {/* delivery tube */}
+      <path d="M 128 54 L 128 40 Q 128 26 146 26 L 424 26 Q 444 26 444 44 L 444 92" fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <circle cx={230} cy={26} r={4.5} fill={accent} className="fig-drift-x" />
+      <circle cx={330} cy={26} r={4.5} fill={accent} className="fig-drift-x" style={{ animationDelay: "0.8s" }} />
+      {/* the syringe */}
+      <rect x={444} y={92} width={200} height={64} rx={10} fill="none" stroke={INK} strokeWidth={2.6} />
+      <rect x={562} y={97} width={14} height={54} rx={4} fill={PAPER} stroke={INK} strokeWidth={2.4} />
+      <rect x={576} y={118} width={92} height={12} rx={5} fill={PAPER} stroke={INK} strokeWidth={2.4} />
+      <rect x={668} y={100} width={12} height={48} rx={4} fill={tint(accent, 24)} stroke={INK} strokeWidth={2.4} />
+      <line x1={470} y1={156} x2={470} y2={164} stroke={FAINT} strokeWidth={2} />
+      <line x1={520} y1={156} x2={520} y2={164} stroke={FAINT} strokeWidth={2} />
+      <line x1={570} y1={156} x2={570} y2={164} stroke={FAINT} strokeWidth={2} />
+      <text x={470} y={180} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-mono)">0</text>
+      <text x={520} y={180} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-mono)">20</text>
+      <text x={570} y={180} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-mono)">40 cm³</text>
+      <circle cx={480} cy={124} r={4.5} fill={accent} className="fig-drift-x" style={{ animationDelay: "0.4s" }} />
+      <circle cx={530} cy={124} r={4.5} fill={accent} className="fig-drift-x" style={{ animationDelay: "1.2s" }} />
+      <text x={544} y={214} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the plunger is pushed out — the volume reads off the scale</text>
+    </svg>
+  );
+}
+
+export function FigMeniscusBand({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 460 470" className="w-full max-w-md" role="img" aria-label="A burette close-up: the meniscus reading sits inside its plus-or-minus 0.05 cm³ uncertainty band — the shaded band glows around the reading line on the graduated scale.">
+      <text x={230} y={34} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">every reading carries a ± band</text>
+      {/* burette tube + liquid */}
+      <rect x={140} y={56} width={140} height={374} rx={12} fill="none" stroke={INK} strokeWidth={2.6} />
+      <rect x={146} y={252} width={128} height={172} fill={tint(accent, 16)} />
+      <path d="M 146 258 Q 210 246 274 258" fill="none" stroke={accent} strokeWidth={2.6} strokeLinecap="round" />
+      {/* the ± band */}
+      <rect x={146} y={226} width={128} height={52} fill={tint(accent, 24)} opacity={0.4} className="fig-glow" />
+      <line x1={146} y1={226} x2={274} y2={226} stroke={FAINT} strokeWidth={1.8} strokeDasharray="3 5" />
+      <line x1={146} y1={278} x2={274} y2={278} stroke={FAINT} strokeWidth={1.8} strokeDasharray="3 5" />
+      <text x={210} y={302} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">± 0.05 cm³</text>
+      {/* the reading line */}
+      <line x1={104} y1={252} x2={274} y2={252} stroke={INK} strokeWidth={2} strokeDasharray="5 5" />
+      <text x={96} y={256} textAnchor="end" fontSize="12" fontWeight="700" fill={INK} fontFamily="var(--font-body)">reading</text>
+      {/* scale */}
+      <line x1={280} y1={120} x2={300} y2={120} stroke={INK} strokeWidth={2} />
+      <line x1={280} y1={180} x2={300} y2={180} stroke={INK} strokeWidth={2} />
+      <line x1={280} y1={240} x2={300} y2={240} stroke={INK} strokeWidth={2} />
+      <line x1={280} y1={300} x2={300} y2={300} stroke={INK} strokeWidth={2} />
+      <line x1={280} y1={360} x2={300} y2={360} stroke={INK} strokeWidth={2} />
+      <line x1={280} y1={150} x2={290} y2={150} stroke={FAINT} strokeWidth={1.6} />
+      <line x1={280} y1={210} x2={290} y2={210} stroke={FAINT} strokeWidth={1.6} />
+      <line x1={280} y1={270} x2={290} y2={270} stroke={FAINT} strokeWidth={1.6} />
+      <line x1={280} y1={330} x2={290} y2={330} stroke={FAINT} strokeWidth={1.6} />
+      <text x={306} y={124} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-mono)">21.5</text>
+      <text x={306} y={184} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-mono)">21.4</text>
+      <text x={306} y={244} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-mono)">21.3</text>
+      <text x={306} y={304} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-mono)">21.2</text>
+      <text x={306} y={364} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-mono)">21.1</text>
+      <text x={230} y={456} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the true value sits somewhere in the band — quote it with the reading</text>
+    </svg>
+  );
+}
+
+export function FigLimewaterTest({ accent = "#FF6B6B" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 780 430" className="w-full" role="img" aria-label="The limewater test: heating a carbonate in a test tube gives off carbon dioxide, which bubbles through limewater in a second tube and turns it milky as white calcium carbonate forms.">
+      <text x={390} y={16} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">the limewater test — CO₂ turns limewater milky</text>
+      {/* heated tube with solid */}
+      <rect x={110} y={70} width={64} height={210} rx={30} fill="none" stroke={INK} strokeWidth={2.6} />
+      <path d="M 118 240 L 118 252 Q 118 272 142 272 Q 166 272 166 252 L 166 240 Q 142 250 118 240 Z" fill={tint("var(--color-ink)", 24)} />
+      <circle cx={130} cy={236} r={3} fill={INK} />
+      <circle cx={148} cy={228} r={3} fill={INK} />
+      <path d="M 142 352 C 134 338, 136 326, 142 314 C 148 326, 150 338, 142 352 Z" fill={accent} className="fig-glow" />
+      <text x={142} y={382} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">heat — the carbonate decomposes</text>
+      {/* delivery tube */}
+      <path d="M 142 68 L 142 46 Q 142 30 160 30 L 556 30 Q 574 30 574 48 L 574 208" fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <text x={310} y={56} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">CO₂</text>
+      {/* limewater tube */}
+      <rect x={526} y={130} width={96} height={270} rx={30} fill="none" stroke={INK} strokeWidth={2.6} />
+      <rect x={534} y={164} width={80} height={226} fill={tint("#4DABF7", 13)} />
+      <circle cx={574} cy={352} r={3.6} fill={PAPER} stroke={FAINT} strokeWidth={1.4} className="fig-drift-up" />
+      <circle cx={588} cy={336} r={3.6} fill={PAPER} stroke={FAINT} strokeWidth={1.4} className="fig-drift-up" style={{ animationDelay: "0.6s" }} />
+      <circle cx={562} cy={330} r={3.6} fill={PAPER} stroke={FAINT} strokeWidth={1.4} className="fig-drift-up" style={{ animationDelay: "1.2s" }} />
+      <rect x={534} y={172} width={80} height={96} fill="#FFFFFF" opacity={0.42} className="fig-glow" />
+      <text x={574} y={424} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">limewater turns milky — white CaCO₃ forms</text>
+      <text x={636} y={220} fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">milky</text>
+    </svg>
+  );
+}
+
+export function FigIonicPpt({ accent = "#FF6B6B" }: { accent?: string }) {
+  const ion = (cx: number, cy: number, r: number, fill: string, label: string, key: string, move?: string) => (
+    <g key={key} className={move}>
+      <circle cx={cx} cy={cy} r={r} fill={fill} stroke={INK} strokeWidth={2} />
+      <text x={cx} y={cy + 4} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">{label}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 780 400" className="w-full" role="img" aria-label="A precipitation reaction drawn as ions: barium ions and sulfate ions drift through the solution and latch together into the white barium sulfate precipitate at the bottom, while the spectator sodium and nitrate ions stay dissolved.">
+      <text x={390} y={32} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Ba²⁺(aq) + SO₄²⁻(aq) → BaSO₄(s) — the ions that make the solid latch on</text>
+      {/* inflow arrows draw themselves */}
+      {t3Arrow(96, 210, 236, 236, accent, 3, true)}
+      <text x={100} y={196} fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-mono)">Ba²⁺(aq)</text>
+      {t3Arrow(684, 210, 544, 236, "#4DABF7", 3, true)}
+      <text x={594} y={196} fontSize="12.5" fontWeight="800" fill="#4DABF7" fontFamily="var(--font-mono)">SO₄²⁻(aq)</text>
+      {/* the beaker */}
+      <path d="M 258 120 L 258 300 Q 258 332 292 332 L 488 332 Q 522 332 522 300 L 522 120" fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
+      <line x1={262} y1={186} x2={518} y2={186} stroke={FAINT} strokeWidth={2} />
+      {/* ions */}
+      {ion(330, 236, 22, tint(accent, 26), "Ba²⁺", "ba1", "fig-jiggle")}
+      {ion(438, 262, 22, tint(accent, 26), "Ba²⁺", "ba2", "fig-jiggle")}
+      {ion(388, 216, 24, tint("#4DABF7", 20), "SO₄²⁻", "so1", "fig-jiggle")}
+      {ion(478, 236, 24, tint("#4DABF7", 20), "SO₄²⁻", "so2", "fig-jiggle")}
+      {ion(296, 196, 14, PAPER, "Na⁺", "na1", "fig-jiggle fig-flow-rev")}
+      {ion(492, 198, 14, PAPER, "NO₃⁻", "no1", "fig-jiggle fig-flow-rev")}
+      {/* the precipitate */}
+      <rect x={368} y={296} width={72} height={26} rx={13} fill={tint(accent, 40)} stroke={INK} strokeWidth={2} className="fig-glow" />
+      <text x={404} y={313} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">BaSO₄(s)</text>
+      <text x={390} y={366} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the spectators — Na⁺ and NO₃⁻ — never join the solid</text>
+    </svg>
+  );
+}
+
+export function FigMolePiles({ accent = "#FF6B6B" }: { accent?: string }) {
+  const piles = [
+    { cx: 150, label: "Mg · 24 g", fill: tint("var(--color-ink)", 20) },
+    { cx: 440, label: "H₂O · 18 g", fill: tint("#4DABF7", 24) },
+    { cx: 730, label: "CO₂ · 44 g", fill: tint(accent, 26) },
+  ];
+  return (
+    <svg viewBox="0 0 880 350" className="w-full" role="img" aria-label="One mole of magnesium, water and carbon dioxide drawn as three piles of six particles: the same number of particles, 6.02 × 10²³, but very different masses — 24 grams, 18 grams and 44 grams.">
+      <text x={440} y={38} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">one mole of each — 6.02 × 10²³ particles, whatever the mass</text>
+      {piles.map((p, i) => (
+        <g key={p.label}>
+          <ellipse cx={p.cx} cy={272} rx={82} ry={18} fill={tint(accent, 8 + i * 5)} stroke={FAINT} strokeWidth={1.6} />
+          {[-34, 0, 34].map((dx, r) => (
+            <g key={r}>
+              <circle cx={p.cx + dx} cy={240} r={15} fill={p.fill} stroke={INK} strokeWidth={2} className="fig-jiggle" />
+              <circle cx={p.cx + dx} cy={214} r={15} fill={p.fill} stroke={INK} strokeWidth={2} className="fig-jiggle fig-flow-rev" />
+            </g>
+          ))}
+          <rect x={p.cx - 78} y={300} width={156} height={34} rx={17} fill={tint(accent, 14)} className="fig-glow" />
+          <text x={p.cx} y={322} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">{p.label}</text>
+        </g>
+      ))}
+      <text x={440} y={96} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">count the particles — six on every pile; read the masses — they differ</text>
+    </svg>
+  );
+}
+
+export function FigAtomBalance({ accent = "#FF6B6B" }: { accent?: string }) {
+  const atom = (cx: number, cy: number, fill: string, label: string, key: string, rev?: boolean) => (
+    <g key={key}>
+      <circle cx={cx} cy={cy} r={19} fill={fill} stroke={INK} strokeWidth={2} className={rev ? "fig-jiggle fig-flow-rev" : "fig-jiggle"} />
+      <text x={cx} y={cy + 4} textAnchor="middle" fontSize="11" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">{label}</text>
+    </g>
+  );
+  const mg = tint("var(--color-ink)", 20);
+  return (
+    <svg viewBox="0 0 880 360" className="w-full" role="img" aria-label="Conservation of mass drawn as atoms: two magnesium atoms and an oxygen molecule on the left rearrange into two magnesium oxide units on the right — the atom count, two magnesium and two oxygen, is the same on both sides.">
+      <text x={440} y={38} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">atoms are only rearranged — count them on both sides</text>
+      <text x={235} y={110} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">2Mg + O₂</text>
+      {atom(150, 200, mg, "Mg", "m1")}
+      {atom(225, 200, mg, "Mg", "m2", true)}
+      {atom(295, 200, tint(accent, 26), "O", "o1")}
+      {atom(338, 200, tint(accent, 26), "O", "o2", true)}
+      <line x1={313} y1={200} x2={320} y2={200} stroke={INK} strokeWidth={2.6} />
+      <path d="M 372 176 Q 440 146 508 176" fill="none" stroke={accent} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="6 6" className="fig-flow" />
+      <path d="M 372 236 Q 440 266 508 236" fill="none" stroke={accent} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="6 6" className="fig-flow" />
+      <text x={440} y={126} textAnchor="middle" fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">rearranged, not lost</text>
+      <text x={665} y={110} textAnchor="middle" fontSize="15" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">2MgO</text>
+      {atom(600, 200, mg, "Mg", "p1")}
+      {atom(642, 200, tint(accent, 26), "O", "p2", true)}
+      {atom(706, 200, mg, "Mg", "p3", true)}
+      {atom(748, 200, tint(accent, 26), "O", "p4")}
+      <line x1={618} y1={200} x2={625} y2={200} stroke={INK} strokeWidth={2.6} />
+      <line x1={724} y1={200} x2={731} y2={200} stroke={INK} strokeWidth={2.6} />
+      <rect x={148} y={286} width={176} height={34} rx={17} fill={tint(accent, 14)} className="fig-glow" />
+      <text x={236} y={308} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">2 Mg, 2 O</text>
+      <rect x={577} y={286} width={176} height={34} rx={17} fill={tint(accent, 14)} className="fig-glow" />
+      <text x={665} y={308} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">2 Mg, 2 O</text>
     </svg>
   );
 }

@@ -69,6 +69,11 @@ export const SECTIONS_P01: SpecSection[] = [
         eq: "PV = nRT        (1 mol gas = 24 dm^3^ at room temperature and pressure)",
         note: "Moles of gas can be calculated from gas volume (and temperature and pressure) using the ideal gas equation, or using the molar gas volume.",
       },
+      {
+        k: "figure",
+        kind: "gas-syringe",
+        caption: "Bubbles rise out of the reacting liquid and the gas drifts along the delivery tube, pushing the plunger out along the scale — the volume reads straight off the syringe.",
+      },
     ],
   },
   {
@@ -122,6 +127,11 @@ export const SECTIONS_P01: SpecSection[] = [
       {
         k: "eq",
         eq: "% uncertainty = (uncertainty ÷ measured value) × 100",
+      },
+      {
+        k: "figure",
+        kind: "meniscus-band",
+        caption: "The meniscus sits inside its ± 0.05 cm³ band — the true value lives somewhere in the shaded strip, which is why a titre (two readings) carries ± 0.10.",
       },
       {
         k: "worked",
