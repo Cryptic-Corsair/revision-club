@@ -3330,3 +3330,233 @@ html.classic .note-rooms .room {
 .fig-atom3d[data-motion="off"] .fig-atom3d-spin {
   animation: none;
 }
+
+/* ————— the figure motion toolkit (§16 discipline) —————
+   Shared classes the notes figures opt into, so motion can spread
+   across the whole diagram library without touching each drawing's
+   geometry. Every animation is transform / opacity / stroke-dashoffset
+   only, loops gently, and freezes to the figure's static truth under
+   prefers-reduced-motion or the customize panel's motion switch
+   (html[data-motion="off"], set by the boot script + applyPrefs).
+
+   .fig-live (per-figure root): every dashed stroke inside the figure
+   becomes a slow current — 1320 is the dash-cycle LCM so every
+   dasharray in the library loops without a visible jump. Opt in ONLY
+   where every dashed stroke is a moving thing (arrows, shells, field
+   lines, flight paths); .fig-still opts a single element back out. */
+
+@keyframes fig-flow {
+  to {
+    stroke-dashoffset: -1320;
+  }
+}
+@keyframes fig-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+@keyframes fig-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes fig-drift {
+  0% {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+}
+@keyframes fig-drift-up {
+  0% {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-18px);
+    opacity: 0;
+  }
+}
+@keyframes fig-jiggle {
+  from {
+    transform: translate(0.7px, -0.8px);
+  }
+  to {
+    transform: translate(-0.7px, 0.8px);
+  }
+}
+@keyframes fig-spring {
+  from {
+    transform: scaleX(0.82);
+  }
+  to {
+    transform: scaleX(1.18);
+  }
+}
+@keyframes fig-sway {
+  from {
+    transform: rotate(-2.4deg);
+  }
+  to {
+    transform: rotate(2.4deg);
+  }
+}
+@keyframes fig-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fig-bar {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.fig-live [stroke-dasharray] {
+  animation: fig-flow 30s linear infinite;
+}
+.fig-flow {
+  stroke-dasharray: 5 7;
+  animation: fig-flow 30s linear infinite;
+}
+.fig-flow-rev {
+  animation-direction: reverse !important;
+}
+.fig-still,
+.fig-still * {
+  animation: none !important;
+}
+.fig-breathe {
+  animation: fig-breathe 3.4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.fig-glow {
+  animation: fig-glow 2.2s ease-in-out infinite;
+}
+.fig-drift {
+  animation: fig-drift 1.8s ease-in infinite;
+  transform-box: fill-box;
+}
+.fig-drift-up {
+  animation: fig-drift-up 2s ease-out infinite;
+  transform-box: fill-box;
+}
+.fig-jiggle {
+  animation: fig-jiggle 0.7s ease-in-out infinite alternate;
+  transform-box: fill-box;
+}
+.fig-jiggle-fast {
+  animation-duration: 0.32s;
+}
+.fig-spring {
+  animation: fig-spring 0.9s ease-in-out infinite alternate;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.fig-sway {
+  animation: fig-sway 5s ease-in-out infinite alternate;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.fig-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: fig-draw 1.5s ease-out both;
+}
+.fig-bar,
+.fig-bars rect,
+.fig-bars line {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: fig-bar 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+.fig-bars :nth-child(2) {
+  animation-delay: 0.09s;
+}
+.fig-bars :nth-child(3) {
+  animation-delay: 0.18s;
+}
+.fig-bars :nth-child(4) {
+  animation-delay: 0.27s;
+}
+.fig-bars :nth-child(5) {
+  animation-delay: 0.36s;
+}
+.fig-bars :nth-child(6) {
+  animation-delay: 0.45s;
+}
+.fig-bars :nth-child(7) {
+  animation-delay: 0.54s;
+}
+.fig-bars :nth-child(8) {
+  animation-delay: 0.63s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fig-live [stroke-dasharray],
+  .fig-flow,
+  .fig-flow-rev,
+  .fig-breathe,
+  .fig-glow,
+  .fig-drift,
+  .fig-drift-up,
+  .fig-jiggle,
+  .fig-jiggle-fast,
+  .fig-spring,
+  .fig-sway,
+  .fig-draw,
+  .fig-bar,
+  .fig-bars rect,
+  .fig-bars line {
+    animation: none !important;
+  }
+}
+[data-motion="off"] :is(
+    .fig-live [stroke-dasharray],
+    .fig-flow,
+    .fig-flow-rev,
+    .fig-breathe,
+    .fig-glow,
+    .fig-drift,
+    .fig-drift-up,
+    .fig-jiggle,
+    .fig-jiggle-fast,
+    .fig-spring,
+    .fig-sway,
+    .fig-draw,
+    .fig-bar,
+    .fig-bars rect,
+    .fig-bars line
+  ) {
+  animation: none !important;
+}

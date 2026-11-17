@@ -71,7 +71,7 @@ export function FigAtom({ accent = "#FF6B6B" }: { accent?: string }) {
     { r: 118, electrons: [20] },
   ];
   return (
-    <svg viewBox="0 0 360 300" className="w-full max-w-md" role="img" aria-label="Atom diagram">
+    <svg viewBox="0 0 360 300" className="fig-live w-full max-w-md" role="img" aria-label="Atom diagram">
       {shells.map((s, i) => (
         <ellipse
           key={i}
@@ -94,7 +94,7 @@ export function FigAtom({ accent = "#FF6B6B" }: { accent?: string }) {
           const cx = 180 + rx * Math.cos(rad);
           const cy = 150 + ry * Math.sin(rad);
           return (
-            <g key={`${i}-${j}`}>
+            <g key={`${i}-${j}`} className="fig-glow">
               <circle cx={cx} cy={cy} r="7.5" fill={INK} />
               <circle cx={cx - 2} cy={cy - 2.4} r="2.2" fill={PAPER} />
             </g>
@@ -316,7 +316,7 @@ export function FigOrbitals({ accent = "#FF6B6B" }: { accent?: string }) {
     <svg viewBox="0 0 660 240" className="w-full" role="img" aria-label="Orbital shapes">
       {/* s orbital */}
       <g transform="translate(110,120)">
-        <circle r="72" fill={tint(accent, 14)} stroke={INK} strokeWidth="3.5" />
+        <circle r="72" fill={tint(accent, 14)} stroke={INK} strokeWidth="3.5" className="fig-breathe" />
         <circle r="9" fill={INK} />
         <text y="108" textAnchor="middle" fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
           s — sphere
@@ -324,8 +324,8 @@ export function FigOrbitals({ accent = "#FF6B6B" }: { accent?: string }) {
       </g>
       {/* p orbital */}
       <g transform="translate(330,120)">
-        <ellipse rx="86" ry="34" fill={tint("#12B886", 18)} stroke={INK} strokeWidth="3.5" transform="rotate(-18)" />
-        <ellipse rx="86" ry="34" fill={tint("#12B886", 18)} stroke={INK} strokeWidth="3.5" transform="rotate(162)" />
+        <ellipse rx="86" ry="34" fill={tint("#12B886", 18)} stroke={INK} strokeWidth="3.5" transform="rotate(-18)" className="fig-breathe" />
+        <ellipse rx="86" ry="34" fill={tint("#12B886", 18)} stroke={INK} strokeWidth="3.5" transform="rotate(162)" className="fig-breathe" />
         <circle r="9" fill={INK} />
         <text y="108" textAnchor="middle" fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
           p — dumbbell
@@ -333,8 +333,8 @@ export function FigOrbitals({ accent = "#FF6B6B" }: { accent?: string }) {
       </g>
       {/* d orbital */}
       <g transform="translate(552,120)">
-        <ellipse rx="62" ry="26" fill={tint("#9775FA", 16)} stroke={INK} strokeWidth="3.5" transform="rotate(45)" />
-        <ellipse rx="62" ry="26" fill={tint("#9775FA", 16)} stroke={INK} strokeWidth="3.5" transform="rotate(135)" />
+        <ellipse rx="62" ry="26" fill={tint("#9775FA", 16)} stroke={INK} strokeWidth="3.5" transform="rotate(45)" className="fig-breathe" />
+        <ellipse rx="62" ry="26" fill={tint("#9775FA", 16)} stroke={INK} strokeWidth="3.5" transform="rotate(135)" className="fig-breathe" />
         <circle r="9" fill={INK} />
         <text y="108" textAnchor="middle" fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
           d — four lobes
@@ -629,10 +629,10 @@ export function FigIeGraph() {
       >
         1st IE / kJ mol⁻¹
       </text>
-      <polyline points={pts} fill="none" stroke="#FF6B6B" strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" />
+      <polyline points={pts} pathLength={1} className="fig-draw" fill="none" stroke="#FF6B6B" strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" />
       {IE_VALUES.map(([sym, v], i) => (
         <g key={sym}>
-          <circle cx={X(i)} cy={Y(v as number)} r={nobles.has(i) ? 7 : 5} fill={nobles.has(i) ? "#12B886" : group1.has(i) ? "#FF6B6B" : dips.has(i) ? "#9775FA" : INK} />
+          <circle cx={X(i)} cy={Y(v as number)} r={nobles.has(i) ? 7 : 5} className={nobles.has(i) ? "fig-glow" : undefined} fill={nobles.has(i) ? "#12B886" : group1.has(i) ? "#FF6B6B" : dips.has(i) ? "#9775FA" : INK} />
           <text x={X(i)} y={axisY + 18} textAnchor="middle" fontSize="10" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
             {sym}
           </text>
@@ -806,7 +806,7 @@ export function FigMelting() {
           </text>
         </g>
       ))}
-      <polyline points={pts} fill="none" stroke="#FF6B6B" strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" />
+      <polyline points={pts} pathLength={1} className="fig-draw" fill="none" stroke="#FF6B6B" strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" />
       {MELT.map(([sym, v], i) => (
         <g key={sym}>
           <circle cx={X(i)} cy={Y(v)} r={sym === "Si" ? 7.5 : 5.5} fill={sym === "Si" ? "#9775FA" : INK} />
@@ -904,9 +904,9 @@ function StageBadge({ x, y, n, label, below = true }: { x: number; y: number; n:
 
 export function FigMassSpec() {
   return (
-    <svg viewBox="0 0 780 400" className="w-full" role="img" aria-label="How a mass spectrometer works">
+    <svg viewBox="0 0 780 400" className="fig-live w-full" role="img" aria-label="How a mass spectrometer works">
       {/* vacuum chamber */}
-      <rect x="18" y="58" width="744" height="252" rx="26" fill="none" stroke={FAINT} strokeWidth="2.5" strokeDasharray="7 8" />
+      <rect x="18" y="58" width="744" height="252" rx="26" fill="none" stroke={FAINT} strokeWidth="2.5" strokeDasharray="7 8" className="fig-still" />
       <text x="44" y="86" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)" fontStyle="italic">
         the whole tube sits inside a high vacuum
       </text>
@@ -1075,7 +1075,7 @@ export function FigSigmaPi({ accent = "#FF6B6B" }: { accent?: string }) {
       {/* panel 1 · s + s (H₂) */}
       <circle cx={85} cy={168} r={52} fill={ghost} stroke={FAINT} strokeWidth="2.5" />
       <circle cx={168} cy={168} r={52} fill={ghost} stroke={FAINT} strokeWidth="2.5" />
-      <path d="M 126.5 136.7 A 52 52 0 0 1 126.5 199.3 A 52 52 0 0 1 126.5 136.7 Z" fill={mid} />
+      <path d="M 126.5 136.7 A 52 52 0 0 1 126.5 199.3 A 52 52 0 0 1 126.5 136.7 Z" fill={mid} className="fig-breathe" />
       <circle cx={120.5} cy={168} r={3.4} fill={INK} />
       <g stroke={INK} strokeWidth={1.8} strokeLinecap="round">
         <line x1={129.8} y1={164.8} x2={136.2} y2={171.2} />
@@ -1087,7 +1087,7 @@ export function FigSigmaPi({ accent = "#FF6B6B" }: { accent?: string }) {
       {/* panel 2 · p + p (F₂) */}
       <ellipse cx={346} cy={168} rx={50} ry={17} fill={ghost} stroke={FAINT} strokeWidth="2.5" />
       <ellipse cx={428} cy={168} rx={50} ry={17} fill={ghost} stroke={FAINT} strokeWidth="2.5" />
-      <ellipse cx={387} cy={168} rx={10} ry={15} fill={mid} />
+      <ellipse cx={387} cy={168} rx={10} ry={15} fill={mid} className="fig-breathe" />
       <circle cx={381.5} cy={168} r={3.4} fill={INK} />
       <g stroke={INK} strokeWidth={1.8} strokeLinecap="round">
         <line x1={390.8} y1={164.8} x2={397.2} y2={171.2} />
@@ -1100,7 +1100,7 @@ export function FigSigmaPi({ accent = "#FF6B6B" }: { accent?: string }) {
       <line x1={600} y1={168} x2={700} y2={168} stroke={FAINT} strokeWidth="2" strokeDasharray="3 6" />
       <ellipse cx={633} cy={168} rx={16} ry={52} fill={ghost} stroke={FAINT} strokeWidth="2.5" />
       <ellipse cx={661} cy={168} rx={16} ry={52} fill={ghost} stroke={FAINT} strokeWidth="2.5" />
-      <rect x={643} y={118} width={8} height={100} fill={mid} opacity={0.85} />
+      <rect x={643} y={118} width={8} height={100} fill={mid} opacity={0.85} className="fig-breathe" />
       <circle cx={647} cy={162} r={3.4} fill={INK} />
       <g stroke={INK} strokeWidth={1.8} strokeLinecap="round">
         <line x1={651.8} y1={158.8} x2={658.2} y2={165.2} />
@@ -1134,13 +1134,13 @@ function t3Cross(x: number, y: number, c = INK) {
 export function FigDotCross({ accent = "#FF6B6B" }: { accent?: string }) {
   const shell = "none";
   return (
-    <svg viewBox="0 0 780 330" className="w-full" role="img" aria-label="Dot and cross diagrams for HCl, CO2 and NH4+">
+    <svg viewBox="0 0 780 330" className="fig-live w-full" role="img" aria-label="Dot and cross diagrams for HCl, CO2 and NH4+">
       {/* legend */}
       <text x={24} y={34} fontSize="12" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
         ·  electron from Cl / O / N        ×  electron from H / C        ———  outer shell
       </text>
-      <line x1={248} y1={54} x2={248} y2={296} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
-      <line x1={518} y1={54} x2={518} y2={296} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
+      <line x1={248} y1={54} x2={248} y2={296} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" className="fig-still" />
+      <line x1={518} y1={54} x2={518} y2={296} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" className="fig-still" />
 
       {/* HCl · single bond */}
       <circle cx={105} cy={172} r={44} fill={shell} stroke={INK} strokeWidth="2.5" />
@@ -1183,7 +1183,7 @@ export function FigDotCross({ accent = "#FF6B6B" }: { accent?: string }) {
       <circle cx={640} cy={118} r={28} fill={shell} stroke={INK} strokeWidth="2.5" />
       <circle cx={594} cy={228} r={28} fill={shell} stroke={INK} strokeWidth="2.5" />
       <circle cx={686} cy={228} r={28} fill={shell} stroke={INK} strokeWidth="2.5" />
-      <circle cx={700} cy={146} r={30} fill={shell} stroke={SOFT} strokeWidth="2.5" strokeDasharray="6 5" />
+      <circle cx={700} cy={146} r={30} fill={shell} stroke={SOFT} strokeWidth="2.5" strokeDasharray="6 5" className="fig-still" />
       {/* three ordinary N—H pairs — dots from N, crosses from H */}
       {t3Dot(634.5, 152)}{t3Cross(645.5, 152)}
       {t3Dot(611, 206)}{t3Cross(621, 213)}
@@ -1263,7 +1263,7 @@ export function FigCarbonLattices({ accent = "#FF6B6B" }: { accent?: string }) {
         </g>
       ))}
       {([[104, 62], [158, 66], [40, 244], [84, 266], [222, 244], [178, 268], [238, 108], [230, 164]] as [number, number][]).map(([x, y], i) => (
-        <circle key={`t${i}`} cx={x} cy={y} r={6} fill={tint(accent, 40)} stroke={INK} strokeWidth={1.6} />
+        <circle key={`t${i}`} cx={x} cy={y} r={6} fill={tint(accent, 40)} stroke={INK} strokeWidth={1.6} className="fig-glow" />
       ))}
       <text x={130} y={306} textAnchor="middle" fontSize="13" fontWeight="800" fill={INK} fontFamily="var(--font-body)">diamond · tetrahedral 3-D network</text>
       <text x={130} y={323} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">every C bonded to four others — very hard</text>
@@ -1275,7 +1275,7 @@ export function FigCarbonLattices({ accent = "#FF6B6B" }: { accent?: string }) {
       {graphiteRows2.map((p, i) => (
         <polygon key={`g2-${i}`} points={t3Hex(p.x, p.y, r)} fill={hexFill} stroke={INK} strokeWidth={2.2} strokeLinejoin="round" />
       ))}
-      <line x1={278} y1={172} x2={496} y2={172} stroke={accent} strokeWidth={2} strokeDasharray="2 7" />
+      <line x1={278} y1={172} x2={496} y2={172} stroke={accent} strokeWidth={2} strokeDasharray="2 7" className="fig-flow" />
       <text x={388} y={165} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">weak London forces — layers slide</text>
       <circle cx={296} cy={68} r={5} fill={accent} stroke={INK} strokeWidth={1.6} />
       <text x={308} y={72} fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">one free electron per atom → conducts</text>
@@ -1337,14 +1337,14 @@ export function FigShapes({ accent = "#FF6B6B" }: { accent?: string }) {
       {/* linear */}
       {bond(110 - L, 140, 110, 140, "lin-l")}
       {bond(110 + L, 140, 110, 140, "lin-r")}
-      <path d="M 84 140 A 26 26 0 0 1 136 140" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" />
+      <path d="M 84 140 A 26 26 0 0 1 136 140" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" className="fig-glow" />
       <text x={110} y={106} textAnchor="middle" fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">180°</text>
       {cap1(110, "linear", "BeCl₂ · CO₂", "180°")}
       {/* trigonal planar */}
       {bond(295, 140 - L, 295, 140, "tp-u")}
       {bond(295 - L * 0.87, 140 + L * 0.5, 295, 140, "tp-l")}
       {bond(295 + L * 0.87, 140 + L * 0.5, 295, 140, "tp-r")}
-      <path d="M 271 154 A 30 30 0 0 0 319 154" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" />
+      <path d="M 271 154 A 30 30 0 0 0 319 154" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" className="fig-glow" />
       <text x={295} y={196} textAnchor="middle" fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">120°</text>
       {cap1(295, "trigonal planar", "BCl₃", "120°")}
       {/* tetrahedral */}
@@ -1352,7 +1352,7 @@ export function FigShapes({ accent = "#FF6B6B" }: { accent?: string }) {
       {bond(480 + L * 0.7, 140 - L * 0.7, 480, 140, "te-ur")}
       {wedge(480, 140, 480 - L * 0.7, 140 + L * 0.7, "te-w")}
       {bond(480 + L * 0.7, 140 + L * 0.7, 480, 140, "te-dr", true)}
-      <path d="M 456 116 A 30 30 0 0 1 504 116" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" />
+      <path d="M 456 116 A 30 30 0 0 1 504 116" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" className="fig-glow" />
       <text x={480} y={88} textAnchor="middle" fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">109.5°</text>
       {cap1(480, "tetrahedral", "CH₄ · NH₄⁺", "109.5°")}
       {/* trigonal bipyramidal */}
@@ -1371,7 +1371,7 @@ export function FigShapes({ accent = "#FF6B6B" }: { accent?: string }) {
       {bond(170 - L * 0.87, 310 + L * 0.5, 170, 310, "py-l")}
       {bond(170 + L * 0.87, 310 + L * 0.5, 170, 310, "py-r")}
       {wedge(170, 310, 170, 310 + L, "py-w")}
-      <path d="M 143 322 A 32 32 0 0 0 197 322" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" />
+      <path d="M 143 322 A 32 32 0 0 0 197 322" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" className="fig-glow" />
       <text x={170} y={288} textAnchor="middle" fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">107°</text>
       {cap2(170, "trigonal pyramidal", "NH₃ · PCl₃ · H₃O⁺", "107°")}
       {/* bent */}
@@ -1379,7 +1379,7 @@ export function FigShapes({ accent = "#FF6B6B" }: { accent?: string }) {
       {t3Lobe(415, 262, 15, 21, accent, "be-lp2")}
       {bond(395 - L * 0.7, 310 + L * 0.7, 395, 310, "be-l")}
       {bond(395 + L * 0.7, 310 + L * 0.7, 395, 310, "be-r")}
-      <path d="M 377 334 A 26 26 0 0 0 413 334" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" />
+      <path d="M 377 334 A 26 26 0 0 0 413 334" fill="none" stroke={accent} strokeWidth={2.5} strokeLinecap="round" className="fig-glow" />
       <text x={395} y={296} textAnchor="middle" fontSize="12" fontWeight="800" fill={accent} fontFamily="var(--font-body)">104.5°</text>
       {cap2(395, "non-linear (bent)", "H₂O · OF₂ · ICl₂⁺", "104.5°")}
       {/* octahedral */}
@@ -1423,7 +1423,7 @@ export function FigDipoles({ accent = "#FF6B6B" }: { accent?: string }) {
 
       {/* CO₂ */}
       <line x1={88} y1={120} x2={172} y2={120} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
-      <circle cx={130} cy={120} r={12} fill={INK} />
+      <circle cx={130} cy={120} r={12} fill={INK} className="fig-glow" />
       <circle cx={76} cy={120} r={17} fill={atom} stroke={INK} strokeWidth={2} />
       <circle cx={184} cy={120} r={17} fill={atom} stroke={INK} strokeWidth={2} />
       <text x={76} y={92} textAnchor="middle" fontSize="13" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">δ−</text>
@@ -1447,7 +1447,7 @@ export function FigDipoles({ accent = "#FF6B6B" }: { accent?: string }) {
         ] as [number, number, number, number][]).map(([x1, y1, x2, y2], i) => (
           <line key={`cc-${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={INK} strokeWidth={3} strokeLinecap="round" />
         ))}
-        <circle cx={388} cy={124} r={12} fill={INK} />
+        <circle cx={388} cy={124} r={12} fill={INK} className="fig-glow" />
         {([[340, 76], [436, 76], [340, 172], [436, 172]] as [number, number][]).map(([x, y], i) => (
           <circle key={`cl-${i}`} cx={x} cy={y} r={15} fill={atom} stroke={INK} strokeWidth={2} />
         ))}
@@ -1476,7 +1476,7 @@ export function FigDipoles({ accent = "#FF6B6B" }: { accent?: string }) {
           <line key={`ch-${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={INK} strokeWidth={3} strokeLinecap="round" />
         ))}
         <line x1={650} y1={124} x2={676} y2={172} stroke={INK} strokeWidth={3} strokeLinecap="round" />
-        <circle cx={650} cy={124} r={12} fill={INK} />
+        <circle cx={650} cy={124} r={12} fill={INK} className="fig-glow" />
         {([[602, 88], [698, 88], [624, 172]] as [number, number][]).map(([x, y], i) => (
           <circle key={`c3-${i}`} cx={x} cy={y} r={15} fill={atom} stroke={INK} strokeWidth={2} />
         ))}
@@ -1568,7 +1568,7 @@ export function FigFormulaTypes({ accent = "#FF6B6B" }: { accent?: string }) {
       {/* skeletal */}
       <polyline points="768,168 804,128 840,168 876,128" fill="none" {...stroke} strokeWidth={3.4} />
       {[[768, 168], [804, 128], [840, 168], [876, 128]].map(([x, y], i) => (
-        <circle key={`v-${i}`} cx={x} cy={y} r={5} fill={accent} />
+        <circle key={`v-${i}`} cx={x} cy={y} r={5} fill={accent} className="fig-glow" />
       ))}
     </svg>
   );
@@ -1634,7 +1634,7 @@ export function FigFracCol({ accent = "#FF6B6B" }: { accent?: string }) {
   ];
   const colX = 128, colW = 74;
   return (
-    <svg viewBox="0 0 880 440" className="w-full" role="img" aria-label="A fractionating column with its five fractions and their uses">
+    <svg viewBox="0 0 880 440" className="fig-live w-full" role="img" aria-label="A fractionating column with its five fractions and their uses">
       <defs>
         <linearGradient id="fracGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={tint(accent, 16)} />
@@ -1729,7 +1729,7 @@ function halfHook(x: number, y: number, dx: number, dy: number, c: string) {
   const a = Math.atan2(ey - my, ex - mx);
   return (
     <g stroke={c} strokeWidth={2.4} fill="none" strokeLinecap="round">
-      <path d={`M ${x} ${y} Q ${mx} ${my} ${ex} ${ey}`} />
+      <path d={`M ${x} ${y} Q ${mx} ${my} ${ex} ${ey}`} className="fig-flow" />
       <path d={`M ${ex} ${ey} L ${ex - 9 * Math.cos(a - 1.15)} ${ey - 9 * Math.sin(a - 1.15)}`} />
     </g>
   );
@@ -1825,7 +1825,7 @@ function curlyPair(x: number, y: number, dx: number, dy: number, c: string) {
   const a = Math.atan2(ey - my, ex - mx);
   return (
     <g stroke={c} strokeWidth={2.4} fill="none" strokeLinecap="round">
-      <path d={`M ${x} ${y} Q ${mx} ${my} ${ex} ${ey}`} />
+      <path d={`M ${x} ${y} Q ${mx} ${my} ${ex} ${ey}`} className="fig-flow" />
       <path d={`M ${ex} ${ey} L ${ex - 10 * Math.cos(a - 0.85)} ${ey - 10 * Math.sin(a - 0.85)}`} />
       <path d={`M ${ex} ${ey} L ${ex - 10 * Math.cos(a + 0.85)} ${ey - 10 * Math.sin(a + 0.85)}`} />
     </g>
@@ -1836,7 +1836,7 @@ function curlyPair(x: number, y: number, dx: number, dy: number, c: string) {
 function prioBadge(x: number, y: number, n: number, accent: string) {
   return (
     <g>
-      <circle cx={x} cy={y} r={11} fill={accent} stroke={INK} strokeWidth={1.6} />
+      <circle cx={x} cy={y} r={11} fill={accent} stroke={INK} strokeWidth={1.6} className="fig-glow" />
       <text x={x} y={y + 4} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={readableInk(accent)} fontFamily="var(--font-body)">{n}</text>
     </g>
   );
@@ -1896,8 +1896,8 @@ export function FigSp2({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={370} y={258} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">…and one normal p orbital left over</text>
 
       {/* panel 3 · ethene */}
-      <ellipse cx={647} cy={136} rx={40} ry={11} fill={mid} opacity={0.7} />
-      <ellipse cx={647} cy={222} rx={40} ry={11} fill={mid} opacity={0.7} />
+      <ellipse cx={647} cy={136} rx={40} ry={11} fill={mid} opacity={0.7} className="fig-breathe" />
+      <ellipse cx={647} cy={222} rx={40} ry={11} fill={mid} opacity={0.7} className="fig-breathe" />
       <line x1={612} y1={172} x2={682} y2={172} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
       <line x1={612} y1={184} x2={682} y2={184} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
       <line x1={612} y1={178} x2={578} y2={138} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
@@ -1932,8 +1932,8 @@ export function FigGeometric({ accent = "#FF6B6B" }: { accent?: string }) {
     const rightBot = trans ? "CH₃" : "H";
     return (
       <g key={key}>
-        <line x1={lx} y1={cy - 6} x2={rx} y2={cy - 6} {...bond} />
-        <line x1={lx} y1={cy + 6} x2={rx} y2={cy + 6} {...bond} />
+        <line x1={lx} y1={cy - 6} x2={rx} y2={cy - 6} {...bond} className="fig-glow" />
+        <line x1={lx} y1={cy + 6} x2={rx} y2={cy + 6} {...bond} className="fig-glow" />
         <line x1={lx} y1={cy} x2={lx - 46} y2={cy - 46} {...bond} />
         <line x1={lx} y1={cy} x2={lx - 46} y2={cy + 46} {...bond} />
         <line x1={rx} y1={cy} x2={rx + 46} y2={cy - 46} {...bond} />
@@ -2117,7 +2117,7 @@ export function FigCarbocation({ accent = "#FF6B6B" }: { accent?: string }) {
       {up === "R" ? rChip(cx, cy - 62, `${key}-u`) : <text x={cx} y={cy - 52} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>}
       {left === "R" ? rChip(cx - 62, cy, `${key}-l`) : <text x={cx - 62} y={cy + 5} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>}
       {right === "R" ? rChip(cx + 62, cy, `${key}-r`) : <text x={cx + 62} y={cy + 5} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">H</text>}
-      <circle cx={cx} cy={cy} r={17} fill="var(--color-paper)" stroke={INK} strokeWidth={2.5} />
+      <circle cx={cx} cy={cy} r={17} fill="var(--color-paper)" stroke={INK} strokeWidth={2.5} className="fig-glow" />
       <text x={cx} y={cy + 5} textAnchor="middle" fontSize="14.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">C⁺</text>
     </g>
   );
@@ -2166,11 +2166,11 @@ export function FigPolymer({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={143} y={101} textAnchor="middle" fontSize="15.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">CH₂=CH₂</text>
       {t3Arrow(230, 95, 330, 95, INK)}
       <text x={280} y={72} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">addition polymerisation</text>
-      <line x1={338} y1={95} x2={352} y2={95} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      <line x1={338} y1={95} x2={352} y2={95} stroke={INK} strokeWidth={3.2} strokeLinecap="round" className="fig-flow" />
       {bracketL(356, 68, 56)}
       <text x={446} y={102} textAnchor="middle" fontSize="15.5" fontWeight="800" fill={INK} fontFamily="var(--font-mono)">—CH₂—CH₂—</text>
       {bracketR(536, 68, 56)}
-      <line x1={536} y1={95} x2={550} y2={95} stroke={INK} strokeWidth={3.2} strokeLinecap="round" />
+      <line x1={536} y1={95} x2={550} y2={95} stroke={INK} strokeWidth={3.2} strokeLinecap="round" className="fig-flow" />
       <text x={560} y={118} fontSize="12.5" fontWeight="800" fill={SOFT} fontFamily="var(--font-mono)">n</text>
       <text x={446} y={152} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">polyethene — the C=C opens, the chain carries on through the brackets</text>
       <line x1={28} y1={182} x2={852} y2={182} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
@@ -2233,7 +2233,7 @@ export function FigThermo({ accent = "#FF6B6B" }: { accent?: string }) {
   const thermo = (cx: number, top: number, bottom: number, mercury: number, c: string) => (
     <g>
       <rect x={cx - 9} y={top} width={18} height={bottom - top - 14} rx={9} fill="var(--color-paper)" stroke={INK} strokeWidth={2.4} />
-      <circle cx={cx} cy={bottom - 8} r={12} fill={c} stroke={INK} strokeWidth={2.4} />
+      <circle cx={cx} cy={bottom - 8} r={12} fill={c} stroke={INK} strokeWidth={2.4} className="fig-glow" />
       <rect x={cx - 3.2} y={mercury} width={6.4} height={bottom - 18 - mercury} rx={3.2} fill={c} />
       {[0, 1, 2, 3, 4].map((i) => (
         <line key={i} x1={cx + 9} y1={top + 18 + i * 22} x2={cx + 15} y2={top + 18 + i * 22} stroke={INK} strokeWidth={2} strokeLinecap="round" />
@@ -2334,7 +2334,7 @@ export function FigProfiles({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={160} y={192} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Reactants</text>
       <line x1={288} y1={284} x2={388} y2={284} stroke={INK} strokeWidth={4} strokeLinecap="round" />
       <text x={344} y={270} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
-      <path d={`M 214 206 C 240 150, 262 112, 292 112 C 322 112, 336 220, 362 284`} fill="none" stroke={tint(accent, 45)} strokeWidth={4.5} strokeLinecap="round" />
+      <path d={`M 214 206 C 240 150, 262 112, 292 112 C 322 112, 336 220, 362 284`} pathLength={1} className="fig-draw" fill="none" stroke={tint(accent, 45)} strokeWidth={4.5} strokeLinecap="round" />
       {t3Arrow(292, 202, 292, 118, mint, 3.2)}
       <text x={306} y={152} fontSize="11.5" fontWeight="700" fill={mint} fontFamily="var(--font-body)">Activation</text>
       <text x={306} y={167} fontSize="11.5" fontWeight="700" fill={mint} fontFamily="var(--font-body)">energy</text>
@@ -2349,7 +2349,7 @@ export function FigProfiles({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={580} y={304} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Reactants</text>
       <line x1={708} y1={206} x2={808} y2={206} stroke={INK} strokeWidth={4} strokeLinecap="round" />
       <text x={764} y={192} textAnchor="middle" fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
-      <path d={`M 634 284 C 660 210, 682 118, 712 118 C 742 118, 756 150, 782 206`} fill="none" stroke={tint(accent, 45)} strokeWidth={4.5} strokeLinecap="round" />
+      <path d={`M 634 284 C 660 210, 682 118, 712 118 C 742 118, 756 150, 782 206`} pathLength={1} className="fig-draw" fill="none" stroke={tint(accent, 45)} strokeWidth={4.5} strokeLinecap="round" />
       {t3Arrow(712, 280, 712, 124, mint, 3.2)}
       <text x={726} y={164} fontSize="11.5" fontWeight="700" fill={mint} fontFamily="var(--font-body)">Activation</text>
       <text x={726} y={179} fontSize="11.5" fontWeight="700" fill={mint} fontFamily="var(--font-body)">energy</text>
@@ -2382,10 +2382,10 @@ export function FigCalorimetry({ accent = "#FF6B6B" }: { accent?: string }) {
       {/* spirit burner */}
       <path d="M 194 296 Q 194 288 202 288 L 258 288 Q 266 288 266 296 L 266 322 L 194 322 Z" fill="var(--color-paper)" stroke={INK} strokeWidth={2.8} strokeLinejoin="round" />
       <rect x={222} y={276} width={16} height={12} fill="var(--color-paper)" stroke={INK} strokeWidth={2.4} />
-      <path d="M 230 276 C 224 266, 226 258, 230 250 C 234 258, 236 266, 230 276 Z" fill={accent} stroke={shade(accent)} strokeWidth={1.6} />
+      <path d="M 230 276 C 224 266, 226 258, 230 250 C 234 258, 236 266, 230 276 Z" fill={accent} stroke={shade(accent)} strokeWidth={1.6} className="fig-glow" />
       {/* heat rays */}
       {[0, 1, 2].map((i) => (
-        <path key={i} d={`M ${206 + i * 24} 246 q 4 -7 0 -14`} fill="none" stroke={tint(accent, 45)} strokeWidth={2.4} strokeLinecap="round" />
+        <path key={i} d={`M ${206 + i * 24} 246 q 4 -7 0 -14`} fill="none" stroke={tint(accent, 45)} strokeWidth={2.4} strokeLinecap="round" className="fig-drift-up" />
       ))}
       {label(120, 40, "thermometer", "start")}
       <line x1={186} y1={46} x2={258} y2={56} stroke={FAINT} strokeWidth={2} />
@@ -2463,8 +2463,8 @@ export function FigCoolingCurve({ accent = "#FF6B6B" }: { accent?: string }) {
       <line x1={X(0)} y1={Y(20)} x2={X(4.4)} y2={Y(20)} stroke={FAINT} strokeWidth={2.2} strokeDasharray="6 6" />
       <line x1={X(3.42)} y1={Y(64.2)} x2={X(9.4)} y2={Y(52.2)} stroke={FAINT} strokeWidth={2.2} strokeDasharray="6 6" />
       {/* the two curves */}
-      <polyline points={rise} fill="none" stroke={tint(accent, 45)} strokeWidth={4} strokeLinecap="round" />
-      <polyline points={cool} fill="none" stroke={tint(accent, 45)} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points={rise} pathLength={1} className="fig-draw" fill="none" stroke={tint(accent, 45)} strokeWidth={4} strokeLinecap="round" />
+      <polyline points={cool} pathLength={1} className="fig-draw" fill="none" stroke={tint(accent, 45)} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" />
       {COOLING_DATA.map(([t, v]) => (
         <circle key={t} cx={X(t)} cy={Y(v)} r={4.5} fill={INK} />
       ))}
@@ -2660,7 +2660,7 @@ export function FigBondH2O({ accent = "#FF6B6B" }: { accent?: string }) {
 
 function t7Hbond(x1: number, y1: number, x2: number, y2: number, accent: string) {
   return (
-    <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={accent} strokeWidth={3.2} strokeDasharray="7 6" strokeLinecap="round" />
+    <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={accent} strokeWidth={3.2} strokeDasharray="7 6" strokeLinecap="round" className="fig-flow" />
   );
 }
 
@@ -2714,7 +2714,7 @@ export function FigLondon({ accent = "#FF6B6B" }: { accent?: string }) {
     return (
       <g key={k}>
         <circle cx={x} cy={y} r={36} fill={shell} stroke={INK} strokeWidth={2.4} />
-        <ellipse cx={cloudX} cy={y} rx={21} ry={29} fill={cloud} opacity={0.9} />
+        <ellipse cx={cloudX} cy={y} rx={21} ry={29} fill={cloud} opacity={0.9} className="fig-breathe" />
         <circle cx={cloudX - 6} cy={y - 12} r={3} fill={INK} />
         <circle cx={cloudX + 5} cy={y} r={3} fill={INK} />
         <circle cx={cloudX - 5} cy={y + 12} r={3} fill={INK} />
@@ -2854,7 +2854,7 @@ export function FigDipolesPermanent({ accent = "#FF6B6B" }: { accent?: string })
       {/* the aligned encounter — Cl of one faces H of the next */}
       {hcl(190, 130, false, "a")}
       {hcl(500, 130, false, "b")}
-      <line x1={222} y1={130} x2={448} y2={130} stroke={accent} strokeWidth={3} strokeLinecap="round" strokeDasharray="7 6" />
+      <line x1={222} y1={130} x2={448} y2={130} stroke={accent} strokeWidth={3} strokeLinecap="round" strokeDasharray="7 6" className="fig-flow" />
       <text x={335} y={108} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">the aligned encounter</text>
       <text x={335} y={182} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">the δ− end of one pulls the δ+ end of the next</text>
 
@@ -2862,7 +2862,7 @@ export function FigDipolesPermanent({ accent = "#FF6B6B" }: { accent?: string })
       <text x={335} y={238} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">most encounters — tumbled, unaligned</text>
       {hcl(190, 288, true, "c")}
       {hcl(500, 288, false, "d")}
-      <line x1={222} y1={288} x2={448} y2={288} stroke={FAINT} strokeWidth={2.4} strokeDasharray="4 7" />
+      <line x1={222} y1={288} x2={448} y2={288} stroke={FAINT} strokeWidth={2.4} strokeDasharray="4 7" className="fig-flow-rev" />
       {/* like ends meeting: two repel arrows pushing apart */}
       {(() => {
         const cx = 335;
@@ -3082,7 +3082,7 @@ export function FigViscosity({ accent = "#FF6B6B" }: { accent?: string }) {
             <text x={x} y={56} textAnchor="middle" fontSize="13.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">{c.name}</text>
             <text x={x} y={86} textAnchor="middle" fontSize="13" fontWeight="700" fill={SOFT} fontFamily="var(--font-mono)">{c.f}</text>
             {Array.from({ length: 3 }).map((_, d) => (
-              <circle key={d} cx={x - 24 + d * 24} cy={116} r={7} fill={d < c.oh ? accent : "transparent"} stroke={d < c.oh ? accent : FAINT} strokeWidth={2} />
+              <circle key={d} cx={x - 24 + d * 24} cy={116} r={7} fill={d < c.oh ? accent : "transparent"} stroke={d < c.oh ? accent : FAINT} strokeWidth={2} className={d < c.oh ? "fig-glow" : undefined} />
             ))}
             <text x={x} y={142} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">
               {c.oh} –OH group{c.oh === 1 ? "" : "s"} per molecule
@@ -3251,7 +3251,7 @@ export function FigHydration({ accent = "#FF6B6B" }: { accent?: string }) {
     </g>
   );
   const miniWater = (x: number, y: number, rot: number, accent2: string) => (
-    <g transform={`rotate(${rot} ${x} ${y})`}>
+    <g transform={`rotate(${rot} ${x} ${y})`} className="fig-sway">
       <circle cx={x} cy={y} r={10.5} fill={tint(accent2, 24)} stroke={INK} strokeWidth={1.8} />
       <circle cx={x - 9} cy={y + 11} r={5} fill={PAPER} stroke={INK} strokeWidth={1.5} />
       <circle cx={x + 9} cy={y + 11} r={5} fill={PAPER} stroke={INK} strokeWidth={1.5} />
@@ -3437,11 +3437,11 @@ export function FigETransfer({ accent = "#FF6B6B" }: { accent?: string }) {
   return (
     <svg viewBox="0 0 920 400" className="w-full" role="img" aria-label="Two beakers side by side: a zinc rod in the left beaker dissolves to zinc(II) ions, giving up two electrons, which travel across to the right beaker where copper(II) ions in blue solution take them up and deposit as copper metal">
       {/* the electron crossing — dashed guide with two electrons on it */}
-      <path d="M 250 50 Q 460 22 628 50" fill="none" stroke={accent} strokeWidth={3.2} strokeLinecap="round" strokeDasharray="9 8" />
+      <path d="M 250 50 Q 460 22 628 50" fill="none" stroke={accent} strokeWidth={3.2} strokeLinecap="round" strokeDasharray="9 8" className="fig-flow" />
       <polygon points="648,50 626,41 630,59" fill={accent} />
-      <circle cx={372} cy={38} r={10} fill={accent} />
+      <circle cx={372} cy={38} r={10} fill={accent} className="fig-glow" />
       <text x={372} y={41.5} textAnchor="middle" fontSize="10" fontWeight="800" fill={readableInk(accent)} fontFamily="var(--font-body)">e⁻</text>
-      <circle cx={523} cy={38} r={10} fill={accent} />
+      <circle cx={523} cy={38} r={10} fill={accent} className="fig-glow" />
       <text x={523} y={41.5} textAnchor="middle" fontSize="10" fontWeight="800" fill={readableInk(accent)} fontFamily="var(--font-body)">e⁻</text>
       <text x={460} y={16} textAnchor="middle" fontSize="15" fontWeight="800" fill={accent} fontFamily="var(--font-body)">2e⁻</text>
 
@@ -3581,7 +3581,7 @@ export function FigDisprop({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={664} y={184} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">chlorate(I) — the chlorine climbed</text>
 
       {/* reduction branch — the fall */}
-      <path d="M 332 226 C 420 262 500 280 577 282" fill="none" stroke={INK} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="8 7" />
+      <path d="M 332 226 C 420 262 500 280 577 282" fill="none" stroke={INK} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="8 7" className="fig-flow" />
       <polygon points="593,284 571,276 573,294" fill={INK} />
       <text x={452} y={246} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">reduction · 0 → −1</text>
       {chip(664, RUNG["−1"], 132, "NaCl", tint("var(--color-ink)", 9))}
@@ -3682,7 +3682,7 @@ export function FigG2Solubility({ accent = "#FF6B6B" }: { accent?: string }) {
 export function FigPolarise({ accent = "#FF6B6B" }: { accent?: string }) {
   const anion = (cx: number, squashed: boolean) => (
     <g>
-      <ellipse cx={cx} cy={168} rx={squashed ? 84 : 92} ry={squashed ? 56 : 68} fill={tint(accent, 8)} stroke={INK} strokeWidth={2.4} />
+      <ellipse cx={cx} cy={168} rx={squashed ? 84 : 92} ry={squashed ? 56 : 68} fill={tint(accent, 8)} stroke={INK} strokeWidth={2.4} className="fig-breathe" />
       <text x={cx} y={175} textAnchor="middle" fontSize="16" fontWeight="800" fill={INK} fontFamily="var(--font-body)">CO₃²⁻</text>
       {/* the C–O bonds inside the anion */}
       <line x1={cx - 26} y1={122} x2={cx - 52} y2={96} stroke={INK} strokeWidth={2.2} strokeLinecap="round" />
@@ -3751,15 +3751,15 @@ export function FigFlameEtc({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={318} y={244} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">energy to climb</text>
 
       {/* down — the fall back */}
-      <circle cx={330} cy={110} r={9} fill={tint(accent, 30)} stroke={accent} strokeWidth={2} strokeDasharray="3 3" />
+      <circle cx={330} cy={110} r={9} fill={tint(accent, 30)} stroke={accent} strokeWidth={2} strokeDasharray="3 3" className="fig-glow" />
       <text x={330} y={86} textAnchor="middle" fontSize="11" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">unstable up here</text>
-      <path d="M 318 122 Q 276 226 322 316" fill="none" stroke={INK} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="8 7" />
+      <path d="M 318 122 Q 276 226 322 316" fill="none" stroke={INK} strokeWidth={2.8} strokeLinecap="round" strokeDasharray="8 7" className="fig-flow" />
       <polygon points="326,332 312,312 332,310" fill={INK} />
       <text x={252} y={290} textAnchor="end" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">falls back,</text>
       <text x={252} y={306} textAnchor="end" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">giving out light</text>
 
       {/* the photon */}
-      <polyline points="420,220 464,196 488,244 536,196 560,244 608,196 632,244 668,224" fill="none" stroke={accent} strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points="420,220 464,196 488,244 536,196 560,244 608,196 632,244 668,224" fill="none" stroke={accent} strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" className="fig-glow" />
       <polygon points="684,220 660,212 664,234" fill={accent} />
       <text x={545} y={176} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">light of a characteristic frequency</text>
       <text x={545} y={272} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">its energy = the gap between the two shells</text>
@@ -3884,6 +3884,7 @@ export function FigTitrationRig({ accent = "#FF6B6B" }: { accent?: string }) {
       ))}
       <rect x={206} y={318} width={52} height={16} rx={6} fill={INK} />
       <path d="M 232 334 L 232 362" stroke={INK} strokeWidth={5} strokeLinecap="round" />
+        <circle cx={232} cy={372} r={5} fill={accent} className="fig-drift" />
       <text x={262} y={90} fontSize="12" fontWeight="800" fill={INK} fontFamily="var(--font-body)">burette</text>
       <text x={262} y={108} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">definite but variable</text>
       <text x={262} y={124} fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">volumes of liquid</text>
@@ -4293,7 +4294,7 @@ export function FigDisplacement({ accent = "#FF6B6B" }: { accent?: string }) {
                   no change
                 </text>
               )}
-              <circle cx={c.x - 66} cy={r.y + 12} r={6} fill={cell.c} stroke={FAINT} strokeWidth={1.2} />
+              <circle cx={c.x - 66} cy={r.y + 12} r={6} fill={cell.c} stroke={FAINT} strokeWidth={1.2} className="fig-glow" />
               <text x={c.x - 54} y={r.y + 16} fontSize="11" fontWeight="700" fill={dis ? INK : SOFT} fontFamily="var(--font-body)">
                 {cell.t}
               </text>
@@ -4582,7 +4583,7 @@ export function FigHalideTest({ accent = "#FF6B6B" }: { accent?: string }) {
           <path d={`M ${s.x - 30} 100 L ${s.x - 30} 214 Q ${s.x - 30} 250 ${s.x} 250 Q ${s.x + 30} 250 ${s.x + 30} 214 L ${s.x + 30} 100`} fill="none" stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
           <line x1={s.x - 42} y1={100} x2={s.x - 30} y2={100} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
           <line x1={s.x + 30} y1={100} x2={s.x + 42} y2={100} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
-          <ellipse cx={s.x} cy={236} rx={21} ry={10} fill={s.ppt} stroke={FAINT} strokeWidth={1.4} />
+          <ellipse cx={s.x} cy={236} rx={21} ry={10} fill={s.ppt} stroke={FAINT} strokeWidth={1.4} className="fig-glow" />
 
           <text x={s.x} y={276} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
             {s.name}
@@ -4656,7 +4657,7 @@ function t9Surface(cx: number, y: number, n: number) {
 export function FigRateFactors({ accent = "#FF6B6B" }: { accent?: string }) {
   const spA = tint(accent, 26); /* species A chip */
   const dot = (x: number, y: number, alt: boolean, k?: number | string) => (
-    <circle key={k} cx={x} cy={y} r={6.5} fill={alt ? PAPER : spA} stroke={INK} strokeWidth={alt ? 2 : 1.4} />
+    <circle key={k} cx={x} cy={y} r={6.5} fill={alt ? PAPER : spA} stroke={INK} strokeWidth={alt ? 2 : 1.4} className={alt ? "fig-jiggle fig-flow-rev" : "fig-jiggle"} />
   );
   const chip = (x: number, t: string) => (
     <g>
@@ -4949,9 +4950,9 @@ export function FigMbCurve({ accent = "#FF6B6B" }: { accent?: string }) {
       </text>
       {/* shaded reactive tail — the exact curve segment beyond Ea */}
       <path d={`M ${eaX} 202 C 376 254, 446 292, 516 303 L 516 318 L ${eaX} 318 Z`} fill={tint(accent, 30)} />
-      <path d={t9MbPath()} fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <path d={t9MbPath()} pathLength={1} className="fig-draw" fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" />
       {/* Ea */}
-      <line x1={eaX} y1={318} x2={eaX} y2={192} stroke={INK} strokeWidth={2.2} strokeDasharray="6 5" />
+      <line x1={eaX} y1={318} x2={eaX} y2={192} stroke={INK} strokeWidth={2.2} strokeDasharray="6 5" className="fig-flow" />
       <text x={eaX - 10} y={206} textAnchor="end" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
         Ea
       </text>
@@ -5042,9 +5043,9 @@ export function FigCatalystProfile({ accent = "#FF6B6B" }: { accent?: string }) 
         <line x1={400} y1={324} x2={438} y2={324} stroke={INK} strokeWidth={4} strokeLinecap="round" />
         <text x={400} y={310} textAnchor="end" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
         {/* uncatalysed */}
-        <path d="M 170 254 C 200 112, 222 96, 246 96 C 272 96, 302 222, 362 294 C 384 316, 398 322, 416 324" fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" opacity={0.5} />
+        <path d="M 170 254 C 200 112, 222 96, 246 96 C 272 96, 302 222, 362 294 C 384 316, 398 322, 416 324" pathLength={1} className="fig-draw" fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" opacity={0.5} />
         {/* catalysed */}
-        <path d="M 170 254 C 220 206, 262 164, 330 164 C 372 164, 398 272, 420 324" fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
+        <path d="M 170 254 C 220 206, 262 164, 330 164 C 372 164, 398 272, 420 324" pathLength={1} className="fig-draw" fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
         {t9Gauge(246, 100, 250, mint)}
         <text x={246} y={80} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={mint} fontFamily="var(--font-body)">
           Ea without catalyst
@@ -5074,7 +5075,7 @@ export function FigCatalystProfile({ accent = "#FF6B6B" }: { accent?: string }) 
         <text x={600} y={240} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Reactants</text>
         <line x1={880} y1={324} x2={918} y2={324} stroke={INK} strokeWidth={4} strokeLinecap="round" />
         <text x={914} y={310} textAnchor="end" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">Products</text>
-        <path d="M 650 254 C 668 158, 686 140, 706 140 C 726 140, 736 210, 756 210 C 776 210, 786 160, 806 160 C 830 160, 858 292, 902 324" fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
+        <path d="M 650 254 C 668 158, 686 140, 706 140 C 726 140, 736 210, 756 210 C 776 210, 786 160, 806 160 C 830 160, 858 292, 902 324" pathLength={1} className="fig-draw" fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
         <text x={756} y={252} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">
           intermediate
         </text>
@@ -5294,9 +5295,9 @@ export function FigEqDynamic({ accent = "#FF6B6B" }: { accent?: string }) {
       {/* the common rate the two curves settle onto */}
       <line x1={230} y1={252} x2={505} y2={252} stroke={tint(accent, 45)} strokeWidth={2.2} strokeDasharray="6 6" />
       {/* forward — starts fast, falls as reactants thin out */}
-      <path d="M 66 62 C 110 100, 158 176, 214 220 C 262 256, 330 252.4, 400 252.2 C 440 252.1, 480 252, 505 252" fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
+      <path d="M 66 62 C 110 100, 158 176, 214 220 C 262 256, 330 252.4, 400 252.2 C 440 252.1, 480 252, 505 252" pathLength={1} className="fig-draw" fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
       {/* backward — starts at zero, climbs as products pile up */}
-      <path d="M 66 302 C 100 284, 140 268, 190 261 C 240 255.5, 310 252.6, 400 252.2 C 440 252.1, 480 252, 505 252" fill="none" stroke={INK} strokeWidth={3.8} strokeLinecap="round" opacity={0.72} />
+      <path d="M 66 302 C 100 284, 140 268, 190 261 C 240 255.5, 310 252.6, 400 252.2 C 440 252.1, 480 252, 505 252" pathLength={1} className="fig-draw" fill="none" stroke={INK} strokeWidth={3.8} strokeLinecap="round" opacity={0.72} />
       <text x={148} y={126} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">forward reaction</text>
       <text x={148} y={290} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)" opacity={0.72}>backward reaction</text>
       <text x={402} y={196} textAnchor="middle" fontSize="11" fontWeight="800" fill={accent} fontFamily="var(--font-body)">
@@ -5390,7 +5391,7 @@ export function FigEqPressure({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={20} y={187} textAnchor="middle" fontSize="10.5" fontWeight="700" fill={INK} fontFamily="var(--font-body)" transform="rotate(-90 20 187)">
         % of ammonia in equilibrium mixture
       </text>
-      <path d={t9Smooth(pts)} fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
+      <path d={t9Smooth(pts)} pathLength={1} className="fig-draw" fill="none" stroke={accent} strokeWidth={4.4} strokeLinecap="round" />
     </svg>
   );
 }
@@ -5531,9 +5532,9 @@ export function FigEqHaber({ accent = "#FF6B6B" }: { accent?: string }) {
           </text>
         </g>
       ))}
-      <path d={t9Smooth(t450.map(([a, p]) => [x(a), y(p)]))} fill="none" stroke={accent} strokeWidth={4.6} strokeLinecap="round" />
+      <path d={t9Smooth(t450.map(([a, p]) => [x(a), y(p)]))} pathLength={1} className="fig-draw" fill="none" stroke={accent} strokeWidth={4.6} strokeLinecap="round" />
       <text x={x(400) + 10} y={y(41) + 4} fontSize="11.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">450 °C</text>
-      <circle cx={x(250)} cy={y(35.5)} r={5} fill={accent} stroke={PAPER} strokeWidth={2} />
+      <circle cx={x(250)} cy={y(35.5)} r={5} fill={accent} stroke={PAPER} strokeWidth={2} className="fig-glow" />
       <text x={x(250)} y={y(35.5) - 12} textAnchor="middle" fontSize="11" fontWeight="800" fill={INK} fontFamily="var(--font-body)">250 atm</text>
     </svg>
   );
@@ -5846,7 +5847,7 @@ export function FigHxReflux({ accent = "#FF6B6B" }: { accent?: string }) {
       {t3Arrow(318, 276, 258, 290, "#4DABF7", 2.6)}
       <text x={324} y={282} textAnchor="start" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Water in</text>
       {/* vapour rising inside the inner tube */}
-      <line x1={230} y1={330} x2={230} y2={68} stroke={accent} strokeWidth={2.6} strokeDasharray="7 7" strokeLinecap="round" />
+      <line x1={230} y1={330} x2={230} y2={68} stroke={accent} strokeWidth={2.6} strokeDasharray="7 7" strokeLinecap="round" className="fig-flow" />
       <polygon points="230,52 223,68 237,68" fill={accent} />
       <line x1={262} y1={146} x2={244} y2={146} stroke={FAINT} strokeWidth={1.6} />
       <text x={268} y={150} textAnchor="start" fontSize="10" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">vapour rises</text>
@@ -5855,9 +5856,9 @@ export function FigHxReflux({ accent = "#FF6B6B" }: { accent?: string }) {
       <line x1={156} y1={186} x2={204} y2={182} stroke={FAINT} strokeWidth={1.6} />
       {/* neck + dripping condensate */}
       <rect x={216} y={330} width={28} height={48} fill={PAPER} stroke={INK} strokeWidth={2.4} />
-      <circle cx={222} cy={344} r={2.4} fill={INK} />
-      <circle cx={238} cy={352} r={2.4} fill={INK} />
-      <circle cx={229} cy={362} r={2.4} fill={INK} />
+      <circle cx={222} cy={344} r={2.4} fill={INK} className="fig-drift-up" />
+      <circle cx={238} cy={352} r={2.4} fill={INK} className="fig-drift-up" />
+      <circle cx={229} cy={362} r={2.4} fill={INK} className="fig-drift-up" />
       {/* round-bottomed flask with boiling liquid */}
       <circle cx={230} cy={428} r={56} fill={PAPER} stroke={INK} strokeWidth={3} />
       <path d="M 177 446 A 56 56 0 0 0 283 446 Z" fill={tint("#F59F00", 30)} />
@@ -5924,7 +5925,7 @@ export function FigHxHydrolysis({ accent = "#FF6B6B" }: { accent?: string }) {
       {/* the water bath */}
       <rect x={50} y={120} width={330} height={210} rx={16} fill="none" stroke={INK} strokeWidth={3} />
       <rect x={56} y={168} width={318} height={156} rx={12} fill={tint("#4DABF7", 14)} />
-      <path d="M 62 168 q 14 -8 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0" fill="none" stroke={tint("#4DABF7", 45)} strokeWidth={2.2} />
+      <path d="M 62 168 q 14 -8 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0 t 28 0" fill="none" stroke={tint("#4DABF7", 45)} strokeWidth={2.2} className="fig-breathe" />
       <text x={215} y={84} textAnchor="middle" fontSize="11.5" fontWeight="700" fill={SOFT} fontFamily="var(--font-body)">aqueous AgNO₃ (1 cm³) + ethanol (2 cm³)</text>
       {tube(120, WHITE, true)}
       {tube(215, CREAM, false)}
@@ -6319,7 +6320,7 @@ export function FigAlcOxFlow({ accent = "#FF6B6B" }: { accent?: string }) {
       <text x={540} y={64} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">heat under reflux</text>
       {box(602, 60, 200, "Carboxylic acid", true)}
       {/* the long reflux arrow underneath */}
-      <path d="M 125 106 L 125 168 L 700 168 L 700 112" fill="none" stroke={accent} strokeWidth={3} strokeLinecap="round" />
+      <path d="M 125 106 L 125 168 L 700 168 L 700 112" fill="none" stroke={accent} strokeWidth={3} strokeLinecap="round" className="fig-flow" />
       <polygon points="700,106 693,122 707,122" fill={accent} />
       <text x={412} y={158} textAnchor="middle" fontSize="10.5" fontWeight="800" fill={accent} fontFamily="var(--font-body)">heat under reflux — the aldehyde condenses back and gets oxidised to the acid</text>
       <line x1={40} y1={216} x2={820} y2={216} stroke={FAINT} strokeWidth="2" strokeDasharray="4 8" />
@@ -6345,7 +6346,7 @@ export function FigAlcDistillation({ accent = "#FF6B6B" }: { accent?: string }) 
     <svg viewBox="0 0 520 660" className="w-full max-w-sm" role="img" aria-label="The distillation rig redrawn from the class note. A round-bottomed flask holding the mixture and anti-bumping granules sits over heat. Vapour rises through the still head, where the thermometer bulb sits at the T junction joining the condenser, and passes into the sloping Liebig condenser. Cooling water enters at the bottom of the jacket and leaves at the top, going against gravity, so the vapour condenses and the distillate drips into the receiver.">
       {/* thermometer */}
       <rect x={148} y={168} width={5} height={196} fill={PAPER} stroke={INK} strokeWidth={2} />
-      <circle cx={150.5} cy={370} r={7} fill={accent} stroke={INK} strokeWidth={2} />
+      <circle cx={150.5} cy={370} r={7} fill={accent} stroke={INK} strokeWidth={2} className="fig-glow" />
       <text x={216} y={184} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">thermometer</text>
       <line x1={212} y1={180} x2={156} y2={182} stroke={FAINT} strokeWidth={1.6} />
       {/* still head + side arm */}
@@ -6363,9 +6364,9 @@ export function FigAlcDistillation({ accent = "#FF6B6B" }: { accent?: string }) 
       <text x={208} y={336} textAnchor="end" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Water out</text>
       <text x={330} y={410} textAnchor="middle" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)" transform="rotate(22 330 410)">Liebig condenser</text>
       {/* distillate + receiver */}
-      <circle cx={420} cy={492} r={2.6} fill={INK} />
-      <circle cx={426} cy={508} r={2.6} fill={INK} />
-      <circle cx={430} cy={524} r={2.6} fill={INK} />
+      <circle cx={420} cy={492} r={2.6} fill={INK} className="fig-drift" />
+      <circle cx={426} cy={508} r={2.6} fill={INK} className="fig-drift" />
+      <circle cx={430} cy={524} r={2.6} fill={INK} className="fig-drift" />
       <path d="M 402 540 L 458 540 L 444 584 L 416 584 Z" fill={PAPER} stroke={INK} strokeWidth={2.6} strokeLinejoin="round" />
       <path d="M 409 560 L 451 560 L 444 584 L 416 584 Z" fill={tint(accent, 30)} />
       <text x={472} y={556} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">distillate</text>
@@ -6455,7 +6456,7 @@ export function FigAlcFractional({ accent = "#FF6B6B" }: { accent?: string }) {
     <svg viewBox="0 0 480 660" className="w-full max-w-sm" role="img" aria-label="Fractional distillation redrawn from the class note. A round-bottomed flask is heated, and its vapour enters a tall fractionating column packed with glass beads. The vapour condenses and revaporises many times on its way up, so only the lowest-boiling fraction reaches the top, passes the thermometer and turns to liquid in the sloping condenser, where water enters at the bottom and leaves at the top. The distillate collects in the receiver.">
       {/* thermometer at the column head */}
       <rect x={158} y={190} width={5} height={112} fill={PAPER} stroke={INK} strokeWidth={2} />
-      <circle cx={160.5} cy={306} r={6} fill={accent} stroke={INK} strokeWidth={2} />
+      <circle cx={160.5} cy={306} r={6} fill={accent} stroke={INK} strokeWidth={2} className="fig-glow" />
       <text x={216} y={206} textAnchor="start" fontSize="11.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">thermometer</text>
       <line x1={212} y1={202} x2={166} y2={204} stroke={FAINT} strokeWidth={1.6} />
       {/* fractionating column packed with beads */}
@@ -6472,6 +6473,7 @@ export function FigAlcFractional({ accent = "#FF6B6B" }: { accent?: string }) {
             fill={tint(accent, 45)}
             stroke={FAINT}
             strokeWidth={1}
+            className="fig-glow"
           />
         );
       })}
@@ -6491,7 +6493,7 @@ export function FigAlcFractional({ accent = "#FF6B6B" }: { accent?: string }) {
       {t3Arrow(222, 296, 248, 322, "#4DABF7", 2.6)}
       <text x={218} y={288} textAnchor="end" fontSize="11" fontWeight="800" fill={SOFT} fontFamily="var(--font-body)">Water out</text>
       {/* receiver */}
-      <circle cx={412} cy={452} r={2.4} fill={INK} />
+      <circle cx={412} cy={452} r={2.4} fill={INK} className="fig-drift" />
       <circle cx={416} cy={468} r={2.4} fill={INK} />
       <circle cx={419} cy={484} r={2.4} fill={INK} />
       <circle cx={421} cy={500} r={2.4} fill={INK} />
@@ -6645,7 +6647,7 @@ function OrgSpectrum({
       ))}
       {peaks.map((p, i) => (
         <g key={i}>
-          <line x1={X(p.x)} y1={Y(0)} x2={X(p.x)} y2={Y(p.h)} stroke={p.color ?? INK} strokeWidth="4.5" strokeLinecap="round" />
+          <line x1={X(p.x)} y1={Y(0)} x2={X(p.x)} y2={Y(p.h)} stroke={p.color ?? INK} strokeWidth="4.5" strokeLinecap="round" className="fig-bar" style={{ animationDelay: `${i * 0.14}s` }} />
           {p.ion && (
             <text x={X(p.x)} y={Y(p.h) - 22} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={p.color ?? INK} fontFamily="var(--font-body)">
               {p.ion}
@@ -7061,10 +7063,10 @@ function IrSpectrum({
 /* the class note's three water vibrations: stretching in step,
    bending, stretching in opposition */
 export function FigIrVibrations() {
-  const Water = ({ cx }: { cx: number }) => {
+  const Water = ({ cx, move }: { cx: number; move?: string }) => {
     const bond = { stroke: INK, strokeWidth: 2.8 } as const;
     return (
-      <g>
+      <g className={move}>
         <line x1={cx} y1={90} x2={cx - 40} y2={122} {...bond} />
         <line x1={cx} y1={90} x2={cx + 40} y2={122} {...bond} />
         <text x={cx} y={88} textAnchor="middle" fontSize="17" fontWeight="800" fill={INK} fontFamily="var(--font-body)">O</text>
@@ -7076,17 +7078,17 @@ export function FigIrVibrations() {
   return (
     <svg viewBox="0 0 660 222" className="w-full" role="img" aria-label="Stretching and bending vibrations of the water molecule">
       {/* symmetrical stretch — both bonds lengthen together */}
-      <Water cx={110} />
+      <Water cx={110} move="fig-spring" />
       {t3Arrow(88, 97, 58, 125, IR_CORAL, 2.4)}
       {t3Arrow(132, 97, 162, 125, IR_CORAL, 2.4)}
       <text x={110} y={196} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">symmetrical stretch</text>
       {/* bending — the H atoms swing toward each other */}
-      <Water cx={330} />
+      <Water cx={330} move="fig-sway" />
       {t3Arrow(266, 152, 300, 152, IR_CORAL, 2.4)}
       {t3Arrow(394, 152, 360, 152, IR_CORAL, 2.4)}
       <text x={330} y={196} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">bending</text>
       {/* asymmetrical stretch — one bond lengthens as the other shortens */}
-      <Water cx={550} />
+      <Water cx={550} move="fig-spring fig-flow-rev" />
       {t3Arrow(528, 97, 498, 125, IR_CORAL, 2.4)}
       {t3Arrow(602, 125, 572, 97, IR_CORAL, 2.4)}
       <text x={550} y={196} textAnchor="middle" fontSize="12.5" fontWeight="800" fill={INK} fontFamily="var(--font-body)">asymmetrical stretch</text>
