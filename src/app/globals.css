@@ -2414,15 +2414,15 @@ main.gal {
 /* ————— the water interface's scoped corrections —————
    The water reader (club/notes-water.tsx) re-points its ink/paper/
    accent tokens inline from the wash (lib/spectra/washes.ts), so
-   nearly every shared style reads the wash without being told. Two
-   lab-keyed rules would otherwise leak through it, because the
+   nearly every shared style reads the wash without being told. One
+   lab-keyed rule would otherwise leak through it, because the
    reader's tokens are wash-owned, not lab-owned:
-   · the night lab's marker is a faint glow tuned for plum grounds —
-     on the reader's light glass it reads as a smear. The water dress
-     pins the daylight pen (roast ink on the solid lemon swipe), the
-     one temper that holds on a light ground in every lab.
-   · nothing else: the room content keeps its daylight contrast by
-     the wash invariant — glass stays light in every wash. */
+   the night lab's marker is a faint glow tuned for plum grounds —
+   over the reader's transparent rooms and light sheets it reads as
+   a smear. The water dress pins the daylight pen (roast ink on the
+   solid lemon swipe), the one temper that holds on a light surface
+   in every lab. Nothing else: the diagrams are token-driven and
+   follow the wash flip for free. */
 .notes-flow.water-reader mark {
   background: linear-gradient(
     100deg,

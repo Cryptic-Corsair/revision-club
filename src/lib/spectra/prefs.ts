@@ -92,9 +92,9 @@ export const GALLERY_DOCS: ReadonlySet<string> = new Set([
    The water dress walked the library one note at a time exactly like
    the gallery did. A doc id here means the water READER may serve
    it: while the visitor wears the water interface, a ledgered doc
-   opens as the glass-rooms-over-water reader (club/notes-water.tsx),
-   and the customize panel offers the Water interface card while a
-   ledgered doc is on stage. Everywhere else a saved "water" displays
+   opens as the transparent-rooms-over-water reader
+   (club/notes-water.tsx), and the customize panel offers the Water
+   interface card while a ledgered doc is on stage. Everywhere else a saved "water" displays
    as the gallery (its heir) through applyPrefs's data-iface painting
    and the panel's worn check — the save keeping Water, so returning
    to a ledgered doc puts the sea straight back. Topic 1 (wch11-t01)
@@ -292,7 +292,7 @@ export interface Prefs {
   theme: Lab;
   /** which interface dresses the reader pages — "gallery" (the
       default, served on its rollout docs) | "editorial" | "water"
-      (the glass-rooms-over-water dress, ledged to WATER_DOCS) */
+      (the transparent-rooms-over-water dress, ledged to WATER_DOCS) */
   iface: Iface;
   /** the water interface's wash — the field's colour system (see
       lib/spectra/washes.ts). Lagoon is the factory wash; the panel's

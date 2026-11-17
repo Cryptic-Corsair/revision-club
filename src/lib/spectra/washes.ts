@@ -2,22 +2,25 @@
    IAL CHEM · the water interface's washes
    The water reader's colour system. A wash dresses the whole
    interface: the field the caustics refract (the baked gradient
-   art + the shader's back/highlight pair), the glass grounds the
-   spec rooms alternate, the one accent the reader speaks, and the
-   ink that sits straight on the open water (hero, contents, the
-   end of the note).
+   art + the shader's back/highlight pair), the content sheets that
+   carry the chemistry, the one accent the reader speaks, and the
+   ink that sits straight on the water.
 
-   Two invariants every wash must keep:
-   · the GLASS rooms stay light in every wash (near-white tints
-     toward the wash's hue) — the reading surfaces inside them keep
-     the site's daylight tokens and their verified contrast, in the
-     pale washes and over the deep abyss alike. The wash expresses
-     itself in the field, the open water and the accent, never by
-     flipping the ink inside a chemistry section.
-   · the ink that sits ON the open water is the wash's own (milk
-     over the abyss, deep sea-navy over the lagoon) — the open zones
-     re-point the daylight ink tokens locally, so the shared chip
-     and toggle styles read the wash without being told.
+   The spec rooms have NO ground of their own — they are transparent,
+   so the living water shows at full strength behind every section.
+   That makes two invariants every wash must keep:
+   · the CONTENT SHEET (the dress's --color-paper: worked examples,
+     key terms, figure grounds — everything that must hold still)
+     carries the reading contrast: near-white wash-tinted sheets in
+     the pale washes with the dark ink ladder; over the deep abyss a
+     LIFTED navy sheet (the classic espresso rooms' recipe — the card
+     sits a step above the water) with the ink ladder flipped to
+     milk. Figures are token-driven (INK = var(--color-ink), PAPER =
+     var(--color-paper)), so they follow the flip for free.
+   · the ink on the water is the wash's own: deep sea-navy over the
+     pale washes, milk over the abyss — held against the brightest
+     caustic filament it crosses (the abyss moonlight runs a step
+     dimmer for exactly this reason).
 
    Lagoon is the factory wash — blueish, the sea the interface is
    named for. Pure data, no React: prefs.ts owns the pref, the panel
@@ -42,24 +45,19 @@ export interface Wash {
     current: string;
     pearl: string;
   };
-  /* ink that sits straight on the open water (hero, contents, the
-      end of the note — over the field itself) */
+  /* the ink ladder that sits straight on the water — rooms are
+      transparent, so this is the reading ink everywhere outside the
+      content sheets */
   ink: string;
   inkSoft: string;
   inkFaint: string;
-  /* ink INSIDE the glass rooms — the reading surfaces. Light in
-      every wash (the glass stays light), so the chemistry keeps its
-      daylight contrast even over the deep abyss. */
-  roomInk: string;
-  roomInkSoft: string;
-  roomInkFaint: string;
+  /* the content-sheet base — the dress's --color-paper. Near-white
+      in the pale washes; the abyss lifts a navy step above the water
+      (classic's card recipe) so sheets still read as cards. */
+  sheet: string;
   /* the interface's one accent + the ink that reads on it */
   accent: string;
   accentInk: string;
-  /* the two glass grounds the spec rooms alternate (rgba — the
-     water shows through by design) */
-  glassA: string;
-  glassB: string;
   /* the panel swatch */
   chip: string;
 }
@@ -80,13 +78,9 @@ export const WASHES: Wash[] = [
     ink: "#16394B",
     inkSoft: "#3D6274",
     inkFaint: "#5E8296",
-    roomInk: "#16394B",
-    roomInkSoft: "#3D6274",
-    roomInkFaint: "#5E8296",
+    sheet: "#F7FBFD",
     accent: "#16719B",
     accentInk: "#F5FBFD",
-    glassA: "rgba(244, 250, 252, 0.84)",
-    glassB: "rgba(222, 240, 248, 0.88)",
     chip: "#58B7E0",
   },
   {
@@ -104,13 +98,9 @@ export const WASHES: Wash[] = [
     ink: "#14403A",
     inkSoft: "#3C645C",
     inkFaint: "#5F837B",
-    roomInk: "#14403A",
-    roomInkSoft: "#3C645C",
-    roomInkFaint: "#5F837B",
+    sheet: "#F2FAF6",
     accent: "#147A62",
     accentInk: "#F2FBF7",
-    glassA: "rgba(243, 250, 246, 0.84)",
-    glassB: "rgba(220, 240, 233, 0.88)",
     chip: "#45B894",
   },
   {
@@ -128,13 +118,9 @@ export const WASHES: Wash[] = [
     ink: "#43241A",
     inkSoft: "#74574A",
     inkFaint: "#93776A",
-    roomInk: "#43241A",
-    roomInkSoft: "#74574A",
-    roomInkFaint: "#93776A",
+    sheet: "#FEF7F3",
     accent: "#C05A3E",
     accentInk: "#FEF6F2",
-    glassA: "rgba(253, 246, 241, 0.84)",
-    glassB: "rgba(250, 235, 226, 0.88)",
     chip: "#FF9E7A",
   },
   {
@@ -152,13 +138,9 @@ export const WASHES: Wash[] = [
     ink: "#26384A",
     inkSoft: "#4E6478",
     inkFaint: "#71869A",
-    roomInk: "#26384A",
-    roomInkSoft: "#4E6478",
-    roomInkFaint: "#71869A",
+    sheet: "#F8FBFE",
     accent: "#3E6E96",
     accentInk: "#F7FAFD",
-    glassA: "rgba(249, 252, 254, 0.82)",
-    glassB: "rgba(234, 243, 250, 0.86)",
     chip: "#9CC3E4",
   },
   {
@@ -179,14 +161,10 @@ export const WASHES: Wash[] = [
     ink: "#EAF3FA",
     inkSoft: "#B9CBDC",
     inkFaint: "#8FA8C0",
-    roomInk: "#22303F",
-    roomInkSoft: "#4E6478",
-    roomInkFaint: "#71869A",
+    sheet: "#2A3B55",
     accent: "#D9A65F",
     accentInk: "#22303F",
-    glassA: "rgba(240, 246, 252, 0.9)",
-    glassB: "rgba(225, 236, 246, 0.92)",
-    chip: "#DFBC91",
+    chip: "#C9A469",
   },
 ];
 

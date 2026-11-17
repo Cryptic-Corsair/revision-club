@@ -220,6 +220,11 @@ const browser = await chromium.launch({ headless: true });
   check('ledgered doc wears the water reader', reader.served);
   check('the reader carries its wash (lagoon factory)', reader.wash === 'lagoon', `got ${reader.wash}`);
   check('the living field mounts behind the reader', reader.field);
+  const roomBg = await page.evaluate(() => {
+    const room = document.querySelector('.water-reader .gal-section')?.parentElement;
+    return room ? getComputedStyle(room).backgroundColor : 'missing';
+  });
+  check('spec rooms sit transparent — the water shows at full strength', roomBg === 'rgba(0, 0, 0, 0)', `got ${roomBg}`);
   check('html paints the gallery display dataset (heir)', reader.iface === 'gallery', `got ${reader.iface}`);
   const cls = await classesOf(page);
   check('no water lab on <html> — the dress is not a lab', !cls.includes('water') && !cls.includes('dark'));

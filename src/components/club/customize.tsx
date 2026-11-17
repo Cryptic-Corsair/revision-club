@@ -760,7 +760,7 @@ export function CustomizePanel({
                   while the dress is worn (the pref is theirs to tune
                   even off the ledgered doc — the wash rides the save
                   like any pick); each swatch paints the wash's own
-                  sea and a floating glass sheet. */}
+                  sea and a floating content sheet. */}
               {prefs.iface === "water" && (
                 <PanelSection title="Water colour">
                   <div className="grid grid-cols-2 gap-2.5">
@@ -789,7 +789,7 @@ export function CustomizePanel({
                           >
                             <span
                               className="absolute top-2.5 left-2 h-[26px] w-9 rounded-[6px] shadow-[0_1.5px_3px_rgb(0_0_0/0.14)]"
-                              style={{ background: w.glassA }}
+                              style={{ background: w.sheet }}
                             />
                             <span
                               className="absolute right-2 bottom-2 h-2 w-2 rounded-full"

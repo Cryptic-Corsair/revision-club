@@ -87,10 +87,10 @@ const NotesGallery = dynamic(
   { ssr: false, loading: RoomLoading },
 );
 /* the notes reader's water twin — same props, the third interface:
-   glass rooms over the living caustic water, the dress carrying its
-   own wash colour system. Served only on its rollout ledger
-   (WATER_DOCS in prefs.ts) while the visitor wears the water
-   interface — Topic 1 is the pilot. */
+   every spec section floating straight on the living caustic water,
+   the dress carrying its own wash colour system. Served only on its
+   rollout ledger (WATER_DOCS in prefs.ts) while the visitor wears
+   the water interface — Topic 1 is the pilot. */
 const NotesWater = dynamic(
   () => import("./notes-water").then((m) => m.NotesWater),
   { ssr: false, loading: RoomLoading },

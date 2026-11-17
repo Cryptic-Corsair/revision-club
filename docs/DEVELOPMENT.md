@@ -204,22 +204,26 @@ re-tint the chrome around them. Three dresses now:
   `GALLERY_DOCS` (the whole library; the ledger gate stays).
 - **Document** (`"editorial"`) — the numbered-clause room.
 - **Water** (`"water"`, IN ROLLOUT — one doc on the ledger): the note
-  read over the living caustic water. ONE field
+  read ON the living caustic water. ONE field
   (`club/water-backdrop.tsx`: `shared/WaterCanvas`, the water
   reference's global-backdrop preset and budgets, portaled to
-  `<body>` at z-index −1) and EVERY spec section a glass room
-  (`club/notes-water.tsx` — the third reader twin, same props
-  contract) hung on translucent washes with transparent-shore wave
-  seams; hero, contents and end-of-note sit on the open water. The
-  dress carries its OWN colour system — the **wash**
-  (`lib/spectra/washes.ts`, `prefs.wash`, default `"lagoon"`; the
-  panel's Water colour section swaps lagoon/tide/reef/glacier/abyss
-  live): the reader root re-points its ink/paper/accent tokens from
-  the wash, the two open-water zones re-point the ink again to the
-  field's own, the glass stays light in EVERY wash so the chemistry
-  keeps its daylight contrast, and `globals.css` pins the daylight
-  marker pen inside `.water-reader` (the night lab's glow-marker is
-  tuned for plum grounds).
+  `<body>` at z-index −1) and EVERY spec section floating straight
+  on it — the rooms have NO ground at all (`club/notes-water.tsx`,
+  the third reader twin, same props contract), so the shader shows
+  at full strength behind every section, hero to end-of-note; the
+  wave seams went with the glass (the sea is one continuous ground).
+  What holds still is only the content sheets — the wash's `sheet`
+  tier riding `--color-paper` (near-white in the pale washes; the
+  abyss lifts a navy step above the water, classic's card recipe)
+  — and the diagrams are token-driven, so a wash re-inks the whole
+  dress in one hop. The dress carries its OWN colour system — the
+  **wash** (`lib/spectra/washes.ts`, `prefs.wash`, default
+  `"lagoon"`; the panel's Water colour section swaps
+  lagoon/tide/reef/glacier/abyss live): the reader root re-points
+  its ink ladder/sheet/accent from the wash (milk ink over the
+  abyss, deep sea-navy over the pale washes), and `globals.css`
+  pins the daylight marker pen inside `.water-reader` (the night
+  lab's glow-marker is tuned for plum grounds).
 - Serving: `waterServes(docId)` = the `WATER_DOCS` ledger (Topic 1,
   `wch11-t01`, the pilot). While a ledgered doc is on stage the panel
   offers the Water interface card; everywhere else a saved water

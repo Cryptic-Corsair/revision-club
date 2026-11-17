@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Fragment,
   useCallback,
   useEffect,
   useMemo,
@@ -22,7 +21,6 @@ import { usePrefs } from "@/lib/spectra/prefs";
 import { washById } from "@/lib/spectra/washes";
 import { Fmt, plural } from "./format";
 import { PopIn, Reveal, Mascot } from "./bits";
-import { BandWave, WAVES } from "./bands";
 import { useSpecMapRegister } from "./spec-map";
 import {
   GalleryLabel,
@@ -33,28 +31,27 @@ import {
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the notes reader, in the water dress.
-   The third interface — the note read over the living caustic
-   water: ONE field (shared/WaterCanvas, the reference's own
-   global-backdrop preset and budgets, portaled behind everything
-   by water-backdrop.tsx) and every spec section a GLASS room hung
-   on it — translucent washes of the dress's colour, never opaque,
-   so the sea shows through for every section, all the way down.
-   The rooms hand you onwards through the wave kit's seams whose
-   shores are transparent: the glass parts, the water shows, the
-   next room begins. The hero, the contents ledger and the end of
-   the note sit straight on the open water.
+   The third interface — the note read ON the living caustic water:
+   ONE field (shared/WaterCanvas, the reference's own global-backdrop
+   preset and budgets, portaled behind everything by
+   water-backdrop.tsx) and every spec section floating straight on
+   it — the rooms have NO ground at all, so the shader shows at full
+   strength behind every section, hero to end-of-note. What holds
+   still is only what must: the content sheets (worked examples, key
+   terms, figure grounds — the wash's `sheet` tier riding
+   --color-paper) carry the reading contrast, and the diagrams are
+   token-driven, so the whole dress re-inks in one hop per wash.
 
    The dress carries its OWN colour system — the wash
    (lib/spectra/washes.ts), not the labs' tokens: the root re-points
-   the reader's ink/paper/accent tokens from the wash, and the two
-   open-water zones re-point the ink again to the field's own (milk
-   over the abyss, deep sea-navy over the lagoon). The glass stays
-   light in every wash, so the chemistry inside keeps its daylight
-   contrast everywhere. The chrome around the reader (nav, drawers,
-   footer) stays lab-dressed, exactly as the interface axis always
-   has. The rollout is ledged: WATER_DOCS in prefs.ts — Topic 1 is
-   the pilot; the props contract is identical to the other twins,
-   so the shell swaps it without knowing the difference.
+   the reader's ink ladder, sheet and accent from the wash (milk
+   ink over the abyss, deep sea-navy over the lagoon; the abyss
+   sheet lifts a navy step above the water, the classic rooms'
+   recipe). The chrome around the reader (nav, drawers, footer)
+   stays lab-dressed, exactly as the interface axis always has. The
+   rollout is ledged: WATER_DOCS in prefs.ts — Topic 1 is the pilot;
+   the props contract is identical to the other twins, so the shell
+   swaps it without knowing the difference.
    ═══════════════════════════════════════════════════════════════ */
 
 const hair = (pct: number) =>
@@ -71,10 +68,6 @@ const readTocPosture = () => {
     return true;
   }
 };
-
-/* the wave seams run catalog-tall, like the gallery's */
-const galWaveH =
-  "h-[calc(52px*var(--ui-scale))] sm:h-[calc(80px*var(--ui-scale))]";
 
 /* ————— the water dress's verified hop —————
    The shared scrollToSpec recipe plus the honest re-measure, the
@@ -263,28 +256,19 @@ function NotesWaterBody({
   const prefs = usePrefs();
   const wash = washById(prefs.wash);
 
-  /* the dress's tokens. The ROOT wears the rooms' palette (dark
-     inks on light glass, in every wash) and re-points the accent —
-     the gallery furniture this dress borrows (the section view, the
-     pack tick, the chip rail) reads the wash through it. The sheet
-     is pinned white: the water dress is lab-independent, and white
-     sheets hold on glass in every wash. */
+  /* the dress's tokens, straight from the wash: the ink ladder that
+     sits on the water (rooms are transparent — this IS the reading
+     ink everywhere outside the sheets), the content-sheet base
+     (near-white for the pale washes, the abyss's lifted navy), and
+     the accent the gallery furniture this dress borrows (the
+     section view, the pack tick, the chip rail) reads through. */
   const dress = {
     "--iface-accent": wash.accent,
     "--iface-accent-ink": wash.accentInk,
-    "--color-ink": wash.roomInk,
-    "--color-ink-soft": wash.roomInkSoft,
-    "--color-ink-faint": wash.roomInkFaint,
-    "--color-paper": "#FFFFFF",
-  } as CSSProperties;
-  /* the open-water zones (back + hero + contents, and the end of
-     the note) re-point the ink again to the field's own — milk over
-     the abyss, deep sea-navy over the lagoon */
-  const openWater = {
-    ...dress,
     "--color-ink": wash.ink,
     "--color-ink-soft": wash.inkSoft,
     "--color-ink-faint": wash.inkFaint,
+    "--color-paper": wash.sheet,
   } as CSSProperties;
 
   /* the contents ledger's posture — expanded by default, remembered
@@ -380,8 +364,6 @@ function NotesWaterBody({
   const lede = introPs[0]?.k === "p" ? introPs[0].text : null;
   const overture = introPs[1]?.k === "p" ? introPs[1].text : null;
 
-  const roomGround = (i: number) => (i % 2 === 0 ? wash.glassA : wash.glassB);
-
   return (
     <main
       className="notes-flow water-reader relative mx-auto max-w-[calc(var(--gal-measure)_+_calc(var(--spacing)_*_16))] px-5 pt-[calc(6.5rem+var(--sa-top))] pb-28 sm:px-8"
@@ -390,7 +372,7 @@ function NotesWaterBody({
       data-testid="water-reader"
     >
       {/* the living field — portaled to <body> behind everything;
-          the glass rooms keep it on stage for every section */}
+          the transparent rooms keep it on stage for every section */}
       <WaterBackdrop wash={wash} />
 
       {/* reading progress — the reader's hairline, in the wash accent */}
@@ -404,9 +386,8 @@ function NotesWaterBody({
         }}
       />
 
-      {/* ————— open water: back, hero, contents ————— */}
-      <div style={openWater}>
-        <PopIn>
+      {/* ————— on the water: back, hero, contents ————— */}
+      <PopIn>
           <button
             type="button"
             onClick={onBack}
@@ -600,59 +581,30 @@ function NotesWaterBody({
             </>
           )}
         </section>
+
+      {/* ————— the catalog — every spec section ON the sea —————
+          no grounds, no seams: the rooms are transparent and the
+          water runs unbroken behind the whole walk. Generous air and
+          the oversized numerals keep the rhythm; the content sheets
+          (the wash's sheet tier riding --color-paper) are the only
+          surfaces that hold still. */}
+      <div className="mt-14 sm:mt-20">
+        {doc.sections.map((section, i) => (
+          <div key={section.spec} className="py-10 sm:py-14">
+            <Reveal y={18}>
+              <GallerySectionView
+                section={section}
+                index={i}
+                figOffset={figOffsets[i]}
+                bannerAction={<WaterPackTick spec={section.spec} />}
+              />
+            </Reveal>
+          </div>
+        ))}
       </div>
 
-      {/* ————— the catalog — glass rooms over the living sea —————
-          every spec section hangs on a translucent wash of the dress
-          (the two glass grounds alternating, the water showing
-          through by design), and the wave kit's seams part them with
-          transparent shores: glass, open water, glass. The rooms
-          wear no lab wardrobe — the dress is wash-owned end to end. */}
-      <div className="mt-12 sm:mt-16">
-        <div
-          aria-hidden
-          className="relative left-1/2 w-[100vw] -translate-x-1/2"
-        >
-          <BandWave from="transparent" to={wash.glassA} className={galWaveH} />
-        </div>
-        {doc.sections.map((section, i) => {
-          const last = i === doc.sections.length - 1;
-          return (
-            <Fragment key={section.spec}>
-              <div
-                className="relative left-1/2 w-[100vw] -translate-x-1/2"
-                style={{ background: roomGround(i) }}
-              >
-                <div className="mx-auto max-w-[calc(var(--gal-measure)_+_calc(var(--spacing)_*_16))] px-5 py-16 sm:px-8 sm:py-20">
-                  <Reveal y={18}>
-                    <GallerySectionView
-                      section={section}
-                      index={i}
-                      figOffset={figOffsets[i]}
-                      bannerAction={<WaterPackTick spec={section.spec} />}
-                    />
-                  </Reveal>
-                </div>
-              </div>
-              <div
-                aria-hidden
-                className="relative left-1/2 w-[100vw] -translate-x-1/2"
-              >
-                <BandWave
-                  from={roomGround(i)}
-                  to={last ? "transparent" : roomGround(i + 1)}
-                  wave={(i + 1) % WAVES.length}
-                  className={galWaveH}
-                />
-              </div>
-            </Fragment>
-          );
-        })}
-      </div>
-
-      {/* ————— open water again: the end of the note ————— */}
-      <div style={openWater}>
-        <Reveal>
+      {/* ————— on the water again: the end of the note ————— */}
+      <Reveal>
           <section
             className="mt-10 border-t pt-10"
             style={{ borderColor: hair(12) }}
@@ -692,8 +644,7 @@ function NotesWaterBody({
               from {doc.source}
             </p>
           </section>
-        </Reveal>
-      </div>
+      </Reveal>
     </main>
   );
 }
