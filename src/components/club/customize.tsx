@@ -784,7 +784,7 @@ export function CustomizePanel({
                             aria-hidden
                             className="relative block h-11 w-full overflow-hidden rounded-[10px]"
                             style={{
-                              background: `linear-gradient(135deg, ${w.art.base[0]} 0%, ${w.art.base[1]} 52%, ${w.art.pocket} 100%)`,
+                              background: `linear-gradient(135deg, ${w.art.base[0]} 0%, ${w.art.base[1]} 52%, ${w.art.pocket[1]} 100%)`,
                             }}
                           >
                             <span

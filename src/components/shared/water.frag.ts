@@ -5,15 +5,18 @@
    the 6-iteration rotating domain-loop caustic field, the simplex wave
    distortion that warps it, the optional second layer, and the highlight
    bloom — every constant kept. The only deviations are mechanical:
-   ES3→ES1 translation (varying/gl_FragColor), the cover-fit UV computed
-   here instead of in the vendor's box-fit vertex stage, and the image
+   ES3→ES1 translation (varying/gl_FragColor), the vendor's box-fit
+   VERTEX-stage image mapping computed here per-pixel (the cover-fit,
+   the u_scale zoom and the vendor's Y flip — recovered verbatim from
+   its shader mount, so a mount's `scale` prop zooms the art and the
+   caustic pattern together exactly like the original), and the image
    frame's fwidth term replaced by a fixed smoothstep (same look, drops
    the derivatives-extension dependency).
 
    This is the shader the user meant by "these shaders" — not a lookalike.
    The uniform names carry the paper-design prop names (u_highlights,
-   u_layering, u_caustic, u_waves, u_size) so the port's call sites can
-   mirror the reference's prop tables one-to-one.
+   u_layering, u_caustic, u_waves, u_size, u_scale) so the port's call
+   sites can mirror the reference's prop tables one-to-one.
    ═══════════════════════════════════════════════════════════════════════ */
 
 export const WATER_VERTEX_SRC = `
@@ -37,6 +40,7 @@ export const WATER_FRAGMENT_SRC = `
   uniform sampler2D u_image;
   uniform float u_imageAspect;
   uniform float u_size;
+  uniform float u_scale;
   uniform float u_highlights;
   uniform float u_layering;
   uniform float u_edges;
@@ -107,8 +111,12 @@ export const WATER_FRAGMENT_SRC = `
   }
 
   void main() {
-    /* cover-fit the art image into the canvas box (the reference does
-       this in its box-fit vertex stage with u_fit=2) */
+    /* the vendor's image mapping, vertex-stage → here: cover-fit the
+       art into the canvas box (their u_fit=2 box-fit), then the mount's
+       scale zoom — v_imageUV /= u_scale, art and caustic pattern
+       zooming together — then their Y flip (v_imageUV.y = 1 - y),
+       which stands the art upright: texture row 0 is the image's TOP,
+       and v_uv.y=0 is the canvas BOTTOM */
     float screenAspect = u_resolution.x / max(1.0, u_resolution.y);
     vec2 imageUV = v_uv;
     if (screenAspect > u_imageAspect) {
@@ -116,6 +124,8 @@ export const WATER_FRAGMENT_SRC = `
     } else {
       imageUV.x = (v_uv.x - 0.5) * (screenAspect / u_imageAspect) + 0.5;
     }
+    imageUV = (imageUV - 0.5) / max(0.0001, u_scale) + 0.5;
+    imageUV.y = 1.0 - imageUV.y;
 
     vec2 patternUV = imageUV - 0.5;
     patternUV = patternUV * vec2(u_imageAspect, 1.0);

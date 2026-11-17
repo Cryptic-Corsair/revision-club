@@ -58,7 +58,9 @@ import { WaveArt } from './WaveArt';
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 /* the reference's global backdrop preset (its own prop table, verbatim;
-   layering drops to 0 on software renderers — handled in WaterCanvas) */
+   layering drops to 0 on software renderers — handled in WaterCanvas;
+   the mount's `scale` prop zooms art and pattern together — the
+   reference's global backdrop runs 1.38) */
 const GLOBAL_WATER: WaterParams = {
   highlights: 0.52,
   layering: 0.34,
@@ -66,10 +68,11 @@ const GLOBAL_WATER: WaterParams = {
   caustic: 0.38,
   waves: 0.34,
   size: 0.72,
+  scale: 1.38,
   speed: 0.24,
 };
 
-/* the reference's footer water preset */
+/* the reference's footer water preset (its table passes no scale → 1) */
 const FOOTER_WATER: WaterParams = {
   highlights: 0.85,
   layering: 0.45,
@@ -77,10 +80,11 @@ const FOOTER_WATER: WaterParams = {
   caustic: 0.62,
   waves: 0.55,
   size: 1.75,
+  scale: 1,
   speed: 0.24,
 };
 
-/* the reading frame's water preset */
+/* the reading frame's water preset (reference card table — no scale) */
 const FRAME_WATER: WaterParams = {
   highlights: 0.34,
   layering: 0.25,
@@ -88,6 +92,7 @@ const FRAME_WATER: WaterParams = {
   caustic: 0.25,
   waves: 0.3,
   size: 1.05,
+  scale: 1,
   speed: 0.24,
 };
 

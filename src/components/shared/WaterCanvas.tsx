@@ -32,6 +32,10 @@ export interface WaterParams {
   caustic: number;
   waves: number;
   size: number;
+  /** the vendor's mount `scale` — zooms the art AND the caustic
+      pattern together (the reference's global backdrop runs 1.38; its
+      footer and card waters pass nothing → 1) */
+  scale: number;
   /** seconds of shader-time per real second — 0 freezes the field */
   speed: number;
 }
@@ -91,6 +95,7 @@ const PARAM_KEYS: (keyof WaterParams)[] = [
   'caustic',
   'waves',
   'size',
+  'scale',
   'speed',
 ];
 
@@ -339,6 +344,7 @@ export function WaterCanvas({
         u_fade: gl.getUniformLocation(program, 'u_fade'),
         u_imageAspect: gl.getUniformLocation(program, 'u_imageAspect'),
         u_size: gl.getUniformLocation(program, 'u_size'),
+        u_scale: gl.getUniformLocation(program, 'u_scale'),
         u_highlights: gl.getUniformLocation(program, 'u_highlights'),
         u_layering: gl.getUniformLocation(program, 'u_layering'),
         u_edges: gl.getUniformLocation(program, 'u_edges'),
@@ -439,6 +445,7 @@ export function WaterCanvas({
         if (uniforms.u_imageAspect)
           gl.uniform1f(uniforms.u_imageAspect, imageAspect);
         if (uniforms.u_size) gl.uniform1f(uniforms.u_size, current.size);
+        if (uniforms.u_scale) gl.uniform1f(uniforms.u_scale, current.scale);
         if (uniforms.u_highlights)
           gl.uniform1f(uniforms.u_highlights, current.highlights);
         if (uniforms.u_layering)

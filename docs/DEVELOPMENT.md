@@ -213,17 +213,22 @@ re-tint the chrome around them. Three dresses now:
   at full strength behind every section, hero to end-of-note; the
   wave seams went with the glass (the sea is one continuous ground).
   What holds still is only the content sheets — the wash's `sheet`
-  tier riding `--color-paper` (near-white in the pale washes; the
-  abyss lifts a navy step above the water, classic's card recipe)
-  — and the diagrams are token-driven, so a wash re-inks the whole
-  dress in one hop. The dress carries its OWN colour system — the
-  **wash** (`lib/spectra/washes.ts`, `prefs.wash`, default
-  `"lagoon"`; the panel's Water colour section swaps
-  lagoon/tide/reef/glacier/abyss live): the reader root re-points
-  its ink ladder/sheet/accent from the wash (milk ink over the
-  abyss, deep sea-navy over the pale washes), and `globals.css`
-  pins the daylight marker pen inside `.water-reader` (the night
-  lab's glow-marker is tuned for plum grounds).
+  tier riding `--color-paper` (each wash's water body lifted a step
+  above itself, classic's card recipe) — and the diagrams are
+  token-driven, so a wash re-inks the whole dress in one hop. The
+  dress carries its OWN colour system — the **wash**
+  (`lib/spectra/washes.ts`, `prefs.wash`, default `"lagoon"`; the
+  panel's Water colour section swaps lagoon/tide/reef/glacier/abyss
+  live): every wash runs the reference's own DEEP-water palette
+  family (deep body per wash hue, champagne-family moonlight baked
+  into the art at the reference's stop opacities, milk ink ladder,
+  lifted sheet), the reader root re-points its ink ladder/sheet/
+  accent from the wash, and `globals.css` gives the reader the
+  deep-water contact shadow (a whisper of navy behind the glyphs
+  where bright filaments pass under text) and pins the daylight
+  marker pen (the night lab's glow-marker is tuned for plum
+  grounds). The field itself is the reference's mount verbatim,
+  `scale` 1.38 and the vendor's Y flip included.
 - Serving: `waterServes(docId)` = the `WATER_DOCS` ledger (Topic 1,
   `wch11-t01`, the pilot). While a ledgered doc is on stage the panel
   offers the Water interface card; everywhere else a saved water

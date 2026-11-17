@@ -12,11 +12,12 @@ import type { Wash } from "@/lib/spectra/washes";
    IAL CHEM · the water interface's field — the dress's living sea.
    The shared WaterCanvas (the portal hero's program) running the
    water reference's own global-backdrop preset and device-pixel
-   budgets, fixed behind the WHOLE reader: the water interface's
-   spec rooms are glass precisely so the field stays on stage for
-   every section — there is no opaque stretch to sleep behind, so
-   unlike the old lab pilot this field has no catalog gate; it runs
-   whenever the reader is open and the page is visible.
+   budgets, fixed behind the WHOLE reader: the spec rooms are
+   transparent precisely so the field stays on stage at FULL
+   strength for every section — there is no surface between you and
+   the shader except the content sheets, so unlike the old lab pilot
+   this field has no catalog gate; it runs whenever the reader is
+   open and the page is visible.
 
    It portals to <body> because the room-transition wrapper animates
    a transform — a fixed element under a transformed ancestor would
@@ -39,8 +40,9 @@ import type { Wash } from "@/lib/spectra/washes";
    ═══════════════════════════════════════════════════════════════ */
 
 /* the reference's global-water preset — the backdrop prop table
-   twilight runs verbatim; layering drops to 0 on software renderers
-   inside WaterCanvas */
+   twilight runs verbatim, scale included (the reference's mount
+   passes scale 1.38: art and caustic pattern zoom together); layering
+   drops to 0 on software renderers inside WaterCanvas */
 const WATER_FIELD: WaterParams = {
   highlights: 0.52,
   layering: 0.34,
@@ -48,6 +50,7 @@ const WATER_FIELD: WaterParams = {
   caustic: 0.38,
   waves: 0.34,
   size: 0.72,
+  scale: 1.38,
   speed: 0.24,
 };
 
@@ -57,10 +60,14 @@ const WATER_FIELD: WaterParams = {
    at 220k device pixels at its 11 fps accumulator cadence) */
 const WATER_BUDGET = { software: 220_000, mobile: 260_000, desktop: 400_000 };
 
-/* the wash's baked gradient art — the same four-layer structure the
-   portal hero's wash uses (diagonal base, hue pocket upper right,
-   secondary current lower left, light core), coloured by the wash.
-   Deterministic per wash id, so re-renders reuse the string. */
+/* the wash's baked gradient art — the reference's own four-layer
+   structure AND its own stop opacities, recovered verbatim from its
+   bundle's backdrop SVG: a diagonal base, the moonlight drift
+   (0.72 → 0.46 @34% → 0.22 @68% → 0), the silver current
+   (0.54 → 0.34 @44% → 0) and the pearl core (0.26 → 0.20 @56% → 0).
+   These ladders are why the reference's water reads deep and rich —
+   a weaker mid-stop family reads pastel and shallow. Deterministic
+   per wash id, so re-renders reuse the string. */
 const artCache = new Map<string, string>();
 function washArt(wash: Wash): string {
   const hit = artCache.get(wash.id);
@@ -70,16 +77,16 @@ function washArt(wash: Wash): string {
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900">` +
       `<defs>` +
       `<linearGradient id="wrBase" x1="0%" y1="0%" x2="100%" y2="100%">` +
-      `<stop offset="0%" stop-color="${a.base[0]}"/><stop offset="52%" stop-color="${a.base[1]}"/><stop offset="100%" stop-color="${a.base[2]}"/>` +
+      `<stop offset="0%" stop-color="${a.base[0]}"/><stop offset="48%" stop-color="${a.base[1]}"/><stop offset="100%" stop-color="${a.base[2]}"/>` +
       `</linearGradient>` +
       `<radialGradient id="wrPocket" cx="72%" cy="28%" r="56%">` +
-      `<stop offset="0%" stop-color="${a.pocket}" stop-opacity="0.6"/><stop offset="38%" stop-color="${a.pocket}" stop-opacity="0.34"/><stop offset="72%" stop-color="${a.pocket}" stop-opacity="0.12"/><stop offset="100%" stop-color="${a.base[1]}" stop-opacity="0"/>` +
+      `<stop offset="0%" stop-color="${a.pocket[0]}" stop-opacity="0.72"/><stop offset="34%" stop-color="${a.pocket[1]}" stop-opacity="0.46"/><stop offset="68%" stop-color="${a.pocket[2]}" stop-opacity="0.22"/><stop offset="100%" stop-color="${a.base[1]}" stop-opacity="0"/>` +
       `</radialGradient>` +
       `<radialGradient id="wrCurrent" cx="28%" cy="66%" r="58%">` +
-      `<stop offset="0%" stop-color="${a.current}" stop-opacity="0.4"/><stop offset="46%" stop-color="${a.current}" stop-opacity="0.2"/><stop offset="100%" stop-color="${a.base[2]}" stop-opacity="0"/>` +
+      `<stop offset="0%" stop-color="${a.current[0]}" stop-opacity="0.54"/><stop offset="44%" stop-color="${a.current[1]}" stop-opacity="0.34"/><stop offset="100%" stop-color="${a.base[2]}" stop-opacity="0"/>` +
       `</radialGradient>` +
       `<radialGradient id="wrPearl" cx="50%" cy="46%" r="48%">` +
-      `<stop offset="0%" stop-color="${a.pearl}" stop-opacity="0.5"/><stop offset="56%" stop-color="${a.pearl}" stop-opacity="0.22"/><stop offset="100%" stop-color="${a.base[1]}" stop-opacity="0"/>` +
+      `<stop offset="0%" stop-color="${a.pearl[0]}" stop-opacity="0.26"/><stop offset="56%" stop-color="${a.pearl[1]}" stop-opacity="0.20"/><stop offset="100%" stop-color="${a.base[1]}" stop-opacity="0"/>` +
       `</radialGradient>` +
       `</defs>` +
       `<rect width="1440" height="900" fill="url(#wrBase)"/>` +
@@ -130,14 +137,14 @@ export function WaterBackdrop({ wash }: { wash: Wash }) {
         active
         reducedMotion={reducedMotion}
         testId="water-theme-canvas"
-        fallback={
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `linear-gradient(160deg, ${wash.art.base[0]} 0%, ${wash.art.base[1]} 55%, ${wash.art.pocket} 100%)`,
-            }}
-          />
-        }
+          fallback={
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(160deg, ${wash.art.base[0]} 0%, ${wash.art.base[1]} 55%, ${wash.art.pocket[1]} 100%)`,
+              }}
+            />
+          }
       />
     </div>,
     document.body,

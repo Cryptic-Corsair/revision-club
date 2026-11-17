@@ -353,14 +353,19 @@ spec section floating straight on it (`club/notes-water.tsx`, the third
 reader twin) — the rooms have NO ground at all, so the water shader
 shows at full strength for EVERY section; the wave seams went with the
 glass, and the only surfaces that hold still are the content sheets
-(the wash's `sheet` tier riding `--color-paper`: near-white in the pale
-washes, a lifted navy under the abyss — classic's card recipe) and the
+(the wash's `sheet` tier riding `--color-paper`: each wash's water
+body lifted a step above itself — classic's card recipe) and the
 token-driven diagrams. The dress carries its own colour system, the
 **wash** (`lib/spectra/washes.ts`, `prefs.wash`, factory `"lagoon"` —
-blueish; the panel's Water colour section swaps it live: lagoon / tide
-/ reef / glacier / abyss): the reader re-points its ink ladder, sheet
-and accent from the wash (milk ink over the abyss, deep sea-navy over
-the pale washes), and the chrome around the reader stays lab-dressed.
+the reference's own global-backdrop palette; the panel's Water colour
+section swaps it live: lagoon / tide / reef / glacier / abyss): every
+wash runs the reference's DEEP-water palette family (deep body in the
+wash's hue, a champagne-family moonlight drift baked into the art at
+the reference's stop opacities, milk ink, lifted sheet), the reader
+re-points its ink ladder, sheet and accent from the wash, and the
+chrome around the reader stays lab-dressed. The field is the
+reference's mount verbatim — its `scale` 1.38 zoom and Y flip
+included.
 Piloted on **Topic 1 only** (`wch11-t01`, the `WATER_DOCS` ledger in
 prefs.ts, walked one document at a time exactly like `GALLERY_DOCS`):
 the panel offers the Water card only while a ledgered doc is on stage,

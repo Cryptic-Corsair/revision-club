@@ -23,12 +23,12 @@ import {
 } from '../../../shared/water.frag';
 
 /* the hero's water preset — the water reference's own global backdrop
-   table (layering .34 / caustic .38 / waves .34 / size .72 / speed
-   .24), with highlights at .62: on the cream room the field's veins
-   must out-shout a near-white base, and the reference's own footer
-   runs .85, so .62 is still the quiet end of its range. The field
-   dissolves into the page's own --bg at the bottom+top edges
-   (edgeFade), the way the old hero shader did. */
+   table (layering .34 / caustic .38 / waves .34 / size .72 / scale
+   1.38 / speed .24), with highlights at .62: on the cream room the
+   field's veins must out-shout a near-white base, and the reference's
+   own footer runs .85, so .62 is still the quiet end of its range.
+   The field dissolves into the page's own --bg at the bottom+top
+   edges (edgeFade), the way the old hero shader did. */
 const HERO_WATER: WaterParams = {
   highlights: 0.62,
   layering: 0.34,
@@ -36,6 +36,7 @@ const HERO_WATER: WaterParams = {
   caustic: 0.38,
   waves: 0.34,
   size: 0.72,
+  scale: 1.38,
   speed: 0.24,
 };
 
