@@ -28,6 +28,7 @@ import {
   type Prefs,
   type TypePrefs,
 } from "@/lib/spectra/prefs";
+import { WASHES } from "@/lib/spectra/washes";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the customize panel
@@ -67,11 +68,12 @@ const BODY_FONTS: { id: BodyFont; label: string; stack: string }[] = [
 
 const SCALE_PX = [12, 14, 16, 19];
 
-/* the interface cards' live miniatures — two abstract pages. The
+/* the interface cards' live miniatures — three abstract pages. The
    gallery miniature shows the white-wall room: accent dash, big
    quiet headline, a hairline ledger of accent numerals; the
    editorial miniature shows the document page: kicker bar,
-   headline rule, numbered clause rails. */
+   headline rule, numbered clause rails; the water miniature shows
+   the sea: a wash ground with a glass sheet floating on it. */
 function IfaceStage({ id }: { id: Iface }) {
   if (id === "gallery") {
     return (
@@ -91,6 +93,30 @@ function IfaceStage({ id }: { id: Iface }) {
             02
           </span>
           <span className="block h-[5px] flex-1 rounded-full bg-ink/15" />
+        </span>
+      </span>
+    );
+  }
+  if (id === "water") {
+    return (
+      <span
+        aria-hidden
+        className="relative block overflow-hidden rounded-[12px] p-2.5"
+        style={{
+          background: "linear-gradient(135deg, #DCF0F6 0%, #BFE3F2 55%, #58B7E0 100%)",
+        }}
+      >
+        <span className="block rounded-[8px] bg-white/85 px-2.5 py-2.5 shadow-[0_1.5px_4px_rgb(20_60_84/0.18)]">
+          <span className="block h-[2px] w-[14px] rounded-full" style={{ background: "#16719B" }} />
+          <span className="mt-2 block h-[7px] w-3/4 rounded-full bg-ink/40" />
+          <span className="mt-1.5 block h-[7px] w-1/2 rounded-full bg-ink/15" />
+          <span className="mt-2.5 block h-px w-full bg-ink/10" />
+          <span className="mt-2 flex items-center gap-1.5">
+            <span className="font-display text-[11px] leading-none font-semibold tabular-nums" style={{ color: "#16719B" }}>
+              01
+            </span>
+            <span className="block h-[5px] flex-1 rounded-full bg-ink/15" />
+          </span>
         </span>
       </span>
     );
@@ -159,27 +185,6 @@ function LabStage({ id }: { id: Lab }) {
         <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#2e2820] shadow-[0_1.5px_0_rgb(0_0_0/0.35)]" />
         <span className="absolute bottom-2 left-2 flex items-center gap-1">
           <i className="h-1.5 w-1.5 rounded-full bg-[#ffd43b]" />
-          <i className="h-1.5 w-1.5 rounded-full bg-[#ff6b6b]" />
-          <i className="h-1.5 w-1.5 rounded-full bg-[#12b886]" />
-        </span>
-      </span>
-    );
-  }
-  if (id === "water") {
-    return (
-      <span className="relative block h-14 w-full overflow-hidden rounded-[calc(12px*var(--ui-scale))] bg-[#fff6ea] shadow-[inset_0_0_0_1px_rgb(61_43_31/0.08)]">
-        {/* the living wash's pockets, held still: the tangerine drift
-            up in the light, the coral current low and left */}
-        <span
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(48px 34px at 70% 14%, rgb(255 146 43 / 0.42), transparent 72%), radial-gradient(44px 32px at 22% 80%, rgb(255 107 107 / 0.32), transparent 70%)",
-          }}
-        />
-        <span className="absolute top-3 left-2 h-5 w-9 rounded-md bg-[#fffdf7]/90 shadow-[0_1.5px_0_rgb(61_43_31/0.1)]" />
-        <span className="absolute bottom-2 left-2 flex items-center gap-1">
-          <i className="h-1.5 w-1.5 rounded-full bg-[#ff922b]" />
           <i className="h-1.5 w-1.5 rounded-full bg-[#ff6b6b]" />
           <i className="h-1.5 w-1.5 rounded-full bg-[#12b886]" />
         </span>
@@ -541,21 +546,32 @@ export function CustomizePanel({
   onOpenLegal: () => void;
   fullscreen: boolean;
   onToggleFullscreen: () => void;
-  /** the water lab is offered while a ledgered doc is open in the
-      Cards dress — the shell computes it (waterServes); the panel
-      never sees the current view itself */
+  /** the water interface is offered while a ledgered doc is on
+      stage — the shell computes it (waterServes); the panel never
+      sees the current view itself */
   waterAvailable: boolean;
 }) {
   const prefs = usePrefs();
   /* the labs this interface offers — the Document reader doesn't
-     offer classic, the Cards reader's house lab; Water rides last
-     only while its rollout ledger has a doc on stage */
-  const labOptions = labOrderFor(prefs.iface, { water: waterAvailable });
-  /* the lab the page WEARS, water included: while the field is up
-     the page really is the water room, so the Water card lights
-     instead of Light (whose tokens the water room shares) */
-  const wornLab: Lab =
-    waterAvailable && prefs.theme === "water" ? "water" : effectiveLab(prefs);
+     offer classic, the Cards reader's house lab */
+  const labOptions = labOrderFor(prefs.iface);
+  /* the interfaces on the menu — the two settled dresses always;
+     the Water dress rides last only while its rollout ledger has a
+     doc on stage (the shell computes it): offered exactly where it
+     can be served, nowhere else */
+  const ifaceOptions: Iface[] = waterAvailable
+    ? [...IFACE_ORDER, "water"]
+    : IFACE_ORDER;
+  /* the interface the page WEARS — a saved water displays as Cards
+     (its heir) wherever the ledger doesn't serve it, the save
+     keeping Water for the reader that can put it back on; while a
+     ledgered doc is on stage the page really is the water room */
+  const wornIface: Iface =
+    prefs.iface === "water"
+      ? waterAvailable
+        ? "water"
+        : "gallery"
+      : prefs.iface;
 
   /* Esc closes · the page behind holds still while the panel is out */
   useEffect(() => {
@@ -572,10 +588,9 @@ export function CustomizePanel({
 
   const pickLab = (lab: Lab) => {
     /* the picker reads the lab the page WEARS (a saved Document+
-       classic wears Light; a saved Water on a ledgered doc wears
-       Water) — tapping the worn lab is a no-op, not a rewrite of
-       the stored pick */
-    if (lab === wornLab) return;
+       classic wears Light) — tapping the worn lab is a no-op, not a
+       rewrite of the stored pick */
+    if (lab === effectiveLab(prefs)) return;
     setPrefs({ theme: lab });
   };
 
@@ -706,16 +721,19 @@ export function CustomizePanel({
                 </div>
               </PanelSection>
 
-              {/* 2 · interface — the two dresses as cards */}
+              {/* 2 · interface — the dresses as cards; the water dress
+                  rides last only while its ledger has a doc on stage */}
               <PanelSection title="Interface">
                 <div className="grid grid-cols-2 gap-2.5">
-                  {IFACE_ORDER.map((f) => {
-                    const active = prefs.iface === f;
+                  {ifaceOptions.map((f) => {
+                    const active = wornIface === f;
                     return (
                       <button
                         key={f}
                         type="button"
-                        onClick={() => setPrefs({ iface: f })}
+                        onClick={() => {
+                          if (f !== wornIface) setPrefs({ iface: f });
+                        }}
                         aria-pressed={active}
                         aria-label={`${IFACE_LABEL[f]} interface — ${IFACE_DESCRIPTION[f]}`}
                         className="flex min-w-0 cursor-pointer flex-col gap-2.5 rounded-[16px] border p-2.5 text-left transition-shadow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--panel-accent)]"
@@ -738,11 +756,64 @@ export function CustomizePanel({
                 </div>
               </PanelSection>
 
+              {/* 2½ · water colour — the water dress's washes. Shows
+                  while the dress is worn (the pref is theirs to tune
+                  even off the ledgered doc — the wash rides the save
+                  like any pick); each swatch paints the wash's own
+                  sea and a floating glass sheet. */}
+              {prefs.iface === "water" && (
+                <PanelSection title="Water colour">
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {WASHES.map((w) => {
+                      const active = prefs.wash === w.id;
+                      return (
+                        <button
+                          key={w.id}
+                          type="button"
+                          onClick={() => setPrefs({ wash: w.id })}
+                          aria-pressed={active}
+                          aria-label={`${w.label} water colour — ${w.blurb}`}
+                          className="flex min-w-0 cursor-pointer flex-col gap-2 rounded-[16px] border p-2.5 text-left transition-shadow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--panel-accent)]"
+                          style={{
+                            borderColor: hair(10),
+                            background: active ? "color-mix(in oklab, var(--panel-accent) 6%, var(--color-paper))" : "transparent",
+                            boxShadow: active ? `0 0 0 1.5px ${A}` : undefined,
+                          }}
+                        >
+                          <span
+                            aria-hidden
+                            className="relative block h-11 w-full overflow-hidden rounded-[10px]"
+                            style={{
+                              background: `linear-gradient(135deg, ${w.art.base[0]} 0%, ${w.art.base[1]} 52%, ${w.art.pocket} 100%)`,
+                            }}
+                          >
+                            <span
+                              className="absolute top-2.5 left-2 h-[26px] w-9 rounded-[6px] shadow-[0_1.5px_3px_rgb(0_0_0/0.14)]"
+                              style={{ background: w.glassA }}
+                            />
+                            <span
+                              className="absolute right-2 bottom-2 h-2 w-2 rounded-full"
+                              style={{ background: w.chip }}
+                            />
+                          </span>
+                          <span className="flex w-full items-center justify-between gap-2">
+                            <span className="truncate font-display text-[calc(12px*var(--ts-other))] font-semibold text-ink">
+                              {w.label}
+                            </span>
+                            <PanelStamp on={active} />
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </PanelSection>
+              )}
+
               {/* 3 · appearance — this interface's labs as cards */}
               <PanelSection title="Appearance">
                 <div className="grid grid-cols-2 gap-2.5">
                   {labOptions.map((l) => {
-                    const active = wornLab === l;
+                    const active = effectiveLab(prefs) === l;
                     return (
                       <button
                         key={l}

@@ -184,7 +184,9 @@ export const WATER_FRAGMENT_SRC = `
    backdrop/filament art as inline gradient SVGs (recovered verbatim
    from the bundle). Opaque gradient washes; the shader does the rest. ── */
 
-const svgDataUri = (svg: string) =>
+/* exported so the water interface's washes can bake their own art
+   (club/water-backdrop.tsx builds one gradient wash per WashId) */
+export const svgDataUri = (svg: string) =>
   `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 
 /* the global backdrop art (the reference's 1440×900 lagoon wash) */

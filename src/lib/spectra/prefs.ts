@@ -2,12 +2,14 @@
 
 import { useSyncExternalStore } from "react";
 import { DARK_MOOD_COUNT, pickDarkMood } from "./dark-mood";
+import { DEFAULT_WASH, WASH_IDS, type WashId } from "./washes";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · site preferences
    The knobs behind the customize panel: lab (light/dark/dune/
-   classic/water), the accent wheel, content scale, heading & body
-   fonts, polka dots, decorative motion.
+   classic), the interface (cards/document/water — the third in
+   rollout), the water interface's wash, the accent wheel, content
+   scale, heading & body fonts, polka dots, decorative motion.
 
    localStorage · key "reaction-club-prefs-v1"
    Every change runs through applyPrefs() — one function that paints
@@ -15,30 +17,42 @@ import { DARK_MOOD_COUNT, pickDarkMood } from "./dark-mood";
    at once and the mobile address bar keeps up.
    ═══════════════════════════════════════════════════════════════ */
 
-export type Lab = "light" | "dark" | "dune" | "classic" | "water";
+export type Lab = "light" | "dark" | "dune" | "classic";
 export type HeadFont = "fredoka" | "baloo" | "patrick" | "fraunces" | "figtree";
 export type BodyFont = "nunito" | "quicksand" | "figtree";
 
-/* the site's interfaces — same notes, two dresses.
+/* the site's interfaces — same notes, three dresses.
    "gallery" is the white-wall dress — quiet grounds, one accent,
    oversized numerals — and the site's front door: every fresh visit
    lands here. "editorial" is the document room the disclaimer page
-   wears (hero, rails, numbered clauses). The band-walked rooms dress
-   they both grew out of has been retired outright — a saved "rooms"
-   reads as the gallery, its heir. The axis is almost independent of
-   the labs: every lab re-tints both interfaces — except classic,
-   the gallery's house lab, which the document room doesn't offer
-   (see labOrderFor and sanitize) — and the homepage keeps its own
-   dress always. */
-export type Iface = "editorial" | "gallery";
+   wears (hero, rails, numbered clauses). "water" is the third dress,
+   IN ROLLOUT: the note read over the living caustic water field,
+   every spec section a glass room on the sea — ledged to Topic 1
+   (WATER_DOCS below; walked one document at a time exactly like the
+   gallery was). The band-walked rooms dress they both grew out of
+   has been retired outright — a saved "rooms" reads as the gallery,
+   its heir. The axis is almost independent of the labs: every lab
+   re-tints the two settled interfaces — except classic, the
+   gallery's house lab, which the document room doesn't offer (see
+   labOrderFor and sanitize). The water dress is the exception to the
+   axis in the other direction: it carries its OWN colour system (the
+   wash, lib/spectra/washes.ts) instead of the labs' tokens — the
+   chrome around the reader stays lab-dressed, the reading rooms wear
+   the wash. The homepage keeps its own dress always. */
+export type Iface = "editorial" | "gallery" | "water";
 export const IFACE_LABEL: Record<Iface, string> = {
   gallery: "Cards",
   editorial: "Document",
+  water: "Water",
 };
 export const IFACE_DESCRIPTION: Record<Iface, string> = {
   gallery: "Card-style reader — every note, spec by spec",
   editorial: "Document-style reader — numbered sections & rails",
+  water: "Glass rooms over living water — Topic 1, in rollout",
 };
+/* the settled dresses the pickers always offer; the water dress is
+   appended at the call sites while its rollout ledger has a doc on
+   stage (waterServes) — offered exactly where it can be served */
 export const IFACE_ORDER: Iface[] = ["gallery", "editorial"];
 
 /* ————— the gallery's rollout ledger —————
@@ -74,29 +88,27 @@ export const GALLERY_DOCS: ReadonlySet<string> = new Set([
   "wch13-p09",
 ]);
 
-/* ————— the water lab's rollout ledger —————
-   "water" is the fifth lab — the daylight room whose paper is the
-   living caustic water field (shared/WaterCanvas, the same program
-   the portal hero wears). It walks the library the way the gallery
-   dress did: one document at a time. A doc id here means the lab may
-   be PICKED while that note is open in the gallery dress — everywhere
-   else a saved "water" displays as Light through effectiveLab() (the
-   same display-only coercion classic gets), the save keeping Water so
-   returning to a ledgered doc puts it straight back on. Topic 1
-   (wch11-t01) is the pilot; widening the ledger widens the lab. */
+/* ————— the water interface's rollout ledger —————
+   The water dress walked the library one note at a time exactly like
+   the gallery did. A doc id here means the water READER may serve
+   it: while the visitor wears the water interface, a ledgered doc
+   opens as the glass-rooms-over-water reader (club/notes-water.tsx),
+   and the customize panel offers the Water interface card while a
+   ledgered doc is on stage. Everywhere else a saved "water" displays
+   as the gallery (its heir) through applyPrefs's data-iface painting
+   and the panel's worn check — the save keeping Water, so returning
+   to a ledgered doc puts the sea straight back. Topic 1 (wch11-t01)
+   is the pilot; widening the ledger widens the interface. */
 export const WATER_DOCS: ReadonlySet<string> = new Set([
   /* Unit 1 · WCH11 — the pilot */
   "wch11-t01",
 ]);
 
-/* whether the water lab is SERVED for this doc in this dress. The
-   pilot rides the gallery (Cards) reader — the dress that walks the
-   ledger — so a ledgered doc must also be gallery-cut for the field
-   to exist behind it; the Document reader joins when its surface is
-   cut for the field. One formula, so the pickers, the shell and the
-   reader can never disagree about whether Water is on the menu. */
-export function waterServes(iface: Iface, docId: string): boolean {
-  return iface === "gallery" && GALLERY_DOCS.has(docId) && WATER_DOCS.has(docId);
+/* whether the water interface is SERVED for this doc — the one
+   formula the shell (reader pick + panel's offer), the pickers and
+   the tests read. One day the ledger widens; nothing else changes. */
+export function waterServes(docId: string): boolean {
+  return WATER_DOCS.has(docId);
 }
 
 /* the candy wheel the site's sections take turns wearing. The full
@@ -279,8 +291,15 @@ export const SPEC_H_MAX = 0.98;
 export interface Prefs {
   theme: Lab;
   /** which interface dresses the reader pages — "gallery" (the
-      default, served on its rollout docs) | "editorial" */
+      default, served on its rollout docs) | "editorial" | "water"
+      (the glass-rooms-over-water dress, ledged to WATER_DOCS) */
   iface: Iface;
+  /** the water interface's wash — the field's colour system (see
+      lib/spectra/washes.ts). Lagoon is the factory wash; the panel's
+      "Water colour" section swaps it. Only meaningful while the
+      water dress is worn, but kept like any pick: the wash a visitor
+      chose is theirs when the dress comes back on. */
+  wash: WashId;
   /** the accent wheel — which candies the sections rotate through */
   accents: AccentId[];
   /** content scale — S/M/L/XL (multiplies --ui-scale) */
@@ -322,6 +341,7 @@ export const DEFAULT_PREFS: Prefs = {
      setting. */
   theme: "classic",
   iface: "gallery",
+  wash: DEFAULT_WASH,
   accents: [...ACCENT_IDS],
   /* the module default is Medium; load() lifts a FIRST RUN to the
      screen-aware factory rung (M phone / L small tablet / XL tablet
@@ -370,14 +390,20 @@ function sanitize(p: StoredPrefs): Prefs {
     p.theme === "light" ||
     p.theme === "dark" ||
     p.theme === "dune" ||
-    p.theme === "classic" ||
-    p.theme === "water"
+    p.theme === "classic"
   )
     out.theme = p.theme;
   else if (p.theme === "hybrid")
     /* the retired third lab rides on as classic — its heir */
     out.theme = "classic";
-  if (p.iface === "editorial" || p.iface === "gallery") out.iface = p.iface;
+  if (p.iface === "editorial" || p.iface === "gallery" || p.iface === "water")
+    out.iface = p.iface;
+  /* a saved "water" iface is the pilot dress — displayed as the
+     gallery (its heir) wherever the ledger doesn't serve it; see
+     applyPrefs and the panel's worn check. The save is never
+     rewritten. */
+  if (typeof p.wash === "string" && WASH_IDS.has(p.wash))
+    out.wash = p.wash as WashId;
   /* classic is the gallery's house lab — the document room doesn't
      wear it. A saved editorial+classic DISPLAYS as Light (the
      nearest daylight lab) through effectiveLab(), but the stored
@@ -552,8 +578,14 @@ export function applyPrefs(p: Prefs) {
   root.classList.toggle("classic", lab === "classic");
   /* the interface axis — CSS may micro-dress chrome off
      html[data-iface="editorial"]; the component twins read the pref
-     from the store, not the dataset */
-  root.dataset.iface = p.iface;
+     from the store, not the dataset. The water dress paints the
+     gallery's dataset everywhere (the display coercion — its heir):
+     the gallery-chrome tokens (--iface-accent etc.) stay defined on
+     the library/spec rooms it falls back to, and the water reader
+     carries its own wash scope (club/notes-water.tsx), so nothing
+     keys off data-iface="water" — which must never appear and leave
+     a token undefined. */
+  root.dataset.iface = p.iface === "water" ? "gallery" : p.iface;
   /* only the night lab wears the CACHED mood — the palette the
      visitor last saw, stamped at their last Night pick; not
      stamped yet (brand-new save) it falls back to today's pick,
@@ -638,24 +670,18 @@ export function currentAccents(): AccentId[] {
   return state.accents;
 }
 
-/** The lab the page actually WEARS. Two display-only coercions, the
-    save never rewritten (mirrored by the pre-paint script in
-    layout.tsx — the two must agree or the first paint re-flows):
-    · Classic is the Cards reader's house lab — the Document reader
-      doesn't offer it — so a saved editorial+classic displays as
-      Light, the nearest daylight lab.
-    · Water is served only on its rollout ledger (waterServes); the
-      water room IS a daylight room — its tokens are Light's, its
-      paper is the living field — so everywhere the field isn't
-      mounted a saved water displays as Light too, and the chrome
-      always agrees with the room on screen.
-    Everything that colours a decision from the active lab — accent
-    helpers, theme chips, the pickers' selected state — reads THIS,
-    not the raw pref; the surfaces that know the current view (the
-    navbar, the panel, the reader) re-point the chip to Water only
-    while the field is actually up. */
+/** The lab the page actually WEARS. Classic is the Cards reader's
+    house lab — the Document reader doesn't offer it — so a saved
+    editorial+classic displays as Light, the nearest daylight lab.
+    The stored theme is untouched: this is a display coercion only,
+    mirrored by the pre-paint script in layout.tsx (the two must
+    agree or the first paint re-flows). Everything that colours a
+    decision from the active lab — accent helpers, theme chips, the
+    pickers' selected state — reads THIS, not the raw pref, so the
+    chrome always agrees with the classes on <html>.
+    (The water dress used to be a lab here; it is an interface now —
+    prefs.iface === "water", with its own wash colour system.) */
 export function effectiveLab(p: Pick<Prefs, "theme" | "iface">): Lab {
-  if (p.theme === "water") return "light";
   return p.iface === "editorial" && p.theme === "classic" ? "light" : p.theme;
 }
 
@@ -715,7 +741,6 @@ export const LAB_LABEL: Record<Lab, string> = {
   dark: "Night",
   dune: "Dune",
   classic: "Classic",
-  water: "Water",
 };
 
 export const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic"];
@@ -726,15 +751,9 @@ export const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic"];
    Night and Dune only, and effectiveLab() displays a saved
    Document+classic as Light while the save keeps Classic for the
    Cards reader. Both theme pickers (the navbar dropdown and the
-   customize panel) read their order from here.
-   Water rides last and only when the caller is standing somewhere it
-   is served (opts.water — waterServes() at the call sites): the lab
-   walks the library one document at a time, so the pickers offer it
-   exactly where its field exists and nowhere else. */
-export function labOrderFor(iface: Iface, opts?: { water?: boolean }): Lab[] {
-  const base =
-    iface === "editorial" ? LAB_ORDER.filter((l) => l !== "classic") : LAB_ORDER;
-  return opts?.water ? [...base, "water"] : base;
+   customize panel) read their order from here. */
+export function labOrderFor(iface: Iface): Lab[] {
+  return iface === "editorial" ? LAB_ORDER.filter((l) => l !== "classic") : LAB_ORDER;
 }
 
 export const LAB_DESCRIPTION: Record<Lab, string> = {
@@ -742,14 +761,13 @@ export const LAB_DESCRIPTION: Record<Lab, string> = {
   dark: "Velvet dusk & lilac",
   dune: "Sandstone & amber",
   classic: "Espresso & parchment",
-  water: "Living water & warm light",
 };
 
 /* ————— the theme chips —————
    Each theme has a fixed signature swatch shared by the navbar and
    theme controls. The swatch identifies the room independently of
    the active page palette: daylight white · velvet plum · dune
-   chocolate · classic parchment · the water wash's tangerine drift. */
+   chocolate · classic parchment. */
 export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> = {
   light: {
     bg: "#FFFFFF", // the bright daylight page
@@ -773,13 +791,5 @@ export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> 
     bg: "#D6C19A",
     ink: "#2C2013",
     side: "#A58B62",
-  },
-  water: {
-    // the wash's tangerine drift — the one saturated stop of the
-    // living field, warm enough to sit beside classic's parchment
-    // and still read as its own room
-    bg: "#FFCF96",
-    ink: "#3D2B1F", // the same roast ink the daylight rooms read in
-    side: "#DD9848",
   },
 };

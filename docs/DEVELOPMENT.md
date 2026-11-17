@@ -173,7 +173,7 @@ API (a fetch script exists at `scripts/fetch-fonts.sh`, untracked — the
 replace the files in `src/app/fonts/`, and keep the `weight` ranges in
 `layout.tsx` matching the file's variable axis (e.g. Fredoka `"300 700"`).
 
-## 7. Theming — five labs (water is in rollout)
+## 7. Theming — four labs
 
 `globals.css` defines the lab tokens, selected by classes/attributes on `<html>`:
 
@@ -194,24 +194,46 @@ replace the files in `src/app/fonts/`, and keep the `weight` ranges in
   two alternating Dune accents; the chocolate surface palette remains unchanged.
 - `html.classic` → **classic** lab (the default): daylight cream `#fdf6e3`
   rooms with espresso `#2c2013` ink — this is the theme new visitors see
-- **`water`** → the fifth lab, IN ROLLOUT (one doc on the ledger): a
-  daylight room whose paper is the living caustic water field
-  (`shared/WaterCanvas` — the portal hero's program, the water
-  reference's own global-backdrop preset and budgets) mounted by the
-  gallery reader (`club/water-backdrop.tsx`, portaled to `<body>` at
-  z-index −1, behind every surface; it sleeps while the reader's room
-  walk spans the viewport and freezes under reduced motion or the
-  panel's motion switch). It needs NO root class and NO token block:
-  its tokens are Light's, so `effectiveLab()` displays a saved water
-  as Light everywhere the field isn't mounted (pre-paint maps
-  water→light — no first-paint re-flow), the save keeping Water. The
-  pickers offer it only where it is served: `waterServes(iface, docId)`
-  = the Cards dress + the doc on the `WATER_DOCS` ledger (prefs.ts,
-  next to `GALLERY_DOCS`) — Topic 1 (`wch11-t01`) is the pilot.
-  Widening the ledger widens the lab.
+
+### 7.1 The interfaces — and the water dress (in rollout)
+
+The interface axis dresses the READER pages (`prefs.iface`); the labs
+re-tint the chrome around them. Three dresses now:
+
+- **Cards** (`"gallery"`, default) — the white-wall dress, served on
+  `GALLERY_DOCS` (the whole library; the ledger gate stays).
+- **Document** (`"editorial"`) — the numbered-clause room.
+- **Water** (`"water"`, IN ROLLOUT — one doc on the ledger): the note
+  read over the living caustic water. ONE field
+  (`club/water-backdrop.tsx`: `shared/WaterCanvas`, the water
+  reference's global-backdrop preset and budgets, portaled to
+  `<body>` at z-index −1) and EVERY spec section a glass room
+  (`club/notes-water.tsx` — the third reader twin, same props
+  contract) hung on translucent washes with transparent-shore wave
+  seams; hero, contents and end-of-note sit on the open water. The
+  dress carries its OWN colour system — the **wash**
+  (`lib/spectra/washes.ts`, `prefs.wash`, default `"lagoon"`; the
+  panel's Water colour section swaps lagoon/tide/reef/glacier/abyss
+  live): the reader root re-points its ink/paper/accent tokens from
+  the wash, the two open-water zones re-point the ink again to the
+  field's own, the glass stays light in EVERY wash so the chemistry
+  keeps its daylight contrast, and `globals.css` pins the daylight
+  marker pen inside `.water-reader` (the night lab's glow-marker is
+  tuned for plum grounds).
+- Serving: `waterServes(docId)` = the `WATER_DOCS` ledger (Topic 1,
+  `wch11-t01`, the pilot). While a ledgered doc is on stage the panel
+  offers the Water interface card; everywhere else a saved water
+  DISPLAYS as its heir, the gallery — `applyPrefs` paints
+  `data-iface="gallery"` and the shell's reader pick routes
+  off-ledger docs exactly like the gallery does (gallery-cut →
+  gallery, else editorial) — the save keeping Water. There is no
+  `.water` class on `<html>` and no water lab: an earlier
+  water-as-fifth-lab pilot was superseded by this dress the same
+  day. Widening the ledger widens the interface.
 
 User prefs (`prefs.ts`, default in parentheses): `theme` (`"classic"`),
-`iface` (`"gallery"`), `accents` (the full candy wheel), `type` (all five
+`iface` (`"gallery"`), `wash` (`"lagoon"` — the water interface's wash),
+`accents` (the full candy wheel), `type` (all five
 role factors `1` — the M vector), `headFont` (`"fredoka"`), `bodyFont`
 (`"quicksand"`), `scale` (`"M"`, but a FIRST RUN lifts the rung to the
 screen-aware factory — M on phones, L on small tablets (≥640px), XL on

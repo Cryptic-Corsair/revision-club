@@ -344,18 +344,32 @@ There are four settled global themes (called labs internally):
 - dune
 - classic (current default)
 
-…plus a fifth lab **in rollout** — `water` (2026-11-17): a daylight room
-whose paper is the living caustic water field (the shared `WaterCanvas`),
-piloted on **Topic 1 only** (`wch11-t01`, the `WATER_DOCS` ledger in
-prefs.ts, walked one document at a time exactly like `GALLERY_DOCS`). The
-water room shares Light's tokens, so `effectiveLab()` displays a saved
-water as Light everywhere the field isn't mounted (pre-paint mirrored),
-the pickers offer it only where `waterServes()` says the field exists
-(gallery dress + ledgered doc), and the field itself (`club/water-backdrop.tsx`)
-runs the §17 contract: portal to `<body>` behind every surface, sleeps
-while the reader's room walk spans the viewport, one static frame under
-reduced motion, the reference's own device-pixel budgets and 30 fps
-accumulator. Widening the ledger widens the lab.
+The interfaces dress the reader pages on top of the labs — Cards
+(`gallery`, the front door), Document (`editorial`) — and a third dress
+**in rollout**: the **water interface** (2026-11-17). The note reads
+over the living caustic water: one field (`club/water-backdrop.tsx`,
+the shared `WaterCanvas`, portaled to `<body>` at z-index −1) and every
+spec section a glass room (`club/notes-water.tsx`, the third reader
+twin) hung on translucent washes with transparent-shore wave seams —
+the water shows through for EVERY section, and hero, contents and
+end-of-note sit on the open water. The dress carries its own colour
+system, the **wash** (`lib/spectra/washes.ts`, `prefs.wash`, factory
+`"lagoon"` — blueish; the panel's Water colour section swaps it live:
+lagoon / tide / reef / glacier / abyss): the reader re-points its own
+ink/paper/accent tokens from the wash, the glass stays light in every
+wash so the chemistry keeps daylight contrast, and the chrome around
+the reader stays lab-dressed. Piloted on **Topic 1 only** (`wch11-t01`,
+the `WATER_DOCS` ledger in prefs.ts, walked one document at a time
+exactly like `GALLERY_DOCS`): the panel offers the Water card only
+while a ledgered doc is on stage, and everywhere else a saved water
+displays as its heir the gallery (`applyPrefs` paints
+`data-iface="gallery"`; the shell routes off-ledger docs like the
+gallery does) while the save keeps Water. The field runs the §17
+contract (portal behind every surface, reduced-motion = one static
+frame, the reference's own device-pixel budgets and 30 fps
+accumulator — no sleep gate: the glass keeps it on stage for every
+section). Widening the ledger widens the interface. (An earlier
+water-as-fifth-LAB pilot was superseded by this dress the same day.)
 
 The theme is global. Rooms and Editorial do **not** have independent theme selectors or separate theme persistence. Each interface interprets the active global theme through its own presentation system.
 

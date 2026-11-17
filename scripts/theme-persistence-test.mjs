@@ -7,11 +7,12 @@
 //  · a legacy night save without a mood gets today's pick stamped in
 //  · editorial+classic DISPLAYS light but the save keeps classic —
 //    switching back to Cards restores Classic without a re-pick
-//  · water (the fifth lab) is offered and worn only where its ledger
-//    serves it — /club/notes/wch11-t01 in the Cards dress: the chip
-//    names Water there, the field mounts, reload keeps it; another
-//    doc and the Document dress display Light while the save keeps
-//    water, so returning to the ledgered doc puts it straight back
+//  · the water INTERFACE (the third dress, ledged to wch11-t01) is
+//    served and offered only where its ledger has a doc on stage:
+//    on Topic 1 the water reader mounts (glass rooms + the living
+//    field) and the wash pref persists; on another doc and in the
+//    other dresses the page displays the settled dresses while the
+//    save keeps water
 //  · a fresh Night pick in another tab stamps today's mood and the
 //    first tab follows the storage event (dedup'd listener)
 //  · no unexpected storage keys appear
@@ -191,7 +192,7 @@ const browser = await chromium.launch({ headless: true });
   await ctx.close();
 }
 
-/* — 7 · the water lab: worn and offered only where its ledger serves it — */
+/* — 7 · the water interface: served and offered only on its ledger — */
 {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
   const page = await ctx.newPage();
@@ -202,42 +203,58 @@ const browser = await chromium.launch({ headless: true });
         localStorage.setItem('rc-test-marker', '1');
       }
     },
-    JSON.stringify({ theme: 'water', iface: 'gallery', v: 3 }),
+    JSON.stringify({ theme: 'classic', iface: 'water', wash: 'lagoon', v: 3 }),
   );
-  /* the pilot doc — Topic 1 — wears the field */
+  /* the pilot doc — Topic 1 — wears the water dress */
   await page.goto(url + '/club/notes/wch11-t01', { waitUntil: 'networkidle' });
   await page.waitForSelector('[data-view="notes-wch11-t01"]', { timeout: 15000 });
-  const chip = await page.evaluate(() =>
-    document.querySelector('button[aria-label^="Theme:"]')?.getAttribute('aria-label') || '');
-  check('ledgered doc wears Water (chip names it)', chip.includes('Theme: Water'), chip.slice(0, 40));
+  const reader = await page.evaluate(() => {
+    const root = document.querySelector('.water-reader');
+    return {
+      served: Boolean(root),
+      wash: root?.getAttribute('data-wash'),
+      field: Boolean(document.querySelector('[data-testid="water-theme-field"] > [data-testid="water-theme-canvas"] canvas')),
+      iface: document.documentElement.dataset.iface,
+    };
+  });
+  check('ledgered doc wears the water reader', reader.served);
+  check('the reader carries its wash (lagoon factory)', reader.wash === 'lagoon', `got ${reader.wash}`);
+  check('the living field mounts behind the reader', reader.field);
+  check('html paints the gallery display dataset (heir)', reader.iface === 'gallery', `got ${reader.iface}`);
   const cls = await classesOf(page);
-  check('water first-paints the daylight tokens (no dark/classic class)', !cls.includes('dark') && !cls.includes('classic'));
-  const field = await page.evaluate(() =>
-    Boolean(document.querySelector('[data-testid="water-theme-field"] > [data-testid="water-theme-canvas"] canvas')));
-  check('the living field mounts behind the reader', field);
+  check('no water lab on <html> — the dress is not a lab', !cls.includes('water') && !cls.includes('dark'));
   await page.reload({ waitUntil: 'networkidle' });
-  const chip2 = await page.evaluate(() =>
-    document.querySelector('button[aria-label^="Theme:"]')?.getAttribute('aria-label') || '');
-  check('water survives reload (pre-paint resolves it to light tokens)', chip2.includes('Theme: Water'));
-  const field2 = await page.evaluate(() =>
-    Boolean(document.querySelector('[data-testid="water-theme-field"]')));
-  check('field remounts after reload', field2);
-  /* another doc — the offer and the field stand down, the save keeps water */
+  await page.waitForSelector('.water-reader', { timeout: 15000 });
+  const served2 = await page.evaluate(() => Boolean(document.querySelector('.water-reader')));
+  check('water dress survives reload', served2);
+  /* the wash is a pick — it persists and re-dresses the reader */
+  await page.evaluate(() => {
+    const s = JSON.parse(localStorage.getItem('reaction-club-prefs-v1') || '{}');
+    s.wash = 'reef';
+    localStorage.setItem('reaction-club-prefs-v1', JSON.stringify(s));
+  });
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.waitForSelector('.water-reader', { timeout: 15000 });
+  const wash2 = await page.evaluate(() =>
+    document.querySelector('.water-reader')?.getAttribute('data-wash'));
+  check('wash pick persists and re-dresses the reader', wash2 === 'reef', `got ${wash2}`);
+  /* another doc — the settled dresses serve it, the save keeps water */
   await page.goto(url + '/club/notes/wch11-t02', { waitUntil: 'networkidle' });
   await page.waitForSelector('[data-view="notes-wch11-t02"]', { timeout: 15000 });
-  const opts = await page.evaluate(() =>
-    Array.from(document.querySelectorAll('#theme-picker-options button span.font-display'))
-      .map((s) => s.textContent));
-  check('Water not offered on a doc off the ledger', !opts.includes('Water'), opts.join('|'));
-  const chip3 = await page.evaluate(() =>
-    document.querySelector('button[aria-label^="Theme:"]')?.getAttribute('aria-label') || '');
-  check('off-ledger doc displays Light', chip3.includes('Theme: Light'), chip3.slice(0, 40));
-  const field3 = await page.evaluate(() =>
-    Boolean(document.querySelector('[data-testid="water-theme-field"]')));
-  check('no field off the ledger', !field3);
+  await page.waitForSelector('.gal-toc', { timeout: 15000 });
+  const offLedger = await page.evaluate(() => ({
+    waterReader: Boolean(document.querySelector('.water-reader')),
+    galleryReader: Boolean(document.querySelector('.gal-toc')),
+    field: Boolean(document.querySelector('[data-testid="water-theme-field"]')),
+  }));
+  check('off-ledger doc serves no water reader', !offLedger.waterReader);
+  check('off-ledger doc falls back to the gallery dress', offLedger.galleryReader);
+  check('no field off the ledger', !offLedger.field);
   const st = await storedPrefs(page);
-  check('save keeps water — no destructive coercion', st?.theme === 'water', `got ${st?.theme}`);
-  /* the Document dress never serves it */
+  check('save keeps water — no destructive coercion', st?.iface === 'water', `got ${st?.iface}`);
+  check('save keeps the wash pick', st?.wash === 'reef', `got ${st?.wash}`);
+  /* the Document dress never serves it either — and the round trip
+     back to Cards puts the sea straight on again */
   await page.evaluate(() => {
     const s = JSON.parse(localStorage.getItem('reaction-club-prefs-v1') || '{}');
     s.iface = 'editorial';
@@ -245,15 +262,22 @@ const browser = await chromium.launch({ headless: true });
   });
   await page.goto(url + '/club/notes/wch11-t01', { waitUntil: 'networkidle' });
   await page.waitForSelector('[data-view="notes-wch11-t01"]', { timeout: 15000 });
-  const optsEd = await page.evaluate(() =>
-    Array.from(document.querySelectorAll('#theme-picker-options button span.font-display'))
-      .map((s) => s.textContent));
-  check('Document dress offers no Water either', !optsEd.includes('Water'), optsEd.join('|'));
-  const field4 = await page.evaluate(() =>
-    Boolean(document.querySelector('[data-testid="water-theme-field"]')));
-  check('no field in the Document dress', !field4);
-  const st2 = await storedPrefs(page);
-  check('save still water after the editorial detour', st2?.theme === 'water', `got ${st2?.theme}`);
+  await page.waitForSelector('.note-rooms, .etoc', { timeout: 15000 }).catch(() => {});
+  const ed = await page.evaluate(() => ({
+    waterReader: Boolean(document.querySelector('.water-reader')),
+    iface: document.documentElement.dataset.iface,
+  }));
+  check('Document dress serves no water reader', !ed.waterReader);
+  check('editorial dataset paints editorial (not gallery-coerced)', ed.iface === 'editorial', `got ${ed.iface}`);
+  await page.evaluate(() => {
+    const s = JSON.parse(localStorage.getItem('reaction-club-prefs-v1') || '{}');
+    s.iface = 'water';
+    localStorage.setItem('reaction-club-prefs-v1', JSON.stringify(s));
+  });
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.waitForSelector('.water-reader', { timeout: 15000 });
+  const back = await page.evaluate(() => Boolean(document.querySelector('.water-reader')));
+  check('returning to Cards (water worn) puts the sea straight back', back);
   await ctx.close();
 }
 
