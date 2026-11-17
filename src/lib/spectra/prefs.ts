@@ -17,7 +17,7 @@ import { DEFAULT_WASH, WASH_IDS, type WashId } from "./washes";
    at once and the mobile address bar keeps up.
    ═══════════════════════════════════════════════════════════════ */
 
-export type Lab = "light" | "dark" | "dune" | "classic";
+export type Lab = "light" | "dark" | "dune" | "classic" | "pistachio";
 export type HeadFont = "fredoka" | "baloo" | "patrick" | "fraunces" | "figtree";
 export type BodyFont = "nunito" | "quicksand" | "figtree";
 
@@ -390,7 +390,8 @@ function sanitize(p: StoredPrefs): Prefs {
     p.theme === "light" ||
     p.theme === "dark" ||
     p.theme === "dune" ||
-    p.theme === "classic"
+    p.theme === "classic" ||
+    p.theme === "pistachio"
   )
     out.theme = p.theme;
   else if (p.theme === "hybrid")
@@ -576,6 +577,7 @@ export function applyPrefs(p: Prefs) {
   root.classList.toggle("dark", lab === "dark" || lab === "dune");
   root.classList.toggle("dune", lab === "dune");
   root.classList.toggle("classic", lab === "classic");
+  root.classList.toggle("pistachio", lab === "pistachio");
   /* the interface axis — CSS may micro-dress chrome off
      html[data-iface="editorial"]; the component twins read the pref
      from the store, not the dataset. The water dress paints the
@@ -741,9 +743,10 @@ export const LAB_LABEL: Record<Lab, string> = {
   dark: "Night",
   dune: "Dune",
   classic: "Classic",
+  pistachio: "Pistachio",
 };
 
-export const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic"];
+export const LAB_ORDER: Lab[] = ["light", "dark", "dune", "classic", "pistachio"];
 
 /* the labs a given interface offers. Classic is the Cards reader's
    house lab — espresso rooms cut for the white-wall dress — so the
@@ -761,6 +764,7 @@ export const LAB_DESCRIPTION: Record<Lab, string> = {
   dark: "Velvet dusk & lilac",
   dune: "Sandstone & amber",
   classic: "Espresso & parchment",
+  pistachio: "Pistachio & plum orchard",
 };
 
 /* ————— the theme chips —————
@@ -791,5 +795,11 @@ export const THEME_CHIP: Record<Lab, { bg: string; ink: string; side: string }> 
     bg: "#D6C19A",
     ink: "#2C2013",
     side: "#A58B62",
+  },
+  pistachio: {
+    // pistachio-kernel green — the meat of the orchard lab
+    bg: "#A9B665",
+    ink: "#2F3417",
+    side: "#7F8C4D",
   },
 };

@@ -286,6 +286,29 @@ const browser = await chromium.launch({ headless: true });
   await ctx.close();
 }
 
+/* — 7 · the pistachio lab: the fifth daylight room persists, the
+   chip reads it, the picker offers it, and no dark class leaks — */
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const page = await ctx.newPage();
+  await page.goto(url + '/club', { waitUntil: 'domcontentloaded' });
+  await page.evaluate((k) => localStorage.setItem(k, JSON.stringify({ theme: 'pistachio', iface: 'gallery', v: 3 })), KEY);
+  await page.reload({ waitUntil: 'networkidle' });
+  const cls = await classesOf(page);
+  check('pistachio first load wears pistachio', cls.includes('pistachio') && !cls.includes('dark'), cls);
+  check('pistachio survives reload', (await classesOf(page)).includes('pistachio'));
+  const st = await storedPrefs(page);
+  check('stored theme stays pistachio', st?.theme === 'pistachio', `got ${st?.theme}`);
+  const chip = await page.evaluate(() =>
+    document.querySelector('button[aria-label^="Theme:"]')?.getAttribute('aria-label') || '');
+  check('navbar chip reads Pistachio', chip.includes('Theme: Pistachio'), chip.slice(0, 40));
+  await page.click('button[aria-label^="Theme:"]');
+  const offered = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('[aria-label="Appearance themes"] button')).map((b) => b.textContent?.trim()));
+  check('picker offers Pistachio', offered.some((t) => t?.includes('Pistachio')), offered.join('|'));
+  await ctx.close();
+}
+
 await browser.close();
 console.log(fails ? `\n${fails} CHECK(S) FAILED` : '\nALL THEME CHECKS PASSED');
 process.exit(fails ? 1 : 0);

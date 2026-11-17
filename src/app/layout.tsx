@@ -176,7 +176,7 @@ const prefsInit = `(function(){try{
 var r=document.documentElement,p=null;
 try{p=JSON.parse(localStorage.getItem("reaction-club-prefs-v1")||"null")}catch(e){}
 if(!p){var t=localStorage.getItem("rc-theme");p={theme:t==="dark"?"dark":"classic"}}
-var th=p.theme==="light"?"light":p.theme==="dark"?"dark":p.theme==="dune"?"dune":"classic";
+var th=p.theme==="light"?"light":p.theme==="dark"?"dark":p.theme==="dune"?"dune":p.theme==="pistachio"?"pistachio":"classic";
 /* classic is the Cards reader's house lab — a saved Document visitor
    DISPLAYS as Light (mirrors effectiveLab() in prefs.ts); the save
    keeps classic so the Cards reader puts it straight back */
@@ -184,6 +184,7 @@ if(p.iface==="editorial"&&th==="classic")th="light";
 if(th==="dark"){r.classList.add("dark");var C=${DARK_MOOD_COUNT};var dm=(typeof p.mood==="number"&&isFinite(p.mood))?((Math.floor(p.mood)%C)+C)%C:(Math.floor(Date.now()/864e5)%C);r.dataset.mood=String(dm)}
 else if(th==="dune"){r.classList.add("dark","dune")}
 else if(th==="classic"){r.classList.add("classic")}
+else if(th==="pistachio"){r.classList.add("pistachio")}
 if(p.headFont)r.dataset.head=String(p.headFont);
 if(p.bodyFont)r.dataset.body=String(p.bodyFont);
 r.dataset.dots=p.dots===false?"off":"on";

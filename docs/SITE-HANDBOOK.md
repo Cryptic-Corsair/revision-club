@@ -262,7 +262,7 @@ Content changes require explicit authorisation. When authorised:
 5. Ensure each figure kind exists in the figure renderer.
 6. Ensure tables have consistent column counts and correctly paired headings/cells.
 7. Run the production build to catch type errors.
-8. Inspect the rendered topic in both interfaces and all four themes.
+8. Inspect the rendered topic in both interfaces and all five themes.
 
 Do not edit content merely to make a screenshot look more balanced.
 
@@ -337,12 +337,14 @@ See INTERFACES-ROADMAP.md for the detailed interface contract and planned bounda
 
 ## 9. Themes, tokens and CSS ownership
 
-There are four settled global themes (called labs internally):
+There are five settled global themes (called labs internally):
 
 - light
 - dark (Night)
 - dune
 - classic (current default)
+- pistachio (2026-11-17) — the orchard: a fifth daylight lab whose
+  cream page, ink text and pistachio/plum accents join the walk
 
 The interfaces dress the reader pages on top of the labs — Cards
 (`gallery`, the front door), Document (`editorial`) — and a third dress
@@ -388,6 +390,8 @@ prefs.ts owns preference validation and the central applyPrefs() mechanism that 
 If a preference affects first paint, changing only the React store is insufficient. Update pre-paint and runtime application together. Test first load, refresh, preference changes and cross-tab updates.
 
 Dune uses the dark-mode foundation plus Dune-specific token overrides. Do not assume html.dune is independent of html.dark; inspect the actual root-class application before changing selectors.
+
+**The pistachio lab** (2026-11-17) is the fifth lab and the second daylight signature: cream page `#f7f3e6`, ink text `#35312b`, deep plum `#3a2337` on the footer/dark-band anchor, and roasted-pistachio rooms `#3b4423` carrying cream inks. It re-points the base tokens under `html.pistachio`, flips its rooms through the shared `.room` wardrobe exactly as classic does, and defines its own `--gal-room-a/b` pair under `html[data-iface="gallery"].pistachio` — the gallery's per-lab room grounds are mandatory, not inherited (a lab without them sends the reader's room ink flip onto daylight grounds; the visual pass caught exactly that). Every pair was measured with scripts/pistachio-palette.py (ink 11.6:1 on cream, room inks 10.3:1 on the orchard ground, milk 13.4:1 on plum, dress accent 6.7:1). The candy shelf, the band walk and the water washes pass through untouched; the suite carries five pistachio persistence checks.
 
 ### 9.2 CSS ownership rules
 
@@ -580,7 +584,7 @@ Preserve scientific geometry and relationships, chemical labels/symbols/charges,
 
 Do not replace an existing figure with generic stock art or a visually similar but scientifically different drawing. Do not change figure identifiers casually; content modules refer to them through the FigureKind union.
 
-A figure change requires visual inspection at realistic reading size, in all four themes and both interfaces where the figure appears. Check narrow screens for clipping and label collisions.
+A figure change requires visual inspection at realistic reading size, in all five themes and both interfaces where the figure appears. Check narrow screens for clipping and label collisions.
 
 MOTION GRAPHICS span the whole figure library (2026-11-17) through a shared CSS toolkit in globals.css: `.fig-live` (per-figure root — every dashed stroke inside becomes a slow current at a 1320 px dash-cycle LCM, so every dasharray in the library loops without a jump; opt in ONLY where every dashed stroke is a moving thing, `.fig-still` opts one element back out) plus element classes — `.fig-flow`/`.fig-flow-rev` (dashed current, adds its own dasharray), `.fig-draw` (path draw-on with `pathLength={1}`, resting state = the full curve), `.fig-bar`/`.fig-bars` (bars grow in with a stagger), `.fig-breathe`, `.fig-glow`, `.fig-drift`/`.fig-drift-up`, `.fig-jiggle`, `.fig-spring`, `.fig-sway`. Everything is transform/opacity/stroke-dashoffset only, and every class freezes to the figure's static truth under prefers-reduced-motion or the motion switch — `html[data-motion="off"]`, set by the boot script and kept in step by applyPrefs, gates them all in one place. Two flagship figures are bespoke components: `atom-3d` (`FigAtom3D` — pure-DOM CSS-3D atom, three tilted orbits, travelling electrons, ±11° sway, pointer drag to tilt, billboarded nucleon cluster) and `ion-form` (`FigIonForm` — the sodium→chlorine transfer on a 7 s loop whose RESTING state is the completed, labelled transfer). Motion follows meaning: dashed arrows and beams flow (ion flight paths, field lines, the electrochemical wire, condenser water, delocalised seas, curly electron-pair arrows via the shared `curlyPair` helper), reaction-profile and distribution curves draw themselves on, molecules jiggle (collision theory), the IR water molecule vibrates in all three modes, equilibrium rate curves draw toward balance, titration drops fall, spectra grow in bar by bar. Figures whose dashes are grids, separators, lattices or reference lines stay still — as do pure label arrows (`t3Arrow`'s unflagged call sites). The toolkit grew with the second pass (2026-11-17, later): `.fig-drift-x` (horizontal gas drift), `.fig-appear` (an arrowhead fades in a beat after its line draws), `.fig-bar-l` (horizontal bars grow from the left), and `t3Arrow` gained an optional trailing `draw` flag that turns one arrow into a draw-on with a fading head — the five Hess cycles and the halogenoalkane reaction map pass it on every route arrow, energy levels draw their rungs, Group 2 solubility bars grow, flame-test flames flicker and the sulfate-ladder descenders flow. Six figures were BORN moving for the docs that had none: `gas-syringe` and `meniscus-band` (wch13-p01), `limewater-test` and `ionic-ppt` (wch13-p05), `mole-piles` and `atom-balance` (topic 1's mole sections) — so every figure-bearing document now carries motion, and the sweep script counts live animations per doc to prove it. One deliberate exception: a precipitate is objectively white in every lab, so the limewater figure's milk is a literal `#FFFFFF` overlay rather than a lab-adaptive token. HalogenColours stays still on purpose — its swatches ARE data colours. No figure may introduce a canvas: the one-ambient-canvas rule of §17 stands.
 
@@ -665,7 +669,7 @@ Then manually verify affected flows. A successful build does not prove that the 
 
 For visual changes, test:
 
-- all four themes: Light, Night/Dark, Dune and Classic;
+- all five themes: Light, Night/Dark, Dune, Classic and Pistachio;
 - both interfaces: Rooms and Editorial;
 - affected content types: paragraph, heading, table, worked example, callout, steps and figure as applicable;
 - phone/tablet/desktop breakpoints;
