@@ -1624,3 +1624,8 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Verified live by computed style** (not screenshots alone): body font-family nunito + weight 450; pistachio cream `#e9eddb`, soft `#615a4b`, roomA whisper mix. Build clean, theme suite + routing suite all green. Visual pass: flat gallery (the user's own 1.3 view — one ground, no whitish step), flat editorial, dune and night readers brighter, 390 px phone fine. Preview set rebuilt in download/pistachio-preview/ (7 shots, luminance-checked).
 - **Commit:** this commit. Push still blocked pending a fresh token.
 - **Remaining limitations:** the user's unload-flush makes localStorage seeding racy for tests — theme switching via the chip UI is the reliable path; the editorial hero keeps its fixed daylight glows (decorative); the water interface dresses from its own wash palette as before.
+
+## 2026-11-18 (45) — the backlog pushed: main is live on origin again
+
+- **Push:** 17 commits reached `Cryptic-Corsair/revision-club` as a clean fast-forward `fb4a117..fc54617` (the motion-graphics pair, the portal sea, the pistachio lab series v1–v3, and this log). Remote-only commits: 0 before the push — no force used. All the earlier "push still blocked" notes above are resolved as of this entry.
+- **Credential hygiene:** the fresh PAT rode a one-shot env-injected credential helper for fetch/push; grep confirms nothing persisted (no token in .git/config, no ~/.git-credentials, no ~/.netrc, helper unset, remote URL plain). The token was shared in chat and should be rotated once no longer needed.
