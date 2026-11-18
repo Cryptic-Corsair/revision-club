@@ -1640,3 +1640,11 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Operational notes:** the palette scripts were lost in a sandbox recycle and were rebuilt (pistachio-palette.py now carries the v4 suite); localStorage seeding from about:blank does nothing (origin isolation) and the unload-flush races seeds — theme/interface switching via the panel's aria-labels is the reliable path.
 - **Commit:** this commit, NOT pushed (awaiting the user's word).
 - **Remaining limitations:** the editorial hero keeps its fixed daylight glows (decorative on the green); the water interface dresses from its own wash palette; candy shelf untinted by design.
+
+## 2026-11-18 (47) — the dead preview: production server + a one-command recovery
+
+- **User report:** "I can't preview." Survey showed the code intact (6c2765f, tree clean, v4 CSS verified inside the built chunk `c04e052fa415f747.css`) — only the server had died with the sandbox recycle between turns. Nothing else was broken.
+- **Fix:** started the production standalone server (`bun run start`) instead of dev — snappier and stabler for previewing. Verified end to end: /club, a reader and a deep clause path all 200; Caddy's :81 proxy 200; browser smoke test confirms `html.pistachio` + `--color-cream #a9b665` painting, edge pixel sampled `#a9b665` byte-exact.
+- **Hardening:** `scripts/serve-preview.sh` (gitignored by convention, like the rest of scripts/) restores the preview after any recycle: frees :3000, rebuilds only when src is newer than BUILD_ID, starts the standalone server detached, health-checks home + deep reader before reporting. Tested end to end — it killed the previous server, passed its own gates and left a live one behind. DEVELOPMENT.md §10 documents it.
+- **Commit:** this commit (DEVELOPMENT.md + WORK-LOG.md only). Not pushed.
+- **Remaining limitation:** if the browser still shows "Recycled" with both local layers 200, the stale entry is at the platform edge — needs a platform-side session restart, which only the user can trigger.

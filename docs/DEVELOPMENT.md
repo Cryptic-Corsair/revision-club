@@ -435,6 +435,12 @@ browser → platform edge (*.space-z.ai) → Caddy :81 → Next dev :3000
   routing entry is stale — a **session restart** on the platform side
   refreshes it. The code is not at fault; verify `curl localhost:3000`
   returns 200 first.
+- Servers die with every sandbox recycle. `bash scripts/serve-preview.sh`
+  (gitignored, local) brings the preview back in one command: it frees :3000,
+  rebuilds only when `src/` is newer than `.next/BUILD_ID`, starts the
+  production standalone server detached (`server.log`), and health-checks
+  `/club` + a deep reader path before reporting live. `bun run dev` remains
+  the interactive alternative.
   platform pipeline runs `bun install` → `bun run db:push` (now a safe no-op —
   it previously aborted the boot when the script didn't exist) → then the dev
   server can be started (`bun run dev`).
