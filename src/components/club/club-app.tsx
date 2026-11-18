@@ -35,7 +35,6 @@ import { useDesk, markUnit, markTopic, markLandingSeen, markDeskEntered } from "
 import {
   applyPrefs,
   GALLERY_DOCS,
-  WATER_DOCS,
   LAB_DESCRIPTION,
   LAB_LABEL,
   labOrderFor,
@@ -44,7 +43,6 @@ import {
   setPrefs,
   THEME_CHIP,
   usePrefs,
-  waterServes,
   type Iface,
   type Lab,
 } from "@/lib/spectra/prefs";
@@ -84,15 +82,6 @@ const NotesEditorial = dynamic(
    the gallery falls back to the editorial reader. */
 const NotesGallery = dynamic(
   () => import("./notes-gallery").then((m) => m.NotesGallery),
-  { ssr: false, loading: RoomLoading },
-);
-/* the notes reader's water twin — same props, the third interface:
-   every spec section floating straight on the living caustic water,
-   the dress carrying its own wash colour system. Served only on its
-   rollout ledger (WATER_DOCS in prefs.ts) while the visitor wears
-   the water interface — Topic 1 is the pilot. */
-const NotesWater = dynamic(
-  () => import("./notes-water").then((m) => m.NotesWater),
   { ssr: false, loading: RoomLoading },
 );
 /* the progress room — the original sticker book, back on the surface
@@ -401,7 +390,6 @@ const WARM_CHUNKS = {
   packEditorial: () => import("./pack-editorial"),
   stickerBook: () => import("./sticker-book"),
   notesGallery: () => import("./notes-gallery"),
-  notesWater: () => import("./notes-water"),
   search: () => import("./search"),
   customize: () => import("./customize"),
   legal: () => import("./legal"),
@@ -422,9 +410,6 @@ const WARM_BY_IFACE: Record<Iface, (keyof typeof WARM_CHUNKS)[]> = {
   /* the gallery is a one-note dress today: its own reader, plus the
      editorial pages it falls back to everywhere else */
   gallery: ["notesGallery", ...EDITORIAL_PAGES],
-  /* the water dress is a pilot on one doc: its own reader, plus the
-     gallery pages it falls back to everywhere else */
-  water: ["notesWater", "notesGallery", ...EDITORIAL_PAGES],
 };
 const WARM_SHARED: (keyof typeof WARM_CHUNKS)[] = ["search", "customize", "legal"];
 
@@ -1213,12 +1198,6 @@ export default function ClubApp() {
 
   const prefs = usePrefs();
 
-  /* the water interface's offer at shell level — the customize
-     panel's interface cards need it (the panel never sees the
-     current view); the same formula the reader pick below runs */
-  const waterServing =
-    view.kind === "notes" && waterServes(view.docId);
-
   /* ————— warm the lazy rooms —————
      Once the first paint has settled, fetch the deferred chunks in
      the background so the first tap into notes / packs / search
@@ -1519,7 +1498,7 @@ export default function ClubApp() {
             />
           )}
           {(customizeOpen || customizeMounted) && (
-            <CustomizePanel open={customizeOpen} onClose={closeCustomize} onHome={goHome} onOpenSpec={openSpec} onOpenPack={openPack} onOpenProgress={openSticker} onOpenLegal={openLegal} fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} waterAvailable={waterServing} />
+            <CustomizePanel open={customizeOpen} onClose={closeCustomize} onHome={goHome} onOpenSpec={openSpec} onOpenPack={openPack} onOpenProgress={openSticker} onOpenLegal={openLegal} fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
           )}
   
           <main className="relative flex-1">
@@ -1594,19 +1573,12 @@ export default function ClubApp() {
                      contract, so the shell changes nothing but the
                      component picked. The gallery's rollout is
                      complete: every note in GALLERY_DOCS (the whole
-                     library) stands on the white-wall dress. The
-                     water dress is the third reader, served on its
-                     own ledger while the visitor wears it — Topic 1
-                     is the pilot. Everywhere else a saved water
-                     behaves exactly like its heir, the gallery: a
-                     gallery-cut doc reads on the white wall, anything
+                     library) stands on the white-wall dress; anything
                      not yet cut for it falls to the editorial floor. */
                   const Reader =
-                    prefs.iface === "water" && WATER_DOCS.has(view.docId)
-                      ? NotesWater
-                      : prefs.iface === "editorial" || !GALLERY_DOCS.has(view.docId)
-                        ? NotesEditorial
-                        : NotesGallery;
+                    prefs.iface === "editorial" || !GALLERY_DOCS.has(view.docId)
+                      ? NotesEditorial
+                      : NotesGallery;
                   return (
                     <Reader
                       key={view.docId}

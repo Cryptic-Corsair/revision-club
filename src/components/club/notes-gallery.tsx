@@ -19,6 +19,7 @@ import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
 import { Fmt, plural } from "./format";
 import { PopIn, Reveal, Mascot } from "./bits";
 import { BandWave, WAVES } from "./bands";
+import { useFarPause } from "./use-far-pause";
 import { useSpecMapRegister } from "./spec-map";
 import {
   GalleryLabel,
@@ -251,6 +252,7 @@ export function NotesGallery({
   jumpToSpec?: string;
 }) {
   const doc = getNotes(docId);
+  useFarPause(".notes-flow");
   if (!doc) {
     /* the shell only opens notes it knows from notes-meta.ts, so
        this is a belt-and-braces room — still, never a white screen */
@@ -632,6 +634,7 @@ function NotesGalleryBody({
                 className={`relative left-1/2 w-[100vw] -translate-x-1/2${
                   i % 2 === 0 ? " room" : ""
                 }`}
+                data-tone={i % 2 === 0 ? "deep" : "light"}
                 style={{ background: galRoom(i) }}
               >
                 <div className="mx-auto max-w-[calc(var(--gal-measure)_+_calc(var(--spacing)_*_16))] px-5 py-16 sm:px-8 sm:py-20">

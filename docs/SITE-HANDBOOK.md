@@ -347,39 +347,18 @@ There are five settled global themes (called labs internally):
   cream page, ink text and pistachio/plum accents join the walk
 
 The interfaces dress the reader pages on top of the labs — Cards
-(`gallery`, the front door), Document (`editorial`) — and a third dress
-**in rollout**: the **water interface** (2026-11-17). The note reads ON
-the living caustic water: one field (`club/water-backdrop.tsx`, the
-shared `WaterCanvas`, portaled to `<body>` at z-index −1) and every
-spec section floating straight on it (`club/notes-water.tsx`, the third
-reader twin) — the rooms have NO ground at all, so the water shader
-shows at full strength for EVERY section; the wave seams went with the
-glass, and the only surfaces that hold still are the content sheets
-(the wash's `sheet` tier riding `--color-paper`: each wash's water
-body lifted a step above itself — classic's card recipe) and the
-token-driven diagrams. The dress carries its own colour system, the
-**wash** (`lib/spectra/washes.ts`, `prefs.wash`, factory `"lagoon"` —
-the reference's own global-backdrop palette; the panel's Water colour
-section swaps it live: lagoon / tide / reef / glacier / abyss): every
-wash runs the reference's DEEP-water palette family (deep body in the
-wash's hue, a champagne-family moonlight drift baked into the art at
-the reference's stop opacities, milk ink, lifted sheet), the reader
-re-points its ink ladder, sheet and accent from the wash, and the
-chrome around the reader stays lab-dressed. The field is the
-reference's mount verbatim — its `scale` 1.38 zoom and Y flip
-included.
-Piloted on **Topic 1 only** (`wch11-t01`, the `WATER_DOCS` ledger in
-prefs.ts, walked one document at a time exactly like `GALLERY_DOCS`):
-the panel offers the Water card only while a ledgered doc is on stage,
-and everywhere else a saved water displays as its heir the gallery
-(`applyPrefs` paints `data-iface="gallery"`; the shell routes
-off-ledger docs like the gallery does) while the save keeps Water. The
-field runs the §17 contract (portal behind every surface,
-reduced-motion = one static frame, the reference's own device-pixel
-budgets and 30 fps accumulator — no sleep gate: the transparent rooms
-keep it on stage for every section). Widening the ledger widens the
-interface. (An earlier water-as-fifth-LAB pilot was superseded by this
-dress the same day.)
+(`gallery`, the front door) and Document (`editorial`). A third dress,
+the **water interface** (2026-11-17 — glass rooms floating on the
+living caustic water, piloted on Topic 1), was **removed outright on
+2026-11-18** at the user's word: its reader (`club/notes-water.tsx`),
+its backdrop mount (`club/water-backdrop.tsx`), the wash palettes
+(`lib/spectra/washes.ts`) and the panel's Water card + Water colour
+section are gone; `prefs.iface` dropped the `"water"` member and
+sanitize() maps any saved water to its heir the gallery (the save is
+never rewritten, the dress is simply gone). The shared WebGL caustic
+field itself lives on — `src/components/shared/water.frag.ts` +
+`WaterCanvas` still dress the portal hero and all of /twilight, which
+never were the notes dress.
 
 The theme is global. Rooms and Editorial do **not** have independent theme selectors or separate theme persistence. Each interface interprets the active global theme through its own presentation system.
 
@@ -391,7 +370,7 @@ If a preference affects first paint, changing only the React store is insufficie
 
 Dune uses the dark-mode foundation plus Dune-specific token overrides. Do not assume html.dune is independent of html.dark; inspect the actual root-class application before changing selectors.
 
-**The pistachio lab** (2026-11-17; re-cut twice on 2026-11-18 — flat, then saturated) is the fifth lab and the second daylight signature. The site chrome stays on the pale pistachio page `#e9eddb` with daylight ink, and the two readers carry the greens themselves: the cards interface walks REAL pistachio `#a9b665` (the chip green) against light pistachio (kernel 40% into milk ≈ `#d6deb4`), and the document interface fills its ENTIRE background with the real pistachio via `html[data-iface="editorial"].pistachio` (the same attribute handshake dune uses), sheets lifting to the light tone. Both readers speak a dark-olive text ladder — ink `#262c10` / soft `#3a4115` / faint `#515925` — with the plum anchor `#3a2337` as the one accent (chips carry cream ink `#fffdf7`). Figure plates inside pistachio rooms lift to the light pistachio so nothing reads whitish. Per-lab gallery room grounds are still mandatory (a lab without them sends the room ink flip onto daylight grounds; the visual pass caught exactly that). Every pair is measured with scripts/pistachio-palette.py — oklab mixes replicated in the script, 16/16 pass (ink-olive 6.6:1 on the deep ground and 10.3:1 on the light one, soft 4.9:1, plum 6.5:1 / 10.1:1, milk 13.2:1 on plum). The candy shelf, the band walk and the water washes pass through untouched; the suite carries five pistachio persistence checks.
+**The pistachio lab** (2026-11-17; re-cut three times on 2026-11-18 — flat, saturated, then husk) is the fifth lab and the second daylight signature, built around LIGHT fonts. The bright kernel `#a9b665` cannot carry light text (milk reads 2:1 on it), so the grounds speak the pistachio's own deep tone — the husk `#4e5a28`, the lab's anchor since day one — and the fonts go light: milk `#f6f8e8` body (6.9:1), cream tiers dimmed toward the ground, lemon `#ffd43b` numerals and rust (5.2:1), plum chips with cream ink. The cards interface walks the husk (`--gal-room-a`, light ladder via `.room[data-tone="deep"]`, the tone hook set in notes-gallery.tsx) against light pistachio `#d6deb4` (olive ladder via `[data-tone="light"]`); figure plates stay light-ground with dark olive ink inside so the diagrams never invert (the `.bg-paper` flip inside deep rooms). The document interface fills its entire background with the husk through `html[data-iface="editorial"].pistachio body:has(.legal-room)` — scoped to the reader's pages so the homepage and shared chrome keep their own dress (the v4 kernel-ground version leaked site-wide; the visual pass caught it) — with sheets stepping a hair deeper (ink 18% into the husk) and the lemon selection/marker keeping their dark pen. The kernel `#a9b665` rides on as chips, hairlines and the light walk. Per-lab gallery room grounds remain mandatory. Every pair is measured with scripts/pistachio-palette.py — oklab mixes replicated in the script, 25/25 pass. The candy shelf and the band walk pass through untouched; the suite carries five pistachio persistence checks.
 
 **The readability pass** (2026-11-18, same day) lifts the dark-theme text tiers a step: night inks `#faf7fc/#d6cbdd/#bcafc3`, dune `#fcf8ee/#d9d0c1/#b9ae9e` (base, .rooms and .note-rooms ladders, hairlines following), the classic espresso rooms' flip inheriting the brighter `:root` milk `#fffaf1` (≈15.5:1 on `#2c2013`). These rides apply on top of every dark ground; when adding a new dark lab or room ground, re-measure with a palette script and keep body ≥15:1, soft ≥9:1, faint ≥6:1.
 

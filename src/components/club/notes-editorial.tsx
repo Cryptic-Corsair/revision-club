@@ -19,6 +19,7 @@ import { scrollToSpec, useSpecSpy } from "@/lib/spectra/scroll-helpers";
 import { Fmt, plural } from "./format";
 import { PopIn, Reveal, SoftButton, Mascot, readableInk, shade } from "./bits";
 import { accentOf } from "./bands";
+import { useFarPause } from "./use-far-pause";
 import { useSpecMapRegister } from "./spec-map";
 import { EditorialSectionView, figOffsetsOf } from "./spec-section-editorial";
 import { EditorialLabel, SampleBlockView } from "./sample-blocks";
@@ -119,6 +120,7 @@ export function NotesEditorial({
   jumpToSpec?: string;
 }) {
   const doc = getNotes(docId);
+  useFarPause(".edoc");
   if (!doc) {
     /* the shell only opens notes it knows from notes-meta.ts, so
        this is a belt-and-braces room — still, never a white screen */
