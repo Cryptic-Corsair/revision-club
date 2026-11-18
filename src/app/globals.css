@@ -639,18 +639,20 @@ html.dune .rooms {
   --rooms-hairline-soft: rgb(252 248 238 / 0.09);
 }
 /* ————— the pistachio lab —————
-   The fifth lab: an orchard daylight room, FLAT like dune — one
-   pistachio ground family carries the entire webpage, no room walk
-   and no painted clauses. The page is pistachio, the cards and
-   sheets sit a half-step above it, and the reader rooms whisper
-   (kernel mixed 10% and 20% into the page — the same barely-there
-   rhythm dune runs at 13%/25%), with daylight ink everywhere and
-   plum anchoring the footer, the dark bands and the lamp bloom.
-   Contrast measured with scripts/pistachio-palette.py: ink 10.8:1
-   on the page and 11.7:1 on cards, 10.3:1 on the room whispers,
-   milk 13.2:1 on the plum footer. The candy shelf is NOT re-tinted
-   — every brand value passes on the pistachio grounds. No mood
-   rotation — this pair is the theme's signature and never changes. */
+   The fifth lab: an orchard daylight room. The site chrome stays on
+   the pale pistachio page (#e9eddb, daylight ink), and the two
+   readers carry the greens themselves: the cards interface walks
+   REAL pistachio (#a9b665, the chip green) against light pistachio
+   (kernel 40% into milk), and the document interface fills its
+   entire background with the real pistachio — sheets lifting to the
+   light tone. Both readers speak a dark-olive text ladder that
+   measures on the green (6.6:1 body on the deep ground), with the
+   plum anchor as the one accent. Contrast in
+   scripts/pistachio-palette.py: ink-olive 6.6:1 on pistachio and
+   10.3:1 on the light tone, plum 6.5:1 / 10.1:1, milk 13.2:1 on the
+   plum footer. The candy shelf is NOT re-tinted — every brand value
+   passes on the pistachio grounds. No mood rotation — this pair is
+   the theme's signature and never changes. */
 html.pistachio {
   --color-cream: #e9eddb; /* pistachio page */
   --color-paper: #f2f5e3; /* pistachio cards, sheets, bubbles */
@@ -667,9 +669,9 @@ html.pistachio {
   color-scheme: light;
 }
 html.pistachio .rooms {
-  --color-ink: #38322e;
-  --color-ink-soft: #6f6360;
-  --color-ink-faint: #8e8280;
+  --color-ink: #262c10; /* dark olive — 6.6:1 on the pistachio rooms */
+  --color-ink-soft: #3a4115; /* 4.9:1 */
+  --color-ink-faint: #515925; /* 3.4:1 */
   --rooms-hairline: color-mix(in oklab, var(--color-ink) 16%, transparent);
   --rooms-hairline-soft: color-mix(in oklab, var(--color-ink) 8%, transparent);
 }
@@ -1453,15 +1455,14 @@ html[data-iface="gallery"].classic {
   --gal-room-b: #fdf6e3;
 }
 html[data-iface="gallery"].pistachio {
-  --iface-accent: #4e5a28;
+  --iface-accent: #3a2337; /* the plum anchor speaks the accent */
   --iface-accent-ink: #fffdf7;
-  /* the orchard whispers — kernel mixed 10% and 20% into the
-     pistachio page, the same barely-there step dune runs at 13%/25%:
-     one recognizable ground down the whole reader, no whitish and no
-     deep step. Ink 10.6:1 / 11.2:1 on the pair
-     (scripts/pistachio-palette.py) */
-  --gal-room-a: color-mix(in oklab, #a9b665 10%, var(--color-cream));
-  --gal-room-b: color-mix(in oklab, #a9b665 20%, var(--color-cream));
+  /* the orchard's two tones, spoken plainly — REAL pistachio
+     alternating light pistachio, no cream, no whisper. Ink-olive
+     6.6:1 on the deep tone and 10.3:1 on the light one, plum 6.5:1 /
+     10.1:1 (scripts/pistachio-palette.py) */
+  --gal-room-a: #a9b665;
+  --gal-room-b: color-mix(in oklab, #a9b665 40%, #f6f8e8);
 }
 /* inside a classic espresso room the dress's one accent is re-
    pointed to a caramel that reads on cocoa — numerals, labels,
@@ -1471,13 +1472,21 @@ html[data-iface="gallery"].classic .room {
   --iface-accent: color-mix(in oklab, #e6b77e 72%, var(--color-milk));
   --iface-accent-ink: #2c2013;
 }
-/* the orchard's one accent, re-pointed to a pistachio-kernel cream
-   that reads on the green rooms — numerals, labels, rules and the
-   pack tick follow the token in one hop — and the on-accent ink
-   flips back to the room ground */
+/* inside the pistachio rooms the text ladder re-points to the dark
+   olive that reads on the green, the figure plates lift to the light
+   pistachio so nothing reads whitish, and the one accent is the plum
+   anchor — numerals, labels, rules and the pack tick follow in one
+   hop, with cream ink on the plum chips */
 html[data-iface="gallery"].pistachio .room {
-  --iface-accent: color-mix(in oklab, #d9d383 72%, var(--color-milk));
-  --iface-accent-ink: #2b3117;
+  --iface-accent: #3a2337;
+  --iface-accent-ink: #fffdf7;
+  --color-ink: #262c10;
+  --color-ink-soft: #3a4115;
+  --color-ink-faint: #515925;
+  --color-paper: color-mix(in oklab, #a9b665 40%, #f6f8e8);
+  --tint-base: color-mix(in oklab, #a9b665 30%, var(--color-paper));
+  --shade-ink: #a9b665;
+  --edge: rgb(38 44 16 / 0.16);
 }
 html[data-iface="gallery"] ::selection {
   background: color-mix(in oklab, var(--iface-accent) 30%, transparent);
@@ -2066,15 +2075,26 @@ html.classic .legal-clause.is-band-espresso mark {
   }
 }
 
-/* ————— pistachio on editorial · the flat orchard —————
-   The document room wears the orchard the way dune, night and light
-   do: the ground tokens flow through and the clause stream stays
-   flat on pistachio paper — no painted parity, no hybrid dressing.
-   Only the one accent re-points: the husk-bronze that carries the
-   document room's labels, numerals and rules, the same move dune
-   makes with its caramel (6.7:1 on the pistachio paper). */
+/* ————— pistachio on editorial · the orchard fills the page —————
+   The document interface wears the REAL pistachio as its entire
+   background — the page ground itself, not a pale wash — with the
+   sheets lifting to the light pistachio and the text ladder
+   re-pointed to the dark olive that reads on the green (6.6:1 body,
+   4.9:1 soft). The one accent is the plum anchor (6.5:1 on the
+   ground, 10.1:1 on the sheets), the same ink the footer speaks. */
+html[data-iface="editorial"].pistachio {
+  --color-cream: #a9b665; /* the orchard fills the page */
+  --color-paper: color-mix(in oklab, #a9b665 40%, #f6f8e8);
+  --tint-base: color-mix(in oklab, #a9b665 30%, var(--color-paper));
+  --color-ink: #262c10;
+  --color-ink-soft: #3a4115;
+  --color-ink-faint: #515925;
+  --shade-ink: #a9b665;
+  --edge: rgb(38 44 16 / 0.16);
+  --iface-rust: #3a2337;
+}
 html.pistachio .legal-room {
-  --legal-rust: #4e5a28;
+  --legal-rust: #3a2337;
 }
 
 /* in the document room the highlighter becomes a pencil: a flat,
@@ -3135,11 +3155,11 @@ html.classic .note-rooms .room {
   --rooms-hairline-soft: rgb(247 242 231 / 0.10);
 }
 
-/* the pistachio bands whisper on the orchard ground like dune's —
-   the rooms ladder above already speaks daylight ink on them */
+/* the pistachio bands speak the same two tones as the cards walk —
+   the rooms ladder above already speaks the olive ink on them */
 html.pistachio .note-rooms {
-  --note-band-a: color-mix(in oklab, #a9b665 10%, var(--color-cream));
-  --note-band-b: color-mix(in oklab, #a9b665 20%, var(--color-cream));
+  --note-band-a: #a9b665;
+  --note-band-b: color-mix(in oklab, #a9b665 40%, #f6f8e8);
 }
 
 /* the pack prints as a worksheet: daylight ink no matter which lab
