@@ -61,8 +61,8 @@ const HEAD_FONTS: { id: HeadFont; label: string; stack: string }[] = [
 ];
 
 const BODY_FONTS: { id: BodyFont; label: string; stack: string }[] = [
-  { id: "quicksand", label: "Quicksand", stack: "var(--font-quicksand), 'Trebuchet MS', sans-serif" },
   { id: "nunito", label: "Nunito", stack: "var(--font-nunito), 'Trebuchet MS', sans-serif" },
+  { id: "quicksand", label: "Quicksand", stack: "var(--font-quicksand), 'Trebuchet MS', sans-serif" },
   { id: "figtree", label: "Figtree", stack: "var(--font-figtree), 'Trebuchet MS', sans-serif" },
 ];
 

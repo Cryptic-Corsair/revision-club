@@ -14,15 +14,15 @@ import "./globals.css";
 
 /* ————— preload strategy —————
    next/font preloads every family by default, which used to put all
-   192 KB of woff2 on the critical path — including the three swap
+   192 KB of woff2 on the critical path — including the swap
    families the factory theme never renders (Baloo 2, Patrick Hand
-   and Nunito are only downloaded once the customize panel re-points
-   --font-display / --font-body) and the mono trio, whose first use
-   sits in lazily-loaded rooms (spec map, worked plates). The first
-   paint now belongs to the portal's house voices — Fraunces (display)
-   + Figtree (body) — which keep their preload head start; Fredoka and
-   Quicksand are the workspace reader's pair and load on first use,
-   alongside the rest of the swap shelf. */
+   and Quicksand are only downloaded once the customize panel
+   re-points --font-display / --font-body) and the mono trio, whose
+   first use sits in lazily-loaded rooms (spec map, worked plates).
+   The first paint belongs to the portal's house voices — Fraunces
+   (display) + Figtree (body) — plus the workspace's factory pair,
+   Fredoka (display) + Nunito (body, the default since the
+   readability pass); the rest of the swap shelf loads on first use. */
 const fraunces = localFont({
   variable: "--font-fraunces",
   src: "./fonts/fraunces-var.woff2",
@@ -62,12 +62,13 @@ const patrick = localFont({
 });
 
 /* no 900 — the heaviest class anywhere is font-extrabold (800) */
+/* Nunito is the factory body face — it rides the critical path
+   with the house voices; Quicksand retired to the swap shelf. */
 const nunito = localFont({
   variable: "--font-nunito",
   src: "./fonts/nunito-var.woff2",
   weight: "400 800",
   display: "swap",
-  preload: false,
 });
 
 const quicksand = localFont({

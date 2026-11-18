@@ -351,7 +351,7 @@ export const DEFAULT_PREFS: Prefs = {
   specHeight: 0.8,
   specDensity: "roomy",
   headFont: "fredoka",
-  bodyFont: "quicksand",
+  bodyFont: "nunito",
   dots: true,
   motion: true,
 };
