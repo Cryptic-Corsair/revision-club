@@ -1668,3 +1668,11 @@ The journal is chronological and append-only. A journal entry describes complete
 - **Sandbox recycle losses recovered:** scripts/pistachio-palette.py, scripts/pistachio-v6-editorial.py and scripts/serve-preview.sh (from worklog 47's description) are recreated AND committed this time — uncommitted scripts die with the recycle.
 - **Preview set rebuilt** in download/pistachio-preview/ (5 shots, ground-sampled): 1 document handout sheets, 2 cards husk room, 3 cards light room, 4 home pale, 5 phone document.
 - **Commit:** this commit. Not pushed.
+
+## 2026-11-19 (50) — preview restored after the second recycle: the dev-server substitution caught
+
+- **User report:** "I can't preview." Survey: HEAD 556555a (v6 committed), tree clean, and port :3000 was answering 200 — but the process behind it was the platform pipeline's auto-started `next dev`, not the hardened production standalone server of worklog 47. The recycle had killed the standalone server and the platform's cold-start path substituted the dev server.
+- **Checks first:** /, /club, deep reader all 200 in under 0.1s; Caddy :81 proxy 200 for /club and the deep reader; a `/customize` 404 was my own wrong path guess — no such route exists (customization is the in-club panel). All real routes healthy.
+- **Fix:** `bash scripts/serve-preview.sh` — freed :3000, rebuilt (source mtimes fresher than BUILD_ID after the recycle), started the production standalone server detached, its health gates passed (home + deep reader). The v6 handout tokens verified inside the built chunk (11bc6269351157b1.css carries the #fbfcf3 sheets) and live by computed style: page cream #a9b665, clause bg the pale band, clause ink rgb(38,44,16).
+- **Conclusion:** the sandbox-internal chain is fully green. If the user's browser still shows "Recycled"/blank, the remaining suspect is the stale platform edge routing entry (DEVELOPMENT.md §10) — a platform-side session restart refreshes it; the code and server are not at fault.
+- **Commit:** this commit (worklog only). Not pushed.
