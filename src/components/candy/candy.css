@@ -1,0 +1,1734 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   the candy lab (/candy) — IAL CHEM's alternate homepage, the fun one.
+
+   Deliberately NOT the actual homepage's look: where the daylight portal
+   is a dark sea-slate cinematic descent, this door is a bright candy
+   workshop — warm cream grounds, chunky Fredoka headlines with Nunito
+   body (the workspace's own playful voices, already on <html>), sticker
+   cards with tilted corners, and the six units in their registry candy
+   colours worn loud. Bubbles the beaker mascot headlines the page.
+
+   Motion discipline (handbook §17, the twilight/lumen contract): canvas
+   machines run on the shared gated runner (IntersectionObserver + 30 fps
+   accumulator + 1.5 DPR cap + one static frame for reduced motion); the
+   only CSS loops are compositor transform/opacity keyframes carrying
+   .cd-loop — paused by default, running only while their section is on
+   screen (.cd-live), frozen outright under prefers-reduced-motion or the
+   club's motion-off switch. Every entrance settles.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.candy-root {
+  /* the playful trio, re-pointed through the root layout's variables */
+  --font-display: var(--font-fredoka), "Comic Sans MS", system-ui, sans-serif;
+  --font-body: var(--font-nunito), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* the candy palette */
+  --cd-cream: #FFF8EE;        /* page ground — warm cream */
+  --cd-cream2: #FFFCF5;       /* raised ground */
+  --cd-card: #FFFDF9;         /* card ground */
+  --cd-ink: #3D2B1F;          /* the club's warm dark ink */
+  --cd-soft: rgba(61, 43, 31, 0.66);
+  --cd-faint: rgba(61, 43, 31, 0.47);
+  --cd-line: rgba(61, 43, 31, 0.15);
+  --cd-coral: #FF6B6B;
+  --cd-orange: #FF922B;
+  --cd-green: #12B886;
+  --cd-violet: #9775FA;
+  --cd-pink: #F06595;
+  --cd-amber: #F59F00;
+  --cd-sky: #5BB4E8;
+  --cd-butter: #FFC64B;
+  --cd-rose-soft: #FFE3E3;
+  --cd-butter-soft: #FFF1D0;
+  --cd-mint-soft: #D8F1E5;
+  --cd-sky-soft: #DCF0FB;
+  --cd-lilac-soft: #ECE4FD;
+  --cd-pink-soft: #FFE1EC;
+  --cd-shadow: rgba(61, 43, 31, 0.14);
+  --cd-spring: cubic-bezier(0.2, 1.4, 0.4, 1);
+
+  /* the flask mark's tokens (FlaskMark reads these) */
+  --flask-ink: #3D2B1F;
+  --flask-glass: rgba(255, 255, 255, 0.5);
+  --flask-liquid: #FF6B6B;
+
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: clip;
+  background-color: var(--cd-cream);
+  color: var(--cd-ink);
+  font-family: var(--font-body);
+  font-weight: 450;
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.candy-root ::selection {
+  background-color: var(--cd-butter);
+  color: var(--cd-ink);
+}
+
+.candy-root :focus-visible {
+  outline: 3px solid var(--cd-coral);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+.candy-root h1,
+.candy-root h2,
+.candy-root h3,
+.candy-root h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.candy-root a { color: inherit; text-decoration: none; }
+.candy-root ul { list-style: none; margin: 0; padding: 0; }
+.candy-root svg, .candy-root canvas { display: block; max-width: 100%; }
+
+.candy-root sub, .candy-root sup { font-size: 0.66em; }
+
+.cd-wrap {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 48px);
+}
+
+/* ————— shared voices ————— */
+
+.cd-mono {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-feature-settings: "zero" 1;
+}
+
+.cd-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--cd-card);
+  border: 2px solid var(--cd-line);
+  border-radius: 999px;
+  padding: 7px 17px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 13.5px;
+  letter-spacing: 0.05em;
+  color: var(--cd-soft);
+  box-shadow: 0 3px 0 rgba(61, 43, 31, 0.06);
+}
+
+.cd-eyebrow .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cd-coral);
+  flex: none;
+}
+
+.cd-sec { padding: clamp(74px, 9vw, 116px) 0; position: relative; }
+
+.cd-head { margin-bottom: clamp(36px, 5vw, 56px); max-width: 700px; }
+
+.cd-head h2 {
+  font-size: clamp(34px, 4.6vw, 52px);
+  margin: 18px 0 14px;
+}
+
+.cd-head .cd-lead {
+  font-size: clamp(16px, 1.6vw, 17.5px);
+  line-height: 1.7;
+  color: var(--cd-soft);
+  max-width: 58ch;
+}
+
+/* ————— buttons: chunky, tactile, pressable ————— */
+
+.cd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16.5px;
+  color: #4a2410;
+  background: linear-gradient(180deg, #FFD98A 0%, #FFC64B 100%);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 999px;
+  padding: 13px 26px;
+  cursor: pointer;
+  box-shadow: 0 5px 0 var(--cd-ink);
+  transition: transform 0.16s var(--cd-spring), box-shadow 0.16s var(--cd-spring);
+  position: relative;
+  top: 0;
+}
+
+.cd-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--cd-ink); }
+
+.cd-btn:active { top: 4px; box-shadow: 0 1px 0 var(--cd-ink); }
+
+.cd-btn-coral {
+  background: linear-gradient(180deg, #FF8F8F 0%, #FF6B6B 100%);
+  color: #ffffff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.14);
+}
+
+.cd-btn-ghost {
+  background: var(--cd-card);
+  color: var(--cd-ink);
+  text-shadow: none;
+}
+
+.cd-btn-ghost:hover { background: var(--cd-cream2); }
+
+/* ————— the loop gate (§17) ————— */
+
+.candy-root .cd-loop { animation-play-state: paused; }
+.candy-root .cd-live .cd-loop { animation-play-state: running; }
+
+/* ═════════════════ nav ═════════════════ */
+
+.cd-nav {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: min(94%, 1120px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 250, 240, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 2px solid var(--cd-line);
+  border-radius: 999px;
+  padding: 9px 12px 9px 18px;
+  box-shadow: 0 6px 0 rgba(61, 43, 31, 0.07);
+  transition: box-shadow 0.3s;
+}
+
+.cd-nav.scrolled { box-shadow: 0 10px 0 rgba(61, 43, 31, 0.09), 0 22px 40px -22px var(--cd-shadow); }
+
+.cd-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 19px;
+}
+
+.cd-brand-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cd-faint);
+  padding-left: 2px;
+  margin-top: 3px;
+}
+
+.cd-links { display: flex; gap: 2px; margin-left: auto; }
+
+.cd-links a {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--cd-soft);
+  padding: 8px 14px;
+  border-radius: 999px;
+  transition: background 0.22s, color 0.22s, transform 0.22s var(--cd-spring);
+}
+
+.cd-links a:hover { background: var(--cd-butter-soft); color: var(--cd-ink); transform: translateY(-1px); }
+
+.cd-nav .cd-btn { font-size: 14px; padding: 9px 19px; border-width: 2px; box-shadow: 0 3px 0 var(--cd-ink); }
+.cd-nav .cd-btn:hover { box-shadow: 0 5px 0 var(--cd-ink); }
+.cd-nav .cd-btn:active { top: 2px; box-shadow: 0 1px 0 var(--cd-ink); }
+
+/* the candy progress hairline */
+.cd-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  z-index: 110;
+  transform-origin: 0% 50%;
+  background: linear-gradient(90deg, var(--cd-coral), var(--cd-butter) 30%, var(--cd-green) 60%, var(--cd-violet) 85%, var(--cd-pink));
+}
+
+/* ═════════════════ hero — meet Bubbles ═════════════════ */
+
+.cd-hero {
+  position: relative;
+  padding: clamp(150px, 17vh, 185px) 0 clamp(60px, 8vh, 92px);
+  overflow: clip;
+  background:
+    radial-gradient(ellipse 46% 34% at 84% 22%, rgba(255, 198, 75, 0.16), transparent 70%),
+    radial-gradient(ellipse 42% 36% at 6% 72%, rgba(91, 180, 232, 0.13), transparent 72%),
+    radial-gradient(ellipse 36% 30% at 60% 88%, rgba(255, 107, 107, 0.09), transparent 72%),
+    var(--cd-cream);
+}
+
+/* faint polka dots — the candy workshop's wrapping paper */
+.cd-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(61, 43, 31, 0.055) 1.6px, transparent 1.9px);
+  background-size: 30px 30px;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 76%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 76%, transparent 100%);
+  pointer-events: none;
+}
+
+.cd-hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.cd-hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: clamp(22px, 4vw, 40px);
+  align-items: center;
+}
+
+.cd-hero h1 {
+  font-size: clamp(44px, 6vw, 80px);
+  margin: 24px 0 10px;
+}
+
+/* the squiggle riding under a word */
+.cd-squiggle { display: block; margin-top: 2px; width: min(240px, 46%); height: 14px; }
+
+.cd-hero .cd-lead {
+  font-size: clamp(16.5px, 1.7vw, 18.5px);
+  line-height: 1.72;
+  color: var(--cd-soft);
+  max-width: 54ch;
+  font-weight: 500;
+}
+
+.cd-cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+
+.cd-proof {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--cd-faint);
+}
+
+.cd-proof b { color: var(--cd-ink); font-weight: 700; }
+
+.cd-proof .sep {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cd-coral);
+}
+
+/* ————— the hero art: Bubbles takes the stage ————— */
+
+.cd-art {
+  position: relative;
+  height: clamp(420px, 46vw, 530px);
+  z-index: 2;
+}
+
+.cd-halo {
+  position: absolute;
+  left: 10%;
+  top: 8%;
+  width: 80%;
+  height: 78%;
+  background:
+    radial-gradient(ellipse at 50% 58%, rgba(255, 198, 75, 0.32), rgba(255, 225, 236, 0.42) 55%, transparent 76%);
+  border-radius: 52% 48% 46% 54% / 48% 42% 58% 52%;
+  animation: cd-halo-morph 11s ease-in-out infinite alternate;
+}
+
+@keyframes cd-halo-morph {
+  0%   { border-radius: 52% 48% 46% 54% / 48% 42% 58% 52%; transform: rotate(0deg) scale(1); }
+  50%  { border-radius: 44% 56% 60% 40% / 44% 60% 40% 56%; transform: rotate(3deg) scale(1.03); }
+  100% { border-radius: 60% 40% 42% 58% / 56% 44% 58% 42%; transform: rotate(-2deg) scale(1); }
+}
+
+.cd-mascot-wrap {
+  position: absolute;
+  left: 50%;
+  top: 51%;
+  transform: translate(-50%, -50%);
+  width: min(330px, 72%);
+  filter: drop-shadow(0 22px 22px rgba(61, 43, 31, 0.18));
+  animation: cd-floaty 5.6s ease-in-out infinite;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cd-mascot-wrap:active { transform: translate(-50%, -48%) scale(0.97); }
+
+@keyframes cd-floaty {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50%      { transform: translate(-50%, calc(-50% - 13px)); }
+}
+
+/* the boop reaction — one springy hop */
+.cd-mascot-wrap.booped { animation: cd-boop 0.55s var(--cd-spring); }
+
+@keyframes cd-boop {
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  38%  { transform: translate(-50%, calc(-50% - 20px)) scale(1.06) rotate(-2deg); }
+  70%  { transform: translate(-50%, -50%) scale(0.97) rotate(1.5deg); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.cd-bubble {
+  position: absolute;
+  top: 0;
+  right: -2%;
+  z-index: 3;
+  max-width: 250px;
+  background: var(--cd-card);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 20px 20px 20px 5px;
+  padding: 13px 17px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--cd-ink);
+  box-shadow: 0 4px 0 rgba(61, 43, 31, 0.16);
+  animation: cd-floaty2 6.6s ease-in-out infinite;
+}
+
+.cd-bubble::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  bottom: -11px;
+  width: 16px;
+  height: 16px;
+  background: var(--cd-card);
+  border-right: 2.5px solid var(--cd-ink);
+  border-bottom: 2.5px solid var(--cd-ink);
+  transform: rotate(55deg) skewX(14deg);
+}
+
+.cd-bubble span { display: block; animation: cd-quip-in 0.5s ease both; }
+
+@keyframes cd-quip-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cd-floaty2 {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-11px); }
+}
+
+.cd-chip {
+  position: absolute;
+  z-index: 3;
+  font-family: var(--font-mono);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--cd-ink);
+  background: var(--cd-card);
+  border: 2px solid var(--cd-line);
+  border-radius: 999px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 0 rgba(61, 43, 31, 0.08);
+  animation: cd-bob var(--d, 6s) ease-in-out var(--dl, 0s) infinite;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cd-chip i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c, var(--cd-coral));
+  flex: none;
+}
+
+@keyframes cd-bob {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50%      { transform: translateY(-14px) rotate(calc(var(--r, 0deg) * -1)); }
+}
+
+.cd-spark {
+  position: absolute;
+  z-index: 3;
+  animation: cd-twinkle 3.2s ease-in-out var(--dl, 0s) infinite;
+}
+
+@keyframes cd-twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.7) rotate(0deg); }
+  50%      { opacity: 1; transform: scale(1.18) rotate(20deg); }
+}
+
+/* ————— Bubbles' own motions (Mascot.tsx) ————— */
+
+.candy-root .cd-wave1 { animation: cd-wave-a 4.6s linear infinite; }
+.candy-root .cd-wave2 { animation: cd-wave-b 6.8s linear infinite; }
+
+@keyframes cd-wave-a { to { transform: translateX(-60px); } }
+@keyframes cd-wave-b { from { transform: translateX(-60px); } to { transform: translateX(0); } }
+
+.candy-root .cd-blink {
+  animation: cd-blink 4.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes cd-blink {
+  0%, 90.5%, 100% { transform: scaleY(1); }
+  93.5%           { transform: scaleY(0.06); }
+}
+
+.candy-root .cd-wavearm { animation: cd-wavearm 2.4s ease-in-out infinite; }
+
+@keyframes cd-wavearm {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(-26deg); }
+}
+
+/* pupil glide — the eyes follow the cursor (hero only) */
+.candy-root .cd-pupils {
+  transform: translate(calc(var(--px, 0) * 2.4px), calc(var(--py, 0) * 2.4px));
+  transition: transform 0.18s ease-out;
+}
+
+/* ═════════════════ blob dividers ═════════════════ */
+
+.cd-blobdiv {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: clamp(46px, 6vw, 72px);
+  pointer-events: none;
+  color: inherit;
+}
+
+.cd-blobdiv.top { top: -1px; transform: translateY(-99%); }
+.cd-blobdiv.bottom { bottom: -1px; }
+
+.cd-blobdiv svg { width: 100%; height: 100%; display: block; }
+.cd-blobdiv path { fill: currentColor; }
+
+/* ═════════════════ the two-way candy marquee ═════════════════ */
+
+.cd-marquee {
+  background: var(--cd-butter-soft);
+  border-block: 2.5px solid var(--cd-ink);
+  overflow: clip;
+  position: relative;
+  transform: rotate(-1.1deg) scale(1.02);
+}
+
+.cd-mq-row { padding: 12px 0; overflow: hidden; }
+
+.cd-mq-row + .cd-mq-row { border-top: 2.5px dashed rgba(61, 43, 31, 0.22); }
+
+.cd-mq-track {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  animation: cd-mq 34s linear infinite;
+}
+
+.cd-mq-row.rev .cd-mq-track { animation: cd-mq-rev 42s linear infinite; }
+
+.cd-marquee:hover .cd-mq-track { animation-play-state: paused; }
+
+@keyframes cd-mq     { to { transform: translateX(-50%); } }
+@keyframes cd-mq-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+.cd-mq-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+  background: var(--cd-card);
+  border: 2px solid var(--cd-ink);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-family: var(--font-mono);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--cd-ink);
+  box-shadow: 0 3px 0 rgba(61, 43, 31, 0.12);
+}
+
+.cd-mq-pill i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+}
+
+/* ═════════════════ the sticker shelf — six units ═════════════════ */
+
+.cd-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px 22px;
+  padding-top: 8px;
+}
+
+.cd-tilecell { display: flex; }
+
+.cd-tile {
+  --candy: var(--cd-coral);
+  --tilt: 0deg;
+  position: relative;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--cd-card);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 26px;
+  overflow: hidden;
+  transform: rotate(var(--tilt));
+  box-shadow: 0 7px 0 rgba(61, 43, 31, 0.1);
+  transition: transform 0.4s var(--cd-spring), box-shadow 0.4s var(--cd-spring);
+}
+
+.cd-tile:hover {
+  transform: rotate(0deg) translateY(-8px) scale(1.015);
+  box-shadow: 0 14px 0 rgba(61, 43, 31, 0.1), 0 30px 46px -26px color-mix(in oklab, var(--candy) 55%, transparent);
+}
+
+/* the candy roof */
+.cd-tile-roof {
+  background: var(--candy);
+  padding: 14px 20px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 2.5px solid var(--cd-ink);
+}
+
+.cd-tidx {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  color: #ffffff;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.18);
+  line-height: 1;
+}
+
+.cd-code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: var(--cd-ink);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1.5px solid var(--cd-ink);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.cd-stage-tag {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+}
+
+.cd-tile-body { padding: 18px 20px 16px; display: flex; flex-direction: column; flex: 1; }
+
+.cd-tile h3 {
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.cd-tile .range {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--cd-faint);
+  margin-top: 3px;
+}
+
+.cd-motif {
+  margin: 14px 0 4px;
+  background: var(--cd-cream);
+  border: 2px solid var(--cd-line);
+  border-radius: 18px;
+  padding: 8px 10px 4px;
+}
+
+.cd-motif svg { width: 100%; height: 74px; }
+
+.cd-topics { margin-top: 12px; display: grid; gap: 8px; }
+
+.cd-topi {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  font-size: 13.5px;
+  font-weight: 650;
+  color: var(--cd-soft);
+  line-height: 1.45;
+}
+
+.cd-topi::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--candy);
+  border: 1.5px solid var(--cd-ink);
+  flex: none;
+  margin-top: 4px;
+}
+
+.cd-tile-foot {
+  margin-top: auto;
+  padding-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--cd-faint);
+  flex-wrap: wrap;
+}
+
+.cd-tile-foot .go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--candy);
+  border: 2px solid var(--cd-ink);
+  border-radius: 999px;
+  padding: 4px 13px;
+  box-shadow: 0 3px 0 rgba(61, 43, 31, 0.25);
+  transition: transform 0.25s var(--cd-spring);
+}
+
+.cd-tile:hover .go { transform: translateX(3px); }
+
+/* ————— the six unit motifs (restyled to the candy ink) ————— */
+
+.cd-orbit { animation: cd-spin 9s linear infinite; transform-box: view-box; }
+.cd-orbit-rev { animation: cd-spin 13s linear infinite reverse; transform-box: view-box; }
+@keyframes cd-spin { to { transform: rotate(360deg); } }
+
+.cd-flowdash { stroke-dasharray: 4 9; animation: cd-march 1.05s linear infinite; }
+@keyframes cd-march { to { stroke-dashoffset: -13; } }
+
+.cd-drip { animation: cd-drip 2.3s ease-in infinite; transform-box: fill-box; }
+.cd-drip.d2 { animation-delay: 1.15s; }
+@keyframes cd-drip {
+  0%   { transform: translateY(0); opacity: 0; }
+  22%  { opacity: 1; }
+  74%  { transform: translateY(15px); opacity: 1; }
+  100% { transform: translateY(21px); opacity: 0; }
+}
+
+.cd-balance { animation: cd-balance 4.6s ease-in-out infinite; transform-box: view-box; }
+@keyframes cd-balance {
+  0%, 100% { transform: scaleX(0.68); }
+  50%      { transform: scaleX(1); }
+}
+
+.cd-benzring { animation: cd-spin 7s linear infinite; transform-box: view-box; }
+
+.cd-rise { animation: cd-rise 2.8s ease-out infinite; transform-box: fill-box; }
+.cd-rise.r2 { animation-delay: 0.9s; }
+.cd-rise.r3 { animation-delay: 1.8s; }
+@keyframes cd-rise {
+  0%   { transform: translateY(0); opacity: 0; }
+  25%  { opacity: 1; }
+  80%  { transform: translateY(-16px); opacity: 1; }
+  100% { transform: translateY(-23px); opacity: 0; }
+}
+
+/* ═════════════════ the flame stage ═════════════════ */
+
+.cd-flamesec { position: relative; }
+
+.cd-flamestage {
+  position: relative;
+  background:
+    radial-gradient(ellipse 62% 82% at 50% 116%, rgba(255, 146, 43, 0.14), transparent 72%),
+    #2A2138;
+  border: 3px solid var(--cd-ink);
+  border-radius: 44px;
+  padding: clamp(38px, 5vw, 58px) clamp(18px, 4vw, 46px) clamp(28px, 3.6vw, 40px);
+  box-shadow: 0 10px 0 rgba(61, 43, 31, 0.12), 0 40px 70px -40px rgba(42, 33, 56, 0.75);
+  overflow: hidden;
+}
+
+/* a scatter of tiny stars inside the stage */
+.cd-flamestage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(255, 246, 227, 0.5) 1px, transparent 1.4px),
+    radial-gradient(rgba(255, 246, 227, 0.28) 1px, transparent 1.3px);
+  background-size: 90px 70px, 130px 110px;
+  background-position: 10px 12px, 60px 40px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.cd-flamehead { color: #FFF6E9; text-align: center; margin-inline: auto; max-width: 620px; position: relative; }
+
+.cd-flamehead .cd-eyebrow {
+  background: rgba(255, 246, 229, 0.1);
+  border-color: rgba(255, 246, 229, 0.28);
+  color: #FFEDC8;
+  box-shadow: none;
+}
+
+.cd-flamehead .cd-lead { color: rgba(255, 246, 229, 0.75); margin-inline: auto; }
+
+.cd-flames {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(10px, 2vw, 26px);
+  margin-top: clamp(28px, 4vw, 44px);
+  position: relative;
+}
+
+.cd-flame { text-align: center; }
+
+.cd-flame svg {
+  width: clamp(44px, 5vw, 64px);
+  height: clamp(88px, 10vw, 128px);
+  margin: 0 auto;
+}
+
+.cd-flame .f-outer,
+.cd-flame .f-mid,
+.cd-flame .f-core { transform-box: fill-box; transform-origin: 50% 100%; }
+
+.cd-flame .f-outer { animation: cd-flick-a 2.1s ease-in-out infinite; }
+.cd-flame .f-mid   { animation: cd-flick-b 1.7s ease-in-out infinite; }
+.cd-flame .f-core  { animation: cd-flick-c 1.3s ease-in-out infinite; }
+
+.cd-flame:nth-child(3n) .f-outer { animation-duration: 2.5s; }
+.cd-flame:nth-child(3n) .f-mid   { animation-duration: 1.9s; }
+.cd-flame:nth-child(2n) .f-core  { animation-duration: 1.1s; }
+
+@keyframes cd-flick-a {
+  0%, 100% { transform: scaleY(1) scaleX(1) skewX(0deg); }
+  30%      { transform: scaleY(1.06) scaleX(0.95) skewX(1.6deg); }
+  62%      { transform: scaleY(0.95) scaleX(1.05) skewX(-1.8deg); }
+}
+
+@keyframes cd-flick-b {
+  0%, 100% { transform: scaleY(1.02) skewX(-0.8deg); }
+  40%      { transform: scaleY(0.93) scaleX(1.06) skewX(1.2deg); }
+  70%      { transform: scaleY(1.08) skewX(-1.4deg); }
+}
+
+@keyframes cd-flick-c {
+  0%, 100% { transform: scaleY(1) scaleX(1); opacity: 0.95; }
+  50%      { transform: scaleY(1.12) scaleX(0.9); opacity: 1; }
+}
+
+.cd-flame-label {
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: rgba(255, 246, 229, 0.6);
+}
+
+.cd-flame-label b {
+  display: block;
+  font-size: 15px;
+  color: #FFF6E9;
+  letter-spacing: 0.13em;
+  margin-bottom: 3px;
+}
+
+.cd-flamenote {
+  margin-top: clamp(24px, 3.4vw, 38px);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 246, 229, 0.55);
+  position: relative;
+}
+
+/* ═════════════════ chemistry in motion — the three machines ═════════════════ */
+
+.cd-band-motion { background: var(--cd-sky-soft); position: relative; }
+
+.cd-stages {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.cd-stage {
+  background: var(--cd-card);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 26px;
+  padding: 18px 18px 8px;
+  box-shadow: 0 7px 0 rgba(61, 43, 31, 0.1);
+  transition: transform 0.4s var(--cd-spring), box-shadow 0.4s var(--cd-spring);
+}
+
+.cd-stage:hover {
+  transform: translateY(-6px) rotate(-0.4deg);
+  box-shadow: 0 12px 0 rgba(61, 43, 31, 0.1), 0 34px 50px -30px rgba(61, 43, 31, 0.4);
+}
+
+.cd-stage.wide { grid-column: 1 / -1; }
+
+.cd-stage h3 {
+  font-size: 20px;
+  margin: 2px 4px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cd-stage canvas {
+  width: 100%;
+  height: 300px;
+  border-radius: 18px;
+  background: var(--cd-cream2);
+  border: 2px solid var(--cd-line);
+}
+
+.cd-stage.wide canvas { height: 340px; }
+
+.cd-stage-cap {
+  font-size: 14.5px;
+  font-weight: 550;
+  line-height: 1.65;
+  color: var(--cd-soft);
+  margin: 13px 4px 15px;
+  max-width: 74ch;
+}
+
+.cd-spec-chip {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--cd-soft);
+  background: var(--cd-cream);
+  border: 1.5px solid var(--cd-line);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+
+.cd-motion-note {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--cd-faint);
+  text-align: center;
+}
+
+.cd-motion-note .pulse {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--cd-green);
+  border: 2px solid var(--cd-ink);
+  animation: cd-pulse 2.4s ease-in-out infinite;
+  flex: none;
+}
+
+@keyframes cd-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.45); }
+}
+
+/* the machines' pilot dot (meter-free version for the motion note) */
+.candy-root .cd-motion-note .pulse { animation-play-state: paused; }
+.candy-root .cd-live .cd-motion-note .pulse { animation-play-state: running; }
+
+/* ═════════════════ a taste — the worked question ═════════════════ */
+
+.cd-band-taste { background: var(--cd-rose-soft); position: relative; }
+
+.cd-taste-grid {
+  display: grid;
+  grid-template-columns: 0.94fr 1.06fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.cd-qcard {
+  background: var(--cd-card);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 28px;
+  padding: 30px;
+  box-shadow: 0 8px 0 rgba(61, 43, 31, 0.1);
+  position: sticky;
+  top: 104px;
+}
+
+.cd-qchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cd-mint-soft);
+  border: 2px solid var(--cd-ink);
+  color: var(--cd-ink);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.cd-qtext {
+  margin-top: 18px;
+  font-size: 18.5px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--cd-ink);
+}
+
+.cd-qeq {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  background: var(--cd-cream);
+  border: 2px solid var(--cd-line);
+  border-radius: 16px;
+  padding: 10px 20px;
+}
+
+.cd-tsvg {
+  margin-top: 20px;
+  background: var(--cd-cream);
+  border: 2px solid var(--cd-line);
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.cd-tsvg svg { width: 100%; height: auto; }
+
+.cd-qfoot {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cd-faint);
+}
+
+.cd-steps { display: grid; gap: 16px; }
+
+.cd-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--cd-card);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 22px;
+  padding: 20px 22px;
+  box-shadow: 0 6px 0 rgba(61, 43, 31, 0.09);
+  transition: transform 0.3s var(--cd-spring);
+}
+
+.cd-step:hover { transform: translateX(5px); }
+
+.cd-stepn {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--cd-butter);
+  border: 2.5px solid var(--cd-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--cd-ink);
+  box-shadow: 0 3px 0 rgba(61, 43, 31, 0.25);
+}
+
+.cd-step p { font-size: 15px; line-height: 1.7; color: var(--cd-soft); font-weight: 550; }
+
+.cd-step b { color: var(--cd-ink); font-weight: 800; }
+
+.cd-step .cd-mono { font-size: 0.95em; color: var(--cd-violet); }
+
+.cd-answrap { position: relative; }
+
+.cd-answer {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(180deg, #FFD98A, #FFC64B);
+  color: var(--cd-ink);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 999px;
+  padding: 12px 26px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 20px;
+  box-shadow: 0 5px 0 rgba(61, 43, 31, 0.28);
+}
+
+.cd-ans-spark {
+  position: absolute;
+  right: 16px;
+  top: -18px;
+  width: 28px;
+  height: 28px;
+  color: var(--cd-orange);
+  animation: cd-twinkle 2.6s ease-in-out infinite;
+}
+
+/* the mini rig's loops (8 s breath) */
+.candy-root .cd-pinkcycle { animation: cd-pinkcycle 8s ease-in-out infinite; }
+
+@keyframes cd-pinkcycle {
+  0%, 62%   { opacity: 0.85; }
+  68%       { opacity: 0.35; }
+  74%, 88%  { opacity: 0.08; }
+  100%      { opacity: 0.85; }
+}
+
+.candy-root .cd-drawcurve {
+  stroke-dasharray: 300;
+  animation: cd-drawcurve 8s ease-in-out infinite;
+}
+
+@keyframes cd-drawcurve {
+  0%        { stroke-dashoffset: 300; }
+  55%, 78%  { stroke-dashoffset: 0; }
+  100%      { stroke-dashoffset: -300; }
+}
+
+/* ═════════════════ the periodic snack table ═════════════════ */
+
+.cd-band-snack { background: var(--cd-butter-soft); position: relative; }
+
+.cd-snacks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.cd-snack {
+  --cc: var(--cd-coral);
+  position: relative;
+  width: 128px;
+  background: var(--cd-card);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 20px;
+  padding: 0 0 12px;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 6px 0 rgba(61, 43, 31, 0.1);
+  transition: transform 0.3s var(--cd-spring), box-shadow 0.3s var(--cd-spring);
+}
+
+.cd-snack:hover {
+  animation: cd-wobble 0.55s var(--cd-spring);
+  transform: translateY(-6px);
+  box-shadow: 0 11px 0 rgba(61, 43, 31, 0.1), 0 26px 40px -22px color-mix(in oklab, var(--cc) 60%, transparent);
+}
+
+@keyframes cd-wobble {
+  0%   { transform: translateY(-6px) rotate(0deg); }
+  30%  { transform: translateY(-6px) rotate(-3.4deg); }
+  60%  { transform: translateY(-6px) rotate(2.6deg); }
+  100% { transform: translateY(-6px) rotate(0deg); }
+}
+
+.cd-snack-top {
+  background: var(--cc);
+  border-bottom: 2.5px solid var(--cd-ink);
+  padding: 6px 10px 5px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+}
+
+.cd-snack .sym {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 34px;
+  color: var(--cc);
+  margin-top: 9px;
+  line-height: 1;
+}
+
+.cd-snack .nm {
+  font-size: 12px;
+  font-weight: 750;
+  color: var(--cd-soft);
+  margin-top: 3px;
+}
+
+.cd-snack .fact {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--cd-faint);
+  line-height: 1.45;
+  margin: 5px 8px 0;
+  min-height: 3em;
+}
+
+.cd-snacknote {
+  margin-top: 26px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cd-faint);
+}
+
+/* ═════════════════ how Bubbles helps — the four steps ═════════════════ */
+
+.cd-band-method { background: var(--cd-mint-soft); position: relative; }
+
+.cd-protocol { position: relative; }
+
+.cd-thread {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cd-thread svg { width: 100%; height: 100%; overflow: visible; }
+
+.cd-stations {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.cd-stations > div { display: flex; }
+.cd-stations > div .cd-station { flex: 1; }
+
+.cd-station {
+  background: var(--cd-card);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 24px;
+  padding: 26px 20px 24px;
+  text-align: center;
+  box-shadow: 0 7px 0 rgba(61, 43, 31, 0.1);
+  transition: transform 0.35s var(--cd-spring), box-shadow 0.35s var(--cd-spring);
+}
+
+.cd-station:hover {
+  transform: translateY(-6px) rotate(0.6deg);
+  box-shadow: 0 12px 0 rgba(61, 43, 31, 0.1);
+}
+
+.cd-snode {
+  width: 46px;
+  height: 46px;
+  margin: -50px auto 14px;
+  display: grid;
+  place-items: center;
+  background: var(--cd-butter);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--cd-ink);
+  box-shadow: 0 3px 0 rgba(61, 43, 31, 0.25);
+}
+
+.cd-sticon { width: 48px; height: 48px; margin: 0 auto 10px; }
+
+.cd-station h4 { font-size: 19.5px; margin-bottom: 9px; }
+
+.cd-station p { font-size: 13.5px; line-height: 1.65; color: var(--cd-soft); font-weight: 550; }
+
+/* the marching dashes on the method thread */
+.cd-march { stroke-dasharray: 10 12; animation: cd-marchpath 0.9s linear infinite; }
+@keyframes cd-marchpath { to { stroke-dashoffset: -22; } }
+
+/* ═════════════════ the sticker sheet — counted ═════════════════ */
+
+.cd-stickers {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+.cd-stickers > div { display: flex; }
+.cd-stickers > div .cd-sticker { flex: 1; }
+
+.cd-sticker {
+  --cc: var(--cd-coral);
+  --tilt: 0deg;
+  position: relative;
+  background: var(--cd-card);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 24px;
+  padding: 24px 12px 18px;
+  text-align: center;
+  transform: rotate(var(--tilt));
+  box-shadow: 0 7px 0 rgba(61, 43, 31, 0.1);
+  transition: transform 0.35s var(--cd-spring);
+  overflow: hidden;
+}
+
+/* the sticker's punch-hole ring */
+.cd-sticker::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--cd-cream);
+  border: 2px solid var(--cd-ink);
+}
+
+.cd-sticker:hover { transform: rotate(0deg) translateY(-6px) scale(1.04); }
+
+.cd-sticker .val {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 3.6vw, 48px);
+  line-height: 1.1;
+  height: 56px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: var(--cc);
+  -webkit-text-stroke: 1.2px var(--cd-ink);
+  paint-order: stroke fill;
+}
+
+.cd-sticker .val .unit { font-size: 0.46em; color: var(--cd-ink); -webkit-text-stroke: 0; margin-left: 2px; }
+
+.cd-sticker .lbl {
+  margin-top: 8px;
+  font-size: 12.5px;
+  font-weight: 750;
+  color: var(--cd-soft);
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+/* ═════════════════ dress the bench ═════════════════ */
+
+.cd-band-dress { background: var(--cd-lilac-soft); position: relative; }
+
+.cd-dress-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.cd-dress-grid > div { display: flex; }
+.cd-dress-grid > div .cd-labcard { flex: 1; }
+
+.cd-labcard {
+  background: var(--cd-card);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 20px;
+  padding: 18px 14px 14px;
+  text-align: center;
+  box-shadow: 0 6px 0 rgba(61, 43, 31, 0.09);
+  transition: transform 0.3s var(--cd-spring), box-shadow 0.3s var(--cd-spring);
+}
+
+.cd-labcard:hover { transform: translateY(-5px) rotate(-1deg); box-shadow: 0 10px 0 rgba(61, 43, 31, 0.09); }
+
+.cd-dots { display: flex; justify-content: center; gap: 6px; margin: 4px 0 10px; }
+
+.cd-dots span {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--cd-ink);
+}
+
+.cd-labcard .nm { font-size: 14px; font-weight: 800; }
+
+.cd-labcard .sub {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--cd-faint);
+  margin-top: 3px;
+}
+
+.cd-ifaces {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.cd-ifaces > div { display: flex; }
+.cd-ifaces > div .cd-iface { flex: 1; }
+
+.cd-iface {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: var(--cd-card);
+  border: 2.5px solid var(--cd-ink);
+  border-radius: 20px;
+  padding: 16px 18px;
+  box-shadow: 0 6px 0 rgba(61, 43, 31, 0.09);
+  transition: transform 0.3s var(--cd-spring);
+}
+
+.cd-iface:hover { transform: translateY(-4px) rotate(0.4deg); }
+
+.cd-iface svg { flex: none; }
+
+.cd-iface b { display: block; font-size: 15px; font-weight: 800; }
+
+.cd-iface span { font-size: 12.5px; color: var(--cd-faint); line-height: 1.5; display: block; margin-top: 2px; font-weight: 600; }
+
+.cd-dress-note {
+  margin-top: 24px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cd-faint);
+  text-align: center;
+}
+
+/* ═════════════════ the closing panel ═════════════════ */
+
+.cd-cta-panel {
+  position: relative;
+  text-align: center;
+  border-radius: 44px;
+  padding: clamp(56px, 7vw, 84px) clamp(24px, 6vw, 60px) clamp(48px, 6vw, 64px);
+  background:
+    radial-gradient(ellipse 42% 46% at 14% 8%, rgba(255, 107, 107, 0.14), transparent 70%),
+    radial-gradient(ellipse 40% 44% at 86% 90%, rgba(151, 117, 250, 0.14), transparent 72%),
+    radial-gradient(ellipse 34% 40% at 78% 12%, rgba(255, 198, 75, 0.18), transparent 70%),
+    var(--cd-card);
+  border: 3px solid var(--cd-ink);
+  box-shadow: 0 10px 0 rgba(61, 43, 31, 0.1);
+  overflow: hidden;
+}
+
+.cd-cta-flask {
+  width: 128px;
+  margin: -142px auto 4px;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 16px 16px rgba(61, 43, 31, 0.18));
+  animation: cd-floaty3 4.8s ease-in-out infinite;
+}
+
+@keyframes cd-floaty3 {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+.cd-cta-panel h2 { font-size: clamp(38px, 5vw, 58px); margin-bottom: 14px; position: relative; z-index: 2; }
+
+.cd-cta-panel .cd-lead {
+  margin: 0 auto 30px;
+  color: var(--cd-soft);
+  font-size: clamp(15.5px, 1.6vw, 17.5px);
+  line-height: 1.7;
+  max-width: 52ch;
+  font-weight: 550;
+  position: relative;
+  z-index: 2;
+}
+
+.cd-cta-note {
+  margin-top: 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--cd-faint);
+  position: relative;
+  z-index: 2;
+}
+
+.cd-cta-deco { position: absolute; pointer-events: none; animation: cd-twinkle 3.6s ease-in-out var(--dl, 0s) infinite; }
+
+/* ═════════════════ footer — the lab after hours ═════════════════ */
+
+.cd-foot {
+  position: relative;
+  margin-top: clamp(72px, 9vw, 110px);
+  background: #2A2138;
+  color: #2A2138;
+  padding: 96px 0 40px;
+  overflow: clip;
+}
+
+.cd-foot-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 38px;
+  align-items: start;
+}
+
+.cd-foot-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  color: #FFF6E9;
+}
+
+.cd-foot-tag {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 246, 229, 0.62);
+  max-width: 38ch;
+  font-weight: 500;
+}
+
+.cd-foot-col h5 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 246, 229, 0.45);
+  margin-bottom: 14px;
+}
+
+.cd-foot-col a {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 650;
+  padding: 5px 0;
+  color: rgba(255, 246, 229, 0.82);
+  transition: color 0.2s, transform 0.2s;
+}
+
+.cd-foot-col a:hover { color: var(--cd-butter); transform: translateX(4px); }
+
+.cd-foot-bottom {
+  position: relative;
+  z-index: 2;
+  margin-top: 54px;
+  padding-top: 22px;
+  border-top: 1.5px solid rgba(255, 246, 229, 0.16);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 26px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 246, 229, 0.45);
+  line-height: 1.7;
+}
+
+/* stars twinkling in the night lab */
+.cd-star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #FFF6E9;
+  animation: cd-twinkle 2.8s ease-in-out var(--dl, 0s) infinite;
+}
+
+/* the butter moon */
+.cd-moon {
+  position: absolute;
+  right: 9%;
+  top: 58px;
+  width: 52px;
+  height: 52px;
+  filter: drop-shadow(0 0 20px rgba(255, 198, 75, 0.45));
+}
+
+/* the sleeping mascot */
+.cd-sleeper { position: absolute; right: 5%; bottom: 148px; width: 118px; text-align: center; }
+
+.cd-sleeper svg { width: 104px; margin: 0 auto; animation: cd-breathz 4.6s ease-in-out infinite; }
+
+@keyframes cd-breathz {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+
+.cd-zzz { position: absolute; left: 46%; top: 0; width: 0; height: 0; }
+
+.cd-zzz span {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--cd-butter);
+  animation: cd-zfloat 3.4s ease-out infinite;
+}
+
+.cd-zzz span:nth-child(1) { font-size: 14px; left: -20px; animation-delay: 0s; }
+.cd-zzz span:nth-child(2) { font-size: 19px; left: -2px; animation-delay: 1.1s; }
+.cd-zzz span:nth-child(3) { font-size: 25px; left: 18px; animation-delay: 2.2s; }
+
+@keyframes cd-zfloat {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.7); }
+  30%  { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-32px) scale(1.1); }
+}
+
+/* ═════════════════ confetti + the cursor bubble trail ═════════════════ */
+
+.cd-confetti {
+  position: absolute;
+  z-index: 50;
+  width: 9px;
+  height: 13px;
+  border-radius: 3px;
+  background: var(--c, var(--cd-coral));
+  border: 1px solid rgba(61, 43, 31, 0.3);
+  pointer-events: none;
+  animation: cd-confetti 0.95s ease-out forwards;
+}
+
+@keyframes cd-confetti {
+  0%   { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(var(--dx, 0px), var(--dy, -110px)) rotate(var(--rr, 220deg)); opacity: 0; }
+}
+
+.cd-trail {
+  position: fixed;
+  z-index: 3000;
+  width: var(--s, 12px);
+  height: var(--s, 12px);
+  margin: calc(var(--s, 12px) / -2) 0 0 calc(var(--s, 12px) / -2);
+  border-radius: 50%;
+  border: 1.5px solid rgba(61, 43, 31, 0.35);
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.9), var(--c, rgba(91, 180, 232, 0.25)) 72%);
+  pointer-events: none;
+  animation: cd-trail-up 0.85s ease-out forwards;
+}
+
+@keyframes cd-trail-up {
+  0%   { transform: translateY(0) scale(1); opacity: 0.9; }
+  100% { transform: translateY(-34px) scale(0.5); opacity: 0; }
+}
+
+/* ═════════════════ responsive ═════════════════ */
+
+@media (max-width: 1080px) {
+  .cd-sleeper { display: none; }
+}
+
+@media (max-width: 1024px) {
+  .cd-hero-grid { grid-template-columns: 1fr; }
+  .cd-art { height: 460px; margin-top: 16px; }
+  .cd-tiles { grid-template-columns: 1fr 1fr; }
+  .cd-tilecell:nth-child(2n) .cd-tile { --tilt: 0.8deg; }
+  .cd-stages { grid-template-columns: 1fr; }
+  .cd-stations { grid-template-columns: 1fr 1fr; gap: 36px 18px; }
+  .cd-stickers { grid-template-columns: repeat(3, 1fr); }
+  .cd-taste-grid { grid-template-columns: 1fr; }
+  .cd-qcard { position: static; }
+  .cd-dress-grid { grid-template-columns: repeat(3, 1fr); }
+  .cd-foot-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 720px) {
+  .cd-links { display: none; }
+  .cd-nav { padding: 8px 10px 8px 15px; }
+  .cd-brand { font-size: 16.5px; }
+  .cd-brand-sub { display: none; }
+  .cd-nav .cd-btn { font-size: 13px; padding: 8px 15px; }
+  .cd-hero { padding-top: 130px; }
+  .cd-art { height: 420px; }
+  .cd-mascot-wrap { width: min(258px, 68%); }
+  .cd-bubble { right: 2%; max-width: 200px; font-size: 13px; }
+  .cd-chip { font-size: 12.5px; padding: 6px 12px; }
+  .cd-proof .sep { display: none; }
+  .cd-tiles { grid-template-columns: 1fr; }
+  .cd-flames { grid-template-columns: repeat(3, 1fr); }
+  .cd-stations { grid-template-columns: 1fr; }
+  .cd-stickers { grid-template-columns: 1fr 1fr; }
+  .cd-dress-grid { grid-template-columns: 1fr 1fr; }
+  .cd-cta-panel { border-radius: 32px; }
+  .cd-cta-flask { margin-top: -118px; }
+  .cd-foot-grid { grid-template-columns: 1fr; gap: 30px; }
+  .cd-moon { top: 36px; width: 40px; height: 40px; }
+  .cd-snack { width: calc(33.3% - 10px); min-width: 106px; }
+}
+
+@media (max-width: 420px) {
+  .cd-art { height: 370px; }
+  .cd-chip.hide-s { display: none; }
+  .cd-flames { grid-template-columns: repeat(2, 1fr); }
+  .cd-snack { width: calc(50% - 8px); }
+  .cd-stickers { grid-template-columns: 1fr; }
+}
+
+/* ═════════════════ reduced motion — the candy lab naps ═════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .candy-root *,
+  .candy-root *::before,
+  .candy-root *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
+  .cd-trail, .cd-confetti { display: none !important; }
+  .candy-root .cd-loop { animation-play-state: paused !important; }
+}

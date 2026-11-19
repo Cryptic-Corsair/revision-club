@@ -984,6 +984,7 @@ export default function TwilightApp() {
                     ['The workspace', '/club'],
                     ['The spec index', '/club?v=spec'],
                     ['The pack bench', '/club?v=pack'],
+                    ['The candy lab', '/candy'],
                     ['Legal', '/club/legal'],
                   ].map(([label, href]) => (
                     <a

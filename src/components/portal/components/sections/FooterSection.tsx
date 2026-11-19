@@ -33,12 +33,17 @@ export function FooterSection({
     { value: `≈${hours} h`, label: 'Reading' },
   ];
 
-  const aroundRows: Array<{ label: string; onClick: () => void }> = [
+  /* The candy lab carries an href, not an onClick — it is a real page
+     hand-off (the alternate homepage at /candy), so a plain anchor keeps
+     both wrappers' scroll and theme state honest, the same rule the
+     workspace rows follow. */
+  const aroundRows: Array<{ label: string; onClick?: () => void; href?: string }> = [
     { label: 'Back to the top', onClick: () => onNavigate('#top') },
     { label: 'How packs work', onClick: () => onNavigate('#workflow') },
     { label: 'The machines', onClick: () => onNavigate('#showcase') },
     { label: 'Syllabus coverage', onClick: () => onNavigate('#units') },
     { label: 'The living laboratory', onClick: () => onNavigate('#lab') },
+    { label: 'The candy lab — alternate home', href: '/candy' },
     { label: 'Search ⌘K', onClick: onOpenSearch },
   ];
 
@@ -169,17 +174,24 @@ export function FooterSection({
               <nav aria-label="Around this page">
                 <p className="portal-band-label">This page</p>
                 <div className="mt-3 flex flex-col">
-                  {aroundRows.map((row) => (
-                    <button
-                      key={row.label}
-                      type="button"
-                      onClick={row.onClick}
-                      className="portal-band-row"
-                    >
-                      <span>{row.label}</span>
-                      <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                    </button>
-                  ))}
+                  {aroundRows.map((row) =>
+                    row.href ? (
+                      <a key={row.label} href={row.href} className="portal-band-row">
+                        <span>{row.label}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                      </a>
+                    ) : (
+                      <button
+                        key={row.label}
+                        type="button"
+                        onClick={row.onClick}
+                        className="portal-band-row"
+                      >
+                        <span>{row.label}</span>
+                        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                      </button>
+                    ),
+                  )}
                 </div>
               </nav>
 
