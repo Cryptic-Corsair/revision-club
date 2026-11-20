@@ -156,6 +156,18 @@ import {
   FigAlcFunnel,
   FigAlcBp,
 } from "./notes-figures";
+import {
+  FigPhMotionGraphs,
+  FigPhProjectile,
+  FigPhVectors,
+  FigPhFreebody,
+  FigPhTerminal,
+  FigPhMoments,
+  FigPhForceExtension,
+  FigPhStressStrain,
+  FigPhFallingBall,
+  FigPhYoungRig,
+} from "./notes-figures-physics";
 
 /* ═══════════════════════════════════════════════════════════════
    IAL CHEM · the note section renderer — the one true way a
@@ -1010,6 +1022,36 @@ export function figureArt(kind: string, accent: string): ReactNode {
       break;
     case "atom-3d":
       node = <FigAtom3D accent={accent} />;
+      break;
+    case "ph-motion-graphs":
+      node = <FigPhMotionGraphs accent={accent} />;
+      break;
+    case "ph-projectile":
+      node = <FigPhProjectile accent={accent} />;
+      break;
+    case "ph-vectors":
+      node = <FigPhVectors accent={accent} />;
+      break;
+    case "ph-freebody":
+      node = <FigPhFreebody accent={accent} />;
+      break;
+    case "ph-terminal":
+      node = <FigPhTerminal accent={accent} />;
+      break;
+    case "ph-moments":
+      node = <FigPhMoments accent={accent} />;
+      break;
+    case "ph-force-extension":
+      node = <FigPhForceExtension accent={accent} />;
+      break;
+    case "ph-stress-strain":
+      node = <FigPhStressStrain accent={accent} />;
+      break;
+    case "ph-falling-ball":
+      node = <FigPhFallingBall accent={accent} />;
+      break;
+    case "ph-young-rig":
+      node = <FigPhYoungRig accent={accent} />;
       break;
     case "ion-form":
       node = <FigIonForm accent={accent} />;

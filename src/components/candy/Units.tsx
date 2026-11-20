@@ -170,7 +170,7 @@ export function UnitsBand() {
           lead="The whole Pearson Edexcel IAL — WCH11 to WCH16 — as six stickers on the fridge door. Every one wears its registry colour, carries its paper facts and its first three topics, and opens straight into its room in the workspace."
         />
         <div className="cd-tiles">
-          {UNITS.map((u, i) => {
+          {UNITS.slice(0, 6).map((u, i) => {
             const Motif = MOTIFS[i];
             const minutes = u.topics.reduce((n, t) => n + t.minutes, 0);
             const preview = u.topics.slice(0, 3);

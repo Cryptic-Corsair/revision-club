@@ -434,7 +434,7 @@ function LumenFooter({ go }: { go: (hash: string) => void }) {
           </div>
           <div className="lum-foot-col">
             <h5>the six units</h5>
-            {UNITS.map((u) => (
+            {UNITS.slice(0, 6).map((u) => (
               <a key={u.code} href={`/club?v=${u.code.toLowerCase()}`}>
                 {u.code} · {u.shortTitle}
               </a>

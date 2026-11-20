@@ -455,7 +455,7 @@ function Chronology({ reducedMotion }: { reducedMotion: boolean }) {
               style={reducedMotion ? { pathLength: 1 } : { pathLength }}
             />
           </svg>
-          {IAL_UNITS.map((unit, index) => (
+          {IAL_UNITS.slice(0, 6).map((unit, index) => (
             <Reveal key={unit.code} delay={index * 0.04}>
               <button
                 type="button"

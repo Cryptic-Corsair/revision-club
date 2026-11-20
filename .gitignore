@@ -76,3 +76,11 @@ dev.log
 /.agents/
 /agent/
 skills-lock.json
+
+# WPH11 raw research material (Pearson PDFs + text extractions) — digests and scripts are tracked
+research/wph11/*.pdf
+research/wph11/que-*.txt
+research/wph11/rms-*.txt
+research/wph11/pef-*.txt
+research/wph11/list-*.html
+research/wph11/probes*.txt

@@ -6,7 +6,7 @@
 
 export type Stage = "IAS" | "IA2";
 
-export type UnitCode = "WCH11" | "WCH12" | "WCH13" | "WCH14" | "WCH15" | "WCH16";
+export type UnitCode = "WCH11" | "WCH12" | "WCH13" | "WCH14" | "WCH15" | "WCH16" | "WPH11";
 
 /** The colour a unit wears across the site */
 export interface Candy {

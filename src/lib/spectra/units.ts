@@ -5,6 +5,7 @@ import { WCH13_TOPICS } from "./content/wch13";
 import { WCH14_TOPICS } from "./content/wch14";
 import { WCH15_TOPICS } from "./content/wch15";
 import { WCH16_TOPICS } from "./content/wch16";
+import { WPH11_TOPICS } from "./content/wph11";
 
 /* ═══════════════════════════════════════════════════════════════
    The six units of the IAL chemistry course — each wearing its
@@ -120,6 +121,24 @@ export const UNITS: Unit[] = [
     blurb:
       "The A2 practical skills: kinetics experiments, organic techniques and tests, and how to write practical exam answers.",
     topics: WCH16_TOPICS,
+  },
+  {
+    code: "WPH11",
+    index: 7,
+    stage: "IAS",
+    title: "Physics — Mechanics and Materials",
+    shortTitle: "Physics: mechanics & materials",
+    topicRange: "Physics 1.3 & 1.4",
+    paper: {
+      duration: "1 h 30 m",
+      marks: 80,
+      stageWeight: "AS 40%",
+      ialWeight: "IAL 20%",
+    },
+    candy: { main: "#339AF0" },
+    blurb:
+      "The first physics unit, WPH11/01: the whole of Mechanics — motion, vectors, projectiles, Newton's laws, momentum, moments, work, energy and power — and the whole of Materials — fluids, Stokes' law, Hooke's law and the Young modulus — in two complete notes built from the specification, past papers, mark schemes and examiner reports.",
+    topics: WPH11_TOPICS,
   },
 ];
 

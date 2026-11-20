@@ -878,7 +878,7 @@ function Footer({
                   IAL CHEM
                 </div>
                 <p className="mt-2 text-[calc(11px*var(--ts-other))] font-bold uppercase tracking-[0.16em] text-milk/45">
-                  Pearson Edexcel · International A Level Chemistry
+                  Pearson Edexcel · International A Levels · Chemistry & Physics
                 </p>
               </div>
             </div>
@@ -911,7 +911,7 @@ function Footer({
                   </h2>
                 </div>
                 <span className="pb-1 font-mono text-[calc(10.5px*var(--ts-other))] tracking-[0.12em] text-milk/35">
-                  WCH11 — WCH16
+                  WCH11 — WCH16 · WPH11
                 </span>
               </div>
 
@@ -998,7 +998,7 @@ function Footer({
 
           <div className="flex flex-col gap-4 py-5 pb-[calc(1.25rem+var(--sa-bottom))] sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-2xl text-[calc(10.5px*var(--ts-other))] leading-relaxed font-semibold text-milk/40">
-              © 2026 IAL CHEM · Notes for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16. Not affiliated with or endorsed by Pearson Education Ltd.
+              © 2026 IAL CHEM · Notes for the Pearson Edexcel International A Level Chemistry (2018) specification, WCH11–WCH16, and Physics (2018), WPH11. Not affiliated with or endorsed by Pearson Education Ltd.
             </p>
             <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 self-start sm:self-auto">
               {/* The front door. The showcase landing was promoted from

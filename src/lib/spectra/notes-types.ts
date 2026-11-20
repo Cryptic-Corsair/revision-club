@@ -145,7 +145,17 @@ export type FigureKind =
   | "ir-halides"
   | "ir-amines"
   | "atom-3d"
-  | "ion-form";
+  | "ion-form"
+  | "ph-motion-graphs"
+  | "ph-projectile"
+  | "ph-vectors"
+  | "ph-freebody"
+  | "ph-terminal"
+  | "ph-moments"
+  | "ph-force-extension"
+  | "ph-stress-strain"
+  | "ph-falling-ball"
+  | "ph-young-rig";
 
 export type NotesBlock =
   | { k: "p"; text: string }

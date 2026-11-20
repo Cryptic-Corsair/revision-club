@@ -19,7 +19,7 @@ const SECTIONS: Section[] = [
     eyebrow: "01 / THE PLATFORM",
     title: "Purpose and scope",
     body: [
-      "IAL CHEM is an independent revision resource for the Pearson Edexcel International Advanced Level Chemistry specification (2018), units WCH11–WCH16. The site provides revision notes and worked examples for educational use. It is not a course, tutoring service, textbook or official Pearson resource.",
+      "IAL CHEM is an independent revision resource for the Pearson Edexcel International Advanced Level Chemistry specification (2018), units WCH11–WCH16, and the International Advanced Level Physics specification (2018), unit WPH11. The site provides revision notes and worked examples for educational use. It is not a course, tutoring service, textbook or official Pearson resource.",
       "Use this material alongside instruction from your teachers, your course materials, the current specification and official past papers. It is intended to supplement, not replace, those resources.",
     ],
   },

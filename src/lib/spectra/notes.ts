@@ -30,6 +30,11 @@ import { SECTIONS_P06 } from "./content/notes-p06";
 import { SECTIONS_P07 } from "./content/notes-p07";
 import { SECTIONS_P08 } from "./content/notes-p08";
 import { SECTIONS_P09 } from "./content/notes-p09";
+import { SECTIONS_PH01_A } from "./content/notes-ph01-a";
+import { SECTIONS_PH01_B } from "./content/notes-ph01-b";
+import { SECTIONS_PH01_C } from "./content/notes-ph01-c";
+import { SECTIONS_PH02_A } from "./content/notes-ph02-a";
+import { SECTIONS_PH02_B } from "./content/notes-ph02-b";
 import { NOTES_META } from "./notes-meta";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -396,6 +401,46 @@ export const NOTES_DOCS: NotesDoc[] = [
       },
     ],
     sections: SECTIONS_P09,
+  },
+  {
+    id: "wph11-t01",
+    unitCode: "WPH11",
+    topicId: "t01",
+    kicker: "Physics Unit 1 · Mechanics — the complete WPH11 note, statement by statement",
+    title: "Forces, motion and energy",
+    source:
+      "the complete WPH11 Mechanics note — built from the Pearson Edexcel IAL Physics specification (2018, Issue 3), WPH11/01 question papers, mark schemes and Principal Examiners' reports, 2019–2025",
+    intro: [
+      {
+        k: "p",
+        text: "WPH11/01 is the scenario paper: the same 22 specification statements, dressed each session in a new context — a bungee jump, a crane, a submarine, a bascule bridge. This note teaches every statement of Mechanics in specification order: the ==SUVAT equations== and the three ==motion graphs==, ==vectors== resolved and combined, ==projectiles== with their two independent columns, ==free-body diagrams==, ==Newton's laws== and ==terminal velocity==, ==momentum==, ==moments==, then ==work, energy, power and efficiency==.",
+      },
+      {
+        k: "p",
+        text: "Every section carries the same apparatus: the official statement verbatim, the concepts, then ==real WPH11 questions worked in full== from the official mark schemes — with the ==examiners' own words== beside them on what earns and loses the marks, and a note on ==how the question changes costume== when it is asked differently. Learn the physics once here, and the dressing never surprises you again.",
+      },
+    ],
+    sections: [...SECTIONS_PH01_A, ...SECTIONS_PH01_B, ...SECTIONS_PH01_C],
+  },
+  {
+    id: "wph11-t02",
+    unitCode: "WPH11",
+    topicId: "t02",
+    kicker: "Physics Unit 1 · Materials — the complete WPH11 note, statement by statement",
+    title: "Materials — fluids, viscosity and elasticity",
+    source:
+      "the complete WPH11 Materials note — built from the Pearson Edexcel IAL Physics specification (2018, Issue 3), WPH11/01 question papers, mark schemes and Principal Examiners' reports, 2019–2025",
+    intro: [
+      {
+        k: "p",
+        text: "The second half of Unit 1 is the most predictable on the course: nearly every paper since 2019 carries a ==falling-ball viscosity question== and a ==Young modulus graph question==, and the mark schemes ask for the same sentences each time. This note covers all ten Materials statements: ==density== and ==upthrust==, ==Stokes' law== with its conditions, the ==falling-ball viscometer== of Core Practical 2, then ==Hooke's law==, ==stress, strain and the Young modulus==, the ==force-extension== and ==stress-strain== graphs with every named point, the ==Young modulus rig== of Core Practical 3, and ==elastic strain energy==.",
+      },
+      {
+        k: "p",
+        text: "As with the Mechanics note, every section works ==real past-paper questions in full== with the official mark scheme's own steps, quotes the ==examiners' reports== on where the marks go, and shows how each idea ==returns in a different costume== — the same upthrust chain wearing a balloon, a hydrometer, a Cartesian diver and a submarine. The examiner's recurring traps, from diameter-as-radius to the missing final comparison, are collected in a table at the end.",
+      },
+    ],
+    sections: [...SECTIONS_PH02_A, ...SECTIONS_PH02_B],
   },
 ];
 

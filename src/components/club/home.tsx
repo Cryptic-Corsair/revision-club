@@ -115,7 +115,7 @@ function CandyBtn({
 
 function Ticker({ units }: { units: Unit[] }) {
   const facts = [
-    `${units.length} units, WCH11 → WCH16`,
+    `${units.length} units, WCH11 → WPH11`,
     `${TOTALS.topics} topics in spec order`,
     `≈${Math.round(TOTALS.minutes / 60)} hours of reading`,
     `${TOTALS.examples} worked examples`,
@@ -242,7 +242,7 @@ export function Home({ units, onOpenUnit, onOpenSticker, onOpenTopic, onOpenPack
               <PopIn delay={0.16}>
                 <p className="mt-6 max-w-[50ch] text-[calc(15.5px*var(--ts-body))] leading-[1.78] text-ink-soft sm:text-[calc(16.5px*var(--ts-body))] sm:leading-[1.8]">
                   Welcome to <strong className="font-extrabold text-ink">IAL CHEM</strong> —
-                  revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16). Every unit runs
+                  revision notes for Pearson Edexcel IAL Chemistry (WCH11–WCH16 · WPH11) and Physics (WPH11). Every unit runs
                   the 2018 spec in order: definitions, equations and fully worked examples. Your
                   progress saves itself in your browser.
                 </p>

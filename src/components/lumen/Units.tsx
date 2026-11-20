@@ -171,7 +171,7 @@ export function UnitsBand() {
           lead="The whole Pearson Edexcel IAL — WCH11 to WCH16 — as six tiles on one shelf. Each keeps its registry colour, its paper facts and its first three topics; each opens straight into its room in the workspace."
         />
         <div className="lum-tiles">
-          {UNITS.map((u, i) => {
+          {UNITS.slice(0, 6).map((u, i) => {
             const Motif = MOTIFS[i];
             const minutes = u.topics.reduce((n, t) => n + t.minutes, 0);
             const preview = u.topics.slice(0, 3);
