@@ -152,6 +152,7 @@ function BubbleTrail() {
 export default function CandyApp() {
   const reduced = Boolean(useReducedMotion());
   const navRef = useRef<HTMLElement | null>(null);
+  const heroRef = useLive<HTMLElement>();
   const artRef = useRef<HTMLDivElement | null>(null);
   const mascotRef = useRef<HTMLDivElement | null>(null);
   const [boopMood, setBoopMood] = useState<'idle' | 'wow'>('idle');
@@ -261,7 +262,7 @@ export default function CandyApp() {
         </nav>
 
         {/* ————— the hero ————— */}
-        <header className="cd-hero" id="top">
+        <header className="cd-hero" id="top" ref={heroRef}>
           <HeroField />
           <div className="cd-wrap cd-hero-grid">
             <div className="cd-hero-copy">
@@ -277,8 +278,14 @@ export default function CandyApp() {
                   <br />
                   but make it{' '}
                   <span style={{ position: 'relative', display: 'inline-block' }}>
-                    fun
-                    <svg className="cd-squiggle" viewBox="0 0 220 22" aria-hidden="true" fill="none">
+                    fun.
+                    <svg
+                      className="cd-squiggle"
+                      viewBox="0 0 220 22"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                      fill="none"
+                    >
                       <path
                         d="M5 14 C 30 4, 52 20, 78 12 C 104 4, 126 20, 152 12 C 178 4, 200 16, 215 8"
                         stroke="#FF6B6B"
@@ -287,7 +294,6 @@ export default function CandyApp() {
                       />
                     </svg>
                   </span>
-                  .
                 </h1>
               </Reveal>
               <Reveal delay={0.12}>
@@ -392,15 +398,19 @@ export default function CandyApp() {
 
 /* ————— the footer: the lab after hours ————— */
 
+/* stars live in the sky strip above the link columns (y ≤ 14 %) and the
+   outer margins — never twinkling over the footer's text */
 const STARS: Array<{ x: string; y: string; s: number; dl: string }> = [
-  { x: '12%', y: '18%', s: 3, dl: '0s' },
-  { x: '26%', y: '10%', s: 4, dl: '.7s' },
-  { x: '40%', y: '20%', s: 3, dl: '1.3s' },
-  { x: '55%', y: '12%', s: 4, dl: '.4s' },
-  { x: '70%', y: '22%', s: 3, dl: '1.9s' },
-  { x: '82%', y: '14%', s: 4, dl: '1s' },
-  { x: '92%', y: '26%', s: 3, dl: '2.4s' },
-  { x: '6%', y: '34%', s: 3, dl: '1.6s' },
+  { x: '7%', y: '9%', s: 3, dl: '0s' },
+  { x: '17%', y: '13%', s: 2.5, dl: '.7s' },
+  { x: '31%', y: '6%', s: 3, dl: '1.3s' },
+  { x: '44%', y: '11%', s: 2.5, dl: '.4s' },
+  { x: '57%', y: '5%', s: 3, dl: '1.9s' },
+  { x: '68%', y: '12%', s: 2.5, dl: '1s' },
+  { x: '80%', y: '7%', s: 3, dl: '2.4s' },
+  { x: '92%', y: '12%', s: 2.5, dl: '1.6s' },
+  { x: '3%', y: '38%', s: 2.5, dl: '2s' },
+  { x: '97%', y: '44%', s: 2.5, dl: '.2s' },
 ];
 
 function CandyFooter({ go }: { go: (hash: string) => void }) {

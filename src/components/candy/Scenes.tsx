@@ -1,7 +1,7 @@
 'use client';
 
 import { BlobDivider, Reveal, SectionHead } from './bits';
-import { useCanvasScene, monoFont } from './lib';
+import { monoFont, useCanvasScene, useLive } from './lib';
 
 /* ═══════════════════════════════════════════════════════════════════════
    the candy lab's machines — four canvas scenes on the shared gated
@@ -675,8 +675,9 @@ export function SceneEquilibrium() {
 /* ————————————————————— the section ————————————————————— */
 
 export function MotionBand() {
+  const liveRef = useLive<HTMLElement>();
   return (
-    <section id="motion" className="cd-sec cd-band-motion">
+    <section id="motion" ref={liveRef} className="cd-sec cd-band-motion">
       <BlobDivider kind="melt" at="top" color="var(--cd-cream)" />
       <div className="cd-wrap">
         <SectionHead
@@ -690,38 +691,44 @@ export function MotionBand() {
           lead="Three of the course's own ideas, kept as moving machines — no controls, no sliders, just the physics looping the way it loops in the notes. Every figure in the library moves like this; these are the door's demonstrations."
         />
         <div className="cd-stages">
-          <Reveal className="cd-stage">
-            <h3>
-              the distribution breathes <span className="cd-spec-chip">kinetics</span>
-            </h3>
-            <SceneMaxwell />
-            <p className="cd-stage-cap">
-              Maxwell–Boltzmann, warm and cool. The area under the curve never changes — but
-              the tail past E<sub>a</sub> fattens as T rises, which is the whole reason heat
-              speeds a reaction up.
-            </p>
+          <Reveal className="cd-stagecell">
+            <div className="cd-stage">
+              <h3>
+                the distribution breathes <span className="cd-spec-chip">kinetics</span>
+              </h3>
+              <SceneMaxwell />
+              <p className="cd-stage-cap">
+                Maxwell–Boltzmann, warm and cool. The area under the curve never changes — but
+                the tail past E<sub>a</sub> fattens as T rises, which is the whole reason heat
+                speeds a reaction up.
+              </p>
+            </div>
           </Reveal>
-          <Reveal className="cd-stage" delay={0.08}>
-            <h3>
-              the titration draws itself <span className="cd-spec-chip">amount of substance</span>
-            </h3>
-            <SceneTitration />
-            <p className="cd-stage-cap">
-              25.0 cm<sup>3</sup> of 0.100 mol dm<sup>−3</sup> NaOH against the HCl from the
-              worked example below — the curve is computed, not sketched, and it plunges
-              exactly at 20.0 cm<sup>3</sup>.
-            </p>
+          <Reveal className="cd-stagecell" delay={0.08}>
+            <div className="cd-stage">
+              <h3>
+                the titration draws itself <span className="cd-spec-chip">amount of substance</span>
+              </h3>
+              <SceneTitration />
+              <p className="cd-stage-cap">
+                25.0 cm<sup>3</sup> of 0.100 mol dm<sup>−3</sup> NaOH against the HCl from the
+                worked example below — the curve is computed, not sketched, and it plunges
+                exactly at 20.0 cm<sup>3</sup>.
+              </p>
+            </div>
           </Reveal>
-          <Reveal className="cd-stage wide" delay={0.05}>
-            <h3>
-              the balance finds itself <span className="cd-spec-chip">equilibria</span>
-            </h3>
-            <SceneEquilibrium />
-            <p className="cd-stage-cap">
-              2NO<sub>2</sub>(g) ⇌ N<sub>2</sub>O<sub>4</sub>(g) in one sealed bulb. Warming
-              pushes the balance toward brown NO<sub>2</sub>; cooling folds it back into pale
-              N<sub>2</sub>O<sub>4</sub> — Le Chatelier, watched live.
-            </p>
+          <Reveal className="cd-stagecell wide" delay={0.05}>
+            <div className="cd-stage">
+              <h3>
+                the balance finds itself <span className="cd-spec-chip">equilibria</span>
+              </h3>
+              <SceneEquilibrium />
+              <p className="cd-stage-cap">
+                2NO<sub>2</sub>(g) ⇌ N<sub>2</sub>O<sub>4</sub>(g) in one sealed bulb. Warming
+                pushes the balance toward brown NO<sub>2</sub>; cooling folds it back into pale
+                N<sub>2</sub>O<sub>4</sub> — Le Chatelier, watched live.
+              </p>
+            </div>
           </Reveal>
         </div>
         <Reveal className="cd-motion-note" delay={0.1}>

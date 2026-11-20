@@ -1,35 +1,97 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
-import type { ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
+import { motionAllowed } from './lib';
 
-/* the candy lab's shared primitives — the springy entrance voice, the
-   section heading, and the blob seams between bands. */
+/* ═══════════════════════════════════════════════════════════════════════
+   the candy lab's shared primitives — the entrance voice, the section
+   heading, and the blob seams between bands.
 
-export const EASE_CD: [number, number, number, number] = [0.2, 1.3, 0.4, 1];
+   The reveal engine is deliberately NOT framer's whileInView: measured
+   on the live page, whileInView raced hydration and the font swap, and
+   whole bands could end up permanently stuck at opacity 0 (8 of 26
+   sampled elements after one ordinary scroll sweep). This engine is the
+   house pattern instead — the same IntersectionObserver gating the
+   site's other front doors use for their loops:
+
+   · server HTML is visible (no-JS and crawlers see everything);
+   · on mount, motion allowed, below the fold → hidden + observed;
+     one IO tick adds .cd-in exactly once — it can never stick;
+   · already in the first viewport → a quick, delayed load-in;
+   · reduced motion / motion-off → never hidden at all.
+   ═══════════════════════════════════════════════════════════════════════ */
 
 export function Reveal({
   children,
   className = '',
   delay = 0,
   y = 28,
+  onIn,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   y?: number;
+  /** fires once when the element reveals (the answer pill's confetti) */
+  onIn?: () => void;
 }) {
-  const reduced = Boolean(useReducedMotion());
+  const ref = useRef<HTMLDivElement | null>(null);
+  const onInRef = useRef<(() => void) | undefined>(undefined);
+
+  useEffect(() => {
+    onInRef.current = onIn;
+  }, [onIn]);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !motionAllowed()) return;
+    const r = el.getBoundingClientRect();
+    const vh = window.innerHeight || 0;
+    const setVars = () => {
+      el.style.setProperty('--rd', `${delay}s`);
+      el.style.setProperty('--ry', `${Math.max(0, Math.min(y, 60))}px`);
+    };
+    let io: IntersectionObserver | null = null;
+
+    if (r.top >= vh) {
+      /* below the fold: hide, observe, reveal exactly once on arrival */
+      setVars();
+      el.classList.add('cd-pre');
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              el.classList.add('cd-in');
+              io?.disconnect();
+              onInRef.current?.();
+            }
+          }
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -7% 0px' },
+      );
+      io.observe(el);
+    } else if (r.bottom > 0) {
+      /* in the first viewport: a short load-in choreography */
+      setVars();
+      el.classList.add('cd-pre');
+      /* double rAF so the hidden state is committed before the reveal */
+      const id = requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          el.classList.add('cd-in');
+          onInRef.current?.();
+        }),
+      );
+      return () => cancelAnimationFrame(id);
+    }
+    /* else: scrolled past (hash landing) — stays visible, no animation */
+
+    return () => io?.disconnect();
+  }, [delay, y]);
+
   return (
-    <motion.div
-      className={className}
-      initial={reduced ? false : { opacity: 0, y, scale: 0.985 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.12 }}
-      transition={{ duration: 0.65, ease: EASE_CD, delay }}
-    >
+    <div ref={ref} className={`cd-reveal${className ? ` ${className}` : ''}`}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 

@@ -130,13 +130,22 @@
   flex: none;
 }
 
-.cd-sec { padding: clamp(74px, 9vw, 116px) 0; position: relative; }
+.cd-sec { padding: clamp(76px, 9vw, 118px) 0; position: relative; }
 
-.cd-head { margin-bottom: clamp(36px, 5vw, 56px); max-width: 700px; }
+/* anchor jumps land below the floating pill nav */
+#units, #motion, #taste, #snack, #method { scroll-margin-top: 104px; }
+
+.cd-head { margin-bottom: clamp(36px, 5vw, 56px); max-width: 660px; }
 
 .cd-head h2 {
-  font-size: clamp(34px, 4.6vw, 52px);
+  font-size: clamp(32px, 4.2vw, 47px);
   margin: 18px 0 14px;
+}
+
+/* Fredoka has no italic — emphasise with the house coral, not a faux slant */
+.candy-root h2 em {
+  font-style: normal;
+  color: var(--cd-coral);
 }
 
 .cd-head .cd-lead {
@@ -189,6 +198,25 @@
 
 .candy-root .cd-loop { animation-play-state: paused; }
 .candy-root .cd-live .cd-loop { animation-play-state: running; }
+
+/* ————— the reveal engine (bits.tsx) —————
+   Deterministic IO entrances: server HTML visible, hidden + observed on
+   mount, .cd-in exactly once. Never the framer whileInView race that
+   left whole bands stuck at opacity 0. */
+
+.cd-reveal.cd-pre {
+  opacity: 0;
+  transform: translateY(var(--ry, 28px)) scale(0.985);
+  will-change: opacity, transform;
+}
+
+.cd-reveal.cd-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 0.62s cubic-bezier(0.16, 1, 0.3, 1) var(--rd, 0s),
+    transform 0.62s cubic-bezier(0.16, 1, 0.3, 1) var(--rd, 0s);
+}
 
 /* ═════════════════ nav ═════════════════ */
 
@@ -303,8 +331,13 @@
   margin: 24px 0 10px;
 }
 
-/* the squiggle riding under a word */
-.cd-squiggle { display: block; margin-top: 2px; width: min(240px, 46%); height: 14px; }
+/* the squiggle riding under a word — stretches to the word's own width */
+.cd-squiggle {
+  display: block;
+  margin-top: 3px;
+  width: 100%;
+  height: 12px;
+}
 
 .cd-hero .cd-lead {
   font-size: clamp(16.5px, 1.7vw, 18.5px);
@@ -892,6 +925,12 @@
   gap: 24px;
 }
 
+/* the reveal cell wraps the interactive card so hover transforms and
+   the entrance transform never fight the cascade */
+.cd-stagecell { display: flex; }
+.cd-stagecell > .cd-stage { flex: 1; width: 100%; }
+.cd-stagecell.wide { grid-column: 1 / -1; }
+
 .cd-stage {
   background: var(--cd-card);
   border: 2.5px solid var(--cd-ink);
@@ -905,8 +944,6 @@
   transform: translateY(-6px) rotate(-0.4deg);
   box-shadow: 0 12px 0 rgba(61, 43, 31, 0.1), 0 34px 50px -30px rgba(61, 43, 31, 0.4);
 }
-
-.cd-stage.wide { grid-column: 1 / -1; }
 
 .cd-stage h3 {
   font-size: 20px;
@@ -992,14 +1029,16 @@
   align-items: start;
 }
 
+/* the sticky side rides on the reveal cell (the grid item), not the card */
+.cd-qcardcell { position: sticky; top: 104px; }
+.cd-qcardcell > .cd-qcard { height: 100%; }
+
 .cd-qcard {
   background: var(--cd-card);
   border: 2.5px solid var(--cd-ink);
   border-radius: 28px;
   padding: 30px;
   box-shadow: 0 8px 0 rgba(61, 43, 31, 0.1);
-  position: sticky;
-  top: 104px;
 }
 
 .cd-qchip {
@@ -1058,6 +1097,9 @@
 
 .cd-steps { display: grid; gap: 16px; }
 
+.cd-stepcell { display: flex; }
+.cd-stepcell > .cd-step { flex: 1; width: 100%; }
+
 .cd-step {
   display: flex;
   gap: 16px;
@@ -1096,10 +1138,25 @@
 
 .cd-answrap { position: relative; }
 
+/* the answer pill pops once its cell reveals (delayed past the step) */
+.cd-anscell .cd-answer {
+  transform: scale(0.55) rotate(-3deg);
+  opacity: 0;
+}
+
+.cd-anscell.cd-in .cd-answer {
+  transform: none;
+  opacity: 1;
+  transition:
+    transform 0.55s var(--cd-spring) 0.45s,
+    opacity 0.35s ease 0.45s;
+}
+
 .cd-answer {
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  margin-top: 12px;
   background: linear-gradient(180deg, #FFD98A, #FFC64B);
   color: var(--cd-ink);
   border: 2.5px solid var(--cd-ink);
@@ -1156,7 +1213,7 @@
 .cd-snack {
   --cc: var(--cd-coral);
   position: relative;
-  width: 128px;
+  width: 122px;
   background: var(--cd-card);
   border: 2.5px solid var(--cd-ink);
   border-radius: 20px;
@@ -1682,7 +1739,7 @@
   .cd-stations { grid-template-columns: 1fr 1fr; gap: 36px 18px; }
   .cd-stickers { grid-template-columns: repeat(3, 1fr); }
   .cd-taste-grid { grid-template-columns: 1fr; }
-  .cd-qcard { position: static; }
+  .cd-qcardcell { position: static; }
   .cd-dress-grid { grid-template-columns: repeat(3, 1fr); }
   .cd-foot-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -1731,4 +1788,7 @@
   }
   .cd-trail, .cd-confetti { display: none !important; }
   .candy-root .cd-loop { animation-play-state: paused !important; }
+  /* the reveal engine never hides content when motion is off (it never
+     adds .cd-pre), but belt-and-braces: nothing stays invisible */
+  .cd-reveal { opacity: 1 !important; transform: none !important; }
 }

@@ -1,9 +1,8 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
-import { BlobDivider, EASE_CD, Reveal, SectionHead } from './bits';
-import { boopConfetti, motionAllowed, useLive } from './lib';
 import { useRef } from 'react';
+import { BlobDivider, Reveal, SectionHead } from './bits';
+import { boopConfetti, motionAllowed, useLive } from './lib';
 
 /* ═══════════════════════════════════════════════════════════════════════
    try one on me — a real WCH11-style titration question, solved the
@@ -13,6 +12,10 @@ import { useRef } from 'react';
    scripts/lumen-numbers.py. The question card stays pinned while the
    four steps pop in order; the answer arrives as a pill, with confetti
    if motion is allowed.
+
+   The stagger used to be a framer variant tree; it now rides the same
+   deterministic reveal engine as the rest of the door — per-step
+   delays, one engine, no race with hydration.
    ═══════════════════════════════════════════════════════════════════════ */
 
 const INK70 = 'rgba(61, 43, 31, 0.7)';
@@ -126,14 +129,13 @@ const STEPS: Array<{ n: string; body: React.ReactNode }> = [
 
 export function TasteBand() {
   const liveRef = useLive<HTMLElement>();
-  const reduced = Boolean(useReducedMotion());
   const ansRef = useRef<HTMLDivElement | null>(null);
-  const answered = useRef(false);
+  const fired = useRef(false);
 
   /* the answer pill bursts once, when it first arrives */
   const onAnswerIn = () => {
-    if (answered.current || !motionAllowed()) return;
-    answered.current = true;
+    if (fired.current || !motionAllowed()) return;
+    fired.current = true;
     if (ansRef.current) boopConfetti(ansRef.current);
   };
 
@@ -148,80 +150,53 @@ export function TasteBand() {
           lead="A WCH11 classic — the same titration the machine above is running live. Four steps, no skipped lines, the way every worked example in the notes is written."
         />
         <div className="cd-taste-grid">
-          <Reveal className="cd-qcard">
-            <span className="cd-qchip">WCH11 · formulae &amp; amount of substance</span>
-            <p className="cd-qtext">
-              25.0 cm<sup>3</sup> of 0.100 mol dm<sup>−3</sup> sodium hydroxide is titrated with
-              hydrochloric acid. The titre is 20.0 cm<sup>3</sup>. Find the concentration of the
-              hydrochloric acid.
-            </p>
-            <span className="cd-qeq">
-              HCl + NaOH → NaCl + H<sub>2</sub>O
-            </span>
-            <div className="cd-tsvg">
-              <MiniTitration />
+          <Reveal className="cd-qcardcell">
+            <div className="cd-qcard">
+              <span className="cd-qchip">WCH11 · formulae &amp; amount of substance</span>
+              <p className="cd-qtext">
+                25.0 cm<sup>3</sup> of 0.100 mol dm<sup>−3</sup> sodium hydroxide is titrated with
+                hydrochloric acid. The titre is 20.0 cm<sup>3</sup>. Find the concentration of the
+                hydrochloric acid.
+              </p>
+              <span className="cd-qeq">
+                HCl + NaOH → NaCl + H<sub>2</sub>O
+              </span>
+              <div className="cd-tsvg">
+                <MiniTitration />
+              </div>
+              <p className="cd-qfoot">the rig on the left, the curve on the right — one loop, every 8 seconds</p>
             </div>
-            <p className="cd-qfoot">the rig on the left, the curve on the right — one loop, every 8 seconds</p>
           </Reveal>
 
-          <motion.div
-            className="cd-steps"
-            initial={reduced ? false : 'hidden'}
-            whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
-            variants={{
-              hidden: {},
-              show: { transition: { staggerChildren: reduced ? 0 : 0.16 } },
-            }}
-          >
-            {STEPS.map((s) => (
-              <motion.div
-                key={s.n}
-                className="cd-step"
-                variants={{
-                  hidden: reduced ? {} : { opacity: 0, y: 24, rotate: -1 },
-                  show: { opacity: 1, y: 0, rotate: 0, transition: { duration: 0.55, ease: EASE_CD } },
-                }}
-              >
-                <span className="cd-stepn">{s.n}</span>
-                <p>{s.body}</p>
-              </motion.div>
+          <div className="cd-steps">
+            {STEPS.map((s, i) => (
+              <Reveal key={s.n} className="cd-stepcell" delay={0.14 * i}>
+                <div className="cd-step">
+                  <span className="cd-stepn">{s.n}</span>
+                  <p>{s.body}</p>
+                </div>
+              </Reveal>
             ))}
-            <motion.div
-              className="cd-step cd-answrap"
-              ref={ansRef}
-              onAnimationStart={onAnswerIn}
-              variants={{
-                hidden: reduced ? {} : { opacity: 0, y: 24, rotate: 1 },
-                show: {
-                  opacity: 1,
-                  y: 0,
-                  rotate: 0,
-                  transition: { duration: 0.55, ease: EASE_CD, delay: 0.25 },
-                },
-              }}
+            <Reveal
+              className="cd-stepcell cd-anscell"
+              delay={0.14 * STEPS.length}
+              onIn={onAnswerIn}
             >
-              <span className="cd-stepn">∴</span>
-              <p>
-                <b>Three significant figures,</b> as the paper expects — four marks, gently
-                earned.
-                <br />
-                <motion.span
-                  className="cd-answer"
-                  initial={reduced ? false : { scale: 0.5, opacity: 0, rotate: -3 }}
-                  whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 14, delay: 0.5 }}
-                  style={{ display: 'inline-flex', marginTop: 10 }}
-                >
-                  c(HCl) = 0.125 mol dm<sup>−3</sup>
-                </motion.span>
-              </p>
-              <svg className="cd-ans-spark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 2 L14 9.5 L22 12 L14 14.5 L12 22 L10 14.5 L2 12 L10 9.5 Z" />
-              </svg>
-            </motion.div>
-          </motion.div>
+              <div className="cd-step cd-answrap" ref={ansRef}>
+                <span className="cd-stepn">∴</span>
+                <p>
+                  <b>Three significant figures,</b> as the paper expects — four marks, gently
+                  earned.
+                  <span className="cd-answer">
+                    c(HCl) = 0.125 mol dm<sup>−3</sup>
+                  </span>
+                </p>
+                <svg className="cd-ans-spark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2 L14 9.5 L22 12 L14 14.5 L12 22 L10 14.5 L2 12 L10 9.5 Z" />
+                </svg>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>

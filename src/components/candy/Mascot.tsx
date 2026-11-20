@@ -141,6 +141,8 @@ export function Bubbles({
       <g clipPath={`url(#${idp}-clip)`}>
         <path className={asleep ? undefined : 'cd-loop cd-wave1'} d={WAVE1} fill={`url(#${idp}-liq)`} />
         {!asleep && <path className="cd-loop cd-wave2" d={WAVE2} fill={liquid} opacity="0.45" />}
+        {/* the glass highlight — a soft pane on the beaker's left wall */}
+        <rect x="94" y="54" width="12" height="112" rx="6" fill="#FFFFFF" opacity="0.42" />
         {/* measurement ticks, reading through the glass */}
         <path
           d="M168 152 h11 M166 172 h11 M164 192 h9"
