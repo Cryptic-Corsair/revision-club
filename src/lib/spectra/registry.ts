@@ -79,6 +79,9 @@ const topicIndex = new Map<string, number>(
 function buildEntries(): SpecEntry[] {
   const out: SpecEntry[] = [];
   for (const doc of NOTES_DOCS) {
+    /* hidden docs (the physics fork's seeds) never enter the map —
+       no spec tiles, no pack ticks, no dashboard counts for them */
+    if (doc.hidden) continue;
     const unit = UNITS.find((u) => u.code === doc.unitCode);
     const topic = unit?.topics.find((t) => t.id === doc.topicId);
     if (!unit || !topic) continue;

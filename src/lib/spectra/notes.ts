@@ -406,6 +406,7 @@ export const NOTES_DOCS: NotesDoc[] = [
     id: "wph11-t01",
     unitCode: "WPH11",
     topicId: "t01",
+    hidden: true,
     kicker: "Physics Unit 1 · Mechanics — the complete WPH11 note, statement by statement",
     title: "Forces, motion and energy",
     source:
@@ -426,6 +427,7 @@ export const NOTES_DOCS: NotesDoc[] = [
     id: "wph11-t02",
     unitCode: "WPH11",
     topicId: "t02",
+    hidden: true,
     kicker: "Physics Unit 1 · Materials — the complete WPH11 note, statement by statement",
     title: "Materials — fluids, viscosity and elasticity",
     source:
@@ -453,14 +455,17 @@ export function getNotesForTopic(unitCode: string, topicId: string): NotesDoc | 
 }
 
 /* dev guard — the shell routes on notes-meta.ts, so the two lists
-   must agree or notes open into nothing. Loud, not silent. */
+   must agree or notes open into nothing. Loud, not silent. Hidden
+   docs (the physics fork's seeds) ride in NOTES_DOCS but never get
+   a card, so the guard counts only the visible ones. */
 if (process.env.NODE_ENV !== "production") {
-  if (NOTES_META.length !== NOTES_DOCS.length) {
+  const visibleDocs = NOTES_DOCS.filter((d) => !d.hidden);
+  if (NOTES_META.length !== visibleDocs.length) {
     console.error(
       "[notes] notes-meta.ts and NOTES_DOCS disagree on count — re-run scripts/gen-notes-meta.ts",
     );
   }
-  for (const d of NOTES_DOCS) {
+  for (const d of visibleDocs) {
     const m = NOTES_META.find((x) => x.id === d.id);
     if (!m) {
       console.error(

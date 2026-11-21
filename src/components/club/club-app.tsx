@@ -1172,8 +1172,9 @@ export default function ClubApp() {
      so the rules in globals.css can re-fit the pieces that opt in
      (the customize drawer, the lab toast). The navbar deliberately
      never opts in — browser zoom must not restyle it — and the
-     separate content-scale system can't either (the .site-header
-     --ui-scale pin). The pill stays put, whatever either is doing. */
+     content-scale system can't either (the frozen-chrome pin holds
+     the navbar and the customize drawer at the M rung's size, see
+     globals.css). The pill stays put, whatever either is doing. */
   useEffect(() => {
     const root = document.documentElement;
     const apply = () => {

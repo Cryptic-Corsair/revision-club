@@ -190,4 +190,9 @@ export interface NotesDoc {
   intro: NotesBlock[];
   sections: SpecSection[];
   outro?: NotesBlock[];
+  /** true = the note exists in source but never surfaces: no card in
+     notes-meta.ts, no spec-map entry, no search hit. Kept here so a
+     hidden doc stays one flag away from returning (the physics fork
+     flips these back). */
+  hidden?: true;
 }

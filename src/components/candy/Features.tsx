@@ -66,7 +66,6 @@ const LABS = [
   { name: 'Night', sub: 'plum dusk', dots: ['#17131d', '#30263d', '#f5eff7'] },
   { name: 'Dune', sub: 'chocolate', dots: ['#1e1b16', '#2e2820', '#f6f0e6'] },
   { name: 'Classic', sub: 'espresso', dots: ['#2c2013', '#4a3c2b', '#fff6ea'] },
-  { name: 'Pistachio', sub: 'the orchard', dots: ['#e9eddb', '#f2f5e3', '#262c10'] },
 ];
 
 function IfaceCards() {

@@ -190,26 +190,10 @@ export const NOTES_META: NotesMeta[] = [
     source: "the core practical reference notes (CHSE, Unit 3 · 2020) — Core Practicals 5, 6 and 7, the cyclohexene and ester preparations, and the organic unknowns of Core Practical 8+15",
     specRange: "P9.1 → P9.7",
   },
-  {
-    id: "wph11-t01",
-    unitCode: "WPH11",
-    topicId: "t01",
-    kicker: "Physics Unit 1 · Mechanics — the complete WPH11 note, statement by statement",
-    title: "Forces, motion and energy",
-    source:
-      "the complete WPH11 Mechanics note — built from the Pearson Edexcel IAL Physics specification (2018, Issue 3), WPH11/01 question papers, mark schemes and Principal Examiners' reports, 2019–2025",
-    specRange: "1 → 22",
-  },
-  {
-    id: "wph11-t02",
-    unitCode: "WPH11",
-    topicId: "t02",
-    kicker: "Physics Unit 1 · Materials — the complete WPH11 note, statement by statement",
-    title: "Materials — fluids, viscosity and elasticity",
-    source:
-      "the complete WPH11 Materials note — built from the Pearson Edexcel IAL Physics specification (2018, Issue 3), WPH11/01 question papers, mark schemes and Principal Examiners' reports, 2019–2025",
-    specRange: "23 → 32",
-  },
+  /* the two WPH11 physics cards were removed on 2026-11-21 when the
+     owner hid the physics notes ahead of the physics fork (the docs
+     stay in notes.ts, flagged hidden: true — restore the cards by
+     un-flagging and re-running the generator). */
 ];
 
 export function getNotesMeta(docId: string): NotesMeta | undefined {
