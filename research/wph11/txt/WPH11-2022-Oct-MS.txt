@@ -1,0 +1,608 @@
+                                         PMT
+
+
+
+
+Mark Scheme (Results)
+
+
+October 2022
+
+
+Pearson Edexcel International Advanced
+Subsidiary Level in Physics (WPH11)
+Unit 1: Mechanics and Materials
+                                                                                                 PMT
+
+
+
+
+Edexcel and BTEC Qualifications
+
+Edexcel and BTEC qualifications come from Pearson, the world’s leading learning company.
+We provide a wide range of qualifications including academic, vocational, occupational and
+specific programmes for employers. For further information visit our qualifications
+websites at www.edexcel.com or www.btec.co.uk for our BTEC qualifications. Alternatively,
+you can get in touch with us using the details on our contact us page at
+www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Our aim is to help everyone progress in their lives through education. We believe in every
+kind of learning, for all kinds of people, wherever they are in the world. We’ve been involved
+in education for over 150 years, and by working across 70 countries, in 100 languages, we
+have built an international reputation for our commitment to high standards and raising
+achievement through innovation in education. Find out more about how we can help you
+and your students at: www.pearson.com/uk
+
+
+
+
+October 2022
+Question Paper Log Number: P71878A
+Publications Code: WPH11_01_2210_MS
+All the material in this publication is copyright
+© Pearson Education Ltd 2022
+                                                                                          PMT
+
+
+
+
+General Marking Guidance
+
+
+
+            •   All candidates must receive the same treatment. Examiners must
+                mark the first candidate in exactly the same way as they mark the last.
+            •   Mark schemes should be applied positively. Candidates must be
+                rewarded for what they have shown they can do rather than penalised
+                for omissions.
+            •   Examiners should mark according to the mark scheme not according
+                to their perception of where the grade boundaries may lie.
+            •   There is no ceiling on achievement. All marks on the mark scheme
+                should be used appropriately.
+            •   All the marks on the mark scheme are designed to be awarded.
+                Examiners should always award full marks if deserved, i.e. if the
+                answer matches the mark scheme. Examiners should also be
+                prepared to award zero marks if the candidate’s response is not
+                worthy of credit according to the mark scheme.
+            •   Where some judgement is required, mark schemes will provide the
+                principles by which marks will be awarded and exemplification may
+                be limited.
+            •   When examiners are in doubt regarding the application of the mark
+                scheme to a candidate’s response, the team leader must be
+                consulted.
+            •   Crossed out work should be marked UNLESS the candidate has
+                replaced it with an alternative response.
+                                                                                                       PMT
+
+
+
+
+Mark scheme notes
+
+Underlying principle
+
+The mark scheme will clearly indicate the concept that is being rewarded, backed up by
+examples. It is not a set of model answers.
+
+1. Mark scheme format
+
+1.1 You will not see ‘wtte’ (words to that effect). Alternative correct wording should be credited
+in every answer unless the MS has specified specific words that must be present. Such words
+will be indicated by underlining e.g. ‘resonance’
+
+1.2 Bold lower case will be used for emphasis e.g. ‘and’ when two pieces of information are
+needed for 1 mark.
+
+1.3 Round brackets ( ) indicate words that are not essential e.g. “(hence) distance is increased”.
+
+1.4 Square brackets [ ] indicate advice to examiners or examples e.g. [Do not accept gravity] [ecf].
+
+2. Unit error penalties
+
+2.1 A separate mark is not usually given for a unit but a missing or incorrect unit will normally
+mean that the final calculation mark will not be awarded.
+
+2.2 This does not apply in ‘show that’ questions or in any other question where the units to be
+used have been given, for example in a spreadsheet.
+
+2.3 The mark will not be awarded for the same missing or incorrect unit only once within one
+clip in ePen.
+
+2.4 Occasionally, it may be decided not to insist on a unit e.g the candidate may be calculating
+the gradient of a graph, resulting in a unit that is not one that should be known and is complex.
+
+2.5 The mark scheme will indicate if no unit error is to be applied by means of [no ue].
+
+3. Significant figures
+
+3.1 Use of too many significant figures in the theory questions will not be prevent a mark being
+awarded if the answer given rounds to the answer in the MS.
+
+3.2 Too few significant figures will mean that the final mark cannot be awarded in ‘show that’
+questions where one more significant figure than the value in the question is needed for the
+candidate to demonstrate the validity of the given answer.
+
+3.3 The use of one significant figure might be inappropriate in the context of the question e.g.
+reading a value off a graph. If this is the case, there will be a clear indication in the MS.
+
+3.4 The use of g = 10 m s-2 or 10 N kg-1 instead of 9.81 m s-2 or 9.81 N kg-1 will mean that one
+mark will not be awarded (but not more than once per clip). Accept 9.8 m s-2 or 9.8 N kg-1
+                                                                                                         PMT
+
+
+
+
+3.5 In questions assessing practical skills, a specific number of significant figures will be required
+e.g. determining a constant from the gradient of a graph or in uncertainty calculations. The MS
+will clearly identify the number of significant figures required.
+
+4. Calculations
+
+4.1 Bald (i.e. no working shown) correct answers may score full marks.
+
+4.2 Some working is expected for full marks to be scored in a ‘show that’ question or an extended
+calculation question.
+
+4.3 If a ‘show that’ question is worth 2 marks, then both marks will be available for a reverse
+working. If the question is worth 3 marks then only 2 marks will be available.
+
+4.4 use of the formula means that the candidate demonstrates substitution of physically correct
+values, although there may be conversion errors e.g. power of 10 error.
+
+4.5 The mark scheme will show a correctly worked answer for illustration only.
+
+5. Quality of Written Expression
+
+5.1 Questions that asses the ability to show a coherent and logically structured answer are
+marked with an asterisk.
+
+5.2 Marks are awarded for indicative content and for how the answer is structured.
+
+5.3 Linkage between ideas, and fully-sustained reasoning is expected.
+                                                                                                    PMT
+
+
+
+
+Question
+                                              Answer                                         Mark
+Number
+1        B is the correct answer                                                              1
+         A is incorrect because acceleration is rate of change of velocity.
+         C is incorrect because speed is the magnitude of velocity.
+         D is incorrect because time taken is the x-axis variable
+2        C is the correct answer                                                              1
+         A is incorrect because energy is not a vector
+         B is incorrect because mass is not a vector
+         D is incorrect because power is not a vector
+3        C is the correct answer                                                              1
+         A is incorrect because Stokes' law does not apply to all spheres
+         B is incorrect because Stokes' law does not apply to all spheres and applies at
+         all viscosities
+         D is incorrect because Stokes' law applies at all viscosities
+4        A is the correct answer                                                              1
+         B is incorrect because the gradient is zero except at one point.
+         C is incorrect because the gradient begins negative and becomes positive.
+         D is incorrect because the positive and negative gradients are constant except at
+         one point.
+5        C is the correct answer                                                              1
+         A is incorrect because Young modulus is not the breaking stress of a material
+         B is incorrect because Young modulus is not the density of a material.
+         D is incorrect because Young modulus is not the elastic limit of a material
+6          B is the correct answer                                                            1
+           A is incorrect because P is spurious and R is not included
+           C is incorrect because Q is not included
+           D is incorrect because R is not included
+7          C is the correct answer                                                            1
+           A & B are incorrect because the vectors have not been added
+           D is incorrect because the resultant is in the wrong direction
+8          C is the correct answer                                                            1
+           A is incorrect because the extension is wrong and the force has been neglected
+           B is incorrect because the force has been neglected, or the extension is wrong
+           D is incorrect because the extension has been neglected
+9          A is the correct answer                                                            1
+           B is incorrect because the electron is lighter than the proton
+           C is incorrect because the electron is lighter than the proton
+           D is incorrect because the velocity is not inversely proportional to mass
+10         C is the correct answer                                                            1
+           A is incorrect because it gives 48% of only the power output.
+           B is incorrect because it gives is 52% of the power output.
+           D is incorrect because it gives is the total power input.
+           Total for Section A                                                                10
+                                                                                                        PMT
+
+
+
+
+Question
+                                                Answer                                           Mark
+Number
+11(a)    The (vector) sum of all forces (acting on an object)
+         Or
+         The single force that would have the same effect as all the other forces acting
+         together                                                                          (1)    1
+         [Treat “net force” as synonym for “resultant force”, so no mark]
+
+11(b)      Use of F = m a [allow 3.1 kN or 5.5 kN (0.41 or 0.73 (m s−2) respectively)]     (1)
+           a = 3.2 × 10−1 m s−2                                                            (1)    2
+
+           Example of calculation
+           (5.5 – 3.1) × 103 N = 7.5 × 103 kg × a
+           a = 2.4 × 103 N ÷ 7.5 × 103 kg = 0.32 m s−2
+
+11(c)      Use of P = W / t and ΔW = F Δx [allow P = F v]                                  (1)    2
+           [allow 2.4 kN or 3.1 kN (1.2 × 104 or 1.5 × 104 (W) respectively)]              (1)
+           P = 2.6 × 104 W [or J s−1]
+
+           Example of calculation
+           P = W / t = F Δx / t = F v
+                  = 5.5 × 103 N × 4.8 m s−1= 2.64 × 104 W
+
+           Total for question 11                                                                  5
+                                                                                                           PMT
+
+
+
+
+Question
+                                                     Answer                                         Mark
+Number
+12(a)    Use of σ = F / A                                                                     (1)
+
+            σ = 3.8 × 108 Pa [accept N m−2]
+            Or
+            Fb = 170 N
+            Or
+            Amin = 3.6 × 10−7 m2                                                              (1)
+
+            Valid comparison in consistent units and conclusion                               (1)    3
+
+            Example of calculation
+            σ = 150 N ÷ 3.97 × 10−7 m2 = 3.78 × 108 Pa
+            3.78 < 4.20 ⸫ will not break
+
+12(b)(i)    Determine gradient of straight line section [straight line ends at 5 mm]          (1)
+            [Δx ≥ 3 mm for gradient][Allow use of tangent at origin]                          (1)    2
+            k = 1.30 × 104 (N m−1) [acceptable range to be determined at pre-stand]
+            [1.27 to 1.33][need to see third s.f.]
+
+            Example of calculation
+            gradient = 60 / 4.6 = 13.0
+            gradient = k / N mm−1
+            k = 13.0 N mm−1 = 1.30 × 104 N m−1
+
+12(b)(ii)   Use of k = EA/ x                                                                  (1)
+            E = 1.3 × 1011 Pa [or N m−2](ecf from (b)(i))[their (b)(i) × 1.01 × 107 + unit]   (1)    2
+
+            Example of calculation
+            E=kx/A
+            E = 1.3 × 104 N m−1 × 4.00 ÷ 3.97 × 10−7 m2
+            E = 1.3 × 1011 Pa
+
+            Total for question 12                                                                    7
+                                                                                                      PMT
+
+
+
+
+Question
+                                             Answer                                            Mark
+Number
+13(a)    Moments due to force on wheel and force on handle must be equal (magnitude
+         about any point)                                                                (1)
+
+          Moment is force times (perpendicular) distance [accept “F x” but no other      (1)
+          symbols unless in question or defined by candidate]
+
+           [Accept for MP1 and MP2 Force × (perpendicular) distance must be same for
+           both moments]
+
+           Handle is futher from centre of gravity than wheel (so less force for equal   (1)    3
+           moment) [NB independent mark]
+
+13(b)      Uses weight = 400 N                                                           (1)
+           Or
+           Uses x and (1.5 − x)
+                                                                                         (1)
+           Use of moment = Fx about a stated point                                       (1)
+           [accept pivot point clearly indicated on diagram]                             (1)    4
+           Use of principle of moments
+           x = 0.3 m
+
+           Example calculation
+           Weight = 320 + 80 = 400 N
+           Taking moments about line of action of 320 N force
+           400 N × x = 80 N × 1.5 m
+           x = 120 Nm ÷ 400 N = 0.30 m
+
+           Total for question 13                                                                7
+                                                                                                      PMT
+
+
+
+
+Question
+                                                    Answer                                     Mark
+Number
+14(a)    Use of upthrust = weight of fluid displaced                                     (1)
+         Use of ρ = m / V [accept use to calculate density of balloon, 0.184 (kg m−3)]   (1)
+         [Correct use of ρairgV to find resultant can score MP1 and MP2]                 (1)
+         Use of W = mg                                                                   (1)    4
+         Resultant force = 0.5 N
+
+           Example of calculation
+           Upthrust U = 0.05 m3 × 1.20 kg m−3 × 9.81N kg−1 = 0.589 N
+           Weight W = 9.20 × 10−3 kg × 9.81N kg−1 = 0.090 N
+           Resultant force = U − W = 0.589 N − 0.090 N = 0.498 N
+                                                                                                             PMT
+
+
+
+
+14(b)*   This question assesses a student’s ability to show a coherent and logically structured
+         answer with linkages and fully-sustained reasoning.
+         Marks are awarded for indicative content and for how the answer is structured and
+         shows lines of reasoning.
+         The following table shows how the marks should be awarded for indicative content and
+         lines of reasoning.
+           IC points       IC mark      Max linkage          Max final
+                                       mark available         mark
+                 6             4             2                  6
+                 5             3             2                  5
+                 4             3             1                  4
+                 3             2             1                  3
+                 2             2             0                  2
+                 1             1             0                  1
+                 0             0             0                  0
+                                                                                       Marks
+          Answer shows a coherent and logical structure with linkages and               2
+          fully sustained lines of reasoning demonstrated throughout.
+          Answer is partially structured with some linkages and lines of                  1
+          reasoning
+          Answer has no linkages between points and is unstructured                       0
+         Indicative content:
+
+
+         [Allow “net force” as synonym for “resultant force”, accept U, W for upthrust and
+         weight]
+
+             •       Initially there is a resultant upward force
+                     Or
+                     Upthrust is greater than weight and initially there is no air resistance [accept
+                     “drag”]
+             •       Balloon accelerates (upwards)
+                     Or
+                     Balloon moves (up) with increasing velocity/speed
+             •       (Downward) air resistance force, (initially zero) increases as velocity/speed
+                     increases. (U and W are constant.)
+             •       Resultant (upward) force decreases so acceleration decreases                       6
+             •       (Eventually) resultant force is zero
+                     Or
+                     (Eventually) upthrust = weight + drag
+                     Or
+                     (Eventually) the forces (on the balloon) are balanced
+             •       Balloon moves continues to move (upwards) at constant velocity
+                     Or
+                     balloon moves (upwards) with terminal velocity/speed
+
+         Total for question 14                                                                          10
+                                                                                                   PMT
+
+
+
+
+Question                                                                                     Mar
+                                                    Answer
+Number                                                                                        k
+15(a)      Use of correct trigonometry to calculate horizontal component               (1
+           [9.7 cos 49° or 9.7 sin 41° seen]                                            )
+           Use of s = u t + ½ a t2 with a = 0 [i.e. use of s = v t]
+           t = 0.79 (s) [NB reverse argument scores 2 marks (Rule 4.2)]                (1     3
+                                                                                        )
+           Example of calculation                                                      (1
+           vH = 9.70 m s−1 × cos 49° = 6.36 m s−1                                       )
+           t = 5.00 m ÷ 6.36 m s−1 = 0.786 s
+
+15(b)      Use of correct trigonometry to calculate vertical component                 (1)
+           [9.7 sin 49° or 9.7 cos 41° seen]
+
+           Use of s = u t + ½ a t2                                                     (1)
+           s = 2.7 m (ecf from (a))                                                    (1)
+           ["show that" value also gives 2.72 m]
+           Correct conclusion from valid comparison using student’s calculated value   (1)
+
+           Or
+           Use of v2 = u2 + 2 a s                                                      (1)
+           Max height = 2.7 m [no ecf]                                                 (1)
+           Correct conclusion from valid comparison using student’s calculated value   (1)    4
+           [allow any valid suvat method, allow ecf if method involves t from (a)]
+
+           Example of calculation
+           vV = 9.70 m s−1 × sin 49° = 7.32 m s−1
+           s = 7.32m s−1 × 0.79 s − 0.5 × 9.81 m s−2 × (0.79 s)2 = 2.72 m
+           2.72 m < 3.00 m so ball does not go over the wall
+
+           [Significant moments …
+
+
+
+
+           Total for question 15                                                              7
+                                                                                                        PMT
+
+
+
+
+Question
+                                               Answer                                            Mark
+Number
+16(a)    Sum of momenta before (collision) = sum of momenta after (collision)
+         Or
+         Total momentum before (a collision) = total momentum after (a collision)
+         Or
+         Total momentum remains constant
+         Or
+         The momentum of a system remains constant                                         (1)
+
+           Provided no external/unbalanced/resultant force acts (on the system)
+           Or
+           in a closed/isolated system                                                     (1)    2
+
+16(b)      Use of p = m v                                                                  (1)
+
+           Momentum before collision = 810 N s and after collision = 780 N s
+           Or Expected velocity = 6.5 m s−1                                                (1)
+
+           Correct conclusion based on comparison of candidate’s momenta/speeds            (1)    3
+
+           Example of calculation
+           Momentum before collision:
+           65 kg × 5.5 m s−1 + 60 kg × 7.5 m s−1 = 807.5 N s
+           Momentum after collision:
+           (65 + 60) kg × 6.2 m s−1 = 775.0 N s
+            775 ≠ 808 ⸫ momentum not conserved
+
+16(c)      Forces acted between skaters (during the collision)                             (1)
+           Or
+           External forces [accept friction (between skates and ice)] act on the skaters
+           (during the collision)
+
+           Work done (by forces) during the collision was not recovered
+           Or                                                                              (1)    2
+           Work done (by forces) during the collision was dissipated
+           Or
+           Work done (by forces) transfers (kinetic) energy to thermal energy [accept
+           “heat”]
+
+           Total for question 16                                                                  7
+                                                                                                             PMT
+
+
+
+
+Question
+                                                     Answer                                           Mark
+Number
+17(a)(i) Use of W = m g                                                                         (1)
+         Use of Newton first law                                                                (1)
+         6.9 × 10−8 (N)                                                                         (1)    3
+
+            Example of calculation
+            W = 1.15 × 10−8 kg × 9.81 N kg−1 = 1.13 × 10−7 N
+            D = W − U = 1.13 × 10−7 N − 4.37 × 10−8 N = 6.91 × 10−8 N
+
+17(a)(ii)   Use of F = 6 π η r v [allow diameter for radius]                                    (1)
+            Terminal velocity = 5.7 × 10−3 m s−1 (ecf from (a)(i))                              (1)    2
+            ["show that" value gives 5.73 × 10−3 m s−1]
+
+            Example of calculation
+            D = 6π × 1.41 × 10−3 Pa s × 4.6 × 10−4 m × v = 6.91 × 10−8 N
+            v = 6.91 × 10−8 N ÷ (6π × 1.41 × 10−3 Pa s × 4.6 × 10−4 m)
+                    = 5.65 × 10−3 m s−1
+
+17(b)       Viscosity increases (with lower temperature) so drag force increases (for given     (1)
+            velocity)
+            OR
+            Viscosity increases (with lower temperature) so (terminal) velocity slower for             4
+            given drag force [allow reference to F = 6π η ρ v]
+
+            Density increases (with increasing depth) so upthrust increases [ignore “upthrust   (1)
+            is constant”]
+            Weight remains constant [do not accept “mass”]                                      (1)
+            Terminal velocity reduces (with increasing depth) (dependent on MP1 or MP2)         (1)
+            [accept “constant” velocity]
+
+
+            Total for question 17                                                                      9
+                                                                                                        PMT
+
+
+
+
+Question
+                                                   Answer                                        Mark
+Number
+18(a)    Force from truck to the left [accept 1.2 × 105 (N)]                               (1)
+         Air resistance to the left [accept 3.0 × 104 (N)][do not accept “viscous drag”]   (1)
+         Force from rails to the right [accept 1.5 × 105 (N)]                              (1)
+         [withhold one mark if more forces than three][if magnitudes used ignore names
+         of forces]                                                                        (1)    4
+         Total length of arrows towards the left equals length of arrow to the right [to
+         within 2 mm using measuring tool][dependent on any three horizontal forces,
+         do not check unless lengths look close by eye]
+
+
+
+
+18(b)      A Newton’s third law pair of forces
+              • Forces of equal magnitude that act in opposite directions [do not accept   (1)
+                 “equal and opposite reaction”][accept act for equal times]
+              • Same type of force                                                         (1)
+              • (Acting on) different bodies                                               (1)
+
+                                                                                           (1)
+           These two forces both act on the engine [accept “on the same body”]             (1)    5
+           One force is gravitational [do not accept “weight”]and the other is a contact
+           force
+
+           Total for question 18                                                                  9
+                                                                                                                  PMT
+
+
+
+
+Question
+                                                  Answer                                                   Mark
+Number
+19(a)    Use of ΔW = F Δx [allow any dimensionally correct variation, e.g. involving trig]           (1)
+         ΔW = 3.2 × 104 (J) [do not allow if cos 4° used in MP1, gives 3.217].]                      (1)    2
+
+            Example of calculation
+            ΔW = 150 N × 215 m = 3.23 × 104 J
+
+19(b)(i)    Use of correct trigonometry to calculate Δh                                              (1)
+            Or
+            Use of correct trigonometry to calculate component of g along slope, [61.6 (N)]
+
+            Use of ΔEgrav = m g Δh [ΔEgrav = 90 kg × 9.81 × 215 m × sin 4.0° scores MP1&2]           (1)
+            Total work done = work done against gravity + work done against air resistance           (1)
+            Work against air resistance = 2.0 × 104 J (allow ecf from (a))                           (1)    4
+            [“show that” value gives 1.68 × 104 J]
+
+            Example of calculation
+            Δh = 215 m × sin 4.0° = 15.0 m
+            ΔEgrav = 90 kg × 9.81 × 15.0 = 1.32 × 104 J
+            W = 3.20 × 104 J – 1.32 × 104 J = 1.88 × 104 J
+
+19(b)(ii)   Force of gravity and air resistance are the only significant forces acting (to oppose    (1)    1
+            the motion of the bicycle)
+            Or
+            Frictional forces (in the bearings of the bicycle) are negligible [accept zero, do not
+            accept friction between bicycle and slope/ground]
+            Or
+            Work done against frictional forces (in the bearings of the bicycle) is negligible
+            [accept zero]
+
+
+19(c)       No work done against (force of) gravity
+            Or
+            All work done against air resistance
+            Or
+            No backward force due to gravity so resultant force acts                                 (1)
+
+            Speed increases [MP2 dependent on MP1]                                                   (1)    2
+
+            Total for question 19                                                                           9
+                                                                            PMT
+
+
+
+
+Pearson Education Limited. Registered company number 872828
+with its registered office at 80 Strand, London, WC2R 0RL, United Kingdom
+

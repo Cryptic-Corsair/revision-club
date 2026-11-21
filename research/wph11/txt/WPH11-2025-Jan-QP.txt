@@ -1,0 +1,1456 @@
+                                      Please check the examination details below before entering your candidate information
+                                Candidate surname                                            Other names
+
+
+                               Centre Number                  Candidate Number
+
+
+
+
+                               Pearson Edexcel International Advanced Level
+                               Wednesday 8 January 2025
+                               Morning (Time: 1 hour 30 minutes)               Paper
+                                                                               reference       WPH11/01
+                                Physics
+                                                                                                                               
+
+
+                                International Advanced Subsidiary/Advanced Level
+                                UNIT 1: Mechanics and Materials
+
+                                You must have:                                                                        Total Marks
+                                Scientific calculator, ruler, protractor
+
+
+
+                      Instructions
+                      •• Use   black ink or ball-point pen.
+                          If pencil is used for diagrams/sketches/graphs it must be dark (HB or B).
+                       • Fill in the boxes at the top of this page with your name,
+                          centre number and candidate number.
+                       •• Answer   all questions.
+                          Answer the questions in the spaces provided
+                          – there may be more space than you need.
+                        • Show all your working out in calculations and include units where appropriate.
+                      Information
+                      •• The    total mark for this paper is 80.
+                         The marks for each question are shown in brackets
+                         – use this as a guide as to how much time to spend on each question.
+                       • Into the question marked with an asterisk (*), marks will be awarded for your ability
+                              structure your answer logically, showing how the points that you make are
+                         related or follow on from each other where appropriate.
+                       • The list of data, formulae and relationships is printed at the end of this booklet.
+                      Advice
+                      •• Read  each question carefully before you start to answer it.
+                         Try to answer every question.
+                       • Check your answers if you have time at the end.                                                      Turn over
+
+
+P78474A
+©2025 Pearson Education Ltd.
+H:1/1/1/
+                                                *P78474A0128*
+                                                   SECTION A
+                                             Answer ALL questions.
+
+
+
+
+                                                                                                                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+For questions 1–10, in Section A, select one answer from A to D and put a cross in the box . If you
+ change your mind, put a line through the box and then mark your new answer with a cross .
+1       Stress is applied to a sample of a material. The stress is increased until the sample breaks.
+        The graph shows the relationship between stress and strain for the sample.
+
+
+
+
+                                   Stress
+
+
+
+
+                                                       Strain
+
+        Which of the following gives the Young modulus of the material?
+
+             A The area between the line and the strain axis.
+
+             B The gradient of the graph.
+
+             C The maximum stress multiplied by the maximum strain.
+
+             D The maximum strain divided by the maximum stress.
+                                                                     (Total for Question 1 = 1 mark)
+
+
+
+
+    2
+                                   *P78474A0228*                                                        
+                                                                                                                                                                              2   A coin and a feather are dropped from the same height, through air.
+                                                                                                                                                                                  Which row of the table is correct as the coin and feather fall to the ground?
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                    Initial acceleration           Time taken to reach the ground
+                                                                                                                                                                                        A             Greater for coin                       Less for coin
+                                                                                                                                                                                        B             Greater for coin                 Same for coin and feather
+                                                                                                                                                                                        C        Same for coin and feather                   Less for coin
+                                                                                                                                                                                        D        Same for coin and feather             Same for coin and feather
+
+
+                                                                                                                                                                                                                                              (Total for Question 2 = 1 mark)
+
+                                                                                                                                                                              3   A physical quantity can be either a scalar or a vector.
+                                                                                                                                                                                  Which row of the table is correct for acceleration and work done?
+
+                                                                                                                                                                                                 Acceleration              Work done
+
+                                                                                                                                                                                        A            scalar                  scalar
+
+                                                                                                                                                                                        B            scalar                  vector
+
+                                                                                                                                                                                        C            vector                  scalar
+
+                                                                                                                                                                                        D            vector                  vector
+
+
+                                                                                                                                                                                                                                              (Total for Question 3 = 1 mark)
+
+
+
+
+                                                                                                                                                                                                                                                                                 3
+                                                                                                                                                                                                          *P78474A0328*                                               Turn over
+4       A spring is stretched beyond its elastic limit. The applied force is then removed.
+        Which of the following describes the behaviour of the spring?
+
+
+
+
+                                                                                                                                                                                                    DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                             DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+             A The extension of the spring is always proportional to the force applied.
+
+             B Plastic deformation occurs until the spring reaches its elastic limit.
+
+             C The spring only shows elastic deformation.
+
+             D The spring does not return to its original length.
+                                                                    (Total for Question 4 = 1 mark)
+
+5       An aeroplane lands on a runway at time 0 and then decelerates.
+        The graph shows how the deceleration of the aeroplane varies with time.
+
+                       Deceleration
+
+
+
+
+                                      0                   t             Time
+
+        Which of the following does the shaded area on the graph represent?
+
+             A The displacement of the aeroplane at time t.
+             B The change in displacement of the aeroplane during time t.
+
+             C The velocity of the aeroplane at time t.
+
+             D The change in velocity of the aeroplane during time t.
+
+                                                                    (Total for Question 5 = 1 mark)
+
+
+
+
+    4
+                                   *P78474A0428*                                                      
+                                                                                                                                                                              6   When a force F is applied to a spring of stiffness k, the extension of the spring is Δx.
+                                                                                                                                                                                  A force 2F is applied to a second spring of stiffness 3k.
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                  Which of the following expressions gives the extension of the second spring?
+
+                                                                                                                                                                                             2
+                                                                                                                                                                                        A      Δx
+                                                                                                                                                                                             3
+
+                                                                                                                                                                                             3
+                                                                                                                                                                                        B      Δx
+                                                                                                                                                                                             2
+
+                                                                                                                                                                                            1
+                                                                                                                                                                                        C     Δx
+                                                                                                                                                                                            6
+
+
+                                                                                                                                                                                        D 6Δx
+                                                                                                                                                                                                                                                   (Total for Question 6 = 1 mark)
+
+                                                                                                                                                                              7   A student drops a ball and measures the time taken for the ball to reach the ground.
+                                                                                                                                                                                  He repeats this for different heights.
+                                                                                                                                                                                  He uses a graphical method to determine a value for g, the acceleration of free fall.
+                                                                                                                                                                                  He plots height on the y-axis of his graph.
+                                                                                                                                                                                  Which row of the table is correct for the student’s graph?
+
+
+                                                                                                                                                                                              Quantity plotted on x-axis            Gradient of graph
+
+                                                                                                                                                                                                                                               1
+                                                                                                                                                                                        A                 time
+                                                                                                                                                                                                                                               g
+
+
+                                                                                                                                                                                        B                 time                                 g
+
+
+                                                                                                                                                                                                                                               g
+                                                                                                                                                                                        C                (time)2
+                                                                                                                                                                                                                                               2
+
+
+                                                                                                                                                                                        D                (time)2                               2g
+
+
+                                                                                                                                                                                                                                                   (Total for Question 7 = 1 mark)
+
+
+
+
+                                                                                                                                                                                                                                                                                      5
+                                                                                                                                                                                                         *P78474A0528*                                                     Turn over
+8       The velocity-time graph for a train journey is shown.
+
+                                             2v
+
+
+
+
+                                                                                                                                                                                                    DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                             DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                  Velocity
+                                              v
+
+
+
+
+                                              0
+                                                           t          2t
+                                                          Time
+
+        Which of the following expressions gives the distance travelled by the train in time 2t ?
+
+
+             A 4vt
+
+
+             B 5vt
+
+
+                 3vt
+             C
+                  2
+
+                 5vt
+             D
+                  2
+
+                                                                    (Total for Question 8 = 1 mark)
+
+
+
+
+    6
+                                   *P78474A0628*                                                      
+                                                                                                                                                                              9   A free-body force diagram for an object moving through a fluid is shown.
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                                                     upthrust = 90 N
+
+                                                                                                                                                                                                                                                             Not to scale
+
+
+                                                                                                                                                                                                                              drag
+                                                                                                                                                                                                                                     weight = 49 N
+
+
+
+                                                                                                                                                                                  The mass of the object is 5 kg.
+                                                                                                                                                                                  The object is accelerating upwards at 4 m s−2.
+                                                                                                                                                                                  Which of the following gives the magnitude of the drag force in newtons?
+
+                                                                                                                                                                                        A 5×4
+
+                                                                                                                                                                                        B 90 − 49
+                                                                                                                                                                                        C 90 − 49 − (5 × 4)
+
+                                                                                                                                                                                        D 90 − 49 + (5 × 4)
+
+                                                                                                                                                                                                                                              (Total for Question 9 = 1 mark)
+
+
+
+
+                                                                                                                                                                                                                                                                                   7
+                                                                                                                                                                                                         *P78474A0728*                                                  Turn over
+10 Traffic lights of weight W are suspended from a wire.
+   The wire is held at an angle θ to the horizontal by two supports, as shown.
+
+
+
+
+                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                        DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                       support             support
+
+                                           θ                  θ
+
+                                   traffic lights                 wire
+
+
+
+
+     Which of the following expressions gives the tension in the wire?
+
+          A 2W sin θ
+
+               W
+          B
+              2sin θ
+
+          C 2W cos θ
+
+                W
+          D
+              2 cos θ
+
+                                                              (Total for Question 10 = 1 mark)
+
+                                                    TOTAL FOR SECTION A = 10 MARKS
+
+
+
+
+ 8
+                               *P78474A0828*                                                     
+                                                                                           Turn over
+                                                                                       9
+                                                                                       *P78474A0928*
+                                         BLANK PAGE
+
+
+
+
+                                                                                            
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                             SECTION B
+                                                                                                          Answer ALL questions in the spaces provided.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+11 The mass of a car is 1850 kg.
+              Some people sit in the car. The car then accelerates at 0.230 m s−2 when the resultant
+              force on the car is 460 N.
+              Calculate the total mass of the people in the car.
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                             Total mass of people = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                                                                                                                                                                                                      (Total for Question 11 = 3 marks)
+
+
+
+
+     10
+                                                                                                            *P78474A01028*                                                                                                                                                                                                                                                        
+                                                                                                                                                                              12 A person on skis slides down a slope. The slope is at an angle of 14° to the horizontal.
+                                                                                                                                                                                 The initial speed of the person is 7.1 m s−1, as shown.
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                –1
+                                                                                                                                                                                                                                                                                                                                       7.1 m s
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                        14
+
+                                                                                                                                                                                            The resistive forces acting on the person are negligible.
+                                                                                                                                                                                            Calculate the speed of the person after moving 15 m down the slope.
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Speed = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                                                                                                                                                                                                                                                                                                                                                                                    (Total for Question 12 = 3 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              11
+                                                                                                                                                                                                                                                                                      *P78474A01128*                                                                                                                                                                                                                                        Turn over
+13 An ‘escape lane’ can stop cars or trucks safely if the brakes stop working when moving
+   downhill.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+              The photograph shows an escape lane.
+
+
+
+
+                                                                                                                                                                                                                                              (Source: adapted from © Presse03)
+
+              The escape lane is made of sand and is horizontal, as shown below. The resistive force
+              of the sand on a vehicle reduces the kinetic energy of the vehicle.
+
+                                                                                             vehicle
+
+
+
+
+                                                                                                                                                                                                                                                                                    sand
+
+
+
+                                                                                                    steep road
+                                                                                                                                                                                                                                                                                     escape lane
+
+             (a) As a truck enters the escape lane, the kinetic energy of the truck is 8.0 × 106 J.
+		 The sand exerts an average resistive force of 3.5 × 105 N on the truck as the truck
+   comes to rest.
+		 Calculate the distance moved by the truck on the escape lane.
+                                                                                                                                                                                                                                                                                                                                                                 (2)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                          Distance = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+     12
+                                                                                                            *P78474A01228*                                                                                                                                                                                                                                                        
+                                                                                                                                                                                           (b) The resistive force exerted by the sand on a vehicle is proportional to the weight of
+                                                                                                                                                                                               the vehicle.
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                              		 The weight of a car is less than the weight of a truck.
+                                                                                                                                                                              		 Explain how the deceleration of a car on the escape lane would compare with the
+                                                                                                                                                                                 deceleration of a truck.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (2)
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                    (Total for Question 13 = 4 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              13
+                                                                                                                                                                                                                                                                                      *P78474A01328*                                                                                                                                                                                                                                        Turn over
+14 An air track is a straight tube with holes along its length. Air forced through the holes
+   lifts the gliders, preventing friction between the gliders and the air track.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+              A teacher uses an air track and two gliders, A and B, to demonstrate the principle of
+              conservation of linear momentum.
+              Gliders A and B move towards each other and then collide.
+             (a) State how Newton’s third law applies to the gliders during the collision.
+                                                                                                                                                                                                                                                                                                                                                                 (1)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+             (b) Gliders A and B have different masses and move at different velocities before the
+                 collision, as shown.
+
+                                                                                                                                                –1                                                                        –1
+                                                                                                                  0.32 m s                                                                  0.11 m s
+
+                                                                                                                      0.15 kg                                                                   0.20 kg
+
+
+
+                                                                                                                    glider A                                                                   glider B                                                                             air track
+
+
+		 The gliders stick together in the collision.
+		 A student predicts that the gliders will move to the left after the collision.
+		 Deduce whether the prediction is correct.
+                                                                                                                                                                                                                                                                                                                                                                 (3)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                                                                                      (Total for Question 14 = 4 marks)
+
+
+
+
+     14
+                                                                                                            *P78474A01428*                                                                                                                                                                                                                                                        
+                                                                                       15
+                                                                                            Turn over
+                                                                                        *P78474A01528*
+                                         BLANK PAGE
+
+
+
+
+                                                                                             
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+15 The Cruachan hydroelectric power station in Scotland is built inside a mountain.
+              Water from a lake near the top of the mountain flows through straight pipes to a
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+              generator. The pipes have a length of 350 m and are inclined at an angle of 55° to the
+              horizontal, as shown.
+
+                                                                                                                                                                                            lake
+
+
+
+
+                                                                                                                                                                                                                                350 m
+                                                                                                                                                                                                                                                                                                                generator
+                                                                                                                                                 pipes
+
+                                                                                                                                                                                                                              55
+
+
+
+
+              The gravitational potential energy of the water in the lake is used to generate
+              electrical power.
+             (a) In one minute, each pipe transfers 1700 m3 of water to the generator.
+                 The density of the water in the lake is 1100 kg m−3.
+		 Show that the power transferred by the water in each pipe is about 88 MW.
+                                                                                                                                                                                                                                                                                                                                                                 (5)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+     16
+                                                                                                            *P78474A01628*                                                                                                                                                                                                                                                        
+                                                                                                                                                                                           (b) Water travels from the lake to the generator through 4 identical pipes.
+                                                                                                                                                                              		 As water moves through the 4 pipes to the generator, the total power wasted is 256 MW.
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                              		 Calculate the efficiency of the power station.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (2)
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  Efficiency = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                                                                                                                                                                                                                                                                                                                                                                                    (Total for Question 15 = 7 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              17
+                                                                                                                                                                                                                                                                                      *P78474A01728*                                                                                                                                                                                                                                        Turn over
+16 A balance is formed by a beam suspended from a string. A dish is hung from the beam
+   and the balance is used to measure a fixed portion of rice.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+              When the dish contains one portion of rice, the balance is in equilibrium, as shown.
+
+
+                                                                                    string
+
+                                                                                                                                                                                                              25.0 cm
+
+                                                            centre of
+                                                            gravity of
+                                                              beam
+                                                                                                                                            8.0 cm
+                                                                                                                                                                                                                                                                                                                                       dish
+
+                                                                                                                                                                                                                             one portion of rice
+
+
+             (a) State the conditions needed for an object to be in equilibrium.
+                                                                                                                                                                                                                                                                                                                                                                 (2)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+
+     18
+                                                                                                            *P78474A01828*                                                                                                                                                                                                                                                        
+                                                                                                                                                                                           (b) The dish is moved along the beam so that the horizontal distance from the string to
+                                                                                                                                                                                               the dish is 7.0 cm.
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                              		 Rice is added to the dish until the balance is in equilibrium.
+                                                                                                                                                                              		 Deduce whether the dish now contains 3 portions of rice.
+                                                                                                                                                                                 You should include a calculation of the weight of 1 portion of rice.
+                                                                                                                                                                              		 weight of beam = 3.1 N
+                                                                                                                                                                                 weight of empty dish = 0.64 N
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (6)
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              . ...................................................................................... . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                    (Total for Question 16 = 8 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              19
+                                                                                                                                                                                                                                                                                      *P78474A01928*                                                                                                                                                                                                                                        Turn over
+17 A tugboat is a small boat that can be used to pull large ships. A tugboat is attached to a
+   ship using a thick rope.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+              A sample of the rope is tested to make sure that the rope will not break when a ship
+              is pulled.
+             (a) The original length of the sample was 36.8 m.
+		 Calculate the strain in the sample when the length of the sample increased to 38.1 m.
+                                                                                                                                                                                                                                                                                                                                                                 (2)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                                     Strain = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+             (b) The stress-strain graph for the sample is shown.
+
+                                                                   200
+
+
+
+                                                                   150
+
+
+
+                Stress / MPa 100
+
+
+
+                                                                       50
+
+
+
+                                                                            0
+                                                                                     0                                      0.01                                        0.02                         0.03                                                       0.04                                        0.05
+                                                                                                                                                                                               Strain
+
+
+
+
+     20
+                                                                                                            *P78474A02028*                                                                                                                                                                                                                                                        
+                                                                                                                                                                              		                          (i) The diameter of the sample is 220 mm.
+                                                                                                                                                                              			 Determine the force applied to the sample when the strain was 0.025
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (4)
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Force = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                                                                                                                                              		 (ii) Explain how the area under the stress-strain graph and the volume of the sample
+                                                                                                                                                                                      can be used to determine the energy stored.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (3)
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                    (Total for Question 17 = 9 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              21
+                                                                                                                                                                                                                                                                                      *P78474A02128*                                                                                                                                                                                                                                        Turn over
+18 A small, remotely controlled submarine is used to explore the sea.
+   (a) The engine of the submarine produced a horizontal force of 70 N. The drag force on
+
+
+
+
+                                                                                                                                                                                                                                                                                                DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                         DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+       the submarine was 43 N at an angle of 25° to the horizontal, as shown.
+
+                                          70 N
+                                                                                                                       Not to scale
+                                                                          25
+
+                                                                     43 N
+
+		 Determine the resultant of these two forces on the submarine by drawing a scaled
+   vector diagram in the space below.
+                                                                                                                                                                        (5)
+
+
+
+
+                                                             Magnitude of resultant force = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+                                         Angle of resultant force to horizontal = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+
+ 22
+                            *P78474A02228*                                                                                                                                         
+                                                                                                                                                                                      *(b) A crane on a ship can lift the submarine out of the sea, as shown.
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   cable
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                                                                        crane
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               submarine
+
+
+
+
+                                                                                                                                                                                                                                                                                                              (Source: adapted from © PJF Military Collection/Alamy Stock Photo)
+
+                                                                                                                                                                              		 The submarine is initially completely underwater and at rest just below the surface.
+                                                                                                                                                                                 A cable from the crane is attached to the submarine, so that the cable is vertical.
+                                                                                                                                                                              		 The crane pulls on the cable. The submarine moves vertically upwards at a constant
+                                                                                                                                                                                 speed until the whole submarine is out of the water.
+                                                                                                                                                                              		 Explain how the tension in the cable changes as the submarine moves from below
+                                                                                                                                                                                 the surface of the water to being completely out of the water.
+                                                                                                                                                                              		 You should assume the drag force on the submarine is negligible.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (6)
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                (Total for Question 18 = 11 marks)
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              23
+                                                                                                                                                                                                                                                                                      *P78474A02328*                                                                                                                                                                                                                                        Turn over
+19 Scientists launched a projectile from a mountain. The launch site was 2.0 km above
+   sea level. The projectile initially moved with a speed of 500 m s−1 at an angle of 22° to
+   the horizontal.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+              A ship was a horizontal distance of 15 km from the launch site, as shown. The projectile
+              passed over the ship.
+
+
+                             launch site                                                                                         500 m s–1
+                                                                                                                                                                                                                                                                                                   Not to scale
+                                                                                                                         22
+
+
+                                                                          2.0 km
+                                                                                                                                                                                                                                                                                    ship
+                                                                                                                                                                                                                                                                                                                                                                    sea
+                                                                                                                                                           15 km
+
+
+              (a) (i) Show that the projectile was vertically above the ship about 30 s after launch.
+			 You should ignore the effects of air resistance.
+                                                                                                                                                                                                                                                                                                                                                                 (3)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+
+     24
+                                                                                                            *P78474A02428*                                                                                                                                                                                                                                                        
+                                                                                                                                                                              		 (ii) Determine the height above sea level of the projectile as it passed over the ship.
+                                                                                                                                                                              			 You should ignore the effects of air resistance.
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (4)
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                   Height above sea level = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                                                                                                                                                           (b) The scientists launched several more projectiles. Each projectile was launched at the
+                                                                                                                                                                                               same speed but at a different angle to the horizontal.
+                                                                                                                                                                              		 As the launch angle was increased, the horizontal distance travelled before landing
+                                                                                                                                                                                 in the sea increased to a maximum value and then decreased.
+                                                                                                                                                                              		 Explain why the horizontal distance travelled reached a maximum value.
+                                                                                                                                                                              		 You should consider the components of the initial velocity.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (4)
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              . ...................................................................................... . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                (Total for Question 19 = 11 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              25
+                                                                                                                                                                                                                                                                                      *P78474A02528*                                                                                                                                                                                                                                        Turn over
+20 A student determined the terminal velocity of a metal sphere falling through a container
+   of oil.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+             (a) The student released the sphere from rest in the oil.
+		 Explain why the sphere reached terminal velocity.
+                                                                                                                                                                                                                                                                                                                                                                 (4)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+             (b) The student measured the time taken for the sphere to fall through 0.45 m of the oil
+                 at terminal velocity.
+		                          (i) Calculate the viscous drag force on the sphere.
+			 Assume the conditions for Stokes’ law applied.
+			 time taken = 7.3 s
+    radius of sphere = 0.90 × 10−3 m
+    viscosity of oil = 2.1 × 10−1 Pa s
+                                                                                                                                                                                                                                                                                                                                                                 (3)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                     Viscous drag force = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+
+     26
+                                                                                                            *P78474A02628*                                                                                                                                                                                                                                                        
+                                                                                                                                                                              		 (ii) The student repeated the experiment using a second sphere with a
+                                                                                                                                                                                      greater diameter.
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                              			 The density of the second sphere was the same as the density of the
+                                                                                                                                                                                  original sphere.
+                                                                                                                                                                              			 The temperature of the oil was the same and the conditions for
+                                                                                                                                                                                  Stokes’ law applied.
+                                                                                                                                                                              			 Explain how the time taken for the second sphere to fall through 0.45 m at
+                                                                                                                                                                                  terminal velocity compares with the time taken for the original sphere.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (3)
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                               (Total for Question 20 = 10 marks)
+
+                                                                                                                                                                                                                                                                                                                                                                               TOTAL FOR SECTION B = 70 MARKS
+                                                                                                                                                                                                                                                                                                                                                                                  TOTAL FOR PAPER = 80 MARKS
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              27
+                                                                                                                                                                                                                                                                                      *P78474A02728*
+                                                                                       List of data, formulae and relationships
+
+                                                        Acceleration of free fall            g = 9.81 m s–2                   (close to Earth’s surface)
+
+
+
+
+                                                                                                                                                                  DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                            DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                        Gravitational field strength         g = 9.81 N kg–1                  (close to Earth’s surface)
+                                                        Unit 1
+                                                        Mechanics
+                                                                                                     (u + v)t
+                                                             Kinematic equations of motion       s=
+                                                                                                        2
+                                                                                                 v = u + at
+                                                                                                            1 2
+                                                                                                 s = ut +     at
+                                                                                                            2
+                                                                                                v 2 = u2 + 2as
+                                                              Forces                           ΣF = ma
+                                                                                                    F
+                                                                                                 g=
+                                                                                                    m
+                                                                                                W = mg
+                                                              Momentum                           p = mv
+DO NOT WRITE IN THIS AREA
+
+
+                            DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                              Moment of force             moment = Fx
+                                                              Work and energy                 ΔW = FΔs
+                                                                                                       1
+                                                                                                Ek =     mv 2
+                                                                                                       2
+                                                                                             ΔEgrav = mgΔh
+                                                                                                   E
+                                                              Power                             P=
+                                                                                                   t
+                                                                                                   W
+                                                                                                P=
+                                                                                                   t
+                                                              Efficiency                                           useful energy output
+                                                                                                efficiency =
+                                                                                                                    total energy input
+                                                                                                                   useful power output
+                                                                                                efficiency =
+                                                                                                                    total power input
+                                                        Materials
+                            DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                    m
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                              Density                           ρ=
+                                                                                                    V
+                                                              Stokes’ law                       F = 6�ηrv
+                                                              Hooke’s law                      ΔF = kΔx
+                                                                                                       1
+                                                              Elastic strain energy           ΔEel =     FΔx
+                                                                                                       2
+                                                                                                     σ
+                                                              Young modulus                     E=      where
+                                                                                                     ε
+                                                                                                     F
+                                                                                          Stress σ =
+                                                                                                     A
+                                                                                                     ∆x
+                                                                                          Strain ε =
+                                                                                                      x
+                                                         28                                                                                                 25
+                                                                                                                                                            27
+                                                                                   *P70968A02528*
+                                                                                       *P78474A02828*
+                                                                                       *P75806A02728*                                                      
+

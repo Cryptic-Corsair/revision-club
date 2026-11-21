@@ -1774,3 +1774,16 @@ The journal is chronological and append-only. A journal entry describes complete
 **Deployment status.** Not deployed; commit only.
 
 **Remaining limitations.** Topic 1 still in the old register; papermunch-style "variant" scenario chains are bullets under their own headings rather than unbulleted lead-in paragraphs, matching the site's block model.
+
+## 2026-11-21 — WPH11 Topic 2 research pass (2019–2025) + draft notes (user-requested, draft-only)
+
+- User instruction: do not rewrite site content yet; research every WPH11 session 2019–2025, find patterns/trends/MS stability, then produce a draft Topic 2 mark-scheme-wise notes file (MD).
+- Downloaded 25 sessions of WPH11/01 QP+MS (2019 Jan → 2026 Jun 01A incl. alternative 01A papers; June 2020 does not exist) to research/wph11/{papers,txt}/ via alevelcopilot (PMT behind Cloudflare). All 50 texts verified complete.
+- Five parallel analysis agents produced verbatim MS extraction for every Materials question; reports saved to research/wph11/analysis/agent-1..5.md and copied to download/wph11-analysis/.
+- Deliverables (untracked, for user review): download/WPH11-Topic2-draft-notes.md (11 spec-point cards, no citations/arrows/AI-speak) and download/WPH11-Topic2-research-analysis.md (coverage map, templates, MS-stability verdict, recycled-skeleton findings, trap list).
+- Key findings: core MS wording unchanged 2019→2026; Edexcel reuses question skeletons with identical data across years (2020 Jan Q12 ≡ 2025 Oct 01A Q13; 2022 Oct Q12 ≡ 2026 Jan 01A Q12; Galilean thermometer, sphere-on-balance, pulley rope, iceberg all reappear).
+- Invariants preserved: site content (notes-ph02-*.ts, wph11.ts) untouched — user said draft-only; protected chemistry/physics prose unmodified; no repo source files changed except this journal entry.
+- Checks run: PDF text extraction verified per session (end markers, word counts); deliverable files verified present on disk after write.
+- Deployment status: not applicable (no site/deploy change; download/ artifacts only).
+- Commit: none yet (drafts pending user approval; nothing committed this session).
+- Remaining limitations: keyword pre-scan question numbers proved unreliable (agents re-verified from printed QP numbers — final lists in analysis file supersede the scan); official Pearson spec PDF not downloaded (spec statements taken from the repo's existing spec-aligned note files); June 2020 session does not exist.

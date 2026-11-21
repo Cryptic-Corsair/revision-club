@@ -1,0 +1,1593 @@
+                                     Please check the examination details below before entering your candidate information
+                               Candidate surname                                            Other names
+
+
+                                                                        Centre Number                     Candidate Number
+                           Pearson Edexcel
+                           International
+                           Advanced Level
+
+                               Tuesday 14 May 2019
+                               Morning (Time: 1 hour 30 minutes)                Paper Reference WPH11/01
+
+                               Physics
+                               Advanced Subsidiary
+                               Unit 1: Mechanics and Materials
+
+                               You must have:                                                                        Total Marks
+                               A ruler
+
+
+
+                        Instructions
+                        • Use   black ink or black ball-point pen.
+                        • centre
+                          Fill in the boxes at the top of this page with your name,
+                                   number and candidate number.
+                        • Answer    all questions.
+                        • Answer    the questions in the spaces provided
+                          – there may be more space than you need.
+                        • Show all your working in calculations and include units where appropriate.
+                        Information
+                        • The    total mark for this paper is 80.
+                        • The    marks for each question are shown in brackets
+                          – use this as a guide as to how much time to spend on each question.
+                        • toIn questions marked with an asterisk (*), marks will be awarded for your ability
+                               structure your answer logically showing how the points that you make are
+                               related or follow on from each other where appropriate.
+
+                        Advice
+                        • Read  each question carefully before you start to answer it.
+                        • Checkanswer
+                          Try to       every question.
+                        • your answers if you have time at the end.
+                                                                                                                             Turn over
+
+
+P61472RRA
+©2019 Pearson Education Ltd.
+
+1/1/1/1/1/1/C2/1/1/
+                                           *P61472RRA0128*
+                                                SECTION A
+
+                                          Answer ALL questions.
+
+
+
+
+                                                                                                    DO NOT WRITE IN THIS AREA
+            For questions 1–10, select one answer from A to D and put a cross in the box      .
+                   If you change your mind, put a line through the box    and then
+                                mark your new answer with a cross .
+
+1   Quantities in physics are classified as either vectors or scalars.
+    Which of the following units could only be used for a scalar quantity?
+        A m sí
+        B m sí
+        C kg m sí
+        D kg mí
+
+                                                                  (Total for Question 1 = 1 mark)
+
+
+
+
+                                                                                                    DO NOT WRITE IN THIS AREA
+2   Once in orbit above the Earth’s atmosphere, the engines on a space rocket are switched off.
+
+    Which row of the table correctly states the resulting motion of the rocket and the law
+    explaining this motion?
+
+                 Motion of rocket              Explanation
+        A         uniform velocity           1HZWRQ¶Vnd law
+        B         uniform velocity           1HZWRQ¶Vrd law
+        C        changing velocity           1HZWRQ¶Vnd law
+        D        changing velocity           1HZWRQ¶Vrd law
+
+                                                                  (Total for Question 2 = 1 mark)
+                                                                                                    DO NOT WRITE IN THIS AREA
+
+
+
+
+    2
+                            *P61472RRA0228*
+                            3  $VSKHUHRIZHLJKW1IORDWVLQZDWHUZLWKòRILWVYROXPHEHQHDWKWKHVXUIDFH
+                                A force F is applied to the sphere, completely immersing it in the water as shown.
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                     F
+
+
+
+
+                                Which of the following is the minimum value of F?
+                                    A ×1
+                                    B ×1
+                                    C ò×1
+                                    D ¼ ×1
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                              (Total for Question 3 = 1 mark)
+
+                            4 $EDOOUROOVRIIDWDEOHZLWKDKRUL]RQWDOYHORFLW\RIPVí. The ball takes 0.9 s to reach
+                               the ground and lands a distance s from the table as shown.
+
+
+
+
+                                                                                         s
+
+                                Which of the following expressions could be used to determine the value of s in metres?
+                                        1.22
+                                    A
+                                      2 × 9.81
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                    B × 0.9
+                                    C òî× 0.9
+                                    D ×  ò×× 0.9)
+
+                                                                                              (Total for Question 4 = 1 mark)
+
+
+
+
+                                                                                                                                       3
+                                                        *P61472RRA0328*                                                          Turn over
+5   A sample of sea water is collected using a beaker. The sample contains some particles of
+    sand which settle at the bottom of the beaker.
+
+
+
+
+                                                                                                   DO NOT WRITE IN THIS AREA
+    Which of the following would result in a decrease in the time taken for the sand to settle?
+        A smaller particles of sand
+        B lower temperature of the sea water
+        C smaller terminal velocity of sand particles
+        D lower viscosity of the sea water
+
+                                                                 (Total for Question 5 = 1 mark)
+
+6   A graph of stress ı against strain İ, up to the breaking point, is drawn for four samples of
+    wire, A, B, C and D.
+    Which sample of wire has both a low elastic limit and a large region of plastic deformation?
+
+                                ı
+                                                                      A
+
+
+
+
+                                                                                                   DO NOT WRITE IN THIS AREA
+                                                                      B
+
+
+
+
+                                                                      C
+                                                                      D
+
+                                                                           İ
+
+        A
+        B
+        C                                                                                          DO NOT WRITE IN THIS AREA
+
+        D
+
+                                                                 (Total for Question 6 = 1 mark)
+
+
+
+
+    4
+                           *P61472RRA0428*
+                            7 $ZDWHUSXPSFDXVHVJRIZDWHUWREHHMHFWHGIURPWKHQR]]OHRIDJDUGHQKRVHHDFK
+                               VHFRQGDWDYHORFLW\RIPVí.
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                Which of the following expressions could be used to determine the minimum output power
+                                in watts required from the pump?
+
+                                        200 × 32
+                                    A
+                                           2
+                                        0.2 × 32
+                                    B
+                                           2
+                                        200 × 3
+                                    C
+                                           2
+                                        0.2 × 3
+                                    D
+                                           2
+                                                                                          (Total for Question 7 = 1 mark)
+
+                            8   A model rocket is launched and moves vertically upwards while still burning fuel to give
+                                a constant upwards thrust. The fuel runs out, and the rocket reaches the maximum height
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                at time T before falling back to the ground.
+
+                                Which of the following graphs could show how the acceleration a of the rocket varies
+                                with time t, if the decrease in mass as the fuel burns is neglected?
+
+                                    a                      a                      a                       a
+
+
+                                    0               t       0              t       0              t       0                t
+                                           T                      T                       T                      T
+
+
+
+                                               A                      B                       C                      D
+
+
+                                                                                          (Total for Question 8 = 1 mark)
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                 5
+                                                        *P61472RRA0528*                                                    Turn over
+9  $VWXGHQWZDONHGNPRQDEHDULQJRIDQGWKHQZDONHGNPRQDEHDULQJRI
+    DVVKRZQ
+
+
+
+
+                                                                                                DO NOT WRITE IN THIS AREA
+                                                                          NP
+                                           Diagram to scale
+                   N
+
+
+                       °
+                                                                                  N
+
+
+                                                                           °
+                                   NP
+
+   Which of the following could represent the final displacement of the student from his
+   starting point?
+
+
+
+
+                                                                                                DO NOT WRITE IN THIS AREA
+               A                    B                    C                            D
+                                                                                                DO NOT WRITE IN THIS AREA
+
+
+
+                                                              (Total for Question 9 = 1 mark)
+
+
+
+
+   6
+                          *P61472RRA0628*
+                            10 A lift moves upwards from rest with an acceleration a. A student of mass 70 kg standing
+                               LQWKHOLIWH[HUWVDIRUFHRI1RQWKHIORRURIWKHOLIW
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                               Which of the following expressions could be used to determine a?
+                                   A 70g = 70a
+                                    B  a
+                                   C íg = 70a
+                                   D 70gí a
+
+                                                                                        (Total for Question 10 = 1 mark)
+
+                                                                              TOTAL FOR SECTION A = 10 MARKS
+DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                               7
+                                                      *P61472RRA0728*                                                    Turn over
+                                                                                                                                                                           SECTION B
+
+                                                                                                         Answer ALL questions in the spaces provided.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+11 A child is standing on a skateboard and both are stationary. The child throws a ball forward at
+   a high velocity and the child and the skateboard move backwards at a lower velocity.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                           Ball moves
+                                                                                                                                                                                                                                                                                                                           forwards
+                                                                                                                                                                                                      Child and
+                                                                                                                                                                                                      skateboard move
+                                                                                                                                                                                                      backwards
+
+
+
+
+                                                                             Before                                                                                                                                                                                                    After
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+              Explain, in terms of momentum, why the child and the skateboard move backwards at a
+              lower velocity.
+                                                                                                                                                                                                                                                                                                                                                              (4)
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   DO NOT WRITE IN THIS AREA
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                    (Total for Question 11 = 4 marks)
+
+
+
+
+              8
+                                                                                                    *P61472RRA0828*
+                            12 Machines make work easier by changing the size or direction of a force. A student
+                               GHVLJQHGDVLPSOHPDFKLQHWROLIWDER[RIPDVVNJ7KHVWXGHQWFODLPHGWKH
+                               efficiency of the machine was greater than 90%.
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                         7KHPDFKLQHXVHGDVORSHRIKHLJKWPDQGOHQJWKPWRPRYHWKHER[7KHER[ZDV
+                                          FRQQHFWHGWRDQNJPDVVE\DURSHRYHUDSXOOH\DVVKRZQ$VWKHNJPDVVIHOOWKH
+                                          box moved up the slope at a steady speed.
+
+
+
+
+                                                                                                                                                                                         NJ                                                                                                                                                    P
+                                                                                                                                                                                                                           P
+                                                                                                                                                                                                                                                                    NJPDVV
+
+
+
+
+                                          Determine whether the maximum efficiency of the machine was greater than 90%.
+                                                                                                                                                                                                                                                                                                                                                                                          (4)
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                (Total for Question 12 = 4 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                         9
+                                                                                                                                *P61472RRA0928*                                                                                                                                                                                                                                               Turn over
+13 $VZLPPHUVZLPVDPUDFH$VLPSOLILHGGLVSODFHPHQWWLPHJUDSKIRUWKHVZLPPHU
+    is shown.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+                                                                                          60 –
+
+                                                                                          –
+                                                                       Displacement / m
+
+
+                                                                                          –
+
+                                                                                          –
+
+                                                                                          –
+
+                                                                                          –
+
+                                                                                           0–
+                                                                                             –
+
+                                                                                                                  –
+
+                                                                                                                                        –
+
+                                                                                                                                                              –
+
+                                                                                                                                                                                    –
+
+                                                                                                                                                                                                          –
+
+                                                                                                                                                                                                                                –
+
+                                                                                                                                                                                                                                                      –
+
+                                                                                                                                                                                                                                                                            –
+
+                                                                                                                                                                                                                                                                                                  –
+
+                                                                                                                                                                                                                                                                                                                        –
+                                                                                             0                                                                                                                         60                    70                                        90                  
+                                                                                                                                                                                                 Time / s
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+                D  'UDZDFRUUHVSRQGLQJYHORFLW\WLPHJUDSKIRUWKHPRWLRQRIWKHVZLPPHURQWKHD[HV
+                     below. Show all working in the space below.
+                                                                                                        (4)
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                        Velocity / m sí
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+
+
+
+                                                                                                                                                                                                                                                                                                                 Time / s
+                                                                                 0                                                                                                                 60                    70                                        90                 
+
+
+
+
+            10
+                                                                                              *P61472RRA01028*
+                                          (b) To increase her initial speed, the swimmer began the race by gliding underwater
+                                              IRUPDQGWKHQEHJDQWRXVHKHUDUPVDQGOHJV7KLVZDVQRWUHSUHVHQWHGRQWKH
+                                              VLPSOLILHGGLVSODFHPHQWWLPHJUDSK
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                        (i) Sketch onto the axes below to show the actual variation of displacement with
+                                                            WLPHIRUWKHILUVWPRIWKHUDFH
+                                                                                                                                                                                                                                                                                                                                                                                          (2)
+
+
+
+                                                                                                                                                Displacement / m   
+
+
+
+
+                                                                                                                                                                      0
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                 Time / s
+
+                                                     (ii) Explain one other way in which the motion of the swimmer has been simplified
+                                                          ZKHQGUDZLQJWKHGLVSODFHPHQWWLPHJUDSK
+                                                                                                                                                                                                                                                                                                                                                                                          (2)
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                (Total for Question 13 = 8 marks)
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                       11
+                                                                                                                          *P61472RRA01128*                                                                                                                                                                                                                                                    Turn over
+14 A firework is launched into the air and explodes once it reaches a maximum height.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+                 D  7KHILUHZRUNLVGHVLJQHGWRH[SORGHDWDPD[LPXPKHLJKWRIP
+                             L  6KRZWKDWWKHYHUWLFDOFRPSRQHQWRIWKHYHORFLW\DWODXQFKLVDERXWPVí.
+                                                                                                                                                                                                                                                                                                                                                              (2)
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                         (ii) The vertical component of the velocity at launch depends on both the initial velocity of
+                              the firework and ș, the angle between the initial velocity and the horizontal.
+                                          Sketch a graph showing how the initial velocity required for the firework to reach
+                                          WKHPD[LPXPKHLJKWRIPYDULHVZLWKș for the firework.
+                                                                                                                                                                                                                                                                                                                                                              (4)
+
+
+                                                                                                  Initial
+                                                                                                  velocity
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                    0
+                                                                                                                                                                                                                                                                                   90
+                                                                                                                                                                                                                  ș
+
+
+
+
+            12
+                                                                                              *P61472RRA01228*
+                                          (b) A student wanted to estimate the maximum diameter of the firework after exploding.
+                                                        The student estimated:
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                      •             the time taken between seeing the firework explode and hearing the firework
+                                                                                    explode
+                                                                      •             the angle ‫ ׋‬from the top to the bottom of the firework
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                          diam
+                                                                                                                                                                                                                                                                                                                                                                                 eter
+                                                                                                                                                                                                                               ‫׋‬
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                        Describe how the student could determine the maximum diameter of the exploded
+                                                        firework using the estimated data.
+                                                                                                                                                                                                                                                                                                                                                                                          (2)
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                (Total for Question 14 = 8 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                       13
+                                                                                                                          *P61472RRA01328*                                                                                                                                                                                                                                                    Turn over
+15 Muscles move body parts by contracting and relaxing. For the forearm to hold a ball in the
+   position shown, the biceps muscle contracts, creating a tension T in the muscle as shown.
+
+
+
+
+                                                                                                       DO NOT WRITE IN THIS AREA
+                                                                      biceps
+                                                                      muscle
+
+
+                                                      T
+
+
+
+
+                           force of elbow
+                           MRLQWRQIRUHDUP               weight of      force of
+                                                          forearm         ball on
+                                                                           hand
+
+   A student modelled the forces on the forearm using a uniform beam and spring arrangement
+   as shown below. The length and weight of the beam were the same as the length and weight
+
+
+
+
+                                                                                                       DO NOT WRITE IN THIS AREA
+   of the forearm.
+
+
+
+                                FP
+
+                                                                                         Diagram
+                                             spring                                     not to scale
+                       hinge
+                                                             beam
+                                70°      T
+                            O
+
+                                                                               9.0 cm
+
+
+                           force of hinge       weight of               force of ball
+                              on beam            beam                     on beam
+                                                                                                       DO NOT WRITE IN THIS AREA
+
+
+
+
+   14
+                        *P61472RRA01428*
+                                             D  ,WFDQEHDVVXPHGWKDWWKHELFHSVPXVFOHDFWVDVDVSULQJDWDQDQJOHRIWRWKH
+                                                  EHDPFPIURPWKHSLYRW2
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                        Determine the magnitude of T. You will need to estimate the total length of the forearm
+                                                        and hand.
+                                                      IRUFHRIEDOORQEHDP 1
+                                                      ZHLJKWRIEHDP 1
+                                                                                                                                                                                                                                                                                                                                                                                           (5)
+
+                                                                                                                                                             Estimate of total length of forearm and hand = . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+
+                                                                                                                                                                                                                                                                                                                            T = .......................................................
+                                          (b) Explain a limitation of using a beam to model the forearm.
+                                                                                                                                                                                                                                                                                                                                                                                           (2)
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                                                                                (Total for Question 15 = 7 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                        15
+                                                                                                                          *P61472RRA01528*                                                                                                                                                                                                                                                     Turn over
+16 A student carried out an experiment to determine the Young modulus of copper. She used the
+   apparatus below to observe the position of a marker as a copper wire extended under increasing
+   applied loads.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+                                                       clamp                                                                                                                                                                                        copper wire
+                                                                                                                                               marker
+
+
+
+
+                                                                                                                                                                                                                        rule                                                                         applied load
+
+
+              (a) Describe how the diameter of the wire should have been determined.
+                                                                                                                                                                                                                                                                                                                                                              (3)
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+              (b) The student calculated the extension of the copper wire for each applied load. She then
+                  plotted a graph of load against extension.
+
+                                  –
+
+
+
+                                       –
+
+
+
+                                       6–
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+                  Load / N
+
+
+
+
+                                       –
+
+
+
+                                       –
+
+
+
+                                       0–
+                                            –
+
+
+
+                                                                                    –
+
+
+
+                                                                                                                           –
+
+
+
+                                                                                                                                                                   –
+
+
+
+                                                                                                                                                                                                          –
+
+
+
+                                                                                                                                                                                                                                                 –
+
+
+
+                                                                                                                                                                                                                                                                                         –
+
+
+
+                                                                                                                                                                                                                                                                                                                                –
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                        –
+
+
+
+
+                                        0                                                                                                                                                                                                                                               6                                      7                                      
+                                                                                                                                                                               ([WHQVLRQ± m
+
+            16
+                                                                                              *P61472RRA01628*
+                                                        Determine a value for the Young modulus of copper.
+                                                      RULJLQDOOHQJWKRIFRSSHUZLUH P
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                      GLDPHWHURIFRSSHUZLUH ×í m
+                                                                                                                                                                                                                                                                                                                                                                                           (4)
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                             Young modulus of copper = . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . .
+                                     *(c) Explain why the sample of wire used in this experiment should be long and thin.
+                                                                                                                                                                                                                                                                                                                                                                                           (6)
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                            (Total for Question 16 = 13 marks)
+
+                                                                                                                                                                                                                                                                                                                                                                                                                        17
+                                                                                                                          *P61472RRA01728*                                                                                                                                                                                                                                                     Turn over
+DO NOT WRITE IN THIS AREA   DO NOT WRITE IN THIS AREA   DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                    *P61472RRA01828*
+                                         BLANK PAGE
+
+
+
+
+                                                                                    18
+                            17 The diagram shows a climber on a rock face. A rope is kept firmly anchored by a person on
+                               the ground and passes through a smooth loop to the climber. The climber slips and falls a short
+                               distance as shown.
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                        Diagram
+                                                                                       not to scale                                                      smooth                                                                                 total height
+                                                                                                                                                         loop                                                                                   fallen
+
+
+                                                                                                                                                                                                                                            rope
+
+
+
+
+                                          (a) The ‘fall factor’ is used by climbers to estimate the severity of a climbing fall and is
+                                              given by
+                                                                                                                                                                       height fallen before the rope begins to stretch
+                                                                                                                ‘fall factor’ =
+                                                                                                                                                                              total unstretched length of rope
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                      $FOLPEHUVOLSVDQGIDOOVZLWKDµIDOOIDFWRU¶RIEHIRUHFRPLQJWRUHVW
+                                                        The energy from the fall is absorbed by the climbing rope.
+                                                        The maximum strain in the rope is 9.0%.
+                                                         L  6KRZWKDWWKHPD[LPXPIRUFHDFWLQJRQWKHFOLPEHUGXHWRWKHURSHLVDERXWN1
+                                                               Assume the extension of the rope is proportional to its tension.
+                                                                WRWDOXQVWUHWFKHGOHQJWKRIURSH P
+                                                                PDVVRIFOLPEHU NJ
+                                                                                                                                                                                                                                                                                                                                                                                          (5)
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                       19
+                                                                                                                          *P61472RRA01928*                                                                                                                                                                                                                                                    Turn over
+                         (ii) A new climber suggests using a longer length of rope between the loop and the
+                              climber, as this would absorb more energy after a fall.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+                                          Comment on this suggestion.
+                                                                                                                                                                                                                                                                                                                                                              (2)
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                E  &OLPELQJURSHPDQXIDFWXUHUVUHFRPPHQGWKDWURSHVDUHUHSODFHGHYHU\\HDUV
+                     7KHIRUFHH[WHQVLRQJUDSKVXSWRWKHEUHDNLQJSRLQWIRUDRQHPHWUHOHQJWKRIDURSHZKHQ
+                     QHZDQGDIWHU\HDUVDUHVKRZQ
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+                                                                                                    –
+                                                                                                                                                                                                           new rope
+
+                                                                                                    –                                                                                                                                                                 rope after
+                                                                                                                                                                                                                                                                             \HDUV
+                                                                                Applied force / N
+
+
+
+
+                                                                                                    –
+
+
+
+                                                                                                      –
+
+
+
+                                                                                                                    0–
+                                                                                                                          –
+
+
+
+                                                                                                                                                                      –
+
+
+
+                                                                                                                                                                                                                 –
+
+
+
+                                                                                                                                                                                                                                                             –
+
+
+
+                                                                                                                                                                                                                                                                                                         –
+
+
+
+
+                                                                                                                     0                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+
+
+                                                                                                                                                                                              Extension / m
+
+
+
+
+            20
+                                                                                                    *P61472RRA02028*
+                                                        Comment on the manufacturers’ recommendation. Your answer should include calculations.
+                                                                                                                                       (6)
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                            (Total for Question 17 = 13 marks)
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                        21
+                                                                                                                          *P61472RRA02128*                                                                                                                                                                                                                                                     Turn over
+18 When water vapour in the atmosphere cools it condenses, forming tiny drops of water. These
+   drops increase in size by colliding with each other and fall back to the ground as rain.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                              DO NOT WRITE IN THIS AREA
+              (a) As a raindrop falls through the air it eventually reaches its terminal velocity. The upthrust
+                  on the raindrop can be considered to be negligible.
+                            (i) Explain what is meant by the terminal velocity of the raindrop. Your answer should
+                                LQFOXGHDIUHHERG\IRUFHGLDJUDPIRUWKHUDLQGURSZKHQWHUPLQDOYHORFLW\KDVEHHQ
+                                reached.
+                                                                                                                 (4)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                              DO NOT WRITE IN THIS AREA
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                              DO NOT WRITE IN THIS AREA
+
+
+
+
+            22
+                                                                                              *P61472RRA02228*
+                                                     (ii) The air resistance F acting on a raindrop travelling at a velocity v, can be
+                                                          determined using the expression
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                         F ȡ$Y
+                                                                      where $LVWKHFURVVVHFWLRQDODUHDRIWKHUDLQGURSDQGȡ is the density of the air.
+                                                                &DOFXODWHWKHWHUPLQDOYHORFLW\RIDVSKHULFDOUDLQGURSRIUDGLXV×í m.
+                                                                GHQVLW\RIDLU NJPí
+                                                                GHQVLW\RIUDLQZDWHU × kg mí
+                                                                                                                                                                                                                                                                                                                                                                                           (4)
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                            . . . . . . . . . . ............................... ...................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                            Terminal velocity = . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . .
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                        23
+                                                                                                                          *P61472RRA02328*                                                                                                                                                                                                                                                     Turn over
+              (b) Some plants have adapted to high rainfall by having a specialised shape and waxy
+                  leaves. This allows rain to slide down a leaf and off the end as a series of drops.
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+                            (i) A drop of water slides off a leaf as shown.
+                                          Add to the diagram to show the position of the drop at regular intervals of time.
+                                          The first two positions have been drawn for you.
+                                                                                                                                                                                                                                                                                                                                                              (2)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+                         (ii) Water falls from a leaf at a steady rate of five drops per second.
+                                          As each drop reaches the ground, there are four drops above it in the air.
+                                          Calculate the height of the leaf from the ground. It can be assumed that the drop
+                                          DWWKHKLJKHVWSRVLWLRQKDVMXVWOHIWWKHOHDI
+                                                                                                                                                                                                                                                                                                                                                              (3)
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                                                                                                                                                                                                                                                                                                                                                                             DO NOT WRITE IN THIS AREA
+
+. . . . . . . . . . . .................................................... ....................................... . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                         Height of leaf = . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. . . . .
+
+                                                                                                                                                                                                                               (Total for Question 18 = 13 marks)
+
+                                                                                                                                                                                               TOTAL FOR SECTION B = 70 MARKS
+                                                                                                                                                                                                  TOTAL FOR PAPER = 80 MARKS
+
+
+
+
+            24
+                                                                                              *P61472RRA02428*
+                                                           List of data, formulae and relationships
+
+                            Acceleration of free fall                g =  P V±              (close to Earth’s surface)
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                            Gravitational field strength             g =  1 NJ±             (close to Earth’s surface)
+                            Unit 1
+                            Mechanics
+                                                                           (u + v)t
+                                 Kinematic equations of motion        s=
+                                                                               2
+                                                                      v = u + at
+                                                                                 1
+                                                                      s = ut + at 
+                                                                                 2
+                                                                     v  = u + as
+                                 Forces                            ȈF = ma
+                                                                         F
+                                                                     g=
+                                                                         m
+                                                                     W = mg
+                                 Momentum                            p = mv
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                 Moment of force                       = Fx
+                                 Work and energy                   ǻW = Fǻs
+                                                                          1
+                                                                    Ek =     mv 
+                                                                          2
+                                                                 ǻEgrav = mgǻh
+                                                                          E
+                                 Power                               P=
+                                                                           t
+                                                                          W
+                                                                     P=
+                                                                           t
+
+                                 Efficiency                                           useful energy output
+                                                                     efficiency =
+                                                                                       total energy input
+                                                                                      useful power output
+                                                                     efficiency =
+                            Materials                                                  total power input
+                                                                         m
+                                 Density                             ȡ=
+DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                         V
+                                 Stokes’ law                         F = 6Șrv
+                                 Hooke’s law                       ǻF = kǻx
+                                                                         1
+                                 Elastic strain energy            ǻEel =   Fǻx
+                                                                         2
+                                                                         σ
+                                 Young modulus                       E=     where
+                                                                         ε
+                                                                         F
+                                                              Stress ı =
+                                                                         A
+                                                                         Δx
+                                                              Strain İ =
+                                                                          x
+
+                                                                                                                              25
+                                                      *P61472RRA02528*
+DO NOT WRITE IN THIS AREA   DO NOT WRITE IN THIS AREA   DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                    *P61472RRA02628*
+                                         BLANK PAGE
+
+
+
+
+                                                                                    26
+                   DO NOT WRITE IN THIS AREA   DO NOT WRITE IN THIS AREA   DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                        BLANK PAGE
+
+
+
+
+*P61472RRA02728*
+           27
+DO NOT WRITE IN THIS AREA   DO NOT WRITE IN THIS AREA   DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                    *P61472RRA02828*
+                                         BLANK PAGE
+
+
+
+
+                                                                                    28
+

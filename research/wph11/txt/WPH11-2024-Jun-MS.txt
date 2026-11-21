@@ -1,0 +1,575 @@
+Mark Scheme (Results)
+
+
+June 2024
+
+
+Pearson Edexcel International Advanced
+Subsidiary Level In Physics (WPH11) Paper 01
+Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest awarding body. We
+provide a wide range of qualifications including academic, vocational, occupational and specific
+programmes for employers. For further information visit our qualifications websites at
+www.edexcel.com or www.btec.co.uk. Alternatively, you can get in touch with us using the
+details on our contact us page at www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone
+progress in their lives through education. We believe in every kind of learning, for all kinds of
+people, wherever they are in the world. We’ve been involved in education for over 150 years,
+and by working across 70 countries, in 100 languages, we have built an international reputation
+for our commitment to high standards and raising achievement through innovation in
+education. Find out more about how we can help you and your students at:
+www.pearson.com/uk
+
+
+
+
+ June 2024
+ Question Paper Log Number P75806A
+ Publications Code WPH11_01_2406_MS
+ All the material in this publication is copyright
+ © Pearson Education Ltd 2024
+General Marking Guidance
+
+         •   All candidates must receive the same treatment. Examiners
+             must mark the first candidate in exactly the same way as they
+             mark the last.
+         •   Mark schemes should be applied positively. Candidates must be
+             rewarded for what they have shown they can do rather than
+             penalised for omissions.
+         •   Examiners should mark according to the mark scheme not
+             according to their perception of where the grade boundaries
+             may lie.
+         •   There is no ceiling on achievement. All marks on the mark
+             scheme should be used appropriately.
+         •   All the marks on the mark scheme are designed to be awarded.
+             Examiners should always award full marks if deserved, i.e. if the
+             answer matches the mark scheme. Examiners should also be
+             prepared to award zero marks if the candidate’s response is not
+             worthy of credit according to the mark scheme.
+         •   Where some judgement is required, mark schemes will provide
+             the principles by which marks will be awarded and
+             exemplification may be limited.
+         •   When examiners are in doubt regarding the application of the
+             mark scheme to a candidate’s response, the team leader must
+             be consulted.
+         •   Crossed out work should be marked UNLESS the candidate has
+             replaced it with an alternative response.
+ Question
+                                                  Answer                                  Mark
+ Number
+1                                       𝟏𝟖𝟎
+            The correct answer is A (𝟐𝟒𝟎)                                                  1
+
+            B is incorrect because 60 kW is the wasted energy
+            C is incorrect because 60 kW is the wasted energy and 180 kW is the
+            useful energy
+            D is incorrect because 300 kW is the sum of the wasted and input energy
+
+2           The correct answer is C (decreasing acceleration)                              1
+
+            A is incorrect because constant acceleration has a straight line
+            B is incorrect because displacement is increasing
+            D is incorrect because displacement is increasing
+
+3           The correct answer is C (small, spherical, laminar)                            1
+
+            A is incorrect because the object must be small and spherical, and there
+            should be laminar flow
+            B is incorrect because the object must be small and there should be laminar
+            flow
+            D is incorrect because the object must be spherical
+
+4           The correct answer is C (mass × velocity)                                      1
+
+            A is incorrect because mass is a scalar
+            B is incorrect because work is a scalar
+            D is incorrect because extension is a scalar
+
+5           The correct answer is D (𝒒−𝒑)
+                                         𝑹                                                 1
+
+
+            A is incorrect because stiffness is not extension / force
+            B is incorrect because stiffness is not length / force
+            C is incorrect because stiffness is not force / length
+
+6           The correct answer is B (
+                                        (𝒒−𝒑)×𝑹
+                                                 )                                         1
+                                             𝟐
+
+
+            A is incorrect because work done ≠ ½ force × length
+            C is incorrect because work done ≠ ½ force × (final + original length)
+            D is incorrect because the factor of ½ is missing
+
+7           The correct answer is D (the point where the weight of the object may          1
+            be considered to act)
+
+            A is incorrect because mass is not a force
+            B is incorrect because mass is not a force
+            C is incorrect because the weight acts everywhere, centre of gravity gives
+            an average point of action
+8    The correct answer is A (The ball bearing is moving downwards when            1
+     the student starts the stopwatch)
+
+     B is incorrect because time would be greater giving a lower value
+     C is incorrect because time would be greater giving a lower value
+     D is incorrect because time would be greater giving a lower value
+
+9    The correct answer is B (The second wire had a longer length)                 1
+
+     A is incorrect because the wire would break at the same extension
+     C is incorrect because the wire would break at the same extension
+     D is incorrect because the wire would break at a smaller extension
+
+10   The correct answer is A (𝟖. 𝟎 × 𝟏𝟎𝟓 − (𝟎. 𝟎𝟑 × 𝟏. 𝟐 × 𝟏𝟎𝟕 ))                  1
+
+     B is incorrect because the force from the ship’s engine has been added to
+     resultant force
+     C is incorrect because the force from the ship’s engine has been divided by
+     resultant force
+     D is incorrect because the force from the ship’s engine has been multiplied
+     by resultant force
+Question
+                                            Answer                          Mark
+Number
+11(a)    Use of ΔEgrav = mgΔh                                         (1)
+
+          ΔEgrav = 420 × 106 (J)                                      (1)    2
+
+          Example of calculation
+
+          ΔEgrav = 1.7 × 106 kg × 9.81 N kg−1 × 25 m = 4.17 × 108 J
+
+11(b)     Use P = W / t                                               (1)
+
+          Use of energy conservation                                  (1)
+
+          2.8 × 108 J (ecf from (a))                                  (1)    3
+
+          Example of calculation
+
+          W = 20 × 106 W × 35 s = 7.00 × 108 J
+          7.00 × 108 J − 4.17 × 108 J = 2.83 × 108 J
+
+          Total for question 11                                              5
+ Question
+                                            Answer                                      Mark
+ Number
+12(a)       Calculates volume of seawater displaced                               (1)
+
+            Use of ρ = m / V
+            and
+            Use of W = mg                                                         (1)
+
+            Weight of block = 2.4 × 108 N                                         (1)    3
+
+            Example of calculation
+
+            Volume displaced = 3 500 m2 × 6.7 m = 2.35 × 104 m3
+            Mass displaced = 2.35 × 104 m3 × 1.03 × 103 kg m−3
+                           = 2.42 × 107 kg
+            Weight of block = weight displaced
+                            = 2.42 × 107 kg × 9.81 N kg−1 = 2.37 × 108 N
+
+12(b)       (at equilibrium) The weight of the block/iceberg equals the weight
+            of water displaced
+            Or
+            (at equilibrium) The upthrust is equal (in magnitude) to the weight
+            of the block/iceberg
+            Or
+            Upthrust is equal (in magnitude) to the weight of water displaced     (1)
+
+            (So, in lower density seawater,) a greater volume of water must be
+            displaced (for iceberg to float)
+            Or
+            (at equilibrium) density of seawater is inversely proportional to
+            volume of water displaced                                             (1)    2
+
+            Total for question 12                                                        5
+Question
+                                               Answer                                           Mark
+Number
+13(a)    Use of s = ut + ½ at2
+         Allow any valid suvat method.                                                    (1)
+
+          Uses difference in distances travelled by A and B of 9m                         (1)
+
+          t = 1.13 (s)                                                                    (1)    3
+
+          Example calculation
+                                                  1
+          (93 ms −1 × 𝑡) + 9 m = (93 ms−1 × 𝑡) + ( × 14 ms −2 × 𝑡 2 )
+                                                  2
+                  1          −2   2
+          9 m = ( × 14 ms × 𝑡 )
+                  2
+                    9m
+          𝑡=√                 = √1.29 s = 1.13 s
+                1         −1
+                2 × 14 ms
+13(b)                     1
+          Use of 𝑠 = 𝑢𝑡 + 2 𝑎𝑡 2
+                                                                                          (1)
+          Allow any valid suvat method.
+
+          Time for A to finish = 1.075 s
+          Or
+          Time for B to finish = 1.084 s
+          (allow correctly calculated value for another quantity given in the question)   (1)
+
+          Comparison of time for A to finish with time for B to finish and valid
+          conclusion
+          Or
+          comparison of time for A to finish with 1.13 s and valid conclusion
+          (ecf from 13(b))
+          (allow valid conclusion based on comparison of calculated values for other
+          quantities given in the question)                                               (1)    3
+
+          Example calculation
+                 100 m
+          𝑡A =           = 1.075 s
+                  93
+
+                      1
+          109 = 93𝑡B + × 14 × 𝑡B 2
+                      2
+
+                                   14
+                 −93 + √932 − 4 × ( 2 ) × (−109)
+          𝑡B =                                            = 1.084 s
+                                   14
+                                 2× 2
+
+          1.075 s < 1.084 s so car A will finish first.
+
+          Total for question 13                                                                  6
+Question
+                                           Answer                                        Mark
+Number
+14(a)    The weight of the grain is equal to the sum of the drag and upthrust
+         acting on it
+         Or
+         Resultant force = 0
+         Or
+         The sum of the upward forces is equal to the sum of the downward
+         forces
+         Or
+         The (vector) sum of the forces is zero                                    (1)    1
+
+14(b)      Use of weight = upthrust + drag                                         (1)
+
+           Use of viscous drag = 6πηrv                                             (1)
+
+           v = 1.7 m s−1 and comparison with 0.050 m s−1 and consistent
+           conclusion.
+            (allow correctly calculated values for other quantities given in the
+           question, with consistent conclusion)                                   (1)    3
+
+           Example of calculation
+           Drag = 4.3 × 10−5 N − 1.5 × 10−5 N = 2.8 × 10−5N
+                               2.8 × 10−5 N                          −1
+           𝑣=                                        −3 m = 1.65 m s
+                                            1.5 × 10
+                6 × π × 1.2 × 10−3 Pa s × (              )
+                                                  2
+           1.65 ≠ 0.05 so Stokes’ law does not apply
+
+14(c)      As temperature increases, viscosity decreases                           (1)
+
+           So (value of) terminal velocity increases (to make drag equal to
+           weight) (dependent on MP1)                                              (1)    2
+
+           Allow converse argument
+           Total for question 14                                                          6
+Question
+                                            Answer                                   Mark
+Number
+15(a)    Use of p = mv                                                         (1)
+
+          Use of momentum conservation                                         (1)
+
+          v = 0.048 (m s−1)                                                    (1)    3
+
+          Example of calculation
+          Initial momentum = 0.165 kg × 0.739 m s−1 = 0.122 N s
+          0.165 kg × 0.691 m s−1 + 0.165 kg × v = 0.122 N s
+                0.122 N s − 0.114 Ns
+          𝑣=                         = 0.048 m s−1
+                      0.165 kg
+
+15(b)     Use of Ek = ½ m v2                                                   (1)
+
+          Decrease in Ek = 5.4 × 10−3 (J) (ecf from 15(a))                     (1)    2
+
+          Example of calculation
+          A: final 𝐸k = 0.5 × 0.165 kg × (0.048 m s−1 )2 = 1.90 × 10−4 J
+          B: final 𝐸k = 0.5 × 0.165 kg × (0.691 m s −1 )2 = 3.94 × 10−2 J
+          Total final 𝐸k = 3.94 × 10−2 J + 1.90 × 10−4 J = 3.96 × 10−2 J
+          Decrease in 𝐸k = 4.5 × 10−2 − 3.96 × 10−2 = 5.40 × 10−3 J
+
+15(c)     (By Newton’s third law) ball B exerts a force equal (in magnitude)
+          and opposite (in direction) on ball A                                (1)
+
+          (By Newton’s first / second law), resultant force on A causes A to   (1)    2
+          decelerate
+
+          To score 2 marks, there must be a reference to Newton’s second law
+          or Newton’s third law.
+
+          Total for question 15                                                       7
+Question
+                                                 Answer                                      Mark
+Number
+16(a)*   This question assesses a student’s ability to show a coherent and logically
+             structured answer with linkages and fully-sustained reasoning. Marks are
+             awarded for indicative content and for how the answer is structured and shows
+             lines of reasoning. The following table shows how the marks should be awarded
+             for indicative content.
+               IC points     IC mark       Max linkage mark       Max final mark
+                   6            4                  2                    6
+                   5            3                  2                    5
+                   4            3                  1                    4
+                   3            2                  1                    3
+                   2            2                  0                    2
+                   1            1                  0                    1
+                   0            0                  0                    0
+
+             The following table shows how the marks should be awarded for structure and
+             lines of reasoning.
+                                                           Number of marks awarded for
+                                                           structure of answer and
+                                                           sustained line of reasoning
+               Answer shows a coherent and logical
+                                                                           2
+               structure with linkages and fully sustained
+               lines of reasoning demonstrated throughout
+               Answer is partially structured with some                    1
+               linkages and lines of reasoning
+               Answer has no linkages between points and                   0
+               is unstructured                                                                6
+
+             Indicative content
+             IC1 Measure the original length (from clamp to marker)
+             IC2 Measure distance moved by marker from original position to
+                   determine extension.
+                   Or Measure new length and subtract original length to
+                   determine extension
+             IC3 Calculate weight of masses using W = mg
+                   Or Use a newtonmeter to measure weight of masses
+             IC4 Use diameter to calculate cross-sectional area
+                                        force
+             IC5 Calculate stress using area and calculate strain using
+                      extension
+                   original length
+                                     (allow symbol equations if terms defined)
+                 Or plot a graph of stress against strain
+                 Or plot a graph of force against extension
+                                                   stress
+             IC6 Calculate Young Modulus using strain (allow symbol equations
+                 if terms defined)
+                 Or Correctly relate gradient of (straight section of) graph to
+                 Young Modulus.
+16(b)   Calculates cross-sectional area                  (1)
+                        𝐹
+        Use of 𝜎 = 𝐴
+                                                         (1)
+                        𝜎                   ∆𝑥
+        Use of 𝐸 = 𝜀 and use of 𝜀 = 𝑥                    (1)
+
+        Δx = 4.6 × 10−4 m                                (1)   4
+
+        Example calculation
+                                     2
+                   0.56×10−3 m
+        A=𝜋×(                       ) = 2.46 × 10−7 m2
+                            2
+                5.0 N
+        σ=                      = 2.03 × 107 Pa
+             2.46×10−7 m2
+              2.03×107 Pa
+        𝜀 = 1.1×1011Pa = 1.85 × 10−4
+        Δx = 1.85 × 10−4 × 2.5 = 4.61 × 10−4 m
+
+        Total for question 16                                  10
+Question
+                                         Answer                     Mark
+Number
+17(a)    Use of trigonometry to show uv = 5.2 (m s−1)         (1)
+
+           Use of trigonometry to show uh = 3.6 (m s−1)       (1)    2
+
+           Example of calculation
+           uv = 6.3 m s−1 × sin 55° = 5.16 m s−1
+           uh = 6.3 m s−1 × cos 55° = 3.61 m s−1
+
+17(b)      Use of v2 = u2 + 2as with a = −g and u = uv        (1)
+
+           Adds 1.25 m to height gained                       (1)
+
+           Greatest height = 2.6 (m) (allow ecf from 17(a))   (1)    3
+
+           Example of calculation
+           0 = (5.16 m s−1)2 – 2 × 9.81 m s−2 × s
+                26.6 m2 s −2
+           𝑠=                = 1.36 m
+                19.6 m s −2
+           1.36 + 1.25 = 2.61 m
+17(c)   EITHER
+
+        Uses valid suvat equation(s) to determine time taken for
+        stone to land in water                                      (1)
+
+        Uses valid suvat equation(s) to determine horizontal
+        distance travelled by stone                                 (1)
+
+        Horizontal distance travelled before landing = 4.5m (ecf
+        from 17(a) and/or 17(b))                                    (1)
+
+        Comparison of horizontal distance travelled with 3.9 (m)
+        and 4.7 (m) and consistent conclusion                       (1)
+
+        OR
+
+        Uses valid suvat equation(s) to determine time taken for
+        stone to reach front or back of ring                        (1)
+
+        Uses valid suvat equation(s) to determine height of stone
+        above front or back of ring                                 (1)
+
+        Height at front of ring = 1.10m and height at back of
+        ring = -0.33 m (ecf from 17(a) and/or 17(b))                (1)
+
+        Comparison of height at front of ring and height at back
+        of ring with 0 and consistent conclusion                    (1)   4
+
+        Example of calculation
+        Vertically
+        𝑣 2 = (5.16 m s−1 )2 + 2 × (−9.81 m s−2 ) × (−1.25 m)
+        𝑣 = −7.15 m s −1
+        −7.15 m s −1 = 5.16 − 9.81 m s−2 × 𝑡
+        𝑡 = 1.25 𝑠
+        Horizontally
+        𝑠 = 3.61 m s −1 × 1.25 s = 4.51 m
+        3.9 m < 4.5 m < 4.7 m, so the stone will land in the tyre
+
+
+
+
+        Total for question 17                                             9
+Question
+                                             Answer                                      Mark
+Number
+18(a)      Use of moment of a force = Fx                                           (1)
+
+           Use of principle of moments                                             (1)
+
+           Use of Newton’s first law
+           Or Second use of principle of moments                                   (1)
+
+           P = 7.9 × 105 N                                                         (1)
+
+           Q = 6.1 × 105 N                                                         (1)    5
+
+           Maximum 4 marks if incorrect / no unit with answers.
+
+           Example of calculation
+           Total clockwise moment = 4.2 × 105 N × 35 m + 9.8 × 105 N × 60 m
+                                    = 7.35 × 107 N m
+           Total anticlockwise moment = Q × 120 m
+           Q × 120 m = 7.35 × 107 N m
+                7.35 × 107 N m
+           𝑄=                    = 6.12 × 105 N
+                     120 m
+           P = 4.2 × 105 N + 9.8 × 105 N – 6.12 × 105 N = 7.88 × 105 N
+
+18(b)      Allow P for X throughout
+           Allow Q for Y throughout
+
+           EITHER
+
+           Distance from X to (centre of gravity of) lorry increases               (1)
+
+           (So) moment (about X) due to (force from) lorry increases               (1)
+
+           Sum of moments remains zero (for equilibrium)                           (1)
+
+           So moment (about X) due to Q increases                                  (1)
+
+           Distance from X to Q remains the same therefore Q increases             (1)
+
+           OR
+
+           Distance from other end of bridge (Y) to (centre of gravity of) lorry   (1)
+           decreases
+
+           (So) moment about Y due to (force from) lorry decreases                 (1)
+
+           Sum of moments remains zero (for equilibrium)                           (1)
+
+           So moment about Y due to P decreases, and P must decrease               (1)
+
+           And (at equilibrium) the sum of P and Q remains the same therefore
+           Q increases                                                             (1)    5
+
+           Total for question 18                                                          10
+Question
+                                          Answer                                       Mark
+Number
+19(a)    Arrow to the left and upwards labelled force from wire / harness        (1)
+
+           Arrow vertically downwards labelled weight / W / mg                   (1)
+
+           Arrow to right (and slightly upward) labelled (viscous) drag / D or
+           labelled air resistance                                               (1)    3
+
+           Example diagram
+
+
+
+
+19(b)(i)   Appropriate trigonometry used                                         (1)
+
+           742 (N)                                                               (1)    2
+
+           Example of calculation
+           R = 2 × 1 200 N × cos (72°) = 741.6 N
+19(b)(ii)   Straight line at least 8 cm long representing force from wire (800 N),
+            with label                                                               (1)
+
+            Vector triangle drawn with at least two sides labelled, and resultant
+            force on shortest side                                                   (1)
+
+            All 3 arrows in correct relative directions (dependent on MP2)           (1)
+
+            Resultant force = 400 N (Range from 390 to 410 )                         (1)   4
+
+            Example diagram
+
+
+
+
+19(c)       (most) Egrav transferred to 𝐸k and mass is in both equations             (1)
+
+            (So final) speed does not depend on mass of person
+            Or
+            (So final) speed only depends on change in height
+            Or
+            (So final) speed = √2𝑔∆ℎ (and g is constant)                             (1)
+
+            (assuming) work done against resistive forces is negligible              (1)   3
+
+
+            Total for question 19                                                          12
+Pearson Education Limited. Registered company number 872828
+with its registered office at 80 Strand, London, WC2R 0RL, United Kingdom
+

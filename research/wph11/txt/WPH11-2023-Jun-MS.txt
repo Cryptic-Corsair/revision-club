@@ -1,0 +1,641 @@
+Mark Scheme (Final)
+
+
+Summer 2023
+
+Pearson Edexcel International Advanced
+Subsidiary Level In Physics (WPH11)
+Paper 01
+Unit 1: Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+Edexcel and BTEC qualifications come from Pearson, the world’s leading
+learning company. We provide a wide range of qualifications including
+academic, vocational, occupational and specific programmes for employers.
+For further information visit our qualifications websites at www.edexcel.com or
+www.btec.co.uk for our BTEC qualifications.
+Alternatively, you can get in touch with us using the details on our contact us
+page at www.edexcel.com/contactus.
+
+
+If you have any subject specific questions about this specification that require
+the help of a subject specialist, you can speak directly to the subject team at
+Pearson.
+Their contact details can be found on this link:
+www.edexcel.com/teachingservices.
+
+
+You can also use our online Ask the Expert service at www.edexcel.com/ask.
+You will need an Edexcel username and password to access this service.
+
+Pearson: helping people progress, everywhere
+Our aim is to help everyone progress in their lives through education. We
+believe in every kind of learning, for all kinds of people, wherever they are in
+the world. We’ve been involved in education for over 150 years, and by
+working across 70 countries, in 100 languages, we have built an international
+reputation for our commitment to high standards and raising achievement
+through innovation in education. Find out more about how we can help you
+and your students at: www.pearson.com/uk
+
+
+
+
+Summer 2034
+Question Paper Log Number: P71945A
+Publications Code: WPH11_01_2306_MS
+All the material in this publication is copyright
+© Pearson Education Ltd 2023
+General Marking Guidance
+
+   •    All candidates must receive the same treatment. Examiners must mark
+        the first candidate in exactly the same way as they mark the last.
+   •    Mark schemes should be applied positively. Candidates must be
+        rewarded for what they have shown they can do rather than penalised
+        for omissions.
+   •    Examiners should mark according to the mark scheme not according to
+        their perception of where the grade boundaries may lie.
+   •    There is no ceiling on achievement. All marks on the mark scheme
+        should be used appropriately.
+   •    All the marks on the mark scheme are designed to be awarded.
+        Examiners should always award full marks if deserved, i.e. if the answer
+        matches the mark scheme. Examiners should also be prepared to award
+        zero marks if the candidate’s response is not worthy of credit according
+        to the mark scheme.
+   •    Where some judgement is required, mark schemes will provide the
+        principles by which marks will be awarded and exemplification may be
+        limited.
+   •    When examiners are in doubt regarding the application of the mark
+        scheme to a candidate’s response, the team leader must be consulted.
+   •    Crossed out work should be marked UNLESS the candidate has replaced
+        it with an alternative response.
+   •    Mark schemes will indicate within the table where, and which strands of
+        QWC, are being assessed. The strands are as follows:
+
+        i) ensure that text is legible and that spelling, punctuation and grammar
+        are accurate so that meaning is clear
+        ii) select and use a form and style of writing appropriate to purpose and
+        to complex subject matter
+        iii) organise information clearly and coherently, using specialist
+        vocabulary when appropriate.
+Mark scheme notes
+
+Underlying principle
+The mark scheme will clearly indicate the concept that is being rewarded, backed up
+by examples. It is not a set of model answers.
+
+1. Mark scheme format
+       1.1 You will not see ‘wtte’ (words to that effect). Alternative correct wording
+                   should be credited in every answer unless the MS has specified
+                   specific words that must be present. Such words will be indicated
+                   by underlining e.g. ‘resonance’
+       1.2 Bold lower case will be used for emphasis e.g. ‘and’ when two pieces of
+                   information are needed for 1 mark.
+        1.3 Round brackets ( ) indicate words that are not essential e.g. “(hence)
+             distance is increased”.
+       1.4 Square brackets [ ] indicate advice to examiners or examples e.g. [Do
+                   not accept gravity] [ecf].
+
+2. Unit error penalties
+        2.1 A separate mark is not usually given for a unit but a missing or incorrect
+                    unit will normally mean that the final calculation mark will not be
+                    awarded.
+        2.2 This does not apply in ‘show that’ questions or in any other question
+                    where the units to be used have been given, for example in a
+                    spreadsheet.
+        2.3 The mark will not be awarded for the same missing or incorrect unit only
+                    once within one clip in epen.
+        2.4 Occasionally, it may be decided not to insist on a unit e.g the candidate
+                    may be calculating the gradient of a graph, resulting in a unit
+                    that is not one that should be known and is complex.
+   2.5 The mark scheme will indicate if no unit error is to be applied by means of [no
+               ue].
+
+3. Significant figures
+        3.1 Use of too many significant figures in the theory questions will not be
+                    prevent a mark being awarded if the answer given rounds to the
+                    answer in the MS.
+        3.2 Too few significant figures will mean that the final mark cannot be
+                    awarded in ‘show that’ questions where one more significant
+                    figure than the value in the question is needed for the candidate
+                    to demonstrate the validity of the given answer.
+        3.3 The use of one significant figure might be inappropriate in the context of
+                    the question e.g. reading a value off a graph. If this is the case,
+                    there will be a clear indication in the MS.
+        3.4 The use of g = 10 m s-2 or 10 N kg-1 instead of 9.81 m s-2 or 9.81 N kg-1
+                    will mean that one mark will not be awarded. (but not more than
+                    once per clip). Accept 9.8 m s-2 or 9.8 N kg-1
+        3.5 In questions assessing practical skills, a specific number of significant
+                    figures will be required e.g. determining a constant from the
+                    gradient of a graph or in uncertainty calculations. The MS will
+                    clearly identify the number of significant figures required.
+4. Calculations
+        4.1 Bald (i.e. no working shown) correct answers score full marks unless in a
+                     ‘show that’ question.
+        4.2 If a ‘show that’ question is worth 2 marks. then both marks will be
+                     available for a reverse working; if it is worth 3 marks then only 2
+                     will be available.
+        4.3 use of the formula means that the candidate demonstrates substitution
+                     of physically correct values, although there may be conversion
+                     errors e.g. power of 10 error.
+        4.4 recall of the correct formula will be awarded when the formula is seen
+                     or implied by substitution.
+       4.5 The mark scheme will show a correctly worked answer for illustration
+               only.
+
+ 5. Quality of Written Communication
+     5.1 Indicated by QoWC in mark scheme. QWC – Work must be clear and
+         organised in a logical manner using technical wording where appropriate.
+    5.2 Usually it is part of a max mark, the final mark not being awarded unless
+         the QoWC condition has been satisfied.
+
+ 6. Graphs
+    6.1 A mark given for axes requires both axes to be labelled with quantities and
+        units, and drawn the correct way round.
+    6.2 Sometimes a separate mark will be given for units or for each axis if the
+        units are complex. This will be indicated on the mark scheme.
+    6.3 A mark given for choosing a scale requires that the chosen scale allows all
+        points to be plotted, spreads plotted points over more than half of each
+        axis and is not an awkward scale e.g. multiples of 3, 7 etc.
+    6.4 Points should be plotted to within 1 mm.
+          • Check the two points furthest from the best line. If both OK award
+              mark.
+          • If either is 2 mm out do not award mark.
+          • If both are 1 mm out do not award mark.
+          • If either is 1 mm out then check another two and award mark if both
+              of these OK, otherwise no mark.
+              For a line mark there must be a thin continuous line which is the best-
+              fit line for the candidate’s results.
+ Question
+                                                 Answer                                 Mark
+ Number
+1           D is the correct answer                                                      1
+            A is incorrect because efficiency is not a vector quantity
+            B is incorrect because energy is not a vector quantity
+            C is incorrect because power is not a vector quantity
+
+2           B is the correct answer                                                      1
+            A is incorrect because the force is not acting in the direction of motion
+            D is incorrect because tan 40° does not give parallel component of force
+            C is incorrect because sin 40° does not give parallel component of force
+
+3           C is the correct answer                                                      1
+            A is incorrect because shorter wire gives less extension
+            B is incorrect because shorter and thicker wire gives less extension
+            D is incorrect because thicker wire gives less extension
+
+4           B is the correct answer                                                      1
+            Ais incorrect because area under graph is not a rectangle
+            B is incorrect because work done is not the gradient of the graph
+            C is incorrect because work done is not the gradient−1 of the graph
+
+5           A is the correct answer                                                      1
+            B is incorrect because N3 pairs must have the same magnitude
+            C is incorrect because N3 pairs must act at the same time
+            D is incorrect because N3 pairs must be of the same type
+
+6           B is the correct answer                                                      1
+            A is incorrect because the gradient gives a quarter of the acceleration
+            C is incorrect because the gradient gives the wrong units
+            D is incorrect because the gradient gives the wrong units
+
+7           D is the correct answer                                                      1
+            A is incorrect because 15 is not the time taken
+            B is incorrect because 2 ×15 is not the time taken
+            C is incorrect because the displacement has not been doubled
+
+8           C is the correct answer                                                      1
+            Because KE gained is GPE lost and the height lost is 20 m × sin 23°
+
+9           B is the correct answer                                                      1
+            A is incorrect because viscosity decreases
+            C is incorrect because viscosity decreases
+            D is incorrect because weight of the ball bearing is constant
+
+10          D is the correct answer                                                      1
+            A is incorrect because it would give a result in mm N−1
+            B is incorrect because two such springs in series would give an extension
+            of 60 mm for a tension of 45 N, not 15 mm
+            C is incorrect because it would give a result in mm N−1
+ Question
+                                                Answer         Mark
+ Number
+11
+            Use of v2 = u2 + 2 a s with u = 0            (1)
+
+            Substitutes a = 0.38 g                       (1)
+
+            𝑣M                                           (1)    3
+                 = 0.62
+            𝑣E
+
+            Example calculation
+            v M 2 = 0 + 2 × 0.38 g s
+            vE2 = 0 + 2 × g s
+             𝑣M 2 0.38𝑔𝑠
+            ( ) =        = 0.38
+             𝑣E     𝑔𝑠
+            𝑣M
+               = √0.38 = 0.62
+            𝑣E
+
+
+            Total for question 11                               3
+ Question
+                                                   Answer                            Mark
+ Number
+12(a)(i)
+            (Initial) gradient = 0
+            Or
+            Tangent horizontal (at t = 0)                                      (1)    1
+
+12(a)(ii)
+            EITHER
+            Draws tangent at (1.5, 0.0)                                        (1)
+
+            (−)14 ± 1 m s−1 by graphical method                                (1)
+
+
+            OR
+            suvat method using quantities read from the graph and/or a = ±g.   (1)
+
+            Correct answer from suvat calculation                              (1)    2
+
+12(b)
+            Straight line from 0 to (1.5, − [magnitude from (a)(ii)])          (1)
+
+            Second straight line from end of first line to (2.1, 0.0)          (1)    2
+
+            [Ignore lines beyond 2.1 s]
+
+
+
+
+            Total for question 12                                                     5
+ Question
+                                                   Answer                  Mark
+ Number
+13(a)
+            Use of Ek = ½ m v2                                       (1)
+
+            Ek = 2.1 × 109 (J)                                       (1)    2
+
+            Example calculation
+            Ek = 0.5 × 7.2 × 105 kg × (76 m s−1)2 = 2.08 × 109 J
+
+13(b)
+            Use of P = W / t                                         (1)
+
+            D = 8.0 × 108 J (ecf from (a))                           (1)    2
+
+            Example calculation
+            W = 16 × 106 W × 180 s = 2.9 × 109 J
+            D = 2.9 × 109 J – 2.1 × 109 J = 8.0 × 108 J
+
+            Total for question 13                                           4
+
+
+
+
+ Question
+                                                   Answer                  Mark
+ Number
+14
+            Resolves horizontal and vertical component of velocity   (1)
+
+            Use of s = u t + ½ a t2 with a = −g and u = uv           (1)
+
+            Use of s = u t + ½ a t2 with a = 0 and u = uh            (1)
+
+            Horizontal distance = 130 m                              (1)    4
+
+            Example calculation
+            uv = 37 m s−1 × sin 53° = 29.5 m s−1
+            t = 2 × 29.5 m s−1 ÷ 9.81 = 6.02 s
+            uh = 37 m s−1 × cos 53° = 22.3 m s−1
+            sh = 22.3 m s−1 × 6.02 s = 134.1 m
+
+            Total for question 14                                           4
+ Question
+                                               Answer                                      Mark
+ Number
+15(a)
+            Total momentum is conserved (because no external forces act)
+            Or
+            Total momentum before is equal to total momentum after (because no
+            external forces act)
+            Or
+            Momentum of system is conserved (because no external forces act)         (1)
+
+            Total/system/initial momentum is zero                                    (1)
+
+            (Final momentum of machine is not zero because) final ball momentum is
+            not zero
+            Or
+            Machine and ball have (equal but) opposite momenta                       (1)    3
+
+15(b)
+            Use of p = mv                                                            (1)
+
+            Use of conservation of momentum                                          (1)
+
+            Velocity of machine = (−)0.087 m s−1                                     (1)    3
+
+            Example calculation
+            2.9 kg × v + 0.056 kg × 4.5 m s−1 = 0
+            v = −0.252 m kg s−1 ÷ 2.9 kg = −0.0869 m s−1
+
+            Total for question 15                                                           6
+ Question
+                                                  Answer                                        Mark
+ Number
+16(a)
+            Flow (around sphere must be) laminar
+            Or
+            Flow (around sphere is) not turbulent                                         (1)    1
+
+16(b)(i)
+            Use of upthrust = weight of displaced fluid                                   (1)
+
+            U = 5.2 × 10−7 (N)                                                            (1)    2
+
+            Example calculation
+            U = 5.3 × 10−11 m3 × 998 kg m−3 × 9.81 N kg−1
+            = 5.19 × 10−7 N
+
+16(b)(ii)
+                        4
+            Use of V = 3πr3                                                               (1)
+
+            Use of F = 6πηrv                                                              (1)
+
+            F = 1.5 × 10−7 N
+            Or
+            Required v = 0.12 m s−1
+            Or
+            Required V = 2.4 × 10−9 m3
+            Or
+            Required r = 8.3 × 10−4 m and r = 2.3 × 10−4 m
+            Or
+            Required η = 3.4 × 10−3 Pa s                                                  (1)
+
+            Valid conclusion by comparison of relevant student values (ecf from (b)(i))   (1)    4
+
+            Example calculation
+                             4
+            5.3 × 10−11 m3 = 3πr3
+               3   3×5.3 × 10−11 m3
+            r= √          4π
+                                    = 2.33 × 10−4 m
+            If Stokes' law applies, F = U
+            F = 6π × 9.5 × 10−4 Pa s × 2.33 × 10−4 m × 3.50 × 10−2 m s−1
+                    = 1.46 × 10−7 N ≠ 5.19 × 10−7 N
+            ⸫ Stokes' law does not apply
+
+            Total for question 16                                                                7
+ Question
+                                                  Answer                                        Mark
+ Number
+17(a)(i)
+            Equates horizontal component with force from current                          (1)
+
+            F = 480 (N)                                                                   (1)    2
+
+            Example calculation
+            F sin 33° = 260 N
+            F = 260 N ÷ sin 33° = 477 N
+
+17(a)(ii)
+            Resolves vertical component of F                                              (1)
+
+            Equates vertical forces                                                       (1)
+
+            Weight of buoy = 2500 N (ecf from (a)(i))                                     (1)    3
+
+            Example calculation
+            477 N cos 33° = 400 N
+            400 N + Weight of buoy = 2.9 × 103 N
+            Weight of buoy = 2900 N − 400 N = 2500 N
+
+17(b)
+            EITHER
+
+            Horizontal component of F increases (to maintain equilibrium)
+            and
+            Vertical component of F remains the same (because vertical forces do not      (1)
+            change, upthrust and weight are constant)
+
+            F2 = Fh2 + Fv2 so F increases [dependent on MP1]                              (1)
+
+            tan θ = Fh/Fv so θ increases [dependent on MP1]                               (1)
+
+            OR
+
+            Horizontal component of F increases (to maintain equilibrium)
+            and
+            Vertical component of F remains the same (because vertical forces do not
+            change, upthrust and weight are constant)                                     (1)
+
+            F2 = Fh2 + Fv2 so F increases [dependent on MP1]
+            Or
+            tan θ = Fh/Fv so θ increases [dependent on MP1]                               (1)
+
+            F cos θ is constant so increase in either F or θ implies an increase in the   (1)    3
+            other [dependent on MP2]
+
+            Total for question 17                                                                8
+ Question
+                                                   Answer                                 Mark
+ Number
+*18
+            This question assesses a student’s ability to show a coherent and logically
+            structured answer with linkages and fully-sustained reasoning.
+            Marks are awarded for indicative content and for how the answer is
+            structured and shows lines of reasoning.
+            The following table shows how the marks should be awarded for
+            indicative content and lines of reasoning.
+              IC points     IC mark      Max linkage         Max final
+                                        mark available        mark
+                  6             4             2                 6
+                  5             3             2                 5
+                  4             3             1                 4
+                  3             2             1                 3
+                  2             2             0                 2
+                  1             1             0                 1
+                  0             0             0                 0
+                                                                                 Marks
+             Answer shows a coherent and logical structure with linkages          2
+             and fully sustained lines of reasoning demonstrated
+             throughout
+             Answer is partially structured with some linkages and lines of           1
+             reasoning
+             Answer has no linkages between points and is unstructured                0
+
+            Indicative content:
+
+            IC1       Balloon exerts a (backwards) force on the air
+
+            IC2       By N3 the air exerts an opposite (forwards) force on balloon
+
+            IC3       The forward force on the balloon is greater than resistive forces
+
+            IC4       By N2 the resultant force causes acceleration
+
+            IC5       As speed increases forces change until resistive force equals
+                      forward force
+
+            IC6       By N1 resultant force equals zero so acceleration equals zero (at    6
+                      maximum speed)
+
+            Total for question 18                                                          6
+ Question
+                                                   Answer                                      Mark
+ Number
+19(a)
+            Use of ΔW = F Δx or ΔEgrav = mgΔh                                            (1)
+
+            Use of P = W / t                                                             (1)
+
+            Use of efficiency = useful power output / total power input
+            Or
+            Use of efficiency = useful energy output / total energy input                (1)
+
+            Total power input = 2.0 × 104 W                                              (1)    4
+
+
+            Example of calculation
+            ΔW = 4.4 × 104 × 15 m = 6.6 × 105 J
+            Output power = 6.6 × 105 J ÷ 70 s = 9.4 × 103 W
+                            9.4×103 W
+            Efficiency =Total power input = 0.47
+                                  9.4 × 103 𝑊
+            Total power input =       0.47
+                                              = 2.0 × 104 W
+
+
+19(b)(i)
+            Total clockwise must balance total anticlockwise moment (about tower)
+            Or
+            Net/resultant/total moment (about tower) must be zero.                       (1)
+
+            Total anticlockwise moment is due to counterweight
+            and
+            Total clockwise moment is due to sum of moment from beam and load            (1)
+
+            Increasing the distance of the load increases the (cw) moment (distance of
+            CoG remains the same)                                                        (1)
+
+            Distance of counterweight needs to be increased [dependent on MP3]           (1)    4
+19(b)(ii)
+            Use of moment = F x                                                      (1)
+
+            Position of centre of mass of beam identified                            (1)
+
+            Use of principle of moments                                              (1)
+
+            Maximum distance of load = 15 m
+            Or, for load at 22 m …
+            CW moment =1.18×106 Nm and max ASW moment = 8.8 ×105 Nm
+            Or
+            Required distance of counterweight = 11 m
+            Or
+            Required counterweight = 1.5 ×105 N
+            Or
+            Maximum load = 3.0 ×104 N
+            Or
+            Required distance to CoG = 2.9 m
+            Or
+            Required weight of beam = 1.3 ×104 N
+            Or
+            Resultant moment = 3.0 × 105 Nm (cw)                                     (1)
+
+            Valid conclusion by comparison of relevant student values                (1)    5
+
+            Example of calculation
+            For equilibrium:
+            3.0 ×104 N × 7.0 m + 4.4 ×104 N × x = 1.1×105 N × 8.0 m
+            where x is the maximum distance of the load from the tower.
+            x = (8.8×105 Nm − 2.1 × 105 Nm) ÷ 4.4 ×104 N
+                    = 6.7 × 105 Nm ÷ 4.4 ×104 N = 15.2 m
+            15.2 m < 22.0 m so crane would topple if load moved to end of beam
+
+
+            Total for question 19                                                           13
+
+
+
+
+ Question
+                                                 Answer                                    Mark
+ Number
+20(a)
+            Stress (or strain) value at/beyond which a material/object undergoes a
+            sudden or large plastic deformation                                      (1)    1
+
+20(b)(i)
+            The force/tension from/in the cable (on the actor) is greater than the   (1)
+            weight of the actor
+                                                                                     (1)    2
+            (So) there is a resultant/net/unbalanced force (upwards)
+20(b)(ii)
+             Use of W = m g                                                                  (1)
+
+             Use of ΣF = m a                                                                 (1)
+
+             Tension = 917 (N)                                                               (1)    3
+
+             Example calculation
+             W= 77 kg × 9.81 N kg−1 = 755 N
+             T – 755 N = 77 kg × 2.1 m s−2
+             T = 162 N + 755 N = 917 N
+
+20(b)(iii)
+             Use of A = π r2                                                                 (1)
+
+             Use of σ = F ÷ A (ecf from (b)(ii))                                             (1)
+
+             Allowed stress (15% yield stress of steel) = 3.8 × 107 Pa
+             and σ = 2.0 × 107 Pa
+             Or
+             (15%)−1 of cable stress = 1.3 × 108 Pa
+             Or
+             Max safe tension = 1.7 × 103 N
+             Or
+             Min safe diameter = 5.6 × 10−3 m
+             Or
+             Percentage of yield stress = 8%
+             Or
+             Max safe acceleration = 12.3 m s−2                                              (1)
+
+             Valid conclusion by comparison of relevant student values                       (1)    4
+
+             Example calculation
+                                      2
+                 𝜋𝑑 2    𝜋×(7.6×10−3 m)
+             A=       =                 = 4.54 × 10−5 m2
+                  4              4
+                      917 N
+             𝜎 = 4.54×10−5 m2 = 2.02 × 107 Pa (show that value gives 2.03 × 107 Pa)
+                               8               7
+             0.15 × 2.5 × 10 Pa = 3.75 × 10 Pa
+             2.03 × 107 Pa < 3.75 × 107 Pa so it is safe.
+
+20(c)
+             New cable has a greater cross sectional area, (but same breaking stress) so
+             a greater force is required                                                      (1)
+
+             Because new cable has smaller Young modulus, there is a greater strain for
+             the same stress                                                                  (1)
+
+             So (at breaking stress) there will be a greater extension (because cables are
+             the same length) [dependent on MP2]
+             Or
+             Smaller Young modulus implies greater extension (at breaking stress,
+             because cables are the same length) [independent mark]                           (1)
+
+             (And as) force and extension both increase, work done to break the new
+             cable is greater than that for the original cable [independent mark]             (1)   4
+
+             Total for question 20                                                                  14
+Pearson Education Limited. Registered company number 872828
+with its registered office at 80 Strand, London, WC2R 0RL, United Kingdom
+

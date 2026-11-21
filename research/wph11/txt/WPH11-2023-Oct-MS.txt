@@ -1,0 +1,522 @@
+Mark Scheme (Results)
+
+October 2023
+
+Pearson Edexcel International Advanced
+Subsidiary Level in Physics (WPH11)
+Paper 01
+Unit 1: Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest awarding body.
+We provide a wide range of qualifications including academic, vocational, occupational and
+specific programmes for employers. For further information visit our qualifications
+websites at www.edexcel.com or www.btec.co.uk. Alternatively, you can get in touch with
+us using the details on our contact us page at www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone
+progress in their lives through education. We believe in every kind of learning, for all kinds
+of people, wherever they are in the world. We’ve been involved in education for over 150
+years, and by working across 70 countries, in 100 languages, we have built an international
+reputation for our commitment to high standards and raising achievement through
+innovation in education. Find out more about how we can help you and your students at:
+www.pearson.com/uk
+
+
+
+
+October 2023
+Question Paper Log Number P75621A
+Publications Code WPH11_01_MS_2310
+All the material in this publication is copyright
+© Pearson Education Ltd 2023
+General Marking Guidance
+
+
+
+            •   All candidates must receive the same treatment. Examiners must
+                mark the first candidate in exactly the same way as they mark the
+                last.
+            •   Mark schemes should be applied positively. Candidates must be
+                rewarded for what they have shown they can do rather than
+                penalised for omissions.
+            •   Examiners should mark according to the mark scheme not
+                according to their perception of where the grade boundaries may
+                lie.
+            •   There is no ceiling on achievement. All marks on the mark scheme
+                should be used appropriately.
+            •   All the marks on the mark scheme are designed to be awarded.
+                Examiners should always award full marks if deserved, i.e. if the
+                answer matches the mark scheme. Examiners should also be
+                prepared to award zero marks if the candidate’s response is not
+                worthy of credit according to the mark scheme.
+            •   Where some judgement is required, mark schemes will provide
+                the principles by which marks will be awarded and exemplification
+                may be limited.
+            •   When examiners are in doubt regarding the application of the
+                mark scheme to a candidate’s response, the team leader must be
+                consulted.
+            •   Crossed out work should be marked UNLESS the candidate has
+                replaced it with an alternative response.
+Question
+                                                Answer                                   Mark
+ Number
+1          A is the correct answer                                                        1
+
+           B is incorrect because displacement is a vector
+           C is incorrect because mass is a scaler
+           D is incorrect because velocity is a vector
+2          A is the correct answer                                                        1
+
+           B is incorrect because this is an SI unit of force
+           C is incorrect because this is an SI unit of acceleration
+           D is incorrect because units of momentum are usually either kg m s−1 or N s
+3          B is the correct answer                                                        1
+
+           A is incorrect because Hooke’s law is when force ∝ extension
+           C is incorrect because the elastic limit relates to what happens when the
+           deforming force is removed
+           D is incorrect because this is the breaking stress
+4          C is the correct answer                                                        1
+
+           A is incorrect because this would be stationary
+           B is incorrect because this would be constant velocity
+           D is incorrect because this would be a decreasing velocity
+5          C is the correct answer                                                        1
+
+           A is incorrect because the force of gravity is down and the helicopter is
+           going up
+           B is incorrect because this includes increasing kinetic energy
+           D is incorrect because this is the increase in kinetic energy
+6          A is the correct answer                                                        1
+
+           B is incorrect because 𝐸𝑘 ∝ 𝑣 2 or 𝑣 ∝ √𝐸𝑘 if 2Ek then vnew = √2𝑣
+           C is incorrect because 𝐸𝑘 ∝ 𝑣 2 or 𝑣 ∝ √𝐸𝑘 if 2Ek then vnew = √2𝑣
+           D is incorrect because 𝐸𝑘 ∝ 𝑣 2 or 𝑣 ∝ √𝐸𝑘 if 2Ek then vnew = √2𝑣
+7          A is the correct answer                                                        1
+
+           B is incorrect because useful output = 2.1 GW and total input = 2.4 + 2.1
+           GW
+           C is incorrect because useful output = 2.1 GW and total input = 2.4 + 2.1
+           GW
+           D is incorrect because useful output = 2.1 GW and total input = 2.4 + 2.1
+           GW
+8          A is the correct answer                                                        1
+
+           B is incorrect because stress ∝ strain or 𝐹/𝐴 ∝ ∆𝑥/𝑥 or ∆𝑥 ∝ 𝑥/𝑑 2 if 2∆𝑥
+           then 0.5x / (0.5 d)2 = 2 (x/d2)
+           C is incorrect because stress ∝ strain or 𝐹/𝐴 ∝ ∆𝑥/𝑥 or ∆𝑥 ∝ 𝑥/𝑑 2 if 2∆𝑥
+           then 0.5x / (0.5 d)2 = 2 (x/d2)
+           D is incorrect because stress ∝ strain or 𝐹/𝐴 ∝ ∆𝑥/𝑥 or ∆𝑥 ∝ 𝑥/𝑑2 if 2∆𝑥
+           then 0.5x / (0.5 d)2 = 2 (x/d2)
+9          D is the correct answer                                                        1
+
+           A is incorrect because the addition of vector forces on an object in
+           equilibrium = 0
+           B is incorrect because the addition of vector forces on an object in
+           equilibrium = 0
+           C is incorrect because the addition of vector forces on an object in
+           equilibrium = 0
+10   B is the correct answer                  1
+
+     A is incorrect because 𝑊 = 𝐹 cos 𝜃 × 𝑑
+     C is incorrect because 𝑊 = 𝐹 cos 𝜃 × 𝑑
+     D is incorrect because 𝑊 = 𝐹 cos 𝜃 × 𝑑
+Question
+                                              Answer                                    Mark
+Number
+11(a)    Use of W = mg                                                            (1)
+
+         Use of F = ma                                                            (1)
+
+         a = 4.8 m s−2                                                            (1)    3
+
+         Example calculation
+         𝑊 = 5.0 × 106 kg × 9.81 N kg −1 = 4.91 × 107 N
+         𝛴𝐹 = 7.3 × 107 N − 4.91 × 107 kg = 5.0 × 106 kg × 𝑎
+             2.39 × 107 N
+         𝑎=                  = 4.78 m s −2
+             5.0 × 106 kg
+
+11(b)    The mass / weight of the rocket / fuel decreases (because fuel is used
+         up)
+         Or
+         The thrust force increases
+         Or
+         The resultant force increases                                            (1)    1
+
+         Total for question 11                                                           4
+Question
+                                            Answer                                               Mark
+Number
+12(a)    Total momentum before (a collision) = total momentum after (a collision)
+         Or
+         total momentum remains constant                                                   (1)
+
+            When no external force acts
+            Or
+            When no resultant force acts on the system
+            Or
+            In a closed / isolated system                                                  (1)    2
+
+12(b)(i)    Momentum is mass ×velocity and after the collision the mass (that is           (1)
+            moving) is double the original value.
+
+            (because velocity is half its original value) momentum remains the same so     (1)    2
+            the law is obeyed (dependent on MP1)
+
+            OR
+
+            Initial momentum of A is equated to final momentum of A plus final
+            momentum of B                                                                  (1)
+
+            Shows that MP1 is consistent with final velocity = half initial velocity and
+            concludes that the law is obeyed (dependent on MP1)                            (1)
+
+
+12(b)(ii)   (The gliders accelerate in opposite directions because) the magnetic
+            forces are equal in size and opposite in direction
+            Or
+            (The gliders accelerate in opposite directions because) the magnetic
+            forces form a Newton's 3rd law pair                                            (1)
+
+            So the velocity of one glider increases and the velocity of the other
+            decreases (by the same amount)
+            Or
+            So the resultant force on the system is zero
+            Or
+            The magnetic forces are not external forces                                    (1)    2
+
+
+            Total for question 12                                                                 6
+Question
+                                                   Answer                                            Mark
+Number
+13(a)(i) Use of s = ut + ½ at2                                                                 (1)
+
+            t = 0.72 (s)                                                                       (1)    2
+
+            Example calculation
+            2.54 m = (0 × t) + ½ × 9.81 m s−2 × t2
+            t = 0.72 s
+
+13(a)(ii)   Use of s = ut + ½ at2 with a = 0                                                   (1)
+
+            u = 25 m s─1   [ecf from (a)(i)]
+            [Show that value gives 25.6 m s─1]                                                 (1)    2
+
+            Example calculation
+                17.89 m
+            uH = 0.72 s = 24.8 m s─1
+
+13(b)       (If the initial velocity is increased) the horizontal (component of) velocity is
+            larger                                                                             (1)
+
+            The vertical (component of) velocity as the ball hits the ground is not
+            affected                                                                           (1)
+                                                                  𝑣
+            (When θ is the angle to the horizontal), tan(𝜃) = V so θ decreases
+                                                                  𝑣H
+            Or
+                                                            𝑣
+            (When θ is the angle to the vertical), tan(𝜃) = 𝑣H so θ increases
+                                                              V
+            Or
+            Labelled vector diagram showing how the angle changes if initial velocity of
+            ball is increased.                                                                 (1)    3
+
+            Total for question 13                                                                     7
+Question
+                                                Answer                                           Mark
+ Number
+14(a)      Straight arrow at least 6cm long representing F, with label                     (1)
+
+           Vector triangle drawn with at least two sides in the triangle labelled, and F   (1)
+           on the longest side.
+
+           All three arrows in correct relative directions (dependent on MP2)              (1)
+                                                                                                  4
+           T = 70 N (allow range of 65 to 75 N)                                            (1)
+
+           Example vector diagram
+
+
+
+
+14(b)      Use of ∆W = F∆s                                                                 (1)
+
+           Use of P = W / t (allow                                                         (1)
+
+           P = 28 (W), which is not equal to 35 (W), so is not consistent                  (1)    3
+                        𝑠
+           [Use of 𝑣 = 𝑡 [1]
+
+           Use of 𝑃 = 𝐹𝑣 [1]
+
+           P = 28 W which is not equal to 35 W, so is not consistent [1]]
+
+           Allow approaches that work backwards from 35W to determine time,
+           number of repetitions, force applied or vertical distance moved.
+
+           Example calculation
+           ∆W = 150 N × 0.25 m = 37.5 J
+              37.5 J×90
+           P = 120 s = 28.1 W
+
+           Total for question 14                                                                  7
+Question
+                                            Answer                                                Mark
+Number
+15(a)    Point through which weight may be taken to act                                     (1)    1
+
+15(b)(i)    Determines distance from hinge to centre of gravity of ladder (0.50 m)          (1)
+
+            Use of moment = Fx                                                              (1)
+
+            Moment (of weight of ladder about hinge) = 27 (N m)
+            and
+            moment (of weight of board about hinge) = 22.5 (N m)
+            Or
+            combined moment (of weight of ladder and board about hinge) = 4.5 (N m)         (1)
+
+            Combined moment (of the weights of the board and ladder about the hinge)
+            is clockwise.
+            Or
+            clockwise moment is greater than anticlockwise moment                           (1)
+
+            The block causes a force / moment so the resultant moment (on ladder and
+            board) is zero                                                                  (1)    5
+
+            Example calculation
+                                                                  2.7 m
+            Distance from hinge to centre of gravity of ladder = (      − 0.85 m)
+                                                                    2
+            Clockwise moment = 54 N × (0.50 m) = 27 N m
+            Anticlockwise moment 50 N × 0.45 m = 22.5 N m
+
+15(b)(ii)   Use of moment = Fx and difference in moments from (b)(i)                        (1)
+
+            Force = 5.6 N      (ecf from(b)(i))                                             (1)    2
+
+            If no other mark scored, allow 1 mark for a force calculated using a distance
+            of 0.80 m with a valid moment using data from the question
+
+            Example calculation
+            Resultant moment = 27 N m – 22.5 N m = 4.5 N m
+               4.5 N m
+            F= 0.80 m = 5.63 N
+
+            Total for question 15                                                                  8
+Question
+                                                  Answer                                              Mark
+Number
+16(a)    They act on the same object                                                            (1)
+
+            They are not the same type of force                                                 (1)    2
+
+16(b)(i)                 Δ𝑥                                                                     (1)
+            Use of ε =
+                         𝑥
+
+                                     𝐹                                                          (1)
+            Use of F = kΔx and σ = 𝐴
+
+                         𝜎                           𝑘𝑥                                         (1)
+            Use of E = 𝜀 [allow a method using E = 𝐴 for 3 marks]
+
+                                                                                                (1)    4
+            E = 2.1 × 1011 Pa
+
+            Example calculation
+            Δx = 3 × 10−4 × 3.8 m = 1.14 × 10−3 m
+            F = 2.8 × 107 N m−1 × 1.14 × 10−3 m = 3.19 × 104 N
+                 3.19×104 N
+            σ = 5.1×10−4 m2 = 6.26 × 107 Pa
+                6.26×107 Pa
+            E = 3.0×10−4 = 2.09 × 1011 Pa
+
+16(b)(ii)   Area under graph = elastic strain energy (can be indicated on graph)                (1)
+
+            Weight of electromagnet is still exerted on cable after object falls (can be
+            indicated on graph)                                                                 (1)
+
+            So change in elastic strain energy = area under graph between total weight
+            (of electromagnet and steel object) and weight of electromagnet (can be
+                                                                            1                   (1)
+            shown on graph or given as an algebraic equivalent using 𝐸𝑒𝑙 = 2 𝐹∆𝑥 )
+
+            And change in gravitational potential energy of electromagnet is weight of
+            electromagnet × change in extension (can be indicated on graph)                     (1)
+
+            So the change in elastic strain energy stored > change in gravitational
+            potential energy of the electromagnet                                               (1)    5
+
+            Example of graph
+
+
+                 total weight of
+                  electromagnet                                      Area of small triangle
+                and steel object                                     plus rectangle = change
+                                                                     in elastic strain energy
+                      weight of
+                 electromagnet
+                                                                      Area of rectangle
+                                                                      represents change
+                                                                      in GPE
+
+
+
+
+            Total for question 16                                                                      11
+Question
+                                              Answer                                           Mark
+Number
+17(a)    An upwards force caused by the displacement of fluid (by an object)
+         Or
+         (a force equal and opposite to) the weight of fluid displaced (by an object )
+                                                                                         (1)    1
+                       𝑚
+17(b)(i)    Use of 𝜌 = 𝑉 and 𝑊 = 𝑚𝑔 to calculate upthrust                                (1)
+
+            Use of ΣF = ma                                                               (1)
+
+            W = 13.2 (N)                                                                 (1)    3
+
+            Example calculation
+            𝑈 = 1.63 m3 × 1.23 kg m−3 × 9.81 N kg −1 = 19.67 N
+            Σ𝐹 = 19.67 N − m × 9.81 = m × 4.80 m s−2
+                          19.7 N
+            𝑚=                             = 1.346 kg
+                4.80 N kg −1 + 9.81 m s −2
+            𝑊 = 1.346 kg × 9.81 N kg −1 = 13.20 N
+
+17(b)(ii)   Density at 25 km = 0.05 kg m−3 (range 0.040 – 0.050 kg m-3)                  (1)
+
+            Use of W = mg and ρ = m / V                                                  (1)
+
+            Volume required at 25 km = 27 m3 (range 26 m3 to 34 m3) [show that value
+            gives 26.5 m3] [allow ecf from b(i)]
+            Or
+            Upthrust from a balloon of volume 50 m3 at 25 km = 25 N (range 19.6 to
+            25.0 N)                                                                      (1)
+
+            Valid conclusion from comparison of their calculated volume with 50 m3
+            Or
+            Valid conclusion from comparison of their calculated upthrust with weight
+            of balloon                                                                   (1)    4
+
+
+            Example calculation
+            Upthrust required = 13.2 N = 0.05 kg m−3 × 9.81 N kg−1 × V
+            V = 13.2 N ÷ 0.491 N m−3 = 26.9 m3
+            26.9 m3 < 50 m3 so yes
+*17(c)   This question assesses a student’s ability to show a coherent and logically
+         structured answer with linkages and fully-sustained reasoning.
+
+         Marks are awarded for indicative content and for how the answer is
+         structured and shows lines of reasoning.
+
+         The following table shows how the marks should be awarded for indicative
+         content and lines of reasoning.
+
+           IC points    IC mark      Max linkage         Max final
+                                    mark available        mark
+               6           4              2                 6
+               5           3              2                 5
+               4           3              1                 4
+               3           2              1                 3
+               2           2              0                 2
+               1           1              0                 1
+               0           0              0                 0
+                                                                                Marks
+          Answer shows a coherent and logical structure with linkages            2
+          and fully sustained lines of reasoning demonstrated
+          throughout
+          Answer is partially structured with some linkages and lines of          1
+          reasoning
+          Answer has no linkages between points and is unstructured               0
+
+
+
+
+         Indicative content:
+
+         IC1 (When the balloon is released) upthrust greater than weight
+
+         IC2 the resultant force is upward
+
+         IC3 Velocity of balloon increases
+             Or balloon accelerates (upwards)
+
+         IC4 (after balloon is at maximum volume) Upthrust decreases as height
+             increases (because density of surrounding air decreases)
+
+         IC5 Until upthrust is less than weight so there is a resultant force
+             downwards
+
+         IC6 Velocity of balloon then decreases to zero                                 6
+             Or balloon then decelerates to rest.
+
+         [Ignore references to viscous drag.]
+
+         Total for question 17                                                          14
+Question
+                                             Answer                                               Mark
+Number
+18(a)    Small spherical object
+         Or
+         Spherical object moving at low speed                                               (1)
+
+             Laminar flow [allow non-turbulent flow]                                        (1)    2
+
+18(b)(i)     Max 3
+
+             Initially the velocity is zero so gradient is zero                             (1)
+
+             As velocity increases the gradient changes                                     (1)
+
+             As velocity increases, drag increases                                          (1)
+
+             Until terminal / constant velocity when the gradient becomes constant.         (1)    3
+
+             [If no other mark scored, allow 1 mark for velocity increases until terminal
+             velocity is reached.]
+
+18(b)(ii)    Determines radius of ball bearing                                              (1)
+
+             Determines gradient                                                            (1)
+                                                                                                   4
+             Use of F = 6πηrv                                                               (1)
+
+             η = 0.046 (Pa s) [allow a range from 0.044 (Pa s) to 0.048 (Pa s)]             (1)
+
+             Example calculation
+                      1.6×10−3 m
+             Radius =             = 8 × 10−4 m
+                           2
+                           11.5
+             Gradient = 1.15−0.60 = 20.9
+                            −1
+             𝑣 = 0.209 m s
+                          1.45 × 10−4 N
+             𝜂=                                     = 0.0460 Pa s
+                 6𝜋 × 8 × 10−4 m × 0.209 m s−1
+18(b)(iii)   At higher temperature the viscosity will be less                               (1)
+
+             F = 6πηrv and r is constant                                                    (1)
+
+             Drag force is less (at a given speed)
+             Or
+             Drag force (at terminal velocity) is unchanged                                 (1)
+
+             Terminal velocity is greater (and ball-bearing takes less time to fall)        (1)    4
+
+             Total for question 18                                                                 13
+Pearson Education Limited. Registered company number 872828
+with its registered office at 80 Strand, London, WC2R 0RL, United Kingdom
+

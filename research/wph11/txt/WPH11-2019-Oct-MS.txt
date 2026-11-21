@@ -1,0 +1,605 @@
+Mark Scheme (Results)
+
+October 2019
+
+Pearson Edexcel International Advanced Level
+In Physics (WPH11) Paper 01
+Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest awarding body. We provide
+a wide range of qualifications including academic, vocational, occupational and specific programmes
+for employers. For further information visit our qualifications websites at www.edexcel.com or
+www.btec.co.uk. Alternatively, you can get in touch with us using the details on our contact us page at
+www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone progress in
+their lives through education. We believe in every kind of learning, for all kinds of people, wherever
+they are in the world. We’ve been involved in education for over 150 years, and by working across 70
+countries, in 100 languages, we have built an international reputation for our commitment to high
+standards and raising achievement through innovation in education. Find out more about how we can
+help you and your students at: www.pearson.com/uk
+
+
+
+
+October 2019
+Publications Code WPH11_01_1910_ MS
+All the material in this publication is copyright
+© Pearson Education Ltd 2019
+   General Marking Guidance
+
+• All candidates must receive the same treatment. Examiners must mark the first candidate
+  in exactly the same way as they mark the last.
+
+
+• Mark schemes should be applied positively. Candidates must be rewarded for what they
+  have shown they can do rather than penalised for omissions.
+
+
+• Examiners should mark according to the mark scheme not according to their perception of
+  where the grade boundaries may lie.
+
+
+• There is no ceiling on achievement. All marks on the mark scheme should be used
+  appropriately.
+
+
+• All the marks on the mark scheme are designed to be awarded. Examiners should always
+  award full marks if deserved, i.e. if the answer matches the mark scheme. Examiners should
+  also be prepared to award zero marks if the candidate’s response is not worthy of credit
+  according to the mark scheme.
+
+
+• Where some judgement is required, mark schemes will provide the principles by which
+  marks will be awarded and exemplification may be limited.
+
+
+• When examiners are in doubt regarding the application of the mark scheme to a candidate’s
+  response, the team leader must be consulted.
+
+
+• Crossed out work should be marked UNLESS the candidate has replaced it with an
+  alternative response.
+Mark scheme notes
+
+Underlying principle
+
+The mark scheme will clearly indicate the concept that is being rewarded, backed up by examples. It is
+not a set of model answers.
+
+For example:
+
+(iii)   Horizontal force of hinge on table top
+
+        66.3 (N) or 66 (N) and correct indication of direction [no ue]                             1
+        [Some examples of direction: acting from right (to left) / to the left / West /
+        opposite direction to horizontal. May show direction by arrow. Do not accept a
+        minus sign in front of number as direction.]
+
+This has a clear statement of the principle for awarding the mark, supported by some examples
+illustrating acceptable boundaries.
+
+1. Mark scheme format
+   1.1 You will not see ‘wtte’ (words to that effect). Alternative correct wording should be
+       credited in every answer unless the ms has specified specific words that must be present.
+       Such words will be indicated by underlining e.g. ‘resonance’
+   1.2 Bold lower case will be used for emphasis.
+   1.3 Round brackets ( ) indicate words that are not essential e.g. “(hence) distance is increased”.
+   1.4 Square brackets [ ] indicate advice to examiners or examples e.g. [Do not accept gravity]
+       [ecf].
+
+2. Unit error penalties
+   2.1 A separate mark is not usually given for a unit but a missing or incorrect unit will normally
+         mean that the final calculation mark will not be awarded.
+   2.2 Incorrect use of case e.g. ‘Watt’ or ‘w’ will not be penalised.
+   2.3 There will be no unit penalty applied in ‘show that’ questions or in any other question where
+         the units to be used have been given, for example in a spreadsheet.
+   2.4 The same missing or incorrect unit will not be penalised more than once within one question
+         (one clip in epen).
+   2.5 Occasionally, it may be decided not to penalise a missing or incorrect unit e.g. the candidate
+         may be calculating the gradient of a graph, resulting in a unit that is not one that should be
+         known and is complex.
+   2.6 The mark scheme will indicate if no unit error penalty is to be applied by means of [no ue].
+
+3. Significant figures
+   3.1 Use of an inappropriate number of significant figures in the theory papers will normally
+         only be penalised in ‘show that’ questions where use of too few significant figures has
+         resulted in the candidate not demonstrating the validity of the given answer.
+   3.2 The use of g = 10 m s-2 or 10 N kg-1 instead of 9.81 m s-2 or 9.81 N kg-1 will be penalised by
+         one mark (but not more than once per clip). Accept 9.8 m s-2 or 9.8 N kg-1
+
+4. Calculations
+   4.1 Bald (i.e. no working shown) correct answers score full marks unless in a ‘show that’
+        question.
+   4.2 If a ‘show that’ question is worth 2 marks then both marks will be available for a reverse
+        working; if it is worth 3 marks then only 2 will be available.
+   4.3 use of the formula means that the candidate demonstrates substitution of physically correct
+        values, although there may be conversion errors e.g. power of 10 error.
+   4.4 recall of the correct formula will be awarded when the formula is seen or implied by
+        substitution.
+   4.5   The mark scheme will show a correctly worked answer for illustration only.
+   4.6   Example of mark scheme for a calculation:
+
+           ‘Show that’ calculation of weight
+
+           Use of L × W × H                                                                     
+
+           Substitution into density equation with a volume and density                         
+
+           Correct answer [49.4 (N)] to at least 3 sig fig. [No ue]                             
+           [If 5040 g rounded to 5000 g or 5 kg, do not give 3rd mark; if conversion to kg is
+           omitted and then answer fudged, do not give 3rd mark]
+           [Bald answer scores 0, reverse calculation 2/3]                                            3
+
+           Example of answer:
+
+           80 cm × 50 cm × 1.8 cm = 7200 cm3
+
+           7200 cm3 × 0.70 g cm-3 = 5040 g
+
+           5040 × 10-3 kg × 9.81 N/kg
+
+           = 49.4 N
+
+5. Quality of Written Communication
+   5.1 Indicated by QoWC in mark scheme. QWC – Work must be clear and organised in a logical
+        manner using technical wording where appropriate.
+   5.2 Usually it is part of a max mark, the final mark not being awarded unless the QoWC
+        condition has been satisfied.
+
+6. Graphs
+   6.1 A mark given for axes requires both axes to be labelled with quantities and units, and drawn
+       the correct way round.
+   6.2 Sometimes a separate mark will be given for units or for each axis if the units are complex.
+       This will be indicated on the mark scheme.
+   6.3 A mark given for choosing a scale requires that the chosen scale allows all points to be
+       plotted, spreads plotted points over more than half of each axis and is not an awkward scale
+       e.g. multiples of 3, 7 etc.
+   6.4 Points should be plotted to within 1 mm.
+          • Check the two points furthest from the best line. If both OK award mark.
+          • If either is 2 mm out do not award mark.
+          • If both are 1 mm out do not award mark.
+          • If either is 1 mm out then check another two and award mark if both of these OK,
+              otherwise no mark.
+          • For a line mark there must be a thin continuous line which is the best-fit line for the
+               candidate’s results.
+Question Answer                                                                    Mark
+Number
+
+1        A is the correct answer                                                   (1)
+
+         B is not correct as both the micro and centi columns are incorrect.
+         C is not correct as the micro column is incorrect.
+         D is not correct as the centi column is incorrect.
+2        B is the correct answer                                                   (1)
+
+         A is not correct as they are the units for force.
+         C is not correct as they are the units for momentum.
+         D is not correct as they are the units for power.
+3        C is the correct answer                                                   (1)
+
+         A is not correct as diameter is being used for radius.
+         B is not correct as diameter is being used for radius.
+         D is not correct as the anomalous point (1.36) has not been ignored.
+4        D is the correct answer                                                   (1)
+
+        This is because the area under a stress-strain graph is the work done
+        per unit volume, but the area under the other 3 graphs represents
+        work done.
+5       B is the correct answer                                                    (1)
+
+         This is because the horizontal component is calculated using the
+        equation 𝑣𝑣H = �𝑣𝑣 2 −𝑣𝑣V2 = √0.52 − 0.32 = 0.4
+6        C is the correct answer                                                   (1)
+
+         This is because Wc should have been drawn in the centre of the cube.
+7        C is the correct answer                                                   (1)
+
+         A is not correct as it ignores the weight of the table.
+         B is a correct equation since Rc=Wc, but it is not an instance of the
+        third law.
+         D is a correct equation but it is not an instance of the third law.
+8        C is the correct answer                                                   (1)
+
+        This is because the power needed is equal to the gravitational energy
+        supplied per second (mgh) plus the kinetic energy given to the water
+        per second (½mv2).
+9       C is the correct answer                                                    (1)
+
+         This is because s=½gt2. So if in one unit of time the sphere has fallen
+        one unit of distance, i.e. from image 1 to image 2, then in 2 units of
+        time it will have fallen 4 units of distance, i.e. from image 1 to R.
+10       B is the correct answer                                                   (1)
+
+        This is because the force is given by F=kx. So if k is doubled but x
+        remains the same, F will be doubled.
+Question Answer                                                                          Mark
+Number
+11       Horizontal force/component = Fcosθ                                        (1)
+
+          Work done = FH × s
+          Or Work done = F cosθ × s                                                (1)
+
+          As θ increases, cosθ / FH / Fcosθ decreases so work done decreases.
+          Or As θ decreases, cosθ / FH / Fcosθ increases so work done increases.   (1)     (3)
+
+          Total for question 11                                                            3
+
+
+
+
+Question Answer                                                                          Mark
+Number
+12(a)    Use of (∆)Egrav = Fd
+          Or Use of Ek = (∆)Egrav AND Use of v2=u2+2as with 𝑎𝑎 = −
+                                                                     𝐹𝐹            (1)
+                                                                     𝑚𝑚
+                       𝑚𝑚𝑚𝑚    𝑑𝑑       𝑚𝑚𝑚𝑚
+          Gradient =        Or      =
+                        𝐹𝐹     ℎ         𝐹𝐹
+                                                                                   (1)     (2)
+
+          Example of calculation
+          mgh= 𝐹𝐹𝐹𝐹
+          𝑑𝑑 𝑚𝑚𝑚𝑚
+            =
+          ℎ   𝐹𝐹
+
+12(b)     u = �2𝑔𝑔ℎ                                                                (1)
+          (Do not allow if suvat used with a=g)
+
+          Use of p = mv                                                            (1)
+
+          m1u = (m1 + m2) v (either seen or used)
+          (Do not allow if there is an m2u term unless u=0)                        (1)
+
+          Some working leading to the correct expression AND statement that the
+          student is correct.                                                      (1)     (4)
+
+
+          Example of calculation
+          mgh = ½ mv2
+          v = �2𝑔𝑔ℎ
+
+          m�2𝑔𝑔ℎ = 2mv
+
+               �2𝑔𝑔ℎ    𝑔𝑔ℎ
+          v=    2
+                     =�
+                         2
+
+          Total for question 12                                                             6
+Question   Answer                                                                                   Mark
+Number
+13(a)      Method 1 – Calculate the vertical displacement at 102 m.
+           See (uv =) 33sin28 Or 15 to 16 (m s−1) Or (uh =) 33cos28 Or 29 (m s−1)             (1)
+
+           Use of v = s/t with s = 102 m for the time of flight needed
+           Or Use of v = s/t with s = 10 m for the extra time of flight needed                (1)
+
+           Use of equation(s) to determine the vertical displacement at the time calculated   (1)
+
+           Vertical displacement = (−) 5.8 to 6.0 m                                           (1)
+
+           Comparison with required height AND height is insufficient                         (1)
+           (Allow correct conclusion based on the calculated height)
+
+
+           Method 2 – Calculate the horizontal displacement for a height of 4.5 m.
+           See (uv =) 33sin28 Or 15 to 16 (m s−1) Or (uh =) 33cos28 Or 29 (m s−1)             (1)
+
+           Use of vertical equation(s) with s = (−)4.5 m to determine the actual time of
+           flight Or to determine the time beyond 92 m                                        (1)
+
+           Use of v = s/t to determine the range
+           Or Use of v = s/t for the extra displacement beyond 92 m                           (1)
+
+           Horizontal displacement = 98 to 101 m Or extra displacement = 7.7 to 7.9 m         (1)
+
+           Comparison with required displacement AND height is insufficient
+           Or Comparison of extra displacement AND height is insufficient                     (1)
+           (Allow correct conclusion based on the calculated distance)
+
+
+           Method 3 – Calculate the actual time of flight and that needed for 102 m
+           See (uv =) 33sin28 Or 15 to 16 (m s−1) Or (uh =) 33cos28 Or 29 (m s−1)             (1)
+
+           Use of v = s/t with s = 102 m for the time of flight needed                        (1)
+
+           Use of vertical equation(s) to determine the actual time of flight                 (1)
+
+           Time of flight needed = 3.5 s AND actual time of flight = 3.4 s                    (1)   (5)
+
+           Time needed > actual time AND height is insufficient                               (1)
+           (Allow correct conclusion based on the calculated times)
+
+
+           Example of calculation
+           uv = (33m s−1) sin28 ° = 15.5 m s−1
+           uh = (33 m s−1) cos28 °= 29.1m s−1
+                 102 m
+           t=
+               29.1 m s−1
+           t = 3.50 s
+           s = (15.5 m s−1 × 3.50 s) + (½ × (−9.81 N kg−1) ×(3.50 s)2)
+           s = − 5.87 m
+*13(b)   This question assesses a student’s ability to show a coherent and logically
+         structured answer with linkages and fully-sustained reasoning.
+         Marks are awarded for indicative content and for how the answer is structured and
+         shows lines of reasoning.
+         The following table shows how the marks should be awarded for indicative
+         content and lines of reasoning.
+
+             IC points   IC mark       Max linkage          Max final
+                                      mark available         mark
+                6            4              2                  6
+                5            3              2                  5
+                4            3              1                  4
+                3            2              1                  3
+                2            2              0                  2
+                1            1              0                  1
+                0            0              0                  0
+
+
+
+                                                                 Number of marks awarded for
+                                                                 structure of answer and sustained
+                                                                 line of reasoning
+         Answer shows a coherent and logical                                      2
+         structure with linkages and fully sustained
+         lines of reasoning demonstrated throughout
+         Answer is partially structured with some                                1
+         linkages and lines of reasoning
+         Answer has no linkages between points and                               0
+         is unstructured
+
+         Indicative content
+         With air resistance:
+         Vertical motion
+          • When moving up weight and (vertical component of) air resistance are
+              acting.
+              Or When moving up air resistance increases the resultant force.
+
+          •     (When moving up,) downwards/vertical acceleration/deceleration increases
+                Or upward velocity decreases more quickly.
+
+          •     (So maximum) height is lower.
+
+         Horizontal motion
+         • There is a horizontal deceleration/force (due to air resistance).
+
+         •      (So the average) horizontal velocity is lower.
+
+         •      The (ball travels a) shorter (total) distance.                                       (6)
+
+         Total for question 13                                                                       11
+Question Answer                                                                             Mark
+Number
+14(a)(i) (This moment) causes an anti-clockwise rotation/motion (about G)
+         Or This moment is anti-clockwise (about G)                                   (1)
+
+            Returning/maintaining the boat to/in an upright/initial position
+            Or Reducing the tilt of the boat
+            Or opposing/balancing the moment caused by the wind                       (1)    (2)
+
+14(a)(ii)   The distance d is reduced
+            Or W/G moves to the right of U/X                                          (1)
+
+            The (anti-clockwise) moment is reduced
+            Or The moment becomes/is clockwise                                        (1)
+
+            The boat would be less stable
+            Or The boat will tilt further
+            Or The boat could turn over                                               (1)    (3)
+
+14(b)(i)    When filled with water/ballast, the weight/mass (of the boat) increases   (1)
+
+            Upthrust equals the weight (of the boat) (because the boat is floating)
+            Or Upthrust increases (because the boat is floating)                      (1)
+
+            Boat moves downwards in the water
+            Or The volume/amount of displaced water increases                         (1)
+
+            Centre of gravity of displaced water is lower                             (1)    (4)
+
+14(b)(ii)   Greater (surface) area of boat in contact with water
+            Or greater cross-sectional area in water (in direction of travel)         (1)
+
+            There a greater resistance/drag/friction (on the boat).                   (1)    (2)
+
+            (ignore references to greater risk of flooding)
+
+            Total for question 14                                                             11
+Question Answer                                                                      Mark
+Number
+
+15(a)(i)    Place two or more rubber bands or markers (on the cylinder)
+            (accept markers correctly placed and labelled on diagram)          (1)
+
+            The top band should be far enough below the surface for terminal
+            velocity to have been reached
+            Or have more than 2 markers and check velocity is constant.        (1)
+
+            Measure time for the sphere to fall a given distance (using the
+            stopwatch) and measure distance fallen (using the metre rule)      (1)
+
+
+            Either
+            Reference to repeated measurements and averaging                   (1)
+
+                                       distance between markers
+            (terminal velocity =)                                              (1)
+                                    (average) time between markers
+
+
+            Or
+            measure the times for different distances                          (1)
+
+            (terminal velocity =) gradient of graph of distance against time   (1)      (5)
+
+15(a)(ii)   A larger sphere would have a greater (terminal) velocity           (1)
+
+            Weight is greater
+            Or terminal velocity is proportional to r2
+            Or takes more time to reach terminal velocity                      (1)
+
+            The time of falling would be less                                  (1)
+
+            The (absolute) uncertainty in the time is the same
+            Or Resolution of the stopwatch is the same
+            Or Reaction time is the same
+            (or they are a greater proportion of the (measured) time)          (1)      (4)
+15(b) (i)   Upthrust/U up                                                         (1)
+
+            Drag/friction/D up                                                    (1)
+
+            Weight/W/mg down                                                      (1)   (3)
+
+            (−1 for each extra force over 3)
+            (−1 if any arrow does not touch the dot)
+            (−1 if any arrow is not close to vertical)
+            (Accept single line up with two labelled arrow heads.
+            Ignore the length of the arrows.)
+
+
+            Examples:
+                    U                    U
+                         Drag                Drag
+
+
+
+
+                         W                    W
+
+15(b)       Weight = (upthrust +) drag with indication that W=3.5×10−2 N          (1)
+(ii)
+            Use of upthrust = ρlVg                                                (1)
+
+            Use of drag = 6πrηv
+                                                                                  (1)
+            η = 2.1 (Pa s)
+                                                                                  (1)   (4)
+
+            Example of calculation
+               4
+            V = π(4.8 × 10−3 m)3 = 4.63 × 10−7 m3
+                3
+            Upthrust = 1.1 × 103 kg m−3 × 4.63 × 10−7 m3 × 9.81 N kg−1 = 5.00 ×
+            10−3 N
+
+            3.5 × 10−2 N = 5.0 × 10−3 N + 6π(4.8 × 10−3 m × η × 0.160 m s−1)
+            η = 2.07 Pa s
+
+            Total for question 15                                                       16
+Question Answer                                                                               Mark
+Number
+16(a)    Compares ≈40 (MPa) (compression) with ≈10 (MPa) (tension)                      (1)
+
+            Breaking/fracture/ultimate stress/force (much) greater under compression
+            Or Breaking/fracture/ultimate stress is 40 MPa under compression, and
+            10 MPa under tension.
+            Or Breaking/fracture/ultimate stress is 30 MPa greater under compression.   (1)   (2)
+
+            (If no other mark scored, allow 1 mark for greater energy absorbed/stored
+            under compression)
+
+16(b)       Breaking stress = 5.00 to 5.10 (×108 Pa)                                    (1)
+
+            Use of σ = F/A                                                              (1)
+
+            F = 8.0/8.1 × 105 N                                                         (1)   (3)
+
+
+            Example of calculation
+            A = π × (2.25 × 10−2 m)2 = 1.59 × 10−3 m2
+            F = 1.59 × 10−3 m2 × 5.05 × 108 Pa = 8.03 × 105 N
+
+16(c)(i)    Concrete can withstand high(er) stress/force under compression              (1)
+            Or Concrete is strong(er) under compression
+
+            The concrete remains under compression when tensile force applied.
+            Or Applied/tensile force first has to overcome the compression
+            Or When tensile force applied, concrete is still under compression          (1)
+
+            The steel/rods take (some of) the force/stress
+            Or The force/stress causes deformation of the steel                         (1)
+
+            Steel can withstand a large(r) tensile force/stress
+            Or Steel is strong(er) under tension
+            Or Ultimate tensile stress of steel is large(r)                             (1)   (4)
+
+16(c)(ii)   (When force removed) the rod will not return to its original length/shape
+            Or The rod will be permanently/plastically deformed                         (1)
+
+            the concrete will not compress (as much)
+            Or The compression force will be less/zero                                  (1)   (2)
+
+            Total for question 16                                                              11
+       Question        Answer                                                                          Mark
+       Number
+       17(a)(i)        The graph is less steep
+                       Or The gradient is smaller                                                (1)   (1)
+                                     𝑣𝑣 −𝑢𝑢
+       17(a)(ii)       Use of a =           Or Use of a = gradient                               (1)
+                                        𝑡𝑡
+
+                                                                                                 (1)   (2)
+                       a2 = 0.96 to 1.3 m s−2
+
+
+                       Example of calculation
+                              13.2 m s−1 −6.8 m s−1
+                       a2 =        (10.5 −4)s
+                                                    = 0.98 m s−2
+
+       17(a)(iii) Velocity is large(r) (in higher gears)                                         (1)
+
+                       so force (of the engine) will be smaller.                                 (1)   (2)
+
+       17(b)(i)        Conversion of mph to m s−1                                                (1)
+
+                       Use of acceleration values for first and second gears only.               (1)
+
+                       Use of a =
+                                     𝑣𝑣 −𝑢𝑢
+                                            to determine a time                                  (1)
+                                        𝑡𝑡
+
+                                                                                                 (1)   (4)
+                       total time = 13.0 to 14.0 s
+
+
+                       Example of calculation
+                                             60 mph ×1600 m
+                       Velocity conversion =                = 26.7 m s−1
+                                                     3600
+                                 18 m s−1 −0
+                       2.9 m s−2 =                  t1 = 6.21 s
+                                      𝑡𝑡1
+                                 26.7 m s−1 − 18 m s−1
+                       1.2 m s =
+                              −2
+                                           𝑡𝑡
+                                                          t2 = 7.22 s
+                       Total time = 6.21 s + 7.22 s = 13.4 s
+
+       17(b)(ii)       As velocity increases the air resistance increases                        (1)
+
+                       (When) frictional forces are equal to the (driving) force of engine/car   (1)
+
+                       There is no resultant/net/unbalanced force and no acceleration            (1)   (3)
+
+                       Total for question 17                                                            12
+
+
+
+
+Pearson Education Limited. Registered company number 872828
+with its registered office at 80 Strand, London, WC2R 0RL, United Kingdom
+

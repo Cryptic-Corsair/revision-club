@@ -1,0 +1,564 @@
+Mark Scheme (Results)
+
+June 2022
+
+
+Pearson Edexcel
+International Advanced Subsidiary Level in Physics
+(WPH11) Paper 01: Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+
+
+Edexcel and BTEC qualifications come from Pearson, the world’s leading
+learning company. We provide a wide range of qualifications including
+academic, vocational, occupational and specific programmes for employers.
+For further information visit our qualifications websites at www.edexcel.com
+or www.btec.co.uk for our BTEC qualifications.
+
+Alternatively, you can get in touch with us using the details on our contact
+us page at www.edexcel.com/contactus.
+
+
+
+
+If you have any subject specific questions about this specification that
+require the help of a subject specialist, you can speak directly to the
+subject team at Pearson.
+
+Their contact details can be found on this link:
+www.edexcel.com/teachingservices.
+
+
+
+
+You can also use our online Ask the Expert service at
+www.edexcel.com/ask. You will need an Edexcel username and password to
+access this service.
+
+
+
+Pearson: helping people progress, everywhere
+
+Our aim is to help everyone progress in their lives through education. We
+believe in every kind of learning, for all kinds of people, wherever they are
+in the world. We’ve been involved in education for over 150 years, and by
+working across 70 countries, in 100 languages, we have built an
+international reputation for our commitment to high standards and raising
+achievement through innovation in education. Find out more about how we
+can help you and your students at: www.pearson.com/uk
+
+
+
+
+June 2022
+Question Paper Log Number: P70968A
+Publications Code: WPH11_01_2206_MS
+All the material in this publication is copyright
+© Pearson Education Ltd 2022
+General Marking Guidance
+
+
+
+   •    All candidates must receive the same treatment. Examiners must
+        mark the first candidate in exactly the same way as they mark the
+        last.
+   •    Mark schemes should be applied positively. Candidates must be
+        rewarded for what they have shown they can do rather than
+        penalised for omissions.
+   •    Examiners should mark according to the mark scheme not according
+        to their perception of where the grade boundaries may lie.
+   •    There is no ceiling on achievement. All marks on the mark scheme
+        should be used appropriately.
+   •    All the marks on the mark scheme are designed to be awarded.
+        Examiners should always award full marks if deserved, i.e. if the
+        answer matches the mark scheme. Examiners should also be
+        prepared to award zero marks if the candidate’s response is not
+        worthy of credit according to the mark scheme.
+   •    Where some judgement is required, mark schemes will provide the
+        principles by which marks will be awarded and exemplification may
+        be limited.
+   •    When examiners are in doubt regarding the application of the mark
+        scheme to a candidate’s response, the team leader must be
+        consulted.
+   •    Crossed out work should be marked UNLESS the candidate has
+        replaced it with an alternative response.
+   •    Mark schemes will indicate within the table where, and which strands
+        of QWC, are being assessed. The strands are as follows:
+
+
+        i) ensure that text is legible and that spelling, punctuation and
+        grammar are accurate so that meaning is clear
+
+        ii) select and use a form and style of writing appropriate to purpose
+        and to complex subject matter
+
+        iii) organise information clearly and coherently, using specialist
+        vocabulary when appropriate.
+Mark scheme notes
+
+
+
+Underlying principle
+
+The mark scheme will clearly indicate the concept that is being rewarded, backed
+up by examples. It is not a set of model answers.
+
+
+1. Mark scheme format
+
+        1.1 You will not see ‘wtte’ (words to that effect). Alternative correct
+                    wording should be credited in every answer unless the MS has
+                    specified specific words that must be present. Such words will
+                    be indicated by underlining e.g. ‘resonance’
+        1.2 Bold lower case will be used for emphasis e.g. ‘and’ when two pieces
+                    of information are needed for 1 mark.
+         1.3 Round brackets ( ) indicate words that are not essential e.g. “(hence)
+              distance is increased”.
+        1.4 Square brackets [ ] indicate advice to examiners or examples e.g. [Do
+                    not accept gravity] [ecf].
+
+
+2. Unit error penalties
+
+        2.1 A separate mark is not usually given for a unit but a missing or
+                    incorrect unit will normally mean that the final calculation
+                    mark will not be awarded.
+        2.2 This does not apply in ‘show that’ questions or in any other question
+                    where the units to be used have been given, for example in a
+                    spreadsheet.
+        2.3 The mark will not be awarded for the same missing or incorrect unit
+                    only once within one clip in epen.
+        2.4 Occasionally, it may be decided not to insist on a unit e.g the
+                    candidate may be calculating the gradient of a graph,
+                    resulting in a unit that is not one that should be known and is
+                    complex.
+   2.5 The mark scheme will indicate if no unit error is to be applied by means of
+               [no ue].
+3. Significant figures
+
+       3.1 Use of too many significant figures in the theory questions will not be
+                   prevent a mark being awarded if the answer given rounds to
+                   the answer in the MS.
+       3.2 Too few significant figures will mean that the final mark cannot be
+                   awarded in ‘show that’ questions where one more significant
+                   figure than the value in the question is needed for the
+                   candidate to demonstrate the validity of the given answer.
+       3.3 The use of one significant figure might be inappropriate in the context
+                   of the question e.g. reading a value off a graph. If this is the
+                   case, there will be a clear indication in the MS.
+       3.4 The use of g = 10 m s-2 or 10 N kg-1 instead of 9.81 m s-2 or 9.81 N
+                   kg-1 will mean that one mark will not be awarded. (but not
+                   more than once per clip). Accept 9.8 m s-2 or 9.8 N kg-1
+       3.5 In questions assessing practical skills, a specific number of significant
+                   figures will be required e.g. determining a constant from the
+                   gradient of a graph or in uncertainty calculations. The MS will
+                   clearly identify the number of significant figures required.
+
+
+4. Calculations
+
+       4.1 Bald (i.e. no working shown) correct answers score full marks unless
+                    in a ‘show that’ question.
+       4.2 If a ‘show that’ question is worth 2 marks. then both marks will be
+                    available for a reverse working; if it is worth 3 marks then
+                    only 2 will be available.
+       4.3 use of the formula means that the candidate demonstrates
+                    substitution of physically correct values, although there may
+                    be conversion errors e.g. power of 10 error.
+       4.4 recall of the correct formula will be awarded when the formula is
+                    seen or implied by substitution.
+       4.5 The mark scheme will show a correctly worked answer for illustration
+              only.
+
+ 5. Quality of Written Communication
+     5.1 Indicated by QoWC in mark scheme. QWC – Work must be clear and
+         organised in a logical manner using technical wording where
+         appropriate.
+    5.2 Usually it is part of a max mark, the final mark not being awarded
+         unless the QoWC condition has been satisfied.
+6. Graphs
+   6.1 A mark given for axes requires both axes to be labelled with quantities
+       and units, and drawn the correct way round.
+   6.2 Sometimes a separate mark will be given for units or for each axis if the
+       units are complex. This will be indicated on the mark scheme.
+   6.3 A mark given for choosing a scale requires that the chosen scale allows
+       all points to be plotted, spreads plotted points over more than half of
+       each axis and is not an awkward scale e.g. multiples of 3, 7 etc.
+   6.4 Points should be plotted to within 1 mm.
+          • Check the two points furthest from the best line. If both OK award
+             mark.
+          • If either is 2 mm out do not award mark.
+          • If both are 1 mm out do not award mark.
+          • If either is 1 mm out then check another two and award mark if
+             both of these OK, otherwise no mark.
+             For a line mark there must be a thin continuous line which is the
+             best-fit line for the candidate’s results.
+Question
+                                              Answer                                      Mark
+Number
+1          The correct answer is C                                                         1
+           A is incorrect because the numerator and denominator are the wrong way
+           around, and a factor of 1 000 is missing in the numerator
+           B is incorrect because the factor 750 should be in the denominator and the 1
+           000 in the numerator
+           D is incorrect because the numerator and denominator are the wrong way
+           around.
+2          The correct answer is B                                                         1
+           A is incorrect because the upthrust is constant
+           C is incorrect because the upthrust is constant and the viscous drag is
+           increasing
+           D is incorrect because the viscous drag is increasing
+3          The correct answer is D                                                         1
+           A is incorrect because force is a vector
+           B is incorrect because momentum is a vector
+           C is incorrect because velocity is a vector
+4          The correct answer is C                                                         1
+           A is incorrect because area represents work done per unit volume
+           B is incorrect because area represents work done per unit volume
+           D is incorrect because the breaking point is outside the linear region
+5          The correct answer is B                                                         1
+           A is incorrect because air resistance would reduce the acceleration
+           C is incorrect because drop time is unaffected by horizontal motion
+           D is incorrect because a greater time would give a lower acceleration
+Question   Answer                                                                           Mark
+Number
+6          The correct answer is B because for a constant resultant force acceleration       1
+           increases if mass decreases
+           A is incorrect because a constant acceleration for a decreasing mass would
+           require a decreasing resultant force
+           C is incorrect because a decreasing acceleration for a decreasing mass would
+           require a decreasing resultant force
+           D is incorrect because a decreasing acceleration for a decreasing mass would
+           require a decreasing resultant force
+7          The correct answer is D                                                           1
+           A is incorrect because springs in series increase the extension and springs in
+           parallel decrease the extension for the same force
+           B is incorrect because springs in series increase the extension for the same
+           force
+           C is incorrect because springs in parallel decrease the extension for the same
+           force
+8          The correct answer is D because the area below the t axis represents negative     1
+           displacement
+           A is incorrect because P is above the line and Q should be subtracted
+           B is incorrect because P is above the line
+           C is incorrect because Q should be subtracted
+9          The correct answer is D                                                           1
+           A is incorrect because the distance moved by the force is not Δh cos θ
+           B is incorrect because the distance moved by the force is not Δh / cos θ
+           C is incorrect because the distance moved by the force is not Δh sin θ
+10         The correct answer is B                                                           1
+           A is incorrect because the spring constant is ΔF / Δx
+           C is incorrect because the spring constant is ΔF / Δx
+           D is incorrect because the spring constant is ΔF / Δx
+           Total for Section A                                                               10
+Question                                                                                        Mark
+           Answer
+Number
+11(a)
+           The forces act on the same object.                                             (1)
+
+           They are different types of force.                                             (1)    2
+
+11(b)
+           Downward arrow labelled magnetic force (from disc)
+           Or Downward arrow labelled F.                                                  (1)
+
+           Upward arrow labelled (normal) reaction / contact / R / N / and arrow length
+           approximately equal to F + W.                                                  (1)    2
+
+
+
+
+           Total for question 11                                                                 4
+Question
+                                                     Answer                                               Mark
+Number
+
+12(a)
+            It’s the force / stress beyond which the cable does not return to its original length
+            when the force / stress is removed                                                      (1)    1
+
+12(b)(i)
+            Use of ε = Δx/x                                                                         (1)
+            ε = 0.021                                                                               (1)    2
+
+            Example of calculation
+            ε = 0.126 m ÷ 6 m = 0.021
+
+12(b)(ii)
+            Use of σ = F/A                                                                          (1)
+            σ = 1.4 × 109 Pa                                                                        (1)    2
+
+            Example of calculation
+            σ = 1.34 × 106 N ÷ 9.6 × 10−3 m2 = 1.40 × 109 Pa
+
+            Total for question 12                                                                          5
+Question
+                                                  Answer                                                Mark
+Number
+
+13(a)
+
+
+
+
+                                                                                                  (1)
+                                                                                                  (1)    2
+
+
+           Horizontal arrow pointing to the left labelled "reaction (force from the wall on the
+           hook)"
+           Arrow drawn below screw and not lower than last point of contact between hook and
+           wall
+           MP2 depends upon MP1
+
+13(b)
+           Use of moment of force = F x                                                           (1)
+           Use of principle of moments                                                            (1)
+           Use of W = m g                                                                         (1)
+           Correct calculation leading to conclusion no (as maximum is two coats)                 (1)    4
+
+           Example of calculation
+           150 N × 0.009 m = W × 0.025 m
+           W = 1.35 N m ÷ 0.025 m = 54.0 N
+           m = 54.0 N ÷ 9.81 N kg−1 = 5.50 kg
+           5.50 kg ÷ 2.6 kg = 2.12 ⸫ two coats max, so no.
+
+           Total for question 13                                                                         6
+Question
+                                                         Answer                       Mark
+Number
+14(a)
+            Use EK = ½ m v2                                                     (1)
+
+            Use of efficiency =
+                                  useful energy output                          (1)
+                                   total energy input
+
+            Efficiency = 0.56 Or 56%                                            (1)    3
+
+
+            Example of calculation
+            EK = 0.5 × 1 560 kg × (13 m s−1) 2 = 1.32 × 105 J
+            efficiency = 73.9 × 104 J ÷ 1.32 × 105 J = 0.56
+
+14(b)(i)
+            As the velocity increases the drag forces increase.                 (1)    1
+
+
+14(b)(ii)
+            At higher speeds more work done against air resistance.             (1)
+            So more energy dissipated.                                          (1)
+            So a smaller proportion of energy is available to charge battery.   (1)
+            (Hence) the efficiency of the system is lower.                      (1)    4
+
+
+            Total for question 14                                                      8
+Question
+                                                     Answer                                               Mark
+Number
+
+15*
+           This question assesses a student’s ability to show a coherent and logically structured
+           answer with linkages and fully-sustained reasoning.
+           Marks are awarded for indicative content and for how the answer is structured and
+           shows lines of reasoning.
+           The following table shows how the marks should be awarded for indicative content
+           and lines of reasoning.
+
+               IC points    IC mark      Max linkage        Max final
+                                        mark available       mark
+                   6           4              2                6
+                   5           3              2                5
+                   4           3              1                4
+                   3           2              1                3
+                   2           2              0                2
+                   1           1              0                1
+                   0           0              0                0
+
+                                                                                     Marks
+               Answer shows a coherent and logical structure with linkages and        2
+               fully sustained lines of reasoning demonstrated throughout.
+               Answer is partially structured with some linkages and lines of          1
+               reasoning
+               Answer has no linkages between points and is unstructured               0
+
+
+           Indicative content:
+
+           •     Upthrust on a bulb is equal to weight of liquid displaced.                         (1)
+           •     When upthrust equals/exceeds weight of bulb / disc, bulb floats                    (1)
+                                                                                                    (1)
+           •     Weight of a bulb / disc is constant
+           •     As temperature increases the weight of displaced liquid decreases
+                                                                                                    (1)
+                 Or As temperature increases upthrust on bulb decreases                             (1)
+           •     Until weight of a bulb / disc exceeds the upthrust
+                                                                                                    (1)    6
+           •     There is a resultant force and bulb will sink
+
+           Total for question 15                                                                           6
+Question
+                                                   Answer                                        Mark
+Number
+16(a)
+           Two arrowed lines for 70 N and 24 N with correct orientation                    (1)
+           [use template for angle]
+           Lines labelled with name/force/scaled length                                    (1)
+           Tension drawn in correctly i.e. correct vector diagram with correct direction   (1)
+           Answer in range 55 ± 2 N                                                        (1)    4
+
+           [Correct answer from trigonometry scores MP4 only]
+
+           Example of calculation
+
+
+
+
+16(b)
+           Measure angle of string to vertical                                             (1)
+           Using a protractor                                                              (1)
+           Calculate weight of mass holder and masses using W = mg                         (1)
+           Vertical component of T is equal to W                                           (1)
+           Vertical component is T cos θ, so T can be calculated                           (1)    5
+
+           Total for question 16                                                                  9
+Question
+                                                      Answer                                                Mark
+Number
+17(a)(i)
+             Use of p = m v                                                                           (1)
+             Use of conservation of momentum                                                          (1)
+             m = 151 (kg)                                                                             (1)    3
+
+             Use of F = Δp / Δt scores MP1 and MP2
+
+             Example of calculation
+             p = 250 kg × 2.10 m s−1 = 250 kg × 1.15 m s−1 + m × 1.57 m s−1 = 525.0 kg m s−1
+             m = (525.0 − 287.5 N s) kg m s−1 ÷ 1.57 m s−1
+                     = 237.5 kg m s−1 ÷ 1.57 m s−1 = 151.3 kg
+
+17(a)(ii)
+             No external horizontal forces acted on either car during the collision.                  (1)    1
+
+17(a)(iii)
+             Use of a = Δv / Δt                                                                       (1)
+             Use of ΣF = ma                                                                           (1)
+             ΣF = 1.76 × 102 N (ecf from (a)(i))                                                      (1)    3
+
+             Example of calculation
+             average acceleration = 1.57 m s−1 ÷ 1.35 s = 1.16 m s−2
+             ΣF = 151.3 kg × 1.16 m s−2 = 1.76 × 102 N
+
+17(b)
+             P exerts a force on Q so Q exerts a force on P                                           (1)
+             Due to N3 forces are equal and opposite in direction                                     (1)
+             Resultant force on P opposite to direction of motion so according to N2, P decelerates   (1)    3
+
+             Total for question 17                                                                           10
+Question
+                                                  Answer                                               Mark
+Number
+18(a)
+           Use of trigonometry                                                                   (1)
+           Vertical component = 34 (m s−1)                                                       (1)    2
+
+           Example of calculation
+           52 m s−1 × sin 41° = 34.1 m s−1
+
+18(b)
+           Method 1:
+           Use of s = u t + ½ a t2 with s = 11 m and a = − 9.81 m s−2                            (1)
+           Use of quadratic formula                                                              (1)
+           t = 6.62 (s) [Allow ecf from (a)]                                                     (1)
+
+           Method 2:
+           Use of v = u + at, with v = 0 to find time to max height [3.48 s]                     (1)
+           Use of s = ½(u + v) t, or other correct suvat equation, to find max height [59.3 m]
+           And
+           Use of s = u t + ½ a t2 to find time to fall to 11 m [3.14 s]                         (1)
+           t = 6.62 (s) depending on rounding of (a) [Allow ecf from (a)]                        (1)    3
+           (allow ecf from (a))
+           [Allow any valid suvat method]
+
+           Example of calculation
+           Let time to max height = t
+           11 m = 34.1 m s−1 × t − ½ × 9.81 m s−2 × t2
+           4.91 × t2 − 34.1 m s−1 × t + 11 m = 0
+           t = (34.1 ± √( 34.12 − 4 × 11 × 4.91) m s−1 ÷ 9.81 m s−2
+                    = 6.62 s (or 0.34 s)
+
+18(c)
+           Resolves for horizontal component of velocity                                         (1)
+           Use of s = v t                                                                        (1)
+           260 m so no                                                                           (1)    3
+           (Allow ecf from (b) with correct conclusion based on student’s value)
+
+           Example of calculation
+           Horizontal component of velocity = 52 m s−1 × cos 41° = 39.2 m s−1
+           s = 39.2 m s−1 × 6.62 s = 260 m
+           Distance required 245 m to 255 m and 260 m > 255 m so no.
+             Total for question 18                                                                  8
+
+Question
+                                                      Answer                                       Mark
+Number
+19(a)
+                The viscosity decreases (with temperature)                                   (1)    1
+
+19(b)(i)
+                Use of V = (4/3)π r3                                                         (1)
+                Use of ρ = m / V                                                             (1)
+                Use of W = m g                                                               (1)
+                W = 4.76 × 10−3 N                                                            (1)    4
+
+                Example of calculation
+                volume = (4/3)π × (3.5 × 10−3 m)3 = 1.80 ×10−7 m3
+                m = 1.80 ×10−7 m3 × 2.70 × 103 kg m−3 = 4.85×10−4 kg
+                W = 4.85×10−4 kg × 9.81 N kg−1 = 4.76 × 10−3 N
+
+19(b)(ii)
+                Use of F = 6π η r v                                                          (1)
+                Use of U = weight of fluid displaced                                         (1)
+                Comparison of F with W − U and conclusion consistent with student's values   (1)    3
+
+                Example of calculation
+                D = 6π × 0.95 Pa s × 0.003 5 m × 0.040 5 m = 2.54 × 10−3 N
+                U = 1.80 ×10−7 m3 × 1.26 × 103 kg m−3 × 9.81 N kg−1 = 2.22 × 10−3 N
+                W − U = 4.76 × 10−3 N − 2.22 × 10−3 N = 2.54 × 10−3 N
+                2.54 × 10−3 N = D ⸫ Stokes law obeyed
+
+
+19(b)(iii)
+                Low speed
+                Or
+                Laminar flow
+                Or
+                Small sphere                                                                 (1)    1
+                [Accept reference to wide cylinder]
+
+
+19(c)
+                Viscosity of blood is much lower                                             (1)
+
+                Drag will be lower for given velocity (proportional to diameter)             (1)
+
+                Reducing diameter gives less weight (proportional to cube of diameter)       (1)
+
+                Forces balance at lower speed
+                Or
+                Terminal velocity lower                                                      (1)
+
+                Laminar flow needs low speed                                                 (1)    5
+
+                Viscosity of blood much lower (1)
+                (For the original sphere) drag would be (much) lower at same velocity (1)
+So terminal velocity would be (much) too large for Stokes' law (1)
+Reducing r reduces W much more than D OR W proportional to r3 but D
+proportional to r (1)
+(With smaller sphere) forces will still balance at low speed (1)
+
+
+Total for question 19                                                 14
+

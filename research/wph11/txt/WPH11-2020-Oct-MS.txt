@@ -1,0 +1,639 @@
+Mark Scheme (Results)
+
+
+October 2020
+
+Pearson Edexcel International Advanced
+Subsidiary/Advanced Level
+In Physics (WPH011)
+Paper 1: Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest awarding body. We
+provide a wide range of qualifications including academic, vocational, occupational and specific
+programmes for employers. For further information visit our qualifications websites at
+www.edexcel.com or www.btec.co.uk. Alternatively, you can get in touch with us using the
+details on our contact us page at www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone
+progress in their lives through education. We believe in every kind of learning, for all kinds of
+people, wherever they are in the world. We’ve been involved in education for over 150 years,
+and by working across 70 countries, in 100 languages, we have built an international reputation
+for our commitment to high standards and raising achievement through innovation in
+education. Find out more about how we can help you and your students at:
+www.pearson.com/uk
+
+
+
+
+Autumn 2020
+Publications Code WPH11_01_2010_MS
+All the material in this publication is copyright
+© Pearson Education Ltd 2020
+General Marking Guidance
+
+
+
+            •   All    candidates        must     receive     the      same
+                treatment. Examiners must mark the first candidate in
+                exactly the same way as they mark the last.
+            •   Mark schemes should be applied positively. Candidates
+                must be rewarded for what they have shown they can do
+                rather than penalised for omissions.
+            •   Examiners should mark according to the mark scheme
+                not according to their perception of where the grade
+                boundaries may lie.
+            •   There is no ceiling on achievement. All marks on the mark
+                scheme should be used appropriately.
+            •   All the marks on the mark scheme are designed to be
+                awarded. Examiners should always award full marks if
+                deserved,   i.e.   if   the   answer   matches   the   mark
+                scheme. Examiners should also be prepared to award
+                zero marks if the candidate’s response is not worthy of
+                credit according to the mark scheme.
+            •   Where some judgement is required, mark schemes will
+                provide the principles by which marks will be awarded
+                and exemplification may be limited.
+            •   When examiners are in doubt regarding the application
+                of the mark scheme to a candidate’s response, the team
+                leader must be consulted.
+            •   Crossed out work should be marked UNLESS the
+                candidate has replaced it with an alternative response.
+Mark scheme notes
+
+Underlying principle
+
+The mark scheme will clearly indicate the concept that is being rewarded, backed up by
+examples. It is not a set of model answers.
+
+For example:
+
+(iii)   Horizontal force of hinge on table top
+
+        66.3 (N) or 66 (N) and correct indication of direction [no ue]                          1
+        [Some examples of direction: acting from right (to left) / to the left / West
+        / opposite direction to horizontal. May show direction by arrow. Do not
+        accept a minus sign in front of number as direction.]
+
+This has a clear statement of the principle for awarding the mark, supported by some
+examples illustrating acceptable boundaries.
+
+1. Mark scheme format
+   1.1 You will not see ‘wtte’ (words to that effect). Alternative correct wording should
+        be credited in every answer unless the ms has specified specific words that must be
+        present. Such words will be indicated by underlining e.g. ‘resonance’
+   1.2 Bold lower case will be used for emphasis.
+   1.3 Round brackets ( ) indicate words that are not essential e.g. “(hence) distance is
+        increased”.
+   1.4 Square brackets [ ] indicate advice to examiners or examples e.g. [Do not accept
+        gravity] [ecf].
+
+2. Unit error penalties
+   2.1 A separate mark is not usually given for a unit but a missing or incorrect unit will
+         normally mean that the final calculation mark will not be awarded.
+   2.2 Incorrect use of case e.g. ‘Watt’ or ‘w’ will not be penalised.
+   2.3 There will be no unit penalty applied in ‘show that’ questions or in any other
+         question where the units to be used have been given, for example in a spreadsheet.
+   2.4 The same missing or incorrect unit will not be penalised more than once within one
+         question (one clip in ePen).
+   2.5 Occasionally, it may be decided not to penalise a missing or incorrect unit e.g. the
+         candidate may be calculating the gradient of a graph, resulting in a unit that is not
+         one that should be known and is complex.
+   2.6 The mark scheme will indicate if no unit error penalty is to be applied by means of
+         [no ue].
+
+3. Significant figures
+   3.1 Use of an inappropriate number of significant figures in the theory papers will
+         normally only be penalised in ‘show that’ questions where use of too few significant
+         figures has resulted in the candidate not demonstrating the validity of the given
+         answer.
+   3.2 The use of g = 10 m s-2 or 10 N kg-1 instead of 9.81 m s-2 or 9.81 N kg-1 will be
+         penalised by one mark (but not more than once per clip). Accept 9.8 m s-2 or 9.8 N
+         kg-1
+4. Calculations
+   4.1 Bald (i.e. no working shown) correct answers score full marks unless in a ‘show that’
+        question.
+   4.2 If a ‘show that’ question is worth 2 marks then both marks will be available for a
+        reverse working; if it is worth 3 marks then only 2 will be available.
+   4.3 use of the formula means that the candidate demonstrates substitution of physically
+        correct values, although there may be conversion errors e.g. power of 10 error.
+   4.4 recall of the correct formula will be awarded when the formula is seen or implied
+        by substitution.
+   4.5 The mark scheme will show a correctly worked answer for illustration only.
+   4.6 Example of mark scheme for a calculation:
+
+           ‘Show that’ calculation of weight
+
+           Use of L × W × H                                                                  
+
+           Substitution into density equation with a volume and density                      
+
+           Correct answer [49.4 (N)] to at least 3 sig fig. [No ue]                          
+           [If 5040 g rounded to 5000 g or 5 kg, do not give 3rd mark; if conversion to kg
+           is omitted and then answer fudged, do not give 3rd mark]
+           [Bald answer scores 0, reverse calculation 2/3]                                       3
+
+           Example of answer:
+
+           80 cm × 50 cm × 1.8 cm = 7200 cm3
+
+           7200 cm3 × 0.70 g cm-3 = 5040 g
+
+           5040 × 10-3 kg × 9.81 N/kg
+
+           = 49.4 N
+
+5. Quality of Written Communication
+   5.1 Indicated by QoWC in mark scheme. QWC – Work must be clear and organised in a
+        logical manner using technical wording where appropriate.
+   5.2 Usually it is part of a max mark, the final mark not being awarded unless the QoWC
+        condition has been satisfied.
+
+6. Graphs
+   6.1 A mark given for axes requires both axes to be labelled with quantities and units,
+        and drawn the correct way round.
+   6.2 Sometimes a separate mark will be given for units or for each axis if the units are
+        complex. This will be indicated on the mark scheme.
+   6.3 A mark given for choosing a scale requires that the chosen scale allows all points to
+        be plotted, spreads plotted points over more than half of each axis and is not an
+        awkward scale e.g. multiples of 3, 7 etc.
+   6.4 Points should be plotted to within 1 mm.
+          • Check the two points furthest from the best line. If both OK award mark.
+          • If either is 2 mm out do not award mark.
+          • If both are 1 mm out do not award mark.
+          • If either is 1 mm out then check another two and award mark if both of these
+              OK, otherwise no mark.
+          •    For a line mark there must be a thin continuous line which is the best-fit line
+               for the candidate’s results.
+Question   Answer                                                                            Mark
+Number
+
+1          C is the correct answer                                                           (1)
+
+           A is not the correct answer as joules are used for energy, a scalar
+           B is not the correct answer as metres are used for distance, a scalar
+           D is not the correct answer as watts are used for power, a scalar
+2          B is the correct answer                                                           (1)
+
+           A is not the correct answer as D has corresponding force on the air
+           C is not the correct answer as W has corresponding force on the planet and D
+           has corresponding force on the air
+           D is not the correct answer as W has corresponding force on the planet
+3          D is the correct answer                                                           (1)
+
+           A is not the correct answer as would be difference in velocities of cars
+           descending to ground from standing starts at P and Q and is out by factor of √2
+           B is not the correct answer as would be difference in velocities of cars
+           descending to ground from standing starts at P and Q
+           C is not the correct answer as is out by a factor of √2
+4          B is the correct answer                                                           (1)
+
+           A is not the correct answer as this would give a final velocity of 80 m s-1 N
+           C is not the correct answer as this would give a final velocity of 120 m s-1 N
+           D is not the correct answer as this would give a final velocity of 20 m s-1 S
+5          D is the correct answer                                                           (1)
+
+           A is not the correct answer as R has the wrong direction
+           B is not the correct answer as R has the wrong direction
+           C is not the correct answer as R is along the wrong diagonal
+6          D is the correct answer                                                           (1)
+
+           A is not the correct answer as spurious factor of 100 and 0.68 multiplies
+           B is not the correct answer as this gives a lower input than output
+           C is not the correct answer as there is a spurious factor of 100
+7          B is the correct answer                                                           (1)
+
+           A is not the correct answer as a velocity requires two measurements
+           C is not the correct answer as a velocity requires two measurements
+           D is not the correct answer as a velocity requires two measurements
+8          C is the correct answer                                                           (1)
+
+           A is not the correct answer as σ ÷ A does not give force
+           B is not the correct answer as σ ÷ A does not give force Δx squared
+           D is not the correct answer as Δx squared
+9          B is the correct answer                                                           (1)
+
+           A is not the correct answer as areas above and below time axis not equal
+           C is not the correct answer as graph starts from zero
+           D is not the correct answer as graph starts from zero
+10          C is the correct answer                                                            (1)
+
+           A is not the correct answer as no indication in Q9 of extremely high velocity
+           required to change displacement apparently instantly
+           B is not the correct answer as lines straight, indicating no change in velocity
+           D is not the correct answer as lines straight, indicating no change in velocity
+
+
+
+
+Question   Answer                                                                                    Mark
+Number
+                                  energy
+11(a)      •    Use of Power = time                                                          (1)
+
+           •    P = 72 (kW)                                                                  (1)      2
+
+           Example of calculation
+
+                32 × 106 J l−1 × 65 l
+           P=                         = 72.2 kW
+                   8 h ×3600 s
+
+
+11(b)           •   Use of ∆W = F∆s                                                          (1)
+                                       energy
+                •   Use of power =                                                           (1)
+                                        time
+
+                •   Average power output of engine = 53 (kW)                                 (1)      3
+           Example of calculation
+           W = 2.1 × 103 N × 730 × 103 m = 1.53 × 106 J
+                2100 N × 730 ×103 m
+           P=                       = 53.2 kW
+                    8 h ×3600 s
+
+
+11(c)           •   Use of efficiency =
+                                           useful power output                               (1)
+                                            total power input
+
+                •   Efficiency = 0.74 or 74 % (ECF from (a) and (b))                         (1)
+
+
+           Example of calculation                                                                     2
+                53.2 ×103 W
+           E=               = 0.74
+                72.2 ×103 W
+
+           Total for question 11                                                                      7
+Question   Answer                                                                          Mark
+Number
+12(a)
+               •    States that W is the weight of the rider (and unicycle) and R    (1)
+                    is the push/reaction force (from the ground)
+               •    R and W are different types of force                             (1)
+                    Or
+                    R and W act on the same object
+                    Or
+                    R and W are not equal.
+
+                                                                                     (1)      3
+               •    They are not a N3 pair of forces
+
+           MP3 conditional on MP2
+
+12(b)      •   The resultant force acting in the vertical direction is zero so the
+               unicycle will remain at that height                                   (1)
+               Or                                                                             2
+               The resultant force acting in the vertical direction is zero so
+               zero acceleration in the vertical direction                           (1)
+
+
+           •   The unicycle moves at a constant (forward) speed because the
+               resultant horizontal force is zero or horizontal forces are
+               balanced (because forward frictional force balances backward
+               drag forces)
+
+           Total for question 12                                                              5
+Question Answer                                                                                    Mark
+Number
+13(a)    • X is the force (or pull or tension) of the wire (on the flagpole)                 (1)
+           (accept tension in the wire)
+
+          •   Y is force (or reaction or push, ignore "normal") of the hinge (or wall) (on   (1)
+                                                                                                      3
+              the flagpole).
+                                                                                             (1)
+          •   Z is weight or force of gravity (of/on the flagpole)
+
+13(b)                                                                                        (1)
+          •   Use of moment of a force = Fx
+                                                                                             (1)
+          •   Use of the principle of moments
+                                                                                             (1)
+          •   T = 323 (N) < 350 (N) so wire will not break
+              Or
+              Moment of weight about hinge = 88.3 (Nm) < 95.8 (Nm), max poss from
+              wire
+              Or
+              Correct conclusion based on comparison of student's value with 350 N
+                                                                                                      3
+              or 95.8 Nm
+
+              MP3 depends on MP1 and MP2 being seen
+
+          Example of calculation
+          (15 kg × 9.81 N kg −1 × 0.6 m) − (T sin 20° × ⅔ × 1.2 m) = 0
+          T = (15 kg × 9.81 N kg −1 × 0.6 m) ÷ (0.8 m × sin 20°)
+                   = 88.29 Nm ÷ 0.2736
+          T = 322.7 N
+          max available moment = 350 N × 0.8 m × sin 20° = 95.77 Nm > 88.29 Nm
+
+           Total for question 13                                                                      6
+Question Answer                                                                                       Mark
+Number
+*14      This question assesses a student’s ability to show a coherent and logically structured
+         answer with linkages and fully-sustained reasoning.
+         Marks are awarded for indicative content and for how the answer is structured and            6
+         shows lines of reasoning.
+         The following table shows how the marks should be awarded for indicative content.
+
+                 Number of            Number of marks     Linkage marks
+             indicative marking         awarded for          available
+                points seen in       indicative marking
+                   answer                  points
+                      6                       4                  2
+                      5                       3                  2
+                      4                       3                  1
+                      3                       2                  1
+                      2                       2                  0
+                      1                       1                  0
+                      0                       0                  0
+           The following table shows how the marks should be awarded for structure and lines of
+           reasoning.
+                                                           Number of marks awarded for
+                                                           structure of answer and sustained
+                                                           line of reasoning
+            Answer shows a coherent and logical structure                    2
+            with linkages and fully sustained lines of
+            reasoning demonstrated throughout
+            Answer is partially structured with some                         1
+            linkages and lines of reasoning
+            Answer has no linkages between points and is                     0
+            unstructured
+
+           Total marks awarded is the sum of marks for indicative content and the marks for
+           structure and lines of reasoning
+
+           Indicative content
+
+           • Acceleration is maximum (or acceleration = g) initially
+           • As velocity increases the air resistance increases
+           • Resultant force decreases until it becomes zero and diver reaches terminal velocity
+             Or
+             (Eventually) forces balance and the diver reaches terminal velocity
+           • At t1 the air resistance increases or is greater then the weight
+           • Skydiver decelerates or the resultant force is now upwards/negative
+           • Second terminal velocity is lower because air resistance = weight at a lower velocity.
+
+              Ignore mention of upthrust.
+
+
+
+
+           Total for question 14                                                                      6
+Question     Answer                                                                                    Mark
+Number
+15(a)(i)                                                                                         (1)
+             • The sphere will be accelerating (in the oil) initially
+               Or
+               Sphere needs time/distance to accelerate
+                                                                                                 (1)
+                                                                                                        2
+             • The sphere falls a distance (through the oil) before reaching constant/terminal
+               velocity
+               Or
+               Sphere needs to reach terminal velocity before timing begins
+
+15(a)(ii)      Either
+             • Adding a rubber band enables more than one distance to be timed (for the
+               sphere to fall)                                                                   (1)
+
+             • An average/mean value for the time/speed can then be calculated                   (1)
+
+                Or                                                                                      2
+
+             • Can compare times/velocities for more than one distance                           (1)
+
+             • To detemine whether terminal velocity achieved                                    (1)
+
+
+
+
+15(b)(i)        Weight of (solid) sphere                                                         (1)    1
+15(b)(ii)       Weight of oil displaced (by the sphere ) Or upthrust                             (1)    1
+15(b)(iii)      Viscous drag or viscous force                                                    (1)    1
+15(b)(iv)       The temperature (of the oil) was greater than 24 °C/had increased - do not
+                accept temperature of the room.
+                Or the measured diameter of the sphere was less than true value                         1
+                Or the time measured (to determine the terminal velocity) was less than true
+                                                                                                 (1)
+                value
+                Or the meaured distance between bands was greater than true value
+
+                Do not accept sphere too close to the edge of cylinder or the flow around the
+                sphere is turbulent or densities used were incorrect
+             Total for question 15                                                                      8
+Question Answer                                                                                          Mark
+Number
+16(a)(i) • Point K is the limit of proportionality
+                   Or beyond K, the force is no longer proportional to the extension Or Hooke's
+                   Law no longer obeyed                                                            (1)    1
+                   Or before K the force is proportional to the extension Or Hooke's Law
+                   obeyed
+
+16(a)(ii)
+             •     Beyond point L the spring will behave plastically
+                                                                                                   (1)
+             •     Beyond L, the spring will no longer return to its original length (once the
+                   deforming force is removed)/spring will be permanently deformed
+                   Or below L, the spring will return to its original length (once the deforming   (1)    2
+                   force is removed)
+16(a)(iii)
+             •     The spring constant/stiffness (not Young modulus) is smaller or has changed     (1)    1
+                   (do not allow greater stiffness)
+
+16(b)        •     Same shape graph but starting from an extension > 0                             (1)    1
+                             force
+
+
+
+
+                                                                 extension
+
+
+
+16(c)        •     Same force acts through both springs
+                                                                                                   (1)
+             •     Both springs have the same extension
+                                                                                                   (1)
+             •     In this combination the (total) extension will be doubled                       (1)
+                                                                                                          4
+                   Or Force required for same (total) extension is halved
+
+             •     Reference to F = k∆x e.g. k is proportional to 1/∆x so k is halved              (1)
+
+                 Total for question 16                                                                    9
+Question    Answer                                                                                      Mark
+Number
+17(a)(i)    •   Initial angle at approximately 30° (by eye) with approximately parabolic shape.   (1)    1
+
+
+
+
+                                   ×
+
+
+
+
+17(a)(ii)
+            •   Use of v2 = u2 + 2as (with u and v the correct way around)                        (1)
+                Or
+                Loss of KE = gain of GPE (i.e. uV2 = 2gh)
+            •   See u sin 30° for initial vertical component of velocity uV                       (1)
+                                                                                                         3
+            •   u = 57 (m s−1)                                                                    (1)
+            Example of calculation
+            02 = (u sin 30°)2 + (2× − 9.81 N kg−1 × 42 m)
+            uV = u sin 30° = 28.7 m s−1
+            u = 57.4 m s−1
+
+
+17(a)(iii) •    Use of trig to determine the horizontal component of the initial                  (1)
+
+                velocity                                                                          (1)
+                METHOD 1
+                                                                                                  (1)
+            •   Use of suitable equation(s) of motion to determine the time of flight
+                                                                                                  (1)    4
+            •   Use of v = s/t to determine the horizontal distance travelled by the
+                flare
+            •   Comparison of distance to boat to distance flare travelled with conclusion
+                consistent with student's value
+                e.g. 7.9 km is less than 8.0 km so the flare can be seen.
+
+            Example of calculation
+            0 = (57.4 m s−1× sin 30° × t) − (0.5× 9.81 N kg−1× t2)
+            t = 5.85 s
+            s = (57.4 m s−1× cos 30° × 5.85 s) = 49.7 m s−1 × 5.85 s = 291 m
+          METHOD 2
+        • Use of v = s/t to determine the time to reach 200 m
+        • Use of s = ut + ½at2 to find height reached after 200 m travel
+        • Explains conclusion consistent with student's value
+          e.g. flare above the sea and in range so visible
+
+
+
+
+17(b)   •   Air resistance/drag is ignored Or air resistance/drag is (presumed to be)   (1)
+            negligible                                                                        1
+
+        Total for question 17                                                                 9
+Question   Answer                                                                         Mark
+Number
+18(a)      •   Use of p = mv                                                        (1)
+
+           •   Use of conservation of momentum                                      (1)
+
+           •   v = 6.3 m s−1                                                        (1)    3
+
+           Example of calculation
+           Before: pmallet= 0.17 kg × 1.6 m s−1 = 0.272 kg m s−1
+           After: pmallet= 0.17 kg × 0.3 m s−1 = 0.051 kg m s−1
+           0.272 kg m s−1= 0.051 kg m s−1 + (0.035 kg × v)
+           v = 6.3 m s−1
+18(b)          METHOD 1                                                             (1)
+           •   Use of Ek = ½mv2
+           •   Use of sin 30° to determine vertical height moved by disc            (1)
+                                                                                    (1)
+           •   Use of Egrav = mgh
+                                                                                    (1)
+           •   Use of W = Fd
+                                                                                    (1)
+           •   Use of conservation of energy e.g. Ek = Egrav + W
+                                                                                    (1)
+           •   FF = 6.6 N
+
+           Example of calculation
+           Ek = ½ × 0.035 kg × (5.0 m s−1)2 = 0.44 J
+           Egrav = 0.035 kg × 9.81 N kg−1× 0.065 m × sin 30° = 1.12 × 10−2 J
+           0.44 J = 1.12 × 10−2 J + (FF × 0.065 m)
+           0.44 J - 0.0112 J = 0.43 J                                                      6
+           FF = 6.56 N
+
+               METHOD 2
+           •   Use of v2 = u2 + 2as to determine deceleration along ramp
+           •   v = 0 and a negative
+           •   Use of sin 30° to determine component of weight of disc down slope
+           •   Use of ΣF = m a to determine resultant force along ramp
+           •   Subtraction of weight component from resultant force.
+           •    FF = 6.6 N
+
+
+
+
+           Total for question 18                                                           9
+Question     Answer                                                                      Mark
+Number
+19(a)(i)     The distance between pylons Or length of cable Or the                 (1)          1
+             weight/mass/density of the cable/material
+
+19(a)(ii)                                                                          (1)
+              •    See Mg = 2T sin θ Or weight (or W or Mg) is proportional
+                   to T sin θ                                                      (1)
+              •    as the sag increases, θ (or sin θ) increases (for a constant
+                   weight)                                                         (1)          3
+              •    (as the sag increases) sinθ increases hence T decreases
+
+
+19(b)(i)      •    Use of region of graph 0 to 300 MPa to determine the            (1)
+                   gradient Or tangent from origin
+                                                                                   (1)          2
+              •    Esteel = 1.5 × 1011 (Pa) to 1.8 × 1011 (Pa)
+
+
+             Example of calculation
+                        𝟐𝟐𝟐𝟐𝟐𝟐 ×𝟏𝟏𝟏𝟏𝟔𝟔 𝑷𝑷𝑷𝑷
+             Esteel =       𝟎𝟎.𝟎𝟎𝟎𝟎𝟎𝟎𝟎𝟎
+                                               = 1.53 × 1011 Pa
+
+19(b)(ii)                                                                          (1)
+                                          𝐹𝐹
+              •    Use of σ = 𝐴𝐴 to obtain the stress
+                                                                                                2
+                                                                                   (1)
+              • stress = 73 MPa
+             Example of calculations
+             F = 0.62 N m−1× 270 m = 167.4 N
+                  0.62 N m−1 ×270 m
+             σ = 2.3 × 10−6 m2
+             σ = 72.8 MPa
+
+
+                   METHOD 1                                                        (1)
+19(b)(iii)    •    Use of graph to obtain the strain in steel
+                   Or use of Young Modulus                                         (1)
+                             ∆𝑒𝑒
+              •    Use of ε = 𝑙𝑙 (for steel ∆e = 0.14 m)
+                                                                                   (1)          3
+              •    Comparison of the two extensions/strains
+                   e.g. the extension/strain of aluminium is larger than that of
+                   steel, so steel is used to reduce the (total) extension/sag
+                   Or
+                   Comparison of two strains/extensions e.g. lower strain for
+                   steel so stiffness of cable increased to reduce (total)
+                   extension/sag
+     METHOD 2
+               ∆𝑒𝑒
+ •   Use of ε = 𝑙𝑙 to find strain (for extension of 0.95 m)
+ •   Use of graph to obtain the stress in aluminium and steel.
+ •   Comparison of two stresses (e.g. greater stress required for
+     steel) so stiffness of cable increased to reduce (total)
+     extension/sag
+
+Example of calculation
+Read off strain (when stress is 70 MPa) on Steel graph
+(0.0005)
+For Steel, Δe = 0.0005 × 270 m = 0.14 m
+
+
+
+Total for question 19                                               11
+Pearson Education Limited. Registered company number 872828
+with its registered office at 80 Strand, London, WC2R 0RL, United Kingdom
+

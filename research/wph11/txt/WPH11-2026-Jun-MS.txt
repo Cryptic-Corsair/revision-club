@@ -1,0 +1,561 @@
+Mark Scheme (Results)
+
+Summer 2026
+
+Pearson Edexcel International Advanced
+Subsidiary Level In Physics
+WPH11/01
+Edexcel and BTEC Qualifications
+
+
+      Edexcel and BTEC qualifications are awarded by Pearson, the UK’s
+      largest awarding body. We provide a wide range of qualifications
+      including academic, vocational, occupational and specific
+      programmes for employers. For further information visit our
+      qualifications websites at www.edexcel.com or www.btec.co.uk.
+      Alternatively, you can get in touch with us using the details on our
+      contact us page at www.edexcel.com/contactus
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help
+everyone progress in their lives through education. We believe in every kind of
+learning, for all kinds of people, wherever they are in the world. We’ve been involved in
+education for over 150 years, and by working across 70 countries, in 100 languages,
+we have built an international reputation for our commitment to high standards and
+raising achievement through innovation in education. Find out more about how we can
+help you and your students at: www.pearson.com/uk
+
+
+
+
+Summer 2026
+Question Paper Log Number P79335A
+Publication Code WPH11_01_2606_MS
+All the material in this publication is copyright
+© Pearson Education Ltd
+General Marking Guidance
+
+•   All candidates must receive the same treatment. Examiners must mark the
+    first candidate in exactly the same way as they mark the last.
+•   Mark schemes should be applied positively. Candidates must be rewarded
+    for what they have shown they can do rather than penalised for omissions.
+•   Examiners should mark according to the mark scheme not according to their
+    perception of where the grade boundaries may lie.
+•   There is no ceiling on achievement. All marks on the mark scheme should be
+    used appropriately.
+•   All the marks on the mark scheme are designed to be awarded. Examiners
+    should always award full marks if deserved, i.e. if the answer matches the
+    mark scheme. Examiners should also be prepared to award zero marks if the
+    candidate’s response is not worthy of credit according to the mark scheme.
+•   Where some judgement is required, mark schemes will provide the principles
+    by which marks will be awarded and exemplification may be limited.
+•   When examiners are in doubt regarding the application of the mark scheme
+    to a candidate’s response, the team leader must be consulted.
+•   Crossed out work should be marked UNLESS the candidate has replaced it
+    with an alternative response.
+Mark scheme notes
+
+
+Underlying principle
+The mark scheme will clearly indicate the concept that is being rewarded,
+backed up by examples. It is not a set of model answers.
+
+1. Mark scheme format
+   1.1 You will not see ‘wtte’ (words to that effect). Alternative correct wording
+        should be credited in every answer unless the MS has specified specific
+        words that must be present. Such words will be indicated by underlining
+        e.g. ‘resonance’
+   1.2 Bold lower case will be used for emphasis e.g. ‘and’ when two pieces of
+        information are needed for 1 mark.
+   1.3 Round brackets ( ) indicate words that are not essential e.g. “(hence)
+        distance is increased”.
+   1.4 Square brackets [ ] indicate advice to examiners or examples e.g. [Do
+        not accept gravity] [ecf].
+
+2. Unit error penalties
+   2.1 A separate mark is not usually given for a unit but a missing or incorrect
+        unit will normally mean that the final calculation mark will not be
+        awarded.
+   2.2 This does not apply in ‘show that’ questions or in any other question
+        where the units to be used have been given, for example in a
+        spreadsheet.
+   2.3 The mark will not be awarded for the same missing or incorrect unit only
+        once within one clip in epen.
+   2.4 Occasionally, it may be decided not to insist on a unit e.g the candidate
+        may be calculating the gradient of a graph, resulting in a unit that is not
+        one that should be known and is complex.
+   2.5 The mark scheme will indicate if no unit error is to be applied by placing
+        brackets around the unit.
+
+3. Significant figures
+   3.1 Use of too many significant figures in the theory questions will not
+        prevent a mark being awarded if the answer given rounds to the answer
+        in the MS.
+   3.2 Too few significant figures will mean that the final mark cannot be
+        awarded in ‘show that’ questions where one more significant figure than
+        the value in the question is needed for the candidate to demonstrate
+        the validity of the given answer.
+   3.3 The use of one significant figure might be inappropriate in the context
+        of the question e.g. reading a value off a graph. If this is the case, there
+        will be a clear indication in the MS.
+  3.4 The use of g = 10 m s−2 or 10 N kg−1 instead of 9.81 m s−2 or 9.81 N kg−1 will
+      be penalised by one mark (but not more than once per clip). Accept 9.8
+      m s−2 or 9.8 N kg−1
+  3.5 In questions assessing practical skills, a specific number of significant
+      figures will be required e.g. determining a constant from the gradient of
+      a graph or in uncertainty calculations. The MS will clearly identify the
+      number of significant figures required.
+
+4. Calculations
+   4.1 use of the formula means that the candidate demonstrates substitution
+       of physically correct values, although there may be conversion errors
+       e.g. power of 10 error.
+   4.2 If a ‘show that’ question is worth 2 marks, then both marks will be
+       available for a reverse working. If the question is worth 3 marks then only
+       2 marks will be available.
+   4.3 The mark scheme will show a correctly worked answer for illustration
+       only.
+
+5. Quality of Written Expression
+   5.1 Questions that asses the ability to show a coherent and logically
+       structured answer are marked with an asterisk.
+   5.2 Marks are awarded for indicative content and for how the answer is
+       structured.
+   5.3 Linkage between ideas, and fully-sustained reasoning is expected.
+Question
+                                                  Answer                                           Mark
+ Number
+1          The only correct answer is C (N m−2)                                                     1
+
+           A is not correct because this is the unit of density
+           B is not correct because this is the unit of spring stiffness constant
+           D is not correct because this is the unit of viscosity
+
+2          The only correct answer is C (momentum is changing, kinetic energy is                    1
+           constant)
+
+           A is not correct because momentum changes because the car changes direction
+           B is not correct because momentum changes because the car changes direction,
+           and kinetic energy is constant
+           D is not correct because kinetic energy is constant
+
+3          The only correct answer is B (The wire will not return to its original length            1
+           because it has gone beyond its elastic limit.)
+
+           A is not correct because an elastically deformed wire would return to its original
+           length when the force is removed.
+           C is not correct because the wire will not return to its original length
+           D is not correct because the wire will not return to its original length
+
+4          The only correct answer is D (mass of the object and time taken to reach the             1
+           ground )
+
+           A is not correct because the equation 𝑣𝑣 2 = 𝑢𝑢2 + 2𝑎𝑎𝑎𝑎 can be used
+                                                            1
+           B is not correct because the equation 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 can be used
+                                                            2
+           C is not correct because the equation 𝑣𝑣 = 𝑢𝑢 + 𝑎𝑎𝑎𝑎 can be used
+
+5          The only correct answer is D (The person is accelerating downwards)                      1
+
+           A is not correct because N3: the tension is equal in magnitude to the weight of the
+           person
+           B is not correct because N3: the tension is in the opposite direction to the weight
+           of the person
+           C is not correct because N3: the forces act on different objects
+                                                       𝑎𝑎
+6          The only correct answer is C ( (𝑡𝑡1 × max ) + (𝑡𝑡2 − 𝑡𝑡1 ) × 𝑎𝑎max )                     1
+                                                            2
+
+           A is not correct because this would give an area greater than the area under the
+           graph
+           B is not correct because the area of the rectangle should be (𝑡𝑡2 − 𝑡𝑡1 ) × 𝑎𝑎𝑚𝑚𝑚𝑚𝑚𝑚
+                                                                      1
+           D is not correct because the area of the triangle should be (𝑡𝑡1 × 𝑎𝑎𝑚𝑚𝑚𝑚𝑚𝑚 ) and the
+                                                                      2
+           area of the rectangle should be (𝑡𝑡2 − 𝑡𝑡1 ) × 𝑎𝑎𝑚𝑚𝑚𝑚𝑚𝑚
+
+7          The only correct answer is D (
+                                             260×1.8
+                                                       )                                            1
+                                             cos 35°
+
+           A is not correct because the correct trig identity needed is cos.
+           B is not correct because the correct trig identity needed is cos.
+           C is not correct because 1.8m is on the adjacent side, not on the hypotenuse
+8    The only correct answer is A (�(𝐶𝐶 − 𝐴𝐴)2 + (𝐷𝐷 − 𝐵𝐵)2 )                             1
+
+     B is not correct because this answer should be square rooted
+     C is not correct because the resultant horizontal force is (C-A) and the resultant
+     vertical force is (D-B)
+     D is not correct because the resultant horizontal force is (C-A) and the resultant
+     vertical force is (D-B) and the answer should be square rooted.
+
+9                                            4𝑚𝑚                                          1
+     The only correct answer is A �𝑑𝑑 = �             �
+                                             𝜋𝜋𝜋𝜋𝜋𝜋
+
+
+     B is not correct because this would give the radius of the wire
+     C is not correct because this would not give the diameter of the wire
+     D is not correct because this would not give the diameter of the wire
+
+10   The only correct answer is D ( 𝑚𝑚 × (30 + 9.81))                                     1
+
+     A is not correct because this would give the resultant force on the person
+     B is not correct because this would give the weight of the person
+     C is not correct because the force from the ground would be greater than the
+     weight of the person.
+Question
+                                   Answer                                 Additional Guidance   Mark
+Number
+11                         1
+           Use of 𝐸𝐸k = 𝑚𝑚𝑣𝑣 2              (1) Example calculation
+                           2
+                                                        3
+                                                              1              2
+                                            (1) 120 × 10 J = 2 × 390 kg × 𝑣𝑣                     2
+           speed = 25 m s-1
+
+                                                          2 × 120 × 103 J
+                                                  𝑣𝑣 = �                  = 24.8 m s −1
+                                                              390 kg
+
+           Total for question 11
+
+Question
+                                   Answer                                 Additional Guidance   Mark
+Number
+12         Use of 𝐹𝐹 = 𝑘𝑘∆𝑥𝑥                (1) Example calculation
+                           1
+           Use of 𝐸𝐸el = 𝐹𝐹∆𝑥𝑥              (1)             3.8 N
+                           2                      ∆𝑥𝑥 =            = 0.152 m
+                                                          25 N m−1
+                                                                                                 3
+           𝐸𝐸el = 0.29 J                    (1)           1
+                                                  𝐸𝐸el = × 3.8 N × 0.152 m = 0.289 J
+                                                          2
+
+
+           Total for question 12                                                                 3
+Question
+                                           Answer                                                             Additional Guidance                    Mark
+Number
+13(a)      Momentum is conserved during the collision
+           Or total momentum before the collision = total momentum              (1)
+           after the collision
+
+
+           So the change in momentum of the racket is equal (in                 (1)
+           magnitude) to the change in momentum of the ball.
+
+
+
+           So (because the mass of the racket is greater than the mass of       (1) Ignore the racket has a lower acceleration than the ball
+           the ball) the change of velocity of the racket is less than the          Ignore the change speed of the racket is lower than the ball
+           change in velocity of the ball (dependent on MP1 or MP2)
+
+           OR
+
+           the racket exerts a force on the ball and the ball exerts a force
+           on the racket                                                        (1)
+
+           By Newton’s third law, the forces are equal (magnitude, and
+           opposite direction)                                                  (1)
+
+           (because the mass of the racket is greater than the mass of the            Ignore the racket has a lower acceleration than the ball
+           ball) the change of velocity of the racket is less than the change         Ignore the change speed of the racket is lower than the ball
+           in velocity of the ball (dependent on MP1 or MP2)                    (1)                                                                   3
+13(b)   Use of 𝑣𝑣 = 𝑢𝑢 + 𝑎𝑎𝑎𝑎                                      (1) Allow use of any valid suvat method to determine a
+
+        Use of 𝐹𝐹 = 𝑚𝑚𝑚𝑚                                           (1)
+
+        m = 58 g                                                   (1)
+
+        Comparison of calculated value with 56 g and 59.4 g, and
+        consistent conclusion                                      (1)                                                      4
+
+
+                                                                         Example calculation
+
+                                                                              14 m s −1 + 22 m s −1
+                                                                         𝑎𝑎 =                       = 1060 m s −2
+                                                                                     0.034 s
+                                                                                   61 N
+                                                                         𝑚𝑚 =                = 0.0575 kg = 57.5 g
+                                                                                1060 m s−2
+
+                                                                         56 < 57.5 < 59.4 so yes
+
+        Total for question 13                                                                                               7
+Question
+                                              Answer                                                 Additional Guidance          Mark
+Number
+14(a)      Use of ∆𝐸𝐸grav = 𝑚𝑚𝑚𝑚∆ℎ                                    (1)   Example calculation
+
+           Applies principle of conservation of energy                (1)   ∆𝐸𝐸grav = 420000 kg × 9.81 N kg −1 × 8.5 m
+                                                                                          − 4 × 93000 kg × 9.81 N kg −1 × 8.5 m
+           ∆𝐸𝐸grav = 4.0 × 106 J                                      (1)
+                                                                            ∆𝐸𝐸grav = 4.00 × 106 J
+           OR
+
+           Use of 𝑊𝑊 = 𝑚𝑚𝑚𝑚
+                                                                      (1)
+           Use of Work done = 𝐹𝐹∆𝑠𝑠 using force of motor on bridge.
+                                                                      (1)
+                              6
+           ∆𝐸𝐸grav = 4.0 × 10 J
+                                                                      (1)                                                          3
+
+14(b)      Use of 𝑃𝑃 =
+                         𝐸𝐸                                           (1)   Example calculation
+                         𝑡𝑡
+
+                                   useful power output                                  15 × 106 J
+           Use of efficiency =                                              𝑃𝑃input =              = 78 900 W
+                                    total power input                                     190 s
+           Or
+           Use of efficiency =
+                               useful energy output                         Useful 𝑃𝑃output = 78 900 W × 0.36
+                                    total energy input                (1)
+                                                                                             = 28 404 W
+           useful power output = 28 kW                                (1)                                                          3
+14(c)   The resultant force would be zero / less
+        Or The total change in gravitational potential energy would be
+        zero
+        Or The motor only needs to overcome resistive forces
+        Or more / all work is done by the counterweights                 (1)
+
+
+        So less work would need to be done by the motors                       Allow zero work for less work
+        Or so less energy input would be needed                          (1)   Allow zero energy for less energy   2
+                                                                               Dependent on MP1
+
+        Total for question 14                                                                                      8
+Question
+                                          Answer                                                       Additional Guidance                           Mark
+Number
+15(a)      draw a tangent at the steepest point of the curve            (1) Allow draw a tangent to the curve at a point between 0.2 s and 1.0 s
+
+           (maximum) acceleration is the gradient of the tangent        (1)                                                                           2
+                                                                              If no other mark scored, allow 1 mark for maximum acceleration is
+                                                                              the gradient of the steepest part of the curve.
+
+                                                                              If no other mark scored, allow 1 mark for drawing an appropriate
+                                                                              tangent and calculating its gradient
+
+15(b)      Distance moved = 14 (m)                                      (1) Allow a distance in the range 13.5 m to 14.5 m
+
+           Uses 3.5 m to determine number of floors moved by elevator   (1)
+
+           Highest floor reached = 10 (answer must be an integer)       (1)                                                                           3
+
+                                                                              Example of calculation
+
+                                                                              Approximate distance = 0.5 × 1.4 × 2.6 + 3.4 × 2.6 + 0.5 × 2.8 × 2.6
+                                                                                                   = 14.3 m
+                                                                                                          14.3 m
+                                                                              Number of floors moved =             ≅ 4 floors
+                                                                                                           3.5
+
+                                                                              Highest floor reached = 4 + 6 = 10
+
+
+           Total for question 15                                                                                                                      5
+Question
+                                           Answer                                                   Additional Guidance   Mark
+Number
+16(a)      The point at / through which the weight of the object / beam
+           appears to act                                                 (1)                                              1
+
+
+16(b)      Use of 𝑊𝑊 = 𝑚𝑚𝑚𝑚                                               (1) Example of calculation
+
+           Use of moment of force = 𝐹𝐹𝐹𝐹                                  (1) 0.25 kg × 9.81 N kg-1 = 2.45 N
+
+           Use of principle of moments                                    (1) 2.45 N × 81 × 10-3 m = W × 0.150 m
+
+           Weight = 1.3 N                                                 (1)          0.198 Nm
+                                                                                𝑊𝑊 =            = 1.32 N
+                                                                                        0.150 m
+           Comparison of calculated value with weight(s) from table and   (1)                                              5
+           consistent conclusion                                                1.32 N ≅ 1.4 N, so beam C was used
+
+
+           Total for question 16                                                                                           6
+Question
+                                             Answer                                                           Additional Guidance                         Mark
+Number
+17(a)      Laminar flow
+           Or The absence of turbulent flow                                          (1)                                                                   1
+
+
+*17(b)     This question assesses a student’s ability to show a coherent and logically     Indicative content
+           structured answer with linkages and fully-sustained reasoning. Marks are        IC1 The forces acting are weight, upthrust and (viscous)
+           awarded for indicative content and for how the answer is structured and shows         drag
+           lines of reasoning. The following table shows how the marks should be
+           awarded for indicative content.                                                 IC2   Weight (of bubble) remains constant
+
+             IC points     IC mark       Max linkage mark        Max final mark            IC3   Upthrust increases because volume / weight of
+                 6            4                  2                     6                         displaced water increases
+                 5            3                  2                     5
+                 4            3                  1                     4                   IC4   (At the same speed) drag increases because
+                 3            2                  1                     3                         radius/volume of bubble increases
+                 2            2                  0                     2
+                 1            1                  0                     1                   IC5   (At the same speed, for the same increase in volume)
+                 0            0                  0                     0                         upthrust increases more than drag
+                                                                                                 Or (At the same speed) drag is proportional to radius
+           The following table shows how the marks should be awarded for structure and           of bubble and upthrust is proportional to radius cubed    6
+           lines of reasoning.
+                                                          Number of marks awarded          IC6   (So) There is a resultant force (upwards) and
+                                                          for structure of answer and            speed/velocity of bubble increases Or There is a
+                                                          sustained line of reasoning            resultant force (upwards) and the bubble accelerates
+             Answer shows a coherent and logical
+                                                                        2
+             structure with linkages and fully sustained
+             lines of reasoning demonstrated throughout
+             Answer is partially structured with some                   1
+             linkages and lines of reasoning
+             Answer has no linkages between points and is               0
+             unstructured
+
+           Total for question 17                                                                                                                           7
+Question
+                                            Answer                                                               Additional Guidance                    Mark
+Number
+18(a)(i)    Use of appropriate trigonometry                                        (1) Example of calculation
+
+            Horizontal component of initial velocity = 3.49 (m s-1)                      4.7 m s −1 × cos(42°) = 3.49 m s −1                             2
+                                                     (to at least 3 sig. figs.)    (1)
+
+18(a)(ii)                     1
+            Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 with a = 0                                   (1)
+                              2
+
+            Use of appropriate trigonometry to calculate initial vertical              Allow use of pythagoras’ theorem to calculate initial vertical
+            velocity                                                               (1) velocity
+                              1
+            Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 with a = − 9.81 m s-2 and positive initial         Allow use of any valid suvat method to determine s
+                              2
+            vertical component of velocity                                         (1)
+
+            s = (−)13 m
+            [allow ecf from 12(a)(i)]
+            (show that value gives 12.38 m)                                        (1)                                                                   4
+
+                                                                                         Example of calculation
+
+                                                                                                   6.8 m
+                                                                                         𝑡𝑡 =               = 1.95 s
+                                                                                                3.49 m s −1
+
+                                                                                         𝑢𝑢vertical = 4.7 m s −1 × sin(42°) = 3.14 m s −1
+
+                                                                                                                    1
+                                                                                         𝑠𝑠 = 3.14 m s −1 × 1.95 s + × (−9.81 m s −2 ) × (1.95 s)2
+                                                                                                                    2
+                                                                                            = −12.5 m
+18(a)(iii)   Path moves up to a maximum height lower than line shown             (1)
+
+             Curved path with ball landing in sea between original position      (1) Do not accept a line that curves back towards the cliff.     2
+             and cliff
+                                                                                       Example diagram
+
+
+
+
+18(b)        Drag increases with speed / velocity                                (1) Allow air resistance for drag throughout
+
+             (At terminal velocity, upthrust plus)                                   Allow weight, (upthrust) and drag cause the stone to be in
+             drag is equal (in size) to weight of ball                           (1) equilibrium
+
+             (So) resultant force becomes zero (and the ball moves at terminal         Ignore forces become balanced
+             velocity)                                                           (1)                                                              3
+
+             Total for question 18                                                                                                                11
+Question
+                                                      Answer                                           Additional Guidance                     Mark
+Number
+19(a)      There is a larger (cross-sectional) area                           (1)
+
+           (each fishing line) has the same breaking stress                   (1)
+
+           (So the line will break at) a larger tension / force               (1)   Dependent on MP1 or MP2                                     3
+
+
+19(b)      Calculates cross-sectional area                                    (1)   Example of calculation
+
+           Use of 𝜎𝜎 =
+                         𝐹𝐹                                                   (1)   𝐴𝐴 = 𝜋𝜋 × (0.34 × 10−3 m)2 = 3.63 × 10−7 m2
+                         𝐴𝐴
+
+                         𝜎𝜎                     ∆𝑥𝑥                                             17 N
+           Use of 𝐸𝐸 =        and use of 𝜀𝜀 =                                 (1)   𝜎𝜎 =                  = 4.68 × 107 Pa
+                         𝜀𝜀                     𝑥𝑥                                         3.63 × 10−7 m2
+
+           Extension = 0.60 m                                                 (1)          4.68 × 107 Pa                                        4
+                                                                                    𝜀𝜀 =                 = 1.67 × 10−2
+                                                                                            2.8 × 109 Pa
+
+                                                                                    ∆𝑥𝑥 = 1.67 × 10−2 × 36 m
+                                                                                        = 0.601 m
+
+19(c)      Represents the elastic strain energy stored in the fishing line    (1)   Allow elastic potential energy for elastic strain energy
+
+           which is work done to stretch the fishing line                     (1)   Allow 𝑊𝑊 = 𝐹𝐹∆𝑠𝑠
+                                                                                    Allow which is the work done on the fishing line
+
+           (because) the area is the mean force multiplied by the extension   (1)                                        1
+                                                                                    Allow (because) the area is equal to 𝐹𝐹 ∆𝑥𝑥                 3
+                                                                                                                         2
+
+
+           Total for question 19                                                                                                                10
+Question
+                                              Answer                                                         Additional Guidance              Mark
+Number
+20(a)      Straight line at least 6 cm long representing weight of ladder, with            Example of diagram
+           Label W, mg, weight or 120 N                                              (1)
+
+           Vector triangle of correct shape drawn with at least two sides labelled
+           and angle between weight and Fg 15°                                       (1)
+
+           All 3 arrows in correct relative directions (dependent on MP2)            (1)
+
+           Magnitude of Fg = 124 N
+           (allow answers in the range 120 N to 128N)                                (1)                                                       4
+
+
+
+
+20(b)      Pythagoras used to determine distance from wall to bottom of ladder.      (1) Allow appropriate use of trigonometry to determine
+                                                                                         distance from wall to bottom of ladder.
+           Appropriate trigonometry with half distance from wall to bottom of
+           ladder to determine 𝜃𝜃                                                    (1)
+
+           𝜃𝜃 = 7.6°                                                                 (1)                                                       3
+                                                                                           Example of calculation
+
+                                                                                           𝑥𝑥 = �(2.07 m)2 − (2.00 m)2 = 0.534 m
+
+                                                                                           𝑥𝑥
+                                                                                              = 0.267 m
+                                                                                           2
+                                                                                                      0.267
+                                                                                           θ = tan−1 �      � = 7.60°
+                                                                                                       2.00
+20(c)   (in equilibrium) the resultant moment is zero                         (1) Allow total clockwise moment = total anticlockwise
+                                                                                  moment
+        the anticlockwise moment (about the bottom of the ladder) increases
+        Or the moment caused by the weight of the student increases           (1)
+
+        (so) the clockwise moment (caused by Fw) increases                    (1)
+
+        (so) Fw increases (dependent on MP3)                                  (1)                                                      4
+
+        Total for question 20                                                                                                          11
+

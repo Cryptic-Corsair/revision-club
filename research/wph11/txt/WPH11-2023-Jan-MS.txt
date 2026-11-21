@@ -1,0 +1,508 @@
+Mark Scheme (Results)
+
+January 2023
+
+
+Pearson Edexcel International Advanced
+Subsidiary Level in Physics (WPH11)
+Paper 01 Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest awarding body. We
+provide a wide range of qualifications including academic, vocational, occupational and specific
+programmes for employers. For further information visit our qualifications websites at
+www.edexcel.com or www.btec.co.uk. Alternatively, you can get in touch with us using the details
+on our contact us page at www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone progress
+in their lives through education. We believe in every kind of learning, for all kinds of people,
+wherever they are in the world. We’ve been involved in education for over 150 years, and by
+working across 70 countries, in 100 languages, we have built an international reputation for our
+commitment to high standards and raising achievement through innovation in education. Find out
+more about how we can help you and your students at: www.pearson.com/uk
+
+
+
+
+January 2023
+Question Paper Log Number P71864A
+Publications Code WPH11_01_MS_2301
+All the material in this publication is copyright
+© Pearson Education Ltd 2023
+General Marking Guidance
+
+
+
+               All candidates must receive the same treatment. Examiners must
+                mark the first candidate in exactly the same way as they mark the
+                last.
+               Mark schemes should be applied positively. Candidates must be
+                rewarded for what they have shown they can do rather than
+                penalised for omissions.
+               Examiners should mark according to the mark scheme not
+                according to their perception of where the grade boundaries may
+                lie.
+               There is no ceiling on achievement. All marks on the mark scheme
+                should be used appropriately.
+               All the marks on the mark scheme are designed to be awarded.
+                Examiners should always award full marks if deserved, i.e. if the
+                answer matches the mark scheme. Examiners should also be
+                prepared to award zero marks if the candidate’s response is not
+                worthy of credit according to the mark scheme.
+               Where some judgement is required, mark schemes will provide
+                the principles by which marks will be awarded and exemplification
+                may be limited.
+               When examiners are in doubt regarding the application of the
+                mark scheme to a candidate’s response, the team leader must be
+                consulted.
+               Crossed out work should be marked UNLESS the candidate has
+                replaced it with an alternative response.
+Mark scheme notes
+
+Underlying principle
+The mark scheme will clearly indicate the concept that is being rewarded, backed up by
+examples. It is not a set of model answers.
+
+1. Mark scheme format
+        1.1 You will not see ‘wtte’ (words to that effect). Alternative correct wording should
+                      be credited in every answer unless the MS has specified specific words
+                      that must be present. Such words will be indicated by underlining e.g.
+                      ‘resonance’
+        1.2 Bold lower case will be used for emphasis e.g. ‘and’ when two pieces of
+                      information are needed for 1 mark.
+         1.3 Round brackets ( ) indicate words that are not essential e.g. “(hence) distance is
+               increased”.
+        1.4 Square brackets [ ] indicate advice to examiners or examples e.g. [Do not accept
+                      gravity] [ecf].
+
+2. Unit error penalties
+          2.1 A separate mark is not usually given for a unit but a missing or incorrect unit will
+                       normally mean that the final calculation mark will not be awarded.
+          2.2 This does not apply in ‘show that’ questions or in any other question where the
+                       units to be used have been given, for example in a spreadsheet.
+          2.3 The mark will not be awarded for the same missing or incorrect unit only once
+                       within one clip in epen.
+          2.4 Occasionally, it may be decided not to insist on a unit e.g the candidate may be
+                       calculating the gradient of a graph, resulting in a unit that is not one
+                       that should be known and is complex.
+    2.5 The mark scheme will indicate if no unit error is to be applied by means of [no ue].
+
+3. Significant figures
+          3.1 Use of too many significant figures in the theory questions will not be prevent a
+                       mark being awarded if the answer given rounds to the answer in the
+                       MS.
+          3.2 Too few significant figures will mean that the final mark cannot be awarded in
+                       ‘show that’ questions where one more significant figure than the value
+                       in the question is needed for the candidate to demonstrate the validity
+                       of the given answer.
+          3.3 The use of one significant figure might be inappropriate in the context of the
+                       question e.g. reading a value off a graph. If this is the case, there will be
+                       a clear indication in the MS.
+          3.4 The use of g = 10 m s-2 or 10 N kg-1 instead of 9.81 m s-2 or 9.81 N kg-1 will mean
+                       that one mark will not be awarded. (but not more than once per clip).
+                       Accept 9.8 m s-2 or 9.8 N kg-1
+         3.5 In questions assessing practical skills, a specific number of significant figures will
+                      be required e.g. determining a constant from the gradient of a graph
+                      or in uncertainty calculations. The MS will clearly identify the number
+                      of significant figures required.
+4. Calculations
+         4.1 Bald (i.e. no working shown) correct answers score full marks unless in a ‘show
+                        that’ question.
+         4.2 If a ‘show that’ question is worth 2 marks. then both marks will be available for a
+                        reverse working; if it is worth 3 marks then only 2 will be available.
+         4.3 use of the formula means that the candidate demonstrates substitution of
+                        physically correct values, although there may be conversion errors e.g.
+                        power of 10 error.
+         4.4 recall of the correct formula will be awarded when the formula is seen or
+                        implied by substitution.
+        4.5 The mark scheme will show a correctly worked answer for illustration only.
+
+ 5. Quality of Written Communication
+     5.1 Indicated by QoWC in mark scheme. QWC – Work must be clear and organised in a
+         logical manner using technical wording where appropriate.
+    5.2 Usually it is part of a max mark, the final mark not being awarded unless the
+         QoWC condition has been satisfied.
+
+ 6. Graphs
+    6.1 A mark given for axes requires both axes to be labelled with quantities and units,
+        and drawn the correct way round.
+    6.2 Sometimes a separate mark will be given for units or for each axis if the units are
+        complex. This will be indicated on the mark scheme.
+    6.3 A mark given for choosing a scale requires that the chosen scale allows all points
+        to be plotted, spreads plotted points over more than half of each axis and is not
+        an awkward scale e.g. multiples of 3, 7 etc.
+    6.4 Points should be plotted to within 1 mm.
+           Check the two points furthest from the best line. If both OK award mark.
+           If either is 2 mm out do not award mark.
+           If both are 1 mm out do not award mark.
+           If either is 1 mm out then check another two and award mark if both of
+              these OK, otherwise no mark.
+              For a line mark there must be a thin continuous line which is the best-fit line
+              for the candidate’s results.
+Question
+                                                  Answer                                     Mark
+ Number
+1          The correct answer is C                                                            1
+           A is not the correct answer because displacement is a vector
+           B is not the correct answer because the moment of a force has a magnitude
+           and a direction so is therefore a vector
+           D is not the correct answer because weight is a force, and force is a vector
+
+2          The correct answer is A                                                            1
+
+           B is not the correct answer because it should be weight, not acceleration
+           C is not the correct answer because it should be weight, not gravitational
+           potential energy
+           D is not the correct answer because it should be weight, not acceleration and
+           mass, not weight
+
+3          The correct answer is B                                                            1
+
+           A is not the correct answer because gpe should be added not subtracted on
+           the right hand side
+           C is not the correct answer because the total elastic energy is not FΔx and gpe
+           should be added not subtracted on the right hand side
+           D is not the correct answer because the total elastic energy is not FΔx
+
+4          The correct answer is D                                                            1
+
+           A is not the correct answer because the drop speed would be too slow if the
+           flow were laminar
+           B is not the correct answer because the ball bearing should not be moving at
+           terminal velocity at all
+           C is not the correct answer because to calculate g you must know the initial
+           velocity and the student isn't measuring that
+
+5          The correct answer is C                                                            1
+
+           A is not the correct answer because the acceleration is not 5 m s−2
+           B is not the correct answer because the acceleration is not 9.81 m s−2
+           D is not the correct answer because this expression is not dimensionally
+           correct and the acceleration is not 9.81 m s−2
+
+6          The correct answer is B                                                            1
+
+           A is not the correct answer because the diagram gives the force required for
+           balance
+           C is not the correct answer because the diagram gives (W – U) − P
+           D is not the correct answer because the diagram gives P − (W – U)
+
+7          The correct answer is B                                                            1
+
+           A is not the correct answer because the acceleration is not positive
+           C is not the correct answer because the acceleration does not increase
+           D is not the correct answer because the acceleration does not decrease
+     8          The correct answer is B                                                                1
+
+                A is not the correct answer because the mass has not been multiplied by g
+                C is not the correct answer because the mass has not been multiplied by g
+                and the factor of 103 is missing for the power
+                D is not the correct answer because the factor of 103 is missing for the power
+     9          The correct answer is B                                                                1
+
+                A is not the correct answer because the mass is not needed
+                C is not the correct answer because radius cannot be directly measured and
+                the mass is not needed
+                D is not the correct answer because radius cannot be directly measured
+     10         The correct answer is B                                                                1
+
+                A is not the correct answer because the forces don't act on the same body
+                C is not the correct answer because the forces have equal magnitudes
+                D in not the correct answer because the forces have equal magnitudes
+
+
+
+
+ Question
+                                                    Answer                                             Mark
+ Number
+11          Use of s = u t + ½ a t2 with u = 0 and a = g for flight time                         (1)
+            Use of s = u t + ½ a t2 with a = 0 for horizontal displacement of stone              (1)
+            Distance travelled = 5.9 m                                                           (1)       3
+
+            Example of calculation
+            12 m = 0.5 × 9.81 m s−2 × t2
+            t = √(12.0 m ÷ 4.905 m s−2) = 1.56 s
+            sstone = 3.8 m s−1 × 1.56 s = 5.94 m
+
+            Total for question 11                                                                          3
+
+
+
+ Question
+                                                    Answer                                             Mark
+ Number
+12(a)
+            (Use balance to measure) mass and multiply
+            mass by g to determine weight
+            Or
+            Use the balance set to read newtons to determine weight (of ball)                    (1)
+
+            Measure the diameter (of the ball) (with the calliper) to determine volume           (1)
+
+            Identify upthrust with weight of fluid displaced                                     (1)
+
+            Calculate the weight of fluid displaced by multiplying the volume of the ball by
+            the density of the liquid and g                                                      (1)       4
+
+
+12(b)       Use of F = 6π ηrv                                                                    (1)
+            η = 2.2 × 102 Pa s                                                                   (1)       2
+
+            Example of calculation
+            1.1 × 10−2 N = 6π × η × 0.50 × 10−2 m × 5.4 × 10−4 m s−1
+            η = 1.1 × 10−2 N ÷ (6π × 2.7 × 10−6 m2 s−1) = 216 Pa s
+
+            Total for question 12                                                                          6
+Question
+                                                   Answer                                   Mark
+ Number
+13(a)(i)    Zero resultant/net force (in any direction)                               (1)
+            Zero (turning) moment (about any point)                                   (1)    2
+
+13(a)(ii)   The point through/at which the weight of the object may be taken to act   (1)    1
+
+13(b)(i)    Downward arrow at centre of gravity labelled "weight" Or "W" Or "mg"      (1)
+            Upward arrow between CoG. and P labelled “force from step”                (1)    2
+
+
+
+
+13(b)(ii)   Use of moment of a force = F x                                            (1)
+            Applies principle of moments                                              (1)
+            P = 52 N                                                                  (1)    3
+
+            Example of calculation
+            Taking moments about the right hand edge of the step:
+            0.40 m × P = 0.05 m × 4.15 × 102 N = 20.8 N m
+            P = 20.8 N m ÷ 0.40 m = 51.9 N
+
+            Total for question 13                                                            8
+Question
+                                                   Answer                                       Mark
+ Number
+14(a)       Material returns to original shape/size when stress/force/tension removed     (1)    1
+
+14(b)(i)    Determines gradient using > half drawn line                                   (1)
+            E = 2.1 × 1011 (Pa)                                                           (1)    2
+
+            Example of calculation
+            Gradient = 4.2 ÷ 2.0 = 2.1
+            E = 2.1 × (100 MPa ÷ 0.1%) = 2.1 × 1011 Pa
+
+14(b)(ii)   Use of σ = F / A                                                              (1)
+
+            Use of E = σ / ε Or Use of graph
+            And
+            Use of ε = Δx / x                                                             (1)
+
+            Δx = 0.79 mm (allow ecf from (b)(i))
+            Or
+            Ereq = 2.8 × 1011 Pa                                                          (1)
+
+            Valid comparison in consistent units and conclusion (allow ecf from (b)(i))   (1)    4
+
+            Example of calculation
+            σ = 9.5 × 105 N ÷ 4.80 × 10−3 m2 = 1.98 × 108 Pa
+            ε = σ ÷ E = 1.98 × 108 Pa ÷ 2.10 × 1011 Pa = 9.42 × 10−4
+            Δx = 0.84 m × 9.42 × 10−4
+                    = 7.91 × 10−4 m = 0.79 mm > 0.6 mm ⸫ no
+
+            Total for question 14                                                                7
+Question    Answer                                                                              Mark
+Number
+15(a)       Use of W = m g                                                                (1)
+            Use of resultant force = push from trampoline – weight of gymnast             (1)
+            Use of ΣF = m a                                                               (1)
+            P = 1.4 × 103 N                                                               (1)     4
+
+            Example of calculation
+            ΣF = P – W
+            ma =T–mg
+            58 kg × 14.2 m s−2 = P − 58 kg × 9.81 N kg−1
+            P = 58 kg × (14.2 + 9.81) m s−2 = 1.39 × 103 N
+
+15(b)(i)    T = 68 N ÷ sin 14° Or 68 N ÷ cos 76°                                          (1)
+            T = 280 (N)                                                                   (1)     2
+
+            Example of calculation
+            T = 68 N ÷ sin (14°) = 281 N
+
+15(b)(ii)   Use of F = k Δx                                                               (1)
+            k = 6.1 × 103 N m−1 (allow ecf from (b)(i))                                   (1)     2
+
+            Example of calculation
+            F = 2.81 ×102 N = k × 4.6 × 10−2 m
+            k = 2.81 ×102 N ÷ 4.60 × 10−2 m = 6.11 × 103 N m−1
+
+15(c)*      This question assesses a student’s ability to show a coherent and logically
+            structured answer with linkages and fully-sustained reasoning.
+            Marks are awarded for indicative content and for how the answer is
+            structured and shows lines of reasoning.
+            The following table shows how the marks should be awarded for indicative
+            content and lines of reasoning.
+              IC points   IC mark      Max linkage         Max final
+                                      mark available        mark
+                  6           4             2                 6
+                  5           3             2                 5
+                  4           3             1                 4
+                  3           2             1                 3
+                  2           2             0                 2
+                  1           1             0                 1
+                  0           0             0                 0
+
+                                                                           Marks
+             Answer shows a coherent and logical structure with             2
+             linkages and fully sustained lines of reasoning
+             demonstrated throughout.
+             Answer is partially structured with some linkages and           1
+             lines of reasoning
+             Answer has no linkages between points and is                    0
+             unstructured
+Indicative content:
+
+    The weight (of the gymnast) acts downwards on the gymnast
+
+    The normal contact force (from trampoline) acts upwards
+
+    The normal contact force decreases as she moves upwards
+     Or
+     The normal contact force increases as she moves downwards
+
+    The normal contact force is zero when gymnast makes/loses contact
+     with trampoline
+     Or
+     The normal contact force is maximum at bottom of bounce
+
+    Resultant/net force is the difference between weight and normal contact
+     force
+
+    When the normal contact force is less than the weight the acceleration is
+     downwards
+     Or
+     When the normal contact force is greater than the weight the                6
+     acceleration is upwards
+
+
+
+
+Total for question 15                                                            14
+Question
+                                                  Answer                                            Mark
+Number
+16(a)       Use of p = m v                                                                    (1)
+            Use of momentum conservation                                                      (1)
+            v = 0.04 m s−1                                                                    (1)
+            Towards O , away from S, to left (dependent on MP3)                               (1)    4
+
+            Example of Calculation
+            1350 kg × 0.82 m s−1 + 2950 v – 2100 kg × 0.58 m s−1 = 0
+            v = (1218 – 1107) kg m s−1 ÷ 2950 kg = 0.0376 m s−1
+
+16(b)(i)    The rocket motor exerts a force on the gases, so the gases exert a force on the
+            rocket motor                                                                      (1)
+
+            The forces are equal and opposite according to Newton’s third law
+            (dependent on MP1)                                                                (1)
+
+            So there is a resultant/net/unbalanced force on the descent module, which
+            accelerates according to Newton’s second law (accept Newton’s first
+            law)(independent mark)                                                            (1)    3
+
+
+
+
+16(b)(ii)   Use of v = u + at to find a                                                       (1)
+            Use of ΣF = m a                                                                   (1)
+            ΣF = 3.4 × 102 N                                                                  (1)    3
+
+            Example of Calculation
+            a = 0.58 m s−1 ÷ 5 s = 0.116 m s−2
+            ΣF = m a = 2950 kg × 0.116 m s−2 = 342.2 N
+
+            Total for question 16                                                                    10
+Question
+                                                 Answer                                           Mark
+ Number
+17(a)      The hammer head is not in free fall
+           Or Person is exerting a force on the hammer                                      (1)
+
+           Work is done on the hammer head by the person                                    (1)
+
+           So additional energy is transferred to kinetic energy (MP3 dependent on          (1)    3
+           MP1 or MP2)
+
+17(b)      Use of ΔW = F Δs                                                                 (1)
+
+           Use of ε = (useful energy output) / (total energy input)                         (1)
+
+           Use of ΔEgrav = m g Δh
+           Or
+           Use of Ek = ½ m v2 and valid suvat method                                        (1)
+
+           Δh = 1.9 m
+           Or Freq = 83 N
+           Or Ereq = 4.0 J and Eout = 2.8 J                                                 (1)
+
+           Conclusion consistent with student's calculation                                 (1)    5
+
+           e.g.
+           The cylinder won’t hit the bell because 1.9 m < 2.7 m
+           Or
+           Force needed to hit bell = 83 N > 53 N so cylinder won’t hit the bell
+           Or
+           Useful output = 2.8 J but energy needed to hit bell is 4.0 J so cylinder won’t
+           hit the bell
+
+           Example of calculation
+           energy of hammer head = ΔW = 58 N × 1.2 m = 69.6 J
+           useful energy output = 0.04 × 69.6 J = 2.78 J
+           g.p.e. gained = 2.78 J = 0.15 kg × 9.81 N kg−1 × Δh
+           Δh = 2.78 J ÷ 1.47 N = 1.89 m
+           1.9 < 2.7 ⸫ no
+
+17(c)      (Ek = ½mv2 so) kinetic energy is proportional to square of velocity
+           Or (Ek = ½mv2 so) kinetic energy multiplies by four (if v doubles)               (1)
+
+           So cylinder could move through four times the distance                           (1)    2
+
+           Total for question 17                                                                   10
+Question
+                                                NAnswer                              Mark
+Number
+18(a)(i) Use of ρ = m / V                                                      (1)
+         Identifies upthrust is equal to weight of fluid displaced             (1)
+         Use of W = m g                                                        (1)
+         Use of D = W – U                                                      (1)
+         1.8 × 102 (N)                                                         (1)    5
+
+             Example of calculation
+             m = 1030 kg m−3 × 1.60 × 10−2 m3 = 16.5 kg
+             U = 16.5 kg × 9.81 N kg−1 = 162 N
+             W = 35 kg × 9.81 N kg−1 = 343 N
+             D = W – U = 343 N – 162 N = 181 N
+
+18(a)(ii)    Use of D = k v2                                                   (1)
+             v = 9.1 m s−1 (allow ecf from (a)(i))                             (1)    2
+
+             Example of calculation
+             D = 181 N = 2.2 N s2 m−2 × v2
+             v = √(181 N ÷ 2.2 N s2 m−2) = 9.1 m s−1
+
+18(a)(iii)   Object might not be spherical                                     (1)
+
+             Flow might not be laminar                                         (1)    2
+
+18(b)        Drag force increases as velocity increases                        (1)
+             Until drag force plus weight equals upthrust                      (1)
+             (Resultant force is then zero) so the object stops accelerating   (1)    3
+
+             Total for question 18                                                    12
+Pearson Education Limited. Registered company number 872828
+with its registered office at 80 Strand, London, WC2R 0RL, United Kingdom
+

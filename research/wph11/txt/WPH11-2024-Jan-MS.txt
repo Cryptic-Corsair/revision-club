@@ -1,0 +1,528 @@
+Mark Scheme (Results)
+
+
+
+January 2024
+
+
+Pearson Edexcel International Advanced
+Subsidiary Level In Physics (WPH11)
+Paper 01: Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest awarding body. We
+provide a wide range of qualifications including academic, vocational, occupational and specific
+programmes for employers. For further information visit our qualifications websites at
+www.edexcel.com or www.btec.co.uk. Alternatively, you can get in touch with us using the details
+on our contact us page at www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone progress
+in their lives through education. We believe in every kind of learning, for all kinds of people,
+wherever they are in the world. We’ve been involved in education for over 150 years, and by working
+across 70 countries, in 100 languages, we have built an international reputation for our
+commitment to high standards and raising achievement through innovation in education. Find out
+more about how we can help you and your students at: www.pearson.com/uk
+
+
+
+
+January 2024
+Question Paper Log Number P75596A
+Publications Code WPH11_01_2401_MS
+All the material in this publication is copyright
+© Pearson Education Ltd 2024
+General Marking Guidance
+
+
+
+     •   All candidates must receive the same treatment. Examiners must
+         mark the first candidate in exactly the same way as they mark the
+         last.
+     •   Mark schemes should be applied positively. Candidates must be
+         rewarded for what they have shown they can do rather than
+         penalised for omissions.
+     •   Examiners should mark according to the mark scheme not
+         according to their perception of where the grade boundaries may
+         lie.
+     •   There is no ceiling on achievement. All marks on the mark scheme
+         should be used appropriately.
+     •   All the marks on the mark scheme are designed to be awarded.
+         Examiners should always award full marks if deserved, i.e. if the
+         answer matches the mark scheme. Examiners should also be
+         prepared to award zero marks if the candidate’s response is not
+         worthy of credit according to the mark scheme.
+     •   Where some judgement is required, mark schemes will provide the
+         principles by which marks will be awarded and exemplification may
+         be limited.
+     •   When examiners are in doubt regarding the application of the mark
+         scheme to a candidate’s response, the team leader must be
+         consulted.
+     •   Crossed out work should be marked UNLESS the candidate has
+         replaced it with an alternative response.
+Question
+                                                 Answer                                          Mark
+ Number
+1          D is the correct answer                                                                1
+
+           A is not correct because this is the unit for mass divided by area
+           B is not correct because this is the unit for area divided by mass
+           C is not correct because this is equivalent to 1 Pa−1
+
+2          A is the correct answer                                                                1
+
+           B is not correct because density, work done and time are scalar quantities
+           C is not correct because mass is a scalar quantity
+           D is not correct because kinetic energy and temperature are scalar quantities
+
+3          A is the correct answer                                                                1
+
+           B is not correct because the answer should not be square rooted
+           C is not correct because the answer is inverted and should not be square rooted
+           D is not correct because the answer is inverted
+
+4          D is the correct answer                                                                1
+
+           A is not correct because the initial power output should be a constant greater than
+           zero, and the power output whilst going uphill should be constant
+           B is not correct because whilst going uphill the power output should be constant
+           C is not correct because the power output should increase
+
+5          C is the correct answer                                                                1
+
+           A is not correct because air resistance would increase the time taken to fall
+           B is not correct because air resistance would increase the time taken to fall and
+           cause the final velocity to be less than calculated
+           D is not correct because air resistance would cause the final velocity to be less
+           than calculated
+
+6          C is the correct answer                                                                1
+
+           A is not correct because the components of T acting vertically should be cos
+           B is not correct because the components of T acting vertically should be cos and
+           should form the denominator
+           D is not correct because the components of T acting vertically should form the
+           denominator
+
+7          C is the correct answer                                                                1
+
+           A is not correct because this would give the work done to stretch the spring
+           B is not correct because an area on this graph would represent an energy
+                                                               1
+           D is not correct because it would give an answer of
+                                                                𝑘
+
+8          D is the correct answer                                                                1
+
+           A is not correct because the answer is inverted and should not be cubed
+           B is not correct because the answer is inverted
+           C is not correct because the answer should not be cubed
+9          C is the correct answer                                                                 1
+
+           A is not correct because P has a smaller breaking stress than Q
+           B is not correct because P has a smaller breaking strain than Q
+           D is not correct because graph P has an initial gradient greater than graph Q
+
+10         D is the correct answer                                                                 1
+
+           A is not correct because this gives the change in velocity of the object
+           B is not correct because this gives the average velocity of the object
+           C is not correct because this gives twice the distance travelled by the object
+
+
+Question
+                                                 Answer                                           Mark
+Number
+11(a)      When the force was removed the rubber band returned to its original length.
+           Or
+           When the force was removed the extension was 0.
+           Or
+           The decreasing force line returns to the origin.                                 (1)    1
+
+
+11(b)      Indication that Eel = area under force-extension graph.                          (1)
+
+           Uses area between graph lines to determine energy.                               (1)
+
+           Energy = 0.048 J (allow a range from 0.0425 J to 0.053 J)                        (1)    3
+
+           Example of calculation
+           1 cm2 on graph ≡ 0.5 N × 0.005 m = 0.0025 J
+
+           Area between graphs ≈ 19 cm2
+
+           Energy that caused heating = 19 cm2 × 0.0025 J cm−2 = 0.0475 J
+
+           Total for question 11                                                                   4
+Question
+                                                   Answer                                    Mark
+Number
+12(a)      Resolves velocity to determine vertical component                           (1)
+
+           Use of 𝑣 = 𝑢 + 𝑎𝑡
+           Allow use of any valid suvat method                                         (1)
+
+           t = 0.139 (s)
+                                                                                       (1)    3
+           Example of calculation
+           𝑢 = 15.6 m s−1 × sin(5°) = 1.36 m s−1
+
+           0 = 1.36 m s −1 − 9.81 𝑡
+
+                1.36 m s −1
+           𝑡=               = 0.139 s
+                9.81 m s −2
+
+12(b)      Use of 𝑠 = 𝑢𝑡 + 0.5𝑎𝑡 2 with 𝑎 = 0 and horizontal component of u            (1)
+
+           𝐷 = 2.2 m (allow ecf from 12(a))                                            (1)    2
+
+           Example of calculation
+
+           𝐷 = 15.6 × cos( 5°) × 0.139 = 2.16 m
+
+           Total for question 12                                                              5
+
+Question
+                                                   Answer                                    Mark
+Number
+13         (As the volume of the air bubble decreases) the upthrust (of the bubble)
+           decreases
+           Or
+           (As water enters the diver) the weight (of the tube, air bubble and water
+           inside) increases.                                                          (1)
+
+           (So) weight is greater than upthrust.                                       (1)
+
+           (So) there is a resultant force downwards.                                  (1)    3
+
+           If no other mark scored, allow one mark for the density of the diver
+           becomes greater than the density of water.
+
+           Total for question 13                                                              3
+Question
+                                                   Answer                   Mark
+Number
+14(a)(i)    The gradient / steepness of the slide varies              (1)
+
+            (So) the acceleration (of the child) varies               (1)
+
+            The equations of motion require a constant acceleration   (1)    3
+
+14(a)(ii)   Use of ∆𝐸grav = 𝑚𝑔ℎ                                       (1)
+
+                           1
+            Use of ∆𝐸𝑘 = 2 𝑚𝑣 2                                       (1)
+
+
+            𝑣 = 5.8 m s−1                                             (1)    3
+            Do not accept use of equations of motion.
+
+            Example of calculation
+            ∆𝐸grav = 24 kg × 9.81 N kg −1 × 1.7 m = 400 J
+
+            400 J = 0.5 × 24 kg × 𝑣 2
+
+               2 × 400
+            𝑣=√        = 5.77 m s −1
+                 24
+
+14(b)       vX = vY                                                   (1)
+
+            Maximum 2 from:
+
+            ∆𝐸grav = ∆𝐸𝑘 and mass is in both equations                (1)
+
+            (Maximum) speed of child = √2𝑔∆ℎ (and 𝑔 is constant)      (1)
+
+            (Maximum) speed does not depend on mass of child
+            Or
+            (Maximum) speed is (only) dependent on ∆ℎ                 (1)    3
+            Total for question 14                                            9
+Question
+                                                 Answer                                         Mark
+Number
+15(a)       Moving at low speed                                                           (1)
+
+            Laminar flow
+            Or Flow not turbulent                                                         (1)    2
+15(b)(i)    Upwards arrow labelled upthrust or U, and downward arrow labelled weight
+            or W or mg. Both arrows start from dot.
+                                                                                          (1)
+            Length of weight arrow ≈ length of drag arrow + length of upthrust arrow
+
+            Example diagrams
+                                                      Upthrust
+            Drag force                  Drag force                                        (1)    2
+
+                             Upthrust
+
+
+
+                         Weight
+                                                      Weight
+
+
+
+15(b)(ii)   Calculates volume of sphere                                                   (1)
+                         𝑚
+            Use of 𝜌 = 𝑉                                                                  (1)
+
+            Use of 𝑊 = 𝑚𝑔                                                                 (1)
+
+            Use of weight = upthrust + viscous drag                                       (1)
+
+                                                                                          (1)
+            Use of viscous drag= 6π𝜂𝑟𝑣
+
+            𝜂 is 0.94 (Pa s) ≈ 0.93 (Pa s) valid conclusion based on comparison of 0.94
+                                                                                          (1)    6
+            with value supplied in question.
+
+            Example of calculation
+                4
+            𝑉 = × π × (2.3 × 10−3 m)3 = 5.10 × 10−8 m3
+                3
+
+            𝑚 = 1.26 × 103 kg m−3 × 5.10 × 10−8 m3 = 6.43 × 10−5 kg
+
+            Weight of liquid displaced = 6.43 × 10−5 kg × 9.81 N kg −1
+                           = 6.31 × 10−4 N
+
+            viscous drag = 6.31 × 10−4 N − 4.00 × 10−3 N = 3.37 × 10−3 N
+
+                            3.37 × 10−3 N
+            𝜂=                                      = 0.943 Pa s
+                 6 π × 2.3 × 10−3 m × 0.0824 m s −1
+
+            Total for question 15                                                                10
+Question
+                                                 Answer                                          Mark
+Number
+16(a)      A value of v and corresponding value of t read from graph                       (1)
+                         𝛥𝑣
+           Use of 𝑎 = 𝛥𝑡 using values of t between 14 ms and 50 ms or using a value
+                                                                                           (1)
+           of Δt ≤ 36 ms.
+
+           Average acceleration = 86 m s−2
+                                                                                           (1)    3
+
+           Example of calculation
+                       2.85 m s −1
+           𝑎=                           = 86.3 m s −2
+              48 × 10−3 s − 15 × 10−3 s
+
+*16(b)     This question assesses a student’s ability to show a coherent and logically
+           structured answer with linkages and fully sustained reasoning. Marks are
+           awarded for indicative content and for how the answer is structured and shows
+           lines of reasoning. The following table shows how the marks should be awarded
+           for indicative content.
+             IC points        IC mark   Max linkage mark        Max final mark
+                 6               4              2                     6
+                 5               3              2                     5
+                 4               3              1                     4
+                 3               2              1                     3
+                 2               2              0                     2
+                 1               1              0                     1
+                 0               0              0                     0
+
+           The following table shows how the marks should be awarded for structure and
+           lines of reasoning.
+                                                         Number of marks awarded for
+                                                         structure of answer and
+                                                         sustained line of reasoning
+             Answer shows a coherent and logical
+                                                                         2
+             structure with linkages and fully sustained
+             lines of reasoning demonstrated throughout
+             Answer is partially structured with some                    1
+             linkages and lines of reasoning
+             Answer has no linkages between points and                   0
+             is unstructured
+
+           Indicative content
+           IC1 The ball applies a force to the skittle.
+           IC2 The skittle applies a force to the ball.
+           IC3 Newton’s 3rd Law means that the forces (on the skittle and the ball)
+                 are equal (in size) and opposite (in direction).
+           IC4 There is a resultant force acting on the skittle / ball.
+           IC5 The skittle / ball accelerates according to Newton’s second law.
+           IC6 The skittle accelerates (to the left) and the ball decelerates.                    6
+
+
+
+
+16(c)      Use of 𝑝 = 𝑚𝑣                                                                   (1)
+
+           Use of total momentum before collision = total momentum after collision         (1)
+
+           Mass of ball = 0.78 kg                                                          (1)    3
+            Example of calculation
+
+            𝑚 × 7.2 m s −1 = 𝑚 × 1.6 m s −1 + 1.4 kg × 3.1 m s −1
+
+                  1.4 kg × 3.1 m s−1
+            𝑚=                           = 0.775 kg
+                 7.2 m s −1 − 1.6 m s −1
+
+            Total for question 16                                                                12
+
+Question
+                                                    Answer                                      Mark
+Number
+17(a)       Measure (diameter) at several positions along the wire                        (1)
+
+            Measure (diameter) at several orientations
+                                                                                          (1)    2
+
+17(b)(i)    (Safety) goggles should be worn                                               (1)
+
+            (Because) the wire could break.                                               (1)    2
+
+17(b)(ii)   The vernier scale has a better resolution
+            Or
+            The vernier scale has a resolution of 0.1 mm                                  (1)
+
+            There is a smaller (percentage) uncertainty (when using the vernier scale).   (1)    2
+
+
+17(c)       EITHER
+
+            Use of 𝐴 = 𝜋𝑟 2                                                               (1)
+
+            Use of ∆𝜎 =
+                           ∆𝐹
+                              with initial force greater than 0 N                         (1)
+                           𝐴
+
+                           ∆𝑥                                                             (1)
+            Use of ∆𝜀 = 𝑥
+
+            Use of 𝐸 = ∆𝜀
+                           ∆𝜎                                                             (1)
+
+            E = 107 (GPa) ≈ 106 (GPa) so material is brass                                (1)
+            OR
+
+            Use of 𝐴 = 𝜋𝑟 2                                                               (1)
+            Determines gradient of graph                                                  (1)
+                       𝑥
+            Calculates 𝐴                                                                  (1)
+
+            Use of 𝐸 = ∆𝜀
+                           ∆𝜎                                                             (1)
+
+                                                                                          (1)    5
+            E = 107 (GPa) ≈ 106 (GPa) so material is brass
+
+
+
+            Example of calculation
+                                     2
+                      0.17 × 10−3 m
+            𝐴 = π×(                 ) = 2.27 × 10−8 m2
+                             2
+                       14 N
+           ∆𝜎 =                  = 6.17 × 108 Pa
+                  2.27 × 10−8 m2
+                  0.0104 m
+           ∆𝜀 =            = 5.78 × 10−3
+                   1.80 m
+
+                6.17 × 108 Pa
+           𝐸=                 = 1.07 × 1011 Pa
+                 5.78 × 10−3
+
+           107 GPa ≈ 106 GPa so material is brass.
+
+
+           Total for question 17                                                                 11
+
+Question
+                                                  Answer                                        Mark
+Number
+18(a)      No resultant force                                                             (1)
+
+           No resultant moment (about any point)                                          (1)    2
+
+18(b)      The point at which the weight of an object is considered to act                (1)    1
+
+18(c)(i)   Use of 𝑊 = 𝑚𝑔                                                                  (1)
+                                                                                      𝑤
+           Horizontal distance from edge of door to centre of gravity identified as       (1)
+                                                                                      2
+
+           Use of moment of force = 𝐹𝑥                                                    (1)
+
+           Use of clockwise moment = anticlockwise moment                                 (1)
+
+           Horizontal component of force of hinge Y on door = 37.5 (N)                    (1)
+                                                                                                 5
+           OR
+                                                                                          (1)
+           Use of 𝑊 = 𝑚𝑔
+                                                                                          (1)
+           Use of tan 𝜃 with dimensions of door
+                                                                                          (1)
+           Use of vertical component of force of hinge Y on door = W/2
+                                                                                          (1)
+           Use of tan 𝜃 with vertical and horizontal components of force of hinge Y on
+           door
+                                                                                          (1)
+           Horizontal component of force of hinge Y on door = 37.5 (N)
+
+
+           Example of calculation
+           𝑊 = 14.4 kg × 9.81N kg −1 = 141 N
+
+                     0.85 m
+           141 N ×          = 𝐹horizontal × 1.60 m
+                        2
+                           60.0 N m
+           𝐹horizontal =            = 37.5 N
+                            1.60 m
+18(c)(ii)    Use of appropriate trigonometry to determine 𝜃                       (1)
+
+             θ = 28° (allow ecf from 18(c)(i)) (show that answer gives 30°)       (1)
+
+             Use of Pythagoras’ theorem to determine F
+             Or
+             Use of appropriate trigonometry to determine F                       (1)
+
+             F = 80 N (allow ecf from 18(c)(i)) (show that answer gives 81 N)     (1)   4
+
+             Example of calculation
+                            37.5
+             𝜃 = tan−1 (         ) = 28.0°
+                            141
+                           ( 2 )
+
+
+                                  141 N 2
+             𝐹 = √(37.5 N)2 + (        ) = 80.0 N
+                                    2
+
+
+18(c)(iii)   Moment of weight of door (about X) remains the same.
+             Or
+                   𝑤
+             𝑚𝑔 × 2 = 𝐹horizontal × 𝐿 (and m, g and w remain the same).           (1)
+
+             (So) horizontal (component of) force increases (when L decreases).
+                                                                                  (1)
+             Vertical (component of) force remains the same.
+             Or
+             Each hinge still holds half the weight of the door.                  (1)
+
+             (So) F increases and θ increases.                                    (1)
+                                                                                        4
+
+             Total for question 18                                                      16
+Pearson Education Limited. Registered company number 872828
+with its registered office at 80 Strand, London, WC2R 0RL, United Kingdom
+

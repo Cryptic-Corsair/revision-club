@@ -1,0 +1,640 @@
+Mark Scheme (Results)
+
+January 2025
+
+Pearson Edexcel International Advanced
+Subsidiary Level in Physics (WPH11)
+Paper 01 Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest awarding body. We
+provide a wide range of qualifications including academic, vocational, occupational and specific
+programmes for employers. For further information visit our qualifications websites at
+www.edexcel.com or www.btec.co.uk. Alternatively, you can get in touch with us using the
+details on our contact us page at www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone
+progress in their lives through education. We believe in every kind of learning, for all kinds of
+people, wherever they are in the world. We’ve been involved in education for over 150 years,
+and by working across 70 countries, in 100 languages, we have built an international reputation
+for our commitment to high standards and raising achievement through innovation in
+education. Find out more about how we can help you and your students at:
+www.pearson.com/uk
+
+
+
+
+ January 2025
+ Question Paper Log Number P78474A
+ Publications Code WPH11_01_2501_MS
+ All the material in this publication is copyright
+ © Pearson Education Ltd 2025
+General Marking Guidance
+
+
+
+         •   All candidates must receive the same treatment. Examiners
+             must mark the first candidate in exactly the same way as they
+             mark the last.
+         •   Mark schemes should be applied positively. Candidates must be
+             rewarded for what they have shown they can do rather than
+             penalised for omissions.
+         •   Examiners should mark according to the mark scheme not
+             according to their perception of where the grade boundaries
+             may lie.
+         •   There is no ceiling on achievement. All marks on the mark
+             scheme should be used appropriately.
+         •   All the marks on the mark scheme are designed to be awarded.
+             Examiners should always award full marks if deserved, i.e. if the
+             answer matches the mark scheme. Examiners should also be
+             prepared to award zero marks if the candidate’s response is not
+             worthy of credit according to the mark scheme.
+         •   Where some judgement is required, mark schemes will provide
+             the principles by which marks will be awarded and
+             exemplification may be limited.
+         •   When examiners are in doubt regarding the application of the
+             mark scheme to a candidate’s response, the team leader must
+             be consulted.
+         •   Crossed out work should be marked UNLESS the candidate has
+             replaced it with an alternative response.
+Mark scheme notes
+
+
+Underlying principle
+The mark scheme will clearly indicate the concept that is being rewarded, backed up by
+examples. It is not a set of model answers.
+
+1. Mark scheme format
+   1.1 You will not see ‘wtte’ (words to that effect). Alternative correct wording should
+       be credited in every answer unless the MS has specified specific words that must
+       be present. Such words will be indicated by underlining e.g. ‘resonance’
+   1.2 Bold lower case will be used for emphasis e.g. ‘and’ when two pieces of
+       information are needed for 1 mark.
+   1.3 Round brackets ( ) indicate words that are not essential e.g. “(hence) distance is
+       increased”.
+   1.4 Square brackets [ ] indicate advice to examiners or examples e.g. [Do not accept
+       gravity] [ecf].
+
+2. Unit error penalties
+   2.1 A separate mark is not usually given for a unit but a missing or incorrect unit will
+         normally mean that the final calculation mark will not be awarded.
+   2.2 This does not apply in ‘show that’ questions or in any other question where the
+         units to be used have been given, for example in a spreadsheet.
+   2.3 The mark will not be awarded for the same missing or incorrect unit only once
+         within one clip in epen.
+   2.4 Occasionally, it may be decided not to insist on a unit e.g the candidate may be
+         calculating the gradient of a graph, resulting in a unit that is not one that should
+         be known and is complex.
+   2.5 The mark scheme will indicate if no unit error is to be applied by placing brackets
+         around the unit.
+
+3. Significant figures
+   3.1 Use of too many significant figures in the theory questions will not prevent a
+         mark being awarded if the answer given rounds to the answer in the MS.
+   3.2 Too few significant figures will mean that the final mark cannot be awarded in
+         ‘show that’ questions where one more significant figure than the value in the
+         question is needed for the candidate to demonstrate the validity of the given
+         answer.
+   3.3 The use of one significant figure might be inappropriate in the context of the
+         question e.g. reading a value off a graph. If this is the case, there will be a clear
+         indication in the MS.
+   3.4 The use of g = 10 m s−2 or 10 N kg−1 instead of 9.81 m s−2 or 9.81 N kg−1 will be
+         penalised by one mark (but not more than once per clip). Accept 9.8 m s−2 or 9.8
+         N kg−1
+   3.5 In questions assessing practical skills, a specific number of significant figures will
+         be required e.g. determining a constant from the gradient of a graph or in
+         uncertainty calculations. The MS will clearly identify the number of significant
+         figures required.
+4. Calculations
+   4.1 use of the formula means that the candidate demonstrates substitution of
+        physically correct values, although there may be conversion errors e.g. power
+        of 10 error.
+   4.2 If a ‘show that’ question is worth 2 marks, then both marks will be available for
+        a reverse working. If the question is worth 3 marks then only 2 marks will be
+        available.
+   4.3 The mark scheme will show a correctly worked answer for illustration only.
+
+5. Quality of Written Expression
+   5.1 Questions that asses the ability to show a coherent and logically structured
+        answer are marked with an asterisk.
+   5.2 Marks are awarded for indicative content and for how the answer is structured.
+   5.3 Linkage between ideas, and fully-sustained reasoning is expected.
+Question
+                                                   Answer                                        Mark
+ Number
+1          The only correct answer is B (the gradient of the graph)                               1
+
+           A is not correct because the Young modulus is not the area under the graph
+           C is not correct because stress × strain is not equivalent to the Young modulus
+           D is not correct because the Young modulus should be stress / strain
+
+2          The only correct answer is C (initial acceleration is same for coin and                1
+           feather, and time taken to reach the ground is less for coin)
+
+           A is not correct because both objects have the same initial acceleration
+           B is not correct because both objects have the same initial acceleration and object
+           A has a greater terminal velocity
+           D is not correct because object A has a greater terminal velocity
+
+3          The only correct answer is C (acceleration is a vector and work done is a              1
+           scalar)
+
+           A is not correct because acceleration is a vector
+           B is not correct because acceleration is a vector and work done is a scalar
+           D is not correct because work done is a scalar
+
+4          The only correct answer is D (the spring does not return to its original               1
+           length)
+
+           A is not correct because beyond the elastic limit force is not proportional to
+           extension
+           B is not correct because plastic deformation starts occurring after the spring
+           reaches the elastic limit
+           C is not correct because plastic deformation occurs beyond the elastic limit
+
+5          The only correct answer is D (the change in velocity of the aeroplane during           1
+           time t)
+
+           A is not correct because displacement is the area under a velocity-time graph
+           B is not correct because displacement is the area under a velocity-time graph
+           C is not correct because the shaded area is the change in velocity during time t
+
+6                                           𝟐𝟐
+           The only correct answer is A � ∆𝒙𝒙�                                                    1
+                                            𝟑𝟑
+
+           B is not correct because doubling the force does not give half the extension and
+           three times the stiffness does not give three times the extension
+           C is not correct because doubling the force does not give half the extension
+           D is not correct because three times the stiffness does not give three times the
+           extension
+
+7          The only correct answer is C (Quantity plotted on x-axis is (time)2, and               1
+                               𝒈𝒈
+           gradient of graph is )
+                                 𝟐𝟐
+
+           A is not correct because time on the x-axis will not give a straight line
+           B is not correct because time on the x-axis will not give a straight line
+           D is not correct because the gradient of this graph is g / 2
+8    The only correct answer is D � 𝟐𝟐 �
+                                        𝟓𝟓𝟓𝟓𝟓𝟓                                              1
+
+     A is not correct because this gives the distance travelled at a constant velocity 2v
+     for time 2t
+     B is not correct because this gives twice the distance travelled
+                              3𝑣𝑣𝑣𝑣
+     C is not correct because       is not the area under the graph
+                                2
+
+
+
+9    The only correct answer is C (𝟗𝟗𝟗𝟗 − 𝟒𝟒𝟒𝟒 − (𝟓𝟓 × 𝟒𝟒))                                 1
+
+     A is not correct because this gives the resultant force
+     B is not correct because the resultant force is not zero
+     D is not correct because this assumes that the object is accelerating downwards
+
+10                                         𝑾𝑾
+     The only correct answer is B �𝟐𝟐𝐬𝐬𝐬𝐬𝐬𝐬 𝜽𝜽�                                             1
+
+     A is not correct because 𝑊𝑊 = 2 sin 𝜃𝜃 × tension
+     C is not correct because T cos θ is the horizontal component of tension T
+     D is not correct because T cos θ is the horizontal component of tension T
+Question
+                                            Answer          Mark
+ Number
+11         Use of 𝐹𝐹 = 𝑚𝑚𝑚𝑚                           (1)
+
+           Difference in mass calculated              (1)
+
+           Mass of people = 150 kg                    (1)    3
+
+           Example calculation
+           460 N = 𝑚𝑚total × 0.23 m s−2
+
+           𝑚𝑚total = 1850 kg + 𝑚𝑚people (= 2000 kg)
+
+           𝑚𝑚people = 2000 kg − 1850 kg = 150 kg
+
+           Total for question 11                             3
+Question
+                                               Answer                                      Mark
+ Number
+12         Use of appropriate trigonometry to determine component of g acting down
+           the slope                                                                 (1)
+
+           Use of 𝑣𝑣 2 = 𝑢𝑢2 + 2𝑎𝑎𝑎𝑎 with u = 7.1 m s-1
+           or
+           Use of other valid suvat method to determine v with u = 7.1 m s-1         (1)
+
+           Speed = 11 m s−1                                                          (1)
+
+           OR
+
+           Use of appropriate trigonometry to determine vertical displacement        (1)
+
+           Use of ∆𝐸𝐸grav = ∆𝑚𝑚𝑚𝑚ℎ
+           Or
+                        1
+           Use of 𝐸𝐸k = 𝑚𝑚𝑣𝑣 2                                                       (1)
+                       2
+
+           Speed = 11 m s−1                                                          (1)    3
+           Example calculation
+           𝑎𝑎 = 9.81 m s −2 × sin(14°) = 2.37 m s−2
+           𝑣𝑣 2 = (7.1 m s−1 )2 + 2 × 2.37 m s −2 × 15 m = 122 m2 s −2
+           𝑣𝑣 = 11.0 m s −1
+
+           Total for question 12                                                            3
+Question
+                                                  Answer                                        Mark
+ Number
+13(a)      Use of ∆𝑊𝑊 = 𝐹𝐹∆𝑠𝑠                                                             (1)
+
+           Distance = 23 m                                                                (1)    2
+
+           Example calculation
+           8.0 × 106 J = 3.5 × 105 N × ∆𝑠𝑠
+
+                   8.0 × 106 J
+           ∆𝑠𝑠 =               = 22.9 m
+                   3.5 × 105 N
+                                        𝑚𝑚𝑚𝑚
+13(b)      (uses F = ma to show) 𝑎𝑎 ∝ 𝑚𝑚
+           Or
+           𝑊𝑊 = 𝑚𝑚𝑚𝑚 and 𝐹𝐹 = 𝑚𝑚𝑚𝑚, so 𝑚𝑚𝑚𝑚 ∝ 𝑚𝑚𝑚𝑚 (and 𝑔𝑔 is constant)
+           Or
+           resistive force is proportional to mass (of vehicle) and 𝐹𝐹 = 𝑚𝑚𝑚𝑚 (so km=ma
+           where k is a constant)                                                         (1)
+
+                                                                                          (1)    2
+           (So) the deceleration of the car is the same (as that of the truck)
+
+           Total for question 13                                                                 4
+Question
+                                               Answer                                              Mark
+ Number
+14(a)      A exerts a force on B
+           and
+           B exerts an equal (magnitude) and opposite (direction) force on A                 (1)
+
+           OR
+
+           The gliders exert equal (magnitude) and opposite (direction) forces on each       (1)    1
+           other
+
+14(b)      Use of p = mv                                                                     (1)
+
+           Total momentum = 0.026 kg m s-1 (to the right)
+           Or
+           Final velocity = 0.074 m s-1 (to the right)
+           Or
+           Initial momentum of A = 0.048 kg m s-1 (to the right)
+           and initial momentum of B = 0.022 kg m s-1 (to the left)                          (1)
+
+           So after the collision the gliders will move to the right and the prediction is
+           not correct (dependent on a valid calculation for MP2)                            (1)    3
+
+           Example calculation
+           If a momentum to the right is positive, then
+
+           Total momentum = 0.15 kg × 0.32 m s−1 − 0.20 kg × 0.11 m s−1
+                           = 0.048 kg m s-1 – 0.022 kg m s-1
+                           = 0.026 kg m s-1
+
+           So total momentum is to the right so the prediction is not correct
+
+           Total for question 14                                                                    4
+Question
+                                                Answer                                    Mark
+ Number
+                         𝑚𝑚
+15(a)      Use of 𝜌𝜌 = 𝑉𝑉                                                           (1)
+
+           Use of trigonometry to calculate Δh                                      (1)
+
+           Use of ∆𝐸𝐸grav = 𝑚𝑚𝑚𝑚∆ℎ                                                  (1)
+
+                         𝐸𝐸
+           Use of 𝑃𝑃 =                                                              (1)
+                         𝑡𝑡
+
+           𝑃𝑃 = 87.7 (MW)                                                           (1)
+
+           OR
+                         𝑚𝑚
+           Use of 𝜌𝜌 =                                                              (1)
+                         𝑉𝑉
+
+           Use of trigonometry to calculate component of g along pipe               (1)
+
+           Use of appropriate suvat equation(s) to determine velocity of water at
+           bottom of pipe
+           and
+                        1                                                           (1)
+           Use of 𝐸𝐸k = 𝑚𝑚𝑣𝑣 2
+                          2
+
+                         𝐸𝐸
+           Use of 𝑃𝑃 =                                                              (1)
+                         𝑡𝑡
+
+           𝑃𝑃 = 87.7 (MW)                                                           (1)    5
+
+           Example calculation
+                                 𝑚𝑚
+           1100 kg m−3 =
+                              1700 m3
+
+           𝑚𝑚 = 1700 m3 × 1100 kg m−3 = 1.87 × 106 kg
+
+           ∆ℎ = 350 m × sin(55°) = 287 m
+
+           ∆𝐸𝐸grav = 1.87 × 106 kg × 9.81 N kg −1 × 287 m = 5.26 × 109 J
+
+                  5.26 × 109 J
+           𝑃𝑃 =                = 87.7 × 106 W
+                      60 s
+
+15(b)      Use of efficiency =
+                                 useful power output                                (1)
+                                  total power input
+
+
+           Efficiency = 0.27
+           Or Efficiency = 27% [ecf from (a)]                                       (1)    2
+           Example calculation
+           Useful power output = 4 × 87.7 MW – 256 MW
+                               = 350.8 MW – 256 MW
+                               = 94.8 MW
+                           94.8
+           Efficiency =         = 0.27
+                          350.8
+
+           Total for question 15                                                           7
+Question
+                                                       Answer                                 Mark
+ Number
+16(a)      Resultant force is zero                                                      (1)
+
+           Resultant moment (about any point) is zero                                   (1)    2
+
+16(b)      Use of Moment of force = 𝐹𝐹𝐹𝐹                                                (1)
+
+           Use of principle of moments with dish in original position                   (1)
+
+           Uses total weight = weight of rice + weight of dish to determine weight of
+           one portion of rice                                                          (1)
+
+           Use of principle of moments with dish in new position
+           Or
+           Calculates clockwise moment with 3 portions of rice in new position and
+           calculates anticlockwise moment of weight of beam                            (1)
+
+           Dish contains 8.2 portions of rice                                           (1)
+
+           Comparison with 3 portions and consistent conclusion                         (1)    6
+
+           Example calculation
+           Moment of weight of beam = 3.1 N × 0.08 m = 0.248 N m
+
+           0.248 N m = (weight of dish and rice) × 0.25 m
+
+                                         0.248 N m
+           Weight of dish and rice =               = 0.992 N
+                                           0.25 m
+
+           Weight of one portion of rice = 0.992 N – 0.64 N = 0.352 N
+
+           0.248 N m = (portions × 0.352 N + 0.64 N) × 0.07 m
+                                   0.248 N m
+                                             −0.64 N
+           Number of portions =       0.07
+                                       0.352 N
+                                                       = 8.247
+
+           The dish contains 8.2 portions, not 3 portions of rice
+
+           Total for question 16                                                               8
+Question
+                                                               Answer                             Mark
+ Number
+17(a)       Use of 𝜀𝜀 = 𝑥𝑥
+                          ∆𝑥𝑥                                                               (1)
+
+                                                                                            (1)    2
+            ε = 0.035 (given to at least 2 significant figures)
+
+            Example calculation
+                 38.1 m − 36.8 m
+            𝜀𝜀 =                 = 0.03533
+                      36.8 m
+
+17(b)(i)    Stress = 110 (MPa) (allow answers in the range 108 to 112 (MPa))                (1)
+
+            Calculates cross-sectional area of rope                                         (1)
+
+            Use of 𝜎𝜎 =
+                          𝐹𝐹                                                                (1)
+                          𝐴𝐴
+
+                                                                                            (1)    4
+            𝐹𝐹 = 4.2 × 106 N (allow answers in the range 4.1× 106 N to 4.3 × 106 N)
+
+            Example calculation
+                                             2
+                   π × �220 × 10−3 m�
+            𝐴𝐴 =               4
+                                                 = 0.0380 m2
+
+                                        𝐹𝐹
+            110 × 106 Pa =
+                                    0.0380 m2
+
+            𝐹𝐹 = 110 × 106 Pa × 0.0380 m2 = 4.18 × 106 N
+
+17(b)(ii)   Energy stored = area under graph × volume (of rope)
+            Or
+            Area under graph = energy stored per unit volume of rope
+            Or
+            Area under stress-strain graph multiplied by volume is equivalent to the area
+            under a force extension graph (which gives elastic potential energy)            (1)
+
+                                        𝐹𝐹       ∆𝑥𝑥
+            Area under graph ∝ ×
+                                𝐴𝐴   𝑥𝑥
+            Or
+                             𝐹𝐹  ∆𝑥𝑥
+            Stress × strain = ×                                                             (1)
+                                   𝐴𝐴       𝑥𝑥
+
+                    𝐹𝐹   ∆𝑥𝑥       𝐹𝐹×∆𝑥𝑥
+            (And) × =
+                  𝐴𝐴   𝑥𝑥    𝑉𝑉
+            Or
+                                                                                            (1)    3
+            (And) 𝐴𝐴 × 𝑥𝑥 = Volume of rope
+
+            Total for question 17                                                                  9
+Question
+                                                 Answer                                          Mark
+ Number
+18(a)      Straight arrow at least 3.5 cm long representing horizontal force, with label
+           F, horizontal force or 70 N                                                     (1)
+
+           Vector triangle drawn with at least two sides in the triangle labelled, and
+           horizontal force on the longest side.                                           (1)
+
+           All three arrows in correct relative directions (dependent on MP2)              (1)
+
+           Magnitude = 36 N (allow an answer in the range 34 N to 38 N)                    (1)
+
+           Angle to horizontal = 30° Or 150° (allow a tolerance of ± 2°)                   (1)    5
+
+           Example diagram
+
+                       Horizontal force, F = 70 N
+
+
+
+            Drag, D = 43 N                    Resultant force
+Question
+                                                Answer                                     Mark
+Number
+*18(b)     This question assesses a student’s ability to show a coherent and logically
+           structured answer with linkages and fully-sustained reasoning. Marks are
+           awarded for indicative content and for how the answer is structured and shows
+           lines of reasoning. The following table shows how the marks should be awarded
+           for indicative content.
+              IC points     IC mark       Max linkage mark      Max final mark
+                                                                                     The
+                  6             4                  2                    6
+                  5             3                  2                    5
+                  4             3                  1                    4
+                  3             2                  1                    3
+                  2             2                  0                    2
+                  1             1                  0                    1
+                  0             0                  0                    0
+           following table shows how the marks should be awarded for structure and lines
+           of reasoning.
+                                                         Number of marks awarded for
+                                                         structure of answer and
+                                                         sustained line of reasoning
+            Answer shows a coherent and logical
+                                                                         2
+            structure with linkages and fully sustained
+            lines of reasoning demonstrated throughout
+            Answer is partially structured with some                     1
+            linkages and lines of reasoning
+            Answer has no linkages between points and                    0
+            is unstructured
+
+           Indicative content
+           IC1 the resultant force on the submarine is zero
+           IC2 So tension = weight – upthrust
+           IC3 As the submarine leaves the water, the volume / mass / weight of water
+                displaced decreases
+           IC4 So the upthrust on the submarine decreases
+           IC5 and the tension in the cable increases
+           IC6 When the submarine is out of the water the tension in the cable is equal
+                (in magnitude) to the weight of the submarine                               6
+
+           Total for question 18                                                            11
+Question
+                                                  Answer                                            Mark
+ Number
+19(a)(i)    Use of trigonometry to determine uh                                               (1)
+
+            Use of s = ut + ½ at2 with a = 0                                                  (1)
+
+            Time = 32 (s)                                                                     (1)    3
+
+            Example calculation
+            uh = 500 m s−1 × cos (22°) = 4.64 × 102 m s−1
+
+                      15 × 103 m
+            𝑡𝑡 =                     = 32.4 s
+                   4.64 × 102 m s −1
+
+19(a)(ii)   Use of trigonometry to determine uv                                               (1)
+                              1
+            Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 with a = − g                                            (1)
+                              2
+            (Allow use of any valid suvat method to determine s)
+                                                                                              (1)
+            Adds launch height
+
+            Height above ship = 3.0 × 103 m [ecf from (a)(i)]
+                                                                                              (1)    4
+            (“show that” value gives 3.2 × 103 m)
+
+            Example calculation
+            uv = 500 m s−1 × sin 22° = 1.87 × 102 m s−1
+            s = 1.87 × 102 m s−1 × 32 s – 0.5 × 9.81 m s−2 × (32 s)2 = 9.61 × 102 m
+            Height = 9.61 × 102 m + 2 × 103 m = 2.96 × 103 m
+
+19(b)       (As the launch angle increased) the horizontal (component of) velocity /
+            speed decreased                                                                   (1)
+
+            (and) the vertical (component of) velocity / speed increased                      (1)
+
+            So the time (in air) increases                                                    (1)
+
+            Horizontal distance travelled = time (in air) × horizontal velocity (which will
+            reach a maximum value)                                                            (1)    4
+
+            Total for question 19                                                                    11
+Question
+                                                     Answer                                    Mark
+ Number
+20(a)       (Initially) weight is greater than upthrust (+ drag)
+            Or
+            (Initially) there is a resultant force downwards                             (1)
+
+            (so) the sphere accelerates
+            Or
+            (so) the speed / velocity of the sphere increases                            (1)
+
+            drag increases (and upthrust remains constant) (dependent on MP2)            (1)
+
+            (until) the resultant force becomes 0 (and the sphere moves at constant /
+            terminal velocity)                                                           (1)    4
+
+20(b)(i)                       1
+            Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 2 𝑎𝑎𝑡𝑡 2 with a = 0                                       (1)
+
+                                                                                         (1)
+            Use of F = 6πηrv
+                                                                                         (1)    3
+            𝐹𝐹 = 2.2 × 10−4 N
+
+            Example calculation
+                 0.45 m
+            𝑢𝑢 =        = 0.0616 m s −1
+                  7.3 s
+
+            𝐹𝐹 = 6π × 2.1 × 10−1 Pa s × 0.90 × 10−3 m × 0.0616 m s −1
+               = 2.19 × 10−4 N
+
+20(b)(ii)   (For the larger sphere at the same speed) drag is greater (because drag is
+            proportional to radius)
+            Or
+            drag is proportional to diameter / radius                                    (1)
+
+            But upthrust and weight increase by a greater factor than drag
+            Or
+            Weight and upthrust are both proportional to diameter / radius cubed,        (1)
+
+            (So) the new sphere had a greater (terminal) velocity, and therefore time
+            taken (for the new sphere) was less                                          (1)    3
+
+            Total for question 20                                                               10
+Pearson Education Limited. Registered company number 872828
+with its registered office at 80 Strand, London, WC2R 0RL, United Kingdom
+

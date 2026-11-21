@@ -1,0 +1,591 @@
+Mark Scheme (Results)
+
+
+Summer 2021
+
+
+ Pearson Edexcel International Advanced
+ Subsidiary Level In Physics (WPH11)
+ Paper 01 Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+
+
+Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest awarding body. We provide a wide range
+of qualifications including academic, vocational, occupational and specific programmes for employers. For further
+information visit our qualifications websites at www.edexcel.com or www.btec.co.uk. Alternatively, you can get in
+touch with us using the details on our contact us page at www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone progress in their lives
+through education. We believe in every kind of learning, for all kinds of people, wherever they are in the world.
+We’ve been involved in education for over 150 years, and by working across 70 countries, in 100 languages, we
+have built an international reputation for our commitment to high standards and raising achievement through
+innovation in education. Find out more about how we can help you and your students at: www.pearson.com/uk
+
+
+
+
+Summer 2021
+Question Paper Log Number P66393A
+Publications Code WPH11_01_2106_MS
+All the material in this publication is copyright
+© Pearson Education Ltd 2018
+  General Marking Guidance
+
+
+
+
+• All candidates must receive the same treatment. Examiners must mark the first candidate
+  in exactly the same way as they mark the last.
+• Mark schemes should be applied positively. Candidates must be rewarded for what they
+  have shown they can do rather than penalised for omissions.
+• Examiners should mark according to the mark scheme not according to their perception of
+  where the grade boundaries may lie.
+• There is no ceiling on achievement. All marks on the mark scheme should be used
+  appropriately.
+• All the marks on the mark scheme are designed to be awarded. Examiners should always
+  award full marks if deserved, i.e. if the answer matches the mark scheme. Examiners should
+  also be prepared to award zero marks if the candidate’s response is not worthy of credit
+  according to the mark scheme.
+• Where some judgement is required, mark schemes will provide the principles by which
+  marks will be awarded and exemplification may be limited.
+• When examiners are in doubt regarding the application of the mark scheme to a candidate’s
+  response, the team leader must be consulted.
+• Crossed out work should be marked UNLESS the candidate has replaced it with an
+  alternative response.
+ Mark scheme notes
+
+
+
+ Underlying principle
+
+ The mark scheme will clearly indicate the concept that is being rewarded, backed up by examples. It is not a
+ set of model answers.
+
+ For example:
+
+(iii)   Horizontal force of hinge on table top
+
+
+
+        66.3 (N) or 66 (N) and correct indication of direction [no ue]                         1
+
+        [Some examples of direction: acting from right (to left) / to the left / West
+        / opposite direction to horizontal. May show direction by arrow. Do not
+        accept a minus sign in front of number as direction.]
+
+ This has a clear statement of the principle for awarding the mark, supported by some examples illustrating
+ acceptable boundaries.
+
+ 1. Mark scheme format
+    1.1 You will not see ‘wtte’ (words to that effect). Alternative correct wording should be credited in
+         every answer unless the ms has specified specific words that must be present. Such words will be
+         indicated by underlining e.g. ‘resonance’
+    1.2 Bold lower case will be used for emphasis.
+    1.3 Round brackets ( ) indicate words that are not essential e.g. “(hence) distance is increased”.
+    1.4 Square brackets [ ] indicate advice to examiners or examples e.g. [Do not accept gravity] [ecf].
+
+
+ 2. Unit error penalties
+    2.1 A separate mark is not usually given for a unit but a missing or incorrect unit will normally mean
+          that the final calculation mark will not be awarded.
+    2.2 Incorrect use of case e.g. ‘Watt’ or ‘w’ will not be penalised.
+    2.3 There will be no unit penalty applied in ‘show that’ questions or in any other question where the
+          units to be used have been given, for example in a spreadsheet.
+    2.4 The same missing or incorrect unit will not be penalised more than once within one question (one
+          clip in epen).
+    2.5 Occasionally, it may be decided not to penalise a missing or incorrect unit e.g. the candidate may
+          be calculating the gradient of a graph, resulting in a unit that is not one that should be known and is
+          complex.
+    2.6 The mark scheme will indicate if no unit error penalty is to be applied by means of [no ue].
+
+
+ 3. Significant figures
+    3.1 Use of an inappropriate number of significant figures in the theory papers will normally only be
+          penalised in ‘show that’ questions where use of too few significant figures has resulted in the
+          candidate not demonstrating the validity of the given answer.
+    3.2 The use of g = 10 m s-2 or 10 N kg-1 instead of 9.81 m s-2 or 9.81 N kg-1 will be penalised by one mark
+          (but not more than once per clip). Accept 9.8 m s-2 or 9.8 N kg-1
+4. Calculations
+   4.1 Bald (i.e. no working shown) correct answers score full marks unless in a ‘show that’ question.
+   4.2 If a ‘show that’ question is worth 2 marks then both marks will be available for a reverse working; if
+        it is worth 3 marks then only 2 will be available.
+   4.3 use of the formula means that the candidate demonstrates substitution of physically correct values,
+        although there may be conversion errors e.g. power of 10 error.
+   4.4 recall of the correct formula will be awarded when the formula is seen or implied by substitution.
+   4.5 The mark scheme will show a correctly worked answer for illustration only.
+   4.6 Example of mark scheme for a calculation:
+
+
+           ‘Show that’ calculation of weight
+
+           Use of L × W × H                                                                  
+
+           Substitution into density equation with a volume and density                      
+
+           Correct answer [49.4 (N)] to at least 3 sig fig. [No ue]                          
+
+           [If 5040 g rounded to 5000 g or 5 kg, do not give 3rd mark; if conversion to kg
+           is omitted and then answer fudged, do not give 3rd mark]
+
+           [Bald answer scores 0, reverse calculation 2/3]
+
+           Example of answer:
+           80 cm × 50 cm × 1.8 cm = 7200 cm3
+           7200 cm3 × 0.70 g cm-3 = 5040 g
+                                                                                                 3
+           5040 × 10-3 kg × 9.81 N/kg
+
+           = 49.4 N
+
+5. Quality of Written Expression
+   5.1 Questions that asses the ability to show a coherent and logically structured answer are marked with
+        an asterisk.
+   5.2 Marks are awarded for indicative content and for how the answer is structured.
+   5.3 Linkage between ideas, and fully-sustained reasoning is expected.
+
+
+6. Graphs
+   6.1 A mark given for axes requires both axes to be labelled with quantities and units, and drawn the
+        correct way round.
+   6.2 Sometimes a separate mark will be given for units or for each axis if the units are complex. This will
+        be indicated on the mark scheme.
+   6.3 A mark given for choosing a scale requires that the chosen scale allows all points to be plotted,
+        spreads plotted points over more than half of each axis and is not an awkward scale e.g. multiples
+        of 3, 7 etc.
+   6.4 Points should be plotted to within 1 mm.
+           • Check the two points furthest from the best line. If both OK award mark.
+           • If either is 2 mm out do not award mark.
+           • If both are 1 mm out do not award mark.
+           • If either is 1 mm out then check another two and award mark if both of these OK, otherwise
+               no mark.
+           •    For a line mark there must be a thin continuous line which is the best-fit line for the
+                candidate’s results.
+Question   Answer                                                                                    Mark
+Number
+1          D is the correct answer                                                                   (1)
+           A is incorrect because weight is a force, which is a vector
+           B is incorrect because momentum is a vector
+           C is incorrect because velocity is a vector
+2          C is the correct answer                                                                   (1)
+           A is incorrect because it give units of m3 kg−1
+           B is incorrect because it give units of m3 kg N−2
+           D is incorrect because it give units of N2 kg−1 m−3
+3          C is the correct answer                                                                   (1)
+           A is incorrect because the frictional force from the road is the driving force
+           B is incorrect because a drag force is also acting
+           D is incorrect because the frictional force from the road is the driving force
+4          B is the correct answer                                                                   (1)
+           A is incorrect because it gives units of J
+           C is incorrect because it gives an input power less than the output power
+           D is incorrect because it gives units of J
+5          D is the correct answer                                                                   (1)
+           A is incorrect because the units are inconsistent
+           B is incorrect because it gives a greater length, and F is a compressive force
+           C is incorrect because the units are inconsistent
+6          B is the correct answer                                                                   (1)
+           A is incorrect because it gives units of J m ≠ N
+           C is incorrect because it gives units of W m s−1 ≠ N
+           D is incorrect because it gives units of m s W−1 ≠ N
+7          B is the correct answer                                                                   (1)
+           A is incorrect because the acceleration is g which has constant magnitude and direction
+           C is incorrect because the objects gain the same k.e. for the same drop height
+           D is incorrect because both objects start with the same k.e. and gain the same k.e.
+8          C is the correct answer                                                                   (1)
+           A is incorrect because the acceleration does not reach zero
+           B is incorrect because the acceleration does not reach zero
+           D is incorrect because the acceleration does not reach zero
+9          D is the correct answer                                                                   (1)
+           A is incorrect because the fracture point is at the extreme end of the graph
+           B is incorrect because proportionality ends before point X is reached
+           C is incorrect because point X is not the highest point reached by the graph
+10         C is the correct answer                                                                   (1)
+           A is incorrect because R is in the wrong direction
+           B is incorrect because R is the wrong diagonal
+           D is incorrect because R is the wrong diagonal
+Question   Answer                                                                              Mark
+Number
+11(a)
+           Use of p = mv                                                                 (1)
+
+           p = 4.53 × 105 (kg m s-1)                                                     (1)          2
+           (reverse calculation can gain both marks)
+
+           Example of calculation
+           p = mv
+           p = (7.15 + 5.35) × 104 kg × 3.62 m s-1 = 4.53× 105 kg m s-1
+
+11(b)
+           Equates the initial with the final momentum.                                  (1)
+
+           v = 2.44 m s-1   (allow ecf from (a))                                         (1)          2
+
+           Example of calculation
+           5.35× 104 kg × v + 7.15 × 104 kg × 4.50 m s-1 = 4.53× 105 kg m s-1
+           v = (4.53× 105 kg m s-1 − 7.15 × 104 kg × 4.50 m s-1)/ 5.35× 104 kg
+           = 2.44 m s-1
+11(c)
+           Use of EK = ½ m v2                                                            (1)
+
+           EK = 6.5 104 J (allow ecf from (b))                                          (1)          2
+
+           Example of calculation
+           Initial k.e. = 0.5 (7.15 × 104 kg (4.50 m s-1)2
+                                         + 5.35× 104 kg × (2.44 m s-1)2) = 8.84 105 J
+           Final k.e. = 0.512.5 × 10 kg × (3.62 m s-1)2) = 8.19 105 J
+                                       4
+
+           Difference = 8.84 105 J − 8.19 105 J = 6.47 104 J
+
+
+           Total for question 11                                                                  6
+Question   Answer                                                                                Mark
+Number
+12(a)
+           Either
+
+           Decrease of GPE = gain of KE.                                                 (1)
+
+           Use of Ek = ½ m v2 and ΔEgrav = m g Δh                                        (1)
+
+           v = 3.1( m s−1)                                                               (1)
+
+           Or
+
+           Use of trigonometry to find parallel component of g and distance along ramp   (1)
+
+           Use of v2 = u2 + 2 a s (or other valid suvat method)                          (1)
+
+           v = 3.1( m s−1)                                                               (1)        3
+
+           (reverse calculations can score maximum 2 marks)
+
+           Example of calculation
+           ½ m v2 = m g Δh
+           ½ v2 = 9.81 m s−2 × 0.5 m
+           v = √(2 × 9.81 m s−2 × 0.5 m) = 3.13 m s−1
+
+12(b)
+           Use of Pythagoras’ Theorem to calculate distance along the ramp
+           Or
+           Use of trigonometry to find parallel component of g                             (1)
+
+           Use of s = ½ (u + v) t (or other valid suvat method for tAB)                    (1)
+
+           Use of s = u t                                                                  (1)
+
+           Total time = 1.64 s (show that value gives 1.65 s)                              (1)          4
+
+           (may see some MPs for (b) in (a))
+
+           Example of calculation
+           Distance along ramp = (√(22 + 0.52)) m = 2.06 m
+           2.06 m = ½ (0 + 3.13) m s−1 × tAB
+           tAB = 2 × 2.06 m / 3.13 m s−1 = 1.32 s
+           tBC = 1 m / 3.13 m s−1 = 0.32 s
+           Total time = 1.32 s + 0.32 s = 1.64 s
+
+           Total for question 12                                                                    7
+Question    Answer                                                                              Mark
+Number
+13(a)(i)
+            Use of ρ=m / V (and U = mg)                                                   (1)
+
+            U = 5.9 × 107 N                                                               (1)      2
+
+            Example of calculation
+            U = ρ g V = 1.03 × 103 kg m-3× 9.81 N kg-1× 5.83 × 103 m3 = 5.89× 107 N
+
+13(a)(ii)
+            Weight of submarine is equal to the upthrust.                                 (1)
+
+            Refers to W = m g to justify a mass of 6.00 × 106 kg
+            Or
+            Refers to mass calculated in (a)(i) to justify a mass of 6.00 × 106 kg        (1)      2
+
+            Example of calculation
+            W = U = 5.89× 107 N = m × 9.81 N kg−1
+            m = 5.89× 107 N / 9.81 N kg−1 = 6.00 × 106 kg
+13(b)(i)
+            The upthrust (of the water on the submarine) is less than the weight of the   (1)
+            submarine
+
+            A resultant force acts (downwards) on the submarine                           (1)
+
+            So the submarine will (begin to) sink (dependent on MP1)                      (1)      3
+
+13(b)(ii)
+            Use of ρ = m/V and W = mg to calculate new upthrust                           (1)
+
+            Mass of water = 1 × 105 kg (pumped out) (allow ecf from (a)(i))               (1)      2
+
+            Example of calculation
+            Upthrust = 1.01 × 103 kg m-3× 9.81 N kg-1× 5.83 × 103 m3 = 5.78 × 107 N
+            Net downward force = 5.89× 107 N – 5.78 × 107 N = 1.14 × 106 N
+            Mass to be lost = 1.14 × 106 N / 9.81 N kg-1 = 1.17 × 105 kg
+
+            Total for question 13                                                                  9
+Question   Answer                                                                                 Mark
+Number
+14(a)
+           Resolves velocity into horizontal and vertical components.                       (1)
+
+           Use of s = u t for horizontal displacement                                       (1)
+
+           Use of s = u t + ½ a t2 with a = g for vertical displacement                     (1)
+
+           Height after 30 m = 0.91 m                                                       (1)
+           Or decrease in height = 1.99 m
+
+           Comparison and conclusion consistent with student's calculation.                 (1)
+
+
+           A method that calculates horizontal displacement in time taken to fall 2.9 m
+           can score full marks.
+           e.g.
+           Resolves velocity into horizontal and vertical components.                       (1)
+
+           Use of suvat equations to calculate total time in flight                         (1)
+
+           Use of s = u t for horizontal displacement                                       (1)
+
+           Total distance = 32.7 m                                                          (1)
+
+           Comparison and conclusion consistent with student's calculation.                 (1)      5
+
+           Example calculation
+           vH = 25 m s−1 × cos 10° = 24.6 m s−1
+           vV = 25 m s−1 × sin 10° = 4.34 m s−1
+           30 m = 24.61 m s−1 × t
+           → t = 30 m ÷ 24.6 m s−1 = 1.22 s
+           s = 4.34 m s−1 × 1.22 s − 0.5 × 9.81 × 1.222 = −1.99 m
+           Height = 2.9 m − 1.99 m = 0.91 m
+           0.91 m > 0.00 m ⸫ success
+
+14(b)
+           Either
+
+           Use of EK = ½ m v2                                                             (1)
+
+           Use of ΔW = FΔs                                                                (1)
+
+           F = 3.88 × 102 N                                                               (1)
+
+           Or
+
+           Use of v2 = u2 + 2as or combination of suvat equations to find deceleration.   (1)
+
+           Use of F = m a                                                                 (1)
+
+           F = 3.88 × 102 N                                                               (1)        3
+
+           Example of calculation
+           EK = ½ × 63 × 232 = 1.67 × 104 J
+           1.67 × 104 J = F × 43
+           F = 1.67 × 104 J / 43 = 3.88 × 102 N
+
+           Total for question 14                                                                     8
+Question   Answer                                                                                      Mark
+Number
+
+*15
+           This question assesses a student’s ability to show a coherent and logically
+           structured answer with linkages and fully-sustained reasoning.
+           Marks are awarded for indicative content and for how the answer is structured and
+           shows lines of reasoning.
+           The following table shows how the marks should be awarded for indicative content
+           and lines of reasoning.
+
+            IC points      IC        Max linkage        Max final
+                          mark      mark available       mark
+              6 or          4             2                6
+              more
+               5            3             2                 5
+               4            3             1                 4
+               3            2             1                 3
+               2            2             0                 2
+               1            1             0                 1
+               0            0             0                 0
+                                                                                     Marks
+            Answer shows a coherent and logical structure with linkages and           2
+            fully sustained lines of reasoning demonstrated throughout.
+            Answer is partially structured with some linkages and lines of             1
+            reasoning
+            Answer has no linkages between points and is unstructured                  0
+
+
+           Indicative content
+           • When the spacecraft is accelerating the astronaut accelerates at the same rate.
+           • The seat is applying a forward force to the astronaut so (by N3) the astronaut is
+              applying a backward/opposite force to the seat (which compresses the seat).
+           • As the fuel is used up, the mass of the spacecraft decreases.
+           • (As the mass of the spacecraft decreases) the acceleration increases.
+           • The force between the seat and the astronaut increases thus further compressing
+              the seat.
+           • The seat decompresses (to push the astronaut forwards) when the force (from
+              the rocket motor) becomes zero.
+              Or
+              The seat decompresses when the force (from the rocket motor) is removed.
+              Or
+              The force from the safety strap decelerates the astronaut.
+
+           1IC                                                                                   (1)
+           2IC Or 3IC                                                                            (1)
+           3IC + linkage Or 4IC Or 5IC                                                           (1)     6
+           4IC + linkage Or 5IC + linkage Or 6IC                                                 (1)
+           5IC + 2 × linkage Or 6 IC + linkage                                                   (1)
+           6IC + 2 × linkage                                                                     (1)
+
+
+           Total for question 15                                                                         6
+Question   Answer                                                    Mark
+Number
+16(a)
+           Use of moment = F x                               (1)
+           Use of Σ(moments) = 0                             (1)
+           R1 = 3.7 kN and R2 = 8.6 kN                       (1)        3
+
+           Example of calculation
+           Taking moments about rear axle:
+           R1 = (1.8 m 1.23  104 N) / 6 m = 3.69  103 N
+           Taking moments about the front axle:
+           R2 = (4.2 m  1.23 104 N) / 6 m = 8.61  103 N
+
+16(b)
+           Use of ΣF = m a                                     (1)
+           ΣF = 6.77  104 N                                   (1)     2
+
+           Example of calculation
+           ΣF = (1.23  104 N / g) × 5.50 g = 6.77  104 N
+16(c)
+           Reference to P = W / t Or ΔW = F Δs                 (1)
+           Force decreases as velocity increases               (1)     2
+
+           Total for question 16                                        7
+Question     Answer                                                                                  Mark
+Number
+17(a)
+             The greater the length of the rope, the greater the extension for a given force   (1)
+
+             Stiffness k = F / Δx so stiffness decreases (if extension increases).             (1)          2
+
+17(b)(i)
+             Use of 𝐸𝐸 =
+                           𝜎𝜎         𝐹𝐹
+                              and 𝜎𝜎 = and 𝜖𝜖 =
+                                                ∆𝑥𝑥                                            (1)
+                           𝜀𝜀         𝐴𝐴        𝑥𝑥
+
+                                                                                               (1)
+             Use of 𝐹𝐹 = 𝑘𝑘∆𝑥𝑥
+                                                                                               (1)
+             k = 1.35 × 105 (N m–1)                                                                         3
+
+             Example of calculation
+             2.70 × 109 N m−2 = F × 6.00 m ÷ (3.00 × 10−4 m2 × ΔL)
+             F = (2.70 × 109 N m−2 × 3.00 × 10−4 m2 ÷ 6.00 m) × ΔL = k Δx
+                  𝐹𝐹    2.70 × 109 N m−2 × 3.00 × 10−4 m2
+             𝑘𝑘 =     =
+                  ∆𝐿𝐿                 6.00 m
+                = 1.35 × 105 N m-1
+
+17(b)(ii)
+             Correct use of factor of 2 to calculate F or Δx                                   (1)
+
+             Use of ∆𝐹𝐹 = 𝑘𝑘∆𝑥𝑥                                                                (1)
+
+             1.85 × 10−2 (m) (allow ecf from (i))                                              (1)          3
+
+             Example of calculation
+             F = 5 000 N/ 2 = 2 500 N
+                   𝐹𝐹       2 500 N
+             ∆𝑥𝑥 = =                   = 1.85 × 10−2 m
+                   𝑘𝑘 1.35 × 105 N m-1
+
+17(b)(iii)
+             Use of ΔEel = ½ FΔx                                                               (1)
+
+             ΔEel = 23.1 J (allow ecf from (ii))                                               (1)          2
+
+             Example of calculation
+             ΔEel = 0.5 2 500 N 1.85 10–2 m = 23.13 J
+
+17(c)
+             Use of W = FΔs (to find the work done in lifting the load)                        (1)
+
+             Compares 7 500 J with their calculated value in b(iii) and draws suitable         (1)          2
+             conclusion
+
+
+             Example of calculation
+             Work done by pulley system = 5 × 103 N × 1.5 m = 7 500 J
+             23(.1) (J) << 7 500 (J) ⸫ not significant
+
+             Total for question 17                                                                     12
+Question     Answer                                                                               Mark
+Number
+18(a)
+             The constant maximum velocity reached by an object falling (through a fluid)   (1)
+
+             When the resultant force equals zero
+             Or when the drag plus the upthrust equals the weight                           (1)          2
+
+18(b)
+             Use of V = 4π r3 / 3                                                           (1)
+
+             Use of upthrust U = weight of fluid displaced W                                (1)
+
+             Use of ρ=m / V and WS = mg                                                     (1)
+
+             Use of D = W – U                                                               (1)
+
+                                                                                            (1)          5
+             D = 0.24 (N)
+
+             Example of calculation
+             V = 43𝜋𝜋 × (0.0175 m)3 = 2.24 ×10−5 m3
+             U = 2.24 ×10−5 m3 × 1.43 × 103 kg m−3 × 9.81 N kg−1 = 0.314 N
+             W = 2.24 ×10−5 m3 × 2.52 × 103 kg m−3 × 9.81 N kg−1 = 0.554 N
+             D = 0.554 N − 0.314 N = 0.240 N
+                                                                           4
+             𝐷𝐷 = 𝑊𝑊 − 𝑈𝑈 = (2.52 − 1.43) × 103 kg m−3 × 9.81 N kg −1 × 3𝜋𝜋
+                           × (0.0175 m)3 = 0.24 N
+18(c)(i)
+             All data points are close to the straight line through origin
+             Or
+             Best fit straight line goes through origin                                     (1)
+
+             This consistent with Stokes’ Law.                                              (1)
+
+             Stokes’ Law implies laminar flow (for the spheres).                            (1)          3
+
+18(c)(ii)
+             Determines gradient of graph                                                   (1)
+
+             Uses large triangle.                                                           (1)
+
+             k = 5.8 to 6.2 m-1s-1                                                          (1)          3
+
+18(c)(iii)                �𝜌𝜌𝑔𝑔 −𝜌𝜌𝑠𝑠 �𝑔𝑔
+             Use of k =                                                                     (1)
+                              18𝜂𝜂
+
+             η = 99 Pa s (allow ecf from (c)(ii))                                           (1)          2
+
+             Example of calculation
+                  �𝜌𝜌𝑔𝑔 − 𝜌𝜌𝑠𝑠 � 𝑔𝑔 (2.52 − 1.43)×103 kg m−3 ×9.81N kg −1
+             𝜂𝜂 =                  =
+                        18𝑘𝑘                    18 ×6 m−1 s−1
+                                 = 99.0 Pa s
+
+             Total for question 18                                                                  15
+Pearson Education Limited. Registered company number 872828
+with its registered office at 80 Strand, London, WC2R 0RL, United Kingdom
+

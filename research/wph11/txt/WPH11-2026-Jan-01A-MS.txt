@@ -1,0 +1,752 @@
+Mark Scheme (Results)
+
+January 2026
+
+Pearson Edexcel International Advanced Subsidiary level
+In Physics
+Mechanics and Materials
+WPH11/01A
+Edexcel and BTEC Qualifications
+
+     Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest
+     awarding body. We provide a wide range of qualifications including
+     academic, vocational, occupational and specific programmes for employers.
+     For further information visit our qualifications websites at www.edexcel.com
+     or www.btec.co.uk. Alternatively, you can get in touch with us using the
+     details on our contact us page at www.edexcel.com/contactus
+
+
+
+
+Pearson: helping people progress, everywhere
+Pearson aspires to be the world’s leading learning company. Our aim is to help
+everyone progress in their lives through education. We believe in every kind of
+learning, for all kinds of people, wherever they are in the world. We’ve been
+involved in education for over 150 years, and by working across 70 countries, in 100
+languages, we have built an international reputation for our commitment to high
+standards and raising achievement through innovation in education. Find out more
+about how we can help you and your students at: www.pearson.com/uk
+
+
+
+
+January 2026
+Question Paper Log Number P87631A
+Publication Code WPH11_01A_2601_MS
+All the material in this publication is copyright
+© Pearson Education Ltd
+General Marking Guidance
+
+•   All candidates must receive the same treatment. Examiners must mark the first
+    candidate in exactly the same way as they mark the last.
+•   Mark schemes should be applied positively. Candidates must be rewarded for
+    what they have shown they can do rather than penalised for omissions.
+•   Examiners should mark according to the mark scheme not according to their
+    perception of where the grade boundaries may lie.
+•   There is no ceiling on achievement. All marks on the mark scheme should be
+    used appropriately.
+•   All the marks on the mark scheme are designed to be awarded. Examiners
+    should always award full marks if deserved, i.e. if the answer matches the mark
+    scheme. Examiners should also be prepared to award zero marks if the
+    candidate’s response is not worthy of credit according to the mark scheme.
+•   Where some judgement is required, mark schemes will provide the principles by
+    which marks will be awarded and exemplification may be limited.
+•   When examiners are in doubt regarding the application of the mark scheme to a
+    candidate’s response, the team leader must be consulted.
+•   Crossed out work should be marked UNLESS the candidate has replaced it with
+    an alternative response.
+Question
+                                                Answer                                     Mark
+Number
+                         Which of the following is a scalar quantity?
+1          The only correct answer is D (work)                                              1
+
+           A is incorrect because force is a vector
+           B is incorrect because momentum is a vector
+           C is incorrect because velocity is a vector
+
+           Two forces, X and Y, act at a point.
+           Which of the following vector diagrams shows the magnitude and
+           direction of the resultant of the two forces?
+2          The only correct answer is C (vectors X and Y drawn tip-to-tail and resultant    1
+           force vector drawn in direction from start of X to end of Y)
+
+           A is incorrect because the vectors have not been added
+           B is incorrect because the vectors have not been added
+           D is incorrect because the resultant is in the wrong direction
+
+           A copper rod was placed under
+           tensile stress and the tensile
+           strain in the rod was measured.
+
+           The graph shows how the
+           tensile stress required to cause
+           a tensile strain in the rod
+           depends upon the tensile
+           strain.
+
+           What does point X represent?
+
+3          The only correct answer is D (the yield point of copper)                         1
+
+           A is incorrect because the fracture point is at the extreme end of the graph
+           B is incorrect because proportionality ends before point X is reached
+           C is incorrect because point X is not the highest point reached by the graph
+
+           A tractor pulls a trailer a distance s in time t. The useful power output
+           of the tractor is P.
+           Which of the following equations gives the force F of the tractor on
+           the trailer?
+4                                                𝑃𝑃𝑃𝑃
+           The only correct answer is B �𝐹𝐹 = 𝑠𝑠 �                                          1
+
+           A is incorrect because it gives units of J m ≠ N
+           C is incorrect because it gives units of W m s−1 ≠ N
+           D is incorrect because it gives units of m s W−1 ≠ N
+
+           A cylinder of aluminium has a weight of 35.0 N and a volume of 1.32 ×
+           10−3 m3.
+           Which of the following calculations gives the density of aluminium in
+           kg m−3 ?
+5                                                35.0
+           The only correct answer is C �9.81×1.32×10−3 �                                   1
+           A is incorrect because it gives units of m3 kg−1
+           B is incorrect because it gives units of m3 kg N−2
+           D is incorrect because it gives units of N2 kg−1 m−3
+    An object on the Moon falls a vertical distance of 0.32 m, from rest,
+    in a time of 0.63 s.
+    Which of the following expressions gives the acceleration due to
+    gravity on the Moon in m s−2?
+6   The only correct answer is C �
+                                     2×0.32
+                                            �                                              1
+                                      0.632
+
+    A is incorrect because the 2 should be above the line, and the 0.63 should be
+    squared
+    B is incorrect because the 2 should be above the line
+    D is incorrect because he 0.63 should be squared
+
+    A sphere falls through a viscous liquid as
+    shown.
+
+    Which row of the table describes the upthrust
+    and the viscous drag on the sphere as it
+    accelerates downwards?
+7   The only correct answer is B (Upthrust constant and viscous drag increasing)           1
+
+    A is incorrect because the upthrust is constant
+    C is incorrect because the upthrust is constant and the viscous drag is
+    increasing
+    D is incorrect because the viscous drag is increasing
+
+    Two arrangements, P and Q, of identical springs are subjected to the
+    same tensile force F, as shown.
+
+    When one spring is subjected to a tensile force F, the elastic strain
+    energy for the spring is E.
+
+    Which row of the table
+    gives the total elastic
+    strain energy for each
+    arrangement?
+8   The only correct answer is D (P: 2E; Q: ½ E)                                           1
+
+    A is incorrect because springs in series increase the extension and springs in
+    parallel decrease the extension for the same force
+    B is incorrect because springs in series increase the extension for the same force
+    C is incorrect because springs in parallel decrease the extension for the same force
+     A rubber band is initially stretched by an increasing force. When the   1
+     force is gradually decreased, the rubber band returns to its original
+     length.
+
+     The force-extension graph for
+     the rubber band is shown.
+
+     P, Q and R represent different
+     areas of the graph.
+
+     Which of the following gives
+     the work done in stretching the
+     rubber band up to its maximum
+     extension?
+9    The only correct answer is B (𝑄𝑄 + 𝑅𝑅)                                  1
+
+     A is incorrect because P is spurious and R is not included
+     C is incorrect because Q is not included
+     D is incorrect because R is not included
+
+     A person is pushing a trolley at a constant velocity.
+
+     The floor exerts a force W on
+     the person. The person exerts
+     a force X on the trolley.
+
+     The trolley exerts a force Y on
+     the person and the total drag
+     force on the trolley is Z.
+
+     Which pair of forces is a
+     Newton’s Third Law pair?
+10   The only correct answer is B (X and Y)                                  1
+
+     A is incorrect because force W and Y act on the same object
+     C is incorrect because force X and Z act on the same object
+     D is incorrect because forces W and Z are not the same type of force.
+Question                                                                                   Additional Guidance
+                                    Answer                                                                       Mark
+Number
+           A trolley accelerates from rest at point A, down a straight track to point B.
+           The trolley then continues along a horizontal track to point C, as shown.
+                                                                                                                  .
+           The effects of air resistance are negligible
+           (a) Show that the trolley reaches point B with a speed of about 3 m s-1.
+11(a)   Use of ∆𝐸𝐸grav = 𝑚𝑚𝑚𝑚∆ℎ                                        (1)   Example of calculation
+                     1
+                                                                             𝑚𝑚 × 9.81 m s −2 × 0.5 m = 0.5 × 𝑚𝑚 × 𝑣𝑣 2
+        Use of 𝐸𝐸k = 𝑚𝑚𝑣𝑣 2                                            (1)
+                     2
+
+        𝑣𝑣 = 3.1 m s−1 (to at least 2 significant figures)             (1)         9.81 m s−2 × 0.5 m
+                                                                             𝑣𝑣 = �                   = 3.13 m s−1
+                                                                                           0.5
+        OR
+        Use of appropriate trigonometry to determine s and a                 Example of calculation
+        Or Use of Pythagoras to determine s and a                                         0.5
+        Or Use of appropriate trigonometry and Pythagoras to                 𝜃𝜃 = tan−1 � � = 14°
+                                                                                          2.0
+        determine s and a                                              (1)   𝑎𝑎 = 9.81 m s −2 × sin(14°) = 2.37 m s−2
+        Use of appropriate equation(s) of motion to determine v              𝑠𝑠 = �22 + 0.52 = 2.06 m
+                                                                       (1)
+                                                                             𝑣𝑣 2 = 02 + 2 × 2.37 m s−2 × 2.06 m = 9.76 m2 s−2
+        𝑣𝑣 = 3.1 m s−1 (to at least 2 significant figures)                   𝑣𝑣 = √9.76 m2 s−2 = 3.12 m s−1
+        (dependent on MP1)                                             (1)                                                       3
+
+11(b)   Use of Pythagoras’ Theorem to calculate distance along the           Example of calculation
+        ramp
+        Or Use of appropriate trigonometry to determine distance             𝑠𝑠 = �(2.0 m)2 + (0.50 m)2 = 2.06 m
+        along ramp
+        Or Use of appropriate trigonometry to determine acceleration                     0 + 3.1 m s−1
+        along ramp                                                     (1)   2.06 m =                  × 𝑡𝑡ramp
+                                                                                               2
+        Use of appropriate equation(s) of motion to determine time                      2.06 m × 2
+        taken to move down ramp with a non-zero (component of) a       (1)   𝑡𝑡ramp =              = 1.33 s
+                                                                                         3.1 m s−1
+                          1
+        Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 with a = 0 (to determine time on                            1.0 m
+                          2
+                                                                       (1)   𝑡𝑡horizontal =         = 0.32 s
+        horizontal track)                                                                     3.1 s
+
+                                                                             𝑡𝑡total = 1.33 s + 0.32 s = 1.65 s                  4
+        Total time = 1.7 s (ecf from 11(a))                            (1)
+        Note: they may end up with 1.64 s depending on rounding, so
+        final answer may be 1.6 s (Show that value gives 1.7)
+
+        Total for question 11                                                                                                    7
+Question                                                                                         Additional Guidance
+                                        Answer                                                                                      Mark
+Number
+           A student carried out an experiment to determine the Young modulus of constantan.
+           The student had a constantan wire with cross-sectional area A of 3.97 × 10–7 m2.
+           The unstretched length x of the wire was 4.00 m.
+           (a) The student had enough slotted masses to apply a weight of up to 150 N to the wire.
+           The breaking stress for constantan is about 420 MPa.
+
+           Deduce whether the wire could support a weight of 150 N.
+12(a)      Use of 𝜎𝜎 =
+                       𝐹𝐹                                      (1) Example of calculation
+                      𝐴𝐴
+                                                                                   150 N
+           𝜎𝜎 = 378 MPa                                                                      = 378 MPa
+                                                                        (1)   3.97 × 10−7 m2
+
+           Comparison of calculated stress with 420 (MPa) and                 378 MPa < 420 MPa so yes, it can support the weight
+                                                                        (1)                                                          3
+           consistent conclusion
+
+           For MP2 and 3
+
+           F =167 N;
+           Comparison of calculated force with 150 (N) and consistent
+           conclusion
+           Or
+           𝐴𝐴 = 3.57 × 10−7 m2 ;
+           Comparison of calculated area with 3.97 × 10−7 (m2 ) and
+           consistent conclusion
+            The student added slotted masses to the wire and determined the corresponding
+            extensions. The student plotted a graph of force against extension, as shown.
+
+                (i)     Show that the stiffness of the wire is about 1.3 × 104 N m–1.
+
+
+12(b)(i)    Determines gradient of straight line section with an extension of
+            ≤ 5.0 mm and force ≤ 64 N
+            Or Use of ∆𝐹𝐹 = 𝑘𝑘∆𝑥𝑥 with an extension of ≤ 5 mm                   (1)   allow a tolerance of ± half a small square
+                                                                                                                                           2
+            k = 1.30 × 104 (N m−1) to at least 3 significant figures            (1)   allow a value consistent with their valid readings
+                                                                                      MP2 dependent on MP1
+
+                                                                                      Example of calculation
+
+                                                                                                 60 N
+                                                                                      𝑘𝑘 =                = 1.304 × 104 N m−1
+                                                                                             4.6 × 10−3 m
+
+            The relationship between the stiffness k of the wire and
+                                                 𝑬𝑬𝑬𝑬
+            the Young modulus E is given by 𝒌𝒌 =
+                                                          𝒙𝒙
+
+
+            where x is the unstretched length of the wire and A is
+            the cross-sectional area of the wire.
+
+            Determine a value for the Young modulus of constantan
+            using the student’s data.
+12(b)(ii)               𝐸𝐸𝐸𝐸
+            Use of 𝑘𝑘 = 𝑥𝑥                                        (1)                 Example of calculation
+
+                                                                                (1)          1.3 × 104 N m−1 × 4.00 m                      2
+            E = 1.3 × 1011 Pa (ecf from (b)(i))                                       𝐸𝐸 =
+                                                                                                  3.97 × 10−7 m2
+
+                                                                                      E = 1.31 × 1011 Pa
+
+            Total for question 12                                                                                                          7
+Question                                                                                                    Additional Guidance
+                                            Answer                                                                                                          Mark
+Number
+           A coat hook is attached to a smooth door by a screw, as shown.
+
+
+
+
+           The diagram below shows three of the forces that act on the coat hook when a coat is hung from it. The weight of the
+           coat hook may be neglected.
+
+
+                                            Add a labelled arrow to the diagram in the answer book to show the additional force
+                                            required for the coat hook to be in equilibrium.
+
+
+
+13(a)      Horizontal arrow starting at wall and pointing to the left labelled         Acceptable labels include Reaction force, R, Normal contact force,
+           normal contact force                                                  (1)   N, Force from door/wall, F, additional force.
+
+                                                                                       If more than one arrow drawn, MP1 cannot be scored
+
+           Horizontal force arrow drawn starting at wall below screw and
+           not lower than last point of contact between hook and door.
+                                                                                 (1)   Example of diagram                                                    2
+        If too many coats are hung on the coat hook, the hook will rotate and pull the screw out
+        of the door. Point P is the position of the pivot as shown.
+
+        The maximum horizontal force from the screw is 150 N.
+
+        The mass of one coat is 2.6 kg.
+
+           Deduce whether a person could hang more than two of these coats from the hook.
+13(b)   Use of moment of force = 𝐹𝐹 𝑥𝑥                      (1)
+
+        Use of principle of moments                                  (1)   Allow an answer that calculates the clockwise moment and
+                                                                           calculates the anticlockwise moment caused by the weight of 2 or
+        Use of 𝑊𝑊 = 𝑚𝑚 𝑔𝑔                                            (1)   3 coats.
+
+        2.1 (coats) > 2 (coats) so yes                               (1)                                                                      4
+        Or
+        2.1 (coats) < 3 (coats) so no
+        Or(Horizontal force needed from screw for exactly 2 coats)
+        141.7 (N) < 150 (N) so yes
+        Or (Distance from screw to pivot for exactly 2 coats)              Example of calculation
+        0.85 (cm) < 0.9 (cm) so yes                                        0.9 cm × 150 N = 2.5 cm × 𝐹𝐹
+        Or (Distance of hook from wall for exactly 2 coats is)
+        2.646 (cm) > 2.5 (cm) so yes                                              0.9 cm × 150 N
+        Or (maximum mass that the hook can support)                        𝐹𝐹 =                  = 54 N
+                                                                                       2.5 cm
+        5.5 (kg) > 5.2 (kg) so yes
+        Or (maximum weight that the hook can support)                      2.6 kg × 9.81 N kg −1 = 25.5 N
+        54 (N) > 51 (N) so yes
+        Or (Maximum mass of one coat would be)                              54 N
+        2.75 (kg) > 2.6 (kg) so yes                                               = 2.12 coats
+                                                                           25.5 N
+        Or(Maximum weight of one coat would be)
+        27 (N) >25.5 (N) so yes.                                           2.12 > 2 so yes
+        Or (moment caused by weight of 2 coats)
+        1.28 (Nm) < 1.35 (Nm) so yes
+        NOTE that other comparisons may also be valid
+        Total for question 13                                                                                                                 6
+Question                                                                                      Additional Guidance
+                                      Answer                                                                                                     Mark
+Number
+           A small sphere is moving horizontally through a viscous liquid.
+           (a) Stokes’ law can be used to calculate the drag force on an object.
+           State the conditions that must apply for Stokes’ law to be valid.
+14(a)      Small, spherical object
+           Or Spherical object with low speed                 (1)
+
+           Laminar flow                                           (1) Allow an absence of turbulent flow                                          2
+
+           There is a constant force of 2.3 × 10−5 N acting horizontally on the sphere in the same direction that the sphere is
+           moving.
+
+                   diameter of sphere = 4.5 × 10−3 m
+                   viscosity of liquid = 7.1 × 10−2 Pa s
+
+           (i) At one instant, the speed of the sphere is 5.2 × 10−3 m s−1.
+
+                                              Calculate the resultant horizontal force on the sphere.
+14(b)(i)   Use of F = 6π η r v with 𝑟𝑟 =
+                                         𝑑𝑑                       (1)
+                                         2
+
+                                                                  (1)
+           Calculates Σ𝐹𝐹
+                                                                  (1)                                                                             3
+           Resultant force = 7 × 10−6 N
+                                                                        Example of calculation
+
+                                                                                                              4.5 × 10−3 m
+                                                                        𝐹𝐹drag = 6 × 𝜋𝜋 × 7.1 × 10−2 Pa s ×                × 5.2 × 10−3 m s −1
+                                                                                                                    2
+
+                                                                        𝐹𝐹drag = 1.57 × 10−5 N
+
+                                                                        Σ𝐹𝐹 = 2.3 × 10−5 N − 1.57 × 10−5 N = 7.3 × 10−6 N
+            Calculate the maximum speed of the sphere in the horizontal direction.
+14(b)(ii)   Use of F = 6π η r v with F = 2.3 × 10−5 N           (1) May use diameter instead of radius in this question part and
+                                                                         still score MP1
+            v = 7.6 × 10−3 m s−1                                   (1)                                                                    2
+                                                                         Example of calculation
+
+                                                                         2.30 × 10−5 N = 6 × 𝜋𝜋 × 7.10 × 10−2 Pa s × 2.25 × 10−3 m × 𝑣𝑣
+
+                                                                                             2.30 × 10−5 N
+                                                                         𝑣𝑣 =
+                                                                                6 × π × 7.10 × 10−2 Pa s × 2.25 × 10−3 m
+
+                                                                         𝑣𝑣 = 7.6 × 10−3 m s −1
+
+            Total for question 14                                                                                                         7
+Question                                                                                           Additional Guidance
+                                          Answer                                                                         Mark
+Number
+           A Galilean thermometer consists of a closed glass cylinder containing a liquid. In the liquid
+           there are several identical sealed glass bulbs, as shown. Attached to each bulb is a metal
+           disc labelled with a temperature. Each disc has a different mass.
+
+           As the temperature increases, the density of the liquid decreases. This can cause the bulbs
+           to move within the liquid.
+
+           Explain why a particular bulb will float until the temperature of the liquid exceeds a certain
+           value.
+*15   This question assesses a student’s ability to show a coherent and logically     Indicative content
+      structured answer with linkages and fully-sustained reasoning. Marks are
+      awarded for indicative content and for how the answer is structured and shows
+      lines of reasoning. The following table shows how the marks should be           IC1 Upthrust equals weight of liquid displaced.
+      awarded for indicative content.
+                                                                                      IC2 When upthrust ≥ weight of bulb / disc, bulb floats
+        IC points      IC mark        Max linkage mark         Max final mark
+            6             4                   2                      6                IC3 As temperature increases, upthrust decreases (because
+            5             3                   2                      5                    density of liquid decreases)
+            4             3                   1                      4                    Or
+            3             2                   1                      3                    As temperature increases, weight of liquid displaced
+            2             2                   0                      2                    decreases (because density of liquid decreases)
+            1             1                   0                      1
+                                                                                      IC4 Until weight of a bulb / disc > upthrust
+            0             0                   0                      0
+                                                                                      IC5 So there is a resultant force downwards on the bulb
+
+      The following table shows how the marks should be awarded for structure and     IC6 So the bulb accelerates downwards
+      lines of reasoning.
+
+                                                     Number of marks awarded
+                                                     for structure of answer and
+                                                     sustained line of reasoning
+       Answer shows a coherent and logical
+                                                                  2
+       structure with linkages and fully sustained
+       lines of reasoning demonstrated throughout
+       Answer is partially structured with some                   1
+       linkages and lines of reasoning
+       Answer has no linkages between points and                  0
+       is unstructured
+                                                                                                                                                  6
+
+      Total for question 15                                                                                                                       6
+Question                                                                                  Additional Guidance
+                                   Answer                                                                                            Mark
+Number
+           The toy aeroplane in the diagram has a spring mechanism connected to the wheels. When the
+           aeroplane is pulled backwards, the wheels rotate backwards and a spring is compressed. When
+           the aeroplane is released, the force from the spring propels the aeroplane forwards.
+
+           The aeroplane is pulled backwards and released from rest. The aeroplane then moves forward in
+           a straight line along a flat surface. The simplified acceleration-time graph for the forward motion of the aeroplane is
+           shown.
+
+           Show that the maximum velocity of the aeroplane is about 3 m s–1.
+16(a)   Use of 𝑣𝑣 = 𝑢𝑢 + 𝑎𝑎𝑎𝑎                                          Example of calculation
+        Or
+        Determines area under the graph                    (1) 𝑣𝑣 = 0 + 2.0 m s−2 × 1.6 s = 3.2 m s −1
+                                                                Note: watch out for 0.8 m s−2 × 4.0 s = 3.2 m s−1 which is also a
+        v = 3.2 (m s ) (to 2 significant figures)
+                    −1
+                                                           (1)  valid method.                                                       2
+        On the axes in the answer book, draw the corresponding velocity-time graph for the aeroplane.
+16(b)   Straight line from origin to (3.2 m s−1, 1.6 s)
+        (ecf from 16(a) )                                        (1)
+
+        Line parallel to x-axis between 1.6 s and 3.0 s, at      (1)                                                                3
+        maximum velocity
+
+        Straight line from maximum velocity                      (1)
+        at 3.0 s to (0 m s−1, 7.0 s)
+
+        Calculate the total distance travelled by the aeroplane after release.
+16(c)   Calculates areas under their graph from 0 s to 1.6s             Example of calculation
+        And Calculates areas under their graph from 1.6 s to 3.0 s  (1)
+        And Calculates areas under their graph from 3.0 s to 7.0 s.     1
+                                                                          × 3.2 m s−1 × 1.6 s = 2.56 m
+                                                                    (1) 2
+        Adds areas together
+                                                                    (1) 3.2 m s−1 × 1.4 s = 4.48 m
+        s = 13 m (ecf from 16(a) and / or 16(b))                                                                                    3
+        (show that value gives 12.6 m)                                  1
+                                                                          × 3.2 m s−1 × 4.0 s = 6.40 m
+                                                                        2
+        OR
+                                                                        s = 2.56 m + 4.48 m + 6.40 m = 13.44 m
+        Time at maximum velocity determined from their graph
+        And total time determined from their graph                  (1)
+
+        Determines area of trapezium                             (1)
+
+        s = 13 m (ecf from 16(a) and / or 16(b))
+        (show that value gives 12.6 m)                           (1)
+        Total for question 16                                                                                                       8
+Question                                                                                                 Additional Guidance
+                                            Answer                                                                                              Mark
+Number
+             The diagram shows two bumper cars, P and Q, at an amusement park.
+             Q was stationary. P was moving at a speed of 2.10 m s–1 towards Q.
+             P collided with Q. After the collision, P and Q moved off in the same direction. P
+             moved with a speed of 1.15 m s–1. Q moved with a speed of 1.57 m s–1.
+             (a) (i) Show that the total mass of Q was about 150 kg.
+             total mass of P = 250 kg
+17(a)(i)     Use of 𝑝𝑝 = 𝑚𝑚𝑚𝑚                                       (1) Example of calculation
+
+             Use of conservation of momentum                              (1)   250 kg × 2.10 m s−1 = 250 kg × 1.15 m s−1 + 𝑚𝑚Q × 1.57 m s−1
+
+             m = 151 (kg) (to at least 3 significant figures)             (1)                      525 kg m s −1 − 287.5 kg m s −1               3
+                                                                                           𝑚𝑚Q =                                   = 151.3 kg
+                                                                                                            1.57 m s−1
+             State one assumption you made in your calculation
+             in (a)(i).
+17(a)(ii)    No external forces acted (during the collision)                Allow there is no friction / drag (during the collision)
+             Or it is a closed system                                  (1)                                                                       1
+             The collision lasted a total time of 1.35 s. Calculate the average horizontal force on Q during the collision.
+                           𝑣𝑣−𝑢𝑢
+17(a)(iii)   Use of 𝑎𝑎 =                                                  (1)   Example of calculation
+                             𝑡𝑡
+
+             Use of 𝛴𝛴𝐹𝐹 = 𝑚𝑚𝑚𝑚                                                        1.57 m s −1
+                                                                          (1)   𝑎𝑎 =               = 1.163 m s −2
+                                                                                         1.35 𝑠𝑠
+             ΣF = 176 N (ecf from (a)(i))
+             (show that value gives 174 N)                                (1)   𝐹𝐹 = 151 kg × 1.163m s −2 = 175.6 N
+
+             OR                                                                 Example of calculation
+             Use of ∆𝑝𝑝 = 𝑚𝑚∆𝑣𝑣                                           (1)   ∆𝑝𝑝𝑄𝑄 = 151 kg × 1.57 m s−1 = 237.1 kg m s−1
+
+             Use of 𝐹𝐹 =
+                           ∆𝑝𝑝
+                                                                          (1)          237.1 kg m s−1
+                           ∆𝑡𝑡                                                  𝐹𝐹 =                  = 175.6 N
+                                                                                           1.35 𝑠𝑠
+                                                                                                                                                 3
+                                                                          (1)
+             ΣF = 176 N (ecf from (a)(i))
+        (show that value gives 174 N)
+
+        Explain why P decelerates during the collision. Your
+        answer should make reference to Newton’s laws of
+        motion.
+17(b)   P exerts a force on Q so Q exerts a force on P       (1)
+
+        By Newton’s third law, forces are equal (magnitude) and
+        opposite (in direction)                                   (1)   Dependent on MP1
+
+        Resultant force on P opposite to direction of motion so         Allow Resultant force on P is to the left / backwards so
+        Newton’s first / second law applies (and P decelerates)   (1)   Newton’s first / second law applies (and P decelerates)    3
+
+        Total for question 17                                                                                                      10
+Question                                                                                     Additional Guidance
+                                    Answer                                                                         Mark
+Number
+           A stunt motorcyclist wants to jump across a river to land on the other side. The diagram
+           shows the motorcyclist driving off a ramp at the edge of a river.
+
+
+
+
+           The ramp is at an angle of 25° to the horizontal and the height at the end of the ramp is
+           3.0 m. The width of the river is 100 m. The initial velocity of the motorcyclist is 35 m s−1.
+           (a) Calculate the horizontal and vertical components of the motorcycle’s initial velocity
+                                                                as it leaves the ramp.
+18(a)   𝑣𝑣h = 31.7 m s −1                                              (1) Max 1 mark if no unit seen
+
+        𝑣𝑣v = 14.8 m s−1                                               (1) If no other mark scored allow 1 mark for                       2
+                                                                             𝑣𝑣h = 35 × cos(25°) and 𝑣𝑣𝑣𝑣 = 35 × sin(25°)
+
+        Deduce whether the rider lands on the other side of the river.
+        The effects of air resistance can be ignored.
+18(b)   Use of appropriate equation of motion for vertical motion     Must be using vertical (components of ) velocity, displacement,
+        with a = (−)9.81 m s−2                                    (1) acceleration
+
+                           1
+        Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 for horizontal motion with a = 0     (1) Must use horizontal (components of ) velocity, displacement,
+                           2
+                                                                             acceleration
+        Horizontal distance = 102 m
+        Or Decrease in height = 2.1 m
+        Or Time taken for change in height of −3.0 m = 3.21 s
+        Or Speed needed to travel 100m and decrease in height
+                                                                       (1)
+        by 3.0 m = 34.7 m/s                                                  ecf from 18(a))
+
+        Comparison of calculated value with (value needed to travel)         Examples for MP3 and MP4:
+                                                                       (1)
+        100 (m) and consistent conclusion                                    2.1 (m) < 3.0 (m) so yes
+                                                                                                                                          4
+                                                                             102 (m) > 100 (m) so yes
+                                                                             3.21 (s) > 3.15 (s) so yes
+                                                                             34.7 (m s-1) < 35 (m s-1) so yes
+
+                                                                             Example of calculation
+                                                                                                         1
+                                                                             −3 m = 14.8 m s −1 × 𝑡𝑡 + 2 × (−9.81 m s−2 ) × 𝑡𝑡 2
+                                                                             𝑡𝑡 = 3.21 s
+                                                                             𝑠𝑠 = 31.7 m s −1 × 3.21 s = 101.8 m
+                                                                             101.8 m > 100 m so yes, the rider lands on the other side
+        Explain how air resistance would affect the jump.
+18(c)   Air resistance opposes the motion (of the motorcyclist)            (1) Allow drag for air resistance
+                                                                               Allow there is a (resultant) force to the left (on the motorbike)
+                                                                               Allow there is a backwards force (on the motorbike)
+        There is deceleration in the horizontal direction
+        Or
+        Horizontal (component of) velocity / speed would decrease
+        Or
+        The vertical acceleration is not 9.81 m s-2                        (1)
+
+
+        (Horizontal) distance travelled would decrease                           Allow so the rider may not reach the other side (of the river)
+        Or
+        The (maximum) height reached by the motorcyclist would                   Allow the (maximum) height of the jump would decrease
+        decrease
+        Or
+        the motorcyclist falls through a greater height in (a horizontal   (1) MP3 dependent on MP1 or MP2
+        distance of 100m)
+
+        OR
+        Work is done by air resistance                                     (1)
+
+        The kinetic energy of the motorbike decreases
+        Or
+        The maximum gravitational potential energy of the
+        motorbike decreases                                                (1)
+
+        (Horizontal) distance travelled would decrease
+        Or
+        The (maximum) height reached by the motorcyclist would
+        decrease
+        Or
+        the motorcyclist falls through a greater height in (a horizontal
+        distance of 100m)                                                  (1) MP3 dependent on MP1 or MP2                                         3
+           Total for question 18                                                                                         9
+
+Question                                                                                      Additional Guidance
+                                                 Answer                                                             Mark
+Number
+           A pulley system is used to lift a 5.00 kN load. The system consists of one
+           fixed pulley
+           and one pulley that can move. The pulleys are connected by a nylon rope,
+           as shown.
+
+           The nylon rope will stretch when it is used in this way. The weight of the
+           pulleys and the rope can be ignored, and you may assume that there is no
+           friction in the pulleys.
+
+           The properties of the nylon rope are:
+           Young modulus of nylon = 2.70 GPa
+           overall length of rope before adding the load = 6.00 m
+           area of cross-section of nylon rope = 3.00 × 10−4 m2
+
+           (a) The greater the length of a rope, the smaller the stiffness of the rope.
+           Explain why.
+
+19(a)            𝐹𝐹
+           𝑘𝑘 = ∆𝑥𝑥                                                                     (1)
+
+
+           Extension is proportional to (original) length
+           Or
+           The greater the length of the rope, the greater the extension (for a given
+           force)
+                                                                                        (1)
+           OR
+                𝐸𝐸𝐸𝐸
+           𝑘𝑘 =                                                                         (1)
+                  𝑥𝑥
+
+                                                                                                                     2
+The stiffness (constant) for the rope is inversely proportional to the length   (1)
+of the rope
+             Show that the stiffness k of the nylon rope is about 1.4 × 105 N m−1.
+
+19(b)(i)     Use of 𝐸𝐸 =
+                           𝜎𝜎         𝐹𝐹
+                              and 𝜎𝜎 = and 𝜀𝜀 =
+                                                ∆𝑥𝑥                             (1)   Example of calculation
+                           𝜀𝜀         𝐴𝐴        𝑥𝑥                                                         𝐹𝐹 × 6.00 m
+                                                                                (1)   2.7 × 109 Pa =
+             Use of 𝐹𝐹 = 𝑘𝑘∆𝑥𝑥                                                                       ∆𝑥𝑥 × 3.00 × 10−4 m2
+                                                                                             𝐹𝐹    2.7 × 109 Pa × 3.00 × 10−4 m2
+                                                                                (1)   𝑘𝑘 =       =                                 3
+             1.35 × 10 (N m ) (to at least 3 significant figures)
+                      5       –1
+                                                                                             ∆𝑥𝑥               6.00 m
+                                                                                      𝑘𝑘 = 1.35 × 105 N m−1
+             The pulley system lifts the 5.00 kN weight at a steady rate.
+             Determine the extension of the rope while the lift is taking place.
+19(b)(ii)    Correct use of factor of 2 to calculate F                          (1)   Example of calculation
+
+             Use of ∆𝐹𝐹 = 𝑘𝑘∆𝑥𝑥                                                              5000 N
+                                𝜎𝜎     𝐹𝐹        ∆𝑥𝑥                            (1)   𝐹𝐹 =          = 2500 N
+             Or Use of of 𝐸𝐸 = and 𝜎𝜎 = and 𝜀𝜀 =                                               2
+                                   𝜀𝜀       𝐴𝐴           𝑥𝑥
+                                                                                                  2 500 N
+             1.85 × 10−2 (m) (ecf from b(i))                                          ∆𝑥𝑥 =                    = 1.85 × 10−2 m
+                                                                                (1)           1.35 × 105 N m-1                     3
+             (‘show that’ value gives 1.79 × 10−2 (m))
+                                                                                      Example of calculation
+                                                                                           5000 N
+                                                                                      𝐹𝐹 =        = 2500 N
+                                                                                             2
+                                                                                                        2500 N × 6.0 m
+                                                                                      2.7 × 109 Pa =
+                                                                                                     ∆x × 3.00 × 10−4 m2
+
+                                                                                      Δ𝑥𝑥 = 0.0185 m
+
+             Calculate the work done in stretching the rope.
+19(b)(iii)                  1
+             Use of ∆𝐸𝐸el = 2 𝐹𝐹∆𝑥𝑥                                             (1)   Example of calculation
+
+                                                                                (1)            1
+                                                                                      ∆𝐸𝐸el = × 2500 N × 0.0185 m = 23.1 J         2
+             W = 23 J (ecf from 19(b)(ii) and 19(b)(i))                                        2
+             (‘show that’ value gives 22.3 J)
+
+             Total for question 19                                                                                                 10
+

@@ -1,0 +1,521 @@
+Mark Scheme (Results)
+
+
+
+January 2021
+
+
+Pearson Edexcel International Advanced
+Subsidiary/ Advanced Level In Physics
+(WPH11)
+Paper 1: Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+
+
+Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest
+awarding body. We provide a wide range of qualifications including academic,
+vocational, occupational and specific programmes for employers. For further
+information visit our qualifications websites at www.edexcel.com or
+www.btec.co.uk. Alternatively, you can get in touch with us using the details on
+our contact us page at www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help
+everyone progress in their lives through education. We believe in every kind of
+learning, for all kinds of people, wherever they are in the world. We’ve been
+involved in education for over 150 years, and by working across 70 countries, in
+100 languages, we have built an international reputation for our commitment to
+high standards and raising achievement through innovation in education. Find out
+more about how we can help you and your students at: www.pearson.com/uk
+
+
+
+
+January 2021
+Publications Code WPH11_01_2101_MS
+All the material in this publication is copyright
+© Pearson Education Ltd 2021
+General Marking Guidance
+
+
+ • All candidates must receive the same treatment. Examiners must mark
+   the first candidate in exactly the same way as they mark the last.
+ • Mark schemes should be applied positively. Candidates must be rewarded
+   for what they have shown they can do rather than penalised for omissions.
+ • Examiners should mark according to the mark scheme not according to
+   their perception of where the grade boundaries may lie.
+ • There is no ceiling on achievement. All marks on the mark scheme should
+   be used appropriately.
+ • All the marks on the mark scheme are designed to be awarded. Examiners
+   should always award full marks if deserved, i.e. if the answer matches the
+   mark scheme. Examiners should also be prepared to award zero marks if
+   the candidate’s response is not worthy of credit according to the mark
+   scheme.
+ • Where some judgement is required, mark schemes will provide the
+   principles by which marks will be awarded and exemplification may be
+   limited.
+ • When examiners are in doubt regarding the application of the mark
+   scheme to a candidate’s response, the team leader must be consulted.
+ • Crossed out work should be marked UNLESS the candidate has replaced it
+   with an alternative response.
+ Mark scheme notes
+
+ Underlying principle
+
+ The mark scheme will clearly indicate the concept that is being rewarded, backed up by
+ examples. It is not a set of model answers.
+
+ For example:
+
+(iii)   Horizontal force of hinge on table top
+
+
+
+        66.3 (N) or 66 (N) and correct indication of direction [no ue]                           1
+
+        [Some examples of direction: acting from right (to left) / to the left / West
+        / opposite direction to horizontal. May show direction by arrow. Do not
+        accept a minus sign in front of number as direction.]
+
+ This has a clear statement of the principle for awarding the mark, supported by some
+ examples illustrating acceptable boundaries.
+
+ 1. Mark scheme format
+    1.1 You will not see ‘wtte’ (words to that effect). Alternative correct wording should be
+         credited in every answer unless the ms has specified specific words that must be
+         present. Such words will be indicated by underlining e.g. ‘resonance’
+    1.2 Bold lower case will be used for emphasis.
+    1.3 Round brackets ( ) indicate words that are not essential e.g. “(hence) distance is
+         increased”.
+    1.4 Square brackets [ ] indicate advice to examiners or examples e.g. [Do not accept
+         gravity] [ecf].
+
+
+ 2. Unit error penalties
+    2.1 A separate mark is not usually given for a unit but a missing or incorrect unit will
+          normally mean that the final calculation mark will not be awarded.
+    2.2 Incorrect use of case e.g. ‘Watt’ or ‘w’ will not be penalised.
+    2.3 There will be no unit penalty applied in ‘show that’ questions or in any other
+          question where the units to be used have been given, for example in a spreadsheet.
+    2.4 The same missing or incorrect unit will not be penalised more than once within one
+          question (one clip in epen).
+    2.5 Occasionally, it may be decided not to penalise a missing or incorrect unit e.g. the
+          candidate may be calculating the gradient of a graph, resulting in a unit that is not
+          one that should be known and is complex.
+    2.6 The mark scheme will indicate if no unit error penalty is to be applied by means of
+          [no ue].
+
+
+ 3. Significant figures
+    3.1 Use of an inappropriate number of significant figures in the theory papers will
+          normally only be penalised in ‘show that’ questions where use of too few significant
+          figures has resulted in the candidate not demonstrating the validity of the given
+          answer.
+    3.2 The use of g = 10 m s-2 or 10 N kg-1 instead of 9.81 m s-2 or 9.81 N kg-1 will be
+          penalised by one mark (but not more than once per clip). Accept 9.8 m s-2 or 9.8 N
+          kg-1
+4. Calculations
+   4.1 Bald (i.e. no working shown) correct answers score full marks unless in a ‘show that’
+        question.
+   4.2 If a ‘show that’ question is worth 2 marks then both marks will be available for a
+        reverse working; if it is worth 3 marks then only 2 will be available.
+   4.3 use of the formula means that the candidate demonstrates substitution of physically
+        correct values, although there may be conversion errors e.g. power of 10 error.
+   4.4 recall of the correct formula will be awarded when the formula is seen or implied by
+        substitution.
+   4.5 The mark scheme will show a correctly worked answer for illustration only.
+   4.6 Example of mark scheme for a calculation:
+
+
+           ‘Show that’ calculation of weight
+
+           Use of L × W × H                                                                  
+
+           Substitution into density equation with a volume and density                      
+
+           Correct answer [49.4 (N)] to at least 3 sig fig. [No ue]                          
+
+           [If 5040 g rounded to 5000 g or 5 kg, do not give 3rd mark; if conversion to kg
+           is omitted and then answer fudged, do not give 3rd mark]
+
+           [Bald answer scores 0, reverse calculation 2/3]
+
+           Example of answer:
+
+           80 cm × 50 cm × 1.8 cm = 7200 cm3
+           7200 cm3 × 0.70 g cm-3 = 5040 g
+                                                                                                 3
+           5040 × 10-3 kg × 9.81 N/kg
+
+           = 49.4 N
+
+5. Quality of Written Communication
+   5.1 Indicated by QoWC in mark scheme. QWC – Work must be clear and organised in a
+        logical manner using technical wording where appropriate.
+   5.2 Usually it is part of a max mark, the final mark not being awarded unless the QoWC
+        condition has been satisfied.
+
+
+6. Graphs
+   6.1 A mark given for axes requires both axes to be labelled with quantities and units, and
+        drawn the correct way round.
+   6.2 Sometimes a separate mark will be given for units or for each axis if the units are
+        complex. This will be indicated on the mark scheme.
+   6.3 A mark given for choosing a scale requires that the chosen scale allows all points to
+        be plotted, spreads plotted points over more than half of each axis and is not an
+        awkward scale e.g. multiples of 3, 7 etc.
+   6.4 Points should be plotted to within 1 mm.
+          • Check the two points furthest from the best line. If both OK award mark.
+          • If either is 2 mm out do not award mark.
+          • If both are 1 mm out do not award mark.
+          • If either is 1 mm out then check another two and award mark if both of these
+              OK, otherwise no mark.
+          •    For a line mark there must be a thin continuous line which is the best-fit line
+               for the candidate’s results.
+Question   Answer                                                                                   Mark
+Number
+1          C is the correct answer                                                                   (1)
+
+           A is incorrect because the velocity should be squared
+           B is incorrect because the displacement should be doubled and the velocity squared
+           D is incorrect because the displacement should be doubled
+2          C is the correct answer                                                                   (1)
+
+           A is incorrect because it takes no account of the k.e.
+           B is incorrect because the energy dissipated would be greater than the original energy
+           D is incorrect because the energy dissipated could not be negative
+3          D is the correct answer                                                                   (1)
+
+           A is incorrect because the acceleration is not positive
+           B is incorrect because the acceleration is decreasing
+           C is incorrect because the acceleration is constant
+4          B is the correct answer                                                                   (1)
+
+           A is incorrect because the graph would have a gradient of g/2
+           C is incorrect because the graph would have a gradient of 2/g
+           D is incorrect because the graph would have a gradient of 1/g
+5          C is the correct answer                                                                   (1)
+
+           A is incorrect because breaking stress is material property independent of dimensions
+           B is incorrect because density is material property independent of dimensions
+           D is incorrect because Young modulus is material property independent of dimensions
+6          A is the correct answer                                                                   (1)
+
+           B is incorrect because object B has greater leftward momentum than object A
+           C is incorrect because total momentum is not the sum of the magnitudes
+           D is incorrect because total momentum is not the sum of the magnitudes
+7          C is the correct answer                                                                   (1)
+
+           A is incorrect because the ball bearing is not in the oil at V
+           B is incorrect because the ball bearing has not reached terminal velocity at W
+           D is incorrect because the ball bearing has not reached terminal velocity at W
+8          C is the correct answer                                                                   (1)
+
+           A is incorrect because density is not a vector
+           B is incorrect because kinetic energy is not a vector
+           D is incorrect because viscosity is not a vector
+9          B is the correct answer                                                                   (1)
+
+           A is incorrect because the forces do act in opposite directions
+           C is incorrect because the forces are of the same type
+           D is incorrect because the forces do have the same magnitude
+10         C is the correct answer                                                                   (1)
+
+           A is incorrect because time is not speed/distance
+           B is incorrect because time is not speed/distance
+           D is incorrect because the powers of ten are incorrect
+Question   Answer                                                                               Mark
+Number
+
+11(a)
+              •   Three downward arrows to show the forces of the people and the weight
+                  of the plank
+                                                                                          (1)
+              •   Upward arrow to show reaction/contact/value force at the pivot.         (1)    2
+
+
+
+
+11(b)
+              •   Use of moment = F x                                                     (1)
+              •   Application of principle of moments                                     (1)
+              •   x = 0.89 m                                                              (1)    3
+
+           Example of calculation
+           x = (0.9 m × 950 N − 1.1 × 250) / 650 N = 0.89 m
+
+           Total for question 11                                                                 5
+Question   Answer                                                                             Mar
+                                                                                              k
+Number
+
+12(a)
+                •   Use of ∆𝐸𝐸grav = 𝑚𝑚𝑚𝑚∆ℎ
+                                                                                       (1)
+                •   Use of trigonometry to calculate Δh                                 (1)
+                •   P = 180 (W)                                                         (1)
+
+           OR
+                •   Use of W = Fs                                                      (1)
+                •   Use of trigonometry to calculate component of weight along slope   (1)
+                •   P = 180 (W)                                                        (1)     3
+
+
+
+           Example of calculation:
+           P = 72 kg × 9.81 N kg−1 × 0.51m s−1 × sin 30° = 180 W
+
+12(b)
+                •   Use of efficiency = useful power output/total power input
+                                                                                       (1)
+                •   Calculates useful power output                                     (1)
+                •   Power input = 3500 W                                               (1)     3
+
+           Example of calculation
+           15 × 180 W / 0.78 = 3.46 × 103 W
+
+           Total for question 12                                                               6
+Question   Answer                                                                              Mark
+Number
+
+13(a)
+               •   Use of v2 = u2 + 2as
+                                                                                         (1)
+               •   Vertical component, 𝑢𝑢𝑉𝑉 = 𝑢𝑢 sin 35°                                 (1)
+               •   Speed of ball = 17.3 (m s−1)                                          (1)    3
+           Example of calculation
+           0 = uv2 – 2 × 9.81 m s−2 × 5.0 m
+           uv2 = 98.1, uv = √98.1 = 9.9 m s−1
+           u = 9.9 / sin 35˚ = 17.3 m s−1
+
+13(b)
+               •   Use of uH = u cos θ
+                                                                                         (1)
+               •   Use of t = s/uH                                                       (1)
+                                     1
+               •   Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 with uV = u sin θ and a = − g               (1)
+                                     2
+               •   Height = 3.2 (m)                                                      (1)
+               •   Comparison of result consistent with calculation of height at 22 m.   (1)    5
+
+
+
+
+           Example of calculation
+           Horizontal speed = 17.0 cos 35˚ = 13.9 m s−1
+           Time to travel 22 m = 22 ÷ 13.9 = 1.58 s
+           Initial vertical speed = 17.0 sin 35˚ = 9.8 m s−1
+           Height gained in 1.58 s = 9.8 1.58 – 0.5  9.81 1.582 = 3.16 m
+
+
+
+
+           Total for question 13                                                                8
+Question Answer                                                                                             Mark
+Number
+14(a)(i)                          𝑚𝑚                                                                  (1)
+                •   Use of 𝜌𝜌 =                                                                       (1)
+                                  𝑉𝑉
+                •   Use of 𝐴𝐴 = π𝑟𝑟 2
+                •   Use of volume in 1 second = cross section area × speed                            (1)
+                •   Speed = 37.1 (m s−1)                                                              (1)    4
+
+            Example of calculation
+            𝑉𝑉   300 kg s −1
+               =               = 0.291 m3 s−1
+            𝑡𝑡 1030 kg m−3
+            A = π × 0.052 = 7.85 × 10-3 m2
+            Speed = 0.291 m3 s−1/ 7.85 × 10-3 m2 = 37.1 m s−1
+
+14(a)(ii)       •   Use of p = mv
+                                                                                                      (1)
+                •   Rate of change of momentum = 1.1 × 104 kg m s−2 (ecf from (a)(i))                 (1)    2
+            Example of calculation
+            mass × speed = 300 kg 37.1 m s−1 = 1.11 × 104 kg m s−2
+
+14(b)           •   Pump applies a (forward) force to the water.
+                                                                                                      (1)
+                •   By Newton 3, water applies an (equal and) opposite/backward force to the pump     (1)    2
+                    Or
+                    By Newton 3, water applies a force to the pump in the opposite direction to the
+                    (flow of) water.
+
+14(c)
+                •   Initially (speed is constant because) drag force = forward force                  (1)
+                •   Turning on pump gives resultant force backwards, so boat slows.                   (1)
+                •   Drag force becomes less (as boat slows) until forces balance again.               (1)
+                                                                                                             3
+
+
+            Total for question 14                                                                            11
+Question   Answer                                                                                              Mark
+Number
+
+15         This question assesses a student’s ability to show a coherent and logically structured answer
+           with linkages and fully-sustained reasoning.
+           Marks are awarded for indicative content and for how the answer is structured and shows
+           lines of reasoning.
+           The following table shows how the marks should be awarded for indicative content and
+           lines of reasoning.
+
+             IC points       IC mark      Max linkage         Max final
+                                         mark available        mark
+            6 or more            4              2                 6
+                   5             3              2                 5
+                   4             3              1                 4
+                   3             2              1                 3
+                   2             2              0                 2
+                   1             1              0                 1
+                   0             0              0                 0
+
+
+                                                                                            Marks
+            Answer shows a coherent and logical structure with linkages and                    2
+            fully sustained lines of reasoning demonstrated throughout.
+
+            Answer is partially structured with some linkages and lines of                     1
+            reasoning
+            Answer has no linkages between points and is unstructured                          0
+
+           Indicative content
+
+               •       In stage 1 the kinetic energy of the jumper is increasing
+               •       Because work is done by gravitational force
+               •       In stage 2 the kinetic energy of the jumper is increasing but at a decreasing rate
+               •       Because work is done on the cord (as the cord stretches) (as well as increasing k.e.)
+               •       In stage 3 the kinetic energy of the jumper is decreasing
+               •       Because work is done on the cord at a greater rate than the gravitational force does
+                       work on the jumper
+                       Or
+                       He comes to rest because the total work done by gravitational forces is equal to
+                       work done stretching the bungee
+                                                                                                                6
+           Total for question 15                                                                                6
+Question     Answer                                                                                  Mark
+Number
+
+16(a)            •   Micrometer (screw gauge) Or digital (not Vernier) calliper(s)             (1)    1
+
+16(b)(i)
+                 •   Attempt to calculate gradient
+                                                                                               (1)
+                 •   Use of linear section, or tangent at origin, with use of large triangle   (1)
+                 •   E = 1.2 ± 0.05 × 1011 Pa                                                  (1)    3
+             Example of calculation
+             Extending straight section to 1%
+             120 × 106 Pa ÷ 0.01 = 1.2 × 1011 Pa
+
+16(b)(ii)
+                 •   Breaking stress read from graph
+                                                                                               (1)
+                 •   Use of 𝐴𝐴 = π𝑟𝑟 2                                                         (1)
+                 •   Use of σ = F/A                                                            (1)
+                 •   F = 2.6 × 104 N                                                           (1)    4
+             Example of calculation
+             Area = π × (2.525 × 10−3)2 = 2.00 × 10−5 m2
+             Force = 1 280 × 106 × 2 ×10– 5 = 2.56 × 104 N
+16(b)(iii)                                                                                     (1)
+                 •   Use of area under graph = ½σε
+                 •   Substitution of F = σA and Δx = εx                                        (1)
+                                                                                               (1)    3
+                 •   Substitution of Ax = V and ΔW = ½ FΔx
+
+             Example of calculation
+             Area = ½σε
+             = ½ (F / A)( Δx / x )
+             = ½ F Δx / (A x)
+             = ΔW / V
+
+16(b)(iv)
+                 •   Calculation of area under graph by a valid method.
+                                                                                               (1)
+                 •   Area in range 60 to 64 (MJ m−3)                                           (1)
+                 •   Calculation of volume of sample                                           (1)
+                 •   Energy = 500±20 J                                                         (1)    4
+
+             Example of calculation
+             One large square = 200 × 106 × 0.01 = 2 × 106 J m–3
+             31 large squares
+             Volume of sample = 0.40 m × 2.0 × 10−5 m2 = 8.0 × 10−6 m3
+             Work = 31 × 8 × 10–6 m3× 2 × 106 J m−3= 4.96 × 102 J
+
+             Total for question 16                                                                    15
+Question   Answer                                                                     Mark
+Number
+
+17(a)
+               •   Use of ∆𝐹𝐹 = 𝑘𝑘∆𝑥𝑥
+                                                                                (1)
+               •   k = 1.9 (N cm−1)                                             (1)    2
+           Example of calculation:
+           k = 15 N ÷ 8 cm = 1.875 N cm−1
+
+17(b)
+              •    Use of w = mg
+                                                                                (1)
+              •    Use of force triangle and Pythagoras to find F
+                   Or F resolved into components                                (1)
+              •    Use of trigonometry to find θ.                               (1)
+                                 ∆𝐹𝐹
+              •    Use of ∆𝑥𝑥 =                                                 (1)
+                                𝑘𝑘
+              •    Δx = 5.4 cm (ecf from (a), "show that" value gives 5.0 cm)   (1)
+              •    θ = 32° (ecf from (a))                                       (1)    6
+
+           Example of calculation:
+           θ = tan−1(0.55 kg × 9.81 N kg−1 ÷ 8.5 N) = 32.4°
+           Δx = √((0.55 × 9.81)2 + 8.52) ÷ 1.88 = 5.37 cm
+
+
+
+           Total for question 17                                                       8
+Question Answer                                                                                   Mark
+Number
+18(a)       • Weight Or W, downwards
+                •    Drag Or D, downwards                                                   (1)
+                                                                                            (1)    2
+
+
+
+
+18(b)                           4
+                •   Use of 𝑉𝑉 = π𝑟𝑟 3                                                       (1)
+                                3
+                               𝑚𝑚
+                •   Use of 𝜌𝜌 = and W = mg
+                               𝑉𝑉
+                                                                                            (1)
+                •   Upthrust = 3.06 × 10−4 (N)
+                                                                                            (1)    3
+            Example of calculation
+            Volume of bead = 4/3 × π × (2.00 × 10−3 m)3 = 3.35 × 10−8 m3
+            Weight of displaced fluid = 930 kg m−3 × 3.35 × 10-8 m3 × 9.81 N kg−1
+            = 3.06 × 10−4 N
+
+18(c)(i)
+                •   The flow must be laminar                                                (1)    1
+                    Or There must be no turbulent flow
+
+18(c)(ii)       •   States D = U – W
+                                                                                            (1)
+                •   Use of F = 6πηrv                                                        (1)
+                •   v = 0.16 (m s−1)                                                        (1)
+                •   Calculate vR = 0.13 (m s−1)                                             (1)
+                •   Comparison of v with vR and correct conclusion (ecf from (b))           (1)    5
+
+                    Alternative method of comparison of F(0.13) with D scores full marks.
+
+            Example of calculation
+            U − W =3.06 × 10−4 − 1.05 × 10−5 = 2.96 × 10−4 N
+            v = 2.96 × 10−4 N / (6π × 4.9 × 10−2 Pa s × 2.0 × 10−3 m) = 1.60 × 10-1 m s−1
+            vR = 10 × 4.9 × 10−2 Pa s / (930 kg m−3 × 4.0 × 10−3 m)= 1.32× 10−1 m s−1
+
+            Total for question 18                                                                  11
+

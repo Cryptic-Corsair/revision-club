@@ -1,0 +1,582 @@
+Mark Scheme (Results)
+
+
+
+October 2021
+
+
+Pearson Edexcel International Advanced
+Subsidiary Level in Physics (WPH11)
+Paper 01 Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest awarding
+body. We provide a wide range of qualifications including academic, vocational,
+occupational and specific programmes for employers. For further information visit
+our qualifications websites at www.edexcel.com or www.btec.co.uk. Alternatively, you
+can get in touch with us using the details on our contact us page at
+www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone
+progress in their lives through education. We believe in every kind of learning, for all kinds of
+people, wherever they are in the world. We’ve been involved in education for over 150 years,
+and by working across 70 countries, in 100 languages, we have built an international
+reputation for our commitment to high standards and raising achievement through
+innovation in education. Find out more about how we can help you and your students at:
+www.pearson.com/uk
+
+
+
+
+November 2021
+Question Paper Log Number
+P69323A
+Publications Code
+WPH11_01_2110_MS
+All the material in this publication is copyright
+© Pearson Education Ltd 2021
+General Marking Guidance
+
+
+
+            •   All candidates must receive the same treatment. Examiners must
+                mark the first candidate in exactly the same way as they mark the
+                last.
+            •   Mark schemes should be applied positively. Candidates must be
+                rewarded for what they have shown they can do rather than
+                penalised for omissions.
+            •   Examiners should mark according to the mark scheme not
+                according to their perception of where the grade boundaries may
+                lie.
+            •   There is no ceiling on achievement. All marks on the mark scheme
+                should be used appropriately.
+            •   All the marks on the mark scheme are designed to be awarded.
+                Examiners should always award full marks if deserved, i.e. if the
+                answer matches the mark scheme. Examiners should also be
+                prepared to award zero marks if the candidate’s response is not
+                worthy of credit according to the mark scheme.
+            •   Where some judgement is required, mark schemes will provide
+                the principles by which marks will be awarded and exemplification
+                may be limited.
+            •   When examiners are in doubt regarding the application of the
+                mark scheme to a candidate’s response, the team leader must be
+                consulted.
+            •   Crossed out work should be marked UNLESS the candidate has
+                replaced it with an alternative response.
+1. Mark scheme format
+        1.1 You will not see ‘wtte’ (words to that effect). Alternative correct wording should
+                      be credited in every answer unless the MS has specified specific words
+                      that must be present. Such words will be indicated by underlining e.g.
+                      ‘resonance’
+        1.2 Bold lower case will be used for emphasis e.g. ‘and’ when two pieces of
+                      information are needed for 1 mark.
+         1.3 Round brackets ( ) indicate words that are not essential e.g. “(hence) distance is
+               increased”.
+        1.4 Square brackets [ ] indicate advice to examiners or examples e.g. [Do not accept
+                      gravity] [ecf].
+
+2. Unit error penalties
+         2.1 A separate mark is not usually given for a unit but a missing or incorrect unit will
+                      normally mean that the final calculation mark will not be awarded.
+         2.2 This does not apply in ‘show that’ questions or in any other question where the
+                      units to be used have been given, for example in a spreadsheet.
+         2.3 The mark will not be awarded for the same missing or incorrect unit only once
+                      within one clip in epen.
+         2.4 Occasionally, it may be decided not to insist on a unit e.g the candidate may be
+                      calculating the gradient of a graph, resulting in a unit that is not one
+                      that should be known and is complex.
+    2.5 The mark scheme will indicate if no unit error is to be applied by means of [no ue].
+
+3. Significant figures
+          3.1 Use of too many significant figures in the theory questions will not be prevent a
+                       mark being awarded if the answer given rounds to the answer in the
+                       MS.
+          3.2 Too few significant figures will mean that the final mark cannot be awarded in
+                       ‘show that’ questions where one more significant figure than the value
+                       in the question is needed for the candidate to demonstrate the validity
+                       of the given answer.
+          3.3 The use of one significant figure might be inappropriate in the context of the
+                       question e.g. reading a value off a graph. If this is the case, there will be
+                       a clear indication in the MS.
+          3.4 The use of g = 10 m s-2 or 10 N kg-1 instead of 9.81 m s-2 or 9.81 N kg-1 will mean
+                       that one mark will not be awarded. (but not more than once per clip).
+                       Accept 9.8 m s-2 or 9.8 N kg-1
+         3.5 In questions assessing practical skills, a specific number of significant figures will
+                      be required e.g. determining a constant from the gradient of a graph
+                      or in uncertainty calculations. The MS will clearly identify the number
+                      of significant figures required.
+4. Calculations
+         4.1 Bald (i.e. no working shown) correct answers score full marks unless in a ‘show
+                        that’ question.
+         4.2 If a ‘show that’ question is worth 2 marks. then both marks will be available for a
+                        reverse working; if it is worth 3 marks then only 2 will be available.
+         4.3 use of the formula means that the candidate demonstrates substitution of
+                        physically correct values, although there may be conversion errors e.g.
+                        power of 10 error.
+         4.4 recall of the correct formula will be awarded when the formula is seen or
+                        implied by substitution.
+        4.5 The mark scheme will show a correctly worked answer for illustration only.
+
+ 5. Quality of Written Communication
+     5.1 Indicated by QoWC in mark scheme. QWC – Work must be clear and organised in a
+         logical manner using technical wording where appropriate.
+    5.2 Usually it is part of a max mark, the final mark not being awarded unless the
+         QoWC condition has been satisfied.
+
+ 6. Graphs
+    6.1 A mark given for axes requires both axes to be labelled with quantities and units,
+        and drawn the correct way round.
+    6.2 Sometimes a separate mark will be given for units or for each axis if the units are
+        complex. This will be indicated on the mark scheme.
+    6.3 A mark given for choosing a scale requires that the chosen scale allows all points
+        to be plotted, spreads plotted points over more than half of each axis and is not
+        an awkward scale e.g. multiples of 3, 7 etc.
+    6.4 Points should be plotted to within 1 mm.
+          • Check the two points furthest from the best line. If both OK award mark.
+          • If either is 2 mm out do not award mark.
+          • If both are 1 mm out do not award mark.
+          • If either is 1 mm out then check another two and award mark if both of
+              these OK, otherwise no mark.
+              For a line mark there must be a thin continuous line which is the best-fit line
+              for the candidate’s results.
+Question   Answer                                                                   Mark
+Number
+
+1          B is the correct answer                                                     1
+           A is incorrect because gradient is velocity, not acceleration
+           C is incorrect because gradient is rate of change of
+           acceleration,not velocity
+           D is incorrect because gradient is rate of change of acceleration, not
+           displacement
+2          C is the correct answer                                                     1
+           A is incorrect because magnitudes are equal
+           B is incorrect because magnitudes are equal and directions
+           areopposite
+           D is incorrect because directions are opposite
+3          C is the correct answer                                                     1
+           A is incorrect because reducing the extension reduces the
+           storedenergy
+           B is incorrect because reducing the extension reduces the
+           storedenergy and increasing the force increases the stored
+           energy
+           D isincorrect because increasing the force increases the stored energy
+4          C is the correct answer                                                     1
+           A is incorrect because 13.2/answer = cos 22.6°, not sin 22.6°
+           B is incorrect because 13.2/answer = cos 22.6°, not sin 22.6°,
+           andthe equation has slo been incorrectly transposed.
+           D is incorrect because although 5.5/answer = sin 22.6° the
+           equation has been incorrectly transposed.
+5          B is the correct answer                                                     1
+           A is incorrect because the CW moment of the force could
+           balancethe ACW moment of the weight
+           C is incorrect because the CW moment of the force could balance
+           theACW moment of the weight
+           D is incorrect because the CW moment of the force could balance the
+           ACW moment of the weight
+6    A is the correct answer                                                   1
+     B is incorrect because N is in the wrong direction
+     C is incorrect because the wrong diagonal has been used
+     D is incorrect because the wrong diagonal has been used
+7    A is the correct answer                                                   1
+     B is incorrect because the distance has not been doubled and the
+     time has not been squared
+     C is incorrect because the distance is in the wrong unit
+     D is incorrect because the distance is in the wrong unit, has not been
+     doubled and the time has not been squared
+8    B is the correct answer                                                   1
+     A is incorrect because the factor 9.81 = g / (N kg−1) is not needed
+     since it is already included in the weight, ΔEgrav = mgΔh = WΔh
+     C is incorrect because dividing by 9.81 removes g from the
+     calculation
+     D is incorrect because dividing by 9.81 removes g and the factor 25 =
+     Δh / m is missing from the calculation
+9    A is the correct answer                                                   1
+     B is incorrect because low viscosity is not a condition
+     C is incorrect because cylindrical object is not a condition
+     D is incorrect because neither cylindrical object nor low viscosity are
+     conditions
+10   D is the correct answer                                                   1
+     A is incorrect because mg has the wrong direction
+     B is incorrect because mg and ma have the wrong directions
+     C is incorrect because ma has the wrong direction
+     Total for Section A                                                       10
+Question   Answer                                               Mark
+Number
+
+11(a)      Use of Ek = ½ m v2                             (1)
+           Ek = 0.54 J                                    (1)     2
+
+           Example of calculation
+           Ek = 0.5 × 0.16 kg × (2.6 m s−1)2 = 0.541 J
+11(b)      Use of Egrav = m g Δh                          (1)
+           Δh = 0.51 m                                    (1)     2
+           (allow ecf from (a))
+
+           Example of calculation
+           Decrease in GPE = 0.54 J + 0.26 J = 0.8 J
+           Δh = 0.8 J / (0.16 kg × 9.81 m s−2) = 0.51 m
+
+           Total for question 11                                  4
+Question   Answer                                                                       Mark
+Number
+
+12(a)      the total momentum before (a collision) = the total momentum after
+           (a
+           collision)
+           Or
+           Sum of momentum values before (collision) = sum of momentum
+           values after (collision)
+           Or
+           total momentum remains constant
+           Or                                                                     (1)
+           the momentum of a system remains constant
+
+           Provided no external/unbalanced/resultant force acts (on the system)
+           Or                                                                     (1)     2
+           in a closed/isolated system
+
+12(b)      Use of p = m v                                                         (1)
+           Uses conservation of momentum                                          (1)
+           Velocity = − 4.6 m s−1                                                 (1)     3
+
+           Example of calculation
+           2.7 kg × 10 m s−1 = 2.7 kg × v + 7.9 kg × 5.0 m s−1
+           v = (27.0 − 39.5) kg m s−1 ÷ 2.7 kg = −4.6(3) m s−1
+
+           Total for question 12                                                          5
+Question    Answer                                                                           Mark
+Number
+
+13(a)       Vertical downwards force labelled "weight", or W.                          (1)
+            Force perpendicular to slope labelled "reaction", "(normal) contact", or   (1)     2
+            R or N.
+
+
+
+
+13(b)(i)    Resolves acceleration along slope.                                         (1)
+            Acceleration = 1.2 (m s−2)                                                 (1)     2
+
+
+            Example of calculation
+            a = 9.81 m s−2 × sin 6.9° = 1.18 m s−2
+
+13(b)(ii)   Either
+
+            Use of v2 = u2 + 2 a s                                                     (1)
+            Final speed = 12 m s−1 (ecf from (i))                                      (1)
+
+            Or
+
+            Use of Ek = ½mv2 and ΔEgrav = mgΔh                                         (1)
+                                  −1
+            Final speed = 12 m s (ecf from (i))                                        (1)     2
+
+            Example of calculation
+            v2 = 02 + 2 × 1.18 m s−2 × 60 m
+            v = √(0 + 2 a s ) = √(2 × 1.18 m s−2 × 60 m) = 11.9 m s−1
+
+13(b)(iii   Use of v = u + a t or another valid suvat equation                         (1)
+)           Time = 10 s (ecf from (ii)) (ecf from (i))                                 (1)     2
+
+            Example of calculation
+            v = u + a t, u = 0
+            11.9 = 0 + 1.18 m s−2 × t
+            t = 11.9 m s−1 ÷ 1.18 m s−2 = 10.1 s
+
+            Total for question 13                                                              8
+Questio     Answer                                                                         Mark
+n Number
+
+14(a)       Maximum value of weight/force for which weight/force is proportional
+            to extension
+            Or
+            Point beyond which Hooke's Law no longer applies
+            Or
+            Point beyond which graph line ceases to be straight
+            Or                                                                               1
+            Point beyond which weight/force is no longer proportional to extension   (1)
+
+14(b)(i)    Use of large triangle to determine gradient                              (1)
+            Gradient = 18 500 (N m−1) (sf range 18 - 19, no ue)                      (1)     2
+            Example of calculation
+            gradient = 37 N ÷ (2 × 10−3 m) = 18 500 (N m−1)
+
+                                                                    𝑥𝑥
+14(b)(ii)   Rearranges E = stress / strain to get 𝐸𝐸 = gradient ×
+                                                                    𝐴𝐴
+                                                                  𝐴𝐴
+            Or Rearranges E = stress / strain to get gradient = 𝐸𝐸
+                                                                  𝑥𝑥
+                                                                                     (1)     3
+            Use of A = π r2
+                                                                                     (1)
+            Young modulus = 2 × 1011 Pa
+                                                                                     (1)
+            (allow ecf from (b)(i))
+
+
+            Example of calculation
+            A = π × (2.8× 10−4)2 = 2.46 × 10−7 m2
+            E = 1.85 × 104 N m−1 × 2.6 m ÷ 2.46 × 10−7 m2 = 1.95 × 1011 Pa
+
+                          𝐹𝐹
+14(c)       Use of 𝜎𝜎 =
+                          𝐴𝐴
+                                                                                     (1)
+            Determines maximum safe load
+            Or
+            Determines maximum stress
+            Or
+            Determines minimum cross section                                         (1)
+
+
+            Valid conclusion by comparison with student's calculation                (1)     3
+
+
+            Example of calculation
+            σmax = 𝑊𝑊max
+                     𝐴𝐴
+            4.80×108 Pa =          𝑊𝑊max
+                               2.46 × 10−7m2
+            Wmax = 480 × 106 Pa × 2.46 × 10−7 m2 = 118 N > 100 N so yes
+
+            Total for question 14                                                            9
+Question    Answer                                                                    Mark
+Number
+
+15(a)*     This question assesses a student’s ability to show a coherent and
+           logically structured answer with linkages and fully-sustained reasoning.
+           Marks are awarded for indicative content and for how the answer is
+           structured and shows lines of reasoning.
+            The following table shows how the marks should be awarded for
+            indicative content and lines of reasoning.
+
+
+
+
+             IC points     IC       Max linkage      Max final
+                          mark         mark           mark
+                                     available
+                 6          4            2               6
+                 5          3            2               5
+                 4          3            1               4
+                 3          2            1               3
+                 2          2            0               2
+                 1          1            0               1
+                 0          0            0               0
+
+                                                                       Mark
+                                                                        s
+             Answer shows a coherent and logical structure              2
+             withlinkages and fully sustained lines of
+             reasoning
+             demonstrated throughout.
+             Answer is partially structured with some linkages and         1
+             lines of reasoning
+            Indicativeh content:
+                             l k       b                 d
+                1. There is a (backward) force/friction on floor from wheels/car
+                2. Newton's Third Law implies forward/opposite force from floor
+                3. Compression/deformation of spring reduces (as car moves
+                    forward)
+                4. (Resultant) force is proportional to compression/deformation of
+                    spring
+                    Or
+                    Reference to Hooke's law.
+                5. Acceleration is proportional to resultant force
+                    Or
+                    Reference to F = ma                                                 6
+                6. Acceleration reduces (as distance travelled increases)
+                    Or
+                    Acceleration is zero once spring has returned to original state
+
+            Accept "resultant force" for "acceleration" in IC6
+
+           Total for question 15                                                        6
+Questio   Answer                                                                            Mark
+n
+Number
+16(a)     Resolves velocity to find vertical component                                (1)
+          Use of v = u + a t                                                          (1)
+          Time to max height = 3.3 (s)                                                (1)     3
+
+
+          Example of calculation
+          uv = 50 m s−1 sin (40°) = 32.1 m s−1
+          v = u + a t with v = 0
+          t = 32.1 m s−1 ÷ 9.81 m s−2 = 3.28 s
+16(b)     Use of vH = v cos θ                                                         (1)
+          Use of s = u t to calculate horizontal distance                             (1)
+          Use of s = u t + ½ a t2 to calculate maximum height or other suvat          (1)
+          equation                                                                    (1)
+          Maximum height = 53 m (allow ecf from (a))                                  (1)
+          Use of tan θ to calculate vertical height of hill                           (1)
+          Compares height of hill with maximum height (accept conclusion
+          based on candidate’s values).
+
+          Or
+
+          Use of vH = v cos θ                                                         (1)
+          Use of s = u t to calculate horizontal distance                             (1)
+          Use of s = u t + ½ a t2 to calculate maximum height or other suvat          (1)
+          equation                                                                    (1)
+          Maximum height = 53 m (allow ecf from (a))                                  (1)
+          Use of tan θ to calculate minimum angle of hill for a hit                   (1)
+          Compares angle of hill with minimum angle (accept conclusion based
+          on candidate’s values).
+
+          Or
+                                                                                      (1)
+                                                                                      (1)
+          Use of vH = v cos θ
+                                                                                      (1)
+          Use of s = u t to calculate horizontal distance                             (1)
+          Use of s = u t + ½ a t2 to calculate maximum height or other suvat          (1)
+          equation                                                                    (1)     6
+          Maximum height = 53 m (allow ecf from (a))
+          Use of tan θ to calculate horizontal distance to 52.6 m height along hill
+          Compares horizontal distances (accept conclusion based on
+          candidate’s values).
+
+
+          Example of calculation
+          vH = 50 m s−1 × cos (40°) = 38.3 m s−1
+          sH = vH × t
+          sH = 38.3 m s−1 × 3.28 s =125 m
+          maximum height of rock = sV = uV t + ½ a t2 with a = − g
+sV = 32.1 m s−1× 3.28 s − ½ × 9.81 m s−2 × (3.28 s)2 = 52.6 m
+vertical height of hill at horizontal distance of 125 m = 125 m × tan (20°)
+= 45.7 m
+45.7 m < 52.6 m, so no
+
+Total for question 16                                                         9
+Questio     Answer                                                                         Mark
+n
+Number
+17(a)(i)    The layers of fluid flow past each other without mixing
+            Or
+            Velocity at a fixed point (relative to the drop) remains constant        (1)     1
+
+
+17(a)(ii)   Resultant force is zero
+            Or
+            Sum of the vertical forces is zero                                       (1)     1
+            (Accept W − U = D or W = U + D with terms defined)
+                        𝑚𝑚
+17(b)(i)    Use of 𝜌𝜌 =                                                              (1)
+                        𝑉𝑉
+            Use of 𝑊𝑊 = 𝑚𝑚𝑚𝑚                                                         (1)
+            Weight = 3.3 × 10−4 N                                                    (1)     3
+
+
+            Example of calculation
+            1.00 × 103 kg m−3 = m ÷ 3.35 × 10−8 m3
+            m = 1.00 × 103 kg m−3 × 3.35 × 10−8 m3 = 3.35 × 10−5 kg
+            W = m g = 3.35 × 10−5 m3 × 9.81 N kg−1 = 3.29 × 10−4 N
+
+17(b)(ii)   Use of upthrust = weight of fluid displaced                              (1)
+            Upthrust = 3.1 × 10−4 (N)                                                (1)     2
+
+            Example of calculation
+            0.94 × 103 kg m−3 = m ÷ 3.35 × 10−8 m3
+            m = 0.94 × 103 kg m−3 × 3.35 × 10−8 m3 = 3.15 × 10−5 kg
+            U = m g = 3.15 × 10−5 m3 × 9.81 N kg−1 = 3.09 × 10−4 N
+
+17(b)(iii   Uses upthrust and weight to determine the viscous force F                (1)
+)                              3
+            Use of V = 4/3 π r to determine r                                        (1)
+            Use of F = 6πηrv                                                         (1)
+            v = 4.8 × 10−3 m s−1 (ecf from (b)(i) and (b)(ii))                       (1)
+                                                                                             4
+            Example of calculation
+            W = U + 6πηrv → W − U = 6πηrv
+            W − U = (3.29 − 3.09) × 10−4 N = 2.0 × 10−5 N
+            r = 3√(¾ × 3.35 × 10−8 m3 ÷ π) = 2.0 × 10−3 m
+            2.0 × 10−5 N = 6π × 0.11 Pa s × 2.0 × 10−3 m × v
+            v = 2.0 × 10−5 N ÷ (6π × 0.11 Pa s × 2.0 × 10−3 m) = 4.82 × 10−3 m s−1
+
+            Total for question 17                                                            11
+Questio   Answer                                                          Mark
+n
+Number
+18(a)     Use of P = W / t and ΔW = F Δs                            (1)
+          Force = 13.9 (kN)                                         (1)     2
+
+          Example of calculation
+          In 1 second W = 6250 J and distance travelled = 0.450 m
+          F = 6 250 W ÷ 0.450 m s−1 = 13.9 kN
+
+18(b)     Use of ΔW = F Δs                                          (1)
+          Use of Δs = 4.35 / sin 6.0°                               (1)
+          Total work = 5.8 × 105 J (allow ecf from (a))             (1)     3
+
+
+          Example of calculation
+          ΔW = 13.9 × 103 N × 4.35 m ÷ sin 6.0° = 578 kJ
+
+18(c)     Use of ΔEgrav = m g Δh                                    (1)
+          Useful work done = 89.6 (kJ)                              (1)     2
+
+
+          Example of calculation
+          ΔEgrav = 2.10 × 103 kg × 9.81 N kg−1 × 4.35 m = 89.6 kJ
+
+18(d)     Use of ε = useful energy output / total energy unput      (1)
+          Efficiency = 0.16 (allow ecf from (b) and (c))            (1)     2
+
+
+          Example of calculation
+          ε = 89.6 kJ ÷ 578 kJ = 0.155
+
+          Total for question 18                                             9
+      Questio        Answer                                                                     Mark
+      n
+      Number
+      19(a)
+                     Use of moment = F x                                                  (1)
+                     Anticlockwise moment = 25.2 (Nm)
+                     and (maximum) clockwise moment = 24.2 (Nm)                           (1)
+                     As angle to the ground increases, clockwise moment from the weight
+                     decreases
+                     Or                                                                   (1)
+                     If line of action of weight moves outside base cannot regain         (1)     4
+                     equilibrium.
+                     25.2 > 24.2 ⸫ blows over
+
+                     Example of calculation
+                     moment from wind = 14 N × 1.8 m = 25.2 N m
+                     moment from weight = 110 N × 0.22 m = 24.2 N m
+                     25.2 > 24.2 ⸫ blows over
+      19(b)
+                     Horizontal component = T × sin 44°
+                     Or
+                     Distance to line of action of T = 1.5 × sin 44°                      (1)
+                     Equates clockwise to anticlockwise moments about centre of base to   (1)
+                     determine T
+                     Use of trigonometry to calculate vertical component of tension       (1)     5
+                     Adds weight to vertical component
+                     Force exerted on the ground = 141 N                                  (1)
+                                                                                          (1)
+                     Example of calculation
+                     Horizontal component of tension = T × sin 44°
+                     CWM = 1.5 m × T × sin 44° = 1.04 m × T
+                     ACWM = 25 N × 1.8 m = 45.0 N m
+                     1.04 m × T = 45.0 N m
+                     T = 45.0 N m ÷ 1.04 m = 43.2 N
+                     Vertical component of T = 43.2 N × cos 44° = 31.1 N
+                     Total downward force = 110 N + 31.1 N = 141.1 N
+                     Total for question 19                                                        9
+
+
+
+
+Pearson Education Limited. Registered company number 872828
+with its registered office at 80 Strand, London, WC2R 0RL, United Kingdom
+

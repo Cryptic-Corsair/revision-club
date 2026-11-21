@@ -1,0 +1,514 @@
+Mark Scheme (Results)
+
+
+January 2022
+
+
+Pearson Edexcel International Advanced
+Subsidiary Level In Physics (WPH11) Paper 01
+Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest awarding body. We
+provide a wide range of qualifications including academic, vocational, occupational and specific
+programmes for employers. For further information visit our qualifications websites at
+www.edexcel.com or www.btec.co.uk. Alternatively, you can get in touch with us using the details
+on our contact us page at www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone
+progress in their lives through education. We believe in every kind of learning, for all kinds of
+people, wherever they are in the world. We’ve been involved in education for over 150 years, and
+by working across 70 countries, in 100 languages, we have built an international reputation for
+our commitment to high standards and raising achievement through innovation in education.
+Find out more about how we can help you and your students at: www.pearson.com/uk
+
+
+
+
+January 2022
+Question Paper Log Number P67154A
+Publications Code WPH11_01_MS_2201
+All the material in this publication is copyright
+© Pearson Education Ltd 2022
+General Marking Guidance
+
+
+
+          All candidates must receive the same treatment. Examiners must
+           mark the first candidate in exactly the same way as they mark the
+           last.
+          Mark schemes should be applied positively. Candidates must be
+           rewarded for what they have shown they can do rather than
+           penalised for omissions.
+          Examiners should mark according to the mark scheme not
+           according to their perception of where the grade boundaries may
+           lie.
+          There is no ceiling on achievement. All marks on the mark scheme
+           should be used appropriately.
+          All the marks on the mark scheme are designed to be awarded.
+           Examiners should always award full marks if deserved, i.e. if the
+           answer matches the mark scheme. Examiners should also be
+           prepared to award zero marks if the candidate’s response is not
+           worthy of credit according to the mark scheme.
+          Where some judgement is required, mark schemes will provide
+           the principles by which marks will be awarded and exemplification
+           may be limited.
+          When examiners are in doubt regarding the application of the
+           mark scheme to a candidate’s response, the team leader must be
+           consulted.
+          Crossed out work should be marked UNLESS the candidate has
+           replaced it with an alternative response.
+                                            SECTION A
+
+
+Question   Answer                                                                                 Mark
+Number
+1          A is the only correct answer                                                             1
+           B is incorrect because final displacement is measured from 0, not −1
+           C is incorrect because displacement is not the area between the line and the t axis,
+           and velocity is 3 m ÷ 6 s, not 6 m ÷ 3 s
+           D in incorrect because velocity is 3 m ÷ 6 s, not 6 m ÷ 3 s
+2          D is the only correct answer                                                             1
+           A is not the correct answer because mass is a scalar and force and acceleration are
+           vectors
+           B is not the correct answer because force is a vector
+           C is not the correct answer because mass is a scalar and acceleration is a vector
+3          A is the only correct answer                                                             1
+           B is incorrect because the velocity is always zero
+           C is incorrect because the velocity is always positive
+           D in incorrect because velocity is zero except for a very short time.
+4          C is the only correct answer                                                             1
+           A is incorrect because the magnitude is the sum of the squares not the difference
+           B is incorrect because the magnitude is the sum of the squares not the difference
+           and a tangent is required for the angle, not a sine.
+           D is incorrect because a tangent is required for the angle, not a sine.
+5          C is the only correct answer                                                             1
+           A is incorrect because the 2 should be above the line, and the 0.63 should be
+           squared
+           B is incorrect because the 2 should be above the line
+           D is incorrect because he 0.63 should be squared
+6          B is the only correct answer                                                             1
+           A is incorrect because a greater viscosity would reduce terminal velocity giving a
+           lower gradient
+           C is incorrect because because a greater viscosity would reduce terminal velocity
+           giving a lower gradient
+           D is incorrect because because a greater viscosity would reduce terminal velocity
+           giving a lower gradient
+7          B is the only correct answer                                                             1
+           A is incorrect because force P and R act on the same object
+           C is incorrect because force Q and S act on the same object
+           D is incorrect because forces P and S are not the same type of force.
+8          A is the only correct answer                                                             1
+           B is incorrect because doubling the diameter gives four times the cross section,
+           requiring four times the tension for the same stress.
+           C is incorrect because increasing the diameter increases the cross section,
+           requiring a greater tension for the same stress, not less
+           D is incorrect because increasing the diameter increases the cross section,
+           requiring a greater tension for the same stress, not less
+9          C is the only correct answer                                                             1
+           A is incorrect because moments must balance about the centre of mass.
+           B is incorrect because moments must balance about the left support.
+           D is incorrect because the total reaction must be equal to the weight.
+10         B is the only correct answer                                                             1
+           A is incorrect because one watt is defined as one joule per second
+           C is incorrect because a 1 N = 1 kg m s−2
+           D is incorrect because a joule is the unit for work, and work = force × distance
+           Total for Section A                                                                      10
+                                            SECTION B
+
+Question    Answer                                                                                    Mark
+Number
+11(a)                                                                                                   2
+            Sum of momenta before (collision) = sum of momenta after (collision)
+            Or
+            Total momentum before (a collision) = total momentum after (a collision)
+            Or
+            Total momentum remains constant
+            Or
+            The momentum of a system remains constant                                           (1)
+
+            Provided no external/unbalanced/resultant force acts
+            Or
+            in a closed/isolated system
+                                                                                                (1)
+11(b)(i)
+            Use of p = m v                                                                      (1)     2
+
+            m = 8.22 × 1013 (kg)                                                                (1)
+
+            Example of calculation
+            1.80 × 1017 N s = m × 2.19 × 103 m s−1
+            m = 1.80 × 1017 N s ÷ 2.19 × 103 m s−1 = 8.219 × 1013 kg
+11(b)(ii)                                                                                               3
+            Use of p = m v with combined final mass                                             (1)
+
+            Use of momentum conservation                                                        (1)
+
+            v = 3.05 × 103 m s−1 (ecf from (i))                                                 (1)
+
+            Example of calculation
+            1.80 × 1017 N s + (5.90 × 1012 kg × 15.0 × 103 m s−1)
+                                                     = (8.219 × 1013 kg + 5.90 × 1012 kg) × v
+            v = 2.685 × 10 N s ÷ 8.81 × 10 kg = 3.048 × 103 m s−1
+                          17                 13
+
+
+
+            Total for question 11                                                                       7
+Question   Answer                                                                          Mark
+Number
+12(a)                                                                                        2
+           Amount of work from the electric motor is reduced                         (1)
+
+           Because there is energy transfer between the counterweight and the lift
+           Or
+           Because counterweight contributes to total work done (on lift cage)
+           Or
+           Because the counterweight reduces the force required from the motor
+           Or
+           Because total work done (on lift cage) is sum of work done by
+           counterweight/gravity and by the motor.                                   (1)
+
+12(b)                                                                                        4
+           Use of ΔW = FΔx or ΔEgrav = mgΔh                                          (1)
+
+           Use of conservation of energy                                             (1)
+
+           Use of P = W / t                                                          (1)
+
+           P = 12.4 (kW)                                                             (1)
+
+           Or
+
+           Calculates resultant force                                                (1)
+
+           Use of ΔW = FΔx                                                           (1)
+
+           Use of P = W / t                                                          (1)
+
+           P = 12.4 (kW)                                                             (1)
+
+           Example of calculation
+           For counterweight ΔEgrav = mgΔh
+                    = 1300 kg × 9.81 ms−2 ×40.0 m = 5.101 × 105 J
+           For lift ΔEgrav = mgΔh
+                    = 2250 kg × 9.81 ms−2 ×40.0 m = 8.829 × 105 J
+           Energy required = 8.829 × 105 J − 5.101 × 105 J = 3.728 × 105 J
+                    P = 3.728 × 105 J ÷ 30 s = 1.243 × 104 W
+
+12(c)                                                                                        2
+           Use of efficiency = useful power output ÷ total power input               (1)
+
+           Efficiency = 0.78 (ecf from (b)                                           (1)
+
+           Example of calculation
+           Efficiency = 12.4 kW÷ (12.4 + 3.6) kW = 0.775
+           Total for question 12                                                             8
+Question    Answer                                                      Mark
+Number
+13(a)                                                                     3
+            Vertical component of tension = T cos 76°             (1)
+
+            Use of 650 N = 2 × vertical component of tension      (1)
+
+            T = 1.34 × 103 (N)                                    (1)
+
+            Example of calculation
+            650 N = 2 T cos 76°
+            T = ½ × 650 N ÷ cos 76° = 1 343 N
+13(b)(i)                                                                  3
+            Use of sin76° or cos 14° to find new length of cord   (1)
+
+            Use of ε = Δx ÷ x                                     (1)
+
+            ε = 0.03 or 3%                                        (1)
+
+            Example of calculation
+            (x + Δx) ÷ 2 = 60 m ÷ sin 76° = 61.8 m
+            Δx = (61.8 × 2) m − 120.0 m = 3.7 m
+            ε = 3.7 m ÷ 120 m = 0.031
+
+13(b)(ii)                                                                 3
+            Use of σ = F ÷ A with F = tension from (a)            (1)
+
+            Use of E = σ ÷ ε                                      (1)
+
+            E = 1.4 × 108 Pa (ecf from (a) and (b)(i))            (1)
+
+            Example of calculation
+            σ = 1.34 × 103 N ÷ 3.14 × 10−4 m2 = 4.28 MPa
+            E = 4.28× 106 Pa ÷ 0.031 = 1.38 × 108 Pa
+            Total for question 13                                         9
+Question   Answer                                                                                   Mark
+Number
+14*                                                                                                 6
+           This question assesses a student’s ability to show a coherent and logically
+           structured answer with linkages and fully-sustained reasoning.
+           Marks are awarded for indicative content and for how the answer is structured and
+           shows lines of reasoning.
+           The following table shows how the marks should be awarded for indicative
+           content and lines of reasoning.
+
+             IC points    IC mark      Max linkage          Max final
+                                      mark available         mark
+            6 or more         4             2                  6
+                5             3             2                  5
+                4             3             1                  4
+                3             2             1                  3
+                2             2             0                  2
+                1             1             0                  1
+                0             0             0                  0
+
+                                                                                       Marks
+            Answer shows a coherent and logical structure with linkages and             2
+            fully sustained lines of reasoning demonstrated throughout.
+            Answer is partially structured with some linkages and lines of               1
+            reasoning
+            Answer has no linkages between points and is unstructured                    0
+
+
+           Indicative content:
+
+           IC1      The force of the lift/scales on the student is the reading on the scales
+                    Or
+                    The reaction/contact force is the reading on the scales
+
+           IC2      At constant speed, the resultant force on the student is zero
+                    Or
+                    Weight/W = Reaction/R
+
+           IC3      At constant speed the reading on the scales would be 600 N.
+                    Or
+                    At rest the reading on the scales would be 600 N
+
+           IC4      As lift decelerates reaction is less than weight
+
+           IC5      As the lift decelerates there is a resultant downward force (on the student).
+
+           IC6      As the lift decelerates the reading on the scales will be less than 600 N
+                    (because the upward force on the student is less than his weight)
+
+
+           Total for question 14                                                                        6
+Question    Answer                                                                                      Mark
+Number
+15(a)
+            There is an upthrust which is equal to the weight of water displaced                  (1)
+
+            The upthrust is equal to the weight of the cylinder (when it’s partially submerged)   (1)
+
+            OR                                                                                            2
+
+            The (overall) density (of the cylinder) is less than the density of the water.        (1)
+
+            The weight of water displaced is equal to the weight of the cylinder                  (1)
+
+15(b)(i)
+            Use of Volume = πr2l                                                                  (1)
+
+            Use of 63% with their volume                                                          (1)
+
+            Use of ρ = m / V                                                                      (1)
+
+            m = 8.8 × 10−3 (kg)                                                                   (1)     4
+
+            Example of calculation
+            volume of cylinder= π × (1.05 cm)2 × 4 cm = 1.39 × 10−5 m3
+            volume submerged = 0.63 × volume of cylinder
+                    = 0.63 × 1.39 × 10−5 m3 = 8.76 × 10−6 m3
+            mass of cylinder = mass of water displaced
+                    = 1 000 kg m−3 × 8.76 × 10−6 m3 = 8.76 × 10−3 kg
+15(b)(ii)
+            Use of ρ = m / V to calculate the volume of brass                                     (1)
+
+            Use of ρ = m / V to calculate the mass of the same volume of gold (not volume of      (1)
+            whole cylinder)
+
+            Use of ρ = m / V to calculate the volume of water needed to float the cylinder
+            Or
+            Use of ρ = m / V to calculate the maximum mass/weight of water that could be
+            displaced                                                                             (1)
+
+            Correct conclusion from comparison of displaced volume of water required to
+            float gold (1.9 × 10−5 m3) with volume of cylinder (1.4 × 10−5 m3)
+            Or
+            Correct conclusion from comparison of weight of gold cylinder
+            (0.19 N) with max weight of water that could be
+            displaced (0.14 N) (ecf from (b)(i))
+            Or
+            Correct conclusion from comparison of mass of gold cylinder
+            (0.019 kg) with max mass/weight of water that could be
+            displaced (0.014 kg) (ecf from (b)(i))                                                (1)
+
+            Example of calculation
+            volume of gold = volume of brass
+                    = 8.73 × 10−3 kg ÷ 8.7 × 103 kg m−3 = 1.00 × 10−6 m3                                  4
+            mass of gold = 1.00 × 10−6 m3 × 19.3 × 103 kg m−3 = 0.019 3 kg
+            volume of water required = 0.019 3 kg ÷ (1.00 × 103 kg m−3) = 1.93 × 10−5 m3
+            1.93 × 10−5 m3 > 1.39 × 10−5 m3 ⸫ sinks
+            Total for question 15                                                                         10
+Question   Answer                                                                Mark
+Number
+16(a)
+           Use of Ek = ½ m v2                                              (1)
+
+           Ek = 3.8 × 10−5 (J)                                             (1)     2
+
+           Example of calculation
+           Ek = 0.5 × 12 × 10−3 kg × (8.0 × 10−2 m s−1)2 = 3.84 × 10−5 J
+
+16(b)
+           Use of ΔEel = ½ F Δx                                            (1)
+
+           F = 1.5 × 10−3 N (allow ecf from (a))                           (1)
+
+           Example of calculation                                                  2
+           ΔEel = Ek = 3.84 × 10−5 J = 0.5 × F × 0.05 m
+           F = 3.84 × 10−5 J ÷ 0.025 m = 1.54 × 10−3 N
+
+16(c)
+           Use of F = k Δx                                                 (1)
+
+           k = 0.03 N m−1 (allow ecf from (b))                             (1)     2
+
+           Example of calculation
+           1.54 × 10−3 N = k × 0.05 m
+           k = 1.54 × 10−3 N ÷ 0.05 m = 0.031 N m−1
+
+16(d)
+           Line has initially decreasing positive gradient
+                                                                           (1)
+           Line starts at v = 0 and a non-zero value of length
+                                                                           (1)
+           Line levels off to horizontal at length = L
+                                                                           (1)
+           Final velocity marked as 8.0 cm s−1
+           Or                                                              (1)     4
+           Original compressed length marked as "L − 5" in cm
+
+
+
+
+           Total for question 16                                                   10
+Question    Answer                                                                                  Mark
+Number
+17(a)       Max 2
+
+            Object must be a sphere                                                           (1)
+
+            Low speed/velocity                                                                (1)
+
+            Laminar flow                                                                      (1)     2
+
+17(b)(i)
+            Use of F = 6π η r v                                                               (1)
+
+            Subtraction of two forces                                                         (1)
+
+            Resultant force = 7 × 10−6 N                                                      (1)     3
+
+            Example of calculation
+            drag force = 6π × 7.1 × 10−2 Pa s × 2.25 × 10−3 m × 5.2 × 10−3 m s−1
+                       = 1.6 × 10−5 N
+            Resultant force = 2.3 × 10−5 N − 1.6 × 10−5 N = 0.7 × 10−5 N
+
+17(b)(ii)
+            Use of F = 6π η r v with F = 2.3 × 10−5 N                                         (1)
+
+            v = 7.6 × 10−3 m s−1                                                              (1)     2
+
+            Example of calculation
+            2.30 × 10−5 N = 6π × 7.10 × 10−2 Pa s × 2.25 × 10−3 m × v
+            v = 2.30 × 10−5 N ÷ (6π × 7.10 × 10−2 Pa s × 2.25 × 10−3 m) = 7.64 × 10−3 m s−1
+17(c)
+            Larger diameter gives larger drag force (at given speed)                          (1)
+            Or
+            Larger diameter gives a lower speed (for the same constant force)
+                                                                                              (1)
+            Lower temperature so viscosity is greater
+
+            Greater viscosity gives larger drag force (at given speed)
+            Or
+            Greater viscosity gives lower speed (for the same constant force)                 (1)
+
+            Maximum speed will decrease (dependent on MP1 and MP3)                            (1)     4
+
+
+            Total for question 17                                                                     11
+Question   Answer                                                                           Mark
+Number
+18(a)
+           Use of appropriate trigonometry                                            (1)
+
+           vx =32 m s−1 and vy =15 m s−1                                              (1)     2
+
+           Example of calculation
+           vx =35 m s−1 × cos 25° = 31.7 m s−1
+           vy =35 m s−1 × sin 25° = 14.8 m s−1
+
+
+
+
+18(b)
+           Use of s = ux t to find time taken to travel 100 m horizontally            (1)
+
+           Use of s = uy t + ½ a t2 with a = − g to find distance fallen in time t
+           Accept other correct SUVAT methods                                         (1)
+
+           Distance fallen = 2.1 m                                                    (1)
+
+           Conclusion consistent with comparison of student's values,
+           e.g. 2.1 m < 3.0 m so rider lands on other side of river                   (1)
+
+           Or
+
+           Use of correct SUVAT method with a = − g to find time to descend by 3 m.   (1)
+
+           Use of s = ux t to find horizontal distance travelled in time t.           (1)
+
+           Distance travelled = 102 m                                                 (1)
+
+           Conclusion consistent with comparison of student's values                  (1)
+
+           Or
+
+           Use of s = ux t to find time taken to travel 100 m horizontally            (1)
+
+           Use of correct SUVAT method with a = − g to find time to descend by 3 m.   (1)
+
+           Time = 3.21 s                                                              (1)
+
+           Conclusion consistent with comparison of student's values,
+           e.g. 3.15 s < 3.21 s so rider lands on other side of river
+                                                                                      (1)     4
+           Example of calculation
+           time taken to travel 100 m = 100 m ÷ 31.7 m s−1 = 3.15 s
+           vertical displacent = 14.8 × 3.15 − 0.5 × 9.81 × 3.152 = − 2.12 m
+           2.1 m < 3.0 m, so rider lands on other side of river
+18(c)
+        Air resistance act to oppose the motion of the motorcyclist          (1)
+
+
+        So it decreases the time for which the motorcyclist is in the air
+        Or
+        There is deceleration in the horizontal direction
+        Or
+        Speed in horizontal direction is reduced
+        Or
+        The (maximum) height reached by the motorcyclist is reduced          (1)
+
+
+
+        Horizontal distance travelled is reduced (dependent on MP1 or MP2)   (1)   3
+
+
+
+        Total for question 18                                                      9
+Pearson Education Limited. Registered company number 872828
+with its registered office at 80 Strand, London, WC2R 0RL, United Kingdom
+

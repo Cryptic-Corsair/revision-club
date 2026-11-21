@@ -1,0 +1,536 @@
+Mark Scheme (Results)
+
+October 2025
+
+Pearson Edexcel International Advanced
+Subsidiary level In Physics
+WPH11/01A
+Edexcel and BTEC Qualifications
+
+
+      Edexcel and BTEC qualifications are awarded by Pearson, the UK’s
+      largest awarding body. We provide a wide range of qualifications
+      including academic, vocational, occupational and specific
+      programmes for employers. For further information visit our
+      qualifications websites at www.edexcel.com or www.btec.co.uk.
+      Alternatively, you can get in touch with us using the details on our
+      contact us page at www.edexcel.com/contactus
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone
+progress in their lives through education. We believe in every kind of learning, for all
+kinds of people, wherever they are in the world. We’ve been involved in education for
+over 150 years, and by working across 70 countries, in 100 languages, we have built an
+international reputation for our commitment to high standards and raising achievement
+through innovation in education. Find out more about how we can help you and your
+students at: www.pearson.com/uk
+
+
+
+
+October 2025
+Question Paper Log Number P87440A
+Publication Code WPH11_01A_2510_MS
+All the material in this publication is copyright
+© Pearson Education Ltd
+General Marking Guidance
+
+•   All candidates must receive the same treatment. Examiners must mark the
+    first candidate in exactly the same way as they mark the last.
+•   Mark schemes should be applied positively. Candidates must be rewarded
+    for what they have shown they can do rather than penalised for omissions.
+•   Examiners should mark according to the mark scheme not according to their
+    perception of where the grade boundaries may lie.
+•   There is no ceiling on achievement. All marks on the mark scheme should be
+    used appropriately.
+•   All the marks on the mark scheme are designed to be awarded. Examiners
+    should always award full marks if deserved, i.e. if the answer matches the
+    mark scheme. Examiners should also be prepared to award zero marks if the
+    candidate’s response is not worthy of credit according to the mark scheme.
+•   Where some judgement is required, mark schemes will provide the principles
+    by which marks will be awarded and exemplification may be limited.
+•   When examiners are in doubt regarding the application of the mark scheme
+    to a candidate’s response, the team leader must be consulted.
+•   Crossed out work should be marked UNLESS the candidate has replaced it
+    with an alternative response.
+ Question
+                                                 Answer                                          Mark
+  Number
+1           The only correct answer is C (velocity)                                               1
+
+            A is not correct because distance is a scalar quantity
+            B is not correct because speed is a scalar quantity
+            D is not correct because work done is a scalar quantity
+
+2           The only correct answer is D (50 N m-1)                                               1
+
+                                         ∆𝐹𝐹    1.5 N
+            A is not correct because 𝑘𝑘 =    =         = 50 N m−1
+                                         ∆𝑥𝑥   0.030 m
+                                         ∆𝐹𝐹     1.5 N
+            B is not correct because 𝑘𝑘 = =            = 50 N m−1
+                                         ∆𝑥𝑥   0.030 m
+                                         ∆𝐹𝐹     1.5 N
+            C is not correct because 𝑘𝑘 = =            = 50 N m−1
+                                         ∆𝑥𝑥   0.030 m
+
+3           The only correct answer is B (s)                                                      1
+
+            A is not correct because displacement is measured in metres
+            C is not correct because velocity is measured in metres per second
+            D is not correct because acceleration is a vector
+
+4           The only correct answer is B (y-axis 2s; x-axis t2)                                   1
+
+            A is not correct because this would give a gradient of g/2
+            C is not correct because this would give a gradient of 2/g
+            D is not correct because this would give a gradient of 1/g
+
+5           The only correct answer is D                                                          1
+
+            A is not correct because vector arrows should be added tip-to-tail and R is in the
+            wrong direction
+            B is not correct because R is in the wrong direction
+            C is not correct because vector arrows should be added tip-to-tail and R goes
+            between the wrong two points
+
+6           The only correct answer is C (The initial horizontal velocity is equal to the         1
+            final horizontal velocity)
+
+            A is not correct because the horizontal component of velocity remains constant
+            throughout the motion. A constant value does not have a minimum or
+            maximum, so it is not appropriate to describe the horizontal velocity as
+            minimum
+            B is not correct because at maximum height the vertical velocity is 0
+            D is not correct because the final position is below the initial position
+7    The only correct answer is B (𝑊𝑊 > 0.5𝐹𝐹1 𝑒𝑒1 )                                       1
+
+     A is not correct because the area under the graph is greater than the area of a
+     triangle drawn from the origin to the end of the line
+     C is not correct because work done is a force multiplied by a distance, not
+     divided by a distance
+     D is not correct because work done is a force multiplied by a distance, not
+     divided by a distance
+
+8    The only correct answer is D (-9.8 m s-1)                                             1
+
+     A is not correct because the ball is in freefall so has acceleration due to gravity
+     B is not correct because the ball is in freefall so has acceleration due to gravity
+     C is not correct because the ball is in freefall so has acceleration due to gravity
+
+9    The only correct answer is B (the forces act on the same body)                        1
+
+     A is not correct because in a Newton’s third law pair the forces act in opposite
+     directions
+     C is not correct because in a Newton’s third law pair the forces are of the same
+     type
+     D is not correct because the forces have the same magnitude
+
+10   The only correct answer is D (90g)                                                    1
+
+     A is not correct because by conserving energy, the expression for speed in
+     metres per second should be �2 × 𝑔𝑔 × (75 − 30)
+     B is not correct because by conserving energy, the expression for speed in metres
+     per second should be �2 × 𝑔𝑔 × (75 − 30)
+     C is not correct because by conserving energy, the expression for speed in metres
+     per second should be �2 × 𝑔𝑔 × (75 − 30)
+Question
+                                   Acceptable Answer                                                 Additional Guidance                      Mark
+Number
+11(a)                                                                         Example diagram
+           Three downward arrows to show the forces of the people and
+           the weight of the plank                                      (1)
+
+                                                                        (1)                                                                     2
+           Upward arrow to show reaction force at the pivot
+
+
+
+
+11(b)                                                                         Example calculation
+           Use of moment = F x                                          (1)
+                                                                                                      4.0 m
+                                                                        (1)   950 N × 0.90 m = � 2 − 0.90 m� × 250 + x × 650 N
+           Application of principle of moments
+                                                                                                                                                3
+                                                                        (1)        (950 N × 0.90 m) − (1.10 m × 250 N)
+           x = 0.89 m                                                         𝑥𝑥 =
+                                                                                                  650 N
+                                                                                     855 Nm−275 Nm
+                                                                              𝑥𝑥 =       650 N
+                                                                                                     = 0.89 m
+
+
+                                                                                                                 (Total for Question 11 = 5 marks)
+Question
+                           Acceptable Answer                                                  Additional Guidance                             Mark
+Number
+12(a)                                                                    ∆ℎ
+                                                                  See 𝑡𝑡 × sin(30°) (= 0.255 m s−1 )
+           Use of appropriate trigonometry                 (1)
+                                                                  Or see 𝑚𝑚𝑚𝑚 × sin(30°) (= 353 N)
+           Use of ∆𝐸𝐸grav = 𝑚𝑚𝑚𝑚∆ℎ
+           Or                                              (1)
+           Use of 𝑊𝑊 = 𝐹𝐹𝐹𝐹
+                                                                                                                                                3
+           P = 180 (W)                                     (1)
+                                                                  Example calculation
+
+                                                                         ∆ℎ
+                                                                  𝑚𝑚𝑚𝑚       = 72kg × 9.81 N kg −1 × sin(30°) × 0.51 m s−1
+                                                                          𝑡𝑡
+
+                                                                  𝑃𝑃 = 180 W
+
+12(b)
+           Calculates useful power output                  (1)
+
+                                 useful power output
+           Use of efficiency =                             (1)
+                                  total power input
+
+
+           Power input = 3500 W (= 3800 W if ‘show that’          ecf from 12(a)                                                                3
+                                                            (1)
+           value used)
+                                                                  Example calculation
+                                                                  𝑃𝑃useful = 15 × 180 W = 2700 W
+                                                                                          2700 W
+                                                                  efficiency = 0.78 = 𝑃𝑃
+                                                                                            input
+
+
+                                                                              2700 W
+                                                                  𝑃𝑃input =    0.78
+                                                                                       = 3460 W
+
+
+                                                                                                                 (Total for Question 12 = 6 marks)
+Question
+                                   Acceptable Answer                                                  Additional Guidance                     Mark
+Number
+13(a)
+           Low speed                                                            Ignore small sphere
+           Or laminar flow
+           Or an absence of turbulent flow                                (1)                                                                   1
+
+13(b)                                                                           Example calculation
+           Use of W = mg                                                  (1)   𝑊𝑊 = 9.1 × 10−4 kg × 9.81 N kg −1 = 8.93 × 10−3 N
+
+           Use of 𝑈𝑈 + 𝐷𝐷 = 𝑊𝑊                                            (1)   Drag = 8.93 × 10−3 N − 1.1 × 10−3 N = 7.83 × 10−3 N
+                                                                          (1)
+           Use of F = 6πηrv                                                                                     6.0 × 10−3 m
+                                                                                𝐹𝐹 = 6𝜋𝜋 × 8.9 × 10−4 Pa s ×                 × 0.50 m s −1
+                                                                          (1)                                         2
+           F = (−) 2.5 × 10−5 N
+                                                                                𝐹𝐹 = 2.52 × 10−5 N
+           Comparison of calculated value of drag with calculated value
+           for F and corresponding conclusion                             (1)   7.83 × 10−3 N ≠ 2.52 × 10−5 N, so no.                           5
+
+
+                                                                                                                     (Total for Question 13 = 6 marks)
+Question
+                                      Acceptable Answer                                                     Additional Guidance                        Mark
+Number
+*14      This question assesses a student’s ability to show a coherent and logically   Indicative content:
+         structured answer with linkages and fully-sustained reasoning. Marks are
+         awarded for indicative content and for how the answer is structured and shows IC1 Gradient of graph is equal to acceleration
+         lines of reasoning. The following table shows how the marks should be
+         awarded for indicative content.                                                IC2 In vacuum, drag = 0 (and upthrust = 0)
+                                                                                             Or In vacuum, resultant force = weight
+            IC points      IC mark        Max linkage mark           Max final mark          Or In vacuum, resultant force is constant
+                6              4                    2                       6                Or In vacuum the only force acting is weight
+                5              3                    2                       5
+                4              3                    1                       4           IC3 so in vacuum acceleration/gradient is constant
+                3              2                    1                       3
+                2              2                    0                       2           IC4 In oil, as speed increases, drag force increases
+                1              1                    0                       1
+                                                                                        IC5 Until in oil resultant force becomes zero
+                0              0                    0                       0
+                                                                                             Or until weight = drag (+ upthrust)
+                                                                                             Or until weight – drag (– upthrust) = 0
+           The following table shows how the marks should be awarded for structure and
+           lines of reasoning.                                                           IC6 so in oil acceleration/gradient decreases to zero
+                                                                                             Or so in oil acceleration/gradient decreases until
+                                                                                             terminal/constant velocity is reached
+                                                           Number of marks awarded
+                                                           for structure of answer and
+                                                           sustained line of reasoning
+             Answer shows a coherent and logical
+                                                                        2
+             structure with linkages and fully sustained
+             lines of reasoning demonstrated throughout
+             Answer is partially structured with some                   1
+             linkages and lines of reasoning
+             Answer has no linkages between points and                  0
+             is unstructured
+                                                                                                                                                         6
+
+
+
+                                                                                                                          (Total for Question 14 = 6 marks)
+Question
+                                     Acceptable Answer                                                 Additional Guidance                         Mark
+Number
+15(a)
+             the stiffness of the material / metal / copper
+                                      Stress
+             Or (Young modulus =) Strain in the linear region
+                                      𝐹𝐹𝐹𝐹
+             Or (Young modulus =) 𝐴𝐴∆𝑥𝑥 in the linear region with all terms   (1)
+             defined                                                                                                                                1
+
+15(b)(i)                                                                            Example calculation
+             Calculates mean diameter                                         (1)
+                                                                                    Mean diameter
+             Calculates cross sectional area                                  (1)     0.230 mm + 0.235 mm + 0.230 mm + 0.240 mm
+                                                                                    =
+                                                                              (1)                         4                                         3
+             A = 4.3 × 10−8 m2 ( = 4.3 × 10−2 mm2)
+                                                                                    Mean diameter = 0.234 × 10−3 m
+
+                                                                                              (0.234 × 10−3 𝑚𝑚)2
+                                                                                    𝐴𝐴 = 𝜋𝜋                      = 4.30 × 10−8 m2
+                                                                                                      4
+15(b)(ii)                                                                           Example calculation
+             Use of W = mg                                                    (1)
+                                                                                    𝐹𝐹
+                         𝐹𝐹                  ∆𝑥𝑥                𝜎𝜎                      = 195 kg m−1 × 9.81 N kg −1 = 1913 N m−1
+             Use of 𝜎𝜎 = 𝐴𝐴 and Use of 𝜀𝜀 = 𝑥𝑥 and use of 𝐸𝐸 = 𝜀𝜀                   ∆𝑥𝑥
+             Or                                                                                               3.50 m
+                                   length
+             Calculates gradient × area                                       (1)   𝐸𝐸 = 1913 N m−1 ×
+                                                                                                          4.30 × 10−8 m2
+                                                                                                     = 1.557 × 1011 Pa
+             Young modulus = 1.6 × 1011 Pa (ecf from (b)(i))                                                                                        3
+                                                                              (1)
+
+15(b)(iii)   The gradient will be greater (for the shorter wire)
+                                                                              (1)
+             The Young modulus is the same
+                                                                              (1)                                                                   2
+
+
+                                                                                                               (Total for Question 15 = 9 marks)
+Question                                                                                              Additional Guidance
+                                  Acceptable Answer                                                                                                 Mark
+Number
+16(a)                                                                            Example calculation
+                       𝑚𝑚
+           Use of 𝜌𝜌 =                                                     (1)
+                       𝑉𝑉
+                                                                                          300 kg
+                                                                           (1)   𝑉𝑉 =               = 0.291 m3
+           Calculates cross sectional area of pipe                                      1030 kg m−3
+
+           Use of volume in 1 second = cross section area × speed          (1)   𝐴𝐴 = 𝜋𝜋 × (0.050 m)2 = 7.85 × 10−3 m2
+
+           Speed = 37.1 (m s−1) (to at least 3 significant figures)        (1)                        0.291 m3 s−1                                   4
+                                                                                              𝑣𝑣 =                  = 37.10 m s −1
+                                                                                                     7.85 × 10−3 m2
+16(b)      Pump applies a (forward/upward/rightwards) force to the water
+                                                                           (1)
+           By Newton’s third law, water applies an (equal and)
+           opposite/backward/downward/leftward force to the pump                 MP2 dependent on MP1
+                                                                           (1)
+           OR
+
+           Pump applies a (forward/upward/rightwards) force to the pipe
+                                                                           (1)
+           By Newton’s third law, pipe applies an (equal and)
+           opposite/backward/downward/leftward force to the pump           (1)   MP2 dependent on MP1                                                2
+
+                                                                                 If no other marks scored, allow 1 mark for the direction of the
+                                                                                 water is to the right, so by Newton's third law the force of the
+                                                                                 water on the pump is to the left
+16(c)   When pump is turned on there is a resultant force
+        backwards/leftwards on the boat, (so the speed decreases)        (1)
+
+        As speed decreases, drag force decreases                         (1)
+
+        Until resultant force = zero (when speed becomes constant)
+        Or
+        Until drag force + force from pump = forward force from engine
+        (when speed becomes constant)
+        Or
+        Resultant force = zero when speed is constant                    (1)                                  3
+
+
+                                                                               (Total for Question 16 = 9 marks)
+Question
+                                          Acceptable Answer                                                   Additional Guidance                 Mark
+Number
+17(a)(i)                                                                                Example diagram
+             Initial angle at 30o (with a parabolic shape) (judge by eye)         (1)                                                              1
+
+
+
+
+17(a)(ii)    Use of v2 = u2 + 2as (with v = 0)                                    (1)   Allow use of appropriate suvat equations to determine u
+
+             Use of appropriate trigonometry to determine initial velocity        (1)
+
+             u = 57 (m s-1) (to at least 2 significant figures)                   (1)                                                              3
+
+
+                                                                                        Example calculation
+
+                                                                                        02 = (𝑢𝑢vertical )2 + 2 × (−9.81 m s −2 ) × 42 m
+
+                                                                                        𝑢𝑢vertical = √824 = 28.7 m s−1
+
+                                                                                               28.7 m s−1
+                                                                                        𝑢𝑢 =              = 57.4 m s −1
+                                                                                                sin(30°)
+
+17(a)(iii)   Use of suitable equation(s) of motion for vertical motion to         (1)   Example calculation
+             determine the time of flight (with a—9.81)
+                                                                                               2 × 57.4 m s −1 × sin(30°) 57.4 m s−1
+             Use of appropriate trigonometry to determine horizontal component          𝑡𝑡 =                             =            = 5.85 𝑠𝑠
+                                                                                                      9.81 m s−2           9.81 m s−2
+             of velocity                                                          (1)
+                               1
+             Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 for horizontal motion (with a = 0)         (1)   𝑢𝑢horizontal = 57.4 m s−1 × cos(30°) = 49.7 m s−1
+                               2
+
+             Total horizontal distance travelled = 290 m, which is greater than         𝑠𝑠 = 49.7 m s −1 × 5.85 s = 291 m
+             200 m so flare can be seen (show that value gives 320 m)
+             (ecf from (a)(ii))                                                         291 m < 200 m so yes
+Or                                                                        OR
+Horizontal distance to maximum height = 150 m, which is less than
+200 m so flare cannot be seen (show that value gives 160 m)                      57.4 m s −1 × sin(30°) 28.7 m s−1                         4
+(ecf from (a)(ii))                                                  (1)   𝑡𝑡 =                         =            = 2.93 𝑠𝑠
+                                                                                      9.81 m s −2        9.81 m s−2
+
+
+                                                                          𝑢𝑢horizontal = 57.4 m s−1 × cos(30°) = 49.7 m s−1
+
+                                                                          𝑠𝑠 = 49.7 m s −1 × 2.93 s = 146 m
+
+                                                                          146 m < 200 m so no
+
+
+                                                                                                            (Total for Question 17 = 8 marks)
+Question
+                                       Acceptable Answer                                                    Additional Guidance                    Mark
+Number
+18(a)
+           Use of p = mv                                                        (1)
+
+           Use of principle of conservation of momentum                         (1)
+                                                                                                                                                    3
+           v = 6.3 m s-1                                                        (1)
+                                                                                      Example calculation
+
+                                                                                      0.17 kg × 1.6 m s−1 = 0.17 kg × 0.30 m s−1 + 0.035 kg × 𝑣𝑣
+
+                                                                                             0.272 kg m s−1 − 0.051 kg m s −1
+                                                                                      𝑣𝑣 =                                    = 6.31 m s−1
+                                                                                                        0.035 kg
+
+18(b)                      1
+           Use of 𝐸𝐸k = 2 𝑚𝑚𝑣𝑣 2                                                (1)
+
+           Use of appropriate trigonometry to determine vertical height moved         See 0.035 kg × 9.81 N kg −1 × sin(30°)
+           by disc                                                                    Or see sin(30°) × 0.065 m
+           Or use of appropriate trigonometry to determine component of
+                                                                                (1)
+           weight acting along slope
+
+           Use of ∆𝐸𝐸grav = 𝑚𝑚𝑚𝑚∆ℎ
+           Or use of 𝑊𝑊 = 𝐹𝐹𝐹𝐹 to determine work done against gravity           (1)
+           Use of principle of conservation of energy                           (1)
+           Use of W = Fs                                                        (1)
+           F = 6.6 N                                                            (1)
+           OR
+
+           Use of 𝑊𝑊 = 𝑚𝑚𝑚𝑚                                                     (1)
+           Use of appropriate trigonometry to determine component of weight           See 0.035 kg × 9.81 N kg −1 × sin(30°)
+           acting along slope                                                   (1)   Or see 0.34 × sin(30°)
+
+           Use of 𝑣𝑣 2 = 𝑢𝑢2 + 2𝑎𝑎𝑎𝑎 to determine acceleration of disc          (1)
+                                                                         Allow use of any appropriate suvat method to determine
+Use of Σ𝐹𝐹 = 𝑚𝑚𝑚𝑚                                                  (1)   acceleration of disc
+
+Use of friction = Σ𝐹𝐹 − (component of weight acting along slope)   (1)
+
+F = 6.6 N                                                          (1)                                                                      6
+
+
+
+
+                                                                         Example calculation
+
+                                                                                 1
+                                                                         𝐸𝐸k =     × 0.035 kg × (5.0 m s −1 )2 = 0.438 J
+                                                                                 2
+
+                                                                         ∆𝐸𝐸grav = 0.035 kg × 9.81 N kg −1 × sin(30°) × 0.065 m
+                                                                                        = 0.0112 J
+
+                                                                         𝑊𝑊 = 0.438 J − 0.0112 J = 0.427 J
+
+                                                                                                     0.427 J
+                                                                                              𝐹𝐹 =           = 6.57 N
+                                                                                                     0.065 m
+
+
+                                                                                                             (Total for Question 18 = 9 marks)
+Question
+                                         Acceptable Answer                                                    Additional Guidance                       Mark
+Number
+19(a)
+            Upwards arrow labelled upthrust / U and Upwards arrow labelled         (1)   Arrows must start from dot
+            tension / T / F / 𝐹𝐹thread
+                                                                                         Example diagrams
+            Downwards arrow labelled Weight / W / mg                               (1)
+
+            Length of downwards arrow ≈ total length of upwards arrows
+            (dependent on MP1 or MP2)                                              (1)                                                                      3
+
+
+
+
+19(b)(i)
+            The water exerts an upwards force on the sphere                        (1)
+            Or the water exerts an upthrust on the sphere
+
+            by Newton’s third law the sphere exerts a downward/opposite force      (1)
+            on water (dependent on MP1)
+
+            (so) the force on the balance increases (and the reading increases)    (1)                                                                      3
+
+19(b)(ii)                                                                                (credit correct equivalent physics due to the density of the
+            mass of displaced water = 0.150 kg                                     (1)   sphere being double the density of the water leading to the
+                                                                                         answer of 0.30 kg if correct reasoning shown)
+                          𝑚𝑚
+            Use of 𝜌𝜌 =      with 𝜌𝜌 = 1000 kg m-3 to determine volume of sphere   (1)
+                          𝑉𝑉
+
+                          𝑚𝑚
+            Use of 𝜌𝜌 =      with 𝜌𝜌 = 2000 kg m-3 to determine mass of sphere     (1)
+                          𝑉𝑉
+
+                                                                                   (1)                                                                  4
+            Mass of sphere = 0.30 kg                                                     Example calculation
+                                                                                         Mass of displaced water = 0.465 kg − 0.315 kg = 0.150 kg
+                                                                                                           0.150 kg
+                                                                                      Volume of sphere = 1000 kg m−3 = 1.50 × 10−4 m3
+
+                                                                                      Mass of sphere 2000 kg m−3 × 1.5 × 10−4 m3 = 0.300 kg
+
+19(b)(iii)   Upthrust will be less
+             Or weight of displaced oil will be less
+             Or downwards force of sphere on liquid will be less                (1)
+
+             (So) final reading will be less (than 465 g)
+             Or (So) the increase/change in reading will be less (than 150 g)   (1)   MP2 dependent on MP1                                       2
+
+
+                                                                                                                       (Total for Question 19 = 12 marks)
+                                                                                                                       TOTAL FOR PAPER = 120 MARKS
+

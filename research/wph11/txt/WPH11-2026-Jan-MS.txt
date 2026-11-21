@@ -1,0 +1,505 @@
+Mark Scheme (Results)
+
+January 2026
+
+Pearson Edexcel International Advanced
+Subsidiary level In Physics
+WPH11/01
+Edexcel and BTEC Qualifications
+
+
+      Edexcel and BTEC qualifications are awarded by Pearson, the UK’s
+      largest awarding body. We provide a wide range of qualifications
+      including academic, vocational, occupational and specific
+      programmes for employers. For further information visit our
+      qualifications websites at www.edexcel.com or www.btec.co.uk.
+      Alternatively, you can get in touch with us using the details on our
+      contact us page at www.edexcel.com/contactus
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help
+everyone progress in their lives through education. We believe in every kind of
+learning, for all kinds of people, wherever they are in the world. We’ve been involved
+in education for over 150 years, and by working across 70 countries, in 100
+languages, we have built an international reputation for our commitment to high
+standards and raising achievement through innovation in education. Find out more
+about how we can help you and your students at: www.pearson.com/uk
+
+
+
+
+January 2026
+Question Paper Log Number P79143A
+Publication Code WPH11_01_2601_MS
+All the material in this publication is copyright
+© Pearson Education Ltd
+General Marking Guidance
+
+• All candidates must receive the same treatment. Examiners must mark the
+  first candidate in exactly the same way as they mark the last.
+• Mark schemes should be applied positively. Candidates must be rewarded
+  for what they have shown they can do rather than penalised for omissions.
+• Examiners should mark according to the mark scheme not according to
+  their perception of where the grade boundaries may lie.
+• There is no ceiling on achievement. All marks on the mark scheme should be
+  used appropriately.
+• All the marks on the mark scheme are designed to be awarded. Examiners
+  should always award full marks if deserved, i.e. if the answer matches the
+  mark scheme. Examiners should also be prepared to award zero marks if
+  the candidate’s response is not worthy of credit according to the mark
+  scheme.
+• Where some judgement is required, mark schemes will provide the
+  principles by which marks will be awarded and exemplification may be
+  limited.
+• When examiners are in doubt regarding the application of the mark scheme
+  to a candidate’s response, the team leader must be consulted.
+• Crossed out work should be marked UNLESS the candidate has replaced it
+  with an alternative response.
+ Question
+                                                Answer                                     Mark
+  Number
+1           The only correct answer is C (N)                                                1
+
+            A is not correct because energy is a scalar
+            B is not correct because mass is a scalar
+            D is not correct because power is a scalar
+
+2           The only correct answer is D (𝑠𝑠 ∝ 𝑡𝑡 2 )                                       1
+
+                                                1
+            A is not correct because 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 and u = 0
+                                                2
+                                                1
+            B is not correct because 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 and u = 0
+                                                2
+                                                1
+            C is not correct because 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 and u = 0
+                                                2
+
+3           The only correct answer is D (total kinetic energy stays the same and total     1
+            momentum stays the same)
+
+            A is not correct because total kinetic energy and total momentum stays the
+            same
+            B is not correct because total kinetic energy stays the same
+            C is not correct because total momentum stays the same
+
+4           The only correct answer is B �
+                                                𝐹𝐹𝐹𝐹
+                                                      �                                     1
+                                               cos 𝜃𝜃
+
+            A is not correct because x is not the distance moved in the direction of the
+            force
+            C is not correct because y is not the distance moved in the direction of the
+            force
+                                                                              𝑦𝑦
+            D is not correct because the distance moved along the slope is
+                                                                            sin 𝜃𝜃
+
+5           The only correct answer is D ��(202 + 352 )�                                    1
+
+            A is not correct because the forces are not in the same direction
+            B is not correct because the forces should each be squared before square
+            rooting the sum of the squares
+            C is not correct because the sum has not been square rooted
+
+6           The only correct answer is B                                                    1
+
+
+
+
+            A is not correct because this shows constant velocity not constant
+            deceleration
+            C is not correct because this shows varying deceleration
+            D is not correct because this shows varying deceleration
+7    The only correct answer is C (The force of the parachute on the cords)                1
+
+     A is not correct because the Newton’s third law pair must be between the cords
+     and the parachute
+     B is not correct because the Newton’s third law pair must be between the cords
+     and the parachute
+     D is not correct because the Newton’s third law pair must be between the cords
+     and the parachute
+
+8    The only correct answer is B (Length = x; Cross-sectional area = 2A)                  1
+
+     A is not correct because this would give an extension of 2∆𝑥𝑥
+     B is not correct because this would give an extension of 4∆𝑥𝑥
+     D is not correct because this would give an extension of ∆𝑥𝑥
+
+9    The only correct answer is C �
+                                       (300 + 50 + 50) × 6 × 10−3
+                                                                    �                      1
+                                                   2
+
+     A is not correct because this would be the change in elastic energy if the initial
+     force applied was 0 N
+     B is not correct because the final force on the spring is (300 + 50) N so this does
+     not take account that the initial force on the spring was 50 N
+     D is not correct because this would be the total elastic energy of the spring
+
+10   The only correct answer is A � 3 �
+                                       2𝑔𝑔                                                 1
+
+     B is not correct because the resultant force is not 5g as this does not take the
+     weight of the 3 kg mass into account
+     C is not correct because this gives the resultant force on the 3 kg mass in N
+     D is not correct because this gives the upwards force from the spring in N
+ Question                              Answer                                                     Additional Guidance   Mark
+ Number
+11          Straight arrows representing forward force (F),               Do not allow more than three arrows for MP1
+            weight (W or mg) and normal contact force (N), in
+            correct directions with labels, all starting from dot   (1)
+
+            Length of weight arrow and length of normal contact           Allow a tolerance of one small square.
+            force arrows equal, and twice length of forward force
+            arrow                                                   (1)                                                  2
+                                                                          Example of diagram
+
+
+
+
+            Total for question 11                                                                                        2
+ Question                             Answer                                            Additional Guidance   Mark
+ Number
+12          Use of ∆𝑊𝑊 = 𝐹𝐹∆𝑠𝑠                           (1)   Example of calculation
+
+                                  useful energy output         ∆𝑊𝑊 = 3400 N × 26 m = 88 400 J
+            Use of efficiency =
+                                   total energy input
+            Or                                                                        88 400 J
+            Use of efficiency =
+                                useful power output            total energy input =            = 233 000 J
+                                   total power input     (1)                           0.38
+
+                          𝑊𝑊                                                  233 000 J
+            Use of 𝑃𝑃 =                                  (1)
+                                                               time taken =             = 40.9 s
+                           𝑡𝑡                                                  5700 W
+            𝑡𝑡 = 41 s                                    (1)                                                   4
+
+            Total for question 12                                                                              4
+Question                              Answer                                                        Additional Guidance                               Mark
+ Number
+13(a)      (By Newton’s second law), Stone A and stone B             (1)   Allow the velocity of stone A decreases and the velocity of stone B
+           accelerate in opposite directions (for the same time)           increases
+                                                                           Allow change in momentum = force × time (and force and time are the
+                                                                           same for both stones)
+
+           So the momentum of A decreases and the momentum
+           of B increases by the same amount
+           Or So change of momentum for each stone is the same
+           size but in the opposite direction                        (1)                                                                               2
+
+13(b)                    1
+           Use of 𝐸𝐸k = 2 𝑚𝑚𝑣𝑣 2                                     (1)   Example of calculation
+
+           Use of 𝑝𝑝 = 𝑚𝑚𝑚𝑚                                          (1)          2 × 3.8 J
+                                                                           𝑢𝑢A = �          = 0.650 m s−1
+                                                                                   18 kg
+           Use of conservation of momentum                           (1)
+
+           Final momentum of A = 4.1 kg m s−1                        (1)   𝑝𝑝A(before) = 18 kg × 0.650 m s−1 = 11.7 kg m s −1
+
+           4.1 (kg m s −1 ) < 5.5 (kg m s −1 ) so stone A will not         𝑝𝑝B(after) = 17 kg × 0.45 m s−1 = 7.65 kg m s−1
+           slide past the target
+           Or Comparison of calculated value of final momentum             11.7 kg m s −1 − 7.65 kg m s−1 = 4.05 kg m s−1
+           of A with 5.5 (kg m s−1) and consistent conclusion        (1)                                                                               5
+                                                                           4.05 kg m s −1 < 5.5 kg m s −1 so stone A will not slide past the target
+
+           Total for question 13                                                                                                                       7
+Question                             Answer                                                        Additional Guidance                      Mark
+ Number
+14(a)      Because there is no (resultant) moment.                  (1)                                                                      1
+
+14(b)      Use of moment of force = 𝐹𝐹𝐹𝐹 to determine clockwise           Example of calculation
+           moment                                                   (1)
+                                                                          Moment of weight about bottom of supporting bar = 34 N × 0.28 m
+           Use of appropriate trigonometry to determine vertical                                                          = 9.52 N m
+           distance on wall between horizontal bar and supporting
+           bar                                                      (1)                                       0.16 m
+                                                                          Vertical distance from P to 𝐹𝐹 =            = 0.112 m
+                                                                                                             tan(55°)
+           Use of principle of moments                              (1)
+                                                                          F × 0.112 m = 9.52 N m
+           F = 85 N                                                 (1)                                                                      4
+                                                                               9.52 N m
+                                                                          𝐹𝐹 =          = 85 N
+                                                                               0.112 m
+
+           Total for question 14                                                                                                             5
+Question                               Answer                                                     Additional Guidance                   Mark
+ Number
+15(a)      Small, spherical object
+           Or Spherical object with low speed                      (1)
+
+           Laminar flow                                            (1)   Allow an absence of turbulent flow                              2
+
+15(b)      Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 1/2𝑎𝑎𝑡𝑡 2 with a = 0                 (1)   Example of calculation
+
+           Use of 𝐹𝐹 = 6π𝜂𝜂𝜂𝜂𝜂𝜂                                    (1)          0.056 m
+                                                                         𝑢𝑢 =           = 0.043 m s −1
+                                                                                  1.3 s
+           F = 1.1 × 10−4 N                                        (1)                                                                   3
+                                                                         𝐹𝐹 = 6 × π × 0.15 Pa s × 0.90 × 10−3 m × 0.043 m s−1
+
+                                                                         𝐹𝐹 = 1.09 × 10−4 N
+
+15(c)      Calculates volume of ball bearing                       (1)   Example of calculation
+                         𝑚𝑚                                                     4
+           Use of 𝜌𝜌 =      to determine mass of displaced paint   (1)
+                         𝑉𝑉                                              𝑉𝑉 =     × π × (0.90 × 10−3 m)3 = 3.05 × 10−9 m3
+                                                                                3
+           Use of 𝑊𝑊 = 𝑚𝑚𝑚𝑚                                        (1)
+                                                                         𝑚𝑚 = 1.5 × 103 kg m−3 × 3.05 × 10−9 m3 = 4.58 × 10−6 kg
+                                                                   (1)
+           Use of ΣF = 0 (so viscous drag = weight – upthrust)
+                                                                         Upthrust = weight of displaced paint
+                                                                   (1)            = 4.58 × 10−6 kg × 9.81 N kg −1 = 4.49 × 10−5 N        5
+           Viscous drag = 1.9 ×10−4 N
+
+                                                                         Weight of ball bearing = 2.4 × 10−5 N × 9.81 N kg −1
+                                                                                                = 2.35 × 10−4 N
+
+                                                                         Viscous drag = 2.35 × 10−4 N − 4.49 × 10−5 N = 1.91 × 10−4 N
+
+           Total for question 15                                                                                                         10
+Question                              Answer                                                        Additional Guidance                             Mark
+ Number
+16(a)      Adding the mass causes the string to be straight / taut   (1)   Allow so the string is under tension                                      1
+
+16(b)      Increase x                                                      Allow use a longer length of string (between the clamp and the marker)
+           Or Position the marker further from the clamp             (1)
+
+           (absolute) uncertainty will remain the same               (1)
+
+           (and) percentage uncertainty is calculated by dividing
+           uncertainty by x / length                                 (1)
+
+           OR
+
+           Position metre rule adjacent to string
+           Or Use a set square between metre rule and string         (1)
+           Or View perpendicular to the string / ruler
+                                                                     (1)
+           To reduce parallax error (dependent on MP1)
+                                                                     (1)   Ignore decreases percentage uncertainty
+           Which decreases (absolute) uncertainty (dependent on                                                                                      3
+           MP1)
+16(c)                  𝐹𝐹
+           Use of 𝜎𝜎 = 𝐴𝐴                                            (1)   Example of calculation
+
+                         ∆𝑥𝑥                                         (1)               15 N
+           Use of 𝜀𝜀 =                                                     𝜎𝜎 =                 = 12.5 × 106 Pa
+                          𝑥𝑥                                                      1.2 × 10−6 m2
+                         𝜎𝜎
+           Use of 𝐸𝐸 =                                               (1)          4.2 × 10−3
+                         𝜀𝜀                                                𝜀𝜀 =              = 2.63 × 10−3
+                                                                                      1.6
+           E = 4.8 (GPa) ≈ 5.0 (GPa) so the string is nylon          (1)                                                                             4
+                                                                                           6
+           Or E = 4.8 (GPa) which is closest to the value for                     12.5 × 10 Pa
+                                                                           𝐸𝐸 =                = 4.75 × 109 Pa
+           nylon                                                                   2.63 × 10−3
+
+                                                                           4.75 × 109 Pa ≈ 5.0 GPa so the string is nylon
+           Total for question 16                                                                                                                     8
+Question                             Answer                                                    Additional Guidance             Mark
+ Number
+17(a)      Use of appropriate trigonometry to calculate vertical         See 2.5 m × sin(22°) (= 0.937 m)
+           displacement of block                                         Or see 5.0 kg × 9.81 N kg −1 × sin(22°) (= 18.37 N)
+           Or Use of appropriate trigonometry to determine               Or see 5.0 kg × 𝑔𝑔 × sin(22°) (= 18.37 N)
+           component of weight acting along slope                  (1)
+
+           Use of ∆𝐸𝐸grav = 𝑚𝑚𝑚𝑚∆ℎ
+           Or Use of Weight = 𝑚𝑚𝑚𝑚 and Use of work done = 𝐹𝐹𝐹𝐹     (1)
+
+                        1
+           Use of 𝐸𝐸k = 𝑚𝑚𝑣𝑣 2                                     (1)
+                        2
+
+           𝑣𝑣 = 4.3 m s−1                                          (1)
+
+           OR
+
+           Use of appropriate trigonometry to calculate
+                                                                   (1)   see 9.81N kg −1 × sin(22°)
+           acceleration of box
+                                                                         Or see 𝑔𝑔 × sin(22°)
+           𝑎𝑎 = 3.67 (m s −2 )
+                                                                   (1)
+           Use of appropriate equation(s) of motion to
+           determine v                                             (1)
+
+           𝑣𝑣 = 4.3 m s−1                                                                                                       4
+                                                                   (1)
+Example of calculation
+
+𝑠𝑠 = 2.5 m × sin(22°) = 0.937 m
+
+5.0 kg × 9.81 N kg −1 × 0.937 m = 45.9 J
+
+         1
+45.9 =     × 5.0 kg × 𝑣𝑣 2
+         2
+
+      2×45.9 J
+𝑣𝑣 = �         = 4.29 m s−1
+       5.0 kg
+
+
+
+Example of calculation
+
+𝑎𝑎 = 9.81 × sin(22°) = 3.67 m s−2
+
+𝑣𝑣 2 = (0 m s −1 )2 + 2 × 3.67 m s−2 × 2.5 m = 18.4 m2 s −2
+
+𝑣𝑣 = �18.4 m2 s −2 = 4.29 m s −1
+*17(b)   This question assesses a student’s ability to show a coherent and logically   Indicative content
+         structured answer with linkages and fully-sustained reasoning. Marks are
+         awarded for indicative content and for how the answer is structured and shows IC1 Gradient of the graph represents velocity
+         lines of reasoning. The following table shows how the marks should be
+                                                                                             Or Initial gradient (up to 10 s) is constant
+         awarded for indicative content.
+                                                                                        IC2   Initial velocity (up to 10 s) is constant
+           IC points      IC mark        Max linkage mark         Max final mark              Or Initial acceleration (up to 10s) is zero
+               6             4                   2                      6
+               5             3                   2                      5               IC3   From 10 s to 20 s the gradient decreases so velocity
+               4             3                   1                      4                     decreases
+               3             2                   1                      3
+               2             2                   0                      2               IC4   From 10 s to 20 s the box decelerates
+               1             1                   0                      1                     Or From 10 to 20 s the acceleration is negative
+               0             0                   0                      0
+                                                                                        IC5   At 20 s velocity = 0
+
+         The following table shows how the marks should be awarded for structure and    IC6   After 20 s the velocity / motion of the box is in the
+         lines of reasoning.                                                                  opposite / backwards direction because gradient is
+                                                                                              negative
+                                                        Number of marks awarded
+                                                        for structure of answer and
+                                                        sustained line of reasoning
+          Answer shows a coherent and logical
+                                                                     2
+          structure with linkages and fully sustained
+          lines of reasoning demonstrated throughout
+          Answer is partially structured with some                   1
+          linkages and lines of reasoning
+          Answer has no linkages between points and                  0
+          is unstructured
+                                                                                                                                                      6
+         Total for question 17                                                                                                                        10
+Question                                  Answer                                              Additional Guidance   Mark
+ Number
+18(a)(i)                      1
+           Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 2 𝑎𝑎𝑡𝑡 2 with a = 0                    Example of calculation
+                                                               (1)
+                                                                                      2930 m
+           Use of appropriate trigonometry to determine 𝜃𝜃           𝑢𝑢horizontal =           = 391 m s −1
+           Or Use of appropriate trigonometry to determine                             7.50 s
+           horizontal component of initial velocity            (1)                391 m s−1
+                                                                     𝜃𝜃 = cos−1 �2460 m s−1 � = 80.9°
+           𝜃𝜃 = 80.9 (°) (to at least 3 significant figures)   (1)                                                   3
+18(a)(ii)   Use of appropriate trigonometry to determine vertical                Example of calculation
+            component of velocity                                          (1)
+                                                                                 𝑢𝑢vertical = 2460 m s−1 × sin(80.9°) = 2429 m s −1
+            Use of 𝑣𝑣 = 𝑢𝑢 + 𝑎𝑎𝑎𝑎 with 𝑎𝑎 = 1.63 m s   −2
+                                                            with u and a   (1)
+            having the same sign convention                                      𝑣𝑣vertical = 2429 m s −1 + 1.63 m s −2 × 7.50 s = 2441 m s −1
+
+            Use of Pythagoras equation                                     (1)   𝑣𝑣final = �(391 m s−1 )2 + (2441 m s −1 )2 = 2472 m s −1
+
+            𝑣𝑣 = 2470 m s −1 (ecf from (a)(i))                             (1)
+
+            OR
+                                                                                 Example of calculation
+            Use of appropriate trigonometry to determine vertical
+            component of velocity                                          (1)   𝑢𝑢vertical = 2460 m s−1 × sin(80.9°) = 2429 m s −1
+                             1
+            Use of s = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 with 𝑎𝑎 = 1.63 m s−2 with u and             𝑠𝑠 = 2429 m s −1 × 7.50 s + 0.5 × 1.63 m s−2 × (7.50 s)2 = 18300 m
+                             2                                             (1)
+            a having the same sign convention
+                                                                                                             1                        1
+                                                                                 𝑚𝑚 × 1.63 m s −2 × 18300 m + × 𝑚𝑚 × (2460 m s −1 )2 = × 𝑚𝑚 × 𝑣𝑣 2
+            Uses principle of conservation of energy                       (1)                               2                        2                  4
+
+            𝑣𝑣 = 2470 m s −1 (ecf from (a)(i))                             (1)                                    1
+                                                                                 𝑣𝑣 = �2 × �1.63 m s−2 × 18300 m + × (2460 m s −1 )2 �
+                                                                                                                  2
+
+                                                                                   = 2472 m s −1
+
+18(b)(i)    The horizontal (component of) velocity is                      (1)   If no other mark scored allow 1 mark for air resistance decreases the
+            the same                                                             horizontal component of velocity.
+
+            And the time taken to reach the surface of Earth is less
+            (than time taken to reach the surface of the Moon)             (1)
+            So the (horizontal) distance travelled is less
+            (dependent on MP2)                                             (1)                                                                           3
+18(b)(ii)   Max TWO from:
+
+            Air resistance acts (on the projectile)
+            Or Drag acts (on the projectile)                         (1)
+
+            The projectile would decelerate horizontally             (1)
+
+            The (vertical) acceleration would not be constant
+            Or The (vertical) acceleration would not be 9.81 m s−2   (1)   2
+
+            Total for question 18                                          12
+Question                               Answer                                                       Additional Guidance   Mark
+ Number
+19(a)      There is some energy stored in the spring when the
+           bread is in the toaster
+           Or Some work is done by gravity                               (1)
+
+           Total work done (to stretch the spring) is work done by
+           gravity plus work done by force of the person                 (1)
+
+           So the (total elastic strain) energy stored is greater than
+           the work done (by the person)                                 (1)   (dependent on MP1 or MP2)                   3
+19(b)(i)    Determines the force on each spring                     (1)   Example of calculation
+
+            Use of ∆𝐹𝐹 = 𝑘𝑘∆𝑥𝑥                                      (1)   Force on each spring =
+                                                                                                   0.52 N
+                                                                                                          = 0.13 N
+                                                                                                      4
+
+            𝑘𝑘 = 6.2 (N m−1 ) (to at least 2 significant figures)   (1)         0.13 N                                               3
+                                                                          𝑘𝑘 =         = 6.19 N m−1
+                                                                               0.021 m
+
+19(b)(ii)   Use of ∆𝐹𝐹 = 𝑘𝑘∆𝑥𝑥                                      (1)   Example of calculation
+                            1
+            Use of ∆𝐸𝐸el = 𝐹𝐹∆𝑥𝑥                                                1.2 N + 0.52 N
+                            2                                       (1)        �
+                                                                                       4       �
+                                                                          𝑥𝑥 =                   = 0.0695 m
+                                                                                  6.19 N m−1
+            Use of ∆𝐸𝐸grav = 𝑚𝑚𝑚𝑚∆ℎ with 𝑚𝑚𝑚𝑚 = 0.52 N              (1)
+                                                                          𝐸𝐸elastic = 0.5 × (1.2 N + 0.52 N) × 0.0695 m = 0.0598 J
+            Applies conservation of energy
+                                                                    (1)   ∆𝐸𝐸grav = 0.52 N × 0.0695 m = 0.0361 J
+                        1
+            Use of 𝐸𝐸k = 𝑚𝑚𝑣𝑣 2 and use of 𝑊𝑊 = 𝑚𝑚𝑚𝑚
+                        2
+                                                                          ∆𝐸𝐸k = 0.0598 J − 0.0361 J = 0.0237 J
+                          −1
+                                                                    (1)
+            𝑣𝑣 = 0.95 m s (ecf from (b)(i)) (show that value
+            gives 𝑣𝑣 = 0.96 m s−1)                                                  0.52 N
+                                                                          𝑚𝑚 =                = 0.0530 kg
+                                                                                 9.81 N kg −1
+                                                                    (1)                                                              6
+
+                                                                                2 × 0.0237 J
+                                                                          𝑣𝑣 = �             = 0.946 m s−1
+                                                                                 0.0530 kg
+
+            Total for question 19                                                                                                    12
+

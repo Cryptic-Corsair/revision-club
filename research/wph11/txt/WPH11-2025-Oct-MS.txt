@@ -1,0 +1,445 @@
+Mark Scheme (Results)
+
+October 2025
+
+Pearson Edexcel International Advanced
+Subsidiary level In Physics
+WPH11/01
+Edexcel and BTEC Qualifications
+
+
+      Edexcel and BTEC qualifications are awarded by Pearson, the UK’s
+      largest awarding body. We provide a wide range of qualifications
+      including academic, vocational, occupational and specific
+      programmes for employers. For further information visit our
+      qualifications websites at www.edexcel.com or www.btec.co.uk.
+      Alternatively, you can get in touch with us using the details on our
+      contact us page at www.edexcel.com/contactus
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone
+progress in their lives through education. We believe in every kind of learning, for all
+kinds of people, wherever they are in the world. We’ve been involved in education for
+over 150 years, and by working across 70 countries, in 100 languages, we have built an
+international reputation for our commitment to high standards and raising achievement
+through innovation in education. Find out more about how we can help you and your
+students at: www.pearson.com/uk
+
+
+
+
+October 2025
+Question Paper Log Number P78831A
+Publication Code WPH11_01_2510_MS
+All the material in this publication is copyright
+© Pearson Education Ltd
+General Marking Guidance
+
+•   All candidates must receive the same treatment. Examiners must mark the
+    first candidate in exactly the same way as they mark the last.
+•   Mark schemes should be applied positively. Candidates must be rewarded
+    for what they have shown they can do rather than penalised for omissions.
+•   Examiners should mark according to the mark scheme not according to their
+    perception of where the grade boundaries may lie.
+•   There is no ceiling on achievement. All marks on the mark scheme should be
+    used appropriately.
+•   All the marks on the mark scheme are designed to be awarded. Examiners
+    should always award full marks if deserved, i.e. if the answer matches the
+    mark scheme. Examiners should also be prepared to award zero marks if the
+    candidate’s response is not worthy of credit according to the mark scheme.
+•   Where some judgement is required, mark schemes will provide the principles
+    by which marks will be awarded and exemplification may be limited.
+•   When examiners are in doubt regarding the application of the mark scheme
+    to a candidate’s response, the team leader must be consulted.
+•   Crossed out work should be marked UNLESS the candidate has replaced it
+    with an alternative response.
+    Question
+                                                     Answer                                      Mark
+    Number
+1              The only correct answer is C (N)                                                   1
+
+               A is not correct because energy is a scalar quantity
+               B is not correct because mass is a scalar quantity
+               D is not correct because power is a scalar quantity
+
+2              The only correct answer is B (Useful power output is constant; total               1
+               energy output increases.)
+
+               A is not correct because total energy output would increase with time
+               C is not correct because useful power output is constant
+               D is not correct because useful power output is constant and total energy
+               output would increase with time
+
+3              The only correct answer is D (The forces have the same magnitude.)                 1
+
+               A is not correct because the forces act on two different objects
+               B is not correct because the forces act in opposite directions
+               C is not correct because the forces can act between stationary objects
+
+4              The only correct answer is C (Viscosity of oil increases; Terminal                 1
+               velocity of ball bearing decreases)
+
+               A is not correct because viscosity increases as temperature decreases
+               B is not correct because viscosity increases as temperature decreases and
+               terminal velocity decreases when viscosity increases
+               D is not correct because terminal velocity decreases when viscosity increases
+
+5              The only correct answer is D (U > W)                                               1
+
+               A is not correct because 𝑈𝑈 = 𝑊𝑊 + 𝐷𝐷
+               B is not correct because 𝑈𝑈 = 𝑊𝑊 + 𝐷𝐷
+               C is not correct because 𝑈𝑈 = 𝑊𝑊 + 𝐷𝐷
+
+6                                            �����⃗
+               The only correct answer is D (𝑭𝑭       �����⃗ ���⃗
+                                                 𝐀𝐀 + 𝑭𝑭𝐁𝐁 + 𝐖𝐖 = 𝟎𝟎)
+                                                                                                  1
+
+               A is not correct because the correct relationship is ����⃗ ����⃗
+                                                                    𝐹𝐹A + 𝐹𝐹     ���⃗
+                                                                             B+W=0
+               B is not correct because the correct relationship is ����⃗ ����⃗
+                                                                    𝐹𝐹A + 𝐹𝐹    ���⃗
+                                                                             B+W= 0
+               C is not correct because the correct relationship is 𝐹𝐹A + 𝐹𝐹B + �W
+                                                                    ����⃗ ����⃗   ��⃗ = 0
+
+7              The only correct answer is B (
+                                                 (𝟎𝟎.𝟓𝟓 − 𝟎𝟎.𝟒𝟒) × 𝟗𝟗.𝟖𝟖𝟖𝟖
+                                                                         )                        1
+                                                       𝟎𝟎.𝟓𝟓 + 𝟎𝟎.𝟒𝟒
+
+               A is not correct because the total mass being accelerated is 0.4 kg + 0.5 kg
+               C is not correct because the total mass being accelerated is 0.4 kg + 0.5 kg
+               and the resultant force is (0.5 kg − 0.4 kg) × 9.81 N kg−1
+               D is not correct because the resultant force is (0.5 kg − 0.4 kg) × 9.81 N kg−1
+8    The only correct answer is C (∆𝒙𝒙)                                                  1
+
+     A is not correct because both wires have the same extension
+     B is not correct because both wires have the same extension
+     D is not correct because both wires have the same extension
+
+9    The only correct answer is D (Gradient increases so line is parabolic and           1
+     then gradient is constant)
+
+     A is not correct because constant acceleration gives a parabolic shaped variation
+     in displacement with time
+     B is not correct because constant acceleration gives a parabolic shaped variation
+     in displacement with time
+     C is not correct because when the acceleration becomes zero, the object
+     continues to move at the same velocity, so displacement continues to increase at
+     a constant rate
+
+10   The only correct answer is B (3p)                                                   1
+
+     A is not correct because the change in velocity is the same for both objects so
+     the increase in momentum of S is greater than that of R
+     C is not correct because S does not double its speed
+     D is not correct because S moves 1.5 times faster than at the start and has twice
+     the mass of R
+  Question
+                                       Answer                                                         Additional Guidance   Mark
+  Number
+11           Use of ∑𝐹𝐹 = 𝑚𝑚𝑚𝑚                                        (1) Example calculation
+
+             𝑎𝑎 = 1.3 m s −2                                          (1)          6700 N − 900 N                            2
+                                                                            𝑎𝑎 =                  = 1.29 m s −2
+                                                                                      4500 kg
+
+             Total for question 11                                                                                           2
+
+  Question
+  Number
+                                       Answer                                                        Additional Guidance    Mark
+12           Triangle of correct shape drawn, with at least two       (1) Example diagram                                    4
+             sides labelled
+
+             Vector triangle drawn with at least two sides labelled
+             and arrows in correct directions                         (1)
+
+             Magnitude of resultant force = 380 N
+             (allow 370 N to 390 N)                                   (1)
+
+             Angle of resultant force from north = 68°
+             (allow 66° – 70°)                                        (1)
+
+
+
+
+             Total for question 12                                                                                           4
+ Question
+                                        Answer                                                 Additional Guidance          Mark
+ Number
+13(a)       (Starting and stopping stopwatch) involves human   (1) Ignore references to human error
+            reaction time
+
+            (So) there will be (large) random errors           (1)                                                           2
+
+13(b)(i)    The length of the metal cylinder                   (1) Ignore length of the tube                                 1
+
+13(b)(ii)   Use of 𝑣𝑣 2 = 𝑢𝑢2 + 2𝑎𝑎𝑎𝑎                          (1) Allow any valid suvat method to determine acceleration
+
+            𝑎𝑎 = 9.62 m s−2                                    (1)                                                           2
+
+                                                                     Example calculation
+
+                                                                            (2.96 m)2 − (1.39 m)2
+                                                                     𝑎𝑎 =                         = 9.619 m s−2
+                                                                                 2 × 0.355 m
+
+            Total for question 13                                                                                            5
+ Question
+ Number
+                                         Answer                                                         Additional Guidance                   Mark
+14(a)       The total momentum (of a system) is constant                  (1)
+                                                                                                                                               2
+            When no external forces act (dependent on MP1)
+            Or In a closed system (dependent on MP1)                      (1)
+
+14(b)                    1
+            Use of 𝐸𝐸k = 2 𝑚𝑚𝑣𝑣 2 to determine initial velocity of rock         Example calculation
+                                                                          (1)
+            B
+                                                                                                                                               4
+                                                                                     2 × 4.1 × 103 J
+            Use of 𝑝𝑝 = 𝑚𝑚𝑚𝑚                                                  𝑣𝑣B = �                = 12.1 m s −1
+                                                                          (1)            56  kg
+            Use of principle of conservation of momentum
+                                                                          (1) 𝑝𝑝B = 56 kg × 12.1 m s−1 = 678 kg m s−1
+            𝑣𝑣 = 11 m s −1
+                                                                          (1) 𝑝𝑝A = 43 kg × 7.8 m s −1 = 335 kg m s −1
+
+                                                                                335 kg m s −1 + 678 kg m s −1 = 43 kg × 𝑣𝑣A + 530 kg m s −1
+
+                                                                                        1013 kg m s−1 − 530 kg m s −1
+                                                                                𝑣𝑣A =                                 = 11.2 m s −1
+                                                                                                   43 kg
+
+            Total for question 14                                                                                                              6
+ Question
+ Number
+                                           Answer                                                  Additional Guidance            Mark
+15(a)       Use of 𝑊𝑊 = 𝑚𝑚𝑚𝑚                                         (1) Example calculation
+
+            Use of 𝐹𝐹 = 𝑘𝑘∆𝑥𝑥 to determine k                         (1) 0.200 kg × 9.81 N kg −1 = 1.962 N
+
+            Use of 𝐹𝐹 = 𝑘𝑘∆𝑥𝑥 to determine weight of ball            (1)               1.962 N
+                                                                           𝑘𝑘 =                     = 15.70 N m−1
+                                                                                  0.375 m − 0.250 m
+            𝑊𝑊 = 0.71 N                                              (1)                                                           4
+                                                                                           −1
+                                                                           𝐹𝐹 = 15.70 N m       × (0.295 m − 0.250 m) = 0.707 N
+
+15(b)       Elastic strain energy is equal to the area under graph
+            Or k is constant (because the gradient is constant)      (1)
+                                 1                  𝐹𝐹
+            Area under graph = 𝐹𝐹∆𝑥𝑥 and ∆𝑥𝑥 =
+                                 2                  𝑘𝑘
+                       1                  𝐹𝐹
+            Or 𝐸𝐸el = 2 𝐹𝐹∆𝑥𝑥 and ∆𝑥𝑥 = 𝑘𝑘                           (1)
+
+                                         𝐹𝐹 2
+            (So) elastic strain energy = 2𝑘𝑘                         (1)                                                           3
+
+
+            Total for question 15                                                                                                  7
+ Question
+                                      Answer                                                      Additional Guidance                       Mark
+ Number
+16(a)(i)    Stiffness                                             (1)                                                                        1
+
+                          𝜎𝜎
+16(a)(ii)   Use of 𝐸𝐸 = 𝜀𝜀                                        (1) Example calculation
+
+                          ∆𝑥𝑥                                     (1)          150 × 106 Pa
+            Use of 𝜀𝜀 =                                                 𝜀𝜀 =                = 7.89 × 10−3
+                           𝑥𝑥                                                   19 × 109 Pa
+            ∆𝑥𝑥 = 3.6 × 10−3 m                                    (1) ∆𝑥𝑥 = 7.89 × 10−3 × 0.45 m = 3.55 × 10−3 m
+
+            New length = 0.446 m                                  (1) New length = 0.45 m − 3.55 × 10−3 m = 0.446 m                          4
+
+
+16(b)       Use of 𝜎𝜎 = 𝐴𝐴
+                          𝐹𝐹                                      (1) Example calculation
+
+                                                                                330 × 103 N
+            Breaking stress of running blade = 390 Mpa                  𝜎𝜎 =                 = 3.88 × 108 Pa
+                                                                               8.5 × 10−4 m2
+            Or
+            Breaking force for glass fibre = 272 kN                     388 MPa ≈ 400 MPa, so the running blade is made from carbon fibre
+            Or
+            Breaking force for carbon fibre = 340 kN
+            Or
+            Breaking force for hybrid core = 289 kN               (1)
+
+            Comparison of breaking stress with value from table
+            and consistent conclusion
+            Or
+            Comparison of calculated breaking force for carbon
+            fibre with 330 kN and consistent conclusion           (1)                                                                        3
+
+
+            Total for question 16                                                                                                            8
+ Question
+                                       Answer                                                 Additional Guidance                        Mark
+ Number
+17(a)       Calculates volume of one lifting bag                (1) Example calculation
+
+            Calculates volume of box                            (1)             4       0.5 m 3
+                                                                      𝑉𝑉bag =     × π×�      � = 0.0654 m3
+                          𝑚𝑚                                                    3         2
+            Use of 𝜌𝜌 =                                         (1)
+                          𝑉𝑉
+                                                                      𝑉𝑉box = 1.1 m × 0.5 m × 0.25 m = 0.138 m3
+            Use of 𝑊𝑊 = 𝑚𝑚𝑚𝑚                                    (1)
+                                                                      𝑉𝑉total = 2 × 0.0654 m3 + 0.138 m3 = 0.269 m3
+            Total upthrust = 2700 N                             (1)
+                                                                      𝑚𝑚displaced water = 1020 kg m−3 × 0.269 m3 = 274 kg
+            Comparison of calculated upthrust with 2500 N and
+            consistent conclusion                               (1)                                                                       6
+                                                                      𝑊𝑊displaced water = 274 kg × 9.81 N kg −1 = 2690 N
+
+                                                                      2690 (N) > 2500 N so the box will be lifted
+
+17(b)(i)    Calculates resultant of weight and upthrust         (1) Example calculation
+
+            Use of 𝐹𝐹 = 6π𝜂𝜂𝜂𝜂𝜂𝜂                                (1) 𝐹𝐹 = 4.77 × 10−4 N − 1.82 × 10−6 N = 4.752 × 10−4 N
+
+            Terminal velocity = 13.0 m s −1                     (1)                          4.752 × 10−4 N                               3
+                                                                         𝑣𝑣 =                                            = 13.03 m s−1
+                                                                                6 × π × 8.60 × 10−4 Pa s × 2.25 × 10−3 m
+17(b)(ii)   Any two from                                              Ignore the bubble may not be small
+                                                                (1)
+             •   The bubble may not move at a low speed
+                                                                (1)
+             •   The bubble may not be spherical
+
+             •   The bubble may not experience laminar flow     (1)
+                 Or flow may be turbulent
+                                                                (1)
+             •   The temperature/viscosity may change (as the
+                 bubble rises)                                  (1)                                        2
+
+             •   The volume/radius may change (as the bubble
+                 rises)
+
+            Total for question 17                                                                          11
+ Question
+ Number
+                                       Answer                                                     Additional Guidance   Mark
+18(a)       Gradient increasing between 0 s and TA                   (1) graph does not have to start from origin
+
+            Straight line with positive gradient between TA and TB   (1)                                                 2
+
+
+                                                                           Example diagram
+*18(b)   This question assesses a student’s ability to show a coherent and logically   Indicative content
+         structured answer with linkages and fully-sustained reasoning. Marks are      IC1 In stage A, the kinetic energy increases
+         awarded for indicative content and for how the answer is structured and shows
+         lines of reasoning. The following table shows how the marks should be         IC2 (and kinetic energy is proportional to speed squared,
+         awarded for indicative content.                                                     so) in stage A, the useful power output increases
+
+           IC points      IC mark        Max linkage mark         Max final mark       IC3   In stage B, the gravitational potential energy
+               6             4                   2                      6                    increases (and kinetic energy is constant)
+               5             3                   2                      5                    Or In stage B, work is done against gravity (and
+               4             3                   1                      4                    kinetic energy is constant)
+               3             2                   1                      3
+               2             2                   0                      2              IC4   And in stage B the gradient of the slope increases so
+               1             1                   0                      1                    power output increases
+               0             0                   0                      0
+                                                                                       IC5   In stage C gravitational potential energy increases
+                                                                                             and kinetic energy decreases
+         The following table shows how the marks should be awarded for structure and
+         lines of reasoning.                                                           IC6   So in stage C the useful power output of the person is
+                                                                                             zero
+                                                        Number of marks awarded
+                                                        for structure of answer and
+                                                        sustained line of reasoning
+          Answer shows a coherent and logical
+                                                                     2
+          structure with linkages and fully sustained
+          lines of reasoning demonstrated throughout
+          Answer is partially structured with some                   1
+          linkages and lines of reasoning
+          Answer has no linkages between points and                  0
+          is unstructured                                                                                                                             6
+
+         Total for question 18                                                                                                                        8
+ Question
+ Number
+                                          Answer                                                        Additional Guidance                  Mark
+19(a)       Acceleration of the shot is constant                       (1)
+
+            Because air resistance will be negligible
+            Or the only force acting is weight                         (1)                                                                    2
+
+19(b)(i)                       1
+            Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 2 𝑎𝑎𝑡𝑡 2 with a = 0                     (1) Example calculation
+                                                                           14.2 m = 𝑢𝑢horizontal × 1.61 s
+            𝑢𝑢horizontal = 8.82 (m s −1 ) (to at least 3 significant
+                                                                       (1)                    14.2 m                                          2
+            figures)                                                         𝑢𝑢horizontal =          = 8.8199 m s −1
+                                                                                              1.61 s
+
+19(b)(ii)                      1
+            Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 2 𝑎𝑎𝑡𝑡 2 with 𝑎𝑎 = (−)9.81 m s −1 and         Example calculation
+                                                                       (1)                1
+            s=(-)1.85 m                                                                   2 × 9.81 m s−2 × (1.61 s)2 − 1.85 m
+                                                                             𝑢𝑢vertical =                                     = 6.75 m s−1
+                                                                                                         1.61 s
+            Use of Pythagoras to determine u
+            Or Use of appropriate trigonometry to determine u          (1) 𝑢𝑢2 = (8.82 m s −1 )2 + (6.75 m s−1 )2 = 123.4 m2 s−2
+
+            𝑢𝑢 = 11 m s −1 [ecf from (b)(i)]                           (1)
+                                                                             𝑢𝑢 = �123.4 m2 s 2 = 11.1 m s−1
+            Use of appropriate trigonometry to determine 𝜃𝜃            (1)            6.75 m s−1
+                                                                             tan 𝜃𝜃 = 8.82 m s−1 = 0.765
+            𝜃𝜃 = 37° [ecf from (b)(i)]                                 (1)
+                                                                                                                                              5
+                                                                             𝜃𝜃 = tan−1 (0.765) = 37.4°
+
+            Total for question 19                                                                                                             9
+ Question
+ Number
+                                        Answer                                                      Additional Guidance                     Mark
+20(a)        In equilibrium, total clockwise moment = total                 Clockwise moment = anticlockwise moment is insufficient.
+             anticlockwise moment
+             Or In equilibrium, sum of all moments (about any
+             point) = 0
+             Or In equilibrium, resultant moment (about any point)
+             =0                                                       (1)                                                                    1
+
+20(b)(i)     The weight causes a clockwise moment (about the
+             pivot)                                                   (1)
+
+             So the direction (of the moment provided by the
+             motor) is anticlockwise (dependent on MP1)               (1)                                                                    2
+
+20(b)(ii)    The motor needs to provide a smaller moment              (1)
+
+             So a smaller force is needed (which moves through the
+             same distance)                                           (1)
+
+             So the work done decreases (dependent on MP1 or
+             MP2)                                                     (1)                                                                    3
+
+20(b)(iii)   Determines distance from pivot to centre of gravity of         Example calculation
+             section of bridge                                        (1)
+                                                                          Distance from pivot to centre of gravity of section
+             Use of Moment of force = 𝐹𝐹𝐹𝐹                            (1)                                         = 33 m −
+                                                                                                                              33 m + 12 m
+                                                                                                                                   2
+                                                                                                                  = 10.5 m
+             Use of principle of moments                              (1)
+                                                                            4.0 × 106 N × 11 m + moment produced by motor
+             Moment produced by motor = 8.4 × 107 N m                 (1)                                                                    4
+                                                                                           = 1.2 × 107 N × 10.5 m + 71 × 103 N × 28 m
+
+                                                                            Moment produced by motor = 8.40 × 107 N m
+
+             Total for question 20                                                                                                           10
+

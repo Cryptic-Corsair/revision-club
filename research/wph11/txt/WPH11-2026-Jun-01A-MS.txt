@@ -1,0 +1,521 @@
+Mark Scheme (Results)
+
+Summer 2026
+
+Pearson Edexcel International Advanced
+Subsidiary Level In Physics
+WPH11/01A
+Edexcel and BTEC Qualifications
+
+
+      Edexcel and BTEC qualifications are awarded by Pearson, the UK’s
+      largest awarding body. We provide a wide range of qualifications
+      including academic, vocational, occupational and specific
+      programmes for employers. For further information visit our
+      qualifications websites at www.edexcel.com or www.btec.co.uk.
+      Alternatively, you can get in touch with us using the details on our
+      contact us page at www.edexcel.com/contactus
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help everyone
+progress in their lives through education. We believe in every kind of learning, for all kinds of
+people, wherever they are in the world. We’ve been involved in education for over 150 years,
+and by working across 70 countries, in 100 languages, we have built an international
+reputation for our commitment to high standards and raising achievement through
+innovation in education. Find out more about how we can help you and your students at:
+www.pearson.com/uk
+
+
+
+
+Summer 2026
+Question Paper Log Number P87903A
+Publication Code WPH11_01A_2606_MS
+All the material in this publication is copyright
+© Pearson Education Ltd
+General Marking Guidance
+
+•   All candidates must receive the same treatment. Examiners must mark the first
+    candidate in exactly the same way as they mark the last.
+•   Mark schemes should be applied positively. Candidates must be rewarded for what
+    they have shown they can do rather than penalised for omissions.
+•   Examiners should mark according to the mark scheme not according to their
+    perception of where the grade boundaries may lie.
+•   There is no ceiling on achievement. All marks on the mark scheme should be used
+    appropriately.
+•   All the marks on the mark scheme are designed to be awarded. Examiners should
+    always award full marks if deserved, i.e. if the answer matches the mark scheme.
+    Examiners should also be prepared to award zero marks if the candidate’s response
+    is not worthy of credit according to the mark scheme.
+•   Where some judgement is required, mark schemes will provide the principles by
+    which marks will be awarded and exemplification may be limited.
+•   When examiners are in doubt regarding the application of the mark scheme to a
+    candidate’s response, the team leader must be consulted.
+•   Crossed out work should be marked UNLESS the candidate has replaced it with an
+    alternative response.
+Mark scheme notes
+
+
+Underlying principle
+The mark scheme will clearly indicate the concept that is being rewarded, backed up
+by examples. It is not a set of model answers.
+
+1. Mark scheme format
+1.1     You will not see ‘wtte’ (words to that effect). Alternative correct wording
+should be credited in every answer unless the MS has specified specific words that
+must be present. Such words will be indicated by underlining e.g. ‘resonance’
+1.2     Bold lower case will be used for emphasis e.g. ‘and’ when two pieces of
+information are needed for 1 mark.
+1.3     Round brackets ( ) indicate words that are not essential e.g. “(hence) distance
+is increased”.
+1.4     Square brackets [ ] indicate advice to examiners or examples e.g. [Do not
+accept gravity] [ecf].
+
+2. Unit error penalties
+2.1    A separate mark is not usually given for a unit but a missing or incorrect unit will
+normally mean that the final calculation mark will not be awarded.
+2.2    This does not apply in ‘show that’ questions or in any other question where the
+units to be used have been given, for example in a spreadsheet.
+2.3    The mark will not be awarded for the same missing or incorrect unit only once
+within one clip in epen.
+2.4 Occasionally, it may be decided not to insist on a unit e.g the candidate may
+be calculating the gradient of a graph, resulting in a unit that is not one that should be
+known and is complex.
+2.5 The mark scheme will indicate if no unit error is to be applied by placing
+brackets around the unit.
+
+3. Significant figures
+3.1    Use of too many significant figures in the theory questions will not prevent a
+mark being awarded if the answer given rounds to the answer in the MS.
+3.2    Too few significant figures will mean that the final mark cannot be awarded in
+‘show that’ questions where one more significant figure than the value in the
+question is needed for the candidate to demonstrate the validity of the given
+answer.
+3.3 The use of one significant figure might be inappropriate in the context of the
+question e.g. reading a value off a graph. If this is the case, there will be a clear
+indication in the MS.
+3.4 The use of g = 10 m s−2 or 10 N kg−1 instead of 9.81 m s−2 or 9.81 N kg−1 will be
+penalised by one mark (but not more than once per clip). Accept 9.8 m s−2 or 9.8 N
+kg−1
+3.5 In questions assessing practical skills, a specific number of significant figures
+will be required e.g. determining a constant from the gradient of a graph or in
+uncertainty calculations. The MS will clearly identify the number of significant figures
+required.
+4. Calculations
+4.1    use of the formula means that the candidate demonstrates substitution of
+physically correct values, although there may be conversion errors e.g. power of 10
+error.
+4.2 If a ‘show that’ question is worth 2 marks, then both marks will be available for
+a reverse working. If the question is worth 3 marks then only 2 marks will be available.
+4.3 The mark scheme will show a correctly worked answer for illustration only.
+
+5. Quality of Written Expression
+5.1   Questions that asses the ability to show a coherent and logically structured
+answer are marked with an asterisk.
+5.2   Marks are awarded for indicative content and for how the answer is
+structured.
+5.3 Linkage between ideas, and fully-sustained reasoning is expected.
+Question
+                                          Answer                                               Mark
+ Number
+1        The only correct answer is B (momentum)                                                1
+
+          A is not correct because mass is a scalar quantity
+          C is not correct because temperature is a scalar quantity
+          D is not correct because time is a scalar quantity
+
+2         The only correct answer is C (N kg-1)                                                 1
+
+          A is not correct because this is a unit for momentum
+          B is not correct because this the unit for force
+          D is not correct because this is a unit for power
+
+3         The only correct answer is B (Distance the ball falls and time taken)                 1
+
+          A is not correct because it would not be possible to determine acceleration due to
+          gravity without further quantities
+          C is not correct because it would not be possible to determine acceleration due to
+          gravity without further quantities
+          D is not correct because it would not be possible to determine acceleration due to
+          gravity without further quantities
+
+4         The only correct answer is B (0 N)                                                    1
+
+          A is not correct because this is their weight
+          C is not correct because this is the distance travelled
+          D is not correct because the magnitude of this number is the magnitude of their
+          velocity
+
+
+
+5         The only correct answer is B (
+                                           5N
+                                                )                                               1
+                                           4m
+
+          A is not correct because stiffness = force / extension
+          C is not correct because stiffness = force / extension
+          D is not correct because stiffness = force / extension
+
+6         The only correct answer is D (0.5 × 5 N × 4 m)                                        1
+
+          A is not correct because energy stored is the area under the graph
+          B is not correct because energy stored is the area under the graph
+          C is not correct because energy stored is the area under the graph
+
+7         The only correct answer is C (17 N)                                                   1
+
+          A is not correct because the resultant force is given by Pythagoras
+          B is not correct because the resultant force is given by Pythagoras
+          C is not correct because the resultant force is given by Pythagoras
+
+8         The only correct answer is D (The falling object should move with laminar flow)       1
+
+          A is not correct because the object should be spherical
+          B is not correct because Stokes’ law would apply in any fluid
+          C is not correct because the object should be moving slowly
+9    The only correct answer is A (2k)                                               1
+
+     B is not correct because springs in parallel are stiffer than by themselves
+     C is not correct because springs in parallel are stiffer than by themselves
+     D is not correct because the spring constants would add together not multiply
+
+10   The only correct answer is C (4x)                                               1
+
+     A is not correct because x ∝ v2
+     B is not correct because x ∝ v2
+     C is not correct because x ∝ v2
+Question                                                                                                 Additional Guidance
+                                         Answer                                                                                Mark
+ Number
+11         velocity is a vector (but speed is a scalar)
+           Or
+           velocity has magnitude/speed and direction (but speed does
+           not have direction)                                            (1)
+
+           Direction is changing (so velocity changes)                    (1)                                                   2
+
+           Total for question 11                                                                                                2
+
+Question                                                                                                 Additional Guidance
+                                         Answer                                                                                Mark
+ Number
+12                                                                              Example of calculation
+
+           Use of W = m g                                                 (1) W = 1.8 kg × 9.81 m s−2 = 17.66 N
+
+           Use of trigonometry to calculate Tension from component        (1) 17.66 N = 2 × 𝑇𝑇 × sin (25°)
+
+           T =21 N                                                        (1) 𝑇𝑇 =    17.66 N
+                                                                                                  = 20.89 N                     3
+                                                                                     2×sin(25°)
+
+           Total for question 12                                                                                                3
+
+Question                                                                                                 Additional Guidance
+                                         Answer                                                                                Mark
+ Number
+13(a)(i)   maximum mass of carriage(s) and passengers determined          (1)   Example of calculation
+                                                                                total mass = 50 × (300+120) kg = 21000 kg
+           Use of ∆𝑊𝑊 = 𝐹𝐹∆𝑠𝑠
+           Or                                                                   work done = 21000 kg × 9.81 m s-2 × 200 m
+           Use of ∆𝐸𝐸𝑔𝑔𝑔𝑔𝑔𝑔𝑔𝑔 = 𝑚𝑚𝑚𝑚∆ℎ                                    (1)
+                                                                                work done = 4.12 × 107 J
+           Maximum work done = 4.1 × 107 (J) (to at least 2 sig. figs.)   (1)                                                   3
+13(a)(ii)    Use of P =E/t                                                       (1)   Example of calculation
+                                                                                       Total Energy input = 135000 W × 8 × 60 s = 6.48 × 107 J
+             Conserves energy                                                    (1)
+                                                                                       Work done against resistive forces = 6.48 × 107 J − 4.12 × 107 J
+                                                            7
+             Work done against resistive forces = 2.4 × 10 J
+             (ecf from (a)(i))                                                                                             = 2.36 × 107 J
+             Or Work done against resistive forces = 5.3 × 107 J                                                                                          3
+                                                                                 (1)
+13(a)(iii)   Use of efficiency =
+                                   useful energy output                                Example of calculation
+                                    total energy input
+             Or                                                                                           4.12 × 107 J       4.12 × 107 J
+                                 useful power output                                   efficiency =                        =
+             Use of efficiency =                                                 (1)                  135 × 103 W × 8 × 60   6.48 × 107 J
+                                    total power input
+
+
+             Efficiency = 0.64 (allow 64%)                                                        = 0.636
+             (ecf from (a)(i) and (a)(ii))
+             Or
+             (if the carriages are all empty)
+             Efficiency = 0.18 (allow 18%)
+             Or
+             (If useful energy output is treated as energy to lift people only
+             up mountain)
+             Efficiency = 0.45 (allow 45 %)
+                                                                                 (1)                                                                      2
+13(b)        friction decreases                                                  (1)   allow resistive forces for friction throughout
+                                                                                       Ignore references to air resistance
+
+             So work done against friction decreases                             (1)                                                                      2
+
+             Total for question 13                                                                                                                        10
+Question                                                                                            Additional Guidance
+                                           Answer                                                                                                   Mark
+ Number
+14(a)      Energy is dissipated (during the collision / bounce)             Allow kinetic energy decreases (during the collision / bounce)
+           Or the collision (with the ground) is inelastic              (1) Allow energy is transferred to thermal energy (during the collision /
+                                                                            bounce )
+
+                                                                              Ignore energy is transferred to the ground
+                                                                              Ignore energy is wasted
+
+           So after the bounce the (maximum) gravitational potential
+           energy is less
+           Or after the bounce, less kinetic energy is transferred to
+           gravitational potential energy                               (1)                                                                          2
+
+14(b)(i)   EITHER                                                           Example of calculation
+           Use of v2 = u2 + 2as                                         (1) 𝑣𝑣 2 = (02 ) + 2 × 9.81 m s −2 × 2.0 m = 39.2 m2 s −2
+
+           velocity = (−)6.3 (m s−1) (to at least 2 sig. figs.)         (1) 𝑣𝑣 = √2 × 9.81 𝑚𝑚 𝑠𝑠 −2 × 2 𝑚𝑚 = (−)6.26 m s −1
+
+           OR
+           Use of E= mgh and E=1/2mv2                                   (1)
+
+           velocity = 6.3 (m s−1) (to at least 2 sig. figs.)            (1)                                                                          2
+14(b)(ii)    Use of appropriate equation of motion to determine t        (1) Example of calculation
+                                                                             −6.26 m s −1 = (0) − 9.81 m s −2 × 𝑡𝑡
+             Time = 0.64 (s) (to at least 2 sig. figs.)
+             (e.cf. from 14(b)(i))                                       (1) 𝑡𝑡 = 6.26 m s−1 = 0.639 s                      2
+                                                                                          −2
+                                                                                   9.81 m s
+
+
+14(b)(iii)   y-axis labelled velocity / v                                      Example graph
+             and x-axis labelled time / t
+             and Graph starts with a straight line from the origin       (1)
+
+             Three bounces shown with velocity reversed direction to a         Velocity
+             smaller magnitude                                           (1)
+
+             (at least) 3 bounces shown as vertical lines to reversed
+             velocity
+             Or (at least) 3 bounces shown as instantaneous changes to   (1)
+             reversed velocity.
+                                                                                                                     Time
+             Gradient between bounces is the same throughout
+             (dependent on MP3)                                          (1)                                                4
+
+
+
+
+             Total for question 14                                                                                          10
+Question                                                                                                   Additional Guidance
+                                        Answer                                                                                                               Mark
+ Number
+15(a)    Any four from:
+
+               •   Initial gradient is the same for both graphs                (1) Allow at low strain, stress is similar for both bars
+                                                                                   Allow the Young modulus is similar
+               •   As the strain increases, the gradient of both graphs        (1)
+                   decreases
+
+               •   As the strain increases the gradient of the toffee graph
+                   decreases more than that of the biscuit graph
+                   Or As the strain increases, For a given stress, the
+                   strain of the toffee bar is greater                         (1)
+
+               •   Both have the same/similar breaking stress                  (1) Allow ultimate tensile stress/strength for breaking stress
+
+               •   Biscuit breaks at a lower strain than toffee bar            (1)
+
+               •   Toffee stress decreases with strain after a certain point       Allow for the toffee bar, the gradient becomes negative after a certain
+                   (but biscuit stress only increases with strain.)            (1) point / stress / strain
+
+               •   Area under the toffee bar graph (at breaking point) is
+                   greater than the area under the biscuit bar graph (at
+                                                                               (1)                                                                            4
+                   breaking point)
+
+15(b)      Material returns to original shape/size/length when
+           stress/force/tension removed                                        (1)                                                                            1
+15(c)(i)   Use a metre rule                                                    (1) Allow use vernier/digital callipers
+           Or Use a vernier scale
+                                                                                   Allow measure initial reading and reading with mass added
+           measure initial length and extended length (with mass added)        (1) Do not accept measure the extension
+
+                                                                                   Allow calculate the difference between the initial and extended
+           subtract the original length from the extended length               (1) readings                                                                   3
+15(c)(ii)   Corresponding pair of values of force and extension from         Example of calculation
+            graph                                                      (1)             4.0 N
+                                                                             𝜎𝜎 =                 = 31 500 Pa
+                                                                                  1.27 × 10−4 m2
+                          𝐹𝐹        ∆𝑥𝑥
+            Use of 𝜎𝜎 = and 𝜀𝜀 =
+                        𝐴𝐴           𝑥𝑥                                             0.10 m
+            Or                                                               𝜀𝜀 =           = 0.645
+            Calculates gradient                                                     0.155 m
+                                                                       (1)
+                          𝜎𝜎                                                        31 500 Pa
+            Use of 𝐸𝐸 =                                                      𝐸𝐸 =             = 48 800 Pa
+                          𝜀𝜀                                           (1)            0.645
+
+            Young modulus = 4.9 × 104 Pa
+            (allow answers in the range 4.7 × 104 Pa to 5.1 × 104 )    (1)                                      4
+
+            Total for question 15                                                                               12
+Question                                                                             Additional Guidance
+                                        Answer                                                             Mark
+ Number
+16(a)      Use of 𝑝𝑝 = mv                        (1) Example of calculation
+
+           Use of conservation of momentum       (1) 𝑝𝑝𝑤𝑤ℎ𝑖𝑖𝑖𝑖𝑖𝑖 𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖𝑖 = 2𝑚𝑚 × 2.1 m s −1
+
+           Velocity of green ball = 3.0 m s−1    (1)   (2𝑚𝑚 × 2.1 m s −1 ) = (2𝑚𝑚 × 0.6 m s −1 ) + 𝑚𝑚𝑚𝑚     3
+
+                                                       𝑣𝑣 = 2 × (2.1 m s −1 − 0.6 m s −1 )
+
+                                                           = 3.0 m s −1
+*16(b)   This question assesses a student’s ability to show a coherent and     Indicative content
+         logically structured answer with linkages and fully-sustained         IC1 Initially the white ball has momentum
+         reasoning. Marks are awarded for indicative content and for how the   IC2 The white ball applies a force to the green ball and the green
+         answer is structured and shows lines of reasoning. The following
+                                                                                    ball exerts a force on the white ball.
+         table shows how the marks should be awarded for indicative content.
+                                                                               IC3 By Newton’s third law, these forces are equal (in magnitude)
+                                                                                    and opposite (in direction)
+            IC points       IC mark      Max linkage mark Max final mark       IC4 So there is a resultant force on each ball (for the same time)
+                6               4                2              6
+                                                                               IC5 By Newton’s first / second law the white ball decelerates and
+                5               3                2              5
+                                                                                    the green ball accelerates
+                4               3                1              4
+                                                                               IC6 So the momentum of the white ball decreases and the
+                3               2                1              3
+                                                                                    momentum of the green ball increases (by the same amount)
+                2               2                0              2
+                1               1                0              1
+                0               0                0              0
+                                                                               For IC6 ignore total momentum before = total momentum after
+         The following table shows how the marks should be awarded for
+         structure and lines of reasoning.                                          collision
+                                                                               For IC6 ignore momentum is conserved
+                                            Number of marks awarded for
+                                            structure of answer and
+                                            sustained line of reasoning
+          Answer shows a coherent and
+                                                          2
+          logical structure with linkages
+          and fully sustained lines of
+          reasoning demonstrated
+          throughout
+          Answer is partially structured                  1
+          with some linkages and lines                                                                                                              6
+          of reasoning
+          Answer has no linkages                          0
+          between points and is
+          unstructured
+
+         Total for question 16                                                                                                                      9
+Question                                                                                             Additional Guidance
+                                          Answer                                                                                                  Mark
+ Number
+17(a)(i)    Resultant force = 0                                           (1)
+
+            Resultant moment = 0                                          (1)                                                                      2
+17(a)(ii)   The point at / through which the weight of the object /
+            cupboard appears to act                                       (1)                                                                      1
+
+17(b)       Use of 𝑊𝑊 = 𝑚𝑚𝑚𝑚                                              (1)
+
+            Use of moment of force = Fx                                   (1)
+
+            Use of principle of moments                                   (1) Allow a calculation of total clockwise moment caused by weight of
+                                                                              cupboard and weight of box and a calculation of anticlockwise
+                                                                              moment caused by force of screw
+
+            Force on screw = 430 N
+            Or (if moments taken about centre of back of cupboard)
+            Force on screw = 850 N                                        (1)
+
+            430 N > 200 N so suggestion is incorrect
+            Or comparison of calculated value with 200 N and consistent                                                                            5
+            conclusion                                                    (1)
+
+                                                                                Example of calculation
+                                                                                𝑊𝑊 = 50 kg × 9.81 N kg −1 = 491 N
+
+                                                                                𝐹𝐹 × 0.75 m = 80 N × 0.30 m + 491 N × 0.60 m = 319 Nm
+
+                                                                                       319 Nm
+                                                                                𝐹𝐹 =          = 425 N
+                                                                                       0.75 m
+
+                                                                                425 (N) > 200 (N) so not correct
+            Total for question 17                                                                                                                  8
+Question                                                                                                Additional Guidance
+                                                  Answer                                                                                      Mark
+ Number
+18(a)      Use of v2 = u2 + 2as vertically using consistent sign convention       (1)   Example of calculation
+
+           Use of appropriate trigonometry to determine u                         (1)   0 = (𝑢𝑢 × sin(35°))2 − 2 × 9.81 m s −2 × 0.4 m
+
+           u = 4.9 (m s−1) (to at least 2 sig. Figs.)                             (1)          2 ×9.81 m s−2 ×0.4                              3
+                                                                                        𝑢𝑢 = �    (sin(35°))2
+                                                                                                                  = 4.88 m s −1
+
+18(b)      Use of appropriate equation(s) of motion with a = (−)9.81 m s-2 and    (1)   Example of calculation
+           consistent sign convention to determine time taken to reach floor
+                                                                                        𝑢𝑢vertical = 4.88 m s −1 × sin(35°) = 2.8 m s −1
+           𝑡𝑡 = 0.86 (𝑠𝑠)
+           (ecf from 18(a))                                                       (1)                              1
+                                                                                        −1.2 = 2.8 m s −1 × 𝑡𝑡 −     × 9.81 m s −2 × 𝑡𝑡 2
+                                                                                                                   2
+           Use of appropriate trigonometry to determine horizontal component of   (1)
+           velocity                                                                     𝑡𝑡 = 0.86 𝑠𝑠
+                              1
+           Use of 𝑠𝑠 = 𝑢𝑢𝑢𝑢 + 𝑎𝑎𝑡𝑡 2 with a = 0                                   (1)   𝑢𝑢horizontal = 4.88 m s −1 × cos(35°) = 4.00 m s −1
+                              2
+
+                                                                                        𝑠𝑠 = 4.00 m s −1 × 0.86 𝑠𝑠 = 3.44 m                    5
+           d = 3.4 m
+                                                                                  (1)
+           (ecf from 18(a))
+
+           Total for question 18                                                                                                               8
+Question                                                                                                    Additional Guidance
+                                            Answer                                                                                         Mark
+ Number
+19a        Use of Σ𝐹𝐹 = 0 (i.e. upthrust = weight of iceberg)                      (1) Example of calculation
+                         𝑚𝑚
+           Use of 𝜌𝜌 =                                                             (1) (At equilibrium,) upthrust = weight of iceberg
+                         𝑉𝑉
+
+           Use of W = mg                                                           (1) weight of displaced seawater = weight of iceberg
+
+           Volume of water displaced is 0.89 × volume of iceberg                   (1) 𝜌𝜌seawater × 𝑉𝑉displaed × 𝑔𝑔 = 𝜌𝜌ice × 𝑉𝑉ice × 𝑔𝑔
+
+           Comparison of calculated value with 70% and consistent conclusion       (1)   𝑉𝑉displaed       𝜌𝜌ice   917 kg m−3                5
+                                                                                                    =           =            = 0.89
+                                                                                            𝑉𝑉ice     𝜌𝜌seawater 1025 kg m−3
+
+                                                                                         89 % ≠ 70% so not true
+
+19b        Weight of iceberg is constant                                                 Allow weight is constant
+           Or                                                                            Ignore mass (of iceberg) is constant
+           Weight of seawater displaced is constant
+           Or
+           Upthrust is constant                                                    (1)
+
+           Weight of iceberg = weight of seawater displaced
+           Or
+           Upthrust = weight of seawater displaced
+           Or
+           Upthrust ∝ volume of seawater displaced                                 (1)
+
+           There is an increase in the volume (of the iceberg under the surface,         Allow the volume of liquid displaced increases
+           because density of seawater decreases) (Dependent on MP2)               (1)                                                      3
+
+           Total for question 19                                                                                                            8
+

@@ -1,0 +1,670 @@
+Mark Scheme (Results)
+
+June 2019
+
+Pearson Edexcel International Advanced
+Subsidiary Level
+In Physics (WPH11)
+Paper 01 Mechanics and Materials
+Edexcel and BTEC Qualifications
+
+Edexcel and BTEC qualifications are awarded by Pearson, the UK’s largest
+awarding body. We provide a wide range of qualifications including academic,
+vocational, occupational and specific programmes for employers. For further
+information visit our qualifications websites at www.edexcel.com or
+www.btec.co.uk. Alternatively, you can get in touch with us using the details on
+our contact us page at www.edexcel.com/contactus.
+
+
+
+
+Pearson: helping people progress, everywhere
+
+Pearson aspires to be the world’s leading learning company. Our aim is to help
+everyone progress in their lives through education. We believe in every kind of
+learning, for all kinds of people, wherever they are in the world. We’ve been
+involved in education for over 150 years, and by working across 70 countries, in
+100 languages, we have built an international reputation for our commitment to
+high standards and raising achievement through innovation in education. Find
+out more about how we can help you and your students at: www.pearson.com/uk
+
+
+
+
+June 2019
+Publications Code WPH11_01_MS_1906
+All the material in this publication is copyright
+© Pearson Education Ltd 2019
+  General Marking Guidance
+
+
+• All candidates must receive the same treatment. Examiners must mark the first
+  candidate in exactly the same way as they mark the last.
+• Mark schemes should be applied positively. Candidates must be rewarded for
+  what they have shown they can do rather than penalised for omissions.
+• Examiners should mark according to the mark scheme not according to their
+  perception of where the grade boundaries may lie.
+• There is no ceiling on achievement. All marks on the mark scheme should be used
+  appropriately.
+• All the marks on the mark scheme are designed to be awarded. Examiners should
+  always award full marks if deserved, i.e. if the answer matches the mark scheme.
+  Examiners should also be prepared to award zero marks if the candidate’s
+  response is not worthy of credit according to the mark scheme.
+• Where some judgement is required, mark schemes will provide the principles by
+  which marks will be awarded and exemplification may be limited.
+• When examiners are in doubt regarding the application of the mark scheme to a
+  candidate’s response, the team leader must be consulted.
+• Crossed out work should be marked UNLESS the candidate has replaced it with an
+  alternative response.
+Mark scheme notes
+
+Underlying principle
+
+The mark scheme will clearly indicate the concept that is being rewarded, backed up by
+examples. It is not a set of model answers.
+
+For example:
+
+(iii)   Horizontal force of hinge on table top
+
+        66.3 (N) or 66 (N) and correct indication of direction [no ue]                  ✓   1
+        [Some examples of direction: acting from right (to left) / to the left / West
+        / opposite direction to horizontal. May show direction by arrow. Do not
+        accept a minus sign in front of number as direction.]
+
+This has a clear statement of the principle for awarding the mark, supported by some examples
+illustrating acceptable boundaries.
+
+1. Mark scheme format
+   1.1 You will not see ‘wtte’ (words to that effect). Alternative correct wording should be
+        credited in every answer unless the ms has specified specific words that must be
+        present. Such words will be indicated by underlining e.g. ‘resonance’
+   1.2 Bold lower case will be used for emphasis.
+   1.3 Round brackets ( ) indicate words that are not essential e.g. “(hence) distance is
+        increased”.
+   1.4 Square brackets [ ] indicate advice to examiners or examples e.g. [Do not accept
+        gravity] [ecf].
+
+2. Unit error penalties
+   2.1 A separate mark is not usually given for a unit but a missing or incorrect unit will
+         normally mean that the final calculation mark will not be awarded.
+   2.2 Incorrect use of case e.g. ‘Watt’ or ‘w’ will not be penalised.
+   2.3 There will be no unit penalty applied in ‘show that’ questions or in any other question
+         where the units to be used have been given, for example in a spreadsheet.
+   2.4 The same missing or incorrect unit will not be penalised more than once within one
+         question (one clip in epen).
+   2.5 Occasionally, it may be decided not to penalise a missing or incorrect unit e.g. the
+         candidate may be calculating the gradient of a graph, resulting in a unit that is not
+         one that should be known and is complex.
+   2.6 The mark scheme will indicate if no unit error penalty is to be applied by means of
+         [no ue].
+
+3. Significant figures
+   3.1 Use of an inappropriate number of significant figures in the theory papers will
+         normally only be penalised in ‘show that’ questions where use of too few significant
+         figures has resulted in the candidate not demonstrating the validity of the given
+         answer.
+   3.2 The use of g = 10 m s-2 or 10 N kg-1 instead of 9.81 m s-2 or 9.81 N kg-1 will be
+         penalised by one mark (but not more than once per clip). Accept 9.8 m s-2 or 9.8 N kg-
+          1
+4. Calculations
+   4.1 Bald (i.e. no working shown) correct answers score full marks unless in a ‘show that’
+        question.
+   4.2 If a ‘show that’ question is worth 2 marks then both marks will be available for a
+        reverse working; if it is worth 3 marks then only 2 will be available.
+   4.3 use of the formula means that the candidate demonstrates substitution of physically
+        correct values, although there may be conversion errors e.g. power of 10 error.
+   4.4 recall of the correct formula will be awarded when the formula is seen or implied by
+        substitution.
+   4.5 The mark scheme will show a correctly worked answer for illustration only.
+   4.6 Example of mark scheme for a calculation:
+
+           ‘Show that’ calculation of weight
+
+           Use of L × W × H                                                                  ✓
+
+           Substitution into density equation with a volume and density                      ✓
+
+           Correct answer [49.4 (N)] to at least 3 sig fig. [No ue]                          ✓
+           [If 5040 g rounded to 5000 g or 5 kg, do not give 3rd mark; if conversion to kg
+           is omitted and then answer fudged, do not give 3rd mark]
+           [Bald answer scores 0, reverse calculation 2/3]                                       3
+
+           Example of answer:
+
+           80 cm × 50 cm × 1.8 cm = 7200 cm3
+
+           7200 cm3 × 0.70 g cm-3 = 5040 g
+
+           5040 × 10-3 kg × 9.81 N/kg
+
+           = 49.4 N
+
+5. Quality of Written Communication
+   5.1 Indicated by QoWC in mark scheme. QWC – Work must be clear and organised in a
+        logical manner using technical wording where appropriate.
+   5.2 Usually it is part of a max mark, the final mark not being awarded unless the QoWC
+        condition has been satisfied.
+
+6. Graphs
+   6.1 A mark given for axes requires both axes to be labelled with quantities and units, and
+        drawn the correct way round.
+   6.2 Sometimes a separate mark will be given for units or for each axis if the units are
+        complex. This will be indicated on the mark scheme.
+   6.3 A mark given for choosing a scale requires that the chosen scale allows all points to
+        be plotted, spreads plotted points over more than half of each axis and is not an
+        awkward scale e.g. multiples of 3, 7 etc.
+   6.4 Points should be plotted to within 1 mm.
+          • Check the two points furthest from the best line. If both OK award mark.
+          • If either is 2 mm out do not award mark.
+          • If both are 1 mm out do not award mark.
+          • If either is 1 mm out then check another two and award mark if both of these
+              OK, otherwise no mark.
+          •    For a line mark there must be a thin continuous line which is the best-fit line
+               for the candidate’s results.
+Question   Answer                                                                                      Mark
+Number
+
+1          The only correct answer is D because kg m−3 is the unit for density (scalar)                (1)
+
+           A is not the correct answer as m s−1 is the unit for velocity (vector) and speed (scalar)
+           B is not the correct answer as m s−2 is the unit for acceleration (vector)
+           C is not the correct answer as kg m s−2 is the unit for force (vector)
+2          The only correct answer is C as the velocity is changing (due to the direction              (1)
+           changing) and N2 describes a resultant force (due to the gravitational force of the
+           earth) causing a change in velocity
+
+            A is not the correct answer as the velocity is changing
+            B is not the correct answer as the velocity is changing and N2 describes a
+           changing velocity due to unbalanced forces
+            D is not the correct answer as N2 describes a changing velocity due to unbalanced
+           forces
+3           The only correct answer is B because                                                       (1)
+            Upthrust is equal to weight of sphere (2.5 N).
+            Weight of displaced water if half sphere submerged = 2.5 N
+            Weight of displaced water if all of sphere submerged = 5.0 N
+            Total upwards force acting on sphere when completely submerged = 5.0 N
+            Total downwards force on sphere if completely submerged (and stationary) = 5.0 N
+            F must be equal to 2.5 N
+
+           A is not the correct answer as F = 2.5 N
+           C is not the correct answer as F = 2.5 N
+           D is not the correct answer as F = 2.5 N
+4          The only correct answer is B as s = vt and s = 1.2 × 0.9                                    (1)
+
+           A is not the correct answer as s = vt and s = 1.2 × 0.9
+           C is not the correct answer as s = vt and s = 1.2 × 0.9
+           D is not the correct answer as s = vt and s = 1.2 × 0.9
+5          The only correct answer is D                                                                (1)
+
+            A is not the correct answer as smaller particles of sand have a lower terminal
+           velocity so take longer to reach the bottom of the beaker
+            B is not the correct answer as a lower temperature would increase the viscosity
+           and increase the time taken for the particles to reach the bottom of the beaker
+           (lower terminal velocity)
+            C is not the correct answer as the sand particles take longer to reach the bottom of
+           the beaker with a smaller terminal velocity
+6           The only correct answer is C                                                               (1)
+
+           A is not the correct answer as it has a high elastic limit
+           B is not the correct answer as it has a high elastic limit and a small region of
+           plastic deformation
+           D is not the correct answer as it has a small region of plastic deformation
+7    The only correct answer is B as power output = kinetic energy per second of the         (1)
+     ejected water.
+          𝟏
+            ×𝟎.𝟐 𝒌𝒈 × (𝟑 𝒎 𝒔−𝟏 )𝟐       𝟎.𝟐 × 𝟑 𝟐
+     P=   𝟐
+                𝟏 𝒔𝒆𝒄𝒐𝒏𝒅
+                                    =       𝟐
+
+      A is not the correct answer because the mass has not been converted into kg which
+     is required for a power in watts.
+      C is not the correct answer because the mass is in g and the velocity has not been
+     squared
+      D is not the correct answer because the velocity has not been squared
+8    The only correct answer is C as the acceleration is positive while the fuel is still    (1)
+     burning. It then becomes negative, while still travelling upwards, as the only forces
+     acting on it are downwards (weight and drag).
+
+     A is not the correct answer because the acceleration should be constant as there is
+     a constant upwards thrust from the fuel.
+     B is not the correct answer because the acceleration should be constant as there is
+     a constant upwards thrust from the fuel. The acceleration should become negative
+     before T.
+     D is not the correct answer because the acceleration becomes negative as the fuel
+     runs out and not at the maximum height.
+9    The only correct answer is B                                                            (1)
+
+
+                    final displacement
+
+                                                       20 km
+
+
+
+
+                                               12 km
+
+
+     A is not the correct answer as the length and direction of the line are incorrect
+     C is not the correct answer as the length and direction of the line are incorrect
+     D is not the correct answer as the length and direction of the line are incorrect
+10   The only correct answer is C because taking upwards as positive,                        (1)
+     force of floor of lift on student − weight of student = mass × acceleration
+     800 − 70g = 70a
+
+     A is not the correct answer because the force of the lift on the student was omitted
+     and the direction of the weight is incorrect
+     B is not the correct answer because the weight of the student has been omitted
+     D is not the correct answer because the weight and the force of the lift on the
+     student are in the wrong direction
+Question   Answer                                                                                Mark
+Number
+11            Max 4
+              • Initial momentum (of the child, ball and skateboard/total) is zero         (1)
+
+              •     Due to conservation of momentum, the total momentum before the
+                    ball is thrown = total momentum after the ball is thrown (so final
+                    total momentum is zero)                                                (1)
+
+              •     The momentum of the child/skateboard is equal to the momentum
+                    of the ball                                                            (1)
+
+              •     The momentum of the child/skateboard is opposite in direction to
+                    the momentum of the ball
+                                                                                           (1)
+              •     As the mass of the child/skateboard greater (than the mass of ball),
+                    the velocity (of the child/skateboard) will be lower                   (1)      4
+
+           (all symbols to be defined, ‘mv’ to be defined if used for momentum)
+           (MP3 accept to the right/positive for forwards)
+           Total for question 11                                                                    4
+Question   Answer                                                                 Mark
+Number
+12             Either                                                       (1)
+                                    2.0                                     (1)
+               •     Use of sin  = 15 Or use of  = 7.7 
+
+               •     Use of Work done = Fs Or use of Egrav = mgh          (1)
+                                           useful energy output
+               •     Use of efficiency =    total energy input
+                                                                ( 100 %)   (1)
+
+               •     Efficiency = 83 or 84 % so less than 90 %
+                     (MP4 dependent on scoring all points MP1& 2 &3)
+           Example of calculation                                           (1)
+                   2.0
+           sin−1( 15 ) = 7.7                                               (1)
+
+                                                    2.0
+           W50 = 50 kg  9.81 N kg−1  2.0 m  15 = 130.8 J                 (1)
+                                                                            (1)      4
+           W8 = 8.0 kg  9.81 N kg−1  2.0 m = 157.0 J
+                          130.8 J
+           Efficiency =            100 % = 83 %
+                          157.0 J
+
+
+
+           Total for question 12                                                     4
+Question   Answer                                                                                               Mark
+Number
+13(a)           •                Use of v = s/t Or use of gradient
+                                                                                                          (1)
+                •                                       −1
+                                 v = () 1.1 to 1.2 (m s )
+                                                                                                          (1)
+                •                Scaling of the velocity axis so that the graph covers at least 50% of
+                                 the paper above and below the axes.                                      (1)
+                                 (A minimum of 1 number on each axis required e.g. 1 and −1)
+
+                •                A positive constant velocity from 0 to 42 s and the same negative
+                                 constant velocity from 48 s to 90 s with connecting line/curve           (1)     4
+                                 (tolerance of ± 1 s)
+
+           Example of calculation
+                                            46 m
+           Initial velocity = 40 s = 1.15 m s−1
+
+                                1.5
+
+
+                                1.0
+             Velocity / m s−1
+
+
+
+
+                                0.5
+
+                                                                                                Time /s
+                                0.0
+                                       0   10      20   30   40      50   60   70    80    90     100
+                                -0.5
+
+
+                                -1.0
+
+
+                                -1.5
+
+
+13(b)(i)   The graph should be a curve initially                                                          (1)
+
+           with a decreasing gradient up to 15 m (by eye)                                                 (1)     2
+           (ignore any part of the graph above 15 m)
+13(b)(ii)   1 mark for a simplification                                                         (1)
+
+            1 mark for a corresponding explanation                                              (1)   2
+
+             Simplification                        Explanation
+             Velocity constant                     • Variation in velocity during each stroke
+             Or velocity doesn’t change            • The force applied to the swimmer/water
+             Or velocity is an average               varies (within the stroke)
+             Or no regions of                      • As the swimmer moves above/below
+             acceleration/deceleration               water to breathe, the velocity changes
+                                                   • The speed would change as they went
+                                                     from gliding to swimming
+             The velocity of the swimmer has       The swimmer may have tired and this could
+             the same magnitude in both parts      be less for the second half of the race
+             of the race
+             The initial velocity after the turn   The swimmer would probably glide
+             would be greater                      (underwater) after the turn
+             Gradient should initially increase    Swimmer initially pushes off from starting
+             from zero                             block/turn
+
+            Treat references to drag as neutral.
+            Total for question 13                                                                     8
+Question Answer                                                                                          Mark
+Number
+14(a)(i)    •   Use of equation(s) of motion to determine uv
+                    Or Use of Ek = Egrav
+                                                                                                   (1)
+               •     uv = 83 (m s ) −1
+                                                                                                   (1)    2
+                    (for mp2 must have used v = 0 and -g)
+
+            Example of calculation
+            02 = u2 + 2(−9.81 m s−2) (350 m)
+            u = 82.9 m s−1
+14(a)(ii)       • Launch angle increasing as initial velocity decreases (i.e. negative gradient)   (1)
+
+                •   Curve drawn                                                                    (1)
+
+                •   Minimum initial velocity marked, and graph passes through (90, 82.9/80)
+                    Or other correct pair of points labelled and plotted                           (1)
+
+                •   Initial velocity axis asymptotic                                               (1)    4
+
+
+               Initial velocity
+
+
+
+
+                     82.9 (m s−1)
+
+                                                                              Launch angle/ 
+                                    0                                  90
+14(b)       (Perpendicular) distance to firework= time (counted)  speed of sound                  (1)
+
+            Diameter of firework = 2  distance  tan ( /2)                                       (1)    2
+            (allow Diameter of firework = distance  tan ( /2))
+
+            Total for question 14                                                                         8
+Question   Answer                                                                         Mark
+Number
+15(a)          •      Estimate of length of forearm 30 – 50 (cm)                    (1)
+
+               •      Use of trig to determine the perpendicular component of the
+                      tension
+                                                                                    (1)
+                      Or see Tsin70 Or see Tcos20
+
+               •      Use of moment = Fx with a corresponding force and distance    (1)
+
+               •      Use of the principle of moments                               (1)
+
+               •      Value for T in range 85 N to 150 N
+                      (l = 30 cm, T = 85 N and l = 50 cm, T = 150 N)                (1)          5
+
+           Example of calculation (for l = 0.40 m)
+
+           (0.04 m  T  sin70) = (0.31 m  4.5 N) + (0.20 m  15 N)
+
+           T = 117 N
+
+                     145
+
+                     135
+
+                     125
+              T/ N
+
+
+
+
+                     115
+
+                     105
+
+                     95
+
+                     85
+                           30        35            40              45      50
+                                          length of forearm / cm
+
+
+
+15(b)         •       The forearm is not uniform/symmetrical                        (1)
+
+              •       The centre of gravity is not in the middle                    (1)          2
+
+           Total for question 15                                                                 7
+Question Answer                                                                                   Mark
+Number
+16(a)
+            •     Use a micrometer (screw gauge) Or (vernier)digital calipers               (1)
+
+            •     At different orientations and/or positions along the wire                 (1)
+
+                                                                                            (1)    3
+            •     Calculate/determine/take/find a mean/average value
+
+
+16(b)       •                         𝑑 2                                                   (1)
+                  Use of A = 𝜋 ( 2 )
+
+            •     Calculate gradient of linear section (up to 3  10−3 m, 6.8 N) of graph
+                  Or use of a corresponding pair of points for F and 𝑥 from the linear
+                  region of the graph                                                       (1)
+                                  𝐹            𝑥
+            •     Use of  = 𝐴 and ε =          𝑙
+                                      𝐹𝑙
+                  Or use of E = 𝐴𝑥
+                                                    𝑙
+                  Or Use of E = gradient  𝐴                                                (1)
+
+            •     E = (1.2 – 1.3)  1011 Pa                                                 (1)    4
+                  (MP4 conditional on scoring MP1 & MP2 & MP3)
+
+         Example of calculation using gradient
+                2.3 × 10−4 m 2
+         A = (              ) = 4.15  10−8 m2
+                      2
+                          6.5 N
+         Gradient = 2.9 ×10−3 m = 2.2  103 N m−1
+                                            2.4 m
+         E = 2.2  103 N m−1  4.15 ×10−8m2 = 1.27  1011 Pa
+*16(c)    • This question assesses a student’s ability to show a coherent and logically structured
+              answer with linkages and fully-sustained reasoning.
+          • Marks are awarded for indicative content and for how the answer is structured and
+              shows lines of reasoning.
+          • The following table shows how the marks should be awarded for indicative content.
+               Number of indicative               Number of marks awarded
+               marking points seen in             for indicative marking
+               answer                             points
+                             6                                   4
+                            5–4                                  3
+                            3–2                                  2
+                             1                                   1
+                             0                                   0
+          • The following table shows how the marks should be awarded for structure and
+              lines of reasoning.
+                                                      Number of marks awarded for structure
+                                                      of answer and sustained line of reasoning
+          Answer shows a coherent and logical                             2
+          structure with linkages and fully           (a minimum of at least 5 IC points
+          sustained lines of reasoning                including:
+          demonstrated throughout                     IC1 and IC2/IC5
+                                                     and IC3 and IC4/IC5
+          Answer is partially structured with some                        1
+          linkages and lines of reasoning            (a minimum of 3 IC points including:
+                                                     either IC1 and IC2/IC5
+                                                     Or IC3 and IC4/IC5)
+          Answer has no linkages between points
+                                                                          0
+          and is unstructured
+
+         Total marks awarded is the sum of marks for indicative content and the marks for
+         structure and lines of reasoning
+
+                 Indicative content
+          • For long(er) wire, the extension will be large(r)
+          • (For the same load) extension is proportional to the original length
+                   extension
+             Or original length = constant
+
+          • For a thin(ner) wire, the extension will be large(r)
+          • (For the same load) extension is inversely proportional to cross-sectional area
+             (may be explained in terms of E ,  and ε)
+          • The percentage uncertainty in the extension/length will be lower (although
+            this will be greater for the cross-sectional area)
+          • A small(er) load can be used with a long/thin wire
+
+
+                                                                                                      6
+         Total for question 16                                                                       13
+Question   Answer                                                                               Mark
+Number
+17(a)(i)   Use of fall factor =
+                                  height fallen before the rope begins to stretch         (1)
+                                        total unstretched length of rope
+
+                       ∆𝑥
+           Use of ε = 𝑥 with x = 15.0 m
+                                                                                          (1)
+
+           Use of Egrav = mgh                                                            (1)
+
+           Use of Egrav = Eel with their x                                               (1)
+
+           Fmax = 14 000 (N)                                                              (1)    5
+
+          Example of calculation
+          Height fallen = 15.0 m  0.8 = 12 m     x = 0.09  15.0 m = 1.35 m
+          Egrav = 71 kg  9.81 N kg  12 m = 8358 J (from fall)
+                                    −1
+
+          Egrav = 71 kg  9.81 N kg−1 1.35 m = 940.3 J (from extension)
+          8358 J + 940.3 J = ½  Fmax  1.35 m
+          Fmax = 13 775 N
+17(a)(ii) • This would not be a good idea, as the climber would reach a higher velocity
+             (just before the rope stretches)                                             (1)
+          • (Hence) the climber’s deceleration/force (as the rope stretches) would be
+             greater                                                                      (1)    2
+17(b)           Max 6
+          • Use of area under the graph to determine the stored energy                    (1)
+
+           •    Energy = 800 J (new)                                                      (1)
+
+           •    Energy = 700 J (old)                                                      (1)
+
+           •    The old rope would absorb/store less energy
+                                                                                          (1)
+           •    Use of F = kx to determine k
+                (accept gradient of a tangent)                                            (1)
+
+           •    Calculation of k for both ropes at same applied force                     (1)
+
+           •    The old rope is not as stiff as the new rope                              (1)
+                Or The old rope extends more
+                                                                                          (1)    6
+           • The old rope would break at a smaller applied force/stress
+           Total for question 17                                                                 13
+Question   Answer                                                                        Mark
+Number
+18(a)(i)    Explanation
+             • Terminal velocity is the constant/maximum velocity the rain
+                 reaches
+                 Or terminal velocity is the velocity when acceleration = 0
+                                                                                   (1)
+              •     When weight = Drag (+ upthrust)
+                    Or when forces is equilibrium
+                    Or when resultant force = 0
+                    (accept when the total upward force = total downward force)    (1)
+
+             Diagram
+              • Weight and air resistance (and upthrust) only drawn with
+                 correct directions (arrowed lines must touch dot, and labels      (1)
+                 included)
+                                                                                   (1)          4
+              •     Arrow lengths of weight and air resistance same length
+                    (if upthrust drawn, upthrust line + drag line = weight line)
+                    (MP4 dependent on MP3)
+
+                          Air resistance/F/D
+
+
+
+
+                            Weight/W/mg
+18(a)(ii)                                     4                                  (1)
+               •    Use of A = r2 and V = 3 r3
+
+                                𝑚
+               •    Use of  = 𝑉 and 𝑊 = 𝑚𝑔                                      (1)
+
+               •    Use of W = F                                                 (1)
+
+
+               •    v = 6.5 – 7.0 m s−1                                          (1)   4
+
+            Example of calculation
+            A =   (0.002)2 = 1.26  10−5 m2
+                4
+            V = 3   (0.002 m )3 = 3.35  10−8 m3
+
+            m =1000 kg m−3  3.35  10−8 m3 = 3.35  10−5 kg
+
+            W = 3.35  10−5 kg  9.81 N kg−1 = 3.29  10−4 N
+
+            3.29  10−4 N = 0. 45  1.2 kg m−3  1.26  10−5 m2  v2
+
+            3.29  10−4 N = 6.80  10−6  v2
+
+            v = 6.96 m s−1
+
+18(b)(i)       •    Vertical displacement increasing                             (1)
+
+               •    Horizontal displacement constant (same as first two drops)   (1)   2
+
+            (Mark all added drops but there must be a minimum of 2 additional
+            drops to award MP1 &2)
+
+
+
+
+18(b)(ii)      •    Use of s = ut + ½ at2 with u = 0                             (1)
+                    (accept use of t = 0.2 s, 0.25 s, 0.75 s, 1.0 s)
+
+               •    See 0.8 s for the time since the drop left the leaf
+                                                                                 (1)
+               •    s = 3.1 m                                                    (1)   3
+
+            Example of calculation
+            s = ½ 9.81 N kg−1 (0.8 s)2 = 3.14 m
+
+            Total for question 18                                                      13
+

@@ -1,0 +1,1613 @@
+                               Pearson Edexcel International Advanced Level
+
+                               Friday 08 May 2026
+                                                                                     WPH11/01A
+                                                                        Paper
+                               Afternoon (Time: 1 hour 30 minutes)
+                                                                        reference
+
+                                Physics
+                                                                                                         
+
+
+                                International Advanced Subsidiary/Advanced Level
+                                UNIT 1: Mechanics and Materials
+                                Question Paper
+
+                                You must have:
+                                Scientific calculator, ruler and answer book (sent separately).
+                                Do not return this question paper with the answer book.
+
+
+                      • The list of data, formulae and relationships is printed at the end of this booklet.
+
+
+
+
+                                                                                                         Turn over
+
+
+P87903A
+©2026 Pearson Education Ltd.
+P:1/1/1/1/1/
+                                                    *P87903A*
+                                                      SECTION A
+                                              Answer ALL questions.
+For questions 1-10, in Section A, select one answer from A to D and put a cross in the box . If you
+ change your mind, put a line through the box and then mark your new answer with a cross .
+1       Which of the following is a vector quantity?
+
+        A    mass
+
+        B    momentum
+
+        C    temperature
+
+        D    time
+                                                                     (Total for Question 1 = 1 mark)
+
+2       Which of the following is a correct unit for acceleration?
+
+        A    kg m s−1
+
+        B    kg m s−2
+
+        C    N kg−1
+
+        D    N m s−1
+                                                                     (Total for Question 2 = 1 mark)
+
+3       A student determines a value for the acceleration due to gravity by dropping a steel ball
+        from rest through the air. The student ignored air resistance.
+        Which of the following are the only two quantities required?
+
+        A    diameter of the ball and viscosity of the air
+
+        B    distance the ball falls and time taken
+
+        C    final velocity of the ball and viscosity of the air
+
+        D    mass of the ball and the final velocity of the ball
+                                                                     (Total for Question 3 = 1 mark)
+
+
+
+
+    2                                                                                                  P87903A
+                                                                                                       
+4   The graph below shows the motion of a person of mass 80 kg walking a short distance.
+                     4
+
+                     3
+
+    Velocity / m s–1 2
+
+                     1
+
+                     0
+                         0     1   2     3     4      5     6    7     8     9    10
+                                                   Time / s
+
+    Which of the following is equal to the resultant force, in N, acting on the person
+    between a time of 2 s and 7 s?
+
+    A     80 g
+
+    B     0
+
+    C     0.5 × (10 + 5) × 3
+
+    D     3
+                                                                (Total for Question 4 = 1 mark)
+
+
+
+
+P87903A                                                                                            3
+                                                                                         Turn over
+                               Questions 5 and 6 refer to the following information.
+The graph shows how force varies with extension for a spring.
+                                             5
+
+                                             4
+
+                                             3
+                                 Force / N
+                                             2
+
+                                             1
+
+                                             0
+                                                 0   1    2      3   4
+                                                     Extension / m
+
+5       Which of the following gives the stiffness of the spring?
+
+        A    5N × 4m
+
+              5N
+        B
+              4m
+
+              4m
+        C
+              5N
+
+        D    0.5 × 5 N × 4 m
+                                                                     (Total for Question 5 = 1 mark)
+
+6       A force of 5 N is applied to the spring.
+        Which of the following gives the energy stored, in J, in the spring?
+
+        A    5N × 4m
+
+              5N
+        B
+              4m
+
+              4m
+        C
+              5N
+
+        D    0.5 × 5 N × 4 m
+                                                                     (Total for Question 6 = 1 mark)
+
+
+
+
+    4                                                                                                  P87903A
+                                                                                                       
+7   A ball of weight 8 N falls through the air. A horizontal wind exerts a force of 15 N on
+    the ball.
+    Which of the following is the magnitude of the resultant force on the ball?
+    You should ignore air resistance.
+
+    A     7N
+
+    B     13 N
+
+    C     17 N
+
+    D     23 N
+                                                                (Total for Question 7 = 1 mark)
+
+8   In certain circumstances, Stokes’ law can be applied when an object is falling.
+    Which of the following conditions is required for Stokes’ law to apply?
+
+    A     The object should not be spherical in shape.
+
+    B     The object must be falling through a liquid.
+
+    C     The object should be moving quickly.
+
+    D     The object should be in a laminar flow.
+                                                                (Total for Question 8 = 1 mark)
+
+
+
+
+P87903A                                                                                             5
+                                                                                          Turn over
+9       Two springs each with stiffness k are arranged next to each other, as shown
+
+
+
+                                                      spring
+
+
+
+
+        Which of the following is the stiffness of the combined system?
+
+        A    2k
+
+
+        B    k
+
+             k
+        C
+             2
+
+        D    k2
+                                                                   (Total for Question 9 = 1 mark)
+
+10 A car is travelling at a velocity v. The car brakes with a constant force and comes to rest
+   after a distance x.
+        The same car is now travelling at 2v. The car brakes with the same force and comes
+        to rest.
+        Which of the following is the distance the car now travels while braking?
+
+        A        2x
+        B    2x
+
+        C    4x
+              x
+        D
+               2
+                                                                 (Total for Question 10 = 1 mark)
+
+                                                       TOTAL FOR SECTION A = 10 MARKS
+
+
+
+
+    6                                                                                                P87903A
+                                                                                                     
+                                               SECTION B
+                            Answer ALL questions in the spaces provided.
+11 A man drives his car along a road at a constant speed. The road has many bends.
+   Explain how the speed of the car can be constant but the velocity of the car changes.
+                                                            (Total for Question 11 = 2 marks)
+
+12 A painting is hung from a peg on a wall using two identical wires, as shown.
+                                                   peg
+                               wire                                wire
+                                         T                  T
+
+                                         25                25
+
+
+
+
+                                                                           painting
+
+
+
+   Calculate the tension T in each of the wires.
+   mass of the painting = 1.8 kg
+                                                            (Total for Question 12 = 3 marks)
+
+
+
+
+P87903A                                                                                          7
+                                                                                       Turn over
+13 A ski lift takes skiers from the base of a mountain to its top, as shown.
+
+
+
+
+carriage
+
+
+
+
+      The ski lift moves carriages through a vertical height of 200 m.
+13 (a) Each carriage has a maximum passenger capacity of 300 kg and there are
+       50 carriages moving upwards at any instant on the ski lift.
+13 (a) (i) Show that the maximum work done lifting the 50 carriages through the vertical
+           height of 200 m is about 4 × 107 J.
+			 mass of empty carriage = 120 kg
+                                                                                             (3)
+13 (a) (ii) The ski lift engine has an output power of 135 kW. It takes 8 minutes for all
+            50 carriages to move through the vertical height of 200 m.
+			 Determine the work done against resistive forces.
+			 Ignore the descending carriages.
+                                                                                             (3)
+13 (a)(iii) Calculate the efficiency of the ski lift.
+                                                                                             (2)
+13 (b) Explain how lubricating all the moving parts could improve the efficiency of the
+       ski lift.
+                                                                                             (2)
+                                                              (Total for Question 13 = 10 marks)
+
+
+
+
+  8                                                                                                P87903A
+                                                                                                   
+14 A ball is dropped from rest and falls towards the ground. It hits the ground and bounces
+   three times before coming to rest.
+    Assume air resistance is negligible throughout this question.
+14 (a) Explain why the height of each bounce is less than the height of the
+       previous bounce.
+                                                                                              (2)
+14 (b) The ball falls to the ground from a height of 2.0 m.
+14 (b) (i) Show that the velocity of the ball, as it hits the ground, is about 6 m s–1.
+                                                                                              (2)
+14 (b) (ii) Show that the time taken for the ball to fall to the ground is about 0.6 s.
+                                                                                              (2)
+14 (b)(iii) Sketch a velocity-time graph to show the motion of the ball from when it is
+            dropped to when it comes to rest after bouncing three times.
+			 Sketch the graph using the grid provided in the Answer Book.
+    You do not need to make further calculations.
+                                                                                              (4)
+                                                               (Total for Question 14 = 10 marks)
+
+
+
+
+P87903A                                                                                              9
+                                                                                           Turn over
+15 A food technician investigated the material properties of a biscuit bar and a toffee bar.
+   He took some measurements for each bar and plotted the stress-strain graph shown.
+
+
+                                    biscuit bar                         toffee bar
+
+
+
+                         Stress
+
+
+
+
+                                                       Strain
+
+15 (a) Compare and contrast the stress-strain graph for each bar.
+                                                                                                  (4)
+15 (b) State what is meant by elastic deformation.
+                                                                                                  (1)
+15 (c) The food technician determined the Young modulus of the toffee bar. He used the
+       equipment shown.
+                                                                                               pulley
+                                                  toffee bar              string
+ clamp
+
+
+  blocks
+                                                                                                        masses
+
+
+
+           bench
+
+15 (c) (i) Explain how the equipment shown should be used to determine the extension of
+           the toffee bar for a range of masses.
+			 You should include the use of a suitable piece of measuring equipment.
+                                                                                                  (3)
+
+
+
+
+ 10                                                                                                     P87903A
+                                                                                                        
+15 (c) (ii) The food technician plotted a force-extension graph for the toffee bar, as shown.
+                                 4.0
+
+                                 3.5
+
+                                 3.0
+
+                                 2.5
+
+                      Force / N 2.0
+
+                                 1.5
+
+                                 1.0
+
+                                 0.5
+
+                                 0.0
+                                    0.00 0.02 0.04 0.06 0.08 0.10
+                                              Extension / m
+
+			 Determine the Young modulus of the toffee bar.
+			 cross-sectional area of toffee bar = 1.27 × 10–4 m2
+    initial length of toffee bar = 15.5 cm
+                                                                                                (4)
+                                                              (Total for Question 15 = 12 marks)
+
+
+
+
+P87903A                                                                                               11
+                                                                                             Turn over
+ 16 A white ball, mass 2m, on a snooker table is moving with a velocity of 2.1 m s−1.
+    This white ball collides with a stationary green ball of mass m.
+    After the collision, both balls move in the same direction as the white ball was
+    originally moving.
+    After the collision, the white ball moves with a velocity of 0.6 m s−1.
+ 16 (a) Calculate the velocity of the green ball after the collision.
+                                                                                              (3)
+*16 (b) Discuss how momentum is conserved in this collision.
+ 		 You should refer to Newton’s laws of motion in your answer.
+                                                                                              (6)
+                                                                (Total for Question 16 = 9 marks)
+
+
+
+
+  12                                                                                                P87903A
+                                                                                                    
+17 A cupboard is attached to a wall using a screw, as shown.
+                    screw
+
+
+                                                                            cupboard
+
+
+
+
+                      75 cm
+
+
+
+
+                                                                           base of cupboard
+
+
+
+
+             wall                                60 cm
+
+
+
+
+17 (a) (i) State the two conditions necessary for the cupboard to be in equilibrium.
+                                                                                              (2)
+17 (a) (ii) State what is meant by the centre of gravity of an object.
+                                                                                              (1)
+17 (b) The maximum force the screw can withstand is 200 N.
+		 It is suggested that a box with a mass of 50 kg can be safely placed anywhere on the
+   base of the cupboard.
+		 The weight of the cupboard is 80 N and the cupboard can be assumed to be uniform.
+		 Deduce whether this suggestion is correct.
+                                                                                              (5)
+                                                              (Total for Question 17 = 8 marks)
+
+
+
+
+P87903A                                                                                             13
+                                                                                           Turn over
+18 A gardener sprays water on his plants using a hosepipe. The water leaves the hose at a
+   velocity u at an angle of 35° to the horizontal, as shown.
+                                                    u
+          hosepipe
+                                              35                                path of water
+
+
+                                                    1.6 m
+                                      1.2 m
+
+
+
+
+                                                              d
+
+   The end of the hosepipe is 1.2 m above the ground and the maximum height the water
+   reaches is 1.6 m above the ground.
+   You should ignore the effects of air resistance in the following questions.
+18 (a) Show that u is about 5 m s−1
+                                                                                            (3)
+18 (b) Determine the horizontal distance d.
+                                                                                            (5)
+                                                             (Total for Question 18 = 8 marks)
+
+
+
+
+ 14                                                                                               P87903A
+                                                                                                  
+19 An iceberg is a large mass of ice that floats in seawater. Most of the volume of an
+   iceberg is below the surface of the seawater.
+19 (a) A book about icebergs claims that 70% of the mass of an iceberg is below the
+       surface of the seawater.
+		 Deduce whether this claim is correct.
+		 density of ice = 917 kg m−3
+   density of seawater = 1025 kg m−3
+                                                                                           (5)
+19 (b) An iceberg is near the North Pole where it is very cold.
+		 The iceberg moves away from the North Pole and the temperature of the seawater
+   increases slightly. The iceberg does not melt and the density of the surrounding
+   seawater decreases.
+		 Explain what happens to the volume of the iceberg, under the surface of the
+   seawater, as it moves away from the North Pole.
+                                                                                           (3)
+                                                             (Total for Question 19 = 8 marks)
+
+                                                   TOTAL FOR SECTION B = 70 MARKS
+                                                      TOTAL FOR PAPER = 80 MARKS
+
+
+
+
+P87903A                                                                                          15
+
+                               List of data, formulae and relationships
+Acceleration of free fall               g = 9.81 m s–2                (close to Earth’s surface)
+Gravitational field strength            g = 9.81 N kg–1               (close to Earth’s surface)
+Unit 1
+Mechanics
+                                            (u + v)t
+    Kinematic equations of motion       s=
+                                               2
+                                        v = u + at
+                                                    1 2
+                                        s = ut +      at
+                                                    2
+                                       v 2 = u2 + 2as
+      Forces                          ΣF = ma
+                                           F
+                                        g=
+                                           m
+                                       W = mg
+      Momentum                          p = mv
+      Moment of force             moment = Fx
+      Work and energy                 ΔW = FΔs
+                                               1
+                                       Ek =      mv 2
+                                               2
+                                    ΔEgrav = mgΔh
+                                           E
+      Power                             P=
+                                           t
+                                           W
+                                        P=
+                                           t
+                                               useful energy output
+      Efficiency                efficiency =
+                                                total energy input
+                                               useful power output
+                                efficiency =
+                                                total power input
+Materials
+                                            m
+      Density                           ρ=
+                                            V
+      Stokes’ law                       F = 6�ηrv
+      Hooke’s law                     ΔF = kΔx
+                                               1
+      Elastic strain energy          ΔEel =      FΔx
+                                               2
+                                             σ
+      Young modulus                     E=      where
+                                             ε
+                                              F
+                                  Stress σ =
+                                              A
+                                             ∆x
+                                  Strain ε =
+                                              x
+
+
+ 16                                                                                                P87903A
+                                                                                                   
+                                      Please check the examination details below before entering your candidate information
+                                Candidate surname                                            Other names
+
+
+                               Centre Number                  Candidate Number
+
+
+
+
+                               Pearson Edexcel International Advanced Level
+                               Friday 08 May 2026
+                                                                                              WPH11/01A
+                               Afternoon (Time: 1 hour 30 minutes)             Paper
+                                                                               reference
+
+                                Physics
+                                                                                                                               
+
+
+                                International Advanced Subsidiary/Advanced Level
+                                UNIT 1: Mechanics and Materials
+                                Answer Book
+
+                                You must have:                                                                        Total Marks
+                                Scientific calculator, ruler and question paper (sent separately)
+
+
+
+                      Instructions
+                      •• Use   black ink or ball-point pen.
+                          If pencil is used for diagrams/sketches/graphs it must be dark (HB or B).
+                       • Fill in the boxes at the top of this page with your name,
+                          centre number and candidate number.
+                       •• Answer   all questions.
+                          Answer the questions in the spaces provided
+                          – there may be more space than you need.
+                        • Show all your working out in calculations and include units where appropriate.
+                      Information
+                      •• The    total mark for this paper is 80.
+                         The marks for each question are shown in brackets
+                         – use this as a guide as to how much time to spend on each question.
+                       • Into the question marked with an asterisk (*), marks will be awarded for your ability
+                              structure your answer logically, showing how the points that you make are related
+                         or follow on from each other where appropriate.
+                       • The list of data, formulae and relationships is printed at the end of this booklet.
+                      Advice
+                      •• Read  each question carefully before you start to answer it.
+                         Try to answer every question.
+                       • Check your answers if you have time at the end.                                                      Turn over
+
+
+P87941A
+©2026 Pearson Education Ltd.
+P:1/1/1/1/
+                                                *P87941A0116*
+                                           SECTION A
+                                     Answer ALL questions.
+
+
+
+
+                                                                                                                                                                                             DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+For questions 1–10, in Section A, select one answer from A to D and put a cross in the box . If you
+ change your mind, put a line through the box and then mark your new answer with a cross .
+1
+
+        A
+
+        B
+
+        C
+
+        D
+                                                           (Total for Question 1 = 1 mark)
+
+2
+
+        A
+        B
+
+        C
+
+        D
+                                                           (Total for Question 2 = 1 mark)
+
+3
+
+        A
+
+        B
+
+        C
+
+        D
+                                                           (Total for Question 3 = 1 mark)
+
+4
+
+        A
+
+        B
+
+        C
+
+        D
+                                                           (Total for Question 4 = 1 mark)
+
+
+
+    2
+                            *P87941A0216*                                                    
+                                                                                                                                                                              5
+
+                                                                                                                                                                                     A
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                     B
+
+                                                                                                                                                                                     C
+
+                                                                                                                                                                                     D
+                                                                                                                                                                                                  (Total for Question 5 = 1 mark)
+
+                                                                                                                                                                              6
+
+                                                                                                                                                                                     A
+
+                                                                                                                                                                                     B
+
+                                                                                                                                                                                     C
+
+                                                                                                                                                                                     D
+                                                                                                                                                                                                  (Total for Question 6 = 1 mark)
+
+                                                                                                                                                                              7
+
+                                                                                                                                                                                     A
+
+                                                                                                                                                                                     B
+
+                                                                                                                                                                                     C
+
+                                                                                                                                                                                     D
+                                                                                                                                                                                                  (Total for Question 7 = 1 mark)
+
+                                                                                                                                                                              8
+
+                                                                                                                                                                                     A
+
+                                                                                                                                                                                     B
+
+                                                                                                                                                                                     C
+
+                                                                                                                                                                                     D
+                                                                                                                                                                                                  (Total for Question 8 = 1 mark)
+
+
+
+
+                                                                                                                                                                                                                                     3
+                                                                                                                                                                                     *P87941A0316*                        Turn over
+9
+
+        A
+
+
+
+
+                                                                                                                                                         DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                  DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+        B
+
+        C
+
+        D
+                         (Total for Question 9 = 1 mark)
+
+10
+
+        A
+
+        B
+
+        C
+
+        D
+                        (Total for Question 10 = 1 mark)
+
+                  TOTAL FOR SECTION A = 10 MARKS
+
+
+
+
+    4
+            *P87941A0416*                                  
+                                                                                                                                                                                                                                                                                                                                                           SECTION B
+                                                                                                                                                                                                                                                                                        Answer ALL questions in the spaces provided.
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                              11
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                    (Total for Question 11 = 2 marks)
+
+                                                                                                                                                                              12
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    T = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                                                                                                                                                                                                                                                                                                                                                                                    (Total for Question 12 = 3 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     5
+                                                                                                                                                                                                                                                                                            *P87941A0516*                                                                                                                                                                                                                                      Turn over
+13 (a) (i)
+                                                                                                                                                                                                                                                                                                                                                                 (3)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+13 (a) (ii)
+                                                                                                                                                                                                                                                                                                                                                                 (3)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                  Work done = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13 (a)(iii)
+                                                                                                                                                                                                                                                                                                                                                                 (2)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                    Efficiency = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+
+       6
+                                                                                                                  *P87941A0616*                                                                                                                                                                                                                                                   
+                                                                                                                                                                              13 (b)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (2)
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                               (Total for Question 13 = 10 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                7
+                                                                                                                                                                                                                                                                                            *P87941A0716*                                                                                                                                                                                                                                   Turn over
+14 (a)
+                                                                                                                                                                                                                                                                                                                                                                 (2)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+14 (b) (i)
+                                                                                                                                                                                                                                                                                                                                                                 (2)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+14 (b) (ii)
+                                                                                                                                                                                                                                                                                                                                                                 (2)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+
+       8
+                                                                                                                  *P87941A0816*                                                                                                                                                                                                                                                   
+                                                                                                                           Turn over
+                                                                                                                       9
+         (4)
+
+
+
+
+                                                                                  (Total for Question 14 = 10 marks)
+
+
+
+
+                                                                                                                       *P87941A0916*
+14 (b)(iii)
+
+
+
+
+                                                                                                                            
+               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+15 (a)
+                                                                                                                                                                                                                                                                                                                                                                 (4)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+15 (b)
+                                                                                                                                                                                                                                                                                                                                                                 (1)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+15 (c) (i)
+                                                                                                                                                                                                                                                                                                                                                                 (3)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+
+     10
+                                                                                                            *P87941A01016*                                                                                                                                                                                                                                                        
+                                                                                                                                                                              15 (c) (ii)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (4)
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                                                                                                                                                            4.0
+
+                                                                                                                                                                                                                                                                                                            3.5
+
+                                                                                                                                                                                                                                                                                                            3.0
+
+                                                                                                                                                                                                                                                                                                            2.5
+
+                                                                                                                                                                                                                                                                Force / N 2.0
+
+                                                                                                                                                                                                                                                                                                            1.5
+
+                                                                                                                                                                                                                                                                                                            1.0
+
+                                                                                                                                                                                                                                                                                                            0.5
+
+                                                                                                                                                                                                                                                                                                            0.0
+                                                                                                                                                                                                                                                                                                               0.00 0.02 0.04 0.06 0.08 0.10
+                                                                                                                                                                                                                                                                                                                                                           Extension / m
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                              Young modulus = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                                                                                                                                                                                                                                                                                                                                                                               (Total for Question 15 = 12 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              11
+                                                                                                                                                                                                                                                                                      *P87941A01116*                                                                                                                                                                                                                                        Turn over
+ 16 (a)
+                                                                                                                                                                                                                                                                                                                                                                  (3)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                                DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                             Velocity = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+*16 (b)
+                                                                                                                                                                                                                                                                                                                                                                  (6)
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+ ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                                                                                       (Total for Question 16 = 9 marks)
+
+
+
+
+      12
+                                                                                                             *P87941A01216*                                                                                                                                                                                                                                                        
+                                                                                                                                                                              17 (a) (i)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (2)
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                              17 (a) (ii)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (1)
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                              17 (b)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (5)
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                    (Total for Question 17 = 8 marks)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              13
+                                                                                                                                                                                                                                                                                      *P87941A01316*                                                                                                                                                                                                                                        Turn over
+18 (a)
+                                                                                                                                                                                                                                                                                                                                                                    (3)
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                                                                                                                                                                                                                                                                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+18 (b)
+                                                                                                                                                                                                                                                                                                                                                                    (5)
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                                                                                                                                                      d = . . . . . . . . . . . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                                                                                                                                                                                                      (Total for Question 18 = 8 marks)
+
+
+
+
+     14
+                                                                                                            *P87941A01416*                                                                                                                                                                                                                                                            
+                                                                                                                                                                              19 (a)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (5)
+                                                                                       DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                              19 (b)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               (3)
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+
+                                                                                                                                                                              ............................ ............................................................. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                    (Total for Question 19 = 8 marks)
+
+                                                                                                                                                                                                                                                                                                                                                                               TOTAL FOR SECTION B = 70 MARKS
+                                                                                                                                                                                                                                                                                                                                                                                  TOTAL FOR PAPER = 80 MARKS
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              15
+                                                                                                                                                                                                                                                                                      *P87941A01516*
+                               List of data, formulae and relationships
+Acceleration of free fall               g = 9.81 m s–2              (close to Earth’s surface)
+
+
+
+
+                                                                                                                                                                                               DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+                                                                                                        DO NOT WRITE IN THIS AREA 		DO NOT WRITE IN THIS AREA						DO NOT WRITE IN THIS AREA
+Gravitational field strength            g = 9.81 N kg–1             (close to Earth’s surface)
+Unit 1
+Mechanics
+                                            (u + v)t
+    Kinematic equations of motion       s=
+                                                2
+		                                      v = u + at
+                                                  1
+		                                      s = ut + at2
+                                                  2
+                                        2    2
+		                                     v = u + 2as
+      Forces                          ΣF = ma
+                                           F
+		                                      g=
+                                           m
+		                                     W = mg
+      Momentum                          p = mv
+      Moment of force             moment = Fx
+      Work and energy                 ΔW = FΔs
+                                             1
+		                                     Ek =     mv 2
+                                             2
+		                                  ΔEgrav = mgΔh
+                                             E
+      Power                            P=
+                                             t
+                                             W
+		                                     P=
+                                              t
+                                             useful energy output
+      Efficiency                efficiency =
+                                              total energy input
+                                             useful energy output
+		                              efficiency =
+                                              total energy input
+Materials
+                                            m
+      Density                           ρ=
+                                            V
+      Stokes’ law                       F = 6�ηrv
+      Hooke’s law                     ΔF = kΔx
+                                             1
+      Elastic strain energy          ΔEel =    FΔx
+                                             2
+                                             σ
+      Young modulus                      E=     where
+                                             ε
+                                              F
+			                               Stress σ =
+                                              A
+                                             x
+			                               Strain ε =
+                                              x
+
+ 16
+                               *P87941A01616*                                                    
+
