@@ -5,6 +5,7 @@ Before inspecting or changing this repository, read:
 1. [docs/README.md](docs/README.md)
 2. [docs/SITE-HANDBOOK.md](docs/SITE-HANDBOOK.md)
 3. The relevant specialist guide in `docs/`.
+4. [docs/HANDOVER-IAL-PHYSICS.md](docs/HANDOVER-IAL-PHYSICS.md) — if your task involves the physics fork (cloning this site into the physics project, stripping chemistry, rebranding, or continuing WPH11 development), read it before planning. It carries the mission, the approved physics register and the traps already found.
 
 The handbook defines protected chemistry content, architecture and design boundaries, persistence compatibility, safe implementation workflow and verification expectations.
 
