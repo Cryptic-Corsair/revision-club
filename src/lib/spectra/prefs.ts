@@ -47,10 +47,12 @@ export const IFACE_ORDER: Iface[] = ["gallery", "editorial"];
    walked the library one note at a time — Topic 9 (wch12-t09) was
    the pilot, the proof ran doc by doc, and the ledger now carries
    the whole shelf: every class note and every practical note reads
-   in the gallery. The gate stays (explicitly, not a wildcard) so a
-   future doc — Topic 3's ionic half among them — lands on the
-   editorial floor first and joins the gallery only when it is cut
-   for the dress. */
+   in the gallery, and now the physics shelf too (WPH11's two
+   topics, mark-scheme-wise cut, joined at the user's request so
+   physics revision reads in the cards dress). The gate stays
+   (explicitly, not a wildcard) so a future doc — Topic 3's ionic
+   half among them — lands on the editorial floor first and joins
+   the gallery only when it is cut for the dress. */
 export const GALLERY_DOCS: ReadonlySet<string> = new Set([
   /* Unit 1 · WCH11 — the class notes */
   "wch11-t01",
@@ -73,6 +75,9 @@ export const GALLERY_DOCS: ReadonlySet<string> = new Set([
   "wch13-p07",
   "wch13-p08",
   "wch13-p09",
+  /* Physics · WPH11 — the mark-scheme-wise notes */
+  "wph11-t01",
+  "wph11-t02",
 ]);
 
 /* the candy wheel the site's sections take turns wearing. The full

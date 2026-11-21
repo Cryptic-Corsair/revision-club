@@ -1742,3 +1742,20 @@ The journal is chronological and append-only. A journal entry describes complete
 **Deployment status.** Not deployed; commit only.
 
 **Remaining limitations.** Topic 1 (Forces) note still reads in the older register — same rewrite recommended if the user wants it; checkpoint questions are prompts only (no interactive answer reveal) because the reader's block model has no Q/A widget.
+
+
+## 2029 — WPH11 Topic 2 recreated as mark-scheme-wise notes; physics joins the cards reader
+
+**Investigation & decision.** The user set a new standard: forget the teaching-prose register — the note should be mark-scheme-wise, exactly like the chemistry source materials (heading + bullets, each bullet a scorable mark-scheme point, no worked examples, no paragraphs), with extensive past-paper/MS analysis behind it, and physics notes should read in the cards interface. The chemistry class-note format (h + bullets, ==highlight== on the scorable terms) was confirmed as the target shape, and the cards gate was located: GALLERY_DOCS in prefs.ts (club-app.tsx swaps NotesEditorial/NotesGallery purely on that set membership; the two readers share one props contract).
+
+**Research.** research/wph11/digest-A…D were re-mined statement by statement for 23–32: exact definition MPs (upthrust Oct23 Q17(a); laminar flow Oct21; elastic limit Jun22 Q12(a); yield point Jun23 Q20(a); breaking stress; elastic/plastic deformation Jun25 Q15(b)), the multi-mark chains in awarded order (terminal velocity Jan25 Q20(a); viscosity-temperature Oct23/Jun24/Jun25; cold-deep-water Oct22 Q17(b); submarine tension Jan25 Q18(b) ICs; Galilean Jun22 Q15 ICs), the Stokes-conditions MP pairs, the CP2/CP3 indicative-content lists (Jun25 Q16, Jun24 Q16(a), Jun19 Q16), the scaling law (Δx ∝ x/d², Oct23 Q8/Oct25 Q8), energy MPs (½FΔx linear-only Jan24 Q11(b); (ΔF)(Δx) banned Jun25 Q15(a); σ–ε area proportional-not-equal Oct24 Q18; F²/2k Oct25 Q15(b)) and the examiners' recurring-error quotes.
+
+**Files changed.** notes-ph02-a.ts and notes-ph02-b.ts fully rewritten: every section is spec statement → h-headed bullet groups where one bullet = one marking point in MS wording, with session attributions; def blocks carry the learn-verbatim definitions; the traps table (10 rows, each quoted from the report that named it) closes statement 32; the four physics figures kept (rigs and graph shapes the MS reference); all worked/steps/paragraph blocks removed. notes.ts: wph11-t02 intro rewritten to describe the mark-scheme-wise format. prefs.ts: wph11-t01 and wph11-t02 added to GALLERY_DOCS (both physics notes now read in the cards dress when the interface preference is Cards; editorial remains the fallback).
+
+**Preserved invariants.** Spec statements verbatim, sections 1:1 with statements 23–32, block kinds all standard (h/bullets/def/table/figure), figures unchanged, no registry/type changes beyond the gallery allowlist. Topic 1 (Forces) content untouched — it keeps its worked-example register until asked.
+
+**Checks actually run.** bun run build — green (type-check + prerender). grep confirms zero worked/steps/p blocks in the two rewritten files (bullets blocks: 12 in A, 14 in B). No browser render of the gallery dress for the physics docs yet — the swap is the same three-line mechanism that serves all 13 chemistry docs, flagged here as not visually verified.
+
+**Deployment status.** Not deployed; commit only.
+
+**Remaining limitations.** Topic 1 still in the old register (user scoped this request to topic 2); gallery rendering of physics docs not eyeballed in a browser; bullets are flat (the reader has no sub-bullet nesting — sub-points are separate bullets, as the chemistry notes do it).

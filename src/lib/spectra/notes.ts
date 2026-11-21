@@ -433,11 +433,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "The second half of Unit 1 is the most predictable on the course: nearly every paper since 2019 carries a ==falling-ball viscosity question== and a ==Young modulus graph question==, and the mark schemes ask for the same sentences each time. This note covers all ten Materials statements: ==density== and ==upthrust==, ==Stokes' law== with its conditions, the ==falling-ball viscometer== of Core Practical 2, then ==Hooke's law==, ==stress, strain and the Young modulus==, the ==force-extension== and ==stress-strain== graphs with every named point, the ==Young modulus rig== of Core Practical 3, and ==elastic strain energy==.",
+        text: "This is the ==mark-scheme-wise== Materials note: every spec statement is stated, and below it sit the ==exact marking points the WPH11/01 mark schemes award== — one bullet, one scorable point, in the examiners' own wording. It covers all ten Materials statements: ==density== and ==upthrust==, ==Stokes' law== with its conditions, the ==falling-ball viscometer== of Core Practical 2, then ==Hooke's law==, ==stress, strain and the Young modulus==, the ==force-extension== and ==stress-strain== graphs with every named point, the ==Young modulus rig== of Core Practical 3, and ==elastic strain energy==.",
       },
       {
         k: "p",
-        text: "As with the Mechanics note, every section works ==real past-paper questions in full== with the official mark scheme's own steps, quotes the ==examiners' reports== on where the marks go, and shows how each idea ==returns in a different costume== — the same upthrust chain wearing a balloon, a hydrometer, a Cartesian diver and a submarine. The examiner's recurring traps, from diameter-as-radius to the missing final comparison, are collected in a table at the end.",
+        text: "Every marking point is mined from the ==2019–2025 papers, mark schemes and Principal Examiners' reports==: the definition sentences to learn verbatim (upthrust, laminar flow, the five graph terms), the multi-mark ==chains in the order the marks are awarded== (terminal velocity, viscosity and temperature, the submarine's rising tension), the scenario bullets for every costume the upthrust balance has worn, the practical methods as indicative-content lists, and the ==examiners' own trap list== — with each trap quoted from the report that named it.",
       },
     ],
     sections: [...SECTIONS_PH02_A, ...SECTIONS_PH02_B],
