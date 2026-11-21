@@ -911,12 +911,14 @@ function Footer({
                   </h2>
                 </div>
                 <span className="pb-1 font-mono text-[calc(10.5px*var(--ts-other))] tracking-[0.12em] text-milk/35">
-                  WCH11 — WCH16 · WPH11
+                  WCH11 — WCH16
                 </span>
               </div>
 
               <div className="footer-unit-grid grid gap-2 sm:grid-cols-2">
-                {UNITS.map((u) => (
+                {/* chemistry units only — WPH11 sits out while its notes
+                    are hidden for the physics fork (2026-11-21) */}
+                {UNITS.filter((u) => u.code !== "WPH11").map((u) => (
                   <button
                     key={u.code}
                     type="button"
@@ -1515,7 +1517,11 @@ export default function ClubApp() {
                 {view.kind === "home" &&
                   (deskActive ? (
                     <Desk
-                      units={UNITS}
+                      /* the desk's unit grid is chemistry-only: WPH11 sits
+                         out while its notes are hidden for the physics fork
+                         (2026-11-21). The home band and the spec rail still
+                         list the unit — this feed is desk-scoped on purpose. */
+                      units={UNITS.filter((u) => u.code !== "WPH11")}
                       desk={desk}
                       onOpenUnit={openUnit}
                       onOpenTopic={openTopic}
