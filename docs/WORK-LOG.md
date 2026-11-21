@@ -1797,3 +1797,16 @@ The journal is chronological and append-only. A journal entry describes complete
 - Analysis file needed no corrections (its disputed claims verified: 2024-Oct Q12 new-length Hooke calc, 2023-Oct Q18 data-logger, 2021-Jun Q18 v–d²).
 - Invariants preserved: site content untouched; no repo source changed except this journal entry; nothing committed.
 - Deployment status: not applicable. Commit: none (drafts still awaiting user approval).
+
+## 2026-11-21 — WPH11 Topic 2 draft: v2 rewrite per user's six formatting suggestions
+
+- User feedback applied in full to download/WPH11-Topic2-draft-notes.md (v1 draft rewritten wholesale; changes pervasive so a full file rewrite was used):
+  1. KaTeX for every formula ($...$); named equations now stated first, then unpacked in a sentence.
+  2. Working symbols inside sentences: =, ×, >, < replace "equals/times/greater than/less than".
+  3. Every force now carries owner + direction ("the upthrust on the sphere", "the weight of the sphere"); reasoning lines carry their formula in trailing brackets, applied only where a formula helps (not spammed).
+  4. Every scenario promoted to its own bolded mini-section with a step-per-bullet build-up (balance reading, hydrometer, submarine moving + NEW submarine lifted by crane, Cartesian diver, Galilean thermometer, ballast, iceberg, sinking/reaching terminal velocity, deduce Stokes, sphere size, rising objects, balloon, colder deeper water, pre-tensioned concrete, processing changes, energy transfers, CP2 method/calculation/errors, CP3 method/analysis).
+  5. Elaborated the too-concise lines while keeping mark-scheme vocabulary; the colder-deeper-water case and the reaching-terminal-velocity case now build up force-by-force before comparing.
+  6. Emphasis formatting: bold key formulas/terms, <u>underline</u> for defined terms (7 uses), red span for mark scheme rejections (4 uses).
+- Supersession noted: the earlier "no symbols standing in for words" rule is replaced by the user's new preference for symbols-in-sentences; no arrows, no year citations in bullets, no AI-label prefixes still enforced. All v1 verified physics content preserved; nothing lost (spot-check grep hits all key items).
+- Checks run: awk scan confirms zero unpaired $ delimiters; grep confirms zero banned patterns and no years outside the provenance header; 11 content sections plus the conventions card, 226 bullets, 23 scenario/method sub-sections; file is 356 lines.
+- Work-log: this entry. Commit: none (draft awaiting user approval). Deployment: not applicable.
