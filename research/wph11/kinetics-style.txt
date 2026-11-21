@@ -1,0 +1,1464 @@
+Centre for Higher Secondary Education                                         Department of Chemistry
+
+
+                                          TOPIC 11: KINETICS
+                                              GRADE 12
+                                           SEMESTER 3/2021                                     Checklist
+                                                                                                  P
+Students will be assessed on their ability to:
+11.1 understand the terms:
+       i rate of reaction
+       ii rate equation, rate=k[A]m[B]n where m and n are 0, 1 or 2
+         iii order with respect to a substance in a rate equation
+         iv overall order of a reaction
+         v rate constant
+         vi half-life
+         vii rate-determining step
+         viii activation energy
+         ix heterogeneous and homogeneous catalyst
+11.2     be able to calculate the half-life of a reaction, using data from a suitable graph,
+         and identify a reaction with a constant half-life as being first order.
+11.3     be able to select and justify a suitable experimental technique to obtain rate data
+         for a given reaction, including:
+         i titration
+         ii colorimetry
+         iii mass change
+         iv volume of gas evolved
+         v other suitable technique(s) for a given reaction
+11.4     understand experiments that can be used to investigate reaction rates by:
+         i an initial-rate method, carrying out separate experiments where different initial
+         concentrations of one reagent are used
+         A ‘clock reaction’ is an acceptable approximation of this method.
+         ii a continuous monitoring method to generate data to enable
+         concentration-time or volume-time graphs to be plotted
+11.5     be able to deduce the order (0, 1 or 2) with respect to a substance in a
+         rate equation, using data from:
+         i a concentration-time graph
+         ii a rate-concentration graph
+         iii an initial-rate method
+11.6     understand how to:
+         i obtain data to calculate the order with respect to the reactants
+         (and the hydrogen ion) in the acid-catalysed iodination of propanone
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                         Page 1 of 38
+Centre for Higher Secondary Education                                     Department of Chemistry
+
+
+      ii use these data to make predictions about species involved in the
+      rate-determining step.
+      iii deduce a possible mechanism for the reaction
+11.7 be able to deduce the rate-determining step from a rate equation and vice versa
+11.8 be able to deduce a reaction mechanism, using knowledge of the rate
+      equation and the stoichiometric equation for a reaction
+11.9 understand that knowledge of the rate equations for the hydrolysis of
+      halogenoalkanes can be used to provide evidence for SN1 and SN2 mechanisms
+      for tertiary and primary halogenoalkane hydrolysis
+11.10 be able to use calculations and graphical methods to find the activation energy
+      for a reaction from experimental data
+      The Arrhenius equation will be given if needed
+11.11 understand the use of a solid (heterogeneous) catalyst for industrial reactions,
+      in the gas phase, in terms of providing a surface for the reaction
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                    Page 2 of 38
+Centre for Higher Secondary Education                                          Department of Chemistry
+
+
+11A - 1           TECHNIQUES FOR MEASURING RATE OF                                     SPECIFICATION
+                                                                                      OBJECTIVE 11.1(i),
+                  REACTION                                                            11.3 (i),(ii),(iii), (iv) &
+                                                                                                  (v)
+
+
+Rate of reaction
+Ø Rate of a chemical reaction is the change in molar concentration of a substance per unit time.
+Ø Rate of reaction can be expressed either as:
+  a) an increase in concentration of product with time.
+     rate = change in concentration of product ,          rate= d[product]
+                            time                                   dt
+          OR
+
+    b) a decrease in concentration of reactant with time
+           rate = - change in concentration of reactant      ,       rate= - d[reactant]
+                               time                                            dt
+
+    •    The negative sign in the second expression shows a decrease in the concentration of the
+         reactant and therefore gives a positive value for the rate.
+
+Ø In a reaction such as A + 2B → C the concentrations might change as shown in the graph below.
+
+
+                                                      •    Concentration of reactants (A & B),
+                                                           decreases with time and for product
+                                                           (C), concentration increases with time.
+                                                      •    At the start, concentration of reactants
+                                                           is high, and the curve is steep. The
+                                                           reaction rate is faster at the start and
+                                                           slows down with time as the
+                                                           concentration of the reactants drops.
+                                                      •    Reaction start off quickly because of
+                                                           the greater likelihood of collisions
+                                                      •    Reactions slow down with time as
+                                                           there are fewer reactants to collide
+
+
+
+Ø The units for rate are mol dm-3 s-1.
+Ø The rate of reaction at any given time can be determined from a concentration-time by
+  drawing a tangent to the curve at the given time and calculating the gradient of the tangent.
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                             Page 3 of 38
+Centre for Higher Secondary Education                                        Department of Chemistry
+
+
+ WORKED EXAMPLE
+
+
+
+
+                                                                                      !
+                                                                Rate = gradient =
+                                                                                      "
+                                                                x= 1470 s, y=-1.60 moldm-3
+
+                                                                rate = - 1.60 moldm-3
+                                                                          1470 s
+                                                                        = 1.09 x10-3 moldm-3 s-1
+
+
+
+
+    •    the slope at the start of the reaction will give the INITIAL RATE
+    •    as the reaction proceeds the slope gets less, showing that the rate is slowing down
+
+Techniques for measuring rate of reactions
+The technique chosen to follow the reaction will depend on the nature of the reactants and
+products as well as the conditions under which the reaction is carried out.
+
+Rates of reaction are measured by monitoring the change of an observable property of a reactant
+or product over time. Some of the methods used for monitoring rate of a reaction are outlined
+below.
+
+1. Titrimetric analysis
+
+Ø This method involves removing small samples (aliquots) from a reaction mixture using a
+  pipette, at regular intervals. The reaction in the sample is then quenched (stopped) by
+  immersing it in an ice bath or by adding another substance to it. Then the sample is titrated
+  against a suitable standard solution to determine the concentration of a reactant species or
+  product species. The titre is proportional to the concentration of the reactant or product being
+  titrated.
+
+Ø This method can be used when an acid, alkali or iodine is a reactant or product. Acids can be
+  titrated with a standard solution of alkali, alkalis with a standard solution of acid and iodine
+  with a standard solution of sodium thiosulfate.
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                        Page 4 of 38
+Centre for Higher Secondary Education                                                      Department of Chemistry
+
+
+
+ PRACTICAL SKILLS
+
+
+                           CH3COOH (aq) + CH3CH2OH (aq) à CH3COOCH2CH3 (aq) + H2O(l)
+      •            Measure out samples of the reactants with known concentration.
+      •            Mix the reactants (ethanoic acid and ethanol), start a stopwatch simultaneously and stir
+                   the mixture thoroughly.
+      •            At regular time intervals withdraw samples using a pipette and quench (stop) the
+                   reaction, to prevent further reaction from taking place. The time at which half the
+                   contents of the pipette have been added to the quenching solution is noted.
+      •            The quenched solution is then titrated against a suitable standard solution.
+      •            The titre is proportional to the concentration of the reactant or product being titrated.
+      •            To calculate the rate of the reaction
+          Concentration of acid
+
+
+
+
+                                                                            change in concentration
+                                                  Slope of curve = rate =
+                                                                                change in time
+
+
+
+
+                                  Time
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                                     Page 5 of 38
+Centre for Higher Secondary Education                                        Department of Chemistry
+
+
+2. Colorimetry (Monitoring a colour change)
+
+     Ø If a reactant or product is coloured, the
+       concentration of the coloured species can be
+       monitored. This can be done using observation only
+       or using a colorimeter to get more precise results,
+       thus providing a quantitative measurement.
+
+                                                                Diagram of a colorimeter
+       Components of colorimeter
+
+
+
+
+ •    For example: in clock reactions, the reaction is timed until a sudden colour change happens
+      when a certain amount of product is formed.
+        In Iodine clock reaction, iodine is formed in a reaction and this iodine reacts with starch
+        indicator to form a noticeable blue-black colour. Rate of reaction is measured by
+        monitoring the time taken for blue black colour to appear.
+
+ •    In a similar investigation, the reaction of potassium iodide (KI) with potassium
+      peroxodisulfate (K2S2O8) is carried out in a colorimeter. As the oxidation takes place and
+      iodine is produced, the brown colour of the iodine is monitored extremely precisely in the
+      colorimeter.
+      The change detected by the colorimeter is far more subtle than the human eye could
+      observe.
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                       Page 6 of 38
+Centre for Higher Secondary Education                                        Department of Chemistry
+
+
+3. Monitoring volume of gas produced
+
+    Ø Two methods that are commonly used for collecting and measuring the volume of gas
+       evolved are:
+    a) Collection using a gas syringe.
+
+
+
+
+    b) Collection over water into a measuring cylinder.
+
+
+
+
+         (Note: this method cannot be used for reactions that produce very soluble gases in water).
+
+     •    Example, magnesium reacts with acids to release hydrogen gas. The volume of gas
+          produced at regular time intervals can be measured, using one of the methods given
+          above.
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                       Page 7 of 38
+Centre for Higher Secondary Education                                       Department of Chemistry
+
+
+ •    A graph of total volume of gas produced against time can be plotted to show how the rate of
+      reaction changes.
+
+
+
+
+4. Measuring the change in mass of reaction mixture
+
+     Ø This is another method used when a gas is produced.
+     Ø The flask containing the reaction mixture is placed on a digital balance and the decrease
+       in mass is measured as the reaction progresses.
+       For example: when calcium carbonate reacts with acids to release carbon dioxide gas.
+       The decrease in mass of the total reacting mixture can be monitored as the reaction
+       proceeds.
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                      Page 8 of 38
+Centre for Higher Secondary Education                                          Department of Chemistry
+
+
+5. Measuring the electrical conductivity
+
+     Ø The principle involved is that electrical conductance depends upon the number and
+       mobility of ions. If the total number or type of ions in solution changes during the reaction,
+       change in electrical conductivity can be measured using a conductivity meter.
+
+ •    In the case of some acid-alkali titrations, the end point is found out by observing
+      conductance.
+        Example: BrO3─(aq) + 6I─(aq) + 6H+(aq) ® 3I2(aq) + 3H2O(l) + Br─ (aq)
+
+ •    From the end point, concentration is found and a graph of concentration against time is
+      plotted to get rate of reaction. As the reaction proceeds, the decrease in electrical
+      conductivity can be measured.
+
+6. Measuring any other physical property that shows a significant change
+
+       Ø Possible physical properties that have not already been mentioned include changes in
+         the volume of liquid (‘dilatometry’), chirality and refractive index.
+
+ CHECKPOINT QUESTION 1 (PAGE 6 TEXTBOOK)
+    1. State suitable techniques to collect rate data for each of the following reactions.
+        a. Magnesium with dilute sulfuric acid:
+               Mg (s) + 2H+ (aq) à Mg2+ (aq) + H2 (g)
+ ……………………………………………………………………………………………………………………………………………………
+ ……………………………………………………………………………………………………………………………………………………
+        b. Ethyl ethanoate with sodium hydroxide:
+               CH3COOCH2CH3 (l) + OH- (aq) à CH3COO- (aq) + CH3CH2OH (aq)
+ ……………………………………………………………………………………………………………………………………………………
+ ……………………………………………………………………………………………………………………………………………………
+        c. Hydrogen gas with iodine gas:
+               H2 (g) + I2 (g) à 2HI (g)
+ ……………………………………………………………………………………………………………………………………………………
+ ……………………………………………………………………………………………………………………………………………………
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                         Page 9 of 38
+Centre for Higher Secondary Education                                      Department of Chemistry
+
+
+   2. Why would the technique of measuring the change in mass of a reaction vessel and
+      contents not work well in the reaction between magnesium and dilute sulphuric acid?
+ ……………………………………………………………………………………………………………………………………………………
+ ……………………………………………………………………………………………………………………………………………………
+ ……………………………………………………………………………………………………………………………………………………
+   3. The reaction between calcium carbonate and dilute hydrochloric acid can be followed
+      by collecting and measuring the volume of gas produced. The gas could be collected
+      over water in a measuring cylinder or in a gas syringe. Which technique would be more
+      suitable for this reaction? Explain your answer.
+ …………………………………………………………………………………………………………………………………..………………
+ ……………………………………………………………………………………………………………………………………..……………
+ …………………………………………………………………………………………………………………………………………………..
+
+
+
+                                                                                   SPECIFICATION
+11A - 2           THE RATE EQUATION                                                  OBJECTIVE
+                                                                                  11.1(ii),(iii), (iv), (v)
+                                                                                    & 11.5 (i) & (ii)
+
+Rate equation
+
+    Ø is an equation expressing the mathematical relationship between the rate of reaction and
+      the concentration of the reactants. It shows how changes in the concentration affects the
+      rate of reaction.
+    Ø This relationship between rate and concentration can only be determined through
+      experiments and cannot be inferred from the balanced stoichiometric equation.
+    Ø Thus, the relationship between the rate of a chemical reaction and the concentration of
+      the reactants is shown by the rate equation of the reaction which in turn leads to reaction
+      mechanism.
+
+    Ø Consider the example:                          A + 3B à 2C + 4D
+
+         For this reaction:                   Rate a [A] and Rate a [B]
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                      Page 10 of 38
+Centre for Higher Secondary Education                                              Department of Chemistry
+
+
+    Ø Hence the experimentally determined rate equation (or rate law or rate expression) of this
+      chemical reaction is:
+                                             Rate = k[A]x[B]y
+
+                  o [A] is the concentration of A, and [B] is the concentration of B.
+                  o x is order of reaction with respect to A and y is order of reaction with respect
+                    to B.( x and y are integers and are determined experimentally.)
+                  o The sum of these powers, in this case x + y, is known as the overall order of
+                    reaction.
+                  o k is the proportionality constant or rate constant of the reaction.
+
+ The order of reaction with respect to a given reactant is the power to which the concentration
+ of that species is raised in the experimentally determined rate equation.
+
+ The overall order of reaction is the sum of the powers to which the concentration of each
+ reactant is raised to in the experimentally determined rate equation or sum of all individual
+ orders.
+
+                      (*Note: The values for orders of reaction in rate equation will be 0, 1 or 2 in IAL)
+
+ CHECKPOINT QUESTION 2 (PAGE 9 TEXTBOOK)
+ 1.    The rate equation for the reaction between peroxydisulphate ions and iodide ions is:
+                              rate = k [S2O82-] [I-]
+          a. What is the order of reaction with respect to:
+          (i) peroxydisulphate ions: ………………………………………………………………
+          (ii) iodide ions: ………………………………………………………………
+          b. What is the overall order of reaction? ………………………………………………………………
+
+
+Order of reaction
+1. ZERO ORDER REACTION: reactions in which rate does not change when the concentration
+   of reactant changes and the reactant would NOT appear in the rate equation.
+   For a zero order reaction, the reaction rate is always equal to the rate constant k, over the
+   concentration range of reactant being considered.
+                                      Rate a [Reactant]0
+                                    Rate = k [Reactant]0, rate = k
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                             Page 11 of 38
+Centre for Higher Secondary Education                                              Department of Chemistry
+
+
+
+
+                                                      A straight line showing a constant
+                                                      decline in concentration.
+                                                      The gradient of this graph measures
+                                                      the rate of the reaction.
+                                                      The gradient is constant, so the rate
+                                                      stays the same.
+
+
+
+
+                                                     The rate does not depend on the
+                                                     concentration. The line is parallel to the
+                                                     x axis.
+
+
+
+
+2. FIRST ORDER REACTION: Rate of reaction is directly proportional to the concentration of
+   reactant. That is when the concentration is changed (increased or decreased) by x times, and
+   the rate changes by the same amount (x times), the order with respect to that reactant is
+   one.
+                                    Rate a [Reactant]1
+                                    Rate = k [Reactant]1
+
+
+
+
+                                                      A slightly sloping curve which drops
+                                                      with a constant half-life
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                                Page 12 of 38
+Centre for Higher Secondary Education                                                 Department of Chemistry
+
+
+
+
+                                                         The rate is proportional to the concentration,
+                                                         so you get a straight line of fixed gradient.
+
+                                                         The gradient of the line equals the rate
+                                                         constant for the reaction.
+
+
+
+
+3. SECOND ORDER REACTION: Rate of reaction is proportional to the square of the
+   concentration of reactant. That is when the concentration is changed (increased or
+   decreased) by x times, and the rate changes by square of that amount (x2 times), the order
+   with respect to that reactant is two.
+
+                                              Rate a [Reactant]2
+                                              Rate = k [Reactant]2
+
+
+
+                                                         The curve declines steeply at first then
+                                                         levels out.
+                                                         *note: similar to 1st order graph, hence to
+                                                         differentiate the two, half-life has to be
+                                                         found. See pages 20-21
+
+
+
+
+                                                         The rate is proportional to the square
+                                                         of the concentration. You get an
+                                                         upwardly sloping curve
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                                Page 13 of 38
+Centre for Higher Secondary Education                                        Department of Chemistry
+
+
+In Summary
+
+
+
+
+* orders of reaction of the individual reactants can help us determine a possible mechanism for a
+chemical reaction.
+
+ CHECKPOINT QUESTION 3 (PAGE 9 TEXTBOOK)
+    2. The rate equation for the reaction between P and Q is:
+                              rate = k[P][Q]2
+       What will be the increase in rate if:
+            a. [P] is doubled, while [Q] is kept constant?……………………………………………………………..
+            b. [Q] is doubled, while [P] is kept constant?…………………………………………………………….
+            c. [P] and [Q] are both doubled?……………………………………………………………………………….
+      3.   In the reaction between R, S and T:
+      o    When the concentration of R is doubled, the rate increases by four times
+      o    When the concentration of S is doubled, the rate does not change
+      o    When the concentration of T is doubled, the rate doubles.
+           (a) Deduce the orders of reaction with respect to R, S and T.
+
+
+
+
+           (b) Write the rate equation for the reaction
+
+
+
+           (c) What is the overall order of reaction?
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                      Page 14 of 38
+Centre for Higher Secondary Education                                        Department of Chemistry
+
+
+Rate constant, k
+
+    Ø The rate constant, k, is the constant of proportionality in the rate equation.
+    Ø Every reaction has its own particular rate equation and therefore its own rate constant.
+      Hence, the units of the rate constant will depend on the rate expression.
+    Ø Its value depends on the activation energy of the reaction and temperature.
+    Ø Reactions with large activation energy will have small value of k.
+    Ø The value of rate constants will only change with a change in temperature.
+
+Example: For a reaction of the form A + B à C + D
+For this reaction the rate equation can be of the form shown and hence overall order of the
+reaction can be written as shown below. For the given rate expressions give the overall order and
+the units of the rate constant: (*You can find the units by rearranging the rate equation.)
+
+                                                             Units of rate constant, k
+    Overall Order of                                     (provided moldm-3 as the unit of
+                                  Rate equation
+       reaction                                      concentration and seconds as the unit of
+                                                                       time.)
+
+
+              0             Rate = k [A]0[B]0
+
+
+
+
+                            Rate = k [A]1[B]0
+
+
+
+
+                            Rate = k [A]1[B]1
+
+
+
+
+                            Rate = k [A]1[B]2
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                      Page 15 of 38
+Centre for Higher Secondary Education                                         Department of Chemistry
+
+
+ Practice Question 1
+ Alkaline hydrolysis of methyl ethanoate is shown below.
+                         CH3COOCH3(aq) + OH-(aq) ® CH3COO-(aq) + CH3OH(aq)
+ The rate expression for this reaction is:
+                                Rate = k [CH3COOCH3] [OH-]
+
+ (a) What is the order of reaction with respect to CH3COOCH3 and OH-?
+
+
+
+
+ (b) What is the overall order of the reaction?
+
+
+
+ (c) Work out the units of rate constant for this reaction, using moldm-3 as the unit of
+ concentration and seconds as the unit of time.
+
+
+
+
+                                                                                    SPECIFICATION
+11A-3 EXPERIMENTAL DETERMINATION OF ORDER                                           OBJECTIVE 11.1
+                                                                                   (vi), 11.2 11.4 (i),(ii)
+OF REACTION AND RATE EQUATION                                                            & 11.5 (iii)
+
+
+There are two methods for determining orders of reaction, which are both experimental.
+
+    1. Initial rate method
+
+    Ø The order with respect to each reactant in the reaction can be determined by carrying out
+      the reaction with various different initial concentrations and measuring the change in
+      initial rate of reaction.
+    Ø The initial rate of a reaction is the rate at the instant that the chemicals are mixed. This is
+      normally found by measuring the time taken for the concentration of a reactant or a
+      product to change by a known amount.
+    Ø When the order of reaction with respect to one reactant is being determined, the
+      concentration of that reactant is changed, and the others are kept constant so that the
+      change in rate can be attributed to the change in concentration of that reactant alone.
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                          Page 16 of 38
+Centre for Higher Secondary Education                                              Department of Chemistry
+
+
+        Ø The experiment is then repeated, changing the concentration of one of the other reactants
+          but keeping the concentration of all the others constant.
+        Ø It is then possible to calculate the mathematical relationship between the rate of the
+          reaction and the concentration of the reactant.
+
+                  *Large Excess of reactants
+                  In reactions where there are several reactants, if the
+                  concentration of one of the reactants is kept in large excess, then
+                  the reactant will appear not to affect the rate of the reaction. This
+                  is because its concentration stays effectively constant.
+
+
+Example: A + B + C ® products
+
+The experimental method is as follows:
+The initial rates of reaction with different concentrations of A, B and C are found. And by taking
+two experiments at a time, the order with respect to each substance can be found.
+                               A/                B/               C/         Initial rate /
+          Experiment                -3               -3               -3
+                             moldm            moldm            moldm          moldm-3s-1
+                1                1               1                 1               1
+                2                2               1                 1               2
+                3                1               2                 1               4
+                4                1               2                 2               4
+
+    •    Order of reactant A:
+           o From experiments 1 and 2:                     •   Order of reactant C:
+           o [A] doubles , [A] x 2 and                       o From experiments 3 and 4:
+           o rate doubles, Rate x 2                          o [C] doubles, [C] x 2 and
+           \ order with respect to A = 1                     o rate unaltered/stays the same
+•       Order of reactant B:                                 \ order with respect to C = 0
+        o From experiments 1 and 3:                       Therefore, rate equation:
+        o [B] doubles, [B] x 2 and                         • rate = k [A]1 [B]2 [C]0
+        o rate quadraples, Rate x 4                       Overall order of the reaction = 3
+        o \ order with respect to B = 2
+
+Ø In an initial rates experiment, the initial rate of reaction is proportional to the reciprocal of the
+  time, t, since the amount of product formed, or reactant used is kept constant.
+                                              rate a 1/t
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                            Page 17 of 38
+Centre for Higher Secondary Education                                             Department of Chemistry
+
+
+ CHECKPOINT QUESTION 4 (PAGE 14 TEXTBOOK)
+ 2. The equation for the reaction between bromide ions and bromate(V)ions is acidified aqueous
+ solution is
+                      5Br- (aq) + BrO3- (aq) + 6H+ (aq) à 3Br2 (aq) + 3H2O (l)
+ The table shows the results of four experiments carried out using different concentrations of
+ the three reactants.
+                           [Br- (aq)]/               [BrO3- (aq)]/   [H+ (aq)]/     INITIAL RATE/
+   EXPERIMENT
+                            moldm-3                    moldm-3        moldm-3         moldm-3s-1
+            1                 0.10                       0.10          0.10           1.2 x 10-3
+            2                 0.10                       0.20          0.10           2.4 x 10-3
+            3                 0.30                       0.10          0.10           3.6 x 10-3
+            4                 0.10                       0.20          0.20           9.6 x 10-3
+
+
+ a) Deduce the order of reaction with respect to:
+ (i) Br-
+
+
+
+
+ (ii) BrO3-
+
+
+
+
+ (iii) H+
+
+
+
+
+ (b) Write the rate equation for the reaction.
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                           Page 18 of 38
+Centre for Higher Secondary Education                                         Department of Chemistry
+
+
+ (c) Using the results from experiment 1, calculate the rate constant, k, for the reaction. Include
+ units in your answer.
+
+
+
+
+ Practice Question 2
+ The reaction between nitrogen (II) oxide and hydrogen at 1000⁰C is:
+                                  2NO(g) + 2H2(g) ® N2(g) + 2H2O(g)
+
+
+      Experiment             [NO]/ moldm-3           [H2] / moldm-3   Initial rate/ moldm-3s-1
+
+            1                   4.0 x 10-3             1.0 x 10-3            1.2 x 10-5
+            2                   8.0 x 10-3             1.0 x 10-3            4.8 x 10-5
+            3                   8.0 x 10-3             4.0 x 10-3           1.92 x 10-4
+
+
+      (a) Use the data above to deduce the order of reaction with respect to hydrogen and
+          nitrogen (II)oxide.
+
+
+
+
+      (b) Write the rate equation for the reaction.
+
+
+
+
+      (c) Calculate the overall order of the reaction.
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                        Page 19 of 38
+Centre for Higher Secondary Education                                           Department of Chemistry
+
+
+      (d) Using the results from experiment 1, calculate the rate constant, k. Include units in your
+          answer.
+
+
+
+
+     2. The continuous method
+
+     Ø A reaction mixture is made and samples from the mixture are withdrawn at regular time
+       intervals and quenched.
+     Ø The concentration of the reactant is then determined by an appropriate experimental
+       technique such as titration.
+     Ø A concentration-time graph is then drawn and half-life for the reaction is found at different
+       concentrations.
+     Ø If the half-life has a constant value, then the reaction is first order with respect to that
+       reactant.
+
+ •    Half-life (t1/2) is the time taken for the concentration of a reactant to fall from any selected
+      value to half that value.
+
+
+
+
+                                                                 1st half life: for the change in
+                                                                 concentration from 1.6 to 0.8 is 400s
+                                                                 2nd half life: for the change in
+                                                                 concentration from 0.8 to 0.4 is 400s
+                                                                 3rd half life: for the change in
+                                                                 concentration from 0.4 to 0.2 is 400s
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                          Page 20 of 38
+Centre for Higher Secondary Education                                             Department of Chemistry
+
+
+      o From the concentration against time graph, the time taken for concentration to fall to
+        half from its original value is measured. Then measure time take for concentration to
+        decrease from half to quarter and then from quarter to an eighth.
+
+    Ø If the half-lives double as the reaction proceeds, then the reaction is second order.
+
+    o A useful relationship to calculate the rate constant (k) using half life, for first order reaction:
+
+                                                     kt½ = loge 2
+
+                                                     kt½= 0.693
+
+                                  k = 0.693 / t½ Where, t½= the half life
+
+
+
+ CHECKPOINT QUESTION 5 (PAGE 13 TEXTBOOK)
+       1. A compound P decomposes when heated. The graph shows the change in
+          concentration when a sample of P is heated.
+
+
+
+
+      (a) State what is meant by the term half-life of reaction.
+
+
+
+
+      (b) Use the graph to show that the decomposition of P is a first order reaction.
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                           Page 21 of 38
+Centre for Higher Secondary Education                                             Department of Chemistry
+
+
+      (c) Explain the effect on the half-life of doubling the initial concentration of P.
+
+
+
+
+      (d) Calculate the rate constant, k, for this reaction using the following expression. Include
+          units in your answer.
+          k = 0.693 / half-life
+
+
+
+
+      (e) Write the rate equation for this reaction.
+
+      (f)
+             i.     Use the graph to determine the concentration of P at 800s
+
+
+
+
+             ii.    Use the rate equation from (e) and your answers to (d) and (f) (i) to calculate the
+                    rate of reaction at 800s. include units in your answer.
+
+
+
+
+     (g) Describe how you could determine the reaction rate at 800s directly from the graph.
+ _____________________________________________________________________________________________________
+ ______________________________________________________________________________________________________
+ ______________________________________________________________________________________________________
+ ______________________________________________________________________________________________________
+ ______________________________________________________________________________________________________
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                           Page 22 of 38
+Centre for Higher Secondary Education                                            Department of Chemistry
+
+
+ Practice Question 3
+
+ Consider the reaction PCl3 + Cl2à PCl5.
+ The following rate data were obtained at constant temperature.
+
+                           Initial concentration of   Initial concentration of   Initial rate/
+     Experiment
+                                 PCl3/ moldm-3              Cl2/ moldm-3         moldm-3 s-1
+
+          1                   0.2                        0.1                       0.0004
+          2                   0.4                        0.1                       0.0008
+          3                   0.8                        0.2                       0.0064
+      (a) Use the data to deduce the order of reaction with respect to:
+            I. PCl3
+
+
+
+
+             II.    Cl2.
+
+
+
+
+      (b) Write the rate equation.
+
+
+
+      (c) Calculate the value of the rate constant, using the results from experiment 1. Include
+          units in your answer.
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                               Page 23 of 38
+Centre for Higher Secondary Education                                          Department of Chemistry
+
+
+ Practice Question 4
+
+ The reaction between NO(g) and Cl2(g) has been studied at 50oC.
+                                         NO(g) + ½Cl2(g) à NOCl(g)
+ The table shows the initial concentrations of reactants and the initial rate of formation of
+ NOCl(g).
+
+     Experiment              [NO(g)]/ moldm-3        [Cl2(g)]/ moldm-3   Initial rate/ moldm-3 s-1
+
+            1                       0.250                 0.250                1.43 x 10-6
+            2                       0.250                 0.500                2.86 x 10-6
+            3                       0.500                 0.500                11.44 x 10-6
+      a. What is the order of reaction with respect to Cl2?
+
+
+
+
+      b. What is the order of reaction with respect to NO?
+
+
+
+
+      c. Write the rate equation for this reaction.
+
+
+
+      d. Calculate the value of the rate constant, using experiment 2. Include units in your
+         answer.
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                           Page 24 of 38
+Centre for Higher Secondary Education                                                 Department of Chemistry
+
+                                                                                             SPECIFICATION
+11A – 4           RATE EQUATION AND MECHANISMS                                                OBJECTIVE 11.6
+                                                                                           (i),(ii), (iii), 11.7, 11.8
+                                                                                                      & 11.9
+
+
+Reaction mechanisms
+Ø The orders of reaction of the individual reactants in a rate equation is helpful in suggesting a
+  possible mechanism for a reaction.
+Ø Mechanisms can have one step or a series of steps. If there is a series of steps, then each step
+  can have its own rate. The overall rate is decided by the step with the slowest rate, also known
+  as the rate determining step.
+Ø The reaction mechanism can’t usually be predicted from just the chemical equation unless the
+  reaction is known to be elementary.
+      o Elementary reactions: a reaction that take place with a single collision between the two
+           reactant particles.
+  e.g.: the following reaction is known to be elementary
+               NO(g) + O3(g) → NO2 (g) + O2(g),
+  that is, the reaction takes place when a molecule of NO collides with a molecule of O3. Hence
+  the rate equation will be;
+                                                     The order indicates the no.
+                                                     of molecules involved in the
+                                                     rate-determining step
+                  rate=k[NO] 1 [O3]1
+                                                     Indicates that only molecules of NO & O3
+                                                     are involved in the rate- determining step
+
+
+Ø A reaction that is not elementary takes place through a series of interconnected
+  steps/reactions that is called the mechanism.
+      o Example: free radical substitution reaction of methane with chlorine.
+         The intermediates that are formed in the mechanism do not appear in the overall
+         equation but are involved in steps that result in converting reactants to products.
+
+Ø Thus, if the experimentally determined rate equation does not match with the overall
+  stoichiometry, then it is almost certain that the reaction is not elementary.
+
+Ø A reaction involving simultaneous collision of more than two particles, all with correct
+  orientation and energy is very rare, hence the multiple steps in a mechanism for some
+  reactions.
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                                   Page 25 of 38
+Centre for Higher Secondary Education                                                Department of Chemistry
+
+
+    e.g: For the reaction            NO2(g) +CO(g) → NO(g) + CO2 (g), the rate equation is
+
+                              rate=k[NO2] 2
+    o this suggests that only molecules of NO2 are involved and that 2 molecules of it are involved
+      in the rate determining step.
+
+Therefore, for rate determining step, many possibilities could be drawn.
+       NO2 + NO2 → N2O4 or            NO2 + NO2 → 2NO+ O2            etc.
+
+    o Both of these are acceptable, but there is no way of knowing which one is likely to take
+      place, without investigating further.
+
+Ø Furthermore, if a reactant doesn’t appear in the rate equation (CO in this example), then there
+  must be another step in which that reactant is involved, but this reaction will not have an effect
+  on the overall rate of reaction.
+Ø Hence, a suggested mechanism must be consistent with the data. The order of reaction with
+  respect to any species, which occurs in the mechanism after the rate determining step, will be
+  zero.
+
+Note: there is no way of knowing what is involved in the remaining steps, except that the sum of
+all the steps must add up to the overall stoichiometric equation.
+
+suggested mechanism:
+             NO2 + NO2 ® NO3 + NO                                    SLOW
+
+                  NO3 + CO ® CO2 + NO2                               FAST
+
+                  NO2 + CO ® NO + CO2                Particles cancel to produce the overall equation
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                               Page 26 of 38
+Centre for Higher Secondary Education                                                                                             Department of Chemistry
+
+
+ CHECKPOINT QUESTION 6 (PAGE 18 TEXTBOOK)
+              1. (a) The equation for the reaction between ethanal, CH3CHO, and hydrogen cyanide, HCN, is:
+              CH3CHO + HCN ® CH3CH(OH)CN
+              Two mechanism that have been proposed for this reaction are:
+              Mechanism 1
+                     Step 1: CH3CHO + H+ ® [CH3CHOH]+
+                     Step 2: [CH3CHOH]+ + CN- ® CH3CH(OH)CN
+              Mechanism 2
+                     Step 1: CH3CHO + CN- ® [CH3CHOCN]-
+                     Step 2: [CH3CHOCN]- + H+ ® CH3CH(OH)CN
+              The rate equation for the reaction is:
+              Rate = k[CH3CHO][CN-][H+]0
+ Explain which of the two mechanisms is consistent with the rate equation.
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+
+       (b) Which step in this mechanism is the rate-determining step?
+
+
+
+             2. The equation for the reaction between hydrogen and nitrogen monoxide is:
+             2H2(g) + 2NO(g) ® 2H2O(g) + N2(g)
+             The rate equation for the reaction is:
+                                                    Rate = k[H2][NO]2
+             A proposed mechanism for the reaction is :
+             Step 1: 2NO(g) ® N2O2(g)                           FAST
+             Step 2: N2O2(g) + H2(g) ® H2O(g) + N2O(g)           SLOW
+             Step 3: N2O(g) + H2(g) ® H2O(g) + N2(g)            FAST
+
+             Is this mechanism consistent with the rate equation? Explain your answer.
+
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                                                                                   Page 27 of 38
+Centre for Higher Secondary Education                                         Department of Chemistry
+
+
+ PRACTICAL SKILLS: KINETICS OF THE REACTION BETWEEN PROPANONE AND IODINE IN ACID
+ SOLUTION
+   Ø The reaction between propanone and iodine is
+                              CH3COCH3 + I2 ® CH2ICOCH3 + HI
+
+    Ø This reaction is catalysed using hydrogen ions.
+      CH3COCH3(aq) + I2(aq) + H+(aq) → CH3COCH2I(aq) + 2H+(aq) + I-(aq)
+
+    Ø The rate equation for this reaction can be written as
+                    Rate = k [CH3COCH3 ]x[I2]y[H+]z
+
+   Ø The rate of this reaction is followed by varying the concentration of each species and then
+       titrating the remaining unreacted iodine with standard sodium thiosulfate using starch
+       indicator. Alternatively, a colorimeter can be used to monitor the brown colour of the
+       iodine.
+   Ø Experimental data shows the reaction to be first order with respect to both propanone and
+       hydrogen ions, but zero order for iodine. The reactant iodine is not in the rate equation at
+       all but hydrogen ions are present, despite not being reactants. Hence for this reaction the
+       rate equation is: Rate = k [CH3COCH3] [H+]
+A possible mechanism for this reaction in the presence of an acid catalyst is:
+       CH3COCH3 + H+ ® ( CH3C(OH)CH3)+                    step 1 (slow)
+       (CH3C(OH)CH3) ® CH2C(OH)CH3 + H
+                       +                          +
+                                                          step 2 (fast)
+       CH2C(OH)CH3 + I2 ® CH2IC(OH)(I)CH3                 step 3 (fast)
+       CH2IC(OH)(I)CH3 ® CH2ICOCH3 + H + I   +     -
+                                                          step 4 (fast)
+
+    o Propanone and H+ are in rate determining step, hence they are in the rate equation.
+    o Orders of reaction with respect to these two are 1, so the rate determining step uses one
+      molecule of each.
+    o Order with respect to iodine is 0 hence it is not involved in the rate determining step and it
+      is not included in the rate equation.
+
+Why do H+ ions appear in the rate equation?
+  o The reaction is catalysed by acid [H+] which affects the rate of the reaction but is
+      unchanged overall.
+  o Catalysts appear in the rate equation because they affect the rate, but they do not appear
+      in the stoichiometric equation because they remain chemically unchanged.
+
+*Note: The Lab Book can give additional guidance and treatment and analysis of results.
+(CP9a:pg 34-36)
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                       Page 28 of 38
+Centre for Higher Secondary Education                                       Department of Chemistry
+
+  PRACTICAL SKILLS: IODINE CLOCK REACTION
+  (Studying the effect of changing concentration of a reactant on the reaction rate)
+    Ø A clock reaction allows to determine the initial rate of a reaction by taking a single
+      measurement. The time, t, is measured from the start of an experiment until a visual
+      change is observed. This often involves a colour change or the formation of a precipitate.
+    Ø The time, t, is measured from mixing until the first formation of the blue colour. The rate
+      of reaction is proportional to
+      Example:
+      o Two colourless solutions are mixed and at first there is no visible reaction, but after a
+          short time delay the liquid suddenly turns dark blue (sometimes described as blue-
+          black).
+
+
+
+
+       o One of the reactants is a solution of potassium iodide. This is acidified with dilute
+          sulphuric acid and small quantities of starch and sodium thiosulfate are added.
+      o The other reactant is a solution of hydrogen peroxide. Hydrogen peroxide reacts with
+        acidified potassium iodide to produce iodine as shown below:
+               Step 1: H2O2(aq) + 2I–(aq) + 2H+(aq) → 2H2O(l) + I2(aq)
+      o As soon as any iodine is produced, it reacts with sodium thiosulfate, forming iodide ions
+        again as shown below:
+               Step 2:    I2 (aq) + 2S2O32–(aq) → 2I–(aq) + S4O62–(aq)
+      o When all the sodium thiosulfate is used up, a blue colour is suddenly formed because the
+        iodine forms a complex with the starch that has been added.
+
+      o By repeating the experiment using several different concentrations of hydrogen peroxide,
+        the effect on the rate of changing the concentration of hydrogen peroxide can be
+        investigated.
+
+*Note: The Lab Book provides an additional example with experimental details. (CP9b:pg 37-41)
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                     Page 29 of 38
+Centre for Higher Secondary Education                                       Department of Chemistry
+
+
+ CHECKPOINT QUESTION 7 (PAGE 18 TEXTBOOK)
+
+ 3. Assume the following proposed reaction mechanism is correct:
+                                          Cl2 → 2Cl•             SLOW
+                                           H2 + Cl• → HCl + H•   FAST
+                                           H• + Cl• → HCl        FAST
+ (a) Write the overall equation for the reaction.
+
+
+
+
+ (b) Write a rate equation for the reaction that is consistent with the mechanism.
+
+
+
+ (c) What would be the effect on the rate of reaction of doubling the concentration of Cl2?
+
+
+
+ (d) What would be the effect on the rate of reaction of doubling the concentration of H2?
+
+
+
+
+Alkaline hydrolysis of halogenoalkanes
+Tertiary Halogenoalkanes (SN1 mechanism)
+   Ø The nucleophilic substitution reaction of tertiary haloalkanes via SN1 mechanism
+       (Substitution Nucleophilic unimolecular) is an example of a multistep reaction.
+
+    For example: the reaction between 2-bromo-2-methylpropane and sodium hydroxide
+    Equation: C4H9Br + NaOH ® C4H9OH + NaBr
+    Ø The experimentally determined rate equation for this reaction is:
+                                       rate = k [C4H9Br]
+    Ø This shows that it is a first order reaction with respect to halogenoalkane and zero order
+        with respect to hydroxide ion.
+    Ø Only the halogenoalkane is involved in the rate determining step. So, the rate equation
+        does not involve hydroxide ions.
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                     Page 30 of 38
+Centre for Higher Secondary Education                                       Department of Chemistry
+
+
+    Mechanism:
+
+                                           slow           fast
+
+
+
+
+    o In this mechanism the first step, the slow rate-determining step, involves the loss of the
+      halogen as a halide ion and the formation of a planar carbocation intermediate.
+    o The second step involves a rapid reaction between the nucleophile, hydroxide ion and the
+      carbocation to form the alcohol.
+    o The slow step is said to be unimolecular since only one reactant particle, (CH3)3CBr is
+      present.
+
+Primary halogenoalkanes (SN2 mechanism)
+   Ø The nucleophilic substitution of primary halogenoalkanes occurs via SN2 mechanism
+      (Substitution Nucleophilic bimolecular) and this is an example of a single step mechanism.
+
+         For example: the reaction between 1-bromoethane and sodium hydroxide
+         Equation for the reaction: CH3CH2Br + NaOH ® CH3CH2OH + NaBr
+
+    Ø The experimentally determined rate equation for this reaction is:
+                                      rate = k [CH3CH2Br][OH-]
+    Ø This shows that it is a first order reaction with respect to both halogenoalkane and
+      hydroxide ion and both are involved in the rate determining step.
+
+         Mechanism:
+
+                                        RDS
+
+
+
+
+         o This is a continuous single one-step reaction, which passes through a transition state
+           (not an intermediate as seen in SN1 mechanism), which often represents a condition
+           where old bonds are half-broken and new bonds are half-formed.
+
+         o The rate determining step is said to be bimolecular because there are two reactant
+           particles present.
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                     Page 31 of 38
+Centre for Higher Secondary Education                                                                                             Department of Chemistry
+
+
+ CHECKPOINT QUESTION 8 (PAGE 18 TEXTBOOK)
+ 4. The nucleophilic substitution reaction between equimolar quantities of CH3Cl and OH- is
+   second order overall. However, if the reaction is carried out using large excess of OH-, the
+   reaction becomes first order overall. Suggest an explanation for these observations.
+
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+ ...............................................................................................................................................................
+
+
+
+
+ 5. Bromine can be formed by the oxidation of hydrogen bromide with oxygen.
+    A proposed mechanism for this reaction is:
+    Step 1: HBr + O2 → HBrO2
+    Step 2 : HBrO2 + HBr → 2HBrO
+    Step 3: HBrO + HBr → Br2 + H2O
+    Step 4: HBrO + HBr → Br2 + H2O (repeat of step 3)
+    The rate equation for this reaction is:
+     Rate = k[HBr][O2]
+     a) Explain which of the above four steps is the rate-determining step for this reaction?
+
+
+
+
+      b) Write the overall equation for the reaction.
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                                                                                   Page 32 of 38
+Centre for Higher Secondary Education                                           Department of Chemistry
+
+
+
+                                                                                        SPECIFICATION
+11A - 5           ACTIVATION ENERGY AND CATALYSIS                                          OBJECTIVE
+                                                                                       11.1(vii),(ix) & 11.11
+
+
+    Ø Activation energy, Ea : minimum amount of energy that colliding particles must possess for
+      a reaction to occur.
+
+
+    Catalysts
+    Ø A substance that increase the rate of reaction by providing an alternative reaction route
+      with lower activation energy and is chemically unchanged at the end of the reaction.
+    Ø The energy profile diagram for an exothermic reaction show how catalysts work.
+
+
+
+
+    Ø Catalysts can be divided into two types:
+      o Homogenous catalysts and
+      o Heterogenous catalysts
+
+Homogeneous catalysts
+   Ø A homogeneous catalyst is in the same phase (solid, liquid, solution or gas) as the
+      reactants
+Example:
+   a) iodination of propanone. H+ (aq) ion catalyses the reaction
+      CH3COCH3 (aq) + I2 (aq) ® CH3COCH2I (aq)+ H+ (aq) + I- (aq)
+
+    b) a gaseous catalyst in a mixture of gases or a liquid catalyst in a mixture of liquids.
+       Chlorine free radicals act as a homogeneous catalyst in the gas phase.
+              Cl• (g) + O3(g) → ClO• (g) + O2(g)
+              ClO• (g) + O3 (g) → Cl• (g) + 2O2(g)
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                          Page 33 of 38
+Centre for Higher Secondary Education                                      Department of Chemistry
+
+
+Heterogeneous catalysts
+   Ø A Heterogeneous catalyst is in a different phase to that of the reactants.
+      Example: in the Haber process the solid iron catalyst catalyses the reaction between two
+      gases, hydrogen and nitrogen.
+
+    Ø It takes place at active sites on the surface of a solid (e.g. a metal). Gases are adsorbed
+      onto the surface and form weak bonds with metal atoms. This form of catalysis is thought
+      to work in three stages as follows:
+
+    1. Adsorption: reactants adsorbed (the adhesion of atoms, molecules or ions to the surface
+       of a solid) onto the surface of the catalyst. Formation of bonds with the metal may use
+       some of the electrons from bonds within the gas molecules thus weakening these bonds.
+
+
+
+
+    2. Reaction: reactant molecules are held in position that enable them to react together
+
+
+
+
+    3. Desorption: the product molecules leave the surface/active sites.
+
+
+
+
+*The rate of reaction is controlled by how fast the reactants are adsorbed and how fast the
+products are desorbed.
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                    Page 34 of 38
+Centre for Higher Secondary Education                                       Department of Chemistry
+
+
+Autocatalysis: The reaction is catalysed by one of its products. These reactions start slowly, but
+then speeds up as the catalytic product is formed.
+
+Example: oxidation of ethanedioic acid by potassium manganate (VII).
+          2MnO4- (aq) + 5 (COOH)2 (aq) + 6H+ (aq) à 10CO2 (g) + 2 Mn2+ (aq) +8H2O (l)
+
+This reaction is very slow at room temperature but is catalysed by Mn2+ ions which are not present
+initially. As soon as it is produced the reaction rate increases.
+
+An example of autocatalysis gives a curve like this:
+
+
+
+
+11A – 6 EEFECT OF TEMPERATURE ON THE RATE
+     CONSTANT                                                                  SPECIFICATION
+                                                                               OBJECTIVE 11.10
+                                                                                  &11.1 (vii)
+
+The Arrhenius equation
+    Ø The rate constant, k, is only constant at constant temperature. Increasing the temperature
+      always causes the value of the rate constant to increase. This is because there are more
+      particles with the available activation energy to react at higher temperature.
+
+    Ø A quantitative relationship between temperature and the rate constant was proposed by
+      the Swedish chemist Svante Arrhenius. This is described as the Arrhenius equation and is
+      expressed as follows:
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                      Page 35 of 38
+Centre for Higher Secondary Education                                              Department of Chemistry
+
+
+                                        k Þ rate constant,
+             k a e –Ea/RT               A Þ constant known as the pre-exponential factor, which
+                                        measures the rate at which collisions occur irrespective of
+             k = Ae(–Ea/RT)             their energy. It also includes other important factors like
+                                        correct orientation at the time of collision.
+                                        Ea Þ activation energy of the reaction (J)
+                                        R Þ gas constant (8.31 J mol-1 K-1)
+                                        T Þ absolute temperature (i.e. temperature in kelvin, K)
+                                        e Þ exponential constant
+
+
+
+    Ø Taking natural logarithms of the Arrhenius equation we obtain
+                                                !"#
+                                         ln k =       + lnA
+                                                $%
+
+    Ø Using the above equation a graph of ln k (on y axis) against (on x axis) can be plotted.
+
+    Ø This will produce a straight line graph with gradient of, thereby providing an experimental
+      method to determine the activation energy of a reaction.
+      (For a straight line graph; y = mx + c)
+
+    Ø The intercept with the vertical axis gives ln A
+
+         Example:
+
+
+
+
+    Ø As activation energy Ea of a reaction gets larger, k gets smaller. So, reactions with a large
+      Ea will be slower.
+    Ø The equation also shows that as the temperature rises, k increases and hence rate will also
+      increase.
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                            Page 36 of 38
+Centre for Higher Secondary Education                                        Department of Chemistry
+
+
+ Practice Question 5
+
+ The rate constant for the hydrolysis of a halogenoalkane with sodium hydroxide was
+ measured at several different temperatures and the results plotted in the graph shown.
+
+                                                     From the graph, determine the gradient
+                                                     of the line and hence calculate the
+                                                     activation energy for this reaction.
+                                                     Include signs and units in your answers
+
+
+
+
+ EXAM PRACTICE QUESTION 9 (PAGE 29 TEXTBOOK)
+ Nitrogen dioxide, NO2, is decomposed on heating into nitrogen monoxide, NO, and oxygen. The
+ proposed mechanism for this reaction is:
+                             NO2 + NO2 → NO3 + NO             SLOW
+                              NO3 → NO + O2                    FAST
+     a) (i) write an overall equation for the decomposition of nitrogen dioxide
+
+
+
+          (ii) write the rate equation for the reaction.
+
+
+
+      b) The rate constant, k, for the decomposition was determined at several different
+         temperatures. The results obtained were used to plot the graph shown below.
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                      Page 37 of 38
+Centre for Higher Secondary Education                                          Department of Chemistry
+
+
+
+
+          (i) Use the graph and expression,
+                                                              !"#
+                                                     ln k =  + lnA
+                                                       $%
+               to calculate the activation energy for the thermal decomposition of nitrogen dioxide.
+               Give your answer to an appropriate number of significant figures.
+
+
+
+
+          (ii) A vessel of volume 2.00 dm3 is filled with 4.00 mol of nitrogen dioxide at a
+               temperature of 650K. the initial rate of reaction was found to be 12.64 moldm-3s-1.
+               Calculate a value for the rate constant, k, at this temperature.
+
+
+
+
+Grade 12/Unit 4/Topic 11-KINETICS /2021/semester 3                                        Page 38 of 38
+
