@@ -1759,3 +1759,18 @@ The journal is chronological and append-only. A journal entry describes complete
 **Deployment status.** Not deployed; commit only.
 
 **Remaining limitations.** Topic 1 still in the old register (user scoped this request to topic 2); gallery rendering of physics docs not eyeballed in a browser; bullets are flat (the reader has no sub-bullet nesting — sub-points are separate bullets, as the chemistry notes do it).
+
+
+## 2030 — WPH11 Topic 2 rewritten in the plain register after user feedback
+
+**Feedback & decision.** The user rejected the first mark-scheme-wise cut: arrows and symbols used as prose (temperature ↑ → viscosity ↓), session/question citations on bullets, congested bullet groups, and AI-flavoured phrasing ("costume", "verbatim", "mined", "scorable"). Direction: study papermunch.org/crash/wph11/ and write in that register — one bullet = one full sentence that could earn a mark, cause before effect, equations in bold parentheses, short headed groups with breathing room, and no citations of any kind.
+
+**Files changed.** notes-ph02-a.ts and notes-ph02-b.ts fully rewritten again: no arrows anywhere, no session or question numbers, headings simplified to plain labels (Definitions, Floating, Common mistakes…), 4–7 bullets per group spread over more groups (A: 10 bullet groups/4 headings-per-section average; B: 12 groups), five term definitions kept as def blocks with plain sentences, the ten-row quoted traps table dropped in favour of a short "Common mistakes" group per section, figures kept with plain captions. notes.ts: wph11-t02 intro rewritten to two plain paragraphs without jargon or year references.
+
+**Preserved invariants.** Spec statements verbatim and section titles unchanged; physics stays in GALLERY_DOCS (cards interface); block kinds all standard (h/bullets/def/figure); Topic 1 untouched (it still carries the older register and its intro's "costume/verbatim" wording — scoped out until asked).
+
+**Checks actually run.** bun run build — green. A lint pass over the two content files and the t02 intro confirmed zero symbol-as-prose characters (→ ↑ ↓ ∝), zero session/question citations, zero jargon terms; the only hits repo-wide are in Topic 1's intro and a code comment in notes.ts, both outside this change. Not browser-rendered; the block kinds are the ones already served by both readers.
+
+**Deployment status.** Not deployed; commit only.
+
+**Remaining limitations.** Topic 1 still in the old register; papermunch-style "variant" scenario chains are bullets under their own headings rather than unbulleted lead-in paragraphs, matching the site's block model.

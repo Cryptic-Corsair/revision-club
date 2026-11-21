@@ -433,11 +433,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This is the ==mark-scheme-wise== Materials note: every spec statement is stated, and below it sit the ==exact marking points the WPH11/01 mark schemes award== — one bullet, one scorable point, in the examiners' own wording. It covers all ten Materials statements: ==density== and ==upthrust==, ==Stokes' law== with its conditions, the ==falling-ball viscometer== of Core Practical 2, then ==Hooke's law==, ==stress, strain and the Young modulus==, the ==force-extension== and ==stress-strain== graphs with every named point, the ==Young modulus rig== of Core Practical 3, and ==elastic strain energy==.",
+        text: "This note covers the ten Materials statements of WPH11 Unit 1. Each section starts from the ==specification point==, and under it the content is written as ==mark scheme notes==: short points, each one a sentence that could earn a mark. The sections cover ==density==, ==upthrust==, ==Stokes' law== and viscosity (including the falling-ball experiment), then ==Hooke's law==, ==stress==, ==strain== and the ==Young modulus== (including the wire experiment), the ==force-extension== and ==stress-strain== graphs, and ==elastic strain energy==.",
       },
       {
         k: "p",
-        text: "Every marking point is mined from the ==2019–2025 papers, mark schemes and Principal Examiners' reports==: the definition sentences to learn verbatim (upthrust, laminar flow, the five graph terms), the multi-mark ==chains in the order the marks are awarded== (terminal velocity, viscosity and temperature, the submarine's rising tension), the scenario bullets for every costume the upthrust balance has worn, the practical methods as indicative-content lists, and the ==examiners' own trap list== — with each trap quoted from the report that named it.",
+        text: "Some ideas repeat on nearly every paper in different situations, so the same short chain of points is written out once for the basic case and again for each situation it appears in. Each section ends with the common mistakes that candidates make most often, so you can avoid them before the exam.",
       },
     ],
     sections: [...SECTIONS_PH02_A, ...SECTIONS_PH02_B],

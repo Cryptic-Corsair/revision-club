@@ -2,11 +2,10 @@ import type { SpecSection } from "../notes-types";
 
 /* ═══════════════════════════════════════════════════════════════
    WPH11 · Topic 2 Materials · Part A — fluids (statements 23–26)
-   Mark-scheme-wise notes: each spec statement followed by the
-   marking points the WPH11/01 mark schemes actually award, in
-   their own wording, mined from the 2019–2025 papers, mark
-   schemes and Principal Examiners' reports (research/wph11/
-   digest-A…D). One bullet = one scorable point.
+   Mark-scheme-wise notes in the plain register: one bullet = one
+   sentence that could earn a mark, cause before effect, no
+   symbols-as-prose, no session citations, spread over short
+   headed groups.
    ═══════════════════════════════════════════════════════════════ */
 
 export const SECTIONS_PH02_A: SpecSection[] = [
@@ -15,34 +14,33 @@ export const SECTIONS_PH02_A: SpecSection[] = [
     statement: "be able to use the equation density ρ = m/V",
     title: "Density",
     blocks: [
-      { k: "h", text: "Density — ρ = m/V" },
+      { k: "h", text: "Density" },
       {
         k: "bullets",
         items: [
-          "Density is the ==mass per unit volume==: **ρ = m/V**.",
-          "Unit: ==kg m⁻³== (from kg ÷ m³).",
-          "==g cm⁻³ → kg m⁻³: multiply by 1000== (1 g cm⁻³ = 1000 kg m⁻³; water = 1.00 g cm⁻³ = 1000 kg m⁻³).",
-          "Anchors: water **1000**, seawater **1025–1030**, glycerol **1260**, air **≈ 1.2** (balloon questions give it or want it).",
+          "Density is the mass per unit volume of a material (**ρ = m/V**).",
+          "The unit of density is kg m⁻³.",
+          "Water has a density of 1000 kg m⁻³.",
+          "To convert from g cm⁻³ to kg m⁻³, multiply by 1000.",
         ],
       },
-      { k: "h", text: "Where density earns the marks — the chains it starts" },
+      { k: "h", text: "Using density in questions" },
       {
         k: "bullets",
         items: [
-          "Mass of displaced fluid (→ upthrust, statement 24): **m = ρV**, then upthrust = **mg**.",
-          "Volume of a sphere: **V = (4/3)πr³** — from the diameter, radius = d/2 (CP2, Oct24 Q19).",
-          "Volume of a cylinder: **V = πr²L** with r = d/2 (hydrometer, Oct24 Q16).",
-          "Cube side from weight and density: m = W/g = ρL³, so ==L = ∛(W/(ρg))== (Jan24 Q8 — the distractors invert the ratio or drop the cube root).",
-          "Water flow through a pipe: mass per second = ρ × volume per second, then ΔEgrav = mgΔh (Jan25 Q15).",
+          "The mass of fluid displaced by an object is the density of the fluid times the volume displaced (**m = ρV**).",
+          "The volume of a sphere is **(4/3)πr³**, where r is the radius of the sphere.",
+          "The volume of a cylinder is **πr²L**.",
+          "A cube of side L has volume L³, so its weight is **ρL³g**.",
         ],
       },
-      { k: "h", text: "Mark-scheme warnings" },
+      { k: "h", text: "Common mistakes" },
       {
         k: "bullets",
         items: [
-          "==Radius or diameter?== — the examiners' standing warning: “stop for a moment to consider whether they have been given a radius or diameter” (Oct24 introduction). Using the diameter as the radius gives an answer 2× too big (Jun25 Q16 ER).",
-          "==cm³ → m³: × 10⁻⁶== (Oct24 Q19: 45 cm³ = 45 × 10⁻⁶ m³; common error).",
-          "Don't calculate quantities the question never asked for — e.g. the balloon's own density when the air's is given (Oct22 Q14 ER: “which was not required”).",
+          "Check whether the question gives the radius or the diameter. The radius is half the diameter.",
+          "Convert cm³ to m³ by multiplying by 10⁻⁶.",
+          "Do not calculate quantities the question did not ask for.",
         ],
       },
     ],
@@ -54,33 +52,62 @@ export const SECTIONS_PH02_A: SpecSection[] = [
     blocks: [
       {
         k: "def",
-        term: "Upthrust — the definition mark (learn the sentence)",
-        text: "“An ==upward force caused by the displacement of fluid== (by an object)”, equal to “the ==weight of the fluid displaced==”. — Oct23 Q17(a) MS. Use the word ==displaced==: “replacement was not sufficient” (Oct24 ER).",
+        term: "Upthrust",
+        text: "The upward force a fluid exerts on an object placed in it. The ==upthrust equals the weight of the fluid displaced== by the object.",
       },
-      { k: "h", text: "The mark-scheme sentences" },
+      { k: "h", text: "Finding the upthrust" },
       {
         k: "bullets",
         items: [
-          "Upthrust = weight of fluid displaced = ==ρ_fluid × V_displaced × g== — mass of displaced fluid from ρ = m/V, then its weight from W = mg.",
-          "Floating (equilibrium): ==upthrust = weight== — equal, not greater. “Floats if weight is less than upthrust” is named as ==a clear misconception== (Jun24 Q12(b) ER): if U > W the resultant is upward and the object is still accelerating/rising.",
-          "Sinking at terminal velocity: ==weight = upthrust + drag== → drag = W − U (Jun24 Q14(a), Oct22 Q17(a)(i)).",
-          "Rising at terminal velocity: ==upthrust = weight + drag== → U > W and U > D (Oct25 Q5).",
-          "Hydrometer floating higher in seawater — any two of: “the upthrust is ==equal to the weight of water displaced==”; “the upthrust equals the ==weight of the hydrometer==”; “the weight of displaced water equals the weight of the hydrometer”; then “so a ==smaller volume of seawater== needs to be displaced (because seawater has a greater density)” (Oct24 Q16(b)(i)).",
-          "==Say whose weight== — “many referred to weight, but did not specify whether this was the weight of the hydrometer, the weight of the displaced pure water or the weight of the displaced seawater” (Oct24 ER).",
+          "The weight of displaced fluid is the density of the fluid times the displaced volume times g (**U = ρVg**).",
+          "The displaced volume is the volume of the object that is below the surface of the fluid.",
         ],
       },
-      { k: "h", text: "The same balance in every costume — scenario chains" },
+      { k: "h", text: "Floating" },
       {
         k: "bullets",
         items: [
-          "**Balloon released** — accelerating upward: U − W = ma, with U = ρ_air V g (Oct22 Q14: U = 0.589 N, W = 0.090 N, resultant 0.50 N up).",
-          "**Balloon rising, max height ICs** (Jan23 Q17(c)): at release upthrust > weight → resultant upward → velocity increases; as height increases the air density decreases → upthrust decreases; until upthrust < weight → resultant downward → balloon decelerates to rest.",
-          "**Balloon volume needed** — to float at 25 km: set upthrust = weight, solve V = W/(ρ_air g); compare with the burst volume and conclude (Jan23 Q17(b)(ii): 27 m³ < 50 m³ → survives).",
-          "**Cartesian diver** (Jan24 Q13 MPs): the volume of trapped air decreases → ==upthrust decreases== (or water enters, weight increases) → ==weight greater than upthrust== → ==resultant force downwards== (so it accelerates down).",
-          "**Galilean thermometer ICs** (Jun22 Q15): upthrust on a bulb = weight of liquid displaced; when upthrust ≥ weight the bulb floats; weight of a bulb is constant; as temperature increases the density of the liquid decreases → upthrust on the bulb decreases; until the weight exceeds the upthrust; there is a resultant (downward) force and the bulb sinks.",
-          "**Submarine winched out of the sea** (Jan25 Q18(b) ICs): resultant force zero → tension = weight − upthrust; as it leaves the water the volume/mass/weight of water displaced decreases → upthrust decreases → tension increases; when fully out, tension = weight.",
-          "**Iceberg** (Jun24 Q12(b)): at equilibrium the weight of the block = the weight of water displaced; in lower-density water a ==greater volume== must be displaced.",
-          "**Lifting bags on a seabed box** (Oct25 Q17(a)): total displaced volume = bags + the submerged box itself; U = ρVg; compare U with the total weight and conclude.",
+          "A floating object is in equilibrium, so the resultant force on it is zero.",
+          "For a floating object, the upthrust equals the weight of the object.",
+          "A floating object therefore displaces a weight of fluid equal to its own weight.",
+          "In a denser liquid a smaller volume has to be displaced to balance the same weight, so the object floats higher.",
+        ],
+      },
+      { k: "h", text: "Sinking at terminal velocity" },
+      {
+        k: "bullets",
+        items: [
+          "A sinking object at terminal velocity has zero resultant force.",
+          "The weight downwards is balanced by the upthrust and the drag upwards (**W = U + D**).",
+          "The drag is therefore the difference between the weight and the upthrust (**D = W − U**).",
+        ],
+      },
+      { k: "h", text: "Rising at terminal velocity" },
+      {
+        k: "bullets",
+        items: [
+          "A rising object meets drag acting downwards, in the same direction as its weight.",
+          "At terminal velocity the upthrust balances the weight and the drag together (**U = W + D**).",
+          "The upthrust on a rising object is therefore greater than its weight.",
+        ],
+      },
+      { k: "h", text: "The same balance in other situations" },
+      {
+        k: "bullets",
+        items: [
+          "**A balloon** rises while the upthrust is greater than its weight. As it climbs, the air becomes less dense, so the upthrust falls. It stops rising when the upthrust has fallen below its weight.",
+          "**A Cartesian diver** sinks because squeezing the bottle forces water into it, the trapped air becomes smaller, so the upthrust falls. The weight is then greater than the upthrust, so there is a resultant force downwards.",
+          "**A submarine lifted from the sea** displaces less water as it emerges, so the upthrust falls and the tension in the cable rises until it equals the weight.",
+          "**An iceberg** floats with its weight equal to the weight of the displaced seawater. In less dense water a greater volume must be displaced.",
+        ],
+      },
+      { k: "h", text: "Common mistakes" },
+      {
+        k: "bullets",
+        items: [
+          "Use the word ==displaced==, not replaced.",
+          "Make clear whose weight you mean: the weight of the object, or the weight of the displaced fluid.",
+          "An object does not float because the upthrust is greater than its weight. Upthrust greater than weight means the object is accelerating upwards. Floating means the two forces are equal.",
         ],
       },
     ],
@@ -91,62 +118,88 @@ export const SECTIONS_PH02_A: SpecSection[] = [
       "a be able to use the equation for viscous drag (Stokes' Law), F = 6πηrv. b understand that this equation applies only to small spherical objects moving at low speeds with laminar flow (or in the absence of turbulent flow) and that viscosity is temperature dependent",
     title: "Viscous drag — Stokes' law",
     blocks: [
-      {
-        k: "def",
-        term: "Laminar flow — the definition mark (learn the sentence)",
-        text: "Flow in which the fluid moves in ==layers that do not mix== / flow that is ==not turbulent==. “Laminar flow has a precise definition which needs to be learned” (Oct21 ER). Laminar describes the ==flow== — “the object must be laminar” scores nothing (Oct23 ER).",
-      },
-      { k: "h", text: "Stokes' law and its conditions" },
+      { k: "h", text: "The equation" },
       {
         k: "bullets",
         items: [
-          "Viscous drag on a small sphere: **F = 6πηrv**, with η in ==Pa s==.",
-          "==v is a velocity== (m s⁻¹) — distance ÷ time, or the gradient of a displacement–time graph. “A surprisingly high proportion of candidates interpreted v as a volume” (Oct23 and Jan25 ERs).",
-          "Conditions — the two marking points, verbatim: “==small spherical object== OR ==spherical object moving at low speed==” (1) + “==laminar flow== / flow is not turbulent” (1) (Oct24 Q19(a)(i), Oct23 Q18(a), Jun23 Q16(a)).",
-          "Stokes' law does NOT need a low-viscosity fluid — it “applies at all viscosities” (Oct22 Q3 MS).",
-          "==State only conditions not already given in the stem==: Jan24 Q15(a) — the ball-bearings were already small; “small, spherical object was needed … did not score a mark as the information was given in the question”.",
-          "If one condition is asked for, give one — “there is no advantage in a second, and a risk that if it is wrong it will negate the mark” (Jun22 Q19(b)(iii) ER).",
+          "Stokes' law gives the viscous drag on a small sphere moving slowly through a fluid (**F = 6πηrv**).",
+          "η is the viscosity of the fluid, measured in Pa s.",
+          "v is the velocity of the sphere and r is its radius.",
         ],
       },
-      { k: "h", text: "Terminal velocity — the four-mark chain (Jan25 Q20(a), verbatim order)" },
+      { k: "h", text: "Conditions for Stokes' law" },
       {
         k: "bullets",
         items: [
-          "Initially ==weight is greater than upthrust (+ drag)== → there is a resultant force downwards.",
-          "So the sphere ==accelerates== / its speed increases — state this BEFORE the drag point: “general statements that drag increases when speed increases, without actually stating that the sphere would increase in speed, did not score” (Jan25 ER).",
-          "==Drag increases== as speed increases (and upthrust remains constant).",
-          "Until the ==resultant force becomes zero== → the sphere moves at constant (terminal) velocity.",
-          "The same chain, sinking version: W = U + D at terminal velocity (Jun24 Q14(a): “the weight of the grain is equal to the sum of the drag and upthrust” / “resultant force = 0”).",
-          "Constant speed does NOT require Stokes' law — “mentions of small spheres, laminar flow and temperature were all irrelevant” if the question is only about constant speed (Oct21 Q17 ER).",
+          "The object must be small and spherical.",
+          "The object must move at low speed.",
+          "The flow of the fluid must be laminar.",
+        ],
+      },
+      {
+        k: "def",
+        term: "Laminar flow",
+        text: "Flow in which the fluid moves in ==layers that do not mix==. Laminar flow is flow that is not turbulent.",
+      },
+      {
+        k: "bullets",
+        items: [
+          "Laminar describes the flow of the fluid, not the object.",
+          "Stokes' law works at any viscosity; there is no low-viscosity condition.",
+        ],
+      },
+      { k: "h", text: "How a falling sphere reaches terminal velocity" },
+      {
+        k: "bullets",
+        items: [
+          "At first the weight is greater than the upthrust plus the drag, so there is a resultant force downwards.",
+          "The sphere accelerates, so its speed increases.",
+          "As the speed increases, the viscous drag increases.",
+          "The upthrust stays constant, because it depends only on the displaced volume.",
+          "Eventually the drag plus the upthrust equals the weight, so the resultant force is zero.",
+          "The sphere then falls at a constant velocity, called the ==terminal velocity==.",
         ],
       },
       { k: "h", text: "Viscosity and temperature" },
       {
         k: "bullets",
         items: [
-          "Liquids: temperature ↑ → ==viscosity decreases== (Jun22 Q19(a), Oct25 Q4).",
-          "The warmed-liquid chain: viscosity ↓ → drag ↓ at a given speed → terminal velocity ↑ → the ball takes ==less time== to fall the same distance (Oct23 Q18(b)(iii), Jun24 Q14(c), Jun25 Q16(c)).",
-          "The cooled-liquid chain: viscosity ↑ → drag ↑ at a given speed → terminal velocity ↓ → time taken is greater (Jun25 Q16(c): MP3 dependent on MP1 or MP2).",
-          "Sinking into colder, deeper water (Oct22 Q17(b), four marks): ==viscosity increases== → drag increases for a given velocity; ==density increases== → upthrust increases; ==weight remains constant== (not “mass”); so terminal velocity decreases.",
-          "The drag at terminal velocity is fixed by the force balance — “many candidates did not realise that the drag force at terminal velocity remains the same, and that the velocity can decrease to provide sufficient drag if the viscosity becomes greater” (Oct22 ER).",
+          "For a liquid, the viscosity decreases as the temperature increases.",
+          "A less viscous liquid gives less drag at a given speed.",
+          "With less drag, the forces balance at a higher speed, so the terminal velocity is greater.",
+          "The ball therefore falls a given distance in less time.",
+          "When a liquid cools the viscosity rises, so the terminal velocity falls and the fall takes longer.",
         ],
       },
-      { k: "h", text: "“Does Stokes' law apply?” — the deduction questions" },
+      { k: "h", text: "A sphere sinking into colder, deeper water" },
       {
         k: "bullets",
         items: [
-          "Route: terminal-velocity drag from the balance = **W − U**; Stokes prediction = **6πηrv**; ==compare the two and conclude== (Jun24 Q14(b): 1.65 m s⁻¹ ≠ 0.050 m s⁻¹ → does not apply; Oct24 Q19(a)(ii): 0.035 N ≪ 4.6 N → does not apply; Jun23 Q16(b)(ii); Jun22 Q19(b)(ii): 2.54 × 10⁻³ N = W − U → it does apply).",
-          "Any valid comparison route scores — compare forces, or the required velocity / radius / viscosity — but every route needs an ==explicit comparison and a consistent conclusion==.",
+          "Deeper water is colder, so its viscosity is greater and the drag at any given speed is larger.",
+          "Deeper water is also denser, so the upthrust is larger.",
+          "The weight of the sphere does not change.",
+          "The forces therefore balance at a lower speed, so the terminal velocity decreases as the sphere sinks.",
         ],
       },
-      { k: "h", text: "Size and material comparisons" },
+      { k: "h", text: "Comparing spheres of different sizes" },
       {
         k: "bullets",
         items: [
-          "Larger sphere, same oil (Jan25 Q20(b)(ii)): drag ∝ r, but weight and upthrust ∝ r³ — the downward forces grow by a greater factor → balance struck at a ==greater terminal velocity== → ==less time==. Consider ALL the forces: “most answers did not consider all of the forces … This led to incorrect conclusions” (Jan25 ER).",
-          "Blood instead of glycerol (Jun22 Q19(c)): viscosity of blood is much lower → drag lower for a given velocity → terminal velocity lower; smaller ball → smaller weight (∝ d³) while drag ∝ d.",
-          "A rising bubble: drag acts ==downwards== (opposite to the motion), so 6πηrv = U − W (Oct25 Q17(b)(i)).",
-          "Why a real bubble may differ from Stokes' prediction (Oct25 Q17(b)(ii)): the predicted speed is high → flow likely turbulent; the bubble deforms / is not a rigid sphere; it expands as it rises.",
+          "The weight and the upthrust are both proportional to r³, because they depend on the volume.",
+          "The viscous drag is proportional only to r.",
+          "The weight and upthrust therefore grow faster than the drag as the sphere gets bigger.",
+          "A larger sphere falls at a greater terminal velocity and takes less time to fall the same distance.",
+        ],
+      },
+      { k: "h", text: "Common mistakes" },
+      {
+        k: "bullets",
+        items: [
+          "The v in Stokes' law is a velocity, not a volume.",
+          "Say that the sphere speeds up before you say that the drag increases.",
+          "If the question already describes the objects as small spheres, do not repeat that as an answer.",
+          "Give only as many conditions as the question asks for; a wrong extra statement can lose the mark.",
+          "To test whether Stokes' law applies, compare the drag from F = 6πηrv with the weight minus the upthrust, then state a conclusion.",
         ],
       },
     ],
@@ -159,38 +212,56 @@ export const SECTIONS_PH02_A: SpecSection[] = [
       {
         k: "figure",
         kind: "ph-falling-ball",
-        caption:
-          "The falling-ball viscometer: a wide tube of liquid, timing marks well below the surface, a ball released just under the surface, stopwatch or light gates.",
+        caption: "The falling-ball method for measuring the viscosity of a liquid.",
       },
-      { k: "h", text: "The force balance the experiment is built on" },
+      { k: "h", text: "The principle of the experiment" },
       {
         k: "bullets",
         items: [
-          "At terminal velocity: ==weight = upthrust + viscous drag== → drag = W − U → **η = (W − U)/(6πrv)** (Jan24 Q15(b)(ii), the glycerol deduction).",
-          "==The upthrust comes from the displaced LIQUID==: U = ρ_liquid V_ball g — using the ball's density here is “the most common mark not awarded” (Jan24 Q15(b)(ii) ER).",
-          "Full chain (Jan24 Q15(b)(ii), six marks): V = (4/3)πr³ → m_liquid = ρV → U = m_liquid g → D = W − U → η = D/(6πrv) → compare with the given value and conclude.",
+          "A small ball is released into a tall tube of liquid and falls until it reaches terminal velocity.",
+          "At terminal velocity the weight equals the upthrust plus the viscous drag (**W = U + D**).",
+          "The drag is given by Stokes' law (**D = 6πηrv**), so the viscosity follows from **η = (W − U)/(6πrv)**.",
+          "Each quantity on the right is measured in the experiment.",
         ],
       },
-      { k: "h", text: "The measurements — and what each one is FOR" },
+      { k: "h", text: "The measurements" },
       {
         k: "bullets",
         items: [
-          "==Mass of the ball-bearing== (→ W = mg). Jun25 Q16(a): the one other measurement needed — radius, density and temperature given in the stem are ignored: “ignore radius / diameter / volume; ignore density; ignore temperature”.",
-          "Diameter with (digital) callipers → radius = ==d/2== → V = (4/3)πr³. “Callipers cannot directly measure the radius of a sphere” (Jan24 ER); treating the radius as a diameter, or r² instead of r³, and power-of-ten errors are all recorded (Jan24, Jun25 ERs).",
-          "Terminal velocity: time the fall between two marks, v = s/t (Jun25 Q16(b): 0.20 m ÷ 1.3 s), or take the ==gradient of the straight section== of the displacement–time graph (Oct23 Q18(b)(ii)).",
-          "==Not one point's s ÷ t==: “many candidates … selected a point on the graph and divided the displacement by the time” — the straight section's gradient IS the constant velocity (Oct23 ER).",
-          "The marks sit ==well below the surface==: the ball must have reached terminal velocity before the timing begins — Stokes' law is applied at constant v.",
-          "Repeat and average; record the ==temperature== (η is temperature dependent).",
-          "==Wide tube== / low speed keeps the flow laminar — “accept reference to wide cylinder” (Jun22 Q19(b)(iii)).",
+          "The mass of the ball, to find its weight (**W = mg**).",
+          "The diameter of the ball, with a micrometer, to find the radius and the volume (**V = (4/3)πr³**).",
+          "The density of the liquid, to find the upthrust (**U = ρVg**).",
+          "The time to fall between two fixed marks, to find the terminal velocity (**v = s/t**).",
+          "The temperature of the liquid, because the viscosity depends on it.",
         ],
       },
-      { k: "h", text: "Free-body diagram marking points (Jan24 Q15(b)(i))" },
+      { k: "h", text: "Design choices" },
       {
         k: "bullets",
         items: [
-          "Ball at terminal velocity: ==drag up, upthrust up, weight down== — all arrows starting from the dot.",
-          "==Length of the weight arrow ≈ drag + upthrust arrow lengths== — arrow length represents the size of the force.",
-          "Label it W / weight / mg — “G is not acceptable as an abbreviation for weight” (Jan24, Oct24 ERs); extra forces (e.g. drag on a floating hydrometer) void the marks (Oct24 Q16(a) ER).",
+          "The timing marks are well below the surface, so the ball has reached terminal velocity before the timing starts.",
+          "The tube is wide, so the flow around the ball stays laminar.",
+          "The fall is timed over a long distance, which reduces the percentage uncertainty in the velocity.",
+          "The measurement is repeated and an average is taken.",
+        ],
+      },
+      { k: "h", text: "Free-body diagram of the falling ball" },
+      {
+        k: "bullets",
+        items: [
+          "Draw weight downwards, upthrust upwards and drag upwards, all starting from the centre of the ball.",
+          "The arrow for the weight is equal in length to the arrows for the upthrust and the drag combined.",
+          "Label the forces clearly: W or mg for the weight and U for the upthrust.",
+        ],
+      },
+      { k: "h", text: "Common mistakes" },
+      {
+        k: "bullets",
+        items: [
+          "The upthrust comes from the displaced liquid, so use the density of the liquid, not of the ball.",
+          "Halve the diameter to get the radius before finding the volume.",
+          "Read the terminal velocity from the gradient of the straight part of a displacement–time graph, not from a single point.",
+          "Convert mm and cm³ to SI units before substituting into the equations.",
         ],
       },
     ],
