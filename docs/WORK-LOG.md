@@ -1787,3 +1787,13 @@ The journal is chronological and append-only. A journal entry describes complete
 - Deployment status: not applicable (no site/deploy change; download/ artifacts only).
 - Commit: none yet (drafts pending user approval; nothing committed this session).
 - Remaining limitations: keyword pre-scan question numbers proved unreliable (agents re-verified from printed QP numbers — final lists in analysis file supersede the scan); official Pearson spec PDF not downloaded (spec statements taken from the repo's existing spec-aligned note files); June 2020 session does not exist.
+
+## 2026-11-21 — WPH11 Topic 2 draft: revision and review pass (user-requested)
+
+- User instruction: "Revise and review" the draft notes deliverable.
+- Verified draft claims against primary MS texts (grep sweeps across research/wph11/txt/ and the five analysis reports): conditions trio, balance-readings skeleton, free-body penalties, vernier resolution, "> half drawn line" gradient triangles, g=10 penalty, show-that reverse-working rule, "Weight remains constant [do not accept mass]", toaster four-spring set-up, submarine pump, pre-tensioned/dried concrete, data-logger CP2, v–d² graph, "Do not accept measure the extension", parallel-springs 2k MCQ. All held.
+- Fixes applied to download/WPH11-Topic2-draft-notes.md: removed remaining label-style prefixes ("Balance reading chain:", "fixed chain", "Standard calculation chain:", "The unit family", heading "How the mark scheme pays out" → "Mark scheme conventions"); replaced one misplaced bullet (v-t sketch description sat under force-extension) with the MS-backed force-length work formula; deleted a duplicate trapezium bullet and one duplicate weight→mass bullet; softened unbacked "third marker" claim into the MS-backed data-logger/displacement-time point; rephrased compressive-length bullet; added verified coverage bullets (drag opposes motion, v against d² straight line, two-step F=kΔx, ΔEgrav vs ΔEel compare, measure-initial-and-extended-length with "do not accept measure the extension").
+- Checks run: grep sweep confirms zero arrows/label-prefixes/(year citations in bullets); 13 section headings and bullet counts intact; file verified on disk after edits.
+- Analysis file needed no corrections (its disputed claims verified: 2024-Oct Q12 new-length Hooke calc, 2023-Oct Q18 data-logger, 2021-Jun Q18 v–d²).
+- Invariants preserved: site content untouched; no repo source changed except this journal entry; nothing committed.
+- Deployment status: not applicable. Commit: none (drafts still awaiting user approval).
