@@ -82,7 +82,7 @@ export const WPH11_TOPICS: Topic[] = [
     title: "Materials — fluids, viscosity and elasticity",
     summary:
       "The second half of WPH11: density and upthrust, Stokes' law and the falling-ball viscometer, then Hooke's law, stress, strain and the Young modulus — every graph feature defined, both core practicals in full, and the real questions examiners keep asking.",
-    minutes: 42,
+    minutes: 52,
     ao: ["AO1", "AO2", "AO3"],
     blocks: [
       {

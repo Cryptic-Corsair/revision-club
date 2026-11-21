@@ -433,11 +433,11 @@ export const NOTES_DOCS: NotesDoc[] = [
     intro: [
       {
         k: "p",
-        text: "This note covers the ten Materials statements of WPH11 Unit 1. Each section starts from the ==specification point==, and under it the content is written as ==mark scheme notes==: short points, each one a sentence that could earn a mark. The sections cover ==density==, ==upthrust==, ==Stokes' law== and viscosity (including the falling-ball experiment), then ==Hooke's law==, ==stress==, ==strain== and the ==Young modulus== (including the wire experiment), the ==force-extension== and ==stress-strain== graphs, and ==elastic strain energy==.",
+        text: "This note covers the ten Materials statements of WPH11 Unit 1. Each section starts from the ==specification statement==, and the content under it is written the way the mark schemes mark it: the ==equation is stated first== and then unpacked in a sentence, the working symbols — =, ×, >, < — sit inside the sentences, and every force is named with its owner and its direction: ==the upthrust on the sphere==, the weight of the sphere, the drag upwards. The sections cover ==density==, ==upthrust==, ==Stokes' law== and viscosity (including the falling-ball experiment), then ==Hooke's law==, ==stress==, ==strain== and the ==Young modulus== (including the wire experiment), the ==force-extension== and ==stress-strain== graphs, and ==elastic strain energy==.",
       },
       {
         k: "p",
-        text: "Some ideas repeat on nearly every paper in different situations, so the same short chain of points is written out once for the basic case and again for each situation it appears in. Each section ends with the common mistakes that candidates make most often, so you can avoid them before the exam.",
+        text: "Each situation — a Cartesian diver, a submarine lifted by a crane, a sphere sinking into colder, deeper water — is built up as ==its own short section==, one logical step per bullet, so the pattern and its logic can be followed from cause to effect. The mark schemes' ==rejected wordings== are flagged as Not accepted notes, and the note closes with ==the marking rules that never change== from one series to the next.",
       },
     ],
     sections: [...SECTIONS_PH02_A, ...SECTIONS_PH02_B],
